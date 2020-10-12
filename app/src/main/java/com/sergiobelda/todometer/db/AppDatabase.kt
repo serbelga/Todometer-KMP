@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.db
 
-import androidx.compose.runtime.Composable
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.sergiobelda.todometer.model.Task
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
+@Database(entities = [Task::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
+abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun taskDao(): TaskDao
 }

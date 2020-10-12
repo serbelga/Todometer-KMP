@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer
 
-import androidx.compose.runtime.Composable
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
-}
+@HiltAndroidApp
+class App : Application()

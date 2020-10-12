@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.model
 
-import androidx.compose.runtime.Composable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
+@Entity
+data class Task(
+    val title: String,
+    val body: String,
+    val taskState: TaskState
 ) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 }

@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.repository
 
-import androidx.compose.runtime.Composable
+import com.sergiobelda.todometer.db.TaskDao
+import com.sergiobelda.todometer.model.Task
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
+class TaskRepository(private val taskDao: TaskDao) {
+    val tasks = taskDao.getTasks()
+
+    suspend fun deleteTask(id: Int) = taskDao.deleteTask(id)
+
+    suspend fun insert(task: Task) = taskDao.insertTask(task)
+
+    suspend fun setTaskDone(id: Int) = taskDao.setTaskDone(id)
+
+    suspend fun setTaskDoing(id: Int) = taskDao.setTaskDoing(id)
+
+    suspend fun updateTask(task: Task) = taskDao.updateTask(task)
 }

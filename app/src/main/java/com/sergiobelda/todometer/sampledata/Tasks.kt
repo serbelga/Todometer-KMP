@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.sampledata
 
-import androidx.compose.runtime.Composable
+import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.model.TaskState
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
-}
+val task1 = Task(
+    title = "Task 1",
+    body = "Task one",
+    taskState = TaskState.DOING
+)
+
+val task2 = Task(
+    title = "Task 2",
+    body = "Task two",
+    taskState = TaskState.DONE
+)
+
+val tasksList = listOf(task1, task2)

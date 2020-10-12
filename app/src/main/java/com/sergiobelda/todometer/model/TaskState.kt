@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.model
 
-import androidx.compose.runtime.Composable
-
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
+enum class TaskState {
+    DOING,
+    DONE
 }

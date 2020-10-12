@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.di
 
-import androidx.compose.runtime.Composable
+import com.sergiobelda.todometer.db.TaskDao
+import com.sergiobelda.todometer.repository.TaskRepository
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
+@Module
+@InstallIn(ActivityRetainedComponent::class)
+class RepositoryModule {
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideTaskRepository(taskDao: TaskDao) = TaskRepository(taskDao)
 }

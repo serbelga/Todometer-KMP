@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.taskdetail
+package com.sergiobelda.todometer.db
 
-import androidx.compose.runtime.Composable
+import androidx.room.TypeConverter
+import com.sergiobelda.todometer.model.TaskState
 
-@Composable
-fun TaskDetail(
-    taskId: Long,
-    upPress: () -> Unit
-) {
+class Converters {
+    @TypeConverter
+    fun toString(taskState: TaskState?): String? {
+        return taskState?.name
+    }
+
+    @TypeConverter
+    fun toTaskState(name: String): TaskState? {
+        return enumValueOf<TaskState>(name)
+    }
 }
