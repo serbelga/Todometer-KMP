@@ -1,8 +1,8 @@
 <h1 align="center">ToDo_meter Compose</h1></br>
 
-<h5 align="center">
-  🚧🚧🚧 Migration of https://github.com/serbelga/ToDometer to Jetpack Compose
-</h5>
+<h4 align="center">
+  🚧🚧🚧 WIP: https://github.com/serbelga/ToDometer to Jetpack Compose
+</h4>
 
 <h5 align="center">
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
