@@ -30,11 +30,11 @@ sealed class Destination : Parcelable {
 
     @Immutable
     @Parcelize
-    data class TaskDetail(val taskId: Long) : Destination()
+    data class TaskDetail(val taskId: Int) : Destination()
 }
 
 class Actions(navigator: Navigator<Destination>) {
-    val selectTask: (Long) -> Unit = { taskId: Long ->
+    val selectTask: (Int) -> Unit = { taskId ->
         navigator.navigate(Destination.TaskDetail(taskId))
     }
     val addTask: () -> Unit = {

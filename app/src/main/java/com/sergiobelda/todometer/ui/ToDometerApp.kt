@@ -41,9 +41,11 @@ fun ToDometerApp(backDispatcher: OnBackPressedDispatcher, mainViewModel: MainVie
             when (destination) {
                 Destination.Home -> Home(
                     mainViewModel = mainViewModel,
-                    addTask = actions.addTask
+                    addTask = actions.addTask,
+                    openTask = actions.selectTask
                 )
                 is Destination.AddTask -> AddTask(
+                    mainViewModel = mainViewModel,
                     upPress = actions.upPress
                 )
                 is Destination.TaskDetail -> TaskDetail(

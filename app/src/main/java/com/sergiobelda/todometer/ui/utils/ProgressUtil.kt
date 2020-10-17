@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.sampledata
+package com.sergiobelda.todometer.ui.utils
 
-import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.model.TaskState
+import androidx.annotation.FloatRange
 
-val task1 = Task(
-    title = "Task 1",
-    description = "Task one",
-    taskState = TaskState.DOING
-)
+object ProgressUtil {
 
-val task2 = Task(
-    title = "Task 2",
-    description = "Task two",
-    taskState = TaskState.DONE
-)
-
-val tasksList = listOf(task1, task2)
+    fun getPercentage(@FloatRange(from = 0.0, to = 1.0) progress: Float) =
+        "${(progress * 100).toInt()}%"
+}

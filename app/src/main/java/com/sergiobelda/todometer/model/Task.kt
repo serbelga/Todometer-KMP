@@ -22,7 +22,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Task(
     val title: String,
-    val body: String,
+    val description: String,
     val taskState: TaskState
 ) {
     @PrimaryKey(autoGenerate = true)

@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.repository
 
 import com.sergiobelda.todometer.db.TaskDao
 import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.model.TaskState
 
 class TaskRepository(private val taskDao: TaskDao) {
     val tasks = taskDao.getTasks()
@@ -26,9 +27,8 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     suspend fun insert(task: Task) = taskDao.insertTask(task)
 
-    suspend fun setTaskDone(id: Int) = taskDao.setTaskDone(id)
-
-    suspend fun setTaskDoing(id: Int) = taskDao.setTaskDoing(id)
+    suspend fun updateTaskState(id: Int, taskState: TaskState) =
+        taskDao.updateTaskState(id, taskState.name)
 
     suspend fun updateTask(task: Task) = taskDao.updateTask(task)
 }

@@ -25,6 +25,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.repository.TaskRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -36,6 +37,8 @@ class MainViewModel @ViewModelInject constructor(
 
     var tasks: List<Task> by mutableStateOf(listOf())
         private set
+
+    val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     init {
         viewModelScope.launch {
@@ -49,15 +52,15 @@ class MainViewModel @ViewModelInject constructor(
         taskRepository.insert(task)
     }
 
-    fun setTaskDone(id: Int) = viewModelScope.launch {
-        taskRepository.setTaskDone(id)
-    }
-
-    fun setTaskDoing(id: Int) = viewModelScope.launch {
-        taskRepository.setTaskDoing(id)
+    private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
+        taskRepository.updateTaskState(id, taskState)
     }
 
     fun updateTask(task: Task) = viewModelScope.launch {
         taskRepository.updateTask(task)
+    }
+
+    fun deleteTask(id: Int) = viewModelScope.launch {
+        taskRepository.deleteTask(id)
     }
 }

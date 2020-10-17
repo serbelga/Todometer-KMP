@@ -19,7 +19,6 @@ package com.sergiobelda.todometer.ui.home
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,16 +28,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
-import androidx.compose.material.Card
-import androidx.compose.material.ExtendedFloatingActionButton
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.FabPosition
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,32 +51,54 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.ui.theme.shapes
-import com.sergiobelda.todometer.ui.theme.typography
+import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun Home(
     mainViewModel: MainViewModel,
-    addTask: () -> Unit
+    addTask: () -> Unit,
+    openTask: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
-            ToDometerTopBar()
+            ToDometerTopBar(mainViewModel.tasks)
         },
-        floatingActionButton = { AddTaskExtendedFAB(addTask = addTask) },
+        bottomBar = {
+            BottomAppBar(
+                backgroundColor = colors.surface,
+                contentColor = colors.onSurface,
+                cutoutShape = CircleShape
+            ) {
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(Icons.Rounded.Menu)
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(Icons.Rounded.MoreVert)
+                }
+            }
+        },
+        isFloatingActionButtonDocked = true,
+        floatingActionButton = { AddTaskExtendedFAB(addTask) },
         floatingActionButtonPosition = FabPosition.Center,
-        bodyContent = { HomeBodyContent(mainViewModel.tasks) }
+        bodyContent = { HomeBodyContent(mainViewModel, openTask) }
     )
 }
 
 @Composable
-fun ToDometerTopBar() {
+fun ToDometerTopBar(tasks: List<Task>) {
+    val progress =
+        if (tasks.isNotEmpty()) {
+            tasks.filter { it.taskState == TaskState.DONE }.size.toFloat() / tasks.size.toFloat()
+        } else {
+            0f
+        }
     Surface(
         modifier = Modifier
             .wrapContentHeight()
-            .fillMaxWidth(),
-        elevation = 4.dp
+            .fillMaxWidth()
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -86,12 +112,12 @@ fun ToDometerTopBar() {
                 }
             }
             Text(
-                "20%",
+                ProgressUtil.getPercentage(progress),
                 style = typography.body1,
                 modifier = Modifier.padding(top = 4.dp)
             )
             LinearProgressIndicator(
-                progress = 0.2f,
+                progress = progress,
                 modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
             )
         }
@@ -117,38 +143,26 @@ fun ToDometerTitle(modifier: Modifier) {
 
 @Composable
 fun AddTaskExtendedFAB(addTask: () -> Unit) {
-    ExtendedFloatingActionButton(
+    FloatingActionButton(
         icon = { Icon(Icons.Rounded.Add) },
-        text = { Text(stringResource(id = R.string.add_task)) },
         onClick = addTask
     )
 }
 
 @Composable
 fun HomeBodyContent(
-    tasks: List<Task>
+    mainViewModel: MainViewModel,
+    openTask: (Int) -> Unit
 ) {
+    val tasks = mainViewModel.tasks
     LazyColumnForIndexed(items = tasks) { index, task ->
-        TaskItem(task)
+        TaskItem(
+            task,
+            updateState = mainViewModel.updateTaskState,
+            onClick = openTask
+        )
         if (index == tasks.size - 1) {
             Spacer(modifier = Modifier.height(72.dp))
-        }
-    }
-}
-
-@Composable
-fun TaskItem(task: Task) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height = 120.dp)
-            .padding(8.dp),
-        shape = shapes.large
-    ) {
-        Row(
-            modifier = Modifier.clickable(onClick = {})
-        ) {
-            Text(task.body)
         }
     }
 }

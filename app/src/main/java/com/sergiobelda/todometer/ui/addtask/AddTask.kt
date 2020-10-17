@@ -16,13 +16,78 @@
 
 package com.sergiobelda.todometer.ui.addtask
 
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.savedinstancestate.savedInstanceState
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.sergiobelda.todometer.R
+import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun AddTask(
+    mainViewModel: MainViewModel,
     upPress: () -> Unit
 ) {
-    Scaffold {
-    }
+    var taskTitle by savedInstanceState { "" }
+    var taskDescription by savedInstanceState { "" }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = colors.surface,
+                contentColor = colors.onSurface,
+                elevation = 0.dp,
+                navigationIcon = {
+                    IconButton(onClick = upPress) {
+                        Icon(Icons.Rounded.ArrowBack)
+                    }
+                },
+                title = { Text(stringResource(id = R.string.add_task)) },
+                actions = {
+                    Button(
+                        onClick = {
+                            mainViewModel.insertTask(
+                                Task(
+                                    taskTitle,
+                                    taskDescription,
+                                    TaskState.DOING
+                                )
+                            )
+                            upPress()
+                        }
+                    ) {
+                        Text("SAVE")
+                    }
+                }
+            )
+        },
+        bodyContent = {
+            Column {
+                OutlinedTextField(
+                    value = taskTitle,
+                    onValueChange = { taskTitle = it },
+                    label = { Text(stringResource(id = R.string.title)) }
+                )
+                OutlinedTextField(
+                    value = taskDescription,
+                    onValueChange = { taskDescription = it },
+                    label = { Text(stringResource(id = R.string.description)) }
+                )
+            }
+        }
+    )
 }
