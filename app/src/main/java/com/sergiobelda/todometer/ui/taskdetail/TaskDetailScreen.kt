@@ -20,7 +20,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 
 @Composable
-fun TaskDetail(
+fun TaskDetailScreen(
     taskId: Int,
     upPress: () -> Unit
 ) {

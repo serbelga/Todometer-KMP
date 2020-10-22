@@ -23,6 +23,3 @@ val blue = Color(0xFF4285f4)
 val orange = Color(0xFFF86734)
 val navy = Color(0xFF073042)
 val background = Color(0xFFFFFFFF)
-
-val colorOnSurface = Color(0xDE000000)
-val colorOnSurfaceDark = Color(0xDEFFFFFF)

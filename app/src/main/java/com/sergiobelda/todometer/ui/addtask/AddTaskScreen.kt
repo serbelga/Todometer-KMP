@@ -39,7 +39,7 @@ import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
-fun AddTask(
+fun AddTaskScreen(
     mainViewModel: MainViewModel,
     upPress: () -> Unit
 ) {

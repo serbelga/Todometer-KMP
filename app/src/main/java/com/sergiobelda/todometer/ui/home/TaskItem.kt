@@ -25,21 +25,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
+import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.sampledata.task1
+import com.sergiobelda.todometer.sampledata.task2
 import com.sergiobelda.todometer.ui.theme.shapes
+import com.sergiobelda.todometer.ui.theme.typography
 
 @Composable
 fun TaskItem(
@@ -65,6 +69,9 @@ fun TaskItem(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(start = 16.dp)
             ) {
+                ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+                    Icon(Icons.Rounded.DateRange, modifier = Modifier.padding(end = 8.dp))
+                }
                 when (task.taskState) {
                     TaskState.DOING -> {
                         Text(task.title)
@@ -72,28 +79,31 @@ fun TaskItem(
                         IconButton(
                             onClick = { updateState(task.id, TaskState.DONE) }
                         ) {
-                            Icon(Icons.Rounded.Check)
+                            Icon(Icons.Rounded.Check, tint = colors.secondary)
                         }
                     }
                     TaskState.DONE -> {
                         Text(
                             task.title,
-                            style = TextStyle(textDecoration = TextDecoration.LineThrough)
+                            textDecoration = TextDecoration.LineThrough
                         )
                         Spacer(modifier = Modifier.weight(1f))
                         IconButton(
                             onClick = { updateState(task.id, TaskState.DOING) }
                         ) {
-                            Icon(Icons.Filled.Refresh)
+                            Icon(Icons.Filled.Refresh, tint = colors.secondary)
                         }
                     }
                 }
             }
-            Text(
-                task.description,
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                maxLines = 3
-            )
+            ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+                Text(
+                    task.description,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    maxLines = 3,
+                    style = typography.caption
+                )
+            }
         }
     }
 }
@@ -101,5 +111,5 @@ fun TaskItem(
 @Preview
 @Composable
 fun TaskItemPreview() {
-    TaskItem(task = task1, updateState = { _, _ -> }, onClick = {})
+    TaskItem(task = task2, updateState = { _, _ -> }, onClick = {})
 }
