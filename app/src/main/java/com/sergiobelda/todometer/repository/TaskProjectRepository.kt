@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.model
+package com.sergiobelda.todometer.repository
 
-data class Task(
-    val id: Int = 0,
-    val title: String,
-    val description: String,
-    val state: TaskState,
-    val projectId: Int?,
-    val tagId: Int?
-)
+import com.sergiobelda.todometer.db.dao.TaskProjectDao
+import com.sergiobelda.todometer.mapper.TaskProjectMapper.toDomain
+import com.sergiobelda.todometer.model.TaskProject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+class TaskProjectRepository(private val taskProjectDao: TaskProjectDao) {
+
+    val taskProjectList: Flow<List<TaskProject>> = taskProjectDao.getTaskProjectList().map { list ->
+        list.map { it.toDomain() }
+    }
+}

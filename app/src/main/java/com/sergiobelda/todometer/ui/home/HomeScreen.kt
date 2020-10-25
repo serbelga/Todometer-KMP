@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Divider
 import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
@@ -38,6 +39,7 @@ import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.rounded.Add
@@ -50,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.components.ToDometerTitle
+import com.sergiobelda.todometer.ui.theme.outline
 import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
@@ -66,7 +69,7 @@ fun HomeScreen(
         bottomBar = {
             BottomAppBar(
                 backgroundColor = colors.surface,
-                contentColor = colors.onSurface,
+                contentColor = contentColorFor(colors.surface),
                 cutoutShape = CircleShape
             ) {
                 IconButton(onClick = { /* doSomething() */ }) {
@@ -92,12 +95,6 @@ fun HomeScreen(
 
 @Composable
 fun ToDometerTopBar(tasks: List<Task>) {
-    val progress =
-        if (tasks.isNotEmpty()) {
-            tasks.filter { it.state == TaskState.DONE }.size.toFloat() / tasks.size.toFloat()
-        } else {
-            0f
-        }
     Surface(
         modifier = Modifier
             .wrapContentHeight()
@@ -114,17 +111,7 @@ fun ToDometerTopBar(tasks: List<Task>) {
                     Icon(Icons.Outlined.AccountCircle)
                 }
             }
-            ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
-                Text(
-                    ProgressUtil.getPercentage(progress),
-                    style = typography.body1,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
-            LinearProgressIndicator(
-                progress = progress,
-                modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
-            )
+            Divider(thickness = 1.dp, color = colors.outline)
         }
     }
 }
@@ -134,15 +121,39 @@ fun HomeBodyContent(
     mainViewModel: MainViewModel,
     openTask: (Int) -> Unit
 ) {
-    val tasks = mainViewModel.tasks
-    LazyColumnForIndexed(items = tasks) { index, task ->
-        TaskItem(
-            task,
-            updateState = mainViewModel.updateTaskState,
-            onClick = openTask
+    val projectTasksList = mainViewModel.projectTasksList
+    LazyColumnForIndexed(items = projectTasksList, modifier = Modifier.padding(32.dp)) { index, project ->
+        Text(project.name.toUpperCase(), style = typography.overline)
+        val progress =
+            if (project.tasks.isNotEmpty()) {
+                project.tasks.filter { it.state == TaskState.DONE }.size.toFloat() / project.tasks.size.toFloat()
+            } else {
+                0f
+            }
+        ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+            Text(
+                ProgressUtil.getPercentage(progress),
+                style = typography.body1,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+        }
+        LinearProgressIndicator(
+            progress = progress,
+            modifier = Modifier.padding(top = 8.dp, bottom = 16.dp).fillMaxWidth()
         )
-        if (index == tasks.size - 1) {
-            Spacer(modifier = Modifier.height(72.dp))
+        project.tasks.forEach { task ->
+            TaskItem(
+                task,
+                updateState = mainViewModel.updateTaskState,
+                onClick = openTask
+            )
+        }
+        if (index == projectTasksList.size - 1) {
+            Spacer(modifier = Modifier.height(32.dp))
+        } else {
+            Spacer(modifier = Modifier.height(24.dp))
+            Divider(thickness = 1.dp, color = colors.outline)
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }

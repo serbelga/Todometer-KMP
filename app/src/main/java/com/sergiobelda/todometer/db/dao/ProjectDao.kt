@@ -20,8 +20,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.sergiobelda.todometer.db.entity.ProjectEntity
+import com.sergiobelda.todometer.db.entity.ProjectTasks
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -32,6 +34,10 @@ interface ProjectDao {
 
     @Query("SELECT * FROM project ORDER BY id ASC")
     fun getProjects(): Flow<List<ProjectEntity>>
+
+    @Transaction
+    @Query("SELECT * FROM Project")
+    fun getProjectTasksList(): Flow<List<ProjectTasks>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProject(project: ProjectEntity)

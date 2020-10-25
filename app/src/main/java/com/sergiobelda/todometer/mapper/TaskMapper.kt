@@ -21,10 +21,19 @@ import com.sergiobelda.todometer.model.Task
 
 object TaskMapper {
     fun TaskEntity.toDomain() = Task(
-        id, title, description, state, projectId, tagId
+        id = id,
+        title = title,
+        description = description,
+        state = state,
+        projectId = projectId,
+        tagId = tagId
     )
 
     fun Task.toEntity() = TaskEntity(
-        title, description, state, projectId, tagId
+        title = title,
+        description = description,
+        state = state,
+        projectId = projectId,
+        tagId = tagId
     )
 }

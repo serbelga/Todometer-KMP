@@ -22,14 +22,15 @@ import androidx.room.TypeConverters
 import com.sergiobelda.todometer.db.dao.ProjectDao
 import com.sergiobelda.todometer.db.dao.TagDao
 import com.sergiobelda.todometer.db.dao.TaskDao
+import com.sergiobelda.todometer.db.dao.TaskProjectDao
 import com.sergiobelda.todometer.db.entity.ProjectEntity
 import com.sergiobelda.todometer.db.entity.TagEntity
 import com.sergiobelda.todometer.db.entity.TaskEntity
-import com.sergiobelda.todometer.db.view.ProjectTaskView
+import com.sergiobelda.todometer.db.view.TaskProjectView
 
 @Database(
     entities = [ProjectEntity::class, TagEntity::class, TaskEntity::class],
-    views = [ProjectTaskView::class],
+    views = [TaskProjectView::class],
     version = 1,
     exportSchema = false
 )
@@ -41,4 +42,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun tagDao(): TagDao
 
     abstract fun taskDao(): TaskDao
+
+    abstract fun taskProjectDao(): TaskProjectDao
 }

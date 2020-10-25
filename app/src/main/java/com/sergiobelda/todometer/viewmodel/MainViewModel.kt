@@ -24,18 +24,30 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.model.TaskProject
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.repository.ProjectRepository
+import com.sergiobelda.todometer.repository.TaskProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val projectRepository: ProjectRepository,
+    private val taskProjectRepository: TaskProjectRepository
 ) : ViewModel() {
 
     var tasks: List<Task> by mutableStateOf(listOf())
+        private set
+
+    var taskProjectList: List<TaskProject> by mutableStateOf(listOf())
+        private set
+
+    var projectTasksList: List<Project> by mutableStateOf(listOf())
         private set
 
     val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
@@ -44,6 +56,12 @@ class MainViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             taskRepository.tasks.collect {
                 tasks = it
+            }
+        }
+
+        viewModelScope.launch {
+            projectRepository.projectTaskList.collect {
+                projectTasksList = it
             }
         }
     }

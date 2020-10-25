@@ -19,7 +19,6 @@ package com.sergiobelda.todometer.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -33,7 +32,7 @@ import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.R
 
 @Composable
-fun BoxScope.ToDometerTitle(modifier: Modifier = Modifier.align(Alignment.Center)) {
+fun ToDometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically

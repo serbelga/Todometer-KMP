@@ -21,10 +21,11 @@ import com.sergiobelda.todometer.mapper.TaskMapper.toDomain
 import com.sergiobelda.todometer.mapper.TaskMapper.toEntity
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class TaskRepository(private val taskDao: TaskDao) {
-    val tasks = taskDao.getTasks().map { list ->
+    val tasks: Flow<List<Task>> = taskDao.getTasks().map { list ->
         list.map { it.toDomain() }
     }
 

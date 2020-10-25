@@ -17,11 +17,13 @@
 package com.sergiobelda.todometer.mapper
 
 import com.sergiobelda.todometer.db.entity.ProjectEntity
+import com.sergiobelda.todometer.db.entity.ProjectTasks
+import com.sergiobelda.todometer.mapper.TaskMapper.toDomain
 import com.sergiobelda.todometer.model.Project
 
 object ProjectMapper {
-    fun ProjectEntity.toDomain() = Project(
-        id, name, description
+    fun ProjectTasks.toDomain() = Project(
+        project.id, project.name, project.description, tasks.map { it.toDomain() }
     )
 
     fun Project.toEntity() = ProjectEntity(

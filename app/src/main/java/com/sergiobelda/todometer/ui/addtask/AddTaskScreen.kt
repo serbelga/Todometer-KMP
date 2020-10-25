@@ -25,6 +25,7 @@ import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
@@ -49,7 +50,7 @@ fun AddTaskScreen(
         topBar = {
             TopAppBar(
                 backgroundColor = colors.surface,
-                contentColor = colors.onSurface,
+                contentColor = contentColorFor(colors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = upPress) {
@@ -62,11 +63,11 @@ fun AddTaskScreen(
                         onClick = {
                             mainViewModel.insertTask(
                                 Task(
-                                    taskTitle,
-                                    taskDescription,
-                                    TaskState.DOING,
-                                    null,
-                                    null
+                                    title = taskTitle,
+                                    description = taskDescription,
+                                    state = TaskState.DOING,
+                                    projectId = null,
+                                    tagId = null
                                 )
                             )
                             upPress()

@@ -19,9 +19,8 @@ package com.sergiobelda.todometer.model
 data class Project(
     val id: Int,
     val name: String,
-    val description: String
+    val description: String,
+    val tasks: List<Task>
 ) {
-    constructor(name: String, description: String) : this(0, name, description)
-
     override fun toString() = name
 }

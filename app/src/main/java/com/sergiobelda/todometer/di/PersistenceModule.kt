@@ -40,13 +40,17 @@ class PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideProjectDao(appDatabase: AppDatabase) = appDatabase.projectDao()
-
-    @Provides
-    @Singleton
     fun provideTagDao(appDatabase: AppDatabase) = appDatabase.tagDao()
 
     @Provides
     @Singleton
     fun provideTaskDao(appDatabase: AppDatabase) = appDatabase.taskDao()
+
+    @Provides
+    @Singleton
+    fun provideProjectDao(appDatabase: AppDatabase) = appDatabase.projectDao()
+
+    @Provides
+    @Singleton
+    fun provideTaskProjectDao(appDatabase: AppDatabase) = appDatabase.taskProjectDao()
 }
