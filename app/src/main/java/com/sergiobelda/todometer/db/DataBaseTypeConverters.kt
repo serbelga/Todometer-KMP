@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.model
+package com.sergiobelda.todometer.db
 
-data class Task(
-    val id: Int,
-    val title: String,
-    val description: String,
-    val state: TaskState,
-    val projectId: Int?,
-    val tagId: Int?
-) {
-    constructor(
-        title: String,
-        description: String,
-        state: TaskState,
-        projectId: Int?,
-        tagId: Int?
-    ) : this(0, title, description, state, projectId, tagId)
+import androidx.room.TypeConverter
+import com.sergiobelda.todometer.model.TaskState
+
+class DataBaseTypeConverters {
+    @TypeConverter
+    fun toString(taskState: TaskState?): String? {
+        return taskState?.name
+    }
+
+    @TypeConverter
+    fun toTaskState(name: String): TaskState? {
+        return enumValueOf<TaskState>(name)
+    }
 }

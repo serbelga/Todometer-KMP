@@ -16,19 +16,12 @@
 
 package com.sergiobelda.todometer.model
 
-data class Task(
+data class Project(
     val id: Int,
-    val title: String,
-    val description: String,
-    val state: TaskState,
-    val projectId: Int?,
-    val tagId: Int?
+    val name: String,
+    val description: String
 ) {
-    constructor(
-        title: String,
-        description: String,
-        state: TaskState,
-        projectId: Int?,
-        tagId: Int?
-    ) : this(0, title, description, state, projectId, tagId)
+    constructor(name: String, description: String) : this(0, name, description)
+
+    override fun toString() = name
 }

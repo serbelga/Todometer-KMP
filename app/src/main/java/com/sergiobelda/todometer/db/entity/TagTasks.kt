@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.model
+package com.sergiobelda.todometer.db.entity
 
-data class Task(
-    val id: Int,
-    val title: String,
-    val description: String,
-    val state: TaskState,
-    val projectId: Int?,
-    val tagId: Int?
-) {
-    constructor(
-        title: String,
-        description: String,
-        state: TaskState,
-        projectId: Int?,
-        tagId: Int?
-    ) : this(0, title, description, state, projectId, tagId)
-}
+import androidx.room.Embedded
+import androidx.room.Relation
+
+/**
+ * Relationship one-to-many Tag-Tasks
+ */
+data class TagTasks(
+    @Embedded val tag: TagEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "tag_id"
+    )
+    val tasks: List<TaskEntity>
+)

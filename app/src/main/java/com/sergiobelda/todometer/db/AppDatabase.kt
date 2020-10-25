@@ -19,11 +19,26 @@ package com.sergiobelda.todometer.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.db.dao.ProjectDao
+import com.sergiobelda.todometer.db.dao.TagDao
+import com.sergiobelda.todometer.db.dao.TaskDao
+import com.sergiobelda.todometer.db.entity.ProjectEntity
+import com.sergiobelda.todometer.db.entity.TagEntity
+import com.sergiobelda.todometer.db.entity.TaskEntity
+import com.sergiobelda.todometer.db.view.ProjectTaskView
 
-@Database(entities = [Task::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
+@Database(
+    entities = [ProjectEntity::class, TagEntity::class, TaskEntity::class],
+    views = [ProjectTaskView::class],
+    version = 1,
+    exportSchema = false
+)
+@TypeConverters(DataBaseTypeConverters::class)
 abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun projectDao(): ProjectDao
+
+    abstract fun tagDao(): TagDao
 
     abstract fun taskDao(): TaskDao
 }

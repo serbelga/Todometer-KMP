@@ -72,7 +72,7 @@ fun TaskItem(
                 ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
                     Icon(Icons.Rounded.DateRange, modifier = Modifier.padding(end = 8.dp))
                 }
-                when (task.taskState) {
+                when (task.state) {
                     TaskState.DOING -> {
                         Text(task.title)
                         Spacer(modifier = Modifier.weight(1f))

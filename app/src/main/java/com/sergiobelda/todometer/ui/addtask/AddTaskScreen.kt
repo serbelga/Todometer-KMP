@@ -64,7 +64,9 @@ fun AddTaskScreen(
                                 Task(
                                     taskTitle,
                                     taskDescription,
-                                    TaskState.DOING
+                                    TaskState.DOING,
+                                    null,
+                                    null
                                 )
                             )
                             upPress()

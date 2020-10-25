@@ -94,7 +94,7 @@ fun HomeScreen(
 fun ToDometerTopBar(tasks: List<Task>) {
     val progress =
         if (tasks.isNotEmpty()) {
-            tasks.filter { it.taskState == TaskState.DONE }.size.toFloat() / tasks.size.toFloat()
+            tasks.filter { it.state == TaskState.DONE }.size.toFloat() / tasks.size.toFloat()
         } else {
             0f
         }

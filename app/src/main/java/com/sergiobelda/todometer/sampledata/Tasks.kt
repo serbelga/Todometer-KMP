@@ -22,13 +22,17 @@ import com.sergiobelda.todometer.model.TaskState
 val task1 = Task(
     title = "Task 1",
     description = "Task one",
-    taskState = TaskState.DOING
+    state = TaskState.DOING,
+    projectId = 1,
+    tagId = 1
 )
 
 val task2 = Task(
     title = "Task 2",
     description = "Task two",
-    taskState = TaskState.DONE
+    state = TaskState.DONE,
+    projectId = 1,
+    tagId = 1
 )
 
 val tasksList = listOf(task1, task2)

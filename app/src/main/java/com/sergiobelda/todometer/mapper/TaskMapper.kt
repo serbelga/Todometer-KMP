@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.db
+package com.sergiobelda.todometer.mapper
 
-import androidx.room.TypeConverter
-import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.db.entity.TaskEntity
+import com.sergiobelda.todometer.model.Task
 
-class Converters {
-    @TypeConverter
-    fun toString(taskState: TaskState?): String? {
-        return taskState?.name
-    }
+object TaskMapper {
+    fun TaskEntity.toDomain() = Task(
+        id, title, description, state, projectId, tagId
+    )
 
-    @TypeConverter
-    fun toTaskState(name: String): TaskState? {
-        return enumValueOf<TaskState>(name)
-    }
+    fun Task.toEntity() = TaskEntity(
+        title, description, state, projectId, tagId
+    )
 }

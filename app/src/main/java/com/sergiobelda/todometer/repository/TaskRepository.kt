@@ -16,19 +16,24 @@
 
 package com.sergiobelda.todometer.repository
 
-import com.sergiobelda.todometer.db.TaskDao
+import com.sergiobelda.todometer.db.dao.TaskDao
+import com.sergiobelda.todometer.mapper.TaskMapper.toDomain
+import com.sergiobelda.todometer.mapper.TaskMapper.toEntity
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
+import kotlinx.coroutines.flow.map
 
 class TaskRepository(private val taskDao: TaskDao) {
-    val tasks = taskDao.getTasks()
+    val tasks = taskDao.getTasks().map { list ->
+        list.map { it.toDomain() }
+    }
 
     suspend fun deleteTask(id: Int) = taskDao.deleteTask(id)
 
-    suspend fun insert(task: Task) = taskDao.insertTask(task)
+    suspend fun insert(task: Task) = taskDao.insertTask(task.toEntity())
 
     suspend fun updateTaskState(id: Int, taskState: TaskState) =
         taskDao.updateTaskState(id, taskState.name)
 
-    suspend fun updateTask(task: Task) = taskDao.updateTask(task)
+    suspend fun updateTask(task: Task) = taskDao.updateTask(task.toEntity())
 }

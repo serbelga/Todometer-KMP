@@ -16,7 +16,7 @@
 
 package com.sergiobelda.todometer.di
 
-import com.sergiobelda.todometer.db.TaskDao
+import com.sergiobelda.todometer.db.dao.TaskDao
 import com.sergiobelda.todometer.repository.TaskRepository
 import dagger.Module
 import dagger.Provides

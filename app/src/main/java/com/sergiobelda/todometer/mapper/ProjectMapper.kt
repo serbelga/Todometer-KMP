@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.model
+package com.sergiobelda.todometer.mapper
 
-data class Task(
-    val id: Int,
-    val title: String,
-    val description: String,
-    val state: TaskState,
-    val projectId: Int?,
-    val tagId: Int?
-) {
-    constructor(
-        title: String,
-        description: String,
-        state: TaskState,
-        projectId: Int?,
-        tagId: Int?
-    ) : this(0, title, description, state, projectId, tagId)
+import com.sergiobelda.todometer.db.entity.ProjectEntity
+import com.sergiobelda.todometer.model.Project
+
+object ProjectMapper {
+    fun ProjectEntity.toDomain() = Project(
+        id, name, description
+    )
+
+    fun Project.toEntity() = ProjectEntity(
+        name, description
+    )
 }
