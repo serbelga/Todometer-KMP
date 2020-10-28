@@ -18,6 +18,8 @@ package com.sergiobelda.todometer.repository
 
 import com.sergiobelda.todometer.db.dao.ProjectDao
 import com.sergiobelda.todometer.mapper.ProjectMapper.toDomain
+import com.sergiobelda.todometer.mapper.ProjectMapper.toEntity
+import com.sergiobelda.todometer.model.Project
 import kotlinx.coroutines.flow.map
 
 class ProjectRepository(private val projectDao: ProjectDao) {
@@ -27,4 +29,6 @@ class ProjectRepository(private val projectDao: ProjectDao) {
     }
 
     suspend fun deleteProject(id: Int) = projectDao.deleteProject(id)
+
+    suspend fun insertProject(project: Project) = projectDao.insertProject(project.toEntity())
 }

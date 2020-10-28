@@ -19,10 +19,20 @@ package com.sergiobelda.todometer.ui.addtask
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Button
+import androidx.compose.material.Divider
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
@@ -30,14 +40,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
+import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.ui.theme.outline
+import com.sergiobelda.todometer.ui.theme.typography
 import com.sergiobelda.todometer.viewmodel.MainViewModel
+import java.util.Locale
 
 @Composable
 fun AddTaskScreen(
@@ -46,6 +65,8 @@ fun AddTaskScreen(
 ) {
     var taskTitle by savedInstanceState { "" }
     var taskDescription by savedInstanceState { "" }
+    val radioOptions = mainViewModel.projectTasksList
+    val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[0]) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -66,14 +87,14 @@ fun AddTaskScreen(
                                     title = taskTitle,
                                     description = taskDescription,
                                     state = TaskState.DOING,
-                                    projectId = null,
+                                    projectId = selectedProject.id,
                                     tagId = null
                                 )
                             )
                             upPress()
                         }
                     ) {
-                        Text("SAVE")
+                        Text(stringResource(id = R.string.save))
                     }
                 }
             )
@@ -83,14 +104,73 @@ fun AddTaskScreen(
                 OutlinedTextField(
                     value = taskTitle,
                     onValueChange = { taskTitle = it },
-                    label = { Text(stringResource(id = R.string.title)) }
+                    label = { Text(stringResource(id = R.string.title)) },
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    ).fillMaxWidth(),
+                    imeAction = ImeAction.Next
                 )
                 OutlinedTextField(
                     value = taskDescription,
                     onValueChange = { taskDescription = it },
-                    label = { Text(stringResource(id = R.string.description)) }
+                    label = { Text(stringResource(id = R.string.description)) },
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    ).fillMaxWidth(),
+                    imeAction = ImeAction.Done,
+                    onImeActionPerformed = { _, softwareKeyboardController -> softwareKeyboardController?.hideSoftwareKeyboard() }
                 )
+                ProjectRadioGroup(radioOptions, selectedProject, onProjectSelected)
             }
         }
     )
+}
+
+@Composable
+fun ProjectRadioGroup(
+    projectList: List<Project>,
+    selectedProject: Project,
+    onProjectSelected: (project: Project) -> Unit
+) {
+    Column {
+        Text(
+            text = stringResource(R.string.project).toUpperCase(Locale.ROOT),
+            style = typography.overline,
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp)
+        )
+        Divider(thickness = 1.dp, color = colors.outline, modifier = Modifier.padding(top = 8.dp))
+        LazyColumnFor(
+            items = projectList,
+            modifier = Modifier.height(140.dp)
+        ) { project ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .preferredHeight(56.dp)
+                    .selectable(
+                        selected = (project == selectedProject),
+                        onClick = { onProjectSelected(project) }
+                    )
+                    .padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = (project == selectedProject),
+                    onClick = { onProjectSelected(project) }
+                )
+                Text(
+                    text = project.name,
+                    style = MaterialTheme.typography.body1.merge(),
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+        Divider(thickness = 1.dp, color = colors.outline)
+    }
 }

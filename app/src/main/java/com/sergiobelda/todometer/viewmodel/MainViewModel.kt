@@ -26,7 +26,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.model.TaskProject
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.repository.ProjectRepository
 import com.sergiobelda.todometer.repository.TaskProjectRepository
@@ -41,24 +40,12 @@ class MainViewModel @ViewModelInject constructor(
     private val taskProjectRepository: TaskProjectRepository
 ) : ViewModel() {
 
-    var tasks: List<Task> by mutableStateOf(listOf())
-        private set
-
-    var taskProjectList: List<TaskProject> by mutableStateOf(listOf())
-        private set
-
     var projectTasksList: List<Project> by mutableStateOf(listOf())
         private set
 
     val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     init {
-        viewModelScope.launch {
-            taskRepository.tasks.collect {
-                tasks = it
-            }
-        }
-
         viewModelScope.launch {
             projectRepository.projectTaskList.collect {
                 projectTasksList = it
@@ -67,15 +54,15 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun insertTask(task: Task) = viewModelScope.launch {
-        taskRepository.insert(task)
+        taskRepository.insertTask(task)
+    }
+
+    fun insertProject(project: Project) = viewModelScope.launch {
+        projectRepository.insertProject(project)
     }
 
     private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
         taskRepository.updateTaskState(id, taskState)
-    }
-
-    fun updateTask(task: Task) = viewModelScope.launch {
-        taskRepository.updateTask(task)
     }
 
     fun deleteTask(id: Int) = viewModelScope.launch {

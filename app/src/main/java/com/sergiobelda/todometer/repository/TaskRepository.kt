@@ -31,7 +31,7 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     suspend fun deleteTask(id: Int) = taskDao.deleteTask(id)
 
-    suspend fun insert(task: Task) = taskDao.insertTask(task.toEntity())
+    suspend fun insertTask(task: Task) = taskDao.insertTask(task.toEntity())
 
     suspend fun updateTaskState(id: Int, taskState: TaskState) =
         taskDao.updateTaskState(id, taskState.name)

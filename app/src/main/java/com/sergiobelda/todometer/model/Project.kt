@@ -17,10 +17,10 @@
 package com.sergiobelda.todometer.model
 
 data class Project(
-    val id: Int,
+    val id: Int = 0,
     val name: String,
     val description: String,
-    val tasks: List<Task>
+    val tasks: List<Task> = arrayListOf()
 ) {
     override fun toString() = name
 }

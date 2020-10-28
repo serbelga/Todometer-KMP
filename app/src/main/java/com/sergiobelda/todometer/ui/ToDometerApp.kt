@@ -21,6 +21,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
+import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
 import com.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
@@ -42,9 +43,14 @@ fun ToDometerApp(backDispatcher: OnBackPressedDispatcher, mainViewModel: MainVie
                 Destination.Home -> HomeScreen(
                     mainViewModel = mainViewModel,
                     addTask = actions.addTask,
+                    addProject = actions.addProject,
                     openTask = actions.selectTask
                 )
                 is Destination.AddTask -> AddTaskScreen(
+                    mainViewModel = mainViewModel,
+                    upPress = actions.upPress
+                )
+                is Destination.AddProject -> AddProjectScreen(
                     mainViewModel = mainViewModel,
                     upPress = actions.upPress
                 )
