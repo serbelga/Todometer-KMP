@@ -39,7 +39,6 @@ import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
@@ -49,7 +48,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.rounded.Add
@@ -85,14 +83,7 @@ fun HomeScreen(
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
-        sheetContent = {
-            for (i in 1..5) {
-                ListItem(
-                    text = { Text("Item $i") },
-                    icon = { Icon(Icons.Default.Favorite) }
-                )
-            }
-        }
+        sheetContent = {}
     ) {
         Scaffold(
             topBar = {
