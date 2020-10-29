@@ -8,6 +8,12 @@
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
 </h5>
 
+## App UI Design
+
+<div align="center">
+<img width="300" src="./resources/ToDometer_Wireframe.jpg"></img>
+</div>
+
 ## Tech Stack
 * Kotlin & Coroutines
   * Flow
