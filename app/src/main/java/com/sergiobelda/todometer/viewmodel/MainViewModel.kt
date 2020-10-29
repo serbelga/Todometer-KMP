@@ -27,17 +27,19 @@ import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.repository.ProjectRepository
-import com.sergiobelda.todometer.repository.TaskProjectRepository
-import com.sergiobelda.todometer.repository.TaskRepository
+import com.sergiobelda.todometer.usecase.GetProjectTasksListUseCase
+import com.sergiobelda.todometer.usecase.InsertProjectUseCase
+import com.sergiobelda.todometer.usecase.InsertTaskUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val taskRepository: TaskRepository,
-    private val projectRepository: ProjectRepository,
-    private val taskProjectRepository: TaskProjectRepository
+    private val insertTaskUseCase: InsertTaskUseCase,
+    private val insertProjectUseCase: InsertProjectUseCase,
+    private val getProjectTasksListUseCase: GetProjectTasksListUseCase,
+    private val updateTaskStateUseCase: UpdateTaskStateUseCase
 ) : ViewModel() {
 
     var projectTasksList: List<Project> by mutableStateOf(listOf())
@@ -47,25 +49,21 @@ class MainViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-            projectRepository.projectTaskList.collect {
+            getProjectTasksListUseCase.getProjectTasksList().collect {
                 projectTasksList = it
             }
         }
     }
 
     fun insertTask(task: Task) = viewModelScope.launch {
-        taskRepository.insertTask(task)
+        insertTaskUseCase.insertTask(task)
     }
 
     fun insertProject(project: Project) = viewModelScope.launch {
-        projectRepository.insertProject(project)
+        insertProjectUseCase.insertProject(project)
     }
 
     private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
-        taskRepository.updateTaskState(id, taskState)
-    }
-
-    fun deleteTask(id: Int) = viewModelScope.launch {
-        taskRepository.deleteTask(id)
+        updateTaskStateUseCase.updateTaskState(id, taskState)
     }
 }

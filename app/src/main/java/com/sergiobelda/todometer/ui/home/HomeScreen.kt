@@ -83,7 +83,9 @@ fun HomeScreen(
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
-        sheetContent = {}
+        sheetContent = {
+            Text("Modal Bottom Sheet")
+        }
     ) {
         Scaffold(
             topBar = {
