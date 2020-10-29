@@ -16,7 +16,11 @@
 
 package com.sergiobelda.todometer.di
 
+import com.sergiobelda.todometer.db.dao.ProjectDao
 import com.sergiobelda.todometer.db.dao.TaskDao
+import com.sergiobelda.todometer.db.dao.TaskProjectDao
+import com.sergiobelda.todometer.repository.ProjectRepository
+import com.sergiobelda.todometer.repository.TaskProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
 import dagger.Module
 import dagger.Provides
@@ -31,4 +35,12 @@ class RepositoryModule {
     @Provides
     @ActivityRetainedScoped
     fun provideTaskRepository(taskDao: TaskDao) = TaskRepository(taskDao)
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideProjectRepository(projectDao: ProjectDao) = ProjectRepository(projectDao)
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideTaskProjectRepository(taskProjectDao: TaskProjectDao) = TaskProjectRepository(taskProjectDao)
 }

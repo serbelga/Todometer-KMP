@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.model
+package com.sergiobelda.todometer.db.dao
 
-data class Task(
-    val id: Int = 0,
-    val title: String,
-    val description: String,
-    val state: TaskState,
-    val projectId: Int?,
-    val tagId: Int?
-)
+import androidx.room.Dao
+import androidx.room.Query
+import com.sergiobelda.todometer.db.view.TaskProjectView
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface TaskProjectDao {
+
+    @Query("SELECT * FROM TaskProjectView")
+    fun getTaskProjectList(): Flow<List<TaskProjectView>>
+}

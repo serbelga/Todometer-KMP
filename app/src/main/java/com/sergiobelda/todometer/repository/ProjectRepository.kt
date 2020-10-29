@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.mapper
+package com.sergiobelda.todometer.repository
 
-import com.sergiobelda.todometer.db.entity.ProjectEntity
-import com.sergiobelda.todometer.db.entity.ProjectTasks
-import com.sergiobelda.todometer.mapper.TaskMapper.toDomain
+import com.sergiobelda.todometer.db.dao.ProjectDao
+import com.sergiobelda.todometer.mapper.ProjectMapper.toDomain
+import com.sergiobelda.todometer.mapper.ProjectMapper.toEntity
 import com.sergiobelda.todometer.model.Project
+import kotlinx.coroutines.flow.map
 
-object ProjectMapper {
-    fun ProjectTasks.toDomain() = Project(
-        project.id, project.name, project.description, tasks.map { it.toDomain() }
-    )
+class ProjectRepository(private val projectDao: ProjectDao) {
 
-    fun Project.toEntity() = ProjectEntity(
-        name, description
-    )
+    val projectTaskList = projectDao.getProjectTasksList().map { list ->
+        list.map { it.toDomain() }
+    }
+
+    suspend fun deleteProject(id: Int) = projectDao.deleteProject(id)
+
+    suspend fun insertProject(project: Project) = projectDao.insertProject(project.toEntity())
 }

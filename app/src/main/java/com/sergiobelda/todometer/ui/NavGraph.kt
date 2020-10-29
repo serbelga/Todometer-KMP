@@ -28,6 +28,9 @@ sealed class Destination : Parcelable {
     @Parcelize
     object AddTask : Destination()
 
+    @Parcelize
+    object AddProject : Destination()
+
     @Immutable
     @Parcelize
     data class TaskDetail(val taskId: Int) : Destination()
@@ -39,6 +42,9 @@ class Actions(navigator: Navigator<Destination>) {
     }
     val addTask: () -> Unit = {
         navigator.navigate(Destination.AddTask)
+    }
+    val addProject: () -> Unit = {
+        navigator.navigate(Destination.AddProject)
     }
     val upPress: () -> Unit = {
         navigator.back()

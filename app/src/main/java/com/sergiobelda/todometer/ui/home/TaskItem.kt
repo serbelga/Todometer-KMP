@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.ui.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
@@ -41,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.sampledata.task2
+import com.sergiobelda.todometer.ui.theme.outline
 import com.sergiobelda.todometer.ui.theme.shapes
 import com.sergiobelda.todometer.ui.theme.typography
 
@@ -54,9 +55,10 @@ fun TaskItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(top = 8.dp, bottom = 8.dp),
         shape = shapes.large,
-        elevation = 8.dp
+        elevation = 0.dp,
+        border = BorderStroke(1.dp, colors.outline)
     ) {
         Column(
             modifier = Modifier.clickable(
@@ -111,5 +113,5 @@ fun TaskItem(
 @Preview
 @Composable
 fun TaskItemPreview() {
-    TaskItem(task = task2, updateState = { _, _ -> }, onClick = {})
+    // TaskItem(task = task2, updateState = { _, _ -> }, onClick = {})
 }

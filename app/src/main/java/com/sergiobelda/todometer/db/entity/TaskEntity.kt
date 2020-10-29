@@ -24,7 +24,7 @@ import androidx.room.PrimaryKey
 import com.sergiobelda.todometer.model.TaskState
 
 @Entity(
-    tableName = "task",
+    tableName = "Task",
     foreignKeys = [
         ForeignKey(
             entity = ProjectEntity::class,
