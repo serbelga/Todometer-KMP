@@ -101,7 +101,6 @@ fun HomeScreen(
                     )
                 }
             }
-
         }
     ) {
         Scaffold(
