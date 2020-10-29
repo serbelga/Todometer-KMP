@@ -4,6 +4,10 @@
   🚧🚧🚧 WIP: https://github.com/serbelga/ToDometer to Jetpack Compose
 </h4>
 
+<p align="center">
+<img src="https://github.com/serbelga/ToDometer_Compose/workflows/Android%20CI/badge.svg">
+</p>
+
 <h5 align="center">
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
 </h5>
