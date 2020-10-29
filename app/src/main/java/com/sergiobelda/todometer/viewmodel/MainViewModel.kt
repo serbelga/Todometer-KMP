@@ -27,7 +27,7 @@ import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.usecase.GetProjectTasksListUseCase
+import com.sergiobelda.todometer.usecase.GetProjectListUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
@@ -38,19 +38,19 @@ class MainViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
-    private val getProjectTasksListUseCase: GetProjectTasksListUseCase,
+    private val getProjectListUseCase: GetProjectListUseCase,
     private val updateTaskStateUseCase: UpdateTaskStateUseCase
 ) : ViewModel() {
 
-    var projectTasksList: List<Project> by mutableStateOf(listOf())
+    var projectList: List<Project> by mutableStateOf(listOf())
         private set
 
     val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     init {
         viewModelScope.launch {
-            getProjectTasksListUseCase.getProjectTasksList().collect {
-                projectTasksList = it
+            getProjectListUseCase.getProjectTasksList().collect {
+                projectList = it
             }
         }
     }

@@ -20,7 +20,7 @@ import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.repository.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetProjectTasksListUseCase(
+class GetProjectListUseCase(
     private val projectRepository: ProjectRepository
 ) {
     fun getProjectTasksList(): Flow<List<Project>> = projectRepository.projectTaskList

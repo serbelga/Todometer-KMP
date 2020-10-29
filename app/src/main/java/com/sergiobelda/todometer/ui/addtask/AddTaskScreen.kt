@@ -65,7 +65,7 @@ fun AddTaskScreen(
 ) {
     var taskTitle by savedInstanceState { "" }
     var taskDescription by savedInstanceState { "" }
-    val radioOptions = mainViewModel.projectTasksList
+    val radioOptions = mainViewModel.projectList
     val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[0]) }
     Scaffold(
         topBar = {

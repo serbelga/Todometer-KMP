@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.ui.home
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,8 +27,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomAppBar
@@ -39,6 +42,7 @@ import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
@@ -48,9 +52,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
@@ -79,12 +83,25 @@ fun HomeScreen(
     openTask: (Int) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val projectTasksList = mainViewModel.projectTasksList
+    val projectTasksList = mainViewModel.projectList
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            Text("Modal Bottom Sheet")
+            Column(modifier = Modifier.preferredHeight(320.dp)) {
+                Text(
+                    text = stringResource(id = R.string.projects).toUpperCase(Locale.ROOT),
+                    style = typography.overline
+                )
+                LazyColumnFor(items = mainViewModel.projectList) { project ->
+                    ListItem(
+                        modifier = Modifier.clickable(onClick = {}),
+                        text = { Text(text = project.name) },
+                        icon = { Icon(Icons.Rounded.Favorite) }
+                    )
+                }
+            }
+
         }
     ) {
         Scaffold(
@@ -109,14 +126,14 @@ fun HomeScreen(
                 }
             },
             bodyContent = {
-                if (projectTasksList.isNotEmpty()) {
+                if (!projectTasksList.isNullOrEmpty()) {
                     ProjectTasksListView(mainViewModel, openTask)
                 } else {
                     EmptyProjectTaskListView(addProject)
                 }
             },
             floatingActionButton = {
-                if (projectTasksList.isNotEmpty()) {
+                if (!projectTasksList.isNullOrEmpty()) {
                     FloatingActionButton(
                         icon = { Icon(Icons.Rounded.Add) },
                         onClick = addTask
@@ -157,8 +174,11 @@ fun ProjectTasksListView(
     mainViewModel: MainViewModel,
     openTask: (Int) -> Unit
 ) {
-    val projectTasksList = mainViewModel.projectTasksList
-    LazyColumnForIndexed(items = projectTasksList, modifier = Modifier.padding(32.dp)) { index, project ->
+    val projectTasksList = mainViewModel.projectList
+    LazyColumnForIndexed(
+        items = projectTasksList,
+        modifier = Modifier.padding(32.dp)
+    ) { index, project ->
         Text(project.name.toUpperCase(Locale.ROOT), style = typography.overline)
         val progress =
             if (project.tasks.isNotEmpty()) {
