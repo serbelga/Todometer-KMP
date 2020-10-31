@@ -16,12 +16,12 @@
 
 package com.sergiobelda.todometer.ui.home
 
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,13 +33,14 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
-import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.ListItem
@@ -50,11 +51,11 @@ import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
@@ -88,19 +89,7 @@ fun HomeScreen(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            Column(modifier = Modifier.preferredHeight(320.dp)) {
-                Text(
-                    text = stringResource(id = R.string.projects).toUpperCase(Locale.ROOT),
-                    style = typography.overline
-                )
-                LazyColumnFor(items = mainViewModel.projectList) { project ->
-                    ListItem(
-                        modifier = Modifier.clickable(onClick = {}),
-                        text = { Text(text = project.name) },
-                        icon = { Icon(Icons.Rounded.Favorite) }
-                    )
-                }
-            }
+            SheetContainer(mainViewModel = mainViewModel, addProject)
         }
     ) {
         Scaffold(
@@ -114,12 +103,14 @@ fun HomeScreen(
                         contentColor = contentColorFor(colors.surface),
                         cutoutShape = CircleShape
                     ) {
-                        IconButton(onClick = { sheetState.show() }) {
-                            Icon(Icons.Rounded.Menu)
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                        IconButton(onClick = { /* doSomething() */ }) {
-                            Icon(Icons.Rounded.MoreVert)
+                        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                            IconButton(onClick = { sheetState.show() }) {
+                                Icon(Icons.Rounded.Menu)
+                            }
+                            Spacer(modifier = Modifier.weight(1f))
+                            IconButton(onClick = { /* doSomething() */ }) {
+                                Icon(Icons.Rounded.MoreVert)
+                            }
                         }
                     }
                 }
@@ -140,7 +131,7 @@ fun HomeScreen(
                 }
             },
             floatingActionButtonPosition = FabPosition.Center,
-            // isFloatingActionButtonDocked = true
+            isFloatingActionButtonDocked = true
         )
     }
 }
@@ -159,12 +150,60 @@ fun ToDometerTopBar() {
                 modifier = Modifier.height(56.dp).fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
-                IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
-                    Icon(Icons.Outlined.AccountCircle)
+                ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                    IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
+                        Icon(Icons.Outlined.AccountCircle)
+                    }
                 }
             }
             Divider(thickness = 1.dp, color = colors.outline)
         }
+    }
+}
+
+@Composable
+fun SheetContainer(mainViewModel: MainViewModel, addProject: () -> Unit) {
+    Column(modifier = Modifier.preferredHeight(480.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.projects).toUpperCase(Locale.ROOT),
+                style = typography.overline
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(onClick = addProject) {
+                Icon(asset = Icons.Rounded.Add)
+                Text(text = stringResource(id = R.string.add_project))
+            }
+        }
+        Divider(thickness = 1.dp, color = colors.outline)
+        LazyColumnFor(items = mainViewModel.projectList, modifier = Modifier.preferredHeight(240.dp)) { project ->
+            ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                ListItem(
+                    modifier = Modifier.clickable(onClick = {}),
+                    text = { Text(text = project.name) },
+                    icon = { Icon(vectorResource(id = R.drawable.ic_baseline_book_24)) }
+                )
+            }
+        }
+        Divider(thickness = 1.dp, color = colors.outline)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.tags).toUpperCase(Locale.ROOT),
+                style = typography.overline
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(onClick = {}) {
+                Icon(asset = Icons.Rounded.Add)
+                Text(text = stringResource(id = R.string.add_tag))
+            }
+        }
+        Divider(thickness = 1.dp, color = colors.outline)
     }
 }
 
@@ -185,7 +224,7 @@ fun ProjectTasksListView(
             } else {
                 0f
             }
-        ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
             Text(
                 ProgressUtil.getPercentage(progress),
                 style = typography.body1,
@@ -229,8 +268,7 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
             Text(stringResource(id = R.string.you_have_not_any_project))
             Button(
                 modifier = Modifier.align(Alignment.CenterHorizontally).padding(16.dp),
-                onClick = addProject,
-                elevation = 0.dp
+                onClick = addProject
             ) {
                 Text(stringResource(id = R.string.add_project))
             }

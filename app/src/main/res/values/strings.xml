@@ -9,4 +9,6 @@
     <string name="description">Description</string>
     <string name="you_have_not_any_project">You haven\'t any project</string>
     <string name="save">Save</string>
+    <string name="tags">Tags</string>
+    <string name="add_tag">Add tag</string>
 </resources>

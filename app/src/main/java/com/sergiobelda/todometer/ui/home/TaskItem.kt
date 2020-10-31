@@ -25,8 +25,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.Card
-import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.ProvideEmphasis
@@ -71,7 +71,7 @@ fun TaskItem(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(start = 16.dp)
             ) {
-                ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+                ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
                     Icon(Icons.Rounded.DateRange, modifier = Modifier.padding(end = 8.dp))
                 }
                 when (task.state) {
@@ -98,7 +98,7 @@ fun TaskItem(
                     }
                 }
             }
-            ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+            ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
                 Text(
                     task.description,
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
