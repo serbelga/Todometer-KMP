@@ -85,12 +85,12 @@ fun HomeScreen(
     openTask: (Int) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val projectTasksList = mainViewModel.projectList
+    val projectList = mainViewModel.projectList
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(mainViewModel.projectList, addProject)
+            SheetContainer(projectList, addProject)
         }
     ) {
         Scaffold(
@@ -98,7 +98,7 @@ fun HomeScreen(
                 ToDometerTopBar()
             },
             bottomBar = {
-                if (projectTasksList.isNotEmpty()) {
+                if (projectList.isNotEmpty()) {
                     BottomAppBar(
                         backgroundColor = MaterialColors.surface,
                         contentColor = contentColorFor(MaterialColors.surface),
@@ -117,14 +117,14 @@ fun HomeScreen(
                 }
             },
             bodyContent = {
-                if (!projectTasksList.isNullOrEmpty()) {
+                if (!projectList.isNullOrEmpty()) {
                     ProjectTasksListView(mainViewModel, openTask)
                 } else {
                     EmptyProjectTaskListView(addProject)
                 }
             },
             floatingActionButton = {
-                if (!projectTasksList.isNullOrEmpty()) {
+                if (!projectList.isNullOrEmpty()) {
                     FloatingActionButton(
                         icon = { Icon(Icons.Rounded.Add) },
                         onClick = addTask
