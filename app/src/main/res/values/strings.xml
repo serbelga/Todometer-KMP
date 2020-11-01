@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ToDo_meter</string>
     <string name="project">Project</string>
+    <string name="projects">Projects</string>
     <string name="add_task">Add task</string>
     <string name="add_project">Add project</string>
     <string name="title">Title</string>
@@ -8,4 +9,6 @@
     <string name="description">Description</string>
     <string name="you_have_not_any_project">You haven\'t any project</string>
     <string name="save">Save</string>
+    <string name="tags">Tags</string>
+    <string name="add_tag">Add tag</string>
 </resources>

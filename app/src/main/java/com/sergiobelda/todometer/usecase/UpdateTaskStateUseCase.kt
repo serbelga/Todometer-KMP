@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.theme
+package com.sergiobelda.todometer.usecase
 
-import androidx.compose.ui.graphics.Color
+import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.repository.TaskRepository
 
-val green = Color(0xFF3ddc84)
-val blue = Color(0xFF4285f4)
-val orange = Color(0xFFF86734)
-val navy = Color(0xFF073042)
-val background = Color(0xFFFFFFFF)
-val outlineDark = Color(255, 255, 255, alpha = 12)
-val outlineLight = Color(0, 0, 0, alpha = 12)
+class UpdateTaskStateUseCase(
+    private val taskRepository: TaskRepository
+) {
+    suspend fun updateTaskState(id: Int, taskState: TaskState) = taskRepository.updateTaskState(id, taskState)
+}

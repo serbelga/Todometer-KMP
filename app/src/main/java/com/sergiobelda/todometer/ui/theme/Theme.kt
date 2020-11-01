@@ -53,6 +53,10 @@ val Colors.outline: Color
     get() = if (isLight) outlineLight else outlineDark
 
 @Composable
+val MaterialColors: Colors
+    get() = MaterialTheme.colors
+
+@Composable
 fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette

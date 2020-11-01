@@ -16,7 +16,6 @@
 
 package com.sergiobelda.todometer.ui.addtask
 
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,10 +26,9 @@ import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Button
-import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
@@ -53,8 +51,8 @@ import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.ui.theme.outline
-import com.sergiobelda.todometer.ui.theme.typography
+import com.sergiobelda.todometer.ui.components.HorizontalDivider
+import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import java.util.Locale
 
@@ -65,13 +63,13 @@ fun AddTaskScreen(
 ) {
     var taskTitle by savedInstanceState { "" }
     var taskDescription by savedInstanceState { "" }
-    val radioOptions = mainViewModel.projectTasksList
+    val radioOptions = mainViewModel.projectList
     val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[0]) }
     Scaffold(
         topBar = {
             TopAppBar(
-                backgroundColor = colors.surface,
-                contentColor = contentColorFor(colors.surface),
+                backgroundColor = MaterialColors.surface,
+                contentColor = contentColorFor(MaterialColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = upPress) {
@@ -141,10 +139,10 @@ fun ProjectRadioGroup(
     Column {
         Text(
             text = stringResource(R.string.project).toUpperCase(Locale.ROOT),
-            style = typography.overline,
+            style = MaterialTheme.typography.overline,
             modifier = Modifier.padding(start = 16.dp, top = 16.dp)
         )
-        Divider(thickness = 1.dp, color = colors.outline, modifier = Modifier.padding(top = 8.dp))
+        HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
         LazyColumnFor(
             items = projectList,
             modifier = Modifier.height(140.dp)
@@ -171,6 +169,6 @@ fun ProjectRadioGroup(
                 )
             }
         }
-        Divider(thickness = 1.dp, color = colors.outline)
+        HorizontalDivider()
     }
 }

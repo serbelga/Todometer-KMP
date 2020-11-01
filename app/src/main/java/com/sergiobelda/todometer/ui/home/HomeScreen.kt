@@ -16,39 +16,42 @@
 
 package com.sergiobelda.todometer.ui.home
 
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
@@ -62,10 +65,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.R
+import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.ui.components.DragIndicator
+import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.components.ToDometerTitle
+import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
-import com.sergiobelda.todometer.ui.theme.outline
 import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import java.util.Locale
@@ -79,12 +85,12 @@ fun HomeScreen(
     openTask: (Int) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val projectTasksList = mainViewModel.projectTasksList
+    val projectList = mainViewModel.projectList
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            Text("Modal Bottom Sheet")
+            SheetContainer(projectList, addProject)
         }
     ) {
         Scaffold(
@@ -92,31 +98,33 @@ fun HomeScreen(
                 ToDometerTopBar()
             },
             bottomBar = {
-                if (projectTasksList.isNotEmpty()) {
+                if (projectList.isNotEmpty()) {
                     BottomAppBar(
-                        backgroundColor = colors.surface,
-                        contentColor = contentColorFor(colors.surface),
+                        backgroundColor = MaterialColors.surface,
+                        contentColor = contentColorFor(MaterialColors.surface),
                         cutoutShape = CircleShape
                     ) {
-                        IconButton(onClick = { sheetState.show() }) {
-                            Icon(Icons.Rounded.Menu)
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                        IconButton(onClick = { /* doSomething() */ }) {
-                            Icon(Icons.Rounded.MoreVert)
+                        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                            IconButton(onClick = { sheetState.show() }) {
+                                Icon(Icons.Rounded.Menu)
+                            }
+                            Spacer(modifier = Modifier.weight(1f))
+                            IconButton(onClick = { /* doSomething() */ }) {
+                                Icon(Icons.Rounded.MoreVert)
+                            }
                         }
                     }
                 }
             },
             bodyContent = {
-                if (projectTasksList.isNotEmpty()) {
+                if (!projectList.isNullOrEmpty()) {
                     ProjectTasksListView(mainViewModel, openTask)
                 } else {
                     EmptyProjectTaskListView(addProject)
                 }
             },
             floatingActionButton = {
-                if (projectTasksList.isNotEmpty()) {
+                if (!projectList.isNullOrEmpty()) {
                     FloatingActionButton(
                         icon = { Icon(Icons.Rounded.Add) },
                         onClick = addTask
@@ -124,7 +132,7 @@ fun HomeScreen(
                 }
             },
             floatingActionButtonPosition = FabPosition.Center,
-            // isFloatingActionButtonDocked = true
+            isFloatingActionButtonDocked = true
         )
     }
 }
@@ -143,12 +151,64 @@ fun ToDometerTopBar() {
                 modifier = Modifier.height(56.dp).fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
-                IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
-                    Icon(Icons.Outlined.AccountCircle)
+                ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                    IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
+                        Icon(Icons.Outlined.AccountCircle)
+                    }
                 }
             }
-            Divider(thickness = 1.dp, color = colors.outline)
+            HorizontalDivider()
         }
+    }
+}
+
+@Composable
+fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
+    Column(modifier = Modifier.preferredHeight(480.dp)) {
+        DragIndicator()
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.projects).toUpperCase(Locale.ROOT),
+                style = typography.overline
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(onClick = addProject) {
+                Icon(asset = Icons.Rounded.Add)
+                Text(text = stringResource(id = R.string.add_project))
+            }
+        }
+        HorizontalDivider()
+        LazyColumnFor(
+            items = projectList,
+            modifier = Modifier.preferredHeight(240.dp)
+        ) { project ->
+            ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                ListItem(
+                    modifier = Modifier.clickable(onClick = {}),
+                    text = { Text(text = project.name) },
+                    icon = { Icon(vectorResource(id = R.drawable.ic_baseline_book_24)) }
+                )
+            }
+        }
+        HorizontalDivider()
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.tags).toUpperCase(Locale.ROOT),
+                style = typography.overline
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(onClick = {}) {
+                Icon(asset = Icons.Rounded.Add)
+                Text(text = stringResource(id = R.string.add_tag))
+            }
+        }
+        HorizontalDivider()
     }
 }
 
@@ -157,8 +217,11 @@ fun ProjectTasksListView(
     mainViewModel: MainViewModel,
     openTask: (Int) -> Unit
 ) {
-    val projectTasksList = mainViewModel.projectTasksList
-    LazyColumnForIndexed(items = projectTasksList, modifier = Modifier.padding(32.dp)) { index, project ->
+    val projectTasksList = mainViewModel.projectList
+    LazyColumnForIndexed(
+        items = projectTasksList,
+        modifier = Modifier.padding(32.dp)
+    ) { index, project ->
         Text(project.name.toUpperCase(Locale.ROOT), style = typography.overline)
         val progress =
             if (project.tasks.isNotEmpty()) {
@@ -166,7 +229,7 @@ fun ProjectTasksListView(
             } else {
                 0f
             }
-        ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
             Text(
                 ProgressUtil.getPercentage(progress),
                 style = typography.body1,
@@ -188,7 +251,7 @@ fun ProjectTasksListView(
             Spacer(modifier = Modifier.height(32.dp))
         } else {
             Spacer(modifier = Modifier.height(24.dp))
-            Divider(thickness = 1.dp, color = colors.outline)
+            HorizontalDivider()
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -210,8 +273,7 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
             Text(stringResource(id = R.string.you_have_not_any_project))
             Button(
                 modifier = Modifier.align(Alignment.CenterHorizontally).padding(16.dp),
-                onClick = addProject,
-                elevation = 0.dp
+                onClick = addProject
             ) {
                 Text(stringResource(id = R.string.add_project))
             }
