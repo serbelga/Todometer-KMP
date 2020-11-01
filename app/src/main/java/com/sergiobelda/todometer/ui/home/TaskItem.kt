@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -27,8 +26,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
@@ -42,9 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.outline
-import com.sergiobelda.todometer.ui.theme.shapes
-import com.sergiobelda.todometer.ui.theme.typography
 
 @Composable
 fun TaskItem(
@@ -56,9 +55,9 @@ fun TaskItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 8.dp),
-        shape = shapes.large,
+        shape = MaterialTheme.shapes.large,
         elevation = 0.dp,
-        border = BorderStroke(1.dp, colors.outline)
+        border = BorderStroke(1.dp, MaterialColors.outline)
     ) {
         Column(
             modifier = Modifier.clickable(
@@ -81,7 +80,7 @@ fun TaskItem(
                         IconButton(
                             onClick = { updateState(task.id, TaskState.DONE) }
                         ) {
-                            Icon(Icons.Rounded.Check, tint = colors.secondary)
+                            Icon(Icons.Rounded.Check, tint = MaterialColors.secondary)
                         }
                     }
                     TaskState.DONE -> {
@@ -93,7 +92,7 @@ fun TaskItem(
                         IconButton(
                             onClick = { updateState(task.id, TaskState.DOING) }
                         ) {
-                            Icon(Icons.Filled.Refresh, tint = colors.secondary)
+                            Icon(Icons.Filled.Refresh, tint = MaterialColors.secondary)
                         }
                     }
                 }
@@ -103,7 +102,7 @@ fun TaskItem(
                     task.description,
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                     maxLines = 3,
-                    style = typography.caption
+                    style = MaterialTheme.typography.caption
                 )
             }
         }

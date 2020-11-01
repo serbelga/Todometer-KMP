@@ -16,14 +16,13 @@
 
 package com.sergiobelda.todometer.ui.addproject
 
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
@@ -40,6 +39,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
+import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
@@ -52,8 +52,8 @@ fun AddProjectScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                backgroundColor = MaterialTheme.colors.surface,
-                contentColor = contentColorFor(MaterialTheme.colors.surface),
+                backgroundColor = MaterialColors.surface,
+                contentColor = contentColorFor(MaterialColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = upPress) {

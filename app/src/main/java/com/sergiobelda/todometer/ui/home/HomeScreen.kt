@@ -36,7 +36,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
-import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
@@ -44,7 +43,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.ListItem
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
@@ -67,10 +65,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.R
+import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.ui.components.DragIndicator
+import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.components.ToDometerTitle
+import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
-import com.sergiobelda.todometer.ui.theme.outline
 import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import java.util.Locale
@@ -89,7 +90,7 @@ fun HomeScreen(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(mainViewModel = mainViewModel, addProject)
+            SheetContainer(mainViewModel.projectList, addProject)
         }
     ) {
         Scaffold(
@@ -99,8 +100,8 @@ fun HomeScreen(
             bottomBar = {
                 if (projectTasksList.isNotEmpty()) {
                     BottomAppBar(
-                        backgroundColor = colors.surface,
-                        contentColor = contentColorFor(colors.surface),
+                        backgroundColor = MaterialColors.surface,
+                        contentColor = contentColorFor(MaterialColors.surface),
                         cutoutShape = CircleShape
                     ) {
                         ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
@@ -156,14 +157,15 @@ fun ToDometerTopBar() {
                     }
                 }
             }
-            Divider(thickness = 1.dp, color = colors.outline)
+            HorizontalDivider()
         }
     }
 }
 
 @Composable
-fun SheetContainer(mainViewModel: MainViewModel, addProject: () -> Unit) {
+fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
     Column(modifier = Modifier.preferredHeight(480.dp)) {
+        DragIndicator()
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
@@ -178,8 +180,11 @@ fun SheetContainer(mainViewModel: MainViewModel, addProject: () -> Unit) {
                 Text(text = stringResource(id = R.string.add_project))
             }
         }
-        Divider(thickness = 1.dp, color = colors.outline)
-        LazyColumnFor(items = mainViewModel.projectList, modifier = Modifier.preferredHeight(240.dp)) { project ->
+        HorizontalDivider()
+        LazyColumnFor(
+            items = projectList,
+            modifier = Modifier.preferredHeight(240.dp)
+        ) { project ->
             ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
                 ListItem(
                     modifier = Modifier.clickable(onClick = {}),
@@ -188,7 +193,7 @@ fun SheetContainer(mainViewModel: MainViewModel, addProject: () -> Unit) {
                 )
             }
         }
-        Divider(thickness = 1.dp, color = colors.outline)
+        HorizontalDivider()
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
@@ -203,7 +208,7 @@ fun SheetContainer(mainViewModel: MainViewModel, addProject: () -> Unit) {
                 Text(text = stringResource(id = R.string.add_tag))
             }
         }
-        Divider(thickness = 1.dp, color = colors.outline)
+        HorizontalDivider()
     }
 }
 
@@ -246,7 +251,7 @@ fun ProjectTasksListView(
             Spacer(modifier = Modifier.height(32.dp))
         } else {
             Spacer(modifier = Modifier.height(24.dp))
-            Divider(thickness = 1.dp, color = colors.outline)
+            HorizontalDivider()
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
