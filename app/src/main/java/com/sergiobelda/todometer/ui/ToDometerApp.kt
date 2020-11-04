@@ -56,6 +56,7 @@ fun ToDometerApp(backDispatcher: OnBackPressedDispatcher, mainViewModel: MainVie
                 )
                 is Destination.TaskDetail -> TaskDetailScreen(
                     taskId = destination.taskId,
+                    mainViewModel = mainViewModel,
                     upPress = actions.upPress
                 )
             }

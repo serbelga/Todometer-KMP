@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.di
 import com.sergiobelda.todometer.repository.ProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
@@ -31,6 +32,10 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 class UseCaseModule {
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideGetTaskUseCase(taskRepository: TaskRepository) = GetTaskUseCase(taskRepository)
 
     @Provides
     @ActivityRetainedScoped

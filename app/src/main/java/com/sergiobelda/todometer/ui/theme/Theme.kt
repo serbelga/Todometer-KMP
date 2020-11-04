@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Typography
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
@@ -55,6 +56,10 @@ val Colors.outline: Color
 @Composable
 val MaterialColors: Colors
     get() = MaterialTheme.colors
+
+@Composable
+val MaterialTypography: Typography
+    get() = MaterialTheme.typography
 
 @Composable
 fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {

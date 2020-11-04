@@ -23,11 +23,13 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
@@ -36,6 +38,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
+    private val getTaskUseCase: GetTaskUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val getProjectListUseCase: GetProjectListUseCase,
@@ -66,4 +69,6 @@ class MainViewModel @ViewModelInject constructor(
     private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
         updateTaskStateUseCase.updateTaskState(id, taskState)
     }
+
+    fun getTask(id: Int) = getTaskUseCase.getTask(id).asLiveData()
 }
