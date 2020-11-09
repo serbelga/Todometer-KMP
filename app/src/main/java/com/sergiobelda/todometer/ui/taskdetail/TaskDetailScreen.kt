@@ -18,11 +18,12 @@ package com.sergiobelda.todometer.ui.taskdetail
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import com.sergiobelda.todometer.ui.Actions
 
 @Composable
 fun TaskDetailScreen(
     taskId: Int,
-    upPress: () -> Unit
+    actions: Actions
 ) {
     Scaffold {
     }

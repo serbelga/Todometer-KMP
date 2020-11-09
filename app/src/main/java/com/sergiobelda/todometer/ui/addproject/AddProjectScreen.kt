@@ -39,13 +39,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
+import com.sergiobelda.todometer.ui.Actions
 import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun AddProjectScreen(
     mainViewModel: MainViewModel,
-    upPress: () -> Unit
+    actions: Actions
 ) {
     var projectName by savedInstanceState { "" }
     var projectDescription by savedInstanceState { "" }
@@ -56,7 +57,7 @@ fun AddProjectScreen(
                 contentColor = contentColorFor(MaterialColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
-                    IconButton(onClick = upPress) {
+                    IconButton(onClick = actions.navigateUp) {
                         Icon(Icons.Rounded.ArrowBack)
                     }
                 },
@@ -70,7 +71,7 @@ fun AddProjectScreen(
                                     description = projectDescription
                                 )
                             )
-                            upPress()
+                            actions.navigateUp()
                         }
                     ) {
                         Text(stringResource(id = R.string.save))

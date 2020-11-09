@@ -16,37 +16,27 @@
 
 package com.sergiobelda.todometer.ui
 
-import android.os.Parcelable
-import androidx.compose.runtime.Immutable
-import com.sergiobelda.todometer.ui.utils.Navigator
-import kotlinx.android.parcel.Parcelize
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
 
-sealed class Destination : Parcelable {
-    @Parcelize
-    object Home : Destination()
+const val HOME_ROUTE = "home"
+const val ADD_PROJECT_ROUTE = "addProject"
+const val ADD_TASK_ROUTE = "addTask"
+const val TASK_DETAIL = "taskDetail"
+const val TASK_ID_ARG = "taskId"
+const val TASK_DETAIL_ROUTE = "$TASK_DETAIL/{$TASK_ID_ARG}"
 
-    @Parcelize
-    object AddTask : Destination()
-
-    @Parcelize
-    object AddProject : Destination()
-
-    @Immutable
-    @Parcelize
-    data class TaskDetail(val taskId: Int) : Destination()
-}
-
-class Actions(navigator: Navigator<Destination>) {
-    val selectTask: (Int) -> Unit = { taskId ->
-        navigator.navigate(Destination.TaskDetail(taskId))
+class Actions(navController: NavHostController) {
+    val openTask: (Int) -> Unit = { taskId ->
+        navController.navigate("$TASK_DETAIL/$taskId")
     }
     val addTask: () -> Unit = {
-        navigator.navigate(Destination.AddTask)
+        navController.navigate(ADD_TASK_ROUTE)
     }
     val addProject: () -> Unit = {
-        navigator.navigate(Destination.AddProject)
+        navController.navigate(ADD_PROJECT_ROUTE)
     }
-    val upPress: () -> Unit = {
-        navigator.back()
+    val navigateUp: () -> Unit = {
+        navController.navigateUp()
     }
 }
