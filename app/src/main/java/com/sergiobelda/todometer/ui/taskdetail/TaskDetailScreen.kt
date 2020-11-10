@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun TaskDetailScreen(
     taskId: Int,
-    upPress: () -> Unit
+    navigateUp: () -> Unit
 ) {
     Scaffold {
     }
