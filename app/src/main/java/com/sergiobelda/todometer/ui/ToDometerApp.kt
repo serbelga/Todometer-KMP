@@ -37,16 +37,34 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
     ToDometerTheme {
         NavHost(navController = navController, startDestination = HOME_ROUTE) {
             composable(HOME_ROUTE) {
-                HomeScreen(mainViewModel, actions)
+                HomeScreen(
+                    mainViewModel = mainViewModel,
+                    addTask = actions.addTask,
+                    addProject = actions.addProject,
+                    openTask = actions.openTask
+                )
             }
             composable(
                 TASK_DETAIL_ROUTE,
                 arguments = listOf(navArgument(TASK_ID_ARG) { type = NavType.IntType })
             ) { backStackEntry ->
-                TaskDetailScreen(backStackEntry.arguments?.getInt(TASK_ID_ARG) ?: 0, actions)
+                TaskDetailScreen(
+                    taskId = backStackEntry.arguments?.getInt(TASK_ID_ARG) ?: 0,
+                    navigateUp = actions.navigateUp
+                )
             }
-            composable(ADD_PROJECT_ROUTE) { AddProjectScreen(mainViewModel, actions) }
-            composable(ADD_TASK_ROUTE) { AddTaskScreen(mainViewModel, actions) }
+            composable(ADD_PROJECT_ROUTE) {
+                AddProjectScreen(
+                    mainViewModel = mainViewModel,
+                    navigateUp = actions.navigateUp
+                )
+            }
+            composable(ADD_TASK_ROUTE) {
+                AddTaskScreen(
+                    mainViewModel = mainViewModel,
+                    navigateUp = actions.navigateUp
+                )
+            }
         }
     }
 }

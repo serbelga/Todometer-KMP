@@ -67,7 +67,6 @@ import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.ui.Actions
 import com.sergiobelda.todometer.ui.components.DragIndicator
 import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.components.ToDometerTitle
@@ -81,7 +80,9 @@ import java.util.Locale
 @OptIn(ExperimentalMaterialApi::class)
 fun HomeScreen(
     mainViewModel: MainViewModel,
-    actions: Actions
+    addTask: () -> Unit,
+    addProject: () -> Unit,
+    openTask: (Int) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val projectList = mainViewModel.projectList
@@ -89,7 +90,7 @@ fun HomeScreen(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(projectList, actions.addProject)
+            SheetContainer(projectList, addProject)
         }
     ) {
         Scaffold(
@@ -117,16 +118,16 @@ fun HomeScreen(
             },
             bodyContent = {
                 if (!projectList.isNullOrEmpty()) {
-                    ProjectTasksListView(mainViewModel, actions.openTask)
+                    ProjectTasksListView(mainViewModel, openTask)
                 } else {
-                    EmptyProjectTaskListView(actions.addProject)
+                    EmptyProjectTaskListView(addProject)
                 }
             },
             floatingActionButton = {
                 if (!projectList.isNullOrEmpty()) {
                     FloatingActionButton(
                         icon = { Icon(Icons.Rounded.Add) },
-                        onClick = actions.addTask
+                        onClick = addTask
                     )
                 }
             },

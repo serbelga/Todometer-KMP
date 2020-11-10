@@ -51,7 +51,6 @@ import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.ui.Actions
 import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
@@ -60,7 +59,7 @@ import java.util.Locale
 @Composable
 fun AddTaskScreen(
     mainViewModel: MainViewModel,
-    actions: Actions
+    navigateUp: () -> Unit
 ) {
     var taskTitle by savedInstanceState { "" }
     var taskDescription by savedInstanceState { "" }
@@ -73,7 +72,7 @@ fun AddTaskScreen(
                 contentColor = contentColorFor(MaterialColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
-                    IconButton(onClick = actions.navigateUp) {
+                    IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowBack)
                     }
                 },
@@ -90,7 +89,7 @@ fun AddTaskScreen(
                                     tagId = null
                                 )
                             )
-                            actions.navigateUp
+                            navigateUp()
                         }
                     ) {
                         Text(stringResource(id = R.string.save))
