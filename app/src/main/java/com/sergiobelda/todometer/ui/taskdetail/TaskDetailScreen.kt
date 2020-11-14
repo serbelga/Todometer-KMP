@@ -58,7 +58,7 @@ fun TaskDetailScreen(
                         }
                     },
                     navigationIcon = {
-                        IconButton(onClick = upPress) {
+                        IconButton(onClick = navigateUp) {
                             Icon(Icons.Rounded.ArrowBack)
                         }
                     },

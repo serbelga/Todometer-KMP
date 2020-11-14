@@ -50,6 +50,7 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             ) { backStackEntry ->
                 TaskDetailScreen(
                     taskId = backStackEntry.arguments?.getInt(TASK_ID_ARG) ?: 0,
+                    mainViewModel = mainViewModel,
                     navigateUp = actions.navigateUp
                 )
             }
@@ -63,7 +64,6 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
                 AddTaskScreen(
                     mainViewModel = mainViewModel,
                     navigateUp = actions.navigateUp
-                    upPress = actions.upPress
                 )
             }
         }
