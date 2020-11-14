@@ -18,25 +18,32 @@ package com.sergiobelda.todometer.ui
 
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import com.sergiobelda.todometer.ui.Destinations.AddProject
+import com.sergiobelda.todometer.ui.Destinations.AddTask
+import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 
-const val HOME_ROUTE = "home"
-const val ADD_PROJECT_ROUTE = "addProject"
-const val ADD_TASK_ROUTE = "addTask"
-const val TASK_DETAIL = "taskDetail"
-const val TASK_ID_ARG = "taskId"
-const val TASK_DETAIL_ROUTE = "$TASK_DETAIL/{$TASK_ID_ARG}"
+object Destinations {
+    const val Home = "home"
+    const val AddProject = "addProject"
+    const val AddTask = "addTask"
+    const val TaskDetail = "taskDetail"
+
+    object TaskDetailArgs {
+        const val TaskId = "taskId"
+    }
+}
 
 class Actions(navController: NavHostController) {
     val openTask: (Int) -> Unit = { taskId ->
-        navController.navigate("$TASK_DETAIL/$taskId")
+        navController.navigate("$TaskDetail/$taskId")
     }
     val addTask: () -> Unit = {
-        navController.navigate(ADD_TASK_ROUTE)
+        navController.navigate(AddTask)
     }
     val addProject: () -> Unit = {
-        navController.navigate(ADD_PROJECT_ROUTE)
+        navController.navigate(AddProject)
     }
     val navigateUp: () -> Unit = {
-        navController.navigateUp()
+        navController.popBackStack()
     }
 }
