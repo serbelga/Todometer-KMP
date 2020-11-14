@@ -23,6 +23,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.sergiobelda.todometer.ui.Destinations.AddProject
+import com.sergiobelda.todometer.ui.Destinations.AddTask
+import com.sergiobelda.todometer.ui.Destinations.Home
+import com.sergiobelda.todometer.ui.Destinations.TaskDetail
+import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
@@ -35,8 +40,8 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
     ToDometerTheme {
-        NavHost(navController = navController, startDestination = HOME_ROUTE) {
-            composable(HOME_ROUTE) {
+        NavHost(navController = navController, startDestination = Home) {
+            composable(Home) {
                 HomeScreen(
                     mainViewModel = mainViewModel,
                     addTask = actions.addTask,
@@ -45,22 +50,22 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
                 )
             }
             composable(
-                TASK_DETAIL_ROUTE,
-                arguments = listOf(navArgument(TASK_ID_ARG) { type = NavType.IntType })
+                "$TaskDetail/{$TaskId}",
+                arguments = listOf(navArgument(TaskId) { type = NavType.IntType })
             ) { backStackEntry ->
                 TaskDetailScreen(
-                    taskId = backStackEntry.arguments?.getInt(TASK_ID_ARG) ?: 0,
+                    taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
                     mainViewModel = mainViewModel,
                     navigateUp = actions.navigateUp
                 )
             }
-            composable(ADD_PROJECT_ROUTE) {
+            composable(AddProject) {
                 AddProjectScreen(
                     mainViewModel = mainViewModel,
                     navigateUp = actions.navigateUp
                 )
             }
-            composable(ADD_TASK_ROUTE) {
+            composable(AddTask) {
                 AddTaskScreen(
                     mainViewModel = mainViewModel,
                     navigateUp = actions.navigateUp
