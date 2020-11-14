@@ -59,7 +59,7 @@ import java.util.Locale
 @Composable
 fun AddTaskScreen(
     mainViewModel: MainViewModel,
-    upPress: () -> Unit
+    navigateUp: () -> Unit
 ) {
     var taskTitle by savedInstanceState { "" }
     var taskDescription by savedInstanceState { "" }
@@ -72,7 +72,7 @@ fun AddTaskScreen(
                 contentColor = contentColorFor(MaterialColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
-                    IconButton(onClick = upPress) {
+                    IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowBack)
                     }
                 },
@@ -89,7 +89,7 @@ fun AddTaskScreen(
                                     tagId = null
                                 )
                             )
-                            upPress()
+                            navigateUp()
                         }
                     ) {
                         Text(stringResource(id = R.string.save))

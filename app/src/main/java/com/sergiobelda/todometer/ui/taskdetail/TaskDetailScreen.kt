@@ -44,7 +44,7 @@ import com.sergiobelda.todometer.viewmodel.MainViewModel
 fun TaskDetailScreen(
     taskId: Int,
     mainViewModel: MainViewModel,
-    upPress: () -> Unit
+    navigateUp: () -> Unit
 ) {
     val scrollState = rememberScrollState(0f)
     val taskState = mainViewModel.getTask(taskId).observeAsState()

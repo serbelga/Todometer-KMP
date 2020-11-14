@@ -45,7 +45,7 @@ import com.sergiobelda.todometer.viewmodel.MainViewModel
 @Composable
 fun AddProjectScreen(
     mainViewModel: MainViewModel,
-    upPress: () -> Unit
+    navigateUp: () -> Unit
 ) {
     var projectName by savedInstanceState { "" }
     var projectDescription by savedInstanceState { "" }
@@ -56,7 +56,7 @@ fun AddProjectScreen(
                 contentColor = contentColorFor(MaterialColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
-                    IconButton(onClick = upPress) {
+                    IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowBack)
                     }
                 },
@@ -70,7 +70,7 @@ fun AddProjectScreen(
                                     description = projectDescription
                                 )
                             )
-                            upPress()
+                            navigateUp()
                         }
                     ) {
                         Text(stringResource(id = R.string.save))
