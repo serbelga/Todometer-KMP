@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.di
 
 import com.sergiobelda.todometer.repository.ProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
+import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
 import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
@@ -44,6 +45,10 @@ class UseCaseModule {
     @Provides
     @ActivityRetainedScoped
     fun provideInsertTaskUseCase(taskRepository: TaskRepository) = InsertTaskUseCase(taskRepository)
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideDeleteTaskUseCase(taskRepository: TaskRepository) = DeleteTaskUseCase(taskRepository)
 
     @Provides
     @ActivityRetainedScoped

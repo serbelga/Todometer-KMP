@@ -37,12 +37,16 @@ import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
+import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.theme.MaterialColors
+import com.sergiobelda.todometer.ui.theme.MaterialTypography
 import com.sergiobelda.todometer.ui.theme.outline
 
 @Composable
@@ -98,12 +102,21 @@ fun TaskItem(
                 }
             }
             ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
-                Text(
-                    task.description,
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                    maxLines = 3,
-                    style = MaterialTheme.typography.caption
-                )
+                if (task.description.isNotBlank()) {
+                    Text(
+                        task.description,
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                        style = MaterialTheme.typography.caption,
+                        maxLines = 3
+                    )
+                } else {
+                    Text(
+                        text = stringResource(id = R.string.no_description),
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                        style = MaterialTypography.caption,
+                        fontStyle = FontStyle.Italic
+                    )
+                }
             }
         }
     }

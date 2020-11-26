@@ -25,7 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.Button
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -36,6 +36,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -76,25 +77,7 @@ fun AddTaskScreen(
                         Icon(Icons.Rounded.ArrowBack)
                     }
                 },
-                title = { Text(stringResource(id = R.string.add_task)) },
-                actions = {
-                    Button(
-                        onClick = {
-                            mainViewModel.insertTask(
-                                Task(
-                                    title = taskTitle,
-                                    description = taskDescription,
-                                    state = TaskState.DOING,
-                                    projectId = selectedProject.id,
-                                    tagId = null
-                                )
-                            )
-                            navigateUp()
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.save))
-                    }
-                }
+                title = { Text(stringResource(id = R.string.add_task)) }
             )
         },
         bodyContent = {
@@ -126,6 +109,23 @@ fun AddTaskScreen(
                 )
                 ProjectRadioGroup(radioOptions, selectedProject, onProjectSelected)
             }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    mainViewModel.insertTask(
+                        Task(
+                            title = taskTitle,
+                            description = taskDescription,
+                            state = TaskState.DOING,
+                            projectId = selectedProject.id,
+                            tagId = null
+                        )
+                    )
+                    navigateUp()
+                },
+                icon = { Icon(Icons.Rounded.Check) }
+            )
         }
     )
 }

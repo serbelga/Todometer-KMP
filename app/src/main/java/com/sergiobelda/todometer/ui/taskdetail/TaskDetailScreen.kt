@@ -22,18 +22,24 @@ import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.AmbientEmphasisLevels
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.theme.MaterialColors
@@ -62,11 +68,6 @@ fun TaskDetailScreen(
                             Icon(Icons.Rounded.ArrowBack)
                         }
                     },
-                    actions = {
-                        IconButton(onClick = { }) {
-                            Icon(Icons.Rounded.Delete)
-                        }
-                    },
                     elevation = 0.dp,
                     backgroundColor = MaterialColors.surface,
                     contentColor = contentColorFor(color = MaterialColors.surface)
@@ -74,6 +75,14 @@ fun TaskDetailScreen(
             },
             bodyContent = {
                 TaskDetailBody(scrollState, task)
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {},
+                    icon = {
+                        Icon(Icons.Rounded.Edit)
+                    }
+                )
             }
         )
     }
@@ -89,14 +98,26 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
             Text(
                 text = task.title,
                 style = MaterialTypography.h4,
-                modifier = Modifier.padding(32.dp)
+                modifier = Modifier.padding(32.dp),
+                maxLines = 1
             )
             HorizontalDivider()
-            Text(
-                text = task.description,
-                style = MaterialTypography.body1,
-                modifier = Modifier.padding(24.dp)
-            )
+            if (task.description.isNotBlank()) {
+                Text(
+                    text = task.description,
+                    style = MaterialTypography.body1,
+                    modifier = Modifier.padding(24.dp)
+                )
+            } else {
+                ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                    Text(
+                        text = stringResource(id = R.string.no_description),
+                        style = MaterialTypography.body1,
+                        fontStyle = FontStyle.Italic,
+                        modifier = Modifier.padding(24.dp)
+                    )
+                }
+            }
         }
     }
 }

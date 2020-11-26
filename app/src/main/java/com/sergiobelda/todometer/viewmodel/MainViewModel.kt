@@ -28,6 +28,7 @@ import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
 import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
@@ -42,7 +43,8 @@ class MainViewModel @ViewModelInject constructor(
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val getProjectListUseCase: GetProjectListUseCase,
-    private val updateTaskStateUseCase: UpdateTaskStateUseCase
+    private val updateTaskStateUseCase: UpdateTaskStateUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
     var projectList: List<Project> by mutableStateOf(listOf())
@@ -71,4 +73,8 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun getTask(id: Int) = getTaskUseCase.getTask(id).asLiveData()
+
+    fun deleteTask(id: Int) = viewModelScope.launch {
+        deleteTaskUseCase.deleteTask(id)
+    }
 }
