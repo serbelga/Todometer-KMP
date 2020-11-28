@@ -24,6 +24,7 @@ import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,6 +42,10 @@ class UseCaseModule {
     @Provides
     @ActivityRetainedScoped
     fun provideUpdateTaskStateUseCase(taskRepository: TaskRepository) = UpdateTaskStateUseCase(taskRepository)
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideUpdateTaskUseCase(taskRepository: TaskRepository) = UpdateTaskUseCase(taskRepository)
 
     @Provides
     @ActivityRetainedScoped

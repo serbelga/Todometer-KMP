@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.AmbientEmphasisLevels
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
@@ -58,6 +59,9 @@ import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -85,6 +89,8 @@ fun HomeScreen(
     openTask: (Int) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val selectedTask = remember { mutableStateOf(0) }
+    val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
     val projectList = mainViewModel.projectList
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -117,8 +123,21 @@ fun HomeScreen(
                 }
             },
             bodyContent = {
+                if (deleteTaskAlertDialogState.value) {
+                    RemoveTaskAlertDialog(
+                        deleteTaskAlertDialogState,
+                        deleteTask = { mainViewModel.deleteTask(selectedTask.value) }
+                    )
+                }
                 if (!projectList.isNullOrEmpty()) {
-                    ProjectTasksListView(mainViewModel, openTask)
+                    ProjectTasksListView(
+                        mainViewModel,
+                        onTaskItemClick = openTask,
+                        onTaskItemLongClick = {
+                            deleteTaskAlertDialogState.value = true
+                            selectedTask.value = it
+                        }
+                    )
                 } else {
                     EmptyProjectTaskListView(addProject)
                 }
@@ -135,6 +154,43 @@ fun HomeScreen(
             isFloatingActionButtonDocked = true
         )
     }
+}
+
+@Composable
+fun RemoveTaskAlertDialog(
+    showRemoveTaskAlertDialog: MutableState<Boolean>,
+    deleteTask: () -> Unit
+) {
+    AlertDialog(
+        title = {
+            Text(stringResource(id = R.string.remove_task))
+        },
+        onDismissRequest = {
+            showRemoveTaskAlertDialog.value = false
+        },
+        text = {
+            Text(stringResource(id = R.string.remove_task_question))
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    deleteTask()
+                    showRemoveTaskAlertDialog.value = false
+                }
+            ) {
+                Text(stringResource(id = R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    showRemoveTaskAlertDialog.value = false
+                }
+            ) {
+                Text(stringResource(id = R.string.cancel))
+            }
+        }
+    )
 }
 
 @Composable
@@ -215,7 +271,8 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
 @Composable
 fun ProjectTasksListView(
     mainViewModel: MainViewModel,
-    openTask: (Int) -> Unit
+    onTaskItemClick: (Int) -> Unit,
+    onTaskItemLongClick: (Int) -> Unit
 ) {
     val projectTasksList = mainViewModel.projectList
     LazyColumnForIndexed(
@@ -240,11 +297,12 @@ fun ProjectTasksListView(
             progress = progress,
             modifier = Modifier.padding(top = 8.dp, bottom = 16.dp).fillMaxWidth()
         )
-        project.tasks.forEach { task ->
+        project.tasks.sortedBy { it.state == TaskState.DONE }.forEach { task ->
             TaskItem(
                 task,
                 updateState = mainViewModel.updateTaskState,
-                onClick = openTask
+                onClick = onTaskItemClick,
+                onLongClick = onTaskItemLongClick
             )
         }
         if (index == projectTasksList.size - 1) {

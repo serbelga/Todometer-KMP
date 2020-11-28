@@ -53,7 +53,8 @@ import com.sergiobelda.todometer.ui.theme.outline
 fun TaskItem(
     task: Task,
     updateState: (Int, TaskState) -> Unit,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    onLongClick: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -67,6 +68,9 @@ fun TaskItem(
             modifier = Modifier.clickable(
                 onClick = {
                     onClick(task.id)
+                },
+                onLongClick = {
+                    onLongClick(task.id)
                 }
             )
         ) {

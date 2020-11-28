@@ -50,6 +50,7 @@ import com.sergiobelda.todometer.viewmodel.MainViewModel
 fun TaskDetailScreen(
     taskId: Int,
     mainViewModel: MainViewModel,
+    editTask: (Int) -> Unit,
     navigateUp: () -> Unit
 ) {
     val scrollState = rememberScrollState(0f)
@@ -78,7 +79,9 @@ fun TaskDetailScreen(
             },
             floatingActionButton = {
                 FloatingActionButton(
-                    onClick = {},
+                    onClick = {
+                        editTask(taskId)
+                    },
                     icon = {
                         Icon(Icons.Rounded.Edit)
                     }

@@ -34,6 +34,7 @@ import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -43,14 +44,13 @@ class MainViewModel @ViewModelInject constructor(
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val getProjectListUseCase: GetProjectListUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase,
     private val updateTaskStateUseCase: UpdateTaskStateUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
     var projectList: List<Project> by mutableStateOf(listOf())
         private set
-
-    val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     init {
         viewModelScope.launch {
@@ -59,6 +59,8 @@ class MainViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     fun insertTask(task: Task) = viewModelScope.launch {
         insertTaskUseCase.insertTask(task)
@@ -76,5 +78,9 @@ class MainViewModel @ViewModelInject constructor(
 
     fun deleteTask(id: Int) = viewModelScope.launch {
         deleteTaskUseCase.deleteTask(id)
+    }
+
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase.updateTask(task)
     }
 }
