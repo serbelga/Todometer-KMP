@@ -80,6 +80,7 @@ fun AddTaskScreen(
                     },
                     label = { Text(stringResource(id = R.string.title)) },
                     isErrorValue = taskTitleInputError.value,
+                    errorMessage = stringResource(id = R.string.field_not_empty),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Next
