@@ -71,7 +71,7 @@ fun EditTaskScreen(
                             Icon(Icons.Rounded.ArrowBack)
                         }
                     },
-                    title = { Text(stringResource(id = R.string.add_task)) }
+                    title = { Text(stringResource(id = R.string.edit_task)) }
                 )
             },
             bodyContent = {
@@ -85,8 +85,7 @@ fun EditTaskScreen(
                             end = 16.dp,
                             top = 8.dp,
                             bottom = 8.dp
-                        ).fillMaxWidth(),
-                        imeAction = ImeAction.Next
+                        ).fillMaxWidth()
                     )
                     OutlinedTextField(
                         value = taskDescription,

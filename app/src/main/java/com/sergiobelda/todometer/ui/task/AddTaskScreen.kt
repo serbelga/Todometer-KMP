@@ -45,6 +45,7 @@ import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.components.ProjectSelector
 import com.sergiobelda.todometer.ui.theme.MaterialColors
+import com.sergiobelda.todometer.ui.theme.MaterialTypography
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
@@ -53,6 +54,7 @@ fun AddTaskScreen(
     navigateUp: () -> Unit
 ) {
     var taskTitle by savedInstanceState { "" }
+    val taskTitleInputError = remember { mutableStateOf(false) }
     var taskDescription by savedInstanceState { "" }
     val radioOptions = mainViewModel.projectList
     val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[0]) }
@@ -72,18 +74,32 @@ fun AddTaskScreen(
         },
         bodyContent = {
             Column {
-                OutlinedTextField(
-                    value = taskTitle,
-                    onValueChange = { taskTitle = it },
-                    label = { Text(stringResource(id = R.string.title)) },
+                Column(
                     modifier = Modifier.padding(
                         start = 16.dp,
                         end = 16.dp,
-                        top = 8.dp,
-                        bottom = 8.dp
-                    ).fillMaxWidth(),
-                    imeAction = ImeAction.Next
-                )
+                        top = 8.dp
+                    )
+                ) {
+                    OutlinedTextField(
+                        value = taskTitle,
+                        onValueChange = {
+                            taskTitle = it
+                            taskTitleInputError.value = false
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        label = { Text(stringResource(id = R.string.title)) },
+                        imeAction = ImeAction.Next,
+                        isErrorValue = taskTitleInputError.value
+                    )
+                    if (taskTitleInputError.value) {
+                        Text(
+                            stringResource(id = R.string.field_not_empty),
+                            color = MaterialColors.error,
+                            style = MaterialTypography.caption
+                        )
+                    }
+                }
                 OutlinedTextField(
                     value = taskDescription,
                     onValueChange = { taskDescription = it },
@@ -94,8 +110,7 @@ fun AddTaskScreen(
                         top = 8.dp,
                         bottom = 8.dp
                     ).fillMaxWidth(),
-                    imeAction = ImeAction.Done,
-                    onImeActionPerformed = { _, softwareKeyboardController -> softwareKeyboardController?.hideSoftwareKeyboard() }
+                    imeAction = ImeAction.Done
                 )
                 ProjectSelector(radioOptions, selectedProject, onProjectSelected)
             }
@@ -103,16 +118,20 @@ fun AddTaskScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    mainViewModel.insertTask(
-                        Task(
-                            title = taskTitle,
-                            description = taskDescription,
-                            state = TaskState.DOING,
-                            projectId = selectedProject.id,
-                            tagId = null
+                    if (taskTitle.isBlank()) {
+                        taskTitleInputError.value = true
+                    } else {
+                        mainViewModel.insertTask(
+                            Task(
+                                title = taskTitle,
+                                description = taskDescription,
+                                state = TaskState.DOING,
+                                projectId = selectedProject.id,
+                                tagId = null
+                            )
                         )
-                    )
-                    navigateUp()
+                        navigateUp()
+                    }
                 },
                 icon = { Icon(Icons.Rounded.Check) }
             )
