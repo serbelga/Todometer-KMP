@@ -3,6 +3,7 @@
     <string name="project">Project</string>
     <string name="projects">Projects</string>
     <string name="add_task">Add task</string>
+    <string name="edit_task">Edit task</string>
     <string name="add_project">Add project</string>
     <string name="title">Title</string>
     <string name="name">Name</string>
@@ -11,4 +12,10 @@
     <string name="save">Save</string>
     <string name="tags">Tags</string>
     <string name="add_tag">Add tag</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="remove_task">Remove task</string>
+    <string name="remove_task_question">Do you want to remove this task?</string>
+    <string name="no_description">No description provided</string>
+    <string name="field_not_empty">Field must not be empty</string>
 </resources>

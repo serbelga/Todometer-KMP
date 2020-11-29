@@ -41,12 +41,11 @@ import com.sergiobelda.todometer.model.TaskState
     ]
 )
 data class TaskEntity(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     val title: String,
     val description: String,
     val state: TaskState,
     @ColumnInfo(name = "project_id") val projectId: Int?,
     @ColumnInfo(name = "tag_id") val tagId: Int?
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-}
+)

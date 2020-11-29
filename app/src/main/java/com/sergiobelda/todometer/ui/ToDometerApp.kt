@@ -25,12 +25,14 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
+import com.sergiobelda.todometer.ui.Destinations.EditTask
 import com.sergiobelda.todometer.ui.Destinations.Home
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
-import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
+import com.sergiobelda.todometer.ui.task.AddTaskScreen
+import com.sergiobelda.todometer.ui.task.EditTaskScreen
 import com.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.viewmodel.MainViewModel
@@ -55,6 +57,8 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             ) { backStackEntry ->
                 TaskDetailScreen(
                     taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
+                    mainViewModel = mainViewModel,
+                    editTask = actions.editTask,
                     navigateUp = actions.navigateUp
                 )
             }
@@ -66,6 +70,16 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             }
             composable(AddTask) {
                 AddTaskScreen(
+                    mainViewModel = mainViewModel,
+                    navigateUp = actions.navigateUp
+                )
+            }
+            composable(
+                "$EditTask/{$TaskId}",
+                arguments = listOf(navArgument(TaskId) { type = NavType.IntType })
+            ) { backStackEntry ->
+                EditTaskScreen(
+                    taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
                     mainViewModel = mainViewModel,
                     navigateUp = actions.navigateUp
                 )

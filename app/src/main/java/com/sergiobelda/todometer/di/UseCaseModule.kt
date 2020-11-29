@@ -18,10 +18,13 @@ package com.sergiobelda.todometer.di
 
 import com.sergiobelda.todometer.repository.ProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
+import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,11 +37,23 @@ class UseCaseModule {
 
     @Provides
     @ActivityRetainedScoped
+    fun provideGetTaskUseCase(taskRepository: TaskRepository) = GetTaskUseCase(taskRepository)
+
+    @Provides
+    @ActivityRetainedScoped
     fun provideUpdateTaskStateUseCase(taskRepository: TaskRepository) = UpdateTaskStateUseCase(taskRepository)
 
     @Provides
     @ActivityRetainedScoped
+    fun provideUpdateTaskUseCase(taskRepository: TaskRepository) = UpdateTaskUseCase(taskRepository)
+
+    @Provides
+    @ActivityRetainedScoped
     fun provideInsertTaskUseCase(taskRepository: TaskRepository) = InsertTaskUseCase(taskRepository)
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideDeleteTaskUseCase(taskRepository: TaskRepository) = DeleteTaskUseCase(taskRepository)
 
     @Provides
     @ActivityRetainedScoped

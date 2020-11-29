@@ -14,27 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.mapper
+package com.sergiobelda.todometer.usecase
 
-import com.sergiobelda.todometer.db.entity.TaskEntity
 import com.sergiobelda.todometer.model.Task
+import com.sergiobelda.todometer.repository.TaskRepository
+import kotlinx.coroutines.flow.Flow
 
-object TaskMapper {
-    fun TaskEntity.toDomain() = Task(
-        id = id,
-        title = title,
-        description = description,
-        state = state,
-        projectId = projectId,
-        tagId = tagId
-    )
-
-    fun Task.toEntity() = TaskEntity(
-        id = id,
-        title = title,
-        description = description,
-        state = state,
-        projectId = projectId,
-        tagId = tagId
-    )
+class GetTaskUseCase(val taskRepository: TaskRepository) {
+    fun getTask(id: Int): Flow<Task> = taskRepository.getTask(id)
 }

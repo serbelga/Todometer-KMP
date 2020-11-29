@@ -23,29 +23,34 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
+import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
+    private val getTaskUseCase: GetTaskUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val getProjectListUseCase: GetProjectListUseCase,
-    private val updateTaskStateUseCase: UpdateTaskStateUseCase
+    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val updateTaskStateUseCase: UpdateTaskStateUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
     var projectList: List<Project> by mutableStateOf(listOf())
         private set
-
-    val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     init {
         viewModelScope.launch {
@@ -54,6 +59,8 @@ class MainViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     fun insertTask(task: Task) = viewModelScope.launch {
         insertTaskUseCase.insertTask(task)
@@ -65,5 +72,15 @@ class MainViewModel @ViewModelInject constructor(
 
     private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
         updateTaskStateUseCase.updateTaskState(id, taskState)
+    }
+
+    fun getTask(id: Int) = getTaskUseCase.getTask(id).asLiveData()
+
+    fun deleteTask(id: Int) = viewModelScope.launch {
+        deleteTaskUseCase.deleteTask(id)
+    }
+
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase.updateTask(task)
     }
 }
