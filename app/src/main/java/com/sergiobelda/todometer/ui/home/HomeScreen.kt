@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,9 +33,10 @@ import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.AmbientEmphasisLevels
+import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
@@ -47,9 +47,9 @@ import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
@@ -62,6 +62,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.Providers
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -110,7 +111,7 @@ fun HomeScreen(
                         contentColor = contentColorFor(MaterialColors.surface),
                         cutoutShape = CircleShape
                     ) {
-                        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                        Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                             IconButton(onClick = { sheetState.show() }) {
                                 Icon(Icons.Rounded.Menu)
                             }
@@ -207,7 +208,7 @@ fun ToDometerTopBar() {
                 modifier = Modifier.height(56.dp).fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
-                ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                     IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
                         Icon(Icons.Outlined.AccountCircle)
                     }
@@ -241,7 +242,7 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             items = projectList,
             modifier = Modifier.preferredHeight(240.dp)
         ) { project ->
-            ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+            Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                 ListItem(
                     modifier = Modifier.clickable(onClick = {}),
                     text = { Text(text = project.name) },
@@ -286,7 +287,7 @@ fun ProjectTasksListView(
             } else {
                 0f
             }
-        ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+        Providers(AmbientContentAlpha provides ContentAlpha.medium) {
             Text(
                 ProgressUtil.getPercentage(progress),
                 style = typography.body1,
