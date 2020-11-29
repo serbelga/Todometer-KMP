@@ -16,7 +16,6 @@
 
 package com.sergiobelda.todometer.ui.addproject
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,6 +24,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
@@ -35,7 +35,6 @@ import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
@@ -89,8 +88,7 @@ fun AddProjectScreen(
                         end = 16.dp,
                         top = 8.dp,
                         bottom = 8.dp
-                    ).fillMaxWidth(),
-                    imeAction = ImeAction.Next
+                    ).fillMaxWidth()
                 )
                 OutlinedTextField(
                     value = projectDescription,
@@ -102,7 +100,6 @@ fun AddProjectScreen(
                         top = 8.dp,
                         bottom = 8.dp
                     ).fillMaxWidth(),
-                    imeAction = ImeAction.Done,
                     onImeActionPerformed = { _, softwareKeyboardController -> softwareKeyboardController?.hideSoftwareKeyboard() }
                 )
             }

@@ -24,15 +24,15 @@ import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.unit.sp
 import com.sergiobelda.todometer.R
 
-val regular = font(R.font.jetbrains_mono_regular)
-val medium = font(R.font.jetbrains_mono_medium, FontWeight.W500)
-val bold = font(R.font.jetbrains_mono_bold, FontWeight.W600)
+val regularFont = font(R.font.jetbrains_mono_regular)
+val mediumFont = font(R.font.jetbrains_mono_medium, FontWeight.W500)
+val boldFont = font(R.font.jetbrains_mono_bold, FontWeight.W600)
 
 val appFontFamily = fontFamily(
     fonts = listOf(
-        regular,
-        medium,
-        bold
+        regularFont,
+        mediumFont,
+        boldFont
     )
 )
 
