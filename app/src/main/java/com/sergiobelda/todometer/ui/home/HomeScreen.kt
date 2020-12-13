@@ -67,8 +67,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.R
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.TaskState
@@ -146,9 +146,10 @@ fun HomeScreen(
             floatingActionButton = {
                 if (!projectList.isNullOrEmpty()) {
                     FloatingActionButton(
-                        icon = { Icon(Icons.Rounded.Add) },
                         onClick = addTask
-                    )
+                    ) {
+                        Icon(Icons.Rounded.Add)
+                    }
                 }
             },
             floatingActionButtonPosition = FabPosition.Center,
@@ -233,7 +234,7 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addProject) {
-                Icon(asset = Icons.Rounded.Add)
+                Icon(Icons.Rounded.Add)
                 Text(text = stringResource(id = R.string.add_project))
             }
         }
@@ -261,7 +262,7 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = {}) {
-                Icon(asset = Icons.Rounded.Add)
+                Icon(Icons.Rounded.Add)
                 Text(text = stringResource(id = R.string.add_tag))
             }
         }
@@ -326,7 +327,7 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                asset = vectorResource(id = R.drawable.project_completed),
+                imageVector = vectorResource(id = R.drawable.project_completed),
                 modifier = Modifier.size(240.dp)
             )
             Text(stringResource(id = R.string.you_have_not_any_project))
