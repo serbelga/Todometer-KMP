@@ -21,11 +21,11 @@ import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.AmbientEmphasisLevels
+import androidx.compose.material.AmbientContentAlpha
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -34,6 +34,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Providers
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -82,10 +83,9 @@ fun TaskDetailScreen(
                     onClick = {
                         editTask(taskId)
                     },
-                    icon = {
-                        Icon(Icons.Rounded.Edit)
-                    }
-                )
+                ) {
+                    Icon(Icons.Rounded.Edit)
+                }
             }
         )
     }
@@ -112,7 +112,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                     modifier = Modifier.padding(24.dp)
                 )
             } else {
-                ProvideEmphasis(emphasis = AmbientEmphasisLevels.current.medium) {
+                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                     Text(
                         text = stringResource(id = R.string.no_description),
                         style = MaterialTypography.body1,

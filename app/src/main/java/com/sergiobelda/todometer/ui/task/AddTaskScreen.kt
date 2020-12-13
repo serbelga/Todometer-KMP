@@ -117,8 +117,9 @@ fun AddTaskScreen(
                         navigateUp()
                     }
                 },
-                icon = { Icon(Icons.Rounded.Check) }
-            )
+            ) {
+                Icon(Icons.Rounded.Check)
+            }
         }
     )
 }
