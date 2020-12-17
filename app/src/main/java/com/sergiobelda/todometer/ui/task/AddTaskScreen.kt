@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.ui.task
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -34,6 +35,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -84,7 +86,8 @@ fun AddTaskScreen(
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Next
-                    )
+                    ),
+                    modifier = Modifier.fillMaxWidth()
                 )
                 TextField(
                     value = taskDescription,
@@ -94,7 +97,8 @@ fun AddTaskScreen(
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
-                    )
+                    ),
+                    modifier = Modifier.fillMaxWidth()
                 )
                 ProjectSelector(radioOptions, selectedProject, onProjectSelected)
             }
