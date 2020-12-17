@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.ui.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
@@ -32,14 +31,14 @@ import com.sergiobelda.todometer.ui.theme.MaterialTypography
 
 @Composable
 fun TextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChanged: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
     isErrorValue: Boolean = false,
     errorMessage: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    onImeActionPerformed: (ImeAction, SoftwareKeyboardController?) -> Unit = { _, _ -> },
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    onImeActionPerformed: (ImeAction, SoftwareKeyboardController?) -> Unit = { _, _ -> }
 ) {
     Column(
         modifier = Modifier.padding(
