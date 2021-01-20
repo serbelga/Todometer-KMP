@@ -22,7 +22,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
@@ -49,32 +49,33 @@ fun ProjectSelector(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp)
         )
         HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
-        LazyColumnFor(
-            items = projectList,
+        LazyColumn(
             modifier = Modifier.height(140.dp)
-        ) { project ->
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .preferredHeight(56.dp)
-                    .selectable(
+        ) {
+            items(projectList) { project ->
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .preferredHeight(56.dp)
+                        .selectable(
+                            selected = (project == selectedProject),
+                            onClick = { onProjectSelected(project) }
+                        )
+                        .padding(horizontal = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
                         selected = (project == selectedProject),
                         onClick = { onProjectSelected(project) }
                     )
-                    .padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    selected = (project == selectedProject),
-                    onClick = { onProjectSelected(project) }
-                )
-                Text(
-                    text = project.name,
-                    style = MaterialTheme.typography.body1.merge(),
-                    modifier = Modifier.padding(start = 16.dp)
-                )
+                    Text(
+                        text = project.name,
+                        style = MaterialTheme.typography.body1.merge(),
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+                HorizontalDivider()
             }
         }
-        HorizontalDivider()
     }
 }
