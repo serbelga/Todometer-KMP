@@ -49,17 +49,14 @@ private val LightColorPalette = lightColors(
     onSurface = Color.Black
 )
 
-@Composable
 val Colors.outline: Color
-    get() = if (isLight) outlineLight else outlineDark
+    @Composable get() = if (isLight) outlineLight else outlineDark
 
-@Composable
 val MaterialColors: Colors
-    get() = MaterialTheme.colors
+    @Composable get() = MaterialTheme.colors
 
-@Composable
 val MaterialTypography: Typography
-    get() = MaterialTheme.typography
+    @Composable get() = MaterialTheme.typography
 
 @Composable
 fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {

@@ -42,14 +42,9 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
     ToDometerTheme {
-        NavHost(navController = navController, startDestination = Home) {
+        NavHost(navController, startDestination = Home) {
             composable(Home) {
-                HomeScreen(
-                    mainViewModel = mainViewModel,
-                    addTask = actions.addTask,
-                    addProject = actions.addProject,
-                    openTask = actions.openTask
-                )
+                HomeScreen(mainViewModel, actions.addTask, actions.addProject, actions.openTask)
             }
             composable(
                 "$TaskDetail/{$TaskId}",
@@ -57,22 +52,16 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             ) { backStackEntry ->
                 TaskDetailScreen(
                     taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
-                    mainViewModel = mainViewModel,
-                    editTask = actions.editTask,
-                    navigateUp = actions.navigateUp
+                    mainViewModel,
+                    actions.editTask,
+                    actions.navigateUp
                 )
             }
             composable(AddProject) {
-                AddProjectScreen(
-                    mainViewModel = mainViewModel,
-                    navigateUp = actions.navigateUp
-                )
+                AddProjectScreen(mainViewModel, actions.navigateUp)
             }
             composable(AddTask) {
-                AddTaskScreen(
-                    mainViewModel = mainViewModel,
-                    navigateUp = actions.navigateUp
-                )
+                AddTaskScreen(mainViewModel, actions.navigateUp)
             }
             composable(
                 "$EditTask/{$TaskId}",
@@ -80,8 +69,8 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             ) { backStackEntry ->
                 EditTaskScreen(
                     taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
-                    mainViewModel = mainViewModel,
-                    navigateUp = actions.navigateUp
+                    mainViewModel,
+                    actions.navigateUp
                 )
             }
         }

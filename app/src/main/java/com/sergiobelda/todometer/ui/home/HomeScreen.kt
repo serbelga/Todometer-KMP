@@ -29,8 +29,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumnFor
-import androidx.compose.foundation.lazy.LazyColumnForIndexed
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.AmbientContentAlpha
@@ -81,8 +80,8 @@ import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import java.util.Locale
 
-@Composable
 @OptIn(ExperimentalMaterialApi::class)
+@Composable
 fun HomeScreen(
     mainViewModel: MainViewModel,
     addTask: () -> Unit,
@@ -239,16 +238,17 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             }
         }
         HorizontalDivider()
-        LazyColumnFor(
-            items = projectList,
+        LazyColumn(
             modifier = Modifier.preferredHeight(240.dp)
-        ) { project ->
-            Providers(AmbientContentAlpha provides ContentAlpha.medium) {
-                ListItem(
-                    modifier = Modifier.clickable(onClick = {}),
-                    text = { Text(text = project.name) },
-                    icon = { Icon(vectorResource(id = R.drawable.ic_baseline_book_24)) }
-                )
+        ) {
+            items(projectList) { project ->
+                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                    ListItem(
+                        modifier = Modifier.clickable(onClick = {}),
+                        text = { Text(text = project.name) },
+                        icon = { Icon(vectorResource(id = R.drawable.ic_baseline_book_24)) }
+                    )
+                }
             }
         }
         HorizontalDivider()
@@ -277,42 +277,43 @@ fun ProjectTasksListView(
     onTaskItemLongClick: (Int) -> Unit
 ) {
     val projectTasksList = mainViewModel.projectList
-    LazyColumnForIndexed(
-        items = projectTasksList,
+    LazyColumn(
         modifier = Modifier.padding(32.dp)
-    ) { index, project ->
-        Text(project.name.toUpperCase(Locale.ROOT), style = typography.overline)
-        val progress =
-            if (project.tasks.isNotEmpty()) {
-                project.tasks.filter { it.state == TaskState.DONE }.size.toFloat() / project.tasks.size.toFloat()
-            } else {
-                0f
+    ) {
+        itemsIndexed(projectTasksList) { index, project ->
+            Text(project.name.toUpperCase(Locale.ROOT), style = typography.overline)
+            val progress =
+                if (project.tasks.isNotEmpty()) {
+                    project.tasks.filter { it.state == TaskState.DONE }.size.toFloat() / project.tasks.size.toFloat()
+                } else {
+                    0f
+                }
+            Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                Text(
+                    ProgressUtil.getPercentage(progress),
+                    style = typography.body1,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
             }
-        Providers(AmbientContentAlpha provides ContentAlpha.medium) {
-            Text(
-                ProgressUtil.getPercentage(progress),
-                style = typography.body1,
-                modifier = Modifier.padding(top = 4.dp)
+            LinearProgressIndicator(
+                progress = progress,
+                modifier = Modifier.padding(top = 8.dp, bottom = 16.dp).fillMaxWidth()
             )
-        }
-        LinearProgressIndicator(
-            progress = progress,
-            modifier = Modifier.padding(top = 8.dp, bottom = 16.dp).fillMaxWidth()
-        )
-        project.tasks.sortedBy { it.state == TaskState.DONE }.forEach { task ->
-            TaskItem(
-                task,
-                updateState = mainViewModel.updateTaskState,
-                onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick
-            )
-        }
-        if (index == projectTasksList.size - 1) {
-            Spacer(modifier = Modifier.height(32.dp))
-        } else {
-            Spacer(modifier = Modifier.height(24.dp))
-            HorizontalDivider()
-            Spacer(modifier = Modifier.height(24.dp))
+            project.tasks.sortedBy { it.state == TaskState.DONE }.forEach { task ->
+                TaskItem(
+                    task,
+                    updateState = mainViewModel.updateTaskState,
+                    onClick = onTaskItemClick,
+                    onLongClick = onTaskItemLongClick
+                )
+            }
+            if (index == projectTasksList.size - 1) {
+                Spacer(modifier = Modifier.height(32.dp))
+            } else {
+                Spacer(modifier = Modifier.height(24.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(24.dp))
+            }
         }
     }
 }
