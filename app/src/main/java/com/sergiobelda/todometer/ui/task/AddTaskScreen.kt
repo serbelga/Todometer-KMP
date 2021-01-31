@@ -66,7 +66,7 @@ fun AddTaskScreen(
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
-                        Icon(Icons.Rounded.ArrowBack, "Back")
+                        Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                     }
                 },
                 title = { Text(stringResource(id = R.string.add_task)) }
@@ -122,7 +122,7 @@ fun AddTaskScreen(
                     }
                 },
             ) {
-                Icon(Icons.Rounded.Check, "Add task")
+                Icon(Icons.Rounded.Check, contentDescription = "Add task")
             }
         }
     )

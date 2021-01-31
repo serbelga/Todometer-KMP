@@ -80,7 +80,7 @@ fun TaskItem(
                 modifier = Modifier.padding(start = 16.dp)
             ) {
                 Providers(AmbientContentAlpha provides ContentAlpha.medium) {
-                    Icon(Icons.Rounded.DateRange, null, modifier = Modifier.padding(end = 8.dp))
+                    Icon(Icons.Rounded.DateRange, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
                 }
                 when (task.state) {
                     TaskState.DOING -> {
@@ -89,7 +89,7 @@ fun TaskItem(
                         IconButton(
                             onClick = { updateState(task.id, TaskState.DONE) }
                         ) {
-                            Icon(Icons.Rounded.Check, "Done", tint = MaterialColors.secondary)
+                            Icon(Icons.Rounded.Check, contentDescription = "Done", tint = MaterialColors.secondary)
                         }
                     }
                     TaskState.DONE -> {
@@ -101,7 +101,7 @@ fun TaskItem(
                         IconButton(
                             onClick = { updateState(task.id, TaskState.DOING) }
                         ) {
-                            Icon(Icons.Filled.Refresh, "Doing", tint = MaterialColors.secondary)
+                            Icon(Icons.Filled.Refresh, contentDescription = "Doing", tint = MaterialColors.secondary)
                         }
                     }
                 }

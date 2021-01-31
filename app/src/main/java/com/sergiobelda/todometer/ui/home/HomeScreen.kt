@@ -114,11 +114,11 @@ fun HomeScreen(
                     ) {
                         Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                             IconButton(onClick = { sheetState.show() }) {
-                                Icon(Icons.Rounded.Menu, "Menu")
+                                Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                             }
                             Spacer(modifier = Modifier.weight(1f))
                             IconButton(onClick = { /* doSomething() */ }) {
-                                Icon(Icons.Rounded.MoreVert, "More")
+                                Icon(Icons.Rounded.MoreVert, contentDescription = "More")
                             }
                         }
                     }
@@ -149,7 +149,7 @@ fun HomeScreen(
                     FloatingActionButton(
                         onClick = addTask
                     ) {
-                        Icon(Icons.Rounded.Add, "Add task")
+                        Icon(Icons.Rounded.Add, contentDescription = "Add task")
                     }
                 }
             },
@@ -207,12 +207,14 @@ fun ToDometerTopBar() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
-                modifier = Modifier.height(56.dp).fillMaxWidth()
+                modifier = Modifier
+                    .height(56.dp)
+                    .fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
                 Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                     IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
-                        Icon(Icons.Outlined.AccountCircle, "Account")
+                        Icon(Icons.Outlined.AccountCircle, contentDescription = "Account")
                     }
                 }
             }
@@ -227,7 +229,9 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
         DragIndicator()
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
+            modifier = Modifier
+                .height(56.dp)
+                .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.projects).toUpperCase(Locale.ROOT),
@@ -235,7 +239,7 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addProject) {
-                Icon(Icons.Rounded.Add, "Add project")
+                Icon(Icons.Rounded.Add, contentDescription = "Add project")
                 Text(text = stringResource(id = R.string.add_project))
             }
         }
@@ -248,7 +252,12 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
                     ListItem(
                         modifier = Modifier.clickable(onClick = {}),
                         text = { Text(text = project.name) },
-                        icon = { Icon(vectorResource(id = R.drawable.ic_baseline_book_24), null) }
+                        icon = {
+                            Icon(
+                                vectorResource(id = R.drawable.ic_baseline_book_24),
+                                contentDescription = null
+                            )
+                        }
                     )
                 }
             }
@@ -256,7 +265,9 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
         HorizontalDivider()
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.height(56.dp).padding(start = 16.dp, end = 16.dp)
+            modifier = Modifier
+                .height(56.dp)
+                .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.tags).toUpperCase(Locale.ROOT),
@@ -264,7 +275,7 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = {}) {
-                Icon(Icons.Rounded.Add, "Add tag")
+                Icon(Icons.Rounded.Add, contentDescription = "Add tag")
                 Text(text = stringResource(id = R.string.add_tag))
             }
         }
@@ -299,7 +310,9 @@ fun ProjectTasksListView(
             }
             LinearProgressIndicator(
                 progress = progress,
-                modifier = Modifier.padding(top = 8.dp, bottom = 16.dp).fillMaxWidth()
+                modifier = Modifier
+                    .padding(top = 8.dp, bottom = 16.dp)
+                    .fillMaxWidth()
             )
             project.tasks.sortedBy { it.state == TaskState.DONE }.forEach { task ->
                 TaskItem(
@@ -336,7 +349,9 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
             )
             Text(stringResource(id = R.string.you_have_not_any_project))
             Button(
-                modifier = Modifier.align(Alignment.CenterHorizontally).padding(16.dp),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp),
                 onClick = addProject
             ) {
                 Text(stringResource(id = R.string.add_project))

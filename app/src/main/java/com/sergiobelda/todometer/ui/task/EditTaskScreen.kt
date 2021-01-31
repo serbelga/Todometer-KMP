@@ -71,7 +71,7 @@ fun EditTaskScreen(
                     elevation = 0.dp,
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack, "Back")
+                            Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                         }
                     },
                     title = { Text(stringResource(id = R.string.edit_task)) }
@@ -128,7 +128,7 @@ fun EditTaskScreen(
                         }
                     },
                 ) {
-                    Icon(Icons.Rounded.Check, "Edit task")
+                    Icon(Icons.Rounded.Check, contentDescription = "Edit task")
                 }
             }
         )

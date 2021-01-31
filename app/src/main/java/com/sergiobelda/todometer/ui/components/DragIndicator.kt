@@ -34,7 +34,9 @@ import com.sergiobelda.todometer.ui.theme.outline
 
 @Composable
 fun ColumnScope.DragIndicator() {
-    Column(modifier = Modifier.padding(top = 8.dp).align(Alignment.CenterHorizontally)) {
+    Column(
+        modifier = Modifier.padding(top = 8.dp).align(Alignment.CenterHorizontally)
+    ) {
         Box(
             modifier = Modifier.preferredHeight(6.dp).preferredWidth(42.dp)
                 .clip(RoundedCornerShape(3.dp)).background(

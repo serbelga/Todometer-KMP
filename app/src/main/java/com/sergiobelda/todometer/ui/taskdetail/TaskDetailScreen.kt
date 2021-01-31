@@ -67,7 +67,7 @@ fun TaskDetailScreen(
                     },
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack, "Back")
+                            Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                         }
                     },
                     elevation = 0.dp,
@@ -84,7 +84,7 @@ fun TaskDetailScreen(
                         editTask(taskId)
                     },
                 ) {
-                    Icon(Icons.Rounded.Edit, "Edit task")
+                    Icon(Icons.Rounded.Edit, contentDescription = "Edit task")
                 }
             }
         )
