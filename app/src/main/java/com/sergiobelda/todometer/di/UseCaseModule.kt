@@ -28,38 +28,30 @@ import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
-class UseCaseModule {
+@InstallIn(ViewModelComponent::class)
+object UseCaseModule {
 
     @Provides
-    @ActivityRetainedScoped
     fun provideGetTaskUseCase(taskRepository: TaskRepository) = GetTaskUseCase(taskRepository)
 
     @Provides
-    @ActivityRetainedScoped
     fun provideUpdateTaskStateUseCase(taskRepository: TaskRepository) = UpdateTaskStateUseCase(taskRepository)
 
     @Provides
-    @ActivityRetainedScoped
     fun provideUpdateTaskUseCase(taskRepository: TaskRepository) = UpdateTaskUseCase(taskRepository)
 
     @Provides
-    @ActivityRetainedScoped
     fun provideInsertTaskUseCase(taskRepository: TaskRepository) = InsertTaskUseCase(taskRepository)
 
     @Provides
-    @ActivityRetainedScoped
     fun provideDeleteTaskUseCase(taskRepository: TaskRepository) = DeleteTaskUseCase(taskRepository)
 
     @Provides
-    @ActivityRetainedScoped
     fun provideInsertProjectUseCase(projectRepository: ProjectRepository) = InsertProjectUseCase(projectRepository)
 
     @Provides
-    @ActivityRetainedScoped
     fun provideGetProjectTasksListUseCase(projectRepository: ProjectRepository) = GetProjectListUseCase(projectRepository)
 }

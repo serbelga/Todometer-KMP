@@ -17,10 +17,10 @@
 package com.sergiobelda.todometer.ui.taskdetail
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
@@ -67,7 +67,7 @@ fun TaskDetailScreen(
                     },
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack)
+                            Icon(Icons.Rounded.ArrowBack, "Back")
                         }
                     },
                     elevation = 0.dp,
@@ -84,7 +84,7 @@ fun TaskDetailScreen(
                         editTask(taskId)
                     },
                 ) {
-                    Icon(Icons.Rounded.Edit)
+                    Icon(Icons.Rounded.Edit, "Edit task")
                 }
             }
         )
@@ -97,7 +97,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
         if (scrollState.value >= 270) {
             HorizontalDivider()
         }
-        ScrollableColumn(scrollState = scrollState) {
+        Column(modifier = Modifier.verticalScroll(state = scrollState)) {
             Text(
                 text = task.title,
                 style = MaterialTypography.h4,

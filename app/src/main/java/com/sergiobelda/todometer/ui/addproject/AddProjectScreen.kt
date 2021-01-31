@@ -56,7 +56,7 @@ fun AddProjectScreen(
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
-                        Icon(Icons.Rounded.ArrowBack)
+                        Icon(Icons.Rounded.ArrowBack, "Back")
                     }
                 },
                 title = { Text(stringResource(id = R.string.add_project)) },

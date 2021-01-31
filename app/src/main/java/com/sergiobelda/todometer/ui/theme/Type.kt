@@ -18,17 +18,17 @@ package com.sergiobelda.todometer.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.font
-import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.unit.sp
 import com.sergiobelda.todometer.R
 
-val regularFont = font(R.font.jetbrains_mono_regular)
-val mediumFont = font(R.font.jetbrains_mono_medium, FontWeight.W500)
-val boldFont = font(R.font.jetbrains_mono_bold, FontWeight.W600)
+val regularFont = Font(R.font.jetbrains_mono_regular)
+val mediumFont = Font(R.font.jetbrains_mono_medium, FontWeight.W500)
+val boldFont = Font(R.font.jetbrains_mono_bold, FontWeight.W600)
 
-val appFontFamily = fontFamily(
+val appFontFamily = FontFamily(
     fonts = listOf(
         regularFont,
         mediumFont,
