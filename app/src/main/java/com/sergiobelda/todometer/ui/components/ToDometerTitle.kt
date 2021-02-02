@@ -38,7 +38,8 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            imageVector = vectorResource(id = R.drawable.isotype)
+            imageVector = vectorResource(id = R.drawable.isotype),
+            null
         )
         Text(
             text = stringResource(id = R.string.app_name),

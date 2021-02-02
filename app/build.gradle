@@ -55,10 +55,9 @@ configurations {
 
 dependencies {
     def room_version = '2.2.6'
-    def androidx_hilt_version = '1.0.0-alpha02'
     def lifecycle_version = '2.3.0-rc01'
     def material_version = '1.3.0-rc01'
-    def nav_compose_version = '1.0.0-alpha05'
+    def nav_compose_version = '1.0.0-alpha06'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
@@ -90,8 +89,6 @@ dependencies {
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$androidx_hilt_version"
-    kapt "androidx.hilt:hilt-compiler:$androidx_hilt_version"
     androidTestImplementation  "com.google.dagger:hilt-android-testing:$dagger_hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$dagger_hilt_version"
     testImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt_version"

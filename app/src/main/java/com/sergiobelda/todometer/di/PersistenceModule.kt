@@ -22,12 +22,12 @@ import com.sergiobelda.todometer.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
-class PersistenceModule {
+@InstallIn(SingletonComponent::class)
+object PersistenceModule {
 
     @Provides
     @Singleton

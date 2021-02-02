@@ -25,22 +25,22 @@ import com.sergiobelda.todometer.repository.TaskRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
-class RepositoryModule {
+@InstallIn(SingletonComponent::class)
+object RepositoryModule {
 
     @Provides
-    @ActivityRetainedScoped
+    @Singleton
     fun provideTaskRepository(taskDao: TaskDao) = TaskRepository(taskDao)
 
     @Provides
-    @ActivityRetainedScoped
+    @Singleton
     fun provideProjectRepository(projectDao: ProjectDao) = ProjectRepository(projectDao)
 
     @Provides
-    @ActivityRetainedScoped
+    @Singleton
     fun provideTaskProjectRepository(taskProjectDao: TaskProjectDao) = TaskProjectRepository(taskProjectDao)
 }
