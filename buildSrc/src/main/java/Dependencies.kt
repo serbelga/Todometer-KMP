@@ -15,21 +15,21 @@
  */
 
 object Versions {
-    const val activityKtx = "1.2.0-rc01"
+    const val activityKtx = "1.3.0-alpha02"
     const val appCompat = "1.2.0"
-    const val androidGradlePlugin = "7.0.0-alpha05"
-    const val compose = "1.0.0-alpha11"
+    const val androidGradlePlugin = "7.0.0-alpha06"
+    const val compose = "1.0.0-alpha12"
     const val daggerHilt = "2.31.2-alpha"
     const val espressoCore = "3.3.0"
     const val extJunit = "1.1.2"
     const val junit = "4.13.1"
     const val junitKtx = "1.1.2"
-    const val kotlin = "1.4.21-2"
+    const val kotlin = "1.4.30"
     const val ktLint = "0.40.0"
     const val ktxVersion = "1.3.2"
     const val lifecycle = "2.2.0"
     const val materialComponents = "1.3.0-rc01"
-    const val navigationCompose = "1.0.0-alpha06"
+    const val navigationCompose = "1.0.0-alpha07"
     const val robolectric = "4.3.1"
     const val roomKtx = "2.2.6"
     const val testCoreKtx = "1.3.0"
@@ -54,10 +54,14 @@ object Libs {
 
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-        const val activityKtx = "androidx.activity:activity-ktx:${Versions.activityKtx}"
         const val coreKtx = "androidx.core:core-ktx:${Versions.ktxVersion}"
         const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.junitKtx}"
         const val testCoreKtx = "androidx.test:core-ktx:${Versions.testCoreKtx}"
+
+        object Activity {
+            const val activityCompose = "androidx.activity:activity-compose:${Versions.activityKtx}"
+            const val activityKtx = "androidx.activity:activity-ktx:${Versions.activityKtx}"
+        }
 
         object Compose {
             const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"

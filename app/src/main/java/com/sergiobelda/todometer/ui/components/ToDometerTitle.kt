@@ -25,8 +25,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
@@ -37,10 +37,7 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            imageVector = vectorResource(id = R.drawable.isotype),
-            null
-        )
+        Image(painterResource(id = R.drawable.isotype), null)
         Text(
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.h6,

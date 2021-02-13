@@ -34,7 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.savedinstancestate.savedInstanceState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -56,9 +56,9 @@ fun EditTaskScreen(
 ) {
     val taskState = mainViewModel.getTask(taskId).observeAsState()
     taskState.value?.let { task ->
-        var taskTitle by savedInstanceState { task.title }
-        val taskTitleInputError = remember { mutableStateOf(false) }
-        var taskDescription by savedInstanceState { task.description }
+        var taskTitle by rememberSaveable { mutableStateOf(task.title) }
+        var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
+        var taskDescription by rememberSaveable { mutableStateOf(task.description) }
         val radioOptions = mainViewModel.projectList
         val projectIndex =
             radioOptions.indexOfFirst { it.id == task.projectId }.takeUnless { it == -1 } ?: 0
@@ -83,10 +83,10 @@ fun EditTaskScreen(
                         value = taskTitle,
                         onValueChanged = {
                             taskTitle = it
-                            taskTitleInputError.value = false
+                            taskTitleInputError = false
                         },
                         label = { Text(stringResource(id = R.string.title)) },
-                        isErrorValue = taskTitleInputError.value,
+                        isErrorValue = taskTitleInputError,
                         errorMessage = stringResource(id = R.string.field_not_empty),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
@@ -98,7 +98,6 @@ fun EditTaskScreen(
                         value = taskDescription,
                         onValueChanged = { taskDescription = it },
                         label = { Text(stringResource(id = R.string.description)) },
-                        onImeActionPerformed = { _, softwareKeyboardController -> softwareKeyboardController?.hideSoftwareKeyboard() },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
@@ -112,7 +111,7 @@ fun EditTaskScreen(
                 FloatingActionButton(
                     onClick = {
                         if (taskTitle.isBlank()) {
-                            taskTitleInputError.value = true
+                            taskTitleInputError = true
                         } else {
                             mainViewModel.updateTask(
                                 Task(

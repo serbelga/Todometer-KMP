@@ -33,7 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.savedinstancestate.savedInstanceState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -53,9 +53,9 @@ fun AddTaskScreen(
     mainViewModel: MainViewModel,
     navigateUp: () -> Unit
 ) {
-    var taskTitle by savedInstanceState { "" }
-    val taskTitleInputError = remember { mutableStateOf(false) }
-    var taskDescription by savedInstanceState { "" }
+    var taskTitle by rememberSaveable { mutableStateOf("") }
+    var taskTitleInputError by remember { mutableStateOf(false) }
+    var taskDescription by rememberSaveable { mutableStateOf("") }
     val radioOptions = mainViewModel.projectList
     val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[0]) }
     Scaffold(
@@ -78,10 +78,10 @@ fun AddTaskScreen(
                     value = taskTitle,
                     onValueChanged = {
                         taskTitle = it
-                        taskTitleInputError.value = false
+                        taskTitleInputError = false
                     },
                     label = { Text(stringResource(id = R.string.title)) },
-                    isErrorValue = taskTitleInputError.value,
+                    isErrorValue = taskTitleInputError,
                     errorMessage = stringResource(id = R.string.field_not_empty),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
@@ -93,7 +93,6 @@ fun AddTaskScreen(
                     value = taskDescription,
                     onValueChanged = { taskDescription = it },
                     label = { Text(stringResource(id = R.string.description)) },
-                    onImeActionPerformed = { _, softwareKeyboardController -> softwareKeyboardController?.hideSoftwareKeyboard() },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
@@ -107,7 +106,7 @@ fun AddTaskScreen(
             FloatingActionButton(
                 onClick = {
                     if (taskTitle.isBlank()) {
-                        taskTitleInputError.value = true
+                        taskTitleInputError = true
                     } else {
                         mainViewModel.insertTask(
                             Task(

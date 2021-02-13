@@ -23,8 +23,6 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.MaterialTypography
@@ -38,7 +36,6 @@ fun TextField(
     isErrorValue: Boolean = false,
     errorMessage: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    onImeActionPerformed: (ImeAction, SoftwareKeyboardController?) -> Unit = { _, _ -> }
 ) {
     Column(
         modifier = Modifier.padding(
@@ -53,8 +50,7 @@ fun TextField(
             label = label,
             modifier = modifier,
             keyboardOptions = keyboardOptions,
-            isErrorValue = isErrorValue,
-            onImeActionPerformed = onImeActionPerformed
+            isErrorValue = isErrorValue
         )
         if (isErrorValue) {
             Text(
