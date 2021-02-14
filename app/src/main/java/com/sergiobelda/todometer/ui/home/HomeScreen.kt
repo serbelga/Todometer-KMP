@@ -34,7 +34,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
 import androidx.compose.material.ContentAlpha
@@ -45,6 +44,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.ListItem
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
@@ -66,8 +66,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.R
@@ -112,7 +112,7 @@ fun HomeScreen(
                         contentColor = contentColorFor(MaterialColors.surface),
                         cutoutShape = CircleShape
                     ) {
-                        Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                        Providers(LocalContentAlpha provides ContentAlpha.medium) {
                             IconButton(onClick = { sheetState.show() }) {
                                 Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                             }
@@ -212,7 +212,7 @@ fun ToDometerTopBar() {
                     .fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
-                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                Providers(LocalContentAlpha provides ContentAlpha.medium) {
                     IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
                         Icon(Icons.Outlined.AccountCircle, contentDescription = "Account")
                     }
@@ -223,6 +223,7 @@ fun ToDometerTopBar() {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
     Column(modifier = Modifier.preferredHeight(480.dp)) {
@@ -248,13 +249,13 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             modifier = Modifier.preferredHeight(240.dp)
         ) {
             items(projectList) { project ->
-                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                Providers(LocalContentAlpha provides ContentAlpha.medium) {
                     ListItem(
                         modifier = Modifier.clickable(onClick = {}),
                         text = { Text(text = project.name) },
                         icon = {
                             Icon(
-                                vectorResource(id = R.drawable.ic_baseline_book_24),
+                                painterResource(id = R.drawable.ic_baseline_book_24),
                                 contentDescription = null
                             )
                         }
@@ -301,7 +302,7 @@ fun ProjectTasksListView(
                 } else {
                     0f
                 }
-            Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+            Providers(LocalContentAlpha provides ContentAlpha.medium) {
                 Text(
                     ProgressUtil.getPercentage(progress),
                     style = typography.body1,
@@ -343,7 +344,7 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                imageVector = vectorResource(id = R.drawable.project_completed),
+                painterResource(id = R.drawable.project_completed),
                 modifier = Modifier.size(240.dp),
                 contentDescription = null
             )

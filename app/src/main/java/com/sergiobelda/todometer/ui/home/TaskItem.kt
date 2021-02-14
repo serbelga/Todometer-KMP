@@ -17,17 +17,18 @@
 package com.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.Card
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -50,6 +51,7 @@ import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.MaterialTypography
 import com.sergiobelda.todometer.ui.theme.outline
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
     task: Task,
@@ -66,7 +68,7 @@ fun TaskItem(
         border = BorderStroke(1.dp, MaterialColors.outline)
     ) {
         Column(
-            modifier = Modifier.clickable(
+            modifier = Modifier.combinedClickable(
                 onClick = {
                     onClick(task.id)
                 },
@@ -79,7 +81,7 @@ fun TaskItem(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(start = 16.dp)
             ) {
-                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                Providers(LocalContentAlpha provides ContentAlpha.medium) {
                     Icon(Icons.Rounded.DateRange, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
                 }
                 when (task.state) {
@@ -106,7 +108,7 @@ fun TaskItem(
                     }
                 }
             }
-            Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+            Providers(LocalContentAlpha provides ContentAlpha.medium) {
                 if (task.description.isNotBlank()) {
                     Text(
                         task.description,

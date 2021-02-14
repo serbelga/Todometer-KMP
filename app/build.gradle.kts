@@ -62,7 +62,8 @@ val ktlint by configurations.creating
 
 dependencies {
     implementation(Libs.kotlin)
-    implementation(Libs.AndroidX.activityKtx)
+    implementation(Libs.AndroidX.Activity.activityCompose)
+    implementation(Libs.AndroidX.Activity.activityKtx)
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.coreKtx)
     implementation(Libs.AndroidX.Compose.material)

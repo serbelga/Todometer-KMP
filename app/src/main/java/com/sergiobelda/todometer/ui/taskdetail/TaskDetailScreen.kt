@@ -21,11 +21,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.AmbientContentAlpha
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -72,7 +72,7 @@ fun TaskDetailScreen(
                     },
                     elevation = 0.dp,
                     backgroundColor = MaterialColors.surface,
-                    contentColor = contentColorFor(color = MaterialColors.surface)
+                    contentColor = contentColorFor(backgroundColor = MaterialColors.surface)
                 )
             },
             bodyContent = {
@@ -112,7 +112,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                     modifier = Modifier.padding(24.dp)
                 )
             } else {
-                Providers(AmbientContentAlpha provides ContentAlpha.medium) {
+                Providers(LocalContentAlpha provides ContentAlpha.medium) {
                     Text(
                         text = stringResource(id = R.string.no_description),
                         style = MaterialTypography.body1,
