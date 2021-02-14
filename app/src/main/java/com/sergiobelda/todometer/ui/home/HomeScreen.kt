@@ -76,6 +76,7 @@ import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.components.DragIndicator
 import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.components.ToDometerTitle
+import com.sergiobelda.todometer.ui.task.TaskItem
 import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.ui.utils.ProgressUtil
@@ -86,8 +87,9 @@ import java.util.Locale
 @Composable
 fun HomeScreen(
     mainViewModel: MainViewModel,
-    addTask: () -> Unit,
     addProject: () -> Unit,
+    addTask: () -> Unit,
+    openProject: (Int) ->  Unit,
     openTask: (Int) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -98,7 +100,7 @@ fun HomeScreen(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(projectList, addProject)
+            SheetContainer(projectList, addProject, openProject)
         }
     ) {
         Scaffold(
@@ -225,7 +227,7 @@ fun ToDometerTopBar() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
+fun SheetContainer(projectList: List<Project>, addProject: () -> Unit, openProject: (Int) -> Unit) {
     Column(modifier = Modifier.preferredHeight(480.dp)) {
         DragIndicator()
         Row(
@@ -251,7 +253,9 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit) {
             items(projectList) { project ->
                 Providers(LocalContentAlpha provides ContentAlpha.medium) {
                     ListItem(
-                        modifier = Modifier.clickable(onClick = {}),
+                        modifier = Modifier.clickable(onClick = {
+                            openProject(project.id)
+                        }),
                         text = { Text(text = project.name) },
                         icon = {
                             Icon(

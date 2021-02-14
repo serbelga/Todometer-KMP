@@ -27,13 +27,16 @@ import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
 import com.sergiobelda.todometer.ui.Destinations.EditTask
 import com.sergiobelda.todometer.ui.Destinations.Home
+import com.sergiobelda.todometer.ui.Destinations.ProjectDetail
+import com.sergiobelda.todometer.ui.Destinations.ProjectDetailArgs.ProjectId
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
+import com.sergiobelda.todometer.ui.project.ProjectDetailScreen
 import com.sergiobelda.todometer.ui.task.AddTaskScreen
 import com.sergiobelda.todometer.ui.task.EditTaskScreen
-import com.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
+import com.sergiobelda.todometer.ui.task.TaskDetailScreen
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
@@ -44,14 +47,24 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
     ToDometerTheme {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
-                HomeScreen(mainViewModel, actions.addTask, actions.addProject, actions.openTask)
+                HomeScreen(mainViewModel, actions.addTask, actions.addProject, actions.openProject, actions.openTask)
+            }
+            composable(
+                "$ProjectDetail/{$ProjectId}",
+                arguments = listOf(navArgument(ProjectId) { type = NavType.IntType })
+            ) { navBackStackEntry ->
+                ProjectDetailScreen(
+                    projectId = navBackStackEntry?.arguments?.getInt(ProjectId) ?: 0,
+                    mainViewModel,
+                    navigateUp = actions.navigateUp
+                )
             }
             composable(
                 "$TaskDetail/{$TaskId}",
                 arguments = listOf(navArgument(TaskId) { type = NavType.IntType })
-            ) { backStackEntry ->
+            ) { navBackStackEntry ->
                 TaskDetailScreen(
-                    taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
+                    taskId = navBackStackEntry.arguments?.getInt(TaskId) ?: 0,
                     mainViewModel,
                     actions.editTask,
                     actions.navigateUp

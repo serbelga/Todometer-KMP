@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.db.entity
+package com.sergiobelda.todometer.usecase
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import com.sergiobelda.todometer.model.Project
+import com.sergiobelda.todometer.repository.ProjectRepository
+import kotlinx.coroutines.flow.Flow
 
-/**
- * Relationship one-to-many Project-Tasks
- */
-data class ProjectTasks(
-    @Embedded val project: ProjectEntity,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "project_id"
-    )
-    val tasks: List<TaskEntity>
-)
+class GetProjectUseCase(val projectRepository: ProjectRepository) {
+    operator fun invoke(id: Int): Flow<Project> = projectRepository.getProject(id)
+}

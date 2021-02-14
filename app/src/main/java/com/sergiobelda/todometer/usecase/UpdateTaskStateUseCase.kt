@@ -22,5 +22,5 @@ import com.sergiobelda.todometer.repository.TaskRepository
 class UpdateTaskStateUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun updateTaskState(id: Int, taskState: TaskState) = taskRepository.updateTaskState(id, taskState)
+    suspend operator fun invoke(id: Int, taskState: TaskState) = taskRepository.updateTaskState(id, taskState)
 }

@@ -20,12 +20,17 @@ import com.sergiobelda.todometer.db.dao.ProjectDao
 import com.sergiobelda.todometer.mapper.ProjectMapper.toDomain
 import com.sergiobelda.todometer.mapper.ProjectMapper.toEntity
 import com.sergiobelda.todometer.model.Project
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class ProjectRepository(private val projectDao: ProjectDao) {
 
     val projectTaskList = projectDao.getProjectTasksList().map { list ->
         list.map { it.toDomain() }
+    }
+
+    fun getProject(id: Int): Flow<Project> = projectDao.getProject(id).map {
+        it.toDomain()
     }
 
     suspend fun deleteProject(id: Int) = projectDao.deleteProject(id)

@@ -21,5 +21,5 @@ import com.sergiobelda.todometer.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetTaskUseCase(val taskRepository: TaskRepository) {
-    fun getTask(id: Int): Flow<Task> = taskRepository.getTask(id)
+    operator fun invoke(id: Int): Flow<Task> = taskRepository.getTask(id)
 }
