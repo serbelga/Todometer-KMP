@@ -77,16 +77,16 @@ fun EditTaskScreen(
                     title = { Text(stringResource(id = R.string.edit_task)) }
                 )
             },
-            bodyContent = {
+            content = {
                 Column {
                     TextField(
                         value = taskTitle,
-                        onValueChanged = {
+                        onValueChange = {
                             taskTitle = it
                             taskTitleInputError = false
                         },
                         label = { Text(stringResource(id = R.string.title)) },
-                        isErrorValue = taskTitleInputError,
+                        isError = taskTitleInputError,
                         errorMessage = stringResource(id = R.string.field_not_empty),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
@@ -96,7 +96,7 @@ fun EditTaskScreen(
                     )
                     TextField(
                         value = taskDescription,
-                        onValueChanged = { taskDescription = it },
+                        onValueChange = { taskDescription = it },
                         label = { Text(stringResource(id = R.string.description)) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,

@@ -52,8 +52,7 @@ fun ProjectDetailScreen(
                     contentColor = contentColorFor(backgroundColor = MaterialColors.surface)
                 )
             },
-            bodyContent = {
-
+            content = {
             }
         )
     }

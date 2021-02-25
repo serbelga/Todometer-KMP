@@ -80,7 +80,7 @@ fun AddProjectScreen(
                 }
             )
         },
-        bodyContent = {
+        content = {
             Column {
                 OutlinedTextField(
                     value = projectName,

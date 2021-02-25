@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
@@ -57,7 +56,7 @@ fun ProjectSelector(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .preferredHeight(56.dp)
+                        .height(56.dp)
                         .selectable(
                             selected = (project == selectedProject),
                             onClick = { onProjectSelected(project) }

@@ -34,7 +34,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -54,7 +54,7 @@ fun TaskDetailScreen(
     editTask: (Int) -> Unit,
     navigateUp: () -> Unit
 ) {
-    val scrollState = rememberScrollState(0f)
+    val scrollState = rememberScrollState(0)
     val taskState = mainViewModel.getTask(taskId).observeAsState()
     taskState.value?.let { task ->
         Scaffold(
@@ -75,7 +75,7 @@ fun TaskDetailScreen(
                     contentColor = contentColorFor(backgroundColor = MaterialColors.surface)
                 )
             },
-            bodyContent = {
+            content = {
                 TaskDetailBody(scrollState, task)
             },
             floatingActionButton = {
@@ -112,7 +112,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                     modifier = Modifier.padding(24.dp)
                 )
             } else {
-                Providers(LocalContentAlpha provides ContentAlpha.medium) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     Text(
                         text = stringResource(id = R.string.no_description),
                         style = MaterialTypography.body1,

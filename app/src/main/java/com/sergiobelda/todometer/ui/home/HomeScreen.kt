@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -60,10 +59,11 @@ import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.Providers
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -81,6 +81,7 @@ import com.sergiobelda.todometer.ui.theme.MaterialColors
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -89,9 +90,10 @@ fun HomeScreen(
     mainViewModel: MainViewModel,
     addProject: () -> Unit,
     addTask: () -> Unit,
-    openProject: (Int) ->  Unit,
+    openProject: (Int) -> Unit,
     openTask: (Int) -> Unit
 ) {
+    val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val selectedTask = remember { mutableStateOf(0) }
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
@@ -114,8 +116,12 @@ fun HomeScreen(
                         contentColor = contentColorFor(MaterialColors.surface),
                         cutoutShape = CircleShape
                     ) {
-                        Providers(LocalContentAlpha provides ContentAlpha.medium) {
-                            IconButton(onClick = { sheetState.show() }) {
+                        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                            IconButton(
+                                onClick = {
+                                    scope.launch { sheetState.show() }
+                                }
+                            ) {
                                 Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                             }
                             Spacer(modifier = Modifier.weight(1f))
@@ -126,7 +132,7 @@ fun HomeScreen(
                     }
                 }
             },
-            bodyContent = {
+            content = {
                 if (deleteTaskAlertDialogState.value) {
                     RemoveTaskAlertDialog(
                         deleteTaskAlertDialogState,
@@ -214,7 +220,7 @@ fun ToDometerTopBar() {
                     .fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
-                Providers(LocalContentAlpha provides ContentAlpha.medium) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
                         Icon(Icons.Outlined.AccountCircle, contentDescription = "Account")
                     }
@@ -228,7 +234,7 @@ fun ToDometerTopBar() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetContainer(projectList: List<Project>, addProject: () -> Unit, openProject: (Int) -> Unit) {
-    Column(modifier = Modifier.preferredHeight(480.dp)) {
+    Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -248,14 +254,16 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit, openProje
         }
         HorizontalDivider()
         LazyColumn(
-            modifier = Modifier.preferredHeight(240.dp)
+            modifier = Modifier.height(240.dp)
         ) {
             items(projectList) { project ->
-                Providers(LocalContentAlpha provides ContentAlpha.medium) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     ListItem(
-                        modifier = Modifier.clickable(onClick = {
-                            openProject(project.id)
-                        }),
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                openProject(project.id)
+                            }
+                        ),
                         text = { Text(text = project.name) },
                         icon = {
                             Icon(
@@ -306,7 +314,7 @@ fun ProjectTasksListView(
                 } else {
                     0f
                 }
-            Providers(LocalContentAlpha provides ContentAlpha.medium) {
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                 Text(
                     ProgressUtil.getPercentage(progress),
                     style = typography.body1,

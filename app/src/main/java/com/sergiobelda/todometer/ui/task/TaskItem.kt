@@ -36,7 +36,7 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -81,7 +81,7 @@ fun TaskItem(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(start = 16.dp)
             ) {
-                Providers(LocalContentAlpha provides ContentAlpha.medium) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     Icon(Icons.Rounded.DateRange, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
                 }
                 when (task.state) {
@@ -108,7 +108,7 @@ fun TaskItem(
                     }
                 }
             }
-            Providers(LocalContentAlpha provides ContentAlpha.medium) {
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                 if (task.description.isNotBlank()) {
                     Text(
                         task.description,
