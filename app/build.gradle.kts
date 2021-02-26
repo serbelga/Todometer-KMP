@@ -51,8 +51,9 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerVersion = "1.4.30"
-        kotlinCompilerExtensionVersion = "1.0.0-beta01"
+        kotlinCompilerVersion = Versions.kotlin
+        kotlinCompilerExtensionVersion = Versions.compose
+        useLiveLiterals = true
     }
 }
 
@@ -62,7 +63,7 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 
-val ktlint by configurations.creating
+val ktlint: Configuration by configurations.creating
 
 dependencies {
     implementation(Libs.kotlin)
