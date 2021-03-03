@@ -22,5 +22,5 @@ import com.sergiobelda.todometer.repository.TaskRepository
 class InsertTaskUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun insertTask(task: Task) = taskRepository.insertTask(task)
+    suspend operator fun invoke(task: Task) = taskRepository.insertTask(task)
 }

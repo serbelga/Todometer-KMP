@@ -20,6 +20,7 @@ import com.sergiobelda.todometer.repository.ProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
 import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetProjectUseCase
 import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
@@ -33,6 +34,9 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 object UseCaseModule {
+
+    @Provides
+    fun provideGetProjectUseCase(projectRepository: ProjectRepository) = GetProjectUseCase(projectRepository)
 
     @Provides
     fun provideGetTaskUseCase(taskRepository: TaskRepository) = GetTaskUseCase(taskRepository)

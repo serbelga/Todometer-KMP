@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -48,17 +50,20 @@ android {
     buildFeatures {
         compose = true
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-        useIR = true
-    }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
         kotlinCompilerVersion = Versions.kotlin
+        kotlinCompilerExtensionVersion = Versions.compose
+        useLiveLiterals = true
     }
 }
 
-val ktlint by configurations.creating
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+val ktlint: Configuration by configurations.creating
 
 dependencies {
     implementation(Libs.kotlin)

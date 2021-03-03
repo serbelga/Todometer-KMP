@@ -21,5 +21,5 @@ import com.sergiobelda.todometer.repository.TaskRepository
 class DeleteTaskUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun deleteTask(id: Int) = taskRepository.deleteTask(id)
+    suspend operator fun invoke(id: Int) = taskRepository.deleteTask(id)
 }

@@ -31,9 +31,9 @@ import com.sergiobelda.todometer.ui.theme.MaterialTypography
 fun TextField(
     modifier: Modifier = Modifier,
     value: String,
-    onValueChanged: (String) -> Unit,
+    onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
-    isErrorValue: Boolean = false,
+    isError: Boolean = false,
     errorMessage: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 ) {
@@ -46,13 +46,13 @@ fun TextField(
     ) {
         OutlinedTextField(
             value = value,
-            onValueChange = onValueChanged,
+            onValueChange = onValueChange,
             label = label,
             modifier = modifier,
             keyboardOptions = keyboardOptions,
-            isErrorValue = isErrorValue
+            isError = isError
         )
-        if (isErrorValue) {
+        if (isError) {
             Text(
                 errorMessage,
                 color = MaterialColors.error,

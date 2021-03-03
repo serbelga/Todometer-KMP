@@ -28,6 +28,7 @@ import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetProjectUseCase
 import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
@@ -42,6 +43,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getTaskUseCase: GetTaskUseCase,
+    private val getProjectUseCase: GetProjectUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val getProjectListUseCase: GetProjectListUseCase,
@@ -55,7 +57,7 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getProjectListUseCase.getProjectTasksList().collect {
+            getProjectListUseCase().collect {
                 projectList = it
             }
         }
@@ -64,24 +66,26 @@ class MainViewModel @Inject constructor(
     val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     fun insertTask(task: Task) = viewModelScope.launch {
-        insertTaskUseCase.insertTask(task)
+        insertTaskUseCase(task)
     }
 
     fun insertProject(project: Project) = viewModelScope.launch {
-        insertProjectUseCase.insertProject(project)
+        insertProjectUseCase(project)
     }
 
     private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
-        updateTaskStateUseCase.updateTaskState(id, taskState)
+        updateTaskStateUseCase(id, taskState)
     }
 
-    fun getTask(id: Int) = getTaskUseCase.getTask(id).asLiveData()
+    fun getTask(id: Int) = getTaskUseCase(id).asLiveData()
+
+    fun getProject(id: Int) = getProjectUseCase(id).asLiveData()
 
     fun deleteTask(id: Int) = viewModelScope.launch {
-        deleteTaskUseCase.deleteTask(id)
+        deleteTaskUseCase(id)
     }
 
     fun updateTask(task: Task) = viewModelScope.launch {
-        updateTaskUseCase.updateTask(task)
+        updateTaskUseCase(task)
     }
 }

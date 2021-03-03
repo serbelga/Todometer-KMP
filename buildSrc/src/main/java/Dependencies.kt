@@ -15,10 +15,10 @@
  */
 
 object Versions {
-    const val activityKtx = "1.3.0-alpha02"
+    const val activityKtx = "1.3.0-alpha03"
     const val appCompat = "1.2.0"
-    const val androidGradlePlugin = "7.0.0-alpha06"
-    const val compose = "1.0.0-alpha12"
+    const val androidGradlePlugin = "7.0.0-alpha08"
+    const val compose = "1.0.0-beta01"
     const val daggerHilt = "2.31.2-alpha"
     const val espressoCore = "3.3.0"
     const val extJunit = "1.1.2"
@@ -29,7 +29,7 @@ object Versions {
     const val ktxVersion = "1.3.2"
     const val lifecycle = "2.2.0"
     const val materialComponents = "1.3.0-rc01"
-    const val navigationCompose = "1.0.0-alpha07"
+    const val navigationCompose = "1.0.0-alpha08"
     const val robolectric = "4.3.1"
     const val roomKtx = "2.2.6"
     const val testCoreKtx = "1.3.0"

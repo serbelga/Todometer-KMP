@@ -22,5 +22,5 @@ import com.sergiobelda.todometer.repository.ProjectRepository
 class InsertProjectUseCase(
     private val projectRepository: ProjectRepository
 ) {
-    suspend fun insertProject(project: Project) = projectRepository.insertProject(project)
+    suspend operator fun invoke(project: Project) = projectRepository.insertProject(project)
 }
