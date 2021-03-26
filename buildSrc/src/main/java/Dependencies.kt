@@ -26,7 +26,7 @@ object Versions {
     const val junitKtx = "1.1.2"
     const val koin = "3.0.1-beta-2"
     const val kotlin = "1.4.31"
-    const val ktLint = "0.40.0"
+    const val ktLint = "0.41.0"
     const val ktxVersion = "1.3.2"
     const val lifecycle = "2.3.0"
     const val materialComponents = "1.3.0"

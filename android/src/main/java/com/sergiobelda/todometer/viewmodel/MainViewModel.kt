@@ -25,7 +25,14 @@ import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.usecase.*
+import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
+import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetProjectUseCase
+import com.sergiobelda.todometer.usecase.GetTaskUseCase
+import com.sergiobelda.todometer.usecase.InsertProjectUseCase
+import com.sergiobelda.todometer.usecase.InsertTaskUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

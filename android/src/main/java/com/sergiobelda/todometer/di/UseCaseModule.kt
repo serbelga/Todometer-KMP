@@ -16,7 +16,14 @@
 
 package com.sergiobelda.todometer.di
 
-import com.sergiobelda.todometer.usecase.*
+import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
+import com.sergiobelda.todometer.usecase.GetProjectListUseCase
+import com.sergiobelda.todometer.usecase.GetProjectUseCase
+import com.sergiobelda.todometer.usecase.GetTaskUseCase
+import com.sergiobelda.todometer.usecase.InsertProjectUseCase
+import com.sergiobelda.todometer.usecase.InsertTaskUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
