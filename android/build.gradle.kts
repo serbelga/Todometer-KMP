@@ -32,29 +32,30 @@ dependencies {
     kapt(Libs.AndroidX.Room.roomCompiler)
     androidTestImplementation(Libs.AndroidX.Room.roomTesting)
 
-    // Dagger Hilt
-    implementation(Libs.Google.Dagger.hilt)
-    kapt(Libs.Google.Dagger.hiltCompiler)
-    androidTestImplementation(Libs.Google.Dagger.hiltTesting)
-    kaptAndroidTest(Libs.Google.Dagger.hiltCompiler)
-    testImplementation(Libs.Google.Dagger.hiltTesting)
-    kaptTest(Libs.Google.Dagger.hiltCompiler)
-
     implementation(Libs.timber)
+
+    implementation(Libs.Koin.core)
+    implementation(Libs.Koin.android)
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
         applicationId = "com.sergiobelda.todometer.android"
         minSdkVersion(24)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isShrinkResources = true
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }

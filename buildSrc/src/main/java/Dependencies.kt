@@ -24,6 +24,7 @@ object Versions {
     const val extJunit = "1.1.2"
     const val junit = "4.13.1"
     const val junitKtx = "1.1.2"
+    const val koin = "3.0.1-beta-2"
     const val kotlin = "1.4.31"
     const val ktLint = "0.40.0"
     const val ktxVersion = "1.3.2"
@@ -107,4 +108,12 @@ object Libs {
             const val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
         }
     }
+
+    object Koin {
+        const val core = "io.insert-koin:koin-core:${Versions.koin}"
+        const val test = "io.insert-koin:koin-test:${Versions.koin}"
+        const val android = "io.insert-koin:koin-android:${Versions.koin}"
+    }
 }
+
+

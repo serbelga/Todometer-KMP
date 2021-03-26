@@ -16,31 +16,19 @@
 
 package com.sergiobelda.todometer.di
 
-import com.sergiobelda.todometer.db.dao.ProjectDao
-import com.sergiobelda.todometer.db.dao.TaskDao
-import com.sergiobelda.todometer.db.dao.TaskProjectDao
 import com.sergiobelda.todometer.repository.ProjectRepository
 import com.sergiobelda.todometer.repository.TaskProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object RepositoryModule {
-
-    @Provides
-    @Singleton
-    fun provideTaskRepository(taskDao: TaskDao) = TaskRepository(taskDao)
-
-    @Provides
-    @Singleton
-    fun provideProjectRepository(projectDao: ProjectDao) = ProjectRepository(projectDao)
-
-    @Provides
-    @Singleton
-    fun provideTaskProjectRepository(taskProjectDao: TaskProjectDao) = TaskProjectRepository(taskProjectDao)
+val repositoryModule = module {
+    single {
+        TaskRepository(get())
+    }
+    single {
+        ProjectRepository(get())
+    }
+    single {
+        TaskProjectRepository(get())
+    }
 }

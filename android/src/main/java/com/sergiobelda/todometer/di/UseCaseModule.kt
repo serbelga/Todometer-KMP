@@ -16,46 +16,32 @@
 
 package com.sergiobelda.todometer.di
 
-import com.sergiobelda.todometer.repository.ProjectRepository
-import com.sergiobelda.todometer.repository.TaskRepository
-import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
-import com.sergiobelda.todometer.usecase.GetProjectListUseCase
-import com.sergiobelda.todometer.usecase.GetProjectUseCase
-import com.sergiobelda.todometer.usecase.GetTaskUseCase
-import com.sergiobelda.todometer.usecase.InsertProjectUseCase
-import com.sergiobelda.todometer.usecase.InsertTaskUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import com.sergiobelda.todometer.usecase.*
+import org.koin.dsl.module
 
-@Module
-@InstallIn(ViewModelComponent::class)
-object UseCaseModule {
-
-    @Provides
-    fun provideGetProjectUseCase(projectRepository: ProjectRepository) = GetProjectUseCase(projectRepository)
-
-    @Provides
-    fun provideGetTaskUseCase(taskRepository: TaskRepository) = GetTaskUseCase(taskRepository)
-
-    @Provides
-    fun provideUpdateTaskStateUseCase(taskRepository: TaskRepository) = UpdateTaskStateUseCase(taskRepository)
-
-    @Provides
-    fun provideUpdateTaskUseCase(taskRepository: TaskRepository) = UpdateTaskUseCase(taskRepository)
-
-    @Provides
-    fun provideInsertTaskUseCase(taskRepository: TaskRepository) = InsertTaskUseCase(taskRepository)
-
-    @Provides
-    fun provideDeleteTaskUseCase(taskRepository: TaskRepository) = DeleteTaskUseCase(taskRepository)
-
-    @Provides
-    fun provideInsertProjectUseCase(projectRepository: ProjectRepository) = InsertProjectUseCase(projectRepository)
-
-    @Provides
-    fun provideGetProjectTasksListUseCase(projectRepository: ProjectRepository) = GetProjectListUseCase(projectRepository)
+val useCaseModule = module {
+    single {
+        GetProjectUseCase(get())
+    }
+    single {
+        GetTaskUseCase(get())
+    }
+    single {
+        UpdateTaskStateUseCase(get())
+    }
+    single {
+        UpdateTaskUseCase(get())
+    }
+    single {
+        InsertTaskUseCase(get())
+    }
+    single {
+        DeleteTaskUseCase(get())
+    }
+    single {
+        InsertProjectUseCase(get())
+    }
+    single {
+        GetProjectListUseCase(get())
+    }
 }

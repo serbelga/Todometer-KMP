@@ -17,7 +17,20 @@
 package com.sergiobelda.todometer
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import com.sergiobelda.todometer.di.persistenceModule
+import com.sergiobelda.todometer.di.repositoryModule
+import com.sergiobelda.todometer.di.useCaseModule
+import com.sergiobelda.todometer.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-@HiltAndroidApp
-class App : Application()
+class App : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(this@App)
+            modules(persistenceModule, repositoryModule, useCaseModule, viewModelModule)
+        }
+    }
+}

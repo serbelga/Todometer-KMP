@@ -19,28 +19,17 @@ package com.sergiobelda.todometer.viewmodel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
-import com.sergiobelda.todometer.usecase.GetProjectListUseCase
-import com.sergiobelda.todometer.usecase.GetProjectUseCase
-import com.sergiobelda.todometer.usecase.GetTaskUseCase
-import com.sergiobelda.todometer.usecase.InsertProjectUseCase
-import com.sergiobelda.todometer.usecase.InsertTaskUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.sergiobelda.todometer.usecase.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
+class MainViewModel(
     private val getTaskUseCase: GetTaskUseCase,
     private val getProjectUseCase: GetProjectUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
