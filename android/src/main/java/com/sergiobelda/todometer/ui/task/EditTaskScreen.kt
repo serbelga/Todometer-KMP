@@ -42,7 +42,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.ui.components.ProjectSelector
 import com.sergiobelda.todometer.ui.components.TextField

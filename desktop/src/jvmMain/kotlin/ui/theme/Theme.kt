@@ -18,8 +18,8 @@ package ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.sergiobelda.todometer.common.ui.theme.LightColorPalette
-import com.sergiobelda.todometer.common.ui.theme.shapes
+import com.sergiobelda.todometer.compose.ui.theme.LightColorPalette
+import com.sergiobelda.todometer.compose.ui.theme.shapes
 
 @Composable
 fun ToDometerTheme(content: @Composable() () -> Unit) {

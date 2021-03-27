@@ -16,6 +16,7 @@ val ktlint: Configuration by configurations.creating
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":compose-ui"))
 
     implementation(Libs.AndroidX.Activity.activityCompose)
     implementation(Libs.AndroidX.Compose.materialIconsExtended)
@@ -61,6 +62,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 

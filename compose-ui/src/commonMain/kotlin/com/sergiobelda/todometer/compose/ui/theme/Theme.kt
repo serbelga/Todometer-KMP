@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.ui.theme
+package com.sergiobelda.todometer.compose.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme

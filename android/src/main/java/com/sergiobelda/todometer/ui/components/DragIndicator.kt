@@ -29,8 +29,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.ui.theme.MaterialColors
-import com.sergiobelda.todometer.common.ui.theme.outline
+import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.outline
 
 @Composable
 fun ColumnScope.DragIndicator() {

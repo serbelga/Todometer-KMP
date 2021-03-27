@@ -13,5 +13,6 @@ rootProject.name = "ToDometer"
 
 include(":android")
 include(":desktop")
+include(":ios")
+include(":compose-ui")
 include(":common")
-
