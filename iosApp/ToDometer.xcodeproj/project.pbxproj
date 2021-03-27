@@ -1,0 +1,599 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		42647CDA260EB02300E6B87B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CD9260EB02300E6B87B /* AppDelegate.swift */; };
+		42647CDC260EB02300E6B87B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CDB260EB02300E6B87B /* SceneDelegate.swift */; };
+		42647CDE260EB02300E6B87B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CDD260EB02300E6B87B /* ContentView.swift */; };
+		42647CE0260EB02600E6B87B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42647CDF260EB02600E6B87B /* Assets.xcassets */; };
+		42647CE3260EB02600E6B87B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE2260EB02600E6B87B /* Preview Assets.xcassets */; };
+		42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */; };
+		42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CF0260EB02700E6B87B /* ToDometerTests.swift */; };
+		42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CFB260EB02700E6B87B /* ToDometerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		42647CED260EB02700E6B87B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42647CCE260EB02200E6B87B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42647CD5260EB02200E6B87B;
+			remoteInfo = ToDometer;
+		};
+		42647CF8260EB02700E6B87B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42647CCE260EB02200E6B87B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42647CD5260EB02200E6B87B;
+			remoteInfo = ToDometer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		42647CD6260EB02300E6B87B /* ToDometer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDometer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42647CD9260EB02300E6B87B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		42647CDB260EB02300E6B87B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		42647CDD260EB02300E6B87B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		42647CDF260EB02600E6B87B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		42647CE2260EB02600E6B87B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		42647CE5260EB02600E6B87B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		42647CE7260EB02600E6B87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42647CEC260EB02700E6B87B /* ToDometerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDometerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42647CF0260EB02700E6B87B /* ToDometerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDometerTests.swift; sourceTree = "<group>"; };
+		42647CF2260EB02700E6B87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42647CF7260EB02700E6B87B /* ToDometerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDometerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42647CFB260EB02700E6B87B /* ToDometerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDometerUITests.swift; sourceTree = "<group>"; };
+		42647CFD260EB02700E6B87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		42647CD3260EB02200E6B87B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42647CE9260EB02700E6B87B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42647CF4260EB02700E6B87B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		42647CCD260EB02200E6B87B = {
+			isa = PBXGroup;
+			children = (
+				42647CD8260EB02300E6B87B /* ToDometer */,
+				42647CEF260EB02700E6B87B /* ToDometerTests */,
+				42647CFA260EB02700E6B87B /* ToDometerUITests */,
+				42647CD7260EB02300E6B87B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		42647CD7260EB02300E6B87B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42647CD6260EB02300E6B87B /* ToDometer.app */,
+				42647CEC260EB02700E6B87B /* ToDometerTests.xctest */,
+				42647CF7260EB02700E6B87B /* ToDometerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		42647CD8260EB02300E6B87B /* ToDometer */ = {
+			isa = PBXGroup;
+			children = (
+				42647CD9260EB02300E6B87B /* AppDelegate.swift */,
+				42647CDB260EB02300E6B87B /* SceneDelegate.swift */,
+				42647CDD260EB02300E6B87B /* ContentView.swift */,
+				42647CDF260EB02600E6B87B /* Assets.xcassets */,
+				42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */,
+				42647CE7260EB02600E6B87B /* Info.plist */,
+				42647CE1260EB02600E6B87B /* Preview Content */,
+			);
+			path = ToDometer;
+			sourceTree = "<group>";
+		};
+		42647CE1260EB02600E6B87B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				42647CE2260EB02600E6B87B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		42647CEF260EB02700E6B87B /* ToDometerTests */ = {
+			isa = PBXGroup;
+			children = (
+				42647CF0260EB02700E6B87B /* ToDometerTests.swift */,
+				42647CF2260EB02700E6B87B /* Info.plist */,
+			);
+			path = ToDometerTests;
+			sourceTree = "<group>";
+		};
+		42647CFA260EB02700E6B87B /* ToDometerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				42647CFB260EB02700E6B87B /* ToDometerUITests.swift */,
+				42647CFD260EB02700E6B87B /* Info.plist */,
+			);
+			path = ToDometerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42647CD5260EB02200E6B87B /* ToDometer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42647D00260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometer" */;
+			buildPhases = (
+				42647CD2260EB02200E6B87B /* Sources */,
+				42647CD3260EB02200E6B87B /* Frameworks */,
+				42647CD4260EB02200E6B87B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToDometer;
+			productName = ToDometer;
+			productReference = 42647CD6260EB02300E6B87B /* ToDometer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		42647CEB260EB02700E6B87B /* ToDometerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42647D03260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometerTests" */;
+			buildPhases = (
+				42647CE8260EB02700E6B87B /* Sources */,
+				42647CE9260EB02700E6B87B /* Frameworks */,
+				42647CEA260EB02700E6B87B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42647CEE260EB02700E6B87B /* PBXTargetDependency */,
+			);
+			name = ToDometerTests;
+			productName = ToDometerTests;
+			productReference = 42647CEC260EB02700E6B87B /* ToDometerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		42647CF6260EB02700E6B87B /* ToDometerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42647D06260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometerUITests" */;
+			buildPhases = (
+				42647CF3260EB02700E6B87B /* Sources */,
+				42647CF4260EB02700E6B87B /* Frameworks */,
+				42647CF5260EB02700E6B87B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42647CF9260EB02700E6B87B /* PBXTargetDependency */,
+			);
+			name = ToDometerUITests;
+			productName = ToDometerUITests;
+			productReference = 42647CF7260EB02700E6B87B /* ToDometerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		42647CCE260EB02200E6B87B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Sergio Belda";
+				TargetAttributes = {
+					42647CD5260EB02200E6B87B = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					42647CEB260EB02700E6B87B = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 42647CD5260EB02200E6B87B;
+					};
+					42647CF6260EB02700E6B87B = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 42647CD5260EB02200E6B87B;
+					};
+				};
+			};
+			buildConfigurationList = 42647CD1260EB02200E6B87B /* Build configuration list for PBXProject "ToDometer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 42647CCD260EB02200E6B87B;
+			productRefGroup = 42647CD7260EB02300E6B87B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42647CD5260EB02200E6B87B /* ToDometer */,
+				42647CEB260EB02700E6B87B /* ToDometerTests */,
+				42647CF6260EB02700E6B87B /* ToDometerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		42647CD4260EB02200E6B87B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */,
+				42647CE3260EB02600E6B87B /* Preview Assets.xcassets in Resources */,
+				42647CE0260EB02600E6B87B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42647CEA260EB02700E6B87B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42647CF5260EB02700E6B87B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		42647CD2260EB02200E6B87B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42647CDA260EB02300E6B87B /* AppDelegate.swift in Sources */,
+				42647CDC260EB02300E6B87B /* SceneDelegate.swift in Sources */,
+				42647CDE260EB02300E6B87B /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42647CE8260EB02700E6B87B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42647CF3260EB02700E6B87B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42647CEE260EB02700E6B87B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42647CD5260EB02200E6B87B /* ToDometer */;
+			targetProxy = 42647CED260EB02700E6B87B /* PBXContainerItemProxy */;
+		};
+		42647CF9260EB02700E6B87B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42647CD5260EB02200E6B87B /* ToDometer */;
+			targetProxy = 42647CF8260EB02700E6B87B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				42647CE5260EB02600E6B87B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		42647CFE260EB02700E6B87B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		42647CFF260EB02700E6B87B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		42647D01260EB02700E6B87B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"ToDometer/Preview Content\"";
+				DEVELOPMENT_TEAM = XX543589JX;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = ToDometer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		42647D02260EB02700E6B87B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"ToDometer/Preview Content\"";
+				DEVELOPMENT_TEAM = XX543589JX;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = ToDometer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		42647D04260EB02700E6B87B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XX543589JX;
+				INFOPLIST_FILE = ToDometerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDometer.app/ToDometer";
+			};
+			name = Debug;
+		};
+		42647D05260EB02700E6B87B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XX543589JX;
+				INFOPLIST_FILE = ToDometerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDometer.app/ToDometer";
+			};
+			name = Release;
+		};
+		42647D07260EB02700E6B87B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XX543589JX;
+				INFOPLIST_FILE = ToDometerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ToDometer;
+			};
+			name = Debug;
+		};
+		42647D08260EB02700E6B87B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XX543589JX;
+				INFOPLIST_FILE = ToDometerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ToDometer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		42647CD1260EB02200E6B87B /* Build configuration list for PBXProject "ToDometer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42647CFE260EB02700E6B87B /* Debug */,
+				42647CFF260EB02700E6B87B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42647D00260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42647D01260EB02700E6B87B /* Debug */,
+				42647D02260EB02700E6B87B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42647D03260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42647D04260EB02700E6B87B /* Debug */,
+				42647D05260EB02700E6B87B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42647D06260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42647D07260EB02700E6B87B /* Debug */,
+				42647D08260EB02700E6B87B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 42647CCE260EB02200E6B87B /* Project object */;
+}

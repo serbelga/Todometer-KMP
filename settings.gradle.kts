@@ -14,4 +14,4 @@ rootProject.name = "ToDometer"
 include(":android")
 include(":desktop")
 include(":common")
-
+include(":iosApp")
