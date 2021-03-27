@@ -17,7 +17,7 @@
 object Versions {
     const val activityKtx = "1.3.0-alpha04"
     const val appCompat = "1.2.0"
-    const val androidGradlePlugin = "7.0.0-alpha09"
+    const val androidGradlePlugin = "7.0.0-alpha12"
     const val compose = "1.0.0-beta02"
     const val daggerHilt = "2.33-beta"
     const val espressoCore = "3.3.0"
