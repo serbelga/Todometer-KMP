@@ -16,6 +16,7 @@ val ktlint: Configuration by configurations.creating
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":compose-ui"))
 
     implementation(Libs.AndroidX.Activity.activityCompose)
     implementation(Libs.AndroidX.Compose.materialIconsExtended)

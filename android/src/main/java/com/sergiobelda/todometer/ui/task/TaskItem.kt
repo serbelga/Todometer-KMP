@@ -45,9 +45,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.ui.theme.MaterialColors
-import com.sergiobelda.todometer.common.ui.theme.MaterialTypography
-import com.sergiobelda.todometer.common.ui.theme.outline
+import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
+import com.sergiobelda.todometer.compose.ui.theme.outline
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
 

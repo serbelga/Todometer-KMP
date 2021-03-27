@@ -26,7 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import com.sergiobelda.todometer.common.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable

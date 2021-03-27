@@ -72,7 +72,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.ui.theme.MaterialColors
+import com.sergiobelda.todometer.common.Greeting
+import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.components.DragIndicator
@@ -215,6 +216,7 @@ fun ToDometerTopBar() {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text(Greeting().greeting())
             Box(
                 modifier = Modifier
                     .height(56.dp)

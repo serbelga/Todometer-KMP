@@ -15,6 +15,8 @@
 		42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */; };
 		42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CF0260EB02700E6B87B /* ToDometerTests.swift */; };
 		42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CFB260EB02700E6B87B /* ToDometerUITests.swift */; };
+		42647D0B260ED6E400E6B87B /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; };
+		42647D0C260ED6E400E6B87B /* common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		42647D0D260ED6E400E6B87B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				42647D0C260ED6E400E6B87B /* common.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		42647CD6260EB02300E6B87B /* ToDometer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDometer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42647CD9260EB02300E6B87B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +65,7 @@
 		42647CF7260EB02700E6B87B /* ToDometerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDometerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42647CFB260EB02700E6B87B /* ToDometerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDometerUITests.swift; sourceTree = "<group>"; };
 		42647CFD260EB02700E6B87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42647D0A260ED6E300E6B87B /* common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = common.framework; path = "../common/build/xcode-frameworks/common.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42647D0B260ED6E400E6B87B /* common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +101,7 @@
 				42647CEF260EB02700E6B87B /* ToDometerTests */,
 				42647CFA260EB02700E6B87B /* ToDometerUITests */,
 				42647CD7260EB02300E6B87B /* Products */,
+				42647D09260ED6E200E6B87B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +155,14 @@
 			path = ToDometerUITests;
 			sourceTree = "<group>";
 		};
+		42647D09260ED6E200E6B87B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42647D0A260ED6E300E6B87B /* common.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +173,7 @@
 				42647CD2260EB02200E6B87B /* Sources */,
 				42647CD3260EB02200E6B87B /* Frameworks */,
 				42647CD4260EB02200E6B87B /* Resources */,
+				42647D0D260ED6E400E6B87B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -438,6 +466,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ToDometer/Preview Content\"";
 				DEVELOPMENT_TEAM = XX543589JX;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../common/build/xcode-frameworks";
 				INFOPLIST_FILE = ToDometer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -458,6 +487,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ToDometer/Preview Content\"";
 				DEVELOPMENT_TEAM = XX543589JX;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../common/build/xcode-frameworks";
 				INFOPLIST_FILE = ToDometer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

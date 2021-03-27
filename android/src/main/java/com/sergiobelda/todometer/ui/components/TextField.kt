@@ -24,8 +24,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.ui.theme.MaterialColors
-import com.sergiobelda.todometer.common.ui.theme.MaterialTypography
+import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
 
 @Composable
 fun TextField(

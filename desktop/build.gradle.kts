@@ -19,6 +19,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":common"))
+                implementation(project(":compose-ui"))
                 implementation(compose.desktop.currentOs)
             }
         }
