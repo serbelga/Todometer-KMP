@@ -15,8 +15,8 @@
 		42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */; };
 		42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CF0260EB02700E6B87B /* ToDometerTests.swift */; };
 		42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CFB260EB02700E6B87B /* ToDometerUITests.swift */; };
-		42647D0B260ED6E400E6B87B /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; };
-		42647D0C260ED6E400E6B87B /* common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42CA7102260FDD03006F6928 /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; };
+		42CA7103260FDD03006F6928 /* common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +37,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		42647D0D260ED6E400E6B87B /* Embed Frameworks */ = {
+		42CA7104260FDD03006F6928 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				42647D0C260ED6E400E6B87B /* common.framework in Embed Frameworks */,
+				42CA7103260FDD03006F6928 /* common.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42647D0B260ED6E400E6B87B /* common.framework in Frameworks */,
+				42CA7102260FDD03006F6928 /* common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +173,7 @@
 				42647CD2260EB02200E6B87B /* Sources */,
 				42647CD3260EB02200E6B87B /* Frameworks */,
 				42647CD4260EB02200E6B87B /* Resources */,
-				42647D0D260ED6E400E6B87B /* Embed Frameworks */,
+				42CA7104260FDD03006F6928 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
