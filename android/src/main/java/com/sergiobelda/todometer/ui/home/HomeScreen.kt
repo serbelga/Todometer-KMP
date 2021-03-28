@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
@@ -41,7 +40,6 @@ import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.ListItem
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme.typography
@@ -62,6 +60,7 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -72,16 +71,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.Greeting
+import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
-import com.sergiobelda.todometer.model.Project
-import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.components.DragIndicator
 import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.ui.components.ToDometerTitle
 import com.sergiobelda.todometer.ui.task.TaskItem
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
-import com.sergiobelda.todometer.ui.utils.ProgressUtil
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -92,19 +88,21 @@ fun HomeScreen(
     mainViewModel: MainViewModel,
     addProject: () -> Unit,
     addTask: () -> Unit,
-    openProject: (Int) -> Unit,
-    openTask: (Int) -> Unit
+    openProject: (Long) -> Unit,
+    openTask: (Long) -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val selectedTask = remember { mutableStateOf(0) }
+    val selectedTask = remember { mutableStateOf(0L) }
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
-    val projectList = mainViewModel.projectList
+
+    val tasks = mainViewModel.tasks.observeAsState(emptyList())
+    val projects = mainViewModel.projects.observeAsState(emptyList())
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(projectList, addProject, openProject)
+            SheetContainer(projects.value, addProject, openProject)
         }
     ) {
         Scaffold(
@@ -112,7 +110,7 @@ fun HomeScreen(
                 ToDometerTopBar()
             },
             bottomBar = {
-                if (projectList.isNotEmpty()) {
+                if (projects.value.isNotEmpty()) {
                     BottomAppBar(
                         backgroundColor = MaterialColors.surface,
                         contentColor = contentColorFor(MaterialColors.surface),
@@ -138,10 +136,11 @@ fun HomeScreen(
                 if (deleteTaskAlertDialogState.value) {
                     RemoveTaskAlertDialog(
                         deleteTaskAlertDialogState,
-                        deleteTask = { mainViewModel.deleteTask(selectedTask.value) }
+                        deleteTask = { /*mainViewModel.deleteTask(selectedTask.value)*/ }
                     )
                 }
-                if (!projectList.isNullOrEmpty()) {
+                /*
+                if (!projects.value.isNullOrEmpty()) {
                     ProjectTasksListView(
                         mainViewModel,
                         onTaskItemClick = openTask,
@@ -153,9 +152,20 @@ fun HomeScreen(
                 } else {
                     EmptyProjectTaskListView(addProject)
                 }
+
+                 */
+
+                TasksListView(
+                    mainViewModel,
+                    onTaskItemClick = openTask,
+                    onTaskItemLongClick = {
+                        deleteTaskAlertDialogState.value = true
+                        selectedTask.value = it
+                    }
+                )
             },
             floatingActionButton = {
-                if (!projectList.isNullOrEmpty()) {
+                if (!projects.value.isNullOrEmpty()) {
                     FloatingActionButton(
                         onClick = addTask
                     ) {
@@ -216,7 +226,6 @@ fun ToDometerTopBar() {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(Greeting().greeting())
             Box(
                 modifier = Modifier
                     .height(56.dp)
@@ -236,7 +245,11 @@ fun ToDometerTopBar() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SheetContainer(projectList: List<Project>, addProject: () -> Unit, openProject: (Int) -> Unit) {
+fun SheetContainer(
+    projectList: List<Project>,
+    addProject: () -> Unit,
+    openProject: (Long) -> Unit
+) {
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
         Row(
@@ -300,16 +313,17 @@ fun SheetContainer(projectList: List<Project>, addProject: () -> Unit, openProje
 }
 
 @Composable
-fun ProjectTasksListView(
+fun TasksListView(
     mainViewModel: MainViewModel,
-    onTaskItemClick: (Int) -> Unit,
-    onTaskItemLongClick: (Int) -> Unit
+    onTaskItemClick: (Long) -> Unit,
+    onTaskItemLongClick: (Long) -> Unit
 ) {
-    val projectTasksList = mainViewModel.projectList
+    val tasks = mainViewModel.tasks.observeAsState(emptyList())
     LazyColumn(
         modifier = Modifier.padding(32.dp)
     ) {
-        itemsIndexed(projectTasksList) { index, project ->
+        items(tasks.value) { task ->
+            /*
             Text(project.name.toUpperCase(Locale.ROOT), style = typography.overline)
             val progress =
                 if (project.tasks.isNotEmpty()) {
@@ -317,6 +331,8 @@ fun ProjectTasksListView(
                 } else {
                     0f
                 }
+
+
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                 Text(
                     ProgressUtil.getPercentage(progress),
@@ -330,14 +346,14 @@ fun ProjectTasksListView(
                     .padding(top = 8.dp, bottom = 16.dp)
                     .fillMaxWidth()
             )
-            project.tasks.sortedBy { it.state == TaskState.DONE }.forEach { task ->
-                TaskItem(
-                    task,
-                    updateState = mainViewModel.updateTaskState,
-                    onClick = onTaskItemClick,
-                    onLongClick = onTaskItemLongClick
-                )
-            }
+             */
+            TaskItem(
+                task,
+                updateState = mainViewModel.updateTaskState,
+                onClick = onTaskItemClick,
+                onLongClick = onTaskItemLongClick
+            )
+            /*
             if (index == projectTasksList.size - 1) {
                 Spacer(modifier = Modifier.height(32.dp))
             } else {
@@ -345,6 +361,8 @@ fun ProjectTasksListView(
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(24.dp))
             }
+
+             */
         }
     }
 }

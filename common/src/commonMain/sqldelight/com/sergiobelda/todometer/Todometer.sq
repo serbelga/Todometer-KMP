@@ -1,0 +1,69 @@
+CREATE TABLE DbProject (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE DbTag (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name TEXT NOT NULL
+);
+
+CREATE TABLE DbTask (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    state TEXT NOT NULL,
+    project_id INTEGER,
+    tag_id INTEGER,
+    FOREIGN KEY(project_id) REFERENCES DbProject(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(tag_id) REFERENCES DbTag(id) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE VIEW TaskProjectView AS
+    SELECT DbTask.*, DbProject.name AS project_name
+    FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
+    ORDER BY project_id;
+
+INSERT INTO DbProject VALUES (1, "My tasks", "Some description");
+INSERT INTO DbTag VALUES (1, "Other");
+INSERT INTO DbTask VALUES (1, "Task one", "Task description", "DOING", 1, 1);
+
+selectTask:
+SELECT *
+FROM DbTask
+WHERE id = ?;
+
+selectAllTasks:
+SELECT *
+FROM DbTask;
+
+insertTask:
+INSERT INTO DbTask
+VALUES ?;
+
+updateTask:
+UPDATE DbTask
+SET
+    title = ?,
+    description = ?,
+    tag_id = ?
+WHERE id = ?;
+
+updateTaskState:
+UPDATE DbTask
+SET
+    state = ?
+WHERE id = ?;
+
+deleteTask:
+DELETE FROM DbTask
+WHERE id = ?;
+
+selectAllProjects:
+SELECT *
+FROM DbProject;
+
+insertProject:
+INSERT INTO DbProject
+VALUES ?;

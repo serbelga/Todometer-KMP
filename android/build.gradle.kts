@@ -28,13 +28,6 @@ dependencies {
     implementation(Libs.AndroidX.Lifecycle.liveData)
     implementation(Libs.Google.Material.materialComponents)
 
-    // Room dependencies
-    implementation(Libs.AndroidX.Room.roomKtx)
-    implementation(Libs.AndroidX.Room.roomRuntime)
-    // Required: Room compiler (avoid RuntimeException - cannot find implementation for database)
-    kapt(Libs.AndroidX.Room.roomCompiler)
-    androidTestImplementation(Libs.AndroidX.Room.roomTesting)
-
     implementation(Libs.timber)
 
     implementation(Libs.Koin.core)

@@ -45,19 +45,19 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
 import com.sergiobelda.todometer.compose.ui.theme.outline
-import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.model.TaskState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
     task: Task,
-    updateState: (Int, TaskState) -> Unit,
-    onClick: (Int) -> Unit,
-    onLongClick: (Int) -> Unit
+    updateState: (Long, TaskState) -> Unit,
+    onClick: (Long) -> Unit,
+    onLongClick: (Long) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -109,9 +109,9 @@ fun TaskItem(
                 }
             }
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                if (task.description.isNotBlank()) {
+                if (!task.description.isNullOrBlank()) {
                     Text(
-                        task.description,
+                        task.description ?: "",
                         modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                         style = MaterialTheme.typography.caption,
                         maxLines = 3

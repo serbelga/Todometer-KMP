@@ -33,13 +33,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.model.Project
+import com.sergiobelda.todometer.common.model.Project
 import java.util.Locale
 
 @Composable
 fun ProjectSelector(
     projectList: List<Project>,
-    selectedProject: Project,
+    selectedProject: Project?,
     onProjectSelected: (project: Project) -> Unit
 ) {
     Column {

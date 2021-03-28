@@ -61,10 +61,10 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             }
             composable(
                 "$TaskDetail/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.IntType })
+                arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
             ) { navBackStackEntry ->
                 TaskDetailScreen(
-                    taskId = navBackStackEntry.arguments?.getInt(TaskId) ?: 0,
+                    taskId = navBackStackEntry.arguments?.getLong(TaskId) ?: 0,
                     mainViewModel,
                     actions.editTask,
                     actions.navigateUp
@@ -78,10 +78,10 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
             }
             composable(
                 "$EditTask/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.IntType })
+                arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
             ) { backStackEntry ->
                 EditTaskScreen(
-                    taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0,
+                    taskId = backStackEntry.arguments?.getLong(TaskId) ?: 0,
                     mainViewModel,
                     actions.navigateUp
                 )

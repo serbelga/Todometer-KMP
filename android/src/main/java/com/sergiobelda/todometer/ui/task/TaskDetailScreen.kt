@@ -41,17 +41,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
-import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun TaskDetailScreen(
-    taskId: Int,
+    taskId: Long,
     mainViewModel: MainViewModel,
-    editTask: (Int) -> Unit,
+    editTask: (Long) -> Unit,
     navigateUp: () -> Unit
 ) {
     val scrollState = rememberScrollState(0)
@@ -81,7 +81,7 @@ fun TaskDetailScreen(
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
-                        editTask(taskId)
+                        /*editTask(taskId)*/
                     },
                 ) {
                     Icon(Icons.Rounded.Edit, contentDescription = "Edit task")
@@ -105,9 +105,10 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                 maxLines = 1
             )
             HorizontalDivider()
-            if (task.description.isNotBlank()) {
+            if (!task.description.isNullOrBlank()) {
+                // TODO: 28/03/2021 Empty description
                 Text(
-                    text = task.description,
+                    text = task.description ?: "",
                     style = MaterialTypography.body1,
                     modifier = Modifier.padding(24.dp)
                 )
