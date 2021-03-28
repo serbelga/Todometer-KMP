@@ -17,8 +17,6 @@
 package com.sergiobelda.todometer.common.database.mapper
 
 import com.sergiobelda.todometer.DbTask
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toString
 import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toTaskState
 import com.sergiobelda.todometer.common.model.Task
 

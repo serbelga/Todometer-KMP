@@ -16,5 +16,10 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
-interface ITagDao {
+import com.sergiobelda.todometer.TodometerDatabase
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+class TagDao : ITagDao, KoinComponent {
+    private val database: TodometerDatabase by inject()
 }
