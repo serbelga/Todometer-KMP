@@ -14,15 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.usecase
-
-import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.repository.ITaskRepository
-
-class UpdateTaskStateUseCase(
-    private val taskRepository: ITaskRepository
-) {
-
-    suspend operator fun invoke(id: Long, state: TaskState) =
-        taskRepository.updateTaskState(id, state)
+enum class Screen {
+    Home,
+    AddTask
 }

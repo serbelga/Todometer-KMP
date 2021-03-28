@@ -42,9 +42,9 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
-import com.sergiobelda.todometer.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable

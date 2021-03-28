@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.components
+package com.sergiobelda.todometer.compose.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

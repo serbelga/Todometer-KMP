@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.task
+package com.sergiobelda.todometer.compose.ui.task
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
@@ -39,33 +38,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
-import com.sergiobelda.todometer.compose.ui.theme.outline
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
     task: Task,
-    updateState: (Long, TaskState) -> Unit,
+    onDoingClick: (Long) -> Unit,
+    onDoneClick: (Long) -> Unit,
     onClick: (Long) -> Unit,
-    onLongClick: (Long) -> Unit
+    onLongClick: (Long) -> Unit,
+    emptyDescriptionString: String
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp, bottom = 8.dp),
-        shape = MaterialTheme.shapes.large,
-        elevation = 0.dp,
-        border = BorderStroke(1.dp, MaterialColors.outline)
+            .padding(top = 8.dp, bottom = 8.dp, start = 16.dp, end = 16.dp),
+        shape = MaterialTheme.shapes.large
     ) {
         Column(
             modifier = Modifier.combinedClickable(
@@ -89,7 +84,7 @@ fun TaskItem(
                         Text(task.title)
                         Spacer(modifier = Modifier.weight(1f))
                         IconButton(
-                            onClick = { updateState(task.id, TaskState.DONE) }
+                            onClick = { onDoneClick(task.id) }
                         ) {
                             Icon(Icons.Rounded.Check, contentDescription = "Done", tint = MaterialColors.secondary)
                         }
@@ -101,7 +96,7 @@ fun TaskItem(
                         )
                         Spacer(modifier = Modifier.weight(1f))
                         IconButton(
-                            onClick = { updateState(task.id, TaskState.DOING) }
+                            onClick = { onDoingClick(task.id) }
                         ) {
                             Icon(Icons.Filled.Refresh, contentDescription = "Doing", tint = MaterialColors.secondary)
                         }
@@ -118,7 +113,7 @@ fun TaskItem(
                     )
                 } else {
                     Text(
-                        text = stringResource(id = R.string.no_description),
+                        text = emptyDescriptionString, // stringResource(id = R.string.no_description),
                         modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                         style = MaterialTypography.caption,
                         fontStyle = FontStyle.Italic
@@ -127,10 +122,4 @@ fun TaskItem(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun TaskItemPreview() {
-    // TaskItem(task = task2, updateState = { _, _ -> }, onClick = {})
 }

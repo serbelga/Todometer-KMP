@@ -22,14 +22,14 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import com.sergiobelda.todometer.common.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
+import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.launch
 
@@ -38,7 +38,8 @@ class MainViewModel(
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
-    private val updateTaskStateUseCase: UpdateTaskStateUseCase,
+    private val setTaskDoingUseCase: SetTaskDoingUseCase,
+    private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     getProjectsUseCase: GetProjectsUseCase,
     getTasksUseCase: GetTasksUseCase
@@ -49,9 +50,6 @@ class MainViewModel(
     val projects: LiveData<List<Project>> = getProjectsUseCase().asLiveData()
 
     fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
-
-    // TODO: 28/03/2021 Update
-    val updateTaskState: (Long, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     fun insertTask(task: Task) = viewModelScope.launch {
         insertTaskUseCase(task)
@@ -69,8 +67,11 @@ class MainViewModel(
         insertProjectUseCase(project)
     }
 
-    // TODO: 28/03/2021 Divide in two functions
-    private fun updateTaskState(id: Long, taskState: TaskState) = viewModelScope.launch {
-        updateTaskStateUseCase(id, taskState)
+    fun setTaskDoing(id: Long) = viewModelScope.launch {
+        setTaskDoingUseCase(id)
+    }
+
+    fun setTaskDone(id: Long) = viewModelScope.launch {
+        setTaskDoneUseCase(id)
     }
 }
