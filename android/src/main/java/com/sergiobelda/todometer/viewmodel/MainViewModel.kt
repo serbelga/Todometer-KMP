@@ -44,9 +44,9 @@ class MainViewModel(
     getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
-    val tasks: LiveData<List<com.sergiobelda.todometer.common.model.Task>> = getTasksUseCase().asLiveData()
+    val tasks: LiveData<List<Task>> = getTasksUseCase().asLiveData()
 
-    val projects: LiveData<List<com.sergiobelda.todometer.common.model.Project>> = getProjectsUseCase().asLiveData()
+    val projects: LiveData<List<Project>> = getProjectsUseCase().asLiveData()
 
     fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
 
@@ -69,6 +69,7 @@ class MainViewModel(
         insertProjectUseCase(project)
     }
 
+    // TODO: 28/03/2021 Divide in two functions
     private fun updateTaskState(id: Long, taskState: TaskState) = viewModelScope.launch {
         updateTaskStateUseCase(id, taskState)
     }
