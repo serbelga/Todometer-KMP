@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.database.dao.IProjectDao
 import com.sergiobelda.todometer.common.database.mapper.ProjectMapper.toDomain
+import com.sergiobelda.todometer.common.database.mapper.ProjectMapper.toEntity
 import com.sergiobelda.todometer.common.model.Project
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -30,4 +31,7 @@ class ProjectRepository(
         projectDao.getProjects().map { list ->
             list.map { it.toDomain() }
         }
+
+    override suspend fun insertProject(project: Project) =
+        projectDao.insertProject(project.toEntity())
 }

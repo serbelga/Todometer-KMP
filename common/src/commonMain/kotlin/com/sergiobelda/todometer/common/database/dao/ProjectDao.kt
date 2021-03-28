@@ -30,4 +30,7 @@ class ProjectDao : IProjectDao, KoinComponent {
 
     override fun getProjects(): Flow<List<DbProject>> =
         database.todometerQueries.selectAllProjects().asFlow().mapToList()
+
+    override suspend fun insertProject(project: DbProject) =
+        database.todometerQueries.insertProject(project)
 }

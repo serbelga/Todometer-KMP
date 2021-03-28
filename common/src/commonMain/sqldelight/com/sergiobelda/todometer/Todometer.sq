@@ -20,6 +20,11 @@ CREATE TABLE DbTask (
     FOREIGN KEY(tag_id) REFERENCES DbTag(id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+CREATE VIEW TaskProjectView AS
+    SELECT DbTask.*, DbProject.name AS project_name
+    FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
+    ORDER BY project_id;
+
 INSERT INTO DbProject VALUES (1, "My tasks", "Some description");
 INSERT INTO DbTag VALUES (1, "Other");
 INSERT INTO DbTask VALUES (1, "Task one", "Task description", "DOING", 1, 1);
@@ -58,3 +63,7 @@ WHERE id = ?;
 selectAllProjects:
 SELECT *
 FROM DbProject;
+
+insertProject:
+INSERT INTO DbProject
+VALUES ?;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.db.entity
+package com.sergiobelda.todometer.common.usecase
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.repository.IProjectRepository
 
-@Entity(tableName = "Project")
-@Deprecated("Moved to common module")
-data class ProjectEntity(
-    val name: String,
-    val description: String
+class InsertProjectUseCase(
+    private val projectRepository: IProjectRepository
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+
+    suspend operator fun invoke(project: Project) =
+        projectRepository.insertProject(project)
 }

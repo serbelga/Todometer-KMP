@@ -19,9 +19,6 @@ package com.sergiobelda.todometer
 import android.app.Application
 import com.sergiobelda.todometer.common.database.appContext
 import com.sergiobelda.todometer.common.di.initKoin
-import com.sergiobelda.todometer.di.persistenceModule
-import com.sergiobelda.todometer.di.repositoryModule
-import com.sergiobelda.todometer.di.useCaseModule
 import com.sergiobelda.todometer.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 
@@ -31,7 +28,7 @@ class App : Application() {
         super.onCreate()
         appContext = this
         initKoin {
-            modules(persistenceModule, repositoryModule, useCaseModule, viewModelModule)
+            modules(viewModelModule)
             androidContext(this@App)
         }
     }

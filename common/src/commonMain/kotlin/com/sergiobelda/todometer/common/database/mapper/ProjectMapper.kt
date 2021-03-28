@@ -26,4 +26,10 @@ object ProjectMapper {
         name,
         description
     )
+
+    fun Project.toEntity() = DbProject(
+        id,
+        name,
+        description
+    )
 }

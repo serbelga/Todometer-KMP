@@ -20,23 +20,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
+import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import com.sergiobelda.todometer.common.usecase.UpdateTaskStateUseCase
 import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
-import com.sergiobelda.todometer.model.Project
-import com.sergiobelda.todometer.usecase.GetProjectUseCase
-import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val getTaskUseCase: GetTaskUseCase,
-    private val getProjectUseCase: GetProjectUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
@@ -67,7 +65,6 @@ class MainViewModel(
         deleteTaskUseCase(id)
     }
 
-    // TODO Migrate from here
     fun insertProject(project: Project) = viewModelScope.launch {
         insertProjectUseCase(project)
     }
@@ -75,6 +72,4 @@ class MainViewModel(
     private fun updateTaskState(id: Long, taskState: TaskState) = viewModelScope.launch {
         updateTaskStateUseCase(id, taskState)
     }
-
-    fun getProject(id: Int) = getProjectUseCase(id).asLiveData()
 }

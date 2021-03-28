@@ -16,17 +16,7 @@
 
 package com.sergiobelda.todometer.ui.project
 
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
@@ -35,25 +25,4 @@ fun ProjectDetailScreen(
     mainViewModel: MainViewModel,
     navigateUp: () -> Unit
 ) {
-    val projectState = mainViewModel.getProject(projectId).observeAsState()
-    projectState.value?.let { project ->
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Text(project.name)
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
-                        }
-                    },
-                    backgroundColor = MaterialColors.surface,
-                    contentColor = contentColorFor(backgroundColor = MaterialColors.surface)
-                )
-            },
-            content = {
-            }
-        )
-    }
 }

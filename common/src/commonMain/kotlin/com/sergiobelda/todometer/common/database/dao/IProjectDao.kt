@@ -22,4 +22,6 @@ import kotlinx.coroutines.flow.Flow
 interface IProjectDao {
 
     fun getProjects(): Flow<List<DbProject>>
+
+    suspend fun insertProject(project: DbProject)
 }

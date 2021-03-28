@@ -22,4 +22,6 @@ import kotlinx.coroutines.flow.Flow
 interface IProjectRepository {
 
     fun getProjects(): Flow<List<Project>>
+
+    suspend fun insertProject(project: Project)
 }
