@@ -20,6 +20,7 @@ import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.repository.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 
+@Deprecated("Use GetProjectsUseCase in common module instead")
 class GetProjectListUseCase(
     private val projectRepository: ProjectRepository
 ) {

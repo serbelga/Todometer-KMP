@@ -16,10 +16,12 @@
 
 package com.sergiobelda.todometer.common.di
 
-import com.sergiobelda.todometer.common.dao.ITaskDao
-import com.sergiobelda.todometer.common.dao.TaskDao
+import com.sergiobelda.todometer.common.database.dao.ITaskDao
+import com.sergiobelda.todometer.common.database.dao.TaskDao
 import com.sergiobelda.todometer.common.database.DriverFactory
 import com.sergiobelda.todometer.common.database.createDatabase
+import com.sergiobelda.todometer.common.database.dao.IProjectDao
+import com.sergiobelda.todometer.common.database.dao.ProjectDao
 import org.koin.dsl.module
 
 val databaseModule = module {
@@ -28,5 +30,8 @@ val databaseModule = module {
     }
     single<ITaskDao> {
         TaskDao()
+    }
+    single<IProjectDao> {
+        ProjectDao()
     }
 }

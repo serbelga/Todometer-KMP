@@ -42,15 +42,15 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
-import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.ui.components.ProjectSelector
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun EditTaskScreen(
-    taskId: Int,
+    taskId: Long,
     mainViewModel: MainViewModel,
     navigateUp: () -> Unit
 ) {
@@ -59,10 +59,11 @@ fun EditTaskScreen(
         var taskTitle by rememberSaveable { mutableStateOf(task.title) }
         var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
         var taskDescription by rememberSaveable { mutableStateOf(task.description) }
-        val radioOptions = mainViewModel.projectList
+        val radioOptions = mainViewModel.projects.observeAsState(emptyList())
+        // TODO radioOptions.firstOrNull
+        val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions.value.firstOrNull()) }
         val projectIndex =
-            radioOptions.indexOfFirst { it.id == task.projectId }.takeUnless { it == -1 } ?: 0
-        val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[projectIndex]) }
+            radioOptions.value.indexOfFirst { it.id == task.projectId }.takeUnless { it == -1 } ?: 0
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -95,7 +96,7 @@ fun EditTaskScreen(
                         modifier = Modifier.fillMaxWidth()
                     )
                     TextField(
-                        value = taskDescription,
+                        value = taskDescription ?: "",
                         onValueChange = { taskDescription = it },
                         label = { Text(stringResource(id = R.string.description)) },
                         keyboardOptions = KeyboardOptions(
@@ -104,7 +105,7 @@ fun EditTaskScreen(
                         ),
                         modifier = Modifier.fillMaxWidth()
                     )
-                    ProjectSelector(radioOptions, selectedProject, onProjectSelected)
+                    ProjectSelector(radioOptions.value, selectedProject, onProjectSelected)
                 }
             },
             floatingActionButton = {
@@ -119,7 +120,7 @@ fun EditTaskScreen(
                                     title = taskTitle,
                                     description = taskDescription,
                                     state = task.state,
-                                    projectId = selectedProject.id,
+                                    projectId = selectedProject?.id,
                                     tagId = task.tagId
                                 )
                             )

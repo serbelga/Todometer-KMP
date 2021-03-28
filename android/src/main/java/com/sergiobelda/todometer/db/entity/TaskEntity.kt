@@ -40,6 +40,7 @@ import com.sergiobelda.todometer.model.TaskState
         )
     ]
 )
+@Deprecated("Moved to common module")
 data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,

@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.model
 
+@Deprecated("Moved to common module")
 enum class TaskState {
     DOING,
     DONE

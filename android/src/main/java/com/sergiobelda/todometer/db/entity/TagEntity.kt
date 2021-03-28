@@ -20,6 +20,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
+@Deprecated("Moved to common module")
 data class TagEntity(
     val name: String
 ) {

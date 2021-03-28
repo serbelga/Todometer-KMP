@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.mapper
 import com.sergiobelda.todometer.db.entity.TaskEntity
 import com.sergiobelda.todometer.model.Task
 
+@Deprecated("Moved to common module")
 object TaskMapper {
     fun TaskEntity.toDomain() = Task(
         id = id,

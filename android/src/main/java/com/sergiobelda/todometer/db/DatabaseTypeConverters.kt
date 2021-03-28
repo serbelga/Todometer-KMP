@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.db
 import androidx.room.TypeConverter
 import com.sergiobelda.todometer.model.TaskState
 
+@Deprecated("Moved to common module")
 class DatabaseTypeConverters {
     @TypeConverter
     fun toString(taskState: TaskState?): String? {

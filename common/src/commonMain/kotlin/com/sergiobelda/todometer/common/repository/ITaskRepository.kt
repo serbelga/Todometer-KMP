@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,23 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.usecase
+package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.repository.TaskRepository
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
-@Deprecated("Use GetTaskUseCase in common module instead")
-class GetTaskUseCase(val taskRepository: TaskRepository) {
-    operator fun invoke(id: Int): Flow<Task> = taskRepository.getTask(id)
+interface ITaskRepository {
+
+    fun getTask(id: Long): Flow<Task?>
+
+    fun getTasks(): Flow<List<Task>>
+
+    suspend fun insertTask(task: Task)
+
+    suspend fun updateTask(task: Task)
+
+    suspend fun updateTaskState(id: Long, state: TaskState)
+
+    suspend fun deleteTask(id: Long)
 }

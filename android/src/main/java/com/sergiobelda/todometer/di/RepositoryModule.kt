@@ -21,6 +21,7 @@ import com.sergiobelda.todometer.repository.TaskProjectRepository
 import com.sergiobelda.todometer.repository.TaskRepository
 import org.koin.dsl.module
 
+// TODO Remove - Moved to common module
 val repositoryModule = module {
     single {
         TaskRepository(get())

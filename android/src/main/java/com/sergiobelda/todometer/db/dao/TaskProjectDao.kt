@@ -22,6 +22,7 @@ import com.sergiobelda.todometer.db.view.TaskProjectView
 import kotlinx.coroutines.flow.Flow
 
 @Dao
+@Deprecated("Use DAO in common module")
 interface TaskProjectDao {
 
     @Query("SELECT * FROM TaskProjectView")

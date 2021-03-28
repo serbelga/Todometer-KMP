@@ -27,6 +27,7 @@ import com.sergiobelda.todometer.db.entity.ProjectTasksEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
+@Deprecated("Use DAO in common module")
 interface ProjectDao {
 
     @Query("SELECT * FROM project WHERE id = :id")

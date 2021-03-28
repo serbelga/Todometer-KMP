@@ -21,6 +21,7 @@ import com.sergiobelda.todometer.db.entity.ProjectTasksEntity
 import com.sergiobelda.todometer.mapper.TaskMapper.toDomain
 import com.sergiobelda.todometer.model.Project
 
+@Deprecated("Moved to common module")
 object ProjectMapper {
     fun ProjectTasksEntity.toDomain() = Project(
         project.id, project.name, project.description, tasks.map { it.toDomain() }

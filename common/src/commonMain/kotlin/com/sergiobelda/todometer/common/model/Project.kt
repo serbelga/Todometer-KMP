@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.dao
+package com.sergiobelda.todometer.common.model
 
-import com.sergiobelda.todometer.DbTask
-import com.sergiobelda.todometer.TodometerDatabase
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
-
-class TaskDao : ITaskDao, KoinComponent {
-
-    private val database: TodometerDatabase by inject()
-
-    override fun getTasks(): List<DbTask> =
-        database.todometerQueries.selectAllTasks().executeAsList()
+data class Project(
+    val id: Long = 0,
+    val name: String,
+    val description: String,
+    val tasks: List<Task> = arrayListOf()
+) {
+    override fun toString() = name
 }

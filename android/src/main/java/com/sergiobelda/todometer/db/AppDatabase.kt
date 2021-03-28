@@ -35,6 +35,7 @@ import com.sergiobelda.todometer.db.view.TaskProjectView
     exportSchema = false
 )
 @TypeConverters(DatabaseTypeConverters::class)
+@Deprecated("Moved to common module")
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun projectDao(): ProjectDao

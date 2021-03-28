@@ -22,19 +22,16 @@ import com.sergiobelda.todometer.usecase.GetProjectUseCase
 import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.usecase.InsertTaskUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
 import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
 import org.koin.dsl.module
 
+// TODO Remove - Moved to common module
 val useCaseModule = module {
     single {
         GetProjectUseCase(get())
     }
     single {
         GetTaskUseCase(get())
-    }
-    single {
-        UpdateTaskStateUseCase(get())
     }
     single {
         UpdateTaskUseCase(get())

@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.mapper
 import com.sergiobelda.todometer.db.view.TaskProjectView
 import com.sergiobelda.todometer.model.TaskProject
 
+@Deprecated("Moved to common module")
 object TaskProjectMapper {
 
     fun TaskProjectView.toDomain() = TaskProject(

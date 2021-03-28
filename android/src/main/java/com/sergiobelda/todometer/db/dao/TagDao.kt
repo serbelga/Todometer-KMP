@@ -19,4 +19,5 @@ package com.sergiobelda.todometer.db.dao
 import androidx.room.Dao
 
 @Dao
+@Deprecated("Use DAO in common module")
 interface TagDao

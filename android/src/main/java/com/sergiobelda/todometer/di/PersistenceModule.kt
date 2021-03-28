@@ -21,6 +21,7 @@ import com.sergiobelda.todometer.db.AppDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
+// TODO Remove - Moved to common module
 val persistenceModule = module {
     single {
         Room.databaseBuilder(

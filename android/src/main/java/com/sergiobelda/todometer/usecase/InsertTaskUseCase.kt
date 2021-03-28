@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.usecase
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.repository.TaskRepository
 
+@Deprecated("Use InsertTaskUseCase in common module instead")
 class InsertTaskUseCase(
     private val taskRepository: TaskRepository
 ) {

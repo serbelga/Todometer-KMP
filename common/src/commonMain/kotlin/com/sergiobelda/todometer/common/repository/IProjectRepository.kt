@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.dao
+package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.DbTask
+import com.sergiobelda.todometer.common.model.Project
+import kotlinx.coroutines.flow.Flow
 
-interface ITaskDao {
+interface IProjectRepository {
 
-    fun getTasks(): List<DbTask>
+    fun getProjects(): Flow<List<Project>>
 }

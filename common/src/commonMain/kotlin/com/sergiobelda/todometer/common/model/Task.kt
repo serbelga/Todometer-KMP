@@ -21,7 +21,8 @@ import com.sergiobelda.todometer.DbTask
 data class Task(
     val id: Long = 0,
     val title: String,
-    val description: String?
+    val description: String?,
+    val state: TaskState,
+    val projectId: Long?,
+    val tagId: Long?
 )
-
-fun DbTask.toDomain() = Task(id, title, description)

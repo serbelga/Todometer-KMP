@@ -16,12 +16,31 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.dao.ITaskDao
+import com.sergiobelda.todometer.common.database.dao.ITaskDao
+import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
+import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toEntity
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.toDomain
+import com.sergiobelda.todometer.common.model.TaskState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class TaskRepository(private val taskDao: ITaskDao) {
+class TaskRepository(private val taskDao: ITaskDao) : ITaskRepository {
 
-    fun getTasks(): List<Task> =
-        taskDao.getTasks().map { it.toDomain() }
+    override fun getTask(id: Long): Flow<Task?> =
+        taskDao.getTask(id).map { it?.toDomain() }
+
+    override fun getTasks(): Flow<List<Task>> =
+        taskDao.getTasks().map { list -> list.map { it.toDomain() } }
+
+    override suspend fun insertTask(task: Task) =
+        taskDao.insertTask(task.toEntity())
+
+    override suspend fun updateTask(task: Task) =
+        taskDao.updateTaskState(task.toEntity())
+
+    override suspend fun updateTaskState(id: Long, state: TaskState) =
+        taskDao.updateTaskState(id, state)
+
+    override suspend fun deleteTask(id: Long) =
+        taskDao.deleteTask(id)
 }

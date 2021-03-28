@@ -16,25 +16,22 @@
 
 package com.sergiobelda.todometer.viewmodel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
+import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
+import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
+import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import com.sergiobelda.todometer.common.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import com.sergiobelda.todometer.model.Project
-import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.usecase.DeleteTaskUseCase
-import com.sergiobelda.todometer.usecase.GetProjectListUseCase
 import com.sergiobelda.todometer.usecase.GetProjectUseCase
-import com.sergiobelda.todometer.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.usecase.InsertProjectUseCase
-import com.sergiobelda.todometer.usecase.InsertTaskUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskStateUseCase
-import com.sergiobelda.todometer.usecase.UpdateTaskUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -42,49 +39,42 @@ class MainViewModel(
     private val getProjectUseCase: GetProjectUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
-    private val getProjectListUseCase: GetProjectListUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val updateTaskStateUseCase: UpdateTaskStateUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val getTasksUseCase: GetTasksUseCase
+    getProjectsUseCase: GetProjectsUseCase,
+    getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
-    var projectList: List<Project> by mutableStateOf(listOf())
-        private set
+    val tasks: LiveData<List<com.sergiobelda.todometer.common.model.Task>> = getTasksUseCase().asLiveData()
 
-    init {
-        viewModelScope.launch {
-            getProjectListUseCase().collect {
-                projectList = it
-            }
-        }
-    }
+    val projects: LiveData<List<com.sergiobelda.todometer.common.model.Project>> = getProjectsUseCase().asLiveData()
 
-    val tasks: List<com.sergiobelda.todometer.common.model.Task> = getTasksUseCase()
+    fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
 
-    val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
+    // TODO: 28/03/2021 Update
+    val updateTaskState: (Long, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 
     fun insertTask(task: Task) = viewModelScope.launch {
         insertTaskUseCase(task)
     }
 
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase(task)
+    }
+
+    fun deleteTask(id: Long) = viewModelScope.launch {
+        deleteTaskUseCase(id)
+    }
+
+    // TODO Migrate from here
     fun insertProject(project: Project) = viewModelScope.launch {
         insertProjectUseCase(project)
     }
 
-    private fun updateTaskState(id: Int, taskState: TaskState) = viewModelScope.launch {
+    private fun updateTaskState(id: Long, taskState: TaskState) = viewModelScope.launch {
         updateTaskStateUseCase(id, taskState)
     }
 
-    fun getTask(id: Int) = getTaskUseCase(id).asLiveData()
-
     fun getProject(id: Int) = getProjectUseCase(id).asLiveData()
-
-    fun deleteTask(id: Int) = viewModelScope.launch {
-        deleteTaskUseCase(id)
-    }
-
-    fun updateTask(task: Task) = viewModelScope.launch {
-        updateTaskUseCase(task)
-    }
 }

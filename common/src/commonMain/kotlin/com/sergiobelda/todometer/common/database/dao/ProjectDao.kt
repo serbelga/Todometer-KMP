@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.usecase
+package com.sergiobelda.todometer.common.database.dao
 
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.repository.ITaskRepository
+import com.sergiobelda.todometer.DbProject
+import com.sergiobelda.todometer.TodometerDatabase
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class GetTasksUseCase(
-    private val taskRepository: ITaskRepository
-) {
+class ProjectDao : IProjectDao, KoinComponent {
 
-    operator fun invoke(): Flow<List<Task>> =
-        taskRepository.getTasks()
+    private val database: TodometerDatabase by inject()
+
+    override fun getProjects(): Flow<List<DbProject>> =
+        database.todometerQueries.selectAllProjects().asFlow().mapToList()
 }

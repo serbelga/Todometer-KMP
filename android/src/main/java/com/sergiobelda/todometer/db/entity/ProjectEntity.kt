@@ -20,6 +20,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Project")
+@Deprecated("Moved to common module")
 data class ProjectEntity(
     val name: String,
     val description: String

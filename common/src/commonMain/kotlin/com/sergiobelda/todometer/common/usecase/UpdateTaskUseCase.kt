@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.usecase
+package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.model.TaskState
-import com.sergiobelda.todometer.repository.TaskRepository
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.repository.ITaskRepository
 
-class UpdateTaskStateUseCase(
-    private val taskRepository: TaskRepository
+class UpdateTaskUseCase(
+    private val taskRepository: ITaskRepository
 ) {
-    suspend operator fun invoke(id: Int, taskState: TaskState) = taskRepository.updateTaskState(id, taskState)
+
+    /**
+     * Updates a task.
+     *
+     * @param task Updated task that will replace current task.
+     */
+    suspend operator fun invoke(task: Task) =
+        taskRepository.updateTask(task)
 }

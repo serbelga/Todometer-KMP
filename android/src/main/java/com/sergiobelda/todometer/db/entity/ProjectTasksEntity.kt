@@ -22,6 +22,7 @@ import androidx.room.Relation
 /**
  * Relationship one-to-many Project-Tasks
  */
+@Deprecated("Moved to common module")
 data class ProjectTasksEntity(
     @Embedded val project: ProjectEntity,
     @Relation(

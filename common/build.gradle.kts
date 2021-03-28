@@ -50,6 +50,8 @@ kotlin {
             dependencies {
                 api(Libs.Koin.core)
                 api(Libs.Koin.test)
+
+                implementation(Libs.SqlDelight.coroutines)
             }
         }
         val commonTest by getting

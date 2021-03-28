@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.usecase
 
 import com.sergiobelda.todometer.repository.TaskRepository
 
+@Deprecated("Moved to common module")
 class DeleteTaskUseCase(
     private val taskRepository: TaskRepository
 ) {

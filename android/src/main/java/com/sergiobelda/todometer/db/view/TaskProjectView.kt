@@ -31,6 +31,7 @@ import com.sergiobelda.todometer.db.entity.TaskEntity
         " FROM Task t LEFT JOIN Project p ON t.project_id = p.id" +
         " ORDER BY project_id"
 )
+@Deprecated("Moved to common module")
 data class TaskProjectView(
     @Embedded val task: TaskEntity,
     @ColumnInfo(name = "project_name") val projectName: String?

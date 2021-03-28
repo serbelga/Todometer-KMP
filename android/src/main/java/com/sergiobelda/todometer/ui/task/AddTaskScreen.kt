@@ -31,6 +31,7 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -41,9 +42,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
-import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.model.TaskState
 import com.sergiobelda.todometer.ui.components.ProjectSelector
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
@@ -56,8 +57,9 @@ fun AddTaskScreen(
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
-    val radioOptions = mainViewModel.projectList
-    val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions[0]) }
+    val radioOptions = mainViewModel.projects.observeAsState(emptyList())
+    // TODO radioOptions.firstOrNull
+    val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions.value.firstOrNull()) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,7 +101,7 @@ fun AddTaskScreen(
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
-                ProjectSelector(radioOptions, selectedProject, onProjectSelected)
+                ProjectSelector(radioOptions.value, selectedProject, onProjectSelected)
             }
         },
         floatingActionButton = {
@@ -113,7 +115,7 @@ fun AddTaskScreen(
                                 title = taskTitle,
                                 description = taskDescription,
                                 state = TaskState.DOING,
-                                projectId = selectedProject.id,
+                                projectId = selectedProject?.id,
                                 tagId = null
                             )
                         )

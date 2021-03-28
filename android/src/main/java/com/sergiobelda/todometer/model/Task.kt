@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.model
 
+@Deprecated("Moved to common module")
 data class Task(
     val id: Int = 0,
     val title: String,

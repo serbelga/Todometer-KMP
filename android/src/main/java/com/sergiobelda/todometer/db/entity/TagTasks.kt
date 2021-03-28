@@ -22,6 +22,7 @@ import androidx.room.Relation
 /**
  * Relationship one-to-many Tag-Tasks
  */
+@Deprecated("Moved to common module")
 data class TagTasks(
     @Embedded val tag: TagEntity,
     @Relation(

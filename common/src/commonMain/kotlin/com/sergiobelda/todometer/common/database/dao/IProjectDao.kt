@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.usecase
+package com.sergiobelda.todometer.common.database.dao
 
-import com.sergiobelda.todometer.model.Task
-import com.sergiobelda.todometer.repository.TaskRepository
+import com.sergiobelda.todometer.DbProject
 import kotlinx.coroutines.flow.Flow
 
-@Deprecated("Use GetTaskUseCase in common module instead")
-class GetTaskUseCase(val taskRepository: TaskRepository) {
-    operator fun invoke(id: Int): Flow<Task> = taskRepository.getTask(id)
+interface IProjectDao {
+
+    fun getProjects(): Flow<List<DbProject>>
 }
