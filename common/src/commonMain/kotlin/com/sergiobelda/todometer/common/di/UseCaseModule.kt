@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.di
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
+import org.koin.dsl.module
+
+val useCaseModule = module {
+    single {
+        GetTasksUseCase(get())
+    }
 }

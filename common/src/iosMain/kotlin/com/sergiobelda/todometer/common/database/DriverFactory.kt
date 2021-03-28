@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.database
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import com.sergiobelda.todometer.TodometerDatabase
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+
+actual class DriverFactory {
+    actual fun createDriver(): SqlDriver {
+        return NativeSqliteDriver(TodometerDatabase.Schema, "todometer.db")
+    }
 }

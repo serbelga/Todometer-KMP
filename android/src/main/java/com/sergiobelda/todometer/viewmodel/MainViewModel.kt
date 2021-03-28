@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.model.Project
 import com.sergiobelda.todometer.model.Task
 import com.sergiobelda.todometer.model.TaskState
@@ -44,7 +45,8 @@ class MainViewModel(
     private val getProjectListUseCase: GetProjectListUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val updateTaskStateUseCase: UpdateTaskStateUseCase,
-    private val deleteTaskUseCase: DeleteTaskUseCase
+    private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
     var projectList: List<Project> by mutableStateOf(listOf())
@@ -57,6 +59,8 @@ class MainViewModel(
             }
         }
     }
+
+    val tasks: List<com.sergiobelda.todometer.common.model.Task> = getTasksUseCase()
 
     val updateTaskState: (Int, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
 

@@ -33,6 +33,7 @@ object Versions {
     const val navigationCompose = "1.0.0-alpha09"
     const val robolectric = "4.3.1"
     const val roomKtx = "2.2.6"
+    const val sqlDelight = "1.4.4"
     const val testCoreKtx = "1.3.0"
     const val timber = "4.7.1"
 }
@@ -114,6 +115,11 @@ object Libs {
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
     }
+
+    object SqlDelight {
+        const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
+        const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
+        const val jvmDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
+        const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+    }
 }
-
-

@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.dao
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import com.sergiobelda.todometer.DbTask
+
+interface ITaskDao {
+
+    fun getTasks(): List<DbTask>
 }

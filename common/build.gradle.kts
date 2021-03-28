@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 group = "com.sergiobelda.todometer.common"
@@ -56,6 +57,8 @@ kotlin {
             dependencies {
                 api("androidx.appcompat:appcompat:1.2.0")
                 api("androidx.core:core-ktx:1.3.2")
+
+                implementation(Libs.SqlDelight.androidDriver)
             }
         }
         val androidTest by getting {
@@ -63,9 +66,17 @@ kotlin {
                 implementation("junit:junit:4.13.2")
             }
         }
-        val desktopMain by getting
+        val desktopMain by getting {
+            dependencies {
+                implementation(Libs.SqlDelight.jvmDriver)
+            }
+        }
         val desktopTest by getting
-        val iosMain by getting
+        val iosMain by getting {
+            dependencies {
+                implementation(Libs.SqlDelight.nativeDriver)
+            }
+        }
         val iosTest by getting
     }
 }
@@ -92,3 +103,9 @@ val packForXcode by tasks.creating(Sync::class) {
     into(targetDir)
 }
 tasks.getByName("build").dependsOn(packForXcode)
+
+sqldelight {
+    database("TodometerDatabase") {
+        packageName = "com.sergiobelda.todometer"
+    }
+}

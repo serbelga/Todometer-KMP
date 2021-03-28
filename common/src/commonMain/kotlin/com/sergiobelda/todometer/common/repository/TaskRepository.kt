@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.repository
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import com.sergiobelda.todometer.common.dao.ITaskDao
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.toDomain
+
+class TaskRepository(private val taskDao: ITaskDao) {
+
+    fun getTasks(): List<Task> =
+        taskDao.getTasks().map { it.toDomain() }
 }

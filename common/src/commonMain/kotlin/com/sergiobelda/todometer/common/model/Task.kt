@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.model
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
-}
+import com.sergiobelda.todometer.DbTask
+
+data class Task(
+    val id: Long = 0,
+    val title: String,
+    val description: String?
+)
+
+fun DbTask.toDomain() = Task(id, title, description)

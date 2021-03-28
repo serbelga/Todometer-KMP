@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.di
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
+
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
+    appDeclaration()
+    modules(databaseModule)
+    modules(repositoryModule)
+    modules(useCaseModule)
 }
+
+fun initKoin() = initKoin {}

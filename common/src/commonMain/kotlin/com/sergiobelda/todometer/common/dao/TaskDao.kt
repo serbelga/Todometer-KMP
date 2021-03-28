@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.dao
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import com.sergiobelda.todometer.DbTask
+import com.sergiobelda.todometer.TodometerDatabase
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+class TaskDao : ITaskDao, KoinComponent {
+
+    private val database: TodometerDatabase by inject()
+
+    override fun getTasks(): List<DbTask> =
+        database.todometerQueries.selectAllTasks().executeAsList()
 }

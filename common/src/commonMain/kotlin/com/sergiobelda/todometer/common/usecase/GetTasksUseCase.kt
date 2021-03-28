@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common
+package com.sergiobelda.todometer.common.usecase
 
-actual class Platform actual constructor() {
-    actual val platform: String = "Desktop"
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.repository.TaskRepository
+
+class GetTasksUseCase(
+    private val taskRepository: TaskRepository
+) {
+
+    operator fun invoke(): List<Task> =
+        taskRepository.getTasks()
 }

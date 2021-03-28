@@ -141,6 +141,11 @@ fun HomeScreen(
                         deleteTask = { mainViewModel.deleteTask(selectedTask.value) }
                     )
                 }
+                LazyColumn {
+                    items(mainViewModel.tasks) {
+                        Text(it.title)
+                    }
+                }
                 if (!projectList.isNullOrEmpty()) {
                     ProjectTasksListView(
                         mainViewModel,
@@ -216,7 +221,6 @@ fun ToDometerTopBar() {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(Greeting().greeting())
             Box(
                 modifier = Modifier
                     .height(56.dp)
@@ -305,6 +309,7 @@ fun ProjectTasksListView(
     onTaskItemClick: (Int) -> Unit,
     onTaskItemLongClick: (Int) -> Unit
 ) {
+    /*
     val projectTasksList = mainViewModel.projectList
     LazyColumn(
         modifier = Modifier.padding(32.dp)
@@ -347,6 +352,8 @@ fun ProjectTasksListView(
             }
         }
     }
+
+     */
 }
 
 @Composable

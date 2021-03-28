@@ -1,0 +1,11 @@
+CREATE TABLE DbTask (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT
+);
+
+INSERT INTO DbTask VALUES (1, "Task one", NULL);
+
+selectAllTasks:
+SELECT *
+FROM DbTask;
