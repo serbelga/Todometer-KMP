@@ -24,66 +24,68 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.sergiobelda.todometer.android.R
 
-val regularFont = Font(R.font.jetbrains_mono_regular)
-val mediumFont = Font(R.font.jetbrains_mono_medium, FontWeight.W500)
-val boldFont = Font(R.font.jetbrains_mono_bold, FontWeight.W600)
+val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
+val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
 
-val appFontFamily = FontFamily(
-    fonts = listOf(
-        regularFont,
-        mediumFont,
-        boldFont
-    )
+val quickSandFontFamily = FontFamily(
+    quickSandRegularFont,
+    quickSandMediumFont
 )
 
 val typography = Typography(
     h4 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.W600,
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 30.sp
     ),
     h5 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.W600,
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 24.sp
     ),
     h6 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 20.sp
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp,
+        letterSpacing = 0.15.sp
     ),
     subtitle1 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.W600,
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 16.sp
     ),
     subtitle2 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.W500,
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp
     ),
     body1 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        letterSpacing = 0.5.sp
     ),
     body2 = TextStyle(
-        fontFamily = appFontFamily,
-        fontSize = 14.sp
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp,
+        letterSpacing = 0.25.sp
     ),
     button = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.W500,
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp
     ),
     caption = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp,
+        letterSpacing = 0.4.sp
     ),
     overline = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.W500,
-        fontSize = 12.sp
+        fontFamily = quickSandFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp,
+        letterSpacing = 1.5.sp
     )
 )

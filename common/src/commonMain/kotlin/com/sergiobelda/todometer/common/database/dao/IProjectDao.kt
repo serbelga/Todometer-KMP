@@ -23,5 +23,7 @@ interface IProjectDao {
 
     fun getProjects(): Flow<List<DbProject>>
 
+    fun getProject(id: Long): Flow<DbProject?>
+
     suspend fun insertProject(project: DbProject)
 }

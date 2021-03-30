@@ -60,6 +60,11 @@ deleteTask:
 DELETE FROM DbTask
 WHERE id = ?;
 
+selectProject:
+SELECT *
+FROM DbProject
+WHERE id = ?;
+
 selectAllProjects:
 SELECT *
 FROM DbProject;

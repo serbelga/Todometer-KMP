@@ -20,6 +20,7 @@ import com.sergiobelda.todometer.common.repository.IProjectRepository
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 import com.sergiobelda.todometer.common.repository.ProjectRepository
 import com.sergiobelda.todometer.common.repository.TaskRepository
+import com.sergiobelda.todometer.common.repository.UserPreferencesRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -28,5 +29,8 @@ val repositoryModule = module {
     }
     single<ITaskRepository> {
         TaskRepository(get())
+    }
+    single {
+        UserPreferencesRepository()
     }
 }

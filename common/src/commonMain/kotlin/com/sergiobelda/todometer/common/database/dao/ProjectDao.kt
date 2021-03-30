@@ -20,6 +20,7 @@ import com.sergiobelda.todometer.DbProject
 import com.sergiobelda.todometer.TodometerDatabase
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
+import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,6 +31,9 @@ class ProjectDao : IProjectDao, KoinComponent {
 
     override fun getProjects(): Flow<List<DbProject>> =
         database.todometerQueries.selectAllProjects().asFlow().mapToList()
+
+    override fun getProject(id: Long): Flow<DbProject?> =
+        database.todometerQueries.selectProject(id).asFlow().mapToOneOrNull()
 
     override suspend fun insertProject(project: DbProject) =
         database.todometerQueries.insertProject(project)

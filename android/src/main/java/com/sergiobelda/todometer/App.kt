@@ -27,6 +27,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = this
+        com.sergiobelda.todometer.common.repository.appContext = this
         initKoin {
             modules(viewModelModule)
             androidContext(this@App)

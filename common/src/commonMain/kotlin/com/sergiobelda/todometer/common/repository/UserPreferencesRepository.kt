@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database
+package com.sergiobelda.todometer.common.repository
 
-import com.squareup.sqldelight.db.SqlDriver
+import kotlinx.coroutines.flow.Flow
 
-expect class DriverFactory {
-    fun createDriver(): SqlDriver
+expect class UserPreferencesRepository() {
+
+    fun projectSelected(): Flow<Long>
+
+    suspend fun setProjectSelected(projectSelected: Long)
 }
