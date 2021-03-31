@@ -18,13 +18,13 @@ package com.sergiobelda.todometer.common.usecase
 
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.repository.IProjectRepository
-import com.sergiobelda.todometer.common.repository.UserPreferencesRepository
+import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 
 class GetProjectSelectedUseCase(
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val userPreferencesRepository: IUserPreferencesRepository,
     private val projectRepository: IProjectRepository
 ) {
 

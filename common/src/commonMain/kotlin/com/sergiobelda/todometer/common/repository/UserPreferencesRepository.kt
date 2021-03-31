@@ -16,11 +16,18 @@
 
 package com.sergiobelda.todometer.common.repository
 
+import com.sergiobelda.todometer.common.preferences.Preferences
 import kotlinx.coroutines.flow.Flow
 
-expect class UserPreferencesRepository() {
+class UserPreferencesRepository(private val preferences: Preferences) : IUserPreferencesRepository {
 
-    fun projectSelected(): Flow<Long>
+    override fun projectSelected(): Flow<Long> = preferences.getLong(PROJECT_SELECTED_KEY)
 
-    suspend fun setProjectSelected(projectSelected: Long)
+    override suspend fun setProjectSelected(projectSelected: Long) {
+        preferences.set(PROJECT_SELECTED_KEY, projectSelected)
+    }
+
+    companion object {
+        private const val PROJECT_SELECTED_KEY = "project_selected"
+    }
 }

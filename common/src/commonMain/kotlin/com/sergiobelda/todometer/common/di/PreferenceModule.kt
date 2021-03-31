@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.repository
+package com.sergiobelda.todometer.common.di
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.sergiobelda.todometer.common.preferences.Preferences
+import org.koin.dsl.module
 
-actual class UserPreferencesRepository {
-
-    // TODO Update
-    actual fun projectSelected(): Flow<Long> = flow {
-        emit(1)
-    }
-
-    actual suspend fun setProjectSelected(projectSelected: Long) {
-        // TODO
+val preferenceModule = module {
+    single {
+        Preferences()
     }
 }

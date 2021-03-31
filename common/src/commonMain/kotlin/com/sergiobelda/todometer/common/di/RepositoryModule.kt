@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.common.di
 
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 import com.sergiobelda.todometer.common.repository.ITaskRepository
+import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import com.sergiobelda.todometer.common.repository.ProjectRepository
 import com.sergiobelda.todometer.common.repository.TaskRepository
 import com.sergiobelda.todometer.common.repository.UserPreferencesRepository
@@ -30,7 +31,7 @@ val repositoryModule = module {
     single<ITaskRepository> {
         TaskRepository(get())
     }
-    single {
-        UserPreferencesRepository()
+    single<IUserPreferencesRepository> {
+        UserPreferencesRepository(get())
     }
 }

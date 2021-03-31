@@ -17,15 +17,10 @@
 package com.sergiobelda.todometer.common.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
-actual class UserPreferencesRepository {
-    // TODO Update
-    actual fun projectSelected(): Flow<Long> = flow {
-        emit(1)
-    }
+interface IUserPreferencesRepository {
 
-    actual suspend fun setProjectSelected(projectSelected: Long) {
-        // TODO
-    }
+    fun projectSelected(): Flow<Long>
+
+    suspend fun setProjectSelected(projectSelected: Long)
 }

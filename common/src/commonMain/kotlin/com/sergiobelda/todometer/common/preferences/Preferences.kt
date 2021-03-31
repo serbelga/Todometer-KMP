@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.di
+package com.sergiobelda.todometer.common.preferences
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import kotlinx.coroutines.flow.Flow
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(databaseModule)
-    modules(preferenceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
+expect class Preferences() {
+
+    suspend fun set(key: String, value: String)
+
+    suspend fun set(key: String, value: Long)
+
+    fun getString(key: String, default: String = ""): Flow<String>
+
+    fun getStringOrNull(key: String): Flow<String?>
+
+    fun getLong(key: String, default: Long = 1): Flow<Long>
+
+    fun getLongOrNull(key: String): Flow<Long?>
 }
-
-fun initKoin() = initKoin {}
