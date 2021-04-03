@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +27,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
@@ -85,7 +85,6 @@ fun HomeScreen(
     mainViewModel: MainViewModel,
     addProject: () -> Unit,
     addTask: () -> Unit,
-    openProject: (Long) -> Unit,
     openTask: (Long) -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -93,18 +92,25 @@ fun HomeScreen(
     val selectedTask = remember { mutableStateOf(0L) }
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
 
-    val tasks = mainViewModel.tasks.observeAsState(emptyList())
     val projects = mainViewModel.projects.observeAsState(emptyList())
+    val projectSelected = mainViewModel.projectSelected.observeAsState()
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(projects.value, addProject, openProject)
+            SheetContainer(
+                projectSelected.value?.id,
+                projects.value,
+                addProject,
+                selectProject = {
+                    mainViewModel.setProjectSelected(it)
+                }
+            )
         }
     ) {
         Scaffold(
             topBar = {
-                ToDometerTopAppBar()
+                ToDometerTopAppBar(projectSelected.value)
             },
             bottomBar = {
                 if (projects.value.isNotEmpty()) {
@@ -151,9 +157,9 @@ fun HomeScreen(
                 }
 
                  */
-
+                // TODO: 02/04/2021 Update null check
                 TasksListView(
-                    tasks.value,
+                    projectSelected.value?.tasks ?: emptyList(),
                     onDoingClick = {
                         mainViewModel.setTaskDoing(it)
                     },
@@ -222,9 +228,10 @@ fun RemoveTaskAlertDialog(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetContainer(
+    selectedProjectId: Long?,
     projectList: List<Project>,
     addProject: () -> Unit,
-    openProject: (Long) -> Unit
+    selectProject: (Long) -> Unit
 ) {
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
@@ -251,17 +258,18 @@ fun SheetContainer(
             items(projectList) { project ->
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     ListItem(
-                        modifier = Modifier.clickable(
-                            onClick = {
-                                openProject(project.id)
-                            }
+                        modifier = Modifier.selectable(
+                            onClick = { selectProject(project.id) },
+                            selected = project.id == selectedProjectId
                         ),
                         text = { Text(text = project.name) },
                         icon = {
-                            Icon(
-                                Icons.Default.Book,
-                                contentDescription = null
-                            )
+                            if (selectedProjectId == project.id) {
+                                Icon(
+                                    Icons.Default.Book,
+                                    contentDescription = null
+                                )
+                            }
                         }
                     )
                 }

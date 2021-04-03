@@ -50,6 +50,7 @@ actual class Preferences {
     }
 
     actual fun getLongOrNull(key: String): Flow<Long?> = flow {
+        // TODO This can throw java.lang.NumberFormatException
         emit(preferences?.get(key, null)?.toLong())
     }
 }

@@ -29,6 +29,7 @@ import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
@@ -42,6 +43,7 @@ class MainViewModel(
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val setProjectSelectedUseCase: SetProjectSelectedUseCase,
     getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
     getTasksUseCase: GetTasksUseCase
@@ -77,5 +79,9 @@ class MainViewModel(
 
     fun setTaskDone(id: Long) = viewModelScope.launch {
         setTaskDoneUseCase(id)
+    }
+
+    fun setProjectSelected(id: Long) = viewModelScope.launch {
+        setProjectSelectedUseCase(id)
     }
 }

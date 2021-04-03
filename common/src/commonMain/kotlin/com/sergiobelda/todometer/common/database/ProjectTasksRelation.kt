@@ -14,31 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.mapper
+package com.sergiobelda.todometer.common.database
 
 import com.sergiobelda.todometer.DbProject
-import com.sergiobelda.todometer.common.database.ProjectTasksRelation
-import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
-import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.DbTask
 
-object ProjectMapper {
-
-    fun DbProject.toDomain() = Project(
-        id,
-        name,
-        description
-    )
-
-    fun ProjectTasksRelation.toDomain() = Project(
-        project.id,
-        project.name,
-        project.description,
-        tasks.map { it.toDomain() }
-    )
-
-    fun Project.toEntity() = DbProject(
-        id,
-        name,
-        description
-    )
-}
+data class ProjectTasksRelation(
+    val project: DbProject,
+    val tasks: List<DbTask>
+)

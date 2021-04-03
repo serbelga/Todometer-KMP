@@ -34,6 +34,11 @@ SELECT *
 FROM DbTask
 WHERE id = ?;
 
+selectTasksByProjectId:
+SELECT *
+FROM DbTask
+WHERE project_id = ? ORDER BY state ASC;
+
 selectAllTasks:
 SELECT *
 FROM DbTask;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.utils
+package com.sergiobelda.todometer.util
 
 import androidx.annotation.FloatRange
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskState
 
 object ProgressUtil {
+
+    fun getTasksDoneProgress(list: List<Task?>): Float =
+        list.takeUnless { it.isEmpty() }?.let {
+            it.filter { task -> task?.state == TaskState.DONE }.size / it.size.toFloat()
+        } ?: 0F
 
     fun getPercentage(@FloatRange(from = 0.0, to = 1.0) progress: Float) =
         progress.takeIf { it in 0.0..1.0 }?.let { "${(it * 100).toInt()}%" } ?: "-%"

@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.repository
+package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskState
-import kotlinx.coroutines.flow.Flow
+import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-interface ITaskRepository {
+class SetProjectSelectedUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository
+) {
 
-    fun getTask(id: Long): Flow<Task?>
-
-    fun getTasks(): Flow<List<Task>>
-
-    suspend fun insertTask(task: Task)
-
-    suspend fun updateTask(task: Task)
-
-    suspend fun updateTaskState(id: Long, state: TaskState)
-
-    suspend fun deleteTask(id: Long)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    suspend operator fun invoke(id: Long) =
+        userPreferencesRepository.setProjectSelected(id)
 }
