@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
@@ -72,7 +73,7 @@ import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.viewmodel.MainViewModel
@@ -115,8 +116,8 @@ fun HomeScreen(
             bottomBar = {
                 if (projects.value.isNotEmpty()) {
                     BottomAppBar(
-                        backgroundColor = MaterialColors.surface,
-                        contentColor = contentColorFor(MaterialColors.surface),
+                        backgroundColor = TodometerColors.surface,
+                        contentColor = contentColorFor(TodometerColors.surface),
                         cutoutShape = CircleShape
                     ) {
                         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
@@ -304,52 +305,18 @@ fun TasksListView(
     onTaskItemClick: (Long) -> Unit,
     onTaskItemLongClick: (Long) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier.padding(32.dp)
-    ) {
-        items(tasks) { task ->
-            /*
-            Text(project.name.toUpperCase(Locale.ROOT), style = typography.overline)
-            val progress =
-                if (project.tasks.isNotEmpty()) {
-                    project.tasks.filter { it.state == TaskState.DONE }.size.toFloat() / project.tasks.size.toFloat()
-                } else {
-                    0f
-                }
-
-
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    ProgressUtil.getPercentage(progress),
-                    style = typography.body1,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
-            LinearProgressIndicator(
-                progress = progress,
-                modifier = Modifier
-                    .padding(top = 8.dp, bottom = 16.dp)
-                    .fillMaxWidth()
-            )
-             */
+    LazyColumn {
+        itemsIndexed(tasks) { index, task ->
             TaskItem(
                 task,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick,
-                emptyDescriptionString = stringResource(R.string.no_description)
+                onLongClick = onTaskItemLongClick
             )
-            /*
-            if (index == projectTasksList.size - 1) {
-                Spacer(modifier = Modifier.height(32.dp))
-            } else {
-                Spacer(modifier = Modifier.height(24.dp))
-                HorizontalDivider()
-                Spacer(modifier = Modifier.height(24.dp))
+            if (index == tasks.lastIndex) {
+                Spacer(modifier = Modifier.height(56.dp))
             }
-
-             */
         }
     }
 }

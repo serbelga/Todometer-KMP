@@ -27,7 +27,7 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 
 @Composable
 fun AddTaskScreen(
@@ -45,7 +45,7 @@ fun AddTaskScreen(
                     }
                 },
                 elevation = 0.dp,
-                backgroundColor = MaterialColors.surface
+                backgroundColor = TodometerColors.surface
             )
         }
     ) {

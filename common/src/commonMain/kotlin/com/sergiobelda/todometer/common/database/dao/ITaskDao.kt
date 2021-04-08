@@ -28,7 +28,7 @@ interface ITaskDao {
 
     suspend fun insertTask(task: DbTask)
 
-    suspend fun updateTaskState(task: DbTask)
+    suspend fun updateTask(task: DbTask)
 
     suspend fun updateTaskState(id: Long, state: TaskState)
 

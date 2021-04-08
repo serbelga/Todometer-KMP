@@ -57,8 +57,16 @@ class MainViewModel(
 
     fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
 
-    fun insertTask(task: Task) = viewModelScope.launch {
-        insertTaskUseCase(task)
+    fun insertTask(
+        title: String,
+        description: String?,
+        tagId: Long?
+    ) = viewModelScope.launch {
+        insertTaskUseCase(
+            title,
+            description,
+            tagId
+        )
     }
 
     fun updateTask(task: Task) = viewModelScope.launch {
@@ -69,8 +77,8 @@ class MainViewModel(
         deleteTaskUseCase(id)
     }
 
-    fun insertProject(project: Project) = viewModelScope.launch {
-        insertProjectUseCase(project)
+    fun insertProject(name: String, description: String) = viewModelScope.launch {
+        insertProjectUseCase(name, description)
     }
 
     fun setTaskDoing(id: Long) = viewModelScope.launch {

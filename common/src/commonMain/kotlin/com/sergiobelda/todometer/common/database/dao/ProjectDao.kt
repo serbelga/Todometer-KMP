@@ -46,7 +46,9 @@ class ProjectDao : IProjectDao, KoinComponent {
             }
         }
 
-
     override suspend fun insertProject(project: DbProject) =
-        database.todometerQueries.insertProject(project)
+        database.todometerQueries.insertProject(
+            project.name,
+            project.description
+        )
 }

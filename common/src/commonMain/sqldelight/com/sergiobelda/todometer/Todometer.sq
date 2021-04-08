@@ -45,7 +45,8 @@ FROM DbTask;
 
 insertTask:
 INSERT INTO DbTask
-VALUES ?;
+(title, description, state, project_id, tag_id)
+VALUES (?, ?, ?, ?, ?);
 
 updateTask:
 UPDATE DbTask
@@ -76,4 +77,5 @@ FROM DbProject;
 
 insertProject:
 INSERT INTO DbProject
-VALUES ?;
+(name, description)
+VALUES (?, ?);

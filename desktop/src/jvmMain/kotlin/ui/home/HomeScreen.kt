@@ -39,12 +39,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
+import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import koin
 import kotlinx.coroutines.launch
 import ui.components.ToDometerTopAppBar
@@ -53,9 +53,9 @@ import ui.components.ToDometerTopAppBar
 fun HomeScreen(
     addTask: () -> Unit
 ) {
-    val getTasksUseCase = koin.get<GetTasksUseCase>()
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
+    val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
     val coroutineScope = rememberCoroutineScope()
     val setTaskDoing: (Long) -> Unit = {
         coroutineScope.launch {
@@ -67,15 +67,16 @@ fun HomeScreen(
             setTaskDoneUseCase(it)
         }
     }
-    val tasks: List<Task> by getTasksUseCase().collectAsState(emptyList())
+    val project: Project? by getProjectSelectedUseCase().collectAsState(null)
+    // val tasks: List<Task> by getTasksUseCase().collectAsState(emptyList())
     Scaffold(
         topBar = {
-            ToDometerTopAppBar()
+            ToDometerTopAppBar(project)
         },
         bottomBar = {
             BottomAppBar(
-                backgroundColor = MaterialColors.surface,
-                contentColor = contentColorFor(MaterialColors.surface),
+                backgroundColor = TodometerColors.surface,
+                contentColor = contentColorFor(TodometerColors.surface),
                 cutoutShape = CircleShape
             ) {
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
@@ -103,16 +104,17 @@ fun HomeScreen(
         floatingActionButtonPosition = FabPosition.Center,
         isFloatingActionButtonDocked = true
     ) {
-        LazyColumn {
-            items(tasks) {
-                TaskItem(
-                    task = it,
-                    onDoingClick = setTaskDoing,
-                    onDoneClick = setTaskDone,
-                    {},
-                    {},
-                    "No description provided"
-                )
+        project?.let {
+            LazyColumn {
+                items(it.tasks) {
+                    TaskItem(
+                        task = it,
+                        onDoingClick = setTaskDoing,
+                        onDoneClick = setTaskDone,
+                        {},
+                        {}
+                    )
+                }
             }
         }
     }

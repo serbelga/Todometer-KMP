@@ -20,10 +20,10 @@ import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.outline
 
 @Composable
 fun HorizontalDivider(modifier: Modifier = Modifier) {
-    Divider(thickness = 1.dp, color = MaterialColors.outline, modifier = modifier)
+    Divider(thickness = 1.dp, color = TodometerColors.outline, modifier = modifier)
 }

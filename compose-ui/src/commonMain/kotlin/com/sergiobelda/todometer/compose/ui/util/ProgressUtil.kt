@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.util
+package com.sergiobelda.todometer.compose.ui.util
 
-import androidx.annotation.FloatRange
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 
@@ -27,6 +26,6 @@ object ProgressUtil {
             it.filter { task -> task?.state == TaskState.DONE }.size / it.size.toFloat()
         } ?: 0F
 
-    fun getPercentage(@FloatRange(from = 0.0, to = 1.0) progress: Float) =
+    fun getPercentage(progress: Float) =
         progress.takeIf { it in 0.0..1.0 }?.let { "${(it * 100).toInt()}%" } ?: "-%"
 }

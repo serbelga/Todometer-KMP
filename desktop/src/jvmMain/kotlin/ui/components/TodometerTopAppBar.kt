@@ -25,7 +25,7 @@ import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
@@ -33,21 +33,20 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.components.ProjectProgress
 
 @Composable
-fun ToDometerTopAppBar() {
-    TopAppBar(
-        backgroundColor = MaterialColors.surface,
+fun ToDometerTopAppBar(
+    selectedProject: Project?
+) {
+    Surface(
         modifier = Modifier
             .wrapContentHeight()
-            .fillMaxWidth(),
-        elevation = 0.dp
+            .fillMaxWidth()
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column {
             Box(
                 modifier = Modifier
                     .height(56.dp)
@@ -60,6 +59,7 @@ fun ToDometerTopAppBar() {
                     }
                 }
             }
+            ProjectProgress(selectedProject)
             HorizontalDivider()
         }
     }
