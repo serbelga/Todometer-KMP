@@ -25,7 +25,7 @@ allprojects {
 }
 
 subprojects {
-    afterEvaluate {
+    if (!project.name.contains("ios")) {
         apply {
             from("${project.rootDir}/gradle/ktlint.gradle.kts")
         }
