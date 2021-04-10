@@ -82,7 +82,6 @@ fun HomeScreen(
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     IconButton(
                         onClick = {
-
                         }
                     ) {
                         Icon(Icons.Rounded.Menu, contentDescription = "Menu")
