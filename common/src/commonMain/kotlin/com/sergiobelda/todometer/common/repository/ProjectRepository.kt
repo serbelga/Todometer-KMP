@@ -27,6 +27,9 @@ class ProjectRepository(
     private val projectDao: IProjectDao
 ) : IProjectRepository {
 
+    override fun getProject(id: Long): Flow<Project?> =
+        projectDao.getProject(id).map { it?.toDomain() }
+
     override fun getProjects(): Flow<List<Project>> =
         projectDao.getProjects().map { list ->
             list.map { it.toDomain() }

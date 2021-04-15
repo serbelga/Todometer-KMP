@@ -47,7 +47,7 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
     ToDometerTheme {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
-                HomeScreen(mainViewModel, actions.addProject, actions.addTask, actions.openProject, actions.openTask)
+                HomeScreen(mainViewModel, actions.addProject, actions.addTask, actions.openTask)
             }
             composable(
                 "$ProjectDetail/{$ProjectId}",

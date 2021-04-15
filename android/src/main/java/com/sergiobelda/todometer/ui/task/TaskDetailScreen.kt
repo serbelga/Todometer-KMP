@@ -42,9 +42,9 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
-import com.sergiobelda.todometer.compose.ui.theme.MaterialTypography
-import com.sergiobelda.todometer.ui.components.HorizontalDivider
+import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
@@ -71,8 +71,8 @@ fun TaskDetailScreen(
                         }
                     },
                     elevation = 0.dp,
-                    backgroundColor = MaterialColors.surface,
-                    contentColor = contentColorFor(backgroundColor = MaterialColors.surface)
+                    backgroundColor = TodometerColors.surface,
+                    contentColor = contentColorFor(backgroundColor = TodometerColors.surface)
                 )
             },
             content = {
@@ -100,7 +100,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
         Column(modifier = Modifier.verticalScroll(state = scrollState)) {
             Text(
                 text = task.title,
-                style = MaterialTypography.h4,
+                style = TodometerTypography.h4,
                 modifier = Modifier.padding(32.dp),
                 maxLines = 1
             )
@@ -109,14 +109,14 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                 // TODO: 28/03/2021 Empty description
                 Text(
                     text = task.description ?: "",
-                    style = MaterialTypography.body1,
+                    style = TodometerTypography.body1,
                     modifier = Modifier.padding(24.dp)
                 )
             } else {
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     Text(
                         text = stringResource(id = R.string.no_description),
-                        style = MaterialTypography.body1,
+                        style = TodometerTypography.body1,
                         fontStyle = FontStyle.Italic,
                         modifier = Modifier.padding(24.dp)
                     )

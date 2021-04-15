@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.utils
+package com.sergiobelda.todometer.common.preferences
 
-import androidx.annotation.FloatRange
-
-object ProgressUtil {
-
-    fun getPercentage(@FloatRange(from = 0.0, to = 1.0) progress: Float) =
-        progress.takeIf { it in 0.0..1.0 }?.let { "${(it * 100).toInt()}%" } ?: "-%"
+actual object PreferencesFactory {
+    actual fun createPreferences(): Preferences =
+        Preferences()
 }

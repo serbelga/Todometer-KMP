@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.components
+package com.sergiobelda.todometer.compose.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,7 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.outline
 
 @Composable
@@ -40,7 +40,7 @@ fun ColumnScope.DragIndicator() {
         Box(
             modifier = Modifier.height(6.dp).width(42.dp)
                 .clip(RoundedCornerShape(3.dp)).background(
-                    MaterialColors.outline
+                    TodometerColors.outline
                 )
         )
     }

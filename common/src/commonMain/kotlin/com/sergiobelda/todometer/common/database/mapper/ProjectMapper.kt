@@ -17,6 +17,8 @@
 package com.sergiobelda.todometer.common.database.mapper
 
 import com.sergiobelda.todometer.DbProject
+import com.sergiobelda.todometer.common.database.ProjectTasksRelation
+import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
 import com.sergiobelda.todometer.common.model.Project
 
 object ProjectMapper {
@@ -25,6 +27,13 @@ object ProjectMapper {
         id,
         name,
         description
+    )
+
+    fun ProjectTasksRelation.toDomain() = Project(
+        project.id,
+        project.name,
+        project.description,
+        tasks.map { it.toDomain() }
     )
 
     fun Project.toEntity() = DbProject(

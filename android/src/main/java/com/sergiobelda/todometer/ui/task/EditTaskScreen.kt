@@ -43,7 +43,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.ProjectSelector
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
@@ -60,15 +60,13 @@ fun EditTaskScreen(
         var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
         var taskDescription by rememberSaveable { mutableStateOf(task.description) }
         val radioOptions = mainViewModel.projects.observeAsState(emptyList())
-        // TODO radioOptions.firstOrNull
+        // TODO Remove project selector
         val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions.value.firstOrNull()) }
-        val projectIndex =
-            radioOptions.value.indexOfFirst { it.id == task.projectId }.takeUnless { it == -1 } ?: 0
         Scaffold(
             topBar = {
                 TopAppBar(
-                    backgroundColor = MaterialColors.surface,
-                    contentColor = contentColorFor(MaterialColors.surface),
+                    backgroundColor = TodometerColors.surface,
+                    contentColor = contentColorFor(TodometerColors.surface),
                     elevation = 0.dp,
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {

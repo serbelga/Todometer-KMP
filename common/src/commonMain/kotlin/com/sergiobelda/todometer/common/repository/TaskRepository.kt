@@ -36,7 +36,7 @@ class TaskRepository(private val taskDao: ITaskDao) : ITaskRepository {
         taskDao.insertTask(task.toEntity())
 
     override suspend fun updateTask(task: Task) =
-        taskDao.updateTaskState(task.toEntity())
+        taskDao.updateTask(task.toEntity())
 
     override suspend fun updateTaskState(id: Long, state: TaskState) =
         taskDao.updateTaskState(id, state)

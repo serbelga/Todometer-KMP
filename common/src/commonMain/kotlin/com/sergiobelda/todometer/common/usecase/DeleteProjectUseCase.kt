@@ -17,7 +17,4 @@
 package com.sergiobelda.todometer.common.usecase
 
 // TODO
-class DeleteProjectUseCase(
-
-) {
-}
+class DeleteProjectUseCase()

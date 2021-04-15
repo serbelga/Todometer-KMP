@@ -17,8 +17,9 @@
 package com.sergiobelda.todometer
 
 import android.app.Application
-import com.sergiobelda.todometer.common.database.appContext
+import com.sergiobelda.todometer.common.database.DriverFactory
 import com.sergiobelda.todometer.common.di.initKoin
+import com.sergiobelda.todometer.common.preferences.PreferencesFactory
 import com.sergiobelda.todometer.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 
@@ -26,7 +27,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appContext = this
+        DriverFactory.appContext = this
+        PreferencesFactory.appContext = this
         initKoin {
             modules(viewModelModule)
             androidContext(this@App)

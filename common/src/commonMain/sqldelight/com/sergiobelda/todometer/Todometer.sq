@@ -34,13 +34,19 @@ SELECT *
 FROM DbTask
 WHERE id = ?;
 
+selectTasksByProjectId:
+SELECT *
+FROM DbTask
+WHERE project_id = ? ORDER BY state ASC;
+
 selectAllTasks:
 SELECT *
 FROM DbTask;
 
 insertTask:
 INSERT INTO DbTask
-VALUES ?;
+(title, description, state, project_id, tag_id)
+VALUES (?, ?, ?, ?, ?);
 
 updateTask:
 UPDATE DbTask
@@ -60,10 +66,16 @@ deleteTask:
 DELETE FROM DbTask
 WHERE id = ?;
 
+selectProject:
+SELECT *
+FROM DbProject
+WHERE id = ?;
+
 selectAllProjects:
 SELECT *
 FROM DbProject;
 
 insertProject:
 INSERT INTO DbProject
-VALUES ?;
+(name, description)
+VALUES (?, ?);

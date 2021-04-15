@@ -18,14 +18,20 @@ package ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import com.sergiobelda.todometer.compose.ui.theme.DarkColorPalette
 import com.sergiobelda.todometer.compose.ui.theme.LightColorPalette
 import com.sergiobelda.todometer.compose.ui.theme.shapes
 
 @Composable
-fun ToDometerTheme(content: @Composable() () -> Unit) {
+fun ToDometerTheme(darkTheme: Boolean = false, content: @Composable () -> Unit) {
+    val colors = if (darkTheme) {
+        DarkColorPalette
+    } else {
+        LightColorPalette
+    }
 
     MaterialTheme(
-        colors = LightColorPalette,
+        colors = colors,
         shapes = shapes,
         content = content
     )

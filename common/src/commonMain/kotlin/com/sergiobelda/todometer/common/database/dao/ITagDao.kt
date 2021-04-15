@@ -16,5 +16,4 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
-interface ITagDao {
-}
+interface ITagDao

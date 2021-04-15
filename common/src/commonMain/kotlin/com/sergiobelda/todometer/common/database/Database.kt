@@ -18,6 +18,6 @@ package com.sergiobelda.todometer.common.database
 
 import com.sergiobelda.todometer.TodometerDatabase
 
-fun createDatabase(driverFactory: DriverFactory): TodometerDatabase {
-    return TodometerDatabase(driverFactory.createDriver())
+fun createDatabase(): TodometerDatabase {
+    return TodometerDatabase(DriverFactory.createDriver())
 }

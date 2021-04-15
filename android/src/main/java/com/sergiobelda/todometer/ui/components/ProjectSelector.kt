@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import java.util.Locale
 
 @Composable

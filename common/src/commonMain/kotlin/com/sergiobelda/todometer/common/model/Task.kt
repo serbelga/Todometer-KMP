@@ -16,13 +16,11 @@
 
 package com.sergiobelda.todometer.common.model
 
-import com.sergiobelda.todometer.DbTask
-
 data class Task(
     val id: Long = 0,
     val title: String,
     val description: String?,
-    val state: TaskState,
+    val state: TaskState = TaskState.DOING,
     val projectId: Long?,
     val tagId: Long?
 )

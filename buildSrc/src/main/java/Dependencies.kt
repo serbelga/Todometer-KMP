@@ -20,6 +20,7 @@ object Versions {
     const val androidGradlePlugin = "7.0.0-alpha12"
     const val compose = "1.0.0-beta02"
     const val daggerHilt = "2.33-beta"
+    const val dataStorePreferences = "1.0.0-alpha08"
     const val espressoCore = "3.3.0"
     const val extJunit = "1.1.2"
     const val junit = "4.13.1"
@@ -71,6 +72,11 @@ object Libs {
             const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
             const val material = "androidx.compose.material:material:${Versions.compose}"
             const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
+        }
+
+        object DataStore {
+            const val preferences =
+                "androidx.datastore:datastore-preferences:${Versions.dataStorePreferences}"
         }
 
         object Lifecycle {

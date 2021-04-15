@@ -31,7 +31,6 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -42,10 +41,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
-import com.sergiobelda.todometer.ui.components.ProjectSelector
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
@@ -57,14 +53,11 @@ fun AddTaskScreen(
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
-    val radioOptions = mainViewModel.projects.observeAsState(emptyList())
-    // TODO radioOptions.firstOrNull
-    val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions.value.firstOrNull()) }
     Scaffold(
         topBar = {
             TopAppBar(
-                backgroundColor = MaterialColors.surface,
-                contentColor = contentColorFor(MaterialColors.surface),
+                backgroundColor = TodometerColors.surface,
+                contentColor = contentColorFor(TodometerColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
@@ -101,7 +94,6 @@ fun AddTaskScreen(
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
-                ProjectSelector(radioOptions.value, selectedProject, onProjectSelected)
             }
         },
         floatingActionButton = {
@@ -111,13 +103,9 @@ fun AddTaskScreen(
                         taskTitleInputError = true
                     } else {
                         mainViewModel.insertTask(
-                            Task(
-                                title = taskTitle,
-                                description = taskDescription,
-                                state = TaskState.DOING,
-                                projectId = selectedProject?.id,
-                                tagId = null
-                            )
+                            title = taskTitle,
+                            description = taskDescription,
+                            tagId = null
                         )
                         navigateUp()
                     }

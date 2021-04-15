@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.components
+package com.sergiobelda.todometer.common.repository
 
-import androidx.compose.material.Divider
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.compose.ui.theme.MaterialColors
-import com.sergiobelda.todometer.compose.ui.theme.outline
+import kotlinx.coroutines.flow.Flow
 
-@Composable
-fun HorizontalDivider(modifier: Modifier = Modifier) {
-    Divider(thickness = 1.dp, color = MaterialColors.outline, modifier = modifier)
+interface IUserPreferencesRepository {
+
+    fun projectSelected(): Flow<Long>
+
+    suspend fun setProjectSelected(projectSelected: Long)
 }

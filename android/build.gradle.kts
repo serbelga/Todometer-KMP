@@ -12,8 +12,6 @@ repositories {
     google()
 }
 
-val ktlint: Configuration by configurations.creating
-
 dependencies {
     implementation(project(":common"))
     implementation(project(":compose-ui"))
@@ -32,8 +30,6 @@ dependencies {
 
     implementation(Libs.Koin.core)
     implementation(Libs.Koin.android)
-
-    ktlint(Libs.ktLint)
 }
 
 android {
@@ -59,27 +55,4 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-val outputDir = "${project.buildDir}/reports/ktlint/"
-val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
-
-val ktlintCheck by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    description = "Check Kotlin code style."
-    classpath = ktlint
-    main = "com.pinterest.ktlint.Main"
-    args = listOf("src/**/*.kt")
-}
-
-val ktlintFormat by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    description = "Fix Kotlin code style deviations."
-    classpath = ktlint
-    main = "com.pinterest.ktlint.Main"
-    args = listOf("-F", "src/**/*.kt")
 }

@@ -22,14 +22,16 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
+import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import com.sergiobelda.todometer.common.usecase.UpdateTaskStateUseCase
+import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
+import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
+import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.launch
 
@@ -38,8 +40,11 @@ class MainViewModel(
     private val insertTaskUseCase: InsertTaskUseCase,
     private val insertProjectUseCase: InsertProjectUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
-    private val updateTaskStateUseCase: UpdateTaskStateUseCase,
+    private val setTaskDoingUseCase: SetTaskDoingUseCase,
+    private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val setProjectSelectedUseCase: SetProjectSelectedUseCase,
+    getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
     getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
@@ -48,13 +53,20 @@ class MainViewModel(
 
     val projects: LiveData<List<Project>> = getProjectsUseCase().asLiveData()
 
+    val projectSelected: LiveData<Project?> = getProjectSelectedUseCase().asLiveData()
+
     fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
 
-    // TODO: 28/03/2021 Update
-    val updateTaskState: (Long, TaskState) -> Unit = { id, taskState -> updateTaskState(id, taskState) }
-
-    fun insertTask(task: Task) = viewModelScope.launch {
-        insertTaskUseCase(task)
+    fun insertTask(
+        title: String,
+        description: String?,
+        tagId: Long?
+    ) = viewModelScope.launch {
+        insertTaskUseCase(
+            title,
+            description,
+            tagId
+        )
     }
 
     fun updateTask(task: Task) = viewModelScope.launch {
@@ -65,12 +77,19 @@ class MainViewModel(
         deleteTaskUseCase(id)
     }
 
-    fun insertProject(project: Project) = viewModelScope.launch {
-        insertProjectUseCase(project)
+    fun insertProject(name: String, description: String) = viewModelScope.launch {
+        insertProjectUseCase(name, description)
     }
 
-    // TODO: 28/03/2021 Divide in two functions
-    private fun updateTaskState(id: Long, taskState: TaskState) = viewModelScope.launch {
-        updateTaskStateUseCase(id, taskState)
+    fun setTaskDoing(id: Long) = viewModelScope.launch {
+        setTaskDoingUseCase(id)
+    }
+
+    fun setTaskDone(id: Long) = viewModelScope.launch {
+        setTaskDoneUseCase(id)
+    }
+
+    fun setProjectSelected(id: Long) = viewModelScope.launch {
+        setProjectSelectedUseCase(id)
     }
 }

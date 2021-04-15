@@ -61,6 +61,8 @@ kotlin {
                 api("androidx.core:core-ktx:1.3.2")
 
                 implementation(Libs.SqlDelight.androidDriver)
+
+                implementation(Libs.AndroidX.DataStore.preferences)
             }
         }
         val androidTest by getting {
