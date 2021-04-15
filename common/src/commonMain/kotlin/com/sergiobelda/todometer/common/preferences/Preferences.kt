@@ -18,7 +18,7 @@ package com.sergiobelda.todometer.common.preferences
 
 import kotlinx.coroutines.flow.Flow
 
-expect class Preferences() {
+expect class Preferences {
 
     suspend fun set(key: String, value: String)
 

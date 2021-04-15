@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database
+package com.sergiobelda.todometer.common.preferences
 
-import com.sergiobelda.todometer.TodometerDatabase
+import android.content.Context
 
-fun createDatabase(): TodometerDatabase {
-    return TodometerDatabase(DriverFactory.createDriver())
+actual object PreferencesFactory {
+
+    lateinit var appContext: Context
+
+    actual fun createPreferences(): Preferences =
+        Preferences(appContext)
 }

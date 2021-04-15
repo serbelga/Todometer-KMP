@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database
+package com.sergiobelda.todometer.common.preferences
 
-import com.sergiobelda.todometer.TodometerDatabase
-
-fun createDatabase(): TodometerDatabase {
-    return TodometerDatabase(DriverFactory.createDriver())
+actual object PreferencesFactory {
+    actual fun createPreferences(): Preferences =
+        Preferences()
 }

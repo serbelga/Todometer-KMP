@@ -20,7 +20,7 @@ import com.sergiobelda.todometer.TodometerDatabase
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 
-actual class DriverFactory {
+actual object DriverFactory {
     actual fun createDriver(): SqlDriver {
         return NativeSqliteDriver(TodometerDatabase.Schema, "todometer.db")
     }

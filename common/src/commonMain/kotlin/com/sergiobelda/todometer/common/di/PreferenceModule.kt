@@ -16,11 +16,11 @@
 
 package com.sergiobelda.todometer.common.di
 
-import com.sergiobelda.todometer.common.preferences.Preferences
+import com.sergiobelda.todometer.common.preferences.PreferencesFactory
 import org.koin.dsl.module
 
 val preferenceModule = module {
     single {
-        Preferences()
+        PreferencesFactory.createPreferences()
     }
 }

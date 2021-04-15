@@ -16,7 +16,6 @@
 
 package com.sergiobelda.todometer.common.di
 
-import com.sergiobelda.todometer.common.database.DriverFactory
 import com.sergiobelda.todometer.common.database.createDatabase
 import com.sergiobelda.todometer.common.database.dao.IProjectDao
 import com.sergiobelda.todometer.common.database.dao.ITaskDao
@@ -26,7 +25,7 @@ import org.koin.dsl.module
 
 val databaseModule = module {
     single {
-        createDatabase(DriverFactory())
+        createDatabase()
     }
     single<ITaskDao> {
         TaskDao()

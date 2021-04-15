@@ -265,12 +265,10 @@ fun SheetContainer(
                         ),
                         text = { Text(text = project.name) },
                         icon = {
-                            if (selectedProjectId == project.id) {
-                                Icon(
-                                    Icons.Default.Book,
-                                    contentDescription = null
-                                )
-                            }
+                            Icon(
+                                Icons.Default.Book,
+                                contentDescription = null
+                            )
                         }
                     )
                 }

@@ -23,38 +23,35 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.sergiobelda.todometer.common.preferences.Preferences.Companion.DATA_STORE_NAME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-lateinit var appContext: Context
+actual class Preferences(private val context: Context) {
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
-
-actual class Preferences {
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
 
     actual suspend fun set(key: String, value: String) {
         val stringKey = stringPreferencesKey(key)
-        appContext.dataStore.edit { preferences ->
+        context.dataStore.edit { preferences ->
             preferences[stringKey] = value
         }
     }
 
     actual suspend fun set(key: String, value: Long) {
         val longKey = longPreferencesKey(key)
-        appContext.dataStore.edit { preferences ->
+        context.dataStore.edit { preferences ->
             preferences[longKey] = value
         }
     }
 
     actual fun getString(key: String, default: String): Flow<String> =
-        appContext.dataStore.data.map { preferences ->
+        context.dataStore.data.map { preferences ->
             val stringKey = stringPreferencesKey(key)
             preferences[stringKey] ?: default
         }
 
     actual fun getStringOrNull(key: String): Flow<String?> =
-        appContext.dataStore.data.map { preferences ->
+        context.dataStore.data.map { preferences ->
             val stringKey = stringPreferencesKey(key)
             preferences[stringKey]
         }
@@ -62,13 +59,13 @@ actual class Preferences {
     actual fun getLong(
         key: String,
         default: Long
-    ): Flow<Long> = appContext.dataStore.data.map { preferences ->
+    ): Flow<Long> = context.dataStore.data.map { preferences ->
         val longKey = longPreferencesKey(key)
         preferences[longKey] ?: default
     }
 
     actual fun getLongOrNull(key: String): Flow<Long?> =
-        appContext.dataStore.data.map { preferences ->
+        context.dataStore.data.map { preferences ->
             val longKey = longPreferencesKey(key)
             preferences[longKey]
         }
