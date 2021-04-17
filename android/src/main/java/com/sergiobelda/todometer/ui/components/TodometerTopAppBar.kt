@@ -32,10 +32,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.components.ProjectProgress
+import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 
 @Composable
 fun ToDometerTopAppBar(
@@ -62,5 +64,13 @@ fun ToDometerTopAppBar(
             ProjectProgress(selectedProject)
             HorizontalDivider()
         }
+    }
+}
+
+@Preview
+@Composable
+fun TodometerTopAppBarPreview() {
+    ToDometerTheme {
+        ToDometerTopAppBar(null)
     }
 }

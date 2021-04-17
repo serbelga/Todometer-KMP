@@ -17,18 +17,20 @@
 package com.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
@@ -39,7 +41,6 @@ import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.ListItem
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
@@ -63,6 +64,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -74,11 +76,15 @@ import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
+import com.sergiobelda.todometer.compose.ui.theme.green
+import com.sergiobelda.todometer.compose.ui.theme.orange
+import com.sergiobelda.todometer.compose.ui.theme.primarySelected
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
-import java.util.Locale
+import java.util.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -226,7 +232,6 @@ fun RemoveTaskAlertDialog(
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetContainer(
     selectedProjectId: Long?,
@@ -234,6 +239,7 @@ fun SheetContainer(
     addProject: () -> Unit,
     selectProject: (Long) -> Unit
 ) {
+    // TODO Tags list and Text buttons as items
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
         Row(
@@ -247,32 +253,16 @@ fun SheetContainer(
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-            TextButton(onClick = addProject) {
-                Icon(Icons.Rounded.Add, contentDescription = "Add project")
-                Text(text = stringResource(id = R.string.add_project))
-            }
         }
         HorizontalDivider()
-        LazyColumn(
-            modifier = Modifier.height(240.dp)
-        ) {
+        LazyColumn {
             items(projectList) { project ->
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    ListItem(
-                        modifier = Modifier.selectable(
-                            onClick = { selectProject(project.id) },
-                            selected = project.id == selectedProjectId
-                        ),
-                        text = { Text(text = project.name) },
-                        icon = {
-                            Icon(
-                                Icons.Default.Book,
-                                contentDescription = null
-                            )
-                        }
-                    )
-                }
+                ProjectListItem(project, project.id == selectedProjectId, selectProject)
             }
+        }
+        TextButton(onClick = addProject, modifier = Modifier.fillMaxWidth()) {
+            Icon(Icons.Rounded.Add, contentDescription = "Add project")
+            Text(text = stringResource(id = R.string.add_project))
         }
         HorizontalDivider()
         Row(
@@ -286,12 +276,84 @@ fun SheetContainer(
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-            TextButton(onClick = {}) {
-                Icon(Icons.Rounded.Add, contentDescription = "Add tag")
-                Text(text = stringResource(id = R.string.add_tag))
-            }
+
         }
         HorizontalDivider()
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(56.dp).clickable(onClick = { })
+        ) {
+            Box(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .size(16.dp)
+                    .clip(CircleShape)
+                    .background(orange)
+            )
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                Text(
+                    text = "Persistence",
+                    style = TodometerTypography.subtitle2,
+                    modifier = Modifier.padding(start = 16.dp).weight(1f)
+                )
+            }
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(56.dp).clickable(onClick = { })
+        ) {
+            Box(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .size(16.dp)
+                    .clip(CircleShape)
+                    .background(green)
+            )
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                Text(
+                    text = "UI / UX",
+                    style = TodometerTypography.subtitle2,
+                    modifier = Modifier.padding(start = 16.dp).weight(1f)
+                )
+            }
+        }
+        TextButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+            Icon(Icons.Rounded.Add, contentDescription = "Add tag")
+            Text(text = stringResource(id = R.string.add_tag))
+        }
+    }
+}
+
+@Composable
+fun ProjectListItem(
+    project: Project,
+    selected: Boolean,
+    onItemClick: (Long) -> Unit
+) {
+    val background = if (selected) {
+        Modifier.background(TodometerColors.primarySelected)
+    } else {
+        Modifier
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.height(56.dp).clickable(onClick = { onItemClick(project.id) })
+            .then(background)
+    ) {
+        val selectedColor =
+            if (selected) TodometerColors.primary else TodometerColors.onSurface.copy(alpha = ContentAlpha.medium)
+        Icon(
+            Icons.Default.Book,
+            tint = selectedColor,
+            contentDescription = null,
+            modifier = Modifier.padding(start = 16.dp)
+        )
+        Text(
+            text = project.name,
+            color = selectedColor,
+            style = TodometerTypography.subtitle2,
+            modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
+        )
     }
 }
 
