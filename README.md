@@ -14,9 +14,8 @@
 
 ## App UI Design
 
-<div align="center">
-<img width="300" src="./resources/ToDometer_Wireframe.jpg"></img>
-</div>
+| <img width="300" src="./resources/Home.png"></img> | <img width="300" src="./resources/Home_BottomSheet.png"></img> | <img width="300" src="./resources/Task_Detail.png"></img> | <img width="300" src="./resources/Edit_Task.png"></img> |
+|---|---|---|---|
 
 ## Tech Stack
 * Kotlin & Coroutines
