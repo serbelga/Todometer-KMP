@@ -67,7 +67,7 @@ kotlin {
         }
         val androidTest by getting {
             dependencies {
-                implementation("junit:junit:4.13.2")
+                implementation(Libs.junit)
             }
         }
         val desktopMain by getting {

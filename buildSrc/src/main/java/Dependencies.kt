@@ -23,7 +23,7 @@ object Versions {
     const val dataStorePreferences = "1.0.0-alpha08"
     const val espressoCore = "3.3.0"
     const val extJunit = "1.1.2"
-    const val junit = "4.13.1"
+    const val junit = "4.12"
     const val junitKtx = "1.1.2"
     const val koin = "3.0.1-beta-2"
     const val kotlin = "1.4.31"
