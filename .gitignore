@@ -14,3 +14,7 @@
 .cxx
 local.properties
 /.idea/
+/desktop/build/
+/common/build/
+/buildSrc/build/
+/android/build/

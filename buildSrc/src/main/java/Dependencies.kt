@@ -17,21 +17,24 @@
 object Versions {
     const val activityKtx = "1.3.0-alpha04"
     const val appCompat = "1.2.0"
-    const val androidGradlePlugin = "7.0.0-alpha09"
+    const val androidGradlePlugin = "7.0.0-alpha12"
     const val compose = "1.0.0-beta02"
     const val daggerHilt = "2.33-beta"
+    const val dataStorePreferences = "1.0.0-alpha08"
     const val espressoCore = "3.3.0"
     const val extJunit = "1.1.2"
     const val junit = "4.13.1"
     const val junitKtx = "1.1.2"
+    const val koin = "3.0.1-beta-2"
     const val kotlin = "1.4.31"
-    const val ktLint = "0.40.0"
+    const val ktLint = "0.41.0"
     const val ktxVersion = "1.3.2"
-    const val lifecycle = "2.3.0"
+    const val lifecycle = "2.3.1"
     const val materialComponents = "1.3.0"
     const val navigationCompose = "1.0.0-alpha09"
     const val robolectric = "4.3.1"
     const val roomKtx = "2.2.6"
+    const val sqlDelight = "1.4.4"
     const val testCoreKtx = "1.3.0"
     const val timber = "4.7.1"
 }
@@ -68,6 +71,12 @@ object Libs {
             const val ui = "androidx.compose.ui:ui:${Versions.compose}"
             const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
             const val material = "androidx.compose.material:material:${Versions.compose}"
+            const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
+        }
+
+        object DataStore {
+            const val preferences =
+                "androidx.datastore:datastore-preferences:${Versions.dataStorePreferences}"
         }
 
         object Lifecycle {
@@ -105,5 +114,19 @@ object Libs {
         object Material {
             const val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
         }
+    }
+
+    object Koin {
+        const val core = "io.insert-koin:koin-core:${Versions.koin}"
+        const val test = "io.insert-koin:koin-test:${Versions.koin}"
+        const val android = "io.insert-koin:koin-android:${Versions.koin}"
+    }
+
+    object SqlDelight {
+        const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
+        const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
+        const val jvmDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
+        const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+        const val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     }
 }
