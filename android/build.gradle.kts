@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.compose") version "0.4.0-build173"
+    id("org.jetbrains.compose") version Versions.composeDesktop
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
@@ -33,17 +33,16 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "com.sergiobelda.todometer.android"
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdk = 24
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
     }
     buildTypes {
         getByName("release") {
-            isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
