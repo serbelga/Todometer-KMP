@@ -63,7 +63,6 @@ object Libs {
 
         object Activity {
             const val activityCompose = "androidx.activity:activity-compose:${Versions.activityKtx}"
-            const val activityKtx = "androidx.activity:activity-ktx:${Versions.activityKtx}"
         }
 
         object Compose {
