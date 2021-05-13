@@ -34,7 +34,6 @@ object Versions {
     const val materialComponents = "1.3.0"
     const val navigationCompose = "1.0.0-alpha10"
     const val robolectric = "4.3.1"
-    const val roomKtx = "2.3.0"
     const val sqlDelight = "1.5.0"
     const val testCoreKtx = "1.3.0"
     const val timber = "4.7.1"
@@ -86,13 +85,6 @@ object Libs {
 
         object Navigation {
             const val compose = "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
-        }
-
-        object Room {
-            const val roomKtx = "androidx.room:room-ktx:${Versions.roomKtx}"
-            const val roomRuntime = "androidx.room:room-runtime:${Versions.roomKtx}"
-            const val roomCompiler = "androidx.room:room-compiler:${Versions.roomKtx}"
-            const val roomTesting = "androidx.room:room-testing:${Versions.roomKtx}"
         }
 
         object Test {
