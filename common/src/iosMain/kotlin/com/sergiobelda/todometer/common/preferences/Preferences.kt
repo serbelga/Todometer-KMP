@@ -25,7 +25,7 @@ actual class Preferences {
     private val preferences = NSUserDefaults.standardUserDefaults()
 
     actual suspend fun set(key: String, value: String) {
-        preferences.setValue(value, key)
+        preferences.setValue(value, forKey = key)
         preferences.synchronize()
     }
 
