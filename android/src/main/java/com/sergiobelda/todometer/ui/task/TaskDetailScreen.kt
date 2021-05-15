@@ -41,7 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
@@ -92,7 +92,7 @@ fun TaskDetailScreen(
 }
 
 @Composable
-fun TaskDetailBody(scrollState: ScrollState, task: Task) {
+fun TaskDetailBody(scrollState: ScrollState, task: TaskTag) {
     Column {
         if (scrollState.value >= 270) {
             HorizontalDivider()

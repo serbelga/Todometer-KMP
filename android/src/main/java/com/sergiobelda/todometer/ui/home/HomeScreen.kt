@@ -71,20 +71,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.Tag
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.sampledata.tagsSample
+import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
-import com.sergiobelda.todometer.compose.ui.theme.green
-import com.sergiobelda.todometer.compose.ui.theme.orange
 import com.sergiobelda.todometer.compose.ui.theme.primarySelected
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Locale
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -111,7 +112,8 @@ fun HomeScreen(
                 addProject,
                 selectProject = {
                     mainViewModel.setProjectSelected(it)
-                }
+                },
+                tagsSample
             )
         }
     ) {
@@ -146,7 +148,7 @@ fun HomeScreen(
                 if (deleteTaskAlertDialogState.value) {
                     RemoveTaskAlertDialog(
                         deleteTaskAlertDialogState,
-                        deleteTask = { /*mainViewModel.deleteTask(selectedTask.value)*/ }
+                        deleteTask = { mainViewModel.deleteTask(selectedTask.value) }
                     )
                 }
                 /*
@@ -237,9 +239,9 @@ fun SheetContainer(
     selectedProjectId: Long?,
     projectList: List<Project>,
     addProject: () -> Unit,
-    selectProject: (Long) -> Unit
+    selectProject: (Long) -> Unit,
+    tagList: List<Tag>
 ) {
-    // TODO Tags list and Text buttons as items
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
         Row(
@@ -279,42 +281,9 @@ fun SheetContainer(
 
         }
         HorizontalDivider()
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.height(56.dp).clickable(onClick = { })
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .size(16.dp)
-                    .clip(CircleShape)
-                    .background(orange)
-            )
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    text = "Persistence",
-                    style = TodometerTypography.subtitle2,
-                    modifier = Modifier.padding(start = 16.dp).weight(1f)
-                )
-            }
-        }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.height(56.dp).clickable(onClick = { })
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .size(16.dp)
-                    .clip(CircleShape)
-                    .background(green)
-            )
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    text = "UI / UX",
-                    style = TodometerTypography.subtitle2,
-                    modifier = Modifier.padding(start = 16.dp).weight(1f)
-                )
+        LazyColumn {
+            items(tagList) { tag ->
+                TagItem(tag)
             }
         }
         TextButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
@@ -358,8 +327,31 @@ fun ProjectListItem(
 }
 
 @Composable
+fun TagItem(tag: Tag) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.height(56.dp).clickable(onClick = { })
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .size(16.dp)
+                .clip(CircleShape)
+                .background(TodometerColors.composeColorOf(tag.color))
+        )
+        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+            Text(
+                text = tag.name,
+                style = TodometerTypography.subtitle2,
+                modifier = Modifier.padding(start = 16.dp).weight(1f)
+            )
+        }
+    }
+}
+
+@Composable
 fun TasksListView(
-    tasks: List<Task>,
+    tasks: List<TaskTag>,
     onDoingClick: (Long) -> Unit,
     onDoneClick: (Long) -> Unit,
     onTaskItemClick: (Long) -> Unit,

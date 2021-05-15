@@ -118,8 +118,8 @@ fun EditTaskScreen(
                                     title = taskTitle,
                                     description = taskDescription,
                                     state = task.state,
-                                    projectId = selectedProject?.id,
-                                    tagId = task.tagId
+                                    projectId = selectedProject?.id ?: 1, // TODO Remove ?:
+                                    tagId = task.tag.id
                                 )
                             )
                             navigateUp()

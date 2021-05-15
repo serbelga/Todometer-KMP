@@ -20,7 +20,7 @@ data class Project(
     val id: Long = 0,
     val name: String,
     val description: String,
-    val tasks: List<Task> = arrayListOf()
+    val tasks: List<TaskTag> = arrayListOf()
 ) {
     override fun toString() = name
 }

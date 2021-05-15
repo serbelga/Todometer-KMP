@@ -22,6 +22,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
@@ -49,7 +50,7 @@ class MainViewModel(
     getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
-    val tasks: LiveData<List<Task>> = getTasksUseCase().asLiveData()
+    val tasks: LiveData<List<TaskTag>> = getTasksUseCase().asLiveData()
 
     val projects: LiveData<List<Project>> = getProjectsUseCase().asLiveData()
 
@@ -60,7 +61,7 @@ class MainViewModel(
     fun insertTask(
         title: String,
         description: String?,
-        tagId: Long?
+        tagId: Long
     ) = viewModelScope.launch {
         insertTaskUseCase(
             title,

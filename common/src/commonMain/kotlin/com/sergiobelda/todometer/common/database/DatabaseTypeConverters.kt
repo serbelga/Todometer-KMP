@@ -16,9 +16,12 @@
 
 package com.sergiobelda.todometer.common.database
 
+import com.sergiobelda.todometer.common.model.Color
 import com.sergiobelda.todometer.common.model.TaskState
 
 object DatabaseTypeConverters {
 
     fun toTaskState(name: String): TaskState = enumValueOf(name)
+
+    fun toColor(color: String): Color = enumValueOf(color)
 }

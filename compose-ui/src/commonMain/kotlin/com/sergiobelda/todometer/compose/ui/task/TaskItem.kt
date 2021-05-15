@@ -43,16 +43,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
-import com.sergiobelda.todometer.compose.ui.theme.green
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
-    task: Task,
+    task: TaskTag,
     onDoingClick: (Long) -> Unit,
     onDoneClick: (Long) -> Unit,
     onClick: (Long) -> Unit,
@@ -114,11 +114,11 @@ fun TaskItem(
                     modifier = Modifier
                         .size(16.dp)
                         .clip(CircleShape)
-                        .background(green)
+                        .background(TodometerColors.composeColorOf(task.tag.color))
                 )
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     Text(
-                        text = "UI / UX",
+                        text = task.tag.name,
                         style = TodometerTypography.caption,
                         modifier = Modifier.padding(start = 8.dp)
                     )

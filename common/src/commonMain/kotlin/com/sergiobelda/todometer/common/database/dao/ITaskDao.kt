@@ -16,19 +16,20 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
-import com.sergiobelda.todometer.DbTask
+import com.sergiobelda.todometer.TaskEntity
+import com.sergiobelda.todometer.TaskTagView
 import com.sergiobelda.todometer.common.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskDao {
 
-    fun getTask(id: Long): Flow<DbTask?>
+    fun getTask(id: Long): Flow<TaskTagView?>
 
-    fun getTasks(): Flow<List<DbTask>>
+    fun getTasks(): Flow<List<TaskTagView>>
 
-    suspend fun insertTask(task: DbTask)
+    suspend fun insertTask(task: TaskEntity)
 
-    suspend fun updateTask(task: DbTask)
+    suspend fun updateTask(task: TaskEntity)
 
     suspend fun updateTaskState(id: Long, state: TaskState)
 

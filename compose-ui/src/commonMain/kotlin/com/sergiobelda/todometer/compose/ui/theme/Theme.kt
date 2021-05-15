@@ -59,3 +59,18 @@ val TodometerColors: Colors
 
 val TodometerTypography: Typography
     @Composable get() = MaterialTheme.typography
+
+val Colors.pink: Color
+    @Composable get() = if (isLight) pinkLight else pinkDark
+
+val Colors.red: Color
+    @Composable get() = if (isLight) redLight else redDark
+
+val Colors.blue: Color
+    @Composable get() = if (isLight) blueLight else blueDark
+
+val Colors.indigo: Color
+    @Composable get() = if (isLight) indigoLight else indigoDark
+
+val Colors.teal: Color
+    @Composable get() = if (isLight) tealLight else tealDark

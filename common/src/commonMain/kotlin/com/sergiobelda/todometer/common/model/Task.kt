@@ -21,6 +21,6 @@ data class Task(
     val title: String,
     val description: String?,
     val state: TaskState = TaskState.DOING,
-    val projectId: Long?,
-    val tagId: Long?
+    val projectId: Long,
+    val tagId: Long
 )

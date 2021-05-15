@@ -21,15 +21,16 @@ import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
 import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toEntity
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class TaskRepository(private val taskDao: ITaskDao) : ITaskRepository {
 
-    override fun getTask(id: Long): Flow<Task?> =
+    override fun getTask(id: Long): Flow<TaskTag?> =
         taskDao.getTask(id).map { it?.toDomain() }
 
-    override fun getTasks(): Flow<List<Task>> =
+    override fun getTasks(): Flow<List<TaskTag>> =
         taskDao.getTasks().map { list -> list.map { it.toDomain() } }
 
     override suspend fun insertTask(task: Task) =

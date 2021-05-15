@@ -18,13 +18,14 @@ package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskRepository {
 
-    fun getTask(id: Long): Flow<Task?>
+    fun getTask(id: Long): Flow<TaskTag?>
 
-    fun getTasks(): Flow<List<Task>>
+    fun getTasks(): Flow<List<TaskTag>>
 
     suspend fun insertTask(task: Task)
 

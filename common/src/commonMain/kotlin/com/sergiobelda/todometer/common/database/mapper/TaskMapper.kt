@@ -16,22 +16,30 @@
 
 package com.sergiobelda.todometer.common.database.mapper
 
-import com.sergiobelda.todometer.DbTask
+import com.sergiobelda.todometer.TaskEntity
+import com.sergiobelda.todometer.TaskTagView
+import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toColor
 import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toTaskState
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskTag
 
 object TaskMapper {
 
-    fun DbTask.toDomain() = Task(
+    fun TaskTagView.toDomain() = TaskTag(
         id,
         title,
         description,
         toTaskState(state),
         project_id,
-        tag_id
+        tag = Tag(
+            tag_id,
+            toColor(tag_color),
+            tag_name
+        )
     )
 
-    fun Task.toEntity() = DbTask(
+    fun Task.toEntity() = TaskEntity(
         id,
         title,
         description,
