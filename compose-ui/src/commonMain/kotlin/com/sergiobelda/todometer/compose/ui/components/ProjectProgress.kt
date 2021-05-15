@@ -26,13 +26,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.util.ProgressUtil
 
 @Composable
 fun ProjectProgress(
-    selectedProject: Project?
+    selectedProject: ProjectTasks?
 ) {
     val progress = ProgressUtil.getTasksDoneProgress(selectedProject?.tasks ?: emptyList())
     Column(

@@ -16,32 +16,32 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.database.dao.ITaskDao
-import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
-import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toEntity
+import com.sergiobelda.todometer.common.datasource.ITaskLocalDatabaseSource
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-class TaskRepository(private val taskDao: ITaskDao) : ITaskRepository {
+class TaskRepository(
+    private val taskLocalDatabaseSource: ITaskLocalDatabaseSource
+) : ITaskRepository {
 
-    override fun getTask(id: Long): Flow<TaskTag?> =
-        taskDao.getTask(id).map { it?.toDomain() }
+    override fun getTask(id: Long): Flow<Result<TaskTag?>> =
+        taskLocalDatabaseSource.getTask(id)
 
-    override fun getTasks(): Flow<List<TaskTag>> =
-        taskDao.getTasks().map { list -> list.map { it.toDomain() } }
+    override fun getTasks(): Flow<Result<List<TaskTag>>> =
+        taskLocalDatabaseSource.getTasks()
 
     override suspend fun insertTask(task: Task) =
-        taskDao.insertTask(task.toEntity())
+        taskLocalDatabaseSource.insertTask(task)
 
     override suspend fun updateTask(task: Task) =
-        taskDao.updateTask(task.toEntity())
+        taskLocalDatabaseSource.updateTask(task)
 
     override suspend fun updateTaskState(id: Long, state: TaskState) =
-        taskDao.updateTaskState(id, state)
+        taskLocalDatabaseSource.updateTaskState(id, state)
 
     override suspend fun deleteTask(id: Long) =
-        taskDao.deleteTask(id)
+        taskLocalDatabaseSource.deleteTask(id)
 }

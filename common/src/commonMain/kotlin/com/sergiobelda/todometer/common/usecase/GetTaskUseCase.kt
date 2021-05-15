@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.common.usecase
 
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,6 @@ class GetTaskUseCase(
      *
      * @param id Task id.
      */
-    operator fun invoke(id: Long): Flow<TaskTag?> =
+    operator fun invoke(id: Long): Flow<Result<TaskTag?>> =
         taskRepository.getTask(id)
 }

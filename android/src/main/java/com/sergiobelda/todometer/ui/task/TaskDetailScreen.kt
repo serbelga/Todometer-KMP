@@ -35,12 +35,17 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
 import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
@@ -55,8 +60,12 @@ fun TaskDetailScreen(
     navigateUp: () -> Unit
 ) {
     val scrollState = rememberScrollState(0)
-    val taskState = mainViewModel.getTask(taskId).observeAsState()
-    taskState.value?.let { task ->
+    var taskState: TaskTag? by remember { mutableStateOf(null) }
+    val taskResultState = mainViewModel.getTask(taskId).observeAsState()
+    taskResultState.value?.let { result ->
+        result.doIfSuccess { taskState = it }
+    }
+    taskState?.let { task ->
         Scaffold(
             topBar = {
                 TopAppBar(

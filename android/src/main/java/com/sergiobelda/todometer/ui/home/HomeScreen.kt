@@ -58,10 +58,12 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -70,7 +72,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.common.sampledata.tagsSample
@@ -100,15 +104,26 @@ fun HomeScreen(
     val selectedTask = remember { mutableStateOf(0L) }
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
 
-    val projects = mainViewModel.projects.observeAsState(emptyList())
-    val projectSelected = mainViewModel.projectSelected.observeAsState()
+
+    var projects by remember { mutableStateOf(emptyList<Project>()) }
+    val projectsResultState = mainViewModel.projects.observeAsState()
+    projectsResultState.value?.let { result ->
+        result.doIfSuccess { projects = it }
+    }
+
+    var projectSelected: ProjectTasks? by remember { mutableStateOf(null) }
+    val projectSelectedState = mainViewModel.projectSelected.observeAsState()
+    projectSelectedState.value?.let { result ->
+        result.doIfSuccess { projectSelected = it }
+    }
+
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
             SheetContainer(
-                projectSelected.value?.id,
-                projects.value,
+                projectSelected?.id,
+                projects,
                 addProject,
                 selectProject = {
                     mainViewModel.setProjectSelected(it)
@@ -119,10 +134,10 @@ fun HomeScreen(
     ) {
         Scaffold(
             topBar = {
-                ToDometerTopAppBar(projectSelected.value)
+                ToDometerTopAppBar(projectSelected)
             },
             bottomBar = {
-                if (projects.value.isNotEmpty()) {
+                if (projects.isNotEmpty()) {
                     BottomAppBar(
                         backgroundColor = TodometerColors.surface,
                         contentColor = contentColorFor(TodometerColors.surface),
@@ -168,7 +183,7 @@ fun HomeScreen(
                  */
                 // TODO: 02/04/2021 Update null check
                 TasksListView(
-                    projectSelected.value?.tasks ?: emptyList(),
+                    projectSelected?.tasks ?: emptyList(),
                     onDoingClick = {
                         mainViewModel.setTaskDoing(it)
                     },
@@ -183,7 +198,7 @@ fun HomeScreen(
                 )
             },
             floatingActionButton = {
-                if (!projects.value.isNullOrEmpty()) {
+                if (!projects.isNullOrEmpty()) {
                     FloatingActionButton(
                         onClick = addTask
                     ) {

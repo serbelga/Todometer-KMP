@@ -23,7 +23,7 @@ import com.sergiobelda.todometer.common.database.dao.ProjectDao
 import com.sergiobelda.todometer.common.database.dao.TaskDao
 import org.koin.dsl.module
 
-val databaseModule = module {
+val localDatabaseModule = module {
     single {
         createDatabase()
     }

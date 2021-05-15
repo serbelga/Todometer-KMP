@@ -37,6 +37,7 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import java.util.Locale
 
+@Deprecated("To be removed")
 @Composable
 fun ProjectSelector(
     projectList: List<Project>,

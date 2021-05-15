@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.common.usecase
 
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +28,6 @@ class GetProjectsUseCase(
     /**
      * Retrieves the list of projects every time it changes.
      */
-    operator fun invoke(): Flow<List<Project>> =
+    operator fun invoke(): Flow<Result<List<Project>>> =
         projectRepository.getProjects()
 }

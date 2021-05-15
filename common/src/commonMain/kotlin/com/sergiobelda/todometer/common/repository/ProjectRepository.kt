@@ -16,25 +16,22 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.database.dao.IProjectDao
-import com.sergiobelda.todometer.common.database.mapper.ProjectMapper.toDomain
-import com.sergiobelda.todometer.common.database.mapper.ProjectMapper.toEntity
+import com.sergiobelda.todometer.common.datasource.IProjectLocalDatabaseSource
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class ProjectRepository(
-    private val projectDao: IProjectDao
+    private val projectLocalDatabaseSource: IProjectLocalDatabaseSource
 ) : IProjectRepository {
 
-    override fun getProject(id: Long): Flow<Project?> =
-        projectDao.getProject(id).map { it?.toDomain() }
+    override fun getProject(id: Long): Flow<Result<ProjectTasks?>> =
+        projectLocalDatabaseSource.getProject(id)
 
-    override fun getProjects(): Flow<List<Project>> =
-        projectDao.getProjects().map { list ->
-            list.map { it.toDomain() }
-        }
+    override fun getProjects(): Flow<Result<List<Project>>> =
+        projectLocalDatabaseSource.getProjects()
 
     override suspend fun insertProject(project: Project) =
-        projectDao.insertProject(project.toEntity())
+        projectLocalDatabaseSource.insertProject(project)
 }

@@ -20,6 +20,7 @@ import com.sergiobelda.todometer.ProjectEntity
 import com.sergiobelda.todometer.common.database.ProjectTasksRelation
 import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
 
 object ProjectMapper {
 
@@ -29,7 +30,7 @@ object ProjectMapper {
         description
     )
 
-    fun ProjectTasksRelation.toDomain() = Project(
+    fun ProjectTasksRelation.toDomain() = ProjectTasks(
         project.id,
         project.name,
         project.description,
