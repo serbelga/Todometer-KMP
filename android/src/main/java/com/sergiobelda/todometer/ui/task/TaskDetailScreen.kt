@@ -31,8 +31,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -93,7 +93,7 @@ fun TaskDetailScreen(
                         /*editTask(taskId)*/
                     },
                 ) {
-                    Icon(Icons.Rounded.Edit, contentDescription = "Edit task")
+                    Icon(Icons.Outlined.Edit, contentDescription = "Edit task")
                 }
             }
         )

@@ -104,8 +104,7 @@ fun HomeScreen(
     val selectedTask = remember { mutableStateOf(0L) }
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
 
-
-    var projects by remember { mutableStateOf(emptyList<Project>()) }
+    var projects: List<Project> by remember { mutableStateOf(emptyList()) }
     val projectsResultState = mainViewModel.projects.observeAsState()
     projectsResultState.value?.let { result ->
         result.doIfSuccess { projects = it }

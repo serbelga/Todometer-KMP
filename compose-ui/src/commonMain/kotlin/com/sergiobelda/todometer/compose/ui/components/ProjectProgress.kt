@@ -16,32 +16,42 @@
 
 package com.sergiobelda.todometer.compose.ui.components
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.requiredWidthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.util.ProgressUtil
+import java.util.Locale
 
 @Composable
 fun ProjectProgress(
     selectedProject: ProjectTasks?
 ) {
     val progress = ProgressUtil.getTasksDoneProgress(selectedProject?.tasks ?: emptyList())
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+    )
     Column(
         modifier = Modifier.fillMaxWidth().requiredWidthIn(max = 360.dp)
             .padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
     ) {
         // TODO: 02/04/2021 Max lines
         Text(
-            selectedProject?.name?.toUpperCase() ?: "-",
+            selectedProject?.name?.toUpperCase(Locale.getDefault()) ?: "-",
             style = TodometerTypography.overline
         )
         Text(
@@ -49,8 +59,8 @@ fun ProjectProgress(
             style = TodometerTypography.body2
         )
         LinearProgressIndicator(
-            progress = progress,
-            modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp)
+            progress = animatedProgress,
+            modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp).clip(RoundedCornerShape(2.dp))
         )
     }
 }
