@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.ui.task
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,6 +28,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
@@ -50,6 +52,7 @@ import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
+import com.sergiobelda.todometer.ui.home.TagItem
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
@@ -107,13 +110,20 @@ fun TaskDetailBody(scrollState: ScrollState, task: TaskTag) {
             HorizontalDivider()
         }
         Column(modifier = Modifier.verticalScroll(state = scrollState)) {
-            Text(
-                text = task.title,
-                style = TodometerTypography.h4,
-                modifier = Modifier.padding(32.dp),
-                maxLines = 1
-            )
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
+                    Text(
+                        text = task.title,
+                        style = TodometerTypography.h6,
+                        modifier = Modifier.padding(20.dp),
+                        maxLines = 1
+                    )
+                }
+            }
             HorizontalDivider()
+            TagItem(task.tag)
             if (!task.description.isNullOrBlank()) {
                 // TODO: 28/03/2021 Empty description
                 Text(
