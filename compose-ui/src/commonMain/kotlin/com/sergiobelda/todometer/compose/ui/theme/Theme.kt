@@ -74,3 +74,24 @@ val Colors.indigo: Color
 
 val Colors.teal: Color
     @Composable get() = if (isLight) tealLight else tealDark
+
+val Colors.green: Color
+    @Composable get() = if (isLight) greenLight else greenDark
+
+val Colors.lime: Color
+    @Composable get() = if (isLight) limeLight else limeDark
+
+val Colors.yellow: Color
+    @Composable get() = if (isLight) yellowLight else yellowDark
+
+val Colors.amber: Color
+    @Composable get() = if (isLight) amberLight else amberDark
+
+val Colors.orange: Color
+    @Composable get() = if (isLight) orangeLight else orangeDark
+
+val Colors.brown: Color
+    @Composable get() = if (isLight) brownLight else brownDark
+
+val Colors.gray: Color
+    @Composable get() = if (isLight) grayLight else grayDark

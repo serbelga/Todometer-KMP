@@ -225,7 +225,7 @@ fun RemoveTaskAlertDialog(
                     showRemoveTaskAlertDialog.value = false
                 }
             ) {
-                Text(stringResource(id = R.string.ok))
+                Text(stringResource(id = android.R.string.ok))
             }
         },
         dismissButton = {

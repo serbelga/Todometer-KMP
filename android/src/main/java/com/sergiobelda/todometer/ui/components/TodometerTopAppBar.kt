@@ -21,15 +21,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,11 +48,13 @@ fun ToDometerTopAppBar(
                     .fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
+                /*
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
                         Icon(Icons.Outlined.AccountCircle, contentDescription = "Account")
                     }
                 }
+                */
             }
             ProjectProgress(selectedProject)
             HorizontalDivider()

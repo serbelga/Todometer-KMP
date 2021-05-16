@@ -125,7 +125,6 @@ fun TaskDetailBody(scrollState: ScrollState, task: TaskTag) {
             HorizontalDivider()
             TagItem(task.tag)
             if (!task.description.isNullOrBlank()) {
-                // TODO: 28/03/2021 Empty description
                 Text(
                     text = task.description ?: "",
                     style = TodometerTypography.body1,
