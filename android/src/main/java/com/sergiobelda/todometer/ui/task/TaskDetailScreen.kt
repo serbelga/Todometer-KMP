@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.ui.task
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,24 +28,31 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
+import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
+import com.sergiobelda.todometer.ui.home.TagItem
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
@@ -55,8 +63,12 @@ fun TaskDetailScreen(
     navigateUp: () -> Unit
 ) {
     val scrollState = rememberScrollState(0)
-    val taskState = mainViewModel.getTask(taskId).observeAsState()
-    taskState.value?.let { task ->
+    var taskState: TaskTag? by remember { mutableStateOf(null) }
+    val taskResultState = mainViewModel.getTask(taskId).observeAsState()
+    taskResultState.value?.let { result ->
+        result.doIfSuccess { taskState = it }
+    }
+    taskState?.let { task ->
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -84,7 +96,7 @@ fun TaskDetailScreen(
                         /*editTask(taskId)*/
                     },
                 ) {
-                    Icon(Icons.Rounded.Edit, contentDescription = "Edit task")
+                    Icon(Icons.Outlined.Edit, contentDescription = "Edit task")
                 }
             }
         )
@@ -92,21 +104,27 @@ fun TaskDetailScreen(
 }
 
 @Composable
-fun TaskDetailBody(scrollState: ScrollState, task: Task) {
+fun TaskDetailBody(scrollState: ScrollState, task: TaskTag) {
     Column {
         if (scrollState.value >= 270) {
             HorizontalDivider()
         }
         Column(modifier = Modifier.verticalScroll(state = scrollState)) {
-            Text(
-                text = task.title,
-                style = TodometerTypography.h4,
-                modifier = Modifier.padding(32.dp),
-                maxLines = 1
-            )
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
+                    Text(
+                        text = task.title,
+                        style = TodometerTypography.h6,
+                        modifier = Modifier.padding(20.dp),
+                        maxLines = 1
+                    )
+                }
+            }
             HorizontalDivider()
+            TagItem(task.tag)
             if (!task.description.isNullOrBlank()) {
-                // TODO: 28/03/2021 Empty description
                 Text(
                     text = task.description ?: "",
                     style = TodometerTypography.body1,

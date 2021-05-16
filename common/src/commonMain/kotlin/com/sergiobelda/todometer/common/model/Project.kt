@@ -19,8 +19,7 @@ package com.sergiobelda.todometer.common.model
 data class Project(
     val id: Long = 0,
     val name: String,
-    val description: String,
-    val tasks: List<Task> = arrayListOf()
+    val description: String
 ) {
     override fun toString() = name
 }

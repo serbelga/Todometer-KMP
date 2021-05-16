@@ -21,8 +21,9 @@ import org.koin.dsl.KoinAppDeclaration
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
-    modules(databaseModule)
+    modules(localDatabaseModule)
     modules(preferenceModule)
+    modules(databaseSourceModule)
     modules(repositoryModule)
     modules(useCaseModule)
 }

@@ -15,8 +15,8 @@
   ~ limitations under the License.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.ToDometer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+<resources>
+    <style name="Theme.ToDometer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorPrimaryVariant">@color/colorSecondary</item>
@@ -28,14 +28,8 @@
         <item name="colorError">@color/colorError</item>
         <item name="colorOnError">@color/colorOnError</item>
         <item name="android:colorBackground">@color/colorBackground</item>
+
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
-
-    <style name="Theme.ToDometer.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.ToDometer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.ToDometer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

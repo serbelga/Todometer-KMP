@@ -16,7 +16,8 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
-import com.sergiobelda.todometer.DbTask
+import com.sergiobelda.todometer.TaskEntity
+import com.sergiobelda.todometer.TaskTagView
 import com.sergiobelda.todometer.TodometerDatabase
 import com.sergiobelda.todometer.common.model.TaskState
 import com.squareup.sqldelight.runtime.coroutines.asFlow
@@ -30,13 +31,13 @@ class TaskDao : ITaskDao, KoinComponent {
 
     private val database: TodometerDatabase by inject()
 
-    override fun getTask(id: Long): Flow<DbTask?> =
+    override fun getTask(id: Long): Flow<TaskTagView?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(): Flow<List<DbTask>> =
+    override fun getTasks(): Flow<List<TaskTagView>> =
         database.todometerQueries.selectAllTasks().asFlow().mapToList()
 
-    override suspend fun insertTask(task: DbTask) =
+    override suspend fun insertTask(task: TaskEntity) =
         database.todometerQueries.insertTask(
             title = task.title,
             description = task.description,
@@ -45,7 +46,7 @@ class TaskDao : ITaskDao, KoinComponent {
             project_id = task.project_id
         )
 
-    override suspend fun updateTask(task: DbTask) =
+    override suspend fun updateTask(task: TaskEntity) =
         database.todometerQueries.updateTask(
             id = task.id,
             title = task.title,

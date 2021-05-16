@@ -42,9 +42,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
-import com.sergiobelda.todometer.ui.components.ProjectSelector
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 
@@ -54,14 +55,16 @@ fun EditTaskScreen(
     mainViewModel: MainViewModel,
     navigateUp: () -> Unit
 ) {
-    val taskState = mainViewModel.getTask(taskId).observeAsState()
-    taskState.value?.let { task ->
+    var taskState: TaskTag? by remember { mutableStateOf(null) }
+    val taskResultState = mainViewModel.getTask(taskId).observeAsState()
+    taskResultState.value?.let { result ->
+        result.doIfSuccess { taskState = it }
+    }
+
+    taskState?.let { task ->
         var taskTitle by rememberSaveable { mutableStateOf(task.title) }
         var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
         var taskDescription by rememberSaveable { mutableStateOf(task.description) }
-        val radioOptions = mainViewModel.projects.observeAsState(emptyList())
-        // TODO Remove project selector
-        val (selectedProject, onProjectSelected) = remember { mutableStateOf(radioOptions.value.firstOrNull()) }
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -103,7 +106,6 @@ fun EditTaskScreen(
                         ),
                         modifier = Modifier.fillMaxWidth()
                     )
-                    ProjectSelector(radioOptions.value, selectedProject, onProjectSelected)
                 }
             },
             floatingActionButton = {
@@ -118,8 +120,8 @@ fun EditTaskScreen(
                                     title = taskTitle,
                                     description = taskDescription,
                                     state = task.state,
-                                    projectId = selectedProject?.id,
-                                    tagId = task.tagId
+                                    projectId = task.projectId,
+                                    tagId = task.tag.id
                                 )
                             )
                             navigateUp()

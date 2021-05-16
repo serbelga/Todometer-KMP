@@ -20,11 +20,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
+import com.sergiobelda.todometer.common.usecase.GetTagsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
@@ -46,21 +51,24 @@ class MainViewModel(
     private val setProjectSelectedUseCase: SetProjectSelectedUseCase,
     getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
-    getTasksUseCase: GetTasksUseCase
+    getTasksUseCase: GetTasksUseCase,
+    getTagsUseCase: GetTagsUseCase
 ) : ViewModel() {
 
-    val tasks: LiveData<List<Task>> = getTasksUseCase().asLiveData()
+    val tasks: LiveData<Result<List<TaskTag>>> = getTasksUseCase().asLiveData()
 
-    val projects: LiveData<List<Project>> = getProjectsUseCase().asLiveData()
+    val projects: LiveData<Result<List<Project>>> = getProjectsUseCase().asLiveData()
 
-    val projectSelected: LiveData<Project?> = getProjectSelectedUseCase().asLiveData()
+    val projectSelected: LiveData<Result<ProjectTasks?>> = getProjectSelectedUseCase().asLiveData()
+
+    val tags: LiveData<Result<List<Tag>>> = getTagsUseCase().asLiveData()
 
     fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
 
     fun insertTask(
         title: String,
         description: String?,
-        tagId: Long?
+        tagId: Long
     ) = viewModelScope.launch {
         insertTaskUseCase(
             title,

@@ -105,7 +105,7 @@ fun AddTaskScreen(
                         mainViewModel.insertTask(
                             title = taskTitle,
                             description = taskDescription,
-                            tagId = null
+                            tagId = 1 // TODO: Update
                         )
                         navigateUp()
                     }

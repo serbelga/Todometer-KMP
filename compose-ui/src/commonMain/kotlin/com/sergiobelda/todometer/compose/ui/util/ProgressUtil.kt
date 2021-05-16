@@ -16,12 +16,12 @@
 
 package com.sergiobelda.todometer.compose.ui.util
 
-import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.model.TaskTag
 
 object ProgressUtil {
 
-    fun getTasksDoneProgress(list: List<Task?>): Float =
+    fun getTasksDoneProgress(list: List<TaskTag?>): Float =
         list.takeUnless { it.isEmpty() }?.let {
             it.filter { task -> task?.state == TaskState.DONE }.size / it.size.toFloat()
         } ?: 0F
