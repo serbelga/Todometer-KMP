@@ -34,7 +34,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Button
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
@@ -77,7 +76,6 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.TaskTag
-import com.sergiobelda.todometer.common.sampledata.tagsSample
 import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
@@ -116,6 +114,12 @@ fun HomeScreen(
         result.doIfSuccess { projectSelected = it }
     }
 
+    var tags: List<Tag> by remember { mutableStateOf(emptyList()) }
+    val tagsResultState = mainViewModel.tags.observeAsState()
+    tagsResultState.value?.let { result ->
+        result.doIfSuccess { tags = it }
+    }
+
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
@@ -127,7 +131,7 @@ fun HomeScreen(
                 selectProject = {
                     mainViewModel.setProjectSelected(it)
                 },
-                tagsSample
+                tags
             )
         }
     ) {
@@ -165,36 +169,24 @@ fun HomeScreen(
                         deleteTask = { mainViewModel.deleteTask(selectedTask.value) }
                     )
                 }
-                /*
-                if (!projects.value.isNullOrEmpty()) {
-                    ProjectTasksListView(
-                        mainViewModel,
+                if (projectSelected?.tasks.isNullOrEmpty()) {
+                    EmptyTasksListView()
+                } else {
+                    TasksListView(
+                        projectSelected?.tasks ?: emptyList(),
+                        onDoingClick = {
+                            mainViewModel.setTaskDoing(it)
+                        },
+                        onDoneClick = {
+                            mainViewModel.setTaskDone(it)
+                        },
                         onTaskItemClick = openTask,
                         onTaskItemLongClick = {
                             deleteTaskAlertDialogState.value = true
                             selectedTask.value = it
                         }
                     )
-                } else {
-                    EmptyProjectTaskListView(addProject)
                 }
-
-                 */
-                // TODO: 02/04/2021 Update null check
-                TasksListView(
-                    projectSelected?.tasks ?: emptyList(),
-                    onDoingClick = {
-                        mainViewModel.setTaskDoing(it)
-                    },
-                    onDoneClick = {
-                        mainViewModel.setTaskDone(it)
-                    },
-                    onTaskItemClick = openTask,
-                    onTaskItemLongClick = {
-                        deleteTaskAlertDialogState.value = true
-                        selectedTask.value = it
-                    }
-                )
             },
             floatingActionButton = {
                 if (!projects.isNullOrEmpty()) {
@@ -388,12 +380,12 @@ fun TasksListView(
 }
 
 @Composable
-fun EmptyProjectTaskListView(addProject: () -> Unit) {
+fun EmptyTasksListView() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
@@ -401,15 +393,7 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
                 modifier = Modifier.size(240.dp),
                 contentDescription = null
             )
-            Text(stringResource(id = R.string.you_have_not_any_project))
-            Button(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(16.dp),
-                onClick = addProject
-            ) {
-                Text(stringResource(id = R.string.add_project))
-            }
+            Text(stringResource(id = R.string.no_tasks))
         }
     }
 }
@@ -418,6 +402,6 @@ fun EmptyProjectTaskListView(addProject: () -> Unit) {
 @Composable
 fun EmptyProjectTaskListPreview() {
     ToDometerTheme {
-        EmptyProjectTaskListView(addProject = {})
+        EmptyTasksListView()
     }
 }

@@ -18,8 +18,8 @@ package com.sergiobelda.todometer.common.database.mapper
 
 import com.sergiobelda.todometer.TaskEntity
 import com.sergiobelda.todometer.TaskTagView
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toColor
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toTaskState
+import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.colorValueOf
+import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.taskStateValueOf
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskTag
@@ -30,11 +30,11 @@ object TaskMapper {
         id,
         title,
         description,
-        toTaskState(state),
+        taskStateValueOf(state),
         project_id,
         tag = Tag(
             tag_id,
-            toColor(tag_color),
+            colorValueOf(tag_color),
             tag_name
         )
     )

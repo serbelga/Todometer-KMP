@@ -86,3 +86,7 @@ insertProject:
 INSERT INTO ProjectEntity
 (name, description)
 VALUES (?, ?);
+
+selectAllTags:
+SELECT *
+FROM TagEntity;
