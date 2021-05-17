@@ -1,4 +1,4 @@
-<h1 align="center">ToDo_meter Compose</h1></br>
+<h1 align="center">ToDo_meter Kotlin Multiplatform</h1></br>
 
 <h4 align="center">
   🚧🚧🚧 WIP: https://github.com/serbelga/ToDometer to Jetpack Compose
@@ -24,6 +24,6 @@
   * [Compose](https://developer.android.com/jetpack/compose)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-  * [Room](https://developer.android.com/topic/libraries/architecture/room)
-* [Dagger Hilt](https://dagger.dev/hilt/)
+* [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
+* [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)
