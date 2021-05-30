@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.di
+package com.sergiobelda.todometer.common.localdatasource
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import com.sergiobelda.todometer.common.database.dao.ITagDao
+import com.sergiobelda.todometer.common.database.mapper.toDomain
+import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.model.Tag
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(webServiceModule)
-    modules(localDatabaseModule)
-    modules(preferenceModule)
-    modules(remoteDataSourceModule)
-    modules(localDataSourceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
+class TagLocalDataSource(
+    private val tagDao: ITagDao
+) : ITagLocalDataSource {
+
+    override fun getTags(): Flow<Result<List<Tag>>> =
+        tagDao.getTags().map { list ->
+            Result.Success(list.toDomain())
+        }
 }
-
-fun initKoin() = initKoin {}

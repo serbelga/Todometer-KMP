@@ -16,32 +16,34 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.datasource.ITaskLocalDatabaseSource
 import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.localdatasource.ITaskLocalDataSource
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepository(
-    private val taskLocalDatabaseSource: ITaskLocalDatabaseSource
+    private val taskLocalDataSource: ITaskLocalDataSource,
+    private val taskRemoteDataSource: ITaskRemoteDataSource
 ) : ITaskRepository {
 
     override fun getTask(id: Long): Flow<Result<TaskTag?>> =
-        taskLocalDatabaseSource.getTask(id)
+        taskLocalDataSource.getTask(id)
 
     override fun getTasks(): Flow<Result<List<TaskTag>>> =
-        taskLocalDatabaseSource.getTasks()
+        taskLocalDataSource.getTasks()
 
     override suspend fun insertTask(task: Task) =
-        taskLocalDatabaseSource.insertTask(task)
+        taskLocalDataSource.insertTask(task)
 
     override suspend fun updateTask(task: Task) =
-        taskLocalDatabaseSource.updateTask(task)
+        taskLocalDataSource.updateTask(task)
 
     override suspend fun updateTaskState(id: Long, state: TaskState) =
-        taskLocalDatabaseSource.updateTaskState(id, state)
+        taskLocalDataSource.updateTaskState(id, state)
 
     override suspend fun deleteTask(id: Long) =
-        taskLocalDatabaseSource.deleteTask(id)
+        taskLocalDataSource.deleteTask(id)
 }

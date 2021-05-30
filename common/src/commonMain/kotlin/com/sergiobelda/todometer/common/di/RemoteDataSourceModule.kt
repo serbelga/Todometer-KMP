@@ -16,18 +16,12 @@
 
 package com.sergiobelda.todometer.common.di
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
+import com.sergiobelda.todometer.common.remotedatasource.ProjectRemoteDataSource
+import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(webServiceModule)
-    modules(localDatabaseModule)
-    modules(preferenceModule)
-    modules(remoteDataSourceModule)
-    modules(localDataSourceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
+val remoteDataSourceModule = module {
+    single<IProjectRemoteDataSource> {
+        ProjectRemoteDataSource(get())
+    }
 }
-
-fun initKoin() = initKoin {}

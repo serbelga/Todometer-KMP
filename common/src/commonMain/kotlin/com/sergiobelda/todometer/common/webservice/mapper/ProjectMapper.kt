@@ -14,32 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.mapper
+package com.sergiobelda.todometer.common.webservice.mapper
 
-import com.sergiobelda.todometer.ProjectEntity
-import com.sergiobelda.todometer.common.database.ProjectTasksRelation
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
+import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
 
-fun ProjectEntity.toDomain() = Project(
-    id,
-    name,
-    description
-)
+fun ProjectApiModel.toDomain() =
+    Project(
+        id,
+        name,
+        description
+    )
 
-fun Iterable<ProjectEntity>.toDomain() = this.map {
+fun Iterable<ProjectApiModel>.toDomain() = this.map {
     it.toDomain()
 }
-
-fun ProjectTasksRelation.toDomain() = ProjectTasks(
-    project.id,
-    project.name,
-    project.description,
-    tasks.map { it.toDomain() }
-)
-
-fun Project.toEntity() = ProjectEntity(
-    id,
-    name,
-    description
-)

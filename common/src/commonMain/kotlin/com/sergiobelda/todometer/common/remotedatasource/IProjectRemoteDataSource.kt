@@ -14,32 +14,12 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.mapper
+package com.sergiobelda.todometer.common.remotedatasource
 
-import com.sergiobelda.todometer.ProjectEntity
-import com.sergiobelda.todometer.common.database.ProjectTasksRelation
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 
-fun ProjectEntity.toDomain() = Project(
-    id,
-    name,
-    description
-)
+interface IProjectRemoteDataSource {
 
-fun Iterable<ProjectEntity>.toDomain() = this.map {
-    it.toDomain()
+    suspend fun getProjects(): Result<List<Project>>
 }
-
-fun ProjectTasksRelation.toDomain() = ProjectTasks(
-    project.id,
-    project.name,
-    project.description,
-    tasks.map { it.toDomain() }
-)
-
-fun Project.toEntity() = ProjectEntity(
-    id,
-    name,
-    description
-)

@@ -284,7 +284,6 @@ fun SheetContainer(
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-
         }
         HorizontalDivider()
         LazyColumn {

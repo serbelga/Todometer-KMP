@@ -28,7 +28,7 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<IProjectRepository> {
-        ProjectRepository(get())
+        ProjectRepository(get(), get())
     }
     single<ITagRepository> {
         TagRepository(get())

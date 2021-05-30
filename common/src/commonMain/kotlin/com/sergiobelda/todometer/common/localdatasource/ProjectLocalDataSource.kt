@@ -14,30 +14,31 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.repository
+package com.sergiobelda.todometer.common.localdatasource
 
+import com.sergiobelda.todometer.common.database.dao.IProjectDao
+import com.sergiobelda.todometer.common.database.mapper.toDomain
+import com.sergiobelda.todometer.common.database.mapper.toEntity
 import com.sergiobelda.todometer.common.datasource.Result
-import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
-import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
-class ProjectRepository(
-    private val projectLocalDataSource: IProjectLocalDataSource,
-    private val projectRemoteDataSource: IProjectRemoteDataSource
-) : IProjectRepository {
+class ProjectLocalDataSource(
+    private val projectDao: IProjectDao
+) : IProjectLocalDataSource {
+
+    override fun getProjects(): Flow<Result<List<Project>>> =
+        projectDao.getProjects().map { list ->
+            Result.Success(list.toDomain())
+        }
 
     override fun getProject(id: Long): Flow<Result<ProjectTasks?>> =
-        projectLocalDataSource.getProject(id)
-
-    override fun getProjects(): Flow<Result<List<Project>>> = flow {
-        // TODO Update body
-        val projects = projectRemoteDataSource.getProjects()
-        emit(projects)
-    }
+        projectDao.getProject(id).map { projectTaskRelation ->
+            Result.Success(projectTaskRelation?.toDomain())
+        }
 
     override suspend fun insertProject(project: Project) =
-        projectLocalDataSource.insertProject(project)
+        projectDao.insertProject(project.toEntity())
 }

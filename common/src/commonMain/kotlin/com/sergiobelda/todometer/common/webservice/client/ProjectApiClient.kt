@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.di
+package com.sergiobelda.todometer.common.webservice.client
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import com.sergiobelda.todometer.common.webservice.TodometerApi
+import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import io.ktor.client.request.get
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(webServiceModule)
-    modules(localDatabaseModule)
-    modules(preferenceModule)
-    modules(remoteDataSourceModule)
-    modules(localDataSourceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
+class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClient {
+
+    override suspend fun getProjects(): List<ProjectApiModel> = todometerApi.client.get(TodometerApi.ENDPOINT_URL + TodometerApi.PROJECT_PATH)
 }
-
-fun initKoin() = initKoin {}

@@ -14,20 +14,9 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.di
+package com.sergiobelda.todometer.common.webservice
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(webServiceModule)
-    modules(localDatabaseModule)
-    modules(preferenceModule)
-    modules(remoteDataSourceModule)
-    modules(localDataSourceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
-}
-
-fun initKoin() = initKoin {}
+internal actual val ApplicationDispatcher: CoroutineDispatcher = Dispatchers.IO

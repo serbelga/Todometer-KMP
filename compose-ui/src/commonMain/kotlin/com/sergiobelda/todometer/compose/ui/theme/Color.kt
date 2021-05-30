@@ -62,4 +62,3 @@ val brownDark = Color(0xFFbcaaa4)
 
 val grayLight = Color(0xFF616161)
 val grayDark = Color(0xFFEEEEEE)
-

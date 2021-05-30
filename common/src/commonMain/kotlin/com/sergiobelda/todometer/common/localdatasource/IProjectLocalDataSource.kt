@@ -14,32 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.mapper
+package com.sergiobelda.todometer.common.localdatasource
 
-import com.sergiobelda.todometer.ProjectEntity
-import com.sergiobelda.todometer.common.database.ProjectTasksRelation
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
+import kotlinx.coroutines.flow.Flow
 
-fun ProjectEntity.toDomain() = Project(
-    id,
-    name,
-    description
-)
+interface IProjectLocalDataSource {
 
-fun Iterable<ProjectEntity>.toDomain() = this.map {
-    it.toDomain()
+    fun getProjects(): Flow<Result<List<Project>>>
+
+    fun getProject(id: Long): Flow<Result<ProjectTasks?>>
+
+    suspend fun insertProject(project: Project)
 }
-
-fun ProjectTasksRelation.toDomain() = ProjectTasks(
-    project.id,
-    project.name,
-    project.description,
-    tasks.map { it.toDomain() }
-)
-
-fun Project.toEntity() = ProjectEntity(
-    id,
-    name,
-    description
-)

@@ -14,32 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.mapper
+package com.sergiobelda.todometer.common.remotedatasource
 
-import com.sergiobelda.todometer.ProjectEntity
-import com.sergiobelda.todometer.common.database.ProjectTasksRelation
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
+import com.sergiobelda.todometer.common.webservice.client.IProjectApiClient
+import com.sergiobelda.todometer.common.webservice.mapper.toDomain
+import com.sergiobelda.todometer.common.webservice.safeApiCall
 
-fun ProjectEntity.toDomain() = Project(
-    id,
-    name,
-    description
-)
+class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) : IProjectRemoteDataSource {
 
-fun Iterable<ProjectEntity>.toDomain() = this.map {
-    it.toDomain()
+    override suspend fun getProjects(): Result<List<Project>> =
+        safeApiCall {
+            projectApiClient.getProjects()
+        }.map { it.toDomain() }
 }
-
-fun ProjectTasksRelation.toDomain() = ProjectTasks(
-    project.id,
-    project.name,
-    project.description,
-    tasks.map { it.toDomain() }
-)
-
-fun Project.toEntity() = ProjectEntity(
-    id,
-    name,
-    description
-)

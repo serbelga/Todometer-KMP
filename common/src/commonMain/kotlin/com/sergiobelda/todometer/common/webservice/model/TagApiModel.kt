@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.di
+package com.sergiobelda.todometer.common.webservice.model
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import kotlinx.serialization.Serializable
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(webServiceModule)
-    modules(localDatabaseModule)
-    modules(preferenceModule)
-    modules(remoteDataSourceModule)
-    modules(localDataSourceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
-}
-
-fun initKoin() = initKoin {}
+@Serializable
+data class TagApiModel(
+    val id: Long,
+    val color: String,
+    val name: String
+)

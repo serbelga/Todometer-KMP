@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.di
+package com.sergiobelda.todometer.common.localdatasource
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.model.Tag
+import kotlinx.coroutines.flow.Flow
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(webServiceModule)
-    modules(localDatabaseModule)
-    modules(preferenceModule)
-    modules(remoteDataSourceModule)
-    modules(localDataSourceModule)
-    modules(repositoryModule)
-    modules(useCaseModule)
+interface ITagLocalDataSource {
+
+    fun getTags(): Flow<Result<List<Tag>>>
 }
-
-fun initKoin() = initKoin {}
