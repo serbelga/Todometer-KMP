@@ -31,10 +31,10 @@ val repositoryModule = module {
         ProjectRepository(get(), get())
     }
     single<ITagRepository> {
-        TagRepository(get())
+        TagRepository(get(), get())
     }
     single<ITaskRepository> {
-        TaskRepository(get())
+        TaskRepository(get(), get())
     }
     single<IUserPreferencesRepository> {
         UserPreferencesRepository(get())
