@@ -21,4 +21,6 @@ import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
 interface IProjectApiClient {
 
     suspend fun getProjects(): List<ProjectApiModel>
+
+    suspend fun insertProject(name: String, description: String): Long
 }

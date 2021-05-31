@@ -121,7 +121,8 @@ fun EditTaskScreen(
                                     description = taskDescription,
                                     state = task.state,
                                     projectId = task.projectId,
-                                    tagId = task.tag.id
+                                    tagId = task.tag.id,
+                                    sync = false
                                 )
                             )
                             navigateUp()

@@ -27,5 +27,5 @@ interface IProjectRepository {
 
     fun getProjects(): Flow<Result<List<Project>>>
 
-    suspend fun insertProject(project: Project)
+    suspend fun insertProject(name: String, description: String)
 }

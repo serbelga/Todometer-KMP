@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
@@ -38,6 +39,12 @@ class ProjectRepository(
         emit(projects)
     }
 
-    override suspend fun insertProject(project: Project) =
-        projectLocalDataSource.insertProject(project)
+    override suspend fun insertProject(name: String, description: String) {
+        val result = projectRemoteDataSource.insertProject(name, description)
+        var sync = false
+        result.doIfSuccess {
+            sync = true
+        }
+        projectLocalDataSource.insertProject(Project(name = name, description = description, sync = sync))
+    }
 }

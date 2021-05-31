@@ -6,5 +6,6 @@ data class TaskTag(
     val description: String?,
     val state: TaskState = TaskState.DOING,
     val projectId: Long,
-    val tag: Tag
+    val tag: Tag,
+    val sync: Boolean
 )

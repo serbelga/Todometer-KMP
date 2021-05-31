@@ -28,4 +28,9 @@ class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) :
         safeApiCall {
             projectApiClient.getProjects()
         }.map { it.toDomain() }
+
+    override suspend fun insertProject(name: String, description: String): Result<Long> =
+        safeApiCall {
+            projectApiClient.insertProject(name, description)
+        }
 }

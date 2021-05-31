@@ -39,12 +39,15 @@ class TodometerApi {
 
     companion object {
 
-        private const val API_PROTOCOL = "http"
-        private const val API_HOST = "192.168.0.22"
-        private const val API_PORT = "8080"
-        const val ENDPOINT_URL = "$API_PROTOCOL://$API_HOST:$API_PORT"
-        const val PROJECT_PATH = "/project/"
+        private const val SCHEME = "http"
+        private const val HOST = "192.168.0.22"
+        private const val PORT = "8080"
+        const val ENDPOINT_URL = "$SCHEME://$HOST:$PORT"
+        const val PROJECT_PATH = "/project"
+        const val TASK_PATH = "/task"
+        const val TAG_PATH = "/tag"
     }
 
+    // TODO Remove
     suspend fun getHelloWorldString(): String = client.get("http://192.168.0.22:8080")
 }

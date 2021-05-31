@@ -7,7 +7,8 @@ import com.sergiobelda.todometer.common.model.Tag
 fun TagEntity.toDomain() = Tag(
     id,
     colorValueOf(color),
-    name
+    name,
+    sync
 )
 
 fun Iterable<TagEntity>.toDomain() = this.map {

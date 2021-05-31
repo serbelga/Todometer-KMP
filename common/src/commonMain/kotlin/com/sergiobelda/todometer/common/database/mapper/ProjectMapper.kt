@@ -24,7 +24,8 @@ import com.sergiobelda.todometer.common.model.ProjectTasks
 fun ProjectEntity.toDomain() = Project(
     id,
     name,
-    description
+    description,
+    sync
 )
 
 fun Iterable<ProjectEntity>.toDomain() = this.map {
@@ -35,11 +36,13 @@ fun ProjectTasksRelation.toDomain() = ProjectTasks(
     project.id,
     project.name,
     project.description,
-    tasks.map { it.toDomain() }
+    tasks.map { it.toDomain() },
+    project.sync
 )
 
 fun Project.toEntity() = ProjectEntity(
     id,
     name,
-    description
+    description,
+    sync
 )

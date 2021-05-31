@@ -22,4 +22,6 @@ import com.sergiobelda.todometer.common.model.Project
 interface IProjectRemoteDataSource {
 
     suspend fun getProjects(): Result<List<Project>>
+
+    suspend fun insertProject(name: String, description: String): Result<Long>
 }

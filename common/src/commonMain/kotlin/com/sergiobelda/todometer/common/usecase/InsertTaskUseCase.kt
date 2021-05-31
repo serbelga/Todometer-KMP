@@ -46,7 +46,8 @@ class InsertTaskUseCase(
                     description = description,
                     state = TaskState.DOING,
                     projectId = it,
-                    tagId = tagId
+                    tagId = tagId,
+                    sync = false
                 )
             )
         }

@@ -14,19 +14,9 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.mapper
+package com.sergiobelda.todometer.common.webservice.request
 
-import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
-
-fun ProjectApiModel.toDomain() =
-    Project(
-        id,
-        name,
-        description,
-        sync = true
-    )
-
-fun Iterable<ProjectApiModel>.toDomain() = this.map {
-    it.toDomain()
-}
+data class ProjectRequestBody(
+    val name: String,
+    val description: String
+)

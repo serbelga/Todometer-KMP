@@ -33,8 +33,10 @@ fun TaskTagView.toDomain() = TaskTag(
     tag = Tag(
         tag_id,
         colorValueOf(tag_color),
-        tag_name
-    )
+        tag_name,
+        tag_sync
+    ),
+    sync
 )
 
 fun Iterable<TaskTagView>.toDomain() = this.map {
@@ -47,5 +49,6 @@ fun Task.toEntity() = TaskEntity(
     description,
     state.toString(),
     projectId,
-    tagId
+    tagId,
+    sync
 )
