@@ -43,9 +43,10 @@ class TodometerApi {
         private const val HOST = "192.168.0.22"
         private const val PORT = "8080"
         const val ENDPOINT_URL = "$SCHEME://$HOST:$PORT"
-        const val PROJECT_PATH = "/project"
-        const val TASK_PATH = "/task"
-        const val TAG_PATH = "/tag"
+        const val VERSION_1 = "/v1"
+        const val PROJECT_PATH = "/projects"
+        const val TASK_PATH = "/tasks"
+        const val TAG_PATH = "/tags"
     }
 
     // TODO Remove
