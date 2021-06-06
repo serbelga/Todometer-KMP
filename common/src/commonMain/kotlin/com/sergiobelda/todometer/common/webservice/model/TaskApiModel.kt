@@ -20,10 +20,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TaskApiModel(
-    val id: Long,
+    val id: String,
     val title: String,
     val description: String?,
     val state: String,
-    val projectId: Long,
-    val tagId: Long
+    val projectId: String,
+    val tagId: String
 )

@@ -57,9 +57,9 @@ import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun TaskDetailScreen(
-    taskId: Long,
+    taskId: String,
     mainViewModel: MainViewModel,
-    editTask: (Long) -> Unit,
+    editTask: (String) -> Unit,
     navigateUp: () -> Unit
 ) {
     val scrollState = rememberScrollState(0)
@@ -123,7 +123,9 @@ fun TaskDetailBody(scrollState: ScrollState, task: TaskTag) {
                 }
             }
             HorizontalDivider()
-            TagItem(task.tag)
+            task.tag?.let {
+                TagItem(it)
+            }
             if (!task.description.isNullOrBlank()) {
                 Text(
                     text = task.description ?: "",

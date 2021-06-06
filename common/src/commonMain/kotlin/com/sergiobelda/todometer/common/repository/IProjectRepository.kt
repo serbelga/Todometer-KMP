@@ -23,9 +23,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface IProjectRepository {
 
-    fun getProject(id: Long): Flow<Result<ProjectTasks?>>
+    fun getProject(id: String): Flow<Result<ProjectTasks?>>
 
     fun getProjects(): Flow<Result<List<Project>>>
 
     suspend fun insertProject(name: String, description: String)
+
+    suspend fun refreshProjects()
 }

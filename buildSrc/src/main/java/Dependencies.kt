@@ -117,6 +117,7 @@ object Libs {
 
     object Ktor {
         const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
+        const val clientApache = "io.ktor:ktor-client-apache:${Versions.ktor}"
         const val clientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
         const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val clientJson = "io.ktor:ktor-client-json:${Versions.ktor}"

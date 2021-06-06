@@ -40,8 +40,8 @@ class TodometerApi {
     companion object {
 
         private const val SCHEME = "http"
-        private const val HOST = "192.168.0.22"
-        private const val PORT = "8080"
+        const val HOST = "192.168.0.22"
+        const val PORT = "8080"
         const val ENDPOINT_URL = "$SCHEME://$HOST:$PORT"
         const val VERSION_1 = "/v1"
         const val PROJECT_PATH = "/projects"

@@ -51,7 +51,7 @@ import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
 fun EditTaskScreen(
-    taskId: Long,
+    taskId: String,
     mainViewModel: MainViewModel,
     navigateUp: () -> Unit
 ) {
@@ -121,7 +121,7 @@ fun EditTaskScreen(
                                     description = taskDescription,
                                     state = task.state,
                                     projectId = task.projectId,
-                                    tagId = task.tag.id,
+                                    tagId = task.tag?.id,
                                     sync = false
                                 )
                             )

@@ -34,11 +34,19 @@ class ProjectLocalDataSource(
             Result.Success(list.toDomain())
         }
 
-    override fun getProject(id: Long): Flow<Result<ProjectTasks?>> =
+    override fun getProject(id: String): Flow<Result<ProjectTasks?>> =
         projectDao.getProject(id).map { projectTaskRelation ->
             Result.Success(projectTaskRelation?.toDomain())
         }
 
     override suspend fun insertProject(project: Project) =
         projectDao.insertProject(project.toEntity())
+
+    override suspend fun updateProject(project: Project) {
+        projectDao.updateProject(project.toEntity())
+    }
+
+    override suspend fun updateProjects(projects: List<Project>) {
+        projectDao.insertOrReplace(projects.map { it.toEntity() })
+    }
 }

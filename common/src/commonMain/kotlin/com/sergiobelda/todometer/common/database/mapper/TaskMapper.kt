@@ -30,12 +30,14 @@ fun TaskTagView.toDomain() = TaskTag(
     description,
     taskStateValueOf(state),
     project_id,
-    tag = Tag(
-        tag_id,
-        colorValueOf(tag_color),
-        tag_name,
-        tag_sync
-    ),
+    tag = tag_id?.let {
+        Tag(
+            it,
+            colorValueOf(tag_color),
+            tag_name,
+            tag_sync
+        )
+    },
     sync
 )
 

@@ -16,4 +16,9 @@
 
 package com.sergiobelda.todometer.common.webservice.client
 
-interface ITagApiClient
+import com.sergiobelda.todometer.common.webservice.model.TagApiModel
+
+interface ITagApiClient {
+
+    suspend fun getTags(): List<TagApiModel>
+}

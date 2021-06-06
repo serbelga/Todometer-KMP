@@ -14,24 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.dao
+package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.TaskEntity
-import com.sergiobelda.todometer.TaskTagView
-import com.sergiobelda.todometer.common.model.TaskState
-import kotlinx.coroutines.flow.Flow
+import com.sergiobelda.todometer.common.repository.IProjectRepository
 
-interface ITaskDao {
+class RefreshProjectsUseCase(
+    private val projectRepository: IProjectRepository
+) {
 
-    fun getTask(id: String): Flow<TaskTagView?>
-
-    fun getTasks(): Flow<List<TaskTagView>>
-
-    suspend fun insertTask(task: TaskEntity)
-
-    suspend fun updateTask(task: TaskEntity)
-
-    suspend fun updateTaskState(id: String, state: TaskState)
-
-    suspend fun deleteTask(id: String)
+    suspend operator fun invoke() = projectRepository.refreshProjects()
 }

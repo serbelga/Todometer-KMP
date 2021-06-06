@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserPreferencesRepository {
 
-    fun projectSelected(): Flow<Long>
+    fun projectSelected(): Flow<String>
 
-    suspend fun setProjectSelected(projectSelected: Long)
+    suspend fun setProjectSelected(projectSelectedId: String)
 }

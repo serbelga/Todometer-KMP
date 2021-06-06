@@ -34,7 +34,7 @@ class ProjectDao : IProjectDao, KoinComponent {
     override fun getProjects(): Flow<List<ProjectEntity>> =
         database.todometerQueries.selectAllProjects().asFlow().mapToList()
 
-    override fun getProject(id: Long): Flow<ProjectTasksRelation?> =
+    override fun getProject(id: String): Flow<ProjectTasksRelation?> =
         database.todometerQueries.selectProject(id).asFlow().mapToOneOrNull().combine(
             database.todometerQueries.selectTasksByProjectId(id).asFlow().mapToList()
         ) { project, tasks ->
@@ -48,7 +48,49 @@ class ProjectDao : IProjectDao, KoinComponent {
 
     override suspend fun insertProject(project: ProjectEntity) =
         database.todometerQueries.insertProject(
-            project.name,
-            project.description
+            id = project.id,
+            name = project.name,
+            description = project.description,
+            sync = project.sync
         )
+
+    override suspend fun updateProject(project: ProjectEntity) {
+        database.todometerQueries.updateProject(
+            id = project.id,
+            name = project.name,
+            description = project.description,
+            sync = project.sync
+        )
+    }
+
+    override suspend fun updateProjects(projects: List<ProjectEntity>) {
+        projects.forEach { project ->
+            database.todometerQueries.updateProject(
+                id = project.id,
+                name = project.name,
+                description = project.description,
+                sync = project.sync
+            )
+        }
+    }
+
+    override suspend fun insertOrReplace(project: ProjectEntity) {
+        database.todometerQueries.insertOrReplaceProject(
+            id = project.id,
+            name = project.name,
+            description = project.description,
+            sync = project.sync
+        )
+    }
+
+    override suspend fun insertOrReplace(projects: List<ProjectEntity>) {
+        projects.forEach { project ->
+            database.todometerQueries.insertOrReplaceProject(
+                id = project.id,
+                name = project.name,
+                description = project.description,
+                sync = project.sync
+            )
+        }
+    }
 }

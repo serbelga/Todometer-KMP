@@ -43,8 +43,8 @@ inline fun <reified A> Result<A>.doIfSuccess(callback: (value: A) -> Unit): Resu
 /**
  * Call the specific action in [callback] if the result is [Result.Error].
  */
-inline fun <reified A> Result<A>.doIfError(callback: (code: Int?, error: String?, exception: Throwable?) -> Unit): Result<A> {
-    (this as? Result.Error)?.let { callback(it.code, it.message, it.exception) }
+inline fun <reified A> Result<A>.doIfError(callback: (error: Result.Error) -> Unit): Result<A> {
+    (this as? Result.Error)?.let { callback(it) }
     return this
 }
 

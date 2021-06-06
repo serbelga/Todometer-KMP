@@ -14,24 +14,9 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database.dao
+package com.sergiobelda.todometer.common.webservice.request
 
-import com.sergiobelda.todometer.TaskEntity
-import com.sergiobelda.todometer.TaskTagView
-import com.sergiobelda.todometer.common.model.TaskState
-import kotlinx.coroutines.flow.Flow
-
-interface ITaskDao {
-
-    fun getTask(id: String): Flow<TaskTagView?>
-
-    fun getTasks(): Flow<List<TaskTagView>>
-
-    suspend fun insertTask(task: TaskEntity)
-
-    suspend fun updateTask(task: TaskEntity)
-
-    suspend fun updateTaskState(id: String, state: TaskState)
-
-    suspend fun deleteTask(id: String)
-}
+data class TagRequestBody(
+    val color: String,
+    val name: String
+)

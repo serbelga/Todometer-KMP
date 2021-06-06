@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProjectApiModel(
-    val id: Long,
+    val id: String,
     val name: String,
     val description: String
 )

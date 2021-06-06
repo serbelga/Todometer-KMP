@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TagApiModel(
-    val id: Long,
+    val id: String,
     val color: String,
     val name: String
 )

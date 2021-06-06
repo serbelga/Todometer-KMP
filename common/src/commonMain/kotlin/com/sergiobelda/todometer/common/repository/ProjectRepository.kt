@@ -23,21 +23,39 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class ProjectRepository(
     private val projectLocalDataSource: IProjectLocalDataSource,
     private val projectRemoteDataSource: IProjectRemoteDataSource
 ) : IProjectRepository {
 
-    override fun getProject(id: Long): Flow<Result<ProjectTasks?>> =
+    override fun getProject(id: String): Flow<Result<ProjectTasks?>> =
         projectLocalDataSource.getProject(id)
 
-    override fun getProjects(): Flow<Result<List<Project>>> = flow {
-        // TODO Update body
-        val projects = projectRemoteDataSource.getProjects()
-        emit(projects)
+    override fun getProjects(): Flow<Result<List<Project>>> =
+        projectLocalDataSource.getProjects()
+
+    override suspend fun refreshProjects() {
+        val projectsResult = projectRemoteDataSource.getProjects()
+        projectsResult.doIfSuccess {
+            // TODO Insert or update if exists
+            projectLocalDataSource.updateProjects(it)
+        }
     }
+
+    /*
+    override fun getProjects(): Flow<Result<List<Project>>> = flow {
+        val projectsResult = projectRemoteDataSource.getProjects()
+        projectsResult.doIfSuccess {
+            // TODO Check if inserts or updates if exists
+            projectLocalDataSource.updateProjects(it)
+        }.doIfError { error ->
+            emit(error)
+        }
+        val result = projectLocalDataSource.getProjects().first()
+        emit(result)
+    }
+     */
 
     override suspend fun insertProject(name: String, description: String) {
         val result = projectRemoteDataSource.insertProject(name, description)
@@ -45,6 +63,6 @@ class ProjectRepository(
         result.doIfSuccess {
             sync = true
         }
-        projectLocalDataSource.insertProject(Project(name = name, description = description, sync = sync))
+        //projectLocalDataSource.insertProject(Project(name = name, description = description, sync = sync))
     }
 }

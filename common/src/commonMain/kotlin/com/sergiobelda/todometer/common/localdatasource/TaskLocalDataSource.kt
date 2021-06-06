@@ -30,7 +30,7 @@ class TaskLocalDataSource(
     private val taskDao: ITaskDao
 ) : ITaskLocalDataSource {
 
-    override fun getTask(id: Long): Flow<Result<TaskTag?>> =
+    override fun getTask(id: String): Flow<Result<TaskTag?>> =
         taskDao.getTask(id).map { Result.Success(it?.toDomain()) }
 
     override fun getTasks(): Flow<Result<List<TaskTag>>> =
@@ -44,9 +44,9 @@ class TaskLocalDataSource(
     override suspend fun updateTask(task: Task) =
         taskDao.updateTask(task.toEntity())
 
-    override suspend fun updateTaskState(id: Long, state: TaskState) =
+    override suspend fun updateTaskState(id: String, state: TaskState) =
         taskDao.updateTaskState(id, state)
 
-    override suspend fun deleteTask(id: Long) =
+    override suspend fun deleteTask(id: String) =
         taskDao.deleteTask(id)
 }

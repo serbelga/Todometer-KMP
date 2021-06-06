@@ -23,5 +23,5 @@ interface IProjectRemoteDataSource {
 
     suspend fun getProjects(): Result<List<Project>>
 
-    suspend fun insertProject(name: String, description: String): Result<Long>
+    suspend fun insertProject(name: String, description: String): Result<Unit>
 }

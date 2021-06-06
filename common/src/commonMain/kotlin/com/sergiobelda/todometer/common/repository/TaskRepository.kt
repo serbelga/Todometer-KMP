@@ -29,7 +29,7 @@ class TaskRepository(
     private val taskRemoteDataSource: ITaskRemoteDataSource
 ) : ITaskRepository {
 
-    override fun getTask(id: Long): Flow<Result<TaskTag?>> =
+    override fun getTask(id: String): Flow<Result<TaskTag?>> =
         taskLocalDataSource.getTask(id)
 
     override fun getTasks(): Flow<Result<List<TaskTag>>> =
@@ -41,9 +41,9 @@ class TaskRepository(
     override suspend fun updateTask(task: Task) =
         taskLocalDataSource.updateTask(task)
 
-    override suspend fun updateTaskState(id: Long, state: TaskState) =
+    override suspend fun updateTaskState(id: String, state: TaskState) =
         taskLocalDataSource.updateTaskState(id, state)
 
-    override suspend fun deleteTask(id: Long) =
+    override suspend fun deleteTask(id: String) =
         taskLocalDataSource.deleteTask(id)
 }

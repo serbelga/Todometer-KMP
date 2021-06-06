@@ -37,7 +37,7 @@ class InsertTaskUseCase(
     suspend operator fun invoke(
         title: String,
         description: String?,
-        tagId: Long
+        tagId: String
     ) {
         userPreferencesRepository.projectSelected().firstOrNull()?.let {
             taskRepository.insertTask(

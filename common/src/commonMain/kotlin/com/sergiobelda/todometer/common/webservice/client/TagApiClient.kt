@@ -17,5 +17,14 @@
 package com.sergiobelda.todometer.common.webservice.client
 
 import com.sergiobelda.todometer.common.webservice.TodometerApi
+import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.ENDPOINT_URL
+import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.TAG_PATH
+import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.VERSION_1
+import com.sergiobelda.todometer.common.webservice.model.TagApiModel
+import io.ktor.client.request.get
 
-class TagApiClient(private val todometerApi: TodometerApi) : ITagApiClient
+class TagApiClient(private val todometerApi: TodometerApi) : ITagApiClient {
+
+    override suspend fun getTags(): List<TagApiModel> =
+        todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TAG_PATH)
+}

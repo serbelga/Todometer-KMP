@@ -21,10 +21,10 @@ import kotlinx.coroutines.flow.Flow
 
 class UserPreferencesRepository(private val preferences: Preferences) : IUserPreferencesRepository {
 
-    override fun projectSelected(): Flow<Long> = preferences.getLong(PROJECT_SELECTED_KEY)
+    override fun projectSelected(): Flow<String> = preferences.getString(PROJECT_SELECTED_KEY)
 
-    override suspend fun setProjectSelected(projectSelected: Long) {
-        preferences.set(PROJECT_SELECTED_KEY, projectSelected)
+    override suspend fun setProjectSelected(projectSelectedId: String) {
+        preferences.set(PROJECT_SELECTED_KEY, projectSelectedId)
     }
 
     companion object {

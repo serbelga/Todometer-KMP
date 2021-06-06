@@ -61,12 +61,12 @@ fun HomeScreen(
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
     val coroutineScope = rememberCoroutineScope()
-    val setTaskDoing: (Long) -> Unit = {
+    val setTaskDoing: (String) -> Unit = {
         coroutineScope.launch {
             setTaskDoingUseCase(it)
         }
     }
-    val setTaskDone: (Long) -> Unit = {
+    val setTaskDone: (String) -> Unit = {
         coroutineScope.launch {
             setTaskDoneUseCase(it)
         }

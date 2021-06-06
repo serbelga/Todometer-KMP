@@ -78,6 +78,7 @@ kotlin {
         }
         val desktopMain by getting {
             dependencies {
+                implementation(Libs.Ktor.clientApache)
                 implementation(Libs.SqlDelight.jvmDriver)
             }
         }

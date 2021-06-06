@@ -17,7 +17,7 @@
 package com.sergiobelda.todometer.common.model
 
 data class Project(
-    val id: Long = 0,
+    val id: String,
     val name: String,
     val description: String,
     val sync: Boolean

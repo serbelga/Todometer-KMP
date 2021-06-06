@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITaskLocalDataSource {
 
-    fun getTask(id: Long): Flow<Result<TaskTag?>>
+    fun getTask(id: String): Flow<Result<TaskTag?>>
 
     fun getTasks(): Flow<Result<List<TaskTag>>>
 
@@ -32,7 +32,7 @@ interface ITaskLocalDataSource {
 
     suspend fun updateTask(task: Task)
 
-    suspend fun updateTaskState(id: Long, state: TaskState)
+    suspend fun updateTaskState(id: String, state: TaskState)
 
-    suspend fun deleteTask(id: Long)
+    suspend fun deleteTask(id: String)
 }
