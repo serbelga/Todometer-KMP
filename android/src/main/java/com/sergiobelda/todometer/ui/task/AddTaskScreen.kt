@@ -44,12 +44,12 @@ import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
-import org.koin.androidx.compose.get
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddTaskScreen(
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = get()
+    mainViewModel: MainViewModel = getViewModel()
 ) {
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }

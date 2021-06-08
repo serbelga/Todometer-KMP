@@ -54,14 +54,14 @@ import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.ui.home.TagItem
 import com.sergiobelda.todometer.viewmodel.MainViewModel
-import org.koin.androidx.compose.get
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun TaskDetailScreen(
     taskId: Long,
     editTask: (Long) -> Unit,
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = get()
+    mainViewModel: MainViewModel = getViewModel()
 ) {
     val scrollState = rememberScrollState(0)
     var taskState: TaskTag? by remember { mutableStateOf(null) }
