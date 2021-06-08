@@ -28,8 +28,9 @@ dependencies {
 
     implementation(Libs.timber)
 
-    implementation(Libs.Koin.core)
     implementation(Libs.Koin.android)
+    implementation(Libs.Koin.compose)
+    implementation(Libs.Koin.core)
 }
 
 android {
