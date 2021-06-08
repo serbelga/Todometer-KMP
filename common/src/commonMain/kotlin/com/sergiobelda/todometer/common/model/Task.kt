@@ -17,7 +17,7 @@
 package com.sergiobelda.todometer.common.model
 
 data class Task(
-    val id: String = "",
+    val id: String,
     val title: String,
     val description: String?,
     val state: TaskState = TaskState.DOING,

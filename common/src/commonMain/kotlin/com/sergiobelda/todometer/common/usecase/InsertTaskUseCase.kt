@@ -16,8 +16,6 @@
 
 package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -37,18 +35,14 @@ class InsertTaskUseCase(
     suspend operator fun invoke(
         title: String,
         description: String?,
-        tagId: String
+        tagId: String?
     ) {
-        userPreferencesRepository.projectSelected().firstOrNull()?.let {
+        userPreferencesRepository.projectSelected().firstOrNull()?.let { projectId ->
             taskRepository.insertTask(
-                Task(
-                    title = title,
-                    description = description,
-                    state = TaskState.DOING,
-                    projectId = it,
-                    tagId = tagId,
-                    sync = false
-                )
+                title,
+                description,
+                projectId,
+                tagId
             )
         }
     }

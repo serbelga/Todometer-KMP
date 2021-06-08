@@ -18,6 +18,4 @@ package com.sergiobelda.todometer.common.webservice.client
 
 import com.sergiobelda.todometer.common.webservice.TodometerApi
 
-class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
-
-}
+class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient

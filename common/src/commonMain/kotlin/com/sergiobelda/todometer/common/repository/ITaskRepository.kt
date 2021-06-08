@@ -28,7 +28,7 @@ interface ITaskRepository {
 
     fun getTasks(): Flow<Result<List<TaskTag>>>
 
-    suspend fun insertTask(task: Task)
+    suspend fun insertTask(title: String, description: String?, projectId: String, tagId: String?)
 
     suspend fun updateTask(task: Task)
 
