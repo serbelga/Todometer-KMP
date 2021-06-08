@@ -19,7 +19,6 @@ package com.sergiobelda.todometer.common.webservice
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.request.get
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.serialization.json.Json
 
@@ -48,7 +47,4 @@ class TodometerApi {
         const val TASK_PATH = "/tasks"
         const val TAG_PATH = "/tags"
     }
-
-    // TODO Remove
-    suspend fun getHelloWorldString(): String = client.get("http://192.168.0.22:8080")
 }
