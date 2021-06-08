@@ -16,7 +16,10 @@
 
 package com.sergiobelda.todometer.common.webservice.request
 
-data class TaskRequestBody(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class NewTaskRequestBody(
     val title: String,
     val description: String,
     val state: String,

@@ -23,6 +23,8 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
+import java.util.UUID
 
 class ProjectRepository(
     private val projectLocalDataSource: IProjectLocalDataSource,
@@ -33,36 +35,52 @@ class ProjectRepository(
         projectLocalDataSource.getProject(id)
 
     override fun getProjects(): Flow<Result<List<Project>>> =
-        projectLocalDataSource.getProjects()
+        projectLocalDataSource.getProjects().onEach { result ->
+            result.doIfSuccess { projects ->
+                projects.filter { !it.sync }.forEach { project ->
+                    synchronizeProjectRemotely(project.id, project.name, project.description)
+                }
+            }
+        }
 
     override suspend fun refreshProjects() {
         val projectsResult = projectRemoteDataSource.getProjects()
         projectsResult.doIfSuccess {
-            // TODO Insert or update if exists
-            projectLocalDataSource.updateProjects(it)
+            projectLocalDataSource.insertProjects(it)
         }
     }
-
-    /*
-    override fun getProjects(): Flow<Result<List<Project>>> = flow {
-        val projectsResult = projectRemoteDataSource.getProjects()
-        projectsResult.doIfSuccess {
-            // TODO Check if inserts or updates if exists
-            projectLocalDataSource.updateProjects(it)
-        }.doIfError { error ->
-            emit(error)
-        }
-        val result = projectLocalDataSource.getProjects().first()
-        emit(result)
-    }
-     */
 
     override suspend fun insertProject(name: String, description: String) {
-        val result = projectRemoteDataSource.insertProject(name, description)
+        val result = projectRemoteDataSource.insertProject(name = name, description = description)
         var sync = false
+        // TODO Set null to indicate DAO need to generate UUID
+        var projectId = UUID.randomUUID().toString()
         result.doIfSuccess {
             sync = true
+            projectId = it
         }
-        //projectLocalDataSource.insertProject(Project(name = name, description = description, sync = sync))
+        projectLocalDataSource.insertProject(
+            Project(
+                id = projectId,
+                name = name,
+                description = description,
+                sync = sync
+            )
+        )
+    }
+
+    private suspend fun synchronizeProjectRemotely(id: String, name: String, description: String) {
+        // TODO Insert or replace remote
+        val result = projectRemoteDataSource.insertProject(id = id, name = name, description = description)
+        result.doIfSuccess {
+            projectLocalDataSource.updateProject(
+                Project(
+                    id = id,
+                    name = name,
+                    description = description,
+                    sync = true
+                )
+            )
+        }
     }
 }

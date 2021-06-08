@@ -29,7 +29,7 @@ interface IProjectLocalDataSource {
 
     suspend fun insertProject(project: Project)
 
-    suspend fun updateProject(project: Project)
+    suspend fun insertProjects(projects: List<Project>)
 
-    suspend fun updateProjects(projects: List<Project>)
+    suspend fun updateProject(project: Project)
 }

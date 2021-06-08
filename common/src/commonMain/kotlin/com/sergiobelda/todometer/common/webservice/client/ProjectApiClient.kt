@@ -21,10 +21,14 @@ import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.ENDPOI
 import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.PROJECT_PATH
 import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.VERSION_1
 import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
-import com.sergiobelda.todometer.common.webservice.request.ProjectRequestBody
+import com.sergiobelda.todometer.common.webservice.request.NewProjectRequestBody
+import com.sergiobelda.todometer.common.webservice.request.UpdateProjectRequestBody
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import io.ktor.http.parametersOf
 
 class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClient {
@@ -39,10 +43,18 @@ class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClie
             parametersOf("id", id.toString())
         }
 
-    override suspend fun insertProject(name: String, description: String) =
-        todometerApi.client.post<Unit>(ENDPOINT_URL + VERSION_1 + PROJECT_PATH) {
-            body = ProjectRequestBody(name, description)
+    override suspend fun insertProject(id: String?, name: String, description: String): String =
+        todometerApi.client.post(ENDPOINT_URL + VERSION_1 + PROJECT_PATH) {
+            contentType(ContentType.Application.Json)
+            body = NewProjectRequestBody(id, name, description)
         }
+
+    override suspend fun updateProject(id: String, name: String, description: String) {
+        todometerApi.client.put<Unit>(ENDPOINT_URL + VERSION_1 + PROJECT_PATH) {
+            contentType(ContentType.Application.Json)
+            body = UpdateProjectRequestBody(id, name, description)
+        }
+    }
 
     override suspend fun deleteProject(id: Long) =
         todometerApi.client.delete<Unit>(ENDPOINT_URL + VERSION_1 + PROJECT_PATH) {

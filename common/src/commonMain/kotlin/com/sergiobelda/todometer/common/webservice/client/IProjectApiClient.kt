@@ -24,8 +24,9 @@ interface IProjectApiClient {
 
     suspend fun getProject(id: Long): ProjectApiModel
 
-    // TODO: Return Long
-    suspend fun insertProject(name: String, description: String)
+    suspend fun insertProject(id: String? = null, name: String, description: String): String
+
+    suspend fun updateProject(id: String, name: String, description: String)
 
     suspend fun deleteProject(id: Long)
 }

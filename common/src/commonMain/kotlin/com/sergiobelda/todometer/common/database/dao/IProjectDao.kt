@@ -28,11 +28,9 @@ interface IProjectDao {
 
     suspend fun insertProject(project: ProjectEntity)
 
+    suspend fun insertProjects(projects: List<ProjectEntity>)
+
     suspend fun updateProject(project: ProjectEntity)
 
     suspend fun updateProjects(projects: List<ProjectEntity>)
-
-    suspend fun insertOrReplace(project: ProjectEntity)
-
-    suspend fun insertOrReplace(projects: List<ProjectEntity>)
 }

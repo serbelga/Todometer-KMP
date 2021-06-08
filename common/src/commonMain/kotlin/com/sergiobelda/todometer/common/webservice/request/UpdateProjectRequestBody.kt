@@ -16,7 +16,11 @@
 
 package com.sergiobelda.todometer.common.webservice.request
 
-data class ProjectRequestBody(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class UpdateProjectRequestBody(
+    val id: String,
     val name: String,
     val description: String
 )
