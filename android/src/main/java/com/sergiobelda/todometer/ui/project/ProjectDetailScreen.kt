@@ -18,11 +18,12 @@ package com.sergiobelda.todometer.ui.project
 
 import androidx.compose.runtime.Composable
 import com.sergiobelda.todometer.viewmodel.MainViewModel
+import org.koin.androidx.compose.get
 
 @Composable
 fun ProjectDetailScreen(
     projectId: Int,
-    mainViewModel: MainViewModel,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    mainViewModel: MainViewModel = get()
 ) {
 }

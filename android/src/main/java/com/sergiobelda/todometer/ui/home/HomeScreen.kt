@@ -87,15 +87,16 @@ import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import com.sergiobelda.todometer.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.get
 import java.util.Locale
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
-    mainViewModel: MainViewModel,
     addProject: () -> Unit,
     addTask: () -> Unit,
-    openTask: (Long) -> Unit
+    openTask: (Long) -> Unit,
+    mainViewModel: MainViewModel = get()
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -284,7 +285,6 @@ fun SheetContainer(
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-
         }
         HorizontalDivider()
         LazyColumn {

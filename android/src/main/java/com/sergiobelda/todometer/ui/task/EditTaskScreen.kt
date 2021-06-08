@@ -48,12 +48,13 @@ import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
 import com.sergiobelda.todometer.viewmodel.MainViewModel
+import org.koin.androidx.compose.get
 
 @Composable
 fun EditTaskScreen(
     taskId: Long,
-    mainViewModel: MainViewModel,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    mainViewModel: MainViewModel = get()
 ) {
     var taskState: TaskTag? by remember { mutableStateOf(null) }
     val taskResultState = mainViewModel.getTask(taskId).observeAsState()
