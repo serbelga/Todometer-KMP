@@ -60,7 +60,7 @@ fun ToDometerApp() {
             arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
         ) { navBackStackEntry ->
             TaskDetailScreen(
-                taskId = navBackStackEntry.arguments?.getLong(TaskId) ?: 0,
+                taskId = navBackStackEntry.arguments?.getString(TaskId) ?: "",
                 actions.editTask,
                 actions.navigateUp
             )
@@ -76,7 +76,7 @@ fun ToDometerApp() {
             arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
         ) { backStackEntry ->
             EditTaskScreen(
-                taskId = backStackEntry.arguments?.getLong(TaskId) ?: 0,
+                taskId = backStackEntry.arguments?.getString(TaskId) ?: "",
                 actions.navigateUp
             )
         }

@@ -53,10 +53,10 @@ import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 @Composable
 fun TaskItem(
     task: TaskTag,
-    onDoingClick: (Long) -> Unit,
-    onDoneClick: (Long) -> Unit,
-    onClick: (Long) -> Unit,
-    onLongClick: (Long) -> Unit
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onClick: (String) -> Unit,
+    onLongClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -109,19 +109,21 @@ fun TaskItem(
                     }
                 }
             }
-            Row {
-                Box(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .clip(CircleShape)
-                        .background(TodometerColors.composeColorOf(task.tag.color))
-                )
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text(
-                        text = task.tag.name,
-                        style = TodometerTypography.caption,
-                        modifier = Modifier.padding(start = 8.dp)
+            task.tag?.let { tag ->
+                Row {
+                    Box(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .clip(CircleShape)
+                            .background(TodometerColors.composeColorOf(tag.color))
                     )
+                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                        Text(
+                            text = tag.name,
+                            style = TodometerTypography.caption,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
                 }
             }
         }

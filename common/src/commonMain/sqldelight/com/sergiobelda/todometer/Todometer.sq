@@ -1,30 +1,33 @@
 CREATE TABLE ProjectEntity (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
 CREATE TABLE TagEntity (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL,
     color TEXT NOT NULL,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
 CREATE TABLE TaskEntity (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
     state TEXT NOT NULL,
-    project_id INTEGER NOT NULL,
-    tag_id INTEGER NOT NULL,
+    project_id TEXT NOT NULL,
+    tag_id TEXT,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0,
     FOREIGN KEY(project_id) REFERENCES ProjectEntity(id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(tag_id) REFERENCES TagEntity(id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 CREATE VIEW TaskTagView AS
-    SELECT TaskEntity.*, TagEntity.color AS tag_color, TagEntity.name AS tag_name
+    SELECT TaskEntity.*, TagEntity.color AS tag_color, TagEntity.name AS tag_name, TagEntity.sync AS tag_sync
     FROM TaskEntity LEFT JOIN TagEntity ON TaskEntity.tag_id = TagEntity.id
-    WHERE TagEntity.name IS NOT NULL AND TagEntity.color IS NOT NULL
+    WHERE TagEntity.name IS NOT NULL AND TagEntity.color IS NOT NULL AND TagEntity.sync IS NOT NULL
     ORDER BY TaskEntity.id;
 
 -- CREATE VIEW TaskProjectView AS
@@ -32,9 +35,9 @@ CREATE VIEW TaskTagView AS
 --     FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
 --     ORDER BY project_id;
 
-INSERT INTO ProjectEntity VALUES (1, "My tasks", "Some description");
-INSERT INTO TagEntity VALUES (1, "RED", "Other");
-INSERT INTO TaskEntity VALUES (1, "Task one", "Task description", "DOING", 1, 1);
+-- INSERT INTO ProjectEntity VALUES (1, "My tasks", "Some description", 0);
+-- INSERT INTO TagEntity VALUES (1, "RED", "Other", 0);
+-- INSERT INTO TaskEntity VALUES (1, "Task one", "Task description", "DOING", 1, 1, 0);
 
 selectTask:
 SELECT *
@@ -52,8 +55,8 @@ FROM TaskTagView;
 
 insertTask:
 INSERT INTO TaskEntity
-(title, description, state, project_id, tag_id)
-VALUES (?, ?, ?, ?, ?);
+(id, title, description, state, project_id, tag_id, sync)
+VALUES (?, ?, ?, ?, ?, ?, ?);
 
 updateTask:
 UPDATE TaskEntity
@@ -84,8 +87,21 @@ FROM ProjectEntity;
 
 insertProject:
 INSERT INTO ProjectEntity
-(name, description)
-VALUES (?, ?);
+(id, name, description, sync)
+VALUES (?, ?, ?, ?);
+
+insertOrReplaceProject:
+INSERT OR REPLACE INTO ProjectEntity
+(id, name, description, sync)
+VALUES (?,?, ?, ?);
+
+updateProject:
+UPDATE ProjectEntity
+SET
+    name = ?,
+    description = ?,
+    sync = ?
+WHERE id = ?;
 
 selectAllTags:
 SELECT *

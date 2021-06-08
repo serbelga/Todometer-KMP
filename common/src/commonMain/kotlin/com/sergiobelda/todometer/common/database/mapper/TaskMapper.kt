@@ -24,27 +24,33 @@ import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskTag
 
-object TaskMapper {
-
-    fun TaskTagView.toDomain() = TaskTag(
-        id,
-        title,
-        description,
-        taskStateValueOf(state),
-        project_id,
-        tag = Tag(
-            tag_id,
+fun TaskTagView.toDomain() = TaskTag(
+    id,
+    title,
+    description,
+    taskStateValueOf(state),
+    project_id,
+    tag = tag_id?.let {
+        Tag(
+            it,
             colorValueOf(tag_color),
-            tag_name
+            tag_name,
+            tag_sync
         )
-    )
+    },
+    sync
+)
 
-    fun Task.toEntity() = TaskEntity(
-        id,
-        title,
-        description,
-        state.toString(),
-        projectId,
-        tagId
-    )
+fun Iterable<TaskTagView>.toDomain() = this.map {
+    it.toDomain()
 }
+
+fun Task.toEntity() = TaskEntity(
+    id,
+    title,
+    description,
+    state.toString(),
+    projectId,
+    tagId,
+    sync
+)

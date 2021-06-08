@@ -17,10 +17,11 @@
 package com.sergiobelda.todometer.common.model
 
 data class Task(
-    val id: Long = 0,
+    val id: String,
     val title: String,
     val description: String?,
     val state: TaskState = TaskState.DOING,
-    val projectId: Long,
-    val tagId: Long
+    val projectId: String,
+    val tagId: String?,
+    val sync: Boolean
 )

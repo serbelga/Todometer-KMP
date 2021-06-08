@@ -34,6 +34,7 @@ import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import com.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -49,6 +50,7 @@ class MainViewModel(
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val setProjectSelectedUseCase: SetProjectSelectedUseCase,
+    private val refreshProjectsUseCase: RefreshProjectsUseCase,
     getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
     getTasksUseCase: GetTasksUseCase,
@@ -63,12 +65,18 @@ class MainViewModel(
 
     val tags: LiveData<Result<List<Tag>>> = getTagsUseCase().asLiveData()
 
-    fun getTask(id: Long) = getTaskUseCase(id).asLiveData()
+    init {
+        viewModelScope.launch {
+            refreshProjectsUseCase()
+        }
+    }
+
+    fun getTask(id: String) = getTaskUseCase(id).asLiveData()
 
     fun insertTask(
         title: String,
         description: String?,
-        tagId: Long
+        tagId: String
     ) = viewModelScope.launch {
         insertTaskUseCase(
             title,
@@ -81,7 +89,7 @@ class MainViewModel(
         updateTaskUseCase(task)
     }
 
-    fun deleteTask(id: Long) = viewModelScope.launch {
+    fun deleteTask(id: String) = viewModelScope.launch {
         deleteTaskUseCase(id)
     }
 
@@ -89,15 +97,15 @@ class MainViewModel(
         insertProjectUseCase(name, description)
     }
 
-    fun setTaskDoing(id: Long) = viewModelScope.launch {
+    fun setTaskDoing(id: String) = viewModelScope.launch {
         setTaskDoingUseCase(id)
     }
 
-    fun setTaskDone(id: Long) = viewModelScope.launch {
+    fun setTaskDone(id: String) = viewModelScope.launch {
         setTaskDoneUseCase(id)
     }
 
-    fun setProjectSelected(id: Long) = viewModelScope.launch {
+    fun setProjectSelected(id: String) = viewModelScope.launch {
         setProjectSelectedUseCase(id)
     }
 }

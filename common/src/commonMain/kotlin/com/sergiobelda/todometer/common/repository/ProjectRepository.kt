@@ -16,22 +16,70 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.datasource.IProjectLocalDatabaseSource
 import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
+import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
+import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
+import java.util.UUID
 
 class ProjectRepository(
-    private val projectLocalDatabaseSource: IProjectLocalDatabaseSource
+    private val projectLocalDataSource: IProjectLocalDataSource,
+    private val projectRemoteDataSource: IProjectRemoteDataSource
 ) : IProjectRepository {
 
-    override fun getProject(id: Long): Flow<Result<ProjectTasks?>> =
-        projectLocalDatabaseSource.getProject(id)
+    override fun getProject(id: String): Flow<Result<ProjectTasks?>> =
+        projectLocalDataSource.getProject(id)
 
     override fun getProjects(): Flow<Result<List<Project>>> =
-        projectLocalDatabaseSource.getProjects()
+        projectLocalDataSource.getProjects().onEach { result ->
+            result.doIfSuccess { projects ->
+                projects.filter { !it.sync }.forEach { project ->
+                    synchronizeProjectRemotely(project.id, project.name, project.description)
+                }
+            }
+        }
 
-    override suspend fun insertProject(project: Project) =
-        projectLocalDatabaseSource.insertProject(project)
+    override suspend fun refreshProjects() {
+        val projectsResult = projectRemoteDataSource.getProjects()
+        projectsResult.doIfSuccess {
+            projectLocalDataSource.insertProjects(it)
+        }
+    }
+
+    override suspend fun insertProject(name: String, description: String) {
+        val result = projectRemoteDataSource.insertProject(name = name, description = description)
+        var sync = false
+        // TODO Set null to indicate DAO need to generate UUID
+        var projectId = UUID.randomUUID().toString()
+        result.doIfSuccess {
+            sync = true
+            projectId = it
+        }
+        projectLocalDataSource.insertProject(
+            Project(
+                id = projectId,
+                name = name,
+                description = description,
+                sync = sync
+            )
+        )
+    }
+
+    private suspend fun synchronizeProjectRemotely(id: String, name: String, description: String) {
+        val result = projectRemoteDataSource.insertProject(id = id, name = name, description = description)
+        result.doIfSuccess {
+            projectLocalDataSource.updateProject(
+                Project(
+                    id = id,
+                    name = name,
+                    description = description,
+                    sync = true
+                )
+            )
+        }
+    }
 }

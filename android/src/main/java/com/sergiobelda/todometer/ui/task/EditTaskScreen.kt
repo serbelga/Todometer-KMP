@@ -52,7 +52,7 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun EditTaskScreen(
-    taskId: Long,
+    taskId: String,
     navigateUp: () -> Unit,
     mainViewModel: MainViewModel = getViewModel()
 ) {
@@ -122,7 +122,8 @@ fun EditTaskScreen(
                                     description = taskDescription,
                                     state = task.state,
                                     projectId = task.projectId,
-                                    tagId = task.tag.id
+                                    tagId = task.tag?.id,
+                                    sync = false
                                 )
                             )
                             navigateUp()

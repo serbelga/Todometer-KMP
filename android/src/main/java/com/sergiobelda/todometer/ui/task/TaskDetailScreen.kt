@@ -58,8 +58,8 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun TaskDetailScreen(
-    taskId: Long,
-    editTask: (Long) -> Unit,
+    taskId: String,
+    editTask: (String) -> Unit,
     navigateUp: () -> Unit,
     mainViewModel: MainViewModel = getViewModel()
 ) {
@@ -124,7 +124,9 @@ fun TaskDetailBody(scrollState: ScrollState, task: TaskTag) {
                 }
             }
             HorizontalDivider()
-            TagItem(task.tag)
+            task.tag?.let {
+                TagItem(it)
+            }
             if (!task.description.isNullOrBlank()) {
                 Text(
                     text = task.description ?: "",

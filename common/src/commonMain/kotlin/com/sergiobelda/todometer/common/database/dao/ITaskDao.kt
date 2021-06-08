@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITaskDao {
 
-    fun getTask(id: Long): Flow<TaskTagView?>
+    fun getTask(id: String): Flow<TaskTagView?>
 
     fun getTasks(): Flow<List<TaskTagView>>
 
@@ -31,7 +31,7 @@ interface ITaskDao {
 
     suspend fun updateTask(task: TaskEntity)
 
-    suspend fun updateTaskState(id: Long, state: TaskState)
+    suspend fun updateTaskState(id: String, state: TaskState)
 
-    suspend fun deleteTask(id: Long)
+    suspend fun deleteTask(id: String)
 }

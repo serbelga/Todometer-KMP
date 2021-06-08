@@ -95,12 +95,12 @@ import java.util.Locale
 fun HomeScreen(
     addProject: () -> Unit,
     addTask: () -> Unit,
-    openTask: (Long) -> Unit,
+    openTask: (String) -> Unit,
     mainViewModel: MainViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val selectedTask = remember { mutableStateOf(0L) }
+    val selectedTask = remember { mutableStateOf("") }
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
@@ -243,10 +243,10 @@ fun RemoveTaskAlertDialog(
 
 @Composable
 fun SheetContainer(
-    selectedProjectId: Long?,
+    selectedProjectId: String?,
     projectList: List<Project>,
     addProject: () -> Unit,
-    selectProject: (Long) -> Unit,
+    selectProject: (String) -> Unit,
     tagList: List<Tag>
 ) {
     Column(modifier = Modifier.height(480.dp)) {
@@ -303,7 +303,7 @@ fun SheetContainer(
 fun ProjectListItem(
     project: Project,
     selected: Boolean,
-    onItemClick: (Long) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     val background = if (selected) {
         Modifier.background(TodometerColors.primarySelected)
@@ -358,10 +358,10 @@ fun TagItem(tag: Tag) {
 @Composable
 fun TasksListView(
     tasks: List<TaskTag>,
-    onDoingClick: (Long) -> Unit,
-    onDoneClick: (Long) -> Unit,
-    onTaskItemClick: (Long) -> Unit,
-    onTaskItemLongClick: (Long) -> Unit
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onTaskItemClick: (String) -> Unit,
+    onTaskItemLongClick: (String) -> Unit
 ) {
     LazyColumn {
         itemsIndexed(tasks) { index, task ->

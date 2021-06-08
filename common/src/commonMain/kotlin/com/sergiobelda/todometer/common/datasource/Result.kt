@@ -1,18 +1,33 @@
+/*
+ * Copyright 2021 Sergio Belda
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.sergiobelda.todometer.common.datasource
 
-// TODO: Move
 sealed class Result<out A> {
     data class Success<out A>(val value: A?) : Result<A>()
     data class Error(
         val code: Int? = null,
-        val error: String? = null,
+        val message: String? = null,
         val exception: Throwable? = null
     ) : Result<Nothing>()
     object Loading : Result<Nothing>()
 
-    fun <B> resultMap(m: ((A) -> B)): Result<B> = when (this) {
+    fun <B> map(m: ((A) -> B)): Result<B> = when (this) {
         is Success -> Success(this.value?.let { m(it) })
-        is Error -> Error(this.code, this.error, this.exception)
+        is Error -> Error(this.code, this.message, this.exception)
         is Loading -> Loading
     }
 }
@@ -28,8 +43,8 @@ inline fun <reified A> Result<A>.doIfSuccess(callback: (value: A) -> Unit): Resu
 /**
  * Call the specific action in [callback] if the result is [Result.Error].
  */
-inline fun <reified A> Result<A>.doIfError(callback: (code: Int?, error: String?, exception: Throwable?) -> Unit): Result<A> {
-    (this as? Result.Error)?.let { callback(it.code, it.error, it.exception) }
+inline fun <reified A> Result<A>.doIfError(callback: (error: Result.Error) -> Unit): Result<A> {
+    (this as? Result.Error)?.let { callback(it) }
     return this
 }
 

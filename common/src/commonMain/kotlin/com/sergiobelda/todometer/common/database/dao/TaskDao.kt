@@ -31,7 +31,7 @@ class TaskDao : ITaskDao, KoinComponent {
 
     private val database: TodometerDatabase by inject()
 
-    override fun getTask(id: Long): Flow<TaskTagView?> =
+    override fun getTask(id: String): Flow<TaskTagView?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
     override fun getTasks(): Flow<List<TaskTagView>> =
@@ -39,11 +39,13 @@ class TaskDao : ITaskDao, KoinComponent {
 
     override suspend fun insertTask(task: TaskEntity) =
         database.todometerQueries.insertTask(
+            id = task.id,
             title = task.title,
             description = task.description,
             state = task.state,
             tag_id = task.tag_id,
-            project_id = task.project_id
+            project_id = task.project_id,
+            sync = task.sync
         )
 
     override suspend fun updateTask(task: TaskEntity) =
@@ -54,12 +56,12 @@ class TaskDao : ITaskDao, KoinComponent {
             tag_id = task.tag_id
         )
 
-    override suspend fun updateTaskState(id: Long, state: TaskState) {
+    override suspend fun updateTaskState(id: String, state: TaskState) {
         database.todometerQueries.updateTaskState(
             id = id,
             state = state.toString()
         )
     }
 
-    override suspend fun deleteTask(id: Long) = database.todometerQueries.deleteTask(id)
+    override suspend fun deleteTask(id: String) = database.todometerQueries.deleteTask(id)
 }

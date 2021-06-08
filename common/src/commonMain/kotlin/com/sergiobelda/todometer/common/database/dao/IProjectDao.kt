@@ -24,7 +24,13 @@ interface IProjectDao {
 
     fun getProjects(): Flow<List<ProjectEntity>>
 
-    fun getProject(id: Long): Flow<ProjectTasksRelation?>
+    fun getProject(id: String): Flow<ProjectTasksRelation?>
 
     suspend fun insertProject(project: ProjectEntity)
+
+    suspend fun insertProjects(projects: List<ProjectEntity>)
+
+    suspend fun updateProject(project: ProjectEntity)
+
+    suspend fun updateProjects(projects: List<ProjectEntity>)
 }

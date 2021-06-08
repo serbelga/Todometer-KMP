@@ -16,7 +16,6 @@
 
 package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 
 class InsertProjectUseCase(
@@ -24,7 +23,5 @@ class InsertProjectUseCase(
 ) {
 
     suspend operator fun invoke(name: String, description: String) =
-        projectRepository.insertProject(
-            Project(name = name, description = description)
-        )
+        projectRepository.insertProject(name, description)
 }

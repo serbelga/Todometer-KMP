@@ -24,15 +24,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITaskRepository {
 
-    fun getTask(id: Long): Flow<Result<TaskTag?>>
+    fun getTask(id: String): Flow<Result<TaskTag?>>
 
     fun getTasks(): Flow<Result<List<TaskTag>>>
 
-    suspend fun insertTask(task: Task)
+    suspend fun insertTask(title: String, description: String?, projectId: String, tagId: String?)
 
     suspend fun updateTask(task: Task)
 
-    suspend fun updateTaskState(id: Long, state: TaskState)
+    suspend fun updateTaskState(id: String, state: TaskState)
 
-    suspend fun deleteTask(id: Long)
+    suspend fun deleteTask(id: String)
 }

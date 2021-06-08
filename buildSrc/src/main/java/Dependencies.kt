@@ -29,6 +29,7 @@ object Versions {
     const val koin = "3.0.1"
     const val kotlin = "1.4.32"
     const val ktLint = "0.41.0"
+    const val ktor = "1.6.0"
     const val ktxVersion = "1.3.2"
     const val lifecycle = "2.3.1"
     const val materialComponents = "1.3.0"
@@ -46,6 +47,8 @@ object Libs {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
 
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+
+    const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
 
     const val ktLint = "com.pinterest:ktlint:${Versions.ktLint}"
 
@@ -111,6 +114,15 @@ object Libs {
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
+    }
+
+    object Ktor {
+        const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
+        const val clientApache = "io.ktor:ktor-client-apache:${Versions.ktor}"
+        const val clientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
+        const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
+        const val clientJson = "io.ktor:ktor-client-json:${Versions.ktor}"
+        const val clientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
     }
 
     object SqlDelight {
