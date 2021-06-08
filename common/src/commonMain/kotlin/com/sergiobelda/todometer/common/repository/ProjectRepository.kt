@@ -70,7 +70,6 @@ class ProjectRepository(
     }
 
     private suspend fun synchronizeProjectRemotely(id: String, name: String, description: String) {
-        // TODO Insert or replace remote
         val result = projectRemoteDataSource.insertProject(id = id, name = name, description = description)
         result.doIfSuccess {
             projectLocalDataSource.updateProject(
