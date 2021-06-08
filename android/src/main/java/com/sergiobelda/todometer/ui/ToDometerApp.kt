@@ -37,15 +37,14 @@ import com.sergiobelda.todometer.ui.project.ProjectDetailScreen
 import com.sergiobelda.todometer.ui.task.AddTaskScreen
 import com.sergiobelda.todometer.ui.task.EditTaskScreen
 import com.sergiobelda.todometer.ui.task.TaskDetailScreen
-import com.sergiobelda.todometer.viewmodel.MainViewModel
 
 @Composable
-fun ToDometerApp(mainViewModel: MainViewModel) {
+fun ToDometerApp() {
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
     NavHost(navController, startDestination = Home) {
         composable(Home) {
-            HomeScreen(mainViewModel, actions.addProject, actions.addTask, actions.openTask)
+            HomeScreen(actions.addProject, actions.addTask, actions.openTask)
         }
         composable(
             "$ProjectDetail/{$ProjectId}",
@@ -53,7 +52,6 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
         ) { navBackStackEntry ->
             ProjectDetailScreen(
                 projectId = navBackStackEntry.arguments?.getInt(ProjectId) ?: 0,
-                mainViewModel,
                 navigateUp = actions.navigateUp
             )
         }
@@ -63,16 +61,15 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
         ) { navBackStackEntry ->
             TaskDetailScreen(
                 taskId = navBackStackEntry.arguments?.getString(TaskId) ?: "",
-                mainViewModel,
                 actions.editTask,
                 actions.navigateUp
             )
         }
         composable(AddProject) {
-            AddProjectScreen(mainViewModel, actions.navigateUp)
+            AddProjectScreen(actions.navigateUp)
         }
         composable(AddTask) {
-            AddTaskScreen(mainViewModel, actions.navigateUp)
+            AddTaskScreen(actions.navigateUp)
         }
         composable(
             "$EditTask/{$TaskId}",
@@ -80,7 +77,6 @@ fun ToDometerApp(mainViewModel: MainViewModel) {
         ) { backStackEntry ->
             EditTaskScreen(
                 taskId = backStackEntry.arguments?.getString(TaskId) ?: "",
-                mainViewModel,
                 actions.navigateUp
             )
         }

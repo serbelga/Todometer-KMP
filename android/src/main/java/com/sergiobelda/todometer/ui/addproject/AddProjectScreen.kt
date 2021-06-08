@@ -42,11 +42,12 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.viewmodel.MainViewModel
+import org.koin.androidx.compose.get
 
 @Composable
 fun AddProjectScreen(
-    mainViewModel: MainViewModel,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    mainViewModel: MainViewModel = get()
 ) {
     var projectName by rememberSaveable { mutableStateOf("") }
     var projectDescription by rememberSaveable { mutableStateOf("") }
