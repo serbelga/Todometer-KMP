@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.util.ProgressUtil
-import java.util.Locale
 
 @Composable
 fun ProjectProgress(
@@ -51,7 +50,7 @@ fun ProjectProgress(
     ) {
         // TODO: 02/04/2021 Max lines
         Text(
-            selectedProject?.name?.toUpperCase(Locale.getDefault()) ?: "-",
+            selectedProject?.name?.toUpperCase() ?: "-",
             style = TodometerTypography.overline
         )
         Text(
