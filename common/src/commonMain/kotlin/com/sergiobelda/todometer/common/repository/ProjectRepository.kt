@@ -22,9 +22,9 @@ import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
+import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
-import java.util.UUID
 
 class ProjectRepository(
     private val projectLocalDataSource: IProjectLocalDataSource,
@@ -54,7 +54,7 @@ class ProjectRepository(
         val result = projectRemoteDataSource.insertProject(name = name, description = description)
         var sync = false
         // TODO Set null to indicate DAO need to generate UUID
-        var projectId = UUID.randomUUID().toString()
+        var projectId = randomUUIDString()
         result.doIfSuccess {
             sync = true
             projectId = it

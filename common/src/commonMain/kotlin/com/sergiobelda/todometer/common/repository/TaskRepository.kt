@@ -22,8 +22,8 @@ import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
+import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
-import java.util.UUID
 
 class TaskRepository(
     private val taskLocalDataSource: ITaskLocalDataSource,
@@ -44,7 +44,7 @@ class TaskRepository(
     ) {
         taskLocalDataSource.insertTask(
             Task(
-                id = UUID.randomUUID().toString(),
+                id = randomUUIDString(),
                 title = title,
                 description = description,
                 projectId = projectId,
