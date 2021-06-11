@@ -85,4 +85,7 @@ class ProjectDao : IProjectDao, KoinComponent {
             )
         }
     }
+
+    override suspend fun deleteProject(id: String) =
+        database.todometerQueries.deleteProject(id)
 }

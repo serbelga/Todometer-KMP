@@ -39,15 +39,14 @@ class ProjectLocalDataSource(
             Result.Success(projectTaskRelation?.toDomain())
         }
 
-    override suspend fun insertProject(project: Project) {
+    override suspend fun insertProject(project: Project) =
         projectDao.insertProject(project.toEntity())
-    }
 
-    override suspend fun insertProjects(projects: List<Project>) {
+    override suspend fun insertProjects(projects: List<Project>) =
         projectDao.insertProjects(projects.map { it.toEntity() })
-    }
 
-    override suspend fun updateProject(project: Project) {
+    override suspend fun updateProject(project: Project) =
         projectDao.updateProject(project.toEntity())
-    }
+
+    override suspend fun deleteProject(id: String) = projectDao.deleteProject(id)
 }

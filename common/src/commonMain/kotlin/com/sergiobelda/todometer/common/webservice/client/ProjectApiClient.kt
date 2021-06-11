@@ -21,6 +21,7 @@ import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.ENDPOI
 import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.PROJECT_PATH
 import com.sergiobelda.todometer.common.webservice.TodometerApi.Companion.VERSION_1
 import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import com.sergiobelda.todometer.common.webservice.model.ProjectTasksApiModel
 import com.sergiobelda.todometer.common.webservice.request.NewProjectRequestBody
 import com.sergiobelda.todometer.common.webservice.request.UpdateProjectRequestBody
 import io.ktor.client.request.delete
@@ -36,11 +37,11 @@ class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClie
     override suspend fun getProjects(): List<ProjectApiModel> =
         todometerApi.client.get(ENDPOINT_URL + VERSION_1 + PROJECT_PATH)
 
-    override suspend fun getProject(id: Long): ProjectApiModel =
+    override suspend fun getProject(id: String): ProjectTasksApiModel =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + PROJECT_PATH
         ) {
-            parametersOf("id", id.toString())
+            parametersOf("id", id)
         }
 
     override suspend fun insertProject(id: String?, name: String, description: String): String =

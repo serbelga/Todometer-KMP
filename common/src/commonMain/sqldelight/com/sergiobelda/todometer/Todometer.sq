@@ -39,6 +39,8 @@ CREATE VIEW TaskTagView AS
 -- INSERT INTO TagEntity VALUES (1, "RED", "Other", 0);
 -- INSERT INTO TaskEntity VALUES (1, "Task one", "Task description", "DOING", 1, 1, 0);
 
+-------------------- Task
+
 selectTask:
 SELECT *
 FROM TaskTagView
@@ -76,6 +78,8 @@ deleteTask:
 DELETE FROM TaskEntity
 WHERE id = ?;
 
+-------------------- Project
+
 selectProject:
 SELECT *
 FROM ProjectEntity
@@ -102,6 +106,12 @@ SET
     description = ?,
     sync = ?
 WHERE id = ?;
+
+deleteProject:
+DELETE FROM ProjectEntity
+WHERE id = ?;
+
+-------------------- Tags
 
 selectAllTags:
 SELECT *

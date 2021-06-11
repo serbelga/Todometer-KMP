@@ -32,4 +32,6 @@ interface IProjectLocalDataSource {
     suspend fun insertProjects(projects: List<Project>)
 
     suspend fun updateProject(project: Project)
+
+    suspend fun deleteProject(id: String)
 }

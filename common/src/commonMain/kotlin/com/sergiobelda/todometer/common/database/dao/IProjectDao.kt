@@ -33,4 +33,6 @@ interface IProjectDao {
     suspend fun updateProject(project: ProjectEntity)
 
     suspend fun updateProjects(projects: List<ProjectEntity>)
+
+    suspend fun deleteProject(id: String)
 }

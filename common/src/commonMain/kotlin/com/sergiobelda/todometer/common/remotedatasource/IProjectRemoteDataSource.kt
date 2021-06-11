@@ -18,10 +18,13 @@ package com.sergiobelda.todometer.common.remotedatasource
 
 import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
 
 interface IProjectRemoteDataSource {
 
     suspend fun getProjects(): Result<List<Project>>
+
+    suspend fun getProject(id: String): Result<ProjectTasks>
 
     suspend fun insertProject(id: String? = null, name: String, description: String): Result<String>
 

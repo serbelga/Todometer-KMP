@@ -18,11 +18,11 @@ package com.sergiobelda.todometer.common.database.mapper
 
 import com.sergiobelda.todometer.TaskEntity
 import com.sergiobelda.todometer.TaskTagView
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.colorValueOf
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.taskStateValueOf
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.TypeConverters.colorValueOf
+import com.sergiobelda.todometer.common.model.TypeConverters.taskStateValueOf
 
 fun TaskTagView.toDomain() = TaskTag(
     id,

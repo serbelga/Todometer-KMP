@@ -15,3 +15,22 @@
  */
 
 package com.sergiobelda.todometer.common.webservice.mapper
+
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.TypeConverters.taskStateValueOf
+import com.sergiobelda.todometer.common.webservice.model.TaskTagApiModel
+
+fun TaskTagApiModel.toDomain() =
+    TaskTag(
+        id = id,
+        title = title,
+        description = description,
+        state = taskStateValueOf(state),
+        projectId = projectId,
+        tag = tag?.toDomain(),
+        sync = true
+    )
+
+fun Iterable<TaskTagApiModel>.toTaskTagList() = this.map {
+    it.toDomain()
+}
