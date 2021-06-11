@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.database
+package com.sergiobelda.todometer.common.model
 
-import com.sergiobelda.todometer.common.model.Color
-import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.extensions.enumValueOrDefaultOf
 
-object DatabaseTypeConverters {
+object TypeConverters {
 
-    fun taskStateValueOf(name: String): TaskState = enumValueOf(name)
+    fun taskStateValueOf(name: String): TaskState = enumValueOrDefaultOf(name, TaskState.UNKNOWN)
 
-    fun colorValueOf(color: String): Color = enumValueOf(color)
+    fun colorValueOf(color: String): Color = enumValueOrDefaultOf(color, Color.GRAY)
 }

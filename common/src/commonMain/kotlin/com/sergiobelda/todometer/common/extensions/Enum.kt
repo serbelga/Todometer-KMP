@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.model
+package com.sergiobelda.todometer.common.extensions
 
-enum class TaskState {
-    UNKNOWN,
-    DOING,
-    DONE;
+/**
+ * Returns an enum entry or null with specified [name].
+ */
+inline fun <reified T : Enum<T>> safeEnumValueOf(name: String): T? =
+    enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) }
 
-    override fun toString(): String {
-        return name
-    }
-}
+/**
+ * Returns an enum entry with specified [name] or [default].
+ */
+inline fun <reified T : Enum<T>> enumValueOrDefaultOf(name: String, default: T): T =
+    enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) } ?: default
