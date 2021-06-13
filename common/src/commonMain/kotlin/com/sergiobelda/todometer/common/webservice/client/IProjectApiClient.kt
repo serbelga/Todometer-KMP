@@ -17,17 +17,16 @@
 package com.sergiobelda.todometer.common.webservice.client
 
 import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
-import com.sergiobelda.todometer.common.webservice.model.ProjectTasksApiModel
 
 interface IProjectApiClient {
 
     suspend fun getProjects(): List<ProjectApiModel>
 
-    suspend fun getProject(id: String): ProjectTasksApiModel
+    suspend fun getProject(id: String): ProjectApiModel
 
     suspend fun insertProject(id: String? = null, name: String, description: String): String
 
     suspend fun updateProject(id: String, name: String, description: String)
 
-    suspend fun deleteProject(id: Long)
+    suspend fun deleteProject(id: String)
 }

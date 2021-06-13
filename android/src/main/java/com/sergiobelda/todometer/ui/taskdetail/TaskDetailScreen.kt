@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.task
+package com.sergiobelda.todometer.ui.taskdetail
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
@@ -53,7 +53,6 @@ import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.ui.home.TagItem
-import com.sergiobelda.todometer.viewmodel.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -61,11 +60,11 @@ fun TaskDetailScreen(
     taskId: String,
     editTask: (String) -> Unit,
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = getViewModel()
+    taskDetailViewModel: TaskDetailViewModel = getViewModel()
 ) {
     val scrollState = rememberScrollState(0)
     var taskState: TaskTag? by remember { mutableStateOf(null) }
-    val taskResultState = mainViewModel.getTask(taskId).observeAsState()
+    val taskResultState = taskDetailViewModel.getTask(taskId).observeAsState()
     taskResultState.value?.let { result ->
         result.doIfSuccess { taskState = it }
     }

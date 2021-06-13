@@ -27,7 +27,7 @@ CREATE TABLE TaskEntity (
 CREATE VIEW TaskTagView AS
     SELECT TaskEntity.*, TagEntity.color AS tag_color, TagEntity.name AS tag_name, TagEntity.sync AS tag_sync
     FROM TaskEntity LEFT JOIN TagEntity ON TaskEntity.tag_id = TagEntity.id
-    WHERE TagEntity.name IS NOT NULL AND TagEntity.color IS NOT NULL AND TagEntity.sync IS NOT NULL
+    -- WHERE TagEntity.name IS NOT NULL AND TagEntity.color IS NOT NULL AND TagEntity.sync IS NOT NULL
     ORDER BY TaskEntity.id;
 
 -- CREATE VIEW TaskProjectView AS
@@ -36,7 +36,7 @@ CREATE VIEW TaskTagView AS
 --     ORDER BY project_id;
 
 -- INSERT INTO ProjectEntity VALUES (1, "My tasks", "Some description", 0);
--- INSERT INTO TagEntity VALUES (1, "RED", "Other", 0);
+-- INSERT INTO TagEntity VALUES ("b3d3975f-3cbc-496b-bb39-b1548b791c6e", "RED", "Other", 0);
 -- INSERT INTO TaskEntity VALUES (1, "Task one", "Task description", "DOING", 1, 1, 0);
 
 -------------------- Task
@@ -55,8 +55,8 @@ selectAllTasks:
 SELECT *
 FROM TaskTagView;
 
-insertTask:
-INSERT INTO TaskEntity
+insertOrReplaceTask:
+INSERT OR REPLACE INTO TaskEntity
 (id, title, description, state, project_id, tag_id, sync)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 

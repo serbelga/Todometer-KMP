@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.task
+package com.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,13 +43,12 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
-import com.sergiobelda.todometer.viewmodel.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddTaskScreen(
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = getViewModel()
+    addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -103,7 +102,7 @@ fun AddTaskScreen(
                     if (taskTitle.isBlank()) {
                         taskTitleInputError = true
                     } else {
-                        mainViewModel.insertTask(
+                        addTaskViewModel.insertTask(
                             title = taskTitle,
                             description = taskDescription,
                             tagId = "" // TODO: Update

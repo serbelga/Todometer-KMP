@@ -29,7 +29,7 @@ val remoteDataSourceModule = module {
         ProjectRemoteDataSource(get())
     }
     single<ITaskRemoteDataSource> {
-        TaskRemoteDataSource()
+        TaskRemoteDataSource(get())
     }
     single<ITagRemoteDataSource> {
         TagRemoteDataSource()

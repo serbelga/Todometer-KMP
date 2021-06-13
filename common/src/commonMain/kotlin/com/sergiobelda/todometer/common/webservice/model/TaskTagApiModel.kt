@@ -25,5 +25,5 @@ data class TaskTagApiModel(
     val description: String?,
     val state: String,
     val projectId: String,
-    val tag: TagApiModel?
+    val tag: TagApiModel? = null
 )

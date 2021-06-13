@@ -30,12 +30,13 @@ fun TaskTagView.toDomain() = TaskTag(
     description,
     taskStateValueOf(state),
     project_id,
+    // TODO: Implement check not null for different variables
     tag = tag_id?.let {
         Tag(
             it,
-            colorValueOf(tag_color),
-            tag_name,
-            tag_sync
+            colorValueOf(tag_color!!),
+            tag_name!!,
+            tag_sync!!
         )
     },
     sync

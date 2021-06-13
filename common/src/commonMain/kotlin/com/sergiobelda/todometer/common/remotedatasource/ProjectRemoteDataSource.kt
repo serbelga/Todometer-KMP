@@ -18,7 +18,6 @@ package com.sergiobelda.todometer.common.remotedatasource
 
 import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.webservice.client.IProjectApiClient
 import com.sergiobelda.todometer.common.webservice.mapper.toDomain
 import com.sergiobelda.todometer.common.webservice.safeApiCall
@@ -30,7 +29,7 @@ class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) :
             projectApiClient.getProjects()
         }.map { it.toDomain() }
 
-    override suspend fun getProject(id: String): Result<ProjectTasks> =
+    override suspend fun getProject(id: String): Result<Project> =
         safeApiCall {
             projectApiClient.getProject(id)
         }.map { it.toDomain() }

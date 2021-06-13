@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.remotedatasource
+package com.sergiobelda.todometer.ui.addproject
 
-import com.sergiobelda.todometer.common.datasource.Result
-import com.sergiobelda.todometer.common.model.Project
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
+import kotlinx.coroutines.launch
 
-interface IProjectRemoteDataSource {
+class AddProjectViewModel(
+    private val insertProjectUseCase: InsertProjectUseCase,
+) : ViewModel() {
 
-    suspend fun getProjects(): Result<List<Project>>
-
-    suspend fun getProject(id: String): Result<Project>
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): Result<String>
-
-    suspend fun updateProject(id: String, name: String, description: String): Result<Unit>
+    fun insertProject(name: String, description: String) = viewModelScope.launch {
+        insertProjectUseCase(name, description)
+    }
 }

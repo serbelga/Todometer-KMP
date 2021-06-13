@@ -16,4 +16,25 @@
 
 package com.sergiobelda.todometer.common.webservice.client
 
-interface ITaskApiClient
+import com.sergiobelda.todometer.common.webservice.model.TaskApiModel
+import com.sergiobelda.todometer.common.webservice.model.TaskTagApiModel
+
+interface ITaskApiClient {
+
+    suspend fun getTasks(): List<TaskTagApiModel>
+
+    suspend fun getTasksByProjectId(id: String): List<TaskTagApiModel>
+
+    suspend fun getTask(id: String): TaskApiModel
+
+    suspend fun insertTask(
+        id: String? = null,
+        title: String,
+        description: String,
+        state: String,
+        projectId: String,
+        tagId: String?
+    ): String
+
+    suspend fun deleteTask(id: String)
+}
