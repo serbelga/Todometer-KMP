@@ -14,18 +14,6 @@ repositories {
     google()
 }
 
-// TODO Remove this block when https://youtrack.jetbrains.com/issue/KT-43944 resolved
-android {
-    configurations {
-        create("androidTestApi")
-        create("androidTestDebugApi")
-        create("androidTestReleaseApi")
-        create("testApi")
-        create("testDebugApi")
-        create("testReleaseApi")
-    }
-}
-
 kotlin {
     android {
         compilations.all {

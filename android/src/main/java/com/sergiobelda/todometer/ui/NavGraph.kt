@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.ui
 
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
 import com.sergiobelda.todometer.ui.Destinations.EditTask
