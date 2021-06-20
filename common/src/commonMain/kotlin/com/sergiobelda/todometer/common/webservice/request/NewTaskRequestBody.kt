@@ -20,9 +20,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NewTaskRequestBody(
+    val id: String?,
     val title: String,
     val description: String,
     val state: String,
     val projectId: String,
-    val tagId: String
+    val tagId: String?
 )

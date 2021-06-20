@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.project
+package com.sergiobelda.todometer.ui.projectdetail
 
 import androidx.compose.runtime.Composable
-import com.sergiobelda.todometer.viewmodel.MainViewModel
+import com.sergiobelda.todometer.ui.home.HomeViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ProjectDetailScreen(
     projectId: Int,
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = getViewModel()
+    homeViewModel: HomeViewModel = getViewModel()
 ) {
 }

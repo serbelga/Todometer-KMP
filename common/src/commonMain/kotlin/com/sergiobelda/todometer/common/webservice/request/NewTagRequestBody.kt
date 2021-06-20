@@ -20,6 +20,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NewTagRequestBody(
+    val id: String?,
     val color: String,
     val name: String
 )

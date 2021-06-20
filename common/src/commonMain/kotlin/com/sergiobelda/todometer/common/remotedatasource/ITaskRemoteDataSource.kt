@@ -16,4 +16,10 @@
 
 package com.sergiobelda.todometer.common.remotedatasource
 
-interface ITaskRemoteDataSource
+import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.model.TaskTag
+
+interface ITaskRemoteDataSource {
+
+    suspend fun getTasksByProjectId(id: String): Result<List<TaskTag>>
+}

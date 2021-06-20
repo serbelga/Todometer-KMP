@@ -38,7 +38,7 @@ class TaskDao : ITaskDao, KoinComponent {
         database.todometerQueries.selectAllTasks().asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity) =
-        database.todometerQueries.insertTask(
+        database.todometerQueries.insertOrReplaceTask(
             id = task.id,
             title = task.title,
             description = task.description,
@@ -47,6 +47,11 @@ class TaskDao : ITaskDao, KoinComponent {
             project_id = task.project_id,
             sync = task.sync
         )
+
+    override suspend fun insertTasks(tasks: List<TaskEntity>) =
+        tasks.forEach { task ->
+            insertTask(task)
+        }
 
     override suspend fun updateTask(task: TaskEntity) =
         database.todometerQueries.updateTask(

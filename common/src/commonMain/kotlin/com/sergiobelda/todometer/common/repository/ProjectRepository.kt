@@ -43,6 +43,13 @@ class ProjectRepository(
             }
         }
 
+    override suspend fun refreshProject(id: String) {
+        val projectResult = projectRemoteDataSource.getProject(id)
+        projectResult.doIfSuccess { project ->
+            projectLocalDataSource.insertProject(project)
+        }
+    }
+
     override suspend fun refreshProjects() {
         val projectsResult = projectRemoteDataSource.getProjects()
         projectsResult.doIfSuccess {

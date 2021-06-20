@@ -16,4 +16,16 @@
 
 package com.sergiobelda.todometer.common.remotedatasource
 
-class TaskRemoteDataSource : ITaskRemoteDataSource
+import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.webservice.client.ITaskApiClient
+import com.sergiobelda.todometer.common.webservice.mapper.toTaskTagList
+import com.sergiobelda.todometer.common.webservice.safeApiCall
+
+class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRemoteDataSource {
+
+    override suspend fun getTasksByProjectId(id: String): Result<List<TaskTag>> =
+        safeApiCall {
+            taskApiClient.getTasksByProjectId(id)
+        }.map { it.toTaskTagList() }
+}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.task
+package com.sergiobelda.todometer.ui.edittask
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,17 +47,16 @@ import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
-import com.sergiobelda.todometer.viewmodel.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun EditTaskScreen(
     taskId: String,
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = getViewModel()
+    editTaskViewModel: EditTaskViewModel = getViewModel()
 ) {
     var taskState: TaskTag? by remember { mutableStateOf(null) }
-    val taskResultState = mainViewModel.getTask(taskId).observeAsState()
+    val taskResultState = editTaskViewModel.getTask(taskId).observeAsState()
     taskResultState.value?.let { result ->
         result.doIfSuccess { taskState = it }
     }
@@ -115,7 +114,7 @@ fun EditTaskScreen(
                         if (taskTitle.isBlank()) {
                             taskTitleInputError = true
                         } else {
-                            mainViewModel.updateTask(
+                            editTaskViewModel.updateTask(
                                 Task(
                                     id = task.id,
                                     title = taskTitle,

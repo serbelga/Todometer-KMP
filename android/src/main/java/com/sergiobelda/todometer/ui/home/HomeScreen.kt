@@ -85,10 +85,8 @@ import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.theme.primarySelected
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
-import com.sergiobelda.todometer.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
-import java.util.Locale
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -96,7 +94,7 @@ fun HomeScreen(
     addProject: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
-    mainViewModel: MainViewModel = getViewModel()
+    homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -104,19 +102,19 @@ fun HomeScreen(
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
-    val projectsResultState = mainViewModel.projects.observeAsState()
+    val projectsResultState = homeViewModel.projects.observeAsState()
     projectsResultState.value?.let { result ->
         result.doIfSuccess { projects = it }
     }
 
     var projectSelected: ProjectTasks? by remember { mutableStateOf(null) }
-    val projectSelectedState = mainViewModel.projectSelected.observeAsState()
+    val projectSelectedState = homeViewModel.projectSelected.observeAsState()
     projectSelectedState.value?.let { result ->
         result.doIfSuccess { projectSelected = it }
     }
 
     var tags: List<Tag> by remember { mutableStateOf(emptyList()) }
-    val tagsResultState = mainViewModel.tags.observeAsState()
+    val tagsResultState = homeViewModel.tags.observeAsState()
     tagsResultState.value?.let { result ->
         result.doIfSuccess { tags = it }
     }
@@ -130,7 +128,7 @@ fun HomeScreen(
                 projects,
                 addProject,
                 selectProject = {
-                    mainViewModel.setProjectSelected(it)
+                    homeViewModel.setProjectSelected(it)
                 },
                 tags
             )
@@ -167,7 +165,7 @@ fun HomeScreen(
                 if (deleteTaskAlertDialogState.value) {
                     RemoveTaskAlertDialog(
                         deleteTaskAlertDialogState,
-                        deleteTask = { mainViewModel.deleteTask(selectedTask.value) }
+                        deleteTask = { homeViewModel.deleteTask(selectedTask.value) }
                     )
                 }
                 if (projectSelected?.tasks.isNullOrEmpty()) {
@@ -176,10 +174,10 @@ fun HomeScreen(
                     TasksListView(
                         projectSelected?.tasks ?: emptyList(),
                         onDoingClick = {
-                            mainViewModel.setTaskDoing(it)
+                            homeViewModel.setTaskDoing(it)
                         },
                         onDoneClick = {
-                            mainViewModel.setTaskDone(it)
+                            homeViewModel.setTaskDone(it)
                         },
                         onTaskItemClick = openTask,
                         onTaskItemLongClick = {
@@ -258,7 +256,7 @@ fun SheetContainer(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.projects).toUpperCase(Locale.ROOT),
+                text = stringResource(id = R.string.projects).toUpperCase(),
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -281,7 +279,7 @@ fun SheetContainer(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.tags).toUpperCase(Locale.ROOT),
+                text = stringResource(id = R.string.tags).toUpperCase(),
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))

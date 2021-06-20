@@ -32,11 +32,11 @@ import com.sergiobelda.todometer.ui.Destinations.ProjectDetailArgs.ProjectId
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
+import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
+import com.sergiobelda.todometer.ui.edittask.EditTaskScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
-import com.sergiobelda.todometer.ui.project.ProjectDetailScreen
-import com.sergiobelda.todometer.ui.task.AddTaskScreen
-import com.sergiobelda.todometer.ui.task.EditTaskScreen
-import com.sergiobelda.todometer.ui.task.TaskDetailScreen
+import com.sergiobelda.todometer.ui.projectdetail.ProjectDetailScreen
+import com.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 
 @Composable
 fun ToDometerApp() {

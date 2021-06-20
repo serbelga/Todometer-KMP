@@ -17,10 +17,12 @@
 package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.ITaskLocalDataSource
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.toTask
 import com.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
 import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
@@ -35,6 +37,13 @@ class TaskRepository(
 
     override fun getTasks(): Flow<Result<List<TaskTag>>> =
         taskLocalDataSource.getTasks()
+
+    override suspend fun refreshTasksByProjectId(id: String) {
+        val result = taskRemoteDataSource.getTasksByProjectId(id)
+        result.doIfSuccess { list ->
+            taskLocalDataSource.insertTasks(list.map { it.toTask() })
+        }
+    }
 
     override suspend fun insertTask(
         title: String,

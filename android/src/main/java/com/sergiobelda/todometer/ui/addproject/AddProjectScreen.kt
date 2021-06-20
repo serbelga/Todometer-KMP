@@ -41,13 +41,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
-import com.sergiobelda.todometer.viewmodel.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddProjectScreen(
     navigateUp: () -> Unit,
-    mainViewModel: MainViewModel = getViewModel()
+    addProjectViewModel: AddProjectViewModel = getViewModel()
 ) {
     var projectName by rememberSaveable { mutableStateOf("") }
     var projectDescription by rememberSaveable { mutableStateOf("") }
@@ -66,7 +65,7 @@ fun AddProjectScreen(
                 actions = {
                     Button(
                         onClick = {
-                            mainViewModel.insertProject(projectName, projectDescription)
+                            addProjectViewModel.insertProject(projectName, projectDescription)
                             navigateUp()
                         }
                     ) {

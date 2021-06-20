@@ -41,6 +41,10 @@ class TaskLocalDataSource(
     override suspend fun insertTask(task: Task) =
         taskDao.insertTask(task.toEntity())
 
+    override suspend fun insertTasks(tasks: List<Task>) {
+        taskDao.insertTasks(tasks.map { it.toEntity() })
+    }
+
     override suspend fun updateTask(task: Task) =
         taskDao.updateTask(task.toEntity())
 

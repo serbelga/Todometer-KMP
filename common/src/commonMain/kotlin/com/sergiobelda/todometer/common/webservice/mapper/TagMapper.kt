@@ -15,3 +15,19 @@
  */
 
 package com.sergiobelda.todometer.common.webservice.mapper
+
+import com.sergiobelda.todometer.common.model.Tag
+import com.sergiobelda.todometer.common.model.TypeConverters.colorValueOf
+import com.sergiobelda.todometer.common.webservice.model.TagApiModel
+
+fun TagApiModel.toDomain() =
+    Tag(
+        id = id,
+        color = colorValueOf(color),
+        name = name,
+        sync = true
+    )
+
+fun Iterable<TagApiModel>.toTagList() = this.map {
+    it.toDomain()
+}

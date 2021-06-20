@@ -9,3 +9,14 @@ data class TaskTag(
     val tag: Tag?,
     val sync: Boolean
 )
+
+fun TaskTag.toTask() =
+    Task(
+        id = id,
+        title = title,
+        description = description,
+        state = state,
+        projectId = projectId,
+        tagId = tag?.id,
+        sync = sync
+    )

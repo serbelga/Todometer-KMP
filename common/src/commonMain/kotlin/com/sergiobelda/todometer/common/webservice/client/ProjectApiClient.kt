@@ -36,11 +36,11 @@ class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClie
     override suspend fun getProjects(): List<ProjectApiModel> =
         todometerApi.client.get(ENDPOINT_URL + VERSION_1 + PROJECT_PATH)
 
-    override suspend fun getProject(id: Long): ProjectApiModel =
+    override suspend fun getProject(id: String): ProjectApiModel =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + PROJECT_PATH
         ) {
-            parametersOf("id", id.toString())
+            parametersOf("id", id)
         }
 
     override suspend fun insertProject(id: String?, name: String, description: String): String =
@@ -56,8 +56,8 @@ class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClie
         }
     }
 
-    override suspend fun deleteProject(id: Long) =
+    override suspend fun deleteProject(id: String) =
         todometerApi.client.delete<Unit>(ENDPOINT_URL + VERSION_1 + PROJECT_PATH) {
-            parametersOf("id", id.toString())
+            parametersOf("id", id)
         }
 }

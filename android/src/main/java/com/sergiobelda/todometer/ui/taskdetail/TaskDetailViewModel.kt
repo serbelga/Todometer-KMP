@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.remotedatasource
+package com.sergiobelda.todometer.ui.taskdetail
 
-import com.sergiobelda.todometer.common.datasource.Result
-import com.sergiobelda.todometer.common.model.Project
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 
-interface IProjectRemoteDataSource {
+class TaskDetailViewModel(
+    private val getTaskUseCase: GetTaskUseCase
+) : ViewModel() {
 
-    suspend fun getProjects(): Result<List<Project>>
-
-    suspend fun getProject(id: String): Result<Project>
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): Result<String>
-
-    suspend fun updateProject(id: String, name: String, description: String): Result<Unit>
+    fun getTask(id: String) = getTaskUseCase(id).asLiveData()
 }

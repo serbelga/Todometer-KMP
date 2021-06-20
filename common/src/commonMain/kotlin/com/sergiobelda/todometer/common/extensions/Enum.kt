@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.remotedatasource
+package com.sergiobelda.todometer.common.extensions
 
-import com.sergiobelda.todometer.common.datasource.Result
-import com.sergiobelda.todometer.common.model.Project
+/**
+ * Returns an enum entry or null with specified [name].
+ */
+inline fun <reified T : Enum<T>> safeEnumValueOf(name: String): T? =
+    enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) }
 
-interface IProjectRemoteDataSource {
-
-    suspend fun getProjects(): Result<List<Project>>
-
-    suspend fun getProject(id: String): Result<Project>
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): Result<String>
-
-    suspend fun updateProject(id: String, name: String, description: String): Result<Unit>
-}
+/**
+ * Returns an enum entry with specified [name] or [default].
+ */
+inline fun <reified T : Enum<T>> enumValueOrDefaultOf(name: String, default: T): T =
+    enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) } ?: default

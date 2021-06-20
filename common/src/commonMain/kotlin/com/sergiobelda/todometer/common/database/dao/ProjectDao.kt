@@ -55,16 +55,10 @@ class ProjectDao : IProjectDao, KoinComponent {
         )
     }
 
-    override suspend fun insertProjects(projects: List<ProjectEntity>) {
+    override suspend fun insertProjects(projects: List<ProjectEntity>) =
         projects.forEach { project ->
-            database.todometerQueries.insertOrReplaceProject(
-                id = project.id,
-                name = project.name,
-                description = project.description,
-                sync = project.sync
-            )
+            insertProject(project)
         }
-    }
 
     override suspend fun updateProject(project: ProjectEntity) {
         database.todometerQueries.updateProject(
@@ -85,4 +79,7 @@ class ProjectDao : IProjectDao, KoinComponent {
             )
         }
     }
+
+    override suspend fun deleteProject(id: String) =
+        database.todometerQueries.deleteProject(id)
 }

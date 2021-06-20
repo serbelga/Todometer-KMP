@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.localdatasource
+package com.sergiobelda.todometer.ui.edittask
 
-import com.sergiobelda.todometer.common.datasource.Result
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.model.TaskTag
-import kotlinx.coroutines.flow.Flow
+import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
+import kotlinx.coroutines.launch
 
-interface ITaskLocalDataSource {
+class EditTaskViewModel(
+    private val getTaskUseCase: GetTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
+) : ViewModel() {
 
-    fun getTask(id: String): Flow<Result<TaskTag?>>
+    fun getTask(id: String) = getTaskUseCase(id).asLiveData()
 
-    fun getTasks(): Flow<Result<List<TaskTag>>>
-
-    suspend fun insertTask(task: Task)
-
-    suspend fun insertTasks(tasks: List<Task>)
-
-    suspend fun updateTask(task: Task)
-
-    suspend fun updateTaskState(id: String, state: TaskState)
-
-    suspend fun deleteTask(id: String)
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase(task)
+    }
 }

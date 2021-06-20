@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.remotedatasource
+package com.sergiobelda.todometer.common.webservice.model
 
-import com.sergiobelda.todometer.common.datasource.Result
-import com.sergiobelda.todometer.common.model.Project
+import kotlinx.serialization.Serializable
 
-interface IProjectRemoteDataSource {
-
-    suspend fun getProjects(): Result<List<Project>>
-
-    suspend fun getProject(id: String): Result<Project>
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): Result<String>
-
-    suspend fun updateProject(id: String, name: String, description: String): Result<Unit>
-}
+@Serializable
+data class TaskTagApiModel(
+    val id: String,
+    val title: String,
+    val description: String?,
+    val state: String,
+    val projectId: String,
+    val tag: TagApiModel? = null
+)

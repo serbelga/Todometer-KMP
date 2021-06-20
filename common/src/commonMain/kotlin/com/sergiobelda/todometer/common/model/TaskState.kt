@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.common.model
 
 enum class TaskState {
+    UNKNOWN,
     DOING,
     DONE;
 
