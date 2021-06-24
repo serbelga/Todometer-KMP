@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.plugins
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import io.ktor.application.*
+import io.ktor.features.*
+import io.ktor.gson.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.serialization.*
 
-interface IProjectApiClient {
+fun Application.configureSerialization() {
+    install(ContentNegotiation) {
+        gson {
+        }
+        json()
+    }
 
-    suspend fun getProjects(): Array<ProjectApiModel>
-
-    suspend fun getProject(id: String): ProjectApiModel
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
-
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+    routing {
+        get("/json/gson") {
+            call.respond(mapOf("hello" to "world"))
+        }
+        get("/json/kotlinx-serialization") {
+            call.respond(mapOf("hello" to "world"))
+        }
+    }
 }

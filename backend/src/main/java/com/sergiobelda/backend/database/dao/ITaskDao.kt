@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.database.dao
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import com.sergiobelda.backend.database.entity.NewTaskEntity
+import com.sergiobelda.backend.database.entity.TaskTagView
+import java.util.UUID
 
-interface IProjectApiClient {
+interface ITaskDao {
 
-    suspend fun getProjects(): Array<ProjectApiModel>
+    suspend fun getTask(id: UUID): TaskTagView
 
-    suspend fun getProject(id: String): ProjectApiModel
+    suspend fun getTasks(projectId: UUID? = null): List<TaskTagView>
 
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
+    suspend fun insertTask(task: NewTaskEntity): UUID
 
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+    suspend fun deleteTask(id: UUID)
 }

@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.service
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import com.sergiobelda.backend.model.NewTag
+import com.sergiobelda.backend.model.Tag
 
-interface IProjectApiClient {
+interface ITagService {
 
-    suspend fun getProjects(): Array<ProjectApiModel>
+    suspend fun getTags(): List<Tag>
 
-    suspend fun getProject(id: String): ProjectApiModel
+    suspend fun getTag(id: String): Tag
 
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
+    suspend fun insertTag(newTag: NewTag): String
 
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+    suspend fun deleteTag(id: String)
 }

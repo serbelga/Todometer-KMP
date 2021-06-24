@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.di
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import io.ktor.application.*
+import org.koin.ktor.ext.Koin
+import org.koin.logger.SLF4JLogger
 
-interface IProjectApiClient {
-
-    suspend fun getProjects(): Array<ProjectApiModel>
-
-    suspend fun getProject(id: String): ProjectApiModel
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
-
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+fun Application.configureKoin() {
+    install(Koin) {
+        SLF4JLogger()
+        modules(databaseModule)
+        modules(serviceModule)
+    }
 }

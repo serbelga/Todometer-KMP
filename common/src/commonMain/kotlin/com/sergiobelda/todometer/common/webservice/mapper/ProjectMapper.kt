@@ -33,6 +33,10 @@ fun Iterable<ProjectApiModel>.toDomain() = this.map {
     it.toDomain()
 }
 
+fun Array<ProjectApiModel>.toDomain() = this.map {
+    it.toDomain()
+}
+
 fun ProjectTasksApiModel.toDomain() =
     ProjectTasks(
         id = id,

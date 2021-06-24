@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.di
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import com.sergiobelda.backend.database.dao.IProjectDao
+import com.sergiobelda.backend.database.dao.ITagDao
+import com.sergiobelda.backend.database.dao.ITaskDao
+import com.sergiobelda.backend.database.dao.ProjectDao
+import com.sergiobelda.backend.database.dao.TagDao
+import com.sergiobelda.backend.database.dao.TaskDao
+import org.koin.dsl.module
 
-interface IProjectApiClient {
-
-    suspend fun getProjects(): Array<ProjectApiModel>
-
-    suspend fun getProject(id: String): ProjectApiModel
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
-
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+val databaseModule = module {
+    single<IProjectDao> { ProjectDao() }
+    single<ITagDao> { TagDao() }
+    single<ITaskDao> { TaskDao() }
 }

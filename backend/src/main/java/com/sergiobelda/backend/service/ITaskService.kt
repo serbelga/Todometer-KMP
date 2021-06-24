@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.service
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import com.sergiobelda.backend.model.NewTask
+import com.sergiobelda.backend.model.TaskTag
 
-interface IProjectApiClient {
+interface ITaskService {
 
-    suspend fun getProjects(): Array<ProjectApiModel>
+    suspend fun getTasks(projectId: String?): List<TaskTag>
 
-    suspend fun getProject(id: String): ProjectApiModel
+    suspend fun getTask(id: String): TaskTag
 
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
+    suspend fun insertTask(newTask: NewTask): String
 
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+    suspend fun deleteTask(id: String)
 }

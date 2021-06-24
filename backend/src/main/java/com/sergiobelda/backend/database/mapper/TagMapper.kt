@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.database.mapper
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import com.sergiobelda.backend.database.entity.TagEntity
+import com.sergiobelda.backend.database.table.TagTable
+import org.jetbrains.exposed.sql.ResultRow
 
-interface IProjectApiClient {
+fun ResultRow.toTagEntity() =
+    TagEntity(
+        id = this[TagTable.id],
+        color = this[TagTable.color],
+        name = this[TagTable.name]
+    )
 
-    suspend fun getProjects(): Array<ProjectApiModel>
-
-    suspend fun getProject(id: String): ProjectApiModel
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
-
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+fun Iterable<ResultRow>.toTagEntityList() = this.map {
+    it.toTagEntity()
 }

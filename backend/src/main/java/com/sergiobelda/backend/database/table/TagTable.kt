@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.database.table
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
+import org.jetbrains.exposed.sql.Table
 
-interface IProjectApiClient {
+object TagTable : Table() {
+    val id = uuid("id").autoGenerate()
+    val color = text("color")
+    val name = text("name")
 
-    suspend fun getProjects(): Array<ProjectApiModel>
-
-    suspend fun getProject(id: String): ProjectApiModel
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
-
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
+    override val primaryKey = PrimaryKey(id, name = "PK_Tag_ID")
 }

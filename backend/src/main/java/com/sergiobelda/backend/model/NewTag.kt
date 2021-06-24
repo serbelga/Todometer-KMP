@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.common.webservice.client
+package com.sergiobelda.backend.model
 
-import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
-
-interface IProjectApiClient {
-
-    suspend fun getProjects(): Array<ProjectApiModel>
-
-    suspend fun getProject(id: String): ProjectApiModel
-
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
-
-    suspend fun updateProject(id: String, name: String, description: String)
-
-    suspend fun deleteProject(id: String)
-}
+data class NewTag(
+    val id: String?,
+    val color: String,
+    val name: String
+)
