@@ -21,26 +21,38 @@ plugins {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core:${Versions.ktor}")
-    implementation("io.ktor:ktor-auth:${Versions.ktor}")
-    implementation("io.ktor:ktor-locations:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-core:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-core-jvm:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-apache:${Versions.ktor}")
-    implementation("io.ktor:ktor-gson:${Versions.ktor}")
-    implementation("io.ktor:ktor-serialization:${Versions.ktor}")
-    implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
-    implementation("ch.qos.logback:logback-classic:1.2.3")
-    testImplementation("io.ktor:ktor-server-tests:${Versions.ktor}")
 
-    implementation("org.jetbrains.exposed:exposed-core:0.31.1")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.31.1")
+    implementation(Libs.Ktor.clientApache)
+    implementation(Libs.Ktor.auth)
+    implementation(Libs.Ktor.locations)
+    implementation(Libs.Ktor.clientCore)
+    implementation(Libs.Ktor.clientCoreJvm)
+    implementation(Libs.Ktor.serverCore)
+    implementation(Libs.Ktor.gson)
+    implementation(Libs.Ktor.serialization)
+    implementation(Libs.Ktor.serverNetty)
+    testImplementation(Libs.Ktor.serverTests)
 
-    implementation("com.h2database:h2:1.4.200")
-    implementation("com.zaxxer:HikariCP:4.0.3")
+    implementation(Libs.logback)
+
+    implementation(Libs.Exposed.core)
+    implementation(Libs.Exposed.jdbc)
+
+    implementation(Libs.h2Database)
+    implementation(Libs.hikariCP)
 
     // Koin for Ktor
-    implementation("io.insert-koin:koin-ktor:${Versions.koin}")
+    implementation(Libs.Koin.ktor)
     // SLF4J Logger
-    implementation("io.insert-koin:koin-logger-slf4j:${Versions.koin}")
+    implementation(Libs.Koin.logger)
+}
+
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+application {
+    mainClass.set("com.sergiobelda.backend.ApplicationKt")
 }
