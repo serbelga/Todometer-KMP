@@ -23,6 +23,6 @@ class SetTaskDoingUseCase(
     private val taskRepository: ITaskRepository
 ) {
 
-    suspend operator fun invoke(id: Long) =
+    suspend operator fun invoke(id: String) =
         taskRepository.updateTaskState(id, TaskState.DOING)
 }

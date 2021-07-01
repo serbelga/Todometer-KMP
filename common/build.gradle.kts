@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    id("kotlinx-serialization")
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
@@ -13,20 +14,12 @@ repositories {
     google()
 }
 
-// TODO Remove this block when https://youtrack.jetbrains.com/issue/KT-43944 resolved
-android {
-    configurations {
-        create("androidTestApi")
-        create("androidTestDebugApi")
-        create("androidTestReleaseApi")
-        create("testApi")
-        create("testDebugApi")
-        create("testReleaseApi")
-    }
-}
-
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
     jvm("desktop") {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
@@ -50,19 +43,20 @@ kotlin {
             dependencies {
                 api(Libs.Koin.core)
                 api(Libs.Koin.test)
-
+                implementation(Libs.Ktor.clientCore)
+                implementation(Libs.Ktor.clientJson)
+                implementation(Libs.Ktor.clientSerialization)
                 implementation(Libs.SqlDelight.coroutines)
             }
         }
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                api("androidx.appcompat:appcompat:1.2.0")
-                api("androidx.core:core-ktx:1.3.2")
-
-                implementation(Libs.SqlDelight.androidDriver)
-
+                api("androidx.appcompat:appcompat:1.3.0")
+                api("androidx.core:core-ktx:1.5.0")
                 implementation(Libs.AndroidX.DataStore.preferences)
+                implementation(Libs.Ktor.clientAndroid)
+                implementation(Libs.SqlDelight.androidDriver)
             }
         }
         val androidTest by getting {
@@ -72,12 +66,14 @@ kotlin {
         }
         val desktopMain by getting {
             dependencies {
+                implementation(Libs.Ktor.clientApache)
                 implementation(Libs.SqlDelight.jvmDriver)
             }
         }
         val desktopTest by getting
         val iosMain by getting {
             dependencies {
+                implementation(Libs.Ktor.clientIos)
                 implementation(Libs.SqlDelight.nativeDriver)
             }
         }
@@ -86,11 +82,15 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdk = 24
+        targetSdk = 30
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 

@@ -1,13 +1,13 @@
 buildscript {
     repositories {
         gradlePluginPortal()
-        jcenter()
         google()
         mavenCentral()
     }
 
     dependencies {
         classpath(Libs.kotlinPlugin)
+        classpath(Libs.kotlinSerialization)
         classpath(Libs.androidGradlePlugin)
         classpath(Libs.SqlDelight.gradlePlugin)
     }
@@ -18,9 +18,8 @@ version = "1.0"
 
 allprojects {
     repositories {
-        jcenter()
         mavenCentral()
-        maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 

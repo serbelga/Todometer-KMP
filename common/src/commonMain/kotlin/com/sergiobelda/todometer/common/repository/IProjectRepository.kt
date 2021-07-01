@@ -16,14 +16,20 @@
 
 package com.sergiobelda.todometer.common.repository
 
+import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.ProjectTasks
 import kotlinx.coroutines.flow.Flow
 
 interface IProjectRepository {
 
-    fun getProject(id: Long): Flow<Project?>
+    fun getProject(id: String): Flow<Result<ProjectTasks?>>
 
-    fun getProjects(): Flow<List<Project>>
+    fun getProjects(): Flow<Result<List<Project>>>
 
-    suspend fun insertProject(project: Project)
+    suspend fun refreshProject(id: String)
+
+    suspend fun insertProject(name: String, description: String)
+
+    suspend fun refreshProjects()
 }

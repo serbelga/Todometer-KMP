@@ -16,31 +16,59 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.database.dao.ITaskDao
-import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toDomain
-import com.sergiobelda.todometer.common.database.mapper.TaskMapper.toEntity
+import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
+import com.sergiobelda.todometer.common.localdatasource.ITaskLocalDataSource
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.toTask
+import com.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
+import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-class TaskRepository(private val taskDao: ITaskDao) : ITaskRepository {
+class TaskRepository(
+    private val taskLocalDataSource: ITaskLocalDataSource,
+    private val taskRemoteDataSource: ITaskRemoteDataSource
+) : ITaskRepository {
 
-    override fun getTask(id: Long): Flow<Task?> =
-        taskDao.getTask(id).map { it?.toDomain() }
+    override fun getTask(id: String): Flow<Result<TaskTag?>> =
+        taskLocalDataSource.getTask(id)
 
-    override fun getTasks(): Flow<List<Task>> =
-        taskDao.getTasks().map { list -> list.map { it.toDomain() } }
+    override fun getTasks(): Flow<Result<List<TaskTag>>> =
+        taskLocalDataSource.getTasks()
 
-    override suspend fun insertTask(task: Task) =
-        taskDao.insertTask(task.toEntity())
+    override suspend fun refreshTasksByProjectId(id: String) {
+        val result = taskRemoteDataSource.getTasksByProjectId(id)
+        result.doIfSuccess { list ->
+            taskLocalDataSource.insertTasks(list.map { it.toTask() })
+        }
+    }
+
+    override suspend fun insertTask(
+        title: String,
+        description: String?,
+        projectId: String,
+        tagId: String?
+    ) {
+        taskLocalDataSource.insertTask(
+            Task(
+                id = randomUUIDString(),
+                title = title,
+                description = description,
+                projectId = projectId,
+                tagId = tagId,
+                sync = false
+            )
+        )
+    }
 
     override suspend fun updateTask(task: Task) =
-        taskDao.updateTask(task.toEntity())
+        taskLocalDataSource.updateTask(task)
 
-    override suspend fun updateTaskState(id: Long, state: TaskState) =
-        taskDao.updateTaskState(id, state)
+    override suspend fun updateTaskState(id: String, state: TaskState) =
+        taskLocalDataSource.updateTaskState(id, state)
 
-    override suspend fun deleteTask(id: Long) =
-        taskDao.deleteTask(id)
+    override suspend fun deleteTask(id: String) =
+        taskLocalDataSource.deleteTask(id)
 }

@@ -16,4 +16,10 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
-interface ITagDao
+import com.sergiobelda.todometer.TagEntity
+import kotlinx.coroutines.flow.Flow
+
+interface ITagDao {
+
+    fun getTags(): Flow<List<TagEntity>>
+}

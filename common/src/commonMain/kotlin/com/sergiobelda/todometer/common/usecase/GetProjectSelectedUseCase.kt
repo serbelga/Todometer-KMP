@@ -16,7 +16,8 @@
 
 package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,7 +37,7 @@ class GetProjectSelectedUseCase(
      * @return A Flow that emits the current project selected.
      */
     @OptIn(ExperimentalCoroutinesApi::class)
-    operator fun invoke(): Flow<Project?> =
+    operator fun invoke(): Flow<Result<ProjectTasks?>> =
         userPreferencesRepository.projectSelected().flatMapLatest { projectId ->
             projectRepository.getProject(projectId)
         }

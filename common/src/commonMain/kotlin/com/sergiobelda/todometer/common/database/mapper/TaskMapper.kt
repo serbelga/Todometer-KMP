@@ -16,27 +16,42 @@
 
 package com.sergiobelda.todometer.common.database.mapper
 
-import com.sergiobelda.todometer.DbTask
-import com.sergiobelda.todometer.common.database.DatabaseTypeConverters.toTaskState
+import com.sergiobelda.todometer.TaskEntity
+import com.sergiobelda.todometer.TaskTagView
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.TypeConverters.colorValueOf
+import com.sergiobelda.todometer.common.model.TypeConverters.taskStateValueOf
 
-object TaskMapper {
+fun TaskTagView.toDomain() = TaskTag(
+    id,
+    title,
+    description,
+    taskStateValueOf(state),
+    project_id,
+    // TODO: Implement check not null for different variables
+    tag = tag_id?.let {
+        Tag(
+            it,
+            colorValueOf(tag_color!!),
+            tag_name!!,
+            tag_sync!!
+        )
+    },
+    sync
+)
 
-    fun DbTask.toDomain() = Task(
-        id,
-        title,
-        description,
-        toTaskState(state),
-        project_id,
-        tag_id
-    )
-
-    fun Task.toEntity() = DbTask(
-        id,
-        title,
-        description,
-        state.toString(),
-        projectId,
-        tagId
-    )
+fun Iterable<TaskTagView>.toDomain() = this.map {
+    it.toDomain()
 }
+
+fun Task.toEntity() = TaskEntity(
+    id,
+    title,
+    description,
+    state.toString(),
+    projectId,
+    tagId,
+    sync
+)

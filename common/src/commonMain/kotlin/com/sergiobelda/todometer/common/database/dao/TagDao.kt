@@ -16,10 +16,17 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
+import com.sergiobelda.todometer.TagEntity
 import com.sergiobelda.todometer.TodometerDatabase
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class TagDao : ITagDao, KoinComponent {
     private val database: TodometerDatabase by inject()
+
+    override fun getTags(): Flow<List<TagEntity>> =
+        database.todometerQueries.selectAllTags().asFlow().mapToList()
 }

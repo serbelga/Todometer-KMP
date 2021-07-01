@@ -37,9 +37,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.datasource.doIfSuccess
+import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -57,18 +61,21 @@ fun HomeScreen(
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
     val coroutineScope = rememberCoroutineScope()
-    val setTaskDoing: (Long) -> Unit = {
+    val setTaskDoing: (String) -> Unit = {
         coroutineScope.launch {
             setTaskDoingUseCase(it)
         }
     }
-    val setTaskDone: (Long) -> Unit = {
+    val setTaskDone: (String) -> Unit = {
         coroutineScope.launch {
             setTaskDoneUseCase(it)
         }
     }
-    val project: Project? by getProjectSelectedUseCase().collectAsState(null)
-    // val tasks: List<Task> by getTasksUseCase().collectAsState(emptyList())
+    var project: ProjectTasks? by remember { mutableStateOf(null) }
+    val projectResultState by getProjectSelectedUseCase().collectAsState(null)
+    projectResultState?.let { result ->
+        result.doIfSuccess { project = it }
+    }
     Scaffold(
         topBar = {
             ToDometerTopAppBar(project)

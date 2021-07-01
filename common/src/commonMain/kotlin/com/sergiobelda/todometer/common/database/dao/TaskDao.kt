@@ -16,7 +16,8 @@
 
 package com.sergiobelda.todometer.common.database.dao
 
-import com.sergiobelda.todometer.DbTask
+import com.sergiobelda.todometer.TaskEntity
+import com.sergiobelda.todometer.TaskTagView
 import com.sergiobelda.todometer.TodometerDatabase
 import com.sergiobelda.todometer.common.model.TaskState
 import com.squareup.sqldelight.runtime.coroutines.asFlow
@@ -30,22 +31,29 @@ class TaskDao : ITaskDao, KoinComponent {
 
     private val database: TodometerDatabase by inject()
 
-    override fun getTask(id: Long): Flow<DbTask?> =
+    override fun getTask(id: String): Flow<TaskTagView?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(): Flow<List<DbTask>> =
+    override fun getTasks(): Flow<List<TaskTagView>> =
         database.todometerQueries.selectAllTasks().asFlow().mapToList()
 
-    override suspend fun insertTask(task: DbTask) =
-        database.todometerQueries.insertTask(
+    override suspend fun insertTask(task: TaskEntity) =
+        database.todometerQueries.insertOrReplaceTask(
+            id = task.id,
             title = task.title,
             description = task.description,
             state = task.state,
             tag_id = task.tag_id,
-            project_id = task.project_id
+            project_id = task.project_id,
+            sync = task.sync
         )
 
-    override suspend fun updateTask(task: DbTask) =
+    override suspend fun insertTasks(tasks: List<TaskEntity>) =
+        tasks.forEach { task ->
+            insertTask(task)
+        }
+
+    override suspend fun updateTask(task: TaskEntity) =
         database.todometerQueries.updateTask(
             id = task.id,
             title = task.title,
@@ -53,12 +61,12 @@ class TaskDao : ITaskDao, KoinComponent {
             tag_id = task.tag_id
         )
 
-    override suspend fun updateTaskState(id: Long, state: TaskState) {
+    override suspend fun updateTaskState(id: String, state: TaskState) {
         database.todometerQueries.updateTaskState(
             id = id,
             state = state.toString()
         )
     }
 
-    override suspend fun deleteTask(id: Long) = database.todometerQueries.deleteTask(id)
+    override suspend fun deleteTask(id: String) = database.todometerQueries.deleteTask(id)
 }

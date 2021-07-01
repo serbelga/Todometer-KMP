@@ -32,60 +32,53 @@ import com.sergiobelda.todometer.ui.Destinations.ProjectDetailArgs.ProjectId
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
+import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
+import com.sergiobelda.todometer.ui.edittask.EditTaskScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
-import com.sergiobelda.todometer.ui.project.ProjectDetailScreen
-import com.sergiobelda.todometer.ui.task.AddTaskScreen
-import com.sergiobelda.todometer.ui.task.EditTaskScreen
-import com.sergiobelda.todometer.ui.task.TaskDetailScreen
-import com.sergiobelda.todometer.ui.theme.ToDometerTheme
-import com.sergiobelda.todometer.viewmodel.MainViewModel
+import com.sergiobelda.todometer.ui.projectdetail.ProjectDetailScreen
+import com.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 
 @Composable
-fun ToDometerApp(mainViewModel: MainViewModel) {
+fun ToDometerApp() {
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
-    ToDometerTheme {
-        NavHost(navController, startDestination = Home) {
-            composable(Home) {
-                HomeScreen(mainViewModel, actions.addProject, actions.addTask, actions.openTask)
-            }
-            composable(
-                "$ProjectDetail/{$ProjectId}",
-                arguments = listOf(navArgument(ProjectId) { type = NavType.IntType })
-            ) { navBackStackEntry ->
-                ProjectDetailScreen(
-                    projectId = navBackStackEntry.arguments?.getInt(ProjectId) ?: 0,
-                    mainViewModel,
-                    navigateUp = actions.navigateUp
-                )
-            }
-            composable(
-                "$TaskDetail/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
-            ) { navBackStackEntry ->
-                TaskDetailScreen(
-                    taskId = navBackStackEntry.arguments?.getLong(TaskId) ?: 0,
-                    mainViewModel,
-                    actions.editTask,
-                    actions.navigateUp
-                )
-            }
-            composable(AddProject) {
-                AddProjectScreen(mainViewModel, actions.navigateUp)
-            }
-            composable(AddTask) {
-                AddTaskScreen(mainViewModel, actions.navigateUp)
-            }
-            composable(
-                "$EditTask/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
-            ) { backStackEntry ->
-                EditTaskScreen(
-                    taskId = backStackEntry.arguments?.getLong(TaskId) ?: 0,
-                    mainViewModel,
-                    actions.navigateUp
-                )
-            }
+    NavHost(navController, startDestination = Home) {
+        composable(Home) {
+            HomeScreen(actions.addProject, actions.addTask, actions.openTask)
+        }
+        composable(
+            "$ProjectDetail/{$ProjectId}",
+            arguments = listOf(navArgument(ProjectId) { type = NavType.IntType })
+        ) { navBackStackEntry ->
+            ProjectDetailScreen(
+                projectId = navBackStackEntry.arguments?.getInt(ProjectId) ?: 0,
+                navigateUp = actions.navigateUp
+            )
+        }
+        composable(
+            "$TaskDetail/{$TaskId}",
+            arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
+        ) { navBackStackEntry ->
+            TaskDetailScreen(
+                taskId = navBackStackEntry.arguments?.getString(TaskId) ?: "",
+                actions.editTask,
+                actions.navigateUp
+            )
+        }
+        composable(AddProject) {
+            AddProjectScreen(actions.navigateUp)
+        }
+        composable(AddTask) {
+            AddTaskScreen(actions.navigateUp)
+        }
+        composable(
+            "$EditTask/{$TaskId}",
+            arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
+        ) { backStackEntry ->
+            EditTaskScreen(
+                taskId = backStackEntry.arguments?.getString(TaskId) ?: "",
+                actions.navigateUp
+            )
         }
     }
 }

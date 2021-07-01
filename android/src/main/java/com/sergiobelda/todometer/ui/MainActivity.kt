@@ -20,17 +20,13 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
-import com.sergiobelda.todometer.viewmodel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
-    private val mainViewModel by viewModel<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ToDometerTheme {
-                ToDometerApp(mainViewModel)
+            ToDometerTheme(darkTheme = false) {
+                ToDometerApp()
             }
         }
     }

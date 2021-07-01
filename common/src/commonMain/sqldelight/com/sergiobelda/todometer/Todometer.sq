@@ -1,55 +1,67 @@
-CREATE TABLE DbProject (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+CREATE TABLE ProjectEntity (
+    id TEXT PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
-CREATE TABLE DbTag (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    name TEXT NOT NULL
+CREATE TABLE TagEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    color TEXT NOT NULL,
+    name TEXT NOT NULL,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
-CREATE TABLE DbTask (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+CREATE TABLE TaskEntity (
+    id TEXT PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
     state TEXT NOT NULL,
-    project_id INTEGER,
-    tag_id INTEGER,
-    FOREIGN KEY(project_id) REFERENCES DbProject(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(tag_id) REFERENCES DbTag(id) ON UPDATE NO ACTION ON DELETE NO ACTION
+    project_id TEXT NOT NULL,
+    tag_id TEXT,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0,
+    FOREIGN KEY(project_id) REFERENCES ProjectEntity(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(tag_id) REFERENCES TagEntity(id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-CREATE VIEW TaskProjectView AS
-    SELECT DbTask.*, DbProject.name AS project_name
-    FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
-    ORDER BY project_id;
+CREATE VIEW TaskTagView AS
+    SELECT TaskEntity.*, TagEntity.color AS tag_color, TagEntity.name AS tag_name, TagEntity.sync AS tag_sync
+    FROM TaskEntity LEFT JOIN TagEntity ON TaskEntity.tag_id = TagEntity.id
+    -- WHERE TagEntity.name IS NOT NULL AND TagEntity.color IS NOT NULL AND TagEntity.sync IS NOT NULL
+    ORDER BY TaskEntity.id;
 
-INSERT INTO DbProject VALUES (1, "My tasks", "Some description");
-INSERT INTO DbTag VALUES (1, "Other");
-INSERT INTO DbTask VALUES (1, "Task one", "Task description", "DOING", 1, 1);
+-- CREATE VIEW TaskProjectView AS
+--     SELECT DbTask.*, DbProject.name AS project_name
+--     FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
+--     ORDER BY project_id;
+
+-- INSERT INTO ProjectEntity VALUES (1, "My tasks", "Some description", 0);
+-- INSERT INTO TagEntity VALUES ("b3d3975f-3cbc-496b-bb39-b1548b791c6e", "RED", "Other", 0);
+-- INSERT INTO TaskEntity VALUES (1, "Task one", "Task description", "DOING", 1, 1, 0);
+
+-------------------- Task
 
 selectTask:
 SELECT *
-FROM DbTask
+FROM TaskTagView
 WHERE id = ?;
 
 selectTasksByProjectId:
 SELECT *
-FROM DbTask
+FROM TaskTagView
 WHERE project_id = ? ORDER BY state ASC;
 
 selectAllTasks:
 SELECT *
-FROM DbTask;
+FROM TaskTagView;
 
-insertTask:
-INSERT INTO DbTask
-(title, description, state, project_id, tag_id)
-VALUES (?, ?, ?, ?, ?);
+insertOrReplaceTask:
+INSERT OR REPLACE INTO TaskEntity
+(id, title, description, state, project_id, tag_id, sync)
+VALUES (?, ?, ?, ?, ?, ?, ?);
 
 updateTask:
-UPDATE DbTask
+UPDATE TaskEntity
 SET
     title = ?,
     description = ?,
@@ -57,25 +69,50 @@ SET
 WHERE id = ?;
 
 updateTaskState:
-UPDATE DbTask
+UPDATE TaskEntity
 SET
     state = ?
 WHERE id = ?;
 
 deleteTask:
-DELETE FROM DbTask
+DELETE FROM TaskEntity
 WHERE id = ?;
+
+-------------------- Project
 
 selectProject:
 SELECT *
-FROM DbProject
+FROM ProjectEntity
 WHERE id = ?;
 
 selectAllProjects:
 SELECT *
-FROM DbProject;
+FROM ProjectEntity;
 
 insertProject:
-INSERT INTO DbProject
-(name, description)
-VALUES (?, ?);
+INSERT INTO ProjectEntity
+(id, name, description, sync)
+VALUES (?, ?, ?, ?);
+
+insertOrReplaceProject:
+INSERT OR REPLACE INTO ProjectEntity
+(id, name, description, sync)
+VALUES (?,?, ?, ?);
+
+updateProject:
+UPDATE ProjectEntity
+SET
+    name = ?,
+    description = ?,
+    sync = ?
+WHERE id = ?;
+
+deleteProject:
+DELETE FROM ProjectEntity
+WHERE id = ?;
+
+-------------------- Tags
+
+selectAllTags:
+SELECT *
+FROM TagEntity;

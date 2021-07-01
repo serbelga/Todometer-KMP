@@ -15,26 +15,27 @@
  */
 
 object Versions {
-    const val activityKtx = "1.3.0-alpha04"
-    const val appCompat = "1.2.0"
-    const val androidGradlePlugin = "7.0.0-alpha12"
-    const val compose = "1.0.0-beta02"
+    const val activityKtx = "1.3.0-beta02"
+    const val appCompat = "1.3.0"
+    const val androidGradlePlugin = "7.0.0-beta04"
+    const val compose = "1.0.0-beta09"
+    const val composeDesktop = "0.4.0"
     const val daggerHilt = "2.33-beta"
-    const val dataStorePreferences = "1.0.0-alpha08"
+    const val dataStorePreferences = "1.0.0-beta02"
     const val espressoCore = "3.3.0"
     const val extJunit = "1.1.2"
     const val junit = "4.12"
     const val junitKtx = "1.1.2"
-    const val koin = "3.0.1-beta-2"
-    const val kotlin = "1.4.31"
+    const val koin = "3.1.0"
+    const val kotlin = "1.5.10"
     const val ktLint = "0.41.0"
-    const val ktxVersion = "1.3.2"
+    const val ktor = "1.6.0"
+    const val ktxVersion = "1.5.0"
     const val lifecycle = "2.3.1"
     const val materialComponents = "1.3.0"
-    const val navigationCompose = "1.0.0-alpha09"
+    const val navigationCompose = "2.4.0-alpha03"
     const val robolectric = "4.3.1"
-    const val roomKtx = "2.2.6"
-    const val sqlDelight = "1.4.4"
+    const val sqlDelight = "1.5.0"
     const val testCoreKtx = "1.3.0"
     const val timber = "4.7.1"
 }
@@ -46,6 +47,8 @@ object Libs {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
 
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+
+    const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
 
     const val ktLint = "com.pinterest:ktlint:${Versions.ktLint}"
 
@@ -63,14 +66,11 @@ object Libs {
 
         object Activity {
             const val activityCompose = "androidx.activity:activity-compose:${Versions.activityKtx}"
-            const val activityKtx = "androidx.activity:activity-ktx:${Versions.activityKtx}"
         }
 
         object Compose {
             const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
-            const val ui = "androidx.compose.ui:ui:${Versions.compose}"
             const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
-            const val material = "androidx.compose.material:material:${Versions.compose}"
             const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
         }
 
@@ -87,13 +87,6 @@ object Libs {
 
         object Navigation {
             const val compose = "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
-        }
-
-        object Room {
-            const val roomKtx = "androidx.room:room-ktx:${Versions.roomKtx}"
-            const val roomRuntime = "androidx.room:room-runtime:${Versions.roomKtx}"
-            const val roomCompiler = "androidx.room:room-compiler:${Versions.roomKtx}"
-            const val roomTesting = "androidx.room:room-testing:${Versions.roomKtx}"
         }
 
         object Test {
@@ -117,9 +110,19 @@ object Libs {
     }
 
     object Koin {
+        const val android = "io.insert-koin:koin-android:${Versions.koin}"
+        const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
-        const val android = "io.insert-koin:koin-android:${Versions.koin}"
+    }
+
+    object Ktor {
+        const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
+        const val clientApache = "io.ktor:ktor-client-apache:${Versions.ktor}"
+        const val clientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
+        const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
+        const val clientJson = "io.ktor:ktor-client-json:${Versions.ktor}"
+        const val clientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
     }
 
     object SqlDelight {

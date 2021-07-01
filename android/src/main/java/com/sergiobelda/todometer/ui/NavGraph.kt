@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.ui
 
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
 import com.sergiobelda.todometer.ui.Destinations.EditTask
@@ -41,16 +40,16 @@ object Destinations {
 }
 
 class Actions(navController: NavHostController) {
-    val openProject: (Long) -> Unit = { projectId ->
+    val openProject: (String) -> Unit = { projectId ->
         navController.navigate("$ProjectDetail/$projectId")
     }
-    val openTask: (Long) -> Unit = { taskId ->
+    val openTask: (String) -> Unit = { taskId ->
         navController.navigate("$TaskDetail/$taskId")
     }
     val addTask: () -> Unit = {
         navController.navigate(AddTask)
     }
-    val editTask: (Long) -> Unit = { taskId ->
+    val editTask: (String) -> Unit = { taskId ->
         navController.navigate("$EditTask/$taskId")
     }
     val addProject: () -> Unit = {

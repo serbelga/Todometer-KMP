@@ -24,6 +24,6 @@ class SetProjectSelectedUseCase(
 ) {
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    suspend operator fun invoke(id: Long) =
+    suspend operator fun invoke(id: String) =
         userPreferencesRepository.setProjectSelected(id)
 }

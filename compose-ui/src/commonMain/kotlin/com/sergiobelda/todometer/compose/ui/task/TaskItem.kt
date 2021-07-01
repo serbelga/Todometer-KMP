@@ -43,20 +43,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
+import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
-import com.sergiobelda.todometer.compose.ui.theme.green
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
-    task: Task,
-    onDoingClick: (Long) -> Unit,
-    onDoneClick: (Long) -> Unit,
-    onClick: (Long) -> Unit,
-    onLongClick: (Long) -> Unit
+    task: TaskTag,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onClick: (String) -> Unit,
+    onLongClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -109,19 +109,21 @@ fun TaskItem(
                     }
                 }
             }
-            Row {
-                Box(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .clip(CircleShape)
-                        .background(green)
-                )
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text(
-                        text = "UI / UX",
-                        style = TodometerTypography.caption,
-                        modifier = Modifier.padding(start = 8.dp)
+            task.tag?.let { tag ->
+                Row {
+                    Box(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .clip(CircleShape)
+                            .background(TodometerColors.composeColorOf(tag.color))
                     )
+                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                        Text(
+                            text = tag.name,
+                            style = TodometerTypography.caption,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
                 }
             }
         }

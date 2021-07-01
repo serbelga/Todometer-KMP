@@ -25,6 +25,6 @@ class DeleteTaskUseCase(
     /**
      * Deletes a task.
      */
-    suspend operator fun invoke(id: Long) =
+    suspend operator fun invoke(id: String) =
         taskRepository.deleteTask(id)
 }
