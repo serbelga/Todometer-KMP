@@ -14,8 +14,24 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.model
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.entity.NewTagEntity
+import com.sergiobelda.backend.database.entity.TagEntity
+import java.util.UUID
 
-class ProjectDetailViewModel() : ViewModel()
+fun TagEntity.toTag() = Tag(
+    id = id.toString(),
+    color = color,
+    name = name
+)
+
+fun Iterable<TagEntity>.toTagList() = this.map { tagEntity ->
+    tagEntity.toTag()
+}
+
+fun NewTag.toNewTagEntity() = NewTagEntity(
+    id = id?.let { UUID.fromString(it) },
+    color = color,
+    name = name
+)

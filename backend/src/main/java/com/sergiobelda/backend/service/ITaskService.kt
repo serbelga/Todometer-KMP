@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.service
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.model.NewTask
+import com.sergiobelda.backend.model.TaskTag
 
-class ProjectDetailViewModel() : ViewModel()
+interface ITaskService {
+
+    suspend fun getTasks(projectId: String?): List<TaskTag>
+
+    suspend fun getTask(id: String): TaskTag
+
+    suspend fun insertTask(newTask: NewTask): String
+
+    suspend fun deleteTask(id: String)
+}

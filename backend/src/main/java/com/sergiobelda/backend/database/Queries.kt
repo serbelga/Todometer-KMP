@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.database
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.table.TagTable
+import com.sergiobelda.backend.database.table.TaskTable
+import org.jetbrains.exposed.sql.FieldSet
 
-class ProjectDetailViewModel() : ViewModel()
+private val taskTagViewColumns =
+    mutableListOf(*TaskTable.fields.toTypedArray(), TagTable.name, TagTable.color)
+
+val taskTagViewTable: FieldSet = (TaskTable leftJoin TagTable).slice(taskTagViewColumns)

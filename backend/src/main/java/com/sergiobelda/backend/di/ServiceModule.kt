@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.di
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.service.IProjectService
+import com.sergiobelda.backend.service.ITagService
+import com.sergiobelda.backend.service.ITaskService
+import com.sergiobelda.backend.service.ProjectService
+import com.sergiobelda.backend.service.TagService
+import com.sergiobelda.backend.service.TaskService
+import org.koin.dsl.module
 
-class ProjectDetailViewModel() : ViewModel()
+val serviceModule = module {
+    single<IProjectService> { ProjectService(get()) }
+    single<ITagService> { TagService(get()) }
+    single<ITaskService> { TaskService(get()) }
+}

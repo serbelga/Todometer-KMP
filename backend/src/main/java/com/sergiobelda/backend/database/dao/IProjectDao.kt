@@ -14,8 +14,21 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.database.dao
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.entity.NewProjectEntity
+import com.sergiobelda.backend.database.entity.ProjectEntity
+import java.util.UUID
 
-class ProjectDetailViewModel() : ViewModel()
+interface IProjectDao {
+
+    suspend fun getProject(id: UUID): ProjectEntity
+
+    suspend fun getProjects(): List<ProjectEntity>
+
+    suspend fun insertProject(project: NewProjectEntity): UUID
+
+    suspend fun updateProject(project: ProjectEntity)
+
+    suspend fun deleteProject(id: UUID)
+}

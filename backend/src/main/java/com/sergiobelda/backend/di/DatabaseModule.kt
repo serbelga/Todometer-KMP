@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.di
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.dao.IProjectDao
+import com.sergiobelda.backend.database.dao.ITagDao
+import com.sergiobelda.backend.database.dao.ITaskDao
+import com.sergiobelda.backend.database.dao.ProjectDao
+import com.sergiobelda.backend.database.dao.TagDao
+import com.sergiobelda.backend.database.dao.TaskDao
+import org.koin.dsl.module
 
-class ProjectDetailViewModel() : ViewModel()
+val databaseModule = module {
+    single<IProjectDao> { ProjectDao() }
+    single<ITagDao> { TagDao() }
+    single<ITaskDao> { TaskDao() }
+}

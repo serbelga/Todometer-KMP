@@ -14,8 +14,20 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.service
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.model.NewProject
+import com.sergiobelda.backend.model.Project
 
-class ProjectDetailViewModel() : ViewModel()
+interface IProjectService {
+
+    suspend fun getProject(id: String): Project
+
+    suspend fun getProjects(): List<Project>
+
+    suspend fun insertProject(newProject: NewProject): String
+
+    suspend fun updateProject(project: Project)
+
+    suspend fun deleteProject(id: String)
+}

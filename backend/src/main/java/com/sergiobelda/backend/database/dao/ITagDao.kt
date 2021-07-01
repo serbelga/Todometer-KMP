@@ -14,8 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.database.dao
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.entity.NewTagEntity
+import com.sergiobelda.backend.database.entity.TagEntity
+import java.util.UUID
 
-class ProjectDetailViewModel() : ViewModel()
+interface ITagDao {
+
+    suspend fun getTag(id: UUID): TagEntity
+
+    suspend fun getTags(): List<TagEntity>
+
+    suspend fun insertTag(tag: NewTagEntity): UUID
+
+    suspend fun deleteTag(id: UUID)
+}

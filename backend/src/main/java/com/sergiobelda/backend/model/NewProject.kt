@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.model
 
-import androidx.lifecycle.ViewModel
-
-class ProjectDetailViewModel() : ViewModel()
+data class NewProject(
+    val id: String?,
+    val name: String,
+    val description: String
+)

@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.di
 
-import androidx.lifecycle.ViewModel
+import io.ktor.application.Application
+import io.ktor.application.install
+import org.koin.ktor.ext.Koin
+import org.koin.logger.SLF4JLogger
 
-class ProjectDetailViewModel() : ViewModel()
+fun Application.configureKoin() {
+    install(Koin) {
+        SLF4JLogger()
+        modules(databaseModule)
+        modules(serviceModule)
+    }
+}

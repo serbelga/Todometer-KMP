@@ -23,6 +23,7 @@ object Versions {
     const val daggerHilt = "2.33-beta"
     const val dataStorePreferences = "1.0.0-beta02"
     const val espressoCore = "3.3.0"
+    const val exposedSql = "0.31.1"
     const val extJunit = "1.1.2"
     const val junit = "4.12"
     const val junitKtx = "1.1.2"
@@ -57,6 +58,12 @@ object Libs {
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     const val junit = "junit:junit:${Versions.junit}"
+
+    const val h2Database = "com.h2database:h2:1.4.200"
+
+    const val hikariCP = "com.zaxxer:HikariCP:4.0.3"
+
+    const val logback = "ch.qos.logback:logback-classic:1.2.3"
 
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
@@ -113,16 +120,26 @@ object Libs {
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
+        const val ktor = "io.insert-koin:koin-ktor:${Versions.koin}"
+        const val logger = "io.insert-koin:koin-logger-slf4j:${Versions.koin}"
         const val test = "io.insert-koin:koin-test:${Versions.koin}"
     }
 
     object Ktor {
+        const val auth = "io.ktor:ktor-auth:${Versions.ktor}"
         const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
         const val clientApache = "io.ktor:ktor-client-apache:${Versions.ktor}"
         const val clientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
+        const val clientCoreJvm = "io.ktor:ktor-client-core-jvm:${Versions.ktor}"
         const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val clientJson = "io.ktor:ktor-client-json:${Versions.ktor}"
         const val clientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
+        const val gson = "io.ktor:ktor-gson:${Versions.ktor}"
+        const val locations = "io.ktor:ktor-locations:${Versions.ktor}"
+        const val serialization = "io.ktor:ktor-serialization:${Versions.ktor}"
+        const val serverCore = "io.ktor:ktor-server-core:${Versions.ktor}"
+        const val serverNetty = "io.ktor:ktor-server-netty:${Versions.ktor}"
+        const val serverTests = "io.ktor:ktor-server-tests:${Versions.ktor}"
     }
 
     object SqlDelight {
@@ -131,5 +148,10 @@ object Libs {
         const val jvmDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
         const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
         const val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+    }
+
+    object Exposed {
+        const val core = "org.jetbrains.exposed:exposed-core:${Versions.exposedSql}"
+        const val jdbc = "org.jetbrains.exposed:exposed-jdbc:${Versions.exposedSql}"
     }
 }

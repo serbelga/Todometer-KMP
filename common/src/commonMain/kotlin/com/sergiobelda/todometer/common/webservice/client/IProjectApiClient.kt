@@ -20,7 +20,7 @@ import com.sergiobelda.todometer.common.webservice.model.ProjectApiModel
 
 interface IProjectApiClient {
 
-    suspend fun getProjects(): List<ProjectApiModel>
+    suspend fun getProjects(): Array<ProjectApiModel>
 
     suspend fun getProject(id: String): ProjectApiModel
 

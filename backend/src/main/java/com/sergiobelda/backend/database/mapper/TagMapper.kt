@@ -14,8 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.database.mapper
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.entity.TagEntity
+import com.sergiobelda.backend.database.table.TagTable
+import org.jetbrains.exposed.sql.ResultRow
 
-class ProjectDetailViewModel() : ViewModel()
+fun ResultRow.toTagEntity() =
+    TagEntity(
+        id = this[TagTable.id],
+        color = this[TagTable.color],
+        name = this[TagTable.name]
+    )
+
+fun Iterable<ResultRow>.toTagEntityList() = this.map {
+    it.toTagEntity()
+}

@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.service
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.model.NewTag
+import com.sergiobelda.backend.model.Tag
 
-class ProjectDetailViewModel() : ViewModel()
+interface ITagService {
+
+    suspend fun getTags(): List<Tag>
+
+    suspend fun getTag(id: String): Tag
+
+    suspend fun insertTag(newTag: NewTag): String
+
+    suspend fun deleteTag(id: String)
+}

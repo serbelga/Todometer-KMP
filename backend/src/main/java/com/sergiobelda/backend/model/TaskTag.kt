@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.model
 
-import androidx.lifecycle.ViewModel
-
-class ProjectDetailViewModel() : ViewModel()
+data class TaskTag(
+    val id: String,
+    val title: String,
+    val description: String?,
+    val state: String,
+    val projectId: String,
+    val tag: Tag?
+)

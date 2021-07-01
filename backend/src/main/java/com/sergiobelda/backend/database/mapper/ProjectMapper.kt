@@ -14,8 +14,19 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.database.mapper
 
-import androidx.lifecycle.ViewModel
+import com.sergiobelda.backend.database.entity.ProjectEntity
+import com.sergiobelda.backend.database.table.ProjectTable
+import org.jetbrains.exposed.sql.ResultRow
 
-class ProjectDetailViewModel() : ViewModel()
+fun ResultRow.toProjectEntity() =
+    ProjectEntity(
+        id = this[ProjectTable.id],
+        name = this[ProjectTable.name],
+        description = this[ProjectTable.description]
+    )
+
+fun Iterable<ResultRow>.toProjectEntityList() = this.map {
+    it.toProjectEntity()
+}

@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.backend.database.table
 
-import androidx.lifecycle.ViewModel
+import org.jetbrains.exposed.sql.Table
 
-class ProjectDetailViewModel() : ViewModel()
+object ProjectTable : Table() {
+    val id = uuid("id").autoGenerate()
+    val name = varchar("name", length = 50)
+    val description = text("description")
+
+    override val primaryKey = PrimaryKey(id, name = "PK_Project_ID")
+}
