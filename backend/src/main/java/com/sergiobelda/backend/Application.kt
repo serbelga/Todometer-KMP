@@ -25,9 +25,9 @@ import com.sergiobelda.backend.routing.tasksRouting
 import com.sergiobelda.backend.service.IProjectService
 import com.sergiobelda.backend.service.ITagService
 import com.sergiobelda.backend.service.ITaskService
-import io.ktor.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.inject
 
 fun main() {

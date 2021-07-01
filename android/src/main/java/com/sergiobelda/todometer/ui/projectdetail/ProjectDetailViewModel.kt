@@ -18,7 +18,4 @@ package com.sergiobelda.todometer.ui.projectdetail
 
 import androidx.lifecycle.ViewModel
 
-class ProjectDetailViewModel(
-
-) : ViewModel() {
-}
+class ProjectDetailViewModel() : ViewModel()

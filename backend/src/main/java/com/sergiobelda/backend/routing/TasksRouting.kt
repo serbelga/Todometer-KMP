@@ -18,11 +18,15 @@ package com.sergiobelda.backend.routing
 
 import com.sergiobelda.backend.model.NewTask
 import com.sergiobelda.backend.service.ITaskService
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
+import io.ktor.request.receive
+import io.ktor.response.respond
+import io.ktor.routing.Route
+import io.ktor.routing.delete
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.route
 
 fun Route.tasksRouting(taskService: ITaskService) {
     route("/v1/tasks") {

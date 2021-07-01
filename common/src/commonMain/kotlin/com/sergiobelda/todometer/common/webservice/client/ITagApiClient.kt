@@ -21,6 +21,4 @@ import com.sergiobelda.todometer.common.webservice.model.TagApiModel
 interface ITagApiClient {
 
     suspend fun getTags(): List<TagApiModel>
-
-
 }
