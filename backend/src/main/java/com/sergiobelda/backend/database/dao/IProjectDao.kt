@@ -18,6 +18,7 @@ package com.sergiobelda.backend.database.dao
 
 import com.sergiobelda.backend.database.entity.NewProjectEntity
 import com.sergiobelda.backend.database.entity.ProjectEntity
+import java.util.UUID
 
 interface IProjectDao {
 

@@ -23,6 +23,7 @@ import com.sergiobelda.backend.model.toNewProjectEntity
 import com.sergiobelda.backend.model.toProject
 import com.sergiobelda.backend.model.toProjectEntity
 import com.sergiobelda.backend.model.toProjectList
+import java.util.UUID
 
 class ProjectService(private val projectDao: IProjectDao) : IProjectService {
 
