@@ -17,7 +17,7 @@
 <div align="center">
 <img src="./resources/arch/modules.png" width="700" />
 </div>
-  
+
 ## App UI Design
 
 | <img width="300" src="./resources/Home.png"></img> | <img width="300" src="./resources/Home_BottomSheet.png"></img> | <img width="300" src="./resources/Task_Detail.png"></img> | <img width="300" src="./resources/Edit_Task.png"></img> |
@@ -30,6 +30,6 @@
   * [Compose](https://developer.android.com/jetpack/compose)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-  * [Room](https://developer.android.com/topic/libraries/architecture/room)
-* [Dagger Hilt](https://dagger.dev/hilt/)
+* [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
+* [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)
