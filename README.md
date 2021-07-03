@@ -1,4 +1,4 @@
-<h1 align="center">ToDo_meter Compose</h1></br>
+<h1 align="center">Todometer Kotlin Multiplatform</h1></br>
 
 <h4 align="center">
   🚧🚧🚧 WIP: https://github.com/serbelga/ToDometer to Jetpack Compose
@@ -12,6 +12,12 @@
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
 </h5>
 
+## Modules
+
+<div align="center">
+<img src="./resources/arch/modules.png" width="700" />
+</div>
+  
 ## App UI Design
 
 | <img width="300" src="./resources/Home.png"></img> | <img width="300" src="./resources/Home_BottomSheet.png"></img> | <img width="300" src="./resources/Task_Detail.png"></img> | <img width="300" src="./resources/Edit_Task.png"></img> |
