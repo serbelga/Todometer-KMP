@@ -17,8 +17,8 @@
 object Versions {
     const val activityKtx = "1.3.0-beta02"
     const val appCompat = "1.3.0"
-    const val androidGradlePlugin = "7.0.0-beta04"
-    const val compose = "1.0.0-beta09"
+    const val androidGradlePlugin = "7.0.0-beta05"
+    const val compose = "1.0.0-rc01"
     const val composeDesktop = "0.4.0"
     const val daggerHilt = "2.33-beta"
     const val dataStorePreferences = "1.0.0-beta02"
@@ -30,8 +30,8 @@ object Versions {
     const val koin = "3.1.0"
     const val kotlin = "1.5.10"
     const val ktLint = "0.41.0"
-    const val ktor = "1.6.0"
-    const val ktxVersion = "1.5.0"
+    const val ktor = "1.6.1"
+    const val ktxVersion = "1.6.0"
     const val lifecycle = "2.3.1"
     const val materialComponents = "1.3.0"
     const val navigationCompose = "2.4.0-alpha03"
@@ -39,6 +39,12 @@ object Versions {
     const val sqlDelight = "1.5.0"
     const val testCoreKtx = "1.3.0"
     const val timber = "4.7.1"
+}
+
+object Android {
+    const val compileSdk = 30
+    const val minSdk = 24
+    const val targetSdk = 30
 }
 
 object Libs {

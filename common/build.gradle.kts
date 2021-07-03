@@ -52,8 +52,8 @@ kotlin {
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                api("androidx.appcompat:appcompat:1.3.0")
-                api("androidx.core:core-ktx:1.5.0")
+                api(Libs.AndroidX.appCompat)
+                api(Libs.AndroidX.coreKtx)
                 implementation(Libs.AndroidX.DataStore.preferences)
                 implementation(Libs.Ktor.clientAndroid)
                 implementation(Libs.SqlDelight.androidDriver)
@@ -82,11 +82,11 @@ kotlin {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = Android.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 24
-        targetSdk = 30
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

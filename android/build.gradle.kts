@@ -34,11 +34,11 @@ dependencies {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = Android.compileSdk
     defaultConfig {
         applicationId = "com.sergiobelda.todometer.android"
-        minSdk = 24
-        targetSdk = 30
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
         versionCode = 1
         versionName = "1.0"
     }
