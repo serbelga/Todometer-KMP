@@ -15,7 +15,6 @@
 		42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */; };
 		42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CF0260EB02700E6B87B /* ToDometerTests.swift */; };
 		42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CFB260EB02700E6B87B /* ToDometerUITests.swift */; };
-		7FA883829E39DF5C82E4F1F4 /* Pods_ToDometer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDB3A2B79921F6EF43D71A7 /* Pods_ToDometer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +49,8 @@
 		42647CF7260EB02700E6B87B /* ToDometerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDometerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42647CFB260EB02700E6B87B /* ToDometerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDometerUITests.swift; sourceTree = "<group>"; };
 		42647CFD260EB02700E6B87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		427AEFD62691E8F500C46A56 /* Pods_ToDometer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_ToDometer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80235E15078F68962326835 /* Pods-ToDometer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDometer.release.xcconfig"; path = "Target Support Files/Pods-ToDometer/Pods-ToDometer.release.xcconfig"; sourceTree = "<group>"; };
-		ECDB3A2B79921F6EF43D71A7 /* Pods_ToDometer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDometer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE45680AC9599374DE510FE6 /* Pods-ToDometer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDometer.debug.xcconfig"; path = "Target Support Files/Pods-ToDometer/Pods-ToDometer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FA883829E39DF5C82E4F1F4 /* Pods_ToDometer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +82,7 @@
 		0639DA8B894A191DE2296CE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ECDB3A2B79921F6EF43D71A7 /* Pods_ToDometer.framework */,
+				427AEFD62691E8F500C46A56 /* Pods_ToDometer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
