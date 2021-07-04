@@ -2,12 +2,12 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("kotlinx-serialization")
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
 
-group = "com.sergiobelda.todometer.common"
 version = "1.0"
 
 repositories {
@@ -20,23 +20,27 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
+
     jvm("desktop") {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
         }
     }
-    ios {
-        binaries {
-            framework {
-                baseName = "common"
-            }
-        }
-    }
-    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
-    if (onPhone) {
-        iosArm64("ios")
-    } else {
-        iosX64("ios")
+
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
+            ::iosArm64
+        else
+            ::iosX64
+
+    iosTarget("ios") {}
+
+    cocoapods {
+        summary = "Common"
+        homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
+        ios.deploymentTarget = "14.1"
+        frameworkName = "common"
+        podfile = project.file("../ios/Podfile")
     }
     sourceSets {
         val commonMain by getting {
@@ -93,20 +97,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
-    val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from({ framework.outputDirectory })
-    into(targetDir)
-}
-tasks.getByName("build").dependsOn(packForXcode)
 
 sqldelight {
     database("TodometerDatabase") {

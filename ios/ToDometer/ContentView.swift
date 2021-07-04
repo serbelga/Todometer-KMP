@@ -11,7 +11,7 @@ import common
 
 struct ContentView: View {
     var body: some View {
-        Text(Greeting().greeting())
+        Text("Text")
     }
 }
 

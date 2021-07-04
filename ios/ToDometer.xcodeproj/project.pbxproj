@@ -15,8 +15,7 @@
 		42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */; };
 		42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CF0260EB02700E6B87B /* ToDometerTests.swift */; };
 		42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CFB260EB02700E6B87B /* ToDometerUITests.swift */; };
-		42CA7102260FDD03006F6928 /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; };
-		42CA7103260FDD03006F6928 /* common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42647D0A260ED6E300E6B87B /* common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7FA883829E39DF5C82E4F1F4 /* Pods_ToDometer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDB3A2B79921F6EF43D71A7 /* Pods_ToDometer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,20 +35,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		42CA7104260FDD03006F6928 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				42CA7103260FDD03006F6928 /* common.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		42647CD6260EB02300E6B87B /* ToDometer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDometer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42647CD9260EB02300E6B87B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +50,9 @@
 		42647CF7260EB02700E6B87B /* ToDometerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDometerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42647CFB260EB02700E6B87B /* ToDometerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDometerUITests.swift; sourceTree = "<group>"; };
 		42647CFD260EB02700E6B87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		42647D0A260ED6E300E6B87B /* common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = common.framework; path = "../common/build/xcode-frameworks/common.framework"; sourceTree = "<group>"; };
+		B80235E15078F68962326835 /* Pods-ToDometer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDometer.release.xcconfig"; path = "Target Support Files/Pods-ToDometer/Pods-ToDometer.release.xcconfig"; sourceTree = "<group>"; };
+		ECDB3A2B79921F6EF43D71A7 /* Pods_ToDometer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDometer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE45680AC9599374DE510FE6 /* Pods-ToDometer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDometer.debug.xcconfig"; path = "Target Support Files/Pods-ToDometer/Pods-ToDometer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42CA7102260FDD03006F6928 /* common.framework in Frameworks */,
+				7FA883829E39DF5C82E4F1F4 /* Pods_ToDometer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0639DA8B894A191DE2296CE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECDB3A2B79921F6EF43D71A7 /* Pods_ToDometer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		42647CCD260EB02200E6B87B = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +96,8 @@
 				42647CEF260EB02700E6B87B /* ToDometerTests */,
 				42647CFA260EB02700E6B87B /* ToDometerUITests */,
 				42647CD7260EB02300E6B87B /* Products */,
-				42647D09260ED6E200E6B87B /* Frameworks */,
+				7D4C20AD64F38436CC88D6B0 /* Pods */,
+				0639DA8B894A191DE2296CE5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,12 +151,13 @@
 			path = ToDometerUITests;
 			sourceTree = "<group>";
 		};
-		42647D09260ED6E200E6B87B /* Frameworks */ = {
+		7D4C20AD64F38436CC88D6B0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				42647D0A260ED6E300E6B87B /* common.framework */,
+				EE45680AC9599374DE510FE6 /* Pods-ToDometer.debug.xcconfig */,
+				B80235E15078F68962326835 /* Pods-ToDometer.release.xcconfig */,
 			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,10 +167,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42647D00260EB02700E6B87B /* Build configuration list for PBXNativeTarget "ToDometer" */;
 			buildPhases = (
+				B64D4D4D6D18498C81736971 /* [CP] Check Pods Manifest.lock */,
 				42647CD2260EB02200E6B87B /* Sources */,
 				42647CD3260EB02200E6B87B /* Frameworks */,
 				42647CD4260EB02200E6B87B /* Resources */,
-				42CA7104260FDD03006F6928 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -227,7 +224,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Sergio Belda";
 				TargetAttributes = {
 					42647CD5260EB02200E6B87B = {
@@ -289,6 +286,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B64D4D4D6D18498C81736971 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ToDometer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		42647CD2260EB02200E6B87B /* Sources */ = {
@@ -370,6 +392,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -394,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -430,6 +453,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -448,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -460,17 +484,29 @@
 		};
 		42647D01260EB02700E6B87B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE45680AC9599374DE510FE6 /* Pods-ToDometer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDometer/Preview Content\"";
 				DEVELOPMENT_TEAM = XX543589JX;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../common/build/xcode-frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/../../common/build/cocoapods/framework\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = ToDometer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"common\"",
+					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -481,17 +517,29 @@
 		};
 		42647D02260EB02700E6B87B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B80235E15078F68962326835 /* Pods-ToDometer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDometer/Preview Content\"";
 				DEVELOPMENT_TEAM = XX543589JX;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../common/build/xcode-frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/../../common/build/cocoapods/framework\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = ToDometer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"common\"",
+					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -508,7 +556,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XX543589JX;
 				INFOPLIST_FILE = ToDometerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,7 +578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XX543589JX;
 				INFOPLIST_FILE = ToDometerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
