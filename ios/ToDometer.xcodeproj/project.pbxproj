@@ -15,6 +15,7 @@
 		42647CE6260EB02600E6B87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42647CE4260EB02600E6B87B /* LaunchScreen.storyboard */; };
 		42647CF1260EB02700E6B87B /* ToDometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CF0260EB02700E6B87B /* ToDometerTests.swift */; };
 		42647CFC260EB02700E6B87B /* ToDometerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42647CFB260EB02700E6B87B /* ToDometerUITests.swift */; };
+		DD41374E8D2C64B94E81596B /* Pods_ToDometer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427AEFD62691E8F500C46A56 /* Pods_ToDometer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD41374E8D2C64B94E81596B /* Pods_ToDometer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
