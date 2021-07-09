@@ -24,5 +24,5 @@ data class TaskEntity(
     val description: String,
     val state: String,
     val projectId: UUID,
-    val tagId: UUID?
+    val tag: String
 )

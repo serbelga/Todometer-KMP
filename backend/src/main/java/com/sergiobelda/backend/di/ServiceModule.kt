@@ -17,15 +17,12 @@
 package com.sergiobelda.backend.di
 
 import com.sergiobelda.backend.service.IProjectService
-import com.sergiobelda.backend.service.ITagService
 import com.sergiobelda.backend.service.ITaskService
 import com.sergiobelda.backend.service.ProjectService
-import com.sergiobelda.backend.service.TagService
 import com.sergiobelda.backend.service.TaskService
 import org.koin.dsl.module
 
 val serviceModule = module {
     single<IProjectService> { ProjectService(get()) }
-    single<ITagService> { TagService(get()) }
     single<ITaskService> { TaskService(get()) }
 }

@@ -18,10 +18,8 @@ package com.sergiobelda.todometer.common.di
 
 import com.sergiobelda.todometer.common.api.TodometerApi
 import com.sergiobelda.todometer.common.api.client.IProjectApiClient
-import com.sergiobelda.todometer.common.api.client.ITagApiClient
 import com.sergiobelda.todometer.common.api.client.ITaskApiClient
 import com.sergiobelda.todometer.common.api.client.ProjectApiClient
-import com.sergiobelda.todometer.common.api.client.TagApiClient
 import com.sergiobelda.todometer.common.api.client.TaskApiClient
 import org.koin.dsl.module
 
@@ -32,8 +30,5 @@ val networkModule = module {
     }
     single<ITaskApiClient> {
         TaskApiClient(get())
-    }
-    single<ITagApiClient> {
-        TagApiClient(get())
     }
 }

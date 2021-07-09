@@ -16,6 +16,8 @@
 
 package com.sergiobelda.todometer.common.usecase
 
+import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -30,20 +32,19 @@ class InsertTaskUseCase(
      *
      * @param title Task title.
      * @param description Task description.
-     * @param tagId Id of the task tag.
+     * @param tag Task tag.
      */
     suspend operator fun invoke(
         title: String,
-        description: String?,
-        tagId: String?
-    ) {
-        userPreferencesRepository.projectSelected().firstOrNull()?.let { projectId ->
-            taskRepository.insertTask(
-                title,
-                description,
-                projectId,
-                tagId
-            )
-        }
+        description: String,
+        tag: Tag
+    ): Result<String> {
+        val projectId = userPreferencesRepository.projectSelected().firstOrNull() ?: ""
+        return taskRepository.insertTask(
+            title,
+            description,
+            projectId,
+            tag
+        )
     }
 }

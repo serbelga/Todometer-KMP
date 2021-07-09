@@ -43,10 +43,10 @@ class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClie
             parametersOf("id", id)
         }
 
-    override suspend fun insertProject(id: String?, name: String, description: String): String =
+    override suspend fun insertProject(newProjectRequestBody: NewProjectRequestBody): String =
         todometerApi.client.post(ENDPOINT_URL + VERSION_1 + PROJECT_PATH) {
             contentType(ContentType.Application.Json)
-            body = NewProjectRequestBody(id, name, description)
+            body = newProjectRequestBody
         }
 
     override suspend fun updateProject(id: String, name: String, description: String) {

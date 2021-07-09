@@ -17,8 +17,6 @@
 package com.sergiobelda.backend.database.mapper
 
 import com.sergiobelda.backend.database.entity.TaskEntity
-import com.sergiobelda.backend.database.entity.TaskTagView
-import com.sergiobelda.backend.database.table.TagTable
 import com.sergiobelda.backend.database.table.TaskTable
 import org.jetbrains.exposed.sql.ResultRow
 
@@ -29,25 +27,9 @@ fun ResultRow.toTaskEntity() =
         description = this[TaskTable.description],
         state = this[TaskTable.state],
         projectId = this[TaskTable.projectId],
-        tagId = this[TaskTable.tagId]
+        tag = this[TaskTable.tag]
     )
 
 fun Iterable<ResultRow>.toTaskEntityList() = this.map {
     it.toTaskEntity()
-}
-
-fun ResultRow.toTaskTagView() =
-    TaskTagView(
-        id = this[TaskTable.id],
-        title = this[TaskTable.title],
-        description = this[TaskTable.description],
-        state = this[TaskTable.state],
-        projectId = this[TaskTable.projectId],
-        tagId = this[TaskTable.tagId],
-        tagName = this[TagTable.name],
-        tagColor = this[TagTable.color]
-    )
-
-fun Iterable<ResultRow>.toTaskTagViewList() = this.map {
-    it.toTaskTagView()
 }

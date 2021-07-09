@@ -43,8 +43,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
 import org.koin.androidx.compose.getViewModel
@@ -55,7 +55,7 @@ fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel = getViewModel()
 ) {
-    var taskState: TaskTag? by remember { mutableStateOf(null) }
+    var taskState: Task? by remember { mutableStateOf(null) }
     val taskResultState = editTaskViewModel.getTask(taskId).observeAsState()
     taskResultState.value?.let { result ->
         result.doIfSuccess { taskState = it }
@@ -121,7 +121,7 @@ fun EditTaskScreen(
                                     description = taskDescription,
                                     state = task.state,
                                     projectId = task.projectId,
-                                    tagId = task.tag?.id,
+                                    tag = Tag.RED,
                                     sync = false
                                 )
                             )

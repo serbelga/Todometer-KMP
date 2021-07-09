@@ -43,8 +43,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
@@ -52,7 +52,7 @@ import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
-    task: TaskTag,
+    task: Task,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
@@ -109,21 +109,20 @@ fun TaskItem(
                     }
                 }
             }
-            task.tag?.let { tag ->
-                Row {
-                    Box(
-                        modifier = Modifier
-                            .size(16.dp)
-                            .clip(CircleShape)
-                            .background(TodometerColors.composeColorOf(tag.color))
+
+            Row {
+                Box(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clip(CircleShape)
+                        .background(TodometerColors.composeColorOf(task.tag))
+                )
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                    Text(
+                        text = task.tag.name,
+                        style = TodometerTypography.caption,
+                        modifier = Modifier.padding(start = 8.dp)
                     )
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        Text(
-                            text = tag.name,
-                            style = TodometerTypography.caption,
-                            modifier = Modifier.padding(start = 8.dp)
-                        )
-                    }
                 }
             }
         }

@@ -5,30 +5,16 @@ CREATE TABLE ProjectEntity (
     sync INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
-CREATE TABLE TagEntity (
-    id TEXT PRIMARY KEY NOT NULL,
-    color TEXT NOT NULL,
-    name TEXT NOT NULL,
-    sync INTEGER AS Boolean NOT NULL DEFAULT 0
-);
-
 CREATE TABLE TaskEntity (
     id TEXT PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
     state TEXT NOT NULL,
     project_id TEXT NOT NULL,
-    tag_id TEXT,
+    tag TEXT,
     sync INTEGER AS Boolean NOT NULL DEFAULT 0,
-    FOREIGN KEY(project_id) REFERENCES ProjectEntity(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(tag_id) REFERENCES TagEntity(id) ON UPDATE NO ACTION ON DELETE NO ACTION
+    FOREIGN KEY(project_id) REFERENCES ProjectEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-CREATE VIEW TaskTagView AS
-    SELECT TaskEntity.*, TagEntity.color AS tag_color, TagEntity.name AS tag_name, TagEntity.sync AS tag_sync
-    FROM TaskEntity LEFT JOIN TagEntity ON TaskEntity.tag_id = TagEntity.id
-    -- WHERE TagEntity.name IS NOT NULL AND TagEntity.color IS NOT NULL AND TagEntity.sync IS NOT NULL
-    ORDER BY TaskEntity.id;
 
 -- CREATE VIEW TaskProjectView AS
 --     SELECT DbTask.*, DbProject.name AS project_name
@@ -43,21 +29,21 @@ CREATE VIEW TaskTagView AS
 
 selectTask:
 SELECT *
-FROM TaskTagView
+FROM TaskEntity
 WHERE id = ?;
 
 selectTasksByProjectId:
 SELECT *
-FROM TaskTagView
+FROM TaskEntity
 WHERE project_id = ? ORDER BY state ASC;
 
 selectAllTasks:
 SELECT *
-FROM TaskTagView;
+FROM TaskEntity;
 
 insertOrReplaceTask:
 INSERT OR REPLACE INTO TaskEntity
-(id, title, description, state, project_id, tag_id, sync)
+(id, title, description, state, project_id, tag, sync)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 
 updateTask:
@@ -65,7 +51,7 @@ UPDATE TaskEntity
 SET
     title = ?,
     description = ?,
-    tag_id = ?
+    tag = ?
 WHERE id = ?;
 
 updateTaskState:
@@ -110,9 +96,3 @@ WHERE id = ?;
 deleteProject:
 DELETE FROM ProjectEntity
 WHERE id = ?;
-
--------------------- Tags
-
-selectAllTags:
-SELECT *
-FROM TagEntity;

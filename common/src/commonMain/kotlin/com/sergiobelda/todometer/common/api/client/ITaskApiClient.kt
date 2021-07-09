@@ -17,24 +17,17 @@
 package com.sergiobelda.todometer.common.api.client
 
 import com.sergiobelda.todometer.common.api.model.TaskApiModel
-import com.sergiobelda.todometer.common.api.model.TaskTagApiModel
+import com.sergiobelda.todometer.common.api.request.NewTaskRequestBody
 
 interface ITaskApiClient {
 
-    suspend fun getTasks(): List<TaskTagApiModel>
+    suspend fun getTasks(): List<TaskApiModel>
 
-    suspend fun getTasksByProjectId(id: String): List<TaskTagApiModel>
+    suspend fun getTasksByProjectId(id: String): List<TaskApiModel>
 
     suspend fun getTask(id: String): TaskApiModel
 
-    suspend fun insertTask(
-        id: String? = null,
-        title: String,
-        description: String,
-        state: String,
-        projectId: String,
-        tagId: String?
-    ): String
+    suspend fun insertTask(newTaskRequestBody: NewTaskRequestBody): String
 
     suspend fun deleteTask(id: String)
 }

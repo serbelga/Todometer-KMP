@@ -17,14 +17,14 @@
 package com.sergiobelda.backend.database.dao
 
 import com.sergiobelda.backend.database.entity.NewTaskEntity
-import com.sergiobelda.backend.database.entity.TaskTagView
+import com.sergiobelda.backend.database.entity.TaskEntity
 import java.util.UUID
 
 interface ITaskDao {
 
-    suspend fun getTask(id: UUID): TaskTagView
+    suspend fun getTask(id: UUID): TaskEntity
 
-    suspend fun getTasks(projectId: UUID? = null): List<TaskTagView>
+    suspend fun getTasks(projectId: UUID? = null): List<TaskEntity>
 
     suspend fun insertTask(task: NewTaskEntity): UUID
 

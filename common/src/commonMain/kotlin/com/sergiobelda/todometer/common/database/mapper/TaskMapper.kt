@@ -17,32 +17,21 @@
 package com.sergiobelda.todometer.common.database.mapper
 
 import com.sergiobelda.todometer.TaskEntity
-import com.sergiobelda.todometer.TaskTagView
-import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.model.TaskTag
-import com.sergiobelda.todometer.common.model.TypeConverters.colorValueOf
+import com.sergiobelda.todometer.common.model.TypeConverters.tagValueOf
 import com.sergiobelda.todometer.common.model.TypeConverters.taskStateValueOf
 
-fun TaskTagView.toDomain() = TaskTag(
-    id,
-    title,
-    description,
-    taskStateValueOf(state),
-    project_id,
-    // TODO: Implement check not null for different variables
-    tag = tag_id?.let {
-        Tag(
-            it,
-            colorValueOf(tag_color ?: ""),
-            tag_name ?: "",
-            tag_sync ?: false
-        )
-    },
-    sync
+fun TaskEntity.toDomain() = Task(
+    id = id,
+    title = title,
+    description = description,
+    state = taskStateValueOf(state),
+    projectId = project_id,
+    tag = tagValueOf(tag ?: ""),
+    sync = sync
 )
 
-fun Iterable<TaskTagView>.toDomain() = this.map {
+fun Iterable<TaskEntity>.toDomain() = this.map {
     it.toDomain()
 }
 
@@ -52,6 +41,6 @@ fun Task.toEntity() = TaskEntity(
     description,
     state.toString(),
     projectId,
-    tagId,
+    tag.toString(),
     sync
 )

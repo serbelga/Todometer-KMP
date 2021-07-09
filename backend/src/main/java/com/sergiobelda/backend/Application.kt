@@ -20,10 +20,8 @@ import com.sergiobelda.backend.database.AppDatabase
 import com.sergiobelda.backend.di.configureKoin
 import com.sergiobelda.backend.plugins.configureSerialization
 import com.sergiobelda.backend.routing.projectsRouting
-import com.sergiobelda.backend.routing.tagsRouting
 import com.sergiobelda.backend.routing.tasksRouting
 import com.sergiobelda.backend.service.IProjectService
-import com.sergiobelda.backend.service.ITagService
 import com.sergiobelda.backend.service.ITaskService
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -38,12 +36,10 @@ fun main() {
         AppDatabase.init()
 
         val projectService: IProjectService by inject()
-        val tagService: ITagService by inject()
         val taskService: ITaskService by inject()
 
         routing {
             projectsRouting(projectService)
-            tagsRouting(tagService)
             tasksRouting(taskService)
         }
     }.start(wait = true)

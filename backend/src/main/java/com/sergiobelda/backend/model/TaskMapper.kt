@@ -18,7 +18,6 @@ package com.sergiobelda.backend.model
 
 import com.sergiobelda.backend.database.entity.NewTaskEntity
 import com.sergiobelda.backend.database.entity.TaskEntity
-import com.sergiobelda.backend.database.entity.TaskTagView
 import java.util.UUID
 
 fun TaskEntity.toTask() = Task(
@@ -27,31 +26,11 @@ fun TaskEntity.toTask() = Task(
     description = description,
     state = state,
     projectId = projectId.toString(),
-    tagId = tagId?.toString()
+    tag = tag
 )
 
 fun Iterable<TaskEntity>.toTaskList() = this.map { taskEntity ->
     taskEntity.toTask()
-}
-
-fun TaskTagView.toTaskTag() =
-    TaskTag(
-        id = id.toString(),
-        title = title,
-        description = description,
-        state = state,
-        projectId = projectId.toString(),
-        tag = tagId?.let {
-            Tag(
-                id = tagId.toString(),
-                name = tagName ?: "",
-                color = tagColor ?: ""
-            )
-        }
-    )
-
-fun Iterable<TaskTagView>.toTaskTagList() = this.map {
-    it.toTaskTag()
 }
 
 fun NewTask.toNewTaskEntity() = NewTaskEntity(
@@ -60,5 +39,5 @@ fun NewTask.toNewTaskEntity() = NewTaskEntity(
     description = description,
     state = state,
     projectId = UUID.fromString(projectId),
-    tagId = tagId?.let { UUID.fromString(it) }
+    tag = tag
 )

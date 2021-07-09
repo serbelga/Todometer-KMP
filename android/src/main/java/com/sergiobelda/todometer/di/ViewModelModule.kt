@@ -20,7 +20,7 @@ val viewModelModule = module {
         EditTaskViewModel(get(), get())
     }
     viewModel {
-        HomeViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
+        HomeViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
     viewModel {
         ProjectDetailViewModel()

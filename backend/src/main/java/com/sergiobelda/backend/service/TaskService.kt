@@ -18,19 +18,19 @@ package com.sergiobelda.backend.service
 
 import com.sergiobelda.backend.database.dao.ITaskDao
 import com.sergiobelda.backend.model.NewTask
-import com.sergiobelda.backend.model.TaskTag
+import com.sergiobelda.backend.model.Task
 import com.sergiobelda.backend.model.toNewTaskEntity
-import com.sergiobelda.backend.model.toTaskTag
-import com.sergiobelda.backend.model.toTaskTagList
+import com.sergiobelda.backend.model.toTask
+import com.sergiobelda.backend.model.toTaskList
 import java.util.UUID
 
 class TaskService(private val taskDao: ITaskDao) : ITaskService {
 
-    override suspend fun getTasks(projectId: String?): List<TaskTag> =
-        taskDao.getTasks(projectId?.let { UUID.fromString(it) }).toTaskTagList()
+    override suspend fun getTasks(projectId: String?): List<Task> =
+        taskDao.getTasks(projectId?.let { UUID.fromString(it) }).toTaskList()
 
-    override suspend fun getTask(id: String): TaskTag =
-        taskDao.getTask(UUID.fromString(id)).toTaskTag()
+    override suspend fun getTask(id: String): Task =
+        taskDao.getTask(UUID.fromString(id)).toTask()
 
     override suspend fun insertTask(newTask: NewTask): String =
         taskDao.insertTask(newTask.toNewTaskEntity()).toString()

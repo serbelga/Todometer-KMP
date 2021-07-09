@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NewProjectRequestBody(
-    val id: String?,
+    val id: String? = null,
     val name: String,
     val description: String
 )

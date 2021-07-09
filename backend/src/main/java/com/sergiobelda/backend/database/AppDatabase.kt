@@ -17,7 +17,6 @@
 package com.sergiobelda.backend.database
 
 import com.sergiobelda.backend.database.table.ProjectTable
-import com.sergiobelda.backend.database.table.TagTable
 import com.sergiobelda.backend.database.table.TaskTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -36,7 +35,6 @@ object AppDatabase {
             addLogger(StdOutSqlLogger)
 
             SchemaUtils.create(ProjectTable)
-            SchemaUtils.create(TagTable)
             SchemaUtils.create(TaskTable)
         }
     }

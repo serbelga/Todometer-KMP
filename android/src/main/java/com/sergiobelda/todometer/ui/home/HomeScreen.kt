@@ -75,7 +75,7 @@ import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.model.Tag
-import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
@@ -330,7 +330,7 @@ fun TagItem(tag: Tag) {
                 .padding(start = 16.dp)
                 .size(16.dp)
                 .clip(CircleShape)
-                .background(TodometerColors.composeColorOf(tag.color))
+                .background(TodometerColors.composeColorOf(tag))
         )
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
@@ -344,7 +344,7 @@ fun TagItem(tag: Tag) {
 
 @Composable
 fun TasksListView(
-    tasks: List<TaskTag>,
+    tasks: List<Task>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,

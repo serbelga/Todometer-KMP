@@ -17,9 +17,9 @@
 package com.sergiobelda.todometer.common.database
 
 import com.sergiobelda.todometer.ProjectEntity
-import com.sergiobelda.todometer.TaskTagView
+import com.sergiobelda.todometer.TaskEntity
 
 data class ProjectTasksRelation(
     val project: ProjectEntity,
-    val tasks: List<TaskTagView>
+    val tasks: List<TaskEntity>
 )

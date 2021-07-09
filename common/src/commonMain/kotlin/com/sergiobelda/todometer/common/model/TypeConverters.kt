@@ -22,5 +22,5 @@ object TypeConverters {
 
     fun taskStateValueOf(name: String): TaskState = enumValueOrDefaultOf(name, TaskState.UNKNOWN)
 
-    fun colorValueOf(color: String): Color = enumValueOrDefaultOf(color, Color.GRAY)
+    fun tagValueOf(tag: String): Tag = enumValueOrDefaultOf(tag, Tag.GRAY)
 }

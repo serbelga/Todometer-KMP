@@ -16,8 +16,12 @@
 
 package com.sergiobelda.todometer.ui.addtask
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import kotlinx.coroutines.launch
 
@@ -25,15 +29,15 @@ class AddTaskViewModel(
     private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
+    // TODO: Migrate to StateFlow
+    private val _result = MutableLiveData<Result<String>>()
+    val result: LiveData<Result<String>> get() = _result
+
     fun insertTask(
         title: String,
-        description: String?,
-        tagId: String
+        description: String,
+        tag: Tag
     ) = viewModelScope.launch {
-        insertTaskUseCase(
-            title,
-            description,
-            tagId
-        )
+        _result.value = insertTaskUseCase(title, description, tag)
     }
 }

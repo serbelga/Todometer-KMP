@@ -22,5 +22,5 @@ data class Task(
     val description: String,
     val state: String,
     val projectId: String,
-    val tagId: String?
+    val tag: String
 )

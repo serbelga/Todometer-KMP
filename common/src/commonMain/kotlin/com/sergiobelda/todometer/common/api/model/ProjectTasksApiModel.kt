@@ -23,5 +23,5 @@ data class ProjectTasksApiModel(
     val id: String,
     val name: String,
     val description: String,
-    val tasks: List<TaskTagApiModel> = arrayListOf()
+    val tasks: List<TaskApiModel> = arrayListOf()
 )

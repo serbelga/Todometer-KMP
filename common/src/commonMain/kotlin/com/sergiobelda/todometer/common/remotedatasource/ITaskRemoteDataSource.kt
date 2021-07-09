@@ -17,9 +17,18 @@
 package com.sergiobelda.todometer.common.remotedatasource
 
 import com.sergiobelda.todometer.common.data.Result
-import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.Tag
+import com.sergiobelda.todometer.common.model.Task
 
 interface ITaskRemoteDataSource {
 
-    suspend fun getTasksByProjectId(id: String): Result<List<TaskTag>>
+    suspend fun getTasksByProjectId(id: String): Result<List<Task>>
+
+    suspend fun insertTask(
+        id: String? = null,
+        title: String,
+        description: String,
+        projectId: String,
+        tag: Tag
+    ): Result<String>
 }

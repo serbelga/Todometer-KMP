@@ -17,20 +17,20 @@
 package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskRepository {
 
-    fun getTask(id: String): Flow<Result<TaskTag?>>
+    fun getTask(id: String): Flow<Result<Task?>>
 
-    fun getTasks(): Flow<Result<List<TaskTag>>>
+    fun getTasks(): Flow<Result<List<Task>>>
 
     suspend fun refreshTasksByProjectId(id: String)
 
-    suspend fun insertTask(title: String, description: String?, projectId: String, tagId: String?)
+    suspend fun insertTask(title: String, description: String, projectId: String, tag: Tag): Result<String>
 
     suspend fun updateTask(task: Task)
 

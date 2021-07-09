@@ -19,10 +19,9 @@ package com.sergiobelda.todometer.common.repository
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.ITaskLocalDataSource
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.model.TaskTag
-import com.sergiobelda.todometer.common.model.toTask
 import com.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
 import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
@@ -32,33 +31,46 @@ class TaskRepository(
     private val taskRemoteDataSource: ITaskRemoteDataSource
 ) : ITaskRepository {
 
-    override fun getTask(id: String): Flow<Result<TaskTag?>> =
+    override fun getTask(id: String): Flow<Result<Task?>> =
         taskLocalDataSource.getTask(id)
 
-    override fun getTasks(): Flow<Result<List<TaskTag>>> =
+    override fun getTasks(): Flow<Result<List<Task>>> =
         taskLocalDataSource.getTasks()
 
     override suspend fun refreshTasksByProjectId(id: String) {
         val result = taskRemoteDataSource.getTasksByProjectId(id)
         result.doIfSuccess { list ->
-            taskLocalDataSource.insertTasks(list.map { it.toTask() })
+            taskLocalDataSource.insertTasks(list)
         }
     }
 
     override suspend fun insertTask(
         title: String,
-        description: String?,
+        description: String,
         projectId: String,
-        tagId: String?
-    ) {
-        taskLocalDataSource.insertTask(
+        tag: Tag
+    ): Result<String> {
+        var sync = false
+        // TODO Set null to indicate DAO need to generate UUID
+        var taskId = randomUUIDString()
+        taskRemoteDataSource.insertTask(
+            title = title,
+            description = description,
+            projectId = projectId,
+            tag = tag
+        ).doIfSuccess {
+            sync = true
+            taskId = it
+        }
+        return taskLocalDataSource.insertTask(
             Task(
-                id = randomUUIDString(),
+                id = taskId,
                 title = title,
                 description = description,
+                state = TaskState.DOING,
                 projectId = projectId,
-                tagId = tagId,
-                sync = false
+                tag = tag,
+                sync = sync
             )
         )
     }

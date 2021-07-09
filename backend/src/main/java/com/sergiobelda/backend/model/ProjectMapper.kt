@@ -36,7 +36,7 @@ fun ProjectTasksRelation.toProjectTasks() =
         id = project.id.toString(),
         name = project.name,
         description = project.description,
-        tasks = tasks.map { it.toTaskTag() }
+        tasks = tasks.map { it.toTask() }
     )
 
 fun Project.toProjectEntity() = ProjectEntity(

@@ -31,6 +31,7 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -41,6 +42,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.data.doIfSuccess
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
 import org.koin.androidx.compose.getViewModel
@@ -53,6 +56,10 @@ fun AddTaskScreen(
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
+    val result = addTaskViewModel.result.observeAsState()
+    result.value?.doIfSuccess {
+        navigateUp()
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -105,9 +112,8 @@ fun AddTaskScreen(
                         addTaskViewModel.insertTask(
                             title = taskTitle,
                             description = taskDescription,
-                            tagId = "" // TODO: Update
+                            tag = Tag.RED // TODO: Update
                         )
-                        navigateUp()
                     }
                 },
             ) {

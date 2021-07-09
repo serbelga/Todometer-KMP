@@ -16,21 +16,22 @@
 
 package com.sergiobelda.todometer.common.api.mapper
 
-import com.sergiobelda.todometer.common.api.model.TaskTagApiModel
-import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.api.model.TaskApiModel
+import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TypeConverters.tagValueOf
 import com.sergiobelda.todometer.common.model.TypeConverters.taskStateValueOf
 
-fun TaskTagApiModel.toDomain() =
-    TaskTag(
+fun TaskApiModel.toDomain() =
+    Task(
         id = id,
         title = title,
         description = description,
         state = taskStateValueOf(state),
         projectId = projectId,
-        tag = tag?.toDomain(),
+        tag = tagValueOf(tag),
         sync = true
     )
 
-fun Iterable<TaskTagApiModel>.toTaskTagList() = this.map {
+fun Iterable<TaskApiModel>.toTaskTagList() = this.map {
     it.toDomain()
 }

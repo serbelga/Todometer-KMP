@@ -16,11 +16,9 @@
 
 package com.sergiobelda.backend.database
 
-import com.sergiobelda.backend.database.table.TagTable
-import com.sergiobelda.backend.database.table.TaskTable
-import org.jetbrains.exposed.sql.FieldSet
-
+/*
 private val taskTagViewColumns =
     mutableListOf(*TaskTable.fields.toTypedArray(), TagTable.name, TagTable.color)
 
 val taskTagViewTable: FieldSet = (TaskTable leftJoin TagTable).slice(taskTagViewColumns)
+ */

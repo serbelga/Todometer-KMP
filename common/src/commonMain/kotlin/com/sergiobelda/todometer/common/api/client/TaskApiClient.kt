@@ -21,7 +21,6 @@ import com.sergiobelda.todometer.common.api.TodometerApi.Companion.ENDPOINT_URL
 import com.sergiobelda.todometer.common.api.TodometerApi.Companion.TASK_PATH
 import com.sergiobelda.todometer.common.api.TodometerApi.Companion.VERSION_1
 import com.sergiobelda.todometer.common.api.model.TaskApiModel
-import com.sergiobelda.todometer.common.api.model.TaskTagApiModel
 import com.sergiobelda.todometer.common.api.request.NewTaskRequestBody
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -32,10 +31,10 @@ import io.ktor.http.parametersOf
 
 class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
 
-    override suspend fun getTasks(): List<TaskTagApiModel> =
+    override suspend fun getTasks(): List<TaskApiModel> =
         todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TASK_PATH)
 
-    override suspend fun getTasksByProjectId(id: String): List<TaskTagApiModel> =
+    override suspend fun getTasksByProjectId(id: String): List<TaskApiModel> =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + TASK_PATH
         ) {
@@ -49,17 +48,10 @@ class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
             parametersOf("id", id)
         }
 
-    override suspend fun insertTask(
-        id: String?,
-        title: String,
-        description: String,
-        state: String,
-        projectId: String,
-        tagId: String?
-    ): String =
+    override suspend fun insertTask(newTaskRequestBody: NewTaskRequestBody): String =
         todometerApi.client.post(ENDPOINT_URL + VERSION_1 + TASK_PATH) {
             contentType(ContentType.Application.Json)
-            body = NewTaskRequestBody(id, title, description, state, projectId, tagId)
+            body = newTaskRequestBody
         }
 
     override suspend fun deleteTask(id: String) =

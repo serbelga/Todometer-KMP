@@ -17,17 +17,16 @@
 package com.sergiobelda.todometer.common.database.dao
 
 import com.sergiobelda.todometer.TaskEntity
-import com.sergiobelda.todometer.TaskTagView
 import com.sergiobelda.todometer.common.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskDao {
 
-    fun getTask(id: String): Flow<TaskTagView?>
+    fun getTask(id: String): Flow<TaskEntity?>
 
-    fun getTasks(): Flow<List<TaskTagView>>
+    fun getTasks(): Flow<List<TaskEntity>>
 
-    suspend fun insertTask(task: TaskEntity)
+    suspend fun insertTask(task: TaskEntity): String
 
     suspend fun insertTasks(tasks: List<TaskEntity>)
 

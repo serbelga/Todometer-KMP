@@ -18,5 +18,5 @@ package com.sergiobelda.backend.database.entity
 
 data class ProjectTasksRelation(
     val project: ProjectEntity,
-    val tasks: List<TaskTagView>
+    val tasks: List<TaskEntity>
 )

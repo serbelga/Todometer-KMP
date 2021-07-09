@@ -19,16 +19,15 @@ package com.sergiobelda.todometer.common.localdatasource
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskLocalDataSource {
 
-    fun getTask(id: String): Flow<Result<TaskTag?>>
+    fun getTask(id: String): Flow<Result<Task?>>
 
-    fun getTasks(): Flow<Result<List<TaskTag>>>
+    fun getTasks(): Flow<Result<List<Task>>>
 
-    suspend fun insertTask(task: Task)
+    suspend fun insertTask(task: Task): Result<String>
 
     suspend fun insertTasks(tasks: List<Task>)
 

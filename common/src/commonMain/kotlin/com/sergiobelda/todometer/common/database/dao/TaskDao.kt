@@ -17,7 +17,6 @@
 package com.sergiobelda.todometer.common.database.dao
 
 import com.sergiobelda.todometer.TaskEntity
-import com.sergiobelda.todometer.TaskTagView
 import com.sergiobelda.todometer.TodometerDatabase
 import com.sergiobelda.todometer.common.model.TaskState
 import com.squareup.sqldelight.runtime.coroutines.asFlow
@@ -31,22 +30,25 @@ class TaskDao : ITaskDao, KoinComponent {
 
     private val database: TodometerDatabase by inject()
 
-    override fun getTask(id: String): Flow<TaskTagView?> =
+    override fun getTask(id: String): Flow<TaskEntity?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(): Flow<List<TaskTagView>> =
+    override fun getTasks(): Flow<List<TaskEntity>> =
         database.todometerQueries.selectAllTasks().asFlow().mapToList()
 
-    override suspend fun insertTask(task: TaskEntity) =
+    override suspend fun insertTask(task: TaskEntity): String {
         database.todometerQueries.insertOrReplaceTask(
             id = task.id,
             title = task.title,
             description = task.description,
             state = task.state,
-            tag_id = task.tag_id,
+            tag = task.tag,
             project_id = task.project_id,
             sync = task.sync
         )
+        // TODO Call return last_insert_rowid() from SQLDelight.
+        return task.id
+    }
 
     override suspend fun insertTasks(tasks: List<TaskEntity>) =
         tasks.forEach { task ->
@@ -58,7 +60,7 @@ class TaskDao : ITaskDao, KoinComponent {
             id = task.id,
             title = task.title,
             description = task.description,
-            tag_id = task.tag_id
+            tag = task.tag
         )
 
     override suspend fun updateTaskState(id: String, state: TaskState) {

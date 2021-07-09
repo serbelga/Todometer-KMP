@@ -17,11 +17,10 @@
 package com.sergiobelda.backend.database.dao
 
 import com.sergiobelda.backend.database.entity.NewTaskEntity
-import com.sergiobelda.backend.database.entity.TaskTagView
-import com.sergiobelda.backend.database.mapper.toTaskTagView
-import com.sergiobelda.backend.database.mapper.toTaskTagViewList
+import com.sergiobelda.backend.database.entity.TaskEntity
+import com.sergiobelda.backend.database.mapper.toTaskEntity
+import com.sergiobelda.backend.database.mapper.toTaskEntityList
 import com.sergiobelda.backend.database.table.TaskTable
-import com.sergiobelda.backend.database.taskTagViewTable
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.replace
 import org.jetbrains.exposed.sql.select
@@ -31,15 +30,15 @@ import java.util.UUID
 
 class TaskDao : ITaskDao {
 
-    override suspend fun getTask(id: UUID): TaskTagView = newSuspendedTransaction {
-        taskTagViewTable.select { TaskTable.id eq id }.single().toTaskTagView()
+    override suspend fun getTask(id: UUID): TaskEntity = newSuspendedTransaction {
+        TaskTable.select { TaskTable.id eq id }.single().toTaskEntity()
     }
 
-    override suspend fun getTasks(projectId: UUID?): List<TaskTagView> = newSuspendedTransaction {
+    override suspend fun getTasks(projectId: UUID?): List<TaskEntity> = newSuspendedTransaction {
         if (projectId != null) {
-            taskTagViewTable.select { TaskTable.projectId eq projectId }.toTaskTagViewList()
+            TaskTable.select { TaskTable.projectId eq projectId }.toTaskEntityList()
         } else {
-            taskTagViewTable.selectAll().toTaskTagViewList()
+            TaskTable.selectAll().toTaskEntityList()
         }
     }
 
@@ -53,7 +52,7 @@ class TaskDao : ITaskDao {
                 it[description] = task.description
                 it[state] = task.state
                 it[projectId] = task.projectId
-                it[tagId] = task.tagId
+                it[tag] = task.tag
             }
         } get TaskTable.id
 

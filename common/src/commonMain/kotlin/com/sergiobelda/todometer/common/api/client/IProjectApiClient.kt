@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.common.api.client
 
 import com.sergiobelda.todometer.common.api.model.ProjectApiModel
+import com.sergiobelda.todometer.common.api.request.NewProjectRequestBody
 
 interface IProjectApiClient {
 
@@ -24,7 +25,7 @@ interface IProjectApiClient {
 
     suspend fun getProject(id: String): ProjectApiModel
 
-    suspend fun insertProject(id: String? = null, name: String, description: String): String
+    suspend fun insertProject(newProjectRequestBody: NewProjectRequestBody): String
 
     suspend fun updateProject(id: String, name: String, description: String)
 

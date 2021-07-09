@@ -29,11 +29,7 @@ object TaskTable : Table() {
         onDelete = ReferenceOption.CASCADE,
         onUpdate = ReferenceOption.CASCADE
     )
-    val tagId = uuid("tag_id").references(
-        TagTable.id,
-        onDelete = ReferenceOption.NO_ACTION,
-        onUpdate = ReferenceOption.NO_ACTION
-    ).nullable()
+    val tag = text("tag")
 
     override val primaryKey = PrimaryKey(id, name = "PK_Task_ID")
 }

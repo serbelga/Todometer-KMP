@@ -22,7 +22,6 @@ import com.sergiobelda.todometer.common.database.mapper.toDomain
 import com.sergiobelda.todometer.common.database.mapper.toEntity
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
-import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -31,16 +30,18 @@ class TaskLocalDataSource(
     private val taskDao: ITaskDao
 ) : ITaskLocalDataSource {
 
-    override fun getTask(id: String): Flow<Result<TaskTag?>> =
+    override fun getTask(id: String): Flow<Result<Task?>> =
         taskDao.getTask(id).map { Result.Success(it?.toDomain()) }
 
-    override fun getTasks(): Flow<Result<List<TaskTag>>> =
+    override fun getTasks(): Flow<Result<List<Task>>> =
         taskDao.getTasks().map { list ->
             Result.Success(list.toDomain())
         }
 
-    override suspend fun insertTask(task: Task) =
-        taskDao.insertTask(task.toEntity())
+    override suspend fun insertTask(task: Task): Result<String> {
+        val taskId = taskDao.insertTask(task.toEntity())
+        return Result.Success(taskId)
+    }
 
     override suspend fun insertTasks(tasks: List<Task>) {
         taskDao.insertTasks(tasks.map { it.toEntity() })

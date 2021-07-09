@@ -20,8 +20,8 @@ data class Task(
     val id: String,
     val title: String,
     val description: String?,
-    val state: TaskState = TaskState.DOING,
+    val state: TaskState,
     val projectId: String,
-    val tagId: String?,
+    val tag: Tag,
     val sync: Boolean
 )

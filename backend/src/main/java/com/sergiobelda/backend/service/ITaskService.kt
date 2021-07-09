@@ -17,13 +17,13 @@
 package com.sergiobelda.backend.service
 
 import com.sergiobelda.backend.model.NewTask
-import com.sergiobelda.backend.model.TaskTag
+import com.sergiobelda.backend.model.Task
 
 interface ITaskService {
 
-    suspend fun getTasks(projectId: String?): List<TaskTag>
+    suspend fun getTasks(projectId: String?): List<Task>
 
-    suspend fun getTask(id: String): TaskTag
+    suspend fun getTask(id: String): Task
 
     suspend fun insertTask(newTask: NewTask): String
 

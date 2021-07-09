@@ -17,15 +17,12 @@
 package com.sergiobelda.backend.di
 
 import com.sergiobelda.backend.database.dao.IProjectDao
-import com.sergiobelda.backend.database.dao.ITagDao
 import com.sergiobelda.backend.database.dao.ITaskDao
 import com.sergiobelda.backend.database.dao.ProjectDao
-import com.sergiobelda.backend.database.dao.TagDao
 import com.sergiobelda.backend.database.dao.TaskDao
 import org.koin.dsl.module
 
 val databaseModule = module {
     single<IProjectDao> { ProjectDao() }
-    single<ITagDao> { TagDao() }
     single<ITaskDao> { TaskDao() }
 }

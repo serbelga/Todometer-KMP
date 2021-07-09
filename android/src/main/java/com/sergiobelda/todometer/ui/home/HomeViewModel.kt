@@ -21,11 +21,10 @@ import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
-import com.sergiobelda.todometer.common.model.TaskTag
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
-import com.sergiobelda.todometer.common.usecase.GetTagsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.RefreshProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
@@ -46,11 +45,10 @@ class HomeViewModel(
     private val refreshProjectSelectedUseCase: RefreshProjectSelectedUseCase,
     getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
-    getTasksUseCase: GetTasksUseCase,
-    getTagsUseCase: GetTagsUseCase
+    getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
-    val tasks: StateFlow<Result<List<TaskTag>>> =
+    val tasks: StateFlow<Result<List<Task>>> =
         getTasksUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 
     val projects: StateFlow<Result<List<Project>>> =
@@ -58,8 +56,6 @@ class HomeViewModel(
 
     val projectSelected: StateFlow<Result<ProjectTasks?>> =
         getProjectSelectedUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
-
-    // val tags: LiveData<Result<List<Tag>>> = getTagsUseCase().asLiveData()
 
     init {
         viewModelScope.launch {

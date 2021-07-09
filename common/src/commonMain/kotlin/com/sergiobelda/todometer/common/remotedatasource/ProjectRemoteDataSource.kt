@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.common.remotedatasource
 
 import com.sergiobelda.todometer.common.api.client.IProjectApiClient
 import com.sergiobelda.todometer.common.api.mapper.toDomain
+import com.sergiobelda.todometer.common.api.request.NewProjectRequestBody
 import com.sergiobelda.todometer.common.api.safeApiCall
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
@@ -40,7 +41,7 @@ class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) :
         description: String
     ): Result<String> =
         safeApiCall {
-            projectApiClient.insertProject(id, name, description)
+            projectApiClient.insertProject(NewProjectRequestBody(id, name, description))
         }
 
     override suspend fun updateProject(
