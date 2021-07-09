@@ -16,7 +16,7 @@
 
 package com.sergiobelda.todometer.common.localdatasource
 
-import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import kotlinx.coroutines.flow.Flow
@@ -27,7 +27,7 @@ interface IProjectLocalDataSource {
 
     fun getProject(id: String): Flow<Result<ProjectTasks?>>
 
-    suspend fun insertProject(project: Project)
+    suspend fun insertProject(project: Project): Result<String>
 
     suspend fun insertProjects(projects: List<Project>)
 

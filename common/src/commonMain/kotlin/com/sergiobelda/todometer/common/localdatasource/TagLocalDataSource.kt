@@ -16,9 +16,9 @@
 
 package com.sergiobelda.todometer.common.localdatasource
 
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.database.dao.ITagDao
 import com.sergiobelda.todometer.common.database.mapper.toDomain
-import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Tag
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

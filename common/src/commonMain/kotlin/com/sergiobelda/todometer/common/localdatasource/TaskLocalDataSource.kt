@@ -16,16 +16,17 @@
 
 package com.sergiobelda.todometer.common.localdatasource
 
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.database.dao.ITaskDao
 import com.sergiobelda.todometer.common.database.mapper.toDomain
 import com.sergiobelda.todometer.common.database.mapper.toEntity
-import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.model.TaskTag
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+// TODO Catch errors and return Result.Error
 class TaskLocalDataSource(
     private val taskDao: ITaskDao
 ) : ITaskLocalDataSource {

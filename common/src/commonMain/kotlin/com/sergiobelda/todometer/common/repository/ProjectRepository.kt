@@ -16,15 +16,15 @@
 
 package com.sergiobelda.todometer.common.repository
 
-import com.sergiobelda.todometer.common.datasource.Result
-import com.sergiobelda.todometer.common.datasource.doIfSuccess
+import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
 
 class ProjectRepository(
     private val projectLocalDataSource: IProjectLocalDataSource,
@@ -35,7 +35,7 @@ class ProjectRepository(
         projectLocalDataSource.getProject(id)
 
     override fun getProjects(): Flow<Result<List<Project>>> =
-        projectLocalDataSource.getProjects().onEach { result ->
+        projectLocalDataSource.getProjects().map { result ->
             result.doIfSuccess { projects ->
                 projects.filter { !it.sync }.forEach { project ->
                     synchronizeProjectRemotely(project.id, project.name, project.description)
@@ -57,16 +57,15 @@ class ProjectRepository(
         }
     }
 
-    override suspend fun insertProject(name: String, description: String) {
-        val result = projectRemoteDataSource.insertProject(name = name, description = description)
+    override suspend fun insertProject(name: String, description: String): Result<String> {
         var sync = false
         // TODO Set null to indicate DAO need to generate UUID
         var projectId = randomUUIDString()
-        result.doIfSuccess {
+        projectRemoteDataSource.insertProject(name = name, description = description).doIfSuccess {
             sync = true
             projectId = it
         }
-        projectLocalDataSource.insertProject(
+        return projectLocalDataSource.insertProject(
             Project(
                 id = projectId,
                 name = name,

@@ -16,7 +16,7 @@
 
 package com.sergiobelda.todometer.common.remotedatasource
 
-import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
 
 interface IProjectRemoteDataSource {

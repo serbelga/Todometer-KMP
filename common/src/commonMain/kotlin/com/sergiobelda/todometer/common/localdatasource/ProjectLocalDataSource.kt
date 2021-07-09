@@ -16,15 +16,16 @@
 
 package com.sergiobelda.todometer.common.localdatasource
 
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.database.dao.IProjectDao
 import com.sergiobelda.todometer.common.database.mapper.toDomain
 import com.sergiobelda.todometer.common.database.mapper.toEntity
-import com.sergiobelda.todometer.common.datasource.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+// TODO Catch errors and return Result.Error
 class ProjectLocalDataSource(
     private val projectDao: IProjectDao
 ) : IProjectLocalDataSource {
@@ -39,8 +40,10 @@ class ProjectLocalDataSource(
             Result.Success(projectTaskRelation?.toDomain())
         }
 
-    override suspend fun insertProject(project: Project) =
-        projectDao.insertProject(project.toEntity())
+    override suspend fun insertProject(project: Project): Result<String> {
+        val projectId = projectDao.insertProject(project.toEntity())
+        return Result.Success(projectId)
+    }
 
     override suspend fun insertProjects(projects: List<Project>) =
         projectDao.insertProjects(projects.map { it.toEntity() })

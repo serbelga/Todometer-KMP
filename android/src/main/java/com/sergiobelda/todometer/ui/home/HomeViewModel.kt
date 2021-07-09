@@ -16,14 +16,11 @@
 
 package com.sergiobelda.todometer.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
-import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.TaskTag
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
@@ -35,6 +32,9 @@ import com.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -50,13 +50,16 @@ class HomeViewModel(
     getTagsUseCase: GetTagsUseCase
 ) : ViewModel() {
 
-    val tasks: LiveData<Result<List<TaskTag>>> = getTasksUseCase().asLiveData()
+    val tasks: StateFlow<Result<List<TaskTag>>> =
+        getTasksUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 
-    val projects: LiveData<Result<List<Project>>> = getProjectsUseCase().asLiveData()
+    val projects: StateFlow<Result<List<Project>>> =
+        getProjectsUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 
-    val projectSelected: LiveData<Result<ProjectTasks?>> = getProjectSelectedUseCase().asLiveData()
+    val projectSelected: StateFlow<Result<ProjectTasks?>> =
+        getProjectSelectedUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 
-    val tags: LiveData<Result<List<Tag>>> = getTagsUseCase().asLiveData()
+    // val tags: LiveData<Result<List<Tag>>> = getTagsUseCase().asLiveData()
 
     init {
         viewModelScope.launch {

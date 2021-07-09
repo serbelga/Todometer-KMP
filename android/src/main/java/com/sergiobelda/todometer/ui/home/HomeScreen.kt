@@ -57,8 +57,8 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -71,7 +71,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
-import com.sergiobelda.todometer.common.datasource.doIfSuccess
+import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.model.Tag
@@ -102,22 +102,12 @@ fun HomeScreen(
     val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
-    val projectsResultState = homeViewModel.projects.observeAsState()
-    projectsResultState.value?.let { result ->
-        result.doIfSuccess { projects = it }
-    }
+    val projectsResultState = homeViewModel.projects.collectAsState()
+    projectsResultState.value.doIfSuccess { projects = it }
 
     var projectSelected: ProjectTasks? by remember { mutableStateOf(null) }
-    val projectSelectedState = homeViewModel.projectSelected.observeAsState()
-    projectSelectedState.value?.let { result ->
-        result.doIfSuccess { projectSelected = it }
-    }
-
-    var tags: List<Tag> by remember { mutableStateOf(emptyList()) }
-    val tagsResultState = homeViewModel.tags.observeAsState()
-    tagsResultState.value?.let { result ->
-        result.doIfSuccess { tags = it }
-    }
+    val projectSelectedState = homeViewModel.projectSelected.collectAsState()
+    projectSelectedState.value.doIfSuccess { projectSelected = it }
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -129,8 +119,7 @@ fun HomeScreen(
                 addProject,
                 selectProject = {
                     homeViewModel.setProjectSelected(it)
-                },
-                tags
+                }
             )
         }
     ) {
@@ -245,7 +234,7 @@ fun SheetContainer(
     projectList: List<Project>,
     addProject: () -> Unit,
     selectProject: (String) -> Unit,
-    tagList: List<Tag>
+    tagList: List<Tag> = emptyList()
 ) {
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()

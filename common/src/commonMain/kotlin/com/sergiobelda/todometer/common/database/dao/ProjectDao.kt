@@ -46,13 +46,15 @@ class ProjectDao : IProjectDao, KoinComponent {
             }
         }
 
-    override suspend fun insertProject(project: ProjectEntity) {
+    override suspend fun insertProject(project: ProjectEntity): String {
         database.todometerQueries.insertOrReplaceProject(
             id = project.id,
             name = project.name,
             description = project.description,
             sync = project.sync
         )
+        // TODO Call return last_insert_rowid() from SQLDelight.
+        return project.id
     }
 
     override suspend fun insertProjects(projects: List<ProjectEntity>) =

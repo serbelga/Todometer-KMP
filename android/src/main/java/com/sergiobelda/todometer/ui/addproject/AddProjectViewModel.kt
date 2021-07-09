@@ -16,8 +16,11 @@
 
 package com.sergiobelda.todometer.ui.addproject
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import kotlinx.coroutines.launch
 
@@ -25,7 +28,11 @@ class AddProjectViewModel(
     private val insertProjectUseCase: InsertProjectUseCase,
 ) : ViewModel() {
 
+    // TODO: Migrate to StateFlow
+    private val _result = MutableLiveData<Result<String>>()
+    val result: LiveData<Result<String>> get() = _result
+
     fun insertProject(name: String, description: String) = viewModelScope.launch {
-        insertProjectUseCase(name, description)
+        _result.value = insertProjectUseCase.invoke(name, description)
     }
 }

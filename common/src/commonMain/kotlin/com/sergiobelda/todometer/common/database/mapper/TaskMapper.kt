@@ -34,9 +34,9 @@ fun TaskTagView.toDomain() = TaskTag(
     tag = tag_id?.let {
         Tag(
             it,
-            colorValueOf(tag_color!!),
-            tag_name!!,
-            tag_sync!!
+            colorValueOf(tag_color ?: ""),
+            tag_name ?: "",
+            tag_sync ?: false
         )
     },
     sync

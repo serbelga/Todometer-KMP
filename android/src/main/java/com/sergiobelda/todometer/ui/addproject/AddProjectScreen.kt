@@ -32,6 +32,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -40,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import org.koin.androidx.compose.getViewModel
 
@@ -50,6 +52,10 @@ fun AddProjectScreen(
 ) {
     var projectName by rememberSaveable { mutableStateOf("") }
     var projectDescription by rememberSaveable { mutableStateOf("") }
+    val result = addProjectViewModel.result.observeAsState()
+    result.value?.doIfSuccess {
+        navigateUp()
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -66,7 +72,6 @@ fun AddProjectScreen(
                     Button(
                         onClick = {
                             addProjectViewModel.insertProject(projectName, projectDescription)
-                            navigateUp()
                         }
                     ) {
                         Text(stringResource(id = R.string.save))

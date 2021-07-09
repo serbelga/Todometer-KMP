@@ -16,11 +16,11 @@
 
 package com.sergiobelda.todometer.common.remotedatasource
 
-import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.api.client.ITaskApiClient
+import com.sergiobelda.todometer.common.api.mapper.toTaskTagList
+import com.sergiobelda.todometer.common.api.safeApiCall
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.TaskTag
-import com.sergiobelda.todometer.common.webservice.client.ITaskApiClient
-import com.sergiobelda.todometer.common.webservice.mapper.toTaskTagList
-import com.sergiobelda.todometer.common.webservice.safeApiCall
 
 class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRemoteDataSource {
 

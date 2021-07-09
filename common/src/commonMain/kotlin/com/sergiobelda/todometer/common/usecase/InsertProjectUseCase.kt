@@ -16,12 +16,13 @@
 
 package com.sergiobelda.todometer.common.usecase
 
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 
 class InsertProjectUseCase(
     private val projectRepository: IProjectRepository
 ) {
 
-    suspend operator fun invoke(name: String, description: String) =
+    suspend operator fun invoke(name: String, description: String): Result<String> =
         projectRepository.insertProject(name, description)
 }

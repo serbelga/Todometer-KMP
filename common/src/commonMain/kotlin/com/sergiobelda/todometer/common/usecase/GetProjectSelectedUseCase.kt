@@ -16,7 +16,7 @@
 
 package com.sergiobelda.todometer.common.usecase
 
-import com.sergiobelda.todometer.common.datasource.Result
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
