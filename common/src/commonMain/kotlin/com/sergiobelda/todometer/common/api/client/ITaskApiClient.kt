@@ -29,5 +29,5 @@ interface ITaskApiClient {
 
     suspend fun insertTask(newTaskRequestBody: NewTaskRequestBody): String
 
-    suspend fun deleteTask(id: String)
+    suspend fun deleteTask(id: String): String
 }

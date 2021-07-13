@@ -50,4 +50,16 @@ class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRem
             )
         )
     }
+
+    override suspend fun updateTask() {
+
+    }
+
+    override suspend fun updateTaskState() {
+
+    }
+
+    override suspend fun deleteTask(id: String): Result<String> = safeApiCall {
+        taskApiClient.deleteTask(id)
+    }
 }

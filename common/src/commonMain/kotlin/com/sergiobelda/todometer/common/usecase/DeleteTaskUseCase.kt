@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.common.usecase
 
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 
 class DeleteTaskUseCase(
@@ -25,6 +26,6 @@ class DeleteTaskUseCase(
     /**
      * Deletes a task.
      */
-    suspend operator fun invoke(id: String) =
+    suspend operator fun invoke(id: String): Result<String> =
         taskRepository.deleteTask(id)
 }

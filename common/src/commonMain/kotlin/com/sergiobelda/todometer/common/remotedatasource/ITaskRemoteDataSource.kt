@@ -31,4 +31,10 @@ interface ITaskRemoteDataSource {
         projectId: String,
         tag: Tag
     ): Result<String>
+
+    suspend fun updateTask()
+
+    suspend fun updateTaskState()
+
+    suspend fun deleteTask(id: String): Result<String>
 }

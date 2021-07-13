@@ -29,5 +29,5 @@ interface IProjectApiClient {
 
     suspend fun updateProject(id: String, name: String, description: String)
 
-    suspend fun deleteProject(id: String)
+    suspend fun deleteProject(id: String): String
 }

@@ -19,16 +19,11 @@ package com.sergiobelda.backend.routing
 import com.sergiobelda.backend.model.NewProject
 import com.sergiobelda.backend.model.Project
 import com.sergiobelda.backend.service.IProjectService
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.routing.Route
-import io.ktor.routing.delete
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.put
-import io.ktor.routing.route
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
 fun Route.projectsRouting(projectService: IProjectService) {
     route("/v1/projects") {
@@ -55,7 +50,7 @@ fun Route.projectsRouting(projectService: IProjectService) {
             // TODO respond error if id not present
             val projectId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")
             projectService.deleteProject(projectId)
-            call.respond(HttpStatusCode.OK)
+            call.respond(HttpStatusCode.NoContent)
         }
     }
 }

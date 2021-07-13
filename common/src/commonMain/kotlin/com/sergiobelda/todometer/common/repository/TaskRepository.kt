@@ -82,5 +82,7 @@ class TaskRepository(
         taskLocalDataSource.updateTaskState(id, state)
 
     override suspend fun deleteTask(id: String) =
-        taskLocalDataSource.deleteTask(id)
+        taskRemoteDataSource.deleteTask(id).doIfSuccess {
+            taskLocalDataSource.deleteTask(id)
+        }
 }
