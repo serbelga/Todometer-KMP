@@ -43,7 +43,8 @@
 
 ### Android
 * [Android Jetpack](https://developer.android.com/jetpack)
-  * [Compose](https://developer.android.com/jetpack/compose)
+  * [Compose UI](https://developer.android.com/jetpack/compose)
+  * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
