@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.common.api.client
 
 import com.sergiobelda.todometer.common.api.model.TaskApiModel
 import com.sergiobelda.todometer.common.api.request.NewTaskRequestBody
+import com.sergiobelda.todometer.common.api.request.UpdateTaskStateRequestBody
 
 interface ITaskApiClient {
 
@@ -30,4 +31,9 @@ interface ITaskApiClient {
     suspend fun insertTask(newTaskRequestBody: NewTaskRequestBody): String
 
     suspend fun deleteTask(id: String): String
+
+    suspend fun updateTaskState(
+        id: String,
+        updateTaskRequestBody: UpdateTaskStateRequestBody
+    ): String
 }

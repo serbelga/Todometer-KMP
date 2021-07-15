@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.common.remotedatasource
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.model.TaskState
 
 interface ITaskRemoteDataSource {
 
@@ -34,7 +35,7 @@ interface ITaskRemoteDataSource {
 
     suspend fun updateTask()
 
-    suspend fun updateTaskState()
+    suspend fun updateTaskState(id: String, state: TaskState): Result<String>
 
     suspend fun deleteTask(id: String): Result<String>
 }

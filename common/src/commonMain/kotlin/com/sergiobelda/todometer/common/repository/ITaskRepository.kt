@@ -34,7 +34,7 @@ interface ITaskRepository {
 
     suspend fun updateTask(task: Task)
 
-    suspend fun updateTaskState(id: String, state: TaskState)
+    suspend fun updateTaskState(id: String, state: TaskState): Result<String>
 
     suspend fun deleteTask(id: String): Result<String>
 }

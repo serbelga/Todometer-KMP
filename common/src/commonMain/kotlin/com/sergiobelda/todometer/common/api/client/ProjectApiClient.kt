@@ -23,8 +23,13 @@ import com.sergiobelda.todometer.common.api.TodometerApi.Companion.VERSION_1
 import com.sergiobelda.todometer.common.api.model.ProjectApiModel
 import com.sergiobelda.todometer.common.api.request.NewProjectRequestBody
 import com.sergiobelda.todometer.common.api.request.UpdateProjectRequestBody
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.http.parametersOf
 
 class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClient {
 

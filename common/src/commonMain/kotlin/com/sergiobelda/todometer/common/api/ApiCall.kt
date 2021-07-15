@@ -20,18 +20,20 @@ import com.sergiobelda.todometer.common.data.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher = ApplicationDispatcher, apiCall: suspend () -> T): Result<T> =
-    withContext(dispatcher) {
-        try {
-            val response = apiCall.invoke()
-            Result.Success<T>(response)
-        } catch (throwable: Throwable) {
-            // TODO Update code error
-            when (throwable) {
-                // is IOException -> Result.Error
-                else -> {
-                    Result.Error(null, null, throwable)
-                }
+suspend fun <T> safeApiCall(
+    dispatcher: CoroutineDispatcher = ApplicationDispatcher,
+    apiCall: suspend () -> T
+): Result<T> = withContext(dispatcher) {
+    try {
+        val response = apiCall.invoke()
+        Result.Success<T>(response)
+    } catch (throwable: Throwable) {
+        // TODO Update code error
+        when (throwable) {
+            // is IOException -> Result.Error
+            else -> {
+                Result.Error(null, null, throwable)
             }
         }
     }
+}

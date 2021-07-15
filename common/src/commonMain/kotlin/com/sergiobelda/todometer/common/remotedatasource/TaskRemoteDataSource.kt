@@ -19,6 +19,7 @@ package com.sergiobelda.todometer.common.remotedatasource
 import com.sergiobelda.todometer.common.api.client.ITaskApiClient
 import com.sergiobelda.todometer.common.api.mapper.toTaskTagList
 import com.sergiobelda.todometer.common.api.request.NewTaskRequestBody
+import com.sergiobelda.todometer.common.api.request.UpdateTaskStateRequestBody
 import com.sergiobelda.todometer.common.api.safeApiCall
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Tag
@@ -52,12 +53,12 @@ class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRem
     }
 
     override suspend fun updateTask() {
-
     }
 
-    override suspend fun updateTaskState() {
-
-    }
+    override suspend fun updateTaskState(id: String, state: TaskState): Result<String> =
+        safeApiCall {
+            taskApiClient.updateTaskState(id, UpdateTaskStateRequestBody(state.name))
+        }
 
     override suspend fun deleteTask(id: String): Result<String> = safeApiCall {
         taskApiClient.deleteTask(id)

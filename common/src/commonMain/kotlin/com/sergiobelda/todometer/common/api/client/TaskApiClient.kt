@@ -22,8 +22,14 @@ import com.sergiobelda.todometer.common.api.TodometerApi.Companion.TASK_PATH
 import com.sergiobelda.todometer.common.api.TodometerApi.Companion.VERSION_1
 import com.sergiobelda.todometer.common.api.model.TaskApiModel
 import com.sergiobelda.todometer.common.api.request.NewTaskRequestBody
-import io.ktor.client.request.*
-import io.ktor.http.*
+import com.sergiobelda.todometer.common.api.request.UpdateTaskStateRequestBody
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.http.parametersOf
 
 class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
 
@@ -52,4 +58,12 @@ class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
 
     override suspend fun deleteTask(id: String): String =
         todometerApi.client.delete("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id")
+
+    override suspend fun updateTaskState(
+        id: String,
+        updateTaskRequestBody: UpdateTaskStateRequestBody
+    ): String = todometerApi.client.put("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id/state") {
+        contentType(ContentType.Application.Json)
+        body = updateTaskRequestBody
+    }
 }
