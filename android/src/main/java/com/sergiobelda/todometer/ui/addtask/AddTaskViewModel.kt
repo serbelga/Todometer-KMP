@@ -30,14 +30,14 @@ class AddTaskViewModel(
 ) : ViewModel() {
 
     // TODO: Migrate to StateFlow
-    private val _result = MutableLiveData<Result<String>>()
-    val result: LiveData<Result<String>> get() = _result
+    private val _result = MutableLiveData<Result<String>?>()
+    val result: LiveData<Result<String>?> get() = _result
 
     fun insertTask(
         title: String,
         description: String,
         tag: Tag
     ) = viewModelScope.launch {
-        _result.value = insertTaskUseCase(title, description, tag)
+        _result.value = insertTaskUseCase.invoke(title, description, tag)
     }
 }

@@ -29,8 +29,8 @@ class AddProjectViewModel(
 ) : ViewModel() {
 
     // TODO: Migrate to StateFlow
-    private val _result = MutableLiveData<Result<String>>()
-    val result: LiveData<Result<String>> get() = _result
+    private val _result = MutableLiveData<Result<String>?>()
+    val result: LiveData<Result<String>?> get() = _result
 
     fun insertProject(name: String, description: String) = viewModelScope.launch {
         _result.value = insertProjectUseCase.invoke(name, description)
