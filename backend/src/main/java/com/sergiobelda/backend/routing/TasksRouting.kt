@@ -17,12 +17,19 @@
 package com.sergiobelda.backend.routing
 
 import com.sergiobelda.backend.model.NewTask
+import com.sergiobelda.backend.model.TaskState
+import com.sergiobelda.backend.model.UpdateTaskState
 import com.sergiobelda.backend.service.ITaskService
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
+import io.ktor.request.receive
+import io.ktor.response.respond
+import io.ktor.routing.Route
+import io.ktor.routing.delete
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.put
+import io.ktor.routing.route
 
 fun Route.tasksRouting(taskService: ITaskService) {
     route("/v1/tasks") {
@@ -37,6 +44,15 @@ fun Route.tasksRouting(taskService: ITaskService) {
         post {
             val task = call.receive<NewTask>()
             call.respond(taskService.insertTask(task))
+        }
+        put("/{id}/state") {
+            val taskId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")
+            // TODO Throws ContentTransformationException
+            val body = call.receive<UpdateTaskState>()
+            // TODO Throws IllegalArgumentException
+            val state = enumValueOf<TaskState>(body.state)
+            taskService.updateTask(taskId, state)
+            call.respond(HttpStatusCode.NoContent)
         }
         delete("/{id}") {
             // TODO respond error if id not present

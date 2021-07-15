@@ -18,6 +18,7 @@ package com.sergiobelda.backend.service
 
 import com.sergiobelda.backend.model.NewTask
 import com.sergiobelda.backend.model.Task
+import com.sergiobelda.backend.model.TaskState
 
 interface ITaskService {
 
@@ -26,6 +27,8 @@ interface ITaskService {
     suspend fun getTask(id: String): Task
 
     suspend fun insertTask(newTask: NewTask): String
+
+    suspend fun updateTask(id: String, taskState: TaskState)
 
     suspend fun deleteTask(id: String)
 }

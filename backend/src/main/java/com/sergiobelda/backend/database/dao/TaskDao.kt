@@ -26,6 +26,7 @@ import org.jetbrains.exposed.sql.replace
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.jetbrains.exposed.sql.update
 import java.util.UUID
 
 class TaskDao : ITaskDao {
@@ -55,6 +56,14 @@ class TaskDao : ITaskDao {
                 it[tag] = task.tag
             }
         } get TaskTable.id
+
+    override suspend fun updateTaskState(id: String, taskState: String) {
+        newSuspendedTransaction {
+            TaskTable.update {
+                it[state] = taskState
+            }
+        }
+    }
 
     override suspend fun deleteTask(id: UUID) {
         newSuspendedTransaction {

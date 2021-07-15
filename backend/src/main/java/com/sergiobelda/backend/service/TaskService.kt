@@ -19,6 +19,7 @@ package com.sergiobelda.backend.service
 import com.sergiobelda.backend.database.dao.ITaskDao
 import com.sergiobelda.backend.model.NewTask
 import com.sergiobelda.backend.model.Task
+import com.sergiobelda.backend.model.TaskState
 import com.sergiobelda.backend.model.toNewTaskEntity
 import com.sergiobelda.backend.model.toTask
 import com.sergiobelda.backend.model.toTaskList
@@ -34,6 +35,10 @@ class TaskService(private val taskDao: ITaskDao) : ITaskService {
 
     override suspend fun insertTask(newTask: NewTask): String =
         taskDao.insertTask(newTask.toNewTaskEntity()).toString()
+
+    override suspend fun updateTask(id: String, taskState: TaskState) {
+        taskDao.updateTaskState(id, taskState.name)
+    }
 
     override suspend fun deleteTask(id: String) = taskDao.deleteTask(UUID.fromString(id))
 }
