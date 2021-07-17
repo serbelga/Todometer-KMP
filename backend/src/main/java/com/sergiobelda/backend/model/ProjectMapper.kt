@@ -18,7 +18,6 @@ package com.sergiobelda.backend.model
 
 import com.sergiobelda.backend.database.entity.NewProjectEntity
 import com.sergiobelda.backend.database.entity.ProjectEntity
-import com.sergiobelda.backend.database.entity.ProjectTasksRelation
 import java.util.UUID
 
 fun ProjectEntity.toProject() = Project(
@@ -30,14 +29,6 @@ fun ProjectEntity.toProject() = Project(
 fun Iterable<ProjectEntity>.toProjectList() = this.map { projectEntity ->
     projectEntity.toProject()
 }
-
-fun ProjectTasksRelation.toProjectTasks() =
-    ProjectTasks(
-        id = project.id.toString(),
-        name = project.name,
-        description = project.description,
-        tasks = tasks.map { it.toTask() }
-    )
 
 fun Project.toProjectEntity() = ProjectEntity(
     id = UUID.fromString(id),
