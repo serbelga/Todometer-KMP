@@ -28,4 +28,6 @@ interface IProjectRemoteDataSource {
     suspend fun insertProject(id: String? = null, name: String, description: String): Result<String>
 
     suspend fun updateProject(id: String, name: String, description: String): Result<Unit>
+
+    suspend fun deleteProject(id: String): Result<String>
 }

@@ -51,4 +51,8 @@ class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) :
     ): Result<Unit> = safeApiCall {
         projectApiClient.updateProject(id, name, description)
     }
+
+    override suspend fun deleteProject(id: String): Result<String> = safeApiCall {
+        projectApiClient.deleteProject(id)
+    }
 }

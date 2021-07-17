@@ -32,4 +32,6 @@ interface IProjectRepository {
     suspend fun insertProject(name: String, description: String): Result<String>
 
     suspend fun refreshProjects()
+
+    suspend fun deleteProject(id: String): Result<String>
 }
