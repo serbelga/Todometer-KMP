@@ -66,8 +66,8 @@ class HomeViewModel(
 
     init {
         viewModelScope.launch {
-            refreshProjectsUseCase()
-            refreshProjectSelectedUseCase()
+            // refreshProjectsUseCase()
+            // refreshProjectSelectedUseCase()
         }
     }
 
