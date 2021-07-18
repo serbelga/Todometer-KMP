@@ -39,7 +39,7 @@ val useCaseModule = module {
         RefreshProjectsUseCase(get())
     }
     single {
-        RefreshProjectSelectedUseCase(get(), get(), get())
+        RefreshProjectSelectedUseCase(get(), get())
     }
     single {
         InsertProjectUseCase(get())

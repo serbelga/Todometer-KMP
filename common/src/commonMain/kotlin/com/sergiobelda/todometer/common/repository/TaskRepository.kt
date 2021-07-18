@@ -39,25 +39,27 @@ class TaskRepository(
     override suspend fun getTasks(projectId: String?): Flow<Result<List<Task>>> =
         taskLocalDataSource.getTasks(projectId).map { result ->
             result.doIfSuccess { tasks ->
-                tasks.filter { !it.sync }.forEach { task ->
-                    synchronizeTaskRemotely(task)
-                }
+                synchronizeTasksRemotely(tasks.filter { !it.sync })
+                // TODO Remove ?: ""
+                refreshTasks(projectId ?: "")
             }
         }
 
-    private suspend fun synchronizeTaskRemotely(task: Task) {
-        val result = taskRemoteDataSource.insertTask(
-            id = task.id,
-            title = task.title,
-            description = task.description,
-            projectId = task.projectId,
-            state = task.state,
-            tag = task.tag
-        )
-        result.doIfSuccess {
-            taskLocalDataSource.updateTask(
-                task.copy(sync = true)
+    private suspend fun synchronizeTasksRemotely(tasks: List<Task>) {
+        tasks.forEach { task ->
+            val result = taskRemoteDataSource.insertTask(
+                id = task.id,
+                title = task.title,
+                description = task.description,
+                projectId = task.projectId,
+                state = task.state,
+                tag = task.tag
             )
+            result.doIfSuccess {
+                taskLocalDataSource.updateTask(
+                    task.copy(sync = true)
+                )
+            }
         }
     }
 

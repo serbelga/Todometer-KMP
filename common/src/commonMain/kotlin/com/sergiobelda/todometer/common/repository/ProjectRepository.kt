@@ -36,22 +36,23 @@ class ProjectRepository(
     override fun getProjects(): Flow<Result<List<Project>>> =
         projectLocalDataSource.getProjects().map { result ->
             result.doIfSuccess { projects ->
-                projects.filter { !it.sync }.forEach { project ->
-                    synchronizeProjectRemotely(project)
-                }
+                synchronizeProjectsRemotely(projects.filter { !it.sync })
+                refreshProjects()
             }
         }
 
-    private suspend fun synchronizeProjectRemotely(project: Project) {
-        val result = projectRemoteDataSource.insertProject(
-            id = project.id,
-            name = project.name,
-            description = project.description
-        )
-        result.doIfSuccess {
-            projectLocalDataSource.updateProject(
-                project.copy(sync = true)
+    private suspend fun synchronizeProjectsRemotely(projects: List<Project>) {
+        projects.forEach { project ->
+            val result = projectRemoteDataSource.insertProject(
+                id = project.id,
+                name = project.name,
+                description = project.description
             )
+            result.doIfSuccess {
+                projectLocalDataSource.updateProject(
+                    project.copy(sync = true)
+                )
+            }
         }
     }
 

@@ -17,20 +17,16 @@
 package com.sergiobelda.todometer.common.usecase
 
 import com.sergiobelda.todometer.common.repository.IProjectRepository
-import com.sergiobelda.todometer.common.repository.ITaskRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.collect
 
 class RefreshProjectSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
-    private val projectRepository: IProjectRepository,
-    private val taskRepository: ITaskRepository
+    private val projectRepository: IProjectRepository
 ) {
 
     suspend operator fun invoke() =
         userPreferencesRepository.projectSelected().collect { id ->
             projectRepository.refreshProject(id)
-            // TODO Move to new RefreshTasksUseCase
-            taskRepository.refreshTasks(id)
         }
 }
