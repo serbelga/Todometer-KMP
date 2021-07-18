@@ -28,7 +28,7 @@ interface ITaskDao {
 
     suspend fun insertTask(task: NewTaskEntity): UUID
 
-    suspend fun updateTaskState(id: String, taskState: String)
+    suspend fun updateTaskState(id: UUID, taskState: String)
 
     suspend fun deleteTask(id: UUID)
 }

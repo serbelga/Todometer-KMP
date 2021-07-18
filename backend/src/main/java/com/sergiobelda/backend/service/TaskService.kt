@@ -37,7 +37,7 @@ class TaskService(private val taskDao: ITaskDao) : ITaskService {
         taskDao.insertTask(newTask.toNewTaskEntity()).toString()
 
     override suspend fun updateTask(id: String, taskState: TaskState) {
-        taskDao.updateTaskState(id, taskState.name)
+        taskDao.updateTaskState(UUID.fromString(id), taskState.name)
     }
 
     override suspend fun deleteTask(id: String) = taskDao.deleteTask(UUID.fromString(id))

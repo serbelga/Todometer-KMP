@@ -57,9 +57,9 @@ class TaskDao : ITaskDao {
             }
         } get TaskTable.id
 
-    override suspend fun updateTaskState(id: String, taskState: String) {
+    override suspend fun updateTaskState(id: UUID, taskState: String) {
         newSuspendedTransaction {
-            TaskTable.update {
+            TaskTable.update({ TaskTable.id eq id }) {
                 it[state] = taskState
             }
         }
