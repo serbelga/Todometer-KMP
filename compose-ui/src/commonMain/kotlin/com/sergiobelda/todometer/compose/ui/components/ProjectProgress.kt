@@ -31,15 +31,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.model.ProjectTasks
+import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.util.ProgressUtil
 
 @Composable
-fun ProjectProgress(
-    selectedProject: ProjectTasks?
-) {
-    val progress = ProgressUtil.getTasksDoneProgress(selectedProject?.tasks ?: emptyList())
+fun ProjectProgress(project: Project?, tasks: List<Task>) {
+    val progress = ProgressUtil.getTasksDoneProgress(tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
@@ -50,7 +49,7 @@ fun ProjectProgress(
     ) {
         // TODO: 02/04/2021 Max lines
         Text(
-            selectedProject?.name?.toUpperCase() ?: "-",
+            project?.name?.toUpperCase() ?: "-",
             style = TodometerTypography.overline
         )
         Text(
