@@ -73,7 +73,6 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.mapper.composeColorOf
@@ -105,9 +104,13 @@ fun HomeScreen(
     val projectsResultState = homeViewModel.projects.collectAsState()
     projectsResultState.value.doIfSuccess { projects = it }
 
-    var projectSelected: ProjectTasks? by remember { mutableStateOf(null) }
-    val projectSelectedState = homeViewModel.projectSelected.collectAsState()
-    projectSelectedState.value.doIfSuccess { projectSelected = it }
+    var projectSelected: Project? by remember { mutableStateOf(null) }
+    val projectSelectedResultState = homeViewModel.projectSelected.collectAsState()
+    projectSelectedResultState.value.doIfSuccess { projectSelected = it }
+
+    var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
+    val tasksResultState = homeViewModel.tasks.collectAsState()
+    tasksResultState.value.doIfSuccess { tasks = it }
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -125,7 +128,7 @@ fun HomeScreen(
     ) {
         Scaffold(
             topBar = {
-                ToDometerTopAppBar(projectSelected)
+                ToDometerTopAppBar(projectSelected, tasks)
             },
             bottomBar = {
                 if (projects.isNotEmpty()) {
@@ -157,11 +160,11 @@ fun HomeScreen(
                         deleteTask = { homeViewModel.deleteTask(selectedTask.value) }
                     )
                 }
-                if (projectSelected?.tasks.isNullOrEmpty()) {
+                if (tasks.isEmpty()) {
                     EmptyTasksListView()
                 } else {
                     TasksListView(
-                        projectSelected?.tasks ?: emptyList(),
+                        tasks,
                         onDoingClick = {
                             homeViewModel.setTaskDoing(it)
                         },

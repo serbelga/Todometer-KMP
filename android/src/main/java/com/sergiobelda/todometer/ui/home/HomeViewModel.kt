@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
@@ -52,10 +51,18 @@ class HomeViewModel(
         getTasksUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 
     val projects: StateFlow<Result<List<Project>>> =
-        getProjectsUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
+        getProjectsUseCase().stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            Result.Loading
+        )
 
-    val projectSelected: StateFlow<Result<ProjectTasks?>> =
-        getProjectSelectedUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
+    val projectSelected: StateFlow<Result<Project?>> =
+        getProjectSelectedUseCase().stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            Result.Loading
+        )
 
     init {
         viewModelScope.launch {
