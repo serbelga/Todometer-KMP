@@ -20,7 +20,6 @@ import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
@@ -31,17 +30,30 @@ class ProjectRepository(
     private val projectRemoteDataSource: IProjectRemoteDataSource
 ) : IProjectRepository {
 
-    override fun getProject(id: String): Flow<Result<ProjectTasks?>> =
+    override fun getProject(id: String): Flow<Result<Project?>> =
         projectLocalDataSource.getProject(id)
 
     override fun getProjects(): Flow<Result<List<Project>>> =
         projectLocalDataSource.getProjects().map { result ->
             result.doIfSuccess { projects ->
                 projects.filter { !it.sync }.forEach { project ->
-                    synchronizeProjectRemotely(project.id, project.name, project.description)
+                    synchronizeProjectRemotely(project)
                 }
             }
         }
+
+    private suspend fun synchronizeProjectRemotely(project: Project) {
+        val result = projectRemoteDataSource.insertProject(
+            id = project.id,
+            name = project.name,
+            description = project.description
+        )
+        result.doIfSuccess {
+            projectLocalDataSource.updateProject(
+                project.copy(sync = true)
+            )
+        }
+    }
 
     override suspend fun refreshProject(id: String) {
         val projectResult = projectRemoteDataSource.getProject(id)
@@ -73,20 +85,6 @@ class ProjectRepository(
                 sync = sync
             )
         )
-    }
-
-    private suspend fun synchronizeProjectRemotely(id: String, name: String, description: String) {
-        val result = projectRemoteDataSource.insertProject(id = id, name = name, description = description)
-        result.doIfSuccess {
-            projectLocalDataSource.updateProject(
-                Project(
-                    id = id,
-                    name = name,
-                    description = description,
-                    sync = true
-                )
-            )
-        }
     }
 
     override suspend fun deleteProject(id: String): Result<String> =

@@ -48,7 +48,7 @@ val useCaseModule = module {
         GetTaskUseCase(get())
     }
     single {
-        GetTasksUseCase(get())
+        GetTasksUseCase(get(), get())
     }
     single {
         InsertTaskUseCase(get(), get())

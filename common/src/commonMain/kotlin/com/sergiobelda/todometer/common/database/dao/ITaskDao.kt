@@ -24,13 +24,15 @@ interface ITaskDao {
 
     fun getTask(id: String): Flow<TaskEntity?>
 
-    fun getTasks(): Flow<List<TaskEntity>>
+    fun getTasks(projectId: String? = null): Flow<List<TaskEntity>>
 
     suspend fun insertTask(task: TaskEntity): String
 
     suspend fun insertTasks(tasks: List<TaskEntity>)
 
     suspend fun updateTask(task: TaskEntity)
+
+    suspend fun updateTaskSync(id: String, sync: Boolean)
 
     suspend fun updateTaskState(id: String, state: TaskState)
 

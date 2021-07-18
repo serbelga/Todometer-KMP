@@ -19,12 +19,17 @@ package com.sergiobelda.todometer.common.usecase
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.repository.ITaskRepository
+import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 
 class GetTasksUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository,
     private val taskRepository: ITaskRepository
 ) {
 
     operator fun invoke(): Flow<Result<List<Task>>> =
-        taskRepository.getTasks()
+        userPreferencesRepository.projectSelected().flatMapLatest { projectId ->
+            taskRepository.getTasks(projectId)
+        }
 }

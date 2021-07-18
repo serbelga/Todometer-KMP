@@ -54,6 +54,12 @@ SET
     tag = ?
 WHERE id = ?;
 
+updateTaskSync:
+UPDATE TaskEntity
+SET
+    sync = ?
+WHERE id = ?;
+
 updateTaskState:
 UPDATE TaskEntity
 SET

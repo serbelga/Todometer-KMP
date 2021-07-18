@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.data.doIfError
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.ITaskLocalDataSource
 import com.sergiobelda.todometer.common.model.Tag
@@ -25,6 +26,7 @@ import com.sergiobelda.todometer.common.model.TaskState
 import com.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
 import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class TaskRepository(
     private val taskLocalDataSource: ITaskLocalDataSource,
@@ -34,11 +36,33 @@ class TaskRepository(
     override fun getTask(id: String): Flow<Result<Task?>> =
         taskLocalDataSource.getTask(id)
 
-    override fun getTasks(): Flow<Result<List<Task>>> =
-        taskLocalDataSource.getTasks()
+    override suspend fun getTasks(projectId: String?): Flow<Result<List<Task>>> =
+        taskLocalDataSource.getTasks(projectId).map { result ->
+            result.doIfSuccess { tasks ->
+                tasks.filter { !it.sync }.forEach { task ->
+                    synchronizeTaskRemotely(task)
+                }
+            }
+        }
 
-    override suspend fun refreshTasksByProjectId(id: String) {
-        val result = taskRemoteDataSource.getTasksByProjectId(id)
+    private suspend fun synchronizeTaskRemotely(task: Task) {
+        val result = taskRemoteDataSource.insertTask(
+            id = task.id,
+            title = task.title,
+            description = task.description,
+            projectId = task.projectId,
+            state = task.state,
+            tag = task.tag
+        )
+        result.doIfSuccess {
+            taskLocalDataSource.updateTask(
+                task.copy(sync = true)
+            )
+        }
+    }
+
+    override suspend fun refreshTasks(projectId: String) {
+        val result = taskRemoteDataSource.getTasks(projectId)
         result.doIfSuccess { list ->
             taskLocalDataSource.insertTasks(list)
         }
@@ -78,10 +102,12 @@ class TaskRepository(
     override suspend fun updateTask(task: Task) =
         taskLocalDataSource.updateTask(task)
 
-    override suspend fun updateTaskState(id: String, state: TaskState) =
-        taskRemoteDataSource.updateTaskState(id, state).doIfSuccess {
-            taskLocalDataSource.updateTaskState(id, state)
+    override suspend fun updateTaskState(id: String, state: TaskState) {
+        taskRemoteDataSource.updateTaskState(id, state).doIfError {
+            taskLocalDataSource.updateTaskSync(id, false)
         }
+        taskLocalDataSource.updateTaskState(id, state)
+    }
 
     override suspend fun deleteTask(id: String) =
         taskRemoteDataSource.deleteTask(id).doIfSuccess {

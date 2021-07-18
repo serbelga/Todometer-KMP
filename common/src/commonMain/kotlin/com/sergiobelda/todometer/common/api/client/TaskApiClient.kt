@@ -36,11 +36,11 @@ class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
     override suspend fun getTasks(): List<TaskApiModel> =
         todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TASK_PATH)
 
-    override suspend fun getTasksByProjectId(id: String): List<TaskApiModel> =
+    override suspend fun getTasks(projectId: String?): List<TaskApiModel> =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + TASK_PATH
         ) {
-            parametersOf("projectId", id)
+            projectId?.let { parametersOf(PROJECT_ID_PARAM, it) }
         }
 
     override suspend fun getTask(id: String): TaskApiModel =
@@ -62,8 +62,13 @@ class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
     override suspend fun updateTaskState(
         id: String,
         updateTaskRequestBody: UpdateTaskStateRequestBody
-    ): String = todometerApi.client.put("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id/state") {
+    ): String = todometerApi.client.put("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id/$STATE_PATH") {
         contentType(ContentType.Application.Json)
         body = updateTaskRequestBody
+    }
+
+    companion object {
+        private const val STATE_PATH = "state"
+        private const val PROJECT_ID_PARAM = "projectId"
     }
 }

@@ -23,12 +23,13 @@ import com.sergiobelda.todometer.common.model.TaskState
 
 interface ITaskRemoteDataSource {
 
-    suspend fun getTasksByProjectId(id: String): Result<List<Task>>
+    suspend fun getTasks(projectId: String? = null): Result<List<Task>>
 
     suspend fun insertTask(
         id: String? = null,
         title: String,
-        description: String,
+        description: String?,
+        state: TaskState = TaskState.DOING,
         projectId: String,
         tag: Tag
     ): Result<String>

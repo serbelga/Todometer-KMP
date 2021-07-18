@@ -33,7 +33,8 @@ class TaskDao : ITaskDao, KoinComponent {
     override fun getTask(id: String): Flow<TaskEntity?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(): Flow<List<TaskEntity>> =
+    override fun getTasks(projectId: String?): Flow<List<TaskEntity>> =
+        // TODO Update
         database.todometerQueries.selectAllTasks().asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
@@ -62,6 +63,13 @@ class TaskDao : ITaskDao, KoinComponent {
             description = task.description,
             tag = task.tag
         )
+
+    override suspend fun updateTaskSync(id: String, sync: Boolean) {
+        database.todometerQueries.updateTaskSync(
+            id = id,
+            sync = sync
+        )
+    }
 
     override suspend fun updateTaskState(id: String, state: TaskState) {
         database.todometerQueries.updateTaskState(

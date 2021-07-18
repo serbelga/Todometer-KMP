@@ -17,9 +17,7 @@
 package com.sergiobelda.todometer.common.api.mapper
 
 import com.sergiobelda.todometer.common.api.model.ProjectApiModel
-import com.sergiobelda.todometer.common.api.model.ProjectTasksApiModel
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 
 fun ProjectApiModel.toDomain() =
     Project(
@@ -36,12 +34,3 @@ fun Iterable<ProjectApiModel>.toDomain() = this.map {
 fun Array<ProjectApiModel>.toDomain() = this.map {
     it.toDomain()
 }
-
-fun ProjectTasksApiModel.toDomain() =
-    ProjectTasks(
-        id = id,
-        name = name,
-        description = description,
-        tasks = tasks.toTaskTagList(),
-        sync = true
-    )

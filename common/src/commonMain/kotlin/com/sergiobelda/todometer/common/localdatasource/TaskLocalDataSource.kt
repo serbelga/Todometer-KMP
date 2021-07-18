@@ -33,8 +33,8 @@ class TaskLocalDataSource(
     override fun getTask(id: String): Flow<Result<Task?>> =
         taskDao.getTask(id).map { Result.Success(it?.toDomain()) }
 
-    override fun getTasks(): Flow<Result<List<Task>>> =
-        taskDao.getTasks().map { list ->
+    override fun getTasks(projectId: String?): Flow<Result<List<Task>>> =
+        taskDao.getTasks(projectId).map { list ->
             Result.Success(list.toDomain())
         }
 
@@ -49,6 +49,9 @@ class TaskLocalDataSource(
 
     override suspend fun updateTask(task: Task) =
         taskDao.updateTask(task.toEntity())
+
+    override suspend fun updateTaskSync(id: String, sync: Boolean) =
+        taskDao.updateTaskSync(id, sync)
 
     override suspend fun updateTaskState(id: String, state: TaskState) =
         taskDao.updateTaskState(id, state)

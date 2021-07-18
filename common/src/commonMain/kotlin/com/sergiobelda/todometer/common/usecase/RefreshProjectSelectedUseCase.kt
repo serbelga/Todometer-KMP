@@ -30,6 +30,7 @@ class RefreshProjectSelectedUseCase(
     suspend operator fun invoke() =
         userPreferencesRepository.projectSelected().collect { id ->
             projectRepository.refreshProject(id)
-            taskRepository.refreshTasksByProjectId(id)
+            // TODO Move to new RefreshTasksUseCase
+            taskRepository.refreshTasks(id)
         }
 }

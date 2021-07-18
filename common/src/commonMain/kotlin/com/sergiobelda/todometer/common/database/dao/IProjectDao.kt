@@ -17,14 +17,13 @@
 package com.sergiobelda.todometer.common.database.dao
 
 import com.sergiobelda.todometer.ProjectEntity
-import com.sergiobelda.todometer.common.database.ProjectTasksRelation
 import kotlinx.coroutines.flow.Flow
 
 interface IProjectDao {
 
     fun getProjects(): Flow<List<ProjectEntity>>
 
-    fun getProject(id: String): Flow<ProjectTasksRelation?>
+    fun getProject(id: String): Flow<ProjectEntity?>
 
     suspend fun insertProject(project: ProjectEntity): String
 

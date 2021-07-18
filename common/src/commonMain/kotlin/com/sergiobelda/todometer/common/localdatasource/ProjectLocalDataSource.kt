@@ -21,7 +21,6 @@ import com.sergiobelda.todometer.common.database.dao.IProjectDao
 import com.sergiobelda.todometer.common.database.mapper.toDomain
 import com.sergiobelda.todometer.common.database.mapper.toEntity
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -35,7 +34,7 @@ class ProjectLocalDataSource(
             Result.Success(list.toDomain())
         }
 
-    override fun getProject(id: String): Flow<Result<ProjectTasks?>> =
+    override fun getProject(id: String): Flow<Result<Project?>> =
         projectDao.getProject(id).map { projectTaskRelation ->
             Result.Success(projectTaskRelation?.toDomain())
         }

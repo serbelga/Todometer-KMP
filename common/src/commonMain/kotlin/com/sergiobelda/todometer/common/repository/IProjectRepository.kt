@@ -18,12 +18,11 @@ package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.ProjectTasks
 import kotlinx.coroutines.flow.Flow
 
 interface IProjectRepository {
 
-    fun getProject(id: String): Flow<Result<ProjectTasks?>>
+    fun getProject(id: String): Flow<Result<Project?>>
 
     fun getProjects(): Flow<Result<List<Project>>>
 

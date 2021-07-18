@@ -25,13 +25,15 @@ interface ITaskLocalDataSource {
 
     fun getTask(id: String): Flow<Result<Task?>>
 
-    fun getTasks(): Flow<Result<List<Task>>>
+    fun getTasks(projectId: String? = null): Flow<Result<List<Task>>>
 
     suspend fun insertTask(task: Task): Result<String>
 
     suspend fun insertTasks(tasks: List<Task>)
 
     suspend fun updateTask(task: Task)
+
+    suspend fun updateTaskSync(id: String, sync: Boolean)
 
     suspend fun updateTaskState(id: String, state: TaskState)
 

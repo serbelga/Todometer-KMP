@@ -26,15 +26,15 @@ interface ITaskRepository {
 
     fun getTask(id: String): Flow<Result<Task?>>
 
-    fun getTasks(): Flow<Result<List<Task>>>
+    suspend fun getTasks(projectId: String? = null): Flow<Result<List<Task>>>
 
-    suspend fun refreshTasksByProjectId(id: String)
+    suspend fun refreshTasks(projectId: String)
 
     suspend fun insertTask(title: String, description: String, projectId: String, tag: Tag): Result<String>
 
     suspend fun updateTask(task: Task)
 
-    suspend fun updateTaskState(id: String, state: TaskState): Result<String>
+    suspend fun updateTaskState(id: String, state: TaskState)
 
     suspend fun deleteTask(id: String): Result<String>
 }
