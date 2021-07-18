@@ -43,8 +43,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.sergiobelda.todometer.common.data.doIfSuccess
-import com.sergiobelda.todometer.common.model.ProjectTasks
+import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
+import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
@@ -60,6 +62,7 @@ fun HomeScreen(
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
+    val getTasksUseCase = koin.get<GetTasksUseCase>()
     val coroutineScope = rememberCoroutineScope()
     val setTaskDoing: (String) -> Unit = {
         coroutineScope.launch {
@@ -71,14 +74,19 @@ fun HomeScreen(
             setTaskDoneUseCase(it)
         }
     }
-    var project: ProjectTasks? by remember { mutableStateOf(null) }
+    var project: Project? by remember { mutableStateOf(null) }
     val projectResultState by getProjectSelectedUseCase().collectAsState(null)
     projectResultState?.let { result ->
         result.doIfSuccess { project = it }
     }
+    var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
+    val tasksResultState by getTasksUseCase().collectAsState(null)
+    tasksResultState?.let { result ->
+        result.doIfSuccess { tasks = it }
+    }
     Scaffold(
         topBar = {
-            ToDometerTopAppBar(project)
+            ToDometerTopAppBar(project, tasks)
         },
         bottomBar = {
             BottomAppBar(
@@ -110,17 +118,15 @@ fun HomeScreen(
         floatingActionButtonPosition = FabPosition.Center,
         isFloatingActionButtonDocked = true
     ) {
-        project?.let {
-            LazyColumn {
-                items(it.tasks) {
-                    TaskItem(
-                        task = it,
-                        onDoingClick = setTaskDoing,
-                        onDoneClick = setTaskDone,
-                        {},
-                        {}
-                    )
-                }
+        LazyColumn {
+            items(tasks) {
+                TaskItem(
+                    task = it,
+                    onDoingClick = setTaskDoing,
+                    onDoneClick = setTaskDone,
+                    {},
+                    {}
+                )
             }
         }
     }
