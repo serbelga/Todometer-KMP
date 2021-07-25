@@ -38,7 +38,7 @@ fun ColumnScope.DragIndicator() {
         modifier = Modifier.padding(top = 8.dp).align(Alignment.CenterHorizontally)
     ) {
         Box(
-            modifier = Modifier.height(6.dp).width(42.dp)
+            modifier = Modifier.height(4.dp).width(42.dp)
                 .clip(RoundedCornerShape(3.dp)).background(
                     TodometerColors.outline
                 )
