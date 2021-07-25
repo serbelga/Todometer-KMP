@@ -19,6 +19,9 @@ package com.sergiobelda.todometer.common.repository
 import com.sergiobelda.todometer.common.preferences.Preferences
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Repository for performing data operations on [preferences].
+ */
 class UserPreferencesRepository(private val preferences: Preferences) : IUserPreferencesRepository {
 
     override fun projectSelected(): Flow<String> = preferences.getString(PROJECT_SELECTED_KEY)

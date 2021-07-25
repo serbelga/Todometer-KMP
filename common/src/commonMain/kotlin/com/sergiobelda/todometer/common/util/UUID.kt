@@ -16,4 +16,7 @@
 
 package com.sergiobelda.todometer.common.util
 
+/**
+ * Generates a random UUID as a [String].
+ */
 expect fun randomUUIDString(): String

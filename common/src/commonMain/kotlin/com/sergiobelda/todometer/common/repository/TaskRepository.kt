@@ -28,6 +28,9 @@ import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+/**
+ * Repository for performing [Task] data operations.
+ */
 class TaskRepository(
     private val taskLocalDataSource: ITaskLocalDataSource,
     private val taskRemoteDataSource: ITaskRemoteDataSource
@@ -45,8 +48,14 @@ class TaskRepository(
             }
         }
 
+    /**
+     * Synchronize a list of [Task] remotely.
+     * For each task, calls insert to remote service and if it goes successful
+     * sets sync flag to true.
+     */
     private suspend fun synchronizeTasksRemotely(tasks: List<Task>) {
         tasks.forEach { task ->
+            // TODO Maybe use Update
             val result = taskRemoteDataSource.insertTask(
                 id = task.id,
                 title = task.title,
@@ -56,9 +65,7 @@ class TaskRepository(
                 tag = task.tag
             )
             result.doIfSuccess {
-                taskLocalDataSource.updateTask(
-                    task.copy(sync = true)
-                )
+                taskLocalDataSource.updateTaskSync(task.id, true)
             }
         }
     }
@@ -70,23 +77,25 @@ class TaskRepository(
         }
     }
 
+    /**
+     * Depending on whether the remote call is successful or not,
+     * inserts this task into the local database with true or false sync flag.
+     */
     override suspend fun insertTask(
         title: String,
         description: String,
         projectId: String,
         tag: Tag
     ): Result<String> {
+        var taskId = ""
         var sync = false
-        // TODO Set null to indicate DAO need to generate UUID
-        var taskId = randomUUIDString()
         taskRemoteDataSource.insertTask(
-            title = title,
-            description = description,
-            projectId = projectId,
-            tag = tag
+            title = title, description = description, projectId = projectId, tag = tag
         ).doIfSuccess {
-            sync = true
             taskId = it
+            sync = true
+        }.doIfError {
+            taskId = randomUUIDString()
         }
         return taskLocalDataSource.insertTask(
             Task(
@@ -104,13 +113,20 @@ class TaskRepository(
     override suspend fun updateTask(task: Task) =
         taskLocalDataSource.updateTask(task)
 
+    /**
+     * Update Task state locally and remotely. If remote call returns an error,
+     * sync flag for this task is set to false in local database.
+     */
     override suspend fun updateTaskState(id: String, state: TaskState) {
+        taskLocalDataSource.updateTaskState(id, state)
         taskRemoteDataSource.updateTaskState(id, state).doIfError {
             taskLocalDataSource.updateTaskSync(id, false)
         }
-        taskLocalDataSource.updateTaskState(id, state)
     }
 
+    /**
+     * It only removes task from local database if remote call is successful.
+     */
     override suspend fun deleteTask(id: String) =
         taskRemoteDataSource.deleteTask(id).doIfSuccess {
             taskLocalDataSource.deleteTask(id)

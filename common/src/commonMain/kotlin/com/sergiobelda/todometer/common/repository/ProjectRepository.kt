@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.data.doIfError
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
@@ -25,6 +26,9 @@ import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+/**
+ * Repository for performing [Project] data operations.
+ */
 class ProjectRepository(
     private val projectLocalDataSource: IProjectLocalDataSource,
     private val projectRemoteDataSource: IProjectRemoteDataSource
@@ -71,12 +75,13 @@ class ProjectRepository(
     }
 
     override suspend fun insertProject(name: String, description: String): Result<String> {
+        var projectId = ""
         var sync = false
-        // TODO Set null to indicate DAO need to generate UUID
-        var projectId = randomUUIDString()
         projectRemoteDataSource.insertProject(name = name, description = description).doIfSuccess {
-            sync = true
             projectId = it
+            sync = true
+        }.doIfError {
+            projectId = randomUUIDString()
         }
         return projectLocalDataSource.insertProject(
             Project(
