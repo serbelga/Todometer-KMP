@@ -19,7 +19,6 @@ package com.sergiobelda.todometer.ui.addtask
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -43,7 +42,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
-import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TextField
 import org.koin.androidx.compose.getViewModel
@@ -69,6 +67,15 @@ fun AddTaskScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    IconButton(onClick = navigateUp) {
+                        Icon(
+                            Icons.Rounded.Check,
+                            contentDescription = "Save",
+                            tint = TodometerColors.primary
+                        )
                     }
                 },
                 title = { Text(stringResource(id = R.string.add_task)) }
@@ -101,23 +108,6 @@ fun AddTaskScreen(
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    if (taskTitle.isBlank()) {
-                        taskTitleInputError = true
-                    } else {
-                        addTaskViewModel.insertTask(
-                            title = taskTitle,
-                            description = taskDescription,
-                            tag = Tag.RED // TODO: Update
-                        )
-                    }
-                },
-            ) {
-                Icon(Icons.Rounded.Check, contentDescription = "Add task")
             }
         }
     )

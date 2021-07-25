@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -49,7 +48,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
@@ -182,6 +180,7 @@ fun HomeScreen(
             floatingActionButton = {
                 if (!projects.isNullOrEmpty()) {
                     FloatingActionButton(
+                        backgroundColor = TodometerColors.primary,
                         onClick = addTask
                     ) {
                         Icon(Icons.Rounded.Add, contentDescription = "Add task")
@@ -236,8 +235,7 @@ fun SheetContainer(
     selectedProjectId: String?,
     projectList: List<Project>,
     addProject: () -> Unit,
-    selectProject: (String) -> Unit,
-    tagList: List<Tag> = emptyList()
+    selectProject: (String) -> Unit
 ) {
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
@@ -252,39 +250,16 @@ fun SheetContainer(
                 style = typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
+            TextButton(onClick = addProject) {
+                Icon(Icons.Rounded.Add, contentDescription = "Add project")
+                Text(text = stringResource(id = R.string.add_project))
+            }
         }
         HorizontalDivider()
         LazyColumn {
             items(projectList) { project ->
                 ProjectListItem(project, project.id == selectedProjectId, selectProject)
             }
-        }
-        TextButton(onClick = addProject, modifier = Modifier.fillMaxWidth()) {
-            Icon(Icons.Rounded.Add, contentDescription = "Add project")
-            Text(text = stringResource(id = R.string.add_project))
-        }
-        HorizontalDivider()
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .height(56.dp)
-                .padding(start = 16.dp, end = 16.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.tags).toUpperCase(),
-                style = typography.overline
-            )
-            Spacer(modifier = Modifier.weight(1f))
-        }
-        HorizontalDivider()
-        LazyColumn {
-            items(tagList) { tag ->
-                TagItem(tag)
-            }
-        }
-        TextButton(onClick = {}, modifier = Modifier.fillMaxWidth()) {
-            Icon(Icons.Rounded.Add, contentDescription = "Add tag")
-            Text(text = stringResource(id = R.string.add_tag))
         }
     }
 }
@@ -307,12 +282,6 @@ fun ProjectListItem(
     ) {
         val selectedColor =
             if (selected) TodometerColors.primary else TodometerColors.onSurface.copy(alpha = ContentAlpha.medium)
-        Icon(
-            Icons.Default.Book,
-            tint = selectedColor,
-            contentDescription = null,
-            modifier = Modifier.padding(start = 16.dp)
-        )
         Text(
             text = project.name,
             color = selectedColor,
