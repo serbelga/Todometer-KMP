@@ -15,28 +15,26 @@
  */
 
 object Versions {
-    const val activityKtx = "1.3.0-beta02"
-    const val appCompat = "1.3.0"
-    const val androidGradlePlugin = "7.1.0-alpha04"
-    const val compose = "1.0.0-rc02"
+    const val activityKtx = "1.3.0-rc02"
+    const val appCompat = "1.3.1"
+    const val androidGradlePlugin = "7.1.0-alpha05"
+    const val compose = "1.0.0"
     const val composeDesktop = "0.4.0"
-    const val daggerHilt = "2.33-beta"
-    const val dataStorePreferences = "1.0.0-beta02"
+    const val dataStorePreferences = "1.0.0-rc02"
     const val espressoCore = "3.3.0"
-    const val exposedSql = "0.31.1"
-    const val extJunit = "1.1.2"
-    const val junit = "4.12"
-    const val junitKtx = "1.1.2"
-    const val koin = "3.1.0"
+    const val exposedSql = "0.32.1"
+    const val junit = "4.13.2"
+    const val androidJunit = "1.1.3"
+    const val koin = "3.1.2"
     const val kotlin = "1.5.10"
     const val ktLint = "0.41.0"
     const val ktor = "1.6.1"
     const val ktxVersion = "1.6.0"
     const val lifecycle = "2.3.1"
-    const val materialComponents = "1.3.0"
-    const val navigationCompose = "2.4.0-alpha03"
+    const val materialComponents = "1.4.0"
+    const val navigationCompose = "2.4.0-alpha05"
     const val robolectric = "4.3.1"
-    const val sqlDelight = "1.5.0"
+    const val sqlDelight = "1.5.1"
     const val testCoreKtx = "1.3.0"
     const val timber = "4.7.1"
 }
@@ -74,7 +72,7 @@ object Libs {
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
         const val coreKtx = "androidx.core:core-ktx:${Versions.ktxVersion}"
-        const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.junitKtx}"
+        const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.androidJunit}"
         const val testCoreKtx = "androidx.test:core-ktx:${Versions.testCoreKtx}"
 
         object Activity {
@@ -104,18 +102,11 @@ object Libs {
 
         object Test {
             const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
-            const val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
+            const val extJunit = "androidx.test.ext:junit:${Versions.androidJunit}"
         }
     }
 
     object Google {
-
-        object Dagger {
-            const val hilt = "com.google.dagger:hilt-android:${Versions.daggerHilt}"
-            const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.daggerHilt}"
-            const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.daggerHilt}"
-            const val hiltTesting = "com.google.dagger:hilt-android-testing:${Versions.daggerHilt}"
-        }
 
         object Material {
             const val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
