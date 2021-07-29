@@ -5,7 +5,7 @@
 </h4>
 
 <p align="center">
-<img src="https://github.com/serbelga/ToDometer_Compose/workflows/Android%20CI/badge.svg">
+<img src="https://github.com/serbelga/ToDometer_Kotlin_Multiplatform/actions/workflows/build.yml/badge.svg">
 </p>
 
 <h5 align="center">
