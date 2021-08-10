@@ -16,6 +16,7 @@
 
 package ui.components
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,6 +38,7 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.components.ProjectProgress
+import ui.theme.ToDometerTheme
 
 @Composable
 fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
@@ -61,5 +63,13 @@ fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
             ProjectProgress(project, tasks)
             HorizontalDivider()
         }
+    }
+}
+
+@Preview
+@Composable
+fun ToDometerTopAppBarPreview() {
+    ToDometerTheme {
+        ToDometerTopAppBar(null, emptyList())
     }
 }

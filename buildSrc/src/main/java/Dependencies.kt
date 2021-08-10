@@ -19,7 +19,7 @@ object Versions {
     const val appCompat = "1.4.0-alpha03"
     const val androidGradlePlugin = "7.0.0"
     const val compose = "1.0.1"
-    const val composeDesktop = "1.0.0-alpha2"
+    const val composeDesktop = "1.0.0-alpha3"
     const val dataStorePreferences = "1.0.0"
     const val espressoCore = "3.3.0"
     const val exposedSql = "0.32.1"
@@ -40,9 +40,9 @@ object Versions {
 }
 
 object Android {
-    const val compileSdk = 30
+    const val compileSdk = 31
     const val minSdk = 24
-    const val targetSdk = 30
+    const val targetSdk = 31
 }
 
 object Libs {
@@ -81,8 +81,6 @@ object Libs {
 
         object Compose {
             const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
-            const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
-            const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
         }
 
         object DataStore {

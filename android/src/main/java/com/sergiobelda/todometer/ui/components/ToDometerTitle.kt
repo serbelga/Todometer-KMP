@@ -30,9 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 
 @Composable
-fun ToDometerTitle(
-    modifier: Modifier = Modifier
-) {
+fun ToDometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically

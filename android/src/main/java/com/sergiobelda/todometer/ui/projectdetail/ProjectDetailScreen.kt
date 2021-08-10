@@ -16,7 +16,9 @@
 
 package com.sergiobelda.todometer.ui.projectdetail
 
+import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.sergiobelda.todometer.ui.home.HomeViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -26,4 +28,10 @@ fun ProjectDetailScreen(
     navigateUp: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
+}
+
+@Preview
+@Composable
+fun ProjectDetailScreenPreview() {
+    Button({}) {}
 }

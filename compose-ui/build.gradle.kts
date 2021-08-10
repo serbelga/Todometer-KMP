@@ -27,6 +27,8 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material)
                 api(compose.materialIconsExtended)
+                api(compose.ui)
+                api(compose.uiTooling)
                 implementation(project(":common"))
             }
         }
@@ -48,10 +50,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = Android.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 24
-        targetSdk = 30
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
     }
 }

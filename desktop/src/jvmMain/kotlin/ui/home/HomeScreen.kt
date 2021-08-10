@@ -56,9 +56,7 @@ import kotlinx.coroutines.launch
 import ui.components.ToDometerTopAppBar
 
 @Composable
-fun HomeScreen(
-    addTask: () -> Unit
-) {
+fun HomeScreen(addTask: () -> Unit) {
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()

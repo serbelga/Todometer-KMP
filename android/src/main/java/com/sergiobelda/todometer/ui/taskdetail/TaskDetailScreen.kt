@@ -45,6 +45,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
@@ -53,6 +54,7 @@ import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.ui.home.TagItem
+import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -143,5 +145,13 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun TaskDetailScreenPreview() {
+    ToDometerTheme {
+        TaskDetailScreen("", { _ -> }, {})
     }
 }

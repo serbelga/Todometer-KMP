@@ -17,10 +17,9 @@ dependencies {
     implementation(project(":compose-ui"))
 
     implementation(Libs.AndroidX.Activity.activityCompose)
-    implementation(Libs.AndroidX.Compose.materialIconsExtended)
     implementation(Libs.AndroidX.Compose.runtimeLiveData)
-    implementation(Libs.AndroidX.Compose.uiTooling)
     implementation(Libs.AndroidX.Navigation.compose)
+
     implementation(Libs.AndroidX.Lifecycle.runtime)
     implementation(Libs.AndroidX.Lifecycle.viewModel)
     implementation(Libs.AndroidX.Lifecycle.liveData)

@@ -30,9 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 
 @Composable
-fun AddTaskScreen(
-    navigateUp: () -> Unit
-) {
+fun AddTaskScreen(navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
