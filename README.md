@@ -12,40 +12,11 @@
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
 </h5>
 
-## Diagram
+## Technologies
 
 <div align="center">
 <img src="./resources/arch/diagram.jpg" width="700" />
 </div>
-
-## Modules
-
-<div align="center">
-<img src="./resources/arch/modules.png" width="700" />
-</div>
-
-### Backend
-
-▶️ Run:
-
-```
-./gradlew :backend:run
-```
-
-### Desktop
-
-▶️ Run:
-
-```
-./gradlew :desktop:run
-```
-
-## App UI Design
-
-| <img width="300" src="./resources/Home.png"></img> | <img width="300" src="./resources/Home_BottomSheet.png"></img> | <img width="300" src="./resources/Task_Detail.png"></img> | <img width="300" src="./resources/Edit_Task.png"></img> |
-|---|---|---|---|
-
-## Technologies
 
 ### Android
 * [Android Jetpack](https://developer.android.com/jetpack)
@@ -73,3 +44,30 @@
 ### iOS
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
+
+## Modules
+
+<div align="center">
+<img src="./resources/arch/modules.png" width="700" />
+</div>
+
+### Backend
+
+▶️ Run:
+
+```
+./gradlew :backend:run
+```
+
+### Desktop
+
+▶️ Run:
+
+```
+./gradlew :desktop:run
+```
+
+## App UI Design
+
+| <img width="300" src="./resources/Home.png"></img> | <img width="300" src="./resources/Home_BottomSheet.png"></img> | <img width="300" src="./resources/Task_Detail.png"></img> | <img width="300" src="./resources/Edit_Task.png"></img> |
+|---|---|---|---|
