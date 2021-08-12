@@ -27,15 +27,12 @@ import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
 import com.sergiobelda.todometer.ui.Destinations.EditTask
 import com.sergiobelda.todometer.ui.Destinations.Home
-import com.sergiobelda.todometer.ui.Destinations.ProjectDetail
-import com.sergiobelda.todometer.ui.Destinations.ProjectDetailArgs.ProjectId
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import com.sergiobelda.todometer.ui.edittask.EditTaskScreen
 import com.sergiobelda.todometer.ui.home.HomeScreen
-import com.sergiobelda.todometer.ui.projectdetail.ProjectDetailScreen
 import com.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 
 @Composable
@@ -47,17 +44,8 @@ fun ToDometerApp() {
             HomeScreen(actions.addProject, actions.addTask, actions.openTask)
         }
         composable(
-            "$ProjectDetail/{$ProjectId}",
-            arguments = listOf(navArgument(ProjectId) { type = NavType.IntType })
-        ) { navBackStackEntry ->
-            ProjectDetailScreen(
-                projectId = navBackStackEntry.arguments?.getInt(ProjectId) ?: 0,
-                navigateUp = actions.navigateUp
-            )
-        }
-        composable(
             "$TaskDetail/{$TaskId}",
-            arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
+            arguments = listOf(navArgument(TaskId) { type = NavType.StringType })
         ) { navBackStackEntry ->
             TaskDetailScreen(
                 taskId = navBackStackEntry.arguments?.getString(TaskId) ?: "",
@@ -73,7 +61,7 @@ fun ToDometerApp() {
         }
         composable(
             "$EditTask/{$TaskId}",
-            arguments = listOf(navArgument(TaskId) { type = NavType.LongType })
+            arguments = listOf(navArgument(TaskId) { type = NavType.StringType })
         ) { backStackEntry ->
             EditTaskScreen(
                 taskId = backStackEntry.arguments?.getString(TaskId) ?: "",

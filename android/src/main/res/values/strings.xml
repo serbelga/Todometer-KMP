@@ -16,7 +16,7 @@
   -->
 
 <resources>
-    <string name="app_name">ToDo_meter</string>
+    <string name="app_name">ToDometer</string>
     <string name="project">Project</string>
     <string name="projects">Projects</string>
     <string name="add_task">Add task</string>

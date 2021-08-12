@@ -19,10 +19,11 @@ package com.sergiobelda.todometer.compose.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val green = Color(0xFF3DDC84)
-val blue = Color(0xFF4285F4)
+val primaryLight = Color(0xFF4285F4)
+val primaryDark = Color(0xFF80b4ff)
 val orange = Color(0xFFF86734)
 val navy = Color(0xFF073042)
-val background = Color(0xFFFAFAFA)
+val background = Color(0xFFFFFFFF)
 val outlineDark = Color(255, 255, 255, alpha = 12)
 val outlineLight = Color(0, 0, 0, alpha = 12)
 val blueAlpha08 = Color(0x144285F4)

@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import com.sergiobelda.todometer.compose.ui.theme.DarkColorPalette
 import com.sergiobelda.todometer.compose.ui.theme.LightColorPalette
 import com.sergiobelda.todometer.compose.ui.theme.shapes
+import com.sergiobelda.todometer.compose.ui.theme.typography
 
 @Composable
 fun ToDometerTheme(darkTheme: Boolean = false, content: @Composable () -> Unit) {
@@ -33,6 +34,7 @@ fun ToDometerTheme(darkTheme: Boolean = false, content: @Composable () -> Unit) 
     MaterialTheme(
         colors = colors,
         shapes = shapes,
+        typography = typography,
         content = content
     )
 }

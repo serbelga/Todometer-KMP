@@ -14,23 +14,15 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.theme
+package com.sergiobelda.todometer.compose.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.sergiobelda.todometer.android.R
 
-val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
-val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
-
-val quickSandFontFamily = FontFamily(
-    quickSandRegularFont,
-    quickSandMediumFont
-)
+expect val quickSandFontFamily: FontFamily
 
 val typography = Typography(
     h4 = TextStyle(

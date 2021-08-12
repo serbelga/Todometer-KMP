@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.projectdetail
+package com.sergiobelda.todometer.compose.ui.theme
 
-import androidx.compose.material.Button
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.sergiobelda.todometer.ui.home.HomeViewModel
-import org.koin.androidx.compose.getViewModel
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.platform.Font
 
-@Composable
-fun ProjectDetailScreen(
-    projectId: Int,
-    navigateUp: () -> Unit,
-    homeViewModel: HomeViewModel = getViewModel()
-) {
-}
+val quickSandRegularFont = Font(
+    resource = "quicksand_regular.ttf",
+    weight = FontWeight.Normal
+)
+val quickSandMediumFont = Font(
+    resource = "quicksand_medium.ttf",
+    weight = FontWeight.Medium
+)
 
-@Preview
-@Composable
-fun ProjectDetailScreenPreview() {
-    Button({}) {}
-}
+actual val quickSandFontFamily = FontFamily(
+    quickSandRegularFont,
+    quickSandMediumFont
+)

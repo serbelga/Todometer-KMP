@@ -22,9 +22,10 @@ import androidx.compose.runtime.Composable
 import com.sergiobelda.todometer.compose.ui.theme.DarkColorPalette
 import com.sergiobelda.todometer.compose.ui.theme.LightColorPalette
 import com.sergiobelda.todometer.compose.ui.theme.shapes
+import com.sergiobelda.todometer.compose.ui.theme.typography
 
 @Composable
-fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

@@ -3,18 +3,7 @@ package com.sergiobelda.todometer.compose.mapper
 import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable
 import com.sergiobelda.todometer.common.model.Tag
-import com.sergiobelda.todometer.compose.ui.theme.amber
-import com.sergiobelda.todometer.compose.ui.theme.blue
-import com.sergiobelda.todometer.compose.ui.theme.brown
-import com.sergiobelda.todometer.compose.ui.theme.gray
-import com.sergiobelda.todometer.compose.ui.theme.green
-import com.sergiobelda.todometer.compose.ui.theme.indigo
-import com.sergiobelda.todometer.compose.ui.theme.lime
-import com.sergiobelda.todometer.compose.ui.theme.orange
-import com.sergiobelda.todometer.compose.ui.theme.pink
-import com.sergiobelda.todometer.compose.ui.theme.red
-import com.sergiobelda.todometer.compose.ui.theme.teal
-import com.sergiobelda.todometer.compose.ui.theme.yellow
+import com.sergiobelda.todometer.compose.ui.theme.*
 
 typealias ComposeColor = androidx.compose.ui.graphics.Color
 
