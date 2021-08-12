@@ -58,7 +58,8 @@ fun ProjectProgress(project: Project?, tasks: List<Task>) {
         )
         LinearProgressIndicator(
             progress = animatedProgress,
-            modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp).clip(RoundedCornerShape(2.dp))
+            modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp)
+                .clip(RoundedCornerShape(2.dp))
         )
     }
 }

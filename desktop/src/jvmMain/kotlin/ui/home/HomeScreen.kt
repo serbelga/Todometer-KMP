@@ -19,11 +19,25 @@ package ui.home
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ExtendedFloatingActionButton
+import androidx.compose.material.FabPosition
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.runtime.*
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
@@ -33,6 +47,7 @@ import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import koin
 import kotlinx.coroutines.launch
 
@@ -71,7 +86,6 @@ fun HomeScreen(addTask: () -> Unit) {
             DrawerContainer()
         },
         topBar = {
-            // ToDometerTopAppBar(project, tasks)
             TopAppBar(
                 title = {},
                 elevation = 0.dp,
@@ -92,7 +106,8 @@ fun HomeScreen(addTask: () -> Unit) {
                 text = {
                     Text("Add task")
                 },
-                onClick = addTask
+                onClick = addTask,
+                backgroundColor = TodometerColors.primary
             )
         },
         floatingActionButtonPosition = FabPosition.Center,

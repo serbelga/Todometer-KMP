@@ -19,13 +19,22 @@ package com.sergiobelda.todometer.ui.addtask
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -62,9 +71,11 @@ fun AddTaskScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = {
-                        addTaskViewModel.insertTask(taskTitle, taskDescription, Tag.AMBER)
-                    }) {
+                    IconButton(
+                        onClick = {
+                            addTaskViewModel.insertTask(taskTitle, taskDescription, Tag.AMBER)
+                        }
+                    ) {
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Save",

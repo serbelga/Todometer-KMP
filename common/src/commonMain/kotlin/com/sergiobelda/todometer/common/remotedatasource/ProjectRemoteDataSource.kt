@@ -23,7 +23,8 @@ import com.sergiobelda.todometer.common.api.safeApiCall
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
 
-class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) : IProjectRemoteDataSource {
+class ProjectRemoteDataSource(private val projectApiClient: IProjectApiClient) :
+    IProjectRemoteDataSource {
 
     override suspend fun getProjects(): Result<List<Project>> =
         safeApiCall {
