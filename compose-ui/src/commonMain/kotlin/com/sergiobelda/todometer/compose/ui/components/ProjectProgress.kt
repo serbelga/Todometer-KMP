@@ -49,7 +49,7 @@ fun ProjectProgress(project: Project?, tasks: List<Task>) {
     ) {
         // TODO: 02/04/2021 Max lines
         Text(
-            project?.name?.toUpperCase() ?: "-",
+            project?.name?.uppercase() ?: "-",
             style = TodometerTypography.overline
         )
         Text(

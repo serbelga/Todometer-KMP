@@ -24,60 +24,62 @@ import androidx.compose.ui.unit.sp
 
 expect val quickSandFontFamily: FontFamily
 
-val typography = Typography(
-    h4 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 30.sp
-    ),
-    h5 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 24.sp
-    ),
-    h6 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
-        letterSpacing = 0.15.sp
-    ),
-    subtitle1 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp
-    ),
-    subtitle2 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp
-    ),
-    body1 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-        letterSpacing = 0.5.sp
-    ),
-    body2 = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-        letterSpacing = 0.25.sp
-    ),
-    button = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 10.sp,
-        letterSpacing = 0.4.sp
-    ),
-    overline = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 10.sp,
-        letterSpacing = 1.5.sp
+object Type {
+    val typography = Typography(
+        h4 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 30.sp
+        ),
+        h5 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 24.sp
+        ),
+        h6 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 20.sp,
+            letterSpacing = 0.15.sp
+        ),
+        subtitle1 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 16.sp
+        ),
+        subtitle2 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp
+        ),
+        body1 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 16.sp,
+            letterSpacing = 0.5.sp
+        ),
+        body2 = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 12.sp,
+            letterSpacing = 0.25.sp
+        ),
+        button = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp
+        ),
+        caption = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 10.sp,
+            letterSpacing = 0.4.sp
+        ),
+        overline = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 10.sp,
+            letterSpacing = 1.5.sp
+        )
     )
-)
+}

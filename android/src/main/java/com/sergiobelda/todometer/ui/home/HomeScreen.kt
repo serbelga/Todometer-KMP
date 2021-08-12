@@ -40,7 +40,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
@@ -243,8 +242,8 @@ fun SheetContainer(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.projects).toUpperCase(),
-                style = typography.overline
+                text = stringResource(id = R.string.projects).uppercase(),
+                style = TodometerTypography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addProject) {
