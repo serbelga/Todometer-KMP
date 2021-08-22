@@ -6,6 +6,7 @@
 
 <p align="center">
 <img src="https://github.com/serbelga/ToDometer_Kotlin_Multiplatform/actions/workflows/build.yml/badge.svg">
+<img src="https://github.com/serbelga/ToDometer_Kotlin_Multiplatform/actions/workflows/ktlint.yml/badge.svg">
 </p>
 
 <h5 align="center">
