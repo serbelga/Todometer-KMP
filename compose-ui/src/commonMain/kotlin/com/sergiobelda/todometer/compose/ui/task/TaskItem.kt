@@ -61,7 +61,7 @@ fun TaskItem(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.combinedClickable(
+            modifier = Modifier.padding(start = 16.dp).combinedClickable(
                 onClick = {
                     onClick(task.id)
                 },
@@ -78,7 +78,11 @@ fun TaskItem(
             )
             when (task.state) {
                 TaskState.DOING -> {
-                    Text(task.title, modifier = Modifier.weight(1f), maxLines = 1)
+                    Text(
+                        task.title,
+                        modifier = Modifier.padding(start = 8.dp).weight(1f),
+                        maxLines = 1
+                    )
                     IconButton(
                         onClick = { onDoneClick(task.id) }
                     ) {
@@ -93,7 +97,7 @@ fun TaskItem(
                     Text(
                         task.title,
                         textDecoration = TextDecoration.LineThrough,
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.padding(start = 8.dp).weight(1f),
                         maxLines = 1
                     )
                     IconButton(
