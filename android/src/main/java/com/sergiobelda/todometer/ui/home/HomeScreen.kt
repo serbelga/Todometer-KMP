@@ -47,13 +47,14 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -72,6 +73,7 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
+import com.sergiobelda.todometer.compose.ui.components.SingleLineItem
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
@@ -91,8 +93,10 @@ fun HomeScreen(
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val selectedTask = remember { mutableStateOf("") }
-    val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
+    var currentSheet: HomeBottomSheet by remember { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
+
+    var selectedTask by remember { mutableStateOf("") }
+    var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
     val projectsResultState = homeViewModel.projects.collectAsState()
@@ -110,14 +114,21 @@ fun HomeScreen(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(
-                projectSelected?.id,
-                projects,
-                addProject,
-                selectProject = {
-                    homeViewModel.setProjectSelected(it)
+            when (currentSheet) {
+                is HomeBottomSheet.MenuBottomSheet -> {
+                    MenuBottomSheet(
+                        projectSelected?.id,
+                        projects,
+                        addProject,
+                        selectProject = {
+                            homeViewModel.setProjectSelected(it)
+                        }
+                    )
                 }
-            )
+                is HomeBottomSheet.MoreBottomSheet -> {
+                    MoreBottomSheet()
+                }
+            }
         }
     ) {
         Scaffold(
@@ -134,13 +145,19 @@ fun HomeScreen(
                         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                             IconButton(
                                 onClick = {
+                                    currentSheet = HomeBottomSheet.MenuBottomSheet
                                     scope.launch { sheetState.show() }
                                 }
                             ) {
                                 Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                             }
                             Spacer(modifier = Modifier.weight(1f))
-                            IconButton(onClick = { /* doSomething() */ }) {
+                            IconButton(
+                                onClick = {
+                                    currentSheet = HomeBottomSheet.MoreBottomSheet
+                                    scope.launch { sheetState.show() }
+                                }
+                            ) {
                                 Icon(Icons.Rounded.MoreVert, contentDescription = "More")
                             }
                         }
@@ -148,10 +165,10 @@ fun HomeScreen(
                 }
             },
             content = {
-                if (deleteTaskAlertDialogState.value) {
+                if (deleteTaskAlertDialogState) {
                     RemoveTaskAlertDialog(
-                        deleteTaskAlertDialogState,
-                        deleteTask = { homeViewModel.deleteTask(selectedTask.value) }
+                        onDismissRequest = { deleteTaskAlertDialogState = false },
+                        deleteTask = { homeViewModel.deleteTask(selectedTask) }
                     )
                 }
                 if (tasks.isEmpty()) {
@@ -167,8 +184,8 @@ fun HomeScreen(
                         },
                         onTaskItemClick = openTask,
                         onTaskItemLongClick = {
-                            deleteTaskAlertDialogState.value = true
-                            selectedTask.value = it
+                            deleteTaskAlertDialogState = true
+                            selectedTask = it
                         }
                     )
                 }
@@ -191,16 +208,14 @@ fun HomeScreen(
 
 @Composable
 fun RemoveTaskAlertDialog(
-    showRemoveTaskAlertDialog: MutableState<Boolean>,
+    onDismissRequest: () -> Unit,
     deleteTask: () -> Unit
 ) {
     AlertDialog(
         title = {
             Text(stringResource(id = R.string.remove_task))
         },
-        onDismissRequest = {
-            showRemoveTaskAlertDialog.value = false
-        },
+        onDismissRequest = onDismissRequest,
         text = {
             Text(stringResource(id = R.string.remove_task_question))
         },
@@ -208,7 +223,7 @@ fun RemoveTaskAlertDialog(
             TextButton(
                 onClick = {
                     deleteTask()
-                    showRemoveTaskAlertDialog.value = false
+                    onDismissRequest()
                 }
             ) {
                 Text(stringResource(id = android.R.string.ok))
@@ -216,9 +231,7 @@ fun RemoveTaskAlertDialog(
         },
         dismissButton = {
             TextButton(
-                onClick = {
-                    showRemoveTaskAlertDialog.value = false
-                }
+                onClick = onDismissRequest
             ) {
                 Text(stringResource(id = R.string.cancel))
             }
@@ -227,7 +240,7 @@ fun RemoveTaskAlertDialog(
 }
 
 @Composable
-fun SheetContainer(
+fun MenuBottomSheet(
     selectedProjectId: String?,
     projectList: List<Project>,
     addProject: () -> Unit,
@@ -328,6 +341,47 @@ fun EmptyTasksListView() {
             Text(stringResource(id = R.string.no_tasks))
         }
     }
+}
+
+@Composable
+fun MoreBottomSheet() {
+    Column {
+        SingleLineItem(
+            icon = {
+                Icon(
+                    Icons.Outlined.Edit,
+                    contentDescription = "Editar Proyecto"
+                )
+            },
+            text = {
+                Text(
+                    "Editar Proyecto",
+                    style = TodometerTypography.caption
+                )
+            },
+            onClick = {}
+        )
+        SingleLineItem(
+            icon = {
+                Icon(
+                    Icons.Outlined.Delete,
+                    contentDescription = "Eliminar Proyecto"
+                )
+            },
+            text = {
+                Text(
+                    "Eliminar Proyecto",
+                    style = TodometerTypography.caption
+                )
+            },
+            onClick = {}
+        )
+    }
+}
+
+sealed class HomeBottomSheet {
+    object MenuBottomSheet : HomeBottomSheet()
+    object MoreBottomSheet : HomeBottomSheet()
 }
 
 @Preview
