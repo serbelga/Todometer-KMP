@@ -17,6 +17,7 @@
 package com.sergiobelda.todometer.ui
 
 import androidx.navigation.NavHostController
+import com.sergiobelda.todometer.ui.Destinations.About
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
 import com.sergiobelda.todometer.ui.Destinations.EditTask
@@ -28,6 +29,7 @@ object Destinations {
     const val AddTask = "addTask"
     const val EditTask = "editTask"
     const val TaskDetail = "taskDetail"
+    const val About = "about"
 
     object TaskDetailArgs {
         const val TaskId = "taskId"
@@ -46,6 +48,9 @@ class Actions(navController: NavHostController) {
     }
     val addProject: () -> Unit = {
         navController.navigate(AddProject)
+    }
+    val about: () -> Unit = {
+        navController.navigate(About)
     }
     val navigateUp: () -> Unit = {
         navController.popBackStack()

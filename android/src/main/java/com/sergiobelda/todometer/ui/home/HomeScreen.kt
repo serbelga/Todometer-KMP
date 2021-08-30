@@ -19,12 +19,33 @@ package com.sergiobelda.todometer.ui.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FabPosition
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Brightness4
 import androidx.compose.material.icons.outlined.Delete
@@ -32,7 +53,15 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
-import androidx.compose.runtime.*
+import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -62,6 +91,7 @@ fun HomeScreen(
     addProject: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
+    about: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
@@ -99,7 +129,14 @@ fun HomeScreen(
                     )
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
-                    MoreBottomSheet()
+                    MoreBottomSheet(
+                        aboutClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                about()
+                            }
+                        }
+                    )
                 }
             }
         }
@@ -169,7 +206,10 @@ fun HomeScreen(
                         backgroundColor = TodometerColors.primary,
                         onClick = addTask
                     ) {
-                        Icon(Icons.Rounded.Add, contentDescription = "Add task")
+                        Icon(
+                            Icons.Rounded.Add,
+                            contentDescription = stringResource(R.string.add_task)
+                        )
                     }
                 }
             },
@@ -186,11 +226,11 @@ fun RemoveTaskAlertDialog(
 ) {
     AlertDialog(
         title = {
-            Text(stringResource(id = R.string.remove_task))
+            Text(stringResource(R.string.remove_task))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(id = R.string.remove_task_question))
+            Text(stringResource(R.string.remove_task_question))
         },
         confirmButton = {
             TextButton(
@@ -199,14 +239,14 @@ fun RemoveTaskAlertDialog(
                     onDismissRequest()
                 }
             ) {
-                Text(stringResource(id = android.R.string.ok))
+                Text(stringResource(android.R.string.ok))
             }
         },
         dismissButton = {
             TextButton(
                 onClick = onDismissRequest
             ) {
-                Text(stringResource(id = R.string.cancel))
+                Text(stringResource(R.string.cancel))
             }
         }
     )
@@ -228,13 +268,13 @@ fun MenuBottomSheet(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.projects).uppercase(),
+                text = stringResource(R.string.projects).uppercase(),
                 style = TodometerTypography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addProject) {
-                Icon(Icons.Rounded.Add, contentDescription = "Add project")
-                Text(text = stringResource(id = R.string.add_project))
+                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_project))
+                Text(text = stringResource(R.string.add_project))
             }
         }
         HorizontalDivider()
@@ -307,17 +347,19 @@ fun EmptyTasksListView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(id = R.drawable.project_completed),
+                painterResource(R.drawable.project_completed),
                 modifier = Modifier.size(240.dp),
                 contentDescription = null
             )
-            Text(stringResource(id = R.string.no_tasks))
+            Text(stringResource(R.string.no_tasks))
         }
     }
 }
 
 @Composable
-fun MoreBottomSheet() {
+fun MoreBottomSheet(
+    aboutClick: () -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(top = 16.dp)
@@ -326,12 +368,12 @@ fun MoreBottomSheet() {
             icon = {
                 Icon(
                     Icons.Outlined.Edit,
-                    contentDescription = "Editar Proyecto"
+                    contentDescription = stringResource(R.string.edit_project)
                 )
             },
             text = {
                 Text(
-                    "Editar Proyecto",
+                    stringResource(R.string.edit_project),
                     style = TodometerTypography.caption
                 )
             },
@@ -341,12 +383,12 @@ fun MoreBottomSheet() {
             icon = {
                 Icon(
                     Icons.Outlined.Delete,
-                    contentDescription = "Eliminar Proyecto"
+                    contentDescription = stringResource(R.string.remove_project)
                 )
             },
             text = {
                 Text(
-                    "Eliminar Proyecto",
+                    stringResource(R.string.remove_project),
                     style = TodometerTypography.caption
                 )
             },
@@ -357,18 +399,18 @@ fun MoreBottomSheet() {
             icon = {
                 Icon(
                     Icons.Outlined.Brightness4,
-                    contentDescription = "Tema"
+                    contentDescription = stringResource(R.string.theme)
                 )
             },
             text = {
                 Text(
-                    "Tema",
+                    stringResource(R.string.theme),
                     style = TodometerTypography.caption
                 )
             },
             subtitle = {
                 Text(
-                    "Predeterminado del sistema",
+                    stringResource(R.string.follow_system),
                     style = TodometerTypography.caption
                 )
             },
@@ -377,11 +419,14 @@ fun MoreBottomSheet() {
         HorizontalDivider()
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
             TextButton(onClick = {}) {
-                Text("Licencias de código abierto", style = TodometerTypography.caption)
+                Text(
+                    stringResource(R.string.open_source_licenses),
+                    style = TodometerTypography.caption
+                )
             }
             Text("·")
-            TextButton(onClick = {}) {
-                Text("Acerca de", style = TodometerTypography.caption)
+            TextButton(onClick = aboutClick) {
+                Text(stringResource(R.string.about), style = TodometerTypography.caption)
             }
         }
     }

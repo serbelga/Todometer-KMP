@@ -23,12 +23,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.sergiobelda.todometer.ui.Destinations.About
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
 import com.sergiobelda.todometer.ui.Destinations.EditTask
 import com.sergiobelda.todometer.ui.Destinations.Home
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 import com.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
+import com.sergiobelda.todometer.ui.about.AboutScreen
 import com.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import com.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import com.sergiobelda.todometer.ui.edittask.EditTaskScreen
@@ -41,7 +43,7 @@ fun ToDometerApp() {
     val actions = remember(navController) { Actions(navController) }
     NavHost(navController, startDestination = Home) {
         composable(Home) {
-            HomeScreen(actions.addProject, actions.addTask, actions.openTask)
+            HomeScreen(actions.addProject, actions.addTask, actions.openTask, actions.about)
         }
         composable(
             "$TaskDetail/{$TaskId}",
@@ -67,6 +69,9 @@ fun ToDometerApp() {
                 taskId = backStackEntry.arguments?.getString(TaskId) ?: "",
                 actions.navigateUp
             )
+        }
+        composable(About) {
+            AboutScreen(actions.navigateUp)
         }
     }
 }
