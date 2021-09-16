@@ -38,6 +38,7 @@
     <string name="add">Add</string>
     <string name="edit_project">Edit</string>
     <string name="open_source_licenses">Open-source licenses</string>
+    <string name="privacy_policy">Privacy policy</string>
     <string name="no_projects">There\'s any project</string>
     <string name="theme">Theme</string>
     <string name="follow_system">System default</string>

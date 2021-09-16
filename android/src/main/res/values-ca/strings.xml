@@ -19,6 +19,7 @@
     <string name="add">Afegir</string>
     <string name="edit_project">Editar</string>
     <string name="open_source_licenses">Llicències de codi obert</string>
+    <string name="privacy_policy">Política de privacitat</string>
     <string name="no_projects">No hi ha projectes</string>
     <string name="no_description">No hi ha descripció</string>
     <string name="remove_task_question">Vols eliminar aquesta tasca?</string>

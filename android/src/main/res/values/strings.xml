@@ -39,8 +39,10 @@
     <string name="follow_system">Predeterminado del sistema</string>
     <string name="about">Acerca de</string>
     <string name="open_source_licenses">Licencias de código abierto</string>
+    <string name="privacy_policy">Política de privacidad</string>
     <string name="no_tasks">No hay tareas</string>
     <string name="no_projects">No hay proyectos</string>
     <string name="field_not_empty">El campo no puede quedar vacío</string>
     <string name="you_have_not_any_project">No tienes ningún proyecto</string>
+    <string name="github" translatable="false">GitHub</string>
 </resources>
