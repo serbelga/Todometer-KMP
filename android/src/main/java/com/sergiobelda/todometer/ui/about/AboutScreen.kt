@@ -23,6 +23,10 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.Description
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -32,7 +36,12 @@ import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 
 @Composable
-fun AboutScreen(navigateUp: () -> Unit) {
+fun AboutScreen(
+    githubClick: () -> Unit,
+    openSourceLicensesClick: () -> Unit,
+    navigateUp: () -> Unit
+) {
+    var privacyPolicyDialogState by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -46,6 +55,9 @@ fun AboutScreen(navigateUp: () -> Unit) {
             )
         }
     ) {
+        if (privacyPolicyDialogState) {
+            PrivacyPolicyDialog { privacyPolicyDialogState = false }
+        }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
@@ -53,6 +65,7 @@ fun AboutScreen(navigateUp: () -> Unit) {
             ToDometerLogo()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
+                onCardClick = { githubClick() },
                 icon = {
                     Icon(
                         painterResource(R.drawable.ic_github_24),
@@ -64,10 +77,9 @@ fun AboutScreen(navigateUp: () -> Unit) {
                         text = stringResource(R.string.github)
                     )
                 }
-            ) {
-
-            }
+            )
             AboutItemCard(
+                onCardClick = { privacyPolicyDialogState = true },
                 icon = {
                     Icon(
                         Icons.Rounded.Description,
@@ -79,10 +91,9 @@ fun AboutScreen(navigateUp: () -> Unit) {
                         text = stringResource(R.string.privacy_policy)
                     )
                 }
-            ) {
-
-            }
+            )
             AboutItemCard(
+                onCardClick = { openSourceLicensesClick() },
                 icon = {
                     Icon(
                         Icons.Rounded.Code,
@@ -94,9 +105,7 @@ fun AboutScreen(navigateUp: () -> Unit) {
                         text = stringResource(R.string.open_source_licenses)
                     )
                 }
-            ) {
-
-            }
+            )
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
             Text(
@@ -110,9 +119,9 @@ fun AboutScreen(navigateUp: () -> Unit) {
 
 @Composable
 fun AboutItemCard(
+    onCardClick: () -> Unit,
     icon: @Composable () -> Unit,
-    text: @Composable () -> Unit,
-    onCardClick: () -> Unit
+    text: @Composable () -> Unit
 ) {
     Card(modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp)) {
         Row(

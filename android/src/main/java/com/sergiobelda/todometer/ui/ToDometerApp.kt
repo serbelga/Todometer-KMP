@@ -71,7 +71,11 @@ fun ToDometerApp() {
             )
         }
         composable(About) {
-            AboutScreen(actions.navigateUp)
+            AboutScreen(
+                {},
+                {},
+                actions.navigateUp
+            )
         }
     }
 }
