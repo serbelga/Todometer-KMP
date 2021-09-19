@@ -53,9 +53,11 @@ fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
                     .height(56.dp)
                     .fillMaxWidth()
             ) {
-                // ToDometerTitle(modifier = Modifier.align(Alignment.Center))
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    IconButton(onClick = {}, modifier = Modifier.align(Alignment.CenterEnd)) {
+                    IconButton(
+                        onClick = {},
+                        modifier = Modifier.align(Alignment.CenterEnd)
+                    ) {
                         Icon(Icons.Outlined.AccountCircle, contentDescription = "Account")
                     }
                 }
