@@ -31,4 +31,8 @@ expect class Preferences {
     fun getLong(key: String, default: Long = 1): Flow<Long>
 
     fun getLongOrNull(key: String): Flow<Long?>
+
+    fun getInt(key: String, default: Int = 1): Flow<Int>
+
+    fun getIntOrNull(key: String): Flow<Int?>
 }

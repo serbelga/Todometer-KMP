@@ -21,12 +21,15 @@ import androidx.lifecycle.viewModelScope
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.usecase.DeleteProjectUseCase
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
+import com.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.RefreshProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
+import com.sergiobelda.todometer.common.usecase.SetAppThemeUseCase
 import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -39,13 +42,19 @@ class HomeViewModel(
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val deleteProjectUseCase: DeleteProjectUseCase,
     private val setProjectSelectedUseCase: SetProjectSelectedUseCase,
     private val refreshProjectsUseCase: RefreshProjectsUseCase,
     private val refreshProjectSelectedUseCase: RefreshProjectSelectedUseCase,
     getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
-    getTasksUseCase: GetTasksUseCase
+    getTasksUseCase: GetTasksUseCase,
+    getAppThemeUseCase: GetAppThemeUseCase,
+    private val setAppThemeUseCase: SetAppThemeUseCase
 ) : ViewModel() {
+
+    val appTheme: StateFlow<Int> =
+        getAppThemeUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), 0)
 
     val tasks: StateFlow<Result<List<Task>>> =
         getTasksUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
@@ -73,6 +82,10 @@ class HomeViewModel(
 
     fun deleteTask(id: String) = viewModelScope.launch {
         deleteTaskUseCase(id)
+    }
+
+    fun deleteProject() = viewModelScope.launch {
+        deleteProjectUseCase.invoke()
     }
 
     fun setTaskDoing(id: String) = viewModelScope.launch {

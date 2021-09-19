@@ -20,6 +20,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -56,18 +57,28 @@ actual class Preferences(private val context: Context) {
             preferences[stringKey]
         }
 
-    actual fun getLong(
-        key: String,
-        default: Long
-    ): Flow<Long> = context.dataStore.data.map { preferences ->
-        val longKey = longPreferencesKey(key)
-        preferences[longKey] ?: default
-    }
+    actual fun getLong(key: String, default: Long): Flow<Long> =
+        context.dataStore.data.map { preferences ->
+            val longKey = longPreferencesKey(key)
+            preferences[longKey] ?: default
+        }
 
     actual fun getLongOrNull(key: String): Flow<Long?> =
         context.dataStore.data.map { preferences ->
             val longKey = longPreferencesKey(key)
             preferences[longKey]
+        }
+
+    actual fun getInt(key: String, default: Int): Flow<Int> =
+        context.dataStore.data.map { preferences ->
+            val intKey = intPreferencesKey(key)
+            preferences[intKey] ?: default
+        }
+
+    actual fun getIntOrNull(key: String): Flow<Int?> =
+        context.dataStore.data.map { preferences ->
+            val intKey = intPreferencesKey(key)
+            preferences[intKey]
         }
 
     companion object {

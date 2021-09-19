@@ -27,9 +27,10 @@
     <string name="no_description">No hay descripción</string>
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
-    <string name="remove_task">Eliminar tarea</string>
-    <string name="remove_task_question">Do you want to remove this task?</string>
-    <string name="remove_project">Eliminar proyecto</string>
+    <string name="delete_task">Eliminar tarea</string>
+    <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
+    <string name="delete_project">Eliminar proyecto</string>
+    <string name="delete_project_question">Se eliminaran todas las tareas relacionadas. ¿Desea continuar?</string>
     <string name="add">Añadir</string>
     <string name="add_task">Añadir tarea</string>
     <string name="add_project">Añadir proyecto</string>
@@ -37,6 +38,8 @@
     <string name="edit_project">Editar proyecto</string>
     <string name="theme">Tema</string>
     <string name="follow_system">Predeterminado del sistema</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Oscuro</string>
     <string name="about">Acerca de</string>
     <string name="open_source_licenses">Licencias de código abierto</string>
     <string name="privacy_policy">Política de privacidad</string>

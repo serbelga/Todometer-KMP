@@ -33,7 +33,7 @@ class TaskLocalDataSource(
     override fun getTask(id: String): Flow<Result<Task?>> =
         taskDao.getTask(id).map { Result.Success(it?.toDomain()) }
 
-    override fun getTasks(projectId: String?): Flow<Result<List<Task>>> =
+    override fun getTasks(projectId: String): Flow<Result<List<Task>>> =
         taskDao.getTasks(projectId).map { list ->
             Result.Success(list.toDomain())
         }

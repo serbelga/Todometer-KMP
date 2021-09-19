@@ -31,10 +31,7 @@ actual class Preferences {
         preferences?.putLong(key, value)
     }
 
-    actual fun getString(
-        key: String,
-        default: String
-    ): Flow<String> = flow {
+    actual fun getString(key: String, default: String): Flow<String> = flow {
         emit(preferences?.get(key, default) ?: default)
     }
 
@@ -42,15 +39,21 @@ actual class Preferences {
         emit(preferences?.get(key, null))
     }
 
-    actual fun getLong(
-        key: String,
-        default: Long
-    ): Flow<Long> = flow {
+    actual fun getLong(key: String, default: Long): Flow<Long> = flow {
         emit(preferences?.getLong(key, default) ?: default)
     }
 
     actual fun getLongOrNull(key: String): Flow<Long?> = flow {
         // TODO This can throw java.lang.NumberFormatException
         emit(preferences?.get(key, null)?.toLong())
+    }
+
+    actual fun getInt(key: String, default: Int): Flow<Int> = flow {
+        emit(preferences?.getInt(key, default) ?: default)
+    }
+
+    actual fun getIntOrNull(key: String): Flow<Int?> = flow {
+        // TODO This can throw java.lang.NumberFormatException
+        emit(preferences?.get(key, null)?.toInt())
     }
 }

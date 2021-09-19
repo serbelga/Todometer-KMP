@@ -23,4 +23,8 @@ interface IUserPreferencesRepository {
     fun projectSelected(): Flow<String>
 
     suspend fun setProjectSelected(projectSelectedId: String)
+
+    fun getUserTheme(): Flow<Int>
+
+    suspend fun setUserTheme(theme: Int)
 }

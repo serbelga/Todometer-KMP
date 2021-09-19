@@ -30,7 +30,14 @@ class UserPreferencesRepository(private val preferences: Preferences) : IUserPre
         preferences.set(PROJECT_SELECTED_KEY, projectSelectedId)
     }
 
+    override fun getUserTheme(): Flow<Int> = preferences.getInt(APP_THEME)
+
+    override suspend fun setUserTheme(theme: Int) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         private const val PROJECT_SELECTED_KEY = "project_selected"
+        private const val APP_THEME = "app_theme"
     }
 }

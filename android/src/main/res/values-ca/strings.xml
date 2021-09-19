@@ -13,7 +13,7 @@
     <string name="save">Guardar</string>
     <string name="task">Tasca</string>
     <string name="tasks">Tasques</string>
-    <string name="remove_project">Eliminar projecte</string>
+    <string name="delete_project">Eliminar projecte</string>
     <string name="about">Sobre</string>
     <string name="no_tasks">No hi han tasques</string>
     <string name="add">Afegir</string>
@@ -22,10 +22,13 @@
     <string name="privacy_policy">Política de privacitat</string>
     <string name="no_projects">No hi ha projectes</string>
     <string name="no_description">No hi ha descripció</string>
-    <string name="remove_task_question">Vols eliminar aquesta tasca?</string>
-    <string name="remove_task">Eliminar tasca</string>
+    <string name="delete_task_question">Vols eliminar aquesta tasca?</string>
+    <string name="delete_task">Eliminar tasca</string>
     <string name="cancel">Cancelar</string>
     <string name="field_not_empty">El camp no pot quedar buit</string>
     <string name="theme">Tema</string>
     <string name="follow_system">Predeterminat del sistema</string>
+    <string name="delete_project_question">S\'eliminaran totes les tasques vinculades. Vols continuar?</string>
+    <string name="light_theme">Clar</string>
+    <string name="dark_theme">Obscur</string>
 </resources>

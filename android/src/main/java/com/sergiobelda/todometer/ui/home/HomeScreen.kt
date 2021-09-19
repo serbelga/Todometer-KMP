@@ -99,7 +99,10 @@ fun HomeScreen(
     var currentSheet: HomeBottomSheet by remember { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
 
     var selectedTask by remember { mutableStateOf("") }
+
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
+    var deleteProjectAlertDialogState by remember { mutableStateOf(false) }
+    var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
     val projectsResultState = homeViewModel.projects.collectAsState()
@@ -130,6 +133,12 @@ fun HomeScreen(
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
                     MoreBottomSheet(
+                        deleteProjectClick = {
+                            deleteProjectAlertDialogState = true
+                        },
+                        chooseThemeClick = {
+                            chooseThemeAlertDialogState = true
+                        },
                         aboutClick = {
                             scope.launch {
                                 sheetState.hide()
@@ -176,9 +185,21 @@ fun HomeScreen(
             },
             content = {
                 if (deleteTaskAlertDialogState) {
-                    RemoveTaskAlertDialog(
+                    DeleteTaskAlertDialog(
                         onDismissRequest = { deleteTaskAlertDialogState = false },
                         deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                    )
+                }
+                if (deleteProjectAlertDialogState) {
+                    DeleteProjectAlertDialog(
+                        onDismissRequest = { deleteProjectAlertDialogState = false },
+                        deleteProject = { }
+                    )
+                }
+                if (chooseThemeAlertDialogState) {
+                    ChooseThemeAlertDialog(
+                        onDismissRequest = { chooseThemeAlertDialogState = false },
+                        chooseTheme = { }
                     )
                 }
                 if (tasks.isEmpty()) {
@@ -220,17 +241,60 @@ fun HomeScreen(
 }
 
 @Composable
-fun RemoveTaskAlertDialog(
-    onDismissRequest: () -> Unit,
-    deleteTask: () -> Unit
-) {
+fun ChooseThemeAlertDialog(onDismissRequest: () -> Unit, chooseTheme: () -> Unit) {
+    AlertDialog(
+        title = {},
+        onDismissRequest = onDismissRequest,
+        text = {
+            Column {
+
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = chooseTheme) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+fun DeleteProjectAlertDialog(onDismissRequest: () -> Unit, deleteProject: () -> Unit) {
     AlertDialog(
         title = {
-            Text(stringResource(R.string.remove_task))
+            Text(stringResource(R.string.delete_project))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(R.string.remove_task_question))
+            Text(stringResource(R.string.delete_project_question))
+        },
+        confirmButton = {
+            TextButton(onClick = deleteProject) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) {
+    AlertDialog(
+        title = {
+            Text(stringResource(R.string.delete_task))
+        },
+        onDismissRequest = onDismissRequest,
+        text = {
+            Text(stringResource(R.string.delete_task_question))
         },
         confirmButton = {
             TextButton(
@@ -243,9 +307,7 @@ fun RemoveTaskAlertDialog(
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = onDismissRequest
-            ) {
+            TextButton(onClick = onDismissRequest) {
                 Text(stringResource(R.string.cancel))
             }
         }
@@ -358,6 +420,8 @@ fun EmptyTasksListView() {
 
 @Composable
 fun MoreBottomSheet(
+    deleteProjectClick: () -> Unit,
+    chooseThemeClick: () -> Unit,
     aboutClick: () -> Unit
 ) {
     Column(
@@ -383,16 +447,16 @@ fun MoreBottomSheet(
             icon = {
                 Icon(
                     Icons.Outlined.Delete,
-                    contentDescription = stringResource(R.string.remove_project)
+                    contentDescription = stringResource(R.string.delete_project)
                 )
             },
             text = {
                 Text(
-                    stringResource(R.string.remove_project),
+                    stringResource(R.string.delete_project),
                     style = TodometerTypography.caption
                 )
             },
-            onClick = {}
+            onClick = deleteProjectClick
         )
         HorizontalDivider()
         TwoLineItem(
@@ -414,7 +478,7 @@ fun MoreBottomSheet(
                     style = TodometerTypography.caption
                 )
             },
-            onClick = {}
+            onClick = chooseThemeClick
         )
         HorizontalDivider()
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {

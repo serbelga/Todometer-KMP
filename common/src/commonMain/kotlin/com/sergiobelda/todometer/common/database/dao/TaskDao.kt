@@ -33,9 +33,8 @@ class TaskDao : ITaskDao, KoinComponent {
     override fun getTask(id: String): Flow<TaskEntity?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(projectId: String?): Flow<List<TaskEntity>> =
-        // TODO Update
-        database.todometerQueries.selectAllTasks().asFlow().mapToList()
+    override fun getTasks(projectId: String): Flow<List<TaskEntity>> =
+        database.todometerQueries.selectTasksByProjectId(projectId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
         database.todometerQueries.insertOrReplaceTask(
