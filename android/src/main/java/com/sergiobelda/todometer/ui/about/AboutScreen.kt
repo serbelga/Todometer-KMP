@@ -154,4 +154,3 @@ fun ToDometerLogo(modifier: Modifier = Modifier) {
         )
     }
 }
-

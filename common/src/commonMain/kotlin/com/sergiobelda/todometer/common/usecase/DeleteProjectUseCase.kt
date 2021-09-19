@@ -32,6 +32,5 @@ class DeleteProjectUseCase(
     suspend operator fun invoke() {
         val projectId = userPreferencesRepository.projectSelected().firstOrNull()
         projectId?.let { projectRepository.deleteProject(it) }
-
     }
 }

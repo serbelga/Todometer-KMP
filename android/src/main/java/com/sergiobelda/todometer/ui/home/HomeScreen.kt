@@ -250,7 +250,6 @@ fun ChooseThemeAlertDialog(onDismissRequest: () -> Unit, chooseTheme: () -> Unit
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-
             }
         },
         confirmButton = {

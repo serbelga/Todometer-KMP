@@ -17,7 +17,11 @@
 val ktlint by configurations.creating
 
 dependencies {
-    ktlint("com.pinterest:ktlint:0.41.0")
+    ktlint(Libs.ktLint) {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
 }
 
 val outputDir = "${project.buildDir}/reports/ktlint/"

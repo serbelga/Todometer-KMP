@@ -27,7 +27,7 @@ object Versions {
     const val androidJunit = "1.1.3"
     const val koin = "3.1.0"
     const val kotlin = "1.5.21"
-    const val ktLint = "0.42.0"
+    const val ktLint = "0.42.1"
     const val ktor = "1.6.2"
     const val ktxVersion = "1.6.0"
     const val lifecycle = "2.3.1"
