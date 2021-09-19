@@ -19,15 +19,14 @@ package com.sergiobelda.todometer.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            ToDometerTheme {
-                ToDometerApp()
-            }
+            ToDometerApp()
         }
     }
 }

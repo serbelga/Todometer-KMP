@@ -78,4 +78,8 @@
             <br></br>
         ]]>
     </string>
+    <string name="enter_task_name">Introduce el nombre de la tarea</string>
+    <string name="enter_description">Introduce una descripción</string>
+    <string name="choose_tag">Elige una etiqueta</string>
+    <string name="enter_project_name">Introduce un nombre para el proyecto</string>
 </resources>

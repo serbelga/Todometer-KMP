@@ -28,7 +28,7 @@ interface IProjectRepository {
 
     suspend fun refreshProject(id: String)
 
-    suspend fun insertProject(name: String, description: String): Result<String>
+    suspend fun insertProject(name: String): Result<String>
 
     suspend fun refreshProjects()
 

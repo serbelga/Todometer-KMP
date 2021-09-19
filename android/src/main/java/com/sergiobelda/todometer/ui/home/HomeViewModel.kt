@@ -23,13 +23,11 @@ import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.DeleteProjectUseCase
 import com.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
-import com.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.RefreshProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
-import com.sergiobelda.todometer.common.usecase.SetAppThemeUseCase
 import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -48,13 +46,8 @@ class HomeViewModel(
     private val refreshProjectSelectedUseCase: RefreshProjectSelectedUseCase,
     getProjectSelectedUseCase: GetProjectSelectedUseCase,
     getProjectsUseCase: GetProjectsUseCase,
-    getTasksUseCase: GetTasksUseCase,
-    getAppThemeUseCase: GetAppThemeUseCase,
-    private val setAppThemeUseCase: SetAppThemeUseCase
+    getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
-
-    val appTheme: StateFlow<Int> =
-        getAppThemeUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), 0)
 
     val tasks: StateFlow<Result<List<Task>>> =
         getTasksUseCase().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)

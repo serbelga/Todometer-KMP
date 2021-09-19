@@ -23,6 +23,6 @@ class InsertProjectUseCase(
     private val projectRepository: IProjectRepository
 ) {
 
-    suspend operator fun invoke(name: String, description: String): Result<String> =
-        projectRepository.insertProject(name, description)
+    suspend operator fun invoke(name: String): Result<String> =
+        projectRepository.insertProject(name)
 }

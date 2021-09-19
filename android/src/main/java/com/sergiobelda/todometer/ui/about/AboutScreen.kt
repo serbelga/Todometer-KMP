@@ -18,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Code
@@ -33,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 
 @Composable
@@ -45,12 +47,14 @@ fun AboutScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                backgroundColor = TodometerColors.surface,
+                contentColor = contentColorFor(TodometerColors.surface),
+                elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                     }
                 },
-                elevation = 0.dp,
                 title = {}
             )
         }

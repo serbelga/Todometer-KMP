@@ -1,5 +1,6 @@
 package com.sergiobelda.todometer.di
 
+import com.sergiobelda.todometer.ui.MainViewModel
 import com.sergiobelda.todometer.ui.addproject.AddProjectViewModel
 import com.sergiobelda.todometer.ui.addtask.AddTaskViewModel
 import com.sergiobelda.todometer.ui.edittask.EditTaskViewModel
@@ -29,12 +30,13 @@ val viewModelModule = module {
             get(),
             get(),
             get(),
-            get(),
-            get(),
             get()
         )
     }
     viewModel {
         TaskDetailViewModel(get())
+    }
+    viewModel {
+        MainViewModel(get())
     }
 }

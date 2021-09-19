@@ -21,9 +21,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -55,13 +58,14 @@ fun TaskItem(
 ) {
     Card(
         modifier = Modifier
+            .height(72.dp)
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 8.dp, start = 16.dp, end = 16.dp),
         shape = MaterialTheme.shapes.large
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(start = 16.dp).combinedClickable(
+            modifier = Modifier.combinedClickable(
                 onClick = {
                     onClick(task.id)
                 },
@@ -70,6 +74,7 @@ fun TaskItem(
                 }
             )
         ) {
+            Spacer(Modifier.width(16.dp))
             Box(
                 modifier = Modifier
                     .size(16.dp)

@@ -42,6 +42,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -89,6 +90,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(
     addProject: () -> Unit,
+    editProject: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
     about: () -> Unit,
@@ -133,6 +135,7 @@ fun HomeScreen(
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
                     MoreBottomSheet(
+                        editProjectClick = editProject,
                         deleteProjectClick = {
                             deleteProjectAlertDialogState = true
                         },
@@ -334,7 +337,7 @@ fun MenuBottomSheet(
                 style = TodometerTypography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-            TextButton(onClick = addProject) {
+            OutlinedButton(onClick = addProject) {
                 Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_project))
                 Text(text = stringResource(R.string.add_project))
             }
@@ -420,6 +423,7 @@ fun EmptyTasksListView() {
 
 @Composable
 fun MoreBottomSheet(
+    editProjectClick: () -> Unit,
     deleteProjectClick: () -> Unit,
     chooseThemeClick: () -> Unit,
     aboutClick: () -> Unit
@@ -441,7 +445,7 @@ fun MoreBottomSheet(
                     style = TodometerTypography.caption
                 )
             },
-            onClick = {}
+            onClick = editProjectClick
         )
         SingleLineItem(
             icon = {

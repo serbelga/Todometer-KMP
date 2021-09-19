@@ -20,12 +20,14 @@ import androidx.navigation.NavHostController
 import com.sergiobelda.todometer.ui.Destinations.About
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
+import com.sergiobelda.todometer.ui.Destinations.EditProject
 import com.sergiobelda.todometer.ui.Destinations.EditTask
 import com.sergiobelda.todometer.ui.Destinations.TaskDetail
 
 object Destinations {
     const val Home = "home"
     const val AddProject = "addProject"
+    const val EditProject = "editProject"
     const val AddTask = "addTask"
     const val EditTask = "editTask"
     const val TaskDetail = "taskDetail"
@@ -48,6 +50,9 @@ class Actions(navController: NavHostController) {
     }
     val addProject: () -> Unit = {
         navController.navigate(AddProject)
+    }
+    val editProject: () -> Unit = {
+        navController.navigate(EditProject)
     }
     val about: () -> Unit = {
         navController.navigate(About)

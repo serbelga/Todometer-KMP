@@ -32,7 +32,7 @@ class AddProjectViewModel(
     private val _result = MutableLiveData<Result<String>?>()
     val result: LiveData<Result<String>?> get() = _result
 
-    fun insertProject(name: String, description: String) = viewModelScope.launch {
-        _result.value = insertProjectUseCase.invoke(name, description)
+    fun insertProject(name: String) = viewModelScope.launch {
+        _result.value = insertProjectUseCase.invoke(name)
     }
 }

@@ -31,4 +31,8 @@
     <string name="delete_project_question">S\'eliminaran totes les tasques vinculades. Vols continuar?</string>
     <string name="light_theme">Clar</string>
     <string name="dark_theme">Obscur</string>
+    <string name="enter_task_name">Introdueix el nom de la tasca</string>
+    <string name="enter_description">Introdueix una descripció</string>
+    <string name="choose_tag">Tria una etiqueta</string>
+    <string name="enter_project_name">Introdueix el nom del projecte</string>
 </resources>
