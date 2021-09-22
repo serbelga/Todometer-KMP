@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -49,7 +50,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Brightness4
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
@@ -144,6 +144,7 @@ fun HomeScreen(
                         deleteProjectClick = {
                             deleteProjectAlertDialogState = true
                         },
+                        currentTheme = appThemeState.value,
                         chooseThemeClick = {
                             chooseThemeAlertDialogState = true
                         },
@@ -257,25 +258,40 @@ fun ChooseThemeAlertDialog(
 ) {
     var themeSelected by remember { mutableStateOf(currentTheme) }
     AlertDialog(
-        title = {},
+        title = {
+            Text(text = stringResource(R.string.theme))
+        },
         onDismissRequest = onDismissRequest,
         text = {
             LazyColumn {
                 appThemeMap.forEach { (appTheme, appThemeOption) ->
                     item {
-                        Row {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.height(36.dp).fillMaxWidth()
+                                .clickable { themeSelected = appTheme }
+                        ) {
                             RadioButton(
                                 selected = themeSelected == appTheme,
                                 onClick = { themeSelected = appTheme }
                             )
-                            Text(text = stringResource(appThemeOption.modeNameRes))
+                            Text(
+                                text = stringResource(appThemeOption.modeNameRes),
+                                style = TodometerTypography.subtitle1,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
                         }
                     }
                 }
             }
         },
         confirmButton = {
-            TextButton(onClick = { chooseTheme(themeSelected) }) {
+            TextButton(
+                onClick = {
+                    chooseTheme(themeSelected)
+                    onDismissRequest()
+                }
+            ) {
                 Text(stringResource(android.R.string.ok))
             }
         },
@@ -447,7 +463,8 @@ fun MoreBottomSheet(
     editProjectClick: () -> Unit,
     deleteProjectClick: () -> Unit,
     chooseThemeClick: () -> Unit,
-    aboutClick: () -> Unit
+    aboutClick: () -> Unit,
+    currentTheme: AppTheme
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -486,10 +503,12 @@ fun MoreBottomSheet(
         HorizontalDivider()
         TwoLineItem(
             icon = {
-                Icon(
-                    Icons.Outlined.Brightness4,
-                    contentDescription = stringResource(R.string.theme)
-                )
+                appThemeMap[currentTheme]?.themeIconRes?.let {
+                    Icon(
+                        painterResource(it),
+                        contentDescription = stringResource(R.string.theme)
+                    )
+                }
             },
             text = {
                 Text(
@@ -498,10 +517,9 @@ fun MoreBottomSheet(
                 )
             },
             subtitle = {
-                Text(
-                    stringResource(R.string.follow_system),
-                    style = TodometerTypography.caption
-                )
+                appThemeMap[currentTheme]?.modeNameRes?.let {
+                    Text(stringResource(it), style = TodometerTypography.caption)
+                }
             },
             onClick = chooseThemeClick
         )
