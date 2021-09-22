@@ -33,6 +33,10 @@ actual class Preferences {
         // TODO("Not yet implemented")
     }
 
+    actual suspend fun set(key: String, value: Int) {
+        // TODO("Not yet implemented")
+    }
+
     actual fun getString(key: String, default: String): Flow<String> = flow {
         // TODO("Not yet implemented")
         emit("")

@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.common.repository
 
+import com.sergiobelda.todometer.common.preferences.AppTheme
 import kotlinx.coroutines.flow.Flow
 
 interface IUserPreferencesRepository {
@@ -24,7 +25,7 @@ interface IUserPreferencesRepository {
 
     suspend fun setProjectSelected(projectSelectedId: String)
 
-    fun getUserTheme(): Flow<Int>
+    fun getUserTheme(): Flow<AppTheme>
 
-    suspend fun setUserTheme(theme: Int)
+    suspend fun setUserTheme(theme: AppTheme)
 }

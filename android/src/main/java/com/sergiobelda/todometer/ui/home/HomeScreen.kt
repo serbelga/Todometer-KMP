@@ -43,6 +43,7 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.OutlinedButton
+import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -73,6 +74,7 @@ import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.preferences.AppTheme
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.components.SingleLineItem
@@ -81,6 +83,7 @@ import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.theme.primarySelected
+import com.sergiobelda.todometer.preferences.appThemeMap
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
@@ -117,6 +120,8 @@ fun HomeScreen(
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
     val tasksResultState = homeViewModel.tasks.collectAsState()
     tasksResultState.value.doIfSuccess { tasks = it }
+
+    val appThemeState = homeViewModel.appTheme.collectAsState()
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -201,8 +206,9 @@ fun HomeScreen(
                 }
                 if (chooseThemeAlertDialogState) {
                     ChooseThemeAlertDialog(
+                        currentTheme = appThemeState.value,
                         onDismissRequest = { chooseThemeAlertDialogState = false },
-                        chooseTheme = { }
+                        chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
                     )
                 }
                 if (tasks.isEmpty()) {
@@ -244,16 +250,32 @@ fun HomeScreen(
 }
 
 @Composable
-fun ChooseThemeAlertDialog(onDismissRequest: () -> Unit, chooseTheme: () -> Unit) {
+fun ChooseThemeAlertDialog(
+    currentTheme: AppTheme,
+    onDismissRequest: () -> Unit,
+    chooseTheme: (theme: AppTheme) -> Unit
+) {
+    var themeSelected by remember { mutableStateOf(currentTheme) }
     AlertDialog(
         title = {},
         onDismissRequest = onDismissRequest,
         text = {
-            Column {
+            LazyColumn {
+                appThemeMap.forEach { (appTheme, appThemeOption) ->
+                    item {
+                        Row {
+                            RadioButton(
+                                selected = themeSelected == appTheme,
+                                onClick = { themeSelected = appTheme }
+                            )
+                            Text(text = stringResource(appThemeOption.modeNameRes))
+                        }
+                    }
+                }
             }
         },
         confirmButton = {
-            TextButton(onClick = chooseTheme) {
+            TextButton(onClick = { chooseTheme(themeSelected) }) {
                 Text(stringResource(android.R.string.ok))
             }
         },

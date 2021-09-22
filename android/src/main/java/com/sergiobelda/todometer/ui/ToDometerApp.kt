@@ -25,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.sergiobelda.todometer.common.preferences.AppTheme
 import com.sergiobelda.todometer.ui.Destinations.About
 import com.sergiobelda.todometer.ui.Destinations.AddProject
 import com.sergiobelda.todometer.ui.Destinations.AddTask
@@ -45,13 +46,17 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ToDometerApp() {
-    val mainViewModel: MainViewModel = getViewModel()
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
 
-    val appTheme = mainViewModel.appTheme.collectAsState()
-
-    ToDometerTheme(isSystemInDarkTheme()) {
+    val mainViewModel: MainViewModel = getViewModel()
+    val appThemeState = mainViewModel.appTheme.collectAsState()
+    val darkTheme: Boolean = when (appThemeState.value) {
+        AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+        AppTheme.DARK_THEME -> true
+        AppTheme.LIGHT_THEME -> false
+    }
+    ToDometerTheme(darkTheme) {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(

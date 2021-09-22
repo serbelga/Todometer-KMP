@@ -45,6 +45,13 @@ actual class Preferences(private val context: Context) {
         }
     }
 
+    actual suspend fun set(key: String, value: Int) {
+        val intKey = intPreferencesKey(key)
+        context.dataStore.edit { preferences ->
+            preferences[intKey] = value
+        }
+    }
+
     actual fun getString(key: String, default: String): Flow<String> =
         context.dataStore.data.map { preferences ->
             val stringKey = stringPreferencesKey(key)

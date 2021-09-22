@@ -2,35 +2,25 @@ package com.sergiobelda.todometer.preferences
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatDelegate
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.preferences.AppTheme
 
-enum class AppTheme(
-    val modeNight: Int,
+data class AppThemeOption(
     @DrawableRes val themeIconRes: Int,
     @StringRes val modeNameRes: Int
-) {
-    FOLLOW_SYSTEM(
-        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
+)
+
+val appThemeMap = mapOf(
+    AppTheme.FOLLOW_SYSTEM to AppThemeOption(
         R.drawable.ic_baseline_default_theme_24,
         R.string.follow_system
     ),
-    DARK(
-        AppCompatDelegate.MODE_NIGHT_YES,
-        R.drawable.ic_baseline_dark_theme_24,
-        R.string.dark_theme
-    ),
-    LIGHT(
-        AppCompatDelegate.MODE_NIGHT_NO,
+    AppTheme.LIGHT_THEME to AppThemeOption(
         R.drawable.ic_baseline_light_theme_24,
         R.string.light_theme
-    );
-
-    companion object {
-        val THEME_ARRAY = arrayOf(
-            AppTheme.FOLLOW_SYSTEM,
-            AppTheme.DARK,
-            AppTheme.LIGHT
-        )
-    }
-}
+    ),
+    AppTheme.DARK_THEME to AppThemeOption(
+        R.drawable.ic_baseline_dark_theme_24,
+        R.string.dark_theme
+    )
+)

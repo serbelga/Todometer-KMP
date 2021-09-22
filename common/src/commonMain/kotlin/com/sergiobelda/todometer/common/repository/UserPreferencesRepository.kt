@@ -16,8 +16,10 @@
 
 package com.sergiobelda.todometer.common.repository
 
+import com.sergiobelda.todometer.common.preferences.AppTheme
 import com.sergiobelda.todometer.common.preferences.Preferences
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 /**
  * Repository for performing data operations on [preferences].
@@ -30,10 +32,12 @@ class UserPreferencesRepository(private val preferences: Preferences) : IUserPre
         preferences.set(PROJECT_SELECTED_KEY, projectSelectedId)
     }
 
-    override fun getUserTheme(): Flow<Int> = preferences.getInt(APP_THEME)
+    override fun getUserTheme(): Flow<AppTheme> = preferences.getInt(APP_THEME).map {
+        enumValues<AppTheme>().getOrNull(it) ?: AppTheme.FOLLOW_SYSTEM
+    }
 
-    override suspend fun setUserTheme(theme: Int) {
-        TODO("Not yet implemented")
+    override suspend fun setUserTheme(theme: AppTheme) {
+        preferences.set(APP_THEME, theme.ordinal)
     }
 
     companion object {

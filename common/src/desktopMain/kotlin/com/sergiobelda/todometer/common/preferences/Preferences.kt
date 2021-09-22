@@ -31,6 +31,10 @@ actual class Preferences {
         preferences?.putLong(key, value)
     }
 
+    actual suspend fun set(key: String, value: Int) {
+        preferences?.putInt(key, value)
+    }
+
     actual fun getString(key: String, default: String): Flow<String> = flow {
         emit(preferences?.get(key, default) ?: default)
     }
