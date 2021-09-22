@@ -113,7 +113,8 @@ fun AboutScreen(
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
             Text(
-                text = "2.0.0",
+                // TODO: Update dynamically
+                text = "2.0.0-dev",
                 style = TodometerTypography.overline,
                 modifier = Modifier.padding(bottom = 24.dp)
             )
