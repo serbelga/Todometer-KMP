@@ -21,14 +21,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
@@ -47,6 +46,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -90,6 +90,15 @@ fun TaskDetailScreen(
                             Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                         }
                     },
+                    actions = {
+                        IconButton(onClick = { /*editTask(taskId)*/ }) {
+                            Icon(
+                                Icons.Outlined.Edit,
+                                contentDescription = "Edit task",
+                                tint = TodometerColors.primary
+                            )
+                        }
+                    },
                     elevation = 0.dp,
                     backgroundColor = TodometerColors.surface,
                     contentColor = contentColorFor(backgroundColor = TodometerColors.surface)
@@ -97,17 +106,6 @@ fun TaskDetailScreen(
             },
             content = {
                 TaskDetailBody(scrollState, task)
-            },
-            floatingActionButton = {
-                FloatingActionButton(
-                    backgroundColor = TodometerColors.primary,
-                    onClick = {
-                        /*editTask(taskId)*/
-                    },
-                    modifier = Modifier.padding(bottom = 16.dp)
-                ) {
-                    Icon(Icons.Outlined.Edit, contentDescription = "Edit task")
-                }
             }
         )
     }
@@ -121,12 +119,14 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
         }
         Column(modifier = Modifier.verticalScroll(state = scrollState)) {
             Surface(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.height(64.dp)
             ) {
-                Row {
+                Row(
+                    modifier = Modifier.padding(start = 24.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Box(
                         modifier = Modifier
-                            .padding(start = 16.dp)
                             .size(16.dp)
                             .clip(CircleShape)
                             .background(TodometerColors.composeColorOf(task.tag))
@@ -135,7 +135,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                         Text(
                             text = task.title,
                             style = TodometerTypography.h6,
-                            modifier = Modifier.padding(20.dp),
+                            modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
                             maxLines = 1
                         )
                     }

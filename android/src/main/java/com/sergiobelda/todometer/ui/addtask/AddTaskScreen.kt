@@ -17,7 +17,7 @@
 package com.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -44,7 +44,8 @@ import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
-import com.sergiobelda.todometer.ui.components.TextField
+import com.sergiobelda.todometer.ui.components.TodometerTagSelector
+import com.sergiobelda.todometer.ui.components.TodometerTextField
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -56,6 +57,8 @@ fun AddTaskScreen(
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
     val result = addTaskViewModel.result.observeAsState()
+    val tags = enumValues<Tag>()
+    var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
     result.value?.doIfSuccess {
         navigateUp()
     }
@@ -73,7 +76,11 @@ fun AddTaskScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            addTaskViewModel.insertTask(taskTitle, taskDescription, Tag.AMBER)
+                            if (taskTitle.isNullOrBlank()) {
+                                taskTitleInputError = true
+                            } else {
+                                addTaskViewModel.insertTask(taskTitle, taskDescription, selectedTag)
+                            }
                         }
                     ) {
                         Icon(
@@ -87,31 +94,36 @@ fun AddTaskScreen(
             )
         },
         content = {
-            Column {
-                TextField(
+            Column(modifier = Modifier.padding(top = 24.dp)) {
+                TodometerTextField(
+                    title = stringResource(id = R.string.name),
                     value = taskTitle,
                     onValueChange = {
                         taskTitle = it
                         taskTitleInputError = false
                     },
-                    label = { Text(stringResource(id = R.string.title)) },
+                    placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
                     isError = taskTitleInputError,
                     errorMessage = stringResource(id = R.string.field_not_empty),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Next
-                    ),
-                    modifier = Modifier.fillMaxWidth()
+                    )
                 )
-                TextField(
+                TodometerTagSelector(
+                    selectedTag
+                ) { tag ->
+                    selectedTag = tag
+                }
+                TodometerTextField(
+                    title = stringResource(id = R.string.description),
                     value = taskDescription,
                     onValueChange = { taskDescription = it },
-                    label = { Text(stringResource(id = R.string.description)) },
+                    placeholder = { Text(stringResource(id = R.string.enter_description)) },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
-                    ),
-                    modifier = Modifier.fillMaxWidth()
+                    )
                 )
             }
         }

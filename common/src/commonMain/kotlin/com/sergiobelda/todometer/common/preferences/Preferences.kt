@@ -24,6 +24,8 @@ expect class Preferences {
 
     suspend fun set(key: String, value: Long)
 
+    suspend fun set(key: String, value: Int)
+
     fun getString(key: String, default: String = ""): Flow<String>
 
     fun getStringOrNull(key: String): Flow<String?>
@@ -31,4 +33,8 @@ expect class Preferences {
     fun getLong(key: String, default: Long = 1): Flow<Long>
 
     fun getLongOrNull(key: String): Flow<Long?>
+
+    fun getInt(key: String, default: Int = 1): Flow<Int>
+
+    fun getIntOrNull(key: String): Flow<Int?>
 }

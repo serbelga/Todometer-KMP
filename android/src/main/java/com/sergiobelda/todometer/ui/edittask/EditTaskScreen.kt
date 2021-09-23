@@ -46,7 +46,7 @@ import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
-import com.sergiobelda.todometer.ui.components.TextField
+import com.sergiobelda.todometer.ui.components.TodometerTextField
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -81,7 +81,7 @@ fun EditTaskScreen(
             },
             content = {
                 Column {
-                    TextField(
+                    TodometerTextField(
                         value = taskTitle,
                         onValueChange = {
                             taskTitle = it
@@ -96,7 +96,7 @@ fun EditTaskScreen(
                         ),
                         modifier = Modifier.fillMaxWidth()
                     )
-                    TextField(
+                    TodometerTextField(
                         value = taskDescription ?: "",
                         onValueChange = { taskDescription = it },
                         label = { Text(stringResource(id = R.string.description)) },

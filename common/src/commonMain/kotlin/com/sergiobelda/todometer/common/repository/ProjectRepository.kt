@@ -74,10 +74,10 @@ class ProjectRepository(
         }
     }
 
-    override suspend fun insertProject(name: String, description: String): Result<String> {
+    override suspend fun insertProject(name: String): Result<String> {
         var projectId = ""
         var sync = false
-        projectRemoteDataSource.insertProject(name = name, description = description).doIfSuccess {
+        projectRemoteDataSource.insertProject(name = name, description = "").doIfSuccess {
             projectId = it
             sync = true
         }.doIfError {
@@ -87,7 +87,7 @@ class ProjectRepository(
             Project(
                 id = projectId,
                 name = name,
-                description = description,
+                description = "",
                 sync = sync
             )
         )

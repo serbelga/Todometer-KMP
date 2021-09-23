@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2021 Sergio Belda
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="project">Project</string>
+    <string name="projects">Projects</string>
+    <string name="add_task">Add task</string>
+    <string name="edit_task">Edit task</string>
+    <string name="add_project">Add project</string>
+    <string name="title">Title</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="you_have_not_any_project">You haven\'t any project</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_task">Remove task</string>
+    <string name="delete_task_question">Do you want to remove this task?</string>
+    <string name="no_description">No description provided</string>
+    <string name="field_not_empty">Field must not be empty</string>
+    <string name="no_tasks">There are any task</string>
+    <string name="about">About</string>
+    <string name="task">Task</string>
+    <string name="tasks">Tasks</string>
+    <string name="delete_project">Remove project</string>
+    <string name="add">Add</string>
+    <string name="edit_project">Edit</string>
+    <string name="open_source_licenses">Open-source licenses</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="no_projects">There\'s any project</string>
+    <string name="theme">Theme</string>
+    <string name="follow_system">System default</string>
+    <string name="delete_project_question">All linked tasks will be removed. Do you want to continue?</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="enter_task_name">Enter a Task name</string>
+    <string name="enter_description">Enter a Description</string>
+    <string name="choose_tag">Choose a Tag</string>
+    <string name="enter_project_name">Enter a Project name</string>
+    <string name="choose_theme">Choose theme</string>
+</resources>

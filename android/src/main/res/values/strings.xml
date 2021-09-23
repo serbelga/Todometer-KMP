@@ -15,23 +15,72 @@
   -->
 
 <resources>
-    <string name="app_name">ToDometer</string>
-    <string name="project">Project</string>
-    <string name="projects">Projects</string>
-    <string name="add_task">Add task</string>
-    <string name="edit_task">Edit task</string>
-    <string name="add_project">Add project</string>
-    <string name="title">Title</string>
-    <string name="name">Name</string>
-    <string name="description">Description</string>
-    <string name="you_have_not_any_project">You haven\'t any project</string>
-    <string name="save">Save</string>
-    <string name="tags">Tags</string>
-    <string name="add_tag">Add tag</string>
-    <string name="cancel">Cancel</string>
-    <string name="remove_task">Remove task</string>
-    <string name="remove_task_question">Do you want to remove this task?</string>
-    <string name="no_description">No description provided</string>
-    <string name="field_not_empty">Field must not be empty</string>
-    <string name="no_tasks">There are any task</string>
+    <string name="app_name" translatable="false">ToDometer</string>
+
+    <string name="task">Tarea</string>
+    <string name="tasks">Tareas</string>
+    <string name="project">Proyecto</string>
+    <string name="projects">Proyectos</string>
+    <string name="title">Título</string>
+    <string name="name">Nombre</string>
+    <string name="description">Descripción</string>
+    <string name="no_description">No hay descripción</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_task">Eliminar tarea</string>
+    <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
+    <string name="delete_project">Eliminar proyecto</string>
+    <string name="delete_project_question">Se eliminaran todas las tareas relacionadas. ¿Desea continuar?</string>
+    <string name="add">Añadir</string>
+    <string name="add_task">Añadir tarea</string>
+    <string name="add_project">Añadir proyecto</string>
+    <string name="edit_task">Editar tarea</string>
+    <string name="edit_project">Editar proyecto</string>
+    <string name="theme">Tema</string>
+    <string name="choose_theme">Elegir un tema</string>
+    <string name="follow_system">Predeterminado del sistema</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Oscuro</string>
+    <string name="about">Acerca de</string>
+    <string name="open_source_licenses">Licencias de código abierto</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="no_tasks">No hay tareas</string>
+    <string name="no_projects">No hay proyectos</string>
+    <string name="field_not_empty">El campo no puede quedar vacío</string>
+    <string name="you_have_not_any_project">No tienes ningún proyecto</string>
+    <string name="github" translatable="false">GitHub</string>
+    <string name="privacy_policy_body" translatable="false">
+        <![CDATA[
+            <h6>User data</h6>
+            <div>
+                The ToDometer application does not store any user\'s data on
+                any server since it is an application that runs in a local environment
+                without the need for a connection. No user data is collected, transferred, or disclosed.
+            </div>
+            <br></br>
+            <h6>Permissions</h6>
+            <div>
+                The system does not require the user to grant any location or call and messaging permissions.
+            </div>
+            <br></br>
+            <h6>Device and network abuse</h6>
+            <div>
+                The system does not block or interfere with another application that displays advertisements.
+                It does not provide or provide instructions on how to hack services, software or hardware,
+                or bypass security protections. You do not access or use a service or API in a way that violates
+                its terms of service.
+            </div>
+            <br></br>
+            <h6>Public</h6>
+            <div>
+                The system can be used by people over 3 years old. It does not contain violent material, sexual material, or offensive language.
+                Does not contain ads. Sensitive information for minors is not collected.
+            </div>
+            <br></br>
+        ]]>
+    </string>
+    <string name="enter_task_name">Introduce el nombre de la tarea</string>
+    <string name="enter_description">Introduce una descripción</string>
+    <string name="choose_tag">Elige una etiqueta</string>
+    <string name="enter_project_name">Introduce un nombre para el proyecto</string>
 </resources>

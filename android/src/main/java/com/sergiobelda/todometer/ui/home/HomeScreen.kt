@@ -24,12 +24,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
@@ -42,18 +44,21 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,18 +69,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.common.preferences.AppTheme
 import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
+import com.sergiobelda.todometer.compose.ui.components.SingleLineItem
+import com.sergiobelda.todometer.compose.ui.components.TwoLineItem
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import com.sergiobelda.todometer.compose.ui.theme.primarySelected
+import com.sergiobelda.todometer.preferences.appThemeMap
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
@@ -85,14 +95,21 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(
     addProject: () -> Unit,
+    editProject: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
+    about: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val selectedTask = remember { mutableStateOf("") }
-    val deleteTaskAlertDialogState = remember { mutableStateOf(false) }
+    var currentSheet: HomeBottomSheet by remember { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
+
+    var selectedTask by remember { mutableStateOf("") }
+
+    var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
+    var deleteProjectAlertDialogState by remember { mutableStateOf(false) }
+    var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
     val projectsResultState = homeViewModel.projects.collectAsState()
@@ -106,18 +123,42 @@ fun HomeScreen(
     val tasksResultState = homeViewModel.tasks.collectAsState()
     tasksResultState.value.doIfSuccess { tasks = it }
 
+    val appThemeState = homeViewModel.appTheme.collectAsState()
+
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
         sheetContent = {
-            SheetContainer(
-                projectSelected?.id,
-                projects,
-                addProject,
-                selectProject = {
-                    homeViewModel.setProjectSelected(it)
+            when (currentSheet) {
+                is HomeBottomSheet.MenuBottomSheet -> {
+                    MenuBottomSheet(
+                        projectSelected?.id,
+                        projects,
+                        addProject,
+                        selectProject = {
+                            homeViewModel.setProjectSelected(it)
+                        }
+                    )
                 }
-            )
+                is HomeBottomSheet.MoreBottomSheet -> {
+                    MoreBottomSheet(
+                        editProjectClick = editProject,
+                        deleteProjectClick = {
+                            deleteProjectAlertDialogState = true
+                        },
+                        currentTheme = appThemeState.value,
+                        chooseThemeClick = {
+                            chooseThemeAlertDialogState = true
+                        },
+                        aboutClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                about()
+                            }
+                        }
+                    )
+                }
+            }
         }
     ) {
         Scaffold(
@@ -134,13 +175,19 @@ fun HomeScreen(
                         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                             IconButton(
                                 onClick = {
+                                    currentSheet = HomeBottomSheet.MenuBottomSheet
                                     scope.launch { sheetState.show() }
                                 }
                             ) {
                                 Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                             }
                             Spacer(modifier = Modifier.weight(1f))
-                            IconButton(onClick = { /* doSomething() */ }) {
+                            IconButton(
+                                onClick = {
+                                    currentSheet = HomeBottomSheet.MoreBottomSheet
+                                    scope.launch { sheetState.show() }
+                                }
+                            ) {
                                 Icon(Icons.Rounded.MoreVert, contentDescription = "More")
                             }
                         }
@@ -148,10 +195,23 @@ fun HomeScreen(
                 }
             },
             content = {
-                if (deleteTaskAlertDialogState.value) {
-                    RemoveTaskAlertDialog(
-                        deleteTaskAlertDialogState,
-                        deleteTask = { homeViewModel.deleteTask(selectedTask.value) }
+                if (deleteTaskAlertDialogState) {
+                    DeleteTaskAlertDialog(
+                        onDismissRequest = { deleteTaskAlertDialogState = false },
+                        deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                    )
+                }
+                if (deleteProjectAlertDialogState) {
+                    DeleteProjectAlertDialog(
+                        onDismissRequest = { deleteProjectAlertDialogState = false },
+                        deleteProject = { }
+                    )
+                }
+                if (chooseThemeAlertDialogState) {
+                    ChooseThemeAlertDialog(
+                        currentTheme = appThemeState.value,
+                        onDismissRequest = { chooseThemeAlertDialogState = false },
+                        chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
                     )
                 }
                 if (tasks.isEmpty()) {
@@ -167,8 +227,8 @@ fun HomeScreen(
                         },
                         onTaskItemClick = openTask,
                         onTaskItemLongClick = {
-                            deleteTaskAlertDialogState.value = true
-                            selectedTask.value = it
+                            deleteTaskAlertDialogState = true
+                            selectedTask = it
                         }
                     )
                 }
@@ -179,7 +239,10 @@ fun HomeScreen(
                         backgroundColor = TodometerColors.primary,
                         onClick = addTask
                     ) {
-                        Icon(Icons.Rounded.Add, contentDescription = "Add task")
+                        Icon(
+                            Icons.Rounded.Add,
+                            contentDescription = stringResource(R.string.add_task)
+                        )
                     }
                 }
             },
@@ -190,44 +253,117 @@ fun HomeScreen(
 }
 
 @Composable
-fun RemoveTaskAlertDialog(
-    showRemoveTaskAlertDialog: MutableState<Boolean>,
-    deleteTask: () -> Unit
+fun ChooseThemeAlertDialog(
+    currentTheme: AppTheme,
+    onDismissRequest: () -> Unit,
+    chooseTheme: (theme: AppTheme) -> Unit
 ) {
+    var themeSelected by remember { mutableStateOf(currentTheme) }
     AlertDialog(
         title = {
-            Text(stringResource(id = R.string.remove_task))
+            Text(text = stringResource(R.string.choose_theme))
         },
-        onDismissRequest = {
-            showRemoveTaskAlertDialog.value = false
-        },
+        onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(id = R.string.remove_task_question))
+            LazyColumn {
+                appThemeMap.forEach { (appTheme, appThemeOption) ->
+                    item {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                                .height(56.dp)
+                                .selectable(
+                                    selected = themeSelected == appTheme,
+                                    onClick = { themeSelected = appTheme },
+                                    role = Role.RadioButton
+                                )
+                                .padding(horizontal = 16.dp),
+                        ) {
+                            RadioButton(
+                                selected = themeSelected == appTheme,
+                                onClick = { themeSelected = appTheme }
+                            )
+                            Text(
+                                text = stringResource(appThemeOption.modeNameRes),
+                                style = TodometerTypography.body1,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                        }
+                    }
+                }
+            }
         },
         confirmButton = {
             TextButton(
                 onClick = {
-                    deleteTask()
-                    showRemoveTaskAlertDialog.value = false
+                    chooseTheme(themeSelected)
+                    onDismissRequest()
                 }
             ) {
-                Text(stringResource(id = android.R.string.ok))
+                Text(stringResource(android.R.string.ok))
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = {
-                    showRemoveTaskAlertDialog.value = false
-                }
-            ) {
-                Text(stringResource(id = R.string.cancel))
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.cancel))
             }
         }
     )
 }
 
 @Composable
-fun SheetContainer(
+fun DeleteProjectAlertDialog(onDismissRequest: () -> Unit, deleteProject: () -> Unit) {
+    AlertDialog(
+        title = {
+            Text(stringResource(R.string.delete_project))
+        },
+        onDismissRequest = onDismissRequest,
+        text = {
+            Text(stringResource(R.string.delete_project_question))
+        },
+        confirmButton = {
+            TextButton(onClick = deleteProject) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) {
+    AlertDialog(
+        title = {
+            Text(stringResource(R.string.delete_task))
+        },
+        onDismissRequest = onDismissRequest,
+        text = {
+            Text(stringResource(R.string.delete_task_question))
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    deleteTask()
+                    onDismissRequest()
+                }
+            ) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+fun MenuBottomSheet(
     selectedProjectId: String?,
     projectList: List<Project>,
     addProject: () -> Unit,
@@ -242,13 +378,13 @@ fun SheetContainer(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.projects).uppercase(),
+                text = stringResource(R.string.projects).uppercase(),
                 style = TodometerTypography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-            TextButton(onClick = addProject) {
-                Icon(Icons.Rounded.Add, contentDescription = "Add project")
-                Text(text = stringResource(id = R.string.add_project))
+            OutlinedButton(onClick = addProject) {
+                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_project))
+                Text(text = stringResource(R.string.add_project))
             }
         }
         HorizontalDivider()
@@ -321,13 +457,99 @@ fun EmptyTasksListView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(id = R.drawable.project_completed),
+                painterResource(R.drawable.project_completed),
                 modifier = Modifier.size(240.dp),
                 contentDescription = null
             )
-            Text(stringResource(id = R.string.no_tasks))
+            Text(stringResource(R.string.no_tasks))
         }
     }
+}
+
+@Composable
+fun MoreBottomSheet(
+    editProjectClick: () -> Unit,
+    deleteProjectClick: () -> Unit,
+    chooseThemeClick: () -> Unit,
+    aboutClick: () -> Unit,
+    currentTheme: AppTheme
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(top = 16.dp)
+    ) {
+        SingleLineItem(
+            icon = {
+                Icon(
+                    Icons.Outlined.Edit,
+                    contentDescription = stringResource(R.string.edit_project)
+                )
+            },
+            text = {
+                Text(
+                    stringResource(R.string.edit_project),
+                    style = TodometerTypography.caption
+                )
+            },
+            onClick = editProjectClick
+        )
+        SingleLineItem(
+            icon = {
+                Icon(
+                    Icons.Outlined.Delete,
+                    contentDescription = stringResource(R.string.delete_project)
+                )
+            },
+            text = {
+                Text(
+                    stringResource(R.string.delete_project),
+                    style = TodometerTypography.caption
+                )
+            },
+            onClick = deleteProjectClick
+        )
+        HorizontalDivider()
+        TwoLineItem(
+            icon = {
+                appThemeMap[currentTheme]?.themeIconRes?.let {
+                    Icon(
+                        painterResource(it),
+                        contentDescription = stringResource(R.string.theme)
+                    )
+                }
+            },
+            text = {
+                Text(
+                    stringResource(R.string.theme),
+                    style = TodometerTypography.caption
+                )
+            },
+            subtitle = {
+                appThemeMap[currentTheme]?.modeNameRes?.let {
+                    Text(stringResource(it), style = TodometerTypography.caption)
+                }
+            },
+            onClick = chooseThemeClick
+        )
+        HorizontalDivider()
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
+            TextButton(onClick = {}) {
+                Text(
+                    stringResource(R.string.open_source_licenses),
+                    style = TodometerTypography.caption
+                )
+            }
+            Text("·")
+            TextButton(onClick = aboutClick) {
+                Text(stringResource(R.string.about), style = TodometerTypography.caption)
+            }
+        }
+    }
+}
+
+sealed class HomeBottomSheet {
+    object MenuBottomSheet : HomeBottomSheet()
+    object MoreBottomSheet : HomeBottomSheet()
 }
 
 @Preview

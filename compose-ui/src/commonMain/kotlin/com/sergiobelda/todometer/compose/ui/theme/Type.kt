@@ -29,7 +29,7 @@ object Type {
         h4 = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 30.sp
+            fontSize = 34.sp
         ),
         h5 = TextStyle(
             fontFamily = quickSandFontFamily,
@@ -61,7 +61,7 @@ object Type {
         body2 = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 12.sp,
+            fontSize = 14.sp,
             letterSpacing = 0.25.sp
         ),
         button = TextStyle(
@@ -72,7 +72,7 @@ object Type {
         caption = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 10.sp,
+            fontSize = 12.sp,
             letterSpacing = 0.4.sp
         ),
         overline = TextStyle(

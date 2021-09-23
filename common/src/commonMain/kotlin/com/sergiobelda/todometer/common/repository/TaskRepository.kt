@@ -39,7 +39,7 @@ class TaskRepository(
     override fun getTask(id: String): Flow<Result<Task?>> =
         taskLocalDataSource.getTask(id)
 
-    override suspend fun getTasks(projectId: String?): Flow<Result<List<Task>>> =
+    override suspend fun getTasks(projectId: String): Flow<Result<List<Task>>> =
         taskLocalDataSource.getTasks(projectId).map { result ->
             result.doIfSuccess { tasks ->
                 synchronizeTasksRemotely(tasks.filter { !it.sync })
