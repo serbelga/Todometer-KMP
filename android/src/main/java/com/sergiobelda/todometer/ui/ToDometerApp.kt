@@ -45,11 +45,10 @@ import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun ToDometerApp() {
+fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
 
-    val mainViewModel: MainViewModel = getViewModel()
     val appThemeState = mainViewModel.appTheme.collectAsState()
     val darkTheme: Boolean = when (appThemeState.value) {
         AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()

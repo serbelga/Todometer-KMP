@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
@@ -68,6 +69,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
@@ -259,7 +261,7 @@ fun ChooseThemeAlertDialog(
     var themeSelected by remember { mutableStateOf(currentTheme) }
     AlertDialog(
         title = {
-            Text(text = stringResource(R.string.theme))
+            Text(text = stringResource(R.string.choose_theme))
         },
         onDismissRequest = onDismissRequest,
         text = {
@@ -268,8 +270,14 @@ fun ChooseThemeAlertDialog(
                     item {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.height(36.dp).fillMaxWidth()
-                                .clickable { themeSelected = appTheme }
+                            modifier = Modifier.fillMaxWidth()
+                                .height(56.dp)
+                                .selectable(
+                                    selected = themeSelected == appTheme,
+                                    onClick = { themeSelected = appTheme },
+                                    role = Role.RadioButton
+                                )
+                                .padding(horizontal = 16.dp),
                         ) {
                             RadioButton(
                                 selected = themeSelected == appTheme,
@@ -277,7 +285,7 @@ fun ChooseThemeAlertDialog(
                             )
                             Text(
                                 text = stringResource(appThemeOption.modeNameRes),
-                                style = TodometerTypography.subtitle1,
+                                style = TodometerTypography.body1,
                                 modifier = Modifier.padding(start = 16.dp)
                             )
                         }

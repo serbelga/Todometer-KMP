@@ -49,4 +49,5 @@
     <string name="enter_description">Enter a Description</string>
     <string name="choose_tag">Choose a Tag</string>
     <string name="enter_project_name">Enter a Project name</string>
+    <string name="choose_theme">Choose theme</string>
 </resources>
