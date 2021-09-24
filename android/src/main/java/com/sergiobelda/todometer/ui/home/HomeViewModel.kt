@@ -90,7 +90,7 @@ class HomeViewModel(
     }
 
     fun deleteProject() = viewModelScope.launch {
-        deleteProjectUseCase.invoke()
+        deleteProjectUseCase()
     }
 
     fun setTaskDoing(id: String) = viewModelScope.launch {

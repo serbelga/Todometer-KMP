@@ -36,19 +36,24 @@ fun SingleLineItem(
     modifier: Modifier = Modifier,
     icon: @Composable (() -> Unit)?,
     text: @Composable (() -> Unit),
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
 ) {
     Row(
-        modifier = modifier.heightIn(min = 56.dp).fillMaxWidth().clickable { onClick() },
+        modifier = modifier.heightIn(min = 56.dp).fillMaxWidth()
+            .clickable(enabled = enabled, onClick = onClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        icon?.let {
-            Box(modifier = Modifier.padding(start = 24.dp)) {
-                it()
+        val contentAlpha = if (enabled) ContentAlpha.high else ContentAlpha.disabled
+        CompositionLocalProvider(LocalContentAlpha provides contentAlpha) {
+            icon?.let {
+                Box(modifier = Modifier.padding(start = 24.dp)) {
+                    it()
+                }
             }
-        }
-        Box(modifier = Modifier.padding(start = 24.dp)) {
-            text()
+            Box(modifier = Modifier.padding(start = 24.dp)) {
+                text()
+            }
         }
     }
 }
@@ -59,21 +64,26 @@ fun TwoLineItem(
     icon: @Composable (() -> Unit)?,
     text: @Composable (() -> Unit),
     subtitle: @Composable (() -> Unit),
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
 ) {
     Row(
-        modifier = modifier.heightIn(min = 64.dp).fillMaxWidth().clickable { onClick() },
+        modifier = modifier.heightIn(min = 64.dp).fillMaxWidth()
+            .clickable(enabled = enabled, onClick = onClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        icon?.let {
-            Box(modifier = Modifier.padding(start = 24.dp)) {
-                it()
+        val contentAlpha = if (enabled) ContentAlpha.high else ContentAlpha.disabled
+        CompositionLocalProvider(LocalContentAlpha provides contentAlpha) {
+            icon?.let {
+                Box(modifier = Modifier.padding(start = 24.dp)) {
+                    it()
+                }
             }
-        }
-        Column(modifier = Modifier.padding(start = 24.dp)) {
-            text()
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                subtitle()
+            Column(modifier = Modifier.padding(start = 24.dp)) {
+                text()
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                    subtitle()
+                }
             }
         }
     }

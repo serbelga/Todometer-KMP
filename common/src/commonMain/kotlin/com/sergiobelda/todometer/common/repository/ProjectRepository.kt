@@ -93,8 +93,11 @@ class ProjectRepository(
         )
     }
 
-    override suspend fun deleteProject(id: String): Result<String> =
-        projectRemoteDataSource.deleteProject(id).doIfSuccess {
-            projectLocalDataSource.deleteProject(id)
-        }
+    override suspend fun deleteProject(id: String) =
+        projectLocalDataSource.deleteProject(id)
+    /*
+    projectRemoteDataSource.deleteProject(id).doIfSuccess {
+        projectLocalDataSource.deleteProject(id)
+    }
+    */
 }
