@@ -53,7 +53,8 @@ fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel = getViewModel()
 ) {
-    val taskResultState = editTaskViewModel.getTask(taskId).collectAsState()
+    editTaskViewModel.getTask(taskId)
+    val taskResultState = editTaskViewModel.task.collectAsState()
     taskResultState.value.doIfError {
         navigateUp()
     }.doIfSuccess { task ->

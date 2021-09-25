@@ -67,8 +67,9 @@ fun TaskDetailScreen(
     navigateUp: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel = getViewModel()
 ) {
+    taskDetailViewModel.getTask(taskId)
     val scrollState = rememberScrollState(0)
-    val taskResultState = taskDetailViewModel.getTask(taskId).collectAsState()
+    val taskResultState = taskDetailViewModel.task.collectAsState()
     taskResultState.value.doIfError {
         navigateUp()
     }.doIfSuccess { task ->
