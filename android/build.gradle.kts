@@ -39,7 +39,7 @@ android {
         minSdk = Android.minSdk
         targetSdk = Android.targetSdk
         versionCode = 1
-        versionName = "1.0"
+        versionName = "2.0.0-dev04"
     }
     buildTypes {
         getByName("release") {
