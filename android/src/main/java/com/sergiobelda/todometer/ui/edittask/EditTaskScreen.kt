@@ -17,9 +17,7 @@
 package com.sergiobelda.todometer.ui.edittask
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -36,16 +34,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
-import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
+import com.sergiobelda.todometer.ui.components.TodometerTagSelector
 import com.sergiobelda.todometer.ui.components.TodometerTextField
 import org.koin.androidx.compose.getViewModel
 
@@ -65,6 +62,7 @@ fun EditTaskScreen(
         var taskTitle by rememberSaveable { mutableStateOf(task.title) }
         var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
         var taskDescription by rememberSaveable { mutableStateOf(task.description) }
+        var selectedTag by remember { mutableStateOf(task.tag) }
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -76,60 +74,69 @@ fun EditTaskScreen(
                             Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                         }
                     },
+                    actions = {
+                        IconButton(
+                            onClick = {
+                                if (taskTitle.isBlank()) {
+                                    taskTitleInputError = true
+                                } else {
+                                    editTaskViewModel.updateTask(
+                                        Task(
+                                            id = task.id,
+                                            title = taskTitle,
+                                            description = taskDescription,
+                                            state = task.state,
+                                            projectId = task.projectId,
+                                            tag = selectedTag,
+                                            sync = false
+                                        )
+                                    )
+                                    navigateUp()
+                                }
+                            }
+                        ) {
+                            Icon(
+                                Icons.Rounded.Check,
+                                contentDescription = "Save",
+                                tint = TodometerColors.primary
+                            )
+                        }
+                    },
                     title = { Text(stringResource(id = R.string.edit_task)) }
                 )
             },
             content = {
                 Column {
                     TodometerTextField(
+                        title = stringResource(id = R.string.name),
                         value = taskTitle,
                         onValueChange = {
                             taskTitle = it
                             taskTitleInputError = false
                         },
-                        label = { Text(stringResource(id = R.string.title)) },
+                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
                         isError = taskTitleInputError,
                         errorMessage = stringResource(id = R.string.field_not_empty),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
-                        ),
-                        modifier = Modifier.fillMaxWidth()
+                        )
                     )
+                    TodometerTagSelector(
+                        selectedTag
+                    ) { tag ->
+                        selectedTag = tag
+                    }
                     TodometerTextField(
+                        title = stringResource(id = R.string.description),
                         value = taskDescription ?: "",
                         onValueChange = { taskDescription = it },
-                        label = { Text(stringResource(id = R.string.description)) },
+                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
-                        ),
-                        modifier = Modifier.fillMaxWidth()
+                        )
                     )
-                }
-            },
-            floatingActionButton = {
-                FloatingActionButton(
-                    onClick = {
-                        if (taskTitle.isBlank()) {
-                            taskTitleInputError = true
-                        } else {
-                            editTaskViewModel.updateTask(
-                                Task(
-                                    id = task.id,
-                                    title = taskTitle,
-                                    description = taskDescription,
-                                    state = task.state,
-                                    projectId = task.projectId,
-                                    tag = Tag.RED,
-                                    sync = false
-                                )
-                            )
-                            navigateUp()
-                        }
-                    },
-                ) {
-                    Icon(Icons.Rounded.Check, contentDescription = "Edit task")
                 }
             }
         )

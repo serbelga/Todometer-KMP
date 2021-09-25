@@ -91,7 +91,7 @@ fun TaskDetailScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { /*editTask(taskId)*/ }) {
+                        IconButton(onClick = { editTask(taskId) }) {
                             Icon(
                                 Icons.Outlined.Edit,
                                 contentDescription = "Edit task",
