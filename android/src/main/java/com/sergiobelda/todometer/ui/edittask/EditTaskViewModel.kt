@@ -17,11 +17,14 @@
 package com.sergiobelda.todometer.ui.edittask
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import com.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class EditTaskViewModel(
@@ -29,7 +32,8 @@ class EditTaskViewModel(
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    fun getTask(id: String) = getTaskUseCase(id).asLiveData()
+    fun getTask(id: String): StateFlow<Result<Task>> =
+        getTaskUseCase(id).stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 
     fun updateTask(task: Task) = viewModelScope.launch {
         updateTaskUseCase(task)

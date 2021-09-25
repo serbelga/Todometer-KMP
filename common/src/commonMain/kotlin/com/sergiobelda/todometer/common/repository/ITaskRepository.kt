@@ -27,7 +27,7 @@ interface ITaskRepository {
     /**
      * Get a task given its [id].
      */
-    fun getTask(id: String): Flow<Result<Task?>>
+    fun getTask(id: String): Flow<Result<Task>>
 
     /**
      * Get a list of [Task] given an optional [projectId].

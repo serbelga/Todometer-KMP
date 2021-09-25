@@ -142,7 +142,12 @@ fun HomeScreen(
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
                     MoreBottomSheet(
-                        editProjectClick = editProject,
+                        editProjectClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                editProject()
+                            }
+                        },
                         deleteProjectClick = {
                             deleteProjectAlertDialogState = true
                         },

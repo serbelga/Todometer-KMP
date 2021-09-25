@@ -17,12 +17,18 @@
 package com.sergiobelda.todometer.ui.taskdetail
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
 class TaskDetailViewModel(
     private val getTaskUseCase: GetTaskUseCase
 ) : ViewModel() {
 
-    fun getTask(id: String) = getTaskUseCase(id).asLiveData()
+    fun getTask(id: String): StateFlow<Result<Task>> =
+        getTaskUseCase(id).stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.Loading)
 }

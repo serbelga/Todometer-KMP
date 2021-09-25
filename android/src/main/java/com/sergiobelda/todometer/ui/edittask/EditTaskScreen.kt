@@ -28,8 +28,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
+import com.sergiobelda.todometer.common.data.doIfError
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
@@ -52,13 +53,10 @@ fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel = getViewModel()
 ) {
-    var taskState: Task? by remember { mutableStateOf(null) }
-    val taskResultState = editTaskViewModel.getTask(taskId).observeAsState()
-    taskResultState.value?.let { result ->
-        result.doIfSuccess { taskState = it }
-    }
-
-    taskState?.let { task ->
+    val taskResultState = editTaskViewModel.getTask(taskId).collectAsState()
+    taskResultState.value.doIfError {
+        navigateUp()
+    }.doIfSuccess { task ->
         var taskTitle by rememberSaveable { mutableStateOf(task.title) }
         var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
         var taskDescription by rememberSaveable { mutableStateOf(task.description) }

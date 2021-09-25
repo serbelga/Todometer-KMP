@@ -34,7 +34,7 @@ class ProjectRepository(
     private val projectRemoteDataSource: IProjectRemoteDataSource
 ) : IProjectRepository {
 
-    override fun getProject(id: String): Flow<Result<Project?>> =
+    override fun getProject(id: String): Flow<Result<Project>> =
         projectLocalDataSource.getProject(id)
 
     override fun getProjects(): Flow<Result<List<Project>>> =
@@ -93,8 +93,10 @@ class ProjectRepository(
         )
     }
 
-    override suspend fun deleteProject(id: String) =
-        projectLocalDataSource.deleteProject(id)
+    override suspend fun updateProject(project: Project) =
+        projectLocalDataSource.updateProject(project)
+
+    override suspend fun deleteProject(id: String) = projectLocalDataSource.deleteProject(id)
     /*
     projectRemoteDataSource.deleteProject(id).doIfSuccess {
         projectLocalDataSource.deleteProject(id)

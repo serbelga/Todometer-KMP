@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.ui.addproject
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -36,6 +37,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
@@ -97,7 +100,11 @@ fun AddProjectScreen(
                     placeholder = { Text(stringResource(id = R.string.enter_project_name)) },
                     singleLine = true,
                     isError = projectNameInputError,
-                    errorMessage = stringResource(R.string.field_not_empty)
+                    errorMessage = stringResource(R.string.field_not_empty),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done
+                    )
                 )
             }
         }

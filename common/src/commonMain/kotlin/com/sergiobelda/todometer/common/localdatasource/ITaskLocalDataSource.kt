@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITaskLocalDataSource {
 
-    fun getTask(id: String): Flow<Result<Task?>>
+    fun getTask(id: String): Flow<Result<Task>>
 
     fun getTasks(projectId: String): Flow<Result<List<Task>>>
 

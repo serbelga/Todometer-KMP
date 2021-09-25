@@ -21,7 +21,7 @@ import com.sergiobelda.todometer.TodometerDatabase
 import com.sergiobelda.todometer.common.model.TaskState
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
+import com.squareup.sqldelight.runtime.coroutines.mapToOneNotNull
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,8 +30,8 @@ class TaskDao : ITaskDao, KoinComponent {
 
     private val database: TodometerDatabase by inject()
 
-    override fun getTask(id: String): Flow<TaskEntity?> =
-        database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
+    override fun getTask(id: String): Flow<TaskEntity> =
+        database.todometerQueries.selectTask(id).asFlow().mapToOneNotNull()
 
     override fun getTasks(projectId: String): Flow<List<TaskEntity>> =
         database.todometerQueries.selectTasksByProjectId(projectId).asFlow().mapToList()
