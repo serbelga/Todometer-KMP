@@ -45,7 +45,6 @@ fun AboutScreen(
     openSourceLicensesClick: () -> Unit,
     navigateUp: () -> Unit
 ) {
-    val context = LocalContext.current
     var privacyPolicyDialogState by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -116,7 +115,7 @@ fun AboutScreen(
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
             Text(
-                text = context.getVersionName() ?: "",
+                text = LocalContext.current.getVersionName() ?: "",
                 style = TodometerTypography.overline,
                 modifier = Modifier.padding(bottom = 24.dp)
             )
