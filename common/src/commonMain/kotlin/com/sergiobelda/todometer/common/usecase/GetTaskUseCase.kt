@@ -30,6 +30,6 @@ class GetTaskUseCase(
      *
      * @param id Task id.
      */
-    operator fun invoke(id: String): Flow<Result<Task?>> =
+    operator fun invoke(id: String): Flow<Result<Task>> =
         taskRepository.getTask(id)
 }

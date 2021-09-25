@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.common.usecase
 
+import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.repository.IProjectRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -32,5 +33,11 @@ class DeleteProjectUseCase(
     suspend operator fun invoke() {
         val projectId = userPreferencesRepository.projectSelected().firstOrNull()
         projectId?.let { projectRepository.deleteProject(it) }
+        val projects = projectRepository.getProjects().firstOrNull()
+        projects?.doIfSuccess { list ->
+            list.firstOrNull()?.let { project ->
+                userPreferencesRepository.setProjectSelected(project.id)
+            }
+        }
     }
 }

@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,9 +28,13 @@ import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
+import kotlinx.coroutines.launch
 
 @Composable
 fun TodometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+    val tags = enumValues<Tag>()
+    val state = rememberLazyListState()
+    val scope = rememberCoroutineScope()
     Text(
         text = stringResource(R.string.choose_tag),
         color = TodometerColors.primary,
@@ -37,9 +43,10 @@ fun TodometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     )
     LazyRow(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
-        modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
+        modifier = Modifier.padding(top = 16.dp, bottom = 16.dp),
+        state = state
     ) {
-        items(enumValues<Tag>()) { tag ->
+        items(tags) { tag ->
             Spacer(modifier = Modifier.width(8.dp))
             Box(
                 contentAlignment = Alignment.Center,
@@ -67,5 +74,8 @@ fun TodometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
                 }
             }
         }
+    }
+    scope.launch {
+        state.animateScrollToItem(tags.indexOf(selectedTag))
     }
 }

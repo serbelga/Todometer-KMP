@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IProjectRepository {
 
-    fun getProject(id: String): Flow<Result<Project?>>
+    fun getProject(id: String): Flow<Result<Project>>
 
     fun getProjects(): Flow<Result<List<Project>>>
 
@@ -30,7 +30,10 @@ interface IProjectRepository {
 
     suspend fun insertProject(name: String): Result<String>
 
+    suspend fun updateProject(project: Project)
+
     suspend fun refreshProjects()
 
-    suspend fun deleteProject(id: String): Result<String>
+    suspend fun deleteProject(id: String)
+    // suspend fun deleteProject(id: String): Result<String>
 }

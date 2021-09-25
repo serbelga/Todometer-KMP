@@ -24,7 +24,7 @@ interface IProjectLocalDataSource {
 
     fun getProjects(): Flow<Result<List<Project>>>
 
-    fun getProject(id: String): Flow<Result<Project?>>
+    fun getProject(id: String): Flow<Result<Project>>
 
     suspend fun insertProject(project: Project): Result<String>
 

@@ -19,14 +19,10 @@ package com.sergiobelda.todometer.common.usecase
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 
-class UpdateTaskUseCase(
-    private val taskRepository: ITaskRepository
-) {
+class UpdateTaskUseCase(private val taskRepository: ITaskRepository) {
 
     /**
-     * Updates a task.
-     *
-     * @param task Updated task that will replace current task.
+     * Updates a [Task] given a [task] object.
      */
     suspend operator fun invoke(task: Task) =
         taskRepository.updateTask(task)

@@ -30,12 +30,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
+import com.sergiobelda.todometer.extensions.getVersionName
 
 @Composable
 fun AboutScreen(
@@ -113,8 +115,7 @@ fun AboutScreen(
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
             Text(
-                // TODO: Update dynamically
-                text = "2.0.0-dev",
+                text = LocalContext.current.getVersionName() ?: "",
                 style = TodometerTypography.overline,
                 modifier = Modifier.padding(bottom = 24.dp)
             )

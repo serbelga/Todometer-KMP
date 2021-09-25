@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITaskDao {
 
-    fun getTask(id: String): Flow<TaskEntity?>
+    fun getTask(id: String): Flow<TaskEntity>
 
     fun getTasks(projectId: String): Flow<List<TaskEntity>>
 

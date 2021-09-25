@@ -17,12 +17,25 @@
 package com.sergiobelda.todometer.ui.taskdetail
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class TaskDetailViewModel(
     private val getTaskUseCase: GetTaskUseCase
 ) : ViewModel() {
 
-    fun getTask(id: String) = getTaskUseCase(id).asLiveData()
+    private val _task: MutableStateFlow<Result<Task>> = MutableStateFlow(Result.Loading)
+    var task: StateFlow<Result<Task>> = _task
+
+    fun getTask(id: String) = viewModelScope.launch {
+        getTaskUseCase(id).collect {
+            _task.value = it
+        }
+    }
 }

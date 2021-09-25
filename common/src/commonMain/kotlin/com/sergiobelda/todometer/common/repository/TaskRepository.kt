@@ -36,7 +36,7 @@ class TaskRepository(
     private val taskRemoteDataSource: ITaskRemoteDataSource
 ) : ITaskRepository {
 
-    override fun getTask(id: String): Flow<Result<Task?>> =
+    override fun getTask(id: String): Flow<Result<Task>> =
         taskLocalDataSource.getTask(id)
 
     override suspend fun getTasks(projectId: String): Flow<Result<List<Task>>> =
@@ -110,8 +110,7 @@ class TaskRepository(
         )
     }
 
-    override suspend fun updateTask(task: Task) =
-        taskLocalDataSource.updateTask(task)
+    override suspend fun updateTask(task: Task) = taskLocalDataSource.updateTask(task)
 
     /**
      * Update Task state locally and remotely. If remote call returns an error,
@@ -127,8 +126,10 @@ class TaskRepository(
     /**
      * It only removes task from local database if remote call is successful.
      */
-    override suspend fun deleteTask(id: String) =
-        taskRemoteDataSource.deleteTask(id).doIfSuccess {
-            taskLocalDataSource.deleteTask(id)
-        }
+    override suspend fun deleteTask(id: String) = taskLocalDataSource.deleteTask(id)
+    /*
+    taskRemoteDataSource.deleteTask(id).doIfSuccess {
+        taskLocalDataSource.deleteTask(id)
+    }
+    */
 }

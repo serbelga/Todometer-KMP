@@ -142,10 +142,16 @@ fun HomeScreen(
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
                     MoreBottomSheet(
-                        editProjectClick = editProject,
+                        editProjectClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                editProject()
+                            }
+                        },
                         deleteProjectClick = {
                             deleteProjectAlertDialogState = true
                         },
+                        deleteProjectEnabled = projects.size > 1,
                         currentTheme = appThemeState.value,
                         chooseThemeClick = {
                             chooseThemeAlertDialogState = true
@@ -204,7 +210,12 @@ fun HomeScreen(
                 if (deleteProjectAlertDialogState) {
                     DeleteProjectAlertDialog(
                         onDismissRequest = { deleteProjectAlertDialogState = false },
-                        deleteProject = { }
+                        deleteProject = {
+                            homeViewModel.deleteProject()
+                            scope.launch {
+                                sheetState.hide()
+                            }
+                        }
                     )
                 }
                 if (chooseThemeAlertDialogState) {
@@ -322,7 +333,12 @@ fun DeleteProjectAlertDialog(onDismissRequest: () -> Unit, deleteProject: () -> 
             Text(stringResource(R.string.delete_project_question))
         },
         confirmButton = {
-            TextButton(onClick = deleteProject) {
+            TextButton(
+                onClick = {
+                    deleteProject()
+                    onDismissRequest()
+                }
+            ) {
                 Text(stringResource(android.R.string.ok))
             }
         },
@@ -470,6 +486,7 @@ fun EmptyTasksListView() {
 fun MoreBottomSheet(
     editProjectClick: () -> Unit,
     deleteProjectClick: () -> Unit,
+    deleteProjectEnabled: Boolean,
     chooseThemeClick: () -> Unit,
     aboutClick: () -> Unit,
     currentTheme: AppTheme
@@ -506,7 +523,8 @@ fun MoreBottomSheet(
                     style = TodometerTypography.caption
                 )
             },
-            onClick = deleteProjectClick
+            onClick = deleteProjectClick,
+            enabled = deleteProjectEnabled
         )
         HorizontalDivider()
         TwoLineItem(
