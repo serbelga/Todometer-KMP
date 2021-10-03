@@ -42,9 +42,9 @@ import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfError
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Task
+import com.sergiobelda.todometer.compose.ui.components.TitledTextField
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.ui.components.TodometerTagSelector
-import com.sergiobelda.todometer.ui.components.TodometerTextField
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -106,7 +106,7 @@ fun EditTaskScreen(
             },
             content = {
                 Column {
-                    TodometerTextField(
+                    TitledTextField(
                         title = stringResource(id = R.string.name),
                         value = taskTitle,
                         onValueChange = {
@@ -126,7 +126,7 @@ fun EditTaskScreen(
                     ) { tag ->
                         selectedTag = tag
                     }
-                    TodometerTextField(
+                    TitledTextField(
                         title = stringResource(id = R.string.description),
                         value = taskDescription ?: "",
                         onValueChange = { taskDescription = it },

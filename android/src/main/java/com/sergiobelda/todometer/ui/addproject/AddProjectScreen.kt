@@ -42,8 +42,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
+import com.sergiobelda.todometer.compose.ui.components.TitledTextField
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
-import com.sergiobelda.todometer.ui.components.TodometerTextField
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -90,7 +90,7 @@ fun AddProjectScreen(
         },
         content = {
             Column(modifier = Modifier.padding(top = 24.dp)) {
-                TodometerTextField(
+                TitledTextField(
                     title = stringResource(R.string.name),
                     value = projectName,
                     onValueChange = {

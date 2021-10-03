@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.ui.components
+package com.sergiobelda.todometer.compose.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +32,7 @@ import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 
 @Composable
-fun TodometerTextField(
+fun TitledTextField(
     title: String = "",
     modifier: Modifier = Modifier,
     value: String,
