@@ -22,18 +22,33 @@ import kotlinx.coroutines.flow.Flow
 
 interface IProjectRepository {
 
+    /**
+     * Get a project given its [id].
+     */
     fun getProject(id: String): Flow<Result<Project>>
 
+    /**
+     * Get the list of all [Project].
+     */
     fun getProjects(): Flow<Result<List<Project>>>
 
     suspend fun refreshProject(id: String)
 
+    /**
+     * Inserts a [Project] given a [name].
+     */
     suspend fun insertProject(name: String): Result<String>
 
+    /**
+     * Updates a [Project] given a [project] object.
+     */
     suspend fun updateProject(project: Project)
 
     suspend fun refreshProjects()
 
+    /**
+     * Deletes a [Project] given its [id].
+     */
     suspend fun deleteProject(id: String)
     // suspend fun deleteProject(id: String): Result<String>
 }

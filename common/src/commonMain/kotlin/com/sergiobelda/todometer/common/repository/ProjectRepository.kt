@@ -17,14 +17,12 @@
 package com.sergiobelda.todometer.common.repository
 
 import com.sergiobelda.todometer.common.data.Result
-import com.sergiobelda.todometer.common.data.doIfError
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.localdatasource.IProjectLocalDataSource
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
 import com.sergiobelda.todometer.common.util.randomUUIDString
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 /**
  * Repository for performing [Project] data operations.
@@ -38,13 +36,17 @@ class ProjectRepository(
         projectLocalDataSource.getProject(id)
 
     override fun getProjects(): Flow<Result<List<Project>>> =
-        projectLocalDataSource.getProjects().map { result ->
-            result.doIfSuccess { projects ->
-                synchronizeProjectsRemotely(projects.filter { !it.sync })
-                refreshProjects()
-            }
+        projectLocalDataSource.getProjects()
+    /*
+    projectLocalDataSource.getProjects().map { result ->
+        result.doIfSuccess { projects ->
+            synchronizeProjectsRemotely(projects.filter { !it.sync })
+            refreshProjects()
         }
+    }
+    */
 
+    /*
     private suspend fun synchronizeProjectsRemotely(projects: List<Project>) {
         projects.forEach { project ->
             val result = projectRemoteDataSource.insertProject(
@@ -59,6 +61,7 @@ class ProjectRepository(
             }
         }
     }
+    */
 
     override suspend fun refreshProject(id: String) {
         val projectResult = projectRemoteDataSource.getProject(id)
@@ -75,14 +78,16 @@ class ProjectRepository(
     }
 
     override suspend fun insertProject(name: String): Result<String> {
-        var projectId = ""
-        var sync = false
+        val projectId = randomUUIDString()
+        val sync = false
+        /*
         projectRemoteDataSource.insertProject(name = name, description = "").doIfSuccess {
             projectId = it
             sync = true
         }.doIfError {
             projectId = randomUUIDString()
         }
+        */
         return projectLocalDataSource.insertProject(
             Project(
                 id = projectId,

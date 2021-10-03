@@ -28,6 +28,11 @@ class GetTasksUseCase(
     private val taskRepository: ITaskRepository
 ) {
 
+    /**
+     * Get the list of [Task] for the current project selected. This flow emits a new value
+     * every time that current project selected in user preferences changes or
+     * some task has been updated.
+     */
     operator fun invoke(): Flow<Result<List<Task>>> =
         userPreferencesRepository.projectSelected().flatMapLatest { projectId ->
             taskRepository.getTasks(projectId)

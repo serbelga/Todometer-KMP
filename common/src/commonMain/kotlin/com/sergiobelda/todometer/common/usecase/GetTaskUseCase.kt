@@ -26,9 +26,7 @@ class GetTaskUseCase(
 ) {
 
     /**
-     * Gets a task by it id.
-     *
-     * @param id Task id.
+     * Get a task given its [id].
      */
     operator fun invoke(id: String): Flow<Result<Task>> =
         taskRepository.getTask(id)

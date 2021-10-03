@@ -21,11 +21,27 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserPreferencesRepository {
 
+    /**
+     * Retrieves the current project selected Id every time it changes in
+     * user preferences.
+     */
     fun projectSelected(): Flow<String>
 
+    /**
+     * Sets the current project selected by its id.
+     *
+     * @param id Project id.
+     */
     suspend fun setProjectSelected(projectSelectedId: String)
 
+    /**
+     * Retrieves the current selected [AppTheme] in user preferences
+     * every time it changes.
+     */
     fun getUserTheme(): Flow<AppTheme>
 
+    /**
+     * Updates the current selected [AppTheme].
+     */
     suspend fun setUserTheme(theme: AppTheme)
 }

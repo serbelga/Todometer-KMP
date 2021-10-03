@@ -18,6 +18,7 @@ package com.sergiobelda.todometer.common.usecase
 
 import com.sergiobelda.todometer.common.data.Result
 import com.sergiobelda.todometer.common.model.Tag
+import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.repository.ITaskRepository
 import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -28,11 +29,8 @@ class InsertTaskUseCase(
 ) {
 
     /**
-     * Creates a new task in the current project selected.
-     *
-     * @param title Task title.
-     * @param description Task description.
-     * @param tag Task tag.
+     * Creates a new [Task] given a [title], [description], [projectId] and [tag], in the
+     * current project selected.
      */
     suspend operator fun invoke(
         title: String,

@@ -27,6 +27,8 @@ class GetProjectsUseCase(
 
     /**
      * Retrieves the list of projects every time it changes.
+     *
+     * @return A Flow that emits the list of all projects.
      */
     operator fun invoke(): Flow<Result<List<Project>>> =
         projectRepository.getProjects()
