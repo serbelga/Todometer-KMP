@@ -35,6 +35,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Button
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
@@ -135,9 +136,7 @@ fun HomeScreen(
                         projectSelected?.id,
                         projects,
                         addProject,
-                        selectProject = {
-                            homeViewModel.setProjectSelected(it)
-                        }
+                        selectProject = { homeViewModel.setProjectSelected(it) }
                     )
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
@@ -201,47 +200,53 @@ fun HomeScreen(
                 }
             },
             content = {
-                if (deleteTaskAlertDialogState) {
-                    DeleteTaskAlertDialog(
-                        onDismissRequest = { deleteTaskAlertDialogState = false },
-                        deleteTask = { homeViewModel.deleteTask(selectedTask) }
-                    )
-                }
-                if (deleteProjectAlertDialogState) {
-                    DeleteProjectAlertDialog(
-                        onDismissRequest = { deleteProjectAlertDialogState = false },
-                        deleteProject = {
-                            homeViewModel.deleteProject()
-                            scope.launch {
-                                sheetState.hide()
-                            }
+                projectsResultState.value.doIfSuccess { projects ->
+                    if (projects.isNotEmpty()) {
+                        if (deleteTaskAlertDialogState) {
+                            DeleteTaskAlertDialog(
+                                onDismissRequest = { deleteTaskAlertDialogState = false },
+                                deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                            )
                         }
-                    )
-                }
-                if (chooseThemeAlertDialogState) {
-                    ChooseThemeAlertDialog(
-                        currentTheme = appThemeState.value,
-                        onDismissRequest = { chooseThemeAlertDialogState = false },
-                        chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
-                    )
-                }
-                if (tasks.isEmpty()) {
-                    EmptyTasksListView()
-                } else {
-                    TasksListView(
-                        tasks,
-                        onDoingClick = {
-                            homeViewModel.setTaskDoing(it)
-                        },
-                        onDoneClick = {
-                            homeViewModel.setTaskDone(it)
-                        },
-                        onTaskItemClick = openTask,
-                        onTaskItemLongClick = {
-                            deleteTaskAlertDialogState = true
-                            selectedTask = it
+                        if (deleteProjectAlertDialogState) {
+                            DeleteProjectAlertDialog(
+                                onDismissRequest = { deleteProjectAlertDialogState = false },
+                                deleteProject = {
+                                    homeViewModel.deleteProject()
+                                    scope.launch {
+                                        sheetState.hide()
+                                    }
+                                }
+                            )
                         }
-                    )
+                        if (chooseThemeAlertDialogState) {
+                            ChooseThemeAlertDialog(
+                                currentTheme = appThemeState.value,
+                                onDismissRequest = { chooseThemeAlertDialogState = false },
+                                chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
+                            )
+                        }
+                        if (tasks.isEmpty()) {
+                            EmptyTasksListView()
+                        } else {
+                            TasksListView(
+                                tasks,
+                                onDoingClick = {
+                                    homeViewModel.setTaskDoing(it)
+                                },
+                                onDoneClick = {
+                                    homeViewModel.setTaskDone(it)
+                                },
+                                onTaskItemClick = openTask,
+                                onTaskItemLongClick = {
+                                    deleteTaskAlertDialogState = true
+                                    selectedTask = it
+                                }
+                            )
+                        }
+                    } else {
+                        EmptyProjectsView(addProject = addProject)
+                    }
                 }
             },
             floatingActionButton = {
@@ -473,11 +478,33 @@ fun EmptyTasksListView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(R.drawable.project_completed),
-                modifier = Modifier.size(240.dp),
+                painterResource(R.drawable.no_tasks),
+                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
                 contentDescription = null
             )
             Text(stringResource(R.string.no_tasks))
+        }
+    }
+}
+
+@Composable
+fun EmptyProjectsView(addProject: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painterResource(R.drawable.no_projects),
+                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
+                contentDescription = null
+            )
+            Text(stringResource(R.string.no_projects), modifier = Modifier.padding(bottom = 48.dp))
+            Button(onClick = addProject) {
+                Text(text = stringResource(R.string.add_project))
+            }
         }
     }
 }

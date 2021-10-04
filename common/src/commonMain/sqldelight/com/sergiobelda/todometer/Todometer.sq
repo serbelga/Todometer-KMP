@@ -21,10 +21,6 @@ CREATE TABLE TaskEntity (
 --     FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
 --     ORDER BY project_id;
 
-INSERT INTO ProjectEntity VALUES (1, "My tasks", "", 0);
--- INSERT INTO TagEntity VALUES ("b3d3975f-3cbc-496b-bb39-b1548b791c6e", "RED", "Other", 0);
--- INSERT INTO TaskEntity VALUES (1, "Task one", "Task description", "DOING", 1, 1, 0);
-
 -------------------- Task
 
 selectTask:

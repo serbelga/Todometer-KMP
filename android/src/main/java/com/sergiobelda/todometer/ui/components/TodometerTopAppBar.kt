@@ -35,15 +35,11 @@ import com.sergiobelda.todometer.ui.theme.ToDometerTheme
 @Composable
 fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
     Surface(
-        modifier = Modifier
-            .wrapContentHeight()
-            .fillMaxWidth()
+        modifier = Modifier.wrapContentHeight().fillMaxWidth()
     ) {
         Column {
             Box(
-                modifier = Modifier
-                    .height(56.dp)
-                    .fillMaxWidth()
+                modifier = Modifier.height(56.dp).fillMaxWidth()
             ) {
                 ToDometerTitle(modifier = Modifier.align(Alignment.Center))
                 /*
@@ -54,7 +50,7 @@ fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
                 }
                 */
             }
-            ProjectProgress(project, tasks)
+            project?.let { ProjectProgress(it, tasks) }
         }
     }
 }

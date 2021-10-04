@@ -17,16 +17,21 @@
 package com.sergiobelda.todometer.common.usecase
 
 import com.sergiobelda.todometer.common.data.Result
+import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.repository.IProjectRepository
+import com.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 
 class InsertProjectUseCase(
-    private val projectRepository: IProjectRepository
+    private val projectRepository: IProjectRepository,
+    private val userPreferencesRepository: IUserPreferencesRepository
 ) {
 
     /**
      * Creates a new [Project] given a [name].
      */
     suspend operator fun invoke(name: String): Result<String> =
-        projectRepository.insertProject(name)
+        projectRepository.insertProject(name).doIfSuccess {
+            userPreferencesRepository.setProjectSelected(it)
+        }
 }
