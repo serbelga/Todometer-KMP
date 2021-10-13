@@ -52,40 +52,40 @@ actual class Preferences(private val context: Context) {
         }
     }
 
-    actual fun getString(key: String, default: String): Flow<String> =
-        context.dataStore.data.map { preferences ->
-            val stringKey = stringPreferencesKey(key)
-            preferences[stringKey] ?: default
-        }
-
-    actual fun getStringOrNull(key: String): Flow<String?> =
+    actual fun getString(key: String): Flow<String?> =
         context.dataStore.data.map { preferences ->
             val stringKey = stringPreferencesKey(key)
             preferences[stringKey]
         }
 
-    actual fun getLong(key: String, default: Long): Flow<Long> =
+    actual fun getStringOrDefault(key: String, default: String): Flow<String> =
         context.dataStore.data.map { preferences ->
-            val longKey = longPreferencesKey(key)
-            preferences[longKey] ?: default
+            val stringKey = stringPreferencesKey(key)
+            preferences[stringKey] ?: default
         }
 
-    actual fun getLongOrNull(key: String): Flow<Long?> =
+    actual fun getLong(key: String): Flow<Long?> =
         context.dataStore.data.map { preferences ->
             val longKey = longPreferencesKey(key)
             preferences[longKey]
         }
 
-    actual fun getInt(key: String, default: Int): Flow<Int> =
+    actual fun getLongOrDefault(key: String, default: Long): Flow<Long> =
         context.dataStore.data.map { preferences ->
-            val intKey = intPreferencesKey(key)
-            preferences[intKey] ?: default
+            val longKey = longPreferencesKey(key)
+            preferences[longKey] ?: default
         }
 
-    actual fun getIntOrNull(key: String): Flow<Int?> =
+    actual fun getInt(key: String): Flow<Int?> =
         context.dataStore.data.map { preferences ->
             val intKey = intPreferencesKey(key)
             preferences[intKey]
+        }
+
+    actual fun getIntOrDefault(key: String, default: Int): Flow<Int> =
+        context.dataStore.data.map { preferences ->
+            val intKey = intPreferencesKey(key)
+            preferences[intKey] ?: default
         }
 
     companion object {

@@ -26,15 +26,15 @@ expect class Preferences {
 
     suspend fun set(key: String, value: Int)
 
-    fun getString(key: String, default: String = ""): Flow<String>
+    fun getString(key: String): Flow<String?>
 
-    fun getStringOrNull(key: String): Flow<String?>
+    fun getStringOrDefault(key: String, default: String): Flow<String>
 
-    fun getLong(key: String, default: Long = 1): Flow<Long>
+    fun getLong(key: String): Flow<Long?>
 
-    fun getLongOrNull(key: String): Flow<Long?>
+    fun getLongOrDefault(key: String, default: Long): Flow<Long>
 
-    fun getInt(key: String, default: Int = 1): Flow<Int>
+    fun getInt(key: String): Flow<Int?>
 
-    fun getIntOrNull(key: String): Flow<Int?>
+    fun getIntOrDefault(key: String, default: Int): Flow<Int>
 }

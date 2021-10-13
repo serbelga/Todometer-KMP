@@ -26,14 +26,15 @@ import kotlinx.coroutines.flow.map
  */
 class UserPreferencesRepository(private val preferences: Preferences) : IUserPreferencesRepository {
 
-    override fun projectSelected(): Flow<String> = preferences.getString(PROJECT_SELECTED_KEY)
+    override fun projectSelected(): Flow<String> =
+        preferences.getStringOrDefault(PROJECT_SELECTED_KEY, "")
 
     override suspend fun setProjectSelected(projectSelectedId: String) {
         preferences.set(PROJECT_SELECTED_KEY, projectSelectedId)
     }
 
-    override fun getUserTheme(): Flow<AppTheme> = preferences.getInt(APP_THEME).map {
-        enumValues<AppTheme>().getOrNull(it) ?: AppTheme.FOLLOW_SYSTEM
+    override fun getUserTheme(): Flow<AppTheme> = preferences.getInt(APP_THEME).map { theme ->
+        theme?.let { enumValues<AppTheme>().getOrNull(it) } ?: AppTheme.FOLLOW_SYSTEM
     }
 
     override suspend fun setUserTheme(theme: AppTheme) {
