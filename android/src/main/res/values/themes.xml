@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="Theme.ToDometer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ToDometer" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorPrimaryVariant">@color/colorSecondary</item>
@@ -31,5 +31,10 @@
 
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+
+    <style name="Theme.ToDometer.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>

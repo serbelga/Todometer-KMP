@@ -9,6 +9,7 @@ buildscript {
         classpath(Libs.kotlinPlugin)
         classpath(Libs.kotlinSerialization)
         classpath(Libs.androidGradlePlugin)
+        classpath("com.google.android.gms:oss-licenses-plugin:0.10.4")
         classpath(Libs.SqlDelight.gradlePlugin)
     }
 }
