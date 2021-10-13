@@ -16,7 +16,7 @@
         android:theme="@style/Theme.ToDometer">
         <activity
             android:name="com.sergiobelda.todometer.ui.MainActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
