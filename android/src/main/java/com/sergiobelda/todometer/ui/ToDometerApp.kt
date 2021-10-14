@@ -16,6 +16,7 @@
 
 package com.sergiobelda.todometer.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
@@ -69,6 +70,9 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                     actions.editProject,
                     actions.addTask,
                     actions.openTask,
+                    {
+                        navigateToOpenSourceLicensesScreen(context)
+                    },
                     actions.about
                 )
             }
@@ -104,15 +108,19 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                 AboutScreen(
                     {},
                     {
-                        startActivity(
-                            context,
-                            Intent(context, OssLicensesMenuActivity::class.java),
-                            null
-                        )
+                        navigateToOpenSourceLicensesScreen(context)
                     },
                     actions.navigateUp
                 )
             }
         }
     }
+}
+
+private fun navigateToOpenSourceLicensesScreen(context: Context) {
+    startActivity(
+        context,
+        Intent(context, OssLicensesMenuActivity::class.java),
+        null
+    )
 }

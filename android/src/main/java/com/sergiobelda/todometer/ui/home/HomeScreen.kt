@@ -99,6 +99,7 @@ fun HomeScreen(
     editProject: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
+    openSourceLicenses: () -> Unit,
     about: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
@@ -154,6 +155,12 @@ fun HomeScreen(
                         currentTheme = appThemeState.value,
                         chooseThemeClick = {
                             chooseThemeAlertDialogState = true
+                        },
+                        openSourceLicensesClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                openSourceLicenses()
+                            }
                         },
                         aboutClick = {
                             scope.launch {
@@ -515,6 +522,7 @@ fun MoreBottomSheet(
     deleteProjectClick: () -> Unit,
     deleteProjectEnabled: Boolean,
     chooseThemeClick: () -> Unit,
+    openSourceLicensesClick: () -> Unit,
     aboutClick: () -> Unit,
     currentTheme: AppTheme
 ) {
@@ -578,7 +586,7 @@ fun MoreBottomSheet(
         )
         HorizontalDivider()
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
-            TextButton(onClick = {}) {
+            TextButton(onClick = openSourceLicensesClick) {
                 Text(
                     stringResource(R.string.open_source_licenses),
                     style = TodometerTypography.caption
