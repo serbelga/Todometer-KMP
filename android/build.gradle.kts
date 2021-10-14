@@ -32,7 +32,7 @@ dependencies {
     implementation(Libs.Koin.compose)
     implementation(Libs.Koin.core)
 
-    implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
+    implementation(Libs.Google.ossLicenses)
 }
 
 android {
