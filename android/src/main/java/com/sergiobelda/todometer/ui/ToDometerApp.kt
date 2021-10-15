@@ -70,9 +70,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                     actions.editProject,
                     actions.addTask,
                     actions.openTask,
-                    {
-                        startOpenSourceLicensesActivity(context)
-                    },
+                    { startOpenSourceLicensesActivity(context) },
                     actions.about
                 )
             }
@@ -107,9 +105,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
             composable(About) {
                 AboutScreen(
                     {},
-                    {
-                        startOpenSourceLicensesActivity(context)
-                    },
+                    { startOpenSourceLicensesActivity(context) },
                     actions.navigateUp
                 )
             }
