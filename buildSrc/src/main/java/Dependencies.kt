@@ -33,6 +33,8 @@ object Versions {
     const val lifecycle = "2.3.1"
     const val materialComponents = "1.4.0"
     const val navigationCompose = "2.4.0-alpha06"
+    const val ossLicenses = "17.0.0"
+    const val ossLicensesPlugin = "0.10.4"
     const val robolectric = "4.3.1"
     const val sqlDelight = "1.5.1"
     const val testCoreKtx = "1.3.0"
@@ -106,8 +108,15 @@ object Libs {
 
     object Google {
 
+        const val ossLicensesPlugin =
+            "com.google.android.gms:oss-licenses-plugin:${Versions.ossLicensesPlugin}"
+
+        const val ossLicenses =
+            "com.google.android.gms:play-services-oss-licenses:${Versions.ossLicenses}"
+
         object Material {
-            const val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
+            const val materialComponents =
+                "com.google.android.material:material:${Versions.materialComponents}"
         }
     }
 

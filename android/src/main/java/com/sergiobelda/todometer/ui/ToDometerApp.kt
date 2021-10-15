@@ -16,15 +16,20 @@
 
 package com.sergiobelda.todometer.ui
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.sergiobelda.todometer.common.preferences.AppTheme
 import com.sergiobelda.todometer.ui.Destinations.About
 import com.sergiobelda.todometer.ui.Destinations.AddProject
@@ -46,6 +51,8 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
+    val context = LocalContext.current
+
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
 
@@ -63,6 +70,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                     actions.editProject,
                     actions.addTask,
                     actions.openTask,
+                    { startOpenSourceLicensesActivity(context) },
                     actions.about
                 )
             }
@@ -97,10 +105,18 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
             composable(About) {
                 AboutScreen(
                     {},
-                    {},
+                    { startOpenSourceLicensesActivity(context) },
                     actions.navigateUp
                 )
             }
         }
     }
+}
+
+private fun startOpenSourceLicensesActivity(context: Context) {
+    startActivity(
+        context,
+        Intent(context, OssLicensesMenuActivity::class.java),
+        null
+    )
 }

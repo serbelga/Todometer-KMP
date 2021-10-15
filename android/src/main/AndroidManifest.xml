@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.ToDometer">
+        android:theme="@style/Theme.ToDometer.NoActionBar">
         <activity
             android:name="com.sergiobelda.todometer.ui.MainActivity"
             android:exported="true">
@@ -22,5 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.ToDometer" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.ToDometer" />
     </application>
 </manifest>

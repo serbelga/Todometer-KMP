@@ -1,6 +1,7 @@
 plugins {
     id("org.jetbrains.compose") version Versions.composeDesktop
     id("com.android.application")
+    id("com.google.android.gms.oss-licenses-plugin")
     kotlin("android")
     kotlin("kapt")
 }
@@ -30,6 +31,8 @@ dependencies {
     implementation(Libs.Koin.android)
     implementation(Libs.Koin.compose)
     implementation(Libs.Koin.core)
+
+    implementation(Libs.Google.ossLicenses)
 }
 
 android {
