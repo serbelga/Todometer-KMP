@@ -71,7 +71,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                     actions.addTask,
                     actions.openTask,
                     {
-                        navigateToOpenSourceLicensesScreen(context)
+                        startOpenSourceLicensesActivity(context)
                     },
                     actions.about
                 )
@@ -108,7 +108,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                 AboutScreen(
                     {},
                     {
-                        navigateToOpenSourceLicensesScreen(context)
+                        startOpenSourceLicensesActivity(context)
                     },
                     actions.navigateUp
                 )
@@ -117,7 +117,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     }
 }
 
-private fun navigateToOpenSourceLicensesScreen(context: Context) {
+private fun startOpenSourceLicensesActivity(context: Context) {
     startActivity(
         context,
         Intent(context, OssLicensesMenuActivity::class.java),
