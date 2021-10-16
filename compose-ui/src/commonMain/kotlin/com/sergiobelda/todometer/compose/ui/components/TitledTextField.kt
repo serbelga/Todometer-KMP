@@ -51,12 +51,7 @@ fun TitledTextField(
     )
 ) {
     Column(
-        modifier = Modifier.padding(
-            start = 16.dp,
-            end = 16.dp,
-            top = 8.dp,
-            bottom = 8.dp
-        )
+        modifier = modifier
     ) {
         Text(
             title,
@@ -69,7 +64,7 @@ fun TitledTextField(
             onValueChange = onValueChange,
             label = label,
             placeholder = placeholder,
-            modifier = modifier.padding(top = 4.dp).fillMaxWidth(),
+            modifier = Modifier.padding(top = 4.dp).fillMaxWidth(),
             keyboardOptions = keyboardOptions,
             isError = isError,
             singleLine = singleLine,

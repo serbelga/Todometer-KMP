@@ -11,8 +11,8 @@ import ui.theme.ToDometerTheme
 
 val koin = initKoin().koin
 
-fun main() = Window(title = "ToDo_meter") {
-    var currentPage by remember { mutableStateOf(Screen.Home) }
+fun main() = Window(title = "ToDometer") {
+    var currentPage: Screen by remember { mutableStateOf(Screen.Home) }
     val navigateToHome: () -> Unit = {
         currentPage = Screen.Home
     }

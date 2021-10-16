@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-enum class Screen {
-    Home,
-    AddTask
+sealed class Screen {
+    object Home : Screen()
+    object AddTask : Screen()
 }
