@@ -26,7 +26,7 @@ fun main() = application {
         ),
         icon = iconToDometer()
     ) {
-        var currentPage by remember { mutableStateOf(Screen.Home) }
+        var currentPage: Screen by remember { mutableStateOf(Screen.Home) }
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
