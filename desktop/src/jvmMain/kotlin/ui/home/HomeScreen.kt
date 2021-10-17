@@ -17,11 +17,14 @@
 package ui.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
@@ -63,12 +66,15 @@ import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
+import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.components.TitledTextField
 import com.sergiobelda.todometer.compose.ui.icons.iconToDometer
+import com.sergiobelda.todometer.compose.ui.project.ProjectListItem
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
+import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
 import koin
 import kotlinx.coroutines.launch
 
@@ -82,6 +88,7 @@ fun HomeScreen(addTask: () -> Unit) {
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
+    val setProjectSelectedUseCase = koin.get<SetProjectSelectedUseCase>()
     val getTasksUseCase = koin.get<GetTasksUseCase>()
     val getProjectsUseCase = koin.get<GetProjectsUseCase>()
     val insertProjectUseCase = koin.get<InsertProjectUseCase>()
@@ -98,9 +105,9 @@ fun HomeScreen(addTask: () -> Unit) {
         }
     }
 
-    var project: Project? by remember { mutableStateOf(null) }
+    var projectSelected: Project? by remember { mutableStateOf(null) }
     val projectResultState by getProjectSelectedUseCase().collectAsState(null)
-    projectResultState?.doIfSuccess { project = it }
+    projectResultState?.doIfSuccess { projectSelected = it }
 
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
     val tasksResultState by getTasksUseCase().collectAsState(null)
@@ -164,17 +171,35 @@ fun HomeScreen(addTask: () -> Unit) {
 
         Row {
             Column(modifier = Modifier.requiredWidth(256.dp).padding(top = 16.dp)) {
-                OutlinedButton(
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Projects",
+                        style = TodometerTypography.subtitle2
+                    )
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+                LazyColumn {
+                    items(projects) { project ->
+                        ProjectListItem(
+                            project,
+                            project.id == projectSelected?.id
+                        ) {
+                            coroutineScope.launch {
+                                setProjectSelectedUseCase.invoke(it)
+                            }
+                        }
+                    }
+                }
+                TextButton(
                     onClick = { addProjectAlertDialogState = true },
-                    modifier = Modifier.fillMaxWidth().padding(start = 8.dp, end = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp).fillMaxWidth()
                 ) {
                     Icon(Icons.Rounded.Add, contentDescription = "Add project")
                     Text(text = "Add project")
-                }
-                LazyColumn {
-                    items(projects) {
-                        Text(text = it.name)
-                    }
                 }
             }
             Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
