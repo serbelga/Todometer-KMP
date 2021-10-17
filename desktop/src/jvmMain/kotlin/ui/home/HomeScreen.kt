@@ -16,6 +16,10 @@
 
 package ui.home
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,6 +42,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
@@ -46,6 +52,7 @@ import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
+import com.sergiobelda.todometer.compose.ui.icons.iconToDometer
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import koin
@@ -87,7 +94,16 @@ fun HomeScreen(addTask: () -> Unit) {
         },
         topBar = {
             TopAppBar(
-                title = {},
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = iconToDometer(),
+                            contentDescription = null,
+                            modifier = Modifier.size(32.dp).padding(end = 8.dp)
+                        )
+                        Text(text = "ToDometer")
+                    }
+                },
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(
@@ -95,7 +111,8 @@ fun HomeScreen(addTask: () -> Unit) {
                     ) {
                         Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                     }
-                }
+                },
+                backgroundColor = TodometerColors.surface
             )
         },
         floatingActionButton = {
