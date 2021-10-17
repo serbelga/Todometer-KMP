@@ -130,15 +130,6 @@ fun HomeScreen(addTask: () -> Unit) {
                     }
                 },
                 elevation = 0.dp,
-                navigationIcon = {
-                    /*
-                    IconButton(
-                        onClick = { scope.launch { scaffoldState.drawerState.open() } }
-                    ) {
-                        Icon(Icons.Rounded.Menu, contentDescription = "Menu")
-                    }
-                    */
-                },
                 backgroundColor = TodometerColors.surface
             )
         },
