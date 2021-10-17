@@ -16,6 +16,7 @@
 
 package ui.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -49,6 +51,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -63,6 +66,7 @@ import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.components.TitledTextField
+import com.sergiobelda.todometer.compose.ui.icons.iconToDometer
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import koin
@@ -116,7 +120,14 @@ fun HomeScreen(addTask: () -> Unit) {
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "ToDometer")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = iconToDometer(),
+                            contentDescription = null,
+                            modifier = Modifier.size(32.dp).padding(end = 8.dp)
+                        )
+                        Text(text = "ToDometer")
+                    }
                 },
                 elevation = 0.dp,
                 navigationIcon = {
@@ -127,7 +138,8 @@ fun HomeScreen(addTask: () -> Unit) {
                         Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                     }
                     */
-                }
+                },
+                backgroundColor = TodometerColors.surface
             )
         },
         floatingActionButton = {
