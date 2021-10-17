@@ -17,17 +17,22 @@
 package ui.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -35,7 +40,6 @@ import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -53,7 +57,9 @@ import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
+import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
+import com.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.components.TitledTextField
@@ -68,10 +74,14 @@ fun HomeScreen(addTask: () -> Unit) {
 
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
     val getTasksUseCase = koin.get<GetTasksUseCase>()
+    val getProjectsUseCase = koin.get<GetProjectsUseCase>()
+    val insertProjectUseCase = koin.get<InsertProjectUseCase>()
+
     val coroutineScope = rememberCoroutineScope()
     val setTaskDoing: (String) -> Unit = {
         coroutineScope.launch {
@@ -83,16 +93,19 @@ fun HomeScreen(addTask: () -> Unit) {
             setTaskDoneUseCase(it)
         }
     }
+
     var project: Project? by remember { mutableStateOf(null) }
     val projectResultState by getProjectSelectedUseCase().collectAsState(null)
-    projectResultState?.let { result ->
-        result.doIfSuccess { project = it }
-    }
+    projectResultState?.doIfSuccess { project = it }
+
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
     val tasksResultState by getTasksUseCase().collectAsState(null)
-    tasksResultState?.let { result ->
-        result.doIfSuccess { tasks = it }
-    }
+    tasksResultState?.doIfSuccess { tasks = it }
+
+    var projects: List<Project> by remember { mutableStateOf(emptyList()) }
+    val projectsResultState by getProjectsUseCase().collectAsState(null)
+    projectsResultState?.doIfSuccess { projects = it }
+
     Scaffold(
         /*
         drawerShape = RoundedCornerShape(0),
@@ -107,11 +120,13 @@ fun HomeScreen(addTask: () -> Unit) {
                 },
                 elevation = 0.dp,
                 navigationIcon = {
+                    /*
                     IconButton(
                         onClick = { scope.launch { scaffoldState.drawerState.open() } }
                     ) {
                         Icon(Icons.Rounded.Menu, contentDescription = "Menu")
                     }
+                    */
                 }
             )
         },
@@ -127,30 +142,49 @@ fun HomeScreen(addTask: () -> Unit) {
                 backgroundColor = TodometerColors.primary
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButtonPosition = FabPosition.End,
         scaffoldState = scaffoldState
     ) {
-
+        Divider()
         Column(modifier = Modifier.fillMaxSize()) {
             if (addProjectAlertDialogState) {
-                AddProjectAlertDialog(onDismissRequest = { addProjectAlertDialogState = false })
+                AddProjectAlertDialog(
+                    addProject = { projectName ->
+                        coroutineScope.launch {
+                            insertProjectUseCase.invoke(projectName)
+                        }
+                    },
+                    onDismissRequest = { addProjectAlertDialogState = false }
+                )
             }
         }
 
-        OutlinedButton(onClick = { addProjectAlertDialogState = true }) {
-            Icon(Icons.Rounded.Add, contentDescription = "Add project")
-            Text(text = "Add project")
-        }
-
-        LazyColumn {
-            items(tasks) {
-                TaskItem(
-                    task = it,
-                    onDoingClick = setTaskDoing,
-                    onDoneClick = setTaskDone,
-                    {},
-                    {}
-                )
+        Row {
+            Column(modifier = Modifier.requiredWidth(256.dp).padding(top = 16.dp)) {
+                OutlinedButton(
+                    onClick = { addProjectAlertDialogState = true },
+                    modifier = Modifier.fillMaxWidth().padding(start = 8.dp, end = 8.dp)
+                ) {
+                    Icon(Icons.Rounded.Add, contentDescription = "Add project")
+                    Text(text = "Add project")
+                }
+                LazyColumn {
+                    items(projects) {
+                        Text(text = it.name)
+                    }
+                }
+            }
+            Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
+            LazyColumn {
+                items(tasks) {
+                    TaskItem(
+                        task = it,
+                        onDoingClick = setTaskDoing,
+                        onDoneClick = setTaskDone,
+                        {},
+                        {}
+                    )
+                }
             }
         }
     }
@@ -158,7 +192,10 @@ fun HomeScreen(addTask: () -> Unit) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddProjectAlertDialog(onDismissRequest: () -> Unit) {
+fun AddProjectAlertDialog(
+    addProject: (name: String) -> Unit,
+    onDismissRequest: () -> Unit
+) {
     var projectName by rememberSaveable { mutableStateOf("") }
     var projectNameInputError by remember { mutableStateOf(false) }
 
@@ -176,10 +213,10 @@ fun AddProjectAlertDialog(onDismissRequest: () -> Unit) {
                         projectName = it
                         projectNameInputError = false
                     },
-                    //placeholder = { Text(text = "Enter project name") },
+                    placeholder = { Text(text = "Enter project name") },
                     singleLine = true,
                     isError = projectNameInputError,
-                    // errorMessage = stringResource(R.string.field_not_empty),
+                    errorMessage = "Field must not be empty",
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
@@ -190,8 +227,12 @@ fun AddProjectAlertDialog(onDismissRequest: () -> Unit) {
         confirmButton = {
             TextButton(
                 onClick = {
-
-                    onDismissRequest()
+                    if (projectName.isBlank()) {
+                        projectNameInputError = true
+                    } else {
+                        addProject(projectName)
+                        onDismissRequest()
+                    }
                 }
             ) {
                 Text("Guardar")
