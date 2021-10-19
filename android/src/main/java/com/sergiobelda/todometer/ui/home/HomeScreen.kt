@@ -17,8 +17,6 @@
 package com.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -82,10 +80,10 @@ import com.sergiobelda.todometer.compose.ui.components.DragIndicator
 import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
 import com.sergiobelda.todometer.compose.ui.components.SingleLineItem
 import com.sergiobelda.todometer.compose.ui.components.TwoLineItem
+import com.sergiobelda.todometer.compose.ui.project.ProjectListItem
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
-import com.sergiobelda.todometer.compose.ui.theme.primarySelected
 import com.sergiobelda.todometer.preferences.appThemeMap
 import com.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import com.sergiobelda.todometer.ui.theme.ToDometerTheme
@@ -421,33 +419,6 @@ fun MenuBottomSheet(
                 ProjectListItem(project, project.id == selectedProjectId, selectProject)
             }
         }
-    }
-}
-
-@Composable
-fun ProjectListItem(
-    project: Project,
-    selected: Boolean,
-    onItemClick: (String) -> Unit
-) {
-    val background = if (selected) {
-        Modifier.background(TodometerColors.primarySelected)
-    } else {
-        Modifier
-    }
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(56.dp).clickable(onClick = { onItemClick(project.id) })
-            .then(background)
-    ) {
-        val selectedColor =
-            if (selected) TodometerColors.primary else TodometerColors.onSurface.copy(alpha = ContentAlpha.medium)
-        Text(
-            text = project.name,
-            color = selectedColor,
-            style = TodometerTypography.subtitle2,
-            modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
-        )
     }
 }
 
