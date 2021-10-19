@@ -229,7 +229,7 @@ fun AddProjectAlertDialog(
 
     AlertDialog(
         title = {
-            Text(text = "Add project")
+            Text(text = "Add project", modifier = Modifier.padding(start = 16.dp))
         },
         onDismissRequest = onDismissRequest,
         text = {
@@ -263,12 +263,12 @@ fun AddProjectAlertDialog(
                     }
                 }
             ) {
-                Text("Guardar")
+                Text("Save")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text("Cancelar")
+                Text("Cancel")
             }
         },
         modifier = Modifier.requiredWidth(480.dp)
