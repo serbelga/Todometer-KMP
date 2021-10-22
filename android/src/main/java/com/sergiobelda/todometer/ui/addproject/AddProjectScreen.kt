@@ -72,7 +72,7 @@ fun AddProjectScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            if (projectName.isNullOrBlank()) {
+                            if (projectName.isBlank()) {
                                 projectNameInputError = true
                             } else {
                                 addProjectViewModel.insertProject(projectName)

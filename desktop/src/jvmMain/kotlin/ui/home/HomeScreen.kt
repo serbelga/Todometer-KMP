@@ -61,6 +61,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Project
+import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.common.model.Task
 import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.GetProjectsUseCase
@@ -70,6 +71,7 @@ import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.components.TitledTextField
+import com.sergiobelda.todometer.compose.ui.components.TodometerTagSelector
 import com.sergiobelda.todometer.compose.ui.icons.iconToDometer
 import com.sergiobelda.todometer.compose.ui.project.ProjectListItem
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
@@ -79,11 +81,11 @@ import koin
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(addTask: () -> Unit) {
+fun HomeScreen() {
     var addProjectAlertDialogState by remember { mutableStateOf(false) }
+    var addTaskAlertDialogState by remember { mutableStateOf(false) }
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
 
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
@@ -148,7 +150,7 @@ fun HomeScreen(addTask: () -> Unit) {
                 text = {
                     Text("Add task")
                 },
-                onClick = addTask,
+                onClick = { addTaskAlertDialogState = true },
                 backgroundColor = TodometerColors.primary
             )
         },
@@ -159,13 +161,18 @@ fun HomeScreen(addTask: () -> Unit) {
         Column(modifier = Modifier.fillMaxSize()) {
             if (addProjectAlertDialogState) {
                 AddProjectAlertDialog(
-                    addProject = { projectName ->
-                        coroutineScope.launch {
-                            insertProjectUseCase.invoke(projectName)
-                        }
-                    },
                     onDismissRequest = { addProjectAlertDialogState = false }
-                )
+                ) { projectName ->
+                    coroutineScope.launch {
+                        insertProjectUseCase.invoke(projectName)
+                    }
+                }
+            }
+            if (addTaskAlertDialogState) {
+                AddTaskAlertDialog(
+                    onDismissRequest = { addTaskAlertDialogState = false }
+                ) { _, _, _ ->
+                }
             }
         }
 
@@ -221,8 +228,8 @@ fun HomeScreen(addTask: () -> Unit) {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddProjectAlertDialog(
-    addProject: (name: String) -> Unit,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    addProject: (name: String) -> Unit
 ) {
     var projectName by rememberSaveable { mutableStateOf("") }
     var projectNameInputError by remember { mutableStateOf(false) }
@@ -259,6 +266,92 @@ fun AddProjectAlertDialog(
                         projectNameInputError = true
                     } else {
                         addProject(projectName)
+                        onDismissRequest()
+                    }
+                }
+            ) {
+                Text("Save")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text("Cancel")
+            }
+        },
+        modifier = Modifier.requiredWidth(480.dp)
+    )
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun AddTaskAlertDialog(
+    onDismissRequest: () -> Unit,
+    addTask: (title: String, description: String, tag: Tag) -> Unit
+) {
+    var taskTitle by rememberSaveable { mutableStateOf("") }
+    var taskTitleInputError by remember { mutableStateOf(false) }
+    var taskDescription by rememberSaveable { mutableStateOf("") }
+    val tags = enumValues<Tag>()
+    var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
+    AlertDialog(
+        title = {
+            Text(text = "Add task", modifier = Modifier.padding(start = 16.dp))
+        },
+        onDismissRequest = onDismissRequest,
+        text = {
+            Column(modifier = Modifier.padding(top = 24.dp)) {
+                TitledTextField(
+                    title = "Name",
+                    value = taskTitle,
+                    onValueChange = {
+                        taskTitle = it
+                        taskTitleInputError = false
+                    },
+                    placeholder = { Text("Enter task name") },
+                    isError = taskTitleInputError,
+                    errorMessage = "Field must not be empty",
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Next
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
+                )
+                TodometerTagSelector(
+                    "Choose a Tag",
+                    selectedTag
+                ) { tag ->
+                    selectedTag = tag
+                }
+                TitledTextField(
+                    title = "Description",
+                    value = taskDescription,
+                    onValueChange = { taskDescription = it },
+                    placeholder = { Text("Enter description") },
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    if (taskTitle.isBlank()) {
+                        taskTitleInputError = true
+                    } else {
+                        addTask(taskTitle, taskDescription, selectedTag)
                         onDismissRequest()
                     }
                 }
