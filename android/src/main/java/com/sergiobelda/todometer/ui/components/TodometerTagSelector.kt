@@ -17,7 +17,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,13 +28,11 @@ import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.compose.mapper.composeColorOf
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
-import kotlinx.coroutines.launch
 
 @Composable
 fun TodometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
-    val scope = rememberCoroutineScope()
     Text(
         text = stringResource(R.string.choose_tag),
         color = TodometerColors.primary,
@@ -75,7 +73,7 @@ fun TodometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
             }
         }
     }
-    scope.launch {
+    LaunchedEffect(selectedTag) {
         state.animateScrollToItem(tags.indexOf(selectedTag))
     }
 }
