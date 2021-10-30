@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.compose.ui.icons
+package dev.sergiobelda.todometer.common.compose.ui.icons
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

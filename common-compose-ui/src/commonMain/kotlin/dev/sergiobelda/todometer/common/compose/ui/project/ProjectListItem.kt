@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sergiobelda.todometer.compose.ui.project
+package dev.sergiobelda.todometer.common.compose.ui.project
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,10 +27,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
-import com.sergiobelda.todometer.compose.ui.theme.TodometerTypography
-import com.sergiobelda.todometer.compose.ui.theme.primarySelected
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.compose.ui.theme.primarySelected
+import dev.sergiobelda.todometer.common.model.Project
 
 @Composable
 fun ProjectListItem(
