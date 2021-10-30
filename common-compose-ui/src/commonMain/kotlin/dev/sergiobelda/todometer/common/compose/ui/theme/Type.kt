@@ -27,56 +27,56 @@ expect val quickSandFontFamily: FontFamily
 object Type {
     val typography = Typography(
         h4 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 34.sp
         ),
         h5 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 24.sp
         ),
         h6 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 20.sp,
             letterSpacing = 0.15.sp
         ),
         subtitle1 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp
         ),
         subtitle2 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp
         ),
         body1 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             letterSpacing = 0.5.sp
         ),
         body2 = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
             letterSpacing = 0.25.sp
         ),
         button = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp
         ),
         caption = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp,
             letterSpacing = 0.4.sp
         ),
         overline = TextStyle(
-            fontFamily = dev.sergiobelda.todometer.common.compose.ui.theme.quickSandFontFamily,
+            fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 10.sp,
             letterSpacing = 1.5.sp
