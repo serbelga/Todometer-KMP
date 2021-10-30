@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.compose") version Versions.composeDesktop
 }
 
-group = "com.sergiobelda.todometer"
+group = "dev.sergiobelda.todometer"
 version = "1.0"
 
 kotlin {
@@ -19,7 +19,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":common"))
-                implementation(project(":compose-ui"))
+                implementation(project(":common-compose-ui"))
                 implementation(compose.desktop.currentOs)
             }
         }

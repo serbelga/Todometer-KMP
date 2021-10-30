@@ -54,5 +54,5 @@ tasks {
 }
 
 application {
-    mainClass.set("com.sergiobelda.backend.ApplicationKt")
+    mainClass.set("dev.sergiobelda.todometer.backend.ApplicationKt")
 }

@@ -18,10 +18,10 @@ package ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.sergiobelda.todometer.compose.ui.theme.DarkColorPalette
-import com.sergiobelda.todometer.compose.ui.theme.LightColorPalette
-import com.sergiobelda.todometer.compose.ui.theme.Type.typography
-import com.sergiobelda.todometer.compose.ui.theme.shapes
+import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorPalette
+import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorPalette
+import dev.sergiobelda.todometer.common.compose.ui.theme.Type.typography
+import dev.sergiobelda.todometer.common.compose.ui.theme.shapes
 
 @Composable
 fun ToDometerTheme(darkTheme: Boolean = false, content: @Composable () -> Unit) {

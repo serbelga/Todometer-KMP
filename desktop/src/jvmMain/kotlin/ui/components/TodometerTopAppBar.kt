@@ -34,10 +34,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.compose.ui.components.HorizontalDivider
-import com.sergiobelda.todometer.compose.ui.components.ProjectProgress
+import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.ProjectProgress
+import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.model.Task
 import ui.theme.ToDometerTheme
 
 @Composable
