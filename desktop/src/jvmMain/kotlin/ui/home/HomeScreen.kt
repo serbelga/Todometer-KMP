@@ -39,15 +39,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
-import com.sergiobelda.todometer.common.data.doIfSuccess
-import com.sergiobelda.todometer.common.model.Project
-import com.sergiobelda.todometer.common.model.Task
-import com.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
-import com.sergiobelda.todometer.common.usecase.GetTasksUseCase
-import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
-import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import com.sergiobelda.todometer.compose.ui.task.TaskItem
-import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.data.doIfSuccess
+import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import koin
 import kotlinx.coroutines.launch
 

@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-group = "com.sergiobelda.todometer"
+group = "dev.sergiobelda.todometer"
 version = "1.0"
 
 allprojects {

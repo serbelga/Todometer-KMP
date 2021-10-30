@@ -6,7 +6,7 @@ plugins {
     kotlin("kapt")
 }
 
-group = "com.sergiobelda.todometer"
+group = "dev.sergiobelda.todometer"
 version = "1.0"
 
 repositories {
@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation(project(":compose-ui"))
+    implementation(project(":common-compose-ui"))
 
     implementation(Libs.AndroidX.Activity.activityCompose)
     implementation(Libs.AndroidX.Compose.runtimeLiveData)
@@ -38,7 +38,7 @@ dependencies {
 android {
     compileSdk = Android.compileSdk
     defaultConfig {
-        applicationId = "com.sergiobelda.todometer.android"
+        applicationId = "dev.sergiobelda.todometer"
         minSdk = Android.minSdk
         targetSdk = Android.targetSdk
         versionCode = 1

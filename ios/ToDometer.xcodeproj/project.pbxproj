@@ -508,7 +508,7 @@
 					"\"common\"",
 					"-lsqlite3",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometer;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.ToDometer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -541,7 +541,7 @@
 					"\"common\"",
 					"-lsqlite3",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometer;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.ToDometer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -562,7 +562,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.ToDometerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -584,7 +584,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.ToDometerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -604,7 +604,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.ToDometerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -624,7 +624,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiobelda.todometer.ToDometerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.ToDometerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
