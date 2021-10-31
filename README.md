@@ -13,6 +13,21 @@
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
 </h5>
 
+## Screenshots
+
+### Android
+
+| <img width="300" src="./screenshots/android/home.png"></img> | <img width="300" src="./screenshots/android/add_task.png"></img> |
+|---|---|
+
+### Desktop
+
+Under construction
+
+### iOS
+
+Under construction
+
 ## Technologies
 
 <div align="center">
@@ -20,6 +35,7 @@
 </div>
 
 ### Android
+
 * [Android Jetpack](https://developer.android.com/jetpack)
   * [Compose UI](https://developer.android.com/jetpack/compose)
   * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
@@ -67,8 +83,3 @@
 ```
 ./gradlew :desktop:run
 ```
-
-## App UI Design
-
-| <img width="300" src="./resources/Home.png"></img> | <img width="300" src="./resources/Home_BottomSheet.png"></img> | <img width="300" src="./resources/Task_Detail.png"></img> | <img width="300" src="./resources/Edit_Task.png"></img> |
-|---|---|---|---|
