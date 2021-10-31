@@ -67,6 +67,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase

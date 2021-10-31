@@ -45,7 +45,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.ui.components.TodometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
 @Composable
