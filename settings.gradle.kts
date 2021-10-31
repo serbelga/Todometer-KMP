@@ -12,6 +12,6 @@ rootProject.name = "ToDometer Multiplatform"
 include(":android")
 include(":desktop")
 include(":ios")
-include(":compose-ui")
+include(":common-compose-ui")
 include(":common")
 include(":backend")

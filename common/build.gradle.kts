@@ -100,6 +100,6 @@ android {
 
 sqldelight {
     database("TodometerDatabase") {
-        packageName = "com.sergiobelda.todometer"
+        packageName = "dev.sergiobelda.todometer"
     }
 }
