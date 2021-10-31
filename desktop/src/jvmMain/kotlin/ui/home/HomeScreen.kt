@@ -71,7 +71,6 @@ import com.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import com.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import com.sergiobelda.todometer.compose.ui.components.TitledTextField
-import com.sergiobelda.todometer.compose.ui.components.TodometerTagSelector
 import com.sergiobelda.todometer.compose.ui.icons.iconToDometer
 import com.sergiobelda.todometer.compose.ui.project.ProjectListItem
 import com.sergiobelda.todometer.compose.ui.task.TaskItem
@@ -321,12 +320,6 @@ fun AddTaskAlertDialog(
                         bottom = 8.dp
                     )
                 )
-                TodometerTagSelector(
-                    "Choose a Tag",
-                    selectedTag
-                ) { tag ->
-                    selectedTag = tag
-                }
                 TitledTextField(
                     title = "Description",
                     value = taskDescription,

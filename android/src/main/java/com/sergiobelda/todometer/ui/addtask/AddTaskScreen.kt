@@ -44,7 +44,6 @@ import com.sergiobelda.todometer.android.R
 import com.sergiobelda.todometer.common.data.doIfSuccess
 import com.sergiobelda.todometer.common.model.Tag
 import com.sergiobelda.todometer.compose.ui.components.TitledTextField
-import com.sergiobelda.todometer.compose.ui.components.TodometerTagSelector
 import com.sergiobelda.todometer.compose.ui.theme.TodometerColors
 import org.koin.androidx.compose.getViewModel
 
@@ -116,12 +115,6 @@ fun AddTaskScreen(
                         bottom = 8.dp
                     )
                 )
-                TodometerTagSelector(
-                    stringResource(R.string.choose_tag),
-                    selectedTag
-                ) { tag ->
-                    selectedTag = tag
-                }
                 TitledTextField(
                     title = stringResource(id = R.string.description),
                     value = taskDescription,
