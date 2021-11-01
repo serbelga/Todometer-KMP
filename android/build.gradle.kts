@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.compose") version Versions.composeDesktop
+    id("org.jetbrains.compose") version Versions.composeMultiplatform
     id("com.android.application")
     id("com.google.android.gms.oss-licenses-plugin")
     kotlin("android")
