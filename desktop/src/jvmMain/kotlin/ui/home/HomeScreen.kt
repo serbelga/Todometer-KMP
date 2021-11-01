@@ -31,10 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
@@ -52,14 +49,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.icons.iconToDometer
 import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
@@ -67,7 +60,6 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
-import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
@@ -222,131 +214,6 @@ fun HomeScreen() {
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun AddProjectAlertDialog(
-    onDismissRequest: () -> Unit,
-    addProject: (name: String) -> Unit
-) {
-    var projectName by rememberSaveable { mutableStateOf("") }
-    var projectNameInputError by remember { mutableStateOf(false) }
-
-    AlertDialog(
-        title = {
-            Text(text = "Add project", modifier = Modifier.padding(start = 16.dp))
-        },
-        onDismissRequest = onDismissRequest,
-        text = {
-            Column {
-                TitledTextField(
-                    title = "Name",
-                    value = projectName,
-                    onValueChange = {
-                        projectName = it
-                        projectNameInputError = false
-                    },
-                    placeholder = { Text(text = "Enter project name") },
-                    singleLine = true,
-                    isError = projectNameInputError,
-                    errorMessage = "Field must not be empty",
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Done
-                    )
-                )
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    if (projectName.isBlank()) {
-                        projectNameInputError = true
-                    } else {
-                        addProject(projectName)
-                        onDismissRequest()
-                    }
-                }
-            ) {
-                Text("Save")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text("Cancel")
-            }
-        },
-        modifier = Modifier.requiredWidth(480.dp)
-    )
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun AddTaskAlertDialog(
-    onDismissRequest: () -> Unit,
-    addTask: (title: String, description: String, tag: Tag) -> Unit
-) {
-    var taskTitle by rememberSaveable { mutableStateOf("") }
-    var taskTitleInputError by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable { mutableStateOf("") }
-    val tags = enumValues<Tag>()
-    var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
-    AlertDialog(
-        title = {
-            Text(text = "Add task", modifier = Modifier.padding(start = 16.dp))
-        },
-        onDismissRequest = onDismissRequest,
-        text = {
-            Column(modifier = Modifier.padding(top = 24.dp)) {
-                TitledTextField(
-                    title = "Name",
-                    value = taskTitle,
-                    onValueChange = {
-                        taskTitle = it
-                        taskTitleInputError = false
-                    },
-                    placeholder = { Text("Enter task name") },
-                    isError = taskTitleInputError,
-                    errorMessage = "Field must not be empty",
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Next
-                    )
-                )
-                TitledTextField(
-                    title = "Description",
-                    value = taskDescription,
-                    onValueChange = { taskDescription = it },
-                    placeholder = { Text("Enter description") },
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Done
-                    )
-                )
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    if (taskTitle.isBlank()) {
-                        taskTitleInputError = true
-                    } else {
-                        addTask(taskTitle, taskDescription, selectedTag)
-                        onDismissRequest()
-                    }
-                }
-            ) {
-                Text("Save")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text("Cancel")
-            }
-        },
-        modifier = Modifier.requiredWidth(480.dp)
-    )
 }
 
 @Composable
