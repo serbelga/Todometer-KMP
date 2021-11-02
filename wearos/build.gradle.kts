@@ -4,15 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = Android.compileSdk
 
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer.wear"
-        minSdk = 25
-        targetSdk = 31
+        minSdk = Android.wearMinSdk
+        targetSdk = Android.targetSdk
         versionCode = 1
-        versionName = "1.0"
-
+        versionName = "1.0.0-dev01"
     }
 
     buildTypes {
@@ -28,11 +27,20 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("com.google.android.gms:play-services-wearable:17.1.0")
-    implementation("androidx.percentlayout:percentlayout:1.0.0")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.wear:wear:1.2.0")
+    with(Libs.AndroidX) {
+        implementation(coreKtx)
+    }
+
+    with(Libs.AndroidX.Wear) {
+        implementation(wear)
+        implementation(composeFoundation)
+        implementation(composeMaterial)
+        implementation(composeNavigation)
+    }
+
+    with(Libs.Google.Services) {
+        implementation(wearable)
+    }
+
     implementation(project(":common"))
 }
