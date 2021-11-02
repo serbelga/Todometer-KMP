@@ -79,7 +79,7 @@ fun AddButton() {
         horizontalArrangement = Arrangement.Center
     ) {
         Button(
-            onClick = {  },
+            onClick = { },
         ) {
             Icon(
                 imageVector = Icons.Rounded.Add,
