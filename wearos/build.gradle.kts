@@ -14,21 +14,38 @@ android {
         versionName = "1.0.0-dev01"
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.compose
+    }
+
+    kotlinOptions {
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
 
-    with(Libs.AndroidX) {
-        implementation(coreKtx)
+    implementation(project(":common"))
+
+    implementation(Libs.AndroidX.coreKtx)
+
+    implementation(Libs.AndroidX.Activity.activityCompose)
+
+    with(Libs.AndroidX.Compose) {
+        implementation(foundation)
+        implementation(materialIconsExtended)
+        implementation(uiToolingPreview)
     }
 
     with(Libs.AndroidX.Wear) {
@@ -38,9 +55,5 @@ dependencies {
         implementation(composeNavigation)
     }
 
-    with(Libs.Google.Services) {
-        implementation(wearable)
-    }
-
-    implementation(project(":common"))
+    implementation(Libs.Google.Services.wearable)
 }

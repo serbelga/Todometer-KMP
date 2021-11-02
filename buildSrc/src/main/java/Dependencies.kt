@@ -86,7 +86,13 @@ object Libs {
         }
 
         object Compose {
-            const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+            const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+            const val materialIconsExtended =
+                "androidx.compose.material:material-icons-extended:${Versions.compose}"
+            const val runtimeLiveData =
+                "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+            const val uiToolingPreview =
+                "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
         }
 
         object DataStore {
@@ -101,7 +107,8 @@ object Libs {
         }
 
         object Navigation {
-            const val compose = "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
+            const val compose =
+                "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         }
 
         object Test {
@@ -111,9 +118,12 @@ object Libs {
 
         object Wear {
             const val wear = "androidx.wear:wear:${Versions.wear}"
-            const val composeFoundation = "androidx.wear.compose:compose-foundation:${Versions.wearCompose}"
-            const val composeMaterial = "androidx.wear.compose:compose-material:${Versions.wearCompose}"
-            const val composeNavigation = "androidx.wear.compose:compose-navigation:${Versions.wearCompose}"
+            const val composeFoundation =
+                "androidx.wear.compose:compose-foundation:${Versions.wearCompose}"
+            const val composeMaterial =
+                "androidx.wear.compose:compose-material:${Versions.wearCompose}"
+            const val composeNavigation =
+                "androidx.wear.compose:compose-navigation:${Versions.wearCompose}"
         }
     }
 
@@ -167,7 +177,8 @@ object Libs {
         const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         const val jvmDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
         const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
-        const val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+        const val coroutines =
+            "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     }
 
     object Exposed {
