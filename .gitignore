@@ -18,3 +18,4 @@ local.properties
 /common/build/
 /buildSrc/build/
 /android/build/
+/android/release/*
