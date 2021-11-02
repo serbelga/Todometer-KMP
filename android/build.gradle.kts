@@ -32,7 +32,7 @@ dependencies {
     implementation(Libs.Koin.compose)
     implementation(Libs.Koin.core)
 
-    implementation(Libs.Google.ossLicenses)
+    implementation(Libs.Google.Services.ossLicenses)
 }
 
 android {

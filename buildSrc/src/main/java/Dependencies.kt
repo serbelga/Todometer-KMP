@@ -35,15 +35,19 @@ object Versions {
     const val navigationCompose = "2.4.0-beta01"
     const val ossLicenses = "17.0.0"
     const val ossLicensesPlugin = "0.10.4"
+    const val playServicesWearable = "17.1.0"
     const val robolectric = "4.3.1"
     const val sqlDelight = "1.5.2"
     const val testCoreKtx = "1.4.0"
     const val timber = "4.7.1"
+    const val wear = "1.2.0"
+    const val wearCompose = "1.0.0-alpha09"
 }
 
 object Android {
     const val compileSdk = 31
     const val minSdk = 24
+    const val wearMinSdk = 25
     const val targetSdk = 31
 }
 
@@ -82,7 +86,13 @@ object Libs {
         }
 
         object Compose {
-            const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+            const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+            const val materialIconsExtended =
+                "androidx.compose.material:material-icons-extended:${Versions.compose}"
+            const val runtimeLiveData =
+                "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+            const val uiToolingPreview =
+                "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
         }
 
         object DataStore {
@@ -97,26 +107,42 @@ object Libs {
         }
 
         object Navigation {
-            const val compose = "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
+            const val compose =
+                "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         }
 
         object Test {
             const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
             const val extJunit = "androidx.test.ext:junit:${Versions.androidJunit}"
         }
+
+        object Wear {
+            const val wear = "androidx.wear:wear:${Versions.wear}"
+            const val composeFoundation =
+                "androidx.wear.compose:compose-foundation:${Versions.wearCompose}"
+            const val composeMaterial =
+                "androidx.wear.compose:compose-material:${Versions.wearCompose}"
+            const val composeNavigation =
+                "androidx.wear.compose:compose-navigation:${Versions.wearCompose}"
+        }
     }
 
     object Google {
 
-        const val ossLicensesPlugin =
-            "com.google.android.gms:oss-licenses-plugin:${Versions.ossLicensesPlugin}"
-
-        const val ossLicenses =
-            "com.google.android.gms:play-services-oss-licenses:${Versions.ossLicenses}"
-
         object Material {
             const val materialComponents =
                 "com.google.android.material:material:${Versions.materialComponents}"
+        }
+
+        object Services {
+            const val ossLicensesPlugin =
+                "com.google.android.gms:oss-licenses-plugin:${Versions.ossLicensesPlugin}"
+
+            const val ossLicenses =
+                "com.google.android.gms:play-services-oss-licenses:${Versions.ossLicenses}"
+
+            const val wearable =
+                "com.google.android.gms:play-services-wearable:${Versions.playServicesWearable}"
         }
     }
 
@@ -151,7 +177,8 @@ object Libs {
         const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         const val jvmDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
         const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
-        const val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+        const val coroutines =
+            "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     }
 
     object Exposed {
