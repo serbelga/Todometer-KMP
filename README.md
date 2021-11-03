@@ -28,6 +28,10 @@ Under construction
 
 Under construction
 
+### Wear OS
+
+Under construction
+
 ## Technologies
 
 <div align="center">
