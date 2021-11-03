@@ -27,8 +27,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.ui.Destinations.About
