@@ -29,7 +29,7 @@ class InsertTaskUseCase(
 ) {
 
     /**
-     * Creates a new [Task] given a [title], [description], [projectId] and [tag], in the
+     * Creates a new [Task] given a [title], [description] and [tag], in the
      * current project selected.
      */
     suspend operator fun invoke(
