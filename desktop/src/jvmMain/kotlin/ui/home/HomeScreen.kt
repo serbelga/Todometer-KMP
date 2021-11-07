@@ -58,13 +58,16 @@ import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -85,6 +88,7 @@ fun HomeScreen() {
     val getTasksUseCase = koin.get<GetTasksUseCase>()
     val getProjectsUseCase = koin.get<GetProjectsUseCase>()
     val insertProjectUseCase = koin.get<InsertProjectUseCase>()
+    val insertTaskUseCase = koin.get<InsertTaskUseCase>()
 
     val coroutineScope = rememberCoroutineScope()
     val setTaskDoing: (String) -> Unit = {
@@ -162,7 +166,10 @@ fun HomeScreen() {
             if (addTaskAlertDialogState) {
                 AddTaskAlertDialog(
                     onDismissRequest = { addTaskAlertDialogState = false }
-                ) { _, _, _ ->
+                ) { title, description, _ ->
+                    coroutineScope.launch {
+                        insertTaskUseCase.invoke(title, description, Tag.GRAY)
+                    }
                 }
             }
         }
@@ -201,15 +208,18 @@ fun HomeScreen() {
                 }
             }
             Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
-            LazyColumn {
-                items(tasks) {
-                    TaskItem(
-                        task = it,
-                        onDoingClick = setTaskDoing,
-                        onDoneClick = setTaskDone,
-                        {},
-                        {}
-                    )
+            Column {
+                Text(text = projectSelected?.name ?: "NOTHING")
+                LazyColumn {
+                    items(tasks) {
+                        TaskItem(
+                            task = it,
+                            onDoingClick = setTaskDoing,
+                            onDoneClick = setTaskDone,
+                            {},
+                            {}
+                        )
+                    }
                 }
             }
         }
