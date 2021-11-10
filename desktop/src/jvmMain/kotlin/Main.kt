@@ -28,7 +28,6 @@ import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.compose.ui.icons.iconToDometer
 import dev.sergiobelda.todometer.common.di.initKoin
 import ui.home.HomeScreen
-import ui.task.AddTaskScreen
 import ui.theme.ToDometerTheme
 
 val koin = initKoin().koin
@@ -46,14 +45,12 @@ fun main() = application {
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        val navigateToAddTask: () -> Unit = {
-            currentPage = Screen.AddTask
-        }
         ToDometerTheme(darkTheme = isSystemInDarkTheme()) {
             Crossfade(currentPage) { screen ->
                 when (screen) {
-                    Screen.Home -> HomeScreen(navigateToAddTask)
-                    Screen.AddTask -> AddTaskScreen(navigateToHome)
+                    Screen.Home -> HomeScreen()
+                    else -> {
+                    }
                 }
             }
         }

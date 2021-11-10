@@ -31,10 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
@@ -52,26 +49,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.icons.iconToDometer
 import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -79,11 +75,11 @@ import koin
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(addTask: () -> Unit) {
+fun HomeScreen() {
     var addProjectAlertDialogState by remember { mutableStateOf(false) }
+    var addTaskAlertDialogState by remember { mutableStateOf(false) }
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
 
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
@@ -92,6 +88,7 @@ fun HomeScreen(addTask: () -> Unit) {
     val getTasksUseCase = koin.get<GetTasksUseCase>()
     val getProjectsUseCase = koin.get<GetProjectsUseCase>()
     val insertProjectUseCase = koin.get<InsertProjectUseCase>()
+    val insertTaskUseCase = koin.get<InsertTaskUseCase>()
 
     val coroutineScope = rememberCoroutineScope()
     val setTaskDoing: (String) -> Unit = {
@@ -148,7 +145,7 @@ fun HomeScreen(addTask: () -> Unit) {
                 text = {
                     Text("Add task")
                 },
-                onClick = addTask,
+                onClick = { addTaskAlertDialogState = true },
                 backgroundColor = TodometerColors.primary
             )
         },
@@ -159,13 +156,21 @@ fun HomeScreen(addTask: () -> Unit) {
         Column(modifier = Modifier.fillMaxSize()) {
             if (addProjectAlertDialogState) {
                 AddProjectAlertDialog(
-                    addProject = { projectName ->
-                        coroutineScope.launch {
-                            insertProjectUseCase.invoke(projectName)
-                        }
-                    },
                     onDismissRequest = { addProjectAlertDialogState = false }
-                )
+                ) { projectName ->
+                    coroutineScope.launch {
+                        insertProjectUseCase.invoke(projectName)
+                    }
+                }
+            }
+            if (addTaskAlertDialogState) {
+                AddTaskAlertDialog(
+                    onDismissRequest = { addTaskAlertDialogState = false }
+                ) { title, description, _ ->
+                    coroutineScope.launch {
+                        insertTaskUseCase.invoke(title, description, Tag.GRAY)
+                    }
+                }
             }
         }
 
@@ -203,76 +208,22 @@ fun HomeScreen(addTask: () -> Unit) {
                 }
             }
             Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
-            LazyColumn {
-                items(tasks) {
-                    TaskItem(
-                        task = it,
-                        onDoingClick = setTaskDoing,
-                        onDoneClick = setTaskDone,
-                        {},
-                        {}
-                    )
+            Column {
+                Text(text = projectSelected?.name ?: "NOTHING")
+                LazyColumn {
+                    items(tasks) {
+                        TaskItem(
+                            task = it,
+                            onDoingClick = setTaskDoing,
+                            onDoneClick = setTaskDone,
+                            {},
+                            {}
+                        )
+                    }
                 }
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun AddProjectAlertDialog(
-    addProject: (name: String) -> Unit,
-    onDismissRequest: () -> Unit
-) {
-    var projectName by rememberSaveable { mutableStateOf("") }
-    var projectNameInputError by remember { mutableStateOf(false) }
-
-    AlertDialog(
-        title = {
-            Text(text = "Add project", modifier = Modifier.padding(start = 16.dp))
-        },
-        onDismissRequest = onDismissRequest,
-        text = {
-            Column {
-                TitledTextField(
-                    title = "Name",
-                    value = projectName,
-                    onValueChange = {
-                        projectName = it
-                        projectNameInputError = false
-                    },
-                    placeholder = { Text(text = "Enter project name") },
-                    singleLine = true,
-                    isError = projectNameInputError,
-                    errorMessage = "Field must not be empty",
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Done
-                    )
-                )
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    if (projectName.isBlank()) {
-                        projectNameInputError = true
-                    } else {
-                        addProject(projectName)
-                        onDismissRequest()
-                    }
-                }
-            ) {
-                Text("Save")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text("Cancel")
-            }
-        },
-        modifier = Modifier.requiredWidth(480.dp)
-    )
 }
 
 @Composable
