@@ -53,7 +53,11 @@ kotlin {
                 implementation(Libs.SqlDelight.coroutines)
             }
         }
-        val commonTest by getting
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
         val androidMain by getting {
             dependencies {
                 api(Libs.AndroidX.appCompat)
