@@ -45,7 +45,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.ui.components.TodometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -76,7 +75,7 @@ fun AddTaskScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            if (taskTitle.isNullOrBlank()) {
+                            if (taskTitle.isBlank()) {
                                 taskTitleInputError = true
                             } else {
                                 addTaskViewModel.insertTask(taskTitle, taskDescription, selectedTag)
@@ -108,13 +107,14 @@ fun AddTaskScreen(
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Next
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
                     )
                 )
-                TodometerTagSelector(
-                    selectedTag
-                ) { tag ->
-                    selectedTag = tag
-                }
                 TitledTextField(
                     title = stringResource(id = R.string.description),
                     value = taskDescription,
@@ -123,6 +123,12 @@ fun AddTaskScreen(
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
                     )
                 )
             }

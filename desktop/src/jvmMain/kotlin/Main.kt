@@ -27,7 +27,7 @@ import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.di.initKoin
 import ui.home.HomeScreen
-import ui.task.AddTaskScreen
+import ui.icons.iconToDometer
 import ui.theme.ToDometerTheme
 
 val koin = initKoin().koin
@@ -38,20 +38,19 @@ fun main() = application {
         title = "ToDometer",
         state = WindowState(
             position = WindowPosition.Aligned(Alignment.Center)
-        )
+        ),
+        icon = iconToDometer()
     ) {
         var currentPage: Screen by remember { mutableStateOf(Screen.Home) }
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        val navigateToAddTask: () -> Unit = {
-            currentPage = Screen.AddTask
-        }
         ToDometerTheme(darkTheme = isSystemInDarkTheme()) {
             Crossfade(currentPage) { screen ->
                 when (screen) {
-                    Screen.Home -> HomeScreen(navigateToAddTask)
-                    Screen.AddTask -> AddTaskScreen(navigateToHome)
+                    Screen.Home -> HomeScreen()
+                    else -> {
+                    }
                 }
             }
         }

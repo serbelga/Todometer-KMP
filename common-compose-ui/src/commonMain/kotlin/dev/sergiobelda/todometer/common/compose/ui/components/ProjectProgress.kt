@@ -23,10 +23,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,17 +48,20 @@ fun ProjectProgress(project: Project?, tasks: List<Task>) {
     )
     Column(
         modifier = Modifier.fillMaxWidth().requiredWidthIn(max = 360.dp)
-            .padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 12.dp)
     ) {
         // TODO: 02/04/2021 Max lines
-        Text(
-            project?.name?.uppercase() ?: "-",
-            style = TodometerTypography.overline
-        )
-        Text(
-            text = ProgressUtil.getPercentage(progress),
-            style = TodometerTypography.body2
-        )
+        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+            Text(
+                project?.name?.uppercase() ?: "-",
+                style = TodometerTypography.overline
+            )
+            Text(
+                text = ProgressUtil.getPercentage(progress),
+                style = TodometerTypography.body2,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+        }
         LinearProgressIndicator(
             progress = animatedProgress,
             modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp)

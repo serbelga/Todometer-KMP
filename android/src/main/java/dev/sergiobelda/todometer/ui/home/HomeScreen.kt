@@ -17,8 +17,6 @@
 package dev.sergiobelda.todometer.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -78,10 +76,10 @@ import dev.sergiobelda.todometer.common.compose.ui.components.DragIndicator
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.SingleLineItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
+import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.primarySelected
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Task
@@ -421,33 +419,6 @@ fun MenuBottomSheet(
                 ProjectListItem(project, project.id == selectedProjectId, selectProject)
             }
         }
-    }
-}
-
-@Composable
-fun ProjectListItem(
-    project: Project,
-    selected: Boolean,
-    onItemClick: (String) -> Unit
-) {
-    val background = if (selected) {
-        Modifier.background(TodometerColors.primarySelected)
-    } else {
-        Modifier
-    }
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(56.dp).clickable(onClick = { onItemClick(project.id) })
-            .then(background)
-    ) {
-        val selectedColor =
-            if (selected) TodometerColors.primary else TodometerColors.onSurface.copy(alpha = ContentAlpha.medium)
-        Text(
-            text = project.name,
-            color = selectedColor,
-            style = TodometerTypography.subtitle2,
-            modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
-        )
     }
 }
 

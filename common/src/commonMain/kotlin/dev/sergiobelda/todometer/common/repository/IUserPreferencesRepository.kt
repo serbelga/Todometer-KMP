@@ -30,7 +30,7 @@ interface IUserPreferencesRepository {
     /**
      * Sets the current project selected by its id.
      *
-     * @param id Project id.
+     * @param [projectSelectedId] Project id.
      */
     suspend fun setProjectSelected(projectSelectedId: String)
 

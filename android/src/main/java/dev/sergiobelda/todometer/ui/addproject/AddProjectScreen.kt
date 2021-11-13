@@ -72,7 +72,7 @@ fun AddProjectScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            if (projectName.isNullOrBlank()) {
+                            if (projectName.isBlank()) {
                                 projectNameInputError = true
                             } else {
                                 addProjectViewModel.insertProject(projectName)
@@ -104,6 +104,12 @@ fun AddProjectScreen(
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
                     )
                 )
             }

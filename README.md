@@ -21,12 +21,12 @@
 
 ### Android
 
-| <img width="300" src="./screenshots/android/home.png"></img> | <img width="300" src="./screenshots/android/add_task.png"></img> |
+| <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> |
 |---|---|
 
 ### Desktop
 
-Under construction
+<img width="720" src="./screenshots/desktop/home.png" />
 
 ### iOS
 
