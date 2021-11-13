@@ -26,7 +26,7 @@
 
 ### Desktop
 
-<img width="360" src="./screenshots/desktop/home.png" />
+<img width="720" src="./screenshots/desktop/home.png" />
 
 ### iOS
 
