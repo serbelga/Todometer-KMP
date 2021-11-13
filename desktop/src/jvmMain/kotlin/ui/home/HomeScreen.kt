@@ -226,7 +226,7 @@ fun EmptyProjectsView(addProject: () -> Unit) {
         ) {
             Image(
                 painterResource("images/no_projects.svg"),
-                modifier = Modifier.size(240.dp).padding(bottom = 24.dp).background(Color.Gray),
+                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
