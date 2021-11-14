@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -104,8 +105,13 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
             }
             composable(About) {
                 AboutScreen(
-                    {},
-                    { startOpenSourceLicensesActivity(context) },
+                    githubClick = {
+                        openWebPage(
+                            context,
+                            "https://github.com/serbelga/ToDometer_Multiplatform"
+                        )
+                    },
+                    openSourceLicensesClick = { startOpenSourceLicensesActivity(context) },
                     actions.navigateUp
                 )
             }
@@ -117,6 +123,15 @@ private fun startOpenSourceLicensesActivity(context: Context) {
     startActivity(
         context,
         Intent(context, OssLicensesMenuActivity::class.java),
+        null
+    )
+}
+
+private fun openWebPage(context: Context, url: String) {
+    val webpage: Uri = Uri.parse(url)
+    startActivity(
+        context,
+        Intent(Intent.ACTION_VIEW, webpage),
         null
     )
 }
