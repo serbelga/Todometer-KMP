@@ -30,7 +30,3 @@ fun ProjectApiModel.toDomain() =
 fun Iterable<ProjectApiModel>.toDomain() = this.map {
     it.toDomain()
 }
-
-fun Array<ProjectApiModel>.toDomain() = this.map {
-    it.toDomain()
-}

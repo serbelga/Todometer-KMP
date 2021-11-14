@@ -21,7 +21,7 @@ import dev.sergiobelda.todometer.common.api.request.NewProjectRequestBody
 
 interface IProjectApiClient {
 
-    suspend fun getProjects(): Array<ProjectApiModel>
+    suspend fun getProjects(): List<ProjectApiModel>
 
     suspend fun getProject(id: String): ProjectApiModel
 

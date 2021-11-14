@@ -33,7 +33,7 @@ import io.ktor.http.parametersOf
 
 class ProjectApiClient(private val todometerApi: TodometerApi) : IProjectApiClient {
 
-    override suspend fun getProjects(): Array<ProjectApiModel> =
+    override suspend fun getProjects(): List<ProjectApiModel> =
         todometerApi.client.get(ENDPOINT_URL + VERSION_1 + PROJECT_PATH)
 
     override suspend fun getProject(id: String): ProjectApiModel =
