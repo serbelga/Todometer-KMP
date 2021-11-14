@@ -129,9 +129,7 @@ fun EditTaskScreen(
                             bottom = 8.dp
                         )
                     )
-                    TodometerTagSelector(
-                        selectedTag
-                    ) { tag ->
+                    TodometerTagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
                     TitledTextField(
