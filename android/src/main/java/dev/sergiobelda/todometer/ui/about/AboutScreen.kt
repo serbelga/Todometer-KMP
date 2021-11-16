@@ -54,6 +54,7 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.extensions.getVersionName
+import dev.sergiobelda.todometer.ui.icons.iconToDometer
 
 @Composable
 fun AboutScreen(
@@ -164,7 +165,7 @@ fun ToDometerLogo(modifier: Modifier = Modifier) {
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(painterResource(id = R.drawable.isotype), null)
+        Image(painter = iconToDometer(), null)
         Text(
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.h5,

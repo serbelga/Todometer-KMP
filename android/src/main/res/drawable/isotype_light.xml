@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2021 Sergio Belda
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector android:height="18.782608dp" android:viewportHeight="180"
+    android:viewportWidth="230" android:width="24dp"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <clip-path android:pathData="M0,0h229.77v179.46h-229.77z"/>
+        <path android:fillColor="#0059C1" android:pathData="M68.19,129.22L81.67,115.82L92.48,126.48L100.55,118.48L89.74,107.75L100.55,96.93L119.36,115.82L127.43,107.75L108.62,88.86L119.36,78.13L130.17,88.86L138.24,80.79L127.43,70.05L138.24,59.24L157.05,78.13L165.12,70.05L146.31,51.17L157.05,40.43L167.79,51.17L175.93,43.1L165.12,32.36L175.93,21.55L194.66,40.43L202.81,32.36L184,13.48L197.41,0L229.77,32.36L100.55,161.58L68.19,129.22Z"/>
+        <path android:pathData="M78.217,119.22L53.985,143.453L86.328,175.796L110.56,151.563L78.217,119.22Z">
+            <aapt:attr name="android:fillColor">
+                <gradient android:endX="70.902" android:endY="160.517"
+                    android:startX="95.1767" android:startY="136.242" android:type="linear">
+                    <item android:color="#FF0059C1" android:offset="0"/>
+                    <item android:color="#FF073042" android:offset="0.81"/>
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path android:fillColor="#4285F4" android:pathData="M27.223,87.595L100.762,161.135C100.788,161.161 100.803,161.197 100.803,161.234C100.803,161.271 100.788,161.306 100.762,161.333L91.867,170.228C85.965,176.13 77.96,179.445 69.614,179.445C61.268,179.445 53.263,176.13 47.361,170.228L9.178,132.044C6.256,129.123 3.939,125.655 2.358,121.838C0.777,118.021 -0.037,113.93 -0.037,109.799C-0.037,105.667 0.777,101.576 2.358,97.759C3.939,93.943 6.256,90.474 9.178,87.553C10.363,86.367 11.771,85.428 13.321,84.788C14.871,84.148 16.532,83.821 18.209,83.825C19.886,83.828 21.545,84.164 23.092,84.811C24.639,85.458 26.043,86.404 27.223,87.595V87.595Z"/>
+    </group>
+</vector>
