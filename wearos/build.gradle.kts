@@ -55,5 +55,9 @@ dependencies {
         implementation(composeNavigation)
     }
 
+    with(Libs.Koin) {
+        implementation(android)
+    }
+    
     implementation(Libs.Google.Services.wearable)
 }
