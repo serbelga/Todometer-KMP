@@ -25,7 +25,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
@@ -41,6 +43,7 @@ import androidx.wear.compose.material.rememberScalingLazyListState
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.common.sampledata.sampleTasks
+import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -59,6 +62,7 @@ fun ProjectTasksScreen(
                 bottom = 40.dp
             ),
             state = scalingLazyListState,
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
@@ -67,8 +71,14 @@ fun ProjectTasksScreen(
             item {
                 Spacer(modifier = Modifier.height(4.dp))
             }
-            items(sampleTasks.size) { index ->
-                TaskItem(task = sampleTasks[index])
+            if (sampleTasks.isNullOrEmpty()) {
+                item {
+                    Text(text = stringResource(id = R.string.no_tasks))
+                }
+            } else {
+                items(sampleTasks.size) { index ->
+                    TaskItem(task = sampleTasks[index])
+                }
             }
         }
     }

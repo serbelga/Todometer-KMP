@@ -41,6 +41,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
+import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.sampledata.sampleProjects
 import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
@@ -77,23 +78,35 @@ fun HomeScreen(
             item {
                 Spacer(modifier = Modifier.height(4.dp))
             }
-            items(sampleProjects.size) { index ->
-                Chip(
-                    colors = ChipDefaults.secondaryChipColors(),
-                    label = {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            color = MaterialTheme.colors.onSurface,
-                            text = sampleProjects[index].name
-                        )
-                    },
-                    onClick = {
-                        openProject(index.toString())
-                    }
-                )
+            if (sampleProjects.isNullOrEmpty()) {
+                item {
+                    Text(text = stringResource(id = R.string.no_projects))
+                }
+            } else {
+                items(sampleProjects.size) { index ->
+                    ProjectItem(sampleProjects[index]) { openProject(it) }
+                }
             }
         }
     }
+}
+
+@Composable
+fun ProjectItem(
+    project: Project,
+    onClick: (String) -> Unit
+) {
+    Chip(
+        colors = ChipDefaults.secondaryChipColors(),
+        label = {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colors.onSurface,
+                text = project.name
+            )
+        },
+        onClick = { onClick(project.id) }
+    )
 }
 
 @Composable
