@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.wear.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,12 +25,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
@@ -39,6 +41,8 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
+import dev.sergiobelda.todometer.common.sampledata.sampleProjects
+import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -48,42 +52,45 @@ fun HomeScreen(
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     Scaffold(
+        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
         vignette = {
             Vignette(vignettePosition = VignettePosition.TopAndBottom)
         }
     ) {
-        Column {
-            ScalingLazyColumn(
-                contentPadding = PaddingValues(
-                    top = 28.dp,
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 40.dp
-                ),
-                state = scalingLazyListState,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                item {
-                    AddProjectButton()
-                }
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                }
-                items(10) { index ->
-                    Chip(
-                        colors = ChipDefaults.secondaryChipColors(),
-                        label = {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                color = MaterialTheme.colors.onSurface,
-                                text = "Project ${index + 1}"
-                            )
-                        },
-                        onClick = {
-                            openProject(index.toString())
-                        }
-                    )
-                }
+        ScalingLazyColumn(
+            contentPadding = PaddingValues(
+                top = 28.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 40.dp
+            ),
+            state = scalingLazyListState,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            item {
+                Text(stringResource(R.string.app_name))
+            }
+            item {
+                AddProjectButton()
+            }
+            item {
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+            items(sampleProjects.size) { index ->
+                Chip(
+                    colors = ChipDefaults.secondaryChipColors(),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colors.onSurface,
+                            text = sampleProjects[index].name
+                        )
+                    },
+                    onClick = {
+                        openProject(index.toString())
+                    }
+                )
             }
         }
     }

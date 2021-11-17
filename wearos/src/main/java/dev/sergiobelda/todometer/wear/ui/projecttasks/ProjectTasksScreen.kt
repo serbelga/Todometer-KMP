@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.wear.ui.projecttasks
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,12 +31,16 @@ import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.ToggleChip
 import androidx.wear.compose.material.rememberScalingLazyListState
+import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskState
+import dev.sergiobelda.todometer.common.sampledata.sampleTasks
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -45,42 +48,47 @@ fun ProjectTasksScreen(
     projectTasksViewModel: ProjectTasksViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    Scaffold {
-        Column {
-            ScalingLazyColumn(
-                contentPadding = PaddingValues(
-                    top = 28.dp,
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 40.dp
-                ),
-                state = scalingLazyListState,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                item {
-                    AddTaskButton()
-                }
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                }
-                items(5) { index ->
-                    // Use SplitToggleChip if you need an onClick.
-                    ToggleChip(
-                        //colors = ChipDefaults.secondaryChipColors(),
-                        checked = true,
-                        onCheckedChange = {},
-                        label = {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                color = MaterialTheme.colors.onSurface,
-                                text = "Task ${index + 1}"
-                            )
-                        }
-                    )
-                }
+    Scaffold(
+        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+    ) {
+        ScalingLazyColumn(
+            contentPadding = PaddingValues(
+                top = 28.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 40.dp
+            ),
+            state = scalingLazyListState,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            item {
+                AddTaskButton()
+            }
+            item {
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+            items(sampleTasks.size) { index ->
+                TaskItem(task = sampleTasks[index])
             }
         }
     }
+}
+
+@Composable
+fun TaskItem(task: Task) {
+    // Use SplitToggleChip if onClick is needed.
+    ToggleChip(
+        //colors = ChipDefaults.secondaryChipColors(),
+        checked = task.state == TaskState.DONE,
+        onCheckedChange = {},
+        label = {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colors.onSurface,
+                text = task.title
+            )
+        }
+    )
 }
 
 @Composable

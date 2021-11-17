@@ -18,12 +18,11 @@ package dev.sergiobelda.todometer.common.compose.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Typography
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-
-typealias ComposeMaterialTypography = androidx.compose.material.Typography
 
 val DarkColorPalette = darkColors(
     primary = primaryDark,
@@ -58,7 +57,7 @@ val Colors.primarySelected: Color
 val TodometerColors: Colors
     @Composable get() = MaterialTheme.colors
 
-val TodometerTypography: ComposeMaterialTypography
+val TodometerTypography: Typography
     @Composable get() = MaterialTheme.typography
 
 val Colors.pink: Color

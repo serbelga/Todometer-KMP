@@ -21,17 +21,16 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.wear.compose.material.ExperimentalWearMaterialApi
-import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.wear.Actions
-import dev.sergiobelda.todometer.wear.Destinations
 import dev.sergiobelda.todometer.wear.Destinations.Home
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasksArgs.ProjectId
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
 import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksScreen
+import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 
 @OptIn(ExperimentalWearMaterialApi::class)
 @Composable
@@ -39,7 +38,7 @@ fun ToDometerApp() {
     val navController = rememberSwipeDismissableNavController()
     val actions = remember(navController) { Actions(navController) }
 
-    MaterialTheme {
+    ToDometerTheme {
         SwipeDismissableNavHost(navController = navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
