@@ -25,9 +25,13 @@ import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.wear.Actions
+import dev.sergiobelda.todometer.wear.Destinations.AddProject
+import dev.sergiobelda.todometer.wear.Destinations.AddTask
 import dev.sergiobelda.todometer.wear.Destinations.Home
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasksArgs.ProjectId
+import dev.sergiobelda.todometer.wear.ui.addproject.AddProjectScreen
+import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
 import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksScreen
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
@@ -42,14 +46,21 @@ fun ToDometerApp() {
         SwipeDismissableNavHost(navController = navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
+                    actions.addProject,
                     actions.openProject
                 )
             }
+            composable(AddProject) {
+                AddProjectScreen()
+            }
             composable(
-                "$ProjectTasks/{${ProjectId}}",
+                "$ProjectTasks/{$ProjectId}",
                 arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
             ) {
-                ProjectTasksScreen()
+                ProjectTasksScreen(actions.addTask)
+            }
+            composable(AddTask) {
+                AddTaskScreen()
             }
         }
     }

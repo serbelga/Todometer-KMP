@@ -17,11 +17,15 @@
 package dev.sergiobelda.todometer.wear
 
 import androidx.navigation.NavHostController
+import dev.sergiobelda.todometer.wear.Destinations.AddProject
+import dev.sergiobelda.todometer.wear.Destinations.AddTask
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
 
 object Destinations {
     const val Home = "home"
+    const val AddProject = "addProject"
     const val ProjectTasks = "projectTasks"
+    const val AddTask = "addTask"
 
     object ProjectTasksArgs {
         const val ProjectId = "projectId"
@@ -32,4 +36,6 @@ class Actions(navController: NavHostController) {
     val openProject: (String) -> Unit = { projectId ->
         navController.navigate("$ProjectTasks/$projectId")
     }
+    val addProject: () -> Unit = { navController.navigate(AddProject) }
+    val addTask: () -> Unit = { navController.navigate(AddTask) }
 }

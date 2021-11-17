@@ -48,6 +48,7 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ProjectTasksScreen(
+    addTask: () -> Unit,
     projectTasksViewModel: ProjectTasksViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
@@ -88,7 +89,7 @@ fun ProjectTasksScreen(
 fun TaskItem(task: Task) {
     // Use SplitToggleChip if onClick is needed.
     ToggleChip(
-        //colors = ChipDefaults.secondaryChipColors(),
+        // colors = ChipDefaults.secondaryChipColors(),
         checked = task.state == TaskState.DONE,
         onCheckedChange = {},
         label = {

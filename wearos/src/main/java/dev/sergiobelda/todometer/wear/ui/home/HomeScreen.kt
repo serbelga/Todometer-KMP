@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -41,17 +42,19 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
+import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
-import dev.sergiobelda.todometer.common.sampledata.sampleProjects
 import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
+    addProject: () -> Unit,
     openProject: (String) -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
+    val projectsResultState = homeViewModel.projects.collectAsState()
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
         vignette = {
@@ -73,18 +76,20 @@ fun HomeScreen(
                 Text(stringResource(R.string.app_name))
             }
             item {
-                AddProjectButton()
+                AddProjectButton(addProject)
             }
             item {
                 Spacer(modifier = Modifier.height(4.dp))
             }
-            if (sampleProjects.isNullOrEmpty()) {
-                item {
-                    Text(text = stringResource(id = R.string.no_projects))
-                }
-            } else {
-                items(sampleProjects.size) { index ->
-                    ProjectItem(sampleProjects[index]) { openProject(it) }
+            projectsResultState.value.doIfSuccess { projects ->
+                if (projects.isNullOrEmpty()) {
+                    item {
+                        Text(text = stringResource(id = R.string.no_projects))
+                    }
+                } else {
+                    items(projects.size) { index ->
+                        ProjectItem(projects[index]) { openProject(it) }
+                    }
                 }
             }
         }
@@ -110,7 +115,7 @@ fun ProjectItem(
 }
 
 @Composable
-fun AddProjectButton() {
+fun AddProjectButton(onClick: () -> Unit) {
     Chip(
         modifier = Modifier
             .fillMaxWidth()
@@ -128,7 +133,6 @@ fun AddProjectButton() {
                 text = "Add Project"
             )
         },
-        onClick = {
-        }
+        onClick = onClick
     )
 }
