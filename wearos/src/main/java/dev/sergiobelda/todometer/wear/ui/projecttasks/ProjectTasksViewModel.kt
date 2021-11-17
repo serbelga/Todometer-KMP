@@ -14,18 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.di
+package dev.sergiobelda.todometer.wear.ui.projecttasks
 
-import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
-import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import androidx.lifecycle.ViewModel
 
-val viewModelModule = module {
-    viewModel {
-        HomeViewModel()
-    }
-    viewModel {
-        ProjectTasksViewModel()
-    }
-}
+class ProjectTasksViewModel : ViewModel()

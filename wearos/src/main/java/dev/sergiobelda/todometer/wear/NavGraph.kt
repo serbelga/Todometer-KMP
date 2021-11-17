@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.di
+package dev.sergiobelda.todometer.wear
 
-import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
-import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import androidx.navigation.NavHostController
+import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
 
-val viewModelModule = module {
-    viewModel {
-        HomeViewModel()
+object Destinations {
+    const val Home = "home"
+    const val ProjectTasks = "projectTasks"
+
+    object ProjectTasksArgs {
+        const val ProjectId = "projectId"
     }
-    viewModel {
-        ProjectTasksViewModel()
+}
+
+class Actions(navController: NavHostController) {
+    val openProject: (String) -> Unit = { projectId ->
+        navController.navigate("$ProjectTasks/$projectId")
     }
 }

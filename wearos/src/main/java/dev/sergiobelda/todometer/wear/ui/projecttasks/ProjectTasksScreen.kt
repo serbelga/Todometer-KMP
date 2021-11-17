@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.home
+package dev.sergiobelda.todometer.wear.ui.projecttasks
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,22 +36,16 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.Vignette
-import androidx.wear.compose.material.VignettePosition
+import androidx.wear.compose.material.ToggleChip
 import androidx.wear.compose.material.rememberScalingLazyListState
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen(
-    openProject: (String) -> Unit,
-    homeViewModel: HomeViewModel = getViewModel()
+fun ProjectTasksScreen(
+    projectTasksViewModel: ProjectTasksViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    Scaffold(
-        vignette = {
-            Vignette(vignettePosition = VignettePosition.TopAndBottom)
-        }
-    ) {
+    Scaffold {
         Column {
             ScalingLazyColumn(
                 contentPadding = PaddingValues(
@@ -64,23 +58,23 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 item {
-                    AddProjectButton()
+                    AddTaskButton()
                 }
                 item {
                     Spacer(modifier = Modifier.height(12.dp))
                 }
-                items(10) { index ->
-                    Chip(
-                        colors = ChipDefaults.secondaryChipColors(),
+                items(5) { index ->
+                    // Use SplitToggleChip if you need an onClick.
+                    ToggleChip(
+                        //colors = ChipDefaults.secondaryChipColors(),
+                        checked = true,
+                        onCheckedChange = {},
                         label = {
                             Text(
                                 modifier = Modifier.fillMaxWidth(),
                                 color = MaterialTheme.colors.onSurface,
-                                text = "Project ${index + 1}"
+                                text = "Task ${index + 1}"
                             )
-                        },
-                        onClick = {
-                            openProject(index.toString())
                         }
                     )
                 }
@@ -90,7 +84,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun AddProjectButton() {
+fun AddTaskButton() {
     Chip(
         modifier = Modifier
             .fillMaxWidth()
@@ -105,7 +99,7 @@ fun AddProjectButton() {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Add Project"
+                text = "Add Task"
             )
         },
         onClick = {
