@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
 import kotlinx.coroutines.launch
 
 class AddProjectViewModel(
-    private val insertProjectUseCase: InsertProjectUseCase,
+    private val insertProjectUseCase: InsertProjectUseCase
 ) : ViewModel() {
 
     // TODO: Migrate to StateFlow
