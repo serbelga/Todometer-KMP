@@ -16,9 +16,38 @@
 
 package dev.sergiobelda.todometer.wear.ui.addtask
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.Icon
+import androidx.wear.compose.material.Scaffold
+import androidx.wear.compose.material.Text
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun AddTaskScreen() {
-
+fun AddTaskScreen(
+    projectId: String,
+    navigateUp: () -> Unit,
+    addTaskViewModel: AddTaskViewModel = getViewModel()
+) {
+    Scaffold {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Task 1")
+            Button(
+                onClick = {
+                    addTaskViewModel.insertTask(projectId, "Task")
+                }
+            ) {
+                Icon(Icons.Rounded.Check, contentDescription = "")
+            }
+        }
+    }
 }

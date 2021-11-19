@@ -28,4 +28,13 @@ class AddProjectViewModel(
     fun insertProject(name: String) = viewModelScope.launch {
         insertProjectUseCase.invoke(name)
     }
+
+    /*
+    fun insertProject(name: String): StateFlow<Result<String>> = flow {
+        emit(insertProjectUseCase.invoke(name))
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = Result.Loading
+    )*/
 }

@@ -17,5 +17,22 @@
 package dev.sergiobelda.todometer.wear.ui.projecttasks
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.todometer.common.data.Result
+import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.usecase.GetProjectTasksUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
-class ProjectTasksViewModel : ViewModel()
+class ProjectTasksViewModel(
+    private val getProjectTasksUseCase: GetProjectTasksUseCase
+) : ViewModel() {
+
+    fun getProjectTasks(projectId: String): StateFlow<Result<List<Task>>> =
+        getProjectTasksUseCase(projectId).stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            Result.Loading
+        )
+}

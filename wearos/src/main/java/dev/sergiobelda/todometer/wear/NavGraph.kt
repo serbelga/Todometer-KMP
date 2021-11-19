@@ -37,5 +37,8 @@ class Actions(navController: NavHostController) {
         navController.navigate("$ProjectTasks/$projectId")
     }
     val addProject: () -> Unit = { navController.navigate(AddProject) }
-    val addTask: () -> Unit = { navController.navigate(AddTask) }
+    val addTask: (String) -> Unit = { projectId ->
+        navController.navigate("$AddTask/$projectId")
+    }
+    val navigateUp: () -> Unit = { navController.popBackStack() }
 }

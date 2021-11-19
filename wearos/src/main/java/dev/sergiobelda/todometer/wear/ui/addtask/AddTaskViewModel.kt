@@ -17,10 +17,23 @@
 package dev.sergiobelda.todometer.wear.ui.addtask
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
     private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
+    /*
+    fun insertTask(title: String): StateFlow<Result<String>> = flow {
+        emit(insertTaskUseCase.invoke(title))
+    }.stateIn(
+        scope = viewModelScope,
+        started = WhileSubscribed(),
+        initialValue = Result.Loading
+    )*/
+    fun insertTask(projectId: String, title: String) = viewModelScope.launch {
+        insertTaskUseCase.invoke(projectId, title)
+    }
 }

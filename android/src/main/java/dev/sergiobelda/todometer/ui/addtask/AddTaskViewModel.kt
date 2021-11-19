@@ -22,11 +22,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
-    private val insertTaskUseCase: InsertTaskUseCase
+    private val insertTaskProjectSelectedUseCase: InsertTaskProjectSelectedUseCase
 ) : ViewModel() {
 
     // TODO: Migrate to StateFlow
@@ -38,6 +38,6 @@ class AddTaskViewModel(
         description: String,
         tag: Tag
     ) = viewModelScope.launch {
-        _result.value = insertTaskUseCase.invoke(title, description, tag)
+        _result.value = insertTaskProjectSelectedUseCase.invoke(title, description, tag)
     }
 }

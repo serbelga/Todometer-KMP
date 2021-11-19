@@ -51,16 +51,25 @@ fun ToDometerApp() {
                 )
             }
             composable(AddProject) {
-                AddProjectScreen()
+                AddProjectScreen(actions.navigateUp)
             }
             composable(
                 "$ProjectTasks/{$ProjectId}",
                 arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
-            ) {
-                ProjectTasksScreen(actions.addTask)
+            ) { navBackStackEntry ->
+                ProjectTasksScreen(
+                    navBackStackEntry.arguments?.getString(ProjectId) ?: "",
+                    actions.addTask
+                )
             }
-            composable(AddTask) {
-                AddTaskScreen()
+            composable(
+                "$AddTask/{$ProjectId}",
+                arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
+            ) { navBackStackEntry ->
+                AddTaskScreen(
+                    navBackStackEntry.arguments?.getString(ProjectId) ?: "",
+                    actions.navigateUp
+                )
             }
         }
     }

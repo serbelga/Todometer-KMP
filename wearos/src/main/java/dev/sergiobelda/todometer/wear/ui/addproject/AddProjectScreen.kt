@@ -31,6 +31,7 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddProjectScreen(
+    navigateUp: () -> Unit,
     addProjectViewModel: AddProjectViewModel = getViewModel()
 ) {
     Scaffold {
@@ -39,7 +40,11 @@ fun AddProjectScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Project 1")
-            Button(onClick = { addProjectViewModel.insertProject("Project 1") }) {
+            Button(
+                onClick = {
+                    addProjectViewModel.insertProject("Project 1")
+                }
+            ) {
                 Icon(Icons.Rounded.Check, contentDescription = "")
             }
         }

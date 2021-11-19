@@ -17,24 +17,14 @@
 package dev.sergiobelda.todometer.common.usecase
 
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.repository.ITaskRepository
+import kotlinx.coroutines.flow.Flow
 
-class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
+class GetProjectTasksUseCase(
+    private val taskRepository: ITaskRepository
+) {
 
-    /**
-     * Creates a new [Task] given a [title], [description] and [tag], in the project [projectId].
-     */
-    suspend operator fun invoke(
-        projectId: String,
-        title: String,
-        description: String = "",
-        tag: Tag = Tag.GRAY
-    ): Result<String> = taskRepository.insertTask(
-        title,
-        description,
-        projectId,
-        tag
-    )
+    operator fun invoke(projectId: String): Flow<Result<List<Task>>> =
+        taskRepository.getTasks(projectId)
 }

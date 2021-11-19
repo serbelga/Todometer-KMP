@@ -41,6 +41,7 @@ import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
+import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
@@ -87,8 +88,8 @@ fun HomeScreen(
                         Text(text = stringResource(id = R.string.no_projects))
                     }
                 } else {
-                    items(projects.size) { index ->
-                        ProjectItem(projects[index]) { openProject(it) }
+                    items(projects) { project ->
+                        ProjectItem(project) { openProject(it) }
                     }
                 }
             }

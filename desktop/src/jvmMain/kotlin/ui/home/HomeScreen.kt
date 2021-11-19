@@ -65,11 +65,11 @@ import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -88,17 +88,17 @@ fun HomeScreen() {
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
     val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
     val setProjectSelectedUseCase = koin.get<SetProjectSelectedUseCase>()
-    val getTasksUseCase = koin.get<GetTasksUseCase>()
+    val getProjectSelectedTasksUseCase = koin.get<GetProjectSelectedTasksUseCase>()
     val getProjectsUseCase = koin.get<GetProjectsUseCase>()
     val insertProjectUseCase = koin.get<InsertProjectUseCase>()
-    val insertTaskUseCase = koin.get<InsertTaskUseCase>()
+    val insertTaskProjectSelectedUseCase = koin.get<InsertTaskProjectSelectedUseCase>()
 
     var projectSelected: Project? by remember { mutableStateOf(null) }
     val projectResultState by getProjectSelectedUseCase().collectAsState(null)
     projectResultState?.doIfSuccess { projectSelected = it }
 
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
-    val tasksResultState by getTasksUseCase().collectAsState(null)
+    val tasksResultState by getProjectSelectedTasksUseCase().collectAsState(null)
     tasksResultState?.doIfSuccess { tasks = it }
 
     var projects: List<Project> by remember { mutableStateOf(emptyList()) }
@@ -166,7 +166,7 @@ fun HomeScreen() {
                     onDismissRequest = { addTaskAlertDialogState = false }
                 ) { title, description, _ ->
                     coroutineScope.launch {
-                        insertTaskUseCase.invoke(title, description, Tag.GRAY)
+                        insertTaskProjectSelectedUseCase.invoke(title, description, Tag.GRAY)
                     }
                 }
             }

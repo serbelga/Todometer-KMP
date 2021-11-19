@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -39,19 +40,22 @@ import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.ToggleChip
+import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
+import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskState
-import dev.sergiobelda.todometer.common.sampledata.sampleTasks
 import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ProjectTasksScreen(
-    addTask: () -> Unit,
+    projectId: String,
+    addTask: (String) -> Unit,
     projectTasksViewModel: ProjectTasksViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
+    val tasksResultState = projectTasksViewModel.getProjectTasks(projectId).collectAsState()
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
@@ -67,18 +71,22 @@ fun ProjectTasksScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                AddTaskButton()
+                AddTaskButton {
+                    addTask(projectId)
+                }
             }
             item {
                 Spacer(modifier = Modifier.height(4.dp))
             }
-            if (sampleTasks.isNullOrEmpty()) {
-                item {
-                    Text(text = stringResource(id = R.string.no_tasks))
-                }
-            } else {
-                items(sampleTasks.size) { index ->
-                    TaskItem(task = sampleTasks[index])
+            tasksResultState.value.doIfSuccess { tasks ->
+                if (tasks.isNullOrEmpty()) {
+                    item {
+                        Text(text = stringResource(id = R.string.no_tasks))
+                    }
+                } else {
+                    items(tasks) { task ->
+                        TaskItem(task)
+                    }
                 }
             }
         }
@@ -103,7 +111,7 @@ fun TaskItem(task: Task) {
 }
 
 @Composable
-fun AddTaskButton() {
+fun AddTaskButton(onClick: () -> Unit) {
     Chip(
         modifier = Modifier
             .fillMaxWidth()
@@ -121,7 +129,6 @@ fun AddTaskButton() {
                 text = "Add Task"
             )
         },
-        onClick = {
-        }
+        onClick = onClick
     )
 }

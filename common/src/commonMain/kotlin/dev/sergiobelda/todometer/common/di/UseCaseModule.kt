@@ -19,11 +19,13 @@ package dev.sergiobelda.todometer.common.di
 import dev.sergiobelda.todometer.common.usecase.DeleteProjectUseCase
 import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
+import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.GetProjectTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.RefreshProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
@@ -52,10 +54,16 @@ val useCaseModule = module {
         GetTaskUseCase(get())
     }
     single {
-        GetTasksUseCase(get(), get())
+        GetProjectTasksUseCase(get())
     }
     single {
-        InsertTaskUseCase(get(), get())
+        GetProjectSelectedTasksUseCase(get(), get())
+    }
+    single {
+        InsertTaskUseCase(get())
+    }
+    single {
+        InsertTaskProjectSelectedUseCase(get(), get())
     }
     single {
         UpdateTaskUseCase(get())

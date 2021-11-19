@@ -28,7 +28,7 @@ val viewModelModule = module {
         HomeViewModel(get())
     }
     viewModel {
-        ProjectTasksViewModel()
+        ProjectTasksViewModel(get())
     }
     viewModel {
         AddProjectViewModel(get())
