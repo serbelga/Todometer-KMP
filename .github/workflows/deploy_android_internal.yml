@@ -40,5 +40,5 @@ jobs:
         run: |
           version_name=${{ github.event.inputs.versionName }}
           echo "Tagging release with tag $version_name"
-          git tag $version_name
+          git tag android-$version_name
           git push origin --tags
