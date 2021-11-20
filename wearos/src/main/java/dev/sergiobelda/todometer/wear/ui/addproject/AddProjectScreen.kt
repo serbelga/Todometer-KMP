@@ -43,6 +43,7 @@ fun AddProjectScreen(
             Button(
                 onClick = {
                     addProjectViewModel.insertProject("Project 1")
+                    navigateUp()
                 }
             ) {
                 Icon(Icons.Rounded.Check, contentDescription = "")

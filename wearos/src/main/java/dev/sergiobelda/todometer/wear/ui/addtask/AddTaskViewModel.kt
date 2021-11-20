@@ -25,14 +25,6 @@ class AddTaskViewModel(
     private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
-    /*
-    fun insertTask(title: String): StateFlow<Result<String>> = flow {
-        emit(insertTaskUseCase.invoke(title))
-    }.stateIn(
-        scope = viewModelScope,
-        started = WhileSubscribed(),
-        initialValue = Result.Loading
-    )*/
     fun insertTask(projectId: String, title: String) = viewModelScope.launch {
         insertTaskUseCase.invoke(projectId, title)
     }

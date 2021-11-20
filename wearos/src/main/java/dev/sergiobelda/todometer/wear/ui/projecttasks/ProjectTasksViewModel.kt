@@ -21,18 +21,31 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetProjectTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class ProjectTasksViewModel(
-    private val getProjectTasksUseCase: GetProjectTasksUseCase
+    projectId: String,
+    getProjectTasksUseCase: GetProjectTasksUseCase,
+    private val setTaskDoingUseCase: SetTaskDoingUseCase,
+    private val setTaskDoneUseCase: SetTaskDoneUseCase
 ) : ViewModel() {
 
-    fun getProjectTasks(projectId: String): StateFlow<Result<List<Task>>> =
-        getProjectTasksUseCase(projectId).stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
+    val tasks: StateFlow<Result<List<Task>>> = getProjectTasksUseCase(projectId).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Result.Loading
+    )
+
+    fun setTaskDoing(id: String) = viewModelScope.launch {
+        setTaskDoingUseCase(id)
+    }
+
+    fun setTaskDone(id: String) = viewModelScope.launch {
+        setTaskDoneUseCase(id)
+    }
 }

@@ -43,7 +43,8 @@ fun AddTaskScreen(
             Text(text = "Task 1")
             Button(
                 onClick = {
-                    addTaskViewModel.insertTask(projectId, "Task")
+                    addTaskViewModel.insertTask(projectId, "Task 1")
+                    navigateUp()
                 }
             ) {
                 Icon(Icons.Rounded.Check, contentDescription = "")

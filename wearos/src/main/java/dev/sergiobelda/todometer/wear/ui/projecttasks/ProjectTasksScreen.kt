@@ -47,15 +47,22 @@ import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ProjectTasksScreen(
     projectId: String,
     addTask: (String) -> Unit,
-    projectTasksViewModel: ProjectTasksViewModel = getViewModel()
+    projectTasksViewModel: ProjectTasksViewModel = getViewModel(
+        parameters = {
+            parametersOf(
+                projectId
+            )
+        }
+    )
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val tasksResultState = projectTasksViewModel.getProjectTasks(projectId).collectAsState()
+    val tasksResultState = projectTasksViewModel.tasks.collectAsState()
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
@@ -85,7 +92,12 @@ fun ProjectTasksScreen(
                     }
                 } else {
                     items(tasks) { task ->
-                        TaskItem(task)
+                        TaskItem(
+                            task,
+                            onDoingClick = { projectTasksViewModel.setTaskDoing(task.id) },
+                            onDoneClick = { projectTasksViewModel.setTaskDone(task.id) },
+                            onClick = {}
+                        )
                     }
                 }
             }
@@ -94,12 +106,23 @@ fun ProjectTasksScreen(
 }
 
 @Composable
-fun TaskItem(task: Task) {
+fun TaskItem(
+    task: Task,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onClick: (String) -> Unit
+) {
     // Use SplitToggleChip if onClick is needed.
     ToggleChip(
         // colors = ChipDefaults.secondaryChipColors(),
         checked = task.state == TaskState.DONE,
-        onCheckedChange = {},
+        onCheckedChange = {
+            if (task.state == TaskState.DOING) {
+                onDoneClick(task.id)
+            } else {
+                onDoingClick(task.id)
+            }
+        },
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
