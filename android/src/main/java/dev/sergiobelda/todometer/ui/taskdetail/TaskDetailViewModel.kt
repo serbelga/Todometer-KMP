@@ -21,21 +21,18 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.stateIn
 
 class TaskDetailViewModel(
-    private val getTaskUseCase: GetTaskUseCase
+    taskId: String,
+    getTaskUseCase: GetTaskUseCase
 ) : ViewModel() {
 
-    private val _task: MutableStateFlow<Result<Task>> = MutableStateFlow(Result.Loading)
-    var task: StateFlow<Result<Task>> = _task
-
-    fun getTask(id: String) = viewModelScope.launch {
-        getTaskUseCase(id).collect {
-            _task.value = it
-        }
-    }
+    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Result.Loading
+    )
 }

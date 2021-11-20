@@ -22,24 +22,22 @@ import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class EditTaskViewModel(
-    private val getTaskUseCase: GetTaskUseCase,
+    taskId: String,
+    getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    private val _task: MutableStateFlow<Result<Task>> = MutableStateFlow(Result.Loading)
-    var task: StateFlow<Result<Task>> = _task
-
-    fun getTask(id: String) = viewModelScope.launch {
-        getTaskUseCase(id).collect {
-            _task.value = it
-        }
-    }
+    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Result.Loading
+    )
 
     fun updateTask(task: Task) = viewModelScope.launch {
         updateTaskUseCase(task)
