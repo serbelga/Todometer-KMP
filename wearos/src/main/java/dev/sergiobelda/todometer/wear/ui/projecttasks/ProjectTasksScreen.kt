@@ -54,11 +54,7 @@ fun ProjectTasksScreen(
     projectId: String,
     addTask: (String) -> Unit,
     projectTasksViewModel: ProjectTasksViewModel = getViewModel(
-        parameters = {
-            parametersOf(
-                projectId
-            )
-        }
+        parameters = { parametersOf(projectId) }
     )
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
