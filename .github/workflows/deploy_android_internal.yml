@@ -32,6 +32,7 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: dev.sergiobelda.todometer
           releaseFile: android/build/outputs/bundle/release/android-release.aab
+          status: draft
           track: internal
       - name: Tag Release
         run: |
