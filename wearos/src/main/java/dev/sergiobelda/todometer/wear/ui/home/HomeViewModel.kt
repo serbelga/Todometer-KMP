@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
-import kotlinx.coroutines.launch
+import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
-class AddTaskViewModel(
-    private val insertTaskProjectSelectedUseCase: InsertTaskProjectSelectedUseCase
+class HomeViewModel(
+    getProjectsUseCase: GetProjectsUseCase
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<Result<String>>()
-    val result: LiveData<Result<String>> get() = _result
-
-    fun insertTask(
-        title: String,
-        description: String,
-        tag: Tag
-    ) = viewModelScope.launch {
-        _result.value = insertTaskProjectSelectedUseCase.invoke(title, description, tag)
-    }
+    val projects: StateFlow<Result<List<Project>>> =
+        getProjectsUseCase().stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            Result.Loading
+        )
 }

@@ -14,19 +14,22 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui
+package dev.sergiobelda.todometer.wear.ui.theme
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.wear.compose.material.Typography
+import dev.sergiobelda.todometer.wear.R
 
-class MainActivity : ComponentActivity() {
+val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
+val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+val quickSandFontFamily = FontFamily(
+    quickSandRegularFont,
+    quickSandMediumFont
+)
 
-        setContent {
-            ToDometerApp()
-        }
-    }
-}
+val typography = Typography(
+    defaultFontFamily = quickSandFontFamily
+)

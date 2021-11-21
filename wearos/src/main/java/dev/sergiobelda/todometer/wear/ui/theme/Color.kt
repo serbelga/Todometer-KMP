@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui
+package dev.sergiobelda.todometer.wear.ui.theme
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.ui.graphics.Color
+import androidx.wear.compose.material.Colors
 
-class MainActivity : ComponentActivity() {
+val primary = Color(0xFF80b4ff)
+val green = Color(0xFF3DDC84)
+val navy = Color(0xFF073042)
+val navyDark = Color(0xFF00071c)
+val orange = Color(0xFFF86734)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContent {
-            ToDometerApp()
-        }
-    }
-}
+val colorPalette = Colors(
+    primary = primary,
+    secondary = green,
+    surface = navy,
+    background = navyDark
+)

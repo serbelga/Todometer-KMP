@@ -32,7 +32,7 @@ interface ITaskRepository {
     /**
      * Get a list of [Task] given an optional [projectId].
      */
-    suspend fun getTasks(projectId: String): Flow<Result<List<Task>>>
+    fun getTasks(projectId: String): Flow<Result<List<Task>>>
 
     suspend fun refreshTasks(projectId: String)
 

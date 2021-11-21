@@ -14,29 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.addtask
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
-    private val insertTaskProjectSelectedUseCase: InsertTaskProjectSelectedUseCase
+    private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<Result<String>>()
-    val result: LiveData<Result<String>> get() = _result
-
-    fun insertTask(
-        title: String,
-        description: String,
-        tag: Tag
-    ) = viewModelScope.launch {
-        _result.value = insertTaskProjectSelectedUseCase.invoke(title, description, tag)
+    fun insertTask(projectId: String, title: String) = viewModelScope.launch {
+        insertTaskUseCase.invoke(projectId, title)
     }
 }

@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.usecase
+package dev.sergiobelda.todometer.common.sampledata
 
-import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.repository.ITaskRepository
+import dev.sergiobelda.todometer.common.model.TaskState
 
-class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
-
-    /**
-     * Creates a new [Task] given a [title], [description] and [tag], in the project [projectId].
-     */
-    suspend operator fun invoke(
-        projectId: String,
-        title: String,
-        description: String = "",
-        tag: Tag = Tag.GRAY
-    ): Result<String> = taskRepository.insertTask(
-        title,
-        description,
-        projectId,
-        tag
+val sampleTasks = listOf(
+    Task(
+        id = "1",
+        title = "Task 1",
+        description = "This is the Task 1",
+        state = TaskState.DOING,
+        projectId = "1",
+        tag = Tag.BLUE,
+        sync = false
+    ),
+    Task(
+        id = "2",
+        title = "Task 2",
+        description = "This is the Task 2",
+        state = TaskState.DONE,
+        projectId = "1",
+        tag = Tag.BLUE,
+        sync = false
     )
-}
+)

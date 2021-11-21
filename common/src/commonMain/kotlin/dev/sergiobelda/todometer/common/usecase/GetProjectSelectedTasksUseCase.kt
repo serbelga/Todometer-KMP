@@ -17,24 +17,24 @@
 package dev.sergiobelda.todometer.common.usecase
 
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.repository.ITaskRepository
+import dev.sergiobelda.todometer.common.repository.IUserPreferencesRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 
-class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
+class GetProjectSelectedTasksUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository,
+    private val taskRepository: ITaskRepository
+) {
 
     /**
-     * Creates a new [Task] given a [title], [description] and [tag], in the project [projectId].
+     * Get the list of [Task] for the current project selected. This flow emits a new value
+     * every time that current project selected in user preferences changes or
+     * some task has been updated.
      */
-    suspend operator fun invoke(
-        projectId: String,
-        title: String,
-        description: String = "",
-        tag: Tag = Tag.GRAY
-    ): Result<String> = taskRepository.insertTask(
-        title,
-        description,
-        projectId,
-        tag
-    )
+    operator fun invoke(): Flow<Result<List<Task>>> =
+        userPreferencesRepository.projectSelected().flatMapLatest { projectId ->
+            taskRepository.getTasks(projectId)
+        }
 }

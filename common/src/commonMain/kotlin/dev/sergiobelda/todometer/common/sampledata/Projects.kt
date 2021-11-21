@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui
+package dev.sergiobelda.todometer.common.sampledata
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import dev.sergiobelda.todometer.common.model.Project
 
-class MainActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContent {
-            ToDometerApp()
-        }
-    }
-}
+val sampleProjects = listOf(
+    Project(
+        id = "1",
+        name = "Project 1",
+        description = "",
+        sync = false
+    ),
+    Project(
+        id = "2",
+        name = "Project 2",
+        description = "",
+        sync = false
+    )
+)
