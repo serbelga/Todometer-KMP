@@ -36,8 +36,8 @@ val viewModelModule = module {
     viewModel {
         EditProjectViewModel(get(), get())
     }
-    viewModel {
-        EditTaskViewModel(get(), get())
+    viewModel { parameters ->
+        EditTaskViewModel(parameters.get(), get(), get())
     }
     viewModel {
         HomeViewModel(
@@ -55,8 +55,8 @@ val viewModelModule = module {
             get()
         )
     }
-    viewModel {
-        TaskDetailViewModel(get())
+    viewModel { parameters ->
+        TaskDetailViewModel(parameters.get(), get())
     }
     viewModel {
         MainViewModel(get())

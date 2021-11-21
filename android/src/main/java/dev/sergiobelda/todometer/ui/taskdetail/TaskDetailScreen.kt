@@ -59,15 +59,17 @@ import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TaskDetailScreen(
     taskId: String,
     editTask: (String) -> Unit,
     navigateUp: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel = getViewModel()
+    taskDetailViewModel: TaskDetailViewModel = getViewModel(
+        parameters = { parametersOf(taskId) }
+    )
 ) {
-    taskDetailViewModel.getTask(taskId)
     val scrollState = rememberScrollState(0)
     val taskResultState = taskDetailViewModel.task.collectAsState()
     taskResultState.value.doIfError {

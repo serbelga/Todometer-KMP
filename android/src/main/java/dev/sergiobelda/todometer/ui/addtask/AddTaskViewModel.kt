@@ -29,9 +29,8 @@ class AddTaskViewModel(
     private val insertTaskProjectSelectedUseCase: InsertTaskProjectSelectedUseCase
 ) : ViewModel() {
 
-    // TODO: Migrate to StateFlow
-    private val _result = MutableLiveData<Result<String>?>()
-    val result: LiveData<Result<String>?> get() = _result
+    private val _result = MutableLiveData<Result<String>>()
+    val result: LiveData<Result<String>> get() = _result
 
     fun insertTask(
         title: String,
