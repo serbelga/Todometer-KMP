@@ -28,7 +28,6 @@ class AddProjectViewModel(
     private val insertProjectUseCase: InsertProjectUseCase
 ) : ViewModel() {
 
-    // TODO: Migrate to StateFlow
     private val _result = MutableLiveData<Result<String>>()
     val result: LiveData<Result<String>> get() = _result
 
