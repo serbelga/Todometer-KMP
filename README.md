@@ -28,11 +28,12 @@
 
 <img width="720" src="./screenshots/desktop/home.png" />
 
-### iOS
-
-Under construction
-
 ### Wear OS
+
+| <img width="240" src="./screenshots/wearos/home.png" /> | <img width="240" src="./screenshots/wearos/tasks.png" /> |
+|---|---|
+
+### iOS
 
 Under construction
 
