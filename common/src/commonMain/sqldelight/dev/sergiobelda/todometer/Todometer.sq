@@ -31,7 +31,7 @@ WHERE id = ?;
 selectTasksByProjectId:
 SELECT *
 FROM TaskEntity
-WHERE project_id = ? ORDER BY state ASC;
+WHERE project_id = ?; ---- ORDER BY state ASC;
 
 selectAllTasks:
 SELECT *

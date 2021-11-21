@@ -37,7 +37,7 @@ class TaskRepository(
     override fun getTask(id: String): Flow<Result<Task>> =
         taskLocalDataSource.getTask(id)
 
-    override suspend fun getTasks(projectId: String): Flow<Result<List<Task>>> =
+    override fun getTasks(projectId: String): Flow<Result<List<Task>>> =
         taskLocalDataSource.getTasks(projectId)
     /*
     taskLocalDataSource.getTasks(projectId).map { result ->

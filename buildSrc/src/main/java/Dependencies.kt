@@ -41,7 +41,7 @@ object Versions {
     const val testCoreKtx = "1.4.0"
     const val timber = "4.7.1"
     const val wear = "1.2.0"
-    const val wearCompose = "1.0.0-alpha09"
+    const val wearCompose = "1.0.0-alpha11"
 }
 
 object Android {

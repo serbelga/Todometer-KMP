@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui
+package dev.sergiobelda.todometer.wear.ui.addtask
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+class AddTaskViewModel(
+    private val insertTaskUseCase: InsertTaskUseCase
+) : ViewModel() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContent {
-            ToDometerApp()
-        }
+    fun insertTask(projectId: String, title: String) = viewModelScope.launch {
+        insertTaskUseCase.invoke(projectId, title)
     }
 }
