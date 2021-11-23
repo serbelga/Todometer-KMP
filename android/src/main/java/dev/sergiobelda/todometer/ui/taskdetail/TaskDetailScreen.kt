@@ -28,17 +28,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -53,7 +54,6 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
@@ -61,6 +61,7 @@ import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskDetailScreen(
     taskId: String,
@@ -77,7 +78,7 @@ fun TaskDetailScreen(
     }.doIfSuccess { task ->
         Scaffold(
             topBar = {
-                TopAppBar(
+                SmallTopAppBar(
                     title = {
                         if (scrollState.value >= 120) {
                             Text(task.title)
@@ -96,10 +97,7 @@ fun TaskDetailScreen(
                                 tint = TodometerColors.primary
                             )
                         }
-                    },
-                    elevation = 0.dp,
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(backgroundColor = TodometerColors.surface)
+                    }
                 )
             },
             content = {
@@ -132,7 +130,7 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                     CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
                         Text(
                             text = task.title,
-                            style = TodometerTypography.h6,
+                            style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
                             maxLines = 1
                         )
@@ -143,14 +141,14 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
             if (!task.description.isNullOrBlank()) {
                 Text(
                     text = task.description ?: "",
-                    style = TodometerTypography.body1,
+                    style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(24.dp)
                 )
             } else {
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     Text(
                         text = stringResource(id = R.string.no_description),
-                        style = TodometerTypography.body1,
+                        style = MaterialTheme.typography.bodyMedium,
                         fontStyle = FontStyle.Italic,
                         modifier = Modifier.padding(24.dp)
                     )

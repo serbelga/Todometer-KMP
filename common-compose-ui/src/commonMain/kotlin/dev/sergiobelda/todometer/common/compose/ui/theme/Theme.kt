@@ -16,18 +16,15 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.theme
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-typealias ComposeMaterialTypography = androidx.compose.material.Typography
-
-val DarkColorPalette = darkColors(
+val DarkColorPalette = darkColorScheme(
     primary = primaryDark,
-    primaryVariant = orange,
     secondary = green,
     background = navy,
     surface = navy,
@@ -37,9 +34,8 @@ val DarkColorPalette = darkColors(
     onSurface = Color.White
 )
 
-val LightColorPalette = lightColors(
+val LightColorPalette = lightColorScheme(
     primary = primaryLight,
-    primaryVariant = orange,
     secondary = green,
     background = background,
     surface = Color.White,
@@ -49,50 +45,47 @@ val LightColorPalette = lightColors(
     onSurface = Color.Black
 )
 
-val Colors.outline: Color
+val ColorScheme.outline: Color
     @Composable get() = if (isLight) outlineLight else outlineDark
 
-val Colors.primarySelected: Color
+val ColorScheme.primarySelected: Color
     @Composable get() = blueAlpha08
 
-val TodometerColors: Colors
-    @Composable get() = MaterialTheme.colors
+val TodometerColors: ColorScheme
+    @Composable get() = MaterialTheme.colorScheme
 
-val TodometerTypography: ComposeMaterialTypography
-    @Composable get() = MaterialTheme.typography
-
-val Colors.pink: Color
+val ColorScheme.pink: Color
     @Composable get() = if (isLight) pinkLight else pinkDark
 
-val Colors.red: Color
+val ColorScheme.red: Color
     @Composable get() = if (isLight) redLight else redDark
 
-val Colors.blue: Color
+val ColorScheme.blue: Color
     @Composable get() = if (isLight) blueLight else blueDark
 
-val Colors.indigo: Color
+val ColorScheme.indigo: Color
     @Composable get() = if (isLight) indigoLight else indigoDark
 
-val Colors.teal: Color
+val ColorScheme.teal: Color
     @Composable get() = if (isLight) tealLight else tealDark
 
-val Colors.green: Color
+val ColorScheme.green: Color
     @Composable get() = if (isLight) greenLight else greenDark
 
-val Colors.lime: Color
+val ColorScheme.lime: Color
     @Composable get() = if (isLight) limeLight else limeDark
 
-val Colors.yellow: Color
+val ColorScheme.yellow: Color
     @Composable get() = if (isLight) yellowLight else yellowDark
 
-val Colors.amber: Color
+val ColorScheme.amber: Color
     @Composable get() = if (isLight) amberLight else amberDark
 
-val Colors.orange: Color
+val ColorScheme.orange: Color
     @Composable get() = if (isLight) orangeLight else orangeDark
 
-val Colors.brown: Color
+val ColorScheme.brown: Color
     @Composable get() = if (isLight) brownLight else brownDark
 
-val Colors.gray: Color
+val ColorScheme.gray: Color
     @Composable get() = if (isLight) grayLight else grayDark

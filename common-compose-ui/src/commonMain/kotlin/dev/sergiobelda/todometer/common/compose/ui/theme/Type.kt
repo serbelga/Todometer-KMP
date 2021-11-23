@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -26,56 +26,56 @@ expect val quickSandFontFamily: FontFamily
 
 object Type {
     val typography = Typography(
-        h4 = TextStyle(
+        headlineLarge = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 34.sp
         ),
-        h5 = TextStyle(
+        headlineMedium = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 24.sp
         ),
-        h6 = TextStyle(
+        headlineSmall = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 20.sp,
             letterSpacing = 0.15.sp
         ),
-        subtitle1 = TextStyle(
+        titleMedium = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp
         ),
-        subtitle2 = TextStyle(
+        titleSmall = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp
         ),
-        body1 = TextStyle(
+        bodyLarge = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             letterSpacing = 0.5.sp
         ),
-        body2 = TextStyle(
+        bodyMedium = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
             letterSpacing = 0.25.sp
         ),
-        button = TextStyle(
-            fontFamily = quickSandFontFamily,
-            fontWeight = FontWeight.Medium,
-            fontSize = 14.sp
-        ),
-        caption = TextStyle(
+        bodySmall = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp,
             letterSpacing = 0.4.sp
         ),
-        overline = TextStyle(
+        labelLarge = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp
+        ),
+        labelSmall = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 10.sp,

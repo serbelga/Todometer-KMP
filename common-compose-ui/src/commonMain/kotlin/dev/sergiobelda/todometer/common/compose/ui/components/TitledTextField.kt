@@ -24,12 +24,12 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 
 @Composable
 fun TitledTextField(
@@ -56,7 +56,7 @@ fun TitledTextField(
         Text(
             title,
             color = TodometerColors.primary,
-            style = TodometerTypography.caption,
+            style = MaterialTheme.typography.caption,
             modifier = Modifier.padding(start = 16.dp)
         )
         OutlinedTextField(
@@ -75,7 +75,7 @@ fun TitledTextField(
             Text(
                 errorMessage,
                 color = TodometerColors.error,
-                style = TodometerTypography.caption,
+                style = MaterialTheme.typography.caption,
                 modifier = Modifier.padding(start = 16.dp)
             )
         }

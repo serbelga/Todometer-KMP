@@ -31,23 +31,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Button
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.RadioButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
@@ -56,6 +46,18 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -79,7 +81,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
 import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Task
@@ -90,7 +91,7 @@ import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     addProject: () -> Unit,
@@ -257,7 +258,6 @@ fun HomeScreen(
             floatingActionButton = {
                 if (!projects.isNullOrEmpty()) {
                     FloatingActionButton(
-                        backgroundColor = TodometerColors.primary,
                         onClick = addTask
                     ) {
                         Icon(
@@ -306,7 +306,7 @@ fun ChooseThemeAlertDialog(
                             )
                             Text(
                                 text = stringResource(appThemeOption.modeNameRes),
-                                style = TodometerTypography.body1,
+                                style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier.padding(start = 16.dp)
                             )
                         }
@@ -405,7 +405,7 @@ fun MenuBottomSheet(
         ) {
             Text(
                 text = stringResource(R.string.projects).uppercase(),
-                style = TodometerTypography.overline
+                style = MaterialTheme.typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
             OutlinedButton(onClick = addProject) {
@@ -511,7 +511,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.edit_project),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.caption
                 )
             },
             onClick = editProjectClick
@@ -526,7 +526,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.delete_project),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.caption
                 )
             },
             onClick = deleteProjectClick,
@@ -545,12 +545,12 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.theme),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.caption
                 )
             },
             subtitle = {
                 appThemeMap[currentTheme]?.modeNameRes?.let {
-                    Text(stringResource(it), style = TodometerTypography.caption)
+                    Text(stringResource(it), style = MaterialTheme.typography.caption)
                 }
             },
             onClick = chooseThemeClick
@@ -560,12 +560,12 @@ fun MoreBottomSheet(
             TextButton(onClick = openSourceLicensesClick) {
                 Text(
                     stringResource(R.string.open_source_licenses),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.caption
                 )
             }
             Text("·")
             TextButton(onClick = aboutClick) {
-                Text(stringResource(R.string.about), style = TodometerTypography.caption)
+                Text(stringResource(R.string.about), style = MaterialTheme.typography.caption)
             }
         }
     }

@@ -19,15 +19,15 @@ package dev.sergiobelda.todometer.ui.edittask
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -50,6 +50,7 @@ import dev.sergiobelda.todometer.ui.components.TodometerTagSelector
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditTaskScreen(
     taskId: String,
@@ -68,10 +69,7 @@ fun EditTaskScreen(
         var selectedTag by remember { mutableStateOf(task.tag) }
         Scaffold(
             topBar = {
-                TopAppBar(
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(TodometerColors.surface),
-                    elevation = 0.dp,
+                SmallTopAppBar(
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {
                             Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")

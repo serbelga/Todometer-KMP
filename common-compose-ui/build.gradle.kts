@@ -22,10 +22,11 @@ kotlin {
     }
     sourceSets {
         val commonMain by getting {
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material)
+                api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
                 api(compose.uiTooling)
