@@ -39,22 +39,22 @@ object Destinations {
 }
 
 class Actions(navController: NavHostController) {
-    val openTask: (String) -> Unit = { taskId ->
+    val navigateToTaskDetail: (String) -> Unit = { taskId ->
         navController.navigate("$TaskDetail/$taskId")
     }
-    val addTask: () -> Unit = {
+    val navigateToAddTask: () -> Unit = {
         navController.navigate(AddTask)
     }
-    val editTask: (String) -> Unit = { taskId ->
+    val navigateToEditTask: (String) -> Unit = { taskId ->
         navController.navigate("$EditTask/$taskId")
     }
-    val addProject: () -> Unit = {
+    val navigateToAddProject: () -> Unit = {
         navController.navigate(AddProject)
     }
-    val editProject: () -> Unit = {
+    val navigateToEditProject: () -> Unit = {
         navController.navigate(EditProject)
     }
-    val about: () -> Unit = {
+    val navigateToAbout: () -> Unit = {
         navController.navigate(About)
     }
     val navigateUp: () -> Unit = {

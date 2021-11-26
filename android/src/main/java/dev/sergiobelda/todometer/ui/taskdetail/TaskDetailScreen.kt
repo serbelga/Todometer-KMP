@@ -47,7 +47,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -57,18 +56,12 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TaskDetailScreen(
-    taskId: String,
-    editTask: (String) -> Unit,
+    editTask: () -> Unit,
     navigateUp: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel = getViewModel(
-        parameters = { parametersOf(taskId) }
-    )
+    taskDetailViewModel: TaskDetailViewModel
 ) {
     val scrollState = rememberScrollState(0)
     val taskResultState = taskDetailViewModel.task.collectAsState()
@@ -89,7 +82,7 @@ fun TaskDetailScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { editTask(taskId) }) {
+                        IconButton(onClick = editTask) {
                             Icon(
                                 Icons.Outlined.Edit,
                                 contentDescription = "Edit task",
@@ -157,13 +150,5 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun TaskDetailScreenPreview() {
-    ToDometerTheme {
-        TaskDetailScreen("", { _ -> }, {})
     }
 }

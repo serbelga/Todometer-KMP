@@ -47,16 +47,11 @@ import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.ui.components.TodometerTagSelector
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun EditTaskScreen(
-    taskId: String,
     navigateUp: () -> Unit,
-    editTaskViewModel: EditTaskViewModel = getViewModel(
-        parameters = { parametersOf(taskId) }
-    )
+    editTaskViewModel: EditTaskViewModel
 ) {
     val taskResultState = editTaskViewModel.task.collectAsState()
     taskResultState.value.doIfError {
