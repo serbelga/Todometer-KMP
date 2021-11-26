@@ -14,23 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.di
+package dev.sergiobelda.todometer.common.database
 
-import dev.sergiobelda.todometer.common.database.createDatabase
-import dev.sergiobelda.todometer.common.database.dao.IProjectDao
-import dev.sergiobelda.todometer.common.database.dao.ITaskDao
-import dev.sergiobelda.todometer.common.database.dao.ProjectDao
-import dev.sergiobelda.todometer.common.database.dao.TaskDao
-import org.koin.dsl.module
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import dev.sergiobelda.todometer.TodometerDatabase
 
-val localDatabaseModule = module {
-    single {
-        createDatabase()
-    }
-    single<ITaskDao> {
-        TaskDao(get())
-    }
-    single<IProjectDao> {
-        ProjectDao(get())
-    }
+actual fun createSqlDriver(): SqlDriver {
+    val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+    TodometerDatabase.Schema.create(driver)
+    return driver
 }

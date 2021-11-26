@@ -22,12 +22,8 @@ import com.squareup.sqldelight.runtime.coroutines.mapToOneNotNull
 import dev.sergiobelda.todometer.ProjectEntity
 import dev.sergiobelda.todometer.TodometerDatabase
 import kotlinx.coroutines.flow.Flow
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class ProjectDao : IProjectDao, KoinComponent {
-
-    private val database: TodometerDatabase by inject()
+class ProjectDao(private val database: TodometerDatabase) : IProjectDao {
 
     override fun getProjects(): Flow<List<ProjectEntity>> =
         database.todometerQueries.selectAllProjects().asFlow().mapToList()

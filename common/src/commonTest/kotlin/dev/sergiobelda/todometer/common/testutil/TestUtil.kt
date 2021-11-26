@@ -14,23 +14,27 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.di
+package dev.sergiobelda.todometer.common.testutil
 
-import dev.sergiobelda.todometer.common.database.createDatabase
-import dev.sergiobelda.todometer.common.database.dao.IProjectDao
-import dev.sergiobelda.todometer.common.database.dao.ITaskDao
-import dev.sergiobelda.todometer.common.database.dao.ProjectDao
-import dev.sergiobelda.todometer.common.database.dao.TaskDao
-import org.koin.dsl.module
+import dev.sergiobelda.todometer.ProjectEntity
+import dev.sergiobelda.todometer.TaskEntity
 
-val localDatabaseModule = module {
-    single {
-        createDatabase()
-    }
-    single<ITaskDao> {
-        TaskDao(get())
-    }
-    single<IProjectDao> {
-        ProjectDao(get())
-    }
+object TestUtil {
+
+    fun createProjectEntity(): ProjectEntity = ProjectEntity(
+        id = "1",
+        name = "Name",
+        description = "Description",
+        sync = false
+    )
+
+    fun createTaskEntity(): TaskEntity = TaskEntity(
+        id = "1",
+        title = "Title",
+        description = "Description",
+        state = "DOING",
+        project_id = "1",
+        tag = "GRAY",
+        sync = false
+    )
 }
