@@ -20,25 +20,34 @@ import androidx.navigation.NavHostController
 import dev.sergiobelda.todometer.wear.Destinations.AddProject
 import dev.sergiobelda.todometer.wear.Destinations.AddTask
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
+import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
 
 object Destinations {
     const val Home = "home"
     const val AddProject = "addProject"
     const val ProjectTasks = "projectTasks"
     const val AddTask = "addTask"
+    const val TaskDetail = "taskDetail"
 
     object ProjectTasksArgs {
         const val ProjectId = "projectId"
     }
+
+    object TaskDetailArgs {
+        const val TaskId = "taskId"
+    }
 }
 
 class Actions(navController: NavHostController) {
-    val openProject: (String) -> Unit = { projectId ->
+    val navigateToProjectTasks: (String) -> Unit = { projectId ->
         navController.navigate("$ProjectTasks/$projectId")
     }
-    val addProject: () -> Unit = { navController.navigate(AddProject) }
-    val addTask: (String) -> Unit = { projectId ->
+    val navigateToAddProject: () -> Unit = { navController.navigate(AddProject) }
+    val navigateToAddTask: (String) -> Unit = { projectId ->
         navController.navigate("$AddTask/$projectId")
+    }
+    val navigateToTaskDetail: (String) -> Unit = { taskId ->
+        navController.navigate("$TaskDetail/$taskId")
     }
     val navigateUp: () -> Unit = { navController.popBackStack() }
 }

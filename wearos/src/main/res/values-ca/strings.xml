@@ -15,11 +15,10 @@
   -->
 
 <resources>
-    <string name="app_name" translatable="false">ToDometer</string>
-    <string name="no_tasks">No hay tareas</string>
-    <string name="no_projects">No hay proyectos</string>
-    <string name="edit_project">Editar proyecto</string>
-    <string name="edit_task">Editar tarea</string>
-    <string name="remove_project">Eliminar proyecto</string>
-    <string name="remove_task">Eliminar tarea</string>
+    <string name="no_tasks">No hi han tasques</string>
+    <string name="edit_project">Editar projecte</string>
+    <string name="no_projects">No hi han projectes</string>
+    <string name="edit_task">Editar tasca</string>
+    <string name="remove_project">Eliminar projecte</string>
+    <string name="remove_task">Eliminar tasca</string>
 </resources>

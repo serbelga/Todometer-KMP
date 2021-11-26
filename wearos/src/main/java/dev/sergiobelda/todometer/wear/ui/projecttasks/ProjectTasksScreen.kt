@@ -18,11 +18,14 @@ package dev.sergiobelda.todometer.wear.ui.projecttasks
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Remove
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -30,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
@@ -46,16 +50,11 @@ import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.wear.R
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ProjectTasksScreen(
-    projectId: String,
-    addTask: (String) -> Unit,
-    projectTasksViewModel: ProjectTasksViewModel = getViewModel(
-        parameters = { parametersOf(projectId) }
-    )
+    addTask: () -> Unit,
+    projectTasksViewModel: ProjectTasksViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val tasksResultState = projectTasksViewModel.tasks.collectAsState()
@@ -74,9 +73,7 @@ fun ProjectTasksScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                AddTaskButton {
-                    addTask(projectId)
-                }
+                AddTaskButton(addTask)
             }
             item {
                 Spacer(modifier = Modifier.height(4.dp))
@@ -93,6 +90,22 @@ fun ProjectTasksScreen(
                             onDoingClick = { projectTasksViewModel.setTaskDoing(task.id) },
                             onDoneClick = { projectTasksViewModel.setTaskDone(task.id) },
                             onClick = {}
+                        )
+                    }
+                }
+            }
+            item {
+                Row {
+                    Button(onClick = {}) {
+                        Icon(
+                            Icons.Outlined.Edit,
+                            contentDescription = stringResource(R.string.edit_project)
+                        )
+                    }
+                    Button(onClick = {}) {
+                        Icon(
+                            Icons.Outlined.Remove,
+                            contentDescription = stringResource(R.string.remove_project)
                         )
                     }
                 }

@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.taskdetail
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import kotlinx.coroutines.launch
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.wear.compose.material.Scaffold
 
-class AddTaskViewModel(
-    private val projectId: String,
-    private val insertTaskUseCase: InsertTaskUseCase
-) : ViewModel() {
-
-    fun insertTask(title: String) = viewModelScope.launch {
-        insertTaskUseCase.invoke(projectId, title)
-    }
+@Composable
+fun TaskDetailScreen(
+    taskDetailViewModel: TaskDetailViewModel
+) {
+    val taskResultState = taskDetailViewModel.task.collectAsState()
+    Scaffold {}
 }

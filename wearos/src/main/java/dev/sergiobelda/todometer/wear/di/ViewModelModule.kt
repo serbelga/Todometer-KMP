@@ -20,6 +20,7 @@ import dev.sergiobelda.todometer.wear.ui.addproject.AddProjectViewModel
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksViewModel
+import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -33,7 +34,10 @@ val viewModelModule = module {
     viewModel {
         AddProjectViewModel(get())
     }
-    viewModel {
-        AddTaskViewModel(get())
+    viewModel { parameters ->
+        AddTaskViewModel(projectId = parameters.get(), get())
+    }
+    viewModel { parameters ->
+        TaskDetailViewModel(taskId = parameters.get(), get())
     }
 }

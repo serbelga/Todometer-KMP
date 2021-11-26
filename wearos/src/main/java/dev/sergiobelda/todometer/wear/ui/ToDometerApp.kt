@@ -18,8 +18,6 @@ package dev.sergiobelda.todometer.wear.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import androidx.wear.compose.material.ExperimentalWearMaterialApi
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
@@ -30,11 +28,16 @@ import dev.sergiobelda.todometer.wear.Destinations.AddTask
 import dev.sergiobelda.todometer.wear.Destinations.Home
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
 import dev.sergiobelda.todometer.wear.Destinations.ProjectTasksArgs.ProjectId
+import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
+import dev.sergiobelda.todometer.wear.Destinations.TaskDetailArgs.TaskId
 import dev.sergiobelda.todometer.wear.ui.addproject.AddProjectScreen
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
 import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksScreen
+import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalWearMaterialApi::class)
 @Composable
@@ -46,29 +49,37 @@ fun ToDometerApp() {
         SwipeDismissableNavHost(navController = navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    actions.addProject,
-                    actions.openProject
+                    actions.navigateToAddProject,
+                    actions.navigateToProjectTasks
                 )
             }
             composable(AddProject) {
                 AddProjectScreen(actions.navigateUp)
             }
             composable(
-                "$ProjectTasks/{$ProjectId}",
-                arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
+                "$ProjectTasks/{$ProjectId}"
             ) { navBackStackEntry ->
+                val projectId = navBackStackEntry.arguments?.getString(ProjectId) ?: ""
                 ProjectTasksScreen(
-                    navBackStackEntry.arguments?.getString(ProjectId) ?: "",
-                    actions.addTask
+                    addTask = { actions.navigateToAddTask(projectId) },
+                    projectTasksViewModel = getViewModel { parametersOf(projectId) }
                 )
             }
             composable(
-                "$AddTask/{$ProjectId}",
-                arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
+                "$AddTask/{$ProjectId}"
             ) { navBackStackEntry ->
+                val projectId = navBackStackEntry.arguments?.getString(ProjectId) ?: ""
                 AddTaskScreen(
-                    navBackStackEntry.arguments?.getString(ProjectId) ?: "",
-                    actions.navigateUp
+                    actions.navigateUp,
+                    addTaskViewModel = getViewModel { parametersOf(projectId) }
+                )
+            }
+            composable(
+                "$TaskDetail/{$TaskId}"
+            ) { navBackStackEntry ->
+                val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
+                TaskDetailScreen(
+                    taskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
                 )
             }
         }
