@@ -24,6 +24,9 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProjectDaoTest : DatabaseTest() {
@@ -41,5 +44,24 @@ class ProjectDaoTest : DatabaseTest() {
         val id = projectDao.insertProject(projectA)
         val projectB = projectDao.getProject(id).first()
         assertEquals(projectB, projectA)
+    }
+
+    @Test
+    fun testGetProject() = runTest {
+        val id = projectDao.insertProject(TestUtil.createProjectEntity())
+        assertNotNull(projectDao.getProject(id).first())
+    }
+
+    @Test
+    fun testGetProjectNotExist() = runTest {
+        assertNull(projectDao.getProject("1").first())
+    }
+
+    @Test
+    fun testGetProjects() = runTest {
+        val project = TestUtil.createProjectEntity()
+        projectDao.insertProject(project)
+        val list = projectDao.getProjects().first()
+        assertTrue { list.contains(project) }
     }
 }

@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.common.database.dao
 
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.squareup.sqldelight.runtime.coroutines.mapToOneNotNull
+import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
 import dev.sergiobelda.todometer.ProjectEntity
 import dev.sergiobelda.todometer.TodometerDatabase
 import kotlinx.coroutines.flow.Flow
@@ -28,8 +28,8 @@ class ProjectDao(private val database: TodometerDatabase) : IProjectDao {
     override fun getProjects(): Flow<List<ProjectEntity>> =
         database.todometerQueries.selectAllProjects().asFlow().mapToList()
 
-    override fun getProject(id: String): Flow<ProjectEntity> =
-        database.todometerQueries.selectProject(id).asFlow().mapToOneNotNull()
+    override fun getProject(id: String): Flow<ProjectEntity?> =
+        database.todometerQueries.selectProject(id).asFlow().mapToOneOrNull()
 
     override suspend fun insertProject(project: ProjectEntity): String {
         database.todometerQueries.insertOrReplaceProject(
