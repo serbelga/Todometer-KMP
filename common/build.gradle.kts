@@ -56,6 +56,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(Libs.kotlinCoroutinesTest)
+                implementation(Libs.MockK.mockkCommon)
             }
         }
         val androidMain by getting {
@@ -71,6 +72,7 @@ kotlin {
             dependencies {
                 implementation(Libs.junit)
                 implementation(Libs.SqlDelight.jvmDriver)
+                implementation(Libs.MockK.mockk)
             }
         }
         val desktopMain by getting {
@@ -79,7 +81,11 @@ kotlin {
                 implementation(Libs.SqlDelight.jvmDriver)
             }
         }
-        val desktopTest by getting
+        val desktopTest by getting {
+            dependencies {
+                implementation(Libs.MockK.mockk)
+            }
+        }
         val iosMain by getting {
             dependencies {
                 implementation(Libs.Ktor.clientIos)

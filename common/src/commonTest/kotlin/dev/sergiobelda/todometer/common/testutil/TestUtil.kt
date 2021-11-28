@@ -18,6 +18,8 @@ package dev.sergiobelda.todometer.common.testutil
 
 import dev.sergiobelda.todometer.ProjectEntity
 import dev.sergiobelda.todometer.TaskEntity
+import dev.sergiobelda.todometer.common.model.Tag
+import dev.sergiobelda.todometer.common.model.TaskState
 
 object TestUtil {
 
@@ -32,9 +34,19 @@ object TestUtil {
         id = "1",
         title = "Title",
         description = "Description",
-        state = "DOING",
+        state = TaskState.DOING.name,
         project_id = "1",
-        tag = "GRAY",
+        tag = Tag.GRAY.name,
+        sync = false
+    )
+
+    fun createUpdatedTaskEntity(): TaskEntity = TaskEntity(
+        id = "1",
+        title = "New title",
+        description = "New description",
+        state = TaskState.DOING.name,
+        project_id = "1",
+        tag = Tag.RED.name,
         sync = false
     )
 }

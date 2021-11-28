@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.common.database.dao
 
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.squareup.sqldelight.runtime.coroutines.mapToOneNotNull
+import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
 import dev.sergiobelda.todometer.TaskEntity
 import dev.sergiobelda.todometer.TodometerDatabase
 import dev.sergiobelda.todometer.common.model.TaskState
@@ -26,8 +26,8 @@ import kotlinx.coroutines.flow.Flow
 
 class TaskDao(private val database: TodometerDatabase) : ITaskDao {
 
-    override fun getTask(id: String): Flow<TaskEntity> =
-        database.todometerQueries.selectTask(id).asFlow().mapToOneNotNull()
+    override fun getTask(id: String): Flow<TaskEntity?> =
+        database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
     override fun getTasks(projectId: String): Flow<List<TaskEntity>> =
         database.todometerQueries.selectTasksByProjectId(projectId).asFlow().mapToList()

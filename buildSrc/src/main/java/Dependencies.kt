@@ -33,6 +33,7 @@ object Versions {
     const val ktxVersion = "1.7.0"
     const val lifecycle = "2.4.0"
     const val materialComponents = "1.4.0"
+    const val mockk = "1.12.1"
     const val navigationCompose = "2.4.0-beta01"
     const val ossLicenses = "17.0.0"
     const val ossLicensesPlugin = "0.10.4"
@@ -174,6 +175,11 @@ object Libs {
         const val serverCore = "io.ktor:ktor-server-core:${Versions.ktor}"
         const val serverNetty = "io.ktor:ktor-server-netty:${Versions.ktor}"
         const val serverTests = "io.ktor:ktor-server-tests:${Versions.ktor}"
+    }
+
+    object MockK {
+        const val mockk = "io.mockk:mockk:${Versions.mockk}"
+        const val mockkCommon = "io.mockk:mockk-common:${Versions.mockk}"
     }
 
     object SqlDelight {
