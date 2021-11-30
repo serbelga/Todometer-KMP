@@ -14,24 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.database.dao
+package dev.sergiobelda.todometer.common.database
 
-import dev.sergiobelda.todometer.ProjectEntity
-import kotlinx.coroutines.flow.Flow
+import com.squareup.sqldelight.db.SqlDriver
 
-interface IProjectDao {
-
-    fun getProjects(): Flow<List<ProjectEntity>>
-
-    fun getProject(id: String): Flow<ProjectEntity?>
-
-    suspend fun insertProject(project: ProjectEntity): String
-
-    suspend fun insertProjects(projects: List<ProjectEntity>)
-
-    suspend fun updateProject(project: ProjectEntity)
-
-    suspend fun updateProjects(projects: List<ProjectEntity>)
-
-    suspend fun deleteProject(id: String)
-}
+expect fun createSqlDriver(): SqlDriver

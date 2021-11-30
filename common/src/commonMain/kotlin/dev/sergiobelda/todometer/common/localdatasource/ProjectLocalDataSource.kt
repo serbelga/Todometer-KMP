@@ -36,7 +36,7 @@ class ProjectLocalDataSource(
 
     override fun getProject(id: String): Flow<Result<Project>> =
         projectDao.getProject(id).map { projectTaskRelation ->
-            Result.Success(projectTaskRelation.toDomain())
+            projectTaskRelation?.let { Result.Success(it.toDomain()) } ?: Result.Error()
         }
 
     override suspend fun insertProject(project: Project): Result<String> {

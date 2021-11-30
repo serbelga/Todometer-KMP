@@ -14,24 +14,27 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.database.dao
+package dev.sergiobelda.todometer.common.database
 
-import dev.sergiobelda.todometer.ProjectEntity
-import kotlinx.coroutines.flow.Flow
+import com.squareup.sqldelight.db.SqlDriver
+import dev.sergiobelda.todometer.TodometerDatabase
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 
-interface IProjectDao {
+abstract class DatabaseTest {
 
-    fun getProjects(): Flow<List<ProjectEntity>>
+    private lateinit var sqlDriver: SqlDriver
 
-    fun getProject(id: String): Flow<ProjectEntity?>
+    lateinit var database: TodometerDatabase
 
-    suspend fun insertProject(project: ProjectEntity): String
+    @BeforeTest
+    fun initDatabase() {
+        sqlDriver = createSqlDriver()
+        database = TodometerDatabase(sqlDriver)
+    }
 
-    suspend fun insertProjects(projects: List<ProjectEntity>)
-
-    suspend fun updateProject(project: ProjectEntity)
-
-    suspend fun updateProjects(projects: List<ProjectEntity>)
-
-    suspend fun deleteProject(id: String)
+    @AfterTest
+    fun closeDatabase() {
+        sqlDriver.close()
+    }
 }
