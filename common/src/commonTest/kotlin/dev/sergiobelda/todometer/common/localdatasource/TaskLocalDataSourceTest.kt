@@ -17,34 +17,42 @@
 package dev.sergiobelda.todometer.common.localdatasource
 
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.database.dao.TaskDao
-import dev.sergiobelda.todometer.common.testutil.TestUtil
+import dev.sergiobelda.todometer.common.database.dao.ITaskDao
+import dev.sergiobelda.todometer.common.database.mapper.toDomain
+import dev.sergiobelda.todometer.common.database.mapper.toEntity
+import dev.sergiobelda.todometer.common.model.TaskState
+import dev.sergiobelda.todometer.common.testutils.entityTasks
+import dev.sergiobelda.todometer.common.testutils.task1
+import dev.sergiobelda.todometer.common.testutils.taskEntity1
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TaskLocalDataSourceTest {
 
     @MockK
-    private val taskDao: TaskDao = mockk()
+    private val taskDao: ITaskDao = mockk(relaxed = true)
 
     private val taskLocalDataSource = TaskLocalDataSource(taskDao)
 
     @Test
     fun testGetTask() = runTest {
-        val task = TestUtil.createTaskEntity()
-
         coEvery { taskDao.getTask("1") } returns flow {
-            emit(task)
+            emit(taskEntity1)
         }
 
-        val taskResult = taskLocalDataSource.getTask("1").first()
-        assertTrue { taskResult is Result.Success }
+        val result = taskLocalDataSource.getTask("1").first()
+        assertTrue { result is Result.Success }
+        assertEquals(taskEntity1.toDomain(), (result as? Result.Success)?.value)
     }
 
     @Test
@@ -52,7 +60,58 @@ class TaskLocalDataSourceTest {
         coEvery { taskDao.getTask("1") } returns flow {
             emit(null)
         }
-        val taskResult = taskLocalDataSource.getTask("1").first()
-        assertTrue { taskResult is Result.Error }
+
+        val result = taskLocalDataSource.getTask("1").first()
+        assertTrue { result is Result.Error }
+    }
+
+    @Test
+    fun testGetTasks() = runTest {
+        coEvery { taskDao.getTasks("1") } returns flow {
+            emit(entityTasks)
+        }
+
+        val result = taskLocalDataSource.getTasks("1").first()
+        assertTrue { result is Result.Success }
+        assertEquals(
+            entityTasks.map { it.toDomain() },
+            (result as? Result.Success)?.value
+        )
+    }
+
+    @Test
+    fun testInsertTask() = runTest {
+        coEvery { taskDao.insertTask(taskEntity1) } returns taskEntity1.id
+
+        val result = taskLocalDataSource.insertTask(taskEntity1.toDomain())
+        assertTrue { result is Result.Success }
+    }
+
+    @Test
+    fun testUpdateTask() = runTest {
+        taskLocalDataSource.updateTask(task1)
+
+        coVerify { taskDao.updateTask(task1.toEntity()) }
+    }
+
+    @Test
+    fun testUpdateTaskSync() = runTest {
+        taskLocalDataSource.updateTaskSync("1", sync = true)
+
+        coVerify { taskDao.updateTaskSync("1", sync = true) }
+    }
+
+    @Test
+    fun testUpdateTaskState() = runTest {
+        taskLocalDataSource.updateTaskState("1", state = TaskState.DOING)
+
+        coVerify { taskDao.updateTaskState("1", state = TaskState.DOING) }
+    }
+
+    @Test
+    fun taskDeleteTask() = runTest {
+        taskLocalDataSource.deleteTask("1")
+
+        coVerify { taskDao.deleteTask("1") }
     }
 }

@@ -17,7 +17,10 @@
 package dev.sergiobelda.todometer.common.database.dao
 
 import dev.sergiobelda.todometer.common.database.DatabaseTest
-import dev.sergiobelda.todometer.common.testutil.TestUtil
+import dev.sergiobelda.todometer.common.testutils.entityProjects
+import dev.sergiobelda.todometer.common.testutils.projectEntity1
+import dev.sergiobelda.todometer.common.testutils.projectEntity1Updated
+import dev.sergiobelda.todometer.common.testutils.projectEntity2
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -39,16 +42,16 @@ class ProjectDaoTest : DatabaseTest() {
     }
 
     @Test
-    fun testInsertProject() = runTest {
-        val projectA = TestUtil.createProjectEntity()
-        val id = projectDao.insertProject(projectA)
-        val projectB = projectDao.getProject(id).first()
-        assertEquals(projectB, projectA)
+    fun testGetProjects() = runTest {
+        projectDao.insertProject(projectEntity1)
+        projectDao.insertProject(projectEntity2)
+        val list = projectDao.getProjects().first()
+        assertTrue { list.size == 2 }
     }
 
     @Test
     fun testGetProject() = runTest {
-        val id = projectDao.insertProject(TestUtil.createProjectEntity())
+        val id = projectDao.insertProject(projectEntity1)
         assertNotNull(projectDao.getProject(id).first())
     }
 
@@ -58,10 +61,35 @@ class ProjectDaoTest : DatabaseTest() {
     }
 
     @Test
-    fun testGetProjects() = runTest {
-        val project = TestUtil.createProjectEntity()
-        projectDao.insertProject(project)
+    fun testInsertProject() = runTest {
+        val id = projectDao.insertProject(projectEntity1)
+        assertEquals(projectEntity1, projectDao.getProject(id).first())
+    }
+
+    @Test
+    fun testInsertProjects() = runTest {
+        projectDao.insertProjects(entityProjects)
         val list = projectDao.getProjects().first()
-        assertTrue { list.contains(project) }
+        assertTrue { list.containsAll(entityProjects) }
+    }
+
+    @Test
+    fun testUpdateProject() = runTest {
+        val id = projectDao.insertProject(projectEntity1)
+        var project = projectDao.getProject(id).first()
+        assertEquals("Project 1", project?.name)
+
+        projectDao.updateProject(projectEntity1Updated)
+
+        project = projectDao.getProject(id).first()
+        assertEquals("Project 1 Updated", project?.name)
+    }
+
+    @Test
+    fun testDeleteProject() = runTest {
+        val id = projectDao.insertProject(projectEntity1)
+        assertNotNull(projectDao.getProject(id).first())
+        projectDao.deleteProject(id)
+        assertNull(projectDao.getProject(id).first())
     }
 }
