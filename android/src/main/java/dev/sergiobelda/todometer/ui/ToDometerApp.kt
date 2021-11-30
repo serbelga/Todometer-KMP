@@ -25,11 +25,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.ui.Destinations.About
@@ -49,6 +47,7 @@ import dev.sergiobelda.todometer.ui.home.HomeScreen
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
@@ -67,22 +66,22 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    actions.addProject,
-                    actions.editProject,
-                    actions.addTask,
-                    actions.openTask,
-                    { startOpenSourceLicensesActivity(context) },
-                    actions.about
+                    addProject = actions.navigateToAddProject,
+                    editProject = actions.navigateToEditProject,
+                    addTask = actions.navigateToAddTask,
+                    openTask = actions.navigateToTaskDetail,
+                    openSourceLicenses = { startOpenSourceLicensesActivity(context) },
+                    about = actions.navigateToAbout
                 )
             }
             composable(
-                "$TaskDetail/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.StringType })
+                "$TaskDetail/{$TaskId}"
             ) { navBackStackEntry ->
+                val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
                 TaskDetailScreen(
-                    taskId = navBackStackEntry.arguments?.getString(TaskId) ?: "",
-                    actions.editTask,
-                    actions.navigateUp
+                    editTask = { actions.navigateToEditTask(taskId) },
+                    navigateUp = actions.navigateUp,
+                    taskDetailViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
             composable(AddProject) {
@@ -95,24 +94,24 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                 AddTaskScreen(actions.navigateUp)
             }
             composable(
-                "$EditTask/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.StringType })
+                "$EditTask/{$TaskId}"
             ) { backStackEntry ->
+                val taskId = backStackEntry.arguments?.getString(TaskId) ?: ""
                 EditTaskScreen(
-                    taskId = backStackEntry.arguments?.getString(TaskId) ?: "",
-                    actions.navigateUp
+                    navigateUp = actions.navigateUp,
+                    editTaskViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
             composable(About) {
                 AboutScreen(
-                    githubClick = {
+                    openGithub = {
                         openWebPage(
                             context,
                             "https://github.com/serbelga/ToDometer_Multiplatform"
                         )
                     },
-                    openSourceLicensesClick = { startOpenSourceLicensesActivity(context) },
-                    actions.navigateUp
+                    openSourceLicenses = { startOpenSourceLicensesActivity(context) },
+                    navigateUp = actions.navigateUp
                 )
             }
         }

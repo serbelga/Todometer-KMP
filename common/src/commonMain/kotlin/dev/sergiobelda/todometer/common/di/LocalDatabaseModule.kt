@@ -28,9 +28,9 @@ val localDatabaseModule = module {
         createDatabase()
     }
     single<ITaskDao> {
-        TaskDao()
+        TaskDao(get())
     }
     single<IProjectDao> {
-        ProjectDao()
+        ProjectDao(get())
     }
 }

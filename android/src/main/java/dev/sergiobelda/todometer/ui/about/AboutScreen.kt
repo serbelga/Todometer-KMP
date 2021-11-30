@@ -57,8 +57,8 @@ import dev.sergiobelda.todometer.ui.icons.iconToDometer
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
-    githubClick: () -> Unit,
-    openSourceLicensesClick: () -> Unit,
+    openGithub: () -> Unit,
+    openSourceLicenses: () -> Unit,
     navigateUp: () -> Unit
 ) {
     var privacyPolicyDialogState by remember { mutableStateOf(false) }
@@ -84,7 +84,7 @@ fun AboutScreen(
             ToDometerLogo()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
-                onCardClick = { githubClick() },
+                onCardClick = { openGithub() },
                 icon = {
                     Icon(
                         painterResource(R.drawable.ic_github_24),
@@ -112,7 +112,7 @@ fun AboutScreen(
                 }
             )
             AboutItemCard(
-                onCardClick = { openSourceLicensesClick() },
+                onCardClick = { openSourceLicenses() },
                 icon = {
                     Icon(
                         Icons.Rounded.Code,
