@@ -21,16 +21,21 @@ dependencies {
     implementation(Libs.AndroidX.Compose.runtimeLiveData)
     implementation(Libs.AndroidX.Navigation.compose)
 
-    implementation(Libs.AndroidX.Lifecycle.runtime)
-    implementation(Libs.AndroidX.Lifecycle.viewModel)
-    implementation(Libs.AndroidX.Lifecycle.liveData)
+    with(Libs.AndroidX.Lifecycle) {
+        implementation(runtime)
+        implementation(viewModel)
+        implementation(liveData)
+    }
+
     implementation(Libs.Google.Material.materialComponents)
 
     implementation(Libs.timber)
 
-    implementation(Libs.Koin.android)
-    implementation(Libs.Koin.compose)
-    implementation(Libs.Koin.core)
+    with(Libs.Koin) {
+        implementation(android)
+        implementation(compose)
+        implementation(core)
+    }
 
     implementation(Libs.Google.Services.ossLicenses)
 }
