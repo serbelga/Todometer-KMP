@@ -7,7 +7,7 @@ android {
     compileSdk = Android.compileSdk
 
     defaultConfig {
-Update d        applicationId = "dev.sergiobelda.todometer"
+        applicationId = "dev.sergiobelda.todometer"
         minSdk = Android.wearMinSdk
         targetSdk = Android.targetSdk
         versionCode = 1
