@@ -35,13 +35,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.util.ProgressUtil
 import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskProgress
 
 @Composable
 fun ProjectProgress(project: Project?, tasks: List<Task>) {
-    val progress = ProgressUtil.getTasksDoneProgress(tasks)
+    val progress = TaskProgress.getTasksDoneProgress(tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
@@ -57,7 +57,7 @@ fun ProjectProgress(project: Project?, tasks: List<Task>) {
                 style = TodometerTypography.overline
             )
             Text(
-                text = ProgressUtil.getPercentage(progress),
+                text = TaskProgress.getPercentage(progress),
                 style = TodometerTypography.body2,
                 modifier = Modifier.padding(top = 4.dp)
             )

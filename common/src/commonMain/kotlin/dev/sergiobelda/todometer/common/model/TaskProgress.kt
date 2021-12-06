@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.util
+package dev.sergiobelda.todometer.common.model
 
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskState
-
-object ProgressUtil {
+object TaskProgress {
 
     fun getTasksDoneProgress(list: List<Task?>): Float =
         list.takeUnless { it.isEmpty() }?.let {
