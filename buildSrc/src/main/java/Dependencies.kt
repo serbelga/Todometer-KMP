@@ -17,7 +17,7 @@
 object Versions {
     const val activityKtx = "1.4.0"
     const val appCompat = "1.4.0"
-    const val androidGradlePlugin = "7.1.0-beta03"
+    const val androidGradlePlugin = "7.1.0-beta05"
     const val compose = "1.1.0-beta02"
     const val composeMultiplatform = "1.0.0"
     const val dataStorePreferences = "1.0.0"
