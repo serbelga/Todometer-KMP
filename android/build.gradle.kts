@@ -37,6 +37,11 @@ dependencies {
         implementation(core)
     }
 
+    with(Libs.AndroidX.Glance) {
+        implementation(glance)
+        implementation(glanceAppWidget)
+    }
+
     implementation(Libs.Google.Services.ossLicenses)
 }
 
