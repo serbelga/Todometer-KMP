@@ -27,13 +27,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ProjectProgress
-import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 
 @Composable
-fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
+fun ToDometerTopAppBar(taskList: TaskList?, tasks: List<Task>) {
     Surface(
         modifier = Modifier.wrapContentHeight().fillMaxWidth()
     ) {
@@ -50,7 +50,7 @@ fun ToDometerTopAppBar(project: Project?, tasks: List<Task>) {
                 }
                 */
             }
-            project?.let { ProjectProgress(it, tasks) }
+            taskList?.let { TaskListProgress(it, tasks) }
         }
     }
 }

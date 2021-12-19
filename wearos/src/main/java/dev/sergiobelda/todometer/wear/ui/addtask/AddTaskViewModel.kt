@@ -25,7 +25,7 @@ class AddTaskViewModel(
     private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
-    fun insertTask(projectId: String, title: String) = viewModelScope.launch {
-        insertTaskUseCase.invoke(projectId, title)
+    fun insertTask(taskListId: String, title: String) = viewModelScope.launch {
+        insertTaskUseCase.invoke(taskListId, title)
     }
 }

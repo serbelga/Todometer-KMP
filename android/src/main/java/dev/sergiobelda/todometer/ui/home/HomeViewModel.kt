@@ -19,21 +19,21 @@ package dev.sergiobelda.todometer.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
-import dev.sergiobelda.todometer.common.usecase.DeleteProjectUseCase
+import dev.sergiobelda.todometer.common.usecase.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
-import dev.sergiobelda.todometer.common.usecase.RefreshProjectSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.usecase.RefreshTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.RefreshTaskListsUseCase
 import dev.sergiobelda.todometer.common.usecase.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskListSelectedUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -43,13 +43,13 @@ class HomeViewModel(
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val deleteProjectUseCase: DeleteProjectUseCase,
-    private val setProjectSelectedUseCase: SetProjectSelectedUseCase,
-    private val refreshProjectsUseCase: RefreshProjectsUseCase,
-    private val refreshProjectSelectedUseCase: RefreshProjectSelectedUseCase,
-    getProjectSelectedUseCase: GetProjectSelectedUseCase,
-    getProjectsUseCase: GetProjectsUseCase,
-    getProjectSelectedTasksUseCase: GetProjectSelectedTasksUseCase,
+    private val deleteTaskListUseCase: DeleteTaskListUseCase,
+    private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
+    private val refreshTaskListsUseCase: RefreshTaskListsUseCase,
+    private val refreshTaskListSelectedUseCase: RefreshTaskListSelectedUseCase,
+    getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
+    getTaskListsUseCase: GetTaskListsUseCase,
+    getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase
 ) : ViewModel() {
@@ -62,21 +62,21 @@ class HomeViewModel(
         )
 
     val tasks: StateFlow<Result<List<Task>>> =
-        getProjectSelectedTasksUseCase().stateIn(
+        getTaskListSelectedTasksUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
             Result.Loading
         )
 
-    val projects: StateFlow<Result<List<Project>>> =
-        getProjectsUseCase().stateIn(
+    val taskLists: StateFlow<Result<List<TaskList>>> =
+        getTaskListsUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
             Result.Loading
         )
 
-    val projectSelected: StateFlow<Result<Project?>> =
-        getProjectSelectedUseCase().stateIn(
+    val taskListSelected: StateFlow<Result<TaskList?>> =
+        getTaskListSelectedUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
             Result.Loading
@@ -84,8 +84,8 @@ class HomeViewModel(
 
     init {
         viewModelScope.launch {
-            // refreshProjectsUseCase()
-            // refreshProjectSelectedUseCase()
+            // refreshTaskListsUseCase()
+            // refreshTaskListSelectedUseCase()
         }
     }
 
@@ -93,8 +93,8 @@ class HomeViewModel(
         deleteTaskUseCase(id)
     }
 
-    fun deleteProject() = viewModelScope.launch {
-        deleteProjectUseCase()
+    fun deleteTaskList() = viewModelScope.launch {
+        deleteTaskListUseCase()
     }
 
     fun setTaskDoing(id: String) = viewModelScope.launch {
@@ -105,8 +105,8 @@ class HomeViewModel(
         setTaskDoneUseCase(id)
     }
 
-    fun setProjectSelected(id: String) = viewModelScope.launch {
-        setProjectSelectedUseCase(id)
+    fun setTaskListSelected(id: String) = viewModelScope.launch {
+        setTaskListSelectedUseCase(id)
     }
 
     fun setAppTheme(theme: AppTheme) = viewModelScope.launch {

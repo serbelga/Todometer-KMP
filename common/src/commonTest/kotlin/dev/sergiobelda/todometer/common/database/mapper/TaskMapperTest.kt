@@ -32,7 +32,7 @@ class TaskMapperTest {
             title = "Title",
             description = "Description",
             state = TaskState.DOING,
-            projectId = "2",
+            taskListId = "2",
             tag = Tag.GRAY,
             sync = true
         )
@@ -41,7 +41,7 @@ class TaskMapperTest {
         assertEquals(task.title, taskEntity.title)
         assertEquals(task.description, taskEntity.description)
         assertEquals(task.state, taskEntity.state)
-        assertEquals(task.projectId, taskEntity.project_id)
+        assertEquals(task.taskListId, taskEntity.tasklist_id)
         assertEquals(task.tag, taskEntity.tag)
         assertEquals(task.sync, taskEntity.sync)
     }
@@ -53,7 +53,7 @@ class TaskMapperTest {
             title = "Title",
             description = "Description",
             state = TaskState.DOING,
-            project_id = "2",
+            tasklist_id = "2",
             tag = Tag.GRAY,
             sync = true
         )
@@ -62,7 +62,7 @@ class TaskMapperTest {
         assertEquals(taskEntity.title, task.title)
         assertEquals(taskEntity.description, task.description)
         assertEquals(taskEntity.state, task.state)
-        assertEquals(taskEntity.project_id, task.projectId)
+        assertEquals(taskEntity.tasklist_id, task.taskListId)
         assertEquals(taskEntity.tag, task.tag)
         assertEquals(taskEntity.sync, task.sync)
     }

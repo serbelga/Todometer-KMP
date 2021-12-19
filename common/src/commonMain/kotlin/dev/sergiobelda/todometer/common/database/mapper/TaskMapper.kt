@@ -24,7 +24,7 @@ fun TaskEntity.toDomain() = Task(
     title = title,
     description = description,
     state = state,
-    projectId = project_id,
+    taskListId = tasklist_id,
     tag = tag,
     sync = sync
 )
@@ -38,7 +38,7 @@ fun Task.toEntity() = TaskEntity(
     title,
     description,
     state,
-    projectId,
+    taskListId,
     tag,
     sync
 )

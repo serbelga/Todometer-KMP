@@ -26,7 +26,7 @@ val sampleTasks = listOf(
         title = "Task 1",
         description = "This is the Task 1",
         state = TaskState.DOING,
-        projectId = "1",
+        taskListId = "1",
         tag = Tag.BLUE,
         sync = false
     ),
@@ -35,7 +35,7 @@ val sampleTasks = listOf(
         title = "Task 2",
         description = "This is the Task 2",
         state = TaskState.DONE,
-        projectId = "1",
+        taskListId = "1",
         tag = Tag.BLUE,
         sync = false
     )

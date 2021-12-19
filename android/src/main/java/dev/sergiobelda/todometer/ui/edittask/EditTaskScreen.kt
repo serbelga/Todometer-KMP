@@ -84,7 +84,7 @@ fun EditTaskScreen(
                                             title = taskTitle,
                                             description = taskDescription,
                                             state = task.state,
-                                            projectId = task.projectId,
+                                            taskListId = task.taskListId,
                                             tag = selectedTag,
                                             sync = false
                                         )

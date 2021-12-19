@@ -26,11 +26,11 @@ import kotlinx.coroutines.flow.map
  */
 class UserPreferencesRepository(private val preferences: Preferences) : IUserPreferencesRepository {
 
-    override fun projectSelected(): Flow<String> =
-        preferences.getStringOrDefault(PROJECT_SELECTED_KEY, "")
+    override fun taskListSelected(): Flow<String> =
+        preferences.getStringOrDefault(TASK_LIST_SELECTED_KEY, "")
 
-    override suspend fun setProjectSelected(projectSelectedId: String) {
-        preferences.set(PROJECT_SELECTED_KEY, projectSelectedId)
+    override suspend fun setTaskListSelected(taskListSelectedId: String) {
+        preferences.set(TASK_LIST_SELECTED_KEY, taskListSelectedId)
     }
 
     override fun getUserTheme(): Flow<AppTheme> = preferences.getInt(APP_THEME).map { theme ->
@@ -42,7 +42,7 @@ class UserPreferencesRepository(private val preferences: Preferences) : IUserPre
     }
 
     companion object {
-        private const val PROJECT_SELECTED_KEY = "project_selected"
+        private const val TASK_LIST_SELECTED_KEY = "task_list_selected"
         private const val APP_THEME = "app_theme"
     }
 }

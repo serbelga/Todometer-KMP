@@ -19,10 +19,10 @@ package dev.sergiobelda.todometer.common.database.dao
 import dev.sergiobelda.todometer.common.database.DatabaseTest
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.TaskState
-import dev.sergiobelda.todometer.common.testutils.projectEntity1
 import dev.sergiobelda.todometer.common.testutils.taskEntity1
 import dev.sergiobelda.todometer.common.testutils.taskEntity1Updated
 import dev.sergiobelda.todometer.common.testutils.taskEntity2
+import dev.sergiobelda.todometer.common.testutils.taskListEntity1
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -38,14 +38,14 @@ class TaskDaoTest : DatabaseTest() {
 
     private lateinit var taskDao: TaskDao
 
-    private lateinit var projectDao: ProjectDao
+    private lateinit var taskListDao: TaskListDao
 
     @BeforeTest
     fun init() {
         taskDao = TaskDao(database)
-        projectDao = ProjectDao(database)
+        taskListDao = TaskListDao(database)
         runTest {
-            projectDao.insertProject(projectEntity1)
+            taskListDao.insertTaskList(taskListEntity1)
         }
     }
 
