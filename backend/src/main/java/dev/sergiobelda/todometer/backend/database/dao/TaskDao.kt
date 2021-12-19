@@ -35,9 +35,9 @@ class TaskDao : ITaskDao {
         TaskTable.select { TaskTable.id eq id }.single().toTaskEntity()
     }
 
-    override suspend fun getTasks(projectId: UUID?): List<TaskEntity> = newSuspendedTransaction {
-        if (projectId != null) {
-            TaskTable.select { TaskTable.projectId eq projectId }.toTaskEntityList()
+    override suspend fun getTasks(taskListId: UUID?): List<TaskEntity> = newSuspendedTransaction {
+        if (taskListId != null) {
+            TaskTable.select { TaskTable.taskListId eq taskListId }.toTaskEntityList()
         } else {
             TaskTable.selectAll().toTaskEntityList()
         }
@@ -52,7 +52,7 @@ class TaskDao : ITaskDao {
                 it[title] = task.title
                 it[description] = task.description
                 it[state] = task.state
-                it[projectId] = task.projectId
+                it[taskListId] = task.taskListId
                 it[tag] = task.tag
             }
         } get TaskTable.id

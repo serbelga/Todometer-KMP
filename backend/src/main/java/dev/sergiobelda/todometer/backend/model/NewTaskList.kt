@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.backend.model
 
-data class NewProject(
+data class NewTaskList(
     val id: String?,
     val name: String,
     val description: String

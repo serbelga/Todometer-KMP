@@ -16,13 +16,13 @@
 
 package dev.sergiobelda.todometer.backend.di
 
-import dev.sergiobelda.todometer.backend.service.IProjectService
+import dev.sergiobelda.todometer.backend.service.ITaskListService
 import dev.sergiobelda.todometer.backend.service.ITaskService
-import dev.sergiobelda.todometer.backend.service.ProjectService
+import dev.sergiobelda.todometer.backend.service.TaskListService
 import dev.sergiobelda.todometer.backend.service.TaskService
 import org.koin.dsl.module
 
 val serviceModule = module {
-    single<IProjectService> { ProjectService(get()) }
+    single<ITaskListService> { TaskListService(get()) }
     single<ITaskService> { TaskService(get()) }
 }

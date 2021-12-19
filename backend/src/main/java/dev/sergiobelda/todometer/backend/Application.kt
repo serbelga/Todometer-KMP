@@ -19,9 +19,9 @@ package dev.sergiobelda.todometer.backend
 import dev.sergiobelda.todometer.backend.database.AppDatabase
 import dev.sergiobelda.todometer.backend.di.configureKoin
 import dev.sergiobelda.todometer.backend.plugins.configureSerialization
-import dev.sergiobelda.todometer.backend.routing.projectsRouting
+import dev.sergiobelda.todometer.backend.routing.taskListsRouting
 import dev.sergiobelda.todometer.backend.routing.tasksRouting
-import dev.sergiobelda.todometer.backend.service.IProjectService
+import dev.sergiobelda.todometer.backend.service.ITaskListService
 import dev.sergiobelda.todometer.backend.service.ITaskService
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -35,11 +35,11 @@ fun main() {
 
         AppDatabase.init()
 
-        val projectService: IProjectService by inject()
+        val taskListService: ITaskListService by inject()
         val taskService: ITaskService by inject()
 
         routing {
-            projectsRouting(projectService)
+            taskListsRouting(taskListService)
             tasksRouting(taskService)
         }
     }.start(wait = true)

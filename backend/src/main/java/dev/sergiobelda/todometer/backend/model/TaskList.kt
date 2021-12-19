@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.backend.database.table
+package dev.sergiobelda.todometer.backend.model
 
-import org.jetbrains.exposed.sql.Table
-
-object ProjectTable : Table() {
-    val id = uuid("id").autoGenerate()
-    val name = varchar("name", length = 50)
-    val description = text("description")
-
-    override val primaryKey = PrimaryKey(id, name = "PK_Project_ID")
-}
+data class TaskList(
+    val id: String,
+    val name: String,
+    val description: String
+)

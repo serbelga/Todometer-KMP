@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.backend.model.TaskState
 
 interface ITaskService {
 
-    suspend fun getTasks(projectId: String?): List<Task>
+    suspend fun getTasks(taskListId: String?): List<Task>
 
     suspend fun getTask(id: String): Task
 

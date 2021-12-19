@@ -16,13 +16,13 @@
 
 package dev.sergiobelda.todometer.backend.di
 
-import dev.sergiobelda.todometer.backend.database.dao.IProjectDao
 import dev.sergiobelda.todometer.backend.database.dao.ITaskDao
-import dev.sergiobelda.todometer.backend.database.dao.ProjectDao
+import dev.sergiobelda.todometer.backend.database.dao.ITaskListDao
 import dev.sergiobelda.todometer.backend.database.dao.TaskDao
+import dev.sergiobelda.todometer.backend.database.dao.TaskListDao
 import org.koin.dsl.module
 
 val databaseModule = module {
-    single<IProjectDao> { ProjectDao() }
+    single<ITaskListDao> { TaskListDao() }
     single<ITaskDao> { TaskDao() }
 }

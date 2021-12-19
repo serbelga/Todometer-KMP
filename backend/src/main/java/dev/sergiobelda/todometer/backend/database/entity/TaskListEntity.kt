@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.backend.database.entity
 
 import java.util.UUID
 
-data class ProjectEntity(
+data class TaskListEntity(
     val id: UUID,
     val name: String,
     val description: String

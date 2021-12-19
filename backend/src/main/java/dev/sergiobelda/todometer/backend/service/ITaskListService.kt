@@ -16,18 +16,18 @@
 
 package dev.sergiobelda.todometer.backend.service
 
-import dev.sergiobelda.todometer.backend.model.NewProject
-import dev.sergiobelda.todometer.backend.model.Project
+import dev.sergiobelda.todometer.backend.model.NewTaskList
+import dev.sergiobelda.todometer.backend.model.TaskList
 
-interface IProjectService {
+interface ITaskListService {
 
-    suspend fun getProject(id: String): Project
+    suspend fun getTaskList(id: String): TaskList
 
-    suspend fun getProjects(): List<Project>
+    suspend fun getTaskLists(): List<TaskList>
 
-    suspend fun insertProject(newProject: NewProject): String
+    suspend fun insertTaskList(newTaskList: NewTaskList): String
 
-    suspend fun updateProject(project: Project)
+    suspend fun updateTaskList(taskList: TaskList)
 
-    suspend fun deleteProject(id: String)
+    suspend fun deleteTaskList(id: String)
 }

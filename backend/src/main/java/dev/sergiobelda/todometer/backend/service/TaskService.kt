@@ -27,8 +27,8 @@ import java.util.UUID
 
 class TaskService(private val taskDao: ITaskDao) : ITaskService {
 
-    override suspend fun getTasks(projectId: String?): List<Task> =
-        taskDao.getTasks(projectId?.let { UUID.fromString(it) }).toTaskList()
+    override suspend fun getTasks(taskListId: String?): List<Task> =
+        taskDao.getTasks(taskListId?.let { UUID.fromString(it) }).toTaskList()
 
     override suspend fun getTask(id: String): Task =
         taskDao.getTask(UUID.fromString(id)).toTask()

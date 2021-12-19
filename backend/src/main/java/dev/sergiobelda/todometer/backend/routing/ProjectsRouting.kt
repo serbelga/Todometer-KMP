@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.backend.routing
 
-import dev.sergiobelda.todometer.backend.model.NewProject
-import dev.sergiobelda.todometer.backend.model.Project
-import dev.sergiobelda.todometer.backend.service.IProjectService
+import dev.sergiobelda.todometer.backend.model.NewTaskList
+import dev.sergiobelda.todometer.backend.model.TaskList
+import dev.sergiobelda.todometer.backend.service.ITaskListService
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -30,31 +30,31 @@ import io.ktor.routing.post
 import io.ktor.routing.put
 import io.ktor.routing.route
 
-fun Route.projectsRouting(projectService: IProjectService) {
-    route("/v1/projects") {
+fun Route.taskListsRouting(taskListService: ITaskListService) {
+    route("/v1/tasklists") {
 
         // TODO: Handle exceptions
         get {
-            call.respond(projectService.getProjects())
+            call.respond(taskListService.getTaskLists())
         }
         get("/{id}") {
             // TODO respond error if id not present
-            val projectId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")
-            call.respond(projectService.getProject(projectId))
+            val taskListId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")
+            call.respond(taskListService.getTaskList(taskListId))
         }
         post {
-            val project = call.receive<NewProject>()
-            call.respond(projectService.insertProject(project))
+            val taskList = call.receive<NewTaskList>()
+            call.respond(taskListService.insertTaskList(taskList))
         }
         put {
-            val project = call.receive<Project>()
-            projectService.updateProject(project)
-            call.respond(project)
+            val taskList = call.receive<TaskList>()
+            taskListService.updateTaskList(taskList)
+            call.respond(taskList)
         }
         delete("/{id}") {
             // TODO respond error if id not present
-            val projectId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")
-            projectService.deleteProject(projectId)
+            val taskListId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")
+            taskListService.deleteTaskList(taskListId)
             call.respond(HttpStatusCode.NoContent)
         }
     }

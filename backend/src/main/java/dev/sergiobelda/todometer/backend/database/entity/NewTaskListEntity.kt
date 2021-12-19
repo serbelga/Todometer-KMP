@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.backend.model
+package dev.sergiobelda.todometer.backend.database.entity
 
-data class Project(
-    val id: String,
+import java.util.UUID
+
+data class NewTaskListEntity(
+    val id: UUID?,
     val name: String,
     val description: String
 )

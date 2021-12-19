@@ -16,27 +16,27 @@
 
 package dev.sergiobelda.todometer.backend.model
 
-import dev.sergiobelda.todometer.backend.database.entity.NewProjectEntity
-import dev.sergiobelda.todometer.backend.database.entity.ProjectEntity
+import dev.sergiobelda.todometer.backend.database.entity.NewTaskListEntity
+import dev.sergiobelda.todometer.backend.database.entity.TaskListEntity
 import java.util.UUID
 
-fun ProjectEntity.toProject() = Project(
+fun TaskListEntity.toTaskList() = TaskList(
     id = id.toString(),
     name = name,
     description = description
 )
 
-fun Iterable<ProjectEntity>.toProjectList() = this.map { projectEntity ->
-    projectEntity.toProject()
+fun Iterable<TaskListEntity>.toTaskListList() = this.map { taskListEntity ->
+    taskListEntity.toTaskList()
 }
 
-fun Project.toProjectEntity() = ProjectEntity(
+fun TaskList.toTaskListEntity() = TaskListEntity(
     id = UUID.fromString(id),
     name = name,
     description = description
 )
 
-fun NewProject.toNewProjectEntity() = NewProjectEntity(
+fun NewTaskList.toNewTaskListEntity() = NewTaskListEntity(
     id = id?.let { UUID.fromString(it) },
     name = name,
     description = description

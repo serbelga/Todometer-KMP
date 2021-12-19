@@ -23,6 +23,6 @@ data class TaskEntity(
     val title: String,
     val description: String,
     val state: String,
-    val projectId: UUID,
+    val taskListId: UUID,
     val tag: String
 )

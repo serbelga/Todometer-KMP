@@ -25,7 +25,7 @@ fun TaskEntity.toTask() = Task(
     title = title,
     description = description,
     state = state,
-    projectId = projectId.toString(),
+    taskListId = taskListId.toString(),
     tag = tag
 )
 
@@ -38,6 +38,6 @@ fun NewTask.toNewTaskEntity() = NewTaskEntity(
     title = title,
     description = description,
     state = state,
-    projectId = UUID.fromString(projectId),
+    taskListId = UUID.fromString(taskListId),
     tag = tag
 )

@@ -16,19 +16,19 @@
 
 package dev.sergiobelda.todometer.backend.database.dao
 
-import dev.sergiobelda.todometer.backend.database.entity.NewProjectEntity
-import dev.sergiobelda.todometer.backend.database.entity.ProjectEntity
+import dev.sergiobelda.todometer.backend.database.entity.NewTaskListEntity
+import dev.sergiobelda.todometer.backend.database.entity.TaskListEntity
 import java.util.UUID
 
-interface IProjectDao {
+interface ITaskListDao {
 
-    suspend fun getProject(id: UUID): ProjectEntity
+    suspend fun getTaskList(id: UUID): TaskListEntity
 
-    suspend fun getProjects(): List<ProjectEntity>
+    suspend fun getTaskLists(): List<TaskListEntity>
 
-    suspend fun insertProject(project: NewProjectEntity): UUID
+    suspend fun insertTaskList(taskList: NewTaskListEntity): UUID
 
-    suspend fun updateProject(project: ProjectEntity)
+    suspend fun updateTaskList(taskList: TaskListEntity)
 
-    suspend fun deleteProject(id: UUID)
+    suspend fun deleteTaskList(id: UUID)
 }

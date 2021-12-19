@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.backend.database.entity
+package dev.sergiobelda.todometer.backend.database.table
 
-import java.util.UUID
+import org.jetbrains.exposed.sql.Table
 
-data class NewProjectEntity(
-    val id: UUID?,
-    val name: String,
-    val description: String
-)
+object TaskListTable : Table() {
+    val id = uuid("id").autoGenerate()
+    val name = varchar("name", length = 50)
+    val description = text("description")
+
+    override val primaryKey = PrimaryKey(id, name = "PK_TaskList_ID")
+}
