@@ -48,9 +48,9 @@ val taskEntity1 = TaskEntity(
     id = "1",
     title = "Task 1",
     description = "Description 1",
-    state = TaskState.DOING.name,
+    state = TaskState.DOING,
     project_id = "1",
-    tag = Tag.GRAY.name,
+    tag = Tag.GRAY,
     sync = false
 )
 
@@ -58,9 +58,9 @@ val taskEntity1Updated = TaskEntity(
     id = "1",
     title = "Task 1 Updated",
     description = "Description 1 Updated",
-    state = TaskState.DOING.name,
+    state = TaskState.DOING,
     project_id = "1",
-    tag = Tag.RED.name,
+    tag = Tag.RED,
     sync = false
 )
 
@@ -68,9 +68,9 @@ val taskEntity2 = TaskEntity(
     id = "2",
     title = "Task 2",
     description = "Description 2",
-    state = TaskState.DOING.name,
+    state = TaskState.DOING,
     project_id = "1",
-    tag = Tag.RED.name,
+    tag = Tag.RED,
     sync = false
 )
 

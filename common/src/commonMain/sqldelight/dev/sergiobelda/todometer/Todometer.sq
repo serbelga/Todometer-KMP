@@ -1,3 +1,6 @@
+import dev.sergiobelda.todometer.common.model.Tag;
+import dev.sergiobelda.todometer.common.model.TaskState;
+
 CREATE TABLE ProjectEntity (
     id TEXT PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
@@ -9,9 +12,9 @@ CREATE TABLE TaskEntity (
     id TEXT PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
-    state TEXT NOT NULL,
+    state TEXT AS TaskState NOT NULL,
     project_id TEXT NOT NULL,
-    tag TEXT,
+    tag TEXT AS Tag NOT NULL,
     sync INTEGER AS Boolean NOT NULL DEFAULT 0,
     FOREIGN KEY(project_id) REFERENCES ProjectEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
 );

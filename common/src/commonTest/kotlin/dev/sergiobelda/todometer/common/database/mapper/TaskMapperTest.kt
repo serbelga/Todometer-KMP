@@ -40,9 +40,9 @@ class TaskMapperTest {
         assertEquals(task.id, taskEntity.id)
         assertEquals(task.title, taskEntity.title)
         assertEquals(task.description, taskEntity.description)
-        assertEquals(task.state.name, taskEntity.state)
+        assertEquals(task.state, taskEntity.state)
         assertEquals(task.projectId, taskEntity.project_id)
-        assertEquals(task.tag.name, taskEntity.tag)
+        assertEquals(task.tag, taskEntity.tag)
         assertEquals(task.sync, taskEntity.sync)
     }
 
@@ -52,18 +52,18 @@ class TaskMapperTest {
             id = "1",
             title = "Title",
             description = "Description",
-            state = TaskState.DOING.name,
+            state = TaskState.DOING,
             project_id = "2",
-            tag = Tag.GRAY.name,
+            tag = Tag.GRAY,
             sync = true
         )
         val task = taskEntity.toDomain()
         assertEquals(taskEntity.id, task.id)
         assertEquals(taskEntity.title, task.title)
         assertEquals(taskEntity.description, task.description)
-        assertEquals(taskEntity.state, task.state.name)
+        assertEquals(taskEntity.state, task.state)
         assertEquals(taskEntity.project_id, task.projectId)
-        assertEquals(taskEntity.tag, task.tag.name)
+        assertEquals(taskEntity.tag, task.tag)
         assertEquals(taskEntity.sync, task.sync)
     }
 }

@@ -80,25 +80,25 @@ class TaskDaoTest : DatabaseTest() {
         var task = taskDao.getTask(id).first()
         assertEquals("Task 1", task?.title)
         assertEquals("Description 1", task?.description)
-        assertEquals(Tag.GRAY.name, task?.tag)
+        assertEquals(Tag.GRAY, task?.tag)
 
         taskDao.updateTask(taskEntity1Updated)
 
         task = taskDao.getTask(id).first()
         assertEquals("Task 1 Updated", task?.title)
         assertEquals("Description 1 Updated", task?.description)
-        assertEquals(Tag.RED.name, task?.tag)
+        assertEquals(Tag.RED, task?.tag)
     }
 
     @Test
     fun testUpdateState() = runTest {
         val id = taskDao.insertTask(taskEntity1)
         var task = taskDao.getTask(id).first()
-        assertEquals(TaskState.DOING.name, task?.state)
+        assertEquals(TaskState.DOING, task?.state)
 
         taskDao.updateTaskState(id, TaskState.DONE)
         task = taskDao.getTask(id).first()
-        assertEquals(TaskState.DONE.name, task?.state)
+        assertEquals(TaskState.DONE, task?.state)
     }
 
     @Test

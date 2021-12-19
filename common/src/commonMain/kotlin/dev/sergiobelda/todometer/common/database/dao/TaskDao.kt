@@ -69,7 +69,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
     override suspend fun updateTaskState(id: String, state: TaskState) {
         database.todometerQueries.updateTaskState(
             id = id,
-            state = state.toString()
+            state = state
         )
     }
 
