@@ -304,10 +304,10 @@ fun TaskListsNavigationDrawer(
         LazyColumn(modifier = Modifier.padding(top = 8.dp)) {
             items(taskLists) { taskList ->
                 TaskListItem(
-                    taskList,
+                    taskList.name,
                     taskList.id == taskListSelected?.id
                 ) {
-                    onTaskListClick(it)
+                    onTaskListClick(taskList.id)
                 }
             }
         }

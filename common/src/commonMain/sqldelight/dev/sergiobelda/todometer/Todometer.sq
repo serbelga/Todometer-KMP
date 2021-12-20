@@ -13,7 +13,7 @@ CREATE TABLE TaskEntity (
     title TEXT NOT NULL,
     description TEXT,
     state TEXT AS TaskState NOT NULL,
-    tasklist_id TEXT,
+    tasklist_id TEXT NOT NULL,
     tag TEXT AS Tag NOT NULL,
     sync INTEGER AS Boolean NOT NULL DEFAULT 0,
     FOREIGN KEY(tasklist_id) REFERENCES TaskListEntity(id) ON UPDATE CASCADE ON DELETE CASCADE

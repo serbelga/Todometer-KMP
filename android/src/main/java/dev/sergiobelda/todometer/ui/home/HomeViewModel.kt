@@ -75,7 +75,7 @@ class HomeViewModel(
             Result.Loading
         )
 
-    val taskListSelected: StateFlow<Result<TaskList?>> =
+    val taskListSelected: StateFlow<Result<TaskList>> =
         getTaskListSelectedUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),

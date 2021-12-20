@@ -416,7 +416,9 @@ fun MenuBottomSheet(
         HorizontalDivider()
         LazyColumn {
             items(taskLists) { taskList ->
-                TaskListItem(taskList, taskList.id == selectedTaskListId, selectTaskList)
+                TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
+                    selectTaskList(taskList.id)
+                }
             }
         }
     }
@@ -479,7 +481,10 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
                 modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
                 contentDescription = null
             )
-            Text(stringResource(R.string.no_task_lists), modifier = Modifier.padding(bottom = 48.dp))
+            Text(
+                stringResource(R.string.no_task_lists),
+                modifier = Modifier.padding(bottom = 48.dp)
+            )
             Button(onClick = addTaskList) {
                 Text(text = stringResource(R.string.add_task_list))
             }

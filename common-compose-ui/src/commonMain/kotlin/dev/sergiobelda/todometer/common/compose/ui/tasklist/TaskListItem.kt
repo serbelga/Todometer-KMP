@@ -30,13 +30,12 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.primarySelected
-import dev.sergiobelda.todometer.common.model.TaskList
 
 @Composable
 fun TaskListItem(
-    taskList: TaskList,
+    text: String,
     selected: Boolean,
-    onItemClick: (String) -> Unit
+    onItemClick: () -> Unit
 ) {
     val background = if (selected) {
         Modifier.background(TodometerColors.primarySelected)
@@ -45,13 +44,13 @@ fun TaskListItem(
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(56.dp).clickable(onClick = { onItemClick(taskList.id) })
+        modifier = Modifier.height(56.dp).clickable(onClick = { onItemClick() })
             .then(background)
     ) {
         val selectedColor =
             if (selected) TodometerColors.primary else TodometerColors.onSurface.copy(alpha = ContentAlpha.medium)
         Text(
-            text = taskList.name,
+            text = text,
             color = selectedColor,
             style = TodometerTypography.subtitle2,
             modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
