@@ -583,7 +583,7 @@ sealed class HomeBottomSheet {
 
 @Preview
 @Composable
-fun EmptyTaskListTaskListPreview() {
+fun EmptyTasksListPreview() {
     ToDometerTheme {
         EmptyTasksListView()
     }
