@@ -23,17 +23,18 @@ import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.wear.Actions
-import dev.sergiobelda.todometer.wear.Destinations.AddProject
 import dev.sergiobelda.todometer.wear.Destinations.AddTask
+import dev.sergiobelda.todometer.wear.Destinations.AddTaskList
 import dev.sergiobelda.todometer.wear.Destinations.Home
-import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
-import dev.sergiobelda.todometer.wear.Destinations.ProjectTasksArgs.ProjectId
+import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
+import dev.sergiobelda.todometer.wear.Destinations.TaskListTasksArgs.TaskListId
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetailArgs.TaskId
 import dev.sergiobelda.todometer.wear.ui.addproject.AddProjectScreen
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
+import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksScreen
+import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
@@ -49,29 +50,29 @@ fun ToDometerApp() {
         SwipeDismissableNavHost(navController = navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    actions.navigateToAddProject,
-                    actions.navigateToProjectTasks
+                    actions.navigateToAddTaskList,
+                    actions.navigateToTaskListTasks
                 )
             }
-            composable(AddProject) {
-                AddProjectScreen(actions.navigateUp)
+            composable(AddTaskList) {
+                AddTaskListScreen(actions.navigateUp)
             }
             composable(
-                "$ProjectTasks/{$ProjectId}"
+                "$ProjectTasks/{$TaskListId}"
             ) { navBackStackEntry ->
-                val projectId = navBackStackEntry.arguments?.getString(ProjectId) ?: ""
+                val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
                 ProjectTasksScreen(
-                    addTask = { actions.navigateToAddTask(projectId) },
-                    projectTasksViewModel = getViewModel { parametersOf(projectId) }
+                    addTask = { actions.navigateToAddTask(taskListId) },
+                    taskListTasksViewModel = getViewModel { parametersOf(taskListId) }
                 )
             }
             composable(
-                "$AddTask/{$ProjectId}"
+                "$AddTask/{$TaskListId}"
             ) { navBackStackEntry ->
-                val projectId = navBackStackEntry.arguments?.getString(ProjectId) ?: ""
+                val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
                 AddTaskScreen(
                     actions.navigateUp,
-                    addTaskViewModel = getViewModel { parametersOf(projectId) }
+                    addTaskViewModel = getViewModel { parametersOf(taskListId) }
                 )
             }
             composable(

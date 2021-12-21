@@ -18,16 +18,16 @@ package dev.sergiobelda.todometer.ui
 
 import androidx.navigation.NavHostController
 import dev.sergiobelda.todometer.ui.Destinations.About
-import dev.sergiobelda.todometer.ui.Destinations.AddProject
 import dev.sergiobelda.todometer.ui.Destinations.AddTask
-import dev.sergiobelda.todometer.ui.Destinations.EditProject
+import dev.sergiobelda.todometer.ui.Destinations.AddTaskList
 import dev.sergiobelda.todometer.ui.Destinations.EditTask
+import dev.sergiobelda.todometer.ui.Destinations.EditTaskList
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetail
 
 object Destinations {
     const val Home = "home"
-    const val AddProject = "addProject"
-    const val EditProject = "editProject"
+    const val AddTaskList = "addTaskList"
+    const val EditTaskList = "editTaskList"
     const val AddTask = "addTask"
     const val EditTask = "editTask"
     const val TaskDetail = "taskDetail"
@@ -39,22 +39,22 @@ object Destinations {
 }
 
 class Actions(navController: NavHostController) {
-    val openTask: (String) -> Unit = { taskId ->
+    val navigateToTaskDetail: (String) -> Unit = { taskId ->
         navController.navigate("$TaskDetail/$taskId")
     }
-    val addTask: () -> Unit = {
+    val navigateToAddTask: () -> Unit = {
         navController.navigate(AddTask)
     }
-    val editTask: (String) -> Unit = { taskId ->
+    val navigateToEditTask: (String) -> Unit = { taskId ->
         navController.navigate("$EditTask/$taskId")
     }
-    val addProject: () -> Unit = {
-        navController.navigate(AddProject)
+    val navigateToAddTaskList: () -> Unit = {
+        navController.navigate(AddTaskList)
     }
-    val editProject: () -> Unit = {
-        navController.navigate(EditProject)
+    val navigateToEditTaskList: () -> Unit = {
+        navController.navigate(EditTaskList)
     }
-    val about: () -> Unit = {
+    val navigateToAbout: () -> Unit = {
         navController.navigate(About)
     }
     val navigateUp: () -> Unit = {

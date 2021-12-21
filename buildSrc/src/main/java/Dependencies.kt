@@ -16,22 +16,24 @@
 
 object Versions {
     const val activityKtx = "1.4.0"
-    const val appCompat = "1.4.0-rc01"
-    const val androidGradlePlugin = "7.1.0-beta03"
-    const val compose = "1.1.0-alpha06"
-    const val composeMultiplatform = "1.0.0-beta5"
+    const val appCompat = "1.4.0"
+    const val androidGradlePlugin = "7.1.0-beta05"
+    const val compose = "1.1.0-beta02"
+    const val composeMultiplatform = "1.0.0"
     const val dataStorePreferences = "1.0.0"
     const val espressoCore = "3.4.0"
     const val exposedSql = "0.32.1"
     const val junit = "4.12"
     const val androidJunit = "1.1.3"
-    const val koin = "3.1.3"
+    const val koin = "3.1.4"
     const val kotlin = "1.5.31"
-    const val ktLint = "0.42.1"
-    const val ktor = "1.6.5"
+    const val kotlinCoroutinesTest = "1.6.0-RC"
+    const val ktLint = "0.43.2"
+    const val ktor = "1.6.7"
     const val ktxVersion = "1.7.0"
     const val lifecycle = "2.4.0"
     const val materialComponents = "1.4.0"
+    const val mockk = "1.12.1"
     const val navigationCompose = "2.4.0-beta01"
     const val ossLicenses = "17.0.0"
     const val ossLicensesPlugin = "0.10.4"
@@ -41,7 +43,7 @@ object Versions {
     const val testCoreKtx = "1.4.0"
     const val timber = "4.7.1"
     const val wear = "1.2.0"
-    const val wearCompose = "1.0.0-alpha11"
+    const val wearCompose = "1.0.0-alpha12"
 }
 
 object Android {
@@ -56,6 +58,9 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+
+    const val kotlinCoroutinesTest =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutinesTest}"
 
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 
@@ -170,6 +175,11 @@ object Libs {
         const val serverCore = "io.ktor:ktor-server-core:${Versions.ktor}"
         const val serverNetty = "io.ktor:ktor-server-netty:${Versions.ktor}"
         const val serverTests = "io.ktor:ktor-server-tests:${Versions.ktor}"
+    }
+
+    object MockK {
+        const val mockk = "io.mockk:mockk:${Versions.mockk}"
+        const val mockkCommon = "io.mockk:mockk-common:${Versions.mockk}"
     }
 
     object SqlDelight {

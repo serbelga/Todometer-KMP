@@ -26,7 +26,7 @@ fun ResultRow.toTaskEntity() =
         title = this[TaskTable.title],
         description = this[TaskTable.description],
         state = this[TaskTable.state],
-        projectId = this[TaskTable.projectId],
+        taskListId = this[TaskTable.taskListId],
         tag = this[TaskTable.tag]
     )
 

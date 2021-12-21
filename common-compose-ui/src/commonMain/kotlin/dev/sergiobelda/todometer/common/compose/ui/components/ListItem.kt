@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SingleLineItem(
     modifier: Modifier = Modifier,
-    icon: @Composable (() -> Unit)?,
+    icon: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit),
     onClick: () -> Unit = {},
     enabled: Boolean = true
@@ -61,7 +61,7 @@ fun SingleLineItem(
 @Composable
 fun TwoLineItem(
     modifier: Modifier = Modifier,
-    icon: @Composable (() -> Unit)?,
+    icon: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit),
     subtitle: @Composable (() -> Unit),
     onClick: () -> Unit = {},

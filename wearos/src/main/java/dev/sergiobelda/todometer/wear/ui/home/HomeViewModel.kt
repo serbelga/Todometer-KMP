@@ -19,18 +19,18 @@ package dev.sergiobelda.todometer.wear.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Project
-import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
+import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class HomeViewModel(
-    getProjectsUseCase: GetProjectsUseCase
+    getTaskListsUseCase: GetTaskListsUseCase
 ) : ViewModel() {
 
-    val projects: StateFlow<Result<List<Project>>> =
-        getProjectsUseCase().stateIn(
+    val taskLists: StateFlow<Result<List<TaskList>>> =
+        getTaskListsUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
             Result.Loading

@@ -22,11 +22,11 @@ import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
-    private val projectId: String,
+    private val taskListId: String,
     private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
     fun insertTask(title: String) = viewModelScope.launch {
-        insertTaskUseCase.invoke(projectId, title)
+        insertTaskUseCase.invoke(taskListId, title)
     }
 }

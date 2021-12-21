@@ -25,30 +25,29 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.ui.Destinations.About
-import dev.sergiobelda.todometer.ui.Destinations.AddProject
 import dev.sergiobelda.todometer.ui.Destinations.AddTask
-import dev.sergiobelda.todometer.ui.Destinations.EditProject
+import dev.sergiobelda.todometer.ui.Destinations.AddTaskList
 import dev.sergiobelda.todometer.ui.Destinations.EditTask
+import dev.sergiobelda.todometer.ui.Destinations.EditTaskList
 import dev.sergiobelda.todometer.ui.Destinations.Home
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetail
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import dev.sergiobelda.todometer.ui.about.AboutScreen
-import dev.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import dev.sergiobelda.todometer.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.ui.editproject.EditProjectScreen
+import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
+import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.ui.home.HomeScreen
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
@@ -67,52 +66,52 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    actions.addProject,
-                    actions.editProject,
-                    actions.addTask,
-                    actions.openTask,
-                    { startOpenSourceLicensesActivity(context) },
-                    actions.about
+                    addTaskList = actions.navigateToAddTaskList,
+                    editTaskList = actions.navigateToEditTaskList,
+                    addTask = actions.navigateToAddTask,
+                    openTask = actions.navigateToTaskDetail,
+                    openSourceLicenses = { startOpenSourceLicensesActivity(context) },
+                    about = actions.navigateToAbout
                 )
             }
             composable(
-                "$TaskDetail/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.StringType })
+                "$TaskDetail/{$TaskId}"
             ) { navBackStackEntry ->
+                val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
                 TaskDetailScreen(
-                    taskId = navBackStackEntry.arguments?.getString(TaskId) ?: "",
-                    actions.editTask,
-                    actions.navigateUp
+                    editTask = { actions.navigateToEditTask(taskId) },
+                    navigateUp = actions.navigateUp,
+                    taskDetailViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
-            composable(AddProject) {
-                AddProjectScreen(actions.navigateUp)
+            composable(AddTaskList) {
+                AddTaskListScreen(actions.navigateUp)
             }
-            composable(EditProject) {
-                EditProjectScreen(actions.navigateUp)
+            composable(EditTaskList) {
+                EditTaskListScreen(actions.navigateUp)
             }
             composable(AddTask) {
                 AddTaskScreen(actions.navigateUp)
             }
             composable(
-                "$EditTask/{$TaskId}",
-                arguments = listOf(navArgument(TaskId) { type = NavType.StringType })
+                "$EditTask/{$TaskId}"
             ) { backStackEntry ->
+                val taskId = backStackEntry.arguments?.getString(TaskId) ?: ""
                 EditTaskScreen(
-                    taskId = backStackEntry.arguments?.getString(TaskId) ?: "",
-                    actions.navigateUp
+                    navigateUp = actions.navigateUp,
+                    editTaskViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
             composable(About) {
                 AboutScreen(
-                    githubClick = {
+                    openGithub = {
                         openWebPage(
                             context,
                             "https://github.com/serbelga/ToDometer_Multiplatform"
                         )
                     },
-                    openSourceLicensesClick = { startOpenSourceLicensesActivity(context) },
-                    actions.navigateUp
+                    openSourceLicenses = { startOpenSourceLicensesActivity(context) },
+                    navigateUp = actions.navigateUp
                 )
             }
         }

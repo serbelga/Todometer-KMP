@@ -1,9 +1,5 @@
 <h1 align="center">Todometer Kotlin Multiplatform</h1></br>
 
-<h4 align="center">
-  🚧🚧🚧 WIP: https://github.com/serbelga/ToDometer to Kotlin Multiplatform
-</h4>
-
 <p align="center">
   <a href="https://github.com/serbelga/ToDometer_Multiplatform/actions/workflows/build.yml" target="_blank">
     <img src="https://github.com/serbelga/ToDometer_Kotlin_Multiplatform/actions/workflows/build.yml/badge.svg">

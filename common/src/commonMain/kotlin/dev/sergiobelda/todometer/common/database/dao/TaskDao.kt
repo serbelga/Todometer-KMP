@@ -18,23 +18,19 @@ package dev.sergiobelda.todometer.common.database.dao
 
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.squareup.sqldelight.runtime.coroutines.mapToOneNotNull
+import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
 import dev.sergiobelda.todometer.TaskEntity
 import dev.sergiobelda.todometer.TodometerDatabase
 import dev.sergiobelda.todometer.common.model.TaskState
 import kotlinx.coroutines.flow.Flow
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class TaskDao : ITaskDao, KoinComponent {
+class TaskDao(private val database: TodometerDatabase) : ITaskDao {
 
-    private val database: TodometerDatabase by inject()
+    override fun getTask(id: String): Flow<TaskEntity?> =
+        database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTask(id: String): Flow<TaskEntity> =
-        database.todometerQueries.selectTask(id).asFlow().mapToOneNotNull()
-
-    override fun getTasks(projectId: String): Flow<List<TaskEntity>> =
-        database.todometerQueries.selectTasksByProjectId(projectId).asFlow().mapToList()
+    override fun getTasks(taskListId: String): Flow<List<TaskEntity>> =
+        database.todometerQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
         database.todometerQueries.insertOrReplaceTask(
@@ -43,7 +39,7 @@ class TaskDao : ITaskDao, KoinComponent {
             description = task.description,
             state = task.state,
             tag = task.tag,
-            project_id = task.project_id,
+            tasklist_id = task.tasklist_id,
             sync = task.sync
         )
         // TODO Call return last_insert_rowid() from SQLDelight.
@@ -73,7 +69,7 @@ class TaskDao : ITaskDao, KoinComponent {
     override suspend fun updateTaskState(id: String, state: TaskState) {
         database.todometerQueries.updateTaskState(
             id = id,
-            state = state.toString()
+            state = state
         )
     }
 

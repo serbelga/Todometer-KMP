@@ -18,16 +18,14 @@ package dev.sergiobelda.todometer.common.database.mapper
 
 import dev.sergiobelda.todometer.TaskEntity
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TypeConverters.tagValueOf
-import dev.sergiobelda.todometer.common.model.TypeConverters.taskStateValueOf
 
 fun TaskEntity.toDomain() = Task(
     id = id,
     title = title,
     description = description,
-    state = taskStateValueOf(state),
-    projectId = project_id,
-    tag = tagValueOf(tag ?: ""),
+    state = state,
+    taskListId = tasklist_id,
+    tag = tag,
     sync = sync
 )
 
@@ -39,8 +37,8 @@ fun Task.toEntity() = TaskEntity(
     id,
     title,
     description,
-    state.toString(),
-    projectId,
-    tag.toString(),
+    state,
+    taskListId,
+    tag,
     sync
 )

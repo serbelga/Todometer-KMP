@@ -25,16 +25,17 @@ import dev.sergiobelda.todometer.common.model.TaskState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-// TODO Catch errors and return Result.Error
 class TaskLocalDataSource(
     private val taskDao: ITaskDao
 ) : ITaskLocalDataSource {
 
     override fun getTask(id: String): Flow<Result<Task>> =
-        taskDao.getTask(id).map { Result.Success(it.toDomain()) }
+        taskDao.getTask(id).map { taskEntity ->
+            taskEntity?.let { Result.Success(it.toDomain()) } ?: Result.Error()
+        }
 
-    override fun getTasks(projectId: String): Flow<Result<List<Task>>> =
-        taskDao.getTasks(projectId).map { list ->
+    override fun getTasks(taskListId: String): Flow<Result<List<Task>>> =
+        taskDao.getTasks(taskListId).map { list ->
             Result.Success(list.toDomain())
         }
 

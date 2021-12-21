@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.backend.model
 
 enum class TaskState {
-    UNKNOWN,
     DOING,
     DONE;
 }
