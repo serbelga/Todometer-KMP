@@ -24,17 +24,17 @@ import dev.sergiobelda.todometer.common.repository.ITaskRepository
 class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
 
     /**
-     * Creates a new [Task] given a [title], [description] and [tag], in the project [projectId].
+     * Creates a new [Task] given a [title], [description] and [tag], in the task list [taskListId].
      */
     suspend operator fun invoke(
-        projectId: String,
+        taskListId: String,
         title: String,
         description: String = "",
         tag: Tag = Tag.GRAY
     ): Result<String> = taskRepository.insertTask(
         title,
         description,
-        projectId,
+        taskListId,
         tag
     )
 }

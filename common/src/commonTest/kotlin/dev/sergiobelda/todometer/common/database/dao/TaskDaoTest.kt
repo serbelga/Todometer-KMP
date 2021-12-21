@@ -19,10 +19,10 @@ package dev.sergiobelda.todometer.common.database.dao
 import dev.sergiobelda.todometer.common.database.DatabaseTest
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.TaskState
-import dev.sergiobelda.todometer.common.testutils.projectEntity1
 import dev.sergiobelda.todometer.common.testutils.taskEntity1
 import dev.sergiobelda.todometer.common.testutils.taskEntity1Updated
 import dev.sergiobelda.todometer.common.testutils.taskEntity2
+import dev.sergiobelda.todometer.common.testutils.taskListEntity1
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -38,14 +38,14 @@ class TaskDaoTest : DatabaseTest() {
 
     private lateinit var taskDao: TaskDao
 
-    private lateinit var projectDao: ProjectDao
+    private lateinit var taskListDao: TaskListDao
 
     @BeforeTest
     fun init() {
         taskDao = TaskDao(database)
-        projectDao = ProjectDao(database)
+        taskListDao = TaskListDao(database)
         runTest {
-            projectDao.insertProject(projectEntity1)
+            taskListDao.insertTaskList(taskListEntity1)
         }
     }
 
@@ -80,25 +80,25 @@ class TaskDaoTest : DatabaseTest() {
         var task = taskDao.getTask(id).first()
         assertEquals("Task 1", task?.title)
         assertEquals("Description 1", task?.description)
-        assertEquals(Tag.GRAY.name, task?.tag)
+        assertEquals(Tag.GRAY, task?.tag)
 
         taskDao.updateTask(taskEntity1Updated)
 
         task = taskDao.getTask(id).first()
         assertEquals("Task 1 Updated", task?.title)
         assertEquals("Description 1 Updated", task?.description)
-        assertEquals(Tag.RED.name, task?.tag)
+        assertEquals(Tag.RED, task?.tag)
     }
 
     @Test
     fun testUpdateState() = runTest {
         val id = taskDao.insertTask(taskEntity1)
         var task = taskDao.getTask(id).first()
-        assertEquals(TaskState.DOING.name, task?.state)
+        assertEquals(TaskState.DOING, task?.state)
 
         taskDao.updateTaskState(id, TaskState.DONE)
         task = taskDao.getTask(id).first()
-        assertEquals(TaskState.DONE.name, task?.state)
+        assertEquals(TaskState.DONE, task?.state)
     }
 
     @Test

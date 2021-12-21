@@ -44,18 +44,18 @@ import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.Project
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
-    addProject: () -> Unit,
-    openProject: (String) -> Unit,
+    addTaskList: () -> Unit,
+    openTaskList: (String) -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val projectsResultState = homeViewModel.projects.collectAsState()
+    val taskListsResultState = homeViewModel.taskLists.collectAsState()
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
         vignette = {
@@ -77,19 +77,19 @@ fun HomeScreen(
                 Text(stringResource(R.string.app_name))
             }
             item {
-                AddProjectButton(addProject)
+                AddTaskListButton(addTaskList)
             }
             item {
                 Spacer(modifier = Modifier.height(4.dp))
             }
-            projectsResultState.value.doIfSuccess { projects ->
-                if (projects.isNullOrEmpty()) {
+            taskListsResultState.value.doIfSuccess { taskLists ->
+                if (taskLists.isNullOrEmpty()) {
                     item {
-                        Text(text = stringResource(id = R.string.no_projects))
+                        Text(text = stringResource(id = R.string.no_task_lists))
                     }
                 } else {
-                    items(projects) { project ->
-                        ProjectItem(project) { openProject(it) }
+                    items(taskLists) { taskList ->
+                        TaskListItem(taskList) { openTaskList(it) }
                     }
                 }
             }
@@ -98,8 +98,8 @@ fun HomeScreen(
 }
 
 @Composable
-fun ProjectItem(
-    project: Project,
+fun TaskListItem(
+    taskList: TaskList,
     onClick: (String) -> Unit
 ) {
     Chip(
@@ -108,15 +108,15 @@ fun ProjectItem(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colors.onSurface,
-                text = project.name
+                text = taskList.name
             )
         },
-        onClick = { onClick(project.id) }
+        onClick = { onClick(taskList.id) }
     )
 }
 
 @Composable
-fun AddProjectButton(onClick: () -> Unit) {
+fun AddTaskListButton(onClick: () -> Unit) {
     Chip(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,7 +131,7 @@ fun AddProjectButton(onClick: () -> Unit) {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Add Project"
+                text = "Add Task List"
             )
         },
         onClick = onClick

@@ -35,7 +35,7 @@ fun Route.tasksRouting(taskService: ITaskService) {
     route("/v1/tasks") {
 
         get {
-            call.respond(taskService.getTasks(call.parameters["projectId"]))
+            call.respond(taskService.getTasks(call.parameters["taskListId"]))
         }
         get("/{id}") {
             val taskId = call.parameters["id"] ?: throw IllegalStateException("Must provide id")

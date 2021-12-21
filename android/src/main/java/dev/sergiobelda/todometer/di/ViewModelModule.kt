@@ -17,10 +17,10 @@
 package dev.sergiobelda.todometer.di
 
 import dev.sergiobelda.todometer.ui.MainViewModel
-import dev.sergiobelda.todometer.ui.addproject.AddProjectViewModel
 import dev.sergiobelda.todometer.ui.addtask.AddTaskViewModel
-import dev.sergiobelda.todometer.ui.editproject.EditProjectViewModel
+import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.ui.edittask.EditTaskViewModel
+import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -28,13 +28,13 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel {
-        AddProjectViewModel(get())
+        AddTaskListViewModel(get())
     }
     viewModel {
         AddTaskViewModel(get())
     }
     viewModel {
-        EditProjectViewModel(get(), get())
+        EditTaskListViewModel(get(), get())
     }
     viewModel { parameters ->
         EditTaskViewModel(parameters.get(), get(), get())

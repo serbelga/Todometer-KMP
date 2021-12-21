@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ToDometer</string>
     <string name="no_tasks">No tasks</string>
-    <string name="no_projects">No projects</string>
+    <string name="no_task_lists">No task lists</string>
 </resources>

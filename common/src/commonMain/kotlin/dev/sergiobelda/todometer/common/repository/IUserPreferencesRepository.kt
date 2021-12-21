@@ -22,17 +22,17 @@ import kotlinx.coroutines.flow.Flow
 interface IUserPreferencesRepository {
 
     /**
-     * Retrieves the current project selected Id every time it changes in
+     * Retrieves the current task list selected Id every time it changes in
      * user preferences.
      */
-    fun projectSelected(): Flow<String>
+    fun taskListSelected(): Flow<String>
 
     /**
-     * Sets the current project selected by its id.
+     * Sets the current task list selected by its id.
      *
-     * @param [projectSelectedId] Project id.
+     * @param [taskListSelectedId] TaskList id.
      */
-    suspend fun setProjectSelected(projectSelectedId: String)
+    suspend fun setTaskListSelected(taskListSelectedId: String)
 
     /**
      * Retrieves the current selected [AppTheme] in user preferences

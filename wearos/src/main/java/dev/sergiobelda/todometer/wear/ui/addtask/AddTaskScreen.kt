@@ -31,7 +31,7 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddTaskScreen(
-    projectId: String,
+    taskListId: String,
     navigateUp: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
@@ -43,7 +43,7 @@ fun AddTaskScreen(
             Text(text = "Task 1")
             Button(
                 onClick = {
-                    addTaskViewModel.insertTask(projectId, "Task 1")
+                    addTaskViewModel.insertTask(taskListId, "Task 1")
                     navigateUp()
                 }
             ) {

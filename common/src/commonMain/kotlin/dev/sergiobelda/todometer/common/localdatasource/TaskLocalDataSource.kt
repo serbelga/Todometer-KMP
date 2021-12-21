@@ -34,8 +34,8 @@ class TaskLocalDataSource(
             taskEntity?.let { Result.Success(it.toDomain()) } ?: Result.Error()
         }
 
-    override fun getTasks(projectId: String): Flow<Result<List<Task>>> =
-        taskDao.getTasks(projectId).map { list ->
+    override fun getTasks(taskListId: String): Flow<Result<List<Task>>> =
+        taskDao.getTasks(taskListId).map { list ->
             Result.Success(list.toDomain())
         }
 

@@ -31,18 +31,18 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.ui.Destinations.About
-import dev.sergiobelda.todometer.ui.Destinations.AddProject
 import dev.sergiobelda.todometer.ui.Destinations.AddTask
-import dev.sergiobelda.todometer.ui.Destinations.EditProject
+import dev.sergiobelda.todometer.ui.Destinations.AddTaskList
 import dev.sergiobelda.todometer.ui.Destinations.EditTask
+import dev.sergiobelda.todometer.ui.Destinations.EditTaskList
 import dev.sergiobelda.todometer.ui.Destinations.Home
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetail
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
 import dev.sergiobelda.todometer.ui.about.AboutScreen
-import dev.sergiobelda.todometer.ui.addproject.AddProjectScreen
 import dev.sergiobelda.todometer.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.ui.editproject.EditProjectScreen
+import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
+import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.ui.home.HomeScreen
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
@@ -66,8 +66,8 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    addProject = actions.navigateToAddProject,
-                    editProject = actions.navigateToEditProject,
+                    addTaskList = actions.navigateToAddTaskList,
+                    editTaskList = actions.navigateToEditTaskList,
                     addTask = actions.navigateToAddTask,
                     openTask = actions.navigateToTaskDetail,
                     openSourceLicenses = { startOpenSourceLicensesActivity(context) },
@@ -84,11 +84,11 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                     taskDetailViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
-            composable(AddProject) {
-                AddProjectScreen(actions.navigateUp)
+            composable(AddTaskList) {
+                AddTaskListScreen(actions.navigateUp)
             }
-            composable(EditProject) {
-                EditProjectScreen(actions.navigateUp)
+            composable(EditTaskList) {
+                EditTaskListScreen(actions.navigateUp)
             }
             composable(AddTask) {
                 AddTaskScreen(actions.navigateUp)

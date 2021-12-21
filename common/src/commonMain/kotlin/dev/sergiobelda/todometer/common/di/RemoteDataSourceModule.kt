@@ -16,15 +16,15 @@
 
 package dev.sergiobelda.todometer.common.di
 
-import dev.sergiobelda.todometer.common.remotedatasource.IProjectRemoteDataSource
+import dev.sergiobelda.todometer.common.remotedatasource.ITaskListRemoteDataSource
 import dev.sergiobelda.todometer.common.remotedatasource.ITaskRemoteDataSource
-import dev.sergiobelda.todometer.common.remotedatasource.ProjectRemoteDataSource
+import dev.sergiobelda.todometer.common.remotedatasource.TaskListRemoteDataSource
 import dev.sergiobelda.todometer.common.remotedatasource.TaskRemoteDataSource
 import org.koin.dsl.module
 
 val remoteDataSourceModule = module {
-    single<IProjectRemoteDataSource> {
-        ProjectRemoteDataSource(get())
+    single<ITaskListRemoteDataSource> {
+        TaskListRemoteDataSource(get())
     }
     single<ITaskRemoteDataSource> {
         TaskRemoteDataSource(get())

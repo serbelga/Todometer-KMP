@@ -24,6 +24,6 @@ data class TaskApiModel(
     val title: String,
     val description: String?,
     val state: String,
-    val projectId: String,
+    val taskListId: String,
     val tag: String
 )
