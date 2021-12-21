@@ -38,7 +38,7 @@ class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRem
         title: String,
         description: String?,
         state: TaskState,
-        taskListId: String?,
+        taskListId: String,
         tag: Tag
     ): Result<String> = safeApiCall {
         taskApiClient.insertTask(

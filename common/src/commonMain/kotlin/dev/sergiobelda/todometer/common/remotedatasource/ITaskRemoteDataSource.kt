@@ -30,7 +30,7 @@ interface ITaskRemoteDataSource {
         title: String,
         description: String?,
         state: TaskState = TaskState.DOING,
-        taskListId: String?,
+        taskListId: String,
         tag: Tag
     ): Result<String>
 
