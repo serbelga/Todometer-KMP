@@ -21,8 +21,8 @@ import dev.sergiobelda.todometer.common.database.dao.ITaskDao
 import dev.sergiobelda.todometer.common.database.mapper.toDomain
 import dev.sergiobelda.todometer.common.database.mapper.toEntity
 import dev.sergiobelda.todometer.common.model.TaskState
-import dev.sergiobelda.todometer.common.testutils.entityTasks
 import dev.sergiobelda.todometer.common.testutils.task1
+import dev.sergiobelda.todometer.common.testutils.taskEntities
 import dev.sergiobelda.todometer.common.testutils.taskEntity1
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -68,13 +68,13 @@ class TaskLocalDataSourceTest {
     @Test
     fun testGetTasks() = runTest {
         coEvery { taskDao.getTasks("1") } returns flow {
-            emit(entityTasks)
+            emit(taskEntities)
         }
 
         val result = taskLocalDataSource.getTasks("1").first()
         assertTrue { result is Result.Success }
         assertEquals(
-            entityTasks.map { it.toDomain() },
+            taskEntities.map { it.toDomain() },
             (result as? Result.Success)?.value
         )
     }

@@ -24,7 +24,7 @@ interface ITaskDao {
 
     suspend fun getTask(id: UUID): TaskEntity
 
-    suspend fun getTasks(projectId: UUID? = null): List<TaskEntity>
+    suspend fun getTasks(taskListId: UUID? = null): List<TaskEntity>
 
     suspend fun insertTask(task: NewTaskEntity): UUID
 

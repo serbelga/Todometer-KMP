@@ -20,7 +20,7 @@ import dev.sergiobelda.todometer.common.extensions.enumValueOrDefaultOf
 
 object TypeConverters {
 
-    fun taskStateValueOf(name: String): TaskState = enumValueOrDefaultOf(name, TaskState.UNKNOWN)
+    fun taskStateValueOf(name: String): TaskState = enumValueOrDefaultOf(name, TaskState.DOING)
 
     fun tagValueOf(tag: String): Tag = enumValueOrDefaultOf(tag, Tag.GRAY)
 }

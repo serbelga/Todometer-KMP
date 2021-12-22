@@ -25,15 +25,15 @@ import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.wear.Actions
-import dev.sergiobelda.todometer.wear.Destinations.AddProject
 import dev.sergiobelda.todometer.wear.Destinations.AddTask
+import dev.sergiobelda.todometer.wear.Destinations.AddTaskList
 import dev.sergiobelda.todometer.wear.Destinations.Home
-import dev.sergiobelda.todometer.wear.Destinations.ProjectTasks
-import dev.sergiobelda.todometer.wear.Destinations.ProjectTasksArgs.ProjectId
-import dev.sergiobelda.todometer.wear.ui.addproject.AddProjectScreen
+import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
+import dev.sergiobelda.todometer.wear.Destinations.TaskListTasksArgs.TaskListId
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
+import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wear.ui.projecttasks.ProjectTasksScreen
+import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 
 @OptIn(ExperimentalWearMaterialApi::class)
@@ -46,28 +46,28 @@ fun ToDometerApp() {
         SwipeDismissableNavHost(navController = navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    actions.addProject,
-                    actions.openProject
+                    actions.addTaskList,
+                    actions.openTaskList
                 )
             }
-            composable(AddProject) {
-                AddProjectScreen(actions.navigateUp)
+            composable(AddTaskList) {
+                AddTaskListScreen(actions.navigateUp)
             }
             composable(
-                "$ProjectTasks/{$ProjectId}",
-                arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
+                "$TaskListTasks/{$TaskListId}",
+                arguments = listOf(navArgument(TaskListId) { type = NavType.StringType })
             ) { navBackStackEntry ->
-                ProjectTasksScreen(
-                    navBackStackEntry.arguments?.getString(ProjectId) ?: "",
+                TaskListTasksScreen(
+                    navBackStackEntry.arguments?.getString(TaskListId) ?: "",
                     actions.addTask
                 )
             }
             composable(
-                "$AddTask/{$ProjectId}",
-                arguments = listOf(navArgument(ProjectId) { type = NavType.StringType })
+                "$AddTask/{$TaskListId}",
+                arguments = listOf(navArgument(TaskListId) { type = NavType.StringType })
             ) { navBackStackEntry ->
                 AddTaskScreen(
-                    navBackStackEntry.arguments?.getString(ProjectId) ?: "",
+                    navBackStackEntry.arguments?.getString(TaskListId) ?: "",
                     actions.navigateUp
                 )
             }

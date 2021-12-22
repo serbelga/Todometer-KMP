@@ -43,7 +43,7 @@ class TodometerApi {
         const val PORT = "8080"
         const val ENDPOINT_URL = "$SCHEME://$HOST:$PORT"
         const val VERSION_1 = "/v1"
-        const val PROJECT_PATH = "/projects"
+        const val TASK_LIST_PATH = "/tasklists"
         const val TASK_PATH = "/tasks"
         const val TAG_PATH = "/tags"
     }

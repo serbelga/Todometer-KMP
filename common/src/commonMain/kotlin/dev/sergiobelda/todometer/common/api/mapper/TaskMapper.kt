@@ -27,7 +27,7 @@ fun TaskApiModel.toDomain() =
         title = title,
         description = description,
         state = taskStateValueOf(state),
-        projectId = projectId,
+        taskListId = taskListId,
         tag = tagValueOf(tag),
         sync = true
     )
