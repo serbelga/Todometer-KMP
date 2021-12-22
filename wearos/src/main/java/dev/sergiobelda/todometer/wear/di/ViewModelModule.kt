@@ -19,8 +19,8 @@ package dev.sergiobelda.todometer.wear.di
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
-import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksViewModel
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailViewModel
+import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -35,7 +35,7 @@ val viewModelModule = module {
         AddTaskListViewModel(get())
     }
     viewModel { parameters ->
-        AddTaskViewModel(projectId = parameters.get(), get())
+        AddTaskViewModel(taskListId = parameters.get(), get())
     }
     viewModel { parameters ->
         TaskDetailViewModel(taskId = parameters.get(), get())

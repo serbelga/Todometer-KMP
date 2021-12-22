@@ -16,9 +16,9 @@
 
 <resources>
     <string name="no_tasks">No hi han tasques</string>
-    <string name="edit_project">Editar projecte</string>
-    <string name="no_projects">No hi han projectes</string>
+    <string name="no_task_lists">No hi han llistes de tasques</string>
+    <string name="edit_task_list">Editar llista de tasques</string>
     <string name="edit_task">Editar tasca</string>
-    <string name="remove_project">Eliminar projecte</string>
+    <string name="remove_task_list">Eliminar llista de tasques</string>
     <string name="remove_task">Eliminar tasca</string>
 </resources>

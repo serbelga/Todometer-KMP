@@ -99,13 +99,13 @@ fun TaskListTasksScreen(
                     Button(onClick = {}) {
                         Icon(
                             Icons.Outlined.Edit,
-                            contentDescription = stringResource(R.string.edit_project)
+                            contentDescription = stringResource(R.string.edit_task_list)
                         )
                     }
                     Button(onClick = {}) {
                         Icon(
                             Icons.Outlined.Remove,
-                            contentDescription = stringResource(R.string.remove_project)
+                            contentDescription = stringResource(R.string.remove_task_list)
                         )
                     }
                 }

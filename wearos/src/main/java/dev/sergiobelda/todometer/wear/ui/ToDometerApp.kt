@@ -26,16 +26,15 @@ import dev.sergiobelda.todometer.wear.Actions
 import dev.sergiobelda.todometer.wear.Destinations.AddTask
 import dev.sergiobelda.todometer.wear.Destinations.AddTaskList
 import dev.sergiobelda.todometer.wear.Destinations.Home
-import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
-import dev.sergiobelda.todometer.wear.Destinations.TaskListTasksArgs.TaskListId
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetailArgs.TaskId
-import dev.sergiobelda.todometer.wear.ui.addproject.AddProjectScreen
+import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
+import dev.sergiobelda.todometer.wear.Destinations.TaskListTasksArgs.TaskListId
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
+import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -58,10 +57,10 @@ fun ToDometerApp() {
                 AddTaskListScreen(actions.navigateUp)
             }
             composable(
-                "$ProjectTasks/{$TaskListId}"
+                "$TaskListTasks/{$TaskListId}"
             ) { navBackStackEntry ->
                 val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
-                ProjectTasksScreen(
+                TaskListTasksScreen(
                     addTask = { actions.navigateToAddTask(taskListId) },
                     taskListTasksViewModel = getViewModel { parametersOf(taskListId) }
                 )
