@@ -25,6 +25,7 @@ import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.wear.Actions
 import dev.sergiobelda.todometer.wear.Destinations.AddTask
 import dev.sergiobelda.todometer.wear.Destinations.AddTaskList
+import dev.sergiobelda.todometer.wear.Destinations.EditTaskList
 import dev.sergiobelda.todometer.wear.Destinations.Home
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetailArgs.TaskId
@@ -32,6 +33,7 @@ import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
 import dev.sergiobelda.todometer.wear.Destinations.TaskListTasksArgs.TaskListId
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListScreen
+import dev.sergiobelda.todometer.wear.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
@@ -62,6 +64,9 @@ fun ToDometerApp() {
                 val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
                 TaskListTasksScreen(
                     addTask = { actions.navigateToAddTask(taskListId) },
+                    openTask = actions.navigateToTaskDetail,
+                    editTaskList = { actions.navigateToEditTaskList(taskListId) },
+                    deleteTaskList = { actions.navigateToDeleteTaskList(taskListId) } ,
                     taskListTasksViewModel = getViewModel { parametersOf(taskListId) }
                 )
             }
@@ -75,10 +80,21 @@ fun ToDometerApp() {
                 )
             }
             composable(
+                "$EditTaskList/{$TaskListId}"
+            ) { navBackStackEntry ->
+                val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
+                EditTaskListScreen(
+                    actions.navigateUp,
+                    editTaskListViewModel = getViewModel { parametersOf(taskListId) }
+                )
+            }
+            composable(
                 "$TaskDetail/{$TaskId}"
             ) { navBackStackEntry ->
                 val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
                 TaskDetailScreen(
+                    editTask = {},
+                    removeTask = {},
                     taskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
                 )
             }

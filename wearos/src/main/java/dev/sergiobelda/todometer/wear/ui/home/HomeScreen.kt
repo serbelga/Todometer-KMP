@@ -131,7 +131,7 @@ fun AddTaskListButton(onClick: () -> Unit) {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Add Task List"
+                text = stringResource(id = R.string.add_task_list)
             )
         },
         onClick = onClick

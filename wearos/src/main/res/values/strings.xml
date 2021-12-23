@@ -18,8 +18,10 @@
     <string name="app_name" translatable="false">ToDometer</string>
     <string name="no_tasks">No hay tareas</string>
     <string name="no_task_lists">No hay listas de tareas</string>
+    <string name="add_task_list">Añadir lista de tareas</string>
+    <string name="add_task">Añadir tarea</string>
     <string name="edit_task_list">Editar lista de tareas</string>
     <string name="edit_task">Editar tarea</string>
-    <string name="remove_task_list">Eliminar lista de tareas</string>
-    <string name="remove_task">Eliminar tarea</string>
+    <string name="delete_task_list">Eliminar lista de tareas</string>
+    <string name="delete_task">Eliminar tarea</string>
 </resources>

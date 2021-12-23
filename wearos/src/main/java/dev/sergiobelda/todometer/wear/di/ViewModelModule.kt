@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.wear.di
 
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListViewModel
+import dev.sergiobelda.todometer.wear.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailViewModel
 import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksViewModel
@@ -39,5 +40,8 @@ val viewModelModule = module {
     }
     viewModel { parameters ->
         TaskDetailViewModel(taskId = parameters.get(), get())
+    }
+    viewModel { parameters ->
+        EditTaskListViewModel(taskListId = parameters.get())
     }
 }

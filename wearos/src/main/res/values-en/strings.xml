@@ -19,6 +19,8 @@
     <string name="no_task_lists">No task lists</string>
     <string name="edit_task_list">Edit task list</string>
     <string name="edit_task">Edit task</string>
-    <string name="remove_task_list">Remove task list</string>
-    <string name="remove_task">Remove task</string>
+    <string name="delete_task_list">Delete task list</string>
+    <string name="delete_task">Delete task</string>
+    <string name="add_task">Add task</string>
+    <string name="add_task_list">Add task list</string>
 </resources>
