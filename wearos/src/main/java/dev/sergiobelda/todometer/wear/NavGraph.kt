@@ -23,6 +23,7 @@ import dev.sergiobelda.todometer.wear.Destinations.DeleteTask
 import dev.sergiobelda.todometer.wear.Destinations.DeleteTaskList
 import dev.sergiobelda.todometer.wear.Destinations.EditTask
 import dev.sergiobelda.todometer.wear.Destinations.EditTaskList
+import dev.sergiobelda.todometer.wear.Destinations.Home
 import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
 import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
 
@@ -63,11 +64,17 @@ class Actions(navController: NavHostController) {
     val navigateToDeleteTask: (String) -> Unit = { taskId ->
         navController.navigate("$DeleteTask/$taskId")
     }
+    val popBackToTaskListTasks: () -> Unit = {
+        navController.popBackStack(TaskListTasks, true)
+    }
     val navigateToEditTaskList: (String) -> Unit = { taskId ->
         navController.navigate("$EditTaskList/$taskId")
     }
     val navigateToDeleteTaskList: (String) -> Unit = { taskId ->
         navController.navigate("$DeleteTaskList/$taskId")
+    }
+    val popBackToHome: () -> Unit = {
+        navController.popBackStack(Home, false)
     }
     val navigateUp: () -> Unit = { navController.popBackStack() }
 }

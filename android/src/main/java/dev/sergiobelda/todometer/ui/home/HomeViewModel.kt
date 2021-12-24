@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
-import dev.sergiobelda.todometer.common.usecase.DeleteTaskListUseCase
+import dev.sergiobelda.todometer.common.usecase.DeleteTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
@@ -43,7 +43,7 @@ class HomeViewModel(
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val deleteTaskListUseCase: DeleteTaskListUseCase,
+    private val deleteTaskListSelectedUseCase: DeleteTaskListSelectedUseCase,
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val refreshTaskListsUseCase: RefreshTaskListsUseCase,
     private val refreshTaskListSelectedUseCase: RefreshTaskListSelectedUseCase,
@@ -94,7 +94,7 @@ class HomeViewModel(
     }
 
     fun deleteTaskList() = viewModelScope.launch {
-        deleteTaskListUseCase()
+        deleteTaskListSelectedUseCase()
     }
 
     fun setTaskDoing(id: String) = viewModelScope.launch {
