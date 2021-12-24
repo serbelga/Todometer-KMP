@@ -24,5 +24,5 @@
     <string name="edit_task">Editar tarea</string>
     <string name="delete_task_list">Eliminar lista de tareas</string>
     <string name="delete_task">Eliminar tarea</string>
-    <string name="delete_task_list_question">Eliminar la lista de tareas?</string>
+    <string name="delete_task_list_question">Se eliminarán todas las tareas de esta lista de tareas. ¿Desea continuar?</string>
 </resources>

@@ -25,5 +25,4 @@ fun EditTaskListScreen(
     navigateUp: () -> Unit,
     editTaskListViewModel: AddTaskListViewModel = getViewModel()
 ) {
-
 }
