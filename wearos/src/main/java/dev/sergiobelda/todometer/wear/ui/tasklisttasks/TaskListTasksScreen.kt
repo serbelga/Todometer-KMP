@@ -32,8 +32,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.foundation.CurvedRow
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
+import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -47,6 +49,7 @@ import androidx.wear.compose.material.rememberScalingLazyListState
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskProgress
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.wear.R
 
@@ -60,10 +63,17 @@ fun TaskListTasksScreen(
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val tasksResultState = taskListTasksViewModel.tasks.collectAsState()
-    Scaffold(
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-    ) {
-        tasksResultState.value.doIfSuccess { tasks ->
+    tasksResultState.value.doIfSuccess { tasks ->
+        val progress = TaskProgress.getTasksDoneProgress(tasks)
+        // TODO: Add ProgressIndicator using progress value.
+        Scaffold(
+            timeText = {
+                CurvedRow {
+                    CurvedText(text = TaskProgress.getPercentage(progress))
+                }
+            },
+            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+        ) {
             ScalingLazyColumn(
                 contentPadding = PaddingValues(
                     top = 28.dp,
@@ -93,9 +103,9 @@ fun TaskListTasksScreen(
                 item { EditTaskListButton(editTaskList) }
                 item { DeleteTaskListButton(deleteTaskList) }
             }
-        }.doIfError {
-            // TODO
         }
+    }.doIfError {
+        // TODO
     }
 }
 
