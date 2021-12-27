@@ -64,9 +64,6 @@ class Actions(navController: NavHostController) {
     val navigateToDeleteTask: (String) -> Unit = { taskId ->
         navController.navigate("$DeleteTask/$taskId")
     }
-    val popBackToTaskListTasks: () -> Unit = {
-        navController.popBackStack(TaskListTasks, true)
-    }
     val navigateToEditTaskList: (String) -> Unit = { taskId ->
         navController.navigate("$EditTaskList/$taskId")
     }
@@ -75,6 +72,10 @@ class Actions(navController: NavHostController) {
     }
     val popBackToHome: () -> Unit = {
         navController.popBackStack(Home, false)
+    }
+    val popBackToTaskListTasks: () -> Unit = {
+        navController.popBackStack()
+        navController.navigateUp()
     }
     val navigateUp: () -> Unit = { navController.popBackStack() }
 }

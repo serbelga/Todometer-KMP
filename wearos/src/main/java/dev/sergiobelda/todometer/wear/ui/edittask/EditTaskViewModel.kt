@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.edittasklist
+package dev.sergiobelda.todometer.wear.ui.edittask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.usecase.GetTaskListUseCase
-import dev.sergiobelda.todometer.common.usecase.UpdateTaskListUseCase
+import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import dev.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class EditTaskListViewModel(
-    taskListId: String,
-    getTaskListUseCase: GetTaskListUseCase,
-    private val updateTaskListUseCase: UpdateTaskListUseCase
+class EditTaskViewModel(
+    taskId: String,
+    getTaskUseCase: GetTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    val taskList: StateFlow<Result<TaskList>> = getTaskListUseCase(taskListId).stateIn(
+    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(),
         Result.Loading
     )
 
-    fun updateTaskList(taskList: TaskList) = viewModelScope.launch {
-        updateTaskListUseCase(taskList)
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase(task)
     }
 }

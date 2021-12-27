@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.deletetasklist
+package dev.sergiobelda.todometer.wear.ui.deletetask
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
@@ -24,33 +24,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.wear.compose.material.AlertDialog
 import androidx.wear.compose.material.Button
-import androidx.wear.compose.material.ButtonDefaults.secondaryButtonColors
+import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import dev.sergiobelda.todometer.wear.R
 
 @Composable
-fun DeleteTaskListScreen(
-    onDeleteTaskList: () -> Unit,
+fun DeleteTaskScreen(
+    onDeleteTask: () -> Unit,
     navigateUp: () -> Unit,
-    deleteTaskListViewModel: DeleteTaskListViewModel
+    deleteTaskViewModel: DeleteTaskViewModel
 ) {
     AlertDialog(
         icon = { Icon(Icons.Outlined.Delete, "") },
         title = {},
-        content = { Text(stringResource(R.string.delete_task_list_question)) },
+        content = { Text(stringResource(R.string.delete_task_question)) },
         positiveButton = {
             Button(
                 onClick = {
-                    deleteTaskListViewModel.deleteTaskList()
-                    onDeleteTaskList()
+                    deleteTaskViewModel.deleteTask()
+                    onDeleteTask()
                 }
             ) {
                 Icon(Icons.Rounded.Check, "Positive button")
             }
         },
         negativeButton = {
-            Button(colors = secondaryButtonColors(), onClick = navigateUp) {
+            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateUp) {
                 Icon(Icons.Rounded.Clear, "Negative button")
             }
         }

@@ -75,16 +75,10 @@ fun TaskListTasksScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                item {
-                    AddTaskButton(addTask)
-                }
-                item {
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
+                item { AddTaskButton(addTask) }
+                item { Spacer(modifier = Modifier.height(4.dp)) }
                 if (tasks.isNullOrEmpty()) {
-                    item {
-                        Text(text = stringResource(id = R.string.no_tasks))
-                    }
+                    item { Text(text = stringResource(id = R.string.no_tasks)) }
                 } else {
                     items(tasks) { task ->
                         TaskItem(
@@ -95,15 +89,9 @@ fun TaskListTasksScreen(
                         )
                     }
                 }
-                item {
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
-                item {
-                    EditTaskListButton(editTaskList)
-                }
-                item {
-                    DeleteTaskListButton(deleteTaskList)
-                }
+                item { Spacer(modifier = Modifier.height(16.dp)) }
+                item { EditTaskListButton(editTaskList) }
+                item { DeleteTaskListButton(deleteTaskList) }
             }
         }.doIfError {
             // TODO

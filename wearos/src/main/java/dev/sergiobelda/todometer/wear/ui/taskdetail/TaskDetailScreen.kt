@@ -45,7 +45,7 @@ import dev.sergiobelda.todometer.wear.R
 @Composable
 fun TaskDetailScreen(
     editTask: () -> Unit,
-    removeTask: () -> Unit,
+    deleteTask: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
@@ -75,7 +75,7 @@ fun TaskDetailScreen(
                     EditTaskButton(editTask)
                 }
                 item {
-                    RemoveTaskButton(removeTask)
+                    RemoveTaskButton(deleteTask)
                 }
             }
         }.doIfError {

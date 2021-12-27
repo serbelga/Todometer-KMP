@@ -18,7 +18,9 @@ package dev.sergiobelda.todometer.wear.di
 
 import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListViewModel
+import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListViewModel
+import dev.sergiobelda.todometer.wear.ui.edittask.EditTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailViewModel
@@ -30,22 +32,28 @@ val viewModelModule = module {
     viewModel {
         HomeViewModel(get())
     }
-    viewModel { parameters ->
-        TaskListTasksViewModel(taskListId = parameters.get(), get(), get(), get())
-    }
     viewModel {
         AddTaskListViewModel(get())
+    }
+    viewModel { parameters ->
+        TaskListTasksViewModel(taskListId = parameters.get(), get(), get(), get())
     }
     viewModel { parameters ->
         AddTaskViewModel(taskListId = parameters.get(), get())
     }
     viewModel { parameters ->
-        TaskDetailViewModel(taskId = parameters.get(), get())
-    }
-    viewModel { parameters ->
-        EditTaskListViewModel(taskListId = parameters.get())
+        EditTaskListViewModel(taskListId = parameters.get(), get(), get())
     }
     viewModel { parameters ->
         DeleteTaskListViewModel(taskListId = parameters.get(), get())
+    }
+    viewModel { parameters ->
+        TaskDetailViewModel(taskId = parameters.get(), get())
+    }
+    viewModel { parameters ->
+        EditTaskViewModel(taskId = parameters.get(), get(), get())
+    }
+    viewModel { parameters ->
+        DeleteTaskViewModel(taskId = parameters.get(), get())
     }
 }

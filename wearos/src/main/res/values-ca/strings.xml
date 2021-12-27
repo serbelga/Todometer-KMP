@@ -19,9 +19,10 @@
     <string name="no_task_lists">No hi han llistes de tasques</string>
     <string name="edit_task_list">Editar llista de tasques</string>
     <string name="edit_task">Editar tasca</string>
-    <string name="delete_task_list">Eliminar llista de tasques</string>
-    <string name="delete_task">Eliminar tasca</string>
     <string name="add_task">Afegir tasca</string>
     <string name="add_task_list">Afegir llista de tasques</string>
+    <string name="delete_task_list">Eliminar llista de tasques</string>
     <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de tasques. Vols continuar?</string>
+    <string name="delete_task">Eliminar tasca</string>
+    <string name="delete_task_question">Vols eliminar aquesta tasca?</string>
 </resources>

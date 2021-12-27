@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.edittasklist
+package dev.sergiobelda.todometer.wear.ui.edittask
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,19 +30,17 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.rememberScalingLazyListState
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
-import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun EditTaskListScreen(
-    navigateUp: () -> Unit,
-    editTaskListViewModel: EditTaskListViewModel = getViewModel()
+fun EditTaskScreen(
+    editTaskViewModel: EditTaskViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val taskListResultState = editTaskListViewModel.taskList.collectAsState()
+    val taskResultState = editTaskViewModel.task.collectAsState()
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
-        taskListResultState.value.doIfSuccess { taskList ->
+        taskResultState.value.doIfSuccess { task ->
             ScalingLazyColumn(
                 contentPadding = PaddingValues(
                     top = 28.dp,
@@ -54,7 +52,7 @@ fun EditTaskListScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                item { Text(text = taskList.name) }
+                item { Text(text = task.title) }
             }
         }.doIfError {
             // TODO

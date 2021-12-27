@@ -58,9 +58,7 @@ fun HomeScreen(
     val taskListsResultState = homeViewModel.taskLists.collectAsState()
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
-        vignette = {
-            Vignette(vignettePosition = VignettePosition.TopAndBottom)
-        }
+        vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
     ) {
         ScalingLazyColumn(
             contentPadding = PaddingValues(
@@ -73,15 +71,9 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            item {
-                Text(stringResource(R.string.app_name))
-            }
-            item {
-                AddTaskListButton(addTaskList)
-            }
-            item {
-                Spacer(modifier = Modifier.height(4.dp))
-            }
+            item { Text(stringResource(R.string.app_name)) }
+            item { AddTaskListButton(addTaskList) }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
             taskListsResultState.value.doIfSuccess { taskLists ->
                 if (taskLists.isNullOrEmpty()) {
                     item {
