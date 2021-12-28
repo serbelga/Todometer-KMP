@@ -89,10 +89,7 @@ fun EditTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Outlined.Edit,
-                contentDescription = stringResource(R.string.edit_task)
-            )
+            Icon(Icons.Outlined.Edit, null)
         },
         label = {
             Text(text = stringResource(R.string.edit_task))
@@ -106,10 +103,7 @@ fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Outlined.Delete,
-                contentDescription = stringResource(R.string.delete_task)
-            )
+            Icon(Icons.Outlined.Delete, null)
         },
         label = {
             Text(text = stringResource(R.string.delete_task))

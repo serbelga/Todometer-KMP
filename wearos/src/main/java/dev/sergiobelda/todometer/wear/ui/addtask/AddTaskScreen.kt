@@ -45,7 +45,7 @@ fun AddTaskScreen(
                     navigateUp()
                 }
             ) {
-                Icon(Icons.Rounded.Check, contentDescription = "")
+                Icon(Icons.Rounded.Check, null)
             }
         }
     }

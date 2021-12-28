@@ -115,10 +115,7 @@ fun AddTaskListButton(onClick: () -> Unit) {
             .padding(top = 10.dp),
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Rounded.Add,
-                contentDescription = "Add"
-            )
+            Icon(Icons.Rounded.Add, null)
         },
         label = {
             Text(

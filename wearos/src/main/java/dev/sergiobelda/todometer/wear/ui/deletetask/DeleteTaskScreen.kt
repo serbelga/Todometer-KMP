@@ -36,7 +36,7 @@ fun DeleteTaskScreen(
     deleteTaskViewModel: DeleteTaskViewModel
 ) {
     AlertDialog(
-        icon = { Icon(Icons.Outlined.Delete, "") },
+        icon = { Icon(Icons.Outlined.Delete, null) },
         title = {},
         content = { Text(stringResource(R.string.delete_task_question)) },
         positiveButton = {
@@ -46,12 +46,12 @@ fun DeleteTaskScreen(
                     onDeleteTask()
                 }
             ) {
-                Icon(Icons.Rounded.Check, "Positive button")
+                Icon(Icons.Rounded.Check, null)
             }
         },
         negativeButton = {
             Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateUp) {
-                Icon(Icons.Rounded.Clear, "Negative button")
+                Icon(Icons.Rounded.Clear, null)
             }
         }
     )

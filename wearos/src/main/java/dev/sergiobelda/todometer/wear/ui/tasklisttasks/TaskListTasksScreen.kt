@@ -146,10 +146,7 @@ fun AddTaskButton(onClick: () -> Unit) {
             .padding(top = 10.dp),
         colors = secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Rounded.Add,
-                contentDescription = "Add"
-            )
+            Icon(Icons.Rounded.Add, null)
         },
         label = {
             Text(
@@ -166,10 +163,7 @@ fun EditTaskListButton(onClick: () -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Outlined.Edit,
-                contentDescription = stringResource(R.string.edit_task_list)
-            )
+            Icon(Icons.Outlined.Edit, null)
         },
         label = {
             Text(text = stringResource(R.string.edit_task_list))
@@ -183,10 +177,7 @@ fun DeleteTaskListButton(onClick: () -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Outlined.Delete,
-                contentDescription = stringResource(R.string.delete_task_list)
-            )
+            Icon(Icons.Outlined.Delete, null)
         },
         label = {
             Text(text = stringResource(R.string.delete_task_list))
