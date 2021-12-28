@@ -75,7 +75,7 @@ fun TaskDetailScreen(
                     EditTaskButton(editTask)
                 }
                 item {
-                    RemoveTaskButton(deleteTask)
+                    DeleteTaskButton(deleteTask)
                 }
             }
         }.doIfError {
@@ -102,7 +102,7 @@ fun EditTaskButton(onClick: () -> Unit) {
 }
 
 @Composable
-fun RemoveTaskButton(onClick: () -> Unit) {
+fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
