@@ -33,6 +33,7 @@ import dev.sergiobelda.todometer.common.data.doIfSuccess
 
 @Composable
 fun EditTaskScreen(
+    navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()

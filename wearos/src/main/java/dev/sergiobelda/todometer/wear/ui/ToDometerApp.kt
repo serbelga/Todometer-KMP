@@ -107,6 +107,7 @@ fun ToDometerApp() {
             composable("$EditTask/{$TaskId}") { navBackStackEntry ->
                 val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
                 EditTaskScreen(
+                    actions.navigateUp,
                     editTaskViewModel = getViewModel(parameters = { parametersOf(taskId) })
                 )
             }
