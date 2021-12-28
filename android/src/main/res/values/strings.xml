@@ -30,7 +30,7 @@
     <string name="delete_task">Eliminar tarea</string>
     <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
     <string name="delete_task_list">Eliminar proyecto</string>
-    <string name="delete_task_list_question">Se eliminaran todas las tareas relacionadas. ¿Desea continuar?</string>
+    <string name="delete_task_list_question">Se eliminarán todas las tareas de esta lista de tareas. ¿Desea continuar?</string>
     <string name="add">Añadir</string>
     <string name="add_task">Añadir tarea</string>
     <string name="add_task_list">Añadir lista de tareas</string>

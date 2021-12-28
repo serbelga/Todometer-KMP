@@ -26,15 +26,15 @@
     <string name="you_have_not_any_task_list">You haven\'t any task list</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="delete_task">Remove task</string>
-    <string name="delete_task_question">Do you want to remove this task?</string>
+    <string name="delete_task">Delete task</string>
+    <string name="delete_task_question">Do you want to delete this task?</string>
     <string name="no_description">No description provided</string>
     <string name="field_not_empty">Field must not be empty</string>
     <string name="no_tasks">There are any task</string>
     <string name="about">About</string>
     <string name="task">Task</string>
     <string name="tasks">Tasks</string>
-    <string name="delete_task_list">Remove task list</string>
+    <string name="delete_task_list">Delete task list</string>
     <string name="add">Add</string>
     <string name="edit_task_list">Edit task list</string>
     <string name="open_source_licenses">Open-source licenses</string>
@@ -42,7 +42,7 @@
     <string name="no_task_lists">There\'s any task list</string>
     <string name="theme">Theme</string>
     <string name="follow_system">System default</string>
-    <string name="delete_task_list_question">All linked tasks will be removed. Do you want to continue?</string>
+    <string name="delete_task_list_question">All tasks in this task list will be deleted. Do you want to continue?</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="enter_task_name">Enter a Task name</string>

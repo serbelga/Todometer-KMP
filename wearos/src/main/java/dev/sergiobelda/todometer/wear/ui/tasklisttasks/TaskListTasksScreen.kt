@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -30,93 +32,99 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.foundation.CurvedRow
 import androidx.wear.compose.material.Chip
-import androidx.wear.compose.material.ChipDefaults
+import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
+import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
+import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.ToggleChip
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
+import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskProgress
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.wear.R
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TaskListTasksScreen(
-    taskListId: String,
-    addTask: (String) -> Unit,
-    taskListTasksViewModel: TaskListTasksViewModel = getViewModel(
-        parameters = { parametersOf(taskListId) }
-    )
+    addTask: () -> Unit,
+    openTask: (String) -> Unit,
+    editTaskList: () -> Unit,
+    deleteTaskList: () -> Unit,
+    taskListTasksViewModel: TaskListTasksViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val tasksResultState = taskListTasksViewModel.tasks.collectAsState()
-    Scaffold(
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-    ) {
-        ScalingLazyColumn(
-            contentPadding = PaddingValues(
-                top = 28.dp,
-                start = 16.dp,
-                end = 16.dp,
-                bottom = 40.dp
-            ),
-            state = scalingLazyListState,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            item {
-                AddTaskButton {
-                    addTask(taskListId)
+    tasksResultState.value.doIfSuccess { tasks ->
+        val progress = TaskProgress.getTasksDoneProgress(tasks)
+        // TODO: Add ProgressIndicator using progress value.
+        Scaffold(
+            timeText = {
+                CurvedRow {
+                    CurvedText(text = TaskProgress.getPercentage(progress))
                 }
-            }
-            item {
-                Spacer(modifier = Modifier.height(4.dp))
-            }
-            tasksResultState.value.doIfSuccess { tasks ->
+            },
+            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+        ) {
+            ScalingLazyColumn(
+                contentPadding = PaddingValues(
+                    top = 28.dp,
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 40.dp
+                ),
+                state = scalingLazyListState,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item { AddTaskButton(addTask) }
+                item { Spacer(modifier = Modifier.height(4.dp)) }
                 if (tasks.isNullOrEmpty()) {
-                    item {
-                        Text(text = stringResource(id = R.string.no_tasks))
-                    }
+                    item { Text(text = stringResource(id = R.string.no_tasks)) }
                 } else {
                     items(tasks) { task ->
                         TaskItem(
                             task,
                             onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
                             onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
-                            onClick = {}
+                            onClick = { openTask(task.id) }
                         )
                     }
                 }
+                item { Spacer(modifier = Modifier.height(16.dp)) }
+                item { EditTaskListButton(editTaskList) }
+                item { DeleteTaskListButton(deleteTaskList) }
             }
         }
+    }.doIfError {
+        // TODO
     }
 }
 
 @Composable
 fun TaskItem(
     task: Task,
-    onDoingClick: (String) -> Unit,
-    onDoneClick: (String) -> Unit,
-    onClick: (String) -> Unit
+    onDoingClick: () -> Unit,
+    onDoneClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     // Use SplitToggleChip if onClick is needed.
-    ToggleChip(
+    SplitToggleChip(
         // colors = ChipDefaults.secondaryChipColors(),
         checked = task.state == TaskState.DONE,
         onCheckedChange = {
             if (task.state == TaskState.DOING) {
-                onDoneClick(task.id)
+                onDoneClick()
             } else {
-                onDoingClick(task.id)
+                onDoingClick()
             }
         },
         label = {
@@ -125,7 +133,8 @@ fun TaskItem(
                 color = MaterialTheme.colors.onSurface,
                 text = task.title
             )
-        }
+        },
+        onClick = onClick
     )
 }
 
@@ -135,18 +144,43 @@ fun AddTaskButton(onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 10.dp),
-        colors = ChipDefaults.secondaryChipColors(),
+        colors = secondaryChipColors(),
         icon = {
-            Icon(
-                Icons.Rounded.Add,
-                contentDescription = "Add"
-            )
+            Icon(Icons.Rounded.Add, null)
         },
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Add Task"
+                text = stringResource(id = R.string.add_task)
             )
+        },
+        onClick = onClick
+    )
+}
+
+@Composable
+fun EditTaskListButton(onClick: () -> Unit) {
+    Chip(
+        colors = secondaryChipColors(),
+        icon = {
+            Icon(Icons.Outlined.Edit, null)
+        },
+        label = {
+            Text(text = stringResource(R.string.edit_task_list))
+        },
+        onClick = onClick
+    )
+}
+
+@Composable
+fun DeleteTaskListButton(onClick: () -> Unit) {
+    Chip(
+        colors = secondaryChipColors(),
+        icon = {
+            Icon(Icons.Outlined.Delete, null)
+        },
+        label = {
+            Text(text = stringResource(R.string.delete_task_list))
         },
         onClick = onClick
     )

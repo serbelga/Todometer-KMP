@@ -14,39 +14,45 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.deletetask
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.wear.compose.material.AlertDialog
 import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.Icon
-import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
+import dev.sergiobelda.todometer.wear.R
 
 @Composable
-fun AddTaskScreen(
+fun DeleteTaskScreen(
+    onDeleteTask: () -> Unit,
     navigateUp: () -> Unit,
-    addTaskViewModel: AddTaskViewModel
+    deleteTaskViewModel: DeleteTaskViewModel
 ) {
-    Scaffold {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Task 1")
+    AlertDialog(
+        icon = { Icon(Icons.Outlined.Delete, null) },
+        title = {},
+        content = { Text(stringResource(R.string.delete_task_question)) },
+        positiveButton = {
             Button(
                 onClick = {
-                    addTaskViewModel.insertTask("Task 1")
-                    navigateUp()
+                    deleteTaskViewModel.deleteTask()
+                    onDeleteTask()
                 }
             ) {
                 Icon(Icons.Rounded.Check, null)
             }
+        },
+        negativeButton = {
+            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateUp) {
+                Icon(Icons.Rounded.Clear, null)
+            }
         }
-    }
+    )
 }

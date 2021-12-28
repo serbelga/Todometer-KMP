@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.taskdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import kotlinx.coroutines.launch
+import dev.sergiobelda.todometer.common.data.Result
+import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
-class AddTaskViewModel(
-    private val taskListId: String,
-    private val insertTaskUseCase: InsertTaskUseCase
+class TaskDetailViewModel(
+    taskId: String,
+    getTaskUseCase: GetTaskUseCase
 ) : ViewModel() {
 
-    fun insertTask(title: String) = viewModelScope.launch {
-        insertTaskUseCase.invoke(taskListId, title)
-    }
+    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Result.Loading
+    )
 }

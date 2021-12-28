@@ -16,12 +16,14 @@
 
 package dev.sergiobelda.todometer.common.di
 
+import dev.sergiobelda.todometer.common.usecase.DeleteTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskListTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertTaskInTaskListSelectedUseCase
@@ -81,7 +83,10 @@ val useCaseModule = module {
         DeleteTaskUseCase(get())
     }
     single {
-        DeleteTaskListUseCase(get(), get())
+        DeleteTaskListUseCase(get())
+    }
+    single {
+        DeleteTaskListSelectedUseCase(get(), get())
     }
     single {
         GetTaskListSelectedUseCase(get(), get())
@@ -94,5 +99,8 @@ val useCaseModule = module {
     }
     single {
         SetAppThemeUseCase(get())
+    }
+    single {
+        GetTaskListUseCase(get())
     }
 }
