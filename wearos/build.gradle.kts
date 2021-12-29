@@ -11,7 +11,7 @@ android {
         minSdk = Android.wearMinSdk
         targetSdk = Android.targetSdk
         versionCode = 1
-        versionName = "1.0.0-dev01"
+        versionName = "1.0.0-dev02"
     }
 
     buildFeatures {
