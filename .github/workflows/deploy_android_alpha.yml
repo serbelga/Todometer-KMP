@@ -1,4 +1,4 @@
-name: Deploy ToDometer Android App to Internal
+name: Deploy ToDometer Android App to Alpha
 
 on:
   workflow_dispatch:
