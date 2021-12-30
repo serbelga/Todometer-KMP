@@ -15,6 +15,7 @@
  */
 
 object Versions {
+    const val accompanist = "0.22.0-rc"
     const val activityKtx = "1.4.0"
     const val appCompat = "1.4.0"
     const val androidGradlePlugin = "7.1.0-beta05"
@@ -134,6 +135,9 @@ object Libs {
     }
 
     object Google {
+
+        const val accompanistSystemUiController =
+            "com.google.accompanist:accompanist-systemuicontroller${Versions.accompanist}"
 
         object Material {
             const val materialComponents =

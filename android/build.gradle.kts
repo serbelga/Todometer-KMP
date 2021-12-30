@@ -62,5 +62,7 @@ dependencies {
         implementation(core)
     }
 
+    implementation(Libs.Google.accompanistSystemUiController)
+
     implementation(Libs.Google.Services.ossLicenses)
 }
