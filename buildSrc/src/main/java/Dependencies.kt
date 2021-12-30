@@ -137,7 +137,7 @@ object Libs {
     object Google {
 
         const val accompanistSystemUiController =
-            "com.google.accompanist:accompanist-systemuicontroller${Versions.accompanist}"
+            "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
 
         object Material {
             const val materialComponents =
