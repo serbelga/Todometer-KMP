@@ -19,8 +19,8 @@
 
     <string name="task">Tarea</string>
     <string name="tasks">Tareas</string>
-    <string name="project">Proyecto</string>
-    <string name="projects">Proyectos</string>
+    <string name="task_list">Lista de tareas</string>
+    <string name="task_lists">Listas de tareas</string>
     <string name="title">Título</string>
     <string name="name">Nombre</string>
     <string name="description">Descripción</string>
@@ -29,13 +29,13 @@
     <string name="cancel">Cancelar</string>
     <string name="delete_task">Eliminar tarea</string>
     <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
-    <string name="delete_project">Eliminar proyecto</string>
-    <string name="delete_project_question">Se eliminaran todas las tareas relacionadas. ¿Desea continuar?</string>
+    <string name="delete_task_list">Eliminar proyecto</string>
+    <string name="delete_task_list_question">Se eliminarán todas las tareas de esta lista de tareas. ¿Desea continuar?</string>
     <string name="add">Añadir</string>
     <string name="add_task">Añadir tarea</string>
-    <string name="add_project">Añadir proyecto</string>
+    <string name="add_task_list">Añadir lista de tareas</string>
     <string name="edit_task">Editar tarea</string>
-    <string name="edit_project">Editar proyecto</string>
+    <string name="edit_task_list">Editar lista de tareas</string>
     <string name="theme">Tema</string>
     <string name="choose_theme">Elegir un tema</string>
     <string name="follow_system">Predeterminado del sistema</string>
@@ -45,9 +45,9 @@
     <string name="open_source_licenses">Licencias de código abierto</string>
     <string name="privacy_policy">Política de privacidad</string>
     <string name="no_tasks">No hay tareas</string>
-    <string name="no_projects">No hay proyectos</string>
+    <string name="no_task_lists">No hay listas de tareas</string>
     <string name="field_not_empty">El campo no puede quedar vacío</string>
-    <string name="you_have_not_any_project">No tienes ningún proyecto</string>
+    <string name="you_have_not_any_task_list">No tienes ninguna lista de tareas</string>
     <string name="github" translatable="false">GitHub</string>
     <string name="privacy_policy_body" translatable="false">
         <![CDATA[
@@ -82,5 +82,5 @@
     <string name="enter_task_name">Introduce el nombre de la tarea</string>
     <string name="enter_description">Introduce una descripción</string>
     <string name="choose_tag">Elige una etiqueta</string>
-    <string name="enter_project_name">Introduce un nombre para el proyecto</string>
+    <string name="enter_task_list_name">Introduce un nombre para la lista de tareas</string>
 </resources>

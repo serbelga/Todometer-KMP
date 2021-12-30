@@ -16,40 +16,40 @@
 
 package dev.sergiobelda.todometer.common.testutils
 
-import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.model.TaskState
 
-val project1 = Project(
+val taskList1 = TaskList(
     id = "1",
-    name = "Project 1",
+    name = "Task List 1",
     description = "Description",
     sync = false
 )
 
-val project1Updated = Project(
+val taskList1Updated = TaskList(
     id = "1",
-    name = "Project 1 Updated",
+    name = "Task List 1 Updated",
     description = "Description",
     sync = false
 )
 
-val project2 = Project(
+val taskList2 = TaskList(
     id = "2",
-    name = "Project 2",
+    name = "Task List 2",
     description = "Description",
     sync = false
 )
 
-val projects = listOf(project1, project2)
+val taskLists = listOf(taskList1, taskList2)
 
 val task1 = Task(
     id = "1",
     title = "Task 1",
     description = "Description 1",
     state = TaskState.DOING,
-    projectId = "1",
+    taskListId = "1",
     tag = Tag.GRAY,
     sync = false
 )
@@ -59,7 +59,7 @@ val task1Updated = Task(
     title = "Task 1 Updated",
     description = "Description 1 Updated",
     state = TaskState.DOING,
-    projectId = "1",
+    taskListId = "1",
     tag = Tag.RED,
     sync = false
 )
@@ -69,7 +69,7 @@ val task2 = Task(
     title = "Task 2",
     description = "Description 2",
     state = TaskState.DOING,
-    projectId = "1",
+    taskListId = "1",
     tag = Tag.RED,
     sync = false
 )

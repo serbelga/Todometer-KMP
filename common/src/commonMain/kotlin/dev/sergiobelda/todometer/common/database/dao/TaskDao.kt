@@ -29,8 +29,8 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
     override fun getTask(id: String): Flow<TaskEntity?> =
         database.todometerQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(projectId: String): Flow<List<TaskEntity>> =
-        database.todometerQueries.selectTasksByProjectId(projectId).asFlow().mapToList()
+    override fun getTasks(taskListId: String): Flow<List<TaskEntity>> =
+        database.todometerQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
         database.todometerQueries.insertOrReplaceTask(
@@ -39,7 +39,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
             description = task.description,
             state = task.state,
             tag = task.tag,
-            project_id = task.project_id,
+            tasklist_id = task.tasklist_id,
             sync = task.sync
         )
         // TODO Call return last_insert_rowid() from SQLDelight.
@@ -69,7 +69,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
     override suspend fun updateTaskState(id: String, state: TaskState) {
         database.todometerQueries.updateTaskState(
             id = id,
-            state = state.toString()
+            state = state
         )
     }
 

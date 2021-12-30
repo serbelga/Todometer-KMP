@@ -16,8 +16,15 @@
 
 package dev.sergiobelda.todometer.common.database
 
+import com.squareup.sqldelight.EnumColumnAdapter
+import dev.sergiobelda.todometer.TaskEntity
 import dev.sergiobelda.todometer.TodometerDatabase
 
-fun createDatabase(): TodometerDatabase {
-    return TodometerDatabase(DriverFactory.createDriver())
-}
+fun createDatabase(): TodometerDatabase =
+    TodometerDatabase(
+        DriverFactory.createDriver(),
+        TaskEntityAdapter = TaskEntity.Adapter(
+            stateAdapter = EnumColumnAdapter(),
+            tagAdapter = EnumColumnAdapter()
+        )
+    )

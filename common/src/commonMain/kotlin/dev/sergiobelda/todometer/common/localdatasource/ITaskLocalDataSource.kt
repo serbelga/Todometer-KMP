@@ -25,7 +25,7 @@ interface ITaskLocalDataSource {
 
     fun getTask(id: String): Flow<Result<Task>>
 
-    fun getTasks(projectId: String): Flow<Result<List<Task>>>
+    fun getTasks(taskListId: String): Flow<Result<List<Task>>>
 
     suspend fun insertTask(task: Task): Result<String>
 

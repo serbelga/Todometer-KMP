@@ -27,13 +27,11 @@ import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddTaskScreen(
-    projectId: String,
     navigateUp: () -> Unit,
-    addTaskViewModel: AddTaskViewModel = getViewModel()
+    addTaskViewModel: AddTaskViewModel
 ) {
     Scaffold {
         Column(
@@ -43,11 +41,11 @@ fun AddTaskScreen(
             Text(text = "Task 1")
             Button(
                 onClick = {
-                    addTaskViewModel.insertTask(projectId, "Task 1")
+                    addTaskViewModel.insertTask("Task 1")
                     navigateUp()
                 }
             ) {
-                Icon(Icons.Rounded.Check, contentDescription = "")
+                Icon(Icons.Rounded.Check, null)
             }
         }
     }

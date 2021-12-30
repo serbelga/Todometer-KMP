@@ -38,30 +38,30 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddProjectAlertDialog(
+fun AddTaskListAlertDialog(
     onDismissRequest: () -> Unit,
-    addProject: (name: String) -> Unit
+    addTaskList: (name: String) -> Unit
 ) {
-    var projectName by rememberSaveable { mutableStateOf("") }
-    var projectNameInputError by remember { mutableStateOf(false) }
+    var taskListName by rememberSaveable { mutableStateOf("") }
+    var taskListNameInputError by remember { mutableStateOf(false) }
 
     AlertDialog(
         title = {
-            Text(text = "Add project", modifier = Modifier.padding(start = 16.dp))
+            Text(text = "Add task list", modifier = Modifier.padding(start = 16.dp))
         },
         onDismissRequest = onDismissRequest,
         text = {
             Column {
                 TitledTextField(
                     title = "Name",
-                    value = projectName,
+                    value = taskListName,
                     onValueChange = {
-                        projectName = it
-                        projectNameInputError = false
+                        taskListName = it
+                        taskListNameInputError = false
                     },
-                    placeholder = { Text(text = "Enter project name") },
+                    placeholder = { Text(text = "Enter task list name") },
                     singleLine = true,
-                    isError = projectNameInputError,
+                    isError = taskListNameInputError,
                     errorMessage = "Field must not be empty",
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
@@ -73,10 +73,10 @@ fun AddProjectAlertDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    if (projectName.isBlank()) {
-                        projectNameInputError = true
+                    if (taskListName.isBlank()) {
+                        taskListNameInputError = true
                     } else {
-                        addProject(projectName)
+                        addTaskList(taskListName)
                         onDismissRequest()
                     }
                 }

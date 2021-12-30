@@ -28,9 +28,9 @@ import dev.sergiobelda.todometer.common.model.TaskState
 
 class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRemoteDataSource {
 
-    override suspend fun getTasks(projectId: String?): Result<List<Task>> =
+    override suspend fun getTasks(taskListId: String?): Result<List<Task>> =
         safeApiCall {
-            taskApiClient.getTasks(projectId)
+            taskApiClient.getTasks(taskListId)
         }.map { it.toTaskTagList() }
 
     override suspend fun insertTask(
@@ -38,7 +38,7 @@ class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRem
         title: String,
         description: String?,
         state: TaskState,
-        projectId: String,
+        taskListId: String,
         tag: Tag
     ): Result<String> = safeApiCall {
         taskApiClient.insertTask(
@@ -47,7 +47,7 @@ class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRem
                 title,
                 description ?: "",
                 state.name,
-                projectId,
+                taskListId,
                 tag.toString()
             )
         )

@@ -24,8 +24,8 @@ object TaskTable : Table() {
     val title = text("title")
     val description = text("description")
     val state = text("state")
-    val projectId = uuid("project_id").references(
-        ProjectTable.id,
+    val taskListId = uuid("tasklist_id").references(
+        TaskListTable.id,
         onDelete = ReferenceOption.CASCADE,
         onUpdate = ReferenceOption.CASCADE
     )

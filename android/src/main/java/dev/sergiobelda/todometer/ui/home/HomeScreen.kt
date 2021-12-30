@@ -78,14 +78,15 @@ import dev.sergiobelda.todometer.common.compose.ui.components.DragIndicator
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.SingleLineItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
-import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
+import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.preferences.appThemeMap
+import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
@@ -94,8 +95,8 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
-    addProject: () -> Unit,
-    editProject: () -> Unit,
+    addTaskList: () -> Unit,
+    editTaskList: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
     openSourceLicenses: () -> Unit,
@@ -109,16 +110,16 @@ fun HomeScreen(
     var selectedTask by remember { mutableStateOf("") }
 
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
-    var deleteProjectAlertDialogState by remember { mutableStateOf(false) }
+    var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
     var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
-    var projects: List<Project> by remember { mutableStateOf(emptyList()) }
-    val projectsResultState = homeViewModel.projects.collectAsState()
-    projectsResultState.value.doIfSuccess { projects = it }
+    var taskLists: List<TaskList> by remember { mutableStateOf(emptyList()) }
+    val taskListsResultState = homeViewModel.taskLists.collectAsState()
+    taskListsResultState.value.doIfSuccess { taskLists = it }
 
-    var projectSelected: Project? by remember { mutableStateOf(null) }
-    val projectSelectedResultState = homeViewModel.projectSelected.collectAsState()
-    projectSelectedResultState.value.doIfSuccess { projectSelected = it }
+    var taskListSelected: TaskList? by remember { mutableStateOf(null) }
+    val taskListSelectedResultState = homeViewModel.taskListSelected.collectAsState()
+    taskListSelectedResultState.value.doIfSuccess { taskListSelected = it }
 
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
     val tasksResultState = homeViewModel.tasks.collectAsState()
@@ -133,24 +134,24 @@ fun HomeScreen(
             when (currentSheet) {
                 is HomeBottomSheet.MenuBottomSheet -> {
                     MenuBottomSheet(
-                        projectSelected?.id,
-                        projects,
-                        addProject,
-                        selectProject = { homeViewModel.setProjectSelected(it) }
+                        taskListSelected?.id,
+                        taskLists,
+                        addTaskList,
+                        selectTaskList = { homeViewModel.setTaskListSelected(it) }
                     )
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {
                     MoreBottomSheet(
-                        editProjectClick = {
+                        editTaskListClick = {
                             scope.launch {
                                 sheetState.hide()
-                                editProject()
+                                editTaskList()
                             }
                         },
-                        deleteProjectClick = {
-                            deleteProjectAlertDialogState = true
+                        deleteTaskListClick = {
+                            deleteTaskListAlertDialogState = true
                         },
-                        deleteProjectEnabled = projects.size > 1,
+                        deleteTaskListEnabled = taskLists.size > 1,
                         currentTheme = appThemeState.value,
                         chooseThemeClick = {
                             chooseThemeAlertDialogState = true
@@ -174,10 +175,10 @@ fun HomeScreen(
     ) {
         Scaffold(
             topBar = {
-                ToDometerTopAppBar(projectSelected, tasks)
+                ToDometerTopAppBar(taskListSelected, tasks)
             },
             bottomBar = {
-                if (projects.isNotEmpty()) {
+                if (taskLists.isNotEmpty()) {
                     BottomAppBar(
                         backgroundColor = TodometerColors.surface,
                         contentColor = contentColorFor(TodometerColors.surface),
@@ -206,19 +207,19 @@ fun HomeScreen(
                 }
             },
             content = {
-                projectsResultState.value.doIfSuccess { projects ->
-                    if (projects.isNotEmpty()) {
+                taskListsResultState.value.doIfSuccess { taskLists ->
+                    if (taskLists.isNotEmpty()) {
                         if (deleteTaskAlertDialogState) {
                             DeleteTaskAlertDialog(
                                 onDismissRequest = { deleteTaskAlertDialogState = false },
                                 deleteTask = { homeViewModel.deleteTask(selectedTask) }
                             )
                         }
-                        if (deleteProjectAlertDialogState) {
-                            DeleteProjectAlertDialog(
-                                onDismissRequest = { deleteProjectAlertDialogState = false },
-                                deleteProject = {
-                                    homeViewModel.deleteProject()
+                        if (deleteTaskListAlertDialogState) {
+                            DeleteTaskListAlertDialog(
+                                onDismissRequest = { deleteTaskListAlertDialogState = false },
+                                deleteTaskList = {
+                                    homeViewModel.deleteTaskList()
                                     scope.launch {
                                         sheetState.hide()
                                     }
@@ -251,12 +252,12 @@ fun HomeScreen(
                             )
                         }
                     } else {
-                        EmptyProjectsView(addProject = addProject)
+                        EmptyTaskListsView(addTaskList = addTaskList)
                     }
                 }
             },
             floatingActionButton = {
-                if (!projects.isNullOrEmpty()) {
+                if (!taskLists.isNullOrEmpty()) {
                     FloatingActionButton(
                         onClick = addTask
                     ) {
@@ -280,12 +281,12 @@ fun ChooseThemeAlertDialog(
     chooseTheme: (theme: AppTheme) -> Unit
 ) {
     var themeSelected by remember { mutableStateOf(currentTheme) }
-    AlertDialog(
+    ToDometerAlertDialog(
         title = {
-            Text(text = stringResource(R.string.choose_theme))
+            Text(text = stringResource(R.string.choose_theme), modifier = Modifier.padding(16.dp))
         },
         onDismissRequest = onDismissRequest,
-        text = {
+        body = {
             LazyColumn {
                 appThemeMap.forEach { (appTheme, appThemeOption) ->
                     item {
@@ -333,19 +334,19 @@ fun ChooseThemeAlertDialog(
 }
 
 @Composable
-fun DeleteProjectAlertDialog(onDismissRequest: () -> Unit, deleteProject: () -> Unit) {
+fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskList: () -> Unit) {
     AlertDialog(
         title = {
-            Text(stringResource(R.string.delete_project))
+            Text(stringResource(R.string.delete_task_list))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(R.string.delete_project_question))
+            Text(stringResource(R.string.delete_task_list_question))
         },
         confirmButton = {
             TextButton(
                 onClick = {
-                    deleteProject()
+                    deleteTaskList()
                     onDismissRequest()
                 }
             ) {
@@ -390,10 +391,10 @@ fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) 
 
 @Composable
 fun MenuBottomSheet(
-    selectedProjectId: String?,
-    projectList: List<Project>,
-    addProject: () -> Unit,
-    selectProject: (String) -> Unit
+    selectedTaskListId: String?,
+    taskLists: List<TaskList>,
+    addTaskList: () -> Unit,
+    selectTaskList: (String) -> Unit
 ) {
     Column(modifier = Modifier.height(480.dp)) {
         DragIndicator()
@@ -404,19 +405,21 @@ fun MenuBottomSheet(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(R.string.projects).uppercase(),
+                text = stringResource(R.string.task_lists).uppercase(),
                 style = MaterialTheme.typography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-            OutlinedButton(onClick = addProject) {
-                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_project))
-                Text(text = stringResource(R.string.add_project))
+            OutlinedButton(onClick = addTaskList) {
+                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_task_list))
+                Text(text = stringResource(R.string.add_task_list))
             }
         }
         HorizontalDivider()
-        LazyColumn {
-            items(projectList) { project ->
-                ProjectListItem(project, project.id == selectedProjectId, selectProject)
+        LazyColumn(modifier = Modifier.padding(8.dp)) {
+            items(taskLists) { taskList ->
+                TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
+                    selectTaskList(taskList.id)
+                }
             }
         }
     }
@@ -466,7 +469,7 @@ fun EmptyTasksListView() {
 }
 
 @Composable
-fun EmptyProjectsView(addProject: () -> Unit) {
+fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -475,13 +478,16 @@ fun EmptyProjectsView(addProject: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(R.drawable.no_projects),
+                painterResource(R.drawable.no_task_lists),
                 modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
                 contentDescription = null
             )
-            Text(stringResource(R.string.no_projects), modifier = Modifier.padding(bottom = 48.dp))
-            Button(onClick = addProject) {
-                Text(text = stringResource(R.string.add_project))
+            Text(
+                stringResource(R.string.no_task_lists),
+                modifier = Modifier.padding(bottom = 48.dp)
+            )
+            Button(onClick = addTaskList) {
+                Text(text = stringResource(R.string.add_task_list))
             }
         }
     }
@@ -489,9 +495,9 @@ fun EmptyProjectsView(addProject: () -> Unit) {
 
 @Composable
 fun MoreBottomSheet(
-    editProjectClick: () -> Unit,
-    deleteProjectClick: () -> Unit,
-    deleteProjectEnabled: Boolean,
+    editTaskListClick: () -> Unit,
+    deleteTaskListClick: () -> Unit,
+    deleteTaskListEnabled: Boolean,
     chooseThemeClick: () -> Unit,
     openSourceLicensesClick: () -> Unit,
     aboutClick: () -> Unit,
@@ -505,32 +511,32 @@ fun MoreBottomSheet(
             icon = {
                 Icon(
                     Icons.Outlined.Edit,
-                    contentDescription = stringResource(R.string.edit_project)
+                    contentDescription = stringResource(R.string.edit_task_list)
                 )
             },
             text = {
                 Text(
-                    stringResource(R.string.edit_project),
+                    stringResource(R.string.edit_task_list),
                     style = MaterialTheme.typography.caption
                 )
             },
-            onClick = editProjectClick
+            onClick = editTaskListClick
         )
         SingleLineItem(
             icon = {
                 Icon(
                     Icons.Outlined.Delete,
-                    contentDescription = stringResource(R.string.delete_project)
+                    contentDescription = stringResource(R.string.delete_task_list)
                 )
             },
             text = {
                 Text(
-                    stringResource(R.string.delete_project),
+                    stringResource(R.string.delete_task_list),
                     style = MaterialTheme.typography.caption
                 )
             },
-            onClick = deleteProjectClick,
-            enabled = deleteProjectEnabled
+            onClick = deleteTaskListClick,
+            enabled = deleteTaskListEnabled
         )
         HorizontalDivider()
         TwoLineItem(
@@ -578,7 +584,7 @@ sealed class HomeBottomSheet {
 
 @Preview
 @Composable
-fun EmptyProjectTaskListPreview() {
+fun EmptyTasksListPreview() {
     ToDometerTheme {
         EmptyTasksListView()
     }

@@ -16,60 +16,62 @@
 
 package dev.sergiobelda.todometer.common.di
 
-import dev.sergiobelda.todometer.common.usecase.DeleteProjectUseCase
+import dev.sergiobelda.todometer.common.usecase.DeleteTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import dev.sergiobelda.todometer.common.usecase.RefreshProjectSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.RefreshProjectsUseCase
+import dev.sergiobelda.todometer.common.usecase.RefreshTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.RefreshTaskListsUseCase
 import dev.sergiobelda.todometer.common.usecase.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.usecase.UpdateProjectUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
     single {
-        GetProjectsUseCase(get())
+        GetTaskListsUseCase(get())
     }
     single {
-        RefreshProjectsUseCase(get())
+        RefreshTaskListsUseCase(get())
     }
     single {
-        RefreshProjectSelectedUseCase(get(), get())
+        RefreshTaskListSelectedUseCase(get(), get())
     }
     single {
-        InsertProjectUseCase(get(), get())
+        InsertTaskListUseCase(get(), get())
     }
     single {
         GetTaskUseCase(get())
     }
     single {
-        GetProjectTasksUseCase(get())
+        GetTaskListTasksUseCase(get())
     }
     single {
-        GetProjectSelectedTasksUseCase(get(), get())
+        GetTaskListSelectedTasksUseCase(get(), get())
     }
     single {
         InsertTaskUseCase(get())
     }
     single {
-        InsertTaskProjectSelectedUseCase(get(), get())
+        InsertTaskInTaskListSelectedUseCase(get(), get())
     }
     single {
         UpdateTaskUseCase(get())
     }
     single {
-        UpdateProjectUseCase(get())
+        UpdateTaskListUseCase(get())
     }
     single {
         SetTaskDoingUseCase(get())
@@ -81,18 +83,24 @@ val useCaseModule = module {
         DeleteTaskUseCase(get())
     }
     single {
-        DeleteProjectUseCase(get(), get())
+        DeleteTaskListUseCase(get())
     }
     single {
-        GetProjectSelectedUseCase(get(), get())
+        DeleteTaskListSelectedUseCase(get(), get())
     }
     single {
-        SetProjectSelectedUseCase(get())
+        GetTaskListSelectedUseCase(get(), get())
+    }
+    single {
+        SetTaskListSelectedUseCase(get())
     }
     single {
         GetAppThemeUseCase(get())
     }
     single {
         SetAppThemeUseCase(get())
+    }
+    single {
+        GetTaskListUseCase(get())
     }
 }

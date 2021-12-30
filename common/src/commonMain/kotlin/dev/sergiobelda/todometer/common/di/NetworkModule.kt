@@ -17,16 +17,16 @@
 package dev.sergiobelda.todometer.common.di
 
 import dev.sergiobelda.todometer.common.api.TodometerApi
-import dev.sergiobelda.todometer.common.api.client.IProjectApiClient
 import dev.sergiobelda.todometer.common.api.client.ITaskApiClient
-import dev.sergiobelda.todometer.common.api.client.ProjectApiClient
+import dev.sergiobelda.todometer.common.api.client.ITaskListApiClient
 import dev.sergiobelda.todometer.common.api.client.TaskApiClient
+import dev.sergiobelda.todometer.common.api.client.TaskListApiClient
 import org.koin.dsl.module
 
 val networkModule = module {
     single { TodometerApi() }
-    single<IProjectApiClient> {
-        ProjectApiClient(get())
+    single<ITaskListApiClient> {
+        TaskListApiClient(get())
     }
     single<ITaskApiClient> {
         TaskApiClient(get())

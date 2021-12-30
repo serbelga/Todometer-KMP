@@ -37,14 +37,14 @@ class TaskRepository(
     override fun getTask(id: String): Flow<Result<Task>> =
         taskLocalDataSource.getTask(id)
 
-    override fun getTasks(projectId: String): Flow<Result<List<Task>>> =
-        taskLocalDataSource.getTasks(projectId)
+    override fun getTasks(taskListId: String): Flow<Result<List<Task>>> =
+        taskLocalDataSource.getTasks(taskListId)
     /*
-    taskLocalDataSource.getTasks(projectId).map { result ->
+    taskLocalDataSource.getTasks(taskListId).map { result ->
         result.doIfSuccess { tasks ->
             synchronizeTasksRemotely(tasks.filter { !it.sync })
             // TODO Remove ?: ""
-            refreshTasks(projectId ?: "")
+            refreshTasks(taskListId ?: "")
         }
     }
     */
@@ -61,7 +61,7 @@ class TaskRepository(
                 id = task.id,
                 title = task.title,
                 description = task.description,
-                projectId = task.projectId,
+                taskListId = task.taskListId,
                 state = task.state,
                 tag = task.tag
             )
@@ -71,8 +71,8 @@ class TaskRepository(
         }
     }
 
-    override suspend fun refreshTasks(projectId: String) {
-        val result = taskRemoteDataSource.getTasks(projectId)
+    override suspend fun refreshTasks(taskListId: String) {
+        val result = taskRemoteDataSource.getTasks(taskListId)
         result.doIfSuccess { list ->
             taskLocalDataSource.insertTasks(list)
         }
@@ -85,14 +85,14 @@ class TaskRepository(
     override suspend fun insertTask(
         title: String,
         description: String,
-        projectId: String,
+        taskListId: String,
         tag: Tag
     ): Result<String> {
         val taskId = randomUUIDString()
         val sync = false
         /*
         taskRemoteDataSource.insertTask(
-            title = title, description = description, projectId = projectId, tag = tag
+            title = title, description = description, taskListId = taskListId, tag = tag
         ).doIfSuccess {
             taskId = it
             sync = true
@@ -106,7 +106,7 @@ class TaskRepository(
                 title = title,
                 description = description,
                 state = TaskState.DOING,
-                projectId = projectId,
+                taskListId = taskListId,
                 tag = tag,
                 sync = sync
             )

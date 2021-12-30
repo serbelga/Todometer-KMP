@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.compose.ui.theme
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.Shapes
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -48,11 +49,14 @@ val LightColorPalette = lightColorScheme(
 val ColorScheme.outline: Color
     @Composable get() = if (isLight) outlineLight else outlineDark
 
-val ColorScheme.primarySelected: Color
-    @Composable get() = blueAlpha08
-
 val TodometerColors: ColorScheme
     @Composable get() = MaterialTheme.colorScheme
+
+val TodometerShapes: Shapes
+    @Composable get() = MaterialTheme.shapes
+
+val TodometerTypography: ComposeMaterialTypography
+    @Composable get() = MaterialTheme.typography
 
 val ColorScheme.pink: Color
     @Composable get() = if (isLight) pinkLight else pinkDark

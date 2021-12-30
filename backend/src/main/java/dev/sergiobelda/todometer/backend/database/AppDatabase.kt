@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.backend.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import dev.sergiobelda.todometer.backend.database.table.ProjectTable
+import dev.sergiobelda.todometer.backend.database.table.TaskListTable
 import dev.sergiobelda.todometer.backend.database.table.TaskTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -34,7 +34,7 @@ object AppDatabase {
         transaction {
             addLogger(StdOutSqlLogger)
 
-            SchemaUtils.create(ProjectTable)
+            SchemaUtils.create(TaskListTable)
             SchemaUtils.create(TaskTable)
         }
     }

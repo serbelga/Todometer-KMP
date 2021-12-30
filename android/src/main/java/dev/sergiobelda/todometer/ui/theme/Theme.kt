@@ -19,6 +19,8 @@ package dev.sergiobelda.todometer.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorPalette
 import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorPalette
 import dev.sergiobelda.todometer.common.compose.ui.theme.Type.typography
@@ -29,6 +31,14 @@ fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composa
         DarkColorPalette
     } else {
         LightColorPalette
+    }
+
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = colors.surface,
+            darkIcons = !darkTheme
+        )
     }
 
     MaterialTheme(

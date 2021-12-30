@@ -54,22 +54,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ProjectProgress
-import dev.sergiobelda.todometer.common.compose.ui.project.ProjectListItem
+import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
+import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.Project
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.GetProjectsUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertProjectUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskProjectSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.SetProjectSelectedUseCase
+import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskListSelectedUseCase
 import koin
 import kotlinx.coroutines.launch
 import ui.icons.iconToDometer
@@ -77,37 +77,37 @@ import ui.icons.iconToDometer
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
-    var addProjectAlertDialogState by remember { mutableStateOf(false) }
+    var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
 
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
-    val getProjectSelectedUseCase = koin.get<GetProjectSelectedUseCase>()
-    val setProjectSelectedUseCase = koin.get<SetProjectSelectedUseCase>()
-    val getProjectSelectedTasksUseCase = koin.get<GetProjectSelectedTasksUseCase>()
-    val getProjectsUseCase = koin.get<GetProjectsUseCase>()
-    val insertProjectUseCase = koin.get<InsertProjectUseCase>()
-    val insertTaskProjectSelectedUseCase = koin.get<InsertTaskProjectSelectedUseCase>()
+    val getTaskListSelectedUseCase = koin.get<GetTaskListSelectedUseCase>()
+    val setTaskListSelectedUseCase = koin.get<SetTaskListSelectedUseCase>()
+    val getTaskListSelectedTasksUseCase = koin.get<GetTaskListSelectedTasksUseCase>()
+    val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
+    val insertTaskListUseCase = koin.get<InsertTaskListUseCase>()
+    val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
 
-    var projectSelected: Project? by remember { mutableStateOf(null) }
-    val projectResultState by getProjectSelectedUseCase().collectAsState(null)
-    projectResultState?.doIfSuccess { projectSelected = it }
+    var taskListSelected: TaskList? by remember { mutableStateOf(null) }
+    val taskListResultState by getTaskListSelectedUseCase().collectAsState(null)
+    taskListResultState?.doIfSuccess { taskListSelected = it }
 
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
-    val tasksResultState by getProjectSelectedTasksUseCase().collectAsState(null)
+    val tasksResultState by getTaskListSelectedTasksUseCase().collectAsState(null)
     tasksResultState?.doIfSuccess { tasks = it }
 
-    var projects: List<Project> by remember { mutableStateOf(emptyList()) }
-    val projectsResultState by getProjectsUseCase().collectAsState(null)
-    projectsResultState?.doIfSuccess { projects = it }
+    var taskLists: List<TaskList> by remember { mutableStateOf(emptyList()) }
+    val taskListsResultState by getTaskListsUseCase().collectAsState(null)
+    taskListsResultState?.doIfSuccess { taskLists = it }
 
     Scaffold(
         /*
         drawerShape = RoundedCornerShape(0),
         drawerContent = {
-            DrawerContainer(addProject = { addProjectAlertDialogState = true })
+            DrawerContainer(addTaskList = { addTaskListAlertDialogState = true })
         },
         */
         topBar = {
@@ -130,7 +130,7 @@ fun HomeScreen() {
             )
         },
         floatingActionButton = {
-            if (projects.isNotEmpty()) {
+            if (taskLists.isNotEmpty()) {
                 ExtendedFloatingActionButton(
                     icon = {
                         Icon(Icons.Rounded.Add, "Add task")
@@ -148,12 +148,12 @@ fun HomeScreen() {
     ) {
         Divider()
         Column(modifier = Modifier.fillMaxSize()) {
-            if (addProjectAlertDialogState) {
-                AddProjectAlertDialog(
-                    onDismissRequest = { addProjectAlertDialogState = false }
-                ) { projectName ->
+            if (addTaskListAlertDialogState) {
+                AddTaskListAlertDialog(
+                    onDismissRequest = { addTaskListAlertDialogState = false }
+                ) { taskListName ->
                     coroutineScope.launch {
-                        insertProjectUseCase.invoke(projectName)
+                        insertTaskListUseCase.invoke(taskListName)
                     }
                 }
             }
@@ -162,26 +162,26 @@ fun HomeScreen() {
                     onDismissRequest = { addTaskAlertDialogState = false }
                 ) { title, description, _ ->
                     coroutineScope.launch {
-                        insertTaskProjectSelectedUseCase.invoke(title, description, Tag.GRAY)
+                        insertTaskInTaskListSelectedUseCase.invoke(title, description, Tag.GRAY)
                     }
                 }
             }
         }
-        if (projects.isNotEmpty()) {
+        if (taskLists.isNotEmpty()) {
             Row {
-                ProjectsNavigationDrawer(
-                    projects,
-                    projectSelected,
-                    onProjectClick = {
+                TaskListsNavigationDrawer(
+                    taskLists,
+                    taskListSelected,
+                    onTaskListClick = {
                         coroutineScope.launch {
-                            setProjectSelectedUseCase.invoke(it)
+                            setTaskListSelectedUseCase.invoke(it)
                         }
                     },
-                    onAddProjectClick = { addProjectAlertDialogState = true }
+                    onAddTaskListClick = { addTaskListAlertDialogState = true }
                 )
                 Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
                 Column {
-                    ProjectProgress(projectSelected, tasks)
+                    TaskListProgress(taskListSelected, tasks)
                     if (tasks.isEmpty()) {
                         EmptyTasksListView()
                     } else {
@@ -204,13 +204,13 @@ fun HomeScreen() {
                 }
             }
         } else {
-            EmptyProjectsView(addProject = { addProjectAlertDialogState = true })
+            EmptyTaskListsView(addTaskList = { addTaskListAlertDialogState = true })
         }
     }
 }
 
 @Composable
-fun EmptyProjectsView(addProject: () -> Unit) {
+fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -219,14 +219,14 @@ fun EmptyProjectsView(addProject: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource("images/no_projects.svg"),
+                painterResource("images/no_task_lists.svg"),
                 modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
-            Text("There's any project", modifier = Modifier.padding(bottom = 48.dp))
-            Button(onClick = addProject) {
-                Text("Add project")
+            Text("There's any task list", modifier = Modifier.padding(bottom = 48.dp))
+            Button(onClick = addTaskList) {
+                Text("Add task list")
             }
         }
     }
@@ -273,11 +273,11 @@ fun EmptyTasksListView() {
 }
 
 @Composable
-fun ProjectsNavigationDrawer(
-    projects: List<Project>,
-    projectSelected: Project?,
-    onProjectClick: (projectId: String) -> Unit,
-    onAddProjectClick: () -> Unit
+fun TaskListsNavigationDrawer(
+    taskLists: List<TaskList>,
+    taskListSelected: TaskList?,
+    onTaskListClick: (taskListId: String) -> Unit,
+    onAddTaskListClick: () -> Unit
 ) {
     Column(modifier = Modifier.requiredWidth(280.dp).padding(top = 16.dp)) {
         Row(
@@ -286,24 +286,24 @@ fun ProjectsNavigationDrawer(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "PROJECTS",
+                text = "TASK LISTS",
                 style = MaterialTheme.typography.labelSmall
             )
             OutlinedButton(
-                onClick = onAddProjectClick,
+                onClick = onAddTaskListClick,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp)
             ) {
-                Icon(Icons.Rounded.Add, contentDescription = "Add project")
-                Text(text = "Add project")
+                Icon(Icons.Rounded.Add, contentDescription = "Add task list")
+                Text(text = "Add task list")
             }
         }
-        LazyColumn(modifier = Modifier.padding(top = 8.dp)) {
-            items(projects) { project ->
-                ProjectListItem(
-                    project,
-                    project.id == projectSelected?.id
+        LazyColumn(modifier = Modifier.padding(8.dp)) {
+            items(taskLists) { taskList ->
+                TaskListItem(
+                    taskList.name,
+                    taskList.id == taskListSelected?.id
                 ) {
-                    onProjectClick(it)
+                    onTaskListClick(taskList.id)
                 }
             }
         }
@@ -311,9 +311,9 @@ fun ProjectsNavigationDrawer(
 }
 
 @Composable
-fun DrawerContainer(addProject: () -> Unit) {
-    OutlinedButton(onClick = addProject) {
-        Icon(Icons.Rounded.Add, contentDescription = "Add project")
-        Text(text = "Add project")
+fun DrawerContainer(addTaskList: () -> Unit) {
+    OutlinedButton(onClick = addTaskList) {
+        Icon(Icons.Rounded.Add, contentDescription = "Add task list")
+        Text(text = "Add task list")
     }
 }

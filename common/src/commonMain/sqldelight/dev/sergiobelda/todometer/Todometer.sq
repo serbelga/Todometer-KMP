@@ -1,4 +1,7 @@
-CREATE TABLE ProjectEntity (
+import dev.sergiobelda.todometer.common.model.Tag;
+import dev.sergiobelda.todometer.common.model.TaskState;
+
+CREATE TABLE TaskListEntity (
     id TEXT PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -9,17 +12,12 @@ CREATE TABLE TaskEntity (
     id TEXT PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
-    state TEXT NOT NULL,
-    project_id TEXT NOT NULL,
-    tag TEXT,
+    state TEXT AS TaskState NOT NULL,
+    tasklist_id TEXT NOT NULL,
+    tag TEXT AS Tag NOT NULL,
     sync INTEGER AS Boolean NOT NULL DEFAULT 0,
-    FOREIGN KEY(project_id) REFERENCES ProjectEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(tasklist_id) REFERENCES TaskListEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
--- CREATE VIEW TaskProjectView AS
---     SELECT DbTask.*, DbProject.name AS project_name
---     FROM DbTask LEFT JOIN DbProject ON DbTask.project_id = DbProject.id
---     ORDER BY project_id;
 
 -------------------- Task
 
@@ -28,10 +26,10 @@ SELECT *
 FROM TaskEntity
 WHERE id = ?;
 
-selectTasksByProjectId:
+selectTasksByTaskListId:
 SELECT *
 FROM TaskEntity
-WHERE project_id = ?; ---- ORDER BY state ASC;
+WHERE tasklist_id = ?; ---- ORDER BY state ASC;
 
 selectAllTasks:
 SELECT *
@@ -39,7 +37,7 @@ FROM TaskEntity;
 
 insertOrReplaceTask:
 INSERT OR REPLACE INTO TaskEntity
-(id, title, description, state, project_id, tag, sync)
+(id, title, description, state, tasklist_id, tag, sync)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 
 updateTask:
@@ -66,35 +64,35 @@ deleteTask:
 DELETE FROM TaskEntity
 WHERE id = ?;
 
--------------------- Project
+-------------------- TaskList
 
-selectProject:
+selectTaskList:
 SELECT *
-FROM ProjectEntity
+FROM TaskListEntity
 WHERE id = ?;
 
-selectAllProjects:
+selectAllTaskLists:
 SELECT *
-FROM ProjectEntity;
+FROM TaskListEntity;
 
-insertProject:
-INSERT INTO ProjectEntity
+insertTaskList:
+INSERT INTO TaskListEntity
 (id, name, description, sync)
 VALUES (?, ?, ?, ?);
 
-insertOrReplaceProject:
-INSERT OR REPLACE INTO ProjectEntity
+insertOrReplaceTaskList:
+INSERT OR REPLACE INTO TaskListEntity
 (id, name, description, sync)
 VALUES (?,?, ?, ?);
 
-updateProject:
-UPDATE ProjectEntity
+updateTaskList:
+UPDATE TaskListEntity
 SET
     name = ?,
     description = ?,
     sync = ?
 WHERE id = ?;
 
-deleteProject:
-DELETE FROM ProjectEntity
+deleteTaskList:
+DELETE FROM TaskListEntity
 WHERE id = ?;

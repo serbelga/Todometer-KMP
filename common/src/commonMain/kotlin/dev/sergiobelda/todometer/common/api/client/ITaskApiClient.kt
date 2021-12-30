@@ -24,7 +24,7 @@ interface ITaskApiClient {
 
     suspend fun getTasks(): List<TaskApiModel>
 
-    suspend fun getTasks(projectId: String? = null): List<TaskApiModel>
+    suspend fun getTasks(taskListId: String? = null): List<TaskApiModel>
 
     suspend fun getTask(id: String): TaskApiModel
 

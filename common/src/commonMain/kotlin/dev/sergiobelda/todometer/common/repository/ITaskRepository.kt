@@ -30,19 +30,19 @@ interface ITaskRepository {
     fun getTask(id: String): Flow<Result<Task>>
 
     /**
-     * Get a list of [Task] given an optional [projectId].
+     * Get a list of [Task] given a [taskListId].
      */
-    fun getTasks(projectId: String): Flow<Result<List<Task>>>
+    fun getTasks(taskListId: String): Flow<Result<List<Task>>>
 
-    suspend fun refreshTasks(projectId: String)
+    suspend fun refreshTasks(taskListId: String)
 
     /**
-     * Inserts a [Task] given a [title], [description], [projectId] and [tag].
+     * Inserts a [Task] given a [title], [description], [taskListId] and [tag].
      */
     suspend fun insertTask(
         title: String,
         description: String,
-        projectId: String,
+        taskListId: String,
         tag: Tag
     ): Result<String>
 

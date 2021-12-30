@@ -16,17 +16,17 @@
 
 package dev.sergiobelda.todometer.backend.database.mapper
 
-import dev.sergiobelda.todometer.backend.database.entity.ProjectEntity
-import dev.sergiobelda.todometer.backend.database.table.ProjectTable
+import dev.sergiobelda.todometer.backend.database.entity.TaskListEntity
+import dev.sergiobelda.todometer.backend.database.table.TaskListTable
 import org.jetbrains.exposed.sql.ResultRow
 
-fun ResultRow.toProjectEntity() =
-    ProjectEntity(
-        id = this[ProjectTable.id],
-        name = this[ProjectTable.name],
-        description = this[ProjectTable.description]
+fun ResultRow.toTaskListEntity() =
+    TaskListEntity(
+        id = this[TaskListTable.id],
+        name = this[TaskListTable.name],
+        description = this[TaskListTable.description]
     )
 
-fun Iterable<ResultRow>.toProjectEntityList() = this.map {
-    it.toProjectEntity()
+fun Iterable<ResultRow>.toTaskListEntityList() = this.map {
+    it.toTaskListEntity()
 }

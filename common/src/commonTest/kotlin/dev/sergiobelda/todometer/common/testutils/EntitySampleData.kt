@@ -16,41 +16,41 @@
 
 package dev.sergiobelda.todometer.common.testutils
 
-import dev.sergiobelda.todometer.ProjectEntity
 import dev.sergiobelda.todometer.TaskEntity
+import dev.sergiobelda.todometer.TaskListEntity
 import dev.sergiobelda.todometer.common.model.Tag
 import dev.sergiobelda.todometer.common.model.TaskState
 
-val projectEntity1 = ProjectEntity(
+val taskListEntity1 = TaskListEntity(
     id = "1",
-    name = "Project 1",
+    name = "Task List 1",
     description = "Description",
     sync = false
 )
 
-val projectEntity1Updated = ProjectEntity(
+val taskListEntity1Updated = TaskListEntity(
     id = "1",
-    name = "Project 1 Updated",
+    name = "Task List 1 Updated",
     description = "Description",
     sync = false
 )
 
-val projectEntity2 = ProjectEntity(
+val taskListEntity2 = TaskListEntity(
     id = "2",
-    name = "Project 2",
+    name = "Task List 2",
     description = "Description",
     sync = false
 )
 
-val entityProjects = listOf(projectEntity1, projectEntity2)
+val taskListEntities = listOf(taskListEntity1, taskListEntity2)
 
 val taskEntity1 = TaskEntity(
     id = "1",
     title = "Task 1",
     description = "Description 1",
-    state = TaskState.DOING.name,
-    project_id = "1",
-    tag = Tag.GRAY.name,
+    state = TaskState.DOING,
+    tasklist_id = "1",
+    tag = Tag.GRAY,
     sync = false
 )
 
@@ -58,9 +58,9 @@ val taskEntity1Updated = TaskEntity(
     id = "1",
     title = "Task 1 Updated",
     description = "Description 1 Updated",
-    state = TaskState.DOING.name,
-    project_id = "1",
-    tag = Tag.RED.name,
+    state = TaskState.DOING,
+    tasklist_id = "1",
+    tag = Tag.RED,
     sync = false
 )
 
@@ -68,10 +68,10 @@ val taskEntity2 = TaskEntity(
     id = "2",
     title = "Task 2",
     description = "Description 2",
-    state = TaskState.DOING.name,
-    project_id = "1",
-    tag = Tag.RED.name,
+    state = TaskState.DOING,
+    tasklist_id = "1",
+    tag = Tag.RED,
     sync = false
 )
 
-val entityTasks = listOf(taskEntity1, taskEntity2)
+val taskEntities = listOf(taskEntity1, taskEntity2)
