@@ -21,13 +21,16 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import dev.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class TaskDetailViewModel(
     taskId: String,
-    getTaskUseCase: GetTaskUseCase
+    getTaskUseCase: GetTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
     val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
@@ -35,4 +38,8 @@ class TaskDetailViewModel(
         SharingStarted.WhileSubscribed(),
         Result.Loading
     )
+
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase(task)
+    }
 }

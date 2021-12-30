@@ -21,12 +21,15 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.usecase.InsertTaskListUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    getTaskListsUseCase: GetTaskListsUseCase
+    getTaskListsUseCase: GetTaskListsUseCase,
+    private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
     val taskLists: StateFlow<Result<List<TaskList>>> =
@@ -35,4 +38,8 @@ class HomeViewModel(
             SharingStarted.WhileSubscribed(),
             Result.Loading
         )
+
+    fun insertTaskList(name: String) = viewModelScope.launch {
+        insertTaskListUseCase.invoke(name)
+    }
 }

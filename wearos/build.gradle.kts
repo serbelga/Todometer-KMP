@@ -53,6 +53,7 @@ dependencies {
         implementation(composeFoundation)
         implementation(composeMaterial)
         implementation(composeNavigation)
+        implementation(input)
     }
 
     with(Libs.Koin) {

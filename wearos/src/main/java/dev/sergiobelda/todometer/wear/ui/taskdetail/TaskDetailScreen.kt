@@ -16,6 +16,12 @@
 
 package dev.sergiobelda.todometer.wear.ui.taskdetail
 
+import android.app.Activity.RESULT_OK
+import android.app.RemoteInput
+import android.content.Intent
+import android.view.inputmethod.EditorInfo
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -38,22 +44,32 @@ import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.input.RemoteInputIntentHelper
+import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.wear.R
 
+private const val TASK_TITLE = "task_title"
+
 @Composable
 fun TaskDetailScreen(
-    editTask: () -> Unit,
     deleteTask: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskResultState = taskDetailViewModel.task.collectAsState()
-    Scaffold(
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-    ) {
-        taskResultState.value.doIfSuccess { task ->
+    taskResultState.value.doIfSuccess { task ->
+        val launcher =
+            rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val title = RemoteInput.getResultsFromIntent(result .data).getString(TASK_TITLE)
+                    taskDetailViewModel.updateTask(task.copy(title = title ?: task.title))
+                }
+            }
+        Scaffold(
+            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+        ) {
             ScalingLazyColumn(
                 contentPadding = PaddingValues(
                     top = 28.dp,
@@ -72,15 +88,29 @@ fun TaskDetailScreen(
                     Spacer(modifier = Modifier.height(24.dp))
                 }
                 item {
-                    EditTaskButton(editTask)
+                    EditTaskButton {
+                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                        val remoteInputs: List<RemoteInput> = listOf(
+                            RemoteInput.Builder(TASK_TITLE)
+                                .setLabel(task.title)
+                                .wearableExtender {
+                                    setEmojisAllowed(false)
+                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
+                                }.build()
+                        )
+
+                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+                        launcher.launch(intent)
+                    }
                 }
                 item {
                     DeleteTaskButton(deleteTask)
                 }
             }
-        }.doIfError {
-            // TODO
         }
+    }.doIfError {
+        // TODO
     }
 }
 
