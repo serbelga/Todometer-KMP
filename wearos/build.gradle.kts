@@ -10,8 +10,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = Android.wearMinSdk
         targetSdk = Android.targetSdk
-        versionCode = 1
-        versionName = "1.0.0-dev03"
+        versionCode = 4100003
+        versionName = "wearos-1.0.0-dev03"
     }
 
     buildFeatures {
