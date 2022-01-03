@@ -63,7 +63,7 @@ fun TaskDetailScreen(
         val launcher =
             rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-                    val title = RemoteInput.getResultsFromIntent(result .data).getString(TASK_TITLE)
+                    val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
                     taskDetailViewModel.updateTask(task.copy(title = title ?: task.title))
                 }
             }

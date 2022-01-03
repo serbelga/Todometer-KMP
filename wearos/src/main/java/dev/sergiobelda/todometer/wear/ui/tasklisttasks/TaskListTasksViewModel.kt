@@ -20,12 +20,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.usecase.GetTaskListTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.usecase.UpdateTaskListUseCase
+import dev.sergiobelda.todometer.common.usecase.UpdateTaskListNameUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -37,7 +36,7 @@ class TaskListTasksViewModel(
     private val insertTaskUseCase: InsertTaskUseCase,
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
-    private val updateTaskListUseCase: UpdateTaskListUseCase
+    private val updateTaskListNameUseCase: UpdateTaskListNameUseCase
 ) : ViewModel() {
 
     val tasks: StateFlow<Result<List<Task>>> = getTaskListTasksUseCase(taskListId).stateIn(
@@ -58,7 +57,7 @@ class TaskListTasksViewModel(
         setTaskDoneUseCase(id)
     }
 
-    fun updateTaskList(taskList: TaskList) = viewModelScope.launch {
-        updateTaskListUseCase(taskList)
+    fun updateTaskListName(name: String) = viewModelScope.launch {
+        updateTaskListNameUseCase(taskListId, name)
     }
 }

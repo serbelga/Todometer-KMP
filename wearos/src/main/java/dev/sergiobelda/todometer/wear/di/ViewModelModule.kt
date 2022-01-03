@@ -29,7 +29,7 @@ val viewModelModule = module {
         HomeViewModel(get(), get())
     }
     viewModel { parameters ->
-        TaskListTasksViewModel(taskListId = parameters.get(), get(), get(), get(), get())
+        TaskListTasksViewModel(taskListId = parameters.get(), get(), get(), get(), get(), get())
     }
     viewModel { parameters ->
         DeleteTaskListViewModel(taskListId = parameters.get(), get())

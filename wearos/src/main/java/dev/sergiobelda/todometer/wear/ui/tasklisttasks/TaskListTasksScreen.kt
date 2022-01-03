@@ -84,7 +84,7 @@ fun TaskListTasksScreen(
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
-                name?.let { taskListTasksViewModel.updateTaskList(it) }
+                name?.let { taskListTasksViewModel.updateTaskListName(it) }
             }
         }
     tasksResultState.value.doIfSuccess { tasks ->
@@ -145,7 +145,6 @@ fun TaskListTasksScreen(
                         val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
                         val remoteInputs: List<RemoteInput> = listOf(
                             RemoteInput.Builder(TASK_LIST_NAME)
-                                .setLabel()
                                 .wearableExtender {
                                     setEmojisAllowed(false)
                                     setInputActionType(EditorInfo.IME_ACTION_DONE)
