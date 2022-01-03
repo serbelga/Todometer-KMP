@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
@@ -88,6 +87,8 @@ fun TaskListTasksScreen(
                 name?.let { taskListTasksViewModel.updateTaskListName(it) }
             }
         }
+    var taskListName = ""
+    taskListResultState.value.doIfSuccess { taskListName = it.name }
     tasksResultState.value.doIfSuccess { tasks ->
         val progress = TaskProgress.getTasksDoneProgress(tasks)
         // TODO: Add ProgressIndicator using progress value.
@@ -110,6 +111,21 @@ fun TaskListTasksScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                item { Text(taskListName) }
+                item { Spacer(modifier = Modifier.height(4.dp)) }
+                if (tasks.isNullOrEmpty()) {
+                    item { Text(text = stringResource(id = R.string.no_tasks)) }
+                } else {
+                    items(tasks) { task ->
+                        TaskItem(
+                            task,
+                            onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
+                            onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
+                            onClick = { openTask(task.id) }
+                        )
+                    }
+                }
+                item { Spacer(modifier = Modifier.height(4.dp)) }
                 item {
                     AddTaskButton {
                         val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -127,28 +143,12 @@ fun TaskListTasksScreen(
                         addTaskLauncher.launch(intent)
                     }
                 }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                if (tasks.isNullOrEmpty()) {
-                    item { Text(text = stringResource(id = R.string.no_tasks)) }
-                } else {
-                    items(tasks) { task ->
-                        TaskItem(
-                            task,
-                            onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
-                            onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
-                            onClick = { openTask(task.id) }
-                        )
-                    }
-                }
-                item { Spacer(modifier = Modifier.height(16.dp)) }
                 item {
                     EditTaskListButton {
                         val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                        var taskListNameLabel = ""
-                        taskListResultState.value.doIfSuccess { taskListNameLabel = it.name }
                         val remoteInputs: List<RemoteInput> = listOf(
                             RemoteInput.Builder(TASK_LIST_NAME)
-                                .setLabel(taskListNameLabel)
+                                .setLabel(taskListName)
                                 .wearableExtender {
                                     setEmojisAllowed(false)
                                     setInputActionType(EditorInfo.IME_ACTION_DONE)
@@ -200,9 +200,7 @@ fun TaskItem(
 @Composable
 fun AddTaskButton(onClick: () -> Unit) {
     Chip(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 10.dp),
+        modifier = Modifier.fillMaxWidth(),
         colors = secondaryChipColors(),
         icon = {
             Icon(Icons.Rounded.Add, null)

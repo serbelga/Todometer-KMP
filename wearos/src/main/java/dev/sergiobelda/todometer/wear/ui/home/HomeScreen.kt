@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
@@ -89,6 +88,19 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item { Text(stringResource(R.string.app_name)) }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
+            taskListsResultState.value.doIfSuccess { taskLists ->
+                if (taskLists.isNullOrEmpty()) {
+                    item {
+                        Text(text = stringResource(id = R.string.no_task_lists))
+                    }
+                } else {
+                    items(taskLists) { taskList ->
+                        TaskListItem(taskList) { openTaskList(it) }
+                    }
+                }
+            }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
             item {
                 AddTaskListButton {
                     val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -104,18 +116,6 @@ fun HomeScreen(
                     RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
                     launcher.launch(intent)
-                }
-            }
-            item { Spacer(modifier = Modifier.height(4.dp)) }
-            taskListsResultState.value.doIfSuccess { taskLists ->
-                if (taskLists.isNullOrEmpty()) {
-                    item {
-                        Text(text = stringResource(id = R.string.no_task_lists))
-                    }
-                } else {
-                    items(taskLists) { taskList ->
-                        TaskListItem(taskList) { openTaskList(it) }
-                    }
                 }
             }
         }
@@ -143,9 +143,7 @@ fun TaskListItem(
 @Composable
 fun AddTaskListButton(onClick: () -> Unit) {
     Chip(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 10.dp),
+        modifier = Modifier.fillMaxWidth(),
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
             Icon(Icons.Rounded.Add, null)
