@@ -16,6 +16,12 @@
 
 package dev.sergiobelda.todometer.wear.ui.tasklisttasks
 
+import android.app.Activity
+import android.app.RemoteInput
+import android.content.Intent
+import android.view.inputmethod.EditorInfo
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -46,6 +52,8 @@ import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.input.RemoteInputIntentHelper
+import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
@@ -53,16 +61,33 @@ import dev.sergiobelda.todometer.common.model.TaskProgress
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.wear.R
 
+private const val TASK_TITLE = "task_title"
+private const val TASK_LIST_NAME = "task_list_name"
+
 @Composable
 fun TaskListTasksScreen(
-    addTask: () -> Unit,
     openTask: (String) -> Unit,
-    editTaskList: () -> Unit,
     deleteTaskList: () -> Unit,
     taskListTasksViewModel: TaskListTasksViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val tasksResultState = taskListTasksViewModel.tasks.collectAsState()
+    val taskListResultState = taskListTasksViewModel.taskList.collectAsState()
+    val addTaskLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                title?.let { taskListTasksViewModel.insertTask(it) }
+            }
+        }
+    val taskTitleInput = stringResource(id = R.string.task_title_input)
+    val editTaskListLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
+                name?.let { taskListTasksViewModel.updateTaskListName(it) }
+            }
+        }
     tasksResultState.value.doIfSuccess { tasks ->
         val progress = TaskProgress.getTasksDoneProgress(tasks)
         // TODO: Add ProgressIndicator using progress value.
@@ -85,7 +110,23 @@ fun TaskListTasksScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                item { AddTaskButton(addTask) }
+                item {
+                    AddTaskButton {
+                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                        val remoteInputs: List<RemoteInput> = listOf(
+                            RemoteInput.Builder(TASK_TITLE)
+                                .setLabel(taskTitleInput)
+                                .wearableExtender {
+                                    setEmojisAllowed(false)
+                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
+                                }.build()
+                        )
+
+                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+                        addTaskLauncher.launch(intent)
+                    }
+                }
                 item { Spacer(modifier = Modifier.height(4.dp)) }
                 if (tasks.isNullOrEmpty()) {
                     item { Text(text = stringResource(id = R.string.no_tasks)) }
@@ -100,7 +141,25 @@ fun TaskListTasksScreen(
                     }
                 }
                 item { Spacer(modifier = Modifier.height(16.dp)) }
-                item { EditTaskListButton(editTaskList) }
+                item {
+                    EditTaskListButton {
+                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                        var taskListNameLabel = ""
+                        taskListResultState.value.doIfSuccess { taskListNameLabel = it.name }
+                        val remoteInputs: List<RemoteInput> = listOf(
+                            RemoteInput.Builder(TASK_LIST_NAME)
+                                .setLabel(taskListNameLabel)
+                                .wearableExtender {
+                                    setEmojisAllowed(false)
+                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
+                                }.build()
+                        )
+
+                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+                        editTaskListLauncher.launch(intent)
+                    }
+                }
                 item { DeleteTaskListButton(deleteTaskList) }
             }
         }

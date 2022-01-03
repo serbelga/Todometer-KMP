@@ -56,6 +56,10 @@ class TaskListDao(private val database: TodometerDatabase) : ITaskListDao {
         )
     }
 
+    override suspend fun updateTaskListName(id: String, name: String) {
+        database.todometerQueries.updateTaskListName(id = id, name = name)
+    }
+
     override suspend fun updateTaskLists(taskLists: List<TaskListEntity>) {
         taskLists.forEach { taskList ->
             database.todometerQueries.updateTaskList(

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.addtasklist
+package dev.sergiobelda.todometer.common.usecase
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.usecase.InsertTaskListUseCase
-import kotlinx.coroutines.launch
+import dev.sergiobelda.todometer.common.repository.ITaskListRepository
 
-class AddTaskListViewModel(
-    private val insertTaskListUseCase: InsertTaskListUseCase
-) : ViewModel() {
+class UpdateTaskListNameUseCase(private val taskListRepository: ITaskListRepository) {
 
-    fun insertTaskList(name: String) = viewModelScope.launch {
-        insertTaskListUseCase.invoke(name)
+    /**
+     * Update Task List name by defining a new [name] value.
+     */
+    suspend operator fun invoke(id: String, name: String) {
+        taskListRepository.updateTaskListName(id, name)
     }
 }

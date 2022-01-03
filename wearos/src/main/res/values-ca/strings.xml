@@ -25,4 +25,6 @@
     <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de tasques. Vols continuar?</string>
     <string name="delete_task">Eliminar tasca</string>
     <string name="delete_task_question">Vols eliminar aquesta tasca?</string>
+    <string name="task_title_input">Nom de la tasca</string>
+    <string name="task_list_name_input">Nom de la llista de tasques</string>
 </resources>

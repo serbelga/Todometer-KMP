@@ -46,6 +46,7 @@ object Versions {
     const val timber = "4.7.1"
     const val wear = "1.2.0"
     const val wearCompose = "1.0.0-alpha13"
+    const val wearInput = "1.2.0-alpha02"
 }
 
 object Android {
@@ -131,6 +132,7 @@ object Libs {
                 "androidx.wear.compose:compose-material:${Versions.wearCompose}"
             const val composeNavigation =
                 "androidx.wear.compose:compose-navigation:${Versions.wearCompose}"
+            const val input = "androidx.wear:wear-input:${Versions.wearInput}"
         }
     }
 
