@@ -20,6 +20,9 @@ import dev.sergiobelda.todometer.common.repository.ITaskListRepository
 
 class UpdateTaskListNameUseCase(private val taskListRepository: ITaskListRepository) {
 
+    /**
+     * Update Task List name by defining a new [name] value.
+     */
     suspend operator fun invoke(id: String, name: String) {
         taskListRepository.updateTaskListName(id, name)
     }
