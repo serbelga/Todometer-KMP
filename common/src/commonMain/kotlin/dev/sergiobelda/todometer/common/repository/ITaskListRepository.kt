@@ -44,6 +44,11 @@ interface ITaskListRepository {
      */
     suspend fun updateTaskList(taskList: TaskList)
 
+    /**
+     * Updates the name of a Task List given a new [name].
+     */
+    suspend fun updateTaskListName(id: String, name: String)
+
     suspend fun refreshTaskLists()
 
     /**

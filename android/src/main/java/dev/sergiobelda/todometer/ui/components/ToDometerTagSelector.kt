@@ -46,7 +46,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.model.Tag
 
 @Composable
-fun TodometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     Text(

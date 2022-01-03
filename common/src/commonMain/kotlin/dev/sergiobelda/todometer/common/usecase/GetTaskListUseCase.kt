@@ -14,25 +14,21 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.localdatasource
+package dev.sergiobelda.todometer.common.usecase
 
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.common.repository.ITaskListRepository
 import kotlinx.coroutines.flow.Flow
 
-interface ITaskListLocalDataSource {
+class GetTaskListUseCase(private val taskListRepository: ITaskListRepository) {
 
-    fun getTaskLists(): Flow<Result<List<TaskList>>>
-
-    fun getTaskList(id: String): Flow<Result<TaskList>>
-
-    suspend fun insertTaskList(taskList: TaskList): Result<String>
-
-    suspend fun insertTaskLists(taskLists: List<TaskList>)
-
-    suspend fun updateTaskList(taskList: TaskList)
-
-    suspend fun updateTaskListName(id: String, name: String)
-
-    suspend fun deleteTaskList(id: String)
+    /**
+     * Retrieves the task list given its [id]. This flow emits a value of a task list
+     * every time it changes.
+     *
+     * @return A Flow that emits the task list.
+     */
+    operator fun invoke(id: String): Flow<Result<TaskList>> =
+        taskListRepository.getTaskList(id)
 }

@@ -18,23 +18,26 @@ package dev.sergiobelda.todometer.wear.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import androidx.wear.compose.material.ExperimentalWearMaterialApi
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.wear.Actions
-import dev.sergiobelda.todometer.wear.Destinations.AddTask
-import dev.sergiobelda.todometer.wear.Destinations.AddTaskList
+import dev.sergiobelda.todometer.wear.Destinations.DeleteTask
+import dev.sergiobelda.todometer.wear.Destinations.DeleteTaskList
 import dev.sergiobelda.todometer.wear.Destinations.Home
+import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
+import dev.sergiobelda.todometer.wear.Destinations.TaskDetailArgs.TaskId
 import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
 import dev.sergiobelda.todometer.wear.Destinations.TaskListTasksArgs.TaskListId
-import dev.sergiobelda.todometer.wear.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.wear.ui.addtasklist.AddTaskListScreen
+import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskScreen
+import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListScreen
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
+import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalWearMaterialApi::class)
 @Composable
@@ -46,29 +49,38 @@ fun ToDometerApp() {
         SwipeDismissableNavHost(navController = navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(
-                    actions.addTaskList,
-                    actions.openTaskList
+                    actions.navigateToTaskListTasks
                 )
             }
-            composable(AddTaskList) {
-                AddTaskListScreen(actions.navigateUp)
-            }
-            composable(
-                "$TaskListTasks/{$TaskListId}",
-                arguments = listOf(navArgument(TaskListId) { type = NavType.StringType })
-            ) { navBackStackEntry ->
+            composable("$TaskListTasks/{$TaskListId}") { navBackStackEntry ->
+                val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
                 TaskListTasksScreen(
-                    navBackStackEntry.arguments?.getString(TaskListId) ?: "",
-                    actions.addTask
+                    openTask = actions.navigateToTaskDetail,
+                    deleteTaskList = { actions.navigateToDeleteTaskList(taskListId) },
+                    taskListTasksViewModel = getViewModel { parametersOf(taskListId) }
                 )
             }
-            composable(
-                "$AddTask/{$TaskListId}",
-                arguments = listOf(navArgument(TaskListId) { type = NavType.StringType })
-            ) { navBackStackEntry ->
-                AddTaskScreen(
-                    navBackStackEntry.arguments?.getString(TaskListId) ?: "",
-                    actions.navigateUp
+            composable("$DeleteTaskList/{$TaskListId}") { navBackStackEntry ->
+                val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
+                DeleteTaskListScreen(
+                    onDeleteTaskList = actions.popBackToHome,
+                    navigateUp = actions.navigateUp,
+                    deleteTaskListViewModel = getViewModel { parametersOf(taskListId) }
+                )
+            }
+            composable("$TaskDetail/{$TaskId}") { navBackStackEntry ->
+                val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
+                TaskDetailScreen(
+                    deleteTask = { actions.navigateToDeleteTask(taskId) },
+                    taskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
+                )
+            }
+            composable("$DeleteTask/{$TaskId}") { navBackStackEntry ->
+                val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
+                DeleteTaskScreen(
+                    onDeleteTask = actions.popBackToTaskListTasks,
+                    navigateUp = actions.navigateUp,
+                    deleteTaskViewModel = getViewModel(parameters = { parametersOf(taskId) })
                 )
             }
         }

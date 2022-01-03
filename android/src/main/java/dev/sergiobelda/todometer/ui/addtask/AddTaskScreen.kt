@@ -45,7 +45,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.ui.components.TodometerTagSelector
+import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -116,7 +116,7 @@ fun AddTaskScreen(
                         bottom = 8.dp
                     )
                 )
-                TodometerTagSelector(selectedTag) { tag ->
+                ToDometerTagSelector(selectedTag) { tag ->
                     selectedTag = tag
                 }
                 TitledTextField(

@@ -46,7 +46,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.ui.components.TodometerTagSelector
+import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 
 @Composable
 fun EditTaskScreen(
@@ -126,7 +126,7 @@ fun EditTaskScreen(
                             bottom = 8.dp
                         )
                     )
-                    TodometerTagSelector(selectedTag) { tag ->
+                    ToDometerTagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
                     TitledTextField(

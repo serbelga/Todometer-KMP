@@ -14,40 +14,45 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.addtasklist
+package dev.sergiobelda.todometer.wear.ui.deletetask
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.wear.compose.material.AlertDialog
 import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.Icon
-import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
-import org.koin.androidx.compose.getViewModel
+import dev.sergiobelda.todometer.wear.R
 
 @Composable
-fun AddTaskListScreen(
+fun DeleteTaskScreen(
+    onDeleteTask: () -> Unit,
     navigateUp: () -> Unit,
-    addTaskListViewModel: AddTaskListViewModel = getViewModel()
+    deleteTaskViewModel: DeleteTaskViewModel
 ) {
-    Scaffold {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Task List 1")
+    AlertDialog(
+        icon = { Icon(Icons.Outlined.Delete, null) },
+        title = {},
+        content = { Text(stringResource(R.string.delete_task_question)) },
+        positiveButton = {
             Button(
                 onClick = {
-                    addTaskListViewModel.insertTaskList("Task List 1")
-                    navigateUp()
+                    deleteTaskViewModel.deleteTask()
+                    onDeleteTask()
                 }
             ) {
-                Icon(Icons.Rounded.Check, contentDescription = "")
+                Icon(Icons.Rounded.Check, null)
+            }
+        },
+        negativeButton = {
+            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateUp) {
+                Icon(Icons.Rounded.Clear, null)
             }
         }
-    }
+    )
 }

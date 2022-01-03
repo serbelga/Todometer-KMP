@@ -301,7 +301,7 @@ fun TaskListsNavigationDrawer(
                 Text(text = "Add task list")
             }
         }
-        LazyColumn(modifier = Modifier.padding(top = 8.dp)) {
+        LazyColumn(modifier = Modifier.padding(8.dp)) {
             items(taskLists) { taskList ->
                 TaskListItem(
                     taskList.name,

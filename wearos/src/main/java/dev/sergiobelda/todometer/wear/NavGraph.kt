@@ -17,28 +17,47 @@
 package dev.sergiobelda.todometer.wear
 
 import androidx.navigation.NavHostController
-import dev.sergiobelda.todometer.wear.Destinations.AddTask
-import dev.sergiobelda.todometer.wear.Destinations.AddTaskList
+import dev.sergiobelda.todometer.wear.Destinations.DeleteTask
+import dev.sergiobelda.todometer.wear.Destinations.DeleteTaskList
+import dev.sergiobelda.todometer.wear.Destinations.Home
+import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
 import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
 
 object Destinations {
     const val Home = "home"
-    const val AddTaskList = "addTaskList"
     const val TaskListTasks = "taskListTasks"
-    const val AddTask = "addTask"
+    const val TaskDetail = "taskDetail"
+    const val DeleteTask = "deleteTask"
+    const val DeleteTaskList = "deleteTaskList"
 
     object TaskListTasksArgs {
         const val TaskListId = "taskListId"
     }
+
+    object TaskDetailArgs {
+        const val TaskId = "taskId"
+    }
 }
 
 class Actions(navController: NavHostController) {
-    val openTaskList: (String) -> Unit = { taskListId ->
+    val navigateToTaskListTasks: (String) -> Unit = { taskListId ->
         navController.navigate("$TaskListTasks/$taskListId")
     }
-    val addTaskList: () -> Unit = { navController.navigate(AddTaskList) }
-    val addTask: (String) -> Unit = { taskListId ->
-        navController.navigate("$AddTask/$taskListId")
+    val navigateToTaskDetail: (String) -> Unit = { taskId ->
+        navController.navigate("$TaskDetail/$taskId")
+    }
+    val navigateToDeleteTask: (String) -> Unit = { taskId ->
+        navController.navigate("$DeleteTask/$taskId")
+    }
+    val navigateToDeleteTaskList: (String) -> Unit = { taskId ->
+        navController.navigate("$DeleteTaskList/$taskId")
+    }
+    val popBackToHome: () -> Unit = {
+        navController.popBackStack(Home, false)
+    }
+    val popBackToTaskListTasks: () -> Unit = {
+        navController.popBackStack()
+        navController.navigateUp()
     }
     val navigateUp: () -> Unit = { navController.popBackStack() }
 }

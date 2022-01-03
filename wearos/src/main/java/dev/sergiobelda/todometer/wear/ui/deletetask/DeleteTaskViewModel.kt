@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.deletetask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
+import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
 import kotlinx.coroutines.launch
 
-class AddTaskViewModel(
-    private val insertTaskUseCase: InsertTaskUseCase
+class DeleteTaskViewModel(
+    private val taskId: String,
+    private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
-    fun insertTask(taskListId: String, title: String) = viewModelScope.launch {
-        insertTaskUseCase.invoke(taskListId, title)
+    fun deleteTask() = viewModelScope.launch {
+        deleteTaskUseCase(taskId)
     }
 }

@@ -102,6 +102,9 @@ class TaskListRepository(
     override suspend fun updateTaskList(taskList: TaskList) =
         taskListLocalDataSource.updateTaskList(taskList)
 
+    override suspend fun updateTaskListName(id: String, name: String) =
+        taskListLocalDataSource.updateTaskListName(id, name)
+
     override suspend fun deleteTaskList(id: String) = taskListLocalDataSource.deleteTaskList(id)
     /*
     taskListRemoteDataSource.deleteTaskList(id).doIfSuccess {

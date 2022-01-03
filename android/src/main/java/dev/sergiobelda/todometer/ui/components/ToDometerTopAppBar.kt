@@ -57,7 +57,7 @@ fun ToDometerTopAppBar(taskList: TaskList?, tasks: List<Task>) {
 
 @Preview
 @Composable
-fun TodometerTopAppBarPreview() {
+fun ToDometerTopAppBarPreview() {
     ToDometerTheme {
         ToDometerTopAppBar(null, emptyList())
     }

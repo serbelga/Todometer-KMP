@@ -70,7 +70,7 @@ fun EditTaskListScreen(
                             Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
                         }
                     },
-                    title = { Text(stringResource(id = R.string.add_task_list)) },
+                    title = { Text(stringResource(id = R.string.edit_task_list)) },
                     actions = {
                         IconButton(
                             onClick = {

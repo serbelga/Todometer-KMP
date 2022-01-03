@@ -85,6 +85,7 @@ import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.preferences.appThemeMap
+import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
@@ -280,12 +281,12 @@ fun ChooseThemeAlertDialog(
     chooseTheme: (theme: AppTheme) -> Unit
 ) {
     var themeSelected by remember { mutableStateOf(currentTheme) }
-    AlertDialog(
+    ToDometerAlertDialog(
         title = {
-            Text(text = stringResource(R.string.choose_theme))
+            Text(text = stringResource(R.string.choose_theme), modifier = Modifier.padding(16.dp))
         },
         onDismissRequest = onDismissRequest,
-        text = {
+        body = {
             LazyColumn {
                 appThemeMap.forEach { (appTheme, appThemeOption) ->
                     item {
@@ -414,7 +415,7 @@ fun MenuBottomSheet(
             }
         }
         HorizontalDivider()
-        LazyColumn {
+        LazyColumn(modifier = Modifier.padding(8.dp)) {
             items(taskLists) { taskList ->
                 TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
                     selectTaskList(taskList.id)

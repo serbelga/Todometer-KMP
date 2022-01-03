@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.home
+package dev.sergiobelda.todometer.wear.ui.taskdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskListUseCase
+import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import dev.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
-    getTaskListsUseCase: GetTaskListsUseCase,
-    private val insertTaskListUseCase: InsertTaskListUseCase
+class TaskDetailViewModel(
+    taskId: String,
+    getTaskUseCase: GetTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    val taskLists: StateFlow<Result<List<TaskList>>> =
-        getTaskListsUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
+    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Result.Loading
+    )
 
-    fun insertTaskList(name: String) = viewModelScope.launch {
-        insertTaskListUseCase.invoke(name)
+    fun updateTask(task: Task) = viewModelScope.launch {
+        updateTaskUseCase(task)
     }
 }
