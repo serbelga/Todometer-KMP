@@ -20,7 +20,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.usecase.GetTaskListTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
@@ -33,6 +35,7 @@ import kotlinx.coroutines.launch
 class TaskListTasksViewModel(
     private val taskListId: String,
     getTaskListTasksUseCase: GetTaskListTasksUseCase,
+    getTaskListUseCase: GetTaskListUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
@@ -40,6 +43,12 @@ class TaskListTasksViewModel(
 ) : ViewModel() {
 
     val tasks: StateFlow<Result<List<Task>>> = getTaskListTasksUseCase(taskListId).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        Result.Loading
+    )
+
+    val taskList: StateFlow<Result<TaskList>> = getTaskListUseCase(taskListId).stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(),
         Result.Loading

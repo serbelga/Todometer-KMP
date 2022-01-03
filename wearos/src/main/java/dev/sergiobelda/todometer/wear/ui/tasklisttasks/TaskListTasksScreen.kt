@@ -72,6 +72,7 @@ fun TaskListTasksScreen(
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val tasksResultState = taskListTasksViewModel.tasks.collectAsState()
+    val taskListResultState = taskListTasksViewModel.taskList.collectAsState()
     val addTaskLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -143,8 +144,11 @@ fun TaskListTasksScreen(
                 item {
                     EditTaskListButton {
                         val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                        var taskListNameLabel = ""
+                        taskListResultState.value.doIfSuccess { taskListNameLabel = it.name }
                         val remoteInputs: List<RemoteInput> = listOf(
                             RemoteInput.Builder(TASK_LIST_NAME)
+                                .setLabel(taskListNameLabel)
                                 .wearableExtender {
                                     setEmojisAllowed(false)
                                     setInputActionType(EditorInfo.IME_ACTION_DONE)
