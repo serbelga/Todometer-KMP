@@ -44,6 +44,8 @@ interface ITaskListRepository {
      */
     suspend fun updateTaskList(taskList: TaskList)
 
+    suspend fun updateTaskListName(id: String, name: String)
+
     suspend fun refreshTaskLists()
 
     /**

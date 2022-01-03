@@ -50,5 +50,8 @@ class TaskListLocalDataSource(
     override suspend fun updateTaskList(taskList: TaskList) =
         taskListDao.updateTaskList(taskList.toEntity())
 
+    override suspend fun updateTaskListName(id: String, name: String) =
+        taskListDao.updateTaskListName(id, name)
+
     override suspend fun deleteTaskList(id: String) = taskListDao.deleteTaskList(id)
 }
