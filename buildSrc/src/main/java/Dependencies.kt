@@ -18,7 +18,7 @@ object Versions {
     const val accompanist = "0.22.0-rc"
     const val activityKtx = "1.4.0"
     const val appCompat = "1.4.0"
-    const val androidGradlePlugin = "7.1.0-rc01"
+    const val androidGradlePlugin = "7.1.0"
     const val compose = "1.1.0-rc01"
     const val composeCompiler = "1.1.0-rc02"
     const val composeMultiplatform = "1.0.1"
