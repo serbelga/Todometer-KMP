@@ -32,5 +32,7 @@ interface ITaskListLocalDataSource {
 
     suspend fun updateTaskList(taskList: TaskList)
 
+    suspend fun updateTaskListName(id: String, name: String)
+
     suspend fun deleteTaskList(id: String)
 }

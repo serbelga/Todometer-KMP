@@ -22,11 +22,11 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.wear.compose.material.AlertDialog
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ButtonDefaults.secondaryButtonColors
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.dialog.Alert
 import dev.sergiobelda.todometer.wear.R
 
 @Composable
@@ -35,7 +35,7 @@ fun DeleteTaskListScreen(
     navigateUp: () -> Unit,
     deleteTaskListViewModel: DeleteTaskListViewModel
 ) {
-    AlertDialog(
+    Alert(
         icon = { Icon(Icons.Outlined.Delete, null) },
         title = {},
         content = { Text(stringResource(R.string.delete_task_list_question)) },

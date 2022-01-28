@@ -35,6 +35,7 @@ import dev.sergiobelda.todometer.common.usecase.SetAppThemeUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.usecase.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.UpdateTaskListNameUseCase
 import dev.sergiobelda.todometer.common.usecase.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.usecase.UpdateTaskUseCase
 import org.koin.dsl.module
@@ -102,5 +103,8 @@ val useCaseModule = module {
     }
     single {
         GetTaskListUseCase(get())
+    }
+    single {
+        UpdateTaskListNameUseCase(get())
     }
 }

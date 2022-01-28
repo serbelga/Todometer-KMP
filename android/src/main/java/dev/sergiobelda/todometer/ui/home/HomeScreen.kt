@@ -65,6 +65,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -91,6 +92,7 @@ import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
+import java.io.Serializable
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -104,8 +106,9 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
+    // TODO: Use skipHalfExpanded when available.
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    var currentSheet: HomeBottomSheet by remember { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
+    var currentSheet: HomeBottomSheet by rememberSaveable { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
 
     var selectedTask by remember { mutableStateOf("") }
 
@@ -577,7 +580,7 @@ fun MoreBottomSheet(
     }
 }
 
-sealed class HomeBottomSheet {
+sealed class HomeBottomSheet : Serializable {
     object MenuBottomSheet : HomeBottomSheet()
     object MoreBottomSheet : HomeBottomSheet()
 }

@@ -10,8 +10,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = Android.wearMinSdk
         targetSdk = Android.targetSdk
-        versionCode = 1
-        versionName = "1.0.0-dev02"
+        versionCode = 4100101
+        versionName = "wearos-1.0.0-alpha01"
     }
 
     buildFeatures {
@@ -19,7 +19,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeCompiler
+        kotlinCompilerExtensionVersion = Versions.compose
     }
 
     kotlinOptions {
@@ -28,7 +28,8 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -53,6 +54,7 @@ dependencies {
         implementation(composeFoundation)
         implementation(composeMaterial)
         implementation(composeNavigation)
+        implementation(input)
     }
 
     with(Libs.Koin) {

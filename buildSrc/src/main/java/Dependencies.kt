@@ -18,9 +18,8 @@ object Versions {
     const val accompanist = "0.22.0-rc"
     const val activityKtx = "1.4.0"
     const val appCompat = "1.4.0"
-    const val androidGradlePlugin = "7.1.0-beta05"
-    const val compose = "1.1.0-rc01"
-    const val composeCompiler = "1.1.0-rc02"
+    const val androidGradlePlugin = "7.2.0-beta01"
+    const val compose = "1.1.0-rc03"
     const val composeMultiplatform = "1.0.1"
     const val dataStorePreferences = "1.0.0"
     const val espressoCore = "3.4.0"
@@ -45,7 +44,8 @@ object Versions {
     const val testCoreKtx = "1.4.0"
     const val timber = "4.7.1"
     const val wear = "1.2.0"
-    const val wearCompose = "1.0.0-alpha13"
+    const val wearCompose = "1.0.0-alpha15"
+    const val wearInput = "1.2.0-alpha02"
 }
 
 object Android {
@@ -131,13 +131,14 @@ object Libs {
                 "androidx.wear.compose:compose-material:${Versions.wearCompose}"
             const val composeNavigation =
                 "androidx.wear.compose:compose-navigation:${Versions.wearCompose}"
+            const val input = "androidx.wear:wear-input:${Versions.wearInput}"
         }
     }
 
     object Google {
 
         const val accompanistSystemUiController =
-            "com.google.accompanist:accompanist-systemuicontroller${Versions.accompanist}"
+            "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
 
         object Material {
             const val materialComponents =

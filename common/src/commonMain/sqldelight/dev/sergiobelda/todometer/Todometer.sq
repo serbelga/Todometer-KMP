@@ -93,6 +93,12 @@ SET
     sync = ?
 WHERE id = ?;
 
+updateTaskListName:
+UPDATE TaskListEntity
+SET
+    name = ?
+WHERE id = ?;
+
 deleteTaskList:
 DELETE FROM TaskListEntity
 WHERE id = ?;
