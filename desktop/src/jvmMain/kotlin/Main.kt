@@ -15,7 +15,6 @@
  */
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,7 +44,7 @@ fun main() = application {
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        ToDometerTheme(darkTheme = isSystemInDarkTheme()) {
+        ToDometerTheme(darkTheme = false) {
             Crossfade(currentPage) { screen ->
                 when (screen) {
                     Screen.Home -> HomeScreen()
