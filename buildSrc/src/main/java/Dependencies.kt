@@ -20,7 +20,7 @@ object Versions {
     const val appCompat = "1.4.0"
     const val androidGradlePlugin = "7.2.0-beta01"
     const val compose = "1.1.0-rc03"
-    const val composeMultiplatform = "1.0.1"
+    const val composeMultiplatform = "1.1.0-alpha02"
     const val dataStorePreferences = "1.0.0"
     const val espressoCore = "3.4.0"
     const val exposedSql = "0.32.1"
