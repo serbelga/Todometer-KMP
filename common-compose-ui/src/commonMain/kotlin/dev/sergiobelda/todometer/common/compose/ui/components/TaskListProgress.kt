@@ -27,15 +27,14 @@ import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ProgressIndicatorDefaults
-import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.model.TaskProgress
@@ -55,11 +54,11 @@ fun TaskListProgress(taskList: TaskList?, tasks: List<Task>) {
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
                 taskList?.name?.uppercase() ?: "-",
-                style = MaterialTheme.typography.overline
+                style = MaterialTheme.typography.labelSmall
             )
             Text(
                 text = TaskProgress.getPercentage(progress),
-                style = MaterialTheme.typography.body2,
+                style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(top = 4.dp)
             )
         }

@@ -33,11 +33,9 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.RadioButton
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
@@ -55,6 +53,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -94,7 +93,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import java.io.Serializable
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     addTaskList: () -> Unit,
@@ -277,6 +276,7 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseThemeAlertDialog(
     currentTheme: AppTheme,
@@ -409,7 +409,7 @@ fun MenuBottomSheet(
         ) {
             Text(
                 text = stringResource(R.string.task_lists).uppercase(),
-                style = MaterialTheme.typography.overline
+                style = MaterialTheme.typography.labelSmall
             )
             Spacer(modifier = Modifier.weight(1f))
             OutlinedButton(onClick = addTaskList) {
@@ -520,7 +520,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.edit_task_list),
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             },
             onClick = editTaskListClick
@@ -535,7 +535,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.delete_task_list),
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             },
             onClick = deleteTaskListClick,
@@ -554,12 +554,12 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.theme),
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             },
             subtitle = {
                 appThemeMap[currentTheme]?.modeNameRes?.let {
-                    Text(stringResource(it), style = MaterialTheme.typography.caption)
+                    Text(stringResource(it), style = MaterialTheme.typography.labelLarge)
                 }
             },
             onClick = chooseThemeClick
@@ -569,12 +569,12 @@ fun MoreBottomSheet(
             TextButton(onClick = openSourceLicensesClick) {
                 Text(
                     stringResource(R.string.open_source_licenses),
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             }
             Text("·")
             TextButton(onClick = aboutClick) {
-                Text(stringResource(R.string.about), style = MaterialTheme.typography.caption)
+                Text(stringResource(R.string.about), style = MaterialTheme.typography.labelLarge)
             }
         }
     }
