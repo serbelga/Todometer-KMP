@@ -101,6 +101,7 @@ fun TaskListTasksScreen(
             positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
         ) {
             ScalingLazyColumn(
+                autoCentering = false,
                 contentPadding = PaddingValues(
                     top = 28.dp,
                     start = 16.dp,

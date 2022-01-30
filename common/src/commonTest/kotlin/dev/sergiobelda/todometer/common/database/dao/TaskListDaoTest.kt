@@ -86,6 +86,19 @@ class TaskListDaoTest : DatabaseTest() {
     }
 
     @Test
+    fun testUpdateTaskListName() = runTest {
+        val id = taskListDao.insertTaskList(taskListEntity1)
+        var taskList = taskListDao.getTaskList(id).first()
+        assertEquals("Task List 1", taskList?.name)
+
+        val updatedName = "updated name"
+        taskListDao.updateTaskListName(id, updatedName)
+
+        taskList = taskListDao.getTaskList(id).first()
+        assertEquals(updatedName, taskList?.name)
+    }
+
+    @Test
     fun testDeleteTaskList() = runTest {
         val id = taskListDao.insertTaskList(taskListEntity1)
         assertNotNull(taskListDao.getTaskList(id).first())

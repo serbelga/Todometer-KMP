@@ -44,13 +44,18 @@ fun SingleLineItem(
             .clickable(enabled = enabled, onClick = onClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val contentAlpha = if (enabled) ContentAlpha.high else ContentAlpha.disabled
-        CompositionLocalProvider(LocalContentAlpha provides contentAlpha) {
+        CompositionLocalProvider(
+            LocalContentAlpha provides if (enabled) ContentAlpha.medium else ContentAlpha.disabled
+        ) {
             icon?.let {
                 Box(modifier = Modifier.padding(start = 24.dp)) {
                     it()
                 }
             }
+        }
+        CompositionLocalProvider(
+            LocalContentAlpha provides if (enabled) ContentAlpha.high else ContentAlpha.disabled
+        ) {
             Box(modifier = Modifier.padding(start = 24.dp)) {
                 text()
             }
@@ -72,13 +77,18 @@ fun TwoLineItem(
             .clickable(enabled = enabled, onClick = onClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val contentAlpha = if (enabled) ContentAlpha.high else ContentAlpha.disabled
-        CompositionLocalProvider(LocalContentAlpha provides contentAlpha) {
+        CompositionLocalProvider(
+            LocalContentAlpha provides if (enabled) ContentAlpha.medium else ContentAlpha.disabled
+        ) {
             icon?.let {
                 Box(modifier = Modifier.padding(start = 24.dp)) {
                     it()
                 }
             }
+        }
+        CompositionLocalProvider(
+            LocalContentAlpha provides if (enabled) ContentAlpha.high else ContentAlpha.disabled
+        ) {
             Column(modifier = Modifier.padding(start = 24.dp)) {
                 text()
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
