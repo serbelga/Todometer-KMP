@@ -24,7 +24,7 @@ object Versions {
     const val dataStorePreferences = "1.0.0"
     const val espressoCore = "3.4.0"
     const val exposedSql = "0.32.1"
-    const val glance = "1.0.0-alpha01"
+    const val glance = "1.0.0-alpha02"
     const val junit = "4.12"
     const val androidJunit = "1.1.3"
     const val koin = "3.1.4"
