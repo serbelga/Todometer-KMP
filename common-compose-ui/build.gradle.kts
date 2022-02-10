@@ -29,7 +29,7 @@ kotlin {
                 api(compose.materialIconsExtended)
                 api(compose.ui)
                 api(compose.uiTooling)
-                implementation(project(":common"))
+                implementation(projects.common)
             }
         }
         val commonTest by getting

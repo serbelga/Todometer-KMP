@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":common-compose-ui"))
+    implementation(projects.common)
+    implementation(projects.commonComposeUi)
 
     implementation(Libs.AndroidX.Activity.activityCompose)
     implementation(Libs.AndroidX.Compose.runtimeLiveData)

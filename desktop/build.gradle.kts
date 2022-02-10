@@ -18,8 +18,8 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                implementation(project(":common"))
-                implementation(project(":common-compose-ui"))
+                implementation(projects.common)
+                implementation(projects.commonComposeUi)
                 implementation(compose.desktop.currentOs)
             }
         }

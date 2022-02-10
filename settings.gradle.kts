@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -6,7 +8,7 @@ pluginManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
-rootProject.name = "ToDometer Multiplatform"
+rootProject.name = "ToDometerMultiplatform"
 
 include(":android")
 include(":desktop")

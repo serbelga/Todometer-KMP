@@ -37,7 +37,7 @@ android {
 
 dependencies {
 
-    implementation(project(":common"))
+    implementation(projects.common)
 
     implementation(Libs.AndroidX.coreKtx)
 
