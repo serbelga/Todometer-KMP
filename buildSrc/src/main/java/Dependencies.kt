@@ -15,12 +15,12 @@
  */
 
 object Versions {
-    const val accompanist = "0.22.0-rc"
+    const val accompanist = "0.23.0"
     const val activityKtx = "1.4.0"
-    const val appCompat = "1.4.0"
+    const val appCompat = "1.4.1"
     const val androidGradlePlugin = "7.2.0-beta02"
-    const val compose = "1.1.0-rc03"
-    const val composeMultiplatform = "1.1.0-alpha02"
+    const val compose = "1.1.0"
+    const val composeMultiplatform = "1.1.0-alpha03"
     const val dataStorePreferences = "1.0.0"
     const val espressoCore = "3.4.0"
     const val exposedSql = "0.32.1"
@@ -32,7 +32,7 @@ object Versions {
     const val ktLint = "0.43.2"
     const val ktor = "1.6.7"
     const val ktxVersion = "1.7.0"
-    const val lifecycle = "2.4.0"
+    const val lifecycle = "2.4.1"
     const val materialComponents = "1.4.0"
     const val mockk = "1.12.1"
     const val navigationCompose = "2.4.0-beta01"
@@ -44,7 +44,7 @@ object Versions {
     const val testCoreKtx = "1.4.0"
     const val timber = "4.7.1"
     const val wear = "1.2.0"
-    const val wearCompose = "1.0.0-alpha15"
+    const val wearCompose = "1.0.0-alpha16"
     const val wearInput = "1.2.0-alpha02"
 }
 
