@@ -35,13 +35,13 @@ kotlin {
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                api(Libs.AndroidX.appCompat)
-                api(Libs.AndroidX.coreKtx)
+                api(libs.androidx.appcompat)
+                api(libs.androidx.coreKtx)
             }
         }
         val androidTest by getting {
             dependencies {
-                implementation(Libs.junit)
+                implementation(libs.junit)
             }
         }
         val desktopMain by getting

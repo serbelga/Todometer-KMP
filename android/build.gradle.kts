@@ -42,27 +42,23 @@ dependencies {
     implementation(projects.common)
     implementation(projects.commonComposeUi)
 
-    implementation(Libs.AndroidX.Activity.activityCompose)
-    implementation(Libs.AndroidX.Compose.runtimeLiveData)
-    implementation(Libs.AndroidX.Navigation.compose)
+    implementation(libs.androidx.activityCompose)
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.navigation.compose)
 
-    with(Libs.AndroidX.Lifecycle) {
-        implementation(runtime)
-        implementation(viewModel)
-        implementation(liveData)
-    }
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
-    implementation(Libs.Google.Material.materialComponents)
+    implementation(libs.material)
 
-    implementation(Libs.timber)
+    implementation(libs.timber)
 
-    with(Libs.Koin) {
-        implementation(android)
-        implementation(compose)
-        implementation(core)
-    }
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.core)
 
-    implementation(Libs.Google.accompanistSystemUiController)
+    implementation(libs.accompanist.systemUiController)
 
     implementation(Libs.Google.Services.ossLicenses)
 }

@@ -45,51 +45,51 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(Libs.Koin.core)
-                api(Libs.Koin.test)
-                implementation(Libs.Ktor.clientCore)
-                implementation(Libs.Ktor.clientJson)
-                implementation(Libs.Ktor.clientSerialization)
-                implementation(Libs.SqlDelight.coroutines)
+                api(libs.koin.core)
+                api(libs.koin.test)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.json)
+                implementation(libs.ktor.client.serialization)
+                implementation(libs.sqldelight.coroutines)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(Libs.kotlinCoroutinesTest)
-                implementation(Libs.MockK.mockkCommon)
+                implementation(libs.kotlin.coroutinesTest)
+                implementation(libs.mockk.common)
             }
         }
         val androidMain by getting {
             dependencies {
-                api(Libs.AndroidX.appCompat)
-                api(Libs.AndroidX.coreKtx)
-                implementation(Libs.AndroidX.DataStore.preferences)
-                implementation(Libs.Ktor.clientAndroid)
-                implementation(Libs.SqlDelight.androidDriver)
+                api(libs.androidx.appcompat)
+                api(libs.androidx.coreKtx)
+                implementation(libs.androidx.datastore.preferences)
+                implementation(libs.ktor.client.android)
+                implementation(libs.sqldelight.androidDriver)
             }
         }
         val androidTest by getting {
             dependencies {
-                implementation(Libs.junit)
-                implementation(Libs.SqlDelight.jvmDriver)
-                implementation(Libs.MockK.mockk)
+                implementation(libs.junit)
+                implementation(libs.sqldelight.jvmDriver)
+                implementation(libs.mockk.mockk)
             }
         }
         val desktopMain by getting {
             dependencies {
-                implementation(Libs.Ktor.clientApache)
-                implementation(Libs.SqlDelight.jvmDriver)
+                implementation(libs.ktor.client.apache)
+                implementation(libs.sqldelight.jvmDriver)
             }
         }
         val desktopTest by getting {
             dependencies {
-                implementation(Libs.MockK.mockk)
+                implementation(libs.mockk.mockk)
             }
         }
         val iosMain by getting {
             dependencies {
-                implementation(Libs.Ktor.clientIos)
-                implementation(Libs.SqlDelight.nativeDriver)
+                implementation(libs.ktor.client.ios)
+                implementation(libs.sqldelight.nativeDriver)
             }
         }
         val iosTest by getting
