@@ -28,7 +28,7 @@ allprojects {
 subprojects {
     if (!project.name.contains("ios")) {
         apply {
-            from("${project.rootDir}/gradle/ktlint.gradle.kts")
+            from("${rootDir}/ktlint.gradle.kts")
         }
     }
 }
