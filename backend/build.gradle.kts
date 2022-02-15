@@ -22,29 +22,29 @@ plugins {
 
 dependencies {
 
-    implementation(Libs.Ktor.clientApache)
-    implementation(Libs.Ktor.auth)
-    implementation(Libs.Ktor.locations)
-    implementation(Libs.Ktor.clientCore)
-    implementation(Libs.Ktor.clientCoreJvm)
-    implementation(Libs.Ktor.serverCore)
-    implementation(Libs.Ktor.gson)
-    implementation(Libs.Ktor.serialization)
-    implementation(Libs.Ktor.serverNetty)
-    testImplementation(Libs.Ktor.serverTests)
+    implementation(libs.ktor.auth)
+    implementation(libs.ktor.client.apache)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.core.jvm)
+    implementation(libs.ktor.gson)
+    implementation(libs.ktor.locations)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.netty)
+    testImplementation(libs.ktor.server.tests)
 
-    implementation(Libs.logback)
+    implementation(libs.logback)
 
-    implementation(Libs.Exposed.core)
-    implementation(Libs.Exposed.jdbc)
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
 
-    implementation(Libs.h2Database)
-    implementation(Libs.hikariCP)
+    implementation(libs.h2Database)
+    implementation(libs.hikariCP)
 
     // Koin for Ktor
-    implementation(Libs.Koin.ktor)
+    implementation(libs.koin.ktor)
     // SLF4J Logger
-    implementation(Libs.Koin.logger)
+    implementation(libs.koin.logger)
 }
 
 tasks {
