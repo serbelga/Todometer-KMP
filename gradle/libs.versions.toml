@@ -2,7 +2,7 @@
 accompanist = "0.23.0"
 activity = "1.4.0"
 androidCore = "1.7.0"
-androidGradlePlugin = "7.2.0-beta02"
+androidGradlePlugin = "7.1.1"
 appcompat = "1.4.1"
 compose = "1.1.0"
 composeMultiplatform = "1.1.0-alpha03"
@@ -20,8 +20,8 @@ lifecycle = "2.4.1"
 material = "1.4.0"
 mockk = "1.12.1"
 navigation = "2.4.0-beta01"
-ossLicenses = "17.0.0"
 ossLicensesPlugin = "0.10.4"
+playServicesOssLicenses = "17.0.0"
 playServicesWearable = "17.1.0"
 robolectric = "4.3.1"
 sqlDelight = "1.5.2"
@@ -94,6 +94,10 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockk" }
 
+google-playServicesOssLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "playServicesOssLicenses" }
+google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
+google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
+
 sqldelight-gradlePluginz = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqlDelight" }
 sqldelight-androidDriver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqldelight-jvmDriver = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
@@ -107,3 +111,6 @@ wear-compose-foundation = { module = "androidx.wear.compose:compose-foundation",
 wear-compose-material = { module = "androidx.wear.compose:compose-material", version.ref = "wearCompose" }
 wear-compose-navigation = { module = "androidx.wear.compose:compose-navigation", version.ref = "wearCompose" }
 wear-input = { module = "androidx.wear:wear-input", version.ref = "wearInput" }
+
+[plugins]
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }

@@ -56,5 +56,5 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
 
-    implementation(Libs.Google.Services.wearable)
+    implementation(libs.google.playServicesWearable)
 }

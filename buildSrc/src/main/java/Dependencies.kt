@@ -58,30 +58,4 @@ object Android {
 object Libs {
 
     const val ktLint = "com.pinterest:ktlint:${Versions.ktLint}"
-
-    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
-
-    object AndroidX {
-        const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.androidJunit}"
-        const val testCoreKtx = "androidx.test:core-ktx:${Versions.testCoreKtx}"
-
-        object Test {
-            const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
-            const val extJunit = "androidx.test.ext:junit:${Versions.androidJunit}"
-        }
-    }
-
-    object Google {
-
-        object Services {
-            const val ossLicensesPlugin =
-                "com.google.android.gms:oss-licenses-plugin:${Versions.ossLicensesPlugin}"
-
-            const val ossLicenses =
-                "com.google.android.gms:play-services-oss-licenses:${Versions.ossLicenses}"
-
-            const val wearable =
-                "com.google.android.gms:play-services-wearable:${Versions.playServicesWearable}"
-        }
-    }
 }

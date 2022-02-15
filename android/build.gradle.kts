@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.compose") version Versions.composeMultiplatform
+    alias(libs.plugins.composeMultiplatform)
     id("com.android.application")
     id("com.google.android.gms.oss-licenses-plugin")
     kotlin("android")
@@ -60,5 +60,5 @@ dependencies {
 
     implementation(libs.accompanist.systemUiController)
 
-    implementation(Libs.Google.Services.ossLicenses)
+    implementation(libs.google.playServicesOssLicenses)
 }
