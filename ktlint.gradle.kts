@@ -17,7 +17,10 @@
 val ktlint by configurations.creating
 
 dependencies {
-    ktlint(Libs.ktLint) {
+    // AGP 7.2 libs.findDependency("ktlint").get()
+    // val libs = rootProject.extensions.getByType<VersionCatalogsExtension>().named("libs")
+    val libs = rootProject.extensions.getByName("libs") as org.gradle.accessors.dm.LibrariesForLibs
+    ktlint(libs.ktlint) {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }

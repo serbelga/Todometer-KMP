@@ -19,7 +19,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 
     kotlinOptions {
@@ -39,28 +39,22 @@ dependencies {
 
     implementation(projects.common)
 
-    implementation(Libs.AndroidX.coreKtx)
+    implementation(libs.androidx.activityCompose)
 
-    implementation(Libs.AndroidX.Activity.activityCompose)
+    implementation(libs.androidx.coreKtx)
 
-    with(Libs.AndroidX.Compose) {
-        implementation(foundation)
-        implementation(materialIconsExtended)
-        implementation(uiToolingPreview)
-    }
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.androidx.compose.ui.toolingPreview)
 
-    with(Libs.AndroidX.Wear) {
-        implementation(wear)
-        implementation(composeFoundation)
-        implementation(composeMaterial)
-        implementation(composeNavigation)
-        implementation(input)
-    }
+    implementation(libs.wear.wear)
+    implementation(libs.wear.compose.foundation)
+    implementation(libs.wear.compose.material)
+    implementation(libs.wear.compose.navigation)
+    implementation(libs.wear.input)
 
-    with(Libs.Koin) {
-        implementation(android)
-        implementation(compose)
-    }
-    
-    implementation(Libs.Google.Services.wearable)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+
+    implementation(libs.google.playServicesWearable)
 }
