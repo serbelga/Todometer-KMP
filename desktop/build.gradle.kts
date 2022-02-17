@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version Versions.composeMultiplatform
+    alias(libs.plugins.composeMultiplatform)
 }
 
 group = "dev.sergiobelda.todometer"
@@ -18,8 +18,8 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                implementation(project(":common"))
-                implementation(project(":common-compose-ui"))
+                implementation(projects.common)
+                implementation(projects.commonComposeUi)
                 implementation(compose.desktop.currentOs)
             }
         }

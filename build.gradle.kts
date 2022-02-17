@@ -6,11 +6,11 @@ buildscript {
     }
 
     dependencies {
-        classpath(Libs.kotlinPlugin)
-        classpath(Libs.kotlinSerialization)
-        classpath(Libs.androidGradlePlugin)
-        classpath(Libs.Google.Services.ossLicensesPlugin)
-        classpath(Libs.SqlDelight.gradlePlugin)
+        classpath(libs.kotlin.gradlePluginz)
+        classpath(libs.kotlin.serialization)
+        classpath(libs.android.gradlePluginz)
+        classpath(libs.google.ossLicensesPlugin)
+        classpath(libs.sqldelight.gradlePluginz)
     }
 }
 
@@ -28,7 +28,7 @@ allprojects {
 subprojects {
     if (!project.name.contains("ios")) {
         apply {
-            from("${project.rootDir}/gradle/ktlint.gradle.kts")
+            from("${rootDir}/ktlint.gradle.kts")
         }
     }
 }
