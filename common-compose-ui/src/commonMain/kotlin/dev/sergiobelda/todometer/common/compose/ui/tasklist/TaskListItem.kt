@@ -30,7 +30,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 
 @Composable
 fun TaskListItem(
