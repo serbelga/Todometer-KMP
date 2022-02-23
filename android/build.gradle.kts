@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk = Android.compileSdk
+    compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
-        minSdk = Android.minSdk
-        targetSdk = Android.targetSdk
+        minSdk = libs.versions.androidMinSdk.get().toInt()
+        targetSdk = libs.versions.androidTargetSdk.get().toInt()
         versionCode = 1200103
         versionName = "android-2.0.0-alpha03"
     }
