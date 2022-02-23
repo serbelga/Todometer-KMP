@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk = Android.compileSdk
+    compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
-        minSdk = Android.wearMinSdk
-        targetSdk = Android.targetSdk
-        versionCode = 4100101
-        versionName = "wearos-1.0.0-alpha01"
+        minSdk = libs.versions.androidWearMinSdk.get().toInt()
+        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+        versionCode = 4100102
+        versionName = "wearos-1.0.0-alpha02"
     }
 
     buildFeatures {
