@@ -25,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedRow
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
+import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
@@ -91,22 +93,19 @@ fun TaskListTasksScreen(
     taskListResultState.value.doIfSuccess { taskListName = it.name }
     tasksResultState.value.doIfSuccess { tasks ->
         val progress = TaskProgress.getTasksDoneProgress(tasks)
-        // TODO: Add ProgressIndicator using progress value.
         Scaffold(
             timeText = {
-                CurvedRow {
-                    CurvedText(text = TaskProgress.getPercentage(progress))
-                }
+                CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
             },
             positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
         ) {
             ScalingLazyColumn(
                 autoCentering = false,
                 contentPadding = PaddingValues(
-                    top = 28.dp,
+                    top = 32.dp,
                     start = 16.dp,
                     end = 16.dp,
-                    bottom = 40.dp
+                    bottom = 50.dp
                 ),
                 state = scalingLazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -163,6 +162,12 @@ fun TaskListTasksScreen(
                 }
                 item { DeleteTaskListButton(deleteTaskList) }
             }
+            CircularProgressIndicator(
+                modifier = Modifier.fillMaxSize(),
+                startAngle = 300f,
+                endAngle = 240f,
+                progress = progress
+            )
         }
     }.doIfError {
         // TODO
