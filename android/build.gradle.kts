@@ -60,8 +60,8 @@ dependencies {
 
     implementation(libs.accompanist.systemUiController)
 
+    implementation(libs.androidx.glance.appWidget)
     implementation(libs.androidx.glance.glance)
-    implementation(libs.androidx.glance.glanceAppWidget)
 
     implementation(libs.google.playServicesOssLicenses)
 }
