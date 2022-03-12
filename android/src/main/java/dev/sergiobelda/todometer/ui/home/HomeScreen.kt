@@ -142,7 +142,7 @@ fun HomeScreen(
                         addTaskList,
                         selectTaskList = {
                             homeViewModel.setTaskListSelected(it)
-                            ToDometerWidgetReceiver().updateData()
+                            updateToDometerWidgetData()
                         }
                     )
                 }
@@ -218,7 +218,10 @@ fun HomeScreen(
                         if (deleteTaskAlertDialogState) {
                             DeleteTaskAlertDialog(
                                 onDismissRequest = { deleteTaskAlertDialogState = false },
-                                deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                                deleteTask = {
+                                    homeViewModel.deleteTask(selectedTask)
+                                    updateToDometerWidgetData()
+                                }
                             )
                         }
                         if (deleteTaskListAlertDialogState) {
@@ -226,6 +229,7 @@ fun HomeScreen(
                                 onDismissRequest = { deleteTaskListAlertDialogState = false },
                                 deleteTaskList = {
                                     homeViewModel.deleteTaskList()
+                                    updateToDometerWidgetData()
                                     scope.launch {
                                         sheetState.hide()
                                     }
@@ -246,9 +250,11 @@ fun HomeScreen(
                                 tasks,
                                 onDoingClick = {
                                     homeViewModel.setTaskDoing(it)
+                                    updateToDometerWidgetData()
                                 },
                                 onDoneClick = {
                                     homeViewModel.setTaskDone(it)
+                                    updateToDometerWidgetData()
                                 },
                                 onTaskItemClick = openTask,
                                 onTaskItemLongClick = {
@@ -582,6 +588,10 @@ fun MoreBottomSheet(
             }
         }
     }
+}
+
+private fun updateToDometerWidgetData() {
+    ToDometerWidgetReceiver().updateData()
 }
 
 sealed class HomeBottomSheet : Serializable {

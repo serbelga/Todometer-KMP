@@ -27,9 +27,13 @@ import androidx.glance.GlanceModifier
 import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.LocalGlanceId
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
 import androidx.glance.appwidget.updateAll
@@ -44,6 +48,7 @@ import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.text.Text
+import androidx.glance.text.TextDecoration
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import dev.sergiobelda.todometer.R
@@ -51,8 +56,10 @@ import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.ui.MainActivity
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -66,6 +73,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase by inject()
 
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase by inject()
+
+    private val setTaskDoneUseCase: SetTaskDoneUseCase by inject()
 
     private val coroutineScope = MainScope()
 
@@ -92,7 +101,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             }
 
             getTaskListSelectedTasksUseCase().first().doIfSuccess {
-                tasks = it
+                tasks = it.sortedByDescending { task -> task.state == TaskState.DOING }
             }
 
             updateAll(context)
@@ -150,19 +159,41 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     .background(ImageProvider(R.drawable.todometer_widget_card)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val textStyle = if (task.state == TaskState.DONE) {
+                    TextStyle(
+                        color = ColorProvider(R.color.colorOnSurface),
+                        textDecoration = TextDecoration.LineThrough
+                    )
+                } else {
+                    TextStyle(color = ColorProvider(R.color.colorOnSurface))
+                }
                 Text(
                     text = task.title,
-                    style = TextStyle(color = ColorProvider(R.color.colorOnSurface)),
+                    style = textStyle,
                     modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
                 )
                 Image(
-                    ImageProvider(R.drawable.ic_round_check_24),
+                    ImageProvider(if (task.state == TaskState.DONE) R.drawable.ic_round_refresh_24 else R.drawable.ic_round_check_24),
                     contentDescription = null,
-                    modifier = GlanceModifier.padding(8.dp)
-                        .clickable(onClick = actionStartActivity<MainActivity>())
+                    modifier = GlanceModifier.padding(8.dp).clickable(
+                        onClick = actionRunCallback<Action>(
+                            actionParametersOf()
+                        )
+                    )
                 )
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
         }
+    }
+}
+
+class Action : ActionCallback {
+
+    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+
+    }
+
+    companion object {
+        const val TASK_ID = "taskId"
     }
 }
