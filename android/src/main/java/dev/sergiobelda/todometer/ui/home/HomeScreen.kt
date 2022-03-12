@@ -85,6 +85,7 @@ import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
@@ -139,7 +140,10 @@ fun HomeScreen(
                         taskListSelected?.id,
                         taskLists,
                         addTaskList,
-                        selectTaskList = { homeViewModel.setTaskListSelected(it) }
+                        selectTaskList = {
+                            homeViewModel.setTaskListSelected(it)
+                            ToDometerWidgetReceiver().updateData()
+                        }
                     )
                 }
                 is HomeBottomSheet.MoreBottomSheet -> {

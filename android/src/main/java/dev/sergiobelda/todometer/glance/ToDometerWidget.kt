@@ -16,24 +16,28 @@
 
 package dev.sergiobelda.todometer.glance
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.glance.Button
+import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.Image
+import androidx.glance.ImageProvider
+import androidx.glance.LocalGlanceId
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
+import androidx.glance.appwidget.updateAll
 import androidx.glance.background
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
+import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
@@ -42,12 +46,16 @@ import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import dev.sergiobelda.todometer.common.compose.ui.theme.navy
+import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.ui.MainActivity
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -55,26 +63,68 @@ import org.koin.core.component.inject
 
 class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
+    private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase by inject()
+
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase by inject()
 
     private val coroutineScope = MainScope()
 
-    private var list by mutableStateOf<List<Task>>(emptyList())
+    private var taskList: TaskList? by mutableStateOf(null)
+
+    private var tasks: List<Task> by mutableStateOf(emptyList())
+
+    private val context by inject<Context>()
+
+    var glanceId: GlanceId? by mutableStateOf(null)
 
     init {
+        loadData()
+    }
+
+    fun loadData() {
         coroutineScope.launch {
-            getTaskListSelectedTasksUseCase().first().doIfSuccess {
-                list = it
+            delay(200)
+
+            getTaskListSelectedUseCase().first().doIfSuccess {
+                taskList = it
+            }.doIfError {
+                taskList = null
             }
+
+            getTaskListSelectedTasksUseCase().first().doIfSuccess {
+                tasks = it
+            }
+
+            updateAll(context)
         }
     }
 
     @Composable
     override fun Content() {
-        Box(modifier = GlanceModifier.cornerRadius(16.dp).fillMaxSize().background(navy)) {
+        glanceId = LocalGlanceId.current
+        Box(
+            modifier = GlanceModifier.fillMaxSize()
+                .background(ImageProvider(R.drawable.todometer_widget_background))
+        ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
-                Button(text = "Add task", onClick = actionStartActivity<MainActivity>())
-                if (list.isEmpty()) {
+                Row(
+                    modifier = GlanceModifier.fillMaxWidth().padding(start = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Text(
+                        text = taskList?.name ?: "",
+                        style = TextStyle(color = ColorProvider(R.color.colorOnSurface)),
+                        modifier = GlanceModifier.fillMaxWidth().defaultWeight()
+                    )
+                    Image(
+                        ImageProvider(R.drawable.todometer_widget_add_button),
+                        modifier = GlanceModifier.clickable(onClick = actionStartActivity<MainActivity>()),
+                        contentDescription = null
+                    )
+                }
+                Spacer(modifier = GlanceModifier.height(12.dp))
+                if (tasks.isEmpty()) {
                     Box(
                         modifier = GlanceModifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -83,7 +133,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     }
                 } else {
                     LazyColumn {
-                        items(list) {
+                        items(tasks) {
                             TaskItem(it)
                         }
                     }
@@ -94,13 +144,23 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     @Composable
     private fun TaskItem(task: Task) {
-        Column(modifier = GlanceModifier.clickable(onClick = actionStartActivity<MainActivity>())) {
-            Box(
-                modifier = GlanceModifier.cornerRadius(6.dp).fillMaxWidth()
-                    .background(Color.White.copy(alpha = 0.12f))
-                    .padding(12.dp)
+        Column {
+            Row(
+                modifier = GlanceModifier.fillMaxWidth()
+                    .background(ImageProvider(R.drawable.todometer_widget_card)),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = task.title, style = TextStyle(color = ColorProvider(Color.White)))
+                Text(
+                    text = task.title,
+                    style = TextStyle(color = ColorProvider(R.color.colorOnSurface)),
+                    modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
+                )
+                Image(
+                    ImageProvider(R.drawable.ic_round_check_24),
+                    contentDescription = null,
+                    modifier = GlanceModifier.padding(8.dp)
+                        .clickable(onClick = actionStartActivity<MainActivity>())
+                )
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
         }

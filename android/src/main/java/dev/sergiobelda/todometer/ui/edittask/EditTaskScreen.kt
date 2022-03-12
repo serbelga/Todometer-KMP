@@ -46,6 +46,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 
 @Composable
@@ -89,6 +90,7 @@ fun EditTaskScreen(
                                             sync = false
                                         )
                                     )
+                                    ToDometerWidgetReceiver().updateData()
                                     navigateUp()
                                 }
                             }

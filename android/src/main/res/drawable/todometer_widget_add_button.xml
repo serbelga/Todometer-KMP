@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="48dp"
+        android:height="48dp"
+        android:drawable="@drawable/todometer_widget_button" />
+
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:drawable="@drawable/todometer_widget_ic_round_add_24"
+        android:gravity="center" />
+</layer-list>
