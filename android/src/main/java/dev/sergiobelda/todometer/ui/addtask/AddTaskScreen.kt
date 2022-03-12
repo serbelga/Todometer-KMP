@@ -45,6 +45,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Tag
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
@@ -60,6 +61,7 @@ fun AddTaskScreen(
     val tags = enumValues<Tag>()
     var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
     result.value?.doIfSuccess {
+        ToDometerWidgetReceiver().updateData()
         navigateUp()
     }
     Scaffold(

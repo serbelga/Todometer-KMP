@@ -46,6 +46,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -85,6 +86,7 @@ fun EditTaskListScreen(
                                             sync = false
                                         )
                                     )
+                                    ToDometerWidgetReceiver().updateData()
                                     navigateUp()
                                 }
                             }
