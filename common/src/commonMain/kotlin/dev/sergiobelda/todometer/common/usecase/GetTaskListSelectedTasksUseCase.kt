@@ -18,10 +18,12 @@ package dev.sergiobelda.todometer.common.usecase
 
 import dev.sergiobelda.todometer.common.data.Result
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.common.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 
 class GetTaskListSelectedTasksUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
@@ -35,6 +37,8 @@ class GetTaskListSelectedTasksUseCase(
      */
     operator fun invoke(): Flow<Result<List<Task>>> =
         userPreferencesRepository.taskListSelected().flatMapLatest { taskListId ->
-            taskRepository.getTasks(taskListId)
+            taskRepository.getTasks(taskListId).map { result ->
+                result.map { list -> list.sortedBy { it.state == TaskState.DONE } }
+            }
         }
 }
