@@ -16,6 +16,7 @@
 
 package ui.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -225,6 +226,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TasksListView(
     tasks: List<Task>,
@@ -234,13 +236,14 @@ fun TasksListView(
     onTaskItemLongClick: (String) -> Unit
 ) {
     LazyColumn {
-        items(tasks) {
+        items(tasks, key = { it.id }) {
             TaskItem(
                 task = it,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick
+                onLongClick = onTaskItemLongClick,
+                modifier = Modifier.animateItemPlacement()
             )
         }
     }
