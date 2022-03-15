@@ -81,6 +81,7 @@ import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskList
@@ -121,13 +122,19 @@ fun HomeScreen(
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
     val taskListSelectedResultState = homeViewModel.taskListSelected.collectAsState()
-    taskListSelectedResultState.value.doIfSuccess { taskListSelected = it }
+    taskListSelectedResultState.value.doIfSuccess {
+        taskListSelected = it
+    }.doIfError {
+        taskListSelected = null
+    }
 
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
     val tasksResultState = homeViewModel.tasks.collectAsState()
     tasksResultState.value.doIfSuccess { tasks = it }
 
     val appThemeState = homeViewModel.appTheme.collectAsState()
+
+    val defaultTaskListName = stringResource(R.string.default_task_list_name)
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -136,7 +143,8 @@ fun HomeScreen(
             when (currentSheet) {
                 is HomeBottomSheet.MenuBottomSheet -> {
                     MenuBottomSheet(
-                        taskListSelected?.id,
+                        taskListSelected?.id ?: "",
+                        defaultTaskListName,
                         taskLists,
                         addTaskList,
                         selectTaskList = { homeViewModel.setTaskListSelected(it) }
@@ -150,10 +158,11 @@ fun HomeScreen(
                                 editTaskList()
                             }
                         },
+                        editTaskListEnabled = taskListSelected != null,
                         deleteTaskListClick = {
                             deleteTaskListAlertDialogState = true
                         },
-                        deleteTaskListEnabled = taskLists.size > 1,
+                        deleteTaskListEnabled = taskListSelected != null, // taskLists.size > 1,
                         currentTheme = appThemeState.value,
                         chooseThemeClick = {
                             chooseThemeAlertDialogState = true
@@ -177,99 +186,99 @@ fun HomeScreen(
     ) {
         Scaffold(
             topBar = {
-                ToDometerTopAppBar(taskListSelected, tasks)
+                ToDometerTopAppBar(taskListSelected?.name ?: defaultTaskListName, tasks)
             },
             bottomBar = {
-                if (taskLists.isNotEmpty()) {
-                    BottomAppBar(
-                        backgroundColor = TodometerColors.surface,
-                        contentColor = contentColorFor(TodometerColors.surface),
-                        cutoutShape = CircleShape
-                    ) {
-                        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                            IconButton(
-                                onClick = {
-                                    currentSheet = HomeBottomSheet.MenuBottomSheet
-                                    scope.launch { sheetState.show() }
-                                }
-                            ) {
-                                Icon(Icons.Rounded.Menu, contentDescription = "Menu")
+                //if (taskLists.isNotEmpty()) {
+                BottomAppBar(
+                    backgroundColor = TodometerColors.surface,
+                    contentColor = contentColorFor(TodometerColors.surface),
+                    cutoutShape = CircleShape
+                ) {
+                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                        IconButton(
+                            onClick = {
+                                currentSheet = HomeBottomSheet.MenuBottomSheet
+                                scope.launch { sheetState.show() }
                             }
-                            Spacer(modifier = Modifier.weight(1f))
-                            IconButton(
-                                onClick = {
-                                    currentSheet = HomeBottomSheet.MoreBottomSheet
-                                    scope.launch { sheetState.show() }
-                                }
-                            ) {
-                                Icon(Icons.Rounded.MoreVert, contentDescription = "More")
+                        ) {
+                            Icon(Icons.Rounded.Menu, contentDescription = "Menu")
+                        }
+                        Spacer(modifier = Modifier.weight(1f))
+                        IconButton(
+                            onClick = {
+                                currentSheet = HomeBottomSheet.MoreBottomSheet
+                                scope.launch { sheetState.show() }
                             }
+                        ) {
+                            Icon(Icons.Rounded.MoreVert, contentDescription = "More")
                         }
                     }
                 }
+                //}
             },
             content = {
                 taskListsResultState.value.doIfSuccess { taskLists ->
-                    if (taskLists.isNotEmpty()) {
-                        if (deleteTaskAlertDialogState) {
-                            DeleteTaskAlertDialog(
-                                onDismissRequest = { deleteTaskAlertDialogState = false },
-                                deleteTask = { homeViewModel.deleteTask(selectedTask) }
-                            )
-                        }
-                        if (deleteTaskListAlertDialogState) {
-                            DeleteTaskListAlertDialog(
-                                onDismissRequest = { deleteTaskListAlertDialogState = false },
-                                deleteTaskList = {
-                                    homeViewModel.deleteTaskList()
-                                    scope.launch {
-                                        sheetState.hide()
-                                    }
-                                }
-                            )
-                        }
-                        if (chooseThemeAlertDialogState) {
-                            ChooseThemeAlertDialog(
-                                currentTheme = appThemeState.value,
-                                onDismissRequest = { chooseThemeAlertDialogState = false },
-                                chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
-                            )
-                        }
-                        if (tasks.isEmpty()) {
-                            EmptyTasksListView()
-                        } else {
-                            TasksListView(
-                                tasks,
-                                onDoingClick = {
-                                    homeViewModel.setTaskDoing(it)
-                                },
-                                onDoneClick = {
-                                    homeViewModel.setTaskDone(it)
-                                },
-                                onTaskItemClick = openTask,
-                                onTaskItemLongClick = {
-                                    deleteTaskAlertDialogState = true
-                                    selectedTask = it
-                                }
-                            )
-                        }
-                    } else {
-                        EmptyTaskListsView(addTaskList = addTaskList)
+                    //if (taskLists.isNotEmpty()) {
+                    if (deleteTaskAlertDialogState) {
+                        DeleteTaskAlertDialog(
+                            onDismissRequest = { deleteTaskAlertDialogState = false },
+                            deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                        )
                     }
+                    if (deleteTaskListAlertDialogState) {
+                        DeleteTaskListAlertDialog(
+                            onDismissRequest = { deleteTaskListAlertDialogState = false },
+                            deleteTaskList = {
+                                homeViewModel.deleteTaskList()
+                                scope.launch {
+                                    sheetState.hide()
+                                }
+                            }
+                        )
+                    }
+                    if (chooseThemeAlertDialogState) {
+                        ChooseThemeAlertDialog(
+                            currentTheme = appThemeState.value,
+                            onDismissRequest = { chooseThemeAlertDialogState = false },
+                            chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
+                        )
+                    }
+                    if (tasks.isEmpty()) {
+                        EmptyTasksListView()
+                    } else {
+                        TasksListView(
+                            tasks,
+                            onDoingClick = {
+                                homeViewModel.setTaskDoing(it)
+                            },
+                            onDoneClick = {
+                                homeViewModel.setTaskDone(it)
+                            },
+                            onTaskItemClick = openTask,
+                            onTaskItemLongClick = {
+                                deleteTaskAlertDialogState = true
+                                selectedTask = it
+                            }
+                        )
+                    }
+                    //} else {
+                    //    EmptyTaskListsView(addTaskList = addTaskList)
+                    //}
                 }
             },
             floatingActionButton = {
-                if (!taskLists.isNullOrEmpty()) {
-                    FloatingActionButton(
-                        backgroundColor = TodometerColors.primary,
-                        onClick = addTask
-                    ) {
-                        Icon(
-                            Icons.Rounded.Add,
-                            contentDescription = stringResource(R.string.add_task)
-                        )
-                    }
+                //if (!taskLists.isNullOrEmpty()) {
+                FloatingActionButton(
+                    backgroundColor = TodometerColors.primary,
+                    onClick = addTask
+                ) {
+                    Icon(
+                        Icons.Rounded.Add,
+                        contentDescription = stringResource(R.string.add_task)
+                    )
                 }
+                //}
             },
             floatingActionButtonPosition = FabPosition.Center,
             isFloatingActionButtonDocked = true
@@ -394,7 +403,8 @@ fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) 
 
 @Composable
 fun MenuBottomSheet(
-    selectedTaskListId: String?,
+    selectedTaskListId: String,
+    defaultTaskListName: String,
     taskLists: List<TaskList>,
     addTaskList: () -> Unit,
     selectTaskList: (String) -> Unit
@@ -419,6 +429,11 @@ fun MenuBottomSheet(
         }
         HorizontalDivider()
         LazyColumn(modifier = Modifier.padding(8.dp)) {
+            item {
+                TaskListItem(defaultTaskListName, selectedTaskListId == "") {
+                    selectTaskList("")
+                }
+            }
             items(taskLists) { taskList ->
                 TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
                     selectTaskList(taskList.id)
@@ -499,6 +514,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
 @Composable
 fun MoreBottomSheet(
     editTaskListClick: () -> Unit,
+    editTaskListEnabled: Boolean,
     deleteTaskListClick: () -> Unit,
     deleteTaskListEnabled: Boolean,
     chooseThemeClick: () -> Unit,
@@ -523,7 +539,8 @@ fun MoreBottomSheet(
                     style = TodometerTypography.caption
                 )
             },
-            onClick = editTaskListClick
+            onClick = editTaskListClick,
+            enabled = editTaskListEnabled
         )
         SingleLineItem(
             icon = {

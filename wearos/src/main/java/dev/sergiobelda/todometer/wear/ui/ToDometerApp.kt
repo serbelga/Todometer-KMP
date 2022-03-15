@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.wear.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.navigation.navArgument
 import androidx.wear.compose.material.ExperimentalWearMaterialApi
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
@@ -52,7 +53,10 @@ fun ToDometerApp() {
                     actions.navigateToTaskListTasks
                 )
             }
-            composable("$TaskListTasks/{$TaskListId}") { navBackStackEntry ->
+            composable(
+                "$TaskListTasks/{$TaskListId}",
+                arguments = listOf(navArgument(TaskListId) { defaultValue = "" })
+            ) { navBackStackEntry ->
                 val taskListId = navBackStackEntry.arguments?.getString(TaskListId) ?: ""
                 TaskListTasksScreen(
                     openTask = actions.navigateToTaskDetail,

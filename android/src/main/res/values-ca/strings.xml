@@ -36,4 +36,5 @@
     <string name="choose_tag">Tria una etiqueta</string>
     <string name="enter_task_list_name">Introdueix el nom de la llista de tasques</string>
     <string name="choose_theme">Elegir un tema</string>
+    <string name="default_task_list_name">Tasques</string>
 </resources>

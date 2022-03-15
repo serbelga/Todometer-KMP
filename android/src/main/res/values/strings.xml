@@ -83,4 +83,5 @@
     <string name="enter_description">Introduce una descripción</string>
     <string name="choose_tag">Elige una etiqueta</string>
     <string name="enter_task_list_name">Introduce un nombre para la lista de tareas</string>
+    <string name="default_task_list_name">Mis tareas</string>
 </resources>

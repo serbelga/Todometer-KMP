@@ -41,8 +41,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.twotone.Settings
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -106,12 +106,6 @@ fun HomeScreen() {
     taskListsResultState?.doIfSuccess { taskLists = it }
 
     Scaffold(
-        /*
-        drawerShape = RoundedCornerShape(0),
-        drawerContent = {
-            DrawerContainer(addTaskList = { addTaskListAlertDialogState = true })
-        },
-        */
         topBar = {
             TopAppBar(
                 title = {
@@ -128,13 +122,13 @@ fun HomeScreen() {
                 backgroundColor = TodometerColors.surface,
                 actions = {
                     IconButton(onClick = {}) {
-                        Icon(Icons.TwoTone.Settings, contentDescription = "Settings")
+                        Icon(Icons.Outlined.Settings, contentDescription = "Settings")
                     }
                 }
             )
         },
         floatingActionButton = {
-            if (taskLists.isNotEmpty()) {
+            //if (taskLists.isNotEmpty()) {
                 ExtendedFloatingActionButton(
                     icon = {
                         Icon(Icons.Rounded.Add, "Add task")
@@ -145,7 +139,7 @@ fun HomeScreen() {
                     onClick = { addTaskAlertDialogState = true },
                     backgroundColor = TodometerColors.primary
                 )
-            }
+            //}
         },
         floatingActionButtonPosition = FabPosition.End,
         scaffoldState = scaffoldState
@@ -171,11 +165,12 @@ fun HomeScreen() {
                 }
             }
         }
-        if (taskLists.isNotEmpty()) {
+        //if (taskLists.isNotEmpty()) {
             Row {
                 TaskListsNavigationDrawer(
                     taskLists,
-                    taskListSelected,
+                    taskListSelected?.id ?: "",
+                    "My tasks",
                     onTaskListClick = {
                         coroutineScope.launch {
                             setTaskListSelectedUseCase.invoke(it)
@@ -185,7 +180,7 @@ fun HomeScreen() {
                 )
                 Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
                 Column {
-                    TaskListProgress(taskListSelected, tasks)
+                    TaskListProgress(taskListSelected?.name ?: "My tasks", tasks)
                     if (tasks.isEmpty()) {
                         EmptyTasksListView()
                     } else {
@@ -207,9 +202,9 @@ fun HomeScreen() {
                     }
                 }
             }
-        } else {
-            EmptyTaskListsView(addTaskList = { addTaskListAlertDialogState = true })
-        }
+        //} else {
+        //    EmptyTaskListsView(addTaskList = { addTaskListAlertDialogState = true })
+        //}
     }
 }
 
@@ -279,7 +274,8 @@ fun EmptyTasksListView() {
 @Composable
 fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,
-    taskListSelected: TaskList?,
+    selectedTaskListId: String,
+    defaultTaskListName: String,
     onTaskListClick: (taskListId: String) -> Unit,
     onAddTaskListClick: () -> Unit
 ) {
@@ -302,22 +298,19 @@ fun TaskListsNavigationDrawer(
             }
         }
         LazyColumn(modifier = Modifier.padding(8.dp)) {
+            item {
+                TaskListItem(defaultTaskListName, selectedTaskListId == "") {
+                    onTaskListClick("")
+                }
+            }
             items(taskLists) { taskList ->
                 TaskListItem(
                     taskList.name,
-                    taskList.id == taskListSelected?.id
+                    taskList.id == selectedTaskListId
                 ) {
                     onTaskListClick(taskList.id)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun DrawerContainer(addTaskList: () -> Unit) {
-    OutlinedButton(onClick = addTaskList) {
-        Icon(Icons.Rounded.Add, contentDescription = "Add task list")
-        Text(text = "Add task list")
     }
 }

@@ -58,6 +58,7 @@ import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.model.TaskProgress
 import dev.sergiobelda.todometer.common.model.TaskState
 import dev.sergiobelda.todometer.wear.R
@@ -89,8 +90,8 @@ fun TaskListTasksScreen(
                 name?.let { taskListTasksViewModel.updateTaskListName(it) }
             }
         }
-    var taskListName = ""
-    taskListResultState.value.doIfSuccess { taskListName = it.name }
+    var taskList: TaskList? = null
+    taskListResultState.value.doIfSuccess { taskList = it }.doIfError { taskList = null }
     tasksResultState.value.doIfSuccess { tasks ->
         val progress = TaskProgress.getTasksDoneProgress(tasks)
         Scaffold(
@@ -111,7 +112,7 @@ fun TaskListTasksScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                item { Text(taskListName) }
+                item { Text(taskList?.name ?: "My tasks") }
                 item { Spacer(modifier = Modifier.height(4.dp)) }
                 if (tasks.isNullOrEmpty()) {
                     item { Text(text = stringResource(id = R.string.no_tasks)) }
@@ -143,24 +144,26 @@ fun TaskListTasksScreen(
                         addTaskLauncher.launch(intent)
                     }
                 }
-                item {
-                    EditTaskListButton {
-                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                        val remoteInputs: List<RemoteInput> = listOf(
-                            RemoteInput.Builder(TASK_LIST_NAME)
-                                .setLabel(taskListName)
-                                .wearableExtender {
-                                    setEmojisAllowed(false)
-                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
-                                }.build()
-                        )
+                if (taskList != null) {
+                    item {
+                        EditTaskListButton {
+                            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                            val remoteInputs: List<RemoteInput> = listOf(
+                                RemoteInput.Builder(TASK_LIST_NAME)
+                                    .setLabel(taskList?.name)
+                                    .wearableExtender {
+                                        setEmojisAllowed(false)
+                                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                                    }.build()
+                            )
 
-                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+                            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
-                        editTaskListLauncher.launch(intent)
+                            editTaskListLauncher.launch(intent)
+                        }
                     }
+                    item { DeleteTaskListButton(deleteTaskList) }
                 }
-                item { DeleteTaskListButton(deleteTaskList) }
             }
             CircularProgressIndicator(
                 modifier = Modifier.fillMaxSize(),
