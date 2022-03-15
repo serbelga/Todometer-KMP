@@ -128,18 +128,16 @@ fun HomeScreen() {
             )
         },
         floatingActionButton = {
-            //if (taskLists.isNotEmpty()) {
-                ExtendedFloatingActionButton(
-                    icon = {
-                        Icon(Icons.Rounded.Add, "Add task")
-                    },
-                    text = {
-                        Text("Add task")
-                    },
-                    onClick = { addTaskAlertDialogState = true },
-                    backgroundColor = TodometerColors.primary
-                )
-            //}
+            ExtendedFloatingActionButton(
+                icon = {
+                    Icon(Icons.Rounded.Add, "Add task")
+                },
+                text = {
+                    Text("Add task")
+                },
+                onClick = { addTaskAlertDialogState = true },
+                backgroundColor = TodometerColors.primary
+            )
         },
         floatingActionButtonPosition = FabPosition.End,
         scaffoldState = scaffoldState
@@ -165,46 +163,42 @@ fun HomeScreen() {
                 }
             }
         }
-        //if (taskLists.isNotEmpty()) {
-            Row {
-                TaskListsNavigationDrawer(
-                    taskLists,
-                    taskListSelected?.id ?: "",
-                    "My tasks",
-                    onTaskListClick = {
-                        coroutineScope.launch {
-                            setTaskListSelectedUseCase.invoke(it)
-                        }
-                    },
-                    onAddTaskListClick = { addTaskListAlertDialogState = true }
-                )
-                Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
-                Column {
-                    TaskListProgress(taskListSelected?.name ?: "My tasks", tasks)
-                    if (tasks.isEmpty()) {
-                        EmptyTasksListView()
-                    } else {
-                        TasksListView(
-                            tasks,
-                            onDoingClick = {
-                                coroutineScope.launch {
-                                    setTaskDoingUseCase(it)
-                                }
-                            },
-                            onDoneClick = {
-                                coroutineScope.launch {
-                                    setTaskDoneUseCase(it)
-                                }
-                            },
-                            onTaskItemClick = {},
-                            onTaskItemLongClick = {}
-                        )
+        Row {
+            TaskListsNavigationDrawer(
+                taskLists,
+                taskListSelected?.id ?: "",
+                "My tasks",
+                onTaskListClick = {
+                    coroutineScope.launch {
+                        setTaskListSelectedUseCase.invoke(it)
                     }
+                },
+                onAddTaskListClick = { addTaskListAlertDialogState = true }
+            )
+            Divider(modifier = Modifier.fillMaxHeight().width(1.dp))
+            Column {
+                TaskListProgress(taskListSelected?.name ?: "My tasks", tasks)
+                if (tasks.isEmpty()) {
+                    EmptyTasksListView()
+                } else {
+                    TasksListView(
+                        tasks,
+                        onDoingClick = {
+                            coroutineScope.launch {
+                                setTaskDoingUseCase(it)
+                            }
+                        },
+                        onDoneClick = {
+                            coroutineScope.launch {
+                                setTaskDoneUseCase(it)
+                            }
+                        },
+                        onTaskItemClick = {},
+                        onTaskItemLongClick = {}
+                    )
                 }
             }
-        //} else {
-        //    EmptyTaskListsView(addTaskList = { addTaskListAlertDialogState = true })
-        //}
+        }
     }
 }
 

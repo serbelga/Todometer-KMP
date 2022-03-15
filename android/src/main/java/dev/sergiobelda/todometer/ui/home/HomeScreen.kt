@@ -189,7 +189,6 @@ fun HomeScreen(
                 ToDometerTopAppBar(taskListSelected?.name ?: defaultTaskListName, tasks)
             },
             bottomBar = {
-                //if (taskLists.isNotEmpty()) {
                 BottomAppBar(
                     backgroundColor = TodometerColors.surface,
                     contentColor = contentColorFor(TodometerColors.surface),
@@ -215,11 +214,9 @@ fun HomeScreen(
                         }
                     }
                 }
-                //}
             },
             content = {
                 taskListsResultState.value.doIfSuccess { taskLists ->
-                    //if (taskLists.isNotEmpty()) {
                     if (deleteTaskAlertDialogState) {
                         DeleteTaskAlertDialog(
                             onDismissRequest = { deleteTaskAlertDialogState = false },
@@ -262,13 +259,9 @@ fun HomeScreen(
                             }
                         )
                     }
-                    //} else {
-                    //    EmptyTaskListsView(addTaskList = addTaskList)
-                    //}
                 }
             },
             floatingActionButton = {
-                //if (!taskLists.isNullOrEmpty()) {
                 FloatingActionButton(
                     backgroundColor = TodometerColors.primary,
                     onClick = addTask
@@ -278,7 +271,6 @@ fun HomeScreen(
                         contentDescription = stringResource(R.string.add_task)
                     )
                 }
-                //}
             },
             floatingActionButtonPosition = FabPosition.Center,
             isFloatingActionButtonDocked = true

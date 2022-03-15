@@ -90,18 +90,12 @@ fun HomeScreen(
             item { Text(stringResource(R.string.app_name)) }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             taskListsResultState.value.doIfSuccess { taskLists ->
-                //if (taskLists.isNullOrEmpty()) {
-                //    item {
-                //        Text(text = stringResource(id = R.string.no_task_lists))
-                //    }
-                //} else {
-                    item {
-                        TaskListItem("My tasks", onClick = { openTaskList(null) })
-                    }
-                    items(taskLists) { taskList ->
-                        TaskListItem(taskList.name) { openTaskList(taskList.id) }
-                    }
-                //}
+                item {
+                    TaskListItem("My tasks", onClick = { openTaskList(null) })
+                }
+                items(taskLists) { taskList ->
+                    TaskListItem(taskList.name) { openTaskList(taskList.id) }
+                }
             }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             item {
