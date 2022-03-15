@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.ui.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,7 +29,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
@@ -428,6 +428,7 @@ fun MenuBottomSheet(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TasksListView(
     tasks: List<Task>,
@@ -437,17 +438,18 @@ fun TasksListView(
     onTaskItemLongClick: (String) -> Unit
 ) {
     LazyColumn {
-        itemsIndexed(tasks) { index, task ->
+        items(tasks, key = { it.id }) { task ->
             TaskItem(
                 task,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick
+                onLongClick = onTaskItemLongClick,
+                modifier = Modifier.animateItemPlacement()
             )
-            if (index == tasks.lastIndex) {
-                Spacer(modifier = Modifier.height(56.dp))
-            }
+        }
+        item {
+            Spacer(modifier = Modifier.height(84.dp))
         }
     }
 }
