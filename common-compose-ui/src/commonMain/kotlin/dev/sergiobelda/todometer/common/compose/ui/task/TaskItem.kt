@@ -54,18 +54,8 @@ fun TaskItem(
     onLongClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    /*
-    Card(
-        modifier = modifier
-            .height(72.dp)
-            .fillMaxWidth()
-            .padding(top = 8.dp, bottom = 8.dp, start = 16.dp, end = 16.dp),
-        shape = MaterialTheme.shapes.large
-    ) {
-
-     */
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().background(TodometerColors.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
