@@ -16,8 +16,14 @@
 
 package dev.sergiobelda.todometer.ui.home
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,22 +36,28 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.DismissDirection
+import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.Icon
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -54,10 +66,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -72,6 +85,7 @@ import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
+import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
@@ -86,7 +100,6 @@ import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
-import java.io.Serializable
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -102,7 +115,6 @@ fun HomeScreen(
     val scope = rememberCoroutineScope()
     // TODO: Use skipHalfExpanded when available.
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    var currentSheet: HomeBottomSheet by rememberSaveable { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
 
     val scaffoldState = rememberScaffoldState()
 
@@ -237,7 +249,8 @@ fun HomeScreen(
                                 homeViewModel.setTaskDone(it)
                             },
                             onTaskItemClick = openTask,
-                            onTaskItemLongClick = {
+                            onTaskItemLongClick = {},
+                            onSwipeToDismiss = {
                                 deleteTaskAlertDialogState = true
                                 selectedTask = it
                             }
@@ -430,24 +443,83 @@ fun DrawerContent(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun TasksListView(
     tasks: List<Task>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
-    onTaskItemLongClick: (String) -> Unit
+    onTaskItemLongClick: (String) -> Unit,
+    onSwipeToDismiss: (String) -> Unit
 ) {
     LazyColumn {
         items(tasks, key = { it.id }) { task ->
-            TaskItem(
-                task,
-                onDoingClick = onDoingClick,
-                onDoneClick = onDoneClick,
-                onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick,
-                modifier = Modifier.animateItemPlacement()
+            val dismissState = rememberDismissState(
+                confirmStateChange = {
+                    if (it == DismissValue.DismissedToEnd) {
+                        onSwipeToDismiss(task.id)
+                    }
+                    it != DismissValue.DismissedToEnd
+                }
+            )
+            SwipeToDismiss(
+                state = dismissState,
+                directions = setOf(DismissDirection.StartToEnd),
+                dismissThresholds = {
+                    FractionalThreshold(0.1f)
+                },
+                background = {
+                    val color by animateColorAsState(
+                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    val scale by animateFloatAsState(
+                        if (dismissState.targetValue == DismissValue.Default) 0.65f else 1f,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    val tint by animateColorAsState(
+                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurface else TodometerColors.onError,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    Box(
+                        Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        Icon(
+                            Icons.Outlined.Delete,
+                            contentDescription = stringResource(R.string.delete_task),
+                            modifier = Modifier.scale(scale),
+                            tint = tint
+                        )
+                    }
+                },
+                dismissContent = {
+                    val dp by animateDpAsState(
+                        if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    TaskItem(
+                        task,
+                        onDoingClick = onDoingClick,
+                        onDoneClick = onDoneClick,
+                        onClick = onTaskItemClick,
+                        onLongClick = onTaskItemLongClick,
+                        modifier = Modifier.animateItemPlacement().clip(RoundedCornerShape(dp))
+                    )
+                }
             )
         }
         item {
@@ -584,11 +656,6 @@ fun MoreBottomSheet(
             }
         }
     }
-}
-
-sealed class HomeBottomSheet : Serializable {
-    object MenuBottomSheet : HomeBottomSheet()
-    object MoreBottomSheet : HomeBottomSheet()
 }
 
 @Preview
