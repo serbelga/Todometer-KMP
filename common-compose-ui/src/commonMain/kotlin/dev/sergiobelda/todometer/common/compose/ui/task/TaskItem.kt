@@ -51,11 +51,12 @@ fun TaskItem(
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
-    onLongClick: (String) -> Unit
+    onLongClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     /*
     Card(
-        modifier = Modifier
+        modifier = modifier
             .height(72.dp)
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 8.dp, start = 16.dp, end = 16.dp),
