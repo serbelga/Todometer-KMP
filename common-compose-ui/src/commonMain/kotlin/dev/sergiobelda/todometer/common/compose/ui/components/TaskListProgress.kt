@@ -23,13 +23,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,28 +36,26 @@ import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.common.model.TaskProgress
 
 @Composable
-fun TaskListProgress(taskListName: String?, tasks: List<Task>) {
+fun TaskListProgress(taskListName: String?, tasks: List<Task>, modifier: Modifier = Modifier) {
     val progress = TaskProgress.getTasksDoneProgress(tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
     Column(
-        modifier = Modifier.fillMaxWidth().requiredWidthIn(max = 360.dp)
-            .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 12.dp)
+        modifier = modifier.fillMaxWidth().requiredWidthIn(max = 360.dp)
+            .padding(start = 8.dp, end = 8.dp, bottom = 12.dp)
     ) {
-        // TODO: 02/04/2021 Max lines
-        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-            Text(
-                taskListName?.uppercase() ?: "",
-                style = TodometerTypography.overline
-            )
-            Text(
-                text = TaskProgress.getPercentage(progress),
-                style = TodometerTypography.body2,
-                modifier = Modifier.padding(top = 4.dp)
-            )
-        }
+        Text(
+            taskListName?.uppercase() ?: "",
+            style = TodometerTypography.overline,
+            maxLines = 2
+        )
+        Text(
+            text = TaskProgress.getPercentage(progress),
+            style = TodometerTypography.body2,
+            modifier = Modifier.padding(top = 4.dp)
+        )
         LinearProgressIndicator(
             progress = animatedProgress,
             modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp)

@@ -20,18 +20,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
@@ -42,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.model.Task
@@ -57,12 +54,8 @@ fun TaskItem(
     onLongClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier
-            .height(72.dp)
-            .fillMaxWidth()
-            .padding(top = 8.dp, bottom = 8.dp, start = 16.dp, end = 16.dp),
-        shape = MaterialTheme.shapes.large
+    Column(
+        modifier = modifier.fillMaxWidth().background(TodometerColors.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -73,9 +66,8 @@ fun TaskItem(
                 onLongClick = {
                     onLongClick(task.id)
                 }
-            )
+            ).padding(top = 4.dp, bottom = 4.dp, start = 20.dp, end = 8.dp)
         ) {
-            Spacer(Modifier.width(16.dp))
             Box(
                 modifier = Modifier
                     .size(16.dp)
@@ -118,5 +110,6 @@ fun TaskItem(
                 }
             }
         }
+        HorizontalDivider()
     }
 }

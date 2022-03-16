@@ -73,8 +73,10 @@ fun AboutScreen(
                 contentColor = contentColorFor(TodometerColors.surface),
                 elevation = 0.dp,
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
-                        Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
+                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                        IconButton(onClick = navigateUp) {
+                            Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
+                        }
                     }
                 },
                 title = {}

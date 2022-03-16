@@ -58,6 +58,7 @@ fun TaskListItem(
             text = text,
             color = selectedColor,
             style = TodometerTypography.subtitle2,
+            maxLines = 1,
             modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
         )
     }

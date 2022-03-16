@@ -16,8 +16,14 @@
 
 package dev.sergiobelda.todometer.ui.home
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,50 +36,47 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
-import androidx.compose.material.ContentAlpha
+import androidx.compose.material.DismissDirection
+import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.components.DragIndicator
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.SingleLineItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
@@ -81,6 +84,9 @@ import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
+import dev.sergiobelda.todometer.common.compose.ui.theme.outline
+import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
@@ -88,11 +94,11 @@ import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
+import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
-import java.io.Serializable
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -108,7 +114,11 @@ fun HomeScreen(
     val scope = rememberCoroutineScope()
     // TODO: Use skipHalfExpanded when available.
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    var currentSheet: HomeBottomSheet by rememberSaveable { mutableStateOf(HomeBottomSheet.MenuBottomSheet) }
+
+    val scaffoldState = rememberScaffoldState()
+    val closeDrawer: suspend () -> Unit = {
+        scaffoldState.drawerState.close()
+    }
 
     var selectedTask by remember { mutableStateOf("") }
 
@@ -139,81 +149,71 @@ fun HomeScreen(
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetElevation = 16.dp,
+        sheetShape = sheetShape,
         sheetContent = {
-            when (currentSheet) {
-                is HomeBottomSheet.MenuBottomSheet -> {
-                    MenuBottomSheet(
-                        taskListSelected?.id ?: "",
-                        defaultTaskListName,
-                        taskLists,
-                        addTaskList,
-                        selectTaskList = { homeViewModel.setTaskListSelected(it) }
-                    )
+            MoreBottomSheet(
+                editTaskListClick = {
+                    scope.launch {
+                        sheetState.hide()
+                        editTaskList()
+                    }
+                },
+                editTaskListEnabled = taskListSelected != null,
+                deleteTaskListClick = {
+                    deleteTaskListAlertDialogState = true
+                },
+                deleteTaskListEnabled = taskListSelected != null,
+                currentTheme = appThemeState.value,
+                chooseThemeClick = {
+                    chooseThemeAlertDialogState = true
+                },
+                openSourceLicensesClick = {
+                    scope.launch {
+                        sheetState.hide()
+                        openSourceLicenses()
+                    }
+                },
+                aboutClick = {
+                    scope.launch {
+                        sheetState.hide()
+                        about()
+                    }
                 }
-                is HomeBottomSheet.MoreBottomSheet -> {
-                    MoreBottomSheet(
-                        editTaskListClick = {
-                            scope.launch {
-                                sheetState.hide()
-                                editTaskList()
-                            }
-                        },
-                        editTaskListEnabled = taskListSelected != null,
-                        deleteTaskListClick = {
-                            deleteTaskListAlertDialogState = true
-                        },
-                        deleteTaskListEnabled = taskListSelected != null,
-                        currentTheme = appThemeState.value,
-                        chooseThemeClick = {
-                            chooseThemeAlertDialogState = true
-                        },
-                        openSourceLicensesClick = {
-                            scope.launch {
-                                sheetState.hide()
-                                openSourceLicenses()
-                            }
-                        },
-                        aboutClick = {
-                            scope.launch {
-                                sheetState.hide()
-                                about()
-                            }
-                        }
-                    )
-                }
-            }
+            )
         }
     ) {
         Scaffold(
-            topBar = {
-                ToDometerTopAppBar(taskListSelected?.name ?: defaultTaskListName, tasks)
-            },
-            bottomBar = {
-                BottomAppBar(
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(TodometerColors.surface),
-                    cutoutShape = CircleShape
-                ) {
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        IconButton(
-                            onClick = {
-                                currentSheet = HomeBottomSheet.MenuBottomSheet
-                                scope.launch { sheetState.show() }
-                            }
-                        ) {
-                            Icon(Icons.Rounded.Menu, contentDescription = "Menu")
+            drawerShape = drawerShape,
+            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+            drawerContent = {
+                DrawerContent(
+                    taskListSelected?.id ?: "",
+                    defaultTaskListName,
+                    taskLists,
+                    addTaskList = {
+                        scope.launch {
+                            closeDrawer()
                         }
-                        Spacer(modifier = Modifier.weight(1f))
-                        IconButton(
-                            onClick = {
-                                currentSheet = HomeBottomSheet.MoreBottomSheet
-                                scope.launch { sheetState.show() }
-                            }
-                        ) {
-                            Icon(Icons.Rounded.MoreVert, contentDescription = "More")
-                        }
+                        addTaskList()
+                    },
+                    selectTaskList = {
+                        homeViewModel.setTaskListSelected(it)
+                        scope.launch { closeDrawer() }
                     }
-                }
+                )
+            },
+            scaffoldState = scaffoldState,
+            topBar = {
+                ToDometerTopAppBar(
+                    onMenuClick = {
+                        scope.launch { scaffoldState.drawerState.open() }
+                    },
+                    onMoreClick = {
+                        scope.launch { sheetState.show() }
+                    },
+                    taskListSelected?.name ?: defaultTaskListName,
+                    tasks
+                )
             },
             content = {
                 taskListsResultState.value.doIfSuccess { taskLists ->
@@ -253,7 +253,8 @@ fun HomeScreen(
                                 homeViewModel.setTaskDone(it)
                             },
                             onTaskItemClick = openTask,
-                            onTaskItemLongClick = {
+                            onTaskItemLongClick = {},
+                            onSwipeToDismiss = {
                                 deleteTaskAlertDialogState = true
                                 selectedTask = it
                             }
@@ -272,8 +273,7 @@ fun HomeScreen(
                     )
                 }
             },
-            floatingActionButtonPosition = FabPosition.Center,
-            isFloatingActionButtonDocked = true
+            floatingActionButtonPosition = FabPosition.End
         )
     }
 }
@@ -287,7 +287,10 @@ fun ChooseThemeAlertDialog(
     var themeSelected by remember { mutableStateOf(currentTheme) }
     ToDometerAlertDialog(
         title = {
-            Text(text = stringResource(R.string.choose_theme), modifier = Modifier.padding(16.dp))
+            Text(
+                text = stringResource(R.string.choose_theme),
+                modifier = Modifier.padding(16.dp)
+            )
         },
         onDismissRequest = onDismissRequest,
         body = {
@@ -394,15 +397,22 @@ fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) 
 }
 
 @Composable
-fun MenuBottomSheet(
+fun DrawerContent(
     selectedTaskListId: String,
     defaultTaskListName: String,
     taskLists: List<TaskList>,
     addTaskList: () -> Unit,
     selectTaskList: (String) -> Unit
 ) {
-    Column(modifier = Modifier.height(480.dp)) {
-        DragIndicator()
+    Column {
+        Box(
+            modifier = Modifier.height(56.dp).fillMaxWidth()
+        ) {
+            ToDometerTitle(
+                modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
+            )
+        }
+        HorizontalDivider()
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -414,9 +424,11 @@ fun MenuBottomSheet(
                 style = TodometerTypography.overline
             )
             Spacer(modifier = Modifier.weight(1f))
-            OutlinedButton(onClick = addTaskList) {
-                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_task_list))
-                Text(text = stringResource(R.string.add_task_list))
+            TextButton(onClick = addTaskList) {
+                Text(
+                    stringResource(R.string.add_task_list),
+                    style = TodometerTypography.caption
+                )
             }
         }
         HorizontalDivider()
@@ -435,23 +447,83 @@ fun MenuBottomSheet(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun TasksListView(
     tasks: List<Task>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
-    onTaskItemLongClick: (String) -> Unit
+    onTaskItemLongClick: (String) -> Unit,
+    onSwipeToDismiss: (String) -> Unit
 ) {
     LazyColumn {
         items(tasks, key = { it.id }) { task ->
-            TaskItem(
-                task,
-                onDoingClick = onDoingClick,
-                onDoneClick = onDoneClick,
-                onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick,
+            val dismissState = rememberDismissState(
+                confirmStateChange = {
+                    if (it == DismissValue.DismissedToEnd) {
+                        onSwipeToDismiss(task.id)
+                    }
+                    it != DismissValue.DismissedToEnd
+                }
+            )
+            SwipeToDismiss(
+                state = dismissState,
+                directions = setOf(DismissDirection.StartToEnd),
+                dismissThresholds = {
+                    FractionalThreshold(0.1f)
+                },
+                background = {
+                    val color by animateColorAsState(
+                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    val scale by animateFloatAsState(
+                        if (dismissState.targetValue == DismissValue.Default) 0.65f else 1f,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    val tint by animateColorAsState(
+                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurface else TodometerColors.onError,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    Box(
+                        Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        Icon(
+                            Icons.Outlined.Delete,
+                            contentDescription = stringResource(R.string.delete_task),
+                            modifier = Modifier.scale(scale),
+                            tint = tint
+                        )
+                    }
+                },
+                dismissContent = {
+                    val dp by animateDpAsState(
+                        if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+                        animationSpec = tween(
+                            durationMillis = 400,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                    TaskItem(
+                        task,
+                        onDoingClick = onDoingClick,
+                        onDoneClick = onDoneClick,
+                        onClick = onTaskItemClick,
+                        onLongClick = onTaskItemLongClick,
+                        modifier = Modifier.clip(RoundedCornerShape(dp))
+                    )
+                },
                 modifier = Modifier.animateItemPlacement()
             )
         }
@@ -589,11 +661,6 @@ fun MoreBottomSheet(
             }
         }
     }
-}
-
-sealed class HomeBottomSheet : Serializable {
-    object MenuBottomSheet : HomeBottomSheet()
-    object MoreBottomSheet : HomeBottomSheet()
 }
 
 @Preview

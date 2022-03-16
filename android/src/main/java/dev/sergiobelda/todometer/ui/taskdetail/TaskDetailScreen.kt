@@ -46,7 +46,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -77,8 +76,10 @@ fun TaskDetailScreen(
                         }
                     },
                     navigationIcon = {
-                        IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
+                        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                            IconButton(onClick = navigateUp) {
+                                Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
+                            }
                         }
                     },
                     actions = {
@@ -144,7 +145,6 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                     Text(
                         text = stringResource(id = R.string.no_description),
                         style = TodometerTypography.body1,
-                        fontStyle = FontStyle.Italic,
                         modifier = Modifier.padding(24.dp)
                     )
                 }
