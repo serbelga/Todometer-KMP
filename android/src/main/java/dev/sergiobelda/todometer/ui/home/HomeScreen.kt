@@ -97,7 +97,6 @@ import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
@@ -117,6 +116,9 @@ fun HomeScreen(
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
     val scaffoldState = rememberScaffoldState()
+    val closeDrawer: suspend () -> Unit = {
+        scaffoldState.drawerState.close()
+    }
 
     var selectedTask by remember { mutableStateOf("") }
 
@@ -188,13 +190,15 @@ fun HomeScreen(
                     taskListSelected?.id ?: "",
                     defaultTaskListName,
                     taskLists,
-                    addTaskList,
+                    addTaskList = {
+                        scope.launch {
+                            closeDrawer()
+                        }
+                        addTaskList()
+                    },
                     selectTaskList = {
                         homeViewModel.setTaskListSelected(it)
-                        scope.launch {
-                            delay(100)
-                            scaffoldState.drawerState.close()
-                        }
+                        scope.launch { closeDrawer() }
                     }
                 )
             },
