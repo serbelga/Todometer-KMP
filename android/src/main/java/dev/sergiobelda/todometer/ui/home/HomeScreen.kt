@@ -160,7 +160,7 @@ fun HomeScreen(
                 deleteTaskListClick = {
                     deleteTaskListAlertDialogState = true
                 },
-                deleteTaskListEnabled = taskListSelected != null, // taskLists.size > 1,
+                deleteTaskListEnabled = taskListSelected != null,
                 currentTheme = appThemeState.value,
                 chooseThemeClick = {
                     chooseThemeAlertDialogState = true
