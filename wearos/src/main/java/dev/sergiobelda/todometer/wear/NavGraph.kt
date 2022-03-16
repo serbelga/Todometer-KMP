@@ -40,7 +40,7 @@ object Destinations {
 }
 
 class Actions(navController: NavHostController) {
-    val navigateToTaskListTasks: (String) -> Unit = { taskListId ->
+    val navigateToTaskListTasks: (String?) -> Unit = { taskListId ->
         navController.navigate("$TaskListTasks/$taskListId")
     }
     val navigateToTaskDetail: (String) -> Unit = { taskId ->

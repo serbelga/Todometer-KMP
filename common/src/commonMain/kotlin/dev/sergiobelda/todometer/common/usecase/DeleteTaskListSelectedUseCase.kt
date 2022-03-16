@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.common.usecase
 
+import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.repository.IUserPreferencesRepository
@@ -37,7 +38,9 @@ class DeleteTaskListSelectedUseCase(
         taskLists?.doIfSuccess { list ->
             list.firstOrNull()?.let { taskList ->
                 userPreferencesRepository.setTaskListSelected(taskList.id)
-            }
+            } ?: userPreferencesRepository.setTaskListSelected("")
+        }?.doIfError {
+            userPreferencesRepository.setTaskListSelected("")
         }
     }
 }

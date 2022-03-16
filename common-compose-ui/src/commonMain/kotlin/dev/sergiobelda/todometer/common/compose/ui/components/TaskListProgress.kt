@@ -36,11 +36,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.common.model.TaskProgress
 
 @Composable
-fun TaskListProgress(taskList: TaskList?, tasks: List<Task>) {
+fun TaskListProgress(taskListName: String?, tasks: List<Task>) {
     val progress = TaskProgress.getTasksDoneProgress(tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
@@ -53,7 +52,7 @@ fun TaskListProgress(taskList: TaskList?, tasks: List<Task>) {
         // TODO: 02/04/2021 Max lines
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
             Text(
-                taskList?.name?.uppercase() ?: "-",
+                taskListName?.uppercase() ?: "",
                 style = TodometerTypography.overline
             )
             Text(

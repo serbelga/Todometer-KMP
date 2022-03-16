@@ -50,4 +50,5 @@
     <string name="choose_tag">Choose a Tag</string>
     <string name="enter_task_list_name">Enter a Task list name</string>
     <string name="choose_theme">Choose theme</string>
+    <string name="default_task_list_name">My tasks</string>
 </resources>
