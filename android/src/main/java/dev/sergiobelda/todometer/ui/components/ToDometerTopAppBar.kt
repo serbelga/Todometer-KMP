@@ -34,10 +34,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.model.Task
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 
@@ -49,13 +49,6 @@ fun ToDometerTopAppBar(
     tasks: List<Task>
 ) {
     Box {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth().height(56.dp)
-        ) {
-            ToDometerTitle()
-        }
         Column {
             TopAppBar(
                 title = {},
@@ -73,10 +66,17 @@ fun ToDometerTopAppBar(
                         }
                     }
                 },
-                backgroundColor = Color.Transparent,
+                backgroundColor = TodometerColors.surface,
                 elevation = 0.dp
             )
             TaskListProgress(taskListName, tasks)
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth().height(56.dp)
+        ) {
+            ToDometerTitle()
         }
     }
 }

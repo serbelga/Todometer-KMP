@@ -517,9 +517,10 @@ fun TasksListView(
                         onDoneClick = onDoneClick,
                         onClick = onTaskItemClick,
                         onLongClick = onTaskItemLongClick,
-                        modifier = Modifier.animateItemPlacement().clip(RoundedCornerShape(dp))
+                        modifier = Modifier.clip(RoundedCornerShape(dp))
                     )
-                }
+                },
+                modifier = Modifier.animateItemPlacement()
             )
         }
         item {
