@@ -35,7 +35,8 @@ val DarkColorPalette = darkColors(
     onPrimary = Color.Black,
     onSecondary = Color.Black,
     onBackground = Color.White,
-    onSurface = Color.White
+    onSurface = Color.White,
+    error = red300
 )
 
 val LightColorPalette = lightColors(
@@ -47,7 +48,8 @@ val LightColorPalette = lightColors(
     onPrimary = Color.White,
     onSecondary = Color.White,
     onBackground = Color.Black,
-    onSurface = Color.Black
+    onSurface = Color.Black,
+    error = red800
 )
 
 val Colors.outline: Color
