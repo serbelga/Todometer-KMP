@@ -20,6 +20,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
@@ -86,6 +87,7 @@ import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.data.doIfError
@@ -449,8 +451,9 @@ fun DrawerContent(
 }
 
 @OptIn(
-    ExperimentalFoundationApi::class, ExperimentalMaterialApi::class,
-    androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi::class
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalAnimationGraphicsApi::class
 )
 @Composable
 fun TasksListView(
@@ -486,7 +489,7 @@ fun TasksListView(
                         )
                     )
                     val tint by animateColorAsState(
-                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurface else TodometerColors.onError,
+                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
                         animationSpec = tween(
                             durationMillis = 600,
                             easing = FastOutSlowInEasing
