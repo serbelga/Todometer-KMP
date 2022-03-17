@@ -19,8 +19,11 @@ package dev.sergiobelda.todometer.ui.home
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -70,7 +73,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -85,6 +87,7 @@ import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.data.doIfError
@@ -128,7 +131,7 @@ fun HomeScreen(
 
     var taskLists: List<TaskList> by remember { mutableStateOf(emptyList()) }
     val taskListsResultState = homeViewModel.taskLists.collectAsState()
-    taskListsResultState.value.doIfSuccess { taskLists = it }
+    taskListsResultState.value.doIfSuccess { taskLists = it }.doIfError { taskLists = emptyList() }
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
     val taskListSelectedResultState = homeViewModel.taskListSelected.collectAsState()
@@ -140,7 +143,7 @@ fun HomeScreen(
 
     var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
     val tasksResultState = homeViewModel.tasks.collectAsState()
-    tasksResultState.value.doIfSuccess { tasks = it }
+    tasksResultState.value.doIfSuccess { tasks = it }.doIfError { tasks = emptyList() }
 
     val appThemeState = homeViewModel.appTheme.collectAsState()
 
@@ -447,7 +450,11 @@ fun DrawerContent(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
+@OptIn(
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalAnimationGraphicsApi::class
+)
 @Composable
 fun TasksListView(
     tasks: List<Task>,
@@ -481,28 +488,24 @@ fun TasksListView(
                             easing = FastOutSlowInEasing
                         )
                     )
-                    val scale by animateFloatAsState(
-                        if (dismissState.targetValue == DismissValue.Default) 0.65f else 1f,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
                     val tint by animateColorAsState(
-                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurface else TodometerColors.onError,
+                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
                         animationSpec = tween(
                             durationMillis = 400,
                             easing = FastOutSlowInEasing
                         )
                     )
+                    val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
                     Box(
                         Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Icon(
-                            Icons.Outlined.Delete,
+                            rememberAnimatedVectorPainter(
+                                icon,
+                                atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
+                            ),
                             contentDescription = stringResource(R.string.delete_task),
-                            modifier = Modifier.scale(scale),
                             tint = tint
                         )
                     }

@@ -27,6 +27,8 @@ val background = Color(0xFFFFFFFF)
 val outlineDark = Color(255, 255, 255, alpha = 12)
 val outlineLight = Color(0, 0, 0, alpha = 12)
 val blueAlpha08 = Color(0x144285F4)
+val red300 = Color(0xFFE57373)
+val red800 = Color(0xFFC62828)
 
 val pinkLight = Color(0xFFD81B60)
 val pinkDark = Color(0xFFF48FB1)
