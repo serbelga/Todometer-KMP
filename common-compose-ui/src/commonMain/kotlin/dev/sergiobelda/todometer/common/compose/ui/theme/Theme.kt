@@ -55,6 +55,9 @@ val LightColorPalette = lightColors(
 val Colors.outline: Color
     @Composable get() = if (isLight) outlineLight else outlineDark
 
+val Colors.onSurfaceMediumEmphasis: Color
+    @Composable get() = onSurface.copy(alpha = 0.6f)
+
 val TodometerColors: Colors
     @Composable get() = MaterialTheme.colors
 
