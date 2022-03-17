@@ -6,9 +6,10 @@ androidCompileSdk = "31"
 androidMinSdk = "24"
 androidWearMinSdk = "25"
 androidTargetSdk = "31"
-androidGradlePlugin = "7.2.0-beta04"
+androidGradlePlugin = "7.3.0-alpha06"
 appcompat = "1.4.1"
 compose = "1.1.0"
+composeAnimation = "1.1.1"
 composeMultiplatform = "1.1.0"
 dataStore = "1.0.0"
 espressoCore = "3.4.0"
@@ -43,6 +44,7 @@ android-gradlePluginz = { module = "com.android.tools.build:gradle", version.ref
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidCore" }
+androidx-compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "composeAnimation" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }

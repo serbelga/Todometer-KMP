@@ -43,6 +43,7 @@ dependencies {
     implementation(projects.commonComposeUi)
 
     implementation(libs.androidx.activityCompose)
+    implementation(libs.androidx.compose.animation.graphics)
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.navigation.compose)
 
