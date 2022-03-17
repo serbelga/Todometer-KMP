@@ -491,7 +491,7 @@ fun TasksListView(
                     val tint by animateColorAsState(
                         if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
                         animationSpec = tween(
-                            durationMillis = 600,
+                            durationMillis = 400,
                             easing = FastOutSlowInEasing
                         )
                     )
