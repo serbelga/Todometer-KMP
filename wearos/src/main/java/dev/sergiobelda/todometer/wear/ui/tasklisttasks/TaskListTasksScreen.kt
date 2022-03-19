@@ -22,6 +22,7 @@ import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +35,7 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -46,6 +48,7 @@ import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
+import androidx.wear.compose.material.ProgressIndicatorDefaults
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
@@ -94,6 +97,10 @@ fun TaskListTasksScreen(
     taskListResultState.value.doIfSuccess { taskList = it }.doIfError { taskList = null }
     tasksResultState.value.doIfSuccess { tasks ->
         val progress = TaskProgress.getTasksDoneProgress(tasks)
+        val animatedProgress by animateFloatAsState(
+            targetValue = progress,
+            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        )
         Scaffold(
             timeText = {
                 CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
@@ -114,7 +121,7 @@ fun TaskListTasksScreen(
             ) {
                 item { Text(taskList?.name ?: "My tasks") }
                 item { Spacer(modifier = Modifier.height(4.dp)) }
-                if (tasks.isNullOrEmpty()) {
+                if (tasks.isEmpty()) {
                     item { Text(text = stringResource(id = R.string.no_tasks)) }
                 } else {
                     items(tasks) { task ->
@@ -169,7 +176,7 @@ fun TaskListTasksScreen(
                 modifier = Modifier.fillMaxSize(),
                 startAngle = 300f,
                 endAngle = 240f,
-                progress = progress
+                progress = animatedProgress
             )
         }
     }.doIfError {
