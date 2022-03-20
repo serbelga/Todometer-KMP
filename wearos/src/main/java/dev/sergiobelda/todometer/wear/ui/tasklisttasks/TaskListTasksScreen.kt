@@ -119,7 +119,11 @@ fun TaskListTasksScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                item { Text(taskList?.name ?: "My tasks") }
+                taskList?.let {
+                    item { Text(it.name) }
+                } ?: run {
+                    item { Text(stringResource(R.string.default_task_list_name)) }
+                }
                 item { Spacer(modifier = Modifier.height(4.dp)) }
                 if (tasks.isEmpty()) {
                     item { Text(text = stringResource(id = R.string.no_tasks)) }

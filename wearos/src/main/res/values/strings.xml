@@ -28,4 +28,5 @@
     <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
     <string name="task_title_input">Nombre de la tarea</string>
     <string name="task_list_name_input">Nombre de la lista de tareas</string>
+    <string name="default_task_list_name">Mis tareas</string>
 </resources>

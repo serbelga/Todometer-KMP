@@ -91,7 +91,10 @@ fun HomeScreen(
             item { Spacer(modifier = Modifier.height(4.dp)) }
             taskListsResultState.value.doIfSuccess { taskLists ->
                 item {
-                    TaskListItem("My tasks", onClick = { openTaskList(null) })
+                    TaskListItem(
+                        stringResource(id = R.string.default_task_list_name),
+                        onClick = { openTaskList(null) }
+                    )
                 }
                 items(taskLists) { taskList ->
                     TaskListItem(taskList.name) { openTaskList(taskList.id) }
