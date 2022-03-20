@@ -17,17 +17,17 @@
 <resources>
 
     <style name="Theme.ToDometer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryVariant">@color/colorSecondary</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
-        <item name="colorError">@color/colorError</item>
-        <item name="colorOnError">@color/colorOnError</item>
-        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorPrimary">@color/todometer_primary</item>
+        <item name="colorPrimaryDark">@color/todometer_primary_dark</item>
+        <item name="colorPrimaryVariant">@color/todometer_secondary</item>
+        <item name="colorOnPrimary">@color/todometer_on_primary</item>
+        <item name="colorSecondary">@color/todometer_secondary</item>
+        <item name="colorOnSecondary">@color/todometer_on_secondary</item>
+        <item name="colorSurface">@color/todometer_surface</item>
+        <item name="colorOnSurface">@color/todometer_on_surface</item>
+        <item name="colorError">@color/todometer_error</item>
+        <item name="colorOnError">@color/todometer_on_error</item>
+        <item name="android:colorBackground">@color/todometer_background</item>
 
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
