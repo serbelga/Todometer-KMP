@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation(projects.common)
+    implementation(projects.commonAndroidResources)
     implementation(projects.commonComposeUi)
 
     implementation(libs.androidx.activityCompose)

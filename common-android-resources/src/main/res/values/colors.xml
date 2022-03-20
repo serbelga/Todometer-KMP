@@ -15,18 +15,18 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#4285f4</color>
-    <color name="colorPrimaryDark">#0059c1</color>
-    <color name="colorSecondary">#3ddc84</color>
-    <color name="colorOnPrimary">#000000</color>
-    <color name="colorOnSecondary">#FFFFFF</color>
-    <color name="colorSurface">#FFFFFF</color>
-    <color name="colorOnSurface">#DE000000</color>
-    <color name="colorOnSurfaceMediumEmphasis">#99000000</color>
-    <color name="colorError">#b61827</color>
-    <color name="colorOnError">#FFFFFF</color>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorDivider">#676767</color>
+    <color name="todometer_primary">#4285f4</color>
+    <color name="todometer_primary_dark">#0059c1</color>
+    <color name="todometer_secondary">#3ddc84</color>
+    <color name="todometer_on_primary">#000000</color>
+    <color name="todometer_on_secondary">#FFFFFF</color>
+    <color name="todometer_surface">#FFFFFF</color>
+    <color name="todometer_on_surface">#DE000000</color>
+    <color name="todometer_on_surface_medium_emphasis">#99000000</color>
+    <color name="todometer_error">#b61827</color>
+    <color name="todometer_on_error">#FFFFFF</color>
+    <color name="todometer_background">#FFFFFF</color>
+    <color name="todometer_divider">#676767</color>
 
     <color name="green">#3ddc84</color>
     <color name="greenDark">#00a956</color>
@@ -35,7 +35,6 @@
     <color name="orange500">#FF9800</color>
     <color name="deep_orange400">#FF7043</color>
     <color name="blue">#4285f4</color>
-    <color name="blue500">#2196F3</color>
     <color name="blueLight">#80b4ff</color>
     <color name="blueDark">#0059c1</color>
     <color name="navy">#073042</color>

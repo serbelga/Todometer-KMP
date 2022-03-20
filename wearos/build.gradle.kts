@@ -38,11 +38,10 @@ android {
 dependencies {
 
     implementation(projects.common)
+    implementation(projects.commonAndroidResources)
 
     implementation(libs.androidx.activityCompose)
-
     implementation(libs.androidx.coreKtx)
-
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.compose.ui.toolingPreview)
