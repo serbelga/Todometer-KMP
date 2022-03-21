@@ -51,7 +51,6 @@ import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.TaskList
 import dev.sergiobelda.todometer.wear.R
 import org.koin.androidx.compose.getViewModel
 
@@ -59,7 +58,7 @@ private const val TASK_LIST_NAME = "task_list_name"
 
 @Composable
 fun HomeScreen(
-    openTaskList: (String) -> Unit,
+    openTaskList: (String?) -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
@@ -91,14 +90,14 @@ fun HomeScreen(
             item { Text(stringResource(R.string.app_name)) }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             taskListsResultState.value.doIfSuccess { taskLists ->
-                if (taskLists.isNullOrEmpty()) {
-                    item {
-                        Text(text = stringResource(id = R.string.no_task_lists))
-                    }
-                } else {
-                    items(taskLists) { taskList ->
-                        TaskListItem(taskList) { openTaskList(it) }
-                    }
+                item {
+                    TaskListItem(
+                        stringResource(id = R.string.default_task_list_name),
+                        onClick = { openTaskList(null) }
+                    )
+                }
+                items(taskLists) { taskList ->
+                    TaskListItem(taskList.name) { openTaskList(taskList.id) }
                 }
             }
             item { Spacer(modifier = Modifier.height(4.dp)) }
@@ -124,20 +123,17 @@ fun HomeScreen(
 }
 
 @Composable
-fun TaskListItem(
-    taskList: TaskList,
-    onClick: (String) -> Unit
-) {
+fun TaskListItem(taskListName: String, onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colors.onSurface,
-                text = taskList.name
+                text = taskListName
             )
         },
-        onClick = { onClick(taskList.id) }
+        onClick = onClick
     )
 }
 

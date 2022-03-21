@@ -29,7 +29,7 @@
     <string name="cancel">Cancelar</string>
     <string name="delete_task">Eliminar tarea</string>
     <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
-    <string name="delete_task_list">Eliminar proyecto</string>
+    <string name="delete_task_list">Eliminar lista de tareas</string>
     <string name="delete_task_list_question">Se eliminarán todas las tareas de esta lista de tareas. ¿Desea continuar?</string>
     <string name="add">Añadir</string>
     <string name="add_task">Añadir tarea</string>
@@ -44,11 +44,20 @@
     <string name="about">Acerca de</string>
     <string name="open_source_licenses">Licencias de código abierto</string>
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="enter_task_name">Introduce el nombre de la tarea</string>
+    <string name="enter_description">Introduce una descripción</string>
+    <string name="enter_task_list_name">Introduce un nombre para la lista de tareas</string>
+    <string name="choose_tag">Elige una etiqueta</string>
+    <string name="field_not_empty">El campo no puede quedar vacío</string>
+    <string name="github" translatable="false">GitHub</string>
+    <string name="default_task_list_name">Mis tareas</string>
     <string name="no_tasks">No hay tareas</string>
     <string name="no_task_lists">No hay listas de tareas</string>
-    <string name="field_not_empty">El campo no puede quedar vacío</string>
     <string name="you_have_not_any_task_list">No tienes ninguna lista de tareas</string>
-    <string name="github" translatable="false">GitHub</string>
+
+    <string name="task_title_input">Nombre de la tarea</string>
+    <string name="task_list_name_input">Nombre de la lista de tareas</string>
+
     <string name="privacy_policy_body" translatable="false">
         <![CDATA[
             <h6>User data</h6>
@@ -79,8 +88,4 @@
             <br></br>
         ]]>
     </string>
-    <string name="enter_task_name">Introduce el nombre de la tarea</string>
-    <string name="enter_description">Introduce una descripción</string>
-    <string name="choose_tag">Elige una etiqueta</string>
-    <string name="enter_task_list_name">Introduce un nombre para la lista de tareas</string>
 </resources>

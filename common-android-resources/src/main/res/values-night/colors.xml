@@ -15,18 +15,18 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#80b4ff</color>
-    <color name="colorPrimaryDark">#00071c</color>
-    <color name="colorSecondary">#7affb4</color>
-    <color name="colorOnPrimary">#000000</color>
-    <color name="colorOnSecondary">#000000</color>
-    <color name="colorSurface">#073042</color>
-    <color name="colorOnSurface">#DEFFFFFF</color>
-    <color name="colorOnSurfaceMediumEmphasis">#99FFFFFF</color>
-    <color name="colorError">#CF6679</color>
-    <color name="colorOnError">#FFFFFF</color>
-    <color name="colorBackground">#073042</color>
-    <color name="colorDivider">#808080</color>
+    <color name="todometer_primary">#80b4ff</color>
+    <color name="todometer_primary_dark">#00071c</color>
+    <color name="todometer_secondary">#7affb4</color>
+    <color name="todometer_on_primary">#000000</color>
+    <color name="todometer_on_secondary">#000000</color>
+    <color name="todometer_surface">#073042</color>
+    <color name="todometer_on_surface">#DEFFFFFF</color>
+    <color name="todometer_on_surface_medium_emphasis">#99FFFFFF</color>
+    <color name="todometer_error">#CF6679</color>
+    <color name="todometer_on_error">#FFFFFF</color>
+    <color name="todometer_background">#073042</color>
+    <color name="todometer_divider">#808080</color>
     <color name="todometer_widget_background">#073042</color>
     <color name="todometer_widget_button_background">#80B4FF</color>
     <color name="todometer_widget_card_background">#134860</color>
@@ -36,7 +36,6 @@
     <color name="orange">#FFAC8D</color>
     <color name="orange500">#ffc947</color>
     <color name="blue">#6DB6FF</color>
-    <color name="blue500">#67daff</color>
     <color name="amber">#ffe082</color>
     <color name="yellow">#fff59d</color>
     <color name="teal">#80cbc4</color>

@@ -10,8 +10,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 4100102
-        versionName = "wearos-1.0.0-alpha02"
+        versionCode = 4100201
+        versionName = "wearos-1.0.0-beta01"
     }
 
     buildFeatures {
@@ -38,11 +38,10 @@ android {
 dependencies {
 
     implementation(projects.common)
+    implementation(projects.commonAndroidResources)
 
     implementation(libs.androidx.activityCompose)
-
     implementation(libs.androidx.coreKtx)
-
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.compose.ui.toolingPreview)

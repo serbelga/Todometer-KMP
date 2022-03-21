@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.common.usecase
 
-import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.firstOrNull
@@ -33,11 +32,6 @@ class DeleteTaskListSelectedUseCase(
     suspend operator fun invoke() {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull()
         taskListId?.let { taskListRepository.deleteTaskList(it) }
-        val taskLists = taskListRepository.getTaskLists().firstOrNull()
-        taskLists?.doIfSuccess { list ->
-            list.firstOrNull()?.let { taskList ->
-                userPreferencesRepository.setTaskListSelected(taskList.id)
-            }
-        }
+        userPreferencesRepository.setTaskListSelected("")
     }
 }

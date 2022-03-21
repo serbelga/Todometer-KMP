@@ -15,39 +15,43 @@
   -->
 
 <resources>
+    <string name="task">Task</string>
+    <string name="tasks">Tasks</string>
     <string name="task_list">Task list</string>
     <string name="task_lists">Task lists</string>
-    <string name="add_task">Add task</string>
-    <string name="edit_task">Edit task</string>
-    <string name="add_task_list">Add task list</string>
     <string name="title">Title</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
-    <string name="you_have_not_any_task_list">You haven\'t any task list</string>
+    <string name="no_description">No description provided</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="delete_task">Delete task</string>
     <string name="delete_task_question">Do you want to delete this task?</string>
-    <string name="no_description">No description provided</string>
-    <string name="field_not_empty">Field must not be empty</string>
-    <string name="no_tasks">There are any task</string>
-    <string name="about">About</string>
-    <string name="task">Task</string>
-    <string name="tasks">Tasks</string>
     <string name="delete_task_list">Delete task list</string>
-    <string name="add">Add</string>
-    <string name="edit_task_list">Edit task list</string>
-    <string name="open_source_licenses">Open-source licenses</string>
-    <string name="privacy_policy">Privacy policy</string>
-    <string name="no_task_lists">There\'s any task list</string>
-    <string name="theme">Theme</string>
-    <string name="follow_system">System default</string>
     <string name="delete_task_list_question">All tasks in this task list will be deleted. Do you want to continue?</string>
+    <string name="add">Add</string>
+    <string name="add_task">Add task</string>
+    <string name="add_task_list">Add task list</string>
+    <string name="edit_task">Edit task</string>
+    <string name="edit_task_list">Edit task list</string>
+    <string name="theme">Theme</string>
+    <string name="choose_theme">Choose theme</string>
+    <string name="follow_system">Follow system</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
+    <string name="about">About</string>
+    <string name="open_source_licenses">Open-source licenses</string>
+    <string name="privacy_policy">Privacy policy</string>
     <string name="enter_task_name">Enter a Task name</string>
     <string name="enter_description">Enter a Description</string>
-    <string name="choose_tag">Choose a Tag</string>
     <string name="enter_task_list_name">Enter a Task list name</string>
-    <string name="choose_theme">Choose theme</string>
+    <string name="choose_tag">Choose a Tag</string>
+    <string name="field_not_empty">Field must not be empty</string>
+    <string name="default_task_list_name">My tasks</string>
+    <string name="no_tasks">There are any task</string>
+    <string name="no_task_lists">There\'s any task list</string>
+    <string name="you_have_not_any_task_list">You haven\'t any task list</string>
+
+    <string name="task_title_input">Task name</string>
+    <string name="task_list_name_input">Task list name</string>
 </resources>
