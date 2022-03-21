@@ -111,6 +111,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     @Composable
     override fun Content() {
         glanceId = LocalGlanceId.current
+        val taskListName: String? =
+            if (taskList != null) taskList?.name else context.getString(R.string.default_task_list_name)
         Box(
             modifier = GlanceModifier.fillMaxSize()
                 .background(ImageProvider(R.drawable.todometer_widget_background))
@@ -122,8 +124,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        text = taskList?.name ?: "",
-                        style = TextStyle(color = ColorProvider(R.color.colorOnSurface)),
+                        text = taskListName ?: "",
+                        style = TextStyle(color = ColorProvider(R.color.todometer_on_surface)),
                         modifier = GlanceModifier.fillMaxWidth().defaultWeight()
                     )
                     Image(
@@ -161,11 +163,11 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             ) {
                 val textStyle = if (task.state == TaskState.DONE) {
                     TextStyle(
-                        color = ColorProvider(R.color.colorOnSurface),
+                        color = ColorProvider(R.color.todometer_on_surface),
                         textDecoration = TextDecoration.LineThrough
                     )
                 } else {
-                    TextStyle(color = ColorProvider(R.color.colorOnSurface))
+                    TextStyle(color = ColorProvider(R.color.todometer_on_surface ))
                 }
                 Text(
                     text = task.title,

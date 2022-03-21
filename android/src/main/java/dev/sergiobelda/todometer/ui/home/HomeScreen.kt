@@ -222,46 +222,46 @@ fun HomeScreen(
             },
             content = {
                 taskListsResultState.value.doIfSuccess { taskLists ->
-                        if (deleteTaskAlertDialogState) {
-                            DeleteTaskAlertDialog(
-                                onDismissRequest = { deleteTaskAlertDialogState = false },
-                                deleteTask = {
-                                    homeViewModel.deleteTask(selectedTask)
-                                    updateToDometerWidgetData()
+                    if (deleteTaskAlertDialogState) {
+                        DeleteTaskAlertDialog(
+                            onDismissRequest = { deleteTaskAlertDialogState = false },
+                            deleteTask = {
+                                homeViewModel.deleteTask(selectedTask)
+                                updateToDometerWidgetData()
+                            }
+                        )
+                    }
+                    if (deleteTaskListAlertDialogState) {
+                        DeleteTaskListAlertDialog(
+                            onDismissRequest = { deleteTaskListAlertDialogState = false },
+                            deleteTaskList = {
+                                homeViewModel.deleteTaskList()
+                                updateToDometerWidgetData()
+                                scope.launch {
+                                    sheetState.hide()
                                 }
-                            )
-                        }
-                        if (deleteTaskListAlertDialogState) {
-                            DeleteTaskListAlertDialog(
-                                onDismissRequest = { deleteTaskListAlertDialogState = false },
-                                deleteTaskList = {
-                                    homeViewModel.deleteTaskList()
-                                    updateToDometerWidgetData()
-                                    scope.launch {
-                                        sheetState.hide()
-                                    }
-                                }
-                            )
-                        }
-                        if (chooseThemeAlertDialogState) {
-                            ChooseThemeAlertDialog(
-                                currentTheme = appThemeState.value,
-                                onDismissRequest = { chooseThemeAlertDialogState = false },
-                                chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
-                            )
-                        }
-                        if (tasks.isEmpty()) {
-                            EmptyTasksListView()
-                        } else {
-                            TasksListView(
-                                tasks,
-                                onDoingClick = {
-                                    homeViewModel.setTaskDoing(it)
-                                    updateToDometerWidgetData()
-                                },
-                                onDoneClick = {
-                                    homeViewModel.setTaskDone(it)
-                                    updateToDometerWidgetData()
+                            }
+                        )
+                    }
+                    if (chooseThemeAlertDialogState) {
+                        ChooseThemeAlertDialog(
+                            currentTheme = appThemeState.value,
+                            onDismissRequest = { chooseThemeAlertDialogState = false },
+                            chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
+                        )
+                    }
+                    if (tasks.isEmpty()) {
+                        EmptyTasksListView()
+                    } else {
+                        TasksListView(
+                            tasks,
+                            onDoingClick = {
+                                homeViewModel.setTaskDoing(it)
+                                updateToDometerWidgetData()
+                            },
+                            onDoneClick = {
+                                homeViewModel.setTaskDone(it)
+                                updateToDometerWidgetData()
                             },
                             onTaskItemClick = openTask,
                             onTaskItemLongClick = {},
