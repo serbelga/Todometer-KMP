@@ -167,7 +167,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                         textDecoration = TextDecoration.LineThrough
                     )
                 } else {
-                    TextStyle(color = ColorProvider(R.color.todometer_on_surface ))
+                    TextStyle(color = ColorProvider(R.color.todometer_on_surface))
                 }
                 Text(
                     text = task.title,
@@ -191,9 +191,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
 class Action : ActionCallback {
 
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
-
-    }
+    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {}
 
     companion object {
         const val TASK_ID = "taskId"
