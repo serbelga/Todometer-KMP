@@ -13,6 +13,12 @@
 ✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
 </h5>
 
+<a target="_blank" href="https://play.google.com/store/apps/details?id=dev.sergiobelda.todometer">
+<p align="center">
+<img width="200" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png">
+</p>
+</a>
+
 ## Screenshots
 
 ### Android
