@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -56,4 +58,8 @@ dependencies {
     implementation(libs.koin.compose)
 
     implementation(libs.google.playServicesWearable)
+
+    implementation(platform(libs.google.firebase.firebaseBom))
+    implementation(libs.google.firebase.firebaseAnalyticsKtx)
+    implementation(libs.google.firebase.firebaseCrashlyticsKtx)
 }
