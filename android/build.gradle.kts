@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     id("com.android.application")
     id("com.google.android.gms.oss-licenses-plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("android")
     kotlin("kapt")
 }
@@ -63,4 +65,8 @@ dependencies {
     implementation(libs.accompanist.systemUiController)
 
     implementation(libs.google.playServicesOssLicenses)
+
+    implementation(platform(libs.google.firebase.firebaseBom))
+    implementation(libs.google.firebase.firebaseAnalyticsKtx)
+    implementation(libs.google.firebase.firebaseCrashlyticsKtx)
 }

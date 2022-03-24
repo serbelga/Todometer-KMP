@@ -19,3 +19,5 @@ local.properties
 /buildSrc/build/
 /android/build/
 /android/release/*
+/android/google-services.json
+/wearos/google-services.json
