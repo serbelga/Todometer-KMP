@@ -9,7 +9,9 @@ buildscript {
         classpath(libs.kotlin.gradlePluginz)
         classpath(libs.kotlin.serialization)
         classpath(libs.android.gradlePluginz)
+        classpath(libs.google.firebase.crashlyticsGradle)
         classpath(libs.google.ossLicensesPlugin)
+        classpath(libs.google.services)
         classpath(libs.sqldelight.gradlePluginz)
     }
 }
