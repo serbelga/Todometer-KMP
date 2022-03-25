@@ -16,12 +16,12 @@
 
 package dev.sergiobelda.todometer.common.di
 
-import dev.sergiobelda.todometer.common.repository.ITaskListRepository
-import dev.sergiobelda.todometer.common.repository.ITaskRepository
-import dev.sergiobelda.todometer.common.repository.IUserPreferencesRepository
-import dev.sergiobelda.todometer.common.repository.TaskListRepository
-import dev.sergiobelda.todometer.common.repository.TaskRepository
-import dev.sergiobelda.todometer.common.repository.UserPreferencesRepository
+import dev.sergiobelda.todometer.common.data.repository.TaskListRepository
+import dev.sergiobelda.todometer.common.data.repository.TaskRepository
+import dev.sergiobelda.todometer.common.data.repository.UserPreferencesRepository
+import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
+import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
+import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {

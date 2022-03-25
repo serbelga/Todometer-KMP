@@ -18,9 +18,9 @@ package dev.sergiobelda.todometer.ui.taskdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.usecase.GetTaskUseCase
+import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

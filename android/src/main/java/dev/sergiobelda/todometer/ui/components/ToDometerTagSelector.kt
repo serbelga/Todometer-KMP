@@ -43,7 +43,7 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.model.Tag
+import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @Composable
 fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {

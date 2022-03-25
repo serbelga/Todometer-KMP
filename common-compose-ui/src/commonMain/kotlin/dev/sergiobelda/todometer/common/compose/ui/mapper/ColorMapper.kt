@@ -30,7 +30,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.pink
 import dev.sergiobelda.todometer.common.compose.ui.theme.red
 import dev.sergiobelda.todometer.common.compose.ui.theme.teal
 import dev.sergiobelda.todometer.common.compose.ui.theme.yellow
-import dev.sergiobelda.todometer.common.model.Tag
+import dev.sergiobelda.todometer.common.domain.model.Tag
 
 typealias ComposeColor = androidx.compose.ui.graphics.Color
 

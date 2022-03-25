@@ -58,12 +58,12 @@ import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.data.doIfError
-import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.model.TaskProgress
-import dev.sergiobelda.todometer.common.model.TaskState
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.model.TaskProgress
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.wear.R
 
 private const val TASK_TITLE = "task_title"

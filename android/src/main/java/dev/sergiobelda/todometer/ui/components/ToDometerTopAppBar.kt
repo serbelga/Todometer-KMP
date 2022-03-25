@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 
 @Composable
