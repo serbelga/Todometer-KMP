@@ -52,6 +52,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.data.doIfError
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import dev.sergiobelda.todometer.common.model.Task
@@ -76,10 +77,12 @@ fun TaskDetailScreen(
                         }
                     },
                     navigationIcon = {
-                        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                            IconButton(onClick = navigateUp) {
-                                Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
-                            }
+                        IconButton(onClick = navigateUp) {
+                            Icon(
+                                Icons.Rounded.ArrowBack,
+                                contentDescription = "Back",
+                                tint = TodometerColors.onSurfaceMediumEmphasis
+                            )
                         }
                     },
                     actions = {
