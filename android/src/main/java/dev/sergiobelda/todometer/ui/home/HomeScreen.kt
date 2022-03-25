@@ -256,7 +256,10 @@ fun HomeScreen(
                                 homeViewModel.setTaskDone(it)
                             },
                             onTaskItemClick = openTask,
-                            onTaskItemLongClick = {},
+                            onTaskItemLongClick = {
+                                deleteTaskAlertDialogState = true
+                                selectedTask = it
+                            },
                             onSwipeToDismiss = {
                                 deleteTaskAlertDialogState = true
                                 selectedTask = it

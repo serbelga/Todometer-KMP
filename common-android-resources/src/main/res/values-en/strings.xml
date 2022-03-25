@@ -43,7 +43,7 @@
     <string name="open_source_licenses">Open-source licenses</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="enter_task_name">Enter a Task name</string>
-    <string name="enter_description">Enter a Description</string>
+    <string name="enter_description">Enter a Description (optional)</string>
     <string name="enter_task_list_name">Enter a Task list name</string>
     <string name="choose_tag">Choose a Tag</string>
     <string name="field_not_empty">Field must not be empty</string>

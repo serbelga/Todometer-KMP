@@ -43,7 +43,7 @@
     <string name="open_source_licenses">Llicències de codi obert</string>
     <string name="privacy_policy">Política de privacitat</string>
     <string name="enter_task_name">Introdueix el nom de la tasca</string>
-    <string name="enter_description">Introdueix una descripció</string>
+    <string name="enter_description">Introdueix una descripció (opcional)</string>
     <string name="enter_task_list_name">Introdueix el nom de la llista de tasques</string>
     <string name="choose_tag">Tria una etiqueta</string>
     <string name="field_not_empty">El camp no pot quedar buit</string>

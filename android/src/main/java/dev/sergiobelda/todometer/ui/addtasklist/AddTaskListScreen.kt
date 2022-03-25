@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.data.doIfSuccess
 import org.koin.androidx.compose.getViewModel
 
@@ -65,7 +66,11 @@ fun AddTaskListScreen(
                 elevation = 0.dp,
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
-                        Icon(Icons.Rounded.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            Icons.Rounded.ArrowBack,
+                            contentDescription = "Back",
+                            tint = TodometerColors.onSurfaceMediumEmphasis
+                        )
                     }
                 },
                 title = { Text(stringResource(id = R.string.add_task_list)) },
