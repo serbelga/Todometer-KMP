@@ -18,15 +18,15 @@ package dev.sergiobelda.todometer.wear.ui.tasklisttasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.usecase.GetTaskListTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.usecase.UpdateTaskListNameUseCase
+import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListNameUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

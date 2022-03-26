@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.wear.ui.deletetask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
 import kotlinx.coroutines.launch
 
 class DeleteTaskViewModel(

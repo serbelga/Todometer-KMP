@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.wear
 
 import android.app.Application
-import dev.sergiobelda.todometer.common.database.DriverFactory
+import dev.sergiobelda.todometer.common.data.database.DriverFactory
 import dev.sergiobelda.todometer.common.di.initKoin
 import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 import dev.sergiobelda.todometer.wear.di.viewModelModule

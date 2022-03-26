@@ -35,7 +35,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
-import dev.sergiobelda.todometer.common.model.Tag
+import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
