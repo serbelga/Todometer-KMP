@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer
 
 import android.app.Application
+import com.google.android.material.color.DynamicColors
 import dev.sergiobelda.todometer.common.data.database.DriverFactory
 import dev.sergiobelda.todometer.common.di.initKoin
 import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
@@ -33,5 +34,7 @@ class App : Application() {
             modules(viewModelModule)
             androidContext(this@App)
         }
+
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 }

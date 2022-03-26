@@ -23,9 +23,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.ProgressIndicatorDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -48,12 +48,12 @@ fun TaskListProgress(taskListName: String?, tasks: List<Task>, modifier: Modifie
     ) {
         Text(
             taskListName?.uppercase() ?: "",
-            style = TodometerTypography.overline,
+            style = TodometerTypography.labelSmall,
             maxLines = 2
         )
         Text(
             text = TaskProgress.getPercentage(progress),
-            style = TodometerTypography.body2,
+            style = TodometerTypography.bodyMedium,
             modifier = Modifier.padding(top = 4.dp)
         )
         LinearProgressIndicator(

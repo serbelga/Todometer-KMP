@@ -17,14 +17,13 @@
 package dev.sergiobelda.todometer.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorPalette
 import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorPalette
 import dev.sergiobelda.todometer.common.compose.ui.theme.Type.typography
-import dev.sergiobelda.todometer.common.compose.ui.theme.shapes
 
 @Composable
 fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
@@ -43,8 +42,7 @@ fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composa
     }
 
     MaterialTheme(
-        colors = colors,
-        shapes = shapes,
+        colorScheme = colors,
         typography = typography,
         content = content
     )

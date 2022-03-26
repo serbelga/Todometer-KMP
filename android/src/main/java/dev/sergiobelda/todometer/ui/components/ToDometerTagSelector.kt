@@ -28,10 +28,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -52,7 +52,7 @@ fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     Text(
         text = stringResource(R.string.choose_tag),
         color = TodometerColors.primary,
-        style = TodometerTypography.caption,
+        style = TodometerTypography.labelLarge,
         modifier = Modifier.padding(start = 32.dp)
     )
     LazyRow(

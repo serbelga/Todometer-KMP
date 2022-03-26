@@ -26,6 +26,8 @@ val shapes = Shapes(
     large = RoundedCornerShape(12.dp)
 )
 
+val drawerItemShape = RoundedCornerShape(8.dp)
+
 val drawerShape =
     RoundedCornerShape(topStart = 0.dp, topEnd = 16.dp, bottomStart = 0.dp, bottomEnd = 0.dp)
 

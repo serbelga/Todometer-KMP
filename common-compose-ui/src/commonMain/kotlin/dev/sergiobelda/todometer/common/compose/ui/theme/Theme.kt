@@ -16,19 +16,17 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.theme
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-typealias ComposeMaterialTypography = androidx.compose.material.Typography
+typealias ComposeMaterialTypography = androidx.compose.material3.Typography
 
-val DarkColorPalette = darkColors(
+val DarkColorPalette = lightColorScheme(
     primary = primaryDark,
-    primaryVariant = orange,
     secondary = green,
     background = navy,
     surface = navy,
@@ -39,9 +37,8 @@ val DarkColorPalette = darkColors(
     error = red300
 )
 
-val LightColorPalette = lightColors(
+val LightColorPalette = lightColorScheme(
     primary = primaryLight,
-    primaryVariant = orange,
     secondary = green,
     background = background,
     surface = Color.White,
@@ -52,53 +49,50 @@ val LightColorPalette = lightColors(
     error = red800
 )
 
-val Colors.outline: Color
-    @Composable get() = if (isLight) outlineLight else outlineDark
+val ColorScheme.outline: Color
+    @Composable get() = if (isSystemInDarkTheme()) outlineLight else outlineDark
 
-val Colors.onSurfaceMediumEmphasis: Color
+val ColorScheme.onSurfaceMediumEmphasis: Color
     @Composable get() = onSurface.copy(alpha = 0.6f)
 
-val TodometerColors: Colors
-    @Composable get() = MaterialTheme.colors
-
-val TodometerShapes: Shapes
-    @Composable get() = MaterialTheme.shapes
+val TodometerColors: ColorScheme
+    @Composable get() = MaterialTheme.colorScheme
 
 val TodometerTypography: ComposeMaterialTypography
     @Composable get() = MaterialTheme.typography
 
-val Colors.pink: Color
-    @Composable get() = if (isLight) pinkLight else pinkDark
+val ColorScheme.pink: Color
+    @Composable get() = if (isSystemInDarkTheme()) pinkLight else pinkDark
 
-val Colors.red: Color
-    @Composable get() = if (isLight) redLight else redDark
+val ColorScheme.red: Color
+    @Composable get() = if (isSystemInDarkTheme()) redLight else redDark
 
-val Colors.blue: Color
-    @Composable get() = if (isLight) blueLight else blueDark
+val ColorScheme.blue: Color
+    @Composable get() = if (isSystemInDarkTheme()) blueLight else blueDark
 
-val Colors.indigo: Color
-    @Composable get() = if (isLight) indigoLight else indigoDark
+val ColorScheme.indigo: Color
+    @Composable get() = if (isSystemInDarkTheme()) indigoLight else indigoDark
 
-val Colors.teal: Color
-    @Composable get() = if (isLight) tealLight else tealDark
+val ColorScheme.teal: Color
+    @Composable get() = if (isSystemInDarkTheme()) tealLight else tealDark
 
-val Colors.green: Color
-    @Composable get() = if (isLight) greenLight else greenDark
+val ColorScheme.green: Color
+    @Composable get() = if (isSystemInDarkTheme()) greenLight else greenDark
 
-val Colors.lime: Color
-    @Composable get() = if (isLight) limeLight else limeDark
+val ColorScheme.lime: Color
+    @Composable get() = if (isSystemInDarkTheme()) limeLight else limeDark
 
-val Colors.yellow: Color
-    @Composable get() = if (isLight) yellowLight else yellowDark
+val ColorScheme.yellow: Color
+    @Composable get() = if (isSystemInDarkTheme()) yellowLight else yellowDark
 
-val Colors.amber: Color
-    @Composable get() = if (isLight) amberLight else amberDark
+val ColorScheme.amber: Color
+    @Composable get() = if (isSystemInDarkTheme()) amberLight else amberDark
 
-val Colors.orange: Color
-    @Composable get() = if (isLight) orangeLight else orangeDark
+val ColorScheme.orange: Color
+    @Composable get() = if (isSystemInDarkTheme()) orangeLight else orangeDark
 
-val Colors.brown: Color
-    @Composable get() = if (isLight) brownLight else brownDark
+val ColorScheme.brown: Color
+    @Composable get() = if (isSystemInDarkTheme()) brownLight else brownDark
 
-val Colors.gray: Color
-    @Composable get() = if (isLight) grayLight else grayDark
+val ColorScheme.gray: Color
+    @Composable get() = if (isSystemInDarkTheme()) grayLight else grayDark

@@ -40,22 +40,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
 import androidx.compose.material.DismissDirection
 import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.Icon
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.RadioButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
@@ -63,6 +56,14 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -88,7 +89,6 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
@@ -103,7 +103,7 @@ import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     addTaskList: () -> Unit,
@@ -270,7 +270,6 @@ fun HomeScreen(
             },
             floatingActionButton = {
                 FloatingActionButton(
-                    backgroundColor = TodometerColors.primary,
                     onClick = addTask
                 ) {
                     Icon(
@@ -284,6 +283,7 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseThemeAlertDialog(
     currentTheme: AppTheme,
@@ -305,7 +305,8 @@ fun ChooseThemeAlertDialog(
                     item {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .height(56.dp)
                                 .selectable(
                                     selected = themeSelected == appTheme,
@@ -320,7 +321,7 @@ fun ChooseThemeAlertDialog(
                             )
                             Text(
                                 text = stringResource(appThemeOption.modeNameRes),
-                                style = TodometerTypography.body1,
+                                style = TodometerTypography.bodyLarge,
                                 modifier = Modifier.padding(start = 16.dp)
                             )
                         }
@@ -412,10 +413,14 @@ fun DrawerContent(
 ) {
     Column {
         Box(
-            modifier = Modifier.height(56.dp).fillMaxWidth()
+            modifier = Modifier
+                .height(56.dp)
+                .fillMaxWidth()
         ) {
             ToDometerTitle(
-                modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(start = 16.dp)
             )
         }
         HorizontalDivider()
@@ -427,13 +432,13 @@ fun DrawerContent(
         ) {
             Text(
                 text = stringResource(R.string.task_lists).uppercase(),
-                style = TodometerTypography.overline
+                style = TodometerTypography.labelSmall
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addTaskList) {
                 Text(
                     stringResource(R.string.add_task_list),
-                    style = TodometerTypography.caption
+                    style = TodometerTypography.labelLarge
                 )
             }
         }
@@ -500,7 +505,10 @@ fun TasksListView(
                     )
                     val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
                     Box(
-                        Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
+                        Modifier
+                            .fillMaxSize()
+                            .background(color)
+                            .padding(horizontal = 16.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Icon(
@@ -545,12 +553,16 @@ fun EmptyTasksListView() {
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(bottom = 72.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painterResource(R.drawable.no_tasks),
-                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
+                modifier = Modifier
+                    .size(240.dp)
+                    .padding(bottom = 24.dp),
                 contentDescription = null
             )
             Text(stringResource(R.string.no_tasks))
@@ -564,12 +576,16 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(bottom = 72.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painterResource(R.drawable.no_task_lists),
-                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
+                modifier = Modifier
+                    .size(240.dp)
+                    .padding(bottom = 24.dp),
                 contentDescription = null
             )
             Text(
@@ -608,7 +624,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.edit_task_list),
-                    style = TodometerTypography.caption
+                    style = TodometerTypography.labelLarge
                 )
             },
             onClick = editTaskListClick,
@@ -624,7 +640,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.delete_task_list),
-                    style = TodometerTypography.caption
+                    style = TodometerTypography.labelLarge
                 )
             },
             onClick = deleteTaskListClick,
@@ -643,12 +659,12 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.theme),
-                    style = TodometerTypography.caption
+                    style = TodometerTypography.labelLarge
                 )
             },
             subtitle = {
                 appThemeMap[currentTheme]?.modeNameRes?.let {
-                    Text(stringResource(it), style = TodometerTypography.caption)
+                    Text(stringResource(it), style = TodometerTypography.labelLarge)
                 }
             },
             onClick = chooseThemeClick
@@ -658,12 +674,12 @@ fun MoreBottomSheet(
             TextButton(onClick = openSourceLicensesClick) {
                 Text(
                     stringResource(R.string.open_source_licenses),
-                    style = TodometerTypography.caption
+                    style = TodometerTypography.labelLarge
                 )
             }
             Text("·")
             TextButton(onClick = aboutClick) {
-                Text(stringResource(R.string.about), style = TodometerTypography.caption)
+                Text(stringResource(R.string.about), style = TodometerTypography.labelLarge)
             }
         }
     }

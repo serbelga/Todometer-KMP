@@ -22,12 +22,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,7 +48,7 @@ fun ToDometerTopAppBar(
 ) {
     Box {
         Column {
-            TopAppBar(
+            SmallTopAppBar(
                 title = {},
                 navigationIcon = {
                     IconButton(onClick = onMenuClick) {
@@ -67,9 +67,7 @@ fun ToDometerTopAppBar(
                             tint = TodometerColors.onSurfaceMediumEmphasis
                         )
                     }
-                },
-                backgroundColor = TodometerColors.surface,
-                elevation = 0.dp
+                }
             )
             TaskListProgress(taskListName, tasks)
         }

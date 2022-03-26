@@ -16,12 +16,11 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.components
 
-import androidx.compose.material.Divider
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 
 @Composable
 fun HorizontalDivider(modifier: Modifier = Modifier) {

@@ -20,12 +20,14 @@ kotlin {
             kotlinOptions.jvmTarget = "11"
         }
     }
+    @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
+                api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
                 api(compose.uiTooling)

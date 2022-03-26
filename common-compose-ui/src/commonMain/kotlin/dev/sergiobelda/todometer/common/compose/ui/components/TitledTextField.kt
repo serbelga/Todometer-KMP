@@ -21,9 +21,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,7 +56,7 @@ fun TitledTextField(
         Text(
             title,
             color = TodometerColors.primary,
-            style = TodometerTypography.caption,
+            style = TodometerTypography.labelLarge,
             modifier = Modifier.padding(start = 16.dp)
         )
         OutlinedTextField(
@@ -75,7 +75,7 @@ fun TitledTextField(
             Text(
                 errorMessage,
                 color = TodometerColors.error,
-                style = TodometerTypography.caption,
+                style = TodometerTypography.labelLarge,
                 modifier = Modifier.padding(start = 16.dp)
             )
         }

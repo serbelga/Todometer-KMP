@@ -23,10 +23,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Surface
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.Surface
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import dev.sergiobelda.todometer.common.compose.ui.theme.shapes
 
 @Composable
 fun ToDometerAlertDialog(
@@ -44,8 +45,8 @@ fun ToDometerAlertDialog(
     dismissButton: @Composable (() -> Unit)? = null,
     title: @Composable (() -> Unit)? = null,
     body: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = shapes.medium,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(backgroundColor),
     properties: DialogProperties = DialogProperties()
 ) {
@@ -66,7 +67,6 @@ fun ToDometerAlertDialog(
             modifier = modifier,
             title = title,
             body = body,
-            shape = shape,
             backgroundColor = backgroundColor,
             contentColor = contentColor
         )
@@ -79,8 +79,8 @@ internal fun AlertDialogContent(
     modifier: Modifier = Modifier,
     title: (@Composable () -> Unit)? = null,
     body: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = shapes.medium,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(backgroundColor),
 ) {
     Surface(
@@ -92,7 +92,7 @@ internal fun AlertDialogContent(
         Column {
             title?.let {
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
-                    val textStyle = MaterialTheme.typography.subtitle1
+                    val textStyle = MaterialTheme.typography.titleMedium
                     ProvideTextStyle(textStyle, title)
                 }
             }
@@ -100,7 +100,7 @@ internal fun AlertDialogContent(
                 CompositionLocalProvider(
                     LocalContentAlpha provides ContentAlpha.medium
                 ) {
-                    val textStyle = MaterialTheme.typography.body2
+                    val textStyle = MaterialTheme.typography.bodyMedium
                     ProvideTextStyle(textStyle, body)
                 }
             }

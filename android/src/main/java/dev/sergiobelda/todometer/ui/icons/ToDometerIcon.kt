@@ -16,14 +16,14 @@
 
 package dev.sergiobelda.todometer.ui.icons
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import dev.sergiobelda.todometer.R
 
 @Composable
 fun iconToDometer() =
-    if (MaterialTheme.colors.isLight)
+    if (isSystemInDarkTheme())
         painterResource(R.drawable.isotype_light)
     else
         painterResource(R.drawable.isotype_dark)

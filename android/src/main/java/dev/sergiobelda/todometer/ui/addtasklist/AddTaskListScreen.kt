@@ -19,15 +19,15 @@ package dev.sergiobelda.todometer.ui.addtasklist
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -47,6 +47,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskListScreen(
     navigateUp: () -> Unit,
@@ -60,10 +61,7 @@ fun AddTaskListScreen(
     }
     Scaffold(
         topBar = {
-            TopAppBar(
-                backgroundColor = TodometerColors.surface,
-                contentColor = contentColorFor(TodometerColors.surface),
-                elevation = 0.dp,
+            SmallTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(

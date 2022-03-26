@@ -21,16 +21,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.compose.ui.theme.drawerItemShape
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 
 @Composable
 fun TaskListItem(
@@ -41,23 +41,23 @@ fun TaskListItem(
     val background = if (isSelected) {
         Modifier.background(
             color = TodometerColors.primary.copy(alpha = 0.2f),
-            shape = TodometerShapes.medium
+            shape = drawerItemShape
         )
     } else {
         Modifier
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(56.dp).clip(TodometerShapes.medium)
+        modifier = Modifier.height(56.dp).clip(drawerItemShape)
             .selectable(isSelected, onClick = onItemClick)
             .then(background)
     ) {
         val selectedColor =
-            if (isSelected) TodometerColors.primary else TodometerColors.onSurface.copy(alpha = ContentAlpha.medium)
+            if (isSelected) TodometerColors.primary else TodometerColors.onSurfaceMediumEmphasis
         Text(
             text = text,
             color = selectedColor,
-            style = TodometerTypography.subtitle2,
+            style = TodometerTypography.titleSmall,
             maxLines = 1,
             modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
         )
