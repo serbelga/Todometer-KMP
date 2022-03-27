@@ -21,10 +21,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskUseCase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 
 class TaskDetailViewModel(
     private val taskId: String,

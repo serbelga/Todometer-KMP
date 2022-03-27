@@ -29,7 +29,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,9 +43,7 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.domain.doIfError
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 
 @Composable
@@ -54,104 +51,127 @@ fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel
 ) {
-    val taskResultState = editTaskViewModel.task.collectAsState()
-    taskResultState.value.doIfError {
-        navigateUp()
-    }.doIfSuccess { task ->
-        var taskTitle by rememberSaveable { mutableStateOf(task.title) }
-        var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
-        var taskDescription by rememberSaveable { mutableStateOf(task.description) }
-        var selectedTag by remember { mutableStateOf(task.tag) }
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(TodometerColors.surface),
-                    elevation = 0.dp,
-                    navigationIcon = {
-                        IconButton(onClick = navigateUp) {
-                            Icon(
-                                Icons.Rounded.ArrowBack,
-                                contentDescription = "Back",
-                                tint = TodometerColors.onSurfaceMediumEmphasis
-                            )
-                        }
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = {
-                                if (taskTitle.isBlank()) {
-                                    taskTitleInputError = true
-                                } else {
-                                    editTaskViewModel.updateTask(
-                                        Task(
-                                            id = task.id,
-                                            title = taskTitle,
-                                            description = taskDescription,
-                                            state = task.state,
-                                            taskListId = task.taskListId,
-                                            tag = selectedTag,
-                                            sync = false
-                                        )
-                                    )
-                                    navigateUp()
-                                }
+    val editTaskUiState = editTaskViewModel.editTaskUiState
+
+    when {
+        editTaskUiState.isLoading -> {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        backgroundColor = TodometerColors.surface,
+                        contentColor = contentColorFor(TodometerColors.surface),
+                        elevation = 0.dp,
+                        navigationIcon = {
+                            IconButton(onClick = navigateUp) {
+                                Icon(
+                                    Icons.Rounded.ArrowBack,
+                                    contentDescription = "Back",
+                                    tint = TodometerColors.onSurfaceMediumEmphasis
+                                )
                             }
-                        ) {
-                            Icon(
-                                Icons.Rounded.Check,
-                                contentDescription = "Save",
-                                tint = TodometerColors.primary
-                            )
-                        }
-                    },
-                    title = { Text(stringResource(id = R.string.edit_task)) }
-                )
-            },
-            content = {
-                Column {
-                    TitledTextField(
-                        title = stringResource(id = R.string.name),
-                        value = taskTitle,
-                        onValueChange = {
-                            taskTitle = it
-                            taskTitleInputError = false
                         },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
-                        isError = taskTitleInputError,
-                        errorMessage = stringResource(id = R.string.field_not_empty),
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Next
-                        ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
+                        actions = {},
+                        title = { Text(stringResource(id = R.string.edit_task)) }
                     )
-                    ToDometerTagSelector(selectedTag) { tag ->
-                        selectedTag = tag
-                    }
-                    TitledTextField(
-                        title = stringResource(id = R.string.description),
-                        value = taskDescription ?: "",
-                        onValueChange = { taskDescription = it },
-                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Done
-                        ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
-                    )
+                },
+                content = {
+                    ToDometerContentLoadingProgress()
                 }
-            }
-        )
+            )
+        }
+        editTaskUiState.task != null -> {
+            var taskTitle by rememberSaveable { mutableStateOf(editTaskUiState.task.title) }
+            var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
+            var taskDescription by rememberSaveable { mutableStateOf(editTaskUiState.task.description) }
+            var selectedTag by remember { mutableStateOf(editTaskUiState.task.tag) }
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        backgroundColor = TodometerColors.surface,
+                        contentColor = contentColorFor(TodometerColors.surface),
+                        elevation = 0.dp,
+                        navigationIcon = {
+                            IconButton(onClick = navigateUp) {
+                                Icon(
+                                    Icons.Rounded.ArrowBack,
+                                    contentDescription = "Back",
+                                    tint = TodometerColors.onSurfaceMediumEmphasis
+                                )
+                            }
+                        },
+                        actions = {
+                            IconButton(
+                                onClick = {
+                                    if (taskTitle.isBlank()) {
+                                        taskTitleInputError = true
+                                    } else {
+                                        editTaskViewModel.updateTask(
+                                            taskTitle,
+                                            taskDescription,
+                                            selectedTag
+                                        )
+                                        navigateUp()
+                                    }
+                                }
+                            ) {
+                                Icon(
+                                    Icons.Rounded.Check,
+                                    contentDescription = "Save",
+                                    tint = TodometerColors.primary
+                                )
+                            }
+                        },
+                        title = { Text(stringResource(id = R.string.edit_task)) }
+                    )
+                },
+                content = {
+                    Column {
+                        TitledTextField(
+                            title = stringResource(id = R.string.name),
+                            value = taskTitle,
+                            onValueChange = {
+                                taskTitle = it
+                                taskTitleInputError = false
+                            },
+                            placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
+                            isError = taskTitleInputError,
+                            errorMessage = stringResource(id = R.string.field_not_empty),
+                            keyboardOptions = KeyboardOptions(
+                                capitalization = KeyboardCapitalization.Sentences,
+                                imeAction = ImeAction.Next
+                            ),
+                            modifier = Modifier.padding(
+                                start = 16.dp,
+                                end = 16.dp,
+                                top = 8.dp,
+                                bottom = 8.dp
+                            )
+                        )
+                        ToDometerTagSelector(selectedTag) { tag ->
+                            selectedTag = tag
+                        }
+                        TitledTextField(
+                            title = stringResource(id = R.string.description),
+                            value = taskDescription ?: "",
+                            onValueChange = { taskDescription = it },
+                            placeholder = { Text(stringResource(id = R.string.enter_description)) },
+                            keyboardOptions = KeyboardOptions(
+                                capitalization = KeyboardCapitalization.Sentences,
+                                imeAction = ImeAction.Done
+                            ),
+                            modifier = Modifier.padding(
+                                start = 16.dp,
+                                end = 16.dp,
+                                top = 8.dp,
+                                bottom = 8.dp
+                            )
+                        )
+                    }
+                }
+            )
+        }
+        else -> {
+            // TODO
+        }
     }
 }
