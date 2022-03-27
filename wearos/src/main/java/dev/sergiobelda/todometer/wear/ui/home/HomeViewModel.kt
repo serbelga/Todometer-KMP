@@ -16,30 +16,53 @@
 
 package dev.sergiobelda.todometer.wear.ui.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    getTaskListsUseCase: GetTaskListsUseCase,
+    private val getTaskListsUseCase: GetTaskListsUseCase,
     private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
-    val taskLists: StateFlow<Result<List<TaskList>>> =
-        getTaskListsUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
+    var taskListsUiState by mutableStateOf(TaskListsUiState(isLoading = true))
+        private set
+
+    init {
+        getTaskLists()
+    }
+
+    private fun getTaskLists() = viewModelScope.launch {
+        getTaskListsUseCase().collect { result ->
+            result.doIfSuccess { taskLists ->
+                taskListsUiState = taskListsUiState.copy(
+                    isLoading = false,
+                    taskLists = taskLists,
+                    errorMessage = null
+                )
+            }.doIfError { error ->
+                taskListsUiState = taskListsUiState.copy(
+                    isLoading = false,
+                    taskLists = emptyList(),
+                    errorMessage = error.message
+                )
+            }
+        }
+    }
 
     fun insertTaskList(name: String) = viewModelScope.launch {
         insertTaskListUseCase.invoke(name)
     }
 }
+
+data class TaskListsUiState(
+    val isLoading: Boolean = false,
+    val taskLists: List<TaskList> = emptyList(),
+    val errorMessage: String? = null
+)

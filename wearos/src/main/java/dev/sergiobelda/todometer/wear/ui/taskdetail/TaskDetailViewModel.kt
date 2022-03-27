@@ -16,30 +16,56 @@
 
 package dev.sergiobelda.todometer.wear.ui.taskdetail
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class TaskDetailViewModel(
-    taskId: String,
-    getTaskUseCase: GetTaskUseCase,
+    private val taskId: String,
+    private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(),
-        Result.Loading
-    )
+    var taskDetailUiState by mutableStateOf(TaskDetailUiState(isLoading = true))
+        private set
 
-    fun updateTask(task: Task) = viewModelScope.launch {
-        updateTaskUseCase(task)
+    init {
+        getTask()
+    }
+
+    private fun getTask() = viewModelScope.launch {
+        getTaskUseCase(taskId).collect { result ->
+            result.doIfSuccess { task ->
+                taskDetailUiState = taskDetailUiState.copy(
+                    isLoading = false,
+                    task = task,
+                    errorMessage = null
+                )
+            }.doIfError { error ->
+                taskDetailUiState = taskDetailUiState.copy(
+                    isLoading = false,
+                    task = null,
+                    errorMessage = error.message
+                )
+            }
+        }
+    }
+
+    fun updateTask(title: String) = viewModelScope.launch {
+        taskDetailUiState.task?.let { task ->
+            updateTaskUseCase(task.copy(title = title))
+        }
     }
 }
+
+data class TaskDetailUiState(
+    val isLoading: Boolean = false,
+    val task: Task? = null,
+    val errorMessage: String? = null
+)

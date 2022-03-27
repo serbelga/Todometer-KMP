@@ -30,7 +30,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -46,8 +45,6 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.domain.doIfError
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.wear.R
 
 private const val TASK_TITLE = "task_title"
@@ -58,30 +55,32 @@ fun TaskDetailScreen(
     taskDetailViewModel: TaskDetailViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val taskResultState = taskDetailViewModel.task.collectAsState()
-    taskResultState.value.doIfSuccess { task ->
-        val launcher =
-            rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK) {
-                    val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
-                    taskDetailViewModel.updateTask(task.copy(title = title ?: task.title))
+    val taskDetailUiState = taskDetailViewModel.taskDetailUiState
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                if (!title.isNullOrEmpty()) {
+                    taskDetailViewModel.updateTask(title)
                 }
             }
-        Scaffold(
-            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+        }
+    Scaffold(
+        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+    ) {
+        ScalingLazyColumn(
+            autoCentering = false,
+            contentPadding = PaddingValues(
+                top = 28.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 40.dp
+            ),
+            state = scalingLazyListState,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            ScalingLazyColumn(
-                autoCentering = false,
-                contentPadding = PaddingValues(
-                    top = 28.dp,
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 40.dp
-                ),
-                state = scalingLazyListState,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
+            taskDetailUiState.task?.let { task ->
                 item {
                     Text(text = task.title)
                 }
@@ -110,8 +109,6 @@ fun TaskDetailScreen(
                 }
             }
         }
-    }.doIfError {
-        // TODO
     }
 }
 

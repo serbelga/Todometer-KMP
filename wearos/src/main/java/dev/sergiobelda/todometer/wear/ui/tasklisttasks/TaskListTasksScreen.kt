@@ -40,11 +40,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.foundation.CurvedRow
+import androidx.wear.compose.foundation.CurvedLayout
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
 import androidx.wear.compose.material.CircularProgressIndicator
-import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -54,6 +53,7 @@ import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.curvedText
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
@@ -103,7 +103,7 @@ fun TaskListTasksScreen(
         )
         Scaffold(
             timeText = {
-                CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
+                CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
             },
             positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
         ) {
@@ -158,7 +158,8 @@ fun TaskListTasksScreen(
                 if (taskList != null) {
                     item {
                         EditTaskListButton {
-                            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                            val intent: Intent =
+                                RemoteInputIntentHelper.createActionRemoteInputIntent()
                             val remoteInputs: List<RemoteInput> = listOf(
                                 RemoteInput.Builder(TASK_LIST_NAME)
                                     .setLabel(taskList?.name)
