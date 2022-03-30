@@ -21,17 +21,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 
 class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
-    var taskListsUiState by mutableStateOf(TaskListsUiState(isLoading = true))
+    var homeUiState by mutableStateOf(HomeUiState(isLoading = true))
         private set
 
     init {
@@ -41,13 +43,13 @@ class HomeViewModel(
     private fun getTaskLists() = viewModelScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
-                taskListsUiState = taskListsUiState.copy(
+                homeUiState = homeUiState.copy(
                     isLoading = false,
                     taskLists = taskLists,
                     errorMessage = null
                 )
             }.doIfError { error ->
-                taskListsUiState = taskListsUiState.copy(
+                homeUiState = homeUiState.copy(
                     isLoading = false,
                     taskLists = emptyList(),
                     errorMessage = error.message
@@ -60,9 +62,3 @@ class HomeViewModel(
         insertTaskListUseCase.invoke(name)
     }
 }
-
-data class TaskListsUiState(
-    val isLoading: Boolean = false,
-    val taskLists: List<TaskList> = emptyList(),
-    val errorMessage: String? = null
-)

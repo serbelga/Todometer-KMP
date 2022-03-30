@@ -127,9 +127,7 @@ fun HomeScreen(
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
     var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
-    val taskListSelectedUiState = homeViewModel.taskListSelectedUiState
-    val tasksUiState = homeViewModel.tasksUiState
-    val taskListsUiState = homeViewModel.taskListsUiState
+    val homeUiState = homeViewModel.homeUiState
     val appTheme by homeViewModel.appTheme.collectAsState()
 
     val defaultTaskListName = stringResource(R.string.default_task_list_name)
@@ -146,11 +144,11 @@ fun HomeScreen(
                         editTaskList()
                     }
                 },
-                editTaskListEnabled = !taskListSelectedUiState.isDefaultTaskListSelected,
+                editTaskListEnabled = !homeUiState.isDefaultTaskListSelected,
                 deleteTaskListClick = {
                     deleteTaskListAlertDialogState = true
                 },
-                deleteTaskListEnabled = !taskListSelectedUiState.isDefaultTaskListSelected,
+                deleteTaskListEnabled = !homeUiState.isDefaultTaskListSelected,
                 currentTheme = appTheme,
                 chooseThemeClick = {
                     chooseThemeAlertDialogState = true
@@ -175,9 +173,9 @@ fun HomeScreen(
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             drawerContent = {
                 DrawerContent(
-                    taskListSelectedUiState.taskListSelected?.id ?: "",
+                    homeUiState.taskListSelected?.id ?: "",
                     defaultTaskListName,
-                    taskListsUiState.taskLists,
+                    homeUiState.taskLists,
                     addTaskList = {
                         scope.launch {
                             closeDrawer()
@@ -199,8 +197,8 @@ fun HomeScreen(
                     onMoreClick = {
                         scope.launch { sheetState.show() }
                     },
-                    taskListSelectedUiState.taskListSelected?.name ?: defaultTaskListName,
-                    tasksUiState.tasks
+                    homeUiState.taskListSelected?.name ?: defaultTaskListName,
+                    homeUiState.tasks
                 )
             },
             content = {
@@ -228,14 +226,14 @@ fun HomeScreen(
                         chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
                     )
                 }
-                if (tasksUiState.isLoading) {
+                if (homeUiState.isLoadingTasks) {
                     ToDometerContentLoadingProgress()
                 } else {
-                    if (tasksUiState.tasks.isEmpty()) {
+                    if (homeUiState.tasks.isEmpty()) {
                         EmptyTasksListView()
                     } else {
                         TasksListView(
-                            tasksUiState.tasks,
+                            homeUiState.tasks,
                             onDoingClick = {
                                 homeViewModel.setTaskDoing(it)
                             },

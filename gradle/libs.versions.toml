@@ -2,7 +2,7 @@
 accompanist = "0.23.0"
 activity = "1.4.0"
 androidCore = "1.7.0"
-androidCompileSdk = "31"
+androidCompileSdk = "32"
 androidMinSdk = "24"
 androidWearMinSdk = "25"
 androidTargetSdk = "31"
@@ -111,7 +111,7 @@ mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockk" }
 
 google-playServicesOssLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "playServicesOssLicenses" }
 google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
-google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
+google-ossLicensesPluginz = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
 
 sqldelight-gradlePluginz = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqlDelight" }
 sqldelight-androidDriver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }

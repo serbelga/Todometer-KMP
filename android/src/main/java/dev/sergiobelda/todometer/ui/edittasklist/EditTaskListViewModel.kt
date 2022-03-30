@@ -19,9 +19,11 @@ package dev.sergiobelda.todometer.ui.edittasklist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListUseCase
+import dev.sergiobelda.todometer.ui.error.ErrorUi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -43,3 +45,9 @@ class EditTaskListViewModel(
         updateTaskListUseCase(taskList)
     }
 }
+
+data class EditTaskUiState(
+    val isLoading: Boolean = false,
+    val task: Task? = null,
+    val error: ErrorUi? = null
+)

@@ -66,13 +66,7 @@ class HomeViewModel(
             AppTheme.FOLLOW_SYSTEM
         )
 
-    var taskListSelectedUiState by mutableStateOf(TaskListSelectedUiState(isLoading = true))
-        private set
-
-    var tasksUiState by mutableStateOf(TasksUiState(isLoading = true))
-        private set
-
-    var taskListsUiState by mutableStateOf(TaskListsUiState(isLoading = true))
+    var homeUiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
         private set
 
     init {
@@ -87,20 +81,16 @@ class HomeViewModel(
     }
 
     private fun getTaskListSelected() = viewModelScope.launch {
-        getTaskListSelectedUseCase().collect() { result ->
+        getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
-                taskListSelectedUiState = taskListSelectedUiState.copy(
-                    isLoading = false,
+                homeUiState = homeUiState.copy(
                     taskListSelected = taskList,
-                    isDefaultTaskListSelected = false,
-                    errorMessage = null
+                    isDefaultTaskListSelected = false
                 )
-            }.doIfError { error ->
-                taskListSelectedUiState = taskListSelectedUiState.copy(
-                    isLoading = false,
+            }.doIfError {
+                homeUiState = homeUiState.copy(
                     taskListSelected = null,
                     isDefaultTaskListSelected = true,
-                    errorMessage = error.message
                 )
             }
         }
@@ -109,16 +99,14 @@ class HomeViewModel(
     private fun getTaskListSelectedTasks() = viewModelScope.launch {
         getTaskListSelectedTasksUseCase().collect { result ->
             result.doIfSuccess { tasks ->
-                tasksUiState = tasksUiState.copy(
-                    isLoading = false,
-                    tasks = tasks,
-                    errorMessage = null
+                homeUiState = homeUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = tasks
                 )
-            }.doIfError { error ->
-                tasksUiState = tasksUiState.copy(
-                    isLoading = false,
-                    tasks = emptyList(),
-                    errorMessage = error.message
+            }.doIfError {
+                homeUiState = homeUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = emptyList()
                 )
             }
         }
@@ -127,16 +115,12 @@ class HomeViewModel(
     private fun getTaskLists() = viewModelScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
-                taskListsUiState = taskListsUiState.copy(
-                    isLoading = false,
-                    taskLists = taskLists,
-                    errorMessage = null
+                homeUiState = homeUiState.copy(
+                    taskLists = taskLists
                 )
-            }.doIfError { error ->
-                taskListsUiState = taskListsUiState.copy(
-                    isLoading = false,
-                    taskLists = emptyList(),
-                    errorMessage = error.message
+            }.doIfError {
+                homeUiState = homeUiState.copy(
+                    taskLists = emptyList()
                 )
             }
         }
@@ -166,22 +150,3 @@ class HomeViewModel(
         setAppThemeUseCase(theme)
     }
 }
-
-data class TasksUiState(
-    val isLoading: Boolean = false,
-    val tasks: List<Task> = emptyList(),
-    val errorMessage: String? = null
-)
-
-data class TaskListSelectedUiState(
-    val isLoading: Boolean = false,
-    val taskListSelected: TaskList? = null,
-    val isDefaultTaskListSelected: Boolean = true,
-    val errorMessage: String? = null
-)
-
-data class TaskListsUiState(
-    val isLoading: Boolean = false,
-    val taskLists: List<TaskList> = emptyList(),
-    val errorMessage: String? = null
-)

@@ -66,9 +66,3 @@ class TaskDetailViewModel(
         }
     }
 }
-
-data class TaskDetailUiState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val errorMessage: String? = null
-)

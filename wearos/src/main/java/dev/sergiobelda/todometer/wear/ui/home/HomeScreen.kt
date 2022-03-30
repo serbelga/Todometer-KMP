@@ -36,6 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
+import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -60,7 +61,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val taskListsUiState = homeViewModel.taskListsUiState
+    val homeUiState = homeViewModel.homeUiState
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -83,35 +84,40 @@ fun HomeScreen(
             ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
             item { Text(stringResource(R.string.app_name)) }
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            item {
-                TaskListItem(
-                    stringResource(id = R.string.default_task_list_name),
-                    onClick = { openTaskList(null) }
-                )
-            }
-            items(taskListsUiState.taskLists) { taskList ->
-                TaskListItem(taskList.name) { openTaskList(taskList.id) }
-            }
-            item { Spacer(modifier = Modifier.height(4.dp)) }
-            item {
-                AddTaskListButton {
-                    val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                    val remoteInputs: List<RemoteInput> = listOf(
-                        RemoteInput.Builder(TASK_LIST_NAME)
-                            .setLabel(taskListNameInput)
-                            .wearableExtender {
-                                setEmojisAllowed(false)
-                                setInputActionType(EditorInfo.IME_ACTION_DONE)
-                            }.build()
+            if (homeUiState.isLoading) {
+                item { CircularProgressIndicator() }
+            } else {
+                item {
+                    TaskListItem(
+                        stringResource(id = R.string.default_task_list_name),
+                        onClick = { openTaskList(null) }
                     )
+                }
+                items(homeUiState.taskLists) { taskList ->
+                    TaskListItem(taskList.name) { openTaskList(taskList.id) }
+                }
+                item { Spacer(modifier = Modifier.height(4.dp)) }
+                item {
+                    AddTaskListButton {
+                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+                        val remoteInputs: List<RemoteInput> = listOf(
+                            RemoteInput.Builder(TASK_LIST_NAME)
+                                .setLabel(taskListNameInput)
+                                .wearableExtender {
+                                    setEmojisAllowed(false)
+                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
+                                }.build()
+                        )
 
-                    RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
-                    launcher.launch(intent)
+                        launcher.launch(intent)
+                    }
                 }
             }
         }
