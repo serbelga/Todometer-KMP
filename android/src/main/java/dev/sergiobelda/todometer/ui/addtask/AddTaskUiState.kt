@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.home
+package dev.sergiobelda.todometer.ui.addtask
 
-import dev.sergiobelda.todometer.common.domain.model.TaskList
-
-data class HomeUiState(
-    val isLoading: Boolean = false,
-    val taskLists: List<TaskList> = emptyList(),
+data class AddTaskUiState(
+    val isAddingTask: Boolean = false,
+    val isAdded: Boolean = false,
     val errorMessage: String? = null
 )

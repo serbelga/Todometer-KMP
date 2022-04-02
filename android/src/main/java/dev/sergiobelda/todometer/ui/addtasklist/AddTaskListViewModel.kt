@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,13 @@
 
 package dev.sergiobelda.todometer.ui.addtasklist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
 import kotlinx.coroutines.launch
 
@@ -28,10 +30,24 @@ class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<Result<String>>()
-    val result: LiveData<Result<String>> get() = _result
+    var addTaskListUiState by mutableStateOf(AddTaskListUiState())
+        private set
 
     fun insertTaskList(name: String) = viewModelScope.launch {
-        _result.value = insertTaskListUseCase.invoke(name)
+        addTaskListUiState = addTaskListUiState.copy(isAddingTaskList = true)
+        val result = insertTaskListUseCase.invoke(name)
+        result.doIfSuccess {
+            addTaskListUiState = addTaskListUiState.copy(
+                isAddingTaskList = false,
+                isAdded = true,
+                errorMessage = null
+            )
+        }.doIfError { error ->
+            addTaskListUiState = addTaskListUiState.copy(
+                isAddingTaskList = false,
+                isAdded = false,
+                errorMessage = error.message
+            )
+        }
     }
 }
