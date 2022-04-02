@@ -25,8 +25,8 @@ import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,

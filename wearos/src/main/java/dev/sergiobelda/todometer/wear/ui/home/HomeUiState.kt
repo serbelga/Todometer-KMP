@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.wear.ui.home
 
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 
-data class HomeUiState(
+data class  HomeUiState(
     val isLoading: Boolean = false,
     val taskLists: List<TaskList> = emptyList(),
     val errorMessage: String? = null

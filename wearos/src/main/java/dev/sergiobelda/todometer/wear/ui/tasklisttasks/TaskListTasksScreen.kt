@@ -39,10 +39,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.foundation.CurvedLayout
+import androidx.wear.compose.foundation.CurvedRow
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
 import androidx.wear.compose.material.CircularProgressIndicator
+import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -52,15 +53,16 @@ import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.curvedText
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskProgress
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 
 private const val TASK_TITLE = "task_title"
 private const val TASK_LIST_NAME = "task_list_name"
@@ -73,22 +75,6 @@ fun TaskListTasksScreen(
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskListTasksUiState = taskListTasksViewModel.taskListTasksUiState
-    val addTaskLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
-                title?.let { taskListTasksViewModel.insertTask(it) }
-            }
-        }
-    val taskTitleInput = stringResource(id = R.string.task_title_input)
-    val editTaskListLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
-                name?.let { taskListTasksViewModel.updateTaskListName(it) }
-            }
-        }
-
     val progress = TaskProgress.getTasksDoneProgress(taskListTasksUiState.tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
@@ -96,7 +82,7 @@ fun TaskListTasksScreen(
     )
     Scaffold(
         timeText = {
-            CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
+            CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
         },
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
@@ -110,73 +96,68 @@ fun TaskListTasksScreen(
             ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
-            taskListTasksUiState.taskList?.let {
-                item { Text(it.name) }
-            } ?: run {
-                item { Text(stringResource(R.string.default_task_list_name)) }
+            if (!taskListTasksUiState.isLoadingTaskList) {
+                when {
+                    taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
+                        item { Text(stringResource(R.string.default_task_list_name)) }
+                    taskListTasksUiState.taskList != null ->
+                        item { Text(taskListTasksUiState.taskList.name) }
+                }
             }
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            if (taskListTasksUiState.tasks.isEmpty()) {
-                item { Text(text = stringResource(id = R.string.no_tasks)) }
+            if (taskListTasksUiState.isLoadingTasks) {
+                item { ToDometerLoadingProgress() }
             } else {
-                items(taskListTasksUiState.tasks) { task ->
-                    TaskItem(
-                        task,
-                        onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
-                        onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
-                        onClick = { openTask(task.id) }
-                    )
-                }
-            }
-            item { Spacer(modifier = Modifier.height(4.dp)) }
-            item {
-                AddTaskButton {
-                    val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                    val remoteInputs: List<RemoteInput> = listOf(
-                        RemoteInput.Builder(TASK_TITLE)
-                            .setLabel(taskTitleInput)
-                            .wearableExtender {
-                                setEmojisAllowed(false)
-                                setInputActionType(EditorInfo.IME_ACTION_DONE)
-                            }.build()
-                    )
-
-                    RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
-
-                    addTaskLauncher.launch(intent)
-                }
-            }
-            if (taskListTasksUiState.taskList != null) {
-                item {
-                    EditTaskListButton {
-                        val intent: Intent =
-                            RemoteInputIntentHelper.createActionRemoteInputIntent()
-                        val remoteInputs: List<RemoteInput> = listOf(
-                            RemoteInput.Builder(TASK_LIST_NAME)
-                                .setLabel(taskListTasksUiState.taskList.name)
-                                .wearableExtender {
-                                    setEmojisAllowed(false)
-                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
-                                }.build()
+                if (taskListTasksUiState.tasks.isEmpty()) {
+                    item { Text(text = stringResource(id = R.string.no_tasks)) }
+                } else {
+                    items(taskListTasksUiState.tasks) { task ->
+                        TaskItem(
+                            task,
+                            onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
+                            onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
+                            onClick = { openTask(task.id) }
                         )
-
-                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
-
-                        editTaskListLauncher.launch(intent)
                     }
                 }
-                item { DeleteTaskListButton(deleteTaskList) }
+            }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
+            if (!taskListTasksUiState.isLoadingTaskList) {
+                when {
+                    taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
+                        item {
+                            AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                        }
+                    }
+                    taskListTasksUiState.taskList != null -> {
+                        item {
+                            AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                        }
+                        item {
+                            EditTaskListButton(taskListTasksUiState.taskList) {
+                                taskListTasksViewModel.updateTaskListName(it)
+                            }
+                        }
+                        item { DeleteTaskListButton(deleteTaskList) }
+                    }
+                }
             }
         }
-        CircularProgressIndicator(
-            modifier = Modifier.fillMaxSize(),
-            startAngle = 300f,
-            endAngle = 240f,
-            progress = animatedProgress
-        )
+        TaskListProgressIndicator(progress = animatedProgress)
     }
+}
+
+@Composable
+fun TaskListProgressIndicator(progress: Float) {
+    CircularProgressIndicator(
+        modifier = Modifier.fillMaxSize(),
+        startAngle = 300f,
+        endAngle = 240f,
+        progress = progress
+    )
 }
 
 @Composable
@@ -209,7 +190,15 @@ fun TaskItem(
 }
 
 @Composable
-fun AddTaskButton(onClick: () -> Unit) {
+fun AddTaskButton(onComplete: (String) -> Unit) {
+    val taskTitleInput = stringResource(id = R.string.task_title_input)
+    val addTaskLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                title?.let { onComplete(it) }
+            }
+        }
     Chip(
         modifier = Modifier.fillMaxWidth(),
         colors = secondaryChipColors(),
@@ -222,12 +211,33 @@ fun AddTaskButton(onClick: () -> Unit) {
                 text = stringResource(id = R.string.add_task)
             )
         },
-        onClick = onClick
+        onClick = {
+            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+            val remoteInputs: List<RemoteInput> = listOf(
+                RemoteInput.Builder(TASK_TITLE)
+                    .setLabel(taskTitleInput)
+                    .wearableExtender {
+                        setEmojisAllowed(false)
+                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                    }.build()
+            )
+
+            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+            addTaskLauncher.launch(intent)
+        }
     )
 }
 
 @Composable
-fun EditTaskListButton(onClick: () -> Unit) {
+fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit) {
+    val editTaskListLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
+                name?.let { onComplete(it) }
+            }
+        }
     Chip(
         colors = secondaryChipColors(),
         icon = {
@@ -236,7 +246,22 @@ fun EditTaskListButton(onClick: () -> Unit) {
         label = {
             Text(text = stringResource(R.string.edit_task_list))
         },
-        onClick = onClick
+        onClick = {
+            val intent: Intent =
+                RemoteInputIntentHelper.createActionRemoteInputIntent()
+            val remoteInputs: List<RemoteInput> = listOf(
+                RemoteInput.Builder(TASK_LIST_NAME)
+                    .setLabel(taskList.name)
+                    .wearableExtender {
+                        setEmojisAllowed(false)
+                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                    }.build()
+            )
+
+            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+            editTaskListLauncher.launch(intent)
+        }
     )
 }
 

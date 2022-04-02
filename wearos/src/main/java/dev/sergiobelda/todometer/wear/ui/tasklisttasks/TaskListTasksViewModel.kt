@@ -21,19 +21,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListNameUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class TaskListTasksViewModel(
@@ -46,7 +42,12 @@ class TaskListTasksViewModel(
     private val updateTaskListNameUseCase: UpdateTaskListNameUseCase
 ) : ViewModel() {
 
-    var taskListTasksUiState by mutableStateOf(TaskListTasksUiState())
+    var taskListTasksUiState by mutableStateOf(
+        TaskListTasksUiState(
+            isLoadingTaskList = true,
+            isLoadingTasks = true
+        )
+    )
         private set
 
     init {
@@ -56,12 +57,36 @@ class TaskListTasksViewModel(
 
     private fun getTaskList() = viewModelScope.launch {
         getTaskListUseCase(taskListId).collect { result ->
-
+            result.doIfSuccess { taskList ->
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTaskList = false,
+                    taskList = taskList,
+                    isDefaultTaskList = false
+                )
+            }.doIfError {
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTaskList = false,
+                    taskList = null,
+                    isDefaultTaskList = true
+                )
+            }
         }
     }
 
     private fun getTaskListTasks() = viewModelScope.launch {
-
+        getTaskListTasksUseCase(taskListId).collect { result ->
+            result.doIfSuccess { tasks ->
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = tasks
+                )
+            }.doIfError {
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = emptyList()
+                )
+            }
+        }
     }
 
     fun insertTask(title: String) = viewModelScope.launch {

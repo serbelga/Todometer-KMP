@@ -36,7 +36,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
-import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -51,6 +50,7 @@ import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 
 private const val TASK_LIST_NAME = "task_list_name"
@@ -62,14 +62,7 @@ fun HomeScreen(
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val homeUiState = homeViewModel.homeUiState
-    val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
-                name?.let { homeViewModel.insertTaskList(it) }
-            }
-        }
-    val taskListNameInput = stringResource(id = R.string.task_list_name_input)
+
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
         vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
@@ -90,7 +83,7 @@ fun HomeScreen(
             item { Text(stringResource(R.string.app_name)) }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             if (homeUiState.isLoading) {
-                item { CircularProgressIndicator() }
+                item { ToDometerLoadingProgress() }
             } else {
                 item {
                     TaskListItem(
@@ -103,21 +96,7 @@ fun HomeScreen(
                 }
                 item { Spacer(modifier = Modifier.height(4.dp)) }
                 item {
-                    AddTaskListButton {
-                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                        val remoteInputs: List<RemoteInput> = listOf(
-                            RemoteInput.Builder(TASK_LIST_NAME)
-                                .setLabel(taskListNameInput)
-                                .wearableExtender {
-                                    setEmojisAllowed(false)
-                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
-                                }.build()
-                        )
-
-                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
-
-                        launcher.launch(intent)
-                    }
+                    AddTaskListButton { homeViewModel.insertTaskList(it) }
                 }
             }
         }
@@ -140,7 +119,15 @@ fun TaskListItem(taskListName: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun AddTaskListButton(onClick: () -> Unit) {
+fun AddTaskListButton(onComplete: (String) -> Unit) {
+    val taskListNameInput = stringResource(id = R.string.task_list_name_input)
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
+                name?.let { onComplete(it) }
+            }
+        }
     Chip(
         modifier = Modifier.fillMaxWidth(),
         colors = ChipDefaults.secondaryChipColors(),
@@ -153,6 +140,20 @@ fun AddTaskListButton(onClick: () -> Unit) {
                 text = stringResource(id = R.string.add_task_list)
             )
         },
-        onClick = onClick
+        onClick = {
+            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+            val remoteInputs: List<RemoteInput> = listOf(
+                RemoteInput.Builder(TASK_LIST_NAME)
+                    .setLabel(taskListNameInput)
+                    .wearableExtender {
+                        setEmojisAllowed(false)
+                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                    }.build()
+            )
+
+            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+            launcher.launch(intent)
+        }
     )
 }

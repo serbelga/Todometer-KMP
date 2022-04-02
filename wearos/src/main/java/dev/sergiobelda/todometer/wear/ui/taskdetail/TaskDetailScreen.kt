@@ -45,7 +45,9 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
+import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 
 private const val TASK_TITLE = "task_title"
 
@@ -56,15 +58,7 @@ fun TaskDetailScreen(
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
-    val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
-                if (!title.isNullOrEmpty()) {
-                    taskDetailViewModel.updateTask(title)
-                }
-            }
-        }
+
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
@@ -80,32 +74,22 @@ fun TaskDetailScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            taskDetailUiState.task?.let { task ->
-                item {
-                    Text(text = task.title)
-                }
-                item {
-                    Spacer(modifier = Modifier.height(24.dp))
-                }
-                item {
-                    EditTaskButton {
-                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                        val remoteInputs: List<RemoteInput> = listOf(
-                            RemoteInput.Builder(TASK_TITLE)
-                                .setLabel(task.title)
-                                .wearableExtender {
-                                    setEmojisAllowed(false)
-                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
-                                }.build()
-                        )
-
-                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
-
-                        launcher.launch(intent)
+            if (taskDetailUiState.isLoading) {
+                item { ToDometerLoadingProgress() }
+            } else {
+                taskDetailUiState.task?.let { task ->
+                    item {
+                        Text(text = task.title)
                     }
-                }
-                item {
-                    DeleteTaskButton(deleteTask)
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
+                    item {
+                        EditTaskButton(taskDetailUiState.task) { taskDetailViewModel.updateTask(it) }
+                    }
+                    item {
+                        DeleteTaskButton(deleteTask)
+                    }
                 }
             }
         }
@@ -113,7 +97,17 @@ fun TaskDetailScreen(
 }
 
 @Composable
-fun EditTaskButton(onClick: () -> Unit) {
+fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                if (!title.isNullOrEmpty()) {
+                    onComplete(title)
+                }
+            }
+        }
+
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
@@ -122,7 +116,21 @@ fun EditTaskButton(onClick: () -> Unit) {
         label = {
             Text(text = stringResource(R.string.edit_task))
         },
-        onClick = onClick
+        onClick = {
+            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+            val remoteInputs: List<RemoteInput> = listOf(
+                RemoteInput.Builder(TASK_TITLE)
+                    .setLabel(task.title)
+                    .wearableExtender {
+                        setEmojisAllowed(false)
+                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                    }.build()
+            )
+
+            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+            launcher.launch(intent)
+        }
     )
 }
 
