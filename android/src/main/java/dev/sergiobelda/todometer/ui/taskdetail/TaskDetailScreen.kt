@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,9 @@ fun TaskDetailScreen(
             TopAppBar(
                 title = {
                     if (scrollState.value >= 120) {
-                        Text(taskDetailUiState.task?.title ?: "")
+                        if (!taskDetailUiState.isLoading && taskDetailUiState.task != null) {
+                            Text(taskDetailUiState.task.title)
+                        }
                     }
                 },
                 navigationIcon = {
@@ -81,12 +83,14 @@ fun TaskDetailScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = editTask) {
-                        Icon(
-                            Icons.Outlined.Edit,
-                            contentDescription = "Edit task",
-                            tint = TodometerColors.primary
-                        )
+                    if (!taskDetailUiState.isLoading && taskDetailUiState.task != null) {
+                        IconButton(onClick = editTask) {
+                            Icon(
+                                Icons.Outlined.Edit,
+                                contentDescription = "Edit task",
+                                tint = TodometerColors.primary
+                            )
+                        }
                     }
                 },
                 elevation = 0.dp,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -56,9 +55,3 @@ class TaskDetailViewModel(
         }
     }
 }
-
-data class TaskDetailUiState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val errorMessage: String? = null
-)

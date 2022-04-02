@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.error
+package dev.sergiobelda.todometer.ui.edittasklist
 
-import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.ui.error.ErrorUi
 
-data class ErrorUi(
-    val message: String? = null
+data class EditTaskListUiState(
+    val isLoading: Boolean = false,
+    val taskList: TaskList? = null,
+    val error: ErrorUi? = null
 )
-
-internal fun <T : Any> Result<T>.mapToErrorUi(): ErrorUi? =
-    if (this is Result.Error) {
-        ErrorUi(message = message)
-    } else null

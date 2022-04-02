@@ -23,8 +23,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetAppThemeUseCase

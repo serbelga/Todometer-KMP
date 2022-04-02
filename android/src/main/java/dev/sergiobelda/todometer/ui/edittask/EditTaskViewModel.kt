@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskUseCase
 import dev.sergiobelda.todometer.ui.error.ErrorUi
-import dev.sergiobelda.todometer.ui.error.mapToUiError
+import dev.sergiobelda.todometer.ui.error.mapToErrorUi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -57,7 +57,7 @@ class EditTaskViewModel(
                 editTaskUiState = editTaskUiState.copy(
                     isLoading = false,
                     task = null,
-                    error = error.mapToUiError()
+                    error = error.mapToErrorUi()
                 )
             }
         }
@@ -69,9 +69,3 @@ class EditTaskViewModel(
         }
     }
 }
-
-data class EditTaskUiState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val error: ErrorUi? = null
-)
