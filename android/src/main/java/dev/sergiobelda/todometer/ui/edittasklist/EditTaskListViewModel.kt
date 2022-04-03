@@ -26,7 +26,6 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -43,7 +42,6 @@ class EditTaskListViewModel(
     }
 
     private fun getTaskListSelected() = viewModelScope.launch {
-        delay(3000)
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 editTaskListUiState = editTaskListUiState.copy(
