@@ -108,12 +108,14 @@ fun TaskListTasksScreen(
                 }
             }
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            if (taskListTasksUiState.isLoadingTasks) {
-                item { ToDometerLoadingProgress() }
-            } else {
-                if (taskListTasksUiState.tasks.isEmpty()) {
+            when {
+                taskListTasksUiState.isLoadingTasks -> {
+                    item { ToDometerLoadingProgress() }
+                }
+                taskListTasksUiState.tasks.isEmpty() -> {
                     item { Text(text = stringResource(id = R.string.no_tasks)) }
-                } else {
+                }
+                else -> {
                     items(taskListTasksUiState.tasks) { task ->
                         TaskItem(
                             task,
