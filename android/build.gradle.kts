@@ -15,8 +15,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1200203
-        versionName = "android-2.0.0-beta03"
+        versionCode = 1200301
+        versionName = "android-2.0.0-rc01"
     }
 
     buildTypes {
