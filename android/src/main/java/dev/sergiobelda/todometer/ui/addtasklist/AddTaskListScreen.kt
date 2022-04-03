@@ -58,73 +58,72 @@ fun AddTaskListScreen(
     val addTaskListUiState = addTaskListViewModel.addTaskListUiState
     if (addTaskListUiState.isAdded) {
         navigateUp()
-    } else {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(TodometerColors.surface),
-                    elevation = 0.dp,
-                    navigationIcon = {
-                        IconButton(onClick = navigateUp) {
-                            Icon(
-                                Icons.Rounded.ArrowBack,
-                                contentDescription = "Back",
-                                tint = TodometerColors.onSurfaceMediumEmphasis
-                            )
-                        }
-                    },
-                    title = { Text(stringResource(id = R.string.add_task_list)) },
-                    actions = {
-                        IconButton(
-                            enabled = !addTaskListUiState.isAddingTaskList,
-                            onClick = {
-                                if (taskListName.isBlank()) {
-                                    taskListNameInputError = true
-                                } else {
-                                    addTaskListViewModel.insertTaskList(taskListName)
-                                }
-                            }
-                        ) {
-                            Icon(
-                                Icons.Rounded.Check,
-                                contentDescription = "Save",
-                                tint = if (addTaskListUiState.isAddingTaskList)
-                                    TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
-                            )
-                        }
-                    },
-                )
-            },
-            content = {
-                if (addTaskListUiState.isAddingTaskList) {
-                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-                }
-                Column(modifier = Modifier.padding(top = 24.dp)) {
-                    TitledTextField(
-                        title = stringResource(R.string.name),
-                        value = taskListName,
-                        onValueChange = {
-                            taskListName = it
-                            taskListNameInputError = false
-                        },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_list_name)) },
-                        singleLine = true,
-                        isError = taskListNameInputError,
-                        errorMessage = stringResource(R.string.field_not_empty),
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Done
-                        ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
-                    )
-                }
-            }
-        )
     }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = TodometerColors.surface,
+                contentColor = contentColorFor(TodometerColors.surface),
+                elevation = 0.dp,
+                navigationIcon = {
+                    IconButton(onClick = navigateUp) {
+                        Icon(
+                            Icons.Rounded.ArrowBack,
+                            contentDescription = "Back",
+                            tint = TodometerColors.onSurfaceMediumEmphasis
+                        )
+                    }
+                },
+                title = { Text(stringResource(id = R.string.add_task_list)) },
+                actions = {
+                    IconButton(
+                        enabled = !addTaskListUiState.isAddingTaskList,
+                        onClick = {
+                            if (taskListName.isBlank()) {
+                                taskListNameInputError = true
+                            } else {
+                                addTaskListViewModel.insertTaskList(taskListName)
+                            }
+                        }
+                    ) {
+                        Icon(
+                            Icons.Rounded.Check,
+                            contentDescription = "Save",
+                            tint = if (addTaskListUiState.isAddingTaskList)
+                                TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
+                        )
+                    }
+                },
+            )
+        },
+        content = {
+            if (addTaskListUiState.isAddingTaskList) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+            Column(modifier = Modifier.padding(top = 24.dp)) {
+                TitledTextField(
+                    title = stringResource(R.string.name),
+                    value = taskListName,
+                    onValueChange = {
+                        taskListName = it
+                        taskListNameInputError = false
+                    },
+                    placeholder = { Text(stringResource(id = R.string.enter_task_list_name)) },
+                    singleLine = true,
+                    isError = taskListNameInputError,
+                    errorMessage = stringResource(R.string.field_not_empty),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
+                )
+            }
+        }
+    )
 }

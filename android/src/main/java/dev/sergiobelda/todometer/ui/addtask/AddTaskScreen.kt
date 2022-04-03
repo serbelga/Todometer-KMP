@@ -63,95 +63,94 @@ fun AddTaskScreen(
     val addTaskUiState = addTaskViewModel.addTaskUiState
     if (addTaskUiState.isAdded) {
         navigateUp()
-    } else {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(TodometerColors.surface),
-                    elevation = 0.dp,
-                    navigationIcon = {
-                        IconButton(onClick = navigateUp) {
-                            Icon(
-                                Icons.Rounded.ArrowBack,
-                                contentDescription = "Back",
-                                tint = TodometerColors.onSurfaceMediumEmphasis
-                            )
-                        }
-                    },
-                    actions = {
-                        IconButton(
-                            enabled = !addTaskUiState.isAddingTask,
-                            onClick = {
-                                if (taskTitle.isBlank()) {
-                                    taskTitleInputError = true
-                                } else {
-                                    addTaskViewModel.insertTask(
-                                        taskTitle,
-                                        taskDescription,
-                                        selectedTag
-                                    )
-                                }
-                            }
-                        ) {
-                            Icon(
-                                Icons.Rounded.Check,
-                                contentDescription = "Save",
-                                tint = if (addTaskUiState.isAddingTask)
-                                    TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
-                            )
-                        }
-                    },
-                    title = { Text(stringResource(id = R.string.add_task)) }
-                )
-            },
-            content = {
-                if (addTaskUiState.isAddingTask) {
-                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-                }
-                Column(modifier = Modifier.padding(top = 24.dp)) {
-                    TitledTextField(
-                        title = stringResource(id = R.string.name),
-                        value = taskTitle,
-                        onValueChange = {
-                            taskTitle = it
-                            taskTitleInputError = false
-                        },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
-                        isError = taskTitleInputError,
-                        errorMessage = stringResource(id = R.string.field_not_empty),
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Next
-                        ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
-                    )
-                    ToDometerTagSelector(selectedTag) { tag ->
-                        selectedTag = tag
-                    }
-                    TitledTextField(
-                        title = stringResource(id = R.string.description),
-                        value = taskDescription,
-                        onValueChange = { taskDescription = it },
-                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Done
-                        ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
-                    )
-                }
-            }
-        )
     }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = TodometerColors.surface,
+                contentColor = contentColorFor(TodometerColors.surface),
+                elevation = 0.dp,
+                navigationIcon = {
+                    IconButton(onClick = navigateUp) {
+                        Icon(
+                            Icons.Rounded.ArrowBack,
+                            contentDescription = "Back",
+                            tint = TodometerColors.onSurfaceMediumEmphasis
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(
+                        enabled = !addTaskUiState.isAddingTask,
+                        onClick = {
+                            if (taskTitle.isBlank()) {
+                                taskTitleInputError = true
+                            } else {
+                                addTaskViewModel.insertTask(
+                                    taskTitle,
+                                    taskDescription,
+                                    selectedTag
+                                )
+                            }
+                        }
+                    ) {
+                        Icon(
+                            Icons.Rounded.Check,
+                            contentDescription = "Save",
+                            tint = if (addTaskUiState.isAddingTask)
+                                TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
+                        )
+                    }
+                },
+                title = { Text(stringResource(id = R.string.add_task)) }
+            )
+        },
+        content = {
+            if (addTaskUiState.isAddingTask) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+            Column(modifier = Modifier.padding(top = 24.dp)) {
+                TitledTextField(
+                    title = stringResource(id = R.string.name),
+                    value = taskTitle,
+                    onValueChange = {
+                        taskTitle = it
+                        taskTitleInputError = false
+                    },
+                    placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
+                    isError = taskTitleInputError,
+                    errorMessage = stringResource(id = R.string.field_not_empty),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Next
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
+                )
+                ToDometerTagSelector(selectedTag) { tag ->
+                    selectedTag = tag
+                }
+                TitledTextField(
+                    title = stringResource(id = R.string.description),
+                    value = taskDescription,
+                    onValueChange = { taskDescription = it },
+                    placeholder = { Text(stringResource(id = R.string.enter_description)) },
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done
+                    ),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
+                )
+            }
+        }
+    )
 }
