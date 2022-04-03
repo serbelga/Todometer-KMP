@@ -17,9 +17,10 @@
 package dev.sergiobelda.todometer.wear.ui.taskdetail
 
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class TaskDetailUiState(
     val isLoading: Boolean = false,
     val task: Task? = null,
-    val errorMessage: String? = null
+    val errorUi: ErrorUi? = null
 )

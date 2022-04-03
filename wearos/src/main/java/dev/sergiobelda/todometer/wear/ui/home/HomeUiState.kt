@@ -17,9 +17,10 @@
 package dev.sergiobelda.todometer.wear.ui.home
 
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class HomeUiState(
     val isLoading: Boolean = false,
     val taskLists: List<TaskList> = emptyList(),
-    val errorMessage: String? = null
+    val errorUi: ErrorUi? = null
 )
