@@ -544,6 +544,7 @@ fun EmptyTasksListView() {
 }
 
 @Composable
+@Deprecated("To be removed")
 fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()

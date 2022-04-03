@@ -17,10 +17,10 @@
 package dev.sergiobelda.todometer.ui.edittasklist
 
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class EditTaskListUiState(
     val isLoading: Boolean = false,
     val taskList: TaskList? = null,
-    val error: ErrorUi? = null
+    val errorUi: ErrorUi? = null
 )

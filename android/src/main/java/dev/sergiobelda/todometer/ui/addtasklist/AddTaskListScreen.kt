@@ -30,7 +30,9 @@ import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +54,8 @@ fun AddTaskListScreen(
     navigateUp: () -> Unit,
     addTaskListViewModel: AddTaskListViewModel = getViewModel()
 ) {
+    val scaffoldState = rememberScaffoldState()
+
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
 
@@ -59,7 +63,17 @@ fun AddTaskListScreen(
     if (addTaskListUiState.isAdded) {
         navigateUp()
     }
+
+    if (addTaskListUiState.errorUi != null) {
+        LaunchedEffect(scaffoldState.snackbarHostState) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = addTaskListUiState.errorUi.message ?: ""
+            )
+        }
+    }
+
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 backgroundColor = TodometerColors.surface,

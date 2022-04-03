@@ -24,6 +24,7 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
+import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
@@ -40,13 +41,13 @@ class AddTaskListViewModel(
             addTaskListUiState = addTaskListUiState.copy(
                 isAddingTaskList = false,
                 isAdded = true,
-                errorMessage = null
+                errorUi = null
             )
         }.doIfError { error ->
             addTaskListUiState = addTaskListUiState.copy(
                 isAddingTaskList = false,
                 isAdded = false,
-                errorMessage = error.message
+                errorUi = error.mapToErrorUi()
             )
         }
     }

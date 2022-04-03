@@ -16,8 +16,10 @@
 
 package dev.sergiobelda.todometer.ui.addtasklist
 
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+
 data class AddTaskListUiState(
     val isAddingTaskList: Boolean = false,
     val isAdded: Boolean = false,
-    val errorMessage: String? = null
+    val errorUi: ErrorUi? = null
 )

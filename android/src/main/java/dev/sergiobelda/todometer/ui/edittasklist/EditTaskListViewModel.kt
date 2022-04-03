@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListUseCase
-import dev.sergiobelda.todometer.ui.error.mapToErrorUi
+import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -49,13 +49,13 @@ class EditTaskListViewModel(
                 editTaskListUiState = editTaskListUiState.copy(
                     isLoading = false,
                     taskList = taskList,
-                    error = null
+                    errorUi = null
                 )
             }.doIfError { error ->
                 editTaskListUiState = editTaskListUiState.copy(
                     isLoading = false,
                     taskList = null,
-                    error = error.mapToErrorUi()
+                    errorUi = error.mapToErrorUi()
                 )
             }
         }

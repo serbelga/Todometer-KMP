@@ -25,6 +25,7 @@ import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
@@ -45,13 +46,13 @@ class AddTaskViewModel(
             addTaskUiState = addTaskUiState.copy(
                 isAddingTask = false,
                 isAdded = true,
-                errorMessage = null
+                errorUi = null
             )
         }.doIfError { error ->
             addTaskUiState = addTaskUiState.copy(
                 isAddingTask = false,
                 isAdded = false,
-                errorMessage = error.message
+                errorUi = error.mapToErrorUi()
             )
         }
     }

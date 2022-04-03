@@ -17,10 +17,10 @@
 package dev.sergiobelda.todometer.ui.edittask
 
 import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class EditTaskUiState(
     val isLoading: Boolean = false,
     val task: Task? = null,
-    val error: ErrorUi? = null
+    val errorUi: ErrorUi? = null
 )
