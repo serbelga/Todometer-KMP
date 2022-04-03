@@ -52,12 +52,17 @@ fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel
 ) {
-    val editTaskUiState = editTaskViewModel.editTaskUiState
-
-    var taskTitle by rememberSaveable { mutableStateOf(editTaskUiState.task?.title ?: "") }
+    var taskTitle by remember { mutableStateOf("") }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable { mutableStateOf(editTaskUiState.task?.description ?: "") }
-    var selectedTag by remember { mutableStateOf(editTaskUiState.task?.tag ?: Tag.GRAY) }
+    var taskDescription by rememberSaveable { mutableStateOf("") }
+    var selectedTag by remember { mutableStateOf(Tag.GRAY) }
+
+    val editTaskUiState = editTaskViewModel.editTaskUiState
+    editTaskUiState.task?.let { task ->
+        taskTitle = task.title
+        taskDescription = task.description ?: ""
+        selectedTag = task.tag
+    }
     Scaffold(
         topBar = {
             TopAppBar(

@@ -51,12 +51,13 @@ fun EditTaskListScreen(
     navigateUp: () -> Unit,
     editTaskListViewModel: EditTaskListViewModel = getViewModel()
 ) {
-    val editTaskListUiState = editTaskListViewModel.editTaskListUiState
-
-    var taskListName by rememberSaveable {
-        mutableStateOf(editTaskListUiState.taskList?.name ?: "")
-    }
+    var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
+
+    val editTaskListUiState = editTaskListViewModel.editTaskListUiState
+    editTaskListUiState.taskList?.let { taskList ->
+        taskListName = taskList.name
+    }
     Scaffold(
         topBar = {
             TopAppBar(
