@@ -30,6 +30,8 @@ kotlin {
                 api(compose.ui)
                 api(compose.uiTooling)
                 implementation(projects.common)
+
+                api(libs.kotlin.coroutinesSwing)
             }
         }
         val commonTest by getting
