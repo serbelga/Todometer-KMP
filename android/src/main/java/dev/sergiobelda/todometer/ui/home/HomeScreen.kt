@@ -92,6 +92,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
@@ -452,8 +453,11 @@ fun TasksListView(
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit
 ) {
+    val tasksDoing = tasks.filter { it.state == TaskState.DOING }
+    val tasksDone = tasks.filter { it.state == TaskState.DONE }
+    var areTasksDoneVisible by remember { mutableStateOf(false) }
     LazyColumn {
-        items(tasks, key = { it.id }) { task ->
+        items(tasksDoing, key = { it.id }) { task ->
             val dismissState = rememberDismissState(
                 confirmStateChange = {
                     if (it == DismissValue.DismissedToEnd) {
@@ -517,6 +521,79 @@ fun TasksListView(
                 },
                 modifier = Modifier.animateItemPlacement()
             )
+        }
+        item {
+            SingleLineItem(
+                text = { Text(text = "Completadas (${tasksDone.size})") },
+                modifier = Modifier.animateItemPlacement(),
+                onClick = { areTasksDoneVisible = !areTasksDoneVisible })
+        }
+        if (areTasksDoneVisible) {
+            items(tasksDone, key = { it.id }) { task ->
+                val dismissState = rememberDismissState(
+                    confirmStateChange = {
+                        if (it == DismissValue.DismissedToEnd) {
+                            onSwipeToDismiss(task.id)
+                        }
+                        it != DismissValue.DismissedToEnd
+                    }
+                )
+                SwipeToDismiss(
+                    state = dismissState,
+                    directions = setOf(DismissDirection.StartToEnd),
+                    dismissThresholds = {
+                        FractionalThreshold(0.1f)
+                    },
+                    background = {
+                        val color by animateColorAsState(
+                            if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
+                            animationSpec = tween(
+                                durationMillis = 400,
+                                easing = FastOutSlowInEasing
+                            )
+                        )
+                        val tint by animateColorAsState(
+                            if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
+                            animationSpec = tween(
+                                durationMillis = 400,
+                                easing = FastOutSlowInEasing
+                            )
+                        )
+                        val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
+                        Box(
+                            Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
+                            contentAlignment = Alignment.CenterStart
+                        ) {
+                            Icon(
+                                rememberAnimatedVectorPainter(
+                                    icon,
+                                    atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
+                                ),
+                                contentDescription = stringResource(R.string.delete_task),
+                                tint = tint
+                            )
+                        }
+                    },
+                    dismissContent = {
+                        val dp by animateDpAsState(
+                            if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+                            animationSpec = tween(
+                                durationMillis = 400,
+                                easing = FastOutSlowInEasing
+                            )
+                        )
+                        TaskItem(
+                            task,
+                            onDoingClick = onDoingClick,
+                            onDoneClick = onDoneClick,
+                            onClick = onTaskItemClick,
+                            onLongClick = onTaskItemLongClick,
+                            modifier = Modifier.clip(RoundedCornerShape(dp))
+                        )
+                    },
+                    modifier = Modifier.animateItemPlacement()
+                )
+            }
         }
         item {
             Spacer(modifier = Modifier.height(84.dp))
