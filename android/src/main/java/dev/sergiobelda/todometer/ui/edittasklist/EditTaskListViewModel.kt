@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,30 +16,52 @@
 
 package dev.sergiobelda.todometer.ui.edittasklist
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class EditTaskListViewModel(
-    getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
+    private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val updateTaskListUseCase: UpdateTaskListUseCase
 ) : ViewModel() {
 
-    val taskListSelected: StateFlow<Result<TaskList>> =
-        getTaskListSelectedUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
+    var editTaskListUiState by mutableStateOf(EditTaskListUiState(isLoading = true))
+        private set
 
-    fun updateTaskList(taskList: TaskList) = viewModelScope.launch {
-        updateTaskListUseCase(taskList)
+    init {
+        getTaskListSelected()
+    }
+
+    private fun getTaskListSelected() = viewModelScope.launch {
+        getTaskListSelectedUseCase().collect { result ->
+            result.doIfSuccess { taskList ->
+                editTaskListUiState = editTaskListUiState.copy(
+                    isLoading = false,
+                    taskList = taskList,
+                    errorUi = null
+                )
+            }.doIfError { error ->
+                editTaskListUiState = editTaskListUiState.copy(
+                    isLoading = false,
+                    taskList = null,
+                    errorUi = error.mapToErrorUi()
+                )
+            }
+        }
+    }
+
+    fun updateTaskList(name: String) = viewModelScope.launch {
+        editTaskListUiState.taskList?.let {
+            updateTaskListUseCase(it.copy(name = name))
+        }
     }
 }

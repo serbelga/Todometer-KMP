@@ -10,7 +10,7 @@ buildscript {
         classpath(libs.kotlin.serialization)
         classpath(libs.android.gradlePluginz)
         classpath(libs.google.firebase.crashlyticsGradle)
-        classpath(libs.google.ossLicensesPlugin)
+        classpath(libs.google.ossLicensesPluginz)
         classpath(libs.google.services)
         classpath(libs.sqldelight.gradlePluginz)
     }
@@ -23,7 +23,7 @@ allprojects {
     repositories {
         mavenCentral()
         google()
-        maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 

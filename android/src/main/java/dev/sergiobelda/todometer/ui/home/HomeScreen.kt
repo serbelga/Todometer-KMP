@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,13 +90,12 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
-import dev.sergiobelda.todometer.common.domain.doIfError
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.preferences.AppTheme
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
+import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
@@ -124,28 +123,12 @@ fun HomeScreen(
     }
 
     var selectedTask by remember { mutableStateOf("") }
-
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
     var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
-    var taskLists: List<TaskList> by remember { mutableStateOf(emptyList()) }
-    val taskListsResultState = homeViewModel.taskLists.collectAsState()
-    taskListsResultState.value.doIfSuccess { taskLists = it }.doIfError { taskLists = emptyList() }
-
-    var taskListSelected: TaskList? by remember { mutableStateOf(null) }
-    val taskListSelectedResultState = homeViewModel.taskListSelected.collectAsState()
-    taskListSelectedResultState.value.doIfSuccess {
-        taskListSelected = it
-    }.doIfError {
-        taskListSelected = null
-    }
-
-    var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
-    val tasksResultState = homeViewModel.tasks.collectAsState()
-    tasksResultState.value.doIfSuccess { tasks = it }.doIfError { tasks = emptyList() }
-
-    val appThemeState = homeViewModel.appTheme.collectAsState()
+    val homeUiState = homeViewModel.homeUiState
+    val appTheme by homeViewModel.appTheme.collectAsState()
 
     val defaultTaskListName = stringResource(R.string.default_task_list_name)
 
@@ -161,12 +144,12 @@ fun HomeScreen(
                         editTaskList()
                     }
                 },
-                editTaskListEnabled = taskListSelected != null,
+                editTaskListEnabled = !homeUiState.isDefaultTaskListSelected,
                 deleteTaskListClick = {
                     deleteTaskListAlertDialogState = true
                 },
-                deleteTaskListEnabled = taskListSelected != null,
-                currentTheme = appThemeState.value,
+                deleteTaskListEnabled = !homeUiState.isDefaultTaskListSelected,
+                currentTheme = appTheme,
                 chooseThemeClick = {
                     chooseThemeAlertDialogState = true
                 },
@@ -190,9 +173,9 @@ fun HomeScreen(
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             drawerContent = {
                 DrawerContent(
-                    taskListSelected?.id ?: "",
+                    homeUiState.taskListSelected?.id ?: "",
                     defaultTaskListName,
-                    taskLists,
+                    homeUiState.taskLists,
                     addTaskList = {
                         scope.launch {
                             closeDrawer()
@@ -214,41 +197,43 @@ fun HomeScreen(
                     onMoreClick = {
                         scope.launch { sheetState.show() }
                     },
-                    taskListSelected?.name ?: defaultTaskListName,
-                    tasks
+                    homeUiState.taskListSelected?.name ?: defaultTaskListName,
+                    homeUiState.tasks
                 )
             },
             content = {
-                taskListsResultState.value.doIfSuccess { taskLists ->
-                    if (deleteTaskAlertDialogState) {
-                        DeleteTaskAlertDialog(
-                            onDismissRequest = { deleteTaskAlertDialogState = false },
-                            deleteTask = { homeViewModel.deleteTask(selectedTask) }
-                        )
-                    }
-                    if (deleteTaskListAlertDialogState) {
-                        DeleteTaskListAlertDialog(
-                            onDismissRequest = { deleteTaskListAlertDialogState = false },
-                            deleteTaskList = {
-                                homeViewModel.deleteTaskList()
-                                scope.launch {
-                                    sheetState.hide()
-                                }
+                if (deleteTaskAlertDialogState) {
+                    DeleteTaskAlertDialog(
+                        onDismissRequest = { deleteTaskAlertDialogState = false },
+                        deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                    )
+                }
+                if (deleteTaskListAlertDialogState) {
+                    DeleteTaskListAlertDialog(
+                        onDismissRequest = { deleteTaskListAlertDialogState = false },
+                        deleteTaskList = {
+                            homeViewModel.deleteTaskList()
+                            scope.launch {
+                                sheetState.hide()
                             }
-                        )
-                    }
-                    if (chooseThemeAlertDialogState) {
-                        ChooseThemeAlertDialog(
-                            currentTheme = appThemeState.value,
-                            onDismissRequest = { chooseThemeAlertDialogState = false },
-                            chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
-                        )
-                    }
-                    if (tasks.isEmpty()) {
+                        }
+                    )
+                }
+                if (chooseThemeAlertDialogState) {
+                    ChooseThemeAlertDialog(
+                        currentTheme = appTheme,
+                        onDismissRequest = { chooseThemeAlertDialogState = false },
+                        chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
+                    )
+                }
+                if (homeUiState.isLoadingTasks) {
+                    ToDometerContentLoadingProgress()
+                } else {
+                    if (homeUiState.tasks.isEmpty()) {
                         EmptyTasksListView()
                     } else {
                         TasksListView(
-                            tasks,
+                            homeUiState.tasks,
                             onDoingClick = {
                                 homeViewModel.setTaskDoing(it)
                             },
@@ -559,6 +544,7 @@ fun EmptyTasksListView() {
 }
 
 @Composable
+@Deprecated("To be removed")
 fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,30 +16,54 @@
 
 package dev.sergiobelda.todometer.ui.edittask
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class EditTaskViewModel(
-    taskId: String,
-    getTaskUseCase: GetTaskUseCase,
+    private val taskId: String,
+    private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    val task: StateFlow<Result<Task>> = getTaskUseCase(taskId).stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(),
-        Result.Loading
-    )
+    var editTaskUiState by mutableStateOf(EditTaskUiState(isLoading = true))
+        private set
 
-    fun updateTask(task: Task) = viewModelScope.launch {
-        updateTaskUseCase(task)
+    init {
+        getTask()
+    }
+
+    private fun getTask() = viewModelScope.launch {
+        getTaskUseCase(taskId).collect { result ->
+            result.doIfSuccess { task ->
+                editTaskUiState = editTaskUiState.copy(
+                    isLoading = false,
+                    task = task,
+                    errorUi = null
+                )
+            }.doIfError { error ->
+                editTaskUiState = editTaskUiState.copy(
+                    isLoading = false,
+                    task = null,
+                    errorUi = error.mapToErrorUi()
+                )
+            }
+        }
+    }
+
+    fun updateTask(title: String, description: String?, tag: Tag) = viewModelScope.launch {
+        editTaskUiState.task?.let {
+            updateTaskUseCase(it.copy(title = title, description = description, tag = tag))
+        }
     }
 }

@@ -23,12 +23,10 @@ sealed class Result<out A> {
         val message: String? = null,
         val exception: Throwable? = null
     ) : Result<Nothing>()
-    object Loading : Result<Nothing>()
 
     fun <B> map(m: ((A) -> B)): Result<B> = when (this) {
         is Success -> Success(m(this.value))
         is Error -> Error(this.code, this.message, this.exception)
-        is Loading -> Loading
     }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,6 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,9 +52,8 @@ import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.domain.doIfError
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 
 @Composable
 fun TaskDetailScreen(
@@ -64,28 +62,28 @@ fun TaskDetailScreen(
     taskDetailViewModel: TaskDetailViewModel
 ) {
     val scrollState = rememberScrollState(0)
-    val taskResultState = taskDetailViewModel.task.collectAsState()
-    taskResultState.value.doIfError {
-        navigateUp()
-    }.doIfSuccess { task ->
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        if (scrollState.value >= 120) {
-                            Text(task.title)
+    val taskDetailUiState = taskDetailViewModel.taskDetailUiState
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    if (scrollState.value >= 120) {
+                        if (!taskDetailUiState.isLoading && taskDetailUiState.task != null) {
+                            Text(taskDetailUiState.task.title)
                         }
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = navigateUp) {
-                            Icon(
-                                Icons.Rounded.ArrowBack,
-                                contentDescription = "Back",
-                                tint = TodometerColors.onSurfaceMediumEmphasis
-                            )
-                        }
-                    },
-                    actions = {
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = navigateUp) {
+                        Icon(
+                            Icons.Rounded.ArrowBack,
+                            contentDescription = "Back",
+                            tint = TodometerColors.onSurfaceMediumEmphasis
+                        )
+                    }
+                },
+                actions = {
+                    if (!taskDetailUiState.isLoading && taskDetailUiState.task != null) {
                         IconButton(onClick = editTask) {
                             Icon(
                                 Icons.Outlined.Edit,
@@ -93,17 +91,23 @@ fun TaskDetailScreen(
                                 tint = TodometerColors.primary
                             )
                         }
-                    },
-                    elevation = 0.dp,
-                    backgroundColor = TodometerColors.surface,
-                    contentColor = contentColorFor(backgroundColor = TodometerColors.surface)
-                )
-            },
-            content = {
-                TaskDetailBody(scrollState, task)
+                    }
+                },
+                elevation = 0.dp,
+                backgroundColor = TodometerColors.surface,
+                contentColor = contentColorFor(backgroundColor = TodometerColors.surface)
+            )
+        },
+        content = {
+            if (taskDetailUiState.isLoading) {
+                ToDometerContentLoadingProgress()
+            } else {
+                taskDetailUiState.task?.let { task ->
+                    TaskDetailBody(scrollState, task)
+                }
             }
-        )
-    }
+        }
+    )
 }
 
 @Composable
