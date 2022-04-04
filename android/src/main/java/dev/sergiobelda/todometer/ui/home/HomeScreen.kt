@@ -37,6 +37,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -60,6 +61,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
@@ -458,147 +461,122 @@ fun TasksListView(
     var areTasksDoneVisible by remember { mutableStateOf(false) }
     LazyColumn {
         items(tasksDoing, key = { it.id }) { task ->
-            val dismissState = rememberDismissState(
-                confirmStateChange = {
-                    if (it == DismissValue.DismissedToEnd) {
-                        onSwipeToDismiss(task.id)
-                    }
-                    it != DismissValue.DismissedToEnd
-                }
-            )
-            SwipeToDismiss(
-                state = dismissState,
-                directions = setOf(DismissDirection.StartToEnd),
-                dismissThresholds = {
-                    FractionalThreshold(0.1f)
-                },
-                background = {
-                    val color by animateColorAsState(
-                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                    val tint by animateColorAsState(
-                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                    val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
-                    Box(
-                        Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        Icon(
-                            rememberAnimatedVectorPainter(
-                                icon,
-                                atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
-                            ),
-                            contentDescription = stringResource(R.string.delete_task),
-                            tint = tint
-                        )
-                    }
-                },
-                dismissContent = {
-                    val dp by animateDpAsState(
-                        if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                    TaskItem(
-                        task,
-                        onDoingClick = onDoingClick,
-                        onDoneClick = onDoneClick,
-                        onClick = onTaskItemClick,
-                        onLongClick = onTaskItemLongClick,
-                        modifier = Modifier.clip(RoundedCornerShape(dp))
-                    )
-                },
-                modifier = Modifier.animateItemPlacement()
-            )
+            SwipeableTaskItem(
+                task,
+                onDoingClick,
+                onDoneClick,
+                onTaskItemClick,
+                onTaskItemLongClick
+            ) { onSwipeToDismiss(task.id) }
         }
-        item {
-            SingleLineItem(
-                text = { Text(text = "Completadas (${tasksDone.size})") },
-                modifier = Modifier.animateItemPlacement(),
-                onClick = { areTasksDoneVisible = !areTasksDoneVisible })
+        if (tasksDone.isNotEmpty()) {
+            item {
+                SingleLineItem(
+                    text = { Text(text = "Completadas (${tasksDone.size})") },
+                    trailingIcon = {
+                        if (areTasksDoneVisible) Icon(
+                            Icons.Rounded.ExpandLess,
+                            contentDescription = null
+                        ) else Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                    },
+                    modifier = Modifier.animateItemPlacement(),
+                    onClick = { areTasksDoneVisible = !areTasksDoneVisible })
+            }
         }
         if (areTasksDoneVisible) {
             items(tasksDone, key = { it.id }) { task ->
-                val dismissState = rememberDismissState(
-                    confirmStateChange = {
-                        if (it == DismissValue.DismissedToEnd) {
-                            onSwipeToDismiss(task.id)
-                        }
-                        it != DismissValue.DismissedToEnd
-                    }
-                )
-                SwipeToDismiss(
-                    state = dismissState,
-                    directions = setOf(DismissDirection.StartToEnd),
-                    dismissThresholds = {
-                        FractionalThreshold(0.1f)
-                    },
-                    background = {
-                        val color by animateColorAsState(
-                            if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
-                            animationSpec = tween(
-                                durationMillis = 400,
-                                easing = FastOutSlowInEasing
-                            )
-                        )
-                        val tint by animateColorAsState(
-                            if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
-                            animationSpec = tween(
-                                durationMillis = 400,
-                                easing = FastOutSlowInEasing
-                            )
-                        )
-                        val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
-                        Box(
-                            Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            Icon(
-                                rememberAnimatedVectorPainter(
-                                    icon,
-                                    atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
-                                ),
-                                contentDescription = stringResource(R.string.delete_task),
-                                tint = tint
-                            )
-                        }
-                    },
-                    dismissContent = {
-                        val dp by animateDpAsState(
-                            if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
-                            animationSpec = tween(
-                                durationMillis = 400,
-                                easing = FastOutSlowInEasing
-                            )
-                        )
-                        TaskItem(
-                            task,
-                            onDoingClick = onDoingClick,
-                            onDoneClick = onDoneClick,
-                            onClick = onTaskItemClick,
-                            onLongClick = onTaskItemLongClick,
-                            modifier = Modifier.clip(RoundedCornerShape(dp))
-                        )
-                    },
-                    modifier = Modifier.animateItemPlacement()
-                )
+                SwipeableTaskItem(
+                    task,
+                    onDoingClick,
+                    onDoneClick,
+                    onTaskItemClick,
+                    onTaskItemLongClick
+                ) { onSwipeToDismiss(task.id) }
             }
         }
         item {
             Spacer(modifier = Modifier.height(84.dp))
         }
     }
+}
+
+@OptIn(
+    ExperimentalMaterialApi::class,
+    ExperimentalAnimationGraphicsApi::class,
+    ExperimentalFoundationApi::class
+)
+@Composable
+fun LazyItemScope.SwipeableTaskItem(
+    task: Task,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onTaskItemClick: (String) -> Unit,
+    onTaskItemLongClick: (String) -> Unit,
+    onSwipeToDismiss: () -> Unit
+) {
+    val dismissState = rememberDismissState(
+        confirmStateChange = {
+            if (it == DismissValue.DismissedToEnd) {
+                onSwipeToDismiss()
+            }
+            it != DismissValue.DismissedToEnd
+        }
+    )
+    SwipeToDismiss(
+        state = dismissState,
+        directions = setOf(DismissDirection.StartToEnd),
+        dismissThresholds = {
+            FractionalThreshold(0.1f)
+        },
+        background = {
+            val color by animateColorAsState(
+                if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = FastOutSlowInEasing
+                )
+            )
+            val tint by animateColorAsState(
+                if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = FastOutSlowInEasing
+                )
+            )
+            val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
+            Box(
+                Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Icon(
+                    rememberAnimatedVectorPainter(
+                        icon,
+                        atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
+                    ),
+                    contentDescription = stringResource(R.string.delete_task),
+                    tint = tint
+                )
+            }
+        },
+        dismissContent = {
+            val dp by animateDpAsState(
+                if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = FastOutSlowInEasing
+                )
+            )
+            TaskItem(
+                task,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick,
+                onClick = onTaskItemClick,
+                onLongClick = onTaskItemLongClick,
+                modifier = Modifier.clip(RoundedCornerShape(dp))
+            )
+        },
+        modifier = Modifier.animateItemPlacement()
+    )
 }
 
 @Composable
