@@ -1,8 +1,9 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -12,8 +13,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 4100201
-        versionName = "wearos-1.0.0-beta01"
+        versionCode = 4100301
+        versionName = "wearos-1.0.0-rc01"
     }
 
     buildFeatures {
@@ -24,16 +25,25 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 
-    kotlinOptions {
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-    }
-
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        getByName("debug") {
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = false
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -47,6 +57,9 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.compose.ui.toolingPreview)
+
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
     implementation(libs.wear.wear)
     implementation(libs.wear.compose.foundation)

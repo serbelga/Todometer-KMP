@@ -22,23 +22,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.model.Task
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 
 @Composable
@@ -53,17 +51,21 @@ fun ToDometerTopAppBar(
             TopAppBar(
                 title = {},
                 navigationIcon = {
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        IconButton(onClick = onMenuClick) {
-                            Icon(Icons.Rounded.Menu, contentDescription = "Menu")
-                        }
+                    IconButton(onClick = onMenuClick) {
+                        Icon(
+                            Icons.Rounded.Menu,
+                            contentDescription = "Menu",
+                            tint = TodometerColors.onSurfaceMediumEmphasis
+                        )
                     }
                 },
                 actions = {
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        IconButton(onClick = onMoreClick) {
-                            Icon(Icons.Rounded.MoreVert, contentDescription = "More")
-                        }
+                    IconButton(onClick = onMoreClick) {
+                        Icon(
+                            Icons.Rounded.MoreVert,
+                            contentDescription = "More",
+                            tint = TodometerColors.onSurfaceMediumEmphasis
+                        )
                     }
                 },
                 backgroundColor = TodometerColors.surface,

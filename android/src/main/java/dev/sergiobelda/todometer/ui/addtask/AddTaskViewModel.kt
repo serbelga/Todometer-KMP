@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,44 @@
 
 package dev.sergiobelda.todometer.ui.addtask
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.common.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
     private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<Result<String>>()
-    val result: LiveData<Result<String>> get() = _result
+    var addTaskUiState by mutableStateOf(AddTaskUiState())
+        private set
 
     fun insertTask(
         title: String,
         description: String,
         tag: Tag
     ) = viewModelScope.launch {
-        _result.value = insertTaskInTaskListSelectedUseCase.invoke(title, description, tag)
+        addTaskUiState = addTaskUiState.copy(isAddingTask = true)
+        val result = insertTaskInTaskListSelectedUseCase.invoke(title, description, tag)
+        result.doIfSuccess {
+            addTaskUiState = addTaskUiState.copy(
+                isAddingTask = false,
+                isAdded = true,
+                errorUi = null
+            )
+        }.doIfError { error ->
+            addTaskUiState = addTaskUiState.copy(
+                isAddingTask = false,
+                isAdded = false,
+                errorUi = error.mapToErrorUi()
+            )
+        }
     }
 }

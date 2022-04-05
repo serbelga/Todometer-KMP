@@ -16,10 +16,10 @@
 
 package dev.sergiobelda.todometer.common.testutils
 
-import dev.sergiobelda.todometer.TaskEntity
-import dev.sergiobelda.todometer.TaskListEntity
-import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.common.model.TaskState
+import dev.sergiobelda.todometer.common.data.database.TaskEntity
+import dev.sergiobelda.todometer.common.data.database.TaskListEntity
+import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 val taskListEntity1 = TaskListEntity(
     id = "1",

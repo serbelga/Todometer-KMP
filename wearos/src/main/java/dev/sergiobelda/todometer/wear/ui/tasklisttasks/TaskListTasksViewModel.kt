@@ -16,43 +16,78 @@
 
 package dev.sergiobelda.todometer.wear.ui.tasklisttasks
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.usecase.GetTaskListTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.usecase.UpdateTaskListNameUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListNameUseCase
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class TaskListTasksViewModel(
     private val taskListId: String,
-    getTaskListTasksUseCase: GetTaskListTasksUseCase,
-    getTaskListUseCase: GetTaskListUseCase,
+    private val getTaskListTasksUseCase: GetTaskListTasksUseCase,
+    private val getTaskListUseCase: GetTaskListUseCase,
     private val insertTaskUseCase: InsertTaskUseCase,
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val updateTaskListNameUseCase: UpdateTaskListNameUseCase
 ) : ViewModel() {
 
-    val tasks: StateFlow<Result<List<Task>>> = getTaskListTasksUseCase(taskListId).stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(),
-        Result.Loading
+    var taskListTasksUiState by mutableStateOf(
+        TaskListTasksUiState(
+            isLoadingTaskList = true,
+            isLoadingTasks = true
+        )
     )
+        private set
 
-    val taskList: StateFlow<Result<TaskList>> = getTaskListUseCase(taskListId).stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(),
-        Result.Loading
-    )
+    init {
+        getTaskList()
+        getTaskListTasks()
+    }
+
+    private fun getTaskList() = viewModelScope.launch {
+        getTaskListUseCase(taskListId).collect { result ->
+            result.doIfSuccess { taskList ->
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTaskList = false,
+                    taskList = taskList,
+                    isDefaultTaskList = false
+                )
+            }.doIfError {
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTaskList = false,
+                    taskList = null,
+                    isDefaultTaskList = true
+                )
+            }
+        }
+    }
+
+    private fun getTaskListTasks() = viewModelScope.launch {
+        getTaskListTasksUseCase(taskListId).collect { result ->
+            result.doIfSuccess { tasks ->
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = tasks
+                )
+            }.doIfError {
+                taskListTasksUiState = taskListTasksUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = emptyList()
+                )
+            }
+        }
+    }
 
     fun insertTask(title: String) = viewModelScope.launch {
         insertTaskUseCase.invoke(taskListId, title)

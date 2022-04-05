@@ -34,7 +34,6 @@ import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,13 +57,12 @@ import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.data.doIfError
-import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.model.TaskProgress
-import dev.sergiobelda.todometer.common.model.TaskState
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.model.TaskProgress
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 
 private const val TASK_TITLE = "task_title"
 private const val TASK_LIST_NAME = "task_list_name"
@@ -76,59 +74,49 @@ fun TaskListTasksScreen(
     taskListTasksViewModel: TaskListTasksViewModel
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val tasksResultState = taskListTasksViewModel.tasks.collectAsState()
-    val taskListResultState = taskListTasksViewModel.taskList.collectAsState()
-    val addTaskLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
-                title?.let { taskListTasksViewModel.insertTask(it) }
-            }
-        }
-    val taskTitleInput = stringResource(id = R.string.task_title_input)
-    val editTaskListLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
-                name?.let { taskListTasksViewModel.updateTaskListName(it) }
-            }
-        }
-    var taskList: TaskList? = null
-    taskListResultState.value.doIfSuccess { taskList = it }.doIfError { taskList = null }
-    tasksResultState.value.doIfSuccess { tasks ->
-        val progress = TaskProgress.getTasksDoneProgress(tasks)
-        val animatedProgress by animateFloatAsState(
-            targetValue = progress,
-            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
-        )
-        Scaffold(
-            timeText = {
-                CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
-            },
-            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+    val taskListTasksUiState = taskListTasksViewModel.taskListTasksUiState
+    val progress = TaskProgress.getTasksDoneProgress(taskListTasksUiState.tasks)
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+    )
+    Scaffold(
+        timeText = {
+            CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
+        },
+        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+    ) {
+        ScalingLazyColumn(
+            autoCentering = false,
+            contentPadding = PaddingValues(
+                top = 32.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 50.dp
+            ),
+            state = scalingLazyListState,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
-            ScalingLazyColumn(
-                autoCentering = false,
-                contentPadding = PaddingValues(
-                    top = 32.dp,
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 50.dp
-                ),
-                state = scalingLazyListState,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                taskList?.let {
-                    item { Text(it.name) }
-                } ?: run {
-                    item { Text(stringResource(R.string.default_task_list_name)) }
+            if (!taskListTasksUiState.isLoadingTaskList) {
+                when {
+                    taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
+                        item { Text(stringResource(R.string.default_task_list_name)) }
+                    taskListTasksUiState.taskList != null ->
+                        item { Text(taskListTasksUiState.taskList.name) }
                 }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                if (tasks.isEmpty()) {
+            }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
+            when {
+                taskListTasksUiState.isLoadingTasks -> {
+                    item { ToDometerLoadingProgress() }
+                }
+                taskListTasksUiState.tasks.isEmpty() -> {
                     item { Text(text = stringResource(id = R.string.no_tasks)) }
-                } else {
-                    items(tasks) { task ->
+                }
+                else -> {
+                    items(taskListTasksUiState.tasks) { task ->
                         TaskItem(
                             task,
                             onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
@@ -137,55 +125,41 @@ fun TaskListTasksScreen(
                         )
                     }
                 }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                item {
-                    AddTaskButton {
-                        val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                        val remoteInputs: List<RemoteInput> = listOf(
-                            RemoteInput.Builder(TASK_TITLE)
-                                .setLabel(taskTitleInput)
-                                .wearableExtender {
-                                    setEmojisAllowed(false)
-                                    setInputActionType(EditorInfo.IME_ACTION_DONE)
-                                }.build()
-                        )
-
-                        RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
-
-                        addTaskLauncher.launch(intent)
-                    }
-                }
-                if (taskList != null) {
-                    item {
-                        EditTaskListButton {
-                            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                            val remoteInputs: List<RemoteInput> = listOf(
-                                RemoteInput.Builder(TASK_LIST_NAME)
-                                    .setLabel(taskList?.name)
-                                    .wearableExtender {
-                                        setEmojisAllowed(false)
-                                        setInputActionType(EditorInfo.IME_ACTION_DONE)
-                                    }.build()
-                            )
-
-                            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
-
-                            editTaskListLauncher.launch(intent)
+            }
+            item { Spacer(modifier = Modifier.height(4.dp)) }
+            if (!taskListTasksUiState.isLoadingTaskList) {
+                when {
+                    taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
+                        item {
+                            AddTaskButton { taskListTasksViewModel.insertTask(it) }
                         }
                     }
-                    item { DeleteTaskListButton(deleteTaskList) }
+                    taskListTasksUiState.taskList != null -> {
+                        item {
+                            AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                        }
+                        item {
+                            EditTaskListButton(taskListTasksUiState.taskList) {
+                                taskListTasksViewModel.updateTaskListName(it)
+                            }
+                        }
+                        item { DeleteTaskListButton(deleteTaskList) }
+                    }
                 }
             }
-            CircularProgressIndicator(
-                modifier = Modifier.fillMaxSize(),
-                startAngle = 300f,
-                endAngle = 240f,
-                progress = animatedProgress
-            )
         }
-    }.doIfError {
-        // TODO
+        TaskListProgressIndicator(progress = animatedProgress)
     }
+}
+
+@Composable
+fun TaskListProgressIndicator(progress: Float) {
+    CircularProgressIndicator(
+        modifier = Modifier.fillMaxSize(),
+        startAngle = 300f,
+        endAngle = 240f,
+        progress = progress
+    )
 }
 
 @Composable
@@ -218,7 +192,15 @@ fun TaskItem(
 }
 
 @Composable
-fun AddTaskButton(onClick: () -> Unit) {
+fun AddTaskButton(onComplete: (String) -> Unit) {
+    val taskTitleInput = stringResource(id = R.string.task_title_input)
+    val addTaskLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                title?.let { onComplete(it) }
+            }
+        }
     Chip(
         modifier = Modifier.fillMaxWidth(),
         colors = secondaryChipColors(),
@@ -231,12 +213,33 @@ fun AddTaskButton(onClick: () -> Unit) {
                 text = stringResource(id = R.string.add_task)
             )
         },
-        onClick = onClick
+        onClick = {
+            val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+            val remoteInputs: List<RemoteInput> = listOf(
+                RemoteInput.Builder(TASK_TITLE)
+                    .setLabel(taskTitleInput)
+                    .wearableExtender {
+                        setEmojisAllowed(false)
+                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                    }.build()
+            )
+
+            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+            addTaskLauncher.launch(intent)
+        }
     )
 }
 
 @Composable
-fun EditTaskListButton(onClick: () -> Unit) {
+fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit) {
+    val editTaskListLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
+                name?.let { onComplete(it) }
+            }
+        }
     Chip(
         colors = secondaryChipColors(),
         icon = {
@@ -245,7 +248,22 @@ fun EditTaskListButton(onClick: () -> Unit) {
         label = {
             Text(text = stringResource(R.string.edit_task_list))
         },
-        onClick = onClick
+        onClick = {
+            val intent: Intent =
+                RemoteInputIntentHelper.createActionRemoteInputIntent()
+            val remoteInputs: List<RemoteInput> = listOf(
+                RemoteInput.Builder(TASK_LIST_NAME)
+                    .setLabel(taskList.name)
+                    .wearableExtender {
+                        setEmojisAllowed(false)
+                        setInputActionType(EditorInfo.IME_ACTION_DONE)
+                    }.build()
+            )
+
+            RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+
+            editTaskListLauncher.launch(intent)
+        }
     )
 }
 

@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.common.sampledata
 
-import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 
 val sampleTaskLists = listOf(
     TaskList(

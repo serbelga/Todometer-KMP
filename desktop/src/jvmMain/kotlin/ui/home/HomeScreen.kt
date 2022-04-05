@@ -55,24 +55,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
+import dev.sergiobelda.todometer.common.compose.ui.components.VerticalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.data.doIfSuccess
-import dev.sergiobelda.todometer.common.model.Tag
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
-import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskInTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.InsertTaskListUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskListSelectedUseCase
 import koin
 import kotlinx.coroutines.launch
 import ui.icons.iconToDometer
@@ -175,7 +175,7 @@ fun HomeScreen() {
                 },
                 onAddTaskListClick = { addTaskListAlertDialogState = true }
             )
-            HorizontalDivider()
+            VerticalDivider()
             Column {
                 TaskListProgress(
                     taskListSelected?.name ?: "My tasks",

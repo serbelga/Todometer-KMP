@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.common.di
 
-import dev.sergiobelda.todometer.common.database.createDatabase
-import dev.sergiobelda.todometer.common.database.dao.ITaskDao
-import dev.sergiobelda.todometer.common.database.dao.ITaskListDao
-import dev.sergiobelda.todometer.common.database.dao.TaskDao
-import dev.sergiobelda.todometer.common.database.dao.TaskListDao
+import dev.sergiobelda.todometer.common.data.database.createDatabase
+import dev.sergiobelda.todometer.common.data.database.dao.ITaskDao
+import dev.sergiobelda.todometer.common.data.database.dao.ITaskListDao
+import dev.sergiobelda.todometer.common.data.database.dao.TaskDao
+import dev.sergiobelda.todometer.common.data.database.dao.TaskListDao
 import org.koin.dsl.module
 
 val localDatabaseModule = module {

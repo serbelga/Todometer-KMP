@@ -30,7 +30,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,8 +41,9 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskState
+import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -95,6 +96,7 @@ fun TaskItem(
                     Text(
                         task.title,
                         textDecoration = TextDecoration.LineThrough,
+                        color = TodometerColors.onSurfaceMediumEmphasis,
                         modifier = Modifier.padding(start = 8.dp).weight(1f),
                         maxLines = 1
                     )
@@ -102,7 +104,7 @@ fun TaskItem(
                         onClick = { onDoingClick(task.id) }
                     ) {
                         Icon(
-                            Icons.Filled.Refresh,
+                            Icons.Filled.Replay,
                             contentDescription = "Doing",
                             tint = TodometerColors.secondary
                         )

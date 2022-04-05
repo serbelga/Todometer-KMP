@@ -15,17 +15,23 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1200201
-        versionName = "android-2.0.0-beta01"
+        versionCode = 1200301
+        versionName = "android-2.0.0-rc01"
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        getByName("debug") {
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = false
+            }
         }
         lint {
             abortOnError = false

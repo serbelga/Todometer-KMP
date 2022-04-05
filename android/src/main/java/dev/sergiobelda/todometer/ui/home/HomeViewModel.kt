@@ -16,26 +16,29 @@
 
 package dev.sergiobelda.todometer.ui.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.data.Result
-import dev.sergiobelda.todometer.common.model.Task
-import dev.sergiobelda.todometer.common.model.TaskList
+import dev.sergiobelda.todometer.common.domain.doIfError
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetAppThemeUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.RefreshTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.RefreshTaskListsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetAppThemeUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.preferences.AppTheme
-import dev.sergiobelda.todometer.common.usecase.DeleteTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.DeleteTaskUseCase
-import dev.sergiobelda.todometer.common.usecase.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.usecase.RefreshTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.usecase.RefreshTaskListsUseCase
-import dev.sergiobelda.todometer.common.usecase.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.usecase.SetTaskListSelectedUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -47,9 +50,9 @@ class HomeViewModel(
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val refreshTaskListsUseCase: RefreshTaskListsUseCase,
     private val refreshTaskListSelectedUseCase: RefreshTaskListSelectedUseCase,
-    getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
-    getTaskListsUseCase: GetTaskListsUseCase,
-    getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
+    private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
+    private val getTaskListsUseCase: GetTaskListsUseCase,
+    private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase
 ) : ViewModel() {
@@ -61,31 +64,63 @@ class HomeViewModel(
             AppTheme.FOLLOW_SYSTEM
         )
 
-    val tasks: StateFlow<Result<List<Task>>> =
-        getTaskListSelectedTasksUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
-
-    val taskLists: StateFlow<Result<List<TaskList>>> =
-        getTaskListsUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
-
-    val taskListSelected: StateFlow<Result<TaskList>> =
-        getTaskListSelectedUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            Result.Loading
-        )
+    var homeUiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
+        private set
 
     init {
+        getTaskListSelected()
+        getTaskListSelectedTasks()
+        getTaskLists()
+
         viewModelScope.launch {
             // refreshTaskListsUseCase()
             // refreshTaskListSelectedUseCase()
+        }
+    }
+
+    private fun getTaskListSelected() = viewModelScope.launch {
+        getTaskListSelectedUseCase().collect { result ->
+            result.doIfSuccess { taskList ->
+                homeUiState = homeUiState.copy(
+                    taskListSelected = taskList,
+                    isDefaultTaskListSelected = false
+                )
+            }.doIfError {
+                homeUiState = homeUiState.copy(
+                    taskListSelected = null,
+                    isDefaultTaskListSelected = true,
+                )
+            }
+        }
+    }
+
+    private fun getTaskListSelectedTasks() = viewModelScope.launch {
+        getTaskListSelectedTasksUseCase().collect { result ->
+            result.doIfSuccess { tasks ->
+                homeUiState = homeUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = tasks
+                )
+            }.doIfError {
+                homeUiState = homeUiState.copy(
+                    isLoadingTasks = false,
+                    tasks = emptyList()
+                )
+            }
+        }
+    }
+
+    private fun getTaskLists() = viewModelScope.launch {
+        getTaskListsUseCase().collect { result ->
+            result.doIfSuccess { taskLists ->
+                homeUiState = homeUiState.copy(
+                    taskLists = taskLists
+                )
+            }.doIfError {
+                homeUiState = homeUiState.copy(
+                    taskLists = emptyList()
+                )
+            }
         }
     }
 
