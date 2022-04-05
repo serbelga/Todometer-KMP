@@ -43,8 +43,8 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
+import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import org.koin.androidx.compose.getViewModel
 
 @Composable

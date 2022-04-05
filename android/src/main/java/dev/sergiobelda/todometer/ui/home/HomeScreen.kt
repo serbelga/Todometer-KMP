@@ -208,9 +208,9 @@ fun HomeScreen(
                     DeleteTaskAlertDialog(
                         onDismissRequest = { deleteTaskAlertDialogState = false },
                         deleteTask = {
-                                homeViewModel.deleteTask(selectedTask)
-                                updateToDometerWidgetData()
-                            }
+                            homeViewModel.deleteTask(selectedTask)
+                            updateToDometerWidgetData()
+                        }
                     )
                 }
                 if (deleteTaskListAlertDialogState) {
@@ -218,7 +218,7 @@ fun HomeScreen(
                         onDismissRequest = { deleteTaskListAlertDialogState = false },
                         deleteTaskList = {
                             homeViewModel.deleteTaskList()
-                                updateToDometerWidgetData()
+                            updateToDometerWidgetData()
                             scope.launch {
                                 sheetState.hide()
                             }
