@@ -20,7 +20,7 @@ junit = "4.12"
 androidJunit = "1.1.3"
 koin = "3.1.5"
 kotlin = "1.6.10"
-kotlinCoroutines = "1.6.0"
+kotlinCoroutines = "1.6.1"
 ktlint = "0.45.1"
 ktor = "1.6.7"
 lifecycle = "2.4.1"
@@ -80,6 +80,7 @@ koin-logger = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinCoroutines" }
 kotlin-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 kotlin-gradlePluginz = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

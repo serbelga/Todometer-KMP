@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetAppThemeUseCase
@@ -35,10 +36,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.SetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.preferences.AppTheme
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 

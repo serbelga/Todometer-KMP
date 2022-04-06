@@ -3,9 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("kotlinx-serialization")
     id("com.android.library")
-    id("com.squareup.sqldelight")
 }
 
 version = "1.0"
@@ -39,7 +37,9 @@ kotlin {
         summary = "Common"
         homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
         ios.deploymentTarget = "14.1"
-        frameworkName = "common"
+        framework {
+            baseName = "common"
+        }
         podfile = project.file("../ios/Podfile")
     }
     sourceSets {
@@ -47,10 +47,10 @@ kotlin {
             dependencies {
                 api(libs.koin.core)
                 api(libs.koin.test)
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.json)
-                implementation(libs.ktor.client.serialization)
-                implementation(libs.sqldelight.coroutines)
+
+                implementation(projects.commonData)
+                api(projects.commonDomain)
+                implementation(projects.commonPreferences)
             }
         }
         val commonTest by getting {
@@ -63,35 +63,21 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.coreKtx)
-                implementation(libs.androidx.datastore.preferences)
-                implementation(libs.ktor.client.android)
-                implementation(libs.sqldelight.androidDriver)
             }
         }
         val androidTest by getting {
             dependencies {
                 implementation(libs.junit)
-                implementation(libs.sqldelight.jvmDriver)
                 implementation(libs.mockk.mockk)
             }
         }
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.apache)
-                implementation(libs.sqldelight.jvmDriver)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting {
             dependencies {
                 implementation(libs.mockk.mockk)
             }
         }
-        val iosMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.ios)
-                implementation(libs.sqldelight.nativeDriver)
-            }
-        }
+        val iosMain by getting
         val iosTest by getting
     }
 }
@@ -106,11 +92,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-}
-
-sqldelight {
-    database("TodometerDatabase") {
-        packageName = "dev.sergiobelda.todometer"
     }
 }
