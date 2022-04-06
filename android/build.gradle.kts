@@ -43,6 +43,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
 }
 
@@ -53,10 +54,8 @@ dependencies {
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.animation.graphics)
-    implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.navigation.compose)
 
-    implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
 
