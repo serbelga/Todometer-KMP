@@ -18,9 +18,9 @@ package dev.sergiobelda.todometer.common.domain.usecase
 
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
-import dev.sergiobelda.todometer.common.domain.model.TaskList
 
 class InsertTaskListUseCase(
     private val taskListRepository: ITaskListRepository,

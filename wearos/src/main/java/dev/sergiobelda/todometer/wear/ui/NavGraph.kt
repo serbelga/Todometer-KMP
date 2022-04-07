@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear
+package dev.sergiobelda.todometer.wear.ui
 
 import androidx.navigation.NavHostController
-import dev.sergiobelda.todometer.wear.Destinations.DeleteTask
-import dev.sergiobelda.todometer.wear.Destinations.DeleteTaskList
-import dev.sergiobelda.todometer.wear.Destinations.Home
-import dev.sergiobelda.todometer.wear.Destinations.TaskDetail
-import dev.sergiobelda.todometer.wear.Destinations.TaskListTasks
+import dev.sergiobelda.todometer.wear.ui.Destinations.DeleteTask
+import dev.sergiobelda.todometer.wear.ui.Destinations.DeleteTaskList
+import dev.sergiobelda.todometer.wear.ui.Destinations.Home
+import dev.sergiobelda.todometer.wear.ui.Destinations.TaskDetail
+import dev.sergiobelda.todometer.wear.ui.Destinations.TaskListTasks
 
 object Destinations {
     const val Home = "home"

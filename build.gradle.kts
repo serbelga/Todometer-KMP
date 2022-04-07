@@ -1,7 +1,5 @@
 buildscript {
-    var kotlin_version: String by extra
-    kotlin_version = "1.0.0"
-    repositories {
+   repositories {
         gradlePluginPortal()
         google()
         mavenCentral()

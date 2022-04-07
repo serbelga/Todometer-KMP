@@ -17,8 +17,6 @@
 package dev.sergiobelda.todometer.common.domain.model
 
 import dev.sergiobelda.todometer.common.domain.extensions.enumValueOrDefaultOf
-import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 object TypeConverters {
 
