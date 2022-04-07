@@ -21,6 +21,3 @@ local.properties
 /android/release/*
 /android/google-services.json
 /wearos/google-services.json
-/common-data/build/
-/common-domain/build/
-/common-preferences/build/
