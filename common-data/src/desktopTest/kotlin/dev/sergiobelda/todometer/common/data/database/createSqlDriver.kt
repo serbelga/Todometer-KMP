@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear
+package dev.sergiobelda.todometer.common.data.database
 
-import dev.sergiobelda.todometer.common.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.di.initKoin
-import dev.sergiobelda.todometer.wear.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
 
-class App : ToDometerBaseApplication() {
-
-    override fun onCreate() {
-        super.onCreate()
-        initKoin {
-            modules(viewModelModule)
-            androidContext(this@App)
-        }
-    }
+actual fun createSqlDriver(): SqlDriver {
+    val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+    TodometerDatabase.Schema.create(driver)
+    return driver
 }

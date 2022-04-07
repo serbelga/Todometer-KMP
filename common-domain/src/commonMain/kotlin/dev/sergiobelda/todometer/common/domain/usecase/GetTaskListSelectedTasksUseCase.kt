@@ -21,6 +21,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -35,6 +36,7 @@ class GetTaskListSelectedTasksUseCase(
      * every time that current task list selected in user preferences changes or
      * some task has been updated.
      */
+    @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(): Flow<Result<List<Task>>> =
         userPreferencesRepository.taskListSelected().flatMapLatest { taskListId ->
             taskRepository.getTasks(taskListId).map { result ->

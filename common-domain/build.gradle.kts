@@ -44,6 +44,10 @@ kotlin {
         val desktopTest by getting
         val iosMain by getting
         val iosTest by getting
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 

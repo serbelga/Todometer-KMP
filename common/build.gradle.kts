@@ -13,17 +13,8 @@ repositories {
 }
 
 kotlin {
-    android {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
-
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    android()
+    jvm("desktop")
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
@@ -48,8 +39,8 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.test)
 
-                implementation(projects.commonData)
                 api(projects.commonDomain)
+                implementation(projects.commonData)
                 implementation(projects.commonPreferences)
             }
         }

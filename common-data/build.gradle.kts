@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -12,7 +14,7 @@ kotlin {
     android()
     jvm("desktop")
 
-    val iosTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget =
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
             ::iosArm64
         else
@@ -36,7 +38,6 @@ kotlin {
                 implementation(libs.ktor.client.json)
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.sqldelight.coroutines)
-
                 implementation(projects.commonDomain)
                 implementation(projects.commonPreferences)
             }
@@ -45,6 +46,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.coroutinesTest)
                 implementation(libs.mockk.common)
+                implementation(kotlin("test"))
             }
         }
         val androidMain by getting {
@@ -78,6 +80,10 @@ kotlin {
             }
         }
         val iosTest by getting
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 
