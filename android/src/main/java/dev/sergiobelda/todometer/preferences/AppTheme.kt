@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.preferences
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.preferences.AppTheme
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 
 data class AppThemeOption(
     @DrawableRes val themeIconRes: Int,
