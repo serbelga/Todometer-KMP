@@ -29,7 +29,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import dev.sergiobelda.todometer.common.preferences.AppTheme
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.ui.Destinations.About
 import dev.sergiobelda.todometer.ui.Destinations.AddTask
 import dev.sergiobelda.todometer.ui.Destinations.AddTaskList

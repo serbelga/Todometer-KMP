@@ -1,5 +1,5 @@
 buildscript {
-    repositories {
+   repositories {
         gradlePluginPortal()
         google()
         mavenCentral()

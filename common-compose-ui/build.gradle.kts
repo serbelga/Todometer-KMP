@@ -15,11 +15,8 @@ repositories {
 
 kotlin {
     android()
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm("desktop")
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -48,6 +45,10 @@ kotlin {
         }
         val desktopMain by getting
         val desktopTest by getting
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 
