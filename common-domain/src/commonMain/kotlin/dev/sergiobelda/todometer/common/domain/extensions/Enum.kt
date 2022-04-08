@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.common.domain.extensions
 
-// TODO: Move to new module
 /**
  * Returns an enum entry or null with specified [name].
  */
