@@ -465,7 +465,8 @@ fun TasksListView(
                 onDoingClick,
                 onDoneClick,
                 onTaskItemClick,
-                onTaskItemLongClick
+                onTaskItemLongClick,
+                modifier = Modifier.animateItemPlacement()
             ) { onSwipeToDismiss(task.id) }
         }
         if (tasksDone.isNotEmpty()) {
@@ -497,7 +498,8 @@ fun TasksListView(
                     onDoingClick,
                     onDoneClick,
                     onTaskItemClick,
-                    onTaskItemLongClick
+                    onTaskItemLongClick,
+                    modifier = Modifier.animateItemPlacement()
                 ) { onSwipeToDismiss(task.id) }
             }
         }
@@ -526,6 +528,7 @@ fun LazyItemScope.SwipeableTaskItem(
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
     onTaskItemLongClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
     onSwipeToDismiss: () -> Unit
 ) {
     val dismissState = rememberDismissState(
@@ -589,7 +592,7 @@ fun LazyItemScope.SwipeableTaskItem(
                 modifier = Modifier.clip(RoundedCornerShape(dp))
             )
         },
-        modifier = Modifier.animateItemPlacement()
+        modifier = modifier
     )
 }
 
