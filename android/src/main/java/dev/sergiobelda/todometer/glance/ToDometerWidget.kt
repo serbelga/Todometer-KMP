@@ -17,11 +17,13 @@
 package dev.sergiobelda.todometer.glance
 
 import android.content.Context
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.Image
@@ -61,16 +63,16 @@ import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksU
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.glance.Action.Companion.taskIdKey
-import dev.sergiobelda.todometer.glance.Action.Companion.taskStateKey
+import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskIdKey
+import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskStateKey
 import dev.sergiobelda.todometer.ui.MainActivity
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent.inject
+import androidx.glance.appwidget.action.actionStartActivity as actionStartActivityIntent
 
 class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
@@ -86,7 +88,17 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     private val context by inject<Context>()
 
-    var glanceId: GlanceId? by mutableStateOf(null)
+    private val openAddTaskDeepLinkIntent = Intent(
+        Intent.ACTION_VIEW,
+        OPEN_ADD_TASK_DEEP_LINK.toUri(),
+        context,
+        MainActivity::class.java
+    )
+
+    private var glanceId: GlanceId? by mutableStateOf(null)
+
+    // TODO: Use Loading Progress indicator.
+    private var isLoading: Boolean by mutableStateOf(false)
 
     init {
         loadData()
@@ -94,7 +106,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     fun loadData() {
         coroutineScope.launch {
-            delay(200)
+            isLoading = true
 
             getTaskListSelectedUseCase().first().doIfSuccess {
                 taskList = it
@@ -107,6 +119,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             }
 
             updateAll(context)
+
+            isLoading = false
         }
     }
 
@@ -121,7 +135,9 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
         ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
                 Row(
-                    modifier = GlanceModifier.fillMaxWidth().padding(start = 8.dp),
+                    modifier = GlanceModifier.fillMaxWidth().padding(start = 8.dp).clickable(
+                        onClick = actionStartActivity<MainActivity>()
+                    ),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalAlignment = Alignment.End
                 ) {
@@ -132,7 +148,9 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     )
                     Image(
                         ImageProvider(R.drawable.todometer_widget_add_button),
-                        modifier = GlanceModifier.clickable(onClick = actionStartActivity<MainActivity>()),
+                        modifier = GlanceModifier.clickable(
+                            onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent)
+                        ),
                         contentDescription = null
                     )
                 }
@@ -142,7 +160,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                         modifier = GlanceModifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = "There are any task")
+                        Text(text = context.getString(R.string.no_tasks))
                     }
                 } else {
                     LazyColumn {
@@ -157,11 +175,18 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     @Composable
     private fun TaskItem(task: Task) {
+        val openTaskDeepLinkIntent = Intent(
+            Intent.ACTION_VIEW,
+            "$OPEN_TASK_DEEP_LINK/${task.id}".toUri(),
+            context,
+            MainActivity::class.java
+        )
         Column {
             Row(
                 modifier = GlanceModifier.fillMaxWidth()
-                    .background(ImageProvider(R.drawable.todometer_widget_card)),
-                verticalAlignment = Alignment.CenterVertically
+                    .background(ImageProvider(R.drawable.todometer_widget_card))
+                    .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 val textStyle = if (task.state == TaskState.DONE) {
                     TextStyle(
@@ -180,7 +205,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     ImageProvider(if (task.state == TaskState.DONE) R.drawable.ic_round_replay_24 else R.drawable.ic_round_check_24),
                     contentDescription = null,
                     modifier = GlanceModifier.padding(8.dp).clickable(
-                        onClick = actionRunCallback<Action>(
+                        onClick = actionRunCallback<SetTaskStateAction>(
                             actionParametersOf(
                                 taskIdKey to task.id,
                                 taskStateKey to task.state
@@ -193,9 +218,14 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             Spacer(modifier = GlanceModifier.height(8.dp))
         }
     }
+
+    companion object {
+        private const val OPEN_ADD_TASK_DEEP_LINK: String = "app://open.add.task"
+        private const val OPEN_TASK_DEEP_LINK: String = "app://open.task"
+    }
 }
 
-class Action : ActionCallback {
+class SetTaskStateAction : ActionCallback {
 
     private val setTaskDoneUseCase: SetTaskDoneUseCase by inject(SetTaskDoneUseCase::class.java)
 
@@ -204,7 +234,7 @@ class Action : ActionCallback {
     override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val taskId: String = parameters[taskIdKey] ?: ""
         parameters[taskStateKey]?.let { state ->
-            when(state) {
+            when (state) {
                 TaskState.DOING -> setTaskDoneUseCase.invoke(taskId)
                 TaskState.DONE -> setTaskDoingUseCase.invoke(taskId)
             }
