@@ -51,9 +51,12 @@
     <string name="field_not_empty">El campo no puede quedar vacío</string>
     <string name="github" translatable="false">GitHub</string>
     <string name="default_task_list_name">Mis tareas</string>
-    <string name="no_tasks">No hay tareas</string>
+    <string name="no_tasks">No has añadido ninguna tarea</string>
     <string name="no_task_lists">No hay listas de tareas</string>
     <string name="you_have_not_any_task_list">No tienes ninguna lista de tareas</string>
+    <string name="completed_tasks">Completadas (%1$d)</string>
+    <string name="you_have_completed_all_tasks">Has completado todas las tareas</string>
+    <string name="congratulations">Enhorabuena!</string>
 
     <string name="task_title_input">Nombre de la tarea</string>
     <string name="task_list_name_input">Nombre de la lista de tareas</string>

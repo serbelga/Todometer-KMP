@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.ui.home
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -79,7 +80,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -102,7 +102,6 @@ import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
-import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
@@ -234,7 +233,7 @@ fun HomeScreen(
                     ToDometerContentLoadingProgress()
                 } else {
                     if (homeUiState.tasks.isEmpty()) {
-                        EmptyTasksListView()
+                        TaskListIllustration(R.drawable.no_tasks, stringResource(R.string.no_tasks))
                     } else {
                         TasksListView(
                             homeUiState.tasks,
@@ -472,7 +471,14 @@ fun TasksListView(
         if (tasksDone.isNotEmpty()) {
             item {
                 SingleLineItem(
-                    text = { Text(text = "Completadas (${tasksDone.size})") },
+                    text = {
+                        Text(
+                            text = stringResource(
+                                R.string.completed_tasks,
+                                tasksDone.size
+                            )
+                        )
+                    },
                     trailingIcon = {
                         if (areTasksDoneVisible) Icon(
                             Icons.Rounded.ExpandLess,
@@ -480,7 +486,8 @@ fun TasksListView(
                         ) else Icon(Icons.Rounded.ExpandMore, contentDescription = null)
                     },
                     modifier = Modifier.animateItemPlacement(),
-                    onClick = { areTasksDoneVisible = !areTasksDoneVisible })
+                    onClick = { areTasksDoneVisible = !areTasksDoneVisible }
+                )
             }
         }
         if (areTasksDoneVisible) {
@@ -497,6 +504,13 @@ fun TasksListView(
         item {
             Spacer(modifier = Modifier.height(84.dp))
         }
+    }
+    if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
+        TaskListIllustration(
+            R.drawable.completed_tasks,
+            stringResource(R.string.you_have_completed_all_tasks),
+            stringResource(R.string.congratulations)
+        )
     }
 }
 
@@ -580,7 +594,11 @@ fun LazyItemScope.SwipeableTaskItem(
 }
 
 @Composable
-fun EmptyTasksListView() {
+fun TaskListIllustration(
+    @DrawableRes drawableRes: Int,
+    text: String,
+    secondaryText: String? = null
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -589,11 +607,18 @@ fun EmptyTasksListView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(R.drawable.no_tasks),
-                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
+                painterResource(drawableRes),
+                modifier = Modifier.size(220.dp).padding(bottom = 36.dp),
                 contentDescription = null
             )
-            Text(stringResource(R.string.no_tasks))
+            Text(text = text)
+            secondaryText?.let {
+                Text(
+                    text = it,
+                    color = TodometerColors.onSurfaceMediumEmphasis,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
         }
     }
 }
@@ -707,13 +732,5 @@ fun MoreBottomSheet(
                 Text(stringResource(R.string.about), style = TodometerTypography.caption)
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun EmptyTasksListPreview() {
-    ToDometerTheme {
-        EmptyTasksListView()
     }
 }
