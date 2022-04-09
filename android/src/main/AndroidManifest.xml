@@ -21,8 +21,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <data android:scheme="app" android:host="open.add.task" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <data android:scheme="app" android:host="open.task" />
             </intent-filter>
         </activity>
