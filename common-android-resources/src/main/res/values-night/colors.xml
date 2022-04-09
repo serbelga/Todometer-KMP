@@ -20,12 +20,12 @@
     <color name="todometer_secondary">#7affb4</color>
     <color name="todometer_on_primary">#000000</color>
     <color name="todometer_on_secondary">#000000</color>
-    <color name="todometer_surface">#073042</color>
+    <color name="todometer_surface">#171B23</color>
     <color name="todometer_on_surface">#DEFFFFFF</color>
     <color name="todometer_on_surface_medium_emphasis">#99FFFFFF</color>
     <color name="todometer_error">#CF6679</color>
     <color name="todometer_on_error">#FFFFFF</color>
-    <color name="todometer_background">#073042</color>
+    <color name="todometer_background">#171B23</color>
     <color name="todometer_divider">#808080</color>
     <color name="todometer_widget_background">#073042</color>
     <color name="todometer_widget_button_background">#80B4FF</color>
