@@ -67,6 +67,7 @@ import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskIdKey
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskStateKey
 import dev.sergiobelda.todometer.ui.MainActivity
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -106,6 +107,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     fun loadData() {
         coroutineScope.launch {
+            delay(200)
+
             isLoading = true
 
             getTaskListSelectedUseCase().first().doIfSuccess {
