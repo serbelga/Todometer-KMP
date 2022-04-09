@@ -59,7 +59,10 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.glance.Action.Companion.taskIdKey
+import dev.sergiobelda.todometer.glance.Action.Companion.taskStateKey
 import dev.sergiobelda.todometer.ui.MainActivity
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -67,14 +70,13 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.java.KoinJavaComponent.inject
 
 class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase by inject()
 
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase by inject()
-
-    private val setTaskDoneUseCase: SetTaskDoneUseCase by inject()
 
     private val coroutineScope = MainScope()
 
@@ -175,14 +177,18 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
                 )
                 Image(
-                    ImageProvider(if (task.state == TaskState.DONE) R.drawable.ic_round_refresh_24 else R.drawable.ic_round_check_24),
+                    ImageProvider(if (task.state == TaskState.DONE) R.drawable.ic_round_replay_24 else R.drawable.ic_round_check_24),
                     contentDescription = null,
                     modifier = GlanceModifier.padding(8.dp).clickable(
                         onClick = actionRunCallback<Action>(
-                            actionParametersOf()
+                            actionParametersOf(
+                                taskIdKey to task.id,
+                                taskStateKey to task.state
+                            )
                         )
                     )
                 )
+
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
         }
@@ -191,9 +197,25 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
 class Action : ActionCallback {
 
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {}
+    private val setTaskDoneUseCase: SetTaskDoneUseCase by inject(SetTaskDoneUseCase::class.java)
+
+    private val setTaskDoingUseCase: SetTaskDoingUseCase by inject(SetTaskDoingUseCase::class.java)
+
+    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        val taskId: String = parameters[taskIdKey] ?: ""
+        parameters[taskStateKey]?.let { state ->
+            when(state) {
+                TaskState.DOING -> setTaskDoneUseCase.invoke(taskId)
+                TaskState.DONE -> setTaskDoingUseCase.invoke(taskId)
+            }
+        }
+        ToDometerWidget().loadData()
+    }
 
     companion object {
-        const val TASK_ID = "taskId"
+        private const val TASK_ID = "taskId"
+        private const val TASK_STATE = "taskState"
+        val taskIdKey = ActionParameters.Key<String>(TASK_ID)
+        val taskStateKey = ActionParameters.Key<TaskState>(TASK_STATE)
     }
 }
