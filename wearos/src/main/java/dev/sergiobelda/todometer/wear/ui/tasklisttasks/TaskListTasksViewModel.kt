@@ -29,7 +29,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListNameUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class TaskListTasksViewModel(
