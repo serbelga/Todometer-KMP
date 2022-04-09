@@ -25,7 +25,6 @@ import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class TaskDetailViewModel(
