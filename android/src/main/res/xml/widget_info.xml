@@ -17,4 +17,5 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="180dp"
     android:minHeight="60dp"
+    android:previewImage="@drawable/widget_thumbnail"
     android:resizeMode="horizontal|vertical" />
