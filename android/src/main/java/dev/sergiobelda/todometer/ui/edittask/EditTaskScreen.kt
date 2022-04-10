@@ -44,6 +44,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 
@@ -90,6 +91,7 @@ fun EditTaskScreen(
                                         taskDescription,
                                         selectedTag
                                     )
+                                    ToDometerWidgetReceiver().updateData()
                                     navigateUp()
                                 }
                             }

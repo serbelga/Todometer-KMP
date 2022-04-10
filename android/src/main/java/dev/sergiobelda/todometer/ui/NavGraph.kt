@@ -33,6 +33,9 @@ object Destinations {
     const val TaskDetail = "taskDetail"
     const val About = "about"
 
+    const val AddTaskDeepLink = "app://open.add.task"
+    const val TaskDetailDeepLink = "app://open.task"
+
     object TaskDetailArgs {
         const val TaskId = "taskId"
     }

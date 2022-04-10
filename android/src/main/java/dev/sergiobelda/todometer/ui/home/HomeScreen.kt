@@ -97,6 +97,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
@@ -188,6 +189,7 @@ fun HomeScreen(
                     selectTaskList = {
                         homeViewModel.setTaskListSelected(it)
                         scope.launch { closeDrawer() }
+                        updateToDometerWidgetData()
                     }
                 )
             },
@@ -208,7 +210,10 @@ fun HomeScreen(
                 if (deleteTaskAlertDialogState) {
                     DeleteTaskAlertDialog(
                         onDismissRequest = { deleteTaskAlertDialogState = false },
-                        deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                        deleteTask = {
+                            homeViewModel.deleteTask(selectedTask)
+                            updateToDometerWidgetData()
+                        }
                     )
                 }
                 if (deleteTaskListAlertDialogState) {
@@ -216,6 +221,7 @@ fun HomeScreen(
                         onDismissRequest = { deleteTaskListAlertDialogState = false },
                         deleteTaskList = {
                             homeViewModel.deleteTaskList()
+                            updateToDometerWidgetData()
                             scope.launch {
                                 sheetState.hide()
                             }
@@ -239,9 +245,11 @@ fun HomeScreen(
                             homeUiState.tasks,
                             onDoingClick = {
                                 homeViewModel.setTaskDoing(it)
+                                updateToDometerWidgetData()
                             },
                             onDoneClick = {
                                 homeViewModel.setTaskDone(it)
+                                updateToDometerWidgetData()
                             },
                             onTaskItemClick = openTask,
                             onTaskItemLongClick = {
@@ -736,4 +744,8 @@ fun MoreBottomSheet(
             }
         }
     }
+}
+
+private fun updateToDometerWidgetData() {
+    ToDometerWidgetReceiver().updateData()
 }

@@ -27,6 +27,9 @@
     <color name="todometer_on_error">#FFFFFF</color>
     <color name="todometer_background">#FFFFFF</color>
     <color name="todometer_divider">#676767</color>
+    <color name="todometer_widget_background">#F6F8FB</color>
+    <color name="todometer_widget_button_background">#4285F4</color>
+    <color name="todometer_widget_card_background">#FFFFFF</color>
 
     <color name="green">#3ddc84</color>
     <color name="greenDark">#00a956</color>
