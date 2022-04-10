@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
@@ -98,9 +99,6 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     private var glanceId: GlanceId? by mutableStateOf(null)
 
-    // TODO: Use Loading Progress indicator.
-    private var isLoading: Boolean by mutableStateOf(false)
-
     init {
         loadData()
     }
@@ -108,8 +106,6 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     fun loadData() {
         coroutineScope.launch {
             delay(200)
-
-            isLoading = true
 
             getTaskListSelectedUseCase().first().doIfSuccess {
                 taskList = it
@@ -122,8 +118,6 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             }
 
             updateAll(context)
-
-            isLoading = false
         }
     }
 
@@ -132,6 +126,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
         glanceId = LocalGlanceId.current
         val taskListName: String? =
             if (taskList != null) taskList?.name else context.getString(R.string.default_task_list_name)
+        // TODO: Use Loading Progress indicator.
         Box(
             modifier = GlanceModifier.fillMaxSize()
                 .background(ImageProvider(R.drawable.todometer_widget_background))
@@ -146,7 +141,10 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                 ) {
                     Text(
                         text = taskListName ?: "",
-                        style = TextStyle(color = ColorProvider(R.color.todometer_on_surface)),
+                        style = TextStyle(
+                            color = ColorProvider(R.color.todometer_on_surface),
+                            fontSize = 16.sp
+                        ),
                         modifier = GlanceModifier.fillMaxWidth().defaultWeight()
                     )
                     Image(
