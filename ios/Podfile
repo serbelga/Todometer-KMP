@@ -2,4 +2,7 @@ target 'ToDometer' do
     use_frameworks!
     platform :ios, '14.1'
     pod 'common', :path => '../common'
+    pod 'common_data', :path => '../common-data'
+    pod 'common_domain', :path => '../common-domain'
+    pod 'common-preferences', :path => '../common-preferences'
 end
