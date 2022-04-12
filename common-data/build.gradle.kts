@@ -13,14 +13,9 @@ version = "1.0"
 kotlin {
     android()
     jvm("desktop")
-
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
-
-    iosTarget("ios") {}
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Common data"
@@ -73,13 +68,28 @@ kotlin {
                 implementation(libs.mockk.mockk)
             }
         }
-        val iosMain by getting {
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
             dependencies {
                 implementation(libs.ktor.client.ios)
                 implementation(libs.sqldelight.nativeDriver)
             }
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
         }
-        val iosTest by getting
+        val iosX64Test by getting
+        val iosArm64Test by getting
+        val iosSimulatorArm64Test by getting
+        val iosTest by creating {
+            dependsOn(commonTest)
+            iosX64Test.dependsOn(this)
+            iosArm64Test.dependsOn(this)
+            iosSimulatorArm64Test.dependsOn(this)
+        }
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
