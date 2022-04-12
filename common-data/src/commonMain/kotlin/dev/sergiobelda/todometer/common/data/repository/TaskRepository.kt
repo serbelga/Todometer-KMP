@@ -105,10 +105,11 @@ class TaskRepository(
             Task(
                 id = taskId,
                 title = title,
+                tag = tag,
                 description = description,
+                dueDate = 0,
                 state = TaskState.DOING,
                 taskListId = taskListId,
-                tag = tag,
                 sync = sync
             )
         )

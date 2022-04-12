@@ -22,8 +22,9 @@ import kotlinx.serialization.Serializable
 data class TaskApiModel(
     val id: String,
     val title: String,
+    val tag: String,
     val description: String?,
+    val dueDate: Long?,
     val state: String,
-    val taskListId: String,
-    val tag: String
+    val taskListId: String
 )
