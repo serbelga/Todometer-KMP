@@ -34,15 +34,17 @@ class InsertTaskInTaskListSelectedUseCase(
      */
     suspend operator fun invoke(
         title: String,
-        description: String = "",
-        tag: Tag = Tag.GRAY
+        tag: Tag = Tag.GRAY,
+        description: String? = null,
+        dueDate: Long? = null
     ): Result<String> {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull() ?: ""
         return taskRepository.insertTask(
             title,
+            tag,
             description,
-            taskListId,
-            tag
+            dueDate,
+            taskListId
         )
     }
 }

@@ -58,6 +58,9 @@ val Colors.outline: Color
 val Colors.onSurfaceMediumEmphasis: Color
     @Composable get() = onSurface.copy(alpha = 0.6f)
 
+val Colors.onSurfaceDisabled: Color
+        @Composable get() = onSurface.copy(alpha = 0.38f)
+
 val TodometerColors: Colors
     @Composable get() = MaterialTheme.colors
 

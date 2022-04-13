@@ -41,9 +41,10 @@ interface ITaskRepository {
      */
     suspend fun insertTask(
         title: String,
-        description: String,
-        taskListId: String,
-        tag: Tag
+        tag: Tag,
+        description: String?,
+        dueDate: Long?,
+        taskListId: String
     ): Result<String>
 
     /**

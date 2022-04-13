@@ -85,9 +85,10 @@ class TaskRepository(
      */
     override suspend fun insertTask(
         title: String,
-        description: String,
-        taskListId: String,
-        tag: Tag
+        tag: Tag,
+        description: String?,
+        dueDate: Long?,
+        taskListId: String
     ): Result<String> {
         val taskId = randomUUIDString()
         val sync = false
@@ -107,7 +108,7 @@ class TaskRepository(
                 title = title,
                 tag = tag,
                 description = description,
-                dueDate = 0,
+                dueDate = dueDate,
                 state = TaskState.DOING,
                 taskListId = taskListId,
                 sync = sync

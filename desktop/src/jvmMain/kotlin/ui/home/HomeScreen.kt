@@ -158,7 +158,7 @@ fun HomeScreen() {
                     onDismissRequest = { addTaskAlertDialogState = false }
                 ) { title, description, _ ->
                     coroutineScope.launch {
-                        insertTaskInTaskListSelectedUseCase.invoke(title, description, Tag.GRAY)
+                        insertTaskInTaskListSelectedUseCase.invoke(title, Tag.GRAY, description)
                     }
                 }
             }

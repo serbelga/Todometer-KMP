@@ -16,36 +16,47 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.task
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import kotlinx.datetime.Clock
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun TaskItem(
     task: Task,
@@ -56,18 +67,18 @@ fun TaskItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxWidth().background(TodometerColors.surface)
+        modifier = modifier.combinedClickable(
+            onClick = {
+                onClick(task.id)
+            },
+            onLongClick = {
+                onLongClick(task.id)
+            }
+        ).fillMaxWidth().background(TodometerColors.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.combinedClickable(
-                onClick = {
-                    onClick(task.id)
-                },
-                onLongClick = {
-                    onLongClick(task.id)
-                }
-            ).padding(top = 4.dp, bottom = 4.dp, start = 20.dp, end = 8.dp)
+            modifier = Modifier.padding(start = 20.dp, end = 8.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -108,6 +119,25 @@ fun TaskItem(
                             contentDescription = "Doing",
                             tint = TodometerColors.secondary
                         )
+                    }
+                }
+            }
+        }
+        // TODO: If dueDate is not null and task is not done
+        task.dueDate?.let {
+            val dueDateTextColor = if (Clock.System.now().toEpochMilliseconds() > it)
+                TodometerColors.error else TodometerColors.onSurfaceMediumEmphasis
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(start = 36.dp, end = 8.dp, bottom = 8.dp)
+            ) {
+                Surface(
+                    border = BorderStroke(1.dp, TodometerColors.outline),
+                    shape = TodometerShapes.small
+                ) {
+                    Row(modifier = Modifier.padding(6.dp)) {
+                        Icon(Icons.Rounded.Schedule, contentDescription = null, modifier = Modifier.size(16.dp).padding(end = 4.dp), tint = dueDateTextColor)
+                        Text("20 Apr. 12:00h", style = TodometerTypography.caption, color = dueDateTextColor)
                     }
                 }
             }

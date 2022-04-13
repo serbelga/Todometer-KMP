@@ -104,8 +104,8 @@ fun AddTaskScreen(
                             } else {
                                 addTaskViewModel.insertTask(
                                     taskTitle,
-                                    taskDescription,
-                                    selectedTag
+                                    selectedTag,
+                                    taskDescription
                                 )
                             }
                         }

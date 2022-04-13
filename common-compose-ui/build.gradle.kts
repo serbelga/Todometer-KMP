@@ -29,6 +29,8 @@ kotlin {
                 implementation(projects.common)
 
                 api(libs.kotlin.coroutinesSwing)
+
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
             }
         }
         val commonTest by getting
