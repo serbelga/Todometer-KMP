@@ -30,7 +30,7 @@ kotlin {
 
                 api(libs.kotlin.coroutinesSwing)
 
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting

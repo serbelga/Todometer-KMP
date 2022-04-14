@@ -23,9 +23,8 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -42,7 +41,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -54,7 +52,11 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
@@ -123,25 +125,57 @@ fun TaskItem(
                 }
             }
         }
-        // TODO: If dueDate is not null and task is not done
-        task.dueDate?.let {
-            val dueDateTextColor = if (Clock.System.now().toEpochMilliseconds() > it)
-                TodometerColors.error else TodometerColors.onSurfaceMediumEmphasis
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 36.dp, end = 8.dp, bottom = 8.dp)
-            ) {
-                Surface(
-                    border = BorderStroke(1.dp, TodometerColors.outline),
-                    shape = TodometerShapes.small
+        TaskItemAdditionalInformationRow(task)
+        HorizontalDivider()
+    }
+}
+
+@Composable
+internal fun TaskItemAdditionalInformationRow(task: Task) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(start = 36.dp, end = 8.dp, bottom = 8.dp)
+    ) {
+        if (task.state == TaskState.DOING) {
+            task.dueDate?.let { dueDate ->
+                val expired = Clock.System.now().toEpochMilliseconds() > dueDate
+                val dueDateChipTint =
+                    if (expired) TodometerColors.error else TodometerColors.onSurfaceMediumEmphasis
+                val dueDateChipOutline =
+                    if (expired) TodometerColors.error else TodometerColors.outline
+                val dueDateText = Instant.fromEpochMilliseconds(dueDate)
+                dueDateText.toLocalDateTime(TimeZone.currentSystemDefault())
+                TaskItemChip(
+                    borderStroke = BorderStroke(1.dp, dueDateChipOutline)
                 ) {
-                    Row(modifier = Modifier.padding(6.dp)) {
-                        Icon(Icons.Rounded.Schedule, contentDescription = null, modifier = Modifier.size(16.dp).padding(end = 4.dp), tint = dueDateTextColor)
-                        Text("20 Apr. 12:00h", style = TodometerTypography.caption, color = dueDateTextColor)
-                    }
+                    Icon(
+                        Icons.Rounded.Schedule,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp).padding(end = 4.dp),
+                        tint = dueDateChipTint
+                    )
+                    Text(
+                        TaskDueDate.getDueDateFormatted(dueDate),
+                        style = TodometerTypography.caption,
+                        color = dueDateChipTint
+                    )
                 }
             }
         }
-        HorizontalDivider()
+    }
+}
+
+@Composable
+internal fun TaskItemChip(
+    borderStroke: BorderStroke = BorderStroke(1.dp, TodometerColors.outline),
+    content: @Composable RowScope.() -> Unit
+) {
+    Surface(
+        border = borderStroke,
+        shape = TodometerShapes.small
+    ) {
+        Row(modifier = Modifier.padding(6.dp)) {
+            content()
+        }
     }
 }

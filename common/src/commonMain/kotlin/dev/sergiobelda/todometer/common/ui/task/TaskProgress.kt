@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.model
+package dev.sergiobelda.todometer.common.ui.task
+
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 object TaskProgress {
 
