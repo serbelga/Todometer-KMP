@@ -121,11 +121,11 @@ fun TaskItem(
 internal fun TaskItemAdditionalInformationRow(task: Task) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = 36.dp, end = 8.dp, bottom = 8.dp)
+        modifier = Modifier.padding(start = 36.dp, end = 8.dp)
     ) {
         if (task.state == TaskState.DOING) {
             task.dueDate?.let { dueDate ->
-                TaskDueDateChip(dueDate)
+                TaskDueDateChip(dueDate, modifier = Modifier.padding(bottom = 8.dp))
             }
         }
     }
