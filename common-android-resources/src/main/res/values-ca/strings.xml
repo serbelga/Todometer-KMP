@@ -44,6 +44,7 @@
     <string name="privacy_policy">Política de privacitat</string>
     <string name="enter_task_name">Introdueix el nom de la tasca</string>
     <string name="enter_description">Introdueix una descripció (opcional)</string>
+    <string name="enter_date_time">Introdueix data i hora (opcional)</string>
     <string name="enter_task_list_name">Introdueix el nom de la llista de tasques</string>
     <string name="choose_tag">Tria una etiqueta</string>
     <string name="field_not_empty">El camp no pot quedar buit</string>
@@ -54,6 +55,7 @@
     <string name="completed_tasks">Completades (%1$d)</string>
     <string name="you_have_completed_all_tasks">Has completat totes les tasques</string>
     <string name="congratulations">Enhorabona!</string>
+    <string name="date_time">Data i hora</string>
 
     <string name="task_title_input">Nom de la tasca</string>
     <string name="task_list_name_input">Nom de la llista de tasques</string>

@@ -31,12 +31,10 @@ object TaskDueDate {
      * otherwise it displays dd-MM-yyyy HH:mm.
      */
     fun getDueDateFormatted(dueDate: Long): String {
-        val timeZone: TimeZone = TimeZone.currentSystemDefault()
-
         val dueDateInstant: Instant = Instant.fromEpochMilliseconds(dueDate)
-        val dueDateLocalDateTime: LocalDateTime = dueDateInstant.toLocalDateTime(timeZone)
+        val dueDateLocalDateTime: LocalDateTime = dueDateInstant.toLocalDateTime(TimeZone.UTC)
 
-        val todayLocalDate = Clock.System.todayAt(timeZone)
+        val todayLocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
 
         val formattedHour = "${dueDateLocalDateTime.hour.format(2)}:${dueDateLocalDateTime.minute.format(2)}h"
         return if (dueDateLocalDateTime.date.compareTo(todayLocalDate) == 0) {

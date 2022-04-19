@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.ui.edittask
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -35,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -46,6 +48,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
+import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 
 @Composable
@@ -53,16 +56,20 @@ fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel
 ) {
-    var taskTitle by remember { mutableStateOf("") }
+    val activity = LocalContext.current as AppCompatActivity
+
+    var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
     var selectedTag by remember { mutableStateOf(Tag.GRAY) }
+    var taskDueDate: Long? by remember { mutableStateOf(null) }
 
     val editTaskUiState = editTaskViewModel.editTaskUiState
     editTaskUiState.task?.let { task ->
         taskTitle = task.title
         taskDescription = task.description ?: ""
         selectedTag = task.tag
+        taskDueDate = task.dueDate
     }
     Scaffold(
         topBar = {
@@ -88,8 +95,9 @@ fun EditTaskScreen(
                                 } else {
                                     editTaskViewModel.updateTask(
                                         taskTitle,
+                                        selectedTag,
                                         taskDescription,
-                                        selectedTag
+                                        taskDueDate
                                     )
                                     ToDometerWidgetReceiver().updateData()
                                     navigateUp()
@@ -135,6 +143,9 @@ fun EditTaskScreen(
                     )
                     ToDometerTagSelector(selectedTag) { tag ->
                         selectedTag = tag
+                    }
+                    ToDometerDateTimeSelector(activity, taskDueDate) {
+                        taskDueDate = it
                     }
                     TitledTextField(
                         title = stringResource(id = R.string.description),

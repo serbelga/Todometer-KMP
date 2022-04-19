@@ -16,27 +16,22 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.task
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,19 +41,11 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
     task: Task,
@@ -138,44 +125,8 @@ internal fun TaskItemAdditionalInformationRow(task: Task) {
     ) {
         if (task.state == TaskState.DOING) {
             task.dueDate?.let { dueDate ->
-                val expired = Clock.System.now().toEpochMilliseconds() > dueDate
-                val dueDateChipTint =
-                    if (expired) TodometerColors.error else TodometerColors.onSurfaceMediumEmphasis
-                val dueDateChipOutline =
-                    if (expired) TodometerColors.error else TodometerColors.outline
-                val dueDateText = Instant.fromEpochMilliseconds(dueDate)
-                dueDateText.toLocalDateTime(TimeZone.currentSystemDefault())
-                TaskItemChip(
-                    borderStroke = BorderStroke(1.dp, dueDateChipOutline)
-                ) {
-                    Icon(
-                        Icons.Rounded.Schedule,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp).padding(end = 4.dp),
-                        tint = dueDateChipTint
-                    )
-                    Text(
-                        TaskDueDate.getDueDateFormatted(dueDate),
-                        style = TodometerTypography.caption,
-                        color = dueDateChipTint
-                    )
-                }
+                TaskDueDateChip(dueDate)
             }
-        }
-    }
-}
-
-@Composable
-internal fun TaskItemChip(
-    borderStroke: BorderStroke = BorderStroke(1.dp, TodometerColors.outline),
-    content: @Composable RowScope.() -> Unit
-) {
-    Surface(
-        border = borderStroke,
-        shape = TodometerShapes.small
-    ) {
-        Row(modifier = Modifier.padding(6.dp)) {
-            content()
         }
     }
 }

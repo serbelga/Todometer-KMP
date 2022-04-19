@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
+import dev.sergiobelda.todometer.common.compose.ui.task.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
@@ -141,6 +142,9 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
                 }
             }
             HorizontalDivider()
+            task.dueDate?.let {
+                TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
+            }
             if (!task.description.isNullOrBlank()) {
                 Text(
                     text = task.description ?: "",
