@@ -19,6 +19,4 @@ package dev.sergiobelda.todometer.common.extensions
 import platform.Foundation.NSString
 import platform.Foundation.stringWithFormat
 
-actual fun Int.format(digits: Int): String {
-    return NSString.stringWithFormat("%0${digits}d", this)
-}
+actual fun Int.format(digits: Int): String = NSString.stringWithFormat("%0${digits}d", this)

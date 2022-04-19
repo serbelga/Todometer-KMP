@@ -16,6 +16,4 @@
 
 package dev.sergiobelda.todometer.common.extensions
 
-actual fun Int.format(digits: Int): String {
-    return "%0${digits}d".format(this)
-}
+actual fun Int.format(digits: Int): String = "%0${digits}d".format(this)
