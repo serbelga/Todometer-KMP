@@ -37,7 +37,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -64,12 +63,12 @@ fun AddTaskScreen(
 
     val scaffoldState = rememberScaffoldState()
 
-    var taskTitle by rememberSaveable { mutableStateOf("") }
+    var taskTitle by remember { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable { mutableStateOf("") }
+    var taskDescription by remember { mutableStateOf("") }
     val tags = enumValues<Tag>()
     var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
-    var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
+    var taskDueDate: Long? by remember { mutableStateOf(null) }
 
     val addTaskUiState = addTaskViewModel.addTaskUiState
     if (addTaskUiState.isAdded) {
@@ -157,9 +156,12 @@ fun AddTaskScreen(
                 ToDometerTagSelector(selectedTag) { tag ->
                     selectedTag = tag
                 }
-                ToDometerDateTimeSelector(activity, taskDueDate) {
-                    taskDueDate = it
-                }
+                ToDometerDateTimeSelector(
+                    activity,
+                    taskDueDate,
+                    onDateTimeSelected = { taskDueDate = it },
+                    onClearDateTimeClick = { taskDueDate = null }
+                )
                 TitledTextField(
                     title = stringResource(id = R.string.description),
                     value = taskDescription,

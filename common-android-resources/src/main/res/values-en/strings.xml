@@ -56,6 +56,7 @@
     <string name="you_have_completed_all_tasks">You have completed all tasks</string>
     <string name="congratulations">Congratulations!</string>
     <string name="date_time">Date and time</string>
+    <string name="clear">Clear</string>
 
     <string name="task_title_input">Task name</string>
     <string name="task_list_name_input">Task list name</string>

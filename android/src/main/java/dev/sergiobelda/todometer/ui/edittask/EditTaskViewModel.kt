@@ -70,8 +70,8 @@ class EditTaskViewModel(
             updateTaskUseCase(
                 it.copy(
                     title = title,
-                    description = description,
                     tag = tag,
+                    description = description,
                     dueDate = dueDate
                 )
             )

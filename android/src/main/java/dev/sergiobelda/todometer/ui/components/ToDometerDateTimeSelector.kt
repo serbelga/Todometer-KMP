@@ -21,11 +21,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,7 +48,8 @@ import java.util.concurrent.TimeUnit
 fun ToDometerDateTimeSelector(
     activity: AppCompatActivity,
     taskDueDate: Long?,
-    onDateTimeSelected: (Long?) -> Unit
+    onDateTimeSelected: (Long?) -> Unit,
+    onClearDateTimeClick: () -> Unit
 ) {
     Column {
         Text(
@@ -60,7 +64,7 @@ fun ToDometerDateTimeSelector(
                     onDateTimeSelected(it)
                 }
             },
-            verticalAlignment = Alignment.Bottom
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = taskDueDate?.let { TaskDueDate.getDueDateFormatted(it) }
@@ -68,8 +72,16 @@ fun ToDometerDateTimeSelector(
                 color = TodometerColors.onSurfaceMediumEmphasis,
                 modifier = Modifier.padding(start = 32.dp)
             )
+            taskDueDate?.let {
+                IconButton(onClick = onClearDateTimeClick) {
+                    Icon(
+                        Icons.Rounded.Clear,
+                        stringResource(R.string.clear),
+                        tint = TodometerColors.onSurfaceMediumEmphasis
+                    )
+                }
+            }
         }
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

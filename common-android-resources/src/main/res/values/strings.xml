@@ -59,6 +59,7 @@
     <string name="you_have_completed_all_tasks">Has completado todas las tareas</string>
     <string name="congratulations">Enhorabuena!</string>
     <string name="date_time">Fecha y hora</string>
+    <string name="clear">Limpiar</string>
 
     <string name="task_title_input">Nombre de la tarea</string>
     <string name="task_list_name_input">Nombre de la lista de tareas</string>

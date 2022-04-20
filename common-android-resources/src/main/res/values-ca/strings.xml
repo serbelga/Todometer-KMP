@@ -56,6 +56,7 @@
     <string name="you_have_completed_all_tasks">Has completat totes les tasques</string>
     <string name="congratulations">Enhorabona!</string>
     <string name="date_time">Data i hora</string>
+    <string name="clear">Netejar</string>
 
     <string name="task_title_input">Nom de la tasca</string>
     <string name="task_list_name_input">Nom de la llista de tasques</string>
