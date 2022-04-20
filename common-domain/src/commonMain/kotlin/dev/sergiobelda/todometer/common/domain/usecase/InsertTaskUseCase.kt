@@ -29,12 +29,14 @@ class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
     suspend operator fun invoke(
         taskListId: String,
         title: String,
-        description: String = "",
-        tag: Tag = Tag.GRAY
+        tag: Tag = Tag.GRAY,
+        description: String? = null,
+        dueDate: Long? = null
     ): Result<String> = taskRepository.insertTask(
         title,
+        tag,
         description,
-        taskListId,
-        tag
+        dueDate,
+        taskListId
     )
 }

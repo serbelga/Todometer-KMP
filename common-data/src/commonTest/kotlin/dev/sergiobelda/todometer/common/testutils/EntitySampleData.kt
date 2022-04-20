@@ -47,30 +47,33 @@ val taskListEntities = listOf(taskListEntity1, taskListEntity2)
 val taskEntity1 = TaskEntity(
     id = "1",
     title = "Task 1",
+    tag = Tag.GRAY,
     description = "Description 1",
+    dueDate = 1649887517234,
     state = TaskState.DOING,
     tasklist_id = "1",
-    tag = Tag.GRAY,
     sync = false
 )
 
 val taskEntity1Updated = TaskEntity(
     id = "1",
     title = "Task 1 Updated",
+    tag = Tag.RED,
     description = "Description 1 Updated",
+    dueDate = 1649887517234,
     state = TaskState.DOING,
     tasklist_id = "1",
-    tag = Tag.RED,
     sync = false
 )
 
 val taskEntity2 = TaskEntity(
     id = "2",
     title = "Task 2",
+    tag = Tag.RED,
     description = "Description 2",
+    dueDate = 1649887517234,
     state = TaskState.DOING,
     tasklist_id = "1",
-    tag = Tag.RED,
     sync = false
 )
 

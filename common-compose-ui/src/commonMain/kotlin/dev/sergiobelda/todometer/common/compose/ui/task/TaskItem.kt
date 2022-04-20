@@ -56,18 +56,18 @@ fun TaskItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxWidth().background(TodometerColors.surface)
+        modifier = modifier.combinedClickable(
+            onClick = {
+                onClick(task.id)
+            },
+            onLongClick = {
+                onLongClick(task.id)
+            }
+        ).fillMaxWidth().background(TodometerColors.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.combinedClickable(
-                onClick = {
-                    onClick(task.id)
-                },
-                onLongClick = {
-                    onLongClick(task.id)
-                }
-            ).padding(top = 4.dp, bottom = 4.dp, start = 20.dp, end = 8.dp)
+            modifier = Modifier.padding(start = 20.dp, end = 8.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -112,6 +112,21 @@ fun TaskItem(
                 }
             }
         }
+        TaskItemAdditionalInformationRow(task)
         HorizontalDivider()
+    }
+}
+
+@Composable
+internal fun TaskItemAdditionalInformationRow(task: Task) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(start = 36.dp, end = 8.dp)
+    ) {
+        if (task.state == TaskState.DOING) {
+            task.dueDate?.let { dueDate ->
+                TaskDueDateChip(dueDate, modifier = Modifier.padding(bottom = 8.dp))
+            }
+        }
     }
 }

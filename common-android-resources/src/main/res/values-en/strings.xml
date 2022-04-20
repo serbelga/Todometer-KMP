@@ -44,6 +44,7 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="enter_task_name">Enter a Task name</string>
     <string name="enter_description">Enter a Description (optional)</string>
+    <string name="enter_date_time">Enter date and time (optional)</string>
     <string name="enter_task_list_name">Enter a Task list name</string>
     <string name="choose_tag">Choose a Tag</string>
     <string name="field_not_empty">Field must not be empty</string>
@@ -54,6 +55,8 @@
     <string name="completed_tasks">Completed (%1$d)</string>
     <string name="you_have_completed_all_tasks">You have completed all tasks</string>
     <string name="congratulations">Congratulations!</string>
+    <string name="date_time">Date and time</string>
+    <string name="clear">Clear</string>
 
     <string name="task_title_input">Task name</string>
     <string name="task_list_name_input">Task list name</string>

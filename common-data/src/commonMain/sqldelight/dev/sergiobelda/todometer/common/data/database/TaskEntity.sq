@@ -1,0 +1,58 @@
+import dev.sergiobelda.todometer.common.domain.model.Tag;
+import dev.sergiobelda.todometer.common.domain.model.TaskState;
+
+CREATE TABLE TaskEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    state TEXT AS TaskState NOT NULL,
+    tasklist_id TEXT NOT NULL,
+    tag TEXT AS Tag NOT NULL,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0,
+    dueDate INTEGER,
+    FOREIGN KEY(tasklist_id) REFERENCES TaskListEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+selectTask:
+SELECT *
+FROM TaskEntity
+WHERE id = ?;
+
+selectTasksByTaskListId:
+SELECT *
+FROM TaskEntity
+WHERE tasklist_id = ?; ---- ORDER BY state ASC;
+
+selectAllTasks:
+SELECT *
+FROM TaskEntity;
+
+insertOrReplaceTask:
+INSERT OR REPLACE INTO TaskEntity
+(id, title, description, state, tasklist_id, tag, sync, dueDate)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+updateTask:
+UPDATE TaskEntity
+SET
+    title = ?,
+    description = ?,
+    tag = ?,
+    dueDate = ?
+WHERE id = ?;
+
+updateTaskSync:
+UPDATE TaskEntity
+SET
+    sync = ?
+WHERE id = ?;
+
+updateTaskState:
+UPDATE TaskEntity
+SET
+    state = ?
+WHERE id = ?;
+
+deleteTask:
+DELETE FROM TaskEntity
+WHERE id = ?;

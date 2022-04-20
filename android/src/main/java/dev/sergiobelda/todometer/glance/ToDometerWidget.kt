@@ -214,7 +214,6 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                         )
                     )
                 )
-
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
         }

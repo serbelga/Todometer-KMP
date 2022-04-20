@@ -30,10 +30,11 @@ class TaskMapperTest {
         val task = Task(
             id = "1",
             title = "Title",
+            tag = Tag.GRAY,
             description = "Description",
+            dueDate = 1649887517234,
             state = TaskState.DOING,
             taskListId = "2",
-            tag = Tag.GRAY,
             sync = true
         )
         val taskEntity = task.toEntity()
@@ -51,10 +52,11 @@ class TaskMapperTest {
         val taskEntity = TaskEntity(
             id = "1",
             title = "Title",
+            tag = Tag.GRAY,
             description = "Description",
+            dueDate = 1649887517234,
             state = TaskState.DOING,
             tasklist_id = "2",
-            tag = Tag.GRAY,
             sync = true
         )
         val task = taskEntity.toDomain()
