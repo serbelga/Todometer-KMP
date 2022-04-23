@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.AutoCenteringParams
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
@@ -63,12 +64,9 @@ fun TaskDetailScreen(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
         ScalingLazyColumn(
-            autoCentering = false,
             contentPadding = PaddingValues(
-                top = 28.dp,
                 start = 16.dp,
-                end = 16.dp,
-                bottom = 40.dp
+                end = 16.dp
             ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
