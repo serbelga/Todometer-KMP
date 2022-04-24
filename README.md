@@ -19,6 +19,12 @@
 </p>
 </a>
 
+## Setup
+
+Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.google.com/products/crashlytics). You need to create a project in Firebase Console and copy `google-services.json` file into android and wearos folders to be able to launch them. I've created an issue for this in order to avoid requiring this file https://github.com/serbelga/ToDometerMultiplatform/issues/114.
+
+<br/>
+
 ## Screenshots
 
 ### Android
@@ -39,6 +45,8 @@
 
 Under construction
 
+<br/>
+
 ## Technologies
 
 <div align="center">
@@ -54,7 +62,12 @@ Under construction
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Koin](https://insert-koin.io/docs/reference/koin-android/start)
 
-### Backend
+### Wear OS
+
+* [Wear Compose](https://developer.android.com/jetpack/androidx/releases/wear-compose)
+* [Wear Compose Navigation](https://developer.android.com/reference/kotlin/androidx/wear/compose/navigation/package-summary)
+
+### 🚧 Backend
 
 * [Ktor Server](https://ktor.io/)
 * [Jetbrains Exposed](https://github.com/JetBrains/Exposed)
@@ -76,6 +89,7 @@ Under construction
 
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
+<br/>
 
 ## Modules
 
@@ -83,18 +97,18 @@ Under construction
 <img src="./resources/arch/modules.png" width="700" />
 </div>
 
-### Backend
-
-▶️ Run:
-
-```
-./gradlew :backend:run
-```
-
 ### Desktop
 
 ▶️ Run:
 
 ```
 ./gradlew :desktop:run
+```
+
+### Backend
+
+▶️ Run:
+
+```
+./gradlew :backend:run
 ```
