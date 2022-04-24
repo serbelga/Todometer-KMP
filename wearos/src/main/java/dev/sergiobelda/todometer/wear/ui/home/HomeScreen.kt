@@ -69,7 +69,7 @@ fun HomeScreen(
         vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
     ) {
         ScalingLazyColumn(
-            autoCentering = AutoCenteringParams(itemIndex = 2),
+            autoCentering = AutoCenteringParams(itemIndex = 1),
             contentPadding = PaddingValues(
                 start = 16.dp,
                 end = 16.dp
