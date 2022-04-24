@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -29,8 +30,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -44,7 +45,6 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
@@ -55,16 +55,29 @@ fun AddTaskScreen(
     navigateUp: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
+    val scaffoldState = rememberScaffoldState()
+
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
-    val result = addTaskViewModel.result.observeAsState()
     val tags = enumValues<Tag>()
     var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
-    result.value?.doIfSuccess {
+
+    val addTaskUiState = addTaskViewModel.addTaskUiState
+    if (addTaskUiState.isAdded) {
         navigateUp()
     }
+
+    if (addTaskUiState.errorUi != null) {
+        LaunchedEffect(scaffoldState.snackbarHostState) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = addTaskUiState.errorUi.message ?: ""
+            )
+        }
+    }
+
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
@@ -78,18 +91,24 @@ fun AddTaskScreen(
                 },
                 actions = {
                     IconButton(
+                        enabled = !addTaskUiState.isAddingTask,
                         onClick = {
                             if (taskTitle.isBlank()) {
                                 taskTitleInputError = true
                             } else {
-                                addTaskViewModel.insertTask(taskTitle, taskDescription, selectedTag)
+                                addTaskViewModel.insertTask(
+                                    taskTitle,
+                                    taskDescription,
+                                    selectedTag
+                                )
                             }
                         }
                     ) {
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
-                            tint = TodometerColors.primary
+                            tint = if (addTaskUiState.isAddingTask)
+                                TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
                         )
                     }
                 },
@@ -97,6 +116,9 @@ fun AddTaskScreen(
             )
         },
         content = {
+            if (addTaskUiState.isAddingTask) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
             Column(modifier = Modifier.padding(top = 24.dp)) {
                 TitledTextField(
                     title = stringResource(id = R.string.name),

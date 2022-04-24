@@ -15,11 +15,8 @@ repositories {
 
 kotlin {
     android()
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm("desktop")
+
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     sourceSets {
         val commonMain by getting {
@@ -32,6 +29,8 @@ kotlin {
                 api(compose.ui)
                 api(compose.uiTooling)
                 implementation(projects.common)
+
+                api(libs.kotlin.coroutinesSwing)
             }
         }
         val commonTest by getting
@@ -48,6 +47,10 @@ kotlin {
         }
         val desktopMain by getting
         val desktopTest by getting
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 

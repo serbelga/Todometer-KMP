@@ -2,15 +2,15 @@
 accompanist = "0.23.0"
 activity = "1.4.0"
 androidCore = "1.7.0"
-androidCompileSdk = "31"
+androidCompileSdk = "32"
 androidMinSdk = "24"
 androidWearMinSdk = "25"
-androidTargetSdk = "31"
-androidGradlePlugin = "7.1.1"
+androidTargetSdk = "32"
+androidGradlePlugin = "7.2.0-rc01"
 appcompat = "1.4.1"
-compose = "1.1.0"
+compose = "1.2.0-alpha06"
 composeAnimation = "1.1.1"
-composeMultiplatform = "1.2.0-alpha01-dev646"
+composeMultiplatform = "1.2.0-alpha01-dev651"
 dataStore = "1.0.0"
 espressoCore = "3.4.0"
 exposed = "0.32.1"
@@ -19,35 +19,35 @@ firebaseCrashlyticsGradle = "2.5.2"
 googleServices = "4.3.10"
 junit = "4.12"
 androidJunit = "1.1.3"
-koin = "3.1.4"
+koin = "3.1.5"
 kotlin = "1.6.10"
-kotlinCoroutinesTest = "1.6.0"
-ktlint = "0.43.2"
+kotlinCoroutines = "1.6.1"
+ktlint = "0.45.1"
 ktor = "1.6.7"
 lifecycle = "2.4.1"
 material = "1.5.0"
-mockk = "1.12.1"
+mockk = "1.12.3"
 navigation = "2.4.0-beta01"
 ossLicensesPlugin = "0.10.4"
 playServicesOssLicenses = "17.0.0"
 playServicesWearable = "17.1.0"
 robolectric = "4.3.1"
-sqlDelight = "1.5.2"
+sqlDelight = "1.5.3"
 testCoreKtx = "1.4.0"
 timber = "4.7.1"
-wear = "1.2.0"
+wear = "1.3.0-alpha02"
 wearCompose = "1.0.0-alpha18"
 wearInput = "1.2.0-alpha02"
 
 [libraries]
 accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
-android-gradlePluginz = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidCore" }
-androidx-compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "composeAnimation" }
+androidx-compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
@@ -81,8 +81,10 @@ koin-logger = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-kotlin-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutinesTest" }
-kotlin-gradlePluginz = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
+kotlin-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinCoroutines" }
+kotlin-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
@@ -113,7 +115,7 @@ google-playServicesOssLicenses = { module = "com.google.android.gms:play-service
 google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
 google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
 
-sqldelight-gradlePluginz = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqlDelight" }
+sqldelight-gradlePlugin = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqlDelight" }
 sqldelight-androidDriver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqldelight-jvmDriver = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqldelight-nativeDriver = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqlDelight" }
