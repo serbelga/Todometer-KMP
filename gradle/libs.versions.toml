@@ -33,6 +33,7 @@ ossLicensesPlugin = "0.10.4"
 playServicesOssLicenses = "17.0.0"
 playServicesWearable = "17.1.0"
 robolectric = "4.3.1"
+splashscreen = "1.0.0-beta02"
 sqlDelight = "1.5.3"
 testCoreKtx = "1.4.0"
 timber = "4.7.1"
@@ -60,6 +61,7 @@ androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
