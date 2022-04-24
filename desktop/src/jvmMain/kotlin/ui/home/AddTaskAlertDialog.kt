@@ -47,7 +47,7 @@ fun AddTaskAlertDialog(
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
     val tags = enumValues<Tag>()
-    var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
+    var selectedTag by remember { mutableStateOf(Tag.RED) }
     AlertDialog(
         title = {
             Text(text = "Add task", modifier = Modifier.padding(start = 16.dp))
@@ -88,7 +88,7 @@ fun AddTaskAlertDialog(
                     if (taskTitle.isBlank()) {
                         taskTitleInputError = true
                     } else {
-                        addTask(taskTitle, taskDescription, selectedTag)
+                        addTask(taskTitle, taskDescription, Tag.RED)
                         onDismissRequest()
                     }
                 }

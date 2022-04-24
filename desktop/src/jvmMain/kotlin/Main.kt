@@ -20,6 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
@@ -27,6 +29,7 @@ import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.di.initKoin
 import ui.home.HomeScreen
 import ui.icons.iconToDometer
+import ui.task.TaskDetailScreen
 import ui.theme.ToDometerTheme
 
 val koin = initKoin().koin
@@ -36,6 +39,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "ToDometer",
         state = WindowState(
+            size = DpSize(1200.dp, 800.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
         icon = iconToDometer()
@@ -44,12 +48,14 @@ fun main() = application {
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        ToDometerTheme(darkTheme = false) {
+        val navigateToTaskDetail: () -> Unit = {
+            currentPage = Screen.TaskDetail
+        }
+        ToDometerTheme {
             Crossfade(currentPage) { screen ->
                 when (screen) {
-                    Screen.Home -> HomeScreen()
-                    else -> {
-                    }
+                    Screen.Home -> HomeScreen(navigateToTaskDetail)
+                    Screen.TaskDetail -> TaskDetailScreen(navigateToHome)
                 }
             }
         }

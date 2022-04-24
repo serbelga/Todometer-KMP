@@ -42,6 +42,8 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.MenuOpen
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -62,9 +64,9 @@ import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
@@ -78,11 +80,16 @@ import kotlinx.coroutines.launch
 import ui.icons.iconToDometer
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navigateToTaskDetail: () -> Unit
+) {
     var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
+    var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
+    var selectedTask by remember { mutableStateOf("") }
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+    var navigationDrawerStateVisible by remember { mutableStateOf(false) }
 
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
@@ -92,6 +99,7 @@ fun HomeScreen() {
     val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
     val insertTaskListUseCase = koin.get<InsertTaskListUseCase>()
     val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
+    val deleteTaskUseCase = koin.get<DeleteTaskUseCase>()
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
     val taskListResultState by getTaskListSelectedUseCase().collectAsState(null)
@@ -108,6 +116,15 @@ fun HomeScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navigationDrawerStateVisible = !navigationDrawerStateVisible }) {
+                        if (navigationDrawerStateVisible) {
+                            Icon(Icons.Rounded.MenuOpen, contentDescription = null)
+                        } else {
+                            Icon(Icons.Rounded.Menu, contentDescription = null)
+                        }
+                    }
+                },
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
@@ -156,26 +173,39 @@ fun HomeScreen() {
             if (addTaskAlertDialogState) {
                 AddTaskAlertDialog(
                     onDismissRequest = { addTaskAlertDialogState = false }
-                ) { title, description, _ ->
+                ) { title, description, tag ->
                     coroutineScope.launch {
-                        insertTaskInTaskListSelectedUseCase.invoke(title, description, Tag.GRAY)
+                        insertTaskInTaskListSelectedUseCase.invoke(title, description, tag)
                     }
+                }
+            }
+            if (deleteTaskAlertDialogState) {
+                DeleteTaskAlertDialog(
+                    onDismissRequest = {
+                        deleteTaskAlertDialogState = false
+                        selectedTask = ""
+                    }
+                ) {
+                    println(selectedTask)
+                    deleteTaskUseCase(selectedTask)
                 }
             }
         }
         Row {
-            TaskListsNavigationDrawer(
-                taskLists,
-                taskListSelected?.id ?: "",
-                "My tasks",
-                onTaskListClick = {
-                    coroutineScope.launch {
-                        setTaskListSelectedUseCase.invoke(it)
-                    }
-                },
-                onAddTaskListClick = { addTaskListAlertDialogState = true }
-            )
-            VerticalDivider()
+            if (navigationDrawerStateVisible) {
+                TaskListsNavigationDrawer(
+                    taskLists,
+                    taskListSelected?.id ?: "",
+                    "My tasks",
+                    onTaskListClick = {
+                        coroutineScope.launch {
+                            setTaskListSelectedUseCase.invoke(it)
+                        }
+                    },
+                    onAddTaskListClick = { addTaskListAlertDialogState = true }
+                )
+                VerticalDivider()
+            }
             Column {
                 TaskListProgress(
                     taskListSelected?.name ?: "My tasks",
@@ -197,8 +227,14 @@ fun HomeScreen() {
                                 setTaskDoneUseCase(it)
                             }
                         },
-                        onTaskItemClick = {},
-                        onTaskItemLongClick = {}
+                        onTaskItemClick = {
+                            navigateToTaskDetail()
+                        },
+                        onTaskItemLongClick = {
+                            deleteTaskAlertDialogState = true
+                            selectedTask = it
+                            println(selectedTask)
+                        }
                     )
                 }
             }

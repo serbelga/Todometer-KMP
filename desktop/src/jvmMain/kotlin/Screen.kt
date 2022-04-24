@@ -16,4 +16,5 @@
 
 sealed class Screen {
     object Home : Screen()
+    object TaskDetail : Screen()
 }
