@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
 
+    implementation(libs.androidx.splashscreen)
+
     implementation(libs.material)
 
     implementation(libs.timber)
