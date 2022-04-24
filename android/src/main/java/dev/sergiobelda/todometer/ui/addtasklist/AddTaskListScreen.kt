@@ -26,11 +26,11 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,7 +53,7 @@ fun AddTaskListScreen(
     navigateUp: () -> Unit,
     addTaskListViewModel: AddTaskListViewModel = getViewModel()
 ) {
-    val scaffoldState = rememberScaffoldState()
+    // val scaffoldState = rememberScaffoldState()
 
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
@@ -63,6 +63,7 @@ fun AddTaskListScreen(
         navigateUp()
     }
 
+    /*
     if (addTaskListUiState.errorUi != null) {
         LaunchedEffect(scaffoldState.snackbarHostState) {
             scaffoldState.snackbarHostState.showSnackbar(
@@ -70,9 +71,10 @@ fun AddTaskListScreen(
             )
         }
     }
+    */
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        // scaffoldState = scaffoldState,
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {

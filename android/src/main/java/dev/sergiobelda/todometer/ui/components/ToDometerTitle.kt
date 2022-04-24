@@ -21,12 +21,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.ui.icons.iconToDometer
 
 @Composable
@@ -39,7 +41,8 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         Text(
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(start = 4.dp)
+            modifier = Modifier.padding(start = 4.dp),
+            color = contentColorFor(TodometerColors.surface)
         )
     }
 }
