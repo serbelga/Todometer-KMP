@@ -61,6 +61,6 @@ class Actions(navController: NavHostController) {
         navController.navigate(About)
     }
     val navigateUp: () -> Unit = {
-        navController.popBackStack()
+        navController.navigateUp()
     }
 }
