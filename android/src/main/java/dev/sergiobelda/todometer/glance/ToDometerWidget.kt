@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,10 @@ import androidx.glance.GlanceModifier
 import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.LocalGlanceId
-import androidx.glance.action.ActionParameters
 import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
@@ -62,8 +60,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskIdKey
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskStateKey
 import dev.sergiobelda.todometer.ui.MainActivity
@@ -73,7 +69,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.java.KoinJavaComponent.inject
 import androidx.glance.appwidget.action.actionStartActivity as actionStartActivityIntent
 
 class ToDometerWidget : GlanceAppWidget(), KoinComponent {
@@ -222,30 +217,5 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     companion object {
         private const val OPEN_ADD_TASK_DEEP_LINK: String = "app://open.add.task"
         private const val OPEN_TASK_DEEP_LINK: String = "app://open.task"
-    }
-}
-
-class SetTaskStateAction : ActionCallback {
-
-    private val setTaskDoneUseCase: SetTaskDoneUseCase by inject(SetTaskDoneUseCase::class.java)
-
-    private val setTaskDoingUseCase: SetTaskDoingUseCase by inject(SetTaskDoingUseCase::class.java)
-
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
-        val taskId: String = parameters[taskIdKey] ?: ""
-        parameters[taskStateKey]?.let { state ->
-            when (state) {
-                TaskState.DOING -> setTaskDoneUseCase.invoke(taskId)
-                TaskState.DONE -> setTaskDoingUseCase.invoke(taskId)
-            }
-            ToDometerWidget().loadData()
-        }
-    }
-
-    companion object {
-        private const val TASK_ID = "taskId"
-        private const val TASK_STATE = "taskState"
-        val taskIdKey = ActionParameters.Key<String>(TASK_ID)
-        val taskStateKey = ActionParameters.Key<TaskState>(TASK_STATE)
     }
 }
