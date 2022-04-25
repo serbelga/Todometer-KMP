@@ -53,6 +53,7 @@
     <string name="github" translatable="false">GitHub</string>
     <string name="default_task_list_name">Mis tareas</string>
     <string name="no_tasks">No has añadido ninguna tarea</string>
+    <string name="no_pending_tasks">No tienes ninguna tarea pendiente</string>
     <string name="no_task_lists">No hay listas de tareas</string>
     <string name="you_have_not_any_task_list">No tienes ninguna lista de tareas</string>
     <string name="completed_tasks">Completadas (%1$d)</string>

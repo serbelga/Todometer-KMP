@@ -114,7 +114,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             }
 
             getTaskListSelectedTasksUseCase().first().doIfSuccess {
-                tasks = it.sortedByDescending { task -> task.state == TaskState.DOING }
+                tasks = it.filter { task -> task.state == TaskState.DOING }
             }
 
             updateAll(context)
@@ -161,7 +161,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                         modifier = GlanceModifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = context.getString(R.string.no_tasks))
+                        Text(text = context.getString(R.string.no_pending_tasks))
                     }
                 } else {
                     LazyColumn {

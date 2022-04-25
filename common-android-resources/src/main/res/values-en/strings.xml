@@ -50,6 +50,7 @@
     <string name="field_not_empty">Field must not be empty</string>
     <string name="default_task_list_name">My tasks</string>
     <string name="no_tasks">You don\'t have added any task</string>
+    <string name="no_pending_tasks">You have no tasks to do</string>
     <string name="no_task_lists">There\'s any task list</string>
     <string name="you_have_not_any_task_list">You haven\'t any task list</string>
     <string name="completed_tasks">Completed (%1$d)</string>

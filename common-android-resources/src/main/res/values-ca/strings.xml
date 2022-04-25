@@ -50,6 +50,7 @@
     <string name="field_not_empty">El camp no pot quedar buit</string>
     <string name="default_task_list_name">Tasques</string>
     <string name="no_tasks">No has afegit cap tasca</string>
+    <string name="no_pending_tasks">No tens cap tasca pendent</string>
     <string name="no_task_lists">No hi han llistes de tasques</string>
     <string name="you_have_not_any_task_list">No tens cap llista de tasques</string>
     <string name="completed_tasks">Completades (%1$d)</string>
