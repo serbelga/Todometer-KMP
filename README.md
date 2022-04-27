@@ -32,6 +32,9 @@ Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.googl
 | <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/remove_task.gif" /> |
 |---|---|---|
 
+| <img width="300" src="./screenshots/android/home_2.png" /> | <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
+|---|---|
+
 ### Wear OS
 
 | <img width="240" src="./screenshots/wearos/home.png" /> | <img width="240" src="./screenshots/wearos/tasks.png" /> | <img width="240" src="./screenshots/wearos/task.png" /> | <img width="240" src="./screenshots/wearos/delete_task_list.png" /> | <img width="240" src="./screenshots/wearos/delete_task.png" /> |
