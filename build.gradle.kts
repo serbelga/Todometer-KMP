@@ -6,13 +6,13 @@ buildscript {
     }
 
     dependencies {
-        classpath(libs.kotlin.gradlePluginz)
+        classpath(libs.kotlin.gradlePlugin)
         classpath(libs.kotlin.serialization)
-        classpath(libs.android.gradlePluginz)
+        classpath(libs.android.gradlePlugin)
         classpath(libs.google.firebase.crashlyticsGradle)
-        classpath(libs.google.ossLicensesPluginz)
+        classpath(libs.google.ossLicensesPlugin)
         classpath(libs.google.services)
-        classpath(libs.sqldelight.gradlePluginz)
+        classpath(libs.sqldelight.gradlePlugin)
     }
 }
 

@@ -1,0 +1,43 @@
+CREATE TABLE TaskListEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    sync INTEGER AS Boolean NOT NULL DEFAULT 0
+);
+
+selectTaskList:
+SELECT *
+FROM TaskListEntity
+WHERE id = ?;
+
+selectAllTaskLists:
+SELECT *
+FROM TaskListEntity;
+
+insertTaskList:
+INSERT INTO TaskListEntity
+(id, name, description, sync)
+VALUES (?, ?, ?, ?);
+
+insertOrReplaceTaskList:
+INSERT OR REPLACE INTO TaskListEntity
+(id, name, description, sync)
+VALUES (?,?, ?, ?);
+
+updateTaskList:
+UPDATE TaskListEntity
+SET
+    name = ?,
+    description = ?,
+    sync = ?
+WHERE id = ?;
+
+updateTaskListName:
+UPDATE TaskListEntity
+SET
+    name = ?
+WHERE id = ?;
+
+deleteTaskList:
+DELETE FROM TaskListEntity
+WHERE id = ?;

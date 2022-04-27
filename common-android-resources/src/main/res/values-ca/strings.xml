@@ -44,13 +44,20 @@
     <string name="privacy_policy">Política de privacitat</string>
     <string name="enter_task_name">Introdueix el nom de la tasca</string>
     <string name="enter_description">Introdueix una descripció (opcional)</string>
+    <string name="enter_date_time">Introdueix data i hora (opcional)</string>
     <string name="enter_task_list_name">Introdueix el nom de la llista de tasques</string>
     <string name="choose_tag">Tria una etiqueta</string>
     <string name="field_not_empty">El camp no pot quedar buit</string>
     <string name="default_task_list_name">Tasques</string>
-    <string name="no_tasks">No hi han tasques</string>
+    <string name="no_tasks">No has afegit cap tasca</string>
+    <string name="no_pending_tasks">No tens cap tasca pendent</string>
     <string name="no_task_lists">No hi han llistes de tasques</string>
     <string name="you_have_not_any_task_list">No tens cap llista de tasques</string>
+    <string name="completed_tasks">Completades (%1$d)</string>
+    <string name="you_have_completed_all_tasks">Has completat totes les tasques</string>
+    <string name="congratulations">Enhorabona!</string>
+    <string name="date_time">Data i hora</string>
+    <string name="clear">Netejar</string>
 
     <string name="task_title_input">Nom de la tasca</string>
     <string name="task_list_name_input">Nom de la llista de tasques</string>

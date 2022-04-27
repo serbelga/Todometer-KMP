@@ -27,7 +27,6 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class EditTaskViewModel(
@@ -61,9 +60,21 @@ class EditTaskViewModel(
         }
     }
 
-    fun updateTask(title: String, description: String?, tag: Tag) = viewModelScope.launch {
+    fun updateTask(
+        title: String,
+        tag: Tag,
+        description: String? = null,
+        dueDate: Long? = null
+    ) = viewModelScope.launch {
         editTaskUiState.task?.let {
-            updateTaskUseCase(it.copy(title = title, description = description, tag = tag))
+            updateTaskUseCase(
+                it.copy(
+                    title = title,
+                    tag = tag,
+                    description = description,
+                    dueDate = dueDate
+                )
+            )
         }
     }
 }

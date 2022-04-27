@@ -15,11 +15,8 @@ repositories {
 
 kotlin {
     android()
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm("desktop")
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -30,6 +27,10 @@ kotlin {
                 api(compose.ui)
                 api(compose.uiTooling)
                 implementation(projects.common)
+
+                api(libs.kotlin.coroutinesSwing)
+
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting
@@ -46,6 +47,10 @@ kotlin {
         }
         val desktopMain by getting
         val desktopTest by getting
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 

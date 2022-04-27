@@ -33,17 +33,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.CheckBox
+import androidx.compose.material.icons.rounded.CheckBoxOutlineBlank
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.foundation.CurvedRow
+import androidx.wear.compose.foundation.CurvedLayout
+import androidx.wear.compose.material.AutoCenteringParams
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
 import androidx.wear.compose.material.CircularProgressIndicator
-import androidx.wear.compose.material.CurvedText
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -53,14 +55,15 @@ import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.curvedText
 import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.domain.model.TaskProgress
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wear.R
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 
@@ -82,17 +85,15 @@ fun TaskListTasksScreen(
     )
     Scaffold(
         timeText = {
-            CurvedRow { CurvedText(text = TaskProgress.getPercentage(progress)) }
+            CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
         },
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
         ScalingLazyColumn(
-            autoCentering = false,
+            autoCentering = AutoCenteringParams(itemIndex = 2),
             contentPadding = PaddingValues(
-                top = 32.dp,
                 start = 16.dp,
-                end = 16.dp,
-                bottom = 50.dp
+                end = 16.dp
             ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -187,7 +188,14 @@ fun TaskItem(
                 text = task.title
             )
         },
-        onClick = onClick
+        onClick = onClick,
+        toggleControl = {
+            if (task.state == TaskState.DOING) {
+                Icon(Icons.Rounded.CheckBoxOutlineBlank, null)
+            } else {
+                Icon(Icons.Rounded.CheckBox, null)
+            }
+        }
     )
 }
 

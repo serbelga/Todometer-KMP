@@ -44,7 +44,7 @@ fun main() = application {
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        ToDometerTheme(darkTheme = false) {
+        ToDometerTheme {
             Crossfade(currentPage) { screen ->
                 when (screen) {
                     Screen.Home -> HomeScreen()

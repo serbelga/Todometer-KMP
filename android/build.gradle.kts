@@ -15,8 +15,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1200400
-        versionName = "android-2.0.0"
+        versionCode = 1210400
+        versionName = "android-2.1.0"
     }
 
     buildTypes {
@@ -43,6 +43,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
 }
 
@@ -53,12 +54,12 @@ dependencies {
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.animation.graphics)
-    implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.navigation.compose)
 
-    implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
+
+    implementation(libs.androidx.splashscreen)
 
     implementation(libs.material)
 
@@ -69,6 +70,9 @@ dependencies {
     implementation(libs.koin.core)
 
     implementation(libs.accompanist.systemUiController)
+
+    implementation(libs.androidx.glance.appWidget)
+    implementation(libs.androidx.glance.glance)
 
     implementation(libs.google.playServicesOssLicenses)
 

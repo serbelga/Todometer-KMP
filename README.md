@@ -68,10 +68,12 @@ Under construction
 * [Wear Compose Navigation](https://developer.android.com/reference/kotlin/androidx/wear/compose/navigation/package-summary)
 
 ### 🚧 Backend
+
 * [Ktor Server](https://ktor.io/)
 * [Jetbrains Exposed](https://github.com/JetBrains/Exposed)
 
 ### Common
+
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
   * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
@@ -80,9 +82,11 @@ Under construction
 * [Ktor Client](https://ktor.io/docs/client.html)
 
 ### Desktop
+
 * [Compose for Desktop](https://github.com/JetBrains/compose-jb)
 
 ### iOS
+
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
 <br/>
