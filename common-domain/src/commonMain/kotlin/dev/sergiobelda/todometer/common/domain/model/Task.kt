@@ -19,9 +19,10 @@ package dev.sergiobelda.todometer.common.domain.model
 data class Task(
     val id: String,
     val title: String,
+    val tag: Tag,
     val description: String?,
+    val dueDate: Long?,
     val state: TaskState,
     val taskListId: String,
-    val tag: Tag,
     val sync: Boolean
 )

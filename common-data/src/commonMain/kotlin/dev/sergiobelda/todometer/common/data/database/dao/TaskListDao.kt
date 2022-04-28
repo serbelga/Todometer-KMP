@@ -26,13 +26,13 @@ import kotlinx.coroutines.flow.Flow
 class TaskListDao(private val database: TodometerDatabase) : ITaskListDao {
 
     override fun getTaskLists(): Flow<List<TaskListEntity>> =
-        database.todometerQueries.selectAllTaskLists().asFlow().mapToList()
+        database.taskListEntityQueries.selectAllTaskLists().asFlow().mapToList()
 
     override fun getTaskList(id: String): Flow<TaskListEntity?> =
-        database.todometerQueries.selectTaskList(id).asFlow().mapToOneOrNull()
+        database.taskListEntityQueries.selectTaskList(id).asFlow().mapToOneOrNull()
 
     override suspend fun insertTaskList(taskList: TaskListEntity): String {
-        database.todometerQueries.insertOrReplaceTaskList(
+        database.taskListEntityQueries.insertOrReplaceTaskList(
             id = taskList.id,
             name = taskList.name,
             description = taskList.description,
@@ -48,7 +48,7 @@ class TaskListDao(private val database: TodometerDatabase) : ITaskListDao {
         }
 
     override suspend fun updateTaskList(taskList: TaskListEntity) {
-        database.todometerQueries.updateTaskList(
+        database.taskListEntityQueries.updateTaskList(
             id = taskList.id,
             name = taskList.name,
             description = taskList.description,
@@ -57,12 +57,12 @@ class TaskListDao(private val database: TodometerDatabase) : ITaskListDao {
     }
 
     override suspend fun updateTaskListName(id: String, name: String) {
-        database.todometerQueries.updateTaskListName(id = id, name = name)
+        database.taskListEntityQueries.updateTaskListName(id = id, name = name)
     }
 
     override suspend fun updateTaskLists(taskLists: List<TaskListEntity>) {
         taskLists.forEach { taskList ->
-            database.todometerQueries.updateTaskList(
+            database.taskListEntityQueries.updateTaskList(
                 id = taskList.id,
                 name = taskList.name,
                 description = taskList.description,
@@ -72,5 +72,5 @@ class TaskListDao(private val database: TodometerDatabase) : ITaskListDao {
     }
 
     override suspend fun deleteTaskList(id: String) =
-        database.todometerQueries.deleteTaskList(id)
+        database.taskListEntityQueries.deleteTaskList(id)
 }

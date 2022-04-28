@@ -60,9 +60,21 @@ class EditTaskViewModel(
         }
     }
 
-    fun updateTask(title: String, description: String?, tag: Tag) = viewModelScope.launch {
+    fun updateTask(
+        title: String,
+        tag: Tag,
+        description: String? = null,
+        dueDate: Long? = null
+    ) = viewModelScope.launch {
         editTaskUiState.task?.let {
-            updateTaskUseCase(it.copy(title = title, description = description, tag = tag))
+            updateTaskUseCase(
+                it.copy(
+                    title = title,
+                    tag = tag,
+                    description = description,
+                    dueDate = dueDate
+                )
+            )
         }
     }
 }

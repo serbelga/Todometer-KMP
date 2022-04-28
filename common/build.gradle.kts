@@ -36,6 +36,8 @@ kotlin {
                 api(projects.commonDomain)
                 implementation(projects.commonData)
                 implementation(projects.commonPreferences)
+
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting {
