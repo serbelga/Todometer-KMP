@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.ui.addtask
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -34,9 +35,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -46,6 +47,8 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
+import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
@@ -55,16 +58,20 @@ fun AddTaskScreen(
     navigateUp: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
+    val activity = LocalContext.current as AppCompatActivity
+
     // val scaffoldState = rememberScaffoldState()
 
-    var taskTitle by rememberSaveable { mutableStateOf("") }
+    var taskTitle by remember { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable { mutableStateOf("") }
+    var taskDescription by remember { mutableStateOf("") }
     val tags = enumValues<Tag>()
     var selectedTag by remember { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
+    var taskDueDate: Long? by remember { mutableStateOf(null) }
 
     val addTaskUiState = addTaskViewModel.addTaskUiState
     if (addTaskUiState.isAdded) {
+        ToDometerWidgetReceiver().updateData()
         navigateUp()
     }
 
@@ -100,8 +107,9 @@ fun AddTaskScreen(
                             } else {
                                 addTaskViewModel.insertTask(
                                     taskTitle,
+                                    selectedTag,
                                     taskDescription,
-                                    selectedTag
+                                    taskDueDate
                                 )
                             }
                         }
@@ -146,6 +154,12 @@ fun AddTaskScreen(
                 ToDometerTagSelector(selectedTag) { tag ->
                     selectedTag = tag
                 }
+                ToDometerDateTimeSelector(
+                    activity,
+                    taskDueDate,
+                    onDateTimeSelected = { taskDueDate = it },
+                    onClearDateTimeClick = { taskDueDate = null }
+                )
                 TitledTextField(
                     title = stringResource(id = R.string.description),
                     value = taskDescription,

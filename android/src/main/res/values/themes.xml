@@ -16,6 +16,13 @@
 
 <resources>
 
+    <style name="Theme.ToDometer.Starting" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.ToDometer.NoActionBar</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splashscreen_launcher_foreground</item>
+        <item name="windowSplashScreenBackground">@color/todometer_background</item>
+    </style>
+
     <style name="Theme.ToDometer" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/todometer_primary</item>
         <item name="colorPrimaryDark">@color/todometer_primary_dark</item>

@@ -35,7 +35,8 @@ import androidx.compose.ui.unit.dp
 fun SingleLineItem(
     modifier: Modifier = Modifier,
     icon: @Composable (() -> Unit)? = null,
-    text: @Composable (() -> Unit),
+    text: @Composable () -> Unit,
+    trailingIcon: @Composable (() -> Unit)? = null,
     onClick: () -> Unit = {},
     enabled: Boolean = true
 ) {
@@ -56,8 +57,17 @@ fun SingleLineItem(
         CompositionLocalProvider(
             LocalContentAlpha provides if (enabled) ContentAlpha.high else ContentAlpha.disabled
         ) {
-            Box(modifier = Modifier.padding(start = 24.dp)) {
+            Box(modifier = Modifier.padding(start = 24.dp).weight(1f)) {
                 text()
+            }
+        }
+        CompositionLocalProvider(
+            LocalContentAlpha provides if (enabled) ContentAlpha.medium else ContentAlpha.disabled
+        ) {
+            trailingIcon?.let {
+                Box(modifier = Modifier.padding(end = 20.dp)) {
+                    it()
+                }
             }
         }
     }
@@ -67,8 +77,8 @@ fun SingleLineItem(
 fun TwoLineItem(
     modifier: Modifier = Modifier,
     icon: @Composable (() -> Unit)? = null,
-    text: @Composable (() -> Unit),
-    subtitle: @Composable (() -> Unit),
+    text: @Composable () -> Unit,
+    subtitle: @Composable () -> Unit,
     onClick: () -> Unit = {},
     enabled: Boolean = true
 ) {

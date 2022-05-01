@@ -28,8 +28,8 @@ typealias ComposeMaterialTypography = androidx.compose.material3.Typography
 val DarkColorPalette = lightColorScheme(
     primary = primaryDark,
     secondary = green,
-    background = navy,
-    surface = navy,
+    background = darkSurface,
+    surface = darkSurface,
     onPrimary = Color.Black,
     onSecondary = Color.Black,
     onBackground = Color.White,
@@ -54,6 +54,9 @@ val ColorScheme.outline: Color
 
 val ColorScheme.onSurfaceMediumEmphasis: Color
     @Composable get() = onSurface.copy(alpha = 0.6f)
+
+val ColorScheme.onSurfaceDisabled: Color
+    @Composable get() = onSurface.copy(alpha = 0.38f)
 
 val TodometerColors: ColorScheme
     @Composable get() = MaterialTheme.colorScheme

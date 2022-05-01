@@ -22,10 +22,11 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 fun TaskEntity.toDomain() = Task(
     id = id,
     title = title,
+    tag = tag,
     description = description,
+    dueDate = dueDate,
     state = state,
     taskListId = tasklist_id,
-    tag = tag,
     sync = sync
 )
 
@@ -34,11 +35,12 @@ fun Iterable<TaskEntity>.toDomain() = this.map {
 }
 
 fun Task.toEntity() = TaskEntity(
-    id,
-    title,
-    description,
-    state,
-    taskListId,
-    tag,
-    sync
+    id = id,
+    title = title,
+    tag = tag,
+    description = description,
+    dueDate = dueDate,
+    state = state,
+    tasklist_id = taskListId,
+    sync = sync
 )

@@ -28,16 +28,19 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.ui.Destinations.About
 import dev.sergiobelda.todometer.ui.Destinations.AddTask
+import dev.sergiobelda.todometer.ui.Destinations.AddTaskDeepLink
 import dev.sergiobelda.todometer.ui.Destinations.AddTaskList
 import dev.sergiobelda.todometer.ui.Destinations.EditTask
 import dev.sergiobelda.todometer.ui.Destinations.EditTaskList
 import dev.sergiobelda.todometer.ui.Destinations.Home
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetail
 import dev.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
+import dev.sergiobelda.todometer.ui.Destinations.TaskDetailDeepLink
 import dev.sergiobelda.todometer.ui.about.AboutScreen
 import dev.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListScreen
@@ -75,7 +78,8 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                 )
             }
             composable(
-                "$TaskDetail/{$TaskId}"
+                "$TaskDetail/{$TaskId}",
+                deepLinks = listOf(navDeepLink { uriPattern = "$TaskDetailDeepLink/{$TaskId}" })
             ) { navBackStackEntry ->
                 val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
                 TaskDetailScreen(
@@ -90,7 +94,10 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
             composable(EditTaskList) {
                 EditTaskListScreen(actions.navigateUp)
             }
-            composable(AddTask) {
+            composable(
+                AddTask,
+                deepLinks = listOf(navDeepLink { uriPattern = AddTaskDeepLink })
+            ) {
                 AddTaskScreen(actions.navigateUp)
             }
             composable(

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,6 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.model
+package dev.sergiobelda.todometer.common.extensions
 
-object TaskProgress {
-
-    fun getTasksDoneProgress(list: List<Task?>): Float =
-        list.takeUnless { it.isEmpty() }?.let {
-            it.filter { task -> task?.state == TaskState.DONE }.size / it.size.toFloat()
-        } ?: 0F
-
-    fun getPercentage(progress: Float) =
-        progress.takeIf { it in 0.0..1.0 }?.let { "${(it * 100).toInt()}%" } ?: "-%"
-}
+actual fun Int.format(digits: Int): String = "%0${digits}d".format(this)

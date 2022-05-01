@@ -32,6 +32,9 @@ Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.googl
 | <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/remove_task.gif" /> |
 |---|---|---|
 
+| <img width="300" src="./screenshots/android/home_2.png" /> | <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
+|---|---|
+
 ### Wear OS
 
 | <img width="240" src="./screenshots/wearos/home.png" /> | <img width="240" src="./screenshots/wearos/tasks.png" /> | <img width="240" src="./screenshots/wearos/task.png" /> | <img width="240" src="./screenshots/wearos/delete_task_list.png" /> | <img width="240" src="./screenshots/wearos/delete_task.png" /> |
@@ -68,10 +71,12 @@ Under construction
 * [Wear Compose Navigation](https://developer.android.com/reference/kotlin/androidx/wear/compose/navigation/package-summary)
 
 ### 🚧 Backend
+
 * [Ktor Server](https://ktor.io/)
 * [Jetbrains Exposed](https://github.com/JetBrains/Exposed)
 
 ### Common
+
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
   * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
@@ -80,9 +85,11 @@ Under construction
 * [Ktor Client](https://ktor.io/docs/client.html)
 
 ### Desktop
+
 * [Compose for Desktop](https://github.com/JetBrains/compose-jb)
 
 ### iOS
+
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
 <br/>

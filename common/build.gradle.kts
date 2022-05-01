@@ -36,6 +36,8 @@ kotlin {
                 api(projects.commonDomain)
                 implementation(projects.commonData)
                 implementation(projects.commonPreferences)
+
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting {
@@ -89,9 +91,5 @@ android {
     defaultConfig {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }

@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.ui.home
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -53,6 +54,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
@@ -77,7 +80,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -92,13 +94,14 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
-import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
@@ -185,6 +188,7 @@ fun HomeScreen(
                     selectTaskList = {
                         homeViewModel.setTaskListSelected(it)
                         scope.launch { closeDrawer() }
+                        updateToDometerWidgetData()
                     }
                 )
             },
@@ -205,7 +209,10 @@ fun HomeScreen(
                 if (deleteTaskAlertDialogState) {
                     DeleteTaskAlertDialog(
                         onDismissRequest = { deleteTaskAlertDialogState = false },
-                        deleteTask = { homeViewModel.deleteTask(selectedTask) }
+                        deleteTask = {
+                            homeViewModel.deleteTask(selectedTask)
+                            updateToDometerWidgetData()
+                        }
                     )
                 }
                 if (deleteTaskListAlertDialogState) {
@@ -213,6 +220,7 @@ fun HomeScreen(
                         onDismissRequest = { deleteTaskListAlertDialogState = false },
                         deleteTaskList = {
                             homeViewModel.deleteTaskList()
+                            updateToDometerWidgetData()
                             scope.launch {
                                 sheetState.hide()
                             }
@@ -230,15 +238,17 @@ fun HomeScreen(
                     ToDometerContentLoadingProgress()
                 } else {
                     if (homeUiState.tasks.isEmpty()) {
-                        EmptyTasksListView()
+                        TaskListIllustration(R.drawable.no_tasks, stringResource(R.string.no_tasks))
                     } else {
                         TasksListView(
                             homeUiState.tasks,
                             onDoingClick = {
                                 homeViewModel.setTaskDoing(it)
+                                updateToDometerWidgetData()
                             },
                             onDoneClick = {
                                 homeViewModel.setTaskDone(it)
+                                updateToDometerWidgetData()
                             },
                             onTaskItemClick = openTask,
                             onTaskItemLongClick = {
@@ -457,83 +467,156 @@ fun TasksListView(
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit
 ) {
+    val tasksDoing = tasks.filter { it.state == TaskState.DOING }
+    val tasksDone = tasks.filter { it.state == TaskState.DONE }
+    var areTasksDoneVisible by remember { mutableStateOf(false) }
     LazyColumn {
-        items(tasks, key = { it.id }) { task ->
-            val dismissState = rememberDismissState(
-                confirmStateChange = {
-                    if (it == DismissValue.DismissedToEnd) {
-                        onSwipeToDismiss(task.id)
-                    }
-                    it != DismissValue.DismissedToEnd
-                }
-            )
-            SwipeToDismiss(
-                state = dismissState,
-                directions = setOf(DismissDirection.StartToEnd),
-                dismissThresholds = {
-                    FractionalThreshold(0.1f)
-                },
-                background = {
-                    val color by animateColorAsState(
-                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                    val tint by animateColorAsState(
-                        if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                    val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
-                    Box(
-                        Modifier
-                            .fillMaxSize()
-                            .background(color)
-                            .padding(horizontal = 16.dp),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        Icon(
-                            rememberAnimatedVectorPainter(
-                                icon,
-                                atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
-                            ),
-                            contentDescription = stringResource(R.string.delete_task),
-                            tint = tint
-                        )
-                    }
-                },
-                dismissContent = {
-                    val dp by animateDpAsState(
-                        if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
-                        animationSpec = tween(
-                            durationMillis = 400,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                    TaskItem(
-                        task,
-                        onDoingClick = onDoingClick,
-                        onDoneClick = onDoneClick,
-                        onClick = onTaskItemClick,
-                        onLongClick = onTaskItemLongClick,
-                        modifier = Modifier.clip(RoundedCornerShape(dp))
-                    )
-                },
+        items(tasksDoing, key = { it.id }) { task ->
+            SwipeableTaskItem(
+                task,
+                onDoingClick,
+                onDoneClick,
+                onTaskItemClick,
+                onTaskItemLongClick,
                 modifier = Modifier.animateItemPlacement()
-            )
+            ) { onSwipeToDismiss(task.id) }
+        }
+        if (tasksDone.isNotEmpty()) {
+            item {
+                SingleLineItem(
+                    text = {
+                        Text(
+                            text = stringResource(
+                                R.string.completed_tasks,
+                                tasksDone.size
+                            )
+                        )
+                    },
+                    trailingIcon = {
+                        if (areTasksDoneVisible) Icon(
+                            Icons.Rounded.ExpandLess,
+                            contentDescription = null
+                        ) else Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                    },
+                    modifier = Modifier.animateItemPlacement(),
+                    onClick = { areTasksDoneVisible = !areTasksDoneVisible }
+                )
+            }
+        }
+        if (areTasksDoneVisible) {
+            items(tasksDone, key = { it.id }) { task ->
+                SwipeableTaskItem(
+                    task,
+                    onDoingClick,
+                    onDoneClick,
+                    onTaskItemClick,
+                    onTaskItemLongClick,
+                    modifier = Modifier.animateItemPlacement()
+                ) { onSwipeToDismiss(task.id) }
+            }
         }
         item {
             Spacer(modifier = Modifier.height(84.dp))
         }
     }
+    if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
+        TaskListIllustration(
+            R.drawable.completed_tasks,
+            stringResource(R.string.you_have_completed_all_tasks),
+            stringResource(R.string.congratulations)
+        )
+    }
+}
+
+@OptIn(
+    ExperimentalMaterialApi::class,
+    ExperimentalAnimationGraphicsApi::class,
+    ExperimentalFoundationApi::class
+)
+@Composable
+fun SwipeableTaskItem(
+    task: Task,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onTaskItemClick: (String) -> Unit,
+    onTaskItemLongClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    onSwipeToDismiss: () -> Unit
+) {
+    val dismissState = rememberDismissState(
+        confirmStateChange = {
+            if (it == DismissValue.DismissedToEnd) {
+                onSwipeToDismiss()
+            }
+            it != DismissValue.DismissedToEnd
+        }
+    )
+    SwipeToDismiss(
+        state = dismissState,
+        directions = setOf(DismissDirection.StartToEnd),
+        dismissThresholds = {
+            FractionalThreshold(0.1f)
+        },
+        background = {
+            val color by animateColorAsState(
+                if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = FastOutSlowInEasing
+                )
+            )
+            val tint by animateColorAsState(
+                if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = FastOutSlowInEasing
+                )
+            )
+            val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
+            Box(
+                Modifier
+                            .fillMaxSize()
+                            .background(color)
+                            .padding(horizontal = 16.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Icon(
+                    rememberAnimatedVectorPainter(
+                        icon,
+                        atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
+                    ),
+                    contentDescription = stringResource(R.string.delete_task),
+                    tint = tint
+                )
+            }
+        },
+        dismissContent = {
+            val dp by animateDpAsState(
+                if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = FastOutSlowInEasing
+                )
+            )
+            TaskItem(
+                task,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick,
+                onClick = onTaskItemClick,
+                onLongClick = onTaskItemLongClick,
+                modifier = Modifier.clip(RoundedCornerShape(dp))
+            )
+        },
+        modifier = modifier
+    )
 }
 
 @Composable
-fun EmptyTasksListView() {
+fun TaskListIllustration(
+    @DrawableRes drawableRes: Int,
+    text: String,
+    secondaryText: String? = null
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -544,13 +627,20 @@ fun EmptyTasksListView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painterResource(R.drawable.no_tasks),
+                painterResource(drawableRes),
                 modifier = Modifier
-                    .size(240.dp)
-                    .padding(bottom = 24.dp),
+                    .size(220.dp)
+                    .padding(bottom = 36.dp),
                 contentDescription = null
             )
-            Text(stringResource(R.string.no_tasks))
+            Text(text = text)
+            secondaryText?.let {
+                Text(
+                    text = it,
+                    color = TodometerColors.onSurfaceMediumEmphasis,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
         }
     }
 }
@@ -671,10 +761,6 @@ fun MoreBottomSheet(
     }
 }
 
-@Preview
-@Composable
-fun EmptyTasksListPreview() {
-    ToDometerTheme {
-        EmptyTasksListView()
-    }
+private fun updateToDometerWidgetData() {
+    ToDometerWidgetReceiver().updateData()
 }

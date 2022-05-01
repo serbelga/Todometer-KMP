@@ -25,10 +25,11 @@ fun TaskApiModel.toDomain() =
     Task(
         id = id,
         title = title,
+        tag = tagValueOf(tag),
         description = description,
+        dueDate = dueDate,
         state = taskStateValueOf(state),
         taskListId = taskListId,
-        tag = tagValueOf(tag),
         sync = true
     )
 
