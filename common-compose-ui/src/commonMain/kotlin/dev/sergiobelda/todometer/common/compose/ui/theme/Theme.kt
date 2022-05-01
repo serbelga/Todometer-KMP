@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.common.compose.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Shapes
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
@@ -60,6 +61,11 @@ val ColorScheme.onSurfaceDisabled: Color
 
 val TodometerColors: ColorScheme
     @Composable get() = MaterialTheme.colorScheme
+
+/*
+val TodometerShapes: Shapes
+    @Composable get() = MaterialTheme.shapes
+*/
 
 val TodometerTypography: ComposeMaterialTypography
     @Composable get() = MaterialTheme.typography

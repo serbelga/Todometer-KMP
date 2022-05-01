@@ -25,7 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
+// import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 
 @Composable
@@ -36,7 +36,7 @@ fun ToDometerChip(
 ) {
     Surface(
         border = borderStroke,
-        shape = TodometerShapes.small,
+        // shape = TodometerShapes.small,
         modifier = modifier
     ) {
         Row(modifier = Modifier.padding(6.dp)) {

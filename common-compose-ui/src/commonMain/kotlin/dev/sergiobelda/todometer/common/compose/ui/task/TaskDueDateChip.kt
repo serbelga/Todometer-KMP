@@ -60,7 +60,7 @@ fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
         )
         Text(
             TaskDueDate.getDueDateFormatted(dueDate),
-            style = TodometerTypography.caption,
+            style = TodometerTypography.labelLarge,
             color = dueDateChipTint
         )
     }
