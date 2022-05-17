@@ -52,10 +52,6 @@ Under construction
 
 ## Technologies
 
-<div align="center">
-<img src="./resources/arch/diagram.jpg" width="700" />
-</div>
-
 ### Android
 
 * [Android Jetpack](https://developer.android.com/jetpack)
@@ -63,6 +59,7 @@ Under construction
   * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+  * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)  
 * [Koin](https://insert-koin.io/docs/reference/koin-android/start)
 
 ### Wear OS
@@ -91,6 +88,12 @@ Under construction
 ### iOS
 
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
+
+</br>
+
+<div align="center">
+<img src="./resources/arch/diagram.jpg" width="700" />
+</div>
 
 <br/>
 
