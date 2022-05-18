@@ -29,6 +29,8 @@ kotlin {
                 implementation(projects.common)
 
                 api(libs.kotlin.coroutinesSwing)
+
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting

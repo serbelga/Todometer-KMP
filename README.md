@@ -19,12 +19,21 @@
 </p>
 </a>
 
+## Setup
+
+Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.google.com/products/crashlytics). You need to create a project in Firebase Console and copy `google-services.json` file into android and wearos folders to be able to launch them. I've created an issue for this in order to avoid requiring this file https://github.com/serbelga/ToDometerMultiplatform/issues/114.
+
+<br/>
+
 ## Screenshots
 
 ### Android
 
 | <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/remove_task.gif" /> |
 |---|---|---|
+
+| <img width="300" src="./screenshots/android/home_2.png" /> | <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
+|---|---|
 
 ### Wear OS
 
@@ -39,11 +48,9 @@
 
 Under construction
 
-## Technologies
+<br/>
 
-<div align="center">
-<img src="./resources/arch/diagram.jpg" width="700" />
-</div>
+## Technologies
 
 ### Android
 
@@ -52,13 +59,21 @@ Under construction
   * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+  * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)  
 * [Koin](https://insert-koin.io/docs/reference/koin-android/start)
 
-### Backend
+### Wear OS
+
+* [Wear Compose](https://developer.android.com/jetpack/androidx/releases/wear-compose)
+* [Wear Compose Navigation](https://developer.android.com/reference/kotlin/androidx/wear/compose/navigation/package-summary)
+
+### 🚧 Backend
+
 * [Ktor Server](https://ktor.io/)
 * [Jetbrains Exposed](https://github.com/JetBrains/Exposed)
 
 ### Common
+
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
   * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
@@ -67,11 +82,20 @@ Under construction
 * [Ktor Client](https://ktor.io/docs/client.html)
 
 ### Desktop
+
 * [Compose for Desktop](https://github.com/JetBrains/compose-jb)
 
 ### iOS
+
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
+</br>
+
+<div align="center">
+<img src="./resources/arch/diagram.jpg" width="700" />
+</div>
+
+<br/>
 
 ## Modules
 
@@ -79,18 +103,18 @@ Under construction
 <img src="./resources/arch/modules.png" width="700" />
 </div>
 
-### Backend
-
-▶️ Run:
-
-```
-./gradlew :backend:run
-```
-
 ### Desktop
 
 ▶️ Run:
 
 ```
 ./gradlew :desktop:run
+```
+
+### Backend
+
+▶️ Run:
+
+```
+./gradlew :backend:run
 ```

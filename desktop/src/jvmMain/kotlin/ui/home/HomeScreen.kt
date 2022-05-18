@@ -57,10 +57,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.VerticalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
+import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
@@ -175,7 +175,7 @@ fun HomeScreen(
                     onDismissRequest = { addTaskAlertDialogState = false }
                 ) { title, description, tag ->
                     coroutineScope.launch {
-                        insertTaskInTaskListSelectedUseCase.invoke(title, description, tag)
+                        insertTaskInTaskListSelectedUseCase.invoke(title, tag, description)
                     }
                 }
             }
