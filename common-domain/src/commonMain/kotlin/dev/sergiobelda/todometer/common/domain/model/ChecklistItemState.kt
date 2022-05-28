@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,9 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.data.api.mapper
+package dev.sergiobelda.todometer.common.domain.model
 
-import dev.sergiobelda.todometer.common.data.api.model.TaskListApiModel
-import dev.sergiobelda.todometer.common.domain.model.TaskList
-
-fun TaskListApiModel.toTaskList(): TaskList =
-    TaskList(
-        id,
-        name,
-        description,
-        sync = true
-    )
-
-fun Iterable<TaskListApiModel>.toTaskLists(): List<TaskList> = this.map {
-    it.toTaskList()
+enum class ChecklistItemState {
+    DOING,
+    DONE
 }

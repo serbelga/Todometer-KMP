@@ -1,0 +1,9 @@
+import dev.sergiobelda.todometer.common.domain.model.ChecklistItemState;
+
+CREATE TABLE ChecklistItemEntity (
+    id TEXT PRIMARY KEY NOT NULL,
+    text TEXT NOT NULL,
+    task_id TEXT NOT NULL,
+    state TEXT AS ChecklistItemState NOT NULL,
+    FOREIGN KEY(task_id) REFERENCES TaskEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
