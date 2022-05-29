@@ -20,12 +20,14 @@ import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListSelectedUse
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetAppThemeUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.GetTaskChecklistItemsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskChecklistItemUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
@@ -106,5 +108,11 @@ val useCaseModule = module {
     }
     single {
         UpdateTaskListNameUseCase(get())
+    }
+    single {
+        GetTaskChecklistItemsUseCase(get())
+    }
+    single {
+        InsertTaskChecklistItemUseCase(get())
     }
 }

@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.domain.model
 
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
-
-data class TaskDetailUiState(
-    val isLoadingTask: Boolean = false,
-    val task: Task? = null,
-    val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
-    val errorUi: ErrorUi? = null
+data class TaskChecklistItem(
+    val id: String,
+    val text: String,
+    val state: TaskChecklistItemState,
+    val taskId: String
 )

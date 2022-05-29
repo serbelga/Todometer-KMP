@@ -14,16 +14,27 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.data.database.mapper
 
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.data.database.TaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
-data class TaskDetailUiState(
-    val isLoadingTask: Boolean = false,
-    val task: Task? = null,
-    val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
-    val errorUi: ErrorUi? = null
-)
+fun TaskChecklistItemEntity.toTaskChecklistItem(): TaskChecklistItem =
+    TaskChecklistItem(
+        id = id,
+        text = text,
+        taskId = task_id,
+        state = state
+    )
+
+fun Iterable<TaskChecklistItemEntity>.toTaskChecklist(): List<TaskChecklistItem> = this.map {
+    it.toTaskChecklistItem()
+}
+
+fun TaskChecklistItem.toTaskChecklistItemEntity(): TaskChecklistItemEntity =
+    TaskChecklistItemEntity(
+        id = id,
+        text = text,
+        task_id = taskId,
+        state = state
+    )

@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Checkbox
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -54,6 +55,8 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 
 @Composable
@@ -69,7 +72,7 @@ fun TaskDetailScreen(
             TopAppBar(
                 title = {
                     if (scrollState.value >= 120) {
-                        if (!taskDetailUiState.isLoading && taskDetailUiState.task != null) {
+                        if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
                             Text(taskDetailUiState.task.title)
                         }
                     }
@@ -84,7 +87,7 @@ fun TaskDetailScreen(
                     }
                 },
                 actions = {
-                    if (!taskDetailUiState.isLoading && taskDetailUiState.task != null) {
+                    if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
                         IconButton(onClick = editTask) {
                             Icon(
                                 Icons.Outlined.Edit,
@@ -100,11 +103,11 @@ fun TaskDetailScreen(
             )
         },
         content = {
-            if (taskDetailUiState.isLoading) {
+            if (taskDetailUiState.isLoadingTask) {
                 ToDometerContentLoadingProgress()
             } else {
                 taskDetailUiState.task?.let { task ->
-                    TaskDetailBody(scrollState, task)
+                    TaskDetailBody(scrollState, task, taskDetailUiState.taskChecklistItems)
                 }
             }
         }
@@ -112,7 +115,11 @@ fun TaskDetailScreen(
 }
 
 @Composable
-fun TaskDetailBody(scrollState: ScrollState, task: Task) {
+fun TaskDetailBody(
+    scrollState: ScrollState,
+    task: Task,
+    taskChecklistItems: List<TaskChecklistItem>
+) {
     Column {
         if (scrollState.value >= 270) {
             HorizontalDivider()
@@ -144,6 +151,17 @@ fun TaskDetailBody(scrollState: ScrollState, task: Task) {
             HorizontalDivider()
             task.dueDate?.let {
                 TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
+            }
+            Column {
+                taskChecklistItems.forEach {
+                    Row {
+                        Checkbox(
+                            checked = it.state == TaskChecklistItemState.DONE,
+                            onCheckedChange = {}
+                        )
+                        Text(text = it.text)
+                    }
+                },
             }
             if (!task.description.isNullOrBlank()) {
                 Text(

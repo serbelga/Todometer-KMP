@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.domain.usecase
 
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
+import kotlinx.coroutines.flow.Flow
 
-data class TaskDetailUiState(
-    val isLoadingTask: Boolean = false,
-    val task: Task? = null,
-    val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
-    val errorUi: ErrorUi? = null
-)
+class GetTaskChecklistItemsUseCase(
+    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
+) {
+
+    operator fun invoke(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
+        taskChecklistItemsRepository.getTaskChecklistItems(taskId)
+}

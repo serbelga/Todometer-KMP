@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.data.database.dao
 
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.data.database.TaskChecklistItemEntity
+import kotlinx.coroutines.flow.Flow
 
-data class TaskDetailUiState(
-    val isLoadingTask: Boolean = false,
-    val task: Task? = null,
-    val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
-    val errorUi: ErrorUi? = null
-)
+interface ITaskChecklistItemDao {
+
+    fun getTaskChecklistItems(taskId: String): Flow<List<TaskChecklistItemEntity>>
+
+    suspend fun insertTaskChecklistItem(taskChecklistItemEntity: TaskChecklistItemEntity)
+}

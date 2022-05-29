@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.model
+package dev.sergiobelda.todometer.common.domain.repository
 
-enum class ChecklistItemState {
-    DOING,
-    DONE
+import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import kotlinx.coroutines.flow.Flow
+
+interface ITaskChecklistItemsRepository {
+
+    fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>>
+
+    suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem)
 }

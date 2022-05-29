@@ -16,8 +16,10 @@
 
 package dev.sergiobelda.todometer.common.di
 
+import dev.sergiobelda.todometer.common.data.localdatasource.ITaskChecklistItemLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskListLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskLocalDataSource
+import dev.sergiobelda.todometer.common.data.localdatasource.TaskChecklistItemLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.TaskListLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.TaskLocalDataSource
 import org.koin.dsl.module
@@ -28,5 +30,8 @@ val localDataSourceModule = module {
     }
     single<ITaskLocalDataSource> {
         TaskLocalDataSource(get())
+    }
+    single<ITaskChecklistItemLocalDataSource> {
+        TaskChecklistItemLocalDataSource(get())
     }
 }

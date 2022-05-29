@@ -7,3 +7,13 @@ CREATE TABLE TaskChecklistItemEntity (
     state TEXT AS TaskChecklistItemState NOT NULL,
     FOREIGN KEY(task_id) REFERENCES TaskEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+selectTaskChecklistItems:
+SELECT *
+FROM TaskChecklistItemEntity
+WHERE task_id = ?;
+
+insertTaskChecklistItem:
+INSERT OR REPLACE INTO TaskChecklistItemEntity
+(id, text, task_id, state)
+VALUES (?, ?, ?, ?);

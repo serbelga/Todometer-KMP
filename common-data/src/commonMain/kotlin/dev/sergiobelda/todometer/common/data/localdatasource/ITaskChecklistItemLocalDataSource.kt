@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.model
+package dev.sergiobelda.todometer.common.data.localdatasource
 
-data class ChecklistItem(
-    val id: String,
-    val text: String,
-    val state: ChecklistItemState,
-    val taskId: String
-)
+import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import kotlinx.coroutines.flow.Flow
+
+interface ITaskChecklistItemLocalDataSource {
+
+    fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>>
+
+    suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem)
+}

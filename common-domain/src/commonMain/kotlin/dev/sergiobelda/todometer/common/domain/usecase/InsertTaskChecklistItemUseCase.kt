@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.domain.usecase
 
-import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
 
-data class TaskDetailUiState(
-    val isLoadingTask: Boolean = false,
-    val task: Task? = null,
-    val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
-    val errorUi: ErrorUi? = null
-)
+class InsertTaskChecklistItemUseCase(
+    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
+) {
+
+    suspend operator fun invoke(taskChecklistItem: TaskChecklistItem) =
+        taskChecklistItemsRepository.insertTaskChecklistItem(taskChecklistItem)
+}
