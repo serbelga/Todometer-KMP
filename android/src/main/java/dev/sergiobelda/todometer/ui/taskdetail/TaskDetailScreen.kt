@@ -21,6 +21,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -45,7 +46,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Checkbox
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -154,14 +157,18 @@ fun TaskDetailBody(
             }
             Column {
                 taskChecklistItems.forEach {
-                    Row {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(start = 8.dp).fillMaxWidth()
+                    ) {
                         Checkbox(
                             checked = it.state == TaskChecklistItemState.DONE,
-                            onCheckedChange = {}
+                            onCheckedChange = {},
+                            modifier = Modifier.scale(0.85f)
                         )
                         Text(text = it.text)
                     }
-                },
+                }
             }
             if (!task.description.isNullOrBlank()) {
                 Text(
