@@ -45,6 +45,7 @@ android {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
+    namespace = "dev.sergiobelda.todometer"
 }
 
 dependencies {
