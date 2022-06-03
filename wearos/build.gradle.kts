@@ -6,6 +6,18 @@ plugins {
     kotlin("kapt")
 }
 
+// TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
+androidComponents {
+    onVariants(selector().all()) {
+        val capitalizedVariantName = it.name.substring(0, 1).toUpperCase() + it.name.substring(1)
+        afterEvaluate {
+            tasks.named("map${capitalizedVariantName}SourceSetPaths").configure {
+                dependsOn("process${capitalizedVariantName}GoogleServices")
+            }
+        }
+    }
+}
+
 android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
