@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.common.data.repository
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskChecklistItemLocalDataSource
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -31,4 +32,7 @@ class TaskChecklistItemsRepository(
 
     override suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem) =
         taskChecklistItemLocalDataSource.insertTaskChecklistItem(taskChecklistItem)
+
+    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
+        taskChecklistItemLocalDataSource.updateTaskChecklistItemState(id, state)
 }

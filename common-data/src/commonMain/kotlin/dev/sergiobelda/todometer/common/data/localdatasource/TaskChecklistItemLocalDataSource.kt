@@ -21,6 +21,7 @@ import dev.sergiobelda.todometer.common.data.database.mapper.toTaskChecklist
 import dev.sergiobelda.todometer.common.data.database.mapper.toTaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -35,4 +36,7 @@ class TaskChecklistItemLocalDataSource(
 
     override suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem) =
         taskChecklistItemDao.insertTaskChecklistItem(taskChecklistItem.toTaskChecklistItemEntity())
+
+    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
+        taskChecklistItemDao.updateTaskChecklistItemState(id, state)
 }

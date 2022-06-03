@@ -26,6 +26,8 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskChecklistItemsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskChecklistItemUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskChecklistItemDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskChecklistItemDoneUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
@@ -33,7 +35,9 @@ class TaskDetailViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val getTaskChecklistItemsUseCase: GetTaskChecklistItemsUseCase,
-    private val insertTaskChecklistItemsUseCase: InsertTaskChecklistItemUseCase
+    private val insertTaskChecklistItemsUseCase: InsertTaskChecklistItemUseCase,
+    private val setTaskChecklistItemDoingUseCase: SetTaskChecklistItemDoingUseCase,
+    private val setTaskChecklistItemDoneUseCase: SetTaskChecklistItemDoneUseCase
 ) : ViewModel() {
 
     var taskDetailUiState by mutableStateOf(
@@ -81,5 +85,13 @@ class TaskDetailViewModel(
                 )
             }
         }
+    }
+
+    fun setTaskChecklistItemDoing(id: String) = viewModelScope.launch {
+        setTaskChecklistItemDoingUseCase(id)
+    }
+
+    fun setTaskChecklistItemDone(id: String) = viewModelScope.launch {
+        setTaskChecklistItemDoneUseCase(id)
     }
 }

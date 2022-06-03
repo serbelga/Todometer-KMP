@@ -20,6 +20,7 @@ import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import dev.sergiobelda.todometer.common.data.database.TaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.data.database.TodometerDatabase
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import kotlinx.coroutines.flow.Flow
 
 class TaskChecklistItemDao(private val database: TodometerDatabase) : ITaskChecklistItemDao {
@@ -33,5 +34,11 @@ class TaskChecklistItemDao(private val database: TodometerDatabase) : ITaskCheck
             text = taskChecklistItemEntity.text,
             task_id = taskChecklistItemEntity.task_id,
             state = taskChecklistItemEntity.state
+        )
+
+    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
+        database.taskChecklistItemEntityQueries.updateTaskChecklistItemState(
+            id = id,
+            state = state
         )
 }

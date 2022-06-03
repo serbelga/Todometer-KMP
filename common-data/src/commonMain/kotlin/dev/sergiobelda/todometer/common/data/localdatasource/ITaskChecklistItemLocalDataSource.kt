@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.data.localdatasource
 
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskChecklistItemLocalDataSource {
@@ -25,4 +26,6 @@ interface ITaskChecklistItemLocalDataSource {
     fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>>
 
     suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem)
+
+    suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState)
 }

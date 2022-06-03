@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.common.data.database.dao
 
 import dev.sergiobelda.todometer.common.data.database.TaskChecklistItemEntity
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskChecklistItemDao {
@@ -24,4 +25,6 @@ interface ITaskChecklistItemDao {
     fun getTaskChecklistItems(taskId: String): Flow<List<TaskChecklistItemEntity>>
 
     suspend fun insertTaskChecklistItem(taskChecklistItemEntity: TaskChecklistItemEntity)
+
+    suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState)
 }

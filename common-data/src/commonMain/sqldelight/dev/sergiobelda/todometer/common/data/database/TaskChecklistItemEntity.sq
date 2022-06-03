@@ -17,3 +17,9 @@ insertTaskChecklistItem:
 INSERT OR REPLACE INTO TaskChecklistItemEntity
 (id, text, task_id, state)
 VALUES (?, ?, ?, ?);
+
+updateTaskChecklistItemState:
+UPDATE TaskChecklistItemEntity
+SET
+    state = ?
+WHERE id = ?;

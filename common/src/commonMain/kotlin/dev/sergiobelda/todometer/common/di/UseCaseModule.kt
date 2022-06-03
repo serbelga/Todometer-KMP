@@ -34,6 +34,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.RefreshTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.RefreshTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetAppThemeUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskChecklistItemDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.SetTaskChecklistItemDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskListSelectedUseCase
@@ -114,5 +116,11 @@ val useCaseModule = module {
     }
     single {
         InsertTaskChecklistItemUseCase(get())
+    }
+    single {
+        SetTaskChecklistItemDoingUseCase(get())
+    }
+    single {
+        SetTaskChecklistItemDoneUseCase(get())
     }
 }

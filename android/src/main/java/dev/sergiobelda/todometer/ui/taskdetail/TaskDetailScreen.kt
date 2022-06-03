@@ -110,7 +110,9 @@ fun TaskDetailScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 taskDetailUiState.task?.let { task ->
-                    TaskDetailBody(scrollState, task, taskDetailUiState.taskChecklistItems)
+                    TaskDetailBody(scrollState, task, taskDetailUiState.taskChecklistItems) { id, checked ->
+                        if (checked) taskDetailViewModel.setTaskChecklistItemDone(id) else taskDetailViewModel.setTaskChecklistItemDoing(id)
+                    }
                 }
             }
         }
@@ -121,7 +123,8 @@ fun TaskDetailScreen(
 fun TaskDetailBody(
     scrollState: ScrollState,
     task: Task,
-    taskChecklistItems: List<TaskChecklistItem>
+    taskChecklistItems: List<TaskChecklistItem>,
+    onTaskChecklistItemClick: (String, Boolean) -> Unit
 ) {
     Column {
         if (scrollState.value >= 270) {
@@ -163,7 +166,7 @@ fun TaskDetailBody(
                     ) {
                         Checkbox(
                             checked = it.state == TaskChecklistItemState.DONE,
-                            onCheckedChange = {},
+                            onCheckedChange = { checked -> onTaskChecklistItemClick(it.id, checked) },
                             modifier = Modifier.scale(0.85f)
                         )
                         Text(text = it.text)
