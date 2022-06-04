@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem
 
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
 
-class InsertTaskChecklistItemUseCase(
+class DeleteTaskChecklistItemUseCase(
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
 ) {
 
-    suspend operator fun invoke(taskChecklistItem: TaskChecklistItem) =
-        taskChecklistItemsRepository.insertTaskChecklistItem(taskChecklistItem)
+    suspend operator fun invoke(id: String) =
+        taskChecklistItemsRepository.deleteTaskChecklistItem(id)
 }

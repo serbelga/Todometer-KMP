@@ -41,4 +41,7 @@ class TaskChecklistItemDao(private val database: TodometerDatabase) : ITaskCheck
             id = id,
             state = state
         )
+
+    override suspend fun deleteTaskChecklistItem(id: String) =
+        database.taskChecklistItemEntityQueries.deleteTaskChecklistItem(id)
 }

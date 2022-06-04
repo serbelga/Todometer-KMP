@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.ui.taskdetail
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,31 +28,40 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Checkbox
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role.Companion.Checkbox
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
@@ -110,9 +120,22 @@ fun TaskDetailScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 taskDetailUiState.task?.let { task ->
-                    TaskDetailBody(scrollState, task, taskDetailUiState.taskChecklistItems) { id, checked ->
-                        if (checked) taskDetailViewModel.setTaskChecklistItemDone(id) else taskDetailViewModel.setTaskChecklistItemDoing(id)
-                    }
+                    TaskDetailBody(
+                        scrollState,
+                        task,
+                        taskDetailUiState.taskChecklistItems,
+                        onTaskChecklistItemClick = { id, checked ->
+                            if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
+                                id
+                            )
+                        },
+                        onAddTaskCheckListItem = { text ->
+                            taskDetailViewModel.insertTaskChecklistItem(text)
+                        },
+                        onDeleteTaskCheckListItem = { id ->
+                            taskDetailViewModel.deleteTaskChecklistItem(id)
+                        }
+                    )
                 }
             }
         }
@@ -124,7 +147,9 @@ fun TaskDetailBody(
     scrollState: ScrollState,
     task: Task,
     taskChecklistItems: List<TaskChecklistItem>,
-    onTaskChecklistItemClick: (String, Boolean) -> Unit
+    onTaskChecklistItemClick: (String, Boolean) -> Unit,
+    onAddTaskCheckListItem: (String) -> Unit,
+    onDeleteTaskCheckListItem: (String) -> Unit
 ) {
     Column {
         if (scrollState.value >= 270) {
@@ -158,21 +183,12 @@ fun TaskDetailBody(
             task.dueDate?.let {
                 TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
             }
-            Column {
-                taskChecklistItems.forEach {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(start = 8.dp).fillMaxWidth()
-                    ) {
-                        Checkbox(
-                            checked = it.state == TaskChecklistItemState.DONE,
-                            onCheckedChange = { checked -> onTaskChecklistItemClick(it.id, checked) },
-                            modifier = Modifier.scale(0.85f)
-                        )
-                        Text(text = it.text)
-                    }
-                }
-            }
+            TaskChecklist(
+                taskChecklistItems,
+                onTaskChecklistItemClick,
+                onAddTaskCheckListItem,
+                onDeleteTaskCheckListItem
+            )
             if (!task.description.isNullOrBlank()) {
                 Text(
                     text = task.description ?: "",
@@ -185,6 +201,90 @@ fun TaskDetailBody(
                         text = stringResource(id = R.string.no_description),
                         style = TodometerTypography.body1,
                         modifier = Modifier.padding(24.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun TaskChecklist(
+    taskChecklistItems: List<TaskChecklistItem>,
+    onTaskChecklistItemClick: (String, Boolean) -> Unit,
+    onAddTaskCheckListItem: (String) -> Unit,
+    onDeleteTaskCheckListItem: (String) -> Unit
+) {
+    var taskChecklistItemText by remember { mutableStateOf("") }
+    val addTaskChecklistItemAction = {
+        if (taskChecklistItemText.isNotBlank()) {
+            onAddTaskCheckListItem(taskChecklistItemText)
+            taskChecklistItemText = ""
+        }
+    }
+    val iconButtonTint = TodometerColors.onSurfaceMediumEmphasis
+    Column {
+        Text(
+            "Checklist",
+            color = TodometerColors.primary,
+            style = TodometerTypography.caption,
+            modifier = Modifier.padding(start = 20.dp, bottom = 8.dp)
+        )
+        taskChecklistItems.forEach {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth().clickable {
+                    onTaskChecklistItemClick(
+                        it.id,
+                        it.state == TaskChecklistItemState.UNCHECKED
+                    )
+                }
+            ) {
+                ToDometerCheckbox(
+                    checked = it.state == TaskChecklistItemState.CHECKED,
+                    onCheckedChange = { checked ->
+                        onTaskChecklistItemClick(
+                            it.id,
+                            checked
+                        )
+                    },
+                    modifier = Modifier.scale(0.85f).padding(start = 8.dp)
+                )
+                Text(text = it.text, modifier = Modifier.weight(1f))
+                IconButton(onClick = { onDeleteTaskCheckListItem(it.id) }) {
+                    Icon(
+                        Icons.Rounded.Clear,
+                        contentDescription = stringResource(R.string.clear),
+                        tint = iconButtonTint
+                    )
+                }
+            }
+        }
+        Row(modifier = Modifier.fillMaxWidth().padding(start = 8.dp)) {
+            OutlinedTextField(
+                value = taskChecklistItemText,
+                onValueChange = { taskChecklistItemText = it },
+                modifier = Modifier.weight(1f),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    errorBorderColor = Color.Transparent
+                ),
+                placeholder = { Text("Add element") },
+                maxLines = 1,
+                singleLine = true,
+                keyboardActions = KeyboardActions(
+                    onDone = { addTaskChecklistItemAction() }
+                )
+            )
+            if (taskChecklistItemText.isNotBlank()) {
+                IconButton(
+                    onClick = addTaskChecklistItemAction
+                ) {
+                    Icon(
+                        Icons.Rounded.Check,
+                        contentDescription = stringResource(R.string.add),
+                        tint = TodometerColors.primary
                     )
                 }
             }

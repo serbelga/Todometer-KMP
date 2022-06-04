@@ -39,4 +39,7 @@ class TaskChecklistItemLocalDataSource(
 
     override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
         taskChecklistItemDao.updateTaskChecklistItemState(id, state)
+
+    override suspend fun deleteTaskChecklistItem(id: String) =
+        taskChecklistItemDao.deleteTaskChecklistItem(id)
 }

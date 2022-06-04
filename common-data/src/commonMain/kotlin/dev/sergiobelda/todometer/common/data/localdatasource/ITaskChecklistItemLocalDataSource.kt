@@ -28,4 +28,6 @@ interface ITaskChecklistItemLocalDataSource {
     suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem)
 
     suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState)
+
+    suspend fun deleteTaskChecklistItem(id: String)
 }

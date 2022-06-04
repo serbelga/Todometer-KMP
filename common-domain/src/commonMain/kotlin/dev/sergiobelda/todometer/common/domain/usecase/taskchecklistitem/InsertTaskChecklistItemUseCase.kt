@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem
 
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
-import kotlinx.coroutines.flow.Flow
 
-class GetTaskChecklistItemsUseCase(
+class InsertTaskChecklistItemUseCase(
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
 ) {
 
-    operator fun invoke(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
-        taskChecklistItemsRepository.getTaskChecklistItems(taskId)
+    suspend operator fun invoke(text: String, taskId: String) =
+        taskChecklistItemsRepository.insertTaskChecklistItem(text, taskId)
 }

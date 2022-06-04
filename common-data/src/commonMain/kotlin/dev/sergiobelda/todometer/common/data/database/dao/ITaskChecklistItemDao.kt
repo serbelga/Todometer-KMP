@@ -27,4 +27,6 @@ interface ITaskChecklistItemDao {
     suspend fun insertTaskChecklistItem(taskChecklistItemEntity: TaskChecklistItemEntity)
 
     suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState)
+
+    suspend fun deleteTaskChecklistItem(id: String)
 }

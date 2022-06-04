@@ -20,28 +20,29 @@ import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListSelectedUse
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskChecklistItemsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.GetTaskChecklistItemsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskChecklistItemUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertTaskChecklistItemUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.RefreshTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.RefreshTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskChecklistItemDoingUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskChecklistItemDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListNameUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.DeleteTaskChecklistItemUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -118,9 +119,12 @@ val useCaseModule = module {
         InsertTaskChecklistItemUseCase(get())
     }
     single {
-        SetTaskChecklistItemDoingUseCase(get())
+        SetTaskChecklistItemUncheckedUseCase(get())
     }
     single {
-        SetTaskChecklistItemDoneUseCase(get())
+        SetTaskChecklistItemCheckedUseCase(get())
+    }
+    single {
+        DeleteTaskChecklistItemUseCase(get())
     }
 }
