@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.task
 
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetTaskUseCase(
+class GetTaskListTasksUseCase(
     private val taskRepository: ITaskRepository
 ) {
 
-    /**
-     * Get a task given its [id].
-     */
-    operator fun invoke(id: String): Flow<Result<Task>> =
-        taskRepository.getTask(id)
+    operator fun invoke(taskListId: String): Flow<Result<List<Task>>> =
+        taskRepository.getTasks(taskListId)
 }

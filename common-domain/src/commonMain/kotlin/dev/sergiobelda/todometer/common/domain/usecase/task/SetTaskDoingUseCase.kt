@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.task
 
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
-import kotlinx.coroutines.flow.Flow
+import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 
-class GetTaskListsUseCase(
-    private val taskListRepository: ITaskListRepository
+class SetTaskDoingUseCase(
+    private val taskRepository: ITaskRepository
 ) {
 
     /**
-     * Retrieves the list of task list every time it changes.
-     *
-     * @return A Flow that emits the list of all task lists.
+     * Sets the taskState of a task to [TaskState.DOING] given its [id].
      */
-    operator fun invoke(): Flow<Result<List<TaskList>>> =
-        taskListRepository.getTaskLists()
+    suspend operator fun invoke(id: String) =
+        taskRepository.updateTaskState(id, TaskState.DOING)
 }

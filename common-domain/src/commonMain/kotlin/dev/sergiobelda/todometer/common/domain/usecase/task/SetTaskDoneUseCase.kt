@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.task
 
-import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
+import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 
-class SetAppThemeUseCase(private val userPreferencesRepository: IUserPreferencesRepository) {
+class SetTaskDoneUseCase(
+    private val taskRepository: ITaskRepository
+) {
 
     /**
-     * Updates the current selected [AppTheme].
+     * Sets the taskState of a task to [TaskState.DONE] given its [id].
      */
-    suspend operator fun invoke(theme: AppTheme) =
-        userPreferencesRepository.setUserTheme(theme)
+    suspend operator fun invoke(id: String) =
+        taskRepository.updateTaskState(id, TaskState.DONE)
 }

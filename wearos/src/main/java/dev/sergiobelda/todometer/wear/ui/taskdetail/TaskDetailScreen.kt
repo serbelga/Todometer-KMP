@@ -25,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
@@ -69,7 +70,8 @@ fun TaskDetailScreen(
             ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
             if (taskDetailUiState.isLoading) {
                 item { ToDometerLoadingProgress() }
@@ -127,7 +129,8 @@ fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
             launcher.launch(intent)
-        }
+        },
+        modifier = Modifier.fillMaxWidth()
     )
 }
 
@@ -141,6 +144,7 @@ fun DeleteTaskButton(onClick: () -> Unit) {
         label = {
             Text(text = stringResource(R.string.delete_task))
         },
-        onClick = onClick
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth()
     )
 }

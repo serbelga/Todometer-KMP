@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.domain.usecase.GetAppThemeUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

@@ -22,16 +22,20 @@ import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.AutoCenteringParams
@@ -79,7 +83,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            item { Text(stringResource(R.string.app_name)) }
+            item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             if (homeUiState.isLoading) {
                 item { ToDometerLoadingProgress() }
@@ -103,6 +107,21 @@ fun HomeScreen(
 }
 
 @Composable
+fun ToDometerTitle() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Image(
+            painterResource(R.drawable.isotype_dark),
+            contentDescription = null,
+            modifier = Modifier.size(16.dp)
+        )
+        Text(stringResource(R.string.app_name))
+    }
+}
+
+@Composable
 fun TaskListItem(taskListName: String, onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
@@ -113,7 +132,8 @@ fun TaskListItem(taskListName: String, onClick: () -> Unit) {
                 text = taskListName
             )
         },
-        onClick = onClick
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth()
     )
 }
 
@@ -128,7 +148,6 @@ fun AddTaskListButton(onComplete: (String) -> Unit) {
             }
         }
     Chip(
-        modifier = Modifier.fillMaxWidth(),
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
             Icon(Icons.Rounded.Add, null)
@@ -153,6 +172,7 @@ fun AddTaskListButton(onComplete: (String) -> Unit) {
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
             launcher.launch(intent)
-        }
+        },
+        modifier = Modifier.fillMaxWidth()
     )
 }

@@ -14,18 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.theme
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
-import androidx.compose.ui.graphics.Color
-import androidx.wear.compose.material.Colors
+import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 
-val primary = Color(0xFF80b4ff)
-val green = Color(0xFF3DDC84)
-val navy = Color(0xFF073042)
-val navyDark = Color(0xFF00071c)
-val orange = Color(0xFFF86734)
+class SetTaskListSelectedUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository
+) {
 
-val colorPalette = Colors(
-    primary = primary,
-    secondary = green
-)
+    suspend operator fun invoke(id: String) =
+        userPreferencesRepository.setTaskListSelected(id)
+}
