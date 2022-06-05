@@ -14,24 +14,31 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
 import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 
-class InsertTaskListUseCase(
-    private val taskListRepository: ITaskListRepository,
-    private val userPreferencesRepository: IUserPreferencesRepository
+class GetTaskListSelectedUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository,
+    private val taskListRepository: ITaskListRepository
 ) {
 
     /**
-     * Creates a new [TaskList] given a [name].
+     * Retrieves the current task list selected. This flow emits a value of a task list
+     * every time that current task list selected in user preferences changes or
+     * has been updated in database.
+     *
+     * @return A Flow that emits the current task list selected.
      */
-    suspend operator fun invoke(name: String): Result<String> =
-        taskListRepository.insertTaskList(name).doIfSuccess {
-            userPreferencesRepository.setTaskListSelected(it)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    operator fun invoke(): Flow<Result<TaskList>> =
+        userPreferencesRepository.taskListSelected().flatMapLatest { taskListId ->
+            taskListRepository.getTaskList(taskListId)
         }
 }

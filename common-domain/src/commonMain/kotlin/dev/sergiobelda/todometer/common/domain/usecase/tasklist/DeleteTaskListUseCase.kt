@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
-import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
+import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 
-class SetTaskDoingUseCase(
-    private val taskRepository: ITaskRepository
+class DeleteTaskListUseCase(
+    private val taskListRepository: ITaskListRepository
 ) {
 
     /**
-     * Sets the taskState of a task to [TaskState.DOING] given its [id].
+     * Deletes a task list given its [id].
      */
-    suspend operator fun invoke(id: String) =
-        taskRepository.updateTaskState(id, TaskState.DOING)
+    suspend operator fun invoke(id: String) {
+        taskListRepository.deleteTaskList(id)
+    }
 }

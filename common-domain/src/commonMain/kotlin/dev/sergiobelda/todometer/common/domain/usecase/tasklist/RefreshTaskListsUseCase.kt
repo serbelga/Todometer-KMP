@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
-import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
+import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 
-class SetTaskDoneUseCase(
-    private val taskRepository: ITaskRepository
+class RefreshTaskListsUseCase(
+    private val taskListRepository: ITaskListRepository
 ) {
 
-    /**
-     * Sets the taskState of a task to [TaskState.DONE] given its [id].
-     */
-    suspend operator fun invoke(id: String) =
-        taskRepository.updateTaskState(id, TaskState.DONE)
+    suspend operator fun invoke() = taskListRepository.refreshTaskLists()
 }

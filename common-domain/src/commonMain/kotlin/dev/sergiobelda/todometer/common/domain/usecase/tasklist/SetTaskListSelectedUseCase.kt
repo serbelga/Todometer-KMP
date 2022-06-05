@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.deletetasklist
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListUseCase
-import kotlinx.coroutines.launch
+import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 
-class DeleteTaskListViewModel(
-    private val taskListId: String,
-    private val deleteTaskListUseCase: DeleteTaskListUseCase
-) : ViewModel() {
+class SetTaskListSelectedUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository
+) {
 
-    fun deleteTaskList() = viewModelScope.launch {
-        deleteTaskListUseCase(taskListId)
-    }
+    suspend operator fun invoke(id: String) =
+        userPreferencesRepository.setTaskListSelected(id)
 }

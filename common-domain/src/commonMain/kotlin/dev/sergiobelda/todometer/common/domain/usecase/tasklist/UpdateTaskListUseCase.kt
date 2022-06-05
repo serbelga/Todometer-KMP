@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 
-class RefreshTaskListsUseCase(
-    private val taskListRepository: ITaskListRepository
-) {
+class UpdateTaskListUseCase(private val taskListRepository: ITaskListRepository) {
 
-    suspend operator fun invoke() = taskListRepository.refreshTaskLists()
+    /**
+     * Updates a [TaskList] given a [taskList] object.
+     */
+    suspend operator fun invoke(taskList: TaskList) =
+        taskListRepository.updateTaskList(taskList)
 }

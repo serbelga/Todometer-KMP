@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.apptheme
 
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
-import kotlinx.coroutines.flow.Flow
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 
-class GetTaskListTasksUseCase(
-    private val taskRepository: ITaskRepository
-) {
+class SetAppThemeUseCase(private val userPreferencesRepository: IUserPreferencesRepository) {
 
-    operator fun invoke(taskListId: String): Flow<Result<List<Task>>> =
-        taskRepository.getTasks(taskListId)
+    /**
+     * Updates the current selected [AppTheme].
+     */
+    suspend operator fun invoke(theme: AppTheme) =
+        userPreferencesRepository.setUserTheme(theme)
 }
