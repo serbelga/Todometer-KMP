@@ -14,31 +14,24 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
-import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.firstOrNull
 
-class GetTaskListSelectedUseCase(
+class DeleteTaskListSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
     private val taskListRepository: ITaskListRepository
 ) {
 
     /**
-     * Retrieves the current task list selected. This flow emits a value of a task list
-     * every time that current task list selected in user preferences changes or
-     * has been updated in database.
-     *
-     * @return A Flow that emits the current task list selected.
+     * Deletes a task list. The deleted task list will be the current task list selected.
+     * Once is deleted, it will select the first task list in task list list if is not empty.
      */
-    @OptIn(ExperimentalCoroutinesApi::class)
-    operator fun invoke(): Flow<Result<TaskList>> =
-        userPreferencesRepository.taskListSelected().flatMapLatest { taskListId ->
-            taskListRepository.getTaskList(taskListId)
-        }
+    suspend operator fun invoke() {
+        val taskListId = userPreferencesRepository.taskListSelected().firstOrNull()
+        taskListId?.let { taskListRepository.deleteTaskList(it) }
+        userPreferencesRepository.setTaskListSelected("")
+    }
 }

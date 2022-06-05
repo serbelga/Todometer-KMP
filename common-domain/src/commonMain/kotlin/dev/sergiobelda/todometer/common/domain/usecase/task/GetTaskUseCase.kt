@@ -14,29 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.task
 
 import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
+import kotlinx.coroutines.flow.Flow
 
-class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
+class GetTaskUseCase(
+    private val taskRepository: ITaskRepository
+) {
 
     /**
-     * Creates a new [Task] given a [title], [description] and [tag], in the task list [taskListId].
+     * Get a task given its [id].
      */
-    suspend operator fun invoke(
-        taskListId: String,
-        title: String,
-        tag: Tag = Tag.GRAY,
-        description: String? = null,
-        dueDate: Long? = null
-    ): Result<String> = taskRepository.insertTask(
-        title,
-        tag,
-        description,
-        dueDate,
-        taskListId
-    )
+    operator fun invoke(id: String): Flow<Result<Task>> =
+        taskRepository.getTask(id)
 }

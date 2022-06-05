@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.apptheme
 
-import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
+import kotlinx.coroutines.flow.Flow
 
-class RefreshTaskListSelectedUseCase(
-    private val userPreferencesRepository: IUserPreferencesRepository,
-    private val taskListRepository: ITaskListRepository
-) {
+class GetAppThemeUseCase(private val userPreferencesRepository: IUserPreferencesRepository) {
 
-    suspend operator fun invoke() =
-        userPreferencesRepository.taskListSelected().collect { id ->
-            taskListRepository.refreshTaskList(id)
-        }
+    /**
+     * Retrieves the current selected [AppTheme] in user preferences
+     * every time it changes.
+     *
+     * @return A Flow that emits the current theme selected.
+     */
+    operator fun invoke(): Flow<AppTheme> = userPreferencesRepository.getUserTheme()
 }

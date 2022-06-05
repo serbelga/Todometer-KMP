@@ -58,8 +58,8 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskIdKey
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskStateKey
 import dev.sergiobelda.todometer.ui.MainActivity

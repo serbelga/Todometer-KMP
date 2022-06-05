@@ -14,16 +14,22 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
+import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
+import kotlinx.coroutines.flow.Flow
 
-class UpdateTaskListUseCase(private val taskListRepository: ITaskListRepository) {
+class GetTaskListsUseCase(
+    private val taskListRepository: ITaskListRepository
+) {
 
     /**
-     * Updates a [TaskList] given a [taskList] object.
+     * Retrieves the list of task list every time it changes.
+     *
+     * @return A Flow that emits the list of all task lists.
      */
-    suspend operator fun invoke(taskList: TaskList) =
-        taskListRepository.updateTaskList(taskList)
+    operator fun invoke(): Flow<Result<List<TaskList>>> =
+        taskListRepository.getTaskLists()
 }

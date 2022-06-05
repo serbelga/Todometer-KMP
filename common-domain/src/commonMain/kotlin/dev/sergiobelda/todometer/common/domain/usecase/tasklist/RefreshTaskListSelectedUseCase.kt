@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
+import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 
-class UpdateTaskListNameUseCase(private val taskListRepository: ITaskListRepository) {
+class RefreshTaskListSelectedUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository,
+    private val taskListRepository: ITaskListRepository
+) {
 
-    /**
-     * Update Task List name by defining a new [name] value.
-     */
-    suspend operator fun invoke(id: String, name: String) {
-        taskListRepository.updateTaskListName(id, name)
-    }
+    suspend operator fun invoke() =
+        userPreferencesRepository.taskListSelected().collect { id ->
+            taskListRepository.refreshTaskList(id)
+        }
 }

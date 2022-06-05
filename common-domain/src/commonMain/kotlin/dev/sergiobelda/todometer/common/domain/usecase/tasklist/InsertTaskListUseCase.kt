@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.usecase
+package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 
+import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class SetTaskListSelectedUseCase(
+class InsertTaskListUseCase(
+    private val taskListRepository: ITaskListRepository,
     private val userPreferencesRepository: IUserPreferencesRepository
 ) {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    suspend operator fun invoke(id: String) =
-        userPreferencesRepository.setTaskListSelected(id)
+    /**
+     * Creates a new [TaskList] given a [name].
+     */
+    suspend operator fun invoke(name: String): Result<String> =
+        taskListRepository.insertTaskList(name).doIfSuccess {
+            userPreferencesRepository.setTaskListSelected(it)
+        }
 }
