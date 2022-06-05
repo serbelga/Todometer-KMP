@@ -448,11 +448,7 @@ fun DrawerContent(
     }
 }
 
-@OptIn(
-    ExperimentalFoundationApi::class,
-    ExperimentalMaterialApi::class,
-    ExperimentalAnimationGraphicsApi::class
-)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TasksListView(
     tasks: List<Task>,
@@ -525,8 +521,7 @@ fun TasksListView(
 
 @OptIn(
     ExperimentalMaterialApi::class,
-    ExperimentalAnimationGraphicsApi::class,
-    ExperimentalFoundationApi::class
+    ExperimentalAnimationGraphicsApi::class
 )
 @Composable
 fun SwipeableTaskItem(

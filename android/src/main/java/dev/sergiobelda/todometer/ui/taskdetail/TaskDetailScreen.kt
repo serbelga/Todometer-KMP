@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.ui.taskdetail
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -29,6 +28,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
@@ -58,6 +58,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -71,6 +73,8 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
+
+private const val SECTION_PADDING = 32
 
 @Composable
 fun TaskDetailScreen(
@@ -120,22 +124,30 @@ fun TaskDetailScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 taskDetailUiState.task?.let { task ->
-                    TaskDetailBody(
-                        scrollState,
-                        task,
-                        taskDetailUiState.taskChecklistItems,
-                        onTaskChecklistItemClick = { id, checked ->
-                            if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
-                                id
-                            )
-                        },
-                        onAddTaskCheckListItem = { text ->
-                            taskDetailViewModel.insertTaskChecklistItem(text)
-                        },
-                        onDeleteTaskCheckListItem = { id ->
-                            taskDetailViewModel.deleteTaskChecklistItem(id)
+                    Column {
+                        if (scrollState.value >= 200) {
+                            HorizontalDivider()
                         }
-                    )
+                        Column(modifier = Modifier.verticalScroll(state = scrollState)) {
+                            TaskTitle(task)
+                            TaskChips(task)
+                            TaskChecklist(
+                                taskDetailUiState.taskChecklistItems,
+                                onTaskChecklistItemClick = { id, checked ->
+                                    if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
+                                        id
+                                    )
+                                },
+                                onAddTaskCheckListItem = { text ->
+                                    taskDetailViewModel.insertTaskChecklistItem(text)
+                                },
+                                onDeleteTaskCheckListItem = { id ->
+                                    taskDetailViewModel.deleteTaskChecklistItem(id)
+                                }
+                            )
+                            TaskDescription(task.description)
+                        }
+                    }
                 }
             }
         }
@@ -143,68 +155,37 @@ fun TaskDetailScreen(
 }
 
 @Composable
-fun TaskDetailBody(
-    scrollState: ScrollState,
-    task: Task,
-    taskChecklistItems: List<TaskChecklistItem>,
-    onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onAddTaskCheckListItem: (String) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit
-) {
+fun TaskTitle(task: Task) {
     Column {
-        if (scrollState.value >= 270) {
-            HorizontalDivider()
-        }
-        Column(modifier = Modifier.verticalScroll(state = scrollState)) {
-            Surface(
-                modifier = Modifier.height(64.dp)
+        Surface(modifier = Modifier.height(64.dp)) {
+            Row(
+                modifier = Modifier.padding(start = 24.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    modifier = Modifier.padding(start = 24.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(16.dp)
-                            .clip(CircleShape)
-                            .background(TodometerColors.composeColorOf(task.tag))
-                    )
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
-                        Text(
-                            text = task.title,
-                            style = TodometerTypography.h6,
-                            modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
-                            maxLines = 1
-                        )
-                    }
-                }
-            }
-            HorizontalDivider()
-            task.dueDate?.let {
-                TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
-            }
-            TaskChecklist(
-                taskChecklistItems,
-                onTaskChecklistItemClick,
-                onAddTaskCheckListItem,
-                onDeleteTaskCheckListItem
-            )
-            if (!task.description.isNullOrBlank()) {
-                Text(
-                    text = task.description ?: "",
-                    style = TodometerTypography.body1,
-                    modifier = Modifier.padding(24.dp)
+                Box(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clip(CircleShape)
+                        .background(TodometerColors.composeColorOf(task.tag))
                 )
-            } else {
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
                     Text(
-                        text = stringResource(id = R.string.no_description),
-                        style = TodometerTypography.body1,
-                        modifier = Modifier.padding(24.dp)
+                        text = task.title,
+                        style = TodometerTypography.h6,
+                        modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
+                        maxLines = 1
                     )
                 }
             }
         }
+        HorizontalDivider()
+    }
+}
+
+@Composable
+fun TaskChips(task: Task) {
+    task.dueDate?.let {
+        TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
     }
 }
 
@@ -223,13 +204,8 @@ fun TaskChecklist(
         }
     }
     val iconButtonTint = TodometerColors.onSurfaceMediumEmphasis
-    Column {
-        Text(
-            "Checklist",
-            color = TodometerColors.primary,
-            style = TodometerTypography.caption,
-            modifier = Modifier.padding(start = 20.dp, bottom = 8.dp)
-        )
+    Column(modifier = Modifier.padding(top = 24.dp)) {
+        TaskDetailSectionTitle(stringResource(R.string.checklist))
         taskChecklistItems.forEach {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -248,9 +224,14 @@ fun TaskChecklist(
                             checked
                         )
                     },
-                    modifier = Modifier.scale(0.85f).padding(start = 8.dp)
+                    modifier = Modifier.scale(0.85f).padding(start = 16.dp)
                 )
-                Text(text = it.text, modifier = Modifier.weight(1f))
+                Text(
+                    text = it.text,
+                    modifier = Modifier.weight(1f),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
                 IconButton(onClick = { onDeleteTaskCheckListItem(it.id) }) {
                     Icon(
                         Icons.Rounded.Clear,
@@ -260,7 +241,7 @@ fun TaskChecklist(
                 }
             }
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(start = 8.dp)) {
+        Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
             OutlinedTextField(
                 value = taskChecklistItemText,
                 onValueChange = { taskChecklistItemText = it },
@@ -270,12 +251,13 @@ fun TaskChecklist(
                     unfocusedBorderColor = Color.Transparent,
                     errorBorderColor = Color.Transparent
                 ),
-                placeholder = { Text("Add element") },
+                placeholder = { Text(stringResource(R.string.add_element)) },
                 maxLines = 1,
                 singleLine = true,
                 keyboardActions = KeyboardActions(
                     onDone = { addTaskChecklistItemAction() }
-                )
+                ),
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
             )
             if (taskChecklistItemText.isNotBlank()) {
                 IconButton(
@@ -289,5 +271,48 @@ fun TaskChecklist(
                 }
             }
         }
+        HorizontalDivider()
     }
+}
+
+@Composable
+fun TaskDescription(description: String?) {
+    Column(
+        modifier = Modifier.padding(top = 24.dp)
+    ) {
+        TaskDetailSectionTitle(stringResource(R.string.description))
+        if (!description.isNullOrBlank()) {
+            Text(
+                text = description,
+                style = TodometerTypography.body1,
+                modifier = Modifier.padding(
+                    start = SECTION_PADDING.dp,
+                    end = SECTION_PADDING.dp,
+                    bottom = SECTION_PADDING.dp
+                )
+            )
+        } else {
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                Text(
+                    text = stringResource(id = R.string.no_description),
+                    style = TodometerTypography.body1,
+                    modifier = Modifier.padding(
+                        top = 16.dp, start = SECTION_PADDING.dp,
+                        end = SECTION_PADDING.dp,
+                        bottom = SECTION_PADDING.dp
+                    )
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun TaskDetailSectionTitle(text: String) {
+    Text(
+        text,
+        color = TodometerColors.primary,
+        style = TodometerTypography.caption,
+        modifier = Modifier.padding(start = SECTION_PADDING.dp, bottom = 8.dp)
+    )
 }
