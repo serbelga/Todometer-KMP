@@ -23,7 +23,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -52,12 +54,18 @@ import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
 
     val navController = rememberNavController()
     val actions = remember(navController) { Actions(navController) }
+    val navigateBackAction: () -> Unit = {
+        keyboardController?.hide()
+        actions.navigateUp()
+    }
 
     val appThemeState = mainViewModel.appTheme.collectAsState()
     val darkTheme: Boolean = when (appThemeState.value) {
@@ -65,6 +73,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
         AppTheme.DARK_THEME -> true
         AppTheme.LIGHT_THEME -> false
     }
+
     ToDometerTheme(darkTheme) {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
@@ -84,28 +93,28 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                 val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
                 TaskDetailScreen(
                     editTask = { actions.navigateToEditTask(taskId) },
-                    navigateUp = actions.navigateUp,
+                    navigateUp = navigateBackAction,
                     taskDetailViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
             composable(AddTaskList) {
-                AddTaskListScreen(actions.navigateUp)
+                AddTaskListScreen(navigateBackAction)
             }
             composable(EditTaskList) {
-                EditTaskListScreen(actions.navigateUp)
+                EditTaskListScreen(navigateBackAction)
             }
             composable(
                 AddTask,
                 deepLinks = listOf(navDeepLink { uriPattern = AddTaskDeepLink })
             ) {
-                AddTaskScreen(actions.navigateUp)
+                AddTaskScreen(navigateBackAction)
             }
             composable(
                 "$EditTask/{$TaskId}"
             ) { backStackEntry ->
                 val taskId = backStackEntry.arguments?.getString(TaskId) ?: ""
                 EditTaskScreen(
-                    navigateUp = actions.navigateUp,
+                    navigateUp = navigateBackAction,
                     editTaskViewModel = getViewModel { parametersOf(taskId) }
                 )
             }
@@ -118,7 +127,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
                         )
                     },
                     openSourceLicenses = { startOpenSourceLicensesActivity(context) },
-                    navigateUp = actions.navigateUp
+                    navigateUp = navigateBackAction
                 )
             }
         }
