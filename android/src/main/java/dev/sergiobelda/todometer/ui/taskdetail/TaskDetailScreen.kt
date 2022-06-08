@@ -19,17 +19,18 @@ package dev.sergiobelda.todometer.ui.taskdetail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -82,13 +83,13 @@ fun TaskDetailScreen(
     navigateUp: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel
 ) {
-    val scrollState = rememberScrollState(0)
+    val lazyListState = rememberLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    if (scrollState.value >= 120) {
+                    if (lazyListState.firstVisibleItemScrollOffset > 100) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
                             Text(taskDetailUiState.task.title)
                         }
@@ -124,29 +125,24 @@ fun TaskDetailScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 taskDetailUiState.task?.let { task ->
-                    Column {
-                        if (scrollState.value >= 200) {
-                            HorizontalDivider()
-                        }
-                        Column(modifier = Modifier.verticalScroll(state = scrollState)) {
-                            TaskTitle(task)
-                            TaskChips(task)
-                            TaskChecklist(
-                                taskDetailUiState.taskChecklistItems,
-                                onTaskChecklistItemClick = { id, checked ->
-                                    if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
-                                        id
-                                    )
-                                },
-                                onAddTaskCheckListItem = { text ->
-                                    taskDetailViewModel.insertTaskChecklistItem(text)
-                                },
-                                onDeleteTaskCheckListItem = { id ->
-                                    taskDetailViewModel.deleteTaskChecklistItem(id)
-                                }
-                            )
-                            TaskDescription(task.description)
-                        }
+                    LazyColumn(state = lazyListState) {
+                        taskTitle(task)
+                        taskChips(task)
+                        taskChecklist(
+                            taskDetailUiState.taskChecklistItems,
+                            onTaskChecklistItemClick = { id, checked ->
+                                if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
+                                    id
+                                )
+                            },
+                            onAddTaskCheckListItem = { text ->
+                                taskDetailViewModel.insertTaskChecklistItem(text)
+                            },
+                            onDeleteTaskCheckListItem = { id ->
+                                taskDetailViewModel.deleteTaskChecklistItem(id)
+                            }
+                        )
+                        taskDescription(task.description)
                     }
                 }
             }
@@ -154,9 +150,8 @@ fun TaskDetailScreen(
     )
 }
 
-@Composable
-fun TaskTitle(task: Task) {
-    Column {
+private fun LazyListScope.taskTitle(task: Task) {
+    item {
         Surface(modifier = Modifier.height(64.dp)) {
             Row(
                 modifier = Modifier.padding(start = 24.dp),
@@ -182,63 +177,65 @@ fun TaskTitle(task: Task) {
     }
 }
 
-@Composable
-fun TaskChips(task: Task) {
-    task.dueDate?.let {
-        TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
+private fun LazyListScope.taskChips(task: Task) {
+    item {
+        task.dueDate?.let {
+            TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
+        }
     }
 }
 
-@Composable
-fun TaskChecklist(
+fun LazyListScope.taskChecklist(
     taskChecklistItems: List<TaskChecklistItem>,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit
 ) {
-    var taskChecklistItemText by remember { mutableStateOf("") }
-    val addTaskChecklistItemAction = {
-        if (taskChecklistItemText.isNotBlank()) {
-            onAddTaskCheckListItem(taskChecklistItemText)
-            taskChecklistItemText = ""
-        }
-    }
-    val iconButtonTint = TodometerColors.onSurfaceMediumEmphasis
-    Column(modifier = Modifier.padding(top = 24.dp)) {
+    // TODO: padding top 24.dp
+    item {
         TaskDetailSectionTitle(stringResource(R.string.checklist))
-        taskChecklistItems.forEach {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().clickable {
+    }
+    items(taskChecklistItems) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth().clickable {
+                onTaskChecklistItemClick(
+                    it.id,
+                    it.state == TaskChecklistItemState.UNCHECKED
+                )
+            }
+        ) {
+            ToDometerCheckbox(
+                checked = it.state == TaskChecklistItemState.CHECKED,
+                onCheckedChange = { checked ->
                     onTaskChecklistItemClick(
                         it.id,
-                        it.state == TaskChecklistItemState.UNCHECKED
+                        checked
                     )
-                }
-            ) {
-                ToDometerCheckbox(
-                    checked = it.state == TaskChecklistItemState.CHECKED,
-                    onCheckedChange = { checked ->
-                        onTaskChecklistItemClick(
-                            it.id,
-                            checked
-                        )
-                    },
-                    modifier = Modifier.scale(0.85f).padding(start = 16.dp)
+                },
+                modifier = Modifier.scale(0.85f).padding(start = 16.dp)
+            )
+            Text(
+                text = it.text,
+                modifier = Modifier.weight(1f),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+            IconButton(onClick = { onDeleteTaskCheckListItem(it.id) }) {
+                Icon(
+                    Icons.Rounded.Clear,
+                    contentDescription = stringResource(R.string.clear),
+                    tint = TodometerColors.onSurfaceMediumEmphasis
                 )
-                Text(
-                    text = it.text,
-                    modifier = Modifier.weight(1f),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-                IconButton(onClick = { onDeleteTaskCheckListItem(it.id) }) {
-                    Icon(
-                        Icons.Rounded.Clear,
-                        contentDescription = stringResource(R.string.clear),
-                        tint = iconButtonTint
-                    )
-                }
+            }
+        }
+    }
+    item {
+        var taskChecklistItemText by remember { mutableStateOf("") }
+        val addTaskChecklistItemAction = {
+            if (taskChecklistItemText.isNotBlank()) {
+                onAddTaskCheckListItem(taskChecklistItemText)
+                taskChecklistItemText = ""
             }
         }
         Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
@@ -271,16 +268,18 @@ fun TaskChecklist(
                 }
             }
         }
+    }
+    item {
         HorizontalDivider()
     }
 }
 
-@Composable
-fun TaskDescription(description: String?) {
-    Column(
-        modifier = Modifier.padding(top = 24.dp)
-    ) {
+fun LazyListScope.taskDescription(description: String?) {
+    // TODO: padding top 24.dp
+    item {
         TaskDetailSectionTitle(stringResource(R.string.description))
+    }
+    item {
         if (!description.isNullOrBlank()) {
             Text(
                 text = description,
