@@ -5,7 +5,7 @@ plugins {
     kotlin("native.cocoapods")
     id("kotlinx-serialization")
     id("com.android.library")
-    id("com.squareup.sqldelight")
+    id("app.cash.sqldelight")
 }
 
 version = "1.0"
@@ -33,6 +33,7 @@ kotlin {
                 implementation(libs.ktor.client.json)
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.sqldelight.coroutines)
+                implementation(libs.sqldelight.primitiveAdapters)
                 implementation(projects.commonDomain)
                 implementation(projects.commonPreferences)
             }
