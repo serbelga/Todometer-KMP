@@ -20,6 +20,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -89,7 +90,7 @@ fun TaskDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    if (lazyListState.firstVisibleItemScrollOffset > 100) {
+                    if (lazyListState.firstVisibleItemIndex > 0) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
                             Text(taskDetailUiState.task.title)
                         }
@@ -121,6 +122,9 @@ fun TaskDetailScreen(
             )
         },
         content = {
+            if (lazyListState.firstVisibleItemIndex > 0) {
+                HorizontalDivider()
+            }
             if (taskDetailUiState.isLoadingTask) {
                 ToDometerContentLoadingProgress()
             } else {
@@ -185,13 +189,15 @@ private fun LazyListScope.taskChips(task: Task) {
     }
 }
 
-fun LazyListScope.taskChecklist(
+private fun LazyListScope.taskChecklist(
     taskChecklistItems: List<TaskChecklistItem>,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit
 ) {
-    // TODO: padding top 24.dp
+    item {
+        Spacer(modifier = Modifier.height(24.dp))
+    }
     item {
         TaskDetailSectionTitle(stringResource(R.string.checklist))
     }
@@ -274,8 +280,10 @@ fun LazyListScope.taskChecklist(
     }
 }
 
-fun LazyListScope.taskDescription(description: String?) {
-    // TODO: padding top 24.dp
+private fun LazyListScope.taskDescription(description: String?) {
+    item {
+        Spacer(modifier = Modifier.height(24.dp))
+    }
     item {
         TaskDetailSectionTitle(stringResource(R.string.description))
     }
@@ -307,7 +315,7 @@ fun LazyListScope.taskDescription(description: String?) {
 }
 
 @Composable
-fun TaskDetailSectionTitle(text: String) {
+private fun TaskDetailSectionTitle(text: String) {
     Text(
         text,
         color = TodometerColors.primary,
