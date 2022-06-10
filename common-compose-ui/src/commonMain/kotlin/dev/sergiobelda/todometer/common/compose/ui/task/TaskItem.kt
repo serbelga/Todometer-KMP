@@ -42,13 +42,13 @@ import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
-    task: Task,
+    task: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
@@ -118,7 +118,7 @@ fun TaskItem(
 }
 
 @Composable
-internal fun TaskItemAdditionalInformationRow(task: Task) {
+internal fun TaskItemAdditionalInformationRow(task: TaskItem) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(start = 36.dp, end = 8.dp)
@@ -128,5 +128,6 @@ internal fun TaskItemAdditionalInformationRow(task: Task) {
                 TaskDueDateChip(dueDate, modifier = Modifier.padding(bottom = 8.dp))
             }
         }
+        Text(task.checklistItemsDone.toString())
     }
 }

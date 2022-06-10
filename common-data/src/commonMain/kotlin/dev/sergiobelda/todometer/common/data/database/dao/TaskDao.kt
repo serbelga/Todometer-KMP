@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.common.data.database.dao
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
+import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId2
 import dev.sergiobelda.todometer.common.data.database.TaskEntity
 import dev.sergiobelda.todometer.common.data.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -29,8 +30,8 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
     override fun getTask(id: String): Flow<TaskEntity?> =
         database.taskEntityQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(taskListId: String): Flow<List<TaskEntity>> =
-        database.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
+    override fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId2>> =
+        database.taskEntityQueries.selectTasksByTaskListId2(taskListId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
         database.taskEntityQueries.insertOrReplaceTask(

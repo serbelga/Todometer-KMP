@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,26 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.ui.task
+package dev.sergiobelda.todometer.common.data.database.mapper
 
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId2
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
-import dev.sergiobelda.todometer.common.domain.model.TaskState
 
-object TaskProgress {
+// TODO: Improve
+fun SelectTasksByTaskListId2.toTaskItem(): TaskItem =
+    TaskItem(
+        id,
+        title,
+        description,
+        state,
+        tasklist_id,
+        tag,
+        sync,
+        dueDate,
+        checklistItemsDone,
+        totalChecklistItems
+    )
 
-    fun getTasksDoneProgress(list: List<TaskItem?>): Float =
-        list.takeUnless { it.isEmpty() }?.let {
-            it.filter { task -> task?.state == TaskState.DONE }.size / it.size.toFloat()
-        } ?: 0F
-
-    fun getPercentage(progress: Float) =
-        progress.takeIf { it in 0.0..1.0 }?.let { "${(it * 100).toInt()}%" } ?: "-%"
+fun Iterable<SelectTasksByTaskListId2>.toTaskItems(): List<TaskItem> = this.map {
+    it.toTaskItem()
 }

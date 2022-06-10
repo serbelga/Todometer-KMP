@@ -56,6 +56,7 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
@@ -81,7 +82,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     private var taskList: TaskList? by mutableStateOf(null)
 
-    private var tasks: List<Task> by mutableStateOf(emptyList())
+    private var tasks: List<TaskItem> by mutableStateOf(emptyList())
 
     private val context by inject<Context>()
 
@@ -170,7 +171,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     @Composable
-    private fun TaskItem(task: Task) {
+    private fun TaskItem(task: TaskItem) {
         val openTaskDeepLinkIntent = Intent(
             Intent.ACTION_VIEW,
             "$OPEN_TASK_DEEP_LINK/${task.id}".toUri(),

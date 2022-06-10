@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.domain.usecase.task
 
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
@@ -32,12 +33,12 @@ class GetTaskListSelectedTasksUseCase(
 ) {
 
     /**
-     * Get the list of [Task] for the current task list selected. This flow emits a new value
+     * Get the list of [TaskItem] for the current task list selected. This flow emits a new value
      * every time that current task list selected in user preferences changes or
      * some task has been updated.
      */
     @OptIn(ExperimentalCoroutinesApi::class)
-    operator fun invoke(): Flow<Result<List<Task>>> =
+    operator fun invoke(): Flow<Result<List<TaskItem>>> =
         userPreferencesRepository.taskListSelected().flatMapLatest { taskListId ->
             taskRepository.getTasks(taskListId).map { result ->
                 result.map { list -> list.sortedBy { it.state == TaskState.DONE } }
