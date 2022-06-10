@@ -11,7 +11,7 @@ CREATE TABLE TaskChecklistItemEntity (
 selectTaskChecklistItems:
 SELECT *
 FROM TaskChecklistItemEntity
-WHERE task_id = ?;
+WHERE task_id = ? ORDER BY state DESC;
 
 insertTaskChecklistItem:
 INSERT OR REPLACE INTO TaskChecklistItemEntity

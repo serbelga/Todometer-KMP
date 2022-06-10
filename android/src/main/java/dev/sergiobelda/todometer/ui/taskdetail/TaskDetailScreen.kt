@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.ui.taskdetail
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -26,6 +27,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -61,6 +63,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
@@ -110,7 +113,7 @@ fun TaskDetailScreen(
                         IconButton(onClick = editTask) {
                             Icon(
                                 Icons.Outlined.Edit,
-                                contentDescription = "Edit task",
+                                contentDescription = stringResource(R.string.edit_task),
                                 tint = TodometerColors.primary
                             )
                         }
@@ -139,11 +142,11 @@ fun TaskDetailScreen(
                                     id
                                 )
                             },
-                            onAddTaskCheckListItem = { text ->
-                                taskDetailViewModel.insertTaskChecklistItem(text)
-                            },
                             onDeleteTaskCheckListItem = { id ->
                                 taskDetailViewModel.deleteTaskChecklistItem(id)
+                            },
+                            onAddTaskCheckListItem = { text ->
+                                taskDetailViewModel.insertTaskChecklistItem(text)
                             }
                         )
                         taskDescription(task.description)
@@ -192,8 +195,8 @@ private fun LazyListScope.taskChips(task: Task) {
 private fun LazyListScope.taskChecklist(
     taskChecklistItems: List<TaskChecklistItem>,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onAddTaskCheckListItem: (String) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit
+    onDeleteTaskCheckListItem: (String) -> Unit,
+    onAddTaskCheckListItem: (String) -> Unit
 ) {
     item {
         Spacer(modifier = Modifier.height(24.dp))
@@ -201,40 +204,8 @@ private fun LazyListScope.taskChecklist(
     item {
         TaskDetailSectionTitle(stringResource(R.string.checklist))
     }
-    items(taskChecklistItems) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().clickable {
-                onTaskChecklistItemClick(
-                    it.id,
-                    it.state == TaskChecklistItemState.UNCHECKED
-                )
-            }
-        ) {
-            ToDometerCheckbox(
-                checked = it.state == TaskChecklistItemState.CHECKED,
-                onCheckedChange = { checked ->
-                    onTaskChecklistItemClick(
-                        it.id,
-                        checked
-                    )
-                },
-                modifier = Modifier.scale(0.85f).padding(start = 16.dp)
-            )
-            Text(
-                text = it.text,
-                modifier = Modifier.weight(1f),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            IconButton(onClick = { onDeleteTaskCheckListItem(it.id) }) {
-                Icon(
-                    Icons.Rounded.Clear,
-                    contentDescription = stringResource(R.string.clear),
-                    tint = TodometerColors.onSurfaceMediumEmphasis
-                )
-            }
-        }
+    items(taskChecklistItems, key = { it.id }) { taskChecklistItem ->
+        TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
     }
     item {
         var taskChecklistItemText by remember { mutableStateOf("") }
@@ -277,6 +248,52 @@ private fun LazyListScope.taskChecklist(
     }
     item {
         HorizontalDivider()
+    }
+}
+
+@Composable
+@OptIn(ExperimentalFoundationApi::class)
+private fun LazyItemScope.TaskChecklistItem(
+    taskChecklistItem: TaskChecklistItem,
+    onTaskChecklistItemClick: (String, Boolean) -> Unit,
+    onDeleteTaskCheckListItem: (String) -> Unit,
+) {
+    val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onSurface
+    val textDecoration = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth().clickable {
+            onTaskChecklistItemClick(
+                taskChecklistItem.id,
+                taskChecklistItem.state == TaskChecklistItemState.UNCHECKED
+            )
+        }.animateItemPlacement()
+    ) {
+        ToDometerCheckbox(
+            checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,
+            onCheckedChange = { checked ->
+                onTaskChecklistItemClick(
+                    taskChecklistItem.id,
+                    checked
+                )
+            },
+            modifier = Modifier.scale(0.85f).padding(start = 16.dp)
+        )
+        Text(
+            text = taskChecklistItem.text,
+            modifier = Modifier.weight(1f),
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            color = textColor,
+            textDecoration = textDecoration
+        )
+        IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
+            Icon(
+                Icons.Rounded.Clear,
+                contentDescription = stringResource(R.string.clear),
+                tint = TodometerColors.onSurfaceMediumEmphasis
+            )
+        }
     }
 }
 
