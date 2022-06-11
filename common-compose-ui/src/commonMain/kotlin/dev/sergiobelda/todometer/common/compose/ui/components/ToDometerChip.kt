@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
@@ -39,7 +40,7 @@ fun ToDometerChip(
         shape = TodometerShapes.small,
         modifier = modifier
     ) {
-        Row(modifier = Modifier.padding(6.dp)) {
+        Row(modifier = Modifier.padding(6.dp), verticalAlignment = Alignment.CenterVertically) {
             content()
         }
     }

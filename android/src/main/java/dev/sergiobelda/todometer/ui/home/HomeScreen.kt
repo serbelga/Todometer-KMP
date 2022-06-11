@@ -92,7 +92,6 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
-import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -526,7 +525,7 @@ fun TasksListView(
 )
 @Composable
 fun SwipeableTaskItem(
-    task: TaskItem,
+    taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
@@ -587,7 +586,7 @@ fun SwipeableTaskItem(
                 )
             )
             TaskItem(
-                task,
+                taskItem,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,

@@ -16,24 +16,23 @@
 
 package dev.sergiobelda.todometer.common.data.database.mapper
 
-import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId2
+import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 
 // TODO: Improve
-fun SelectTasksByTaskListId2.toTaskItem(): TaskItem =
+fun SelectTasksByTaskListId.toTaskItem(): TaskItem =
     TaskItem(
         id,
         title,
-        description,
         state,
         tasklist_id,
         tag,
         sync,
         dueDate,
-        checklistItemsDone,
+        checklistItemsDone ?: 0,
         totalChecklistItems
     )
 
-fun Iterable<SelectTasksByTaskListId2>.toTaskItems(): List<TaskItem> = this.map {
+fun Iterable<SelectTasksByTaskListId>.toTaskItems(): List<TaskItem> = this.map {
     it.toTaskItem()
 }

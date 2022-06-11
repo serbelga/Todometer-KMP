@@ -20,7 +20,6 @@ import dev.sergiobelda.todometer.common.data.database.dao.ITaskDao
 import dev.sergiobelda.todometer.common.data.database.mapper.toTask
 import dev.sergiobelda.todometer.common.data.database.mapper.toTaskEntity
 import dev.sergiobelda.todometer.common.data.database.mapper.toTaskItems
-import dev.sergiobelda.todometer.common.data.database.mapper.toTasks
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskItem

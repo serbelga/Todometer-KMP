@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.common.ui.task
 
-import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 

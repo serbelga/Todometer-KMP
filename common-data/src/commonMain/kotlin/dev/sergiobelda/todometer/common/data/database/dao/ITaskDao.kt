@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.common.data.database.dao
 
-import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId2
+import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId
 import dev.sergiobelda.todometer.common.data.database.TaskEntity
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
@@ -25,7 +25,7 @@ interface ITaskDao {
 
     fun getTask(id: String): Flow<TaskEntity?>
 
-    fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId2>>
+    fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId>>
 
     suspend fun insertTask(task: TaskEntity): String
 
