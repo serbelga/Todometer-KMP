@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.common.data.database
 
 import android.content.Context
-import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 
 actual object DriverFactory {
     lateinit var appContext: Context
