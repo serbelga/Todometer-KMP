@@ -1,5 +1,6 @@
 import dev.sergiobelda.todometer.common.domain.model.Tag;
 import dev.sergiobelda.todometer.common.domain.model.TaskState;
+import kotlin.Boolean;
 
 CREATE TABLE TaskEntity (
     id TEXT PRIMARY KEY NOT NULL,

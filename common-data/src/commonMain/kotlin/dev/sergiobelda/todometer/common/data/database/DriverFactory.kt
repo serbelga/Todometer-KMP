@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.common.data.database
 
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
 
 expect object DriverFactory {
     fun createDriver(): SqlDriver
