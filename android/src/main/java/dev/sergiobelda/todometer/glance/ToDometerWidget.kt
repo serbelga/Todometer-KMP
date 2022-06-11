@@ -55,7 +55,7 @@ import androidx.glance.unit.ColorProvider
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
@@ -81,7 +81,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     private var taskList: TaskList? by mutableStateOf(null)
 
-    private var tasks: List<Task> by mutableStateOf(emptyList())
+    private var tasks: List<TaskItem> by mutableStateOf(emptyList())
 
     private val context by inject<Context>()
 
@@ -170,10 +170,10 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     @Composable
-    private fun TaskItem(task: Task) {
+    private fun TaskItem(taskItem: TaskItem) {
         val openTaskDeepLinkIntent = Intent(
             Intent.ACTION_VIEW,
-            "$OPEN_TASK_DEEP_LINK/${task.id}".toUri(),
+            "$OPEN_TASK_DEEP_LINK/${taskItem.id}".toUri(),
             context,
             MainActivity::class.java
         )
@@ -184,7 +184,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                val textStyle = if (task.state == TaskState.DONE) {
+                val textStyle = if (taskItem.state == TaskState.DONE) {
                     TextStyle(
                         color = ColorProvider(R.color.todometer_on_surface),
                         textDecoration = TextDecoration.LineThrough
@@ -193,18 +193,18 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     TextStyle(color = ColorProvider(R.color.todometer_on_surface))
                 }
                 Text(
-                    text = task.title,
+                    text = taskItem.title,
                     style = textStyle,
                     modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
                 )
                 Image(
-                    ImageProvider(if (task.state == TaskState.DONE) R.drawable.ic_round_replay_24 else R.drawable.ic_round_check_24),
+                    ImageProvider(if (taskItem.state == TaskState.DONE) R.drawable.ic_round_replay_24 else R.drawable.ic_round_check_24),
                     contentDescription = null,
                     modifier = GlanceModifier.padding(8.dp).clickable(
                         onClick = actionRunCallback<SetTaskStateAction>(
                             actionParametersOf(
-                                taskIdKey to task.id,
-                                taskStateKey to task.state
+                                taskIdKey to taskItem.id,
+                                taskStateKey to taskItem.state
                             )
                         )
                     )

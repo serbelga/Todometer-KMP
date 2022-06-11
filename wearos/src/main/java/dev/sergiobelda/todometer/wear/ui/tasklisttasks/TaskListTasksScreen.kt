@@ -62,7 +62,7 @@ import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
@@ -167,12 +167,12 @@ fun TaskListProgressIndicator(progress: Float) {
 
 @Composable
 fun TaskItem(
-    task: Task,
+    taskItem: TaskItem,
     onDoingClick: () -> Unit,
     onDoneClick: () -> Unit,
     onClick: () -> Unit
 ) {
-    val isTaskDone = task.state == TaskState.DONE
+    val isTaskDone = taskItem.state == TaskState.DONE
     val textDecoration = if (isTaskDone) TextDecoration.LineThrough else null
     // Use SplitToggleChip if onClick is needed.
     SplitToggleChip(
@@ -189,7 +189,7 @@ fun TaskItem(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colors.onSurface,
-                text = task.title,
+                text = taskItem.title,
                 textDecoration = textDecoration
             )
         },

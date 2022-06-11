@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.tasklisttasks
+package dev.sergiobelda.todometer.common.domain.model
 
-import dev.sergiobelda.todometer.common.domain.model.TaskItem
-import dev.sergiobelda.todometer.common.domain.model.TaskList
-
-data class TaskListTasksUiState(
-    val isLoadingTaskList: Boolean = false,
-    val taskList: TaskList? = null,
-    val isDefaultTaskList: Boolean = false,
-    val isLoadingTasks: Boolean = false,
-    val tasks: List<TaskItem> = emptyList()
+data class TaskItem(
+    val id: String,
+    val title: String,
+    val state: TaskState,
+    val taskListId: String,
+    val tag: Tag,
+    val sync: Boolean,
+    val dueDate: Long?,
+    val checklistItemsDone: Long,
+    val totalChecklistItems: Long
 )
