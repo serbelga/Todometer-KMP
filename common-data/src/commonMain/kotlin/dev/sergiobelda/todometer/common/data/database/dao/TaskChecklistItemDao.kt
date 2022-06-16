@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.common.data.database.dao
 
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import dev.sergiobelda.todometer.common.data.database.TaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.data.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
