@@ -23,8 +23,8 @@ import dev.sergiobelda.todometer.common.data.database.mapper.toTaskItem
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.testutils.task1
-import dev.sergiobelda.todometer.common.testutils.taskItemsEntities
 import dev.sergiobelda.todometer.common.testutils.taskEntity1
+import dev.sergiobelda.todometer.common.testutils.taskItemsEntities
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
