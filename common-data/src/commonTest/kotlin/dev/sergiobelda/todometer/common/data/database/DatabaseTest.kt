@@ -35,6 +35,9 @@ abstract class DatabaseTest {
             TaskEntityAdapter = TaskEntity.Adapter(
                 stateAdapter = EnumColumnAdapter(),
                 tagAdapter = EnumColumnAdapter()
+            ),
+            TaskChecklistItemEntityAdapter = TaskChecklistItemEntity.Adapter(
+                stateAdapter = EnumColumnAdapter()
             )
         )
     }

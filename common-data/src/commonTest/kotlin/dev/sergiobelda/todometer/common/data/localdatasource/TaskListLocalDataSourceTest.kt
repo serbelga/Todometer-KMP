@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.common.data.localdatasource
 
 import dev.sergiobelda.todometer.common.data.database.dao.ITaskListDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toDomain
-import dev.sergiobelda.todometer.common.data.database.mapper.toEntity
+import dev.sergiobelda.todometer.common.data.database.mapper.toTaskList
+import dev.sergiobelda.todometer.common.data.database.mapper.toTaskListEntity
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.testutils.taskList1
 import dev.sergiobelda.todometer.common.testutils.taskListEntities
@@ -51,7 +51,7 @@ class TaskListLocalDataSourceTest {
 
         val result = taskListLocalDataSource.getTaskList("1").first()
         assertTrue { result is Result.Success }
-        assertEquals(taskListEntity1.toDomain(), (result as? Result.Success)?.value)
+        assertEquals(taskListEntity1.toTaskList(), (result as? Result.Success)?.value)
     }
 
     @Test
@@ -73,7 +73,7 @@ class TaskListLocalDataSourceTest {
         val result = taskListLocalDataSource.getTaskLists().first()
         assertTrue { result is Result.Success }
         assertEquals(
-            taskListEntities.map { it.toDomain() },
+            taskListEntities.map { it.toTaskList() },
             (result as? Result.Success)?.value
         )
     }
@@ -82,7 +82,7 @@ class TaskListLocalDataSourceTest {
     fun testInsertTaskList() = runTest {
         coEvery { taskListDao.insertTaskList(taskListEntity1) } returns taskListEntity1.id
 
-        val result = taskListLocalDataSource.insertTaskList(taskListEntity1.toDomain())
+        val result = taskListLocalDataSource.insertTaskList(taskListEntity1.toTaskList())
         assertTrue { result is Result.Success }
     }
 
@@ -90,7 +90,7 @@ class TaskListLocalDataSourceTest {
     fun testUpdateTaskList() = runTest {
         taskListLocalDataSource.updateTaskList(taskList1)
 
-        coVerify { taskListDao.updateTaskList(taskList1.toEntity()) }
+        coVerify { taskListDao.updateTaskList(taskList1.toTaskListEntity()) }
     }
 
     @Test

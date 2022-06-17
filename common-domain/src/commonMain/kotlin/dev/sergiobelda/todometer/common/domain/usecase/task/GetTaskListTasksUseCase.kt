@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.common.domain.usecase.task
 
 import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -25,6 +25,6 @@ class GetTaskListTasksUseCase(
     private val taskRepository: ITaskRepository
 ) {
 
-    operator fun invoke(taskListId: String): Flow<Result<List<Task>>> =
+    operator fun invoke(taskListId: String): Flow<Result<List<TaskItem>>> =
         taskRepository.getTasks(taskListId)
 }

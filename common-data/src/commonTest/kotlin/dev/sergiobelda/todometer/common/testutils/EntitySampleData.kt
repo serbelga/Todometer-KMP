@@ -16,9 +16,12 @@
 
 package dev.sergiobelda.todometer.common.testutils
 
+import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId
+import dev.sergiobelda.todometer.common.data.database.TaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.data.database.TaskEntity
 import dev.sergiobelda.todometer.common.data.database.TaskListEntity
 import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 val taskListEntity1 = TaskListEntity(
@@ -77,4 +80,11 @@ val taskEntity2 = TaskEntity(
     sync = false
 )
 
-val taskEntities = listOf(taskEntity1, taskEntity2)
+val taskItemsEntities = listOf<SelectTasksByTaskListId>()
+
+val taskChecklistItemEntity = TaskChecklistItemEntity(
+    id = "1",
+    text = "Item 1",
+    state = TaskChecklistItemState.UNCHECKED,
+    task_id = "1"
+)
