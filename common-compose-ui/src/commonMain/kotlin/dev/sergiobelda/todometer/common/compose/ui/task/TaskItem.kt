@@ -139,7 +139,7 @@ internal fun TaskItemAdditionalInformationRow(taskItem: TaskItem) {
         }
         if (taskItem.totalChecklistItems > 0) {
             item {
-                TaskChecklistItemChip(taskItem.checklistItemsDone, taskItem.totalChecklistItems)
+                TaskChecklistItemsChip(taskItem.checklistItemsDone, taskItem.totalChecklistItems)
             }
         }
         item {

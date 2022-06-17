@@ -15,7 +15,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 
 @Composable
-fun TaskChecklistItemChip(checklistItemsDone: Long, totalChecklistItems: Long) {
+fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
     ToDometerChip(modifier = Modifier.padding(bottom = 8.dp)) {
         Icon(
             Icons.Outlined.CheckBox,
