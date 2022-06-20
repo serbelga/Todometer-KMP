@@ -16,13 +16,13 @@
 
 package dev.sergiobelda.todometer.ui.home
 
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class HomeUiState(
     val isLoadingTasks: Boolean = false,
-    val tasks: List<Task> = emptyList(),
+    val tasks: List<TaskItem> = emptyList(),
     val taskLists: List<TaskList> = emptyList(),
     val taskListSelected: TaskList? = null,
     val isDefaultTaskListSelected: Boolean = true,

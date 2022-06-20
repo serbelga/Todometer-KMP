@@ -23,12 +23,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListTasksUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.UpdateTaskListNameUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
 import kotlinx.coroutines.launch
 
 class TaskListTasksViewModel(

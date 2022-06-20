@@ -27,7 +27,5 @@ val orange = Color(0xFFF86734)
 
 val colorPalette = Colors(
     primary = primary,
-    secondary = green,
-    surface = navy,
-    background = navyDark
+    secondary = green
 )

@@ -56,7 +56,7 @@ val viewModelModule = module {
         )
     }
     viewModel { parameters ->
-        TaskDetailViewModel(parameters.get(), get())
+        TaskDetailViewModel(parameters.get(), get(), get(), get(), get(), get(), get())
     }
     viewModel {
         MainViewModel(get())

@@ -6,6 +6,18 @@ plugins {
     kotlin("kapt")
 }
 
+// TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
+androidComponents {
+    onVariants(selector().all()) {
+        val capitalizedVariantName = it.name.substring(0, 1).toUpperCase() + it.name.substring(1)
+        afterEvaluate {
+            tasks.named("map${capitalizedVariantName}SourceSetPaths").configure {
+                dependsOn("process${capitalizedVariantName}GoogleServices")
+            }
+        }
+    }
+}
+
 android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
@@ -13,8 +25,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 4100400
-        versionName = "wearos-1.0.0"
+        versionCode = 4110101
+        versionName = "wearos-1.1.0-alpha01"
     }
 
     buildFeatures {
@@ -46,6 +58,7 @@ android {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
+    namespace = "dev.sergiobelda.todometer.wear"
 }
 
 dependencies {

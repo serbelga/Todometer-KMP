@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.common.domain.repository
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
@@ -30,9 +31,9 @@ interface ITaskRepository {
     fun getTask(id: String): Flow<Result<Task>>
 
     /**
-     * Get a list of [Task] given a [taskListId].
+     * Get a list of [TaskItem] given a [taskListId].
      */
-    fun getTasks(taskListId: String): Flow<Result<List<Task>>>
+    fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>>
 
     suspend fun refreshTasks(taskListId: String)
 

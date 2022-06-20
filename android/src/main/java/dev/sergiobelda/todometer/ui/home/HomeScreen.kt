@@ -92,7 +92,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
@@ -448,14 +448,10 @@ fun DrawerContent(
     }
 }
 
-@OptIn(
-    ExperimentalFoundationApi::class,
-    ExperimentalMaterialApi::class,
-    ExperimentalAnimationGraphicsApi::class
-)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TasksListView(
-    tasks: List<Task>,
+    tasks: List<TaskItem>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
@@ -525,12 +521,11 @@ fun TasksListView(
 
 @OptIn(
     ExperimentalMaterialApi::class,
-    ExperimentalAnimationGraphicsApi::class,
-    ExperimentalFoundationApi::class
+    ExperimentalAnimationGraphicsApi::class
 )
 @Composable
 fun SwipeableTaskItem(
-    task: Task,
+    taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
@@ -591,7 +586,7 @@ fun SwipeableTaskItem(
                 )
             )
             TaskItem(
-                task,
+                taskItem,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,

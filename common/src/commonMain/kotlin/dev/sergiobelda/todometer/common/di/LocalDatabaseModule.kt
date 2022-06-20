@@ -17,8 +17,10 @@
 package dev.sergiobelda.todometer.common.di
 
 import dev.sergiobelda.todometer.common.data.database.createDatabase
+import dev.sergiobelda.todometer.common.data.database.dao.ITaskChecklistItemDao
 import dev.sergiobelda.todometer.common.data.database.dao.ITaskDao
 import dev.sergiobelda.todometer.common.data.database.dao.ITaskListDao
+import dev.sergiobelda.todometer.common.data.database.dao.TaskChecklistItemDao
 import dev.sergiobelda.todometer.common.data.database.dao.TaskDao
 import dev.sergiobelda.todometer.common.data.database.dao.TaskListDao
 import org.koin.dsl.module
@@ -32,5 +34,8 @@ val localDatabaseModule = module {
     }
     single<ITaskListDao> {
         TaskListDao(get())
+    }
+    single<ITaskChecklistItemDao> {
+        TaskChecklistItemDao(get())
     }
 }

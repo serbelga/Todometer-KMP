@@ -21,8 +21,8 @@ import androidx.glance.GlanceId
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.action.ActionCallback
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import org.koin.java.KoinJavaComponent.inject
 
 class SetTaskStateAction : ActionCallback {
