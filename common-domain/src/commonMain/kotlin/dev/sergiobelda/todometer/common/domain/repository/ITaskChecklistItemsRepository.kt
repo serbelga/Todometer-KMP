@@ -25,7 +25,7 @@ interface ITaskChecklistItemsRepository {
 
     fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>>
 
-    suspend fun insertTaskChecklistItem(text: String, taskId: String)
+    suspend fun insertTaskChecklistItems(taskId: String, vararg items: String)
 
     suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState)
 

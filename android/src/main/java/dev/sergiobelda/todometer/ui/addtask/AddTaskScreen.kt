@@ -111,7 +111,8 @@ fun AddTaskScreen(
                                     taskTitle,
                                     selectedTag,
                                     taskDescription,
-                                    taskDueDate
+                                    taskDueDate,
+                                    listOf("1", "2", "3")
                                 )
                             }
                         }

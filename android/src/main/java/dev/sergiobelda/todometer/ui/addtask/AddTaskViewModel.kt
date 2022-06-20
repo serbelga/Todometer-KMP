@@ -39,10 +39,17 @@ class AddTaskViewModel(
         title: String,
         tag: Tag,
         description: String? = null,
-        dueDate: Long? = null
+        dueDate: Long? = null,
+        checklistItems: List<String> = emptyList()
     ) = viewModelScope.launch {
         addTaskUiState = addTaskUiState.copy(isAddingTask = true)
-        val result = insertTaskInTaskListSelectedUseCase.invoke(title, tag, description, dueDate)
+        val result = insertTaskInTaskListSelectedUseCase.invoke(
+            title,
+            tag,
+            description,
+            dueDate,
+            checklistItems
+        )
         result.doIfSuccess {
             addTaskUiState = addTaskUiState.copy(
                 isAddingTask = false,

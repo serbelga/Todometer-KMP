@@ -25,7 +25,7 @@ interface ITaskChecklistItemLocalDataSource {
 
     fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>>
 
-    suspend fun insertTaskChecklistItem(taskChecklistItem: TaskChecklistItem)
+    suspend fun insertTaskChecklistItems(vararg taskChecklistItems: TaskChecklistItem)
 
     suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState)
 

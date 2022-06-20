@@ -16,6 +16,8 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.task
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -24,25 +26,37 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerChip
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.compose.ui.theme.green
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.outline
+import dev.sergiobelda.todometer.common.compose.ui.theme.teal
 
 @Composable
 fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
-    ToDometerChip(modifier = Modifier.padding(bottom = 8.dp)) {
+    val completedChipTint =
+        if (checklistItemsDone == totalChecklistItems) TodometerColors.teal else TodometerColors.onSurfaceMediumEmphasis
+    val completedChipOutline =
+        if (checklistItemsDone == totalChecklistItems) TodometerColors.teal else TodometerColors.outline
+
+    ToDometerChip(
+        borderStroke = BorderStroke(1.dp, completedChipOutline),
+        modifier = Modifier.padding(bottom = 8.dp)
+    ) {
         Icon(
             Icons.Outlined.CheckBox,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
-            tint = TodometerColors.onSurfaceMediumEmphasis
+            tint = completedChipTint
         )
         Text(
             "$checklistItemsDone/$totalChecklistItems",
             style = TodometerTypography.caption,
-            color = TodometerColors.onSurfaceMediumEmphasis
+            color = completedChipTint
         )
     }
 }

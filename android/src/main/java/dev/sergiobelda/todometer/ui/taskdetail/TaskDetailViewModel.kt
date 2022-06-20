@@ -90,7 +90,7 @@ class TaskDetailViewModel(
     }
 
     fun insertTaskChecklistItem(text: String) = viewModelScope.launch {
-        insertTaskChecklistItemsUseCase(text, taskId)
+        insertTaskChecklistItemsUseCase(taskId, text)
     }
 
     fun setTaskChecklistItemUnchecked(id: String) = viewModelScope.launch {

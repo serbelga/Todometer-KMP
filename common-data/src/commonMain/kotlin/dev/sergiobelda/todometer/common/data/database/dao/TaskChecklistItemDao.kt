@@ -28,13 +28,17 @@ class TaskChecklistItemDao(private val database: TodometerDatabase) : ITaskCheck
     override fun getTaskChecklistItems(taskId: String): Flow<List<TaskChecklistItemEntity>> =
         database.taskChecklistItemEntityQueries.selectTaskChecklistItems(taskId).asFlow().mapToList()
 
-    override suspend fun insertTaskChecklistItem(taskChecklistItemEntity: TaskChecklistItemEntity) =
-        database.taskChecklistItemEntityQueries.insertTaskChecklistItem(
-            id = taskChecklistItemEntity.id,
-            text = taskChecklistItemEntity.text,
-            task_id = taskChecklistItemEntity.task_id,
-            state = taskChecklistItemEntity.state
-        )
+    override suspend fun insertTaskChecklistItems(vararg taskChecklistItemEntities: TaskChecklistItemEntity) =
+        database.taskChecklistItemEntityQueries.transaction {
+            taskChecklistItemEntities.forEach { taskChecklistItemEntity ->
+                database.taskChecklistItemEntityQueries.insertTaskChecklistItem(
+                    id = taskChecklistItemEntity.id,
+                    text = taskChecklistItemEntity.text,
+                    task_id = taskChecklistItemEntity.task_id,
+                    state = taskChecklistItemEntity.state
+                )
+            }
+        }
 
     override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
         database.taskChecklistItemEntityQueries.updateTaskChecklistItemState(
