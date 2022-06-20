@@ -45,6 +45,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
@@ -177,8 +178,10 @@ fun AddTaskScreen(
                         end = 16.dp,
                         top = 8.dp,
                         bottom = 8.dp
-                    )
+                    ),
+                    maxLines = 4
                 )
+                HorizontalDivider()
             }
         }
     )
