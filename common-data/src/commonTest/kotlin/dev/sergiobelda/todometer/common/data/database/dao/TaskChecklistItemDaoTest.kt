@@ -35,9 +35,10 @@ class TaskChecklistItemDaoTest : DatabaseTest() {
     }
 
     @Test
-    fun testInsertTaskChecklistItem() = runTest {
-        taskChecklistItemDao.insertTaskChecklistItem(taskChecklistItemEntity)
-        val taskChecklistItems = taskChecklistItemDao.getTaskChecklistItems(taskChecklistItemEntity.task_id).first()
+    fun testInsertTaskChecklistItems() = runTest {
+        taskChecklistItemDao.insertTaskChecklistItems(taskChecklistItemEntity)
+        val taskChecklistItems =
+            taskChecklistItemDao.getTaskChecklistItems(taskChecklistItemEntity.task_id).first()
         taskChecklistItems.contains(taskChecklistItemEntity)
     }
 }

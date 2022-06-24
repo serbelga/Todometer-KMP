@@ -40,7 +40,7 @@ class InsertTaskInTaskListSelectedUseCase(
         tag: Tag = Tag.GRAY,
         description: String? = null,
         dueDate: Long? = null,
-        checklistItems: List<String> = emptyList()
+        taskChecklistItems: List<String> = emptyList()
     ): Result<String> {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull() ?: ""
         val result = taskRepository.insertTask(
@@ -53,7 +53,7 @@ class InsertTaskInTaskListSelectedUseCase(
         result.doIfSuccess { taskId ->
             taskChecklistItemsRepository.insertTaskChecklistItems(
                 taskId,
-                *checklistItems.toTypedArray()
+                *taskChecklistItems.toTypedArray()
             )
         }
         return result

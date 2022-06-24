@@ -208,46 +208,51 @@ private fun LazyListScope.taskChecklist(
         TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
     }
     item {
-        var taskChecklistItemText by remember { mutableStateOf("") }
-        val addTaskChecklistItemAction = {
-            if (taskChecklistItemText.isNotBlank()) {
-                onAddTaskCheckListItem(taskChecklistItemText)
-                taskChecklistItemText = ""
-            }
-        }
-        Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
-            OutlinedTextField(
-                value = taskChecklistItemText,
-                onValueChange = { taskChecklistItemText = it },
-                modifier = Modifier.weight(1f),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    errorBorderColor = Color.Transparent
-                ),
-                placeholder = { Text(stringResource(R.string.add_element)) },
-                maxLines = 1,
-                singleLine = true,
-                keyboardActions = KeyboardActions(
-                    onDone = { addTaskChecklistItemAction() }
-                ),
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
-            )
-            if (taskChecklistItemText.isNotBlank()) {
-                IconButton(
-                    onClick = addTaskChecklistItemAction
-                ) {
-                    Icon(
-                        Icons.Rounded.Check,
-                        contentDescription = stringResource(R.string.add),
-                        tint = TodometerColors.primary
-                    )
-                }
-            }
-        }
+        AddChecklistItem(onAddTaskCheckListItem)
     }
     item {
         HorizontalDivider()
+    }
+}
+
+@Composable
+fun AddChecklistItem(onAddTaskCheckListItem: (String) -> Unit) {
+    var taskChecklistItemText by remember { mutableStateOf("") }
+    val addTaskChecklistItemAction = {
+        if (taskChecklistItemText.isNotBlank()) {
+            onAddTaskCheckListItem(taskChecklistItemText)
+            taskChecklistItemText = ""
+        }
+    }
+    Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
+        OutlinedTextField(
+            value = taskChecklistItemText,
+            onValueChange = { taskChecklistItemText = it },
+            modifier = Modifier.weight(1f),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                errorBorderColor = Color.Transparent
+            ),
+            placeholder = { Text(stringResource(R.string.add_element)) },
+            maxLines = 1,
+            singleLine = true,
+            keyboardActions = KeyboardActions(
+                onDone = { addTaskChecklistItemAction() }
+            ),
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
+        )
+        if (taskChecklistItemText.isNotBlank()) {
+            IconButton(
+                onClick = addTaskChecklistItemAction
+            ) {
+                Icon(
+                    Icons.Rounded.Check,
+                    contentDescription = stringResource(R.string.add),
+                    tint = TodometerColors.primary
+                )
+            }
+        }
     }
 }
 
@@ -258,8 +263,10 @@ private fun LazyItemScope.TaskChecklistItem(
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
 ) {
-    val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onSurface
-    val textDecoration = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
+    val textColor =
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onSurface
+    val textDecoration =
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().clickable {

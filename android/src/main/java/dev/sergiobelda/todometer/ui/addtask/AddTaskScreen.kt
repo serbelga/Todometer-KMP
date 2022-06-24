@@ -17,9 +17,13 @@
 package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -35,6 +39,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,11 +53,13 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
+import dev.sergiobelda.todometer.ui.taskdetail.AddChecklistItem
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -61,7 +68,7 @@ fun AddTaskScreen(
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
     val activity = LocalContext.current as AppCompatActivity
-
+    val lazyListState = rememberLazyListState()
     val scaffoldState = rememberScaffoldState()
 
     var taskTitle by remember { mutableStateOf("") }
@@ -84,6 +91,8 @@ fun AddTaskScreen(
             )
         }
     }
+
+    val taskChecklistItems = remember { mutableStateListOf<String>() }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -113,7 +122,7 @@ fun AddTaskScreen(
                                     selectedTag,
                                     taskDescription,
                                     taskDueDate,
-                                    listOf("1", "2", "3")
+                                    taskChecklistItems
                                 )
                             }
                         }
@@ -133,55 +142,85 @@ fun AddTaskScreen(
             if (addTaskUiState.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-            Column(modifier = Modifier.padding(top = 24.dp)) {
-                TitledTextField(
-                    title = stringResource(id = R.string.name),
-                    value = taskTitle,
-                    onValueChange = {
-                        taskTitle = it
-                        taskTitleInputError = false
-                    },
-                    placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
-                    isError = taskTitleInputError,
-                    errorMessage = stringResource(id = R.string.field_not_empty),
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Next
-                    ),
-                    modifier = Modifier.padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 8.dp,
-                        bottom = 8.dp
-                    )
-                )
-                ToDometerTagSelector(selectedTag) { tag ->
-                    selectedTag = tag
-                }
-                ToDometerDateTimeSelector(
-                    activity,
-                    taskDueDate,
-                    onDateTimeSelected = { taskDueDate = it },
-                    onClearDateTimeClick = { taskDueDate = null }
-                )
-                TitledTextField(
-                    title = stringResource(id = R.string.description),
-                    value = taskDescription,
-                    onValueChange = { taskDescription = it },
-                    placeholder = { Text(stringResource(id = R.string.enter_description)) },
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Done
-                    ),
-                    modifier = Modifier.padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 8.dp,
-                        bottom = 8.dp
-                    ),
-                    maxLines = 4
-                )
+            if (lazyListState.firstVisibleItemIndex > 0) {
                 HorizontalDivider()
+            }
+            LazyColumn(state = lazyListState) {
+                item { Spacer(modifier = Modifier.height(24.dp)) }
+                item {
+                    TitledTextField(
+                        title = stringResource(id = R.string.name),
+                        value = taskTitle,
+                        onValueChange = {
+                            taskTitle = it
+                            taskTitleInputError = false
+                        },
+                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
+                        isError = taskTitleInputError,
+                        errorMessage = stringResource(id = R.string.field_not_empty),
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Sentences,
+                            imeAction = ImeAction.Next
+                        ),
+                        modifier = Modifier.padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 8.dp,
+                            bottom = 8.dp
+                        )
+                    )
+                }
+                item {
+                    ToDometerTagSelector(selectedTag) { tag ->
+                        selectedTag = tag
+                    }
+                }
+                item {
+                    ToDometerDateTimeSelector(
+                        activity,
+                        taskDueDate,
+                        onDateTimeSelected = { taskDueDate = it },
+                        onClearDateTimeClick = { taskDueDate = null }
+                    )
+                }
+                item {
+                    Text(
+                        text = stringResource(R.string.checklist),
+                        color = TodometerColors.primary,
+                        style = TodometerTypography.caption,
+                        modifier = Modifier.padding(start = 32.dp)
+                    )
+                }
+                items(taskChecklistItems) {
+                    Text(text = it)
+                }
+                item {
+                    AddChecklistItem {
+                        taskChecklistItems.add(it)
+                    }
+                }
+                item {
+                    TitledTextField(
+                        title = stringResource(id = R.string.description),
+                        value = taskDescription,
+                        onValueChange = { taskDescription = it },
+                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Sentences,
+                            imeAction = ImeAction.Done
+                        ),
+                        modifier = Modifier.padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 8.dp,
+                            bottom = 8.dp
+                        ),
+                        maxLines = 4
+                    )
+                }
+                item {
+                    HorizontalDivider()
+                }
             }
         }
     )
