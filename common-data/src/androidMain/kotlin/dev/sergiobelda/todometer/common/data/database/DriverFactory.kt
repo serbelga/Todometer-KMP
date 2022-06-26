@@ -31,7 +31,7 @@ actual object DriverFactory {
             "todometer.db",
             callback = object : AndroidSqliteDriver.Callback(TodometerDatabase.Schema) {
                 override fun onOpen(db: SupportSQLiteDatabase) {
-                    db.execSQL("PRAGMA foreign_keys = ON;");
+                    db.execSQL("PRAGMA foreign_keys = ON;")
                 }
             }
         )
