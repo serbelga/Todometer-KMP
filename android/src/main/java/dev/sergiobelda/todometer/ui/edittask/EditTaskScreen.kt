@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -58,11 +59,11 @@ fun EditTaskScreen(
 ) {
     val activity = LocalContext.current as AppCompatActivity
 
-    var taskTitle by remember { mutableStateOf("") }
+    var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
-    var taskDescription by remember { mutableStateOf("") }
-    var selectedTag by remember { mutableStateOf(Tag.GRAY) }
-    var taskDueDate: Long? by remember { mutableStateOf(null) }
+    var taskDescription by rememberSaveable { mutableStateOf("") }
+    var selectedTag by rememberSaveable { mutableStateOf(Tag.GRAY) }
+    var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
 
     val editTaskUiState = editTaskViewModel.editTaskUiState
     editTaskUiState.task?.let { task ->
@@ -119,7 +120,7 @@ fun EditTaskScreen(
             if (editTaskUiState.isLoading) {
                 ToDometerContentLoadingProgress()
             } else {
-                Column {
+                Column(modifier = Modifier.padding(top = 24.dp)) {
                     TitledTextField(
                         title = stringResource(id = R.string.name),
                         value = taskTitle,

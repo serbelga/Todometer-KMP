@@ -31,14 +31,16 @@ class TaskChecklistItemsRepository(
     override fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
         taskChecklistItemLocalDataSource.getTaskChecklistItems(taskId)
 
-    override suspend fun insertTaskChecklistItem(text: String, taskId: String) {
-        taskChecklistItemLocalDataSource.insertTaskChecklistItem(
-            TaskChecklistItem(
-                id = randomUUIDString(),
-                text = text,
-                state = TaskChecklistItemState.UNCHECKED,
-                taskId = taskId
-            )
+    override suspend fun insertTaskChecklistItems(taskId: String, vararg items: String) {
+        taskChecklistItemLocalDataSource.insertTaskChecklistItems(
+            *items.map { text ->
+                TaskChecklistItem(
+                    id = randomUUIDString(),
+                    text = text,
+                    state = TaskChecklistItemState.UNCHECKED,
+                    taskId = taskId
+                )
+            }.toTypedArray()
         )
     }
 

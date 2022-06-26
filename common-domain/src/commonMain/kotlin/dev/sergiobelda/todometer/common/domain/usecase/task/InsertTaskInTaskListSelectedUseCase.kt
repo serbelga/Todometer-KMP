@@ -17,15 +17,18 @@
 package dev.sergiobelda.todometer.common.domain.usecase.task
 
 import dev.sergiobelda.todometer.common.domain.Result
+import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.firstOrNull
 
 class InsertTaskInTaskListSelectedUseCase(
     private val taskRepository: ITaskRepository,
-    private val userPreferencesRepository: IUserPreferencesRepository
+    private val userPreferencesRepository: IUserPreferencesRepository,
+    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
 ) {
 
     /**
@@ -36,15 +39,23 @@ class InsertTaskInTaskListSelectedUseCase(
         title: String,
         tag: Tag = Tag.GRAY,
         description: String? = null,
-        dueDate: Long? = null
+        dueDate: Long? = null,
+        taskChecklistItems: List<String> = emptyList()
     ): Result<String> {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull() ?: ""
-        return taskRepository.insertTask(
+        val result = taskRepository.insertTask(
             title,
             tag,
             description,
             dueDate,
             taskListId
         )
+        result.doIfSuccess { taskId ->
+            taskChecklistItemsRepository.insertTaskChecklistItems(
+                taskId,
+                *taskChecklistItems.toTypedArray()
+            )
+        }
+        return result
     }
 }

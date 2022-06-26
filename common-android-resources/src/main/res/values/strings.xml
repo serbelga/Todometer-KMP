@@ -63,6 +63,7 @@
     <string name="clear">Limpiar</string>
     <string name="checklist">Checklist</string>
     <string name="add_element">Añadir elemento</string>
+    <string name="add_element_optional">Añadir elemento (opcional)</string>
 
     <string name="task_title_input">Nombre de la tarea</string>
     <string name="task_list_name_input">Nombre de la lista de tareas</string>

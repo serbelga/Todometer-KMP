@@ -32,37 +32,26 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -71,6 +60,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskDueDateChip
+import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
@@ -208,43 +198,10 @@ private fun LazyListScope.taskChecklist(
         TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
     }
     item {
-        var taskChecklistItemText by remember { mutableStateOf("") }
-        val addTaskChecklistItemAction = {
-            if (taskChecklistItemText.isNotBlank()) {
-                onAddTaskCheckListItem(taskChecklistItemText)
-                taskChecklistItemText = ""
-            }
-        }
-        Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
-            OutlinedTextField(
-                value = taskChecklistItemText,
-                onValueChange = { taskChecklistItemText = it },
-                modifier = Modifier.weight(1f),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    errorBorderColor = Color.Transparent
-                ),
-                placeholder = { Text(stringResource(R.string.add_element)) },
-                maxLines = 1,
-                singleLine = true,
-                keyboardActions = KeyboardActions(
-                    onDone = { addTaskChecklistItemAction() }
-                ),
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
-            )
-            if (taskChecklistItemText.isNotBlank()) {
-                IconButton(
-                    onClick = addTaskChecklistItemAction
-                ) {
-                    Icon(
-                        Icons.Rounded.Check,
-                        contentDescription = stringResource(R.string.add),
-                        tint = TodometerColors.primary
-                    )
-                }
-            }
-        }
+        AddChecklistItemField(
+            placeholder = { Text(stringResource(R.string.add_element)) },
+            onAddTaskCheckListItem = onAddTaskCheckListItem
+        )
     }
     item {
         HorizontalDivider()
@@ -256,10 +213,12 @@ private fun LazyListScope.taskChecklist(
 private fun LazyItemScope.TaskChecklistItem(
     taskChecklistItem: TaskChecklistItem,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit,
+    onDeleteTaskCheckListItem: (String) -> Unit
 ) {
-    val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onSurface
-    val textDecoration = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
+    val textColor =
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onSurface
+    val textDecoration =
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().clickable {

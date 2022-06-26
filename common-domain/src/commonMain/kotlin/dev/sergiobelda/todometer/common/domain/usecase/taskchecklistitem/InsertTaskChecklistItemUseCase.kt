@@ -22,6 +22,6 @@ class InsertTaskChecklistItemUseCase(
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
 ) {
 
-    suspend operator fun invoke(text: String, taskId: String) =
-        taskChecklistItemsRepository.insertTaskChecklistItem(text, taskId)
+    suspend operator fun invoke(taskId: String, text: String) =
+        taskChecklistItemsRepository.insertTaskChecklistItems(taskId = taskId, text)
 }
