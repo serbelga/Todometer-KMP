@@ -1,0 +1,5 @@
+pragmaForeignKeysOff:
+PRAGMA foreign_keys = 0;
+
+pragmaForeignKeysOn:
+PRAGMA foreign_keys = 1;

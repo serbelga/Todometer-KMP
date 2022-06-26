@@ -34,6 +34,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
         database.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
+        database.pragmaQueries.pragmaForeignKeysOff()
         database.taskEntityQueries.insertOrReplaceTask(
             id = task.id,
             title = task.title,
@@ -44,6 +45,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
             sync = task.sync,
             dueDate = task.dueDate
         )
+        database.pragmaQueries.pragmaForeignKeysOn()
         // TODO Call return last_insert_rowid() from SQLDelight.
         return task.id
     }
