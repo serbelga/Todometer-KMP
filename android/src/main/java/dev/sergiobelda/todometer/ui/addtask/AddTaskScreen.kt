@@ -97,8 +97,6 @@ fun AddTaskScreen(
         }
     }
 
-    val taskChecklistItems = remember { mutableStateListOf<String>() }
-
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -126,8 +124,7 @@ fun AddTaskScreen(
                                     taskTitle,
                                     selectedTag,
                                     taskDescription,
-                                    taskDueDate,
-                                    taskChecklistItems
+                                    taskDueDate
                                 )
                             }
                         }
@@ -196,15 +193,15 @@ fun AddTaskScreen(
                         modifier = Modifier.padding(start = 32.dp, top = 16.dp)
                     )
                 }
-                itemsIndexed(taskChecklistItems) { index, item ->
+                itemsIndexed(addTaskViewModel.taskChecklistItems) { index, item ->
                     TaskChecklistItem(
                         item
-                    ) { taskChecklistItems.removeAt(index) }
+                    ) { addTaskViewModel.taskChecklistItems.removeAt(index) }
                 }
                 item {
                     AddChecklistItemField(
                         placeholder = { Text(stringResource(R.string.add_element_optional)) },
-                        onAddTaskCheckListItem = { taskChecklistItems.add(it) }
+                        onAddTaskCheckListItem = { addTaskViewModel.taskChecklistItems.add(it) }
                     )
                 }
                 item {
