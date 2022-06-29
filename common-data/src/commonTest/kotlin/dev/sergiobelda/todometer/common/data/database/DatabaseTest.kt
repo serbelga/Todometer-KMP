@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.common.data.database
 
-import com.squareup.sqldelight.EnumColumnAdapter
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.EnumColumnAdapter
+import app.cash.sqldelight.db.SqlDriver
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
@@ -35,6 +35,9 @@ abstract class DatabaseTest {
             TaskEntityAdapter = TaskEntity.Adapter(
                 stateAdapter = EnumColumnAdapter(),
                 tagAdapter = EnumColumnAdapter()
+            ),
+            TaskChecklistItemEntityAdapter = TaskChecklistItemEntity.Adapter(
+                stateAdapter = EnumColumnAdapter()
             )
         )
     }

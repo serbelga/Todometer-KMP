@@ -19,12 +19,16 @@ package dev.sergiobelda.todometer.common.compose.ui.task
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -42,13 +46,13 @@ import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskItem(
-    task: Task,
+    taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
@@ -58,10 +62,10 @@ fun TaskItem(
     Column(
         modifier = modifier.combinedClickable(
             onClick = {
-                onClick(task.id)
+                onClick(taskItem.id)
             },
             onLongClick = {
-                onLongClick(task.id)
+                onLongClick(taskItem.id)
             }
         ).fillMaxWidth().background(TodometerColors.surface)
     ) {
@@ -73,17 +77,17 @@ fun TaskItem(
                 modifier = Modifier
                     .size(16.dp)
                     .clip(CircleShape)
-                    .background(TodometerColors.composeColorOf(task.tag))
+                    .background(TodometerColors.composeColorOf(taskItem.tag))
             )
-            when (task.state) {
+            when (taskItem.state) {
                 TaskState.DOING -> {
                     Text(
-                        task.title,
+                        taskItem.title,
                         modifier = Modifier.padding(start = 8.dp).weight(1f),
                         maxLines = 1
                     )
                     IconButton(
-                        onClick = { onDoneClick(task.id) }
+                        onClick = { onDoneClick(taskItem.id) }
                     ) {
                         Icon(
                             Icons.Rounded.Check,
@@ -94,14 +98,14 @@ fun TaskItem(
                 }
                 TaskState.DONE -> {
                     Text(
-                        task.title,
+                        taskItem.title,
                         textDecoration = TextDecoration.LineThrough,
                         color = TodometerColors.onSurfaceMediumEmphasis,
                         modifier = Modifier.padding(start = 8.dp).weight(1f),
                         maxLines = 1
                     )
                     IconButton(
-                        onClick = { onDoingClick(task.id) }
+                        onClick = { onDoingClick(taskItem.id) }
                     ) {
                         Icon(
                             Icons.Filled.Replay,
@@ -112,21 +116,34 @@ fun TaskItem(
                 }
             }
         }
-        TaskItemAdditionalInformationRow(task)
+        TaskItemAdditionalInformationRow(taskItem)
         HorizontalDivider()
     }
 }
 
 @Composable
-internal fun TaskItemAdditionalInformationRow(task: Task) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = 36.dp, end = 8.dp)
+internal fun TaskItemAdditionalInformationRow(taskItem: TaskItem) {
+    LazyRow(
+        modifier = Modifier.padding(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        if (task.state == TaskState.DOING) {
-            task.dueDate?.let { dueDate ->
-                TaskDueDateChip(dueDate, modifier = Modifier.padding(bottom = 8.dp))
+        item {
+            Spacer(modifier = Modifier.width(32.dp))
+        }
+        if (taskItem.state == TaskState.DOING) {
+            taskItem.dueDate?.let { dueDate ->
+                item {
+                    TaskDueDateChip(dueDate, modifier = Modifier.padding(bottom = 8.dp))
+                }
             }
+        }
+        if (taskItem.totalChecklistItems > 0) {
+            item {
+                TaskChecklistItemsChip(taskItem.checklistItemsDone, taskItem.totalChecklistItems)
+            }
+        }
+        item {
+            Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }

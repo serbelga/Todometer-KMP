@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.common.data.database
 
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
 actual fun createSqlDriver(): SqlDriver {
     return NativeSqliteDriver(TodometerDatabase.Schema, "todometer.db")

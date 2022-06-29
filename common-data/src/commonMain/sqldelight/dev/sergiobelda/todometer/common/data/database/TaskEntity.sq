@@ -1,5 +1,6 @@
 import dev.sergiobelda.todometer.common.domain.model.Tag;
 import dev.sergiobelda.todometer.common.domain.model.TaskState;
+import kotlin.Boolean;
 
 CREATE TABLE TaskEntity (
     id TEXT PRIMARY KEY NOT NULL,
@@ -19,9 +20,9 @@ FROM TaskEntity
 WHERE id = ?;
 
 selectTasksByTaskListId:
-SELECT *
-FROM TaskEntity
-WHERE tasklist_id = ?; ---- ORDER BY state ASC;
+SELECT t.id, t.title, t.state, t.tasklist_id, t.tag, t.sync, t.dueDate, COUNT(CASE WHEN c.state = 'CHECKED' THEN 1 ELSE NULL END) AS 'checklistItemsDone', COUNT(c.id) AS 'totalChecklistItems'
+FROM TaskEntity t LEFT OUTER JOIN TaskChecklistItemEntity c ON t.id = c.task_id
+WHERE t.tasklist_id = ? GROUP BY t.id; ---- ORDER BY state ASC;
 
 selectAllTasks:
 SELECT *

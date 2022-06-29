@@ -17,10 +17,12 @@
 package dev.sergiobelda.todometer.common.data.localdatasource
 
 import dev.sergiobelda.todometer.common.data.database.dao.ITaskDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toDomain
-import dev.sergiobelda.todometer.common.data.database.mapper.toEntity
+import dev.sergiobelda.todometer.common.data.database.mapper.toTask
+import dev.sergiobelda.todometer.common.data.database.mapper.toTaskEntity
+import dev.sergiobelda.todometer.common.data.database.mapper.toTaskItems
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -31,25 +33,25 @@ class TaskLocalDataSource(
 
     override fun getTask(id: String): Flow<Result<Task>> =
         taskDao.getTask(id).map { taskEntity ->
-            taskEntity?.let { Result.Success(it.toDomain()) } ?: Result.Error()
+            taskEntity?.let { Result.Success(it.toTask()) } ?: Result.Error()
         }
 
-    override fun getTasks(taskListId: String): Flow<Result<List<Task>>> =
+    override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
         taskDao.getTasks(taskListId).map { list ->
-            Result.Success(list.toDomain())
+            Result.Success(list.toTaskItems())
         }
 
     override suspend fun insertTask(task: Task): Result<String> {
-        val taskId = taskDao.insertTask(task.toEntity())
+        val taskId = taskDao.insertTask(task.toTaskEntity())
         return Result.Success(taskId)
     }
 
     override suspend fun insertTasks(tasks: List<Task>) {
-        taskDao.insertTasks(tasks.map { it.toEntity() })
+        taskDao.insertTasks(tasks.map { it.toTaskEntity() })
     }
 
     override suspend fun updateTask(task: Task) =
-        taskDao.updateTask(task.toEntity())
+        taskDao.updateTask(task.toTaskEntity())
 
     override suspend fun updateTaskSync(id: String, sync: Boolean) =
         taskDao.updateTaskSync(id, sync)

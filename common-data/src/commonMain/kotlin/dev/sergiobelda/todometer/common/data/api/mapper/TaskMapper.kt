@@ -21,7 +21,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TypeConverters.tagValueOf
 import dev.sergiobelda.todometer.common.domain.model.TypeConverters.taskStateValueOf
 
-fun TaskApiModel.toDomain() =
+fun TaskApiModel.toTask() =
     Task(
         id = id,
         title = title,
@@ -34,5 +34,5 @@ fun TaskApiModel.toDomain() =
     )
 
 fun Iterable<TaskApiModel>.toTaskTagList() = this.map {
-    it.toDomain()
+    it.toTask()
 }

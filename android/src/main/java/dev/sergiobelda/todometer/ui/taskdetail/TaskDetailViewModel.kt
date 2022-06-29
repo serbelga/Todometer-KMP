@@ -23,35 +23,85 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.DeleteTaskChecklistItemUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.GetTaskChecklistItemsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertTaskChecklistItemUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class TaskDetailViewModel(
-    taskId: String,
-    getTaskUseCase: GetTaskUseCase
+    private val taskId: String,
+    private val getTaskUseCase: GetTaskUseCase,
+    private val getTaskChecklistItemsUseCase: GetTaskChecklistItemsUseCase,
+    private val insertTaskChecklistItemsUseCase: InsertTaskChecklistItemUseCase,
+    private val deleteTaskChecklistItemUseCase: DeleteTaskChecklistItemUseCase,
+    private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
+    private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase
 ) : ViewModel() {
 
-    var taskDetailUiState by mutableStateOf(TaskDetailUiState(isLoading = true))
+    var taskDetailUiState by mutableStateOf(
+        TaskDetailUiState(
+            isLoadingTask = true,
+            isLoadingTaskChecklistItems = true
+        )
+    )
         private set
 
     init {
-        viewModelScope.launch {
-            getTaskUseCase(taskId).collect { result ->
-                result.doIfSuccess { task ->
-                    taskDetailUiState = taskDetailUiState.copy(
-                        isLoading = false,
-                        task = task,
-                        errorUi = null
-                    )
-                }.doIfError { error ->
-                    taskDetailUiState = taskDetailUiState.copy(
-                        isLoading = false,
-                        task = null,
-                        errorUi = error.mapToErrorUi()
-                    )
-                }
+        getTask()
+        getTaskChecklistItems()
+    }
+
+    private fun getTask() = viewModelScope.launch {
+        getTaskUseCase(taskId).collect { result ->
+            result.doIfSuccess { task ->
+                taskDetailUiState = taskDetailUiState.copy(
+                    isLoadingTask = false,
+                    task = task,
+                    errorUi = null
+                )
+            }.doIfError { error ->
+                taskDetailUiState = taskDetailUiState.copy(
+                    isLoadingTask = false,
+                    task = null,
+                    errorUi = error.mapToErrorUi()
+                )
             }
         }
+    }
+
+    private fun getTaskChecklistItems() = viewModelScope.launch {
+        getTaskChecklistItemsUseCase(taskId).collect { result ->
+            result.doIfSuccess { taskChecklistItems ->
+                taskDetailUiState = taskDetailUiState.copy(
+                    isLoadingTaskChecklistItems = false,
+                    taskChecklistItems = taskChecklistItems
+                )
+            }.doIfError {
+                taskDetailUiState = taskDetailUiState.copy(
+                    isLoadingTaskChecklistItems = false,
+                    taskChecklistItems = emptyList()
+                )
+            }
+        }
+    }
+
+    fun insertTaskChecklistItem(text: String) = viewModelScope.launch {
+        insertTaskChecklistItemsUseCase(taskId, text)
+    }
+
+    fun setTaskChecklistItemUnchecked(id: String) = viewModelScope.launch {
+        setTaskChecklistItemUncheckedUseCase(id)
+    }
+
+    fun setTaskChecklistItemChecked(id: String) = viewModelScope.launch {
+        setTaskChecklistItemCheckedUseCase(id)
+    }
+
+    fun deleteTaskChecklistItem(id: String) = viewModelScope.launch {
+        deleteTaskChecklistItemUseCase(id)
     }
 }

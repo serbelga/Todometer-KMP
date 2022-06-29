@@ -31,7 +31,7 @@ class TaskListMapperTest {
             description = "Description",
             sync = true
         )
-        val taskListEntity = taskList.toEntity()
+        val taskListEntity = taskList.toTaskListEntity()
         assertEquals(taskList.id, taskListEntity.id)
         assertEquals(taskList.name, taskListEntity.name)
         assertEquals(taskList.description, taskListEntity.description)
@@ -46,7 +46,7 @@ class TaskListMapperTest {
             description = "Description",
             sync = true
         )
-        val taskList = taskListEntity.toDomain()
+        val taskList = taskListEntity.toTaskList()
         assertEquals(taskListEntity.id, taskList.id)
         assertEquals(taskListEntity.name, taskList.name)
         assertEquals(taskListEntity.description, taskList.description)

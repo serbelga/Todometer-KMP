@@ -92,4 +92,5 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
+    namespace = "dev.sergiobelda.todometer.common"
 }

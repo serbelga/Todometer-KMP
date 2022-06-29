@@ -8,6 +8,18 @@ plugins {
     kotlin("kapt")
 }
 
+// TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
+androidComponents {
+    onVariants(selector().all()) {
+        val capitalizedVariantName = it.name.substring(0, 1).toUpperCase() + it.name.substring(1)
+        afterEvaluate {
+            tasks.named("map${capitalizedVariantName}SourceSetPaths").configure {
+                dependsOn("process${capitalizedVariantName}GoogleServices")
+            }
+        }
+    }
+}
+
 android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
@@ -15,8 +27,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1210400
-        versionName = "android-2.1.0"
+        versionCode = 1220400
+        versionName = "android-2.2.0"
     }
 
     buildTypes {
@@ -45,6 +57,7 @@ android {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
+    namespace = "dev.sergiobelda.todometer"
 }
 
 dependencies {

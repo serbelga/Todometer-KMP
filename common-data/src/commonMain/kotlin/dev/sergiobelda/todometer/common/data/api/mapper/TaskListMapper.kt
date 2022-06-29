@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.data.api.mapper
 import dev.sergiobelda.todometer.common.data.api.model.TaskListApiModel
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 
-fun TaskListApiModel.toDomain() =
+fun TaskListApiModel.toTaskList(): TaskList =
     TaskList(
         id,
         name,
@@ -27,6 +27,6 @@ fun TaskListApiModel.toDomain() =
         sync = true
     )
 
-fun Iterable<TaskListApiModel>.toDomain() = this.map {
-    it.toDomain()
+fun Iterable<TaskListApiModel>.toTaskLists(): List<TaskList> = this.map {
+    it.toTaskList()
 }
