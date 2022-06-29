@@ -25,8 +25,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 4110201
-        versionName = "wearos-1.1.0-beta01"
+        versionCode = 4110400
+        versionName = "wearos-1.1.0"
     }
 
     buildFeatures {
