@@ -55,6 +55,7 @@ androidx-compose-material-iconsExtended = { module = "androidx.compose.material:
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
 androidx-compose-ui-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
+androidx-datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "dataStore" }
 androidx-glance-glance = { module = "androidx.glance:glance", version.ref = "glance" }
 androidx-glance-appWidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
