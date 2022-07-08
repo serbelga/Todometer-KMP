@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.common.preferences
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -25,14 +24,8 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.io.File
 
-actual class Preferences {
-    // TODO: Inject
-    private val dataStore: DataStore<Preferences> =
-        PreferenceDataStoreFactory.create {
-            File(File(".").absolutePath, DATA_STORE_NAME)
-        }
+actual class Preferences(private val dataStore: DataStore<Preferences>) {
 
     actual suspend fun set(key: String, value: String) {
         val stringKey = stringPreferencesKey(key)
@@ -90,8 +83,4 @@ actual class Preferences {
             val intKey = intPreferencesKey(key)
             preferences[intKey] ?: default
         }
-
-    companion object {
-        const val DATA_STORE_NAME = "preferences.preferences_pb"
-    }
 }
