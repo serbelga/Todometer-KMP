@@ -23,8 +23,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 

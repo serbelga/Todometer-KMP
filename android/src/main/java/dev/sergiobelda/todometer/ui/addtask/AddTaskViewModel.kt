@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -24,7 +25,7 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
@@ -35,6 +36,8 @@ class AddTaskViewModel(
     var addTaskUiState by mutableStateOf(AddTaskUiState())
         private set
 
+    val taskChecklistItems = mutableStateListOf<String>()
+
     fun insertTask(
         title: String,
         tag: Tag,
@@ -42,7 +45,13 @@ class AddTaskViewModel(
         dueDate: Long? = null
     ) = viewModelScope.launch {
         addTaskUiState = addTaskUiState.copy(isAddingTask = true)
-        val result = insertTaskInTaskListSelectedUseCase.invoke(title, tag, description, dueDate)
+        val result = insertTaskInTaskListSelectedUseCase.invoke(
+            title,
+            tag,
+            description,
+            dueDate,
+            taskChecklistItems
+        )
         result.doIfSuccess {
             addTaskUiState = addTaskUiState.copy(
                 isAddingTask = false,

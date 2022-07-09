@@ -16,48 +16,71 @@
 
 package dev.sergiobelda.todometer.common.preferences
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import java.util.prefs.Preferences
+import kotlinx.coroutines.flow.map
 
-actual class Preferences {
-    private val preferences = Preferences.userRoot()?.node(javaClass.name)
+actual class Preferences(private val dataStore: DataStore<Preferences>) {
 
     actual suspend fun set(key: String, value: String) {
-        preferences?.put(key, value)
+        val stringKey = stringPreferencesKey(key)
+        dataStore.edit { preferences ->
+            preferences[stringKey] = value
+        }
     }
 
     actual suspend fun set(key: String, value: Long) {
-        preferences?.putLong(key, value)
+        val longKey = longPreferencesKey(key)
+        dataStore.edit { preferences ->
+            preferences[longKey] = value
+        }
     }
 
     actual suspend fun set(key: String, value: Int) {
-        preferences?.putInt(key, value)
+        val intKey = intPreferencesKey(key)
+        dataStore.edit { preferences ->
+            preferences[intKey] = value
+        }
     }
 
-    actual fun getString(key: String): Flow<String?> = flow {
-        emit(preferences?.get(key, null))
-    }
+    actual fun getString(key: String): Flow<String?> =
+        dataStore.data.map { preferences ->
+            val stringKey = stringPreferencesKey(key)
+            preferences[stringKey]
+        }
 
-    actual fun getStringOrDefault(key: String, default: String): Flow<String> = flow {
-        emit(preferences?.get(key, default) ?: default)
-    }
+    actual fun getStringOrDefault(key: String, default: String): Flow<String> =
+        dataStore.data.map { preferences ->
+            val stringKey = stringPreferencesKey(key)
+            preferences[stringKey] ?: default
+        }
 
-    actual fun getLong(key: String): Flow<Long?> = flow {
-        // TODO This can throw java.lang.NumberFormatException
-        emit(preferences?.get(key, null)?.toLong())
-    }
+    actual fun getLong(key: String): Flow<Long?> =
+        dataStore.data.map { preferences ->
+            val longKey = longPreferencesKey(key)
+            preferences[longKey]
+        }
 
-    actual fun getLongOrDefault(key: String, default: Long): Flow<Long> = flow {
-        emit(preferences?.getLong(key, default) ?: default)
-    }
+    actual fun getLongOrDefault(key: String, default: Long): Flow<Long> =
+        dataStore.data.map { preferences ->
+            val longKey = longPreferencesKey(key)
+            preferences[longKey] ?: default
+        }
 
-    actual fun getInt(key: String): Flow<Int?> = flow {
-        // TODO This can throw java.lang.NumberFormatException
-        emit(preferences?.get(key, null)?.toInt())
-    }
+    actual fun getInt(key: String): Flow<Int?> =
+        dataStore.data.map { preferences ->
+            val intKey = intPreferencesKey(key)
+            preferences[intKey]
+        }
 
-    actual fun getIntOrDefault(key: String, default: Int): Flow<Int> = flow {
-        emit(preferences?.getInt(key, default) ?: default)
-    }
+    actual fun getIntOrDefault(key: String, default: Int): Flow<Int> =
+        dataStore.data.map { preferences ->
+            val intKey = intPreferencesKey(key)
+            preferences[intKey] ?: default
+        }
 }

@@ -64,17 +64,17 @@ import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.domain.usecase.DeleteTaskUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskInTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.InsertTaskListUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoingUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskDoneUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import koin
 import kotlinx.coroutines.launch
 import ui.icons.iconToDometer
@@ -105,7 +105,7 @@ fun HomeScreen(
     val taskListResultState by getTaskListSelectedUseCase().collectAsState(null)
     taskListResultState?.doIfSuccess { taskListSelected = it }
 
-    var tasks: List<Task> by remember { mutableStateOf(emptyList()) }
+    var tasks: List<TaskItem> by remember { mutableStateOf(emptyList()) }
     val tasksResultState by getTaskListSelectedTasksUseCase().collectAsState(null)
     tasksResultState?.doIfSuccess { tasks = it }
 
@@ -268,7 +268,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TasksListView(
-    tasks: List<Task>,
+    tasks: List<TaskItem>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
@@ -277,7 +277,7 @@ fun TasksListView(
     LazyColumn {
         items(tasks, key = { it.id }) {
             TaskItem(
-                task = it,
+                taskItem = it,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,

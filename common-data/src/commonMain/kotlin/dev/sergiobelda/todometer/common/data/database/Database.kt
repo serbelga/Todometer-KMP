@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.common.data.database
 
-import com.squareup.sqldelight.EnumColumnAdapter
+import app.cash.sqldelight.EnumColumnAdapter
 
 fun createDatabase(): TodometerDatabase =
     TodometerDatabase(
@@ -24,5 +24,8 @@ fun createDatabase(): TodometerDatabase =
         TaskEntityAdapter = TaskEntity.Adapter(
             stateAdapter = EnumColumnAdapter(),
             tagAdapter = EnumColumnAdapter()
+        ),
+        TaskChecklistItemEntityAdapter = TaskChecklistItemEntity.Adapter(
+            stateAdapter = EnumColumnAdapter()
         )
     )

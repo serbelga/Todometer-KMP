@@ -16,9 +16,11 @@
 
 package dev.sergiobelda.todometer.common.di
 
+import dev.sergiobelda.todometer.common.data.repository.TaskChecklistItemsRepository
 import dev.sergiobelda.todometer.common.data.repository.TaskListRepository
 import dev.sergiobelda.todometer.common.data.repository.TaskRepository
 import dev.sergiobelda.todometer.common.data.repository.UserPreferencesRepository
+import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
@@ -33,5 +35,8 @@ val repositoryModule = module {
     }
     single<IUserPreferencesRepository> {
         UserPreferencesRepository(get())
+    }
+    single<ITaskChecklistItemsRepository> {
+        TaskChecklistItemsRepository(get())
     }
 }

@@ -16,9 +16,10 @@
 
 package dev.sergiobelda.todometer.common.data.database.dao
 
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOneOrNull
+import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId
 import dev.sergiobelda.todometer.common.data.database.TaskEntity
 import dev.sergiobelda.todometer.common.data.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -29,10 +30,11 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
     override fun getTask(id: String): Flow<TaskEntity?> =
         database.taskEntityQueries.selectTask(id).asFlow().mapToOneOrNull()
 
-    override fun getTasks(taskListId: String): Flow<List<TaskEntity>> =
+    override fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId>> =
         database.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
+        database.pragmaQueries.pragmaForeignKeysOff()
         database.taskEntityQueries.insertOrReplaceTask(
             id = task.id,
             title = task.title,
@@ -43,6 +45,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
             sync = task.sync,
             dueDate = task.dueDate
         )
+        database.pragmaQueries.pragmaForeignKeysOn()
         // TODO Call return last_insert_rowid() from SQLDelight.
         return task.id
     }

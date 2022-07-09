@@ -23,6 +23,7 @@ import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import kotlinx.coroutines.flow.Flow
@@ -38,7 +39,7 @@ class TaskRepository(
     override fun getTask(id: String): Flow<Result<Task>> =
         taskLocalDataSource.getTask(id)
 
-    override fun getTasks(taskListId: String): Flow<Result<List<Task>>> =
+    override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
         taskLocalDataSource.getTasks(taskListId)
     /*
     taskLocalDataSource.getTasks(taskListId).map { result ->

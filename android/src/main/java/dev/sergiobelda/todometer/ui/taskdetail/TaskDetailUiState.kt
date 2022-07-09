@@ -17,10 +17,13 @@
 package dev.sergiobelda.todometer.ui.taskdetail
 
 import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class TaskDetailUiState(
-    val isLoading: Boolean = false,
+    val isLoadingTask: Boolean = false,
     val task: Task? = null,
+    val isLoadingTaskChecklistItems: Boolean = false,
+    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
     val errorUi: ErrorUi? = null
 )
