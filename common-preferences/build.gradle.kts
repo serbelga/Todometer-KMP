@@ -39,7 +39,11 @@ kotlin {
             }
         }
         val androidTest by getting
-        val desktopMain by getting
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.androidx.datastore.preferences.core)
+            }
+        }
         val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
