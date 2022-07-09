@@ -63,6 +63,7 @@ import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
@@ -103,7 +104,7 @@ fun HomeScreen(
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
     val taskListResultState by getTaskListSelectedUseCase().collectAsState(null)
-    taskListResultState?.doIfSuccess { taskListSelected = it }
+    taskListResultState?.doIfSuccess { taskListSelected = it }?.doIfError { taskListSelected = null }
 
     var tasks: List<TaskItem> by remember { mutableStateOf(emptyList()) }
     val tasksResultState by getTaskListSelectedTasksUseCase().collectAsState(null)
@@ -182,12 +183,15 @@ fun HomeScreen(
             if (deleteTaskAlertDialogState) {
                 DeleteTaskAlertDialog(
                     onDismissRequest = {
-                        deleteTaskAlertDialogState = false
-                        selectedTask = ""
+                        coroutineScope.launch {
+                            selectedTask = ""
+                            deleteTaskAlertDialogState = false
+                        }
                     }
                 ) {
-                    println(selectedTask)
-                    deleteTaskUseCase(selectedTask)
+                    coroutineScope.launch {
+                        deleteTaskUseCase(selectedTask)
+                    }
                 }
             }
         }
@@ -233,7 +237,6 @@ fun HomeScreen(
                         onTaskItemLongClick = {
                             deleteTaskAlertDialogState = true
                             selectedTask = it
-                            println(selectedTask)
                         }
                     )
                 }
