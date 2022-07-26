@@ -18,23 +18,22 @@ package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Divider
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 
 @Composable
 fun HorizontalDivider(modifier: Modifier = Modifier) {
-    Divider(thickness = 1.dp, color = TodometerColors.outline, modifier = modifier)
+    Divider(thickness = 1.dp, color = MaterialTheme.colorScheme.outline, modifier = modifier)
 }
 
 @Composable
 fun VerticalDivider(modifier: Modifier = Modifier) {
     Divider(
         thickness = 1.dp,
-        color = TodometerColors.outline,
+        color = MaterialTheme.colorScheme.outline,
         modifier = modifier.fillMaxHeight().width(1.dp)
     )
 }

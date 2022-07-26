@@ -33,18 +33,19 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -61,9 +62,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
@@ -71,6 +70,7 @@ import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 
 private const val SECTION_PADDING = 32
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskDetailScreen(
     editTask: () -> Unit,
@@ -81,7 +81,7 @@ fun TaskDetailScreen(
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
     Scaffold(
         topBar = {
-            TopAppBar(
+            MediumTopAppBar(
                 title = {
                     if (lazyListState.firstVisibleItemIndex > 0) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
@@ -94,7 +94,7 @@ fun TaskDetailScreen(
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
                 },
@@ -104,14 +104,11 @@ fun TaskDetailScreen(
                             Icon(
                                 Icons.Outlined.Edit,
                                 contentDescription = stringResource(R.string.edit_task),
-                                tint = TodometerColors.primary
+                                tint = MaterialTheme.colorScheme.primary
                             )
                         }
                     }
-                },
-                elevation = 0.dp,
-                backgroundColor = TodometerColors.surface,
-                contentColor = contentColorFor(backgroundColor = TodometerColors.surface)
+                }
             )
         },
         content = {
@@ -158,12 +155,12 @@ private fun LazyListScope.taskTitle(task: Task) {
                     modifier = Modifier
                         .size(16.dp)
                         .clip(CircleShape)
-                        .background(TodometerColors.composeColorOf(task.tag))
+                        .background(ToDometerTheme.toDometerColors.composeColorOf(task.tag))
                 )
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
                     Text(
                         text = task.title,
-                        style = TodometerTypography.h6,
+                        style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
                         maxLines = 1
                     )
@@ -216,7 +213,7 @@ private fun LazyItemScope.TaskChecklistItem(
     onDeleteTaskCheckListItem: (String) -> Unit
 ) {
     val textColor =
-        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onSurface
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.onSurface
     val textDecoration =
         if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
     Row(
@@ -250,7 +247,7 @@ private fun LazyItemScope.TaskChecklistItem(
             Icon(
                 Icons.Rounded.Clear,
                 contentDescription = stringResource(R.string.clear),
-                tint = TodometerColors.onSurfaceMediumEmphasis
+                tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }
     }
@@ -267,7 +264,7 @@ private fun LazyListScope.taskDescription(description: String?) {
         if (!description.isNullOrBlank()) {
             Text(
                 text = description,
-                style = TodometerTypography.body1,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(
                     start = SECTION_PADDING.dp,
                     end = SECTION_PADDING.dp,
@@ -278,7 +275,7 @@ private fun LazyListScope.taskDescription(description: String?) {
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                 Text(
                     text = stringResource(id = R.string.no_description),
-                    style = TodometerTypography.body1,
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(
                         top = 16.dp, start = SECTION_PADDING.dp,
                         end = SECTION_PADDING.dp,
@@ -294,8 +291,8 @@ private fun LazyListScope.taskDescription(description: String?) {
 private fun TaskDetailSectionTitle(text: String) {
     Text(
         text,
-        color = TodometerColors.primary,
-        style = TodometerTypography.caption,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
         modifier = Modifier.padding(start = SECTION_PADDING.dp, bottom = 8.dp)
     )
 }

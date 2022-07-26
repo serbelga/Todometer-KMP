@@ -18,11 +18,13 @@ kotlin {
     jvm("desktop")
 
     sourceSets {
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
+                api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
                 api(compose.uiTooling)
@@ -38,6 +40,7 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.coreKtx)
+                api("androidx.compose.material3:material3:1.0.0-alpha14")
             }
         }
         val androidTest by getting {

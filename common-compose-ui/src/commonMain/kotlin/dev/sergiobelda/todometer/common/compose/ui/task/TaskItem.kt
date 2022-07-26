@@ -30,12 +30,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,8 +45,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
@@ -67,7 +67,7 @@ fun TaskItem(
             onLongClick = {
                 onLongClick(taskItem.id)
             }
-        ).fillMaxWidth().background(TodometerColors.surface)
+        ).fillMaxWidth().background(MaterialTheme.colorScheme.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -77,7 +77,7 @@ fun TaskItem(
                 modifier = Modifier
                     .size(16.dp)
                     .clip(CircleShape)
-                    .background(TodometerColors.composeColorOf(taskItem.tag))
+                    .background(ToDometerTheme.toDometerColors.composeColorOf(taskItem.tag))
             )
             when (taskItem.state) {
                 TaskState.DOING -> {
@@ -92,7 +92,7 @@ fun TaskItem(
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Done",
-                            tint = TodometerColors.secondary
+                            tint = ToDometerTheme.toDometerColors.green
                         )
                     }
                 }
@@ -100,7 +100,7 @@ fun TaskItem(
                     Text(
                         taskItem.title,
                         textDecoration = TextDecoration.LineThrough,
-                        color = TodometerColors.onSurfaceMediumEmphasis,
+                        color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
                         modifier = Modifier.padding(start = 8.dp).weight(1f),
                         maxLines = 1
                     )
@@ -110,7 +110,7 @@ fun TaskItem(
                         Icon(
                             Icons.Filled.Replay,
                             contentDescription = "Doing",
-                            tint = TodometerColors.secondary
+                            tint = ToDometerTheme.toDometerColors.green
                         )
                     }
                 }

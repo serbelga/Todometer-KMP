@@ -26,18 +26,19 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -57,15 +58,14 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskScreen(
     navigateUp: () -> Unit,
@@ -97,18 +97,16 @@ fun AddTaskScreen(
     }
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        // TODO
+        // scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(
-                backgroundColor = TodometerColors.surface,
-                contentColor = contentColorFor(TodometerColors.surface),
-                elevation = 0.dp,
+            SmallTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
                 },
@@ -132,21 +130,21 @@ fun AddTaskScreen(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
                             tint = if (addTaskUiState.isAddingTask)
-                                TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
+                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
                 },
                 title = { Text(stringResource(id = R.string.add_task)) }
             )
         },
-        content = {
+        content = { innerPadding ->
             if (addTaskUiState.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
             if (lazyListState.firstVisibleItemIndex > 0) {
                 HorizontalDivider()
             }
-            LazyColumn(state = lazyListState) {
+            LazyColumn(state = lazyListState, modifier = Modifier.padding(innerPadding)) {
                 item { Spacer(modifier = Modifier.height(24.dp)) }
                 item {
                     TitledTextField(
@@ -187,8 +185,8 @@ fun AddTaskScreen(
                 item {
                     Text(
                         text = stringResource(R.string.checklist),
-                        color = TodometerColors.primary,
-                        style = TodometerTypography.caption,
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(start = 32.dp, top = 16.dp)
                     )
                 }
@@ -249,7 +247,7 @@ private fun TaskChecklistItem(
             Icon(
                 Icons.Rounded.Clear,
                 contentDescription = stringResource(R.string.clear),
-                tint = TodometerColors.onSurfaceMediumEmphasis
+                tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }
     }

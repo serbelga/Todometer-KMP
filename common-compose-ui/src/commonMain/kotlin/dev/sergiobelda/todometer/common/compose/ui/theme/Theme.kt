@@ -16,32 +16,12 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.theme
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-typealias ComposeMaterialTypography = androidx.compose.material.Typography
-
-val DarkColorPalette = darkColors(
-    primary = primaryDark,
-    primaryVariant = orange,
-    secondary = green,
-    background = darkSurface,
-    surface = darkSurface,
-    onPrimary = Color.Black,
-    onSecondary = Color.Black,
-    onBackground = Color.White,
-    onSurface = Color.White,
-    error = red300
-)
-
-val LightColorPalette = lightColors(
+val LightColorScheme = lightColorScheme(
     primary = primaryLight,
-    primaryVariant = orange,
     secondary = green,
     background = background,
     surface = Color.White,
@@ -49,59 +29,51 @@ val LightColorPalette = lightColors(
     onSecondary = Color.White,
     onBackground = Color.Black,
     onSurface = Color.Black,
-    error = red800
+    error = red800,
+    outline = outlineLight
 )
 
-val Colors.outline: Color
-    @Composable get() = if (isLight) outlineLight else outlineDark
+val ToDometerLightColors = toDometerLightColors(
+    onSurfaceMediumEmphasis = Color.Black.copy(alpha = 0.6f),
+    amber = amberLight,
+    blue = blueLight,
+    brown = brownLight,
+    gray = grayLight,
+    green = greenLight,
+    indigo = indigoLight,
+    lime = limeLight,
+    orange = orangeLight,
+    red = redLight,
+    pink = pinkLight,
+    teal = tealLight,
+    yellow = yellowLight
+)
 
-val Colors.onSurfaceMediumEmphasis: Color
-    @Composable get() = onSurface.copy(alpha = 0.6f)
+val DarkColorScheme = darkColorScheme(
+    primary = primaryDark,
+    secondary = green,
+    background = darkSurface,
+    surface = darkSurface,
+    onPrimary = Color.Black,
+    onSecondary = Color.Black,
+    onBackground = Color.White,
+    onSurface = Color.White,
+    error = red300,
+    outline = outlineDark
+)
 
-val Colors.onSurfaceDisabled: Color
-    @Composable get() = onSurface.copy(alpha = 0.38f)
-
-val TodometerColors: Colors
-    @Composable get() = MaterialTheme.colors
-
-val TodometerShapes: Shapes
-    @Composable get() = MaterialTheme.shapes
-
-val TodometerTypography: ComposeMaterialTypography
-    @Composable get() = MaterialTheme.typography
-
-val Colors.pink: Color
-    @Composable get() = if (isLight) pinkLight else pinkDark
-
-val Colors.red: Color
-    @Composable get() = if (isLight) redLight else redDark
-
-val Colors.blue: Color
-    @Composable get() = if (isLight) blueLight else blueDark
-
-val Colors.indigo: Color
-    @Composable get() = if (isLight) indigoLight else indigoDark
-
-val Colors.teal: Color
-    @Composable get() = if (isLight) tealLight else tealDark
-
-val Colors.green: Color
-    @Composable get() = if (isLight) greenLight else greenDark
-
-val Colors.lime: Color
-    @Composable get() = if (isLight) limeLight else limeDark
-
-val Colors.yellow: Color
-    @Composable get() = if (isLight) yellowLight else yellowDark
-
-val Colors.amber: Color
-    @Composable get() = if (isLight) amberLight else amberDark
-
-val Colors.orange: Color
-    @Composable get() = if (isLight) orangeLight else orangeDark
-
-val Colors.brown: Color
-    @Composable get() = if (isLight) brownLight else brownDark
-
-val Colors.gray: Color
-    @Composable get() = if (isLight) grayLight else grayDark
+val ToDometerDarkColors = toDometerDarkColors(
+    onSurfaceMediumEmphasis = Color.White.copy(alpha = 0.6f),
+    amber = amberDark,
+    blue = blueDark,
+    brown = brownDark,
+    gray = grayDark,
+    green = greenDark,
+    indigo = indigoDark,
+    lime = limeDark,
+    orange = orangeDark,
+    red = redDark,
+    pink = pinkDark,
+    teal = tealDark,
+    yellow = yellowDark
+)

@@ -50,7 +50,7 @@ import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.ui.home.HomeScreen
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
-import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.ui.theme.ToDometerAppTheme
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -74,7 +74,7 @@ fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
         AppTheme.LIGHT_THEME -> false
     }
 
-    ToDometerTheme(darkTheme) {
+    ToDometerAppTheme(darkTheme) {
         NavHost(navController, startDestination = Home) {
             composable(Home) {
                 HomeScreen(

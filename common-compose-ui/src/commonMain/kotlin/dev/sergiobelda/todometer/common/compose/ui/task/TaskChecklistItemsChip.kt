@@ -19,26 +19,23 @@ package dev.sergiobelda.todometer.common.compose.ui.task
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckBox
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerChip
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
-import dev.sergiobelda.todometer.common.compose.ui.theme.teal
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 
 @Composable
 fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
     val completedChipTint =
-        if (checklistItemsDone == totalChecklistItems) TodometerColors.teal else TodometerColors.onSurfaceMediumEmphasis
+        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.teal else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
     val completedChipOutline =
-        if (checklistItemsDone == totalChecklistItems) TodometerColors.teal else TodometerColors.outline
+        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.teal else MaterialTheme.colorScheme.outline
 
     ToDometerChip(
         borderStroke = BorderStroke(1.dp, completedChipOutline),
@@ -52,7 +49,7 @@ fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) 
         )
         Text(
             "$checklistItemsDone/$totalChecklistItems",
-            style = TodometerTypography.caption,
+            style = MaterialTheme.typography.labelLarge,
             color = completedChipTint
         )
     }

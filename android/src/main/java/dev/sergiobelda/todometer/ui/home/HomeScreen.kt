@@ -41,22 +41,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
 import androidx.compose.material.DismissDirection
 import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.Icon
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Scaffold
 import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
@@ -66,6 +57,17 @@ import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -86,11 +88,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.SingleLineItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
@@ -105,7 +103,7 @@ import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     addTaskList: () -> Unit,
@@ -172,6 +170,7 @@ fun HomeScreen(
         }
     ) {
         Scaffold(
+            /*
             drawerShape = drawerShape,
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             drawerContent = {
@@ -193,6 +192,7 @@ fun HomeScreen(
                 )
             },
             scaffoldState = scaffoldState,
+            */
             topBar = {
                 ToDometerTopAppBar(
                     onMenuClick = {
@@ -265,7 +265,6 @@ fun HomeScreen(
             },
             floatingActionButton = {
                 FloatingActionButton(
-                    backgroundColor = TodometerColors.primary,
                     onClick = addTask
                 ) {
                     Icon(
@@ -279,6 +278,7 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseThemeAlertDialog(
     currentTheme: AppTheme,
@@ -315,7 +315,7 @@ fun ChooseThemeAlertDialog(
                             )
                             Text(
                                 text = stringResource(appThemeOption.modeNameRes),
-                                style = TodometerTypography.body1,
+                                style = MaterialTheme.typography.bodyLarge,
                                 modifier = Modifier.padding(start = 16.dp)
                             )
                         }
@@ -422,13 +422,13 @@ fun DrawerContent(
         ) {
             Text(
                 text = stringResource(R.string.task_lists).uppercase(),
-                style = TodometerTypography.overline
+                style = MaterialTheme.typography.labelSmall
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addTaskList) {
                 Text(
                     stringResource(R.string.add_task_list),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             }
         }
@@ -549,14 +549,14 @@ fun SwipeableTaskItem(
         },
         background = {
             val color by animateColorAsState(
-                if (dismissState.targetValue == DismissValue.Default) TodometerColors.outline else TodometerColors.error,
+                if (dismissState.targetValue == DismissValue.Default) MaterialTheme.colorScheme.outline else MaterialTheme.colorScheme.error,
                 animationSpec = tween(
                     durationMillis = 400,
                     easing = FastOutSlowInEasing
                 )
             )
             val tint by animateColorAsState(
-                if (dismissState.targetValue == DismissValue.Default) TodometerColors.onSurfaceMediumEmphasis else TodometerColors.onError,
+                if (dismissState.targetValue == DismissValue.Default) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.onError,
                 animationSpec = tween(
                     durationMillis = 400,
                     easing = FastOutSlowInEasing
@@ -620,7 +620,7 @@ fun TaskListIllustration(
             secondaryText?.let {
                 Text(
                     text = it,
-                    color = TodometerColors.onSurfaceMediumEmphasis,
+                    color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
                     modifier = Modifier.padding(top = 8.dp)
                 )
             }
@@ -679,7 +679,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.edit_task_list),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             },
             onClick = editTaskListClick,
@@ -695,7 +695,7 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.delete_task_list),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             },
             onClick = deleteTaskListClick,
@@ -714,12 +714,12 @@ fun MoreBottomSheet(
             text = {
                 Text(
                     stringResource(R.string.theme),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             },
             subtitle = {
                 appThemeMap[currentTheme]?.modeNameRes?.let {
-                    Text(stringResource(it), style = TodometerTypography.caption)
+                    Text(stringResource(it), style = MaterialTheme.typography.labelLarge)
                 }
             },
             onClick = chooseThemeClick
@@ -729,12 +729,12 @@ fun MoreBottomSheet(
             TextButton(onClick = openSourceLicensesClick) {
                 Text(
                     stringResource(R.string.open_source_licenses),
-                    style = TodometerTypography.caption
+                    style = MaterialTheme.typography.labelLarge
                 )
             }
             Text("·")
             TextButton(onClick = aboutClick) {
-                Text(stringResource(R.string.about), style = TodometerTypography.caption)
+                Text(stringResource(R.string.about), style = MaterialTheme.typography.labelLarge)
             }
         }
     }

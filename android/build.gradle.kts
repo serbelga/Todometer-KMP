@@ -41,9 +41,9 @@ android {
             )
         }
         getByName("debug") {
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = false
-            }
+            // firebaseCrashlytics {
+            //    mappingFileUploadEnabled = false
+            // }
         }
         lint {
             abortOnError = false

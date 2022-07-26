@@ -34,7 +34,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     buildTypes {
@@ -44,9 +44,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("debug") {
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = false
-            }
+            // firebaseCrashlytics {
+            //    mappingFileUploadEnabled = false
+            // }
         }
     }
 

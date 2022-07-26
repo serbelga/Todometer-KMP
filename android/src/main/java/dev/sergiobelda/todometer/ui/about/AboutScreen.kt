@@ -27,18 +27,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.Description
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,12 +51,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.extensions.getVersionName
 import dev.sergiobelda.todometer.ui.icons.iconToDometer
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
     openGithub: () -> Unit,
@@ -66,16 +65,13 @@ fun AboutScreen(
     var privacyPolicyDialogState by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
-            TopAppBar(
-                backgroundColor = TodometerColors.surface,
-                contentColor = contentColorFor(TodometerColors.surface),
-                elevation = 0.dp,
+            SmallTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
                 },
@@ -98,7 +94,7 @@ fun AboutScreen(
                     Icon(
                         painterResource(R.drawable.ic_github_24),
                         contentDescription = stringResource(R.string.github),
-                        tint = TodometerColors.onSurfaceMediumEmphasis
+                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                     )
                 },
                 text = {
@@ -113,7 +109,7 @@ fun AboutScreen(
                     Icon(
                         Icons.Rounded.Description,
                         contentDescription = stringResource(R.string.privacy_policy),
-                        tint = TodometerColors.onSurfaceMediumEmphasis
+                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                     )
                 },
                 text = {
@@ -128,7 +124,7 @@ fun AboutScreen(
                     Icon(
                         Icons.Rounded.Code,
                         contentDescription = stringResource(R.string.open_source_licenses),
-                        tint = TodometerColors.onSurfaceMediumEmphasis
+                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                     )
                 },
                 text = {
@@ -141,13 +137,14 @@ fun AboutScreen(
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
             Text(
                 text = LocalContext.current.getVersionName() ?: "",
-                style = TodometerTypography.overline,
+                style = MaterialTheme.typography.labelSmall,
                 modifier = Modifier.padding(bottom = 24.dp)
             )
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutItemCard(
     onCardClick: () -> Unit,
@@ -176,7 +173,7 @@ fun ToDometerLogo(modifier: Modifier = Modifier) {
         Image(painter = iconToDometer(), null)
         Text(
             text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.h5,
+            style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(start = 4.dp)
         )
     }
