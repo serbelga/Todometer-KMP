@@ -39,7 +39,7 @@ fun TaskListItem(
     val background = if (isSelected) {
         Modifier.background(
             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
-            shape = MaterialTheme.shapes.medium
+            shape = MaterialTheme.shapes.extraLarge
         )
     } else {
         Modifier

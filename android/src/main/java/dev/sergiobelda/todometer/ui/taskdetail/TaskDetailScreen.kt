@@ -42,16 +42,20 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -79,9 +83,12 @@ fun TaskDetailScreen(
 ) {
     val lazyListState = rememberLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
+    val topAppBarState = rememberTopAppBarState()
+    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(topAppBarState) }
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            MediumTopAppBar(
+            SmallTopAppBar(
                 title = {
                     if (lazyListState.firstVisibleItemIndex > 0) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
@@ -108,10 +115,11 @@ fun TaskDetailScreen(
                             )
                         }
                     }
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
         },
-        content = {
+        content = { paddingValues ->
             if (lazyListState.firstVisibleItemIndex > 0) {
                 HorizontalDivider()
             }
@@ -119,7 +127,7 @@ fun TaskDetailScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 taskDetailUiState.task?.let { task ->
-                    LazyColumn(state = lazyListState) {
+                    LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                         taskTitle(task)
                         taskChips(task)
                         taskChecklist(

@@ -78,13 +78,13 @@ fun AboutScreen(
                 title = {}
             )
         }
-    ) {
+    ) { innerPadding ->
         if (privacyPolicyDialogState) {
             PrivacyPolicyDialog { privacyPolicyDialogState = false }
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().padding(innerPadding)
         ) {
             ToDometerLogo()
             Spacer(modifier = Modifier.height(72.dp))
@@ -151,10 +151,10 @@ fun AboutItemCard(
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit
 ) {
-    Card(modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp)) {
+    Card(modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp).clickable { onCardClick() }) {
         Row(
-            modifier = Modifier.clickable { onCardClick() },
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxSize()
         ) {
             Spacer(modifier = Modifier.width(24.dp))
             icon()
@@ -173,7 +173,7 @@ fun ToDometerLogo(modifier: Modifier = Modifier) {
         Image(painter = iconToDometer(), null)
         Text(
             text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(start = 4.dp)
         )
     }

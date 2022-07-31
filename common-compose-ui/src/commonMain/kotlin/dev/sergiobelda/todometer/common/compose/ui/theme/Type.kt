@@ -29,18 +29,23 @@ object Type {
         headlineLarge = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 34.sp
+            fontSize = 32.sp
         ),
         headlineMedium = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 24.sp
+            fontSize = 28.sp
         ),
         headlineSmall = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 20.sp,
+            fontSize = 22.sp,
             letterSpacing = 0.15.sp
+        ),
+        titleLarge = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 20.sp
         ),
         titleMedium = TextStyle(
             fontFamily = quickSandFontFamily,
@@ -55,25 +60,27 @@ object Type {
         bodyLarge = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 16.sp,
-            letterSpacing = 0.5.sp
+            fontSize = 16.sp
         ),
         bodyMedium = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 14.sp,
-            letterSpacing = 0.25.sp
+            fontSize = 14.sp
         ),
         bodySmall = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 14.sp
+            fontSize = 12.sp
         ),
         labelLarge = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 12.sp,
-            letterSpacing = 0.4.sp
+            fontSize = 12.sp
+        ),
+        labelMedium = TextStyle(
+            fontFamily = quickSandFontFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 12.sp
         ),
         labelSmall = TextStyle(
             fontFamily = quickSandFontFamily,

@@ -40,7 +40,7 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.coreKtx)
-                api("androidx.compose.material3:material3:1.0.0-alpha14")
+                api("androidx.compose.material3:material3:1.0.0-alpha15")
             }
         }
         val androidTest by getting {
