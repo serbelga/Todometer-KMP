@@ -67,7 +67,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDrawerState
@@ -81,7 +80,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -93,7 +91,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.theme.drawerShape
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
@@ -178,7 +175,7 @@ fun HomeScreen(
     ) {
         ModalNavigationDrawer(
             drawerState = drawerState,
-            //drawerShape = drawerShape,
+            // drawerShape = drawerShape,
             drawerContent = {
                 DrawerContent(
                     homeUiState.taskListSelected?.id ?: "",
@@ -286,7 +283,6 @@ fun HomeScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseThemeAlertDialog(
     currentTheme: AppTheme,

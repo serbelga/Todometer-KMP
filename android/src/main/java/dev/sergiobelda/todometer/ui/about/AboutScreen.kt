@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.ui.about
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,7 +52,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.extensions.getVersionName
-import dev.sergiobelda.todometer.ui.icons.iconToDometer
+import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,7 +85,7 @@ fun AboutScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(innerPadding)
         ) {
-            ToDometerLogo()
+            ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
                 onCardClick = { openGithub() },
@@ -144,7 +143,6 @@ fun AboutScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutItemCard(
     onCardClick: () -> Unit,
@@ -161,20 +159,5 @@ fun AboutItemCard(
             Spacer(modifier = Modifier.width(24.dp))
             text()
         }
-    }
-}
-
-@Composable
-fun ToDometerLogo(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(painter = iconToDometer(), null)
-        Text(
-            text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(start = 4.dp)
-        )
     }
 }

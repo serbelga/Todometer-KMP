@@ -18,24 +18,22 @@ package ui.task
 
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskScreen(navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            SmallTopAppBar(
                 title = {},
                 navigationIcon = {
                     CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
@@ -43,9 +41,7 @@ fun AddTaskScreen(navigateUp: () -> Unit) {
                             Icon(Icons.Rounded.ArrowBack, "Back")
                         }
                     }
-                },
-                elevation = 0.dp,
-                backgroundColor = MaterialTheme.colorScheme.surface
+                }
             )
         }
     ) {

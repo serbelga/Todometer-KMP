@@ -46,7 +46,7 @@ fun TaskListItem(
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(56.dp).clip(MaterialTheme.shapes.medium)
+        modifier = Modifier.height(56.dp).clip(MaterialTheme.shapes.extraLarge)
             .selectable(isSelected, onClick = onItemClick)
             .then(background)
     ) {
