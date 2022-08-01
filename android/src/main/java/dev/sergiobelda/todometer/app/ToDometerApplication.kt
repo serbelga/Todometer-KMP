@@ -26,7 +26,7 @@ class ToDometerApplication : ToDometerBaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        DynamicColors.applyToActivitiesIfAvailable(this);
+        DynamicColors.applyToActivitiesIfAvailable(this)
         initKoin {
             modules(viewModelModule)
             androidContext(this@ToDometerApplication)
