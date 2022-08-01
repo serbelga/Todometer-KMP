@@ -92,7 +92,7 @@ fun TaskItem(
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Done",
-                            tint = ToDometerTheme.toDometerColors.green
+                            tint = ToDometerTheme.toDometerColors.check
                         )
                     }
                 }
@@ -110,7 +110,7 @@ fun TaskItem(
                         Icon(
                             Icons.Filled.Replay,
                             contentDescription = "Doing",
-                            tint = ToDometerTheme.toDometerColors.green
+                            tint = ToDometerTheme.toDometerColors.check
                         )
                     }
                 }

@@ -114,11 +114,11 @@ fun EditTaskScreen(
                 title = { Text(stringResource(id = R.string.edit_task)) }
             )
         },
-        content = { innerPadding ->
+        content = { paddingValues ->
             if (editTaskUiState.isLoading) {
                 ToDometerContentLoadingProgress()
             } else {
-                Column(modifier = Modifier.padding(innerPadding)) {
+                Column(modifier = Modifier.padding(paddingValues)) {
                     TitledTextField(
                         title = stringResource(id = R.string.name),
                         value = taskTitle,

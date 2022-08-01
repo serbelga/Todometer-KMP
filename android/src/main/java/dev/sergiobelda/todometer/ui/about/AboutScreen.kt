@@ -77,13 +77,13 @@ fun AboutScreen(
                 title = {}
             )
         }
-    ) { innerPadding ->
+    ) { paddingValues ->
         if (privacyPolicyDialogState) {
             PrivacyPolicyDialog { privacyPolicyDialogState = false }
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth().padding(innerPadding)
+            modifier = Modifier.fillMaxWidth().padding(paddingValues)
         ) {
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))

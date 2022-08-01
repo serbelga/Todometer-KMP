@@ -111,11 +111,11 @@ fun AddTaskListScreen(
                 },
             )
         },
-        content = { innerPadding ->
+        content = { paddingValues ->
             if (addTaskListUiState.isAddingTaskList) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-            Column(modifier = Modifier.padding(innerPadding)) {
+            Column(modifier = Modifier.padding(paddingValues)) {
                 TitledTextField(
                     title = stringResource(R.string.name),
                     value = taskListName,

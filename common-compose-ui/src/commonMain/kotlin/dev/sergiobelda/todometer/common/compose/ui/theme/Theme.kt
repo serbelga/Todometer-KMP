@@ -52,6 +52,7 @@ val LightColorScheme = lightColorScheme(
 
 val ToDometerLightColors = toDometerLightColors(
     onSurfaceMediumEmphasis = Color.Black.copy(alpha = 0.6f),
+    check = tealLight,
     amber = amberLight,
     blue = blueLight,
     brown = brownLight,
@@ -98,6 +99,7 @@ val DarkColorScheme = darkColorScheme(
 
 val ToDometerDarkColors = toDometerDarkColors(
     onSurfaceMediumEmphasis = Color.White.copy(alpha = 0.6f),
+    check = tealDark,
     amber = amberDark,
     blue = blueDark,
     brown = brownDark,

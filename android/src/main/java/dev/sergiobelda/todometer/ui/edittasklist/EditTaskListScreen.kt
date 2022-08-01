@@ -98,11 +98,11 @@ fun EditTaskListScreen(
                 },
             )
         },
-        content = {
+        content = { paddingValues ->
             if (editTaskListUiState.isLoading) {
                 ToDometerContentLoadingProgress()
             } else {
-                Column(modifier = Modifier.padding(top = 24.dp)) {
+                Column(modifier = Modifier.padding(paddingValues)) {
                     TitledTextField(
                         title = stringResource(R.string.name),
                         value = taskListName,

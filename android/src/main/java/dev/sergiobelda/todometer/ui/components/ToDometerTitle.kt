@@ -39,8 +39,7 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         Icon(
             painter = painterResource(R.drawable.isotype_monochrome),
             tint = MaterialTheme.colorScheme.primary,
-            contentDescription = null,
-            modifier = Modifier.size(20.dp)
+            contentDescription = null
         )
         Text(
             text = stringResource(id = R.string.app_name),

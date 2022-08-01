@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 class ToDometerColors(
     val onSurfaceMediumEmphasis: Color,
+    val check: Color,
     val amber: Color,
     val blue: Color,
     val brown: Color,
@@ -20,6 +21,7 @@ class ToDometerColors(
 
 fun toDometerLightColors(
     onSurfaceMediumEmphasis: Color = Color.Unspecified,
+    check: Color = Color.Unspecified,
     amber: Color = Color.Unspecified,
     blue: Color = Color.Unspecified,
     brown: Color = Color.Unspecified,
@@ -35,6 +37,7 @@ fun toDometerLightColors(
 ): ToDometerColors =
     ToDometerColors(
         onSurfaceMediumEmphasis = onSurfaceMediumEmphasis,
+        check = check,
         amber = amber,
         blue = blue,
         brown = brown,
@@ -51,6 +54,7 @@ fun toDometerLightColors(
 
 fun toDometerDarkColors(
     onSurfaceMediumEmphasis: Color = Color.Unspecified,
+    check: Color = Color.Unspecified,
     amber: Color = Color.Unspecified,
     blue: Color = Color.Unspecified,
     brown: Color = Color.Unspecified,
@@ -66,6 +70,7 @@ fun toDometerDarkColors(
 ): ToDometerColors =
     ToDometerColors(
         onSurfaceMediumEmphasis = onSurfaceMediumEmphasis,
+        check = check,
         amber = amber,
         blue = blue,
         brown = brown,

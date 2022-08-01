@@ -40,6 +40,8 @@ import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -49,6 +51,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -75,6 +78,8 @@ fun AddTaskScreen(
     val activity = LocalContext.current as AppCompatActivity
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val topAppBarState = rememberTopAppBarState()
+    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(topAppBarState) }
 
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -98,6 +103,7 @@ fun AddTaskScreen(
     }
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             SmallTopAppBar(
@@ -134,18 +140,15 @@ fun AddTaskScreen(
                         )
                     }
                 },
-                title = { Text(stringResource(id = R.string.add_task)) }
+                title = { Text(stringResource(id = R.string.add_task)) },
+                scrollBehavior = scrollBehavior
             )
         },
-        content = { innerPadding ->
+        content = { paddingValues ->
             if (addTaskUiState.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-            if (lazyListState.firstVisibleItemIndex > 0) {
-                HorizontalDivider()
-            }
-            LazyColumn(state = lazyListState, modifier = Modifier.padding(innerPadding)) {
-                item { Spacer(modifier = Modifier.height(24.dp)) }
+            LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                 item {
                     TitledTextField(
                         title = stringResource(id = R.string.name),

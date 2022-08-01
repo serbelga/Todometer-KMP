@@ -15,21 +15,36 @@
   -->
 
 <resources>
-    <color name="todometer_primary">#4285f4</color>
-    <color name="todometer_primary_dark">#0059c1</color>
-    <color name="todometer_secondary">#3ddc84</color>
-    <color name="todometer_on_primary">#000000</color>
-    <color name="todometer_on_secondary">#FFFFFF</color>
-    <color name="todometer_surface">#FFFFFF</color>
-    <color name="todometer_on_surface">#DE000000</color>
-    <color name="todometer_on_surface_medium_emphasis">#99000000</color>
-    <color name="todometer_error">#b61827</color>
-    <color name="todometer_on_error">#FFFFFF</color>
-    <color name="todometer_background">#FFFFFF</color>
-    <color name="todometer_divider">#676767</color>
-    <color name="todometer_widget_background">#F6F8FB</color>
-    <color name="todometer_widget_button_background">#4285F4</color>
-    <color name="todometer_widget_card_background">#FFFFFF</color>
+    <color name="seed">#4285f4</color>
+    <color name="md_theme_primary">#005AC1</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#D8E2FF</color>
+    <color name="md_theme_onPrimaryContainer">#001A41</color>
+    <color name="md_theme_secondary">#006D3B</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#66FEA2</color>
+    <color name="md_theme_onSecondaryContainer">#00210E</color>
+    <color name="md_theme_tertiary">#AC3400</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#FFDBD0</color>
+    <color name="md_theme_onTertiaryContainer">#390B00</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_onErrorContainer">#410002</color>
+    <color name="md_theme_background">#FEFBFF</color>
+    <color name="md_theme_onBackground">#171B23</color>
+    <color name="md_theme_surface">#FEFBFF</color>
+    <color name="md_theme_onSurface">#171B23</color>
+    <color name="md_theme_surfaceVariant">#E1E2EC</color>
+    <color name="md_theme_onSurfaceVariant">#44474F</color>
+    <color name="md_theme_outline">#74777F</color>
+    <color name="md_theme_inverseOnSurface">#F2F0F4</color>
+    <color name="md_theme_inverseSurface">#303033</color>
+    <color name="md_theme_inversePrimary">#ADC6FF</color>
+    <color name="md_theme_shadow">#000000</color>
+    <color name="md_theme_surfaceTint">#005AC1</color>
+    <color name="md_theme_surfaceTintColor">#005AC1</color>
 
     <color name="green">#3ddc84</color>
     <color name="greenDark">#00a956</color>
