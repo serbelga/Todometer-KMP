@@ -26,7 +26,7 @@ suspend fun <T> safeApiCall(
 ): Result<T> = withContext(dispatcher) {
     try {
         val response = apiCall.invoke()
-        Result.Success<T>(response)
+        Result.Success(response)
     } catch (throwable: Throwable) {
         // TODO Update code error
         when (throwable) {

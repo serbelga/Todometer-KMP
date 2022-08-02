@@ -23,10 +23,12 @@ import dev.sergiobelda.todometer.common.data.api.TodometerApi.Companion.VERSION_
 import dev.sergiobelda.todometer.common.data.api.model.TaskListApiModel
 import dev.sergiobelda.todometer.common.data.api.request.NewTaskListRequestBody
 import dev.sergiobelda.todometer.common.data.api.request.UpdateTaskListRequestBody
+import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.put
+import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.parametersOf
@@ -34,28 +36,28 @@ import io.ktor.http.parametersOf
 class TaskListApiClient(private val todometerApi: TodometerApi) : ITaskListApiClient {
 
     override suspend fun getTaskLists(): List<TaskListApiModel> =
-        todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TASK_LIST_PATH)
+        todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TASK_LIST_PATH).body()
 
     override suspend fun getTaskList(id: String): TaskListApiModel =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + TASK_LIST_PATH
         ) {
             parametersOf("id", id)
-        }
+        }.body()
 
     override suspend fun insertTaskList(newTaskListRequestBody: NewTaskListRequestBody): String =
         todometerApi.client.post(ENDPOINT_URL + VERSION_1 + TASK_LIST_PATH) {
             contentType(ContentType.Application.Json)
-            body = newTaskListRequestBody
-        }
+            setBody(newTaskListRequestBody)
+        }.body()
 
     override suspend fun updateTaskList(id: String, name: String, description: String) {
-        todometerApi.client.put<Unit>(ENDPOINT_URL + VERSION_1 + TASK_LIST_PATH) {
+        todometerApi.client.put(ENDPOINT_URL + VERSION_1 + TASK_LIST_PATH) {
             contentType(ContentType.Application.Json)
-            body = UpdateTaskListRequestBody(id, name, description)
+            setBody(UpdateTaskListRequestBody(id, name, description))
         }
     }
 
     override suspend fun deleteTaskList(id: String): String =
-        todometerApi.client.delete("$ENDPOINT_URL$VERSION_1$TASK_LIST_PATH/$id")
+        todometerApi.client.delete("$ENDPOINT_URL$VERSION_1$TASK_LIST_PATH/$id").body()
 }
