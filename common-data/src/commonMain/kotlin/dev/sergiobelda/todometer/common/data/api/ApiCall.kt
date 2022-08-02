@@ -20,9 +20,9 @@ import dev.sergiobelda.todometer.common.domain.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-suspend fun <T> safeApiCall(
+internal suspend inline fun <reified T> safeApiCall(
     dispatcher: CoroutineDispatcher = ApplicationDispatcher,
-    apiCall: suspend () -> T
+    crossinline apiCall: suspend () -> T
 ): Result<T> = withContext(dispatcher) {
     try {
         val response = apiCall.invoke()
