@@ -23,10 +23,12 @@ import dev.sergiobelda.todometer.common.data.api.TodometerApi.Companion.VERSION_
 import dev.sergiobelda.todometer.common.data.api.model.TaskApiModel
 import dev.sergiobelda.todometer.common.data.api.request.NewTaskRequestBody
 import dev.sergiobelda.todometer.common.data.api.request.UpdateTaskStateRequestBody
+import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.put
+import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.parametersOf
@@ -34,38 +36,38 @@ import io.ktor.http.parametersOf
 class TaskApiClient(private val todometerApi: TodometerApi) : ITaskApiClient {
 
     override suspend fun getTasks(): List<TaskApiModel> =
-        todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TASK_PATH)
+        todometerApi.client.get(ENDPOINT_URL + VERSION_1 + TASK_PATH).body()
 
     override suspend fun getTasks(taskListId: String?): List<TaskApiModel> =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + TASK_PATH
         ) {
             taskListId?.let { parametersOf(TASK_LIST_ID_PARAM, it) }
-        }
+        }.body()
 
     override suspend fun getTask(id: String): TaskApiModel =
         todometerApi.client.get(
             ENDPOINT_URL + VERSION_1 + TASK_PATH
         ) {
             parametersOf("id", id)
-        }
+        }.body()
 
     override suspend fun insertTask(newTaskRequestBody: NewTaskRequestBody): String =
         todometerApi.client.post(ENDPOINT_URL + VERSION_1 + TASK_PATH) {
             contentType(ContentType.Application.Json)
-            body = newTaskRequestBody
-        }
+            setBody(newTaskRequestBody)
+        }.body()
 
     override suspend fun deleteTask(id: String): String =
-        todometerApi.client.delete("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id")
+        todometerApi.client.delete("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id").body()
 
     override suspend fun updateTaskState(
         id: String,
         updateTaskRequestBody: UpdateTaskStateRequestBody
     ): String = todometerApi.client.put("$ENDPOINT_URL$VERSION_1$TASK_PATH/$id/$STATE_PATH") {
         contentType(ContentType.Application.Json)
-        body = updateTaskRequestBody
-    }
+        setBody(updateTaskRequestBody)
+    }.body()
 
     companion object {
         private const val STATE_PATH = "state"

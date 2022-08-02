@@ -23,9 +23,9 @@ import dev.sergiobelda.todometer.backend.routing.taskListsRouting
 import dev.sergiobelda.todometer.backend.routing.tasksRouting
 import dev.sergiobelda.todometer.backend.service.ITaskListService
 import dev.sergiobelda.todometer.backend.service.ITaskService
-import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
 
 fun main() {
