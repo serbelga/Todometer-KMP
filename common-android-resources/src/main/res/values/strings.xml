@@ -98,4 +98,7 @@
             <br></br>
         ]]>
     </string>
+
+    <string name="cannot_delete_this_task_list">No se puede eliminar esta lista de tareas</string>
+    <string name="cannot_edit_this_task_list">No se puede editar esta lista de tareas</string>
 </resources>

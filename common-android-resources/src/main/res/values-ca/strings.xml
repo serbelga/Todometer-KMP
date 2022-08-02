@@ -64,4 +64,6 @@
     <string name="checklist">Checklist</string>
     <string name="add_element">Afegir element</string>
     <string name="add_element_optional">Afegir element (opcional)</string>
+    <string name="cannot_delete_this_task_list">No es pot eliminar aquesta llista de tasques</string>
+    <string name="cannot_edit_this_task_list">No es pot editar aquesta llista de tasques</string>
 </resources>

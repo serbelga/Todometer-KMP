@@ -28,6 +28,7 @@ import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -63,6 +64,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.RadioButton
@@ -79,6 +81,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -87,7 +90,6 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.SingleLineItem
-import dev.sergiobelda.todometer.common.compose.ui.components.TwoLineItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
@@ -241,7 +243,10 @@ fun HomeScreen(
                         ToDometerContentLoadingProgress()
                     } else {
                         if (homeUiState.tasks.isEmpty()) {
-                            TaskListIllustration(R.drawable.no_tasks, stringResource(R.string.no_tasks))
+                            TaskListIllustration(
+                                R.drawable.no_tasks,
+                                stringResource(R.string.no_tasks)
+                            )
                         } else {
                             TasksListView(
                                 homeUiState.tasks,
@@ -659,6 +664,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoreBottomSheet(
     editTaskListClick: () -> Unit,
@@ -674,41 +680,75 @@ fun MoreBottomSheet(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(top = 16.dp)
     ) {
-        SingleLineItem(
-            icon = {
+        ListItem(
+            headlineText = {
+                Text(
+                    stringResource(R.string.edit_task_list),
+                    style = MaterialTheme.typography.titleSmall
+                )
+            },
+            supportingText = {
+                if (!editTaskListEnabled) {
+                    Text(
+                        stringResource(R.string.cannot_edit_this_task_list),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+            },
+            leadingContent = {
                 Icon(
                     Icons.Outlined.Edit,
                     contentDescription = stringResource(R.string.edit_task_list)
                 )
             },
-            text = {
+            modifier = Modifier.clickable(
+                enabled = editTaskListEnabled,
+                onClick = editTaskListClick
+            ).height(64.dp).alpha(if (editTaskListEnabled) 1f else 0.38f)
+        )
+        ListItem(
+            headlineText = {
                 Text(
-                    stringResource(R.string.edit_task_list),
-                    style = MaterialTheme.typography.labelLarge
+                    stringResource(R.string.delete_task_list),
+                    style = MaterialTheme.typography.titleSmall
                 )
             },
-            onClick = editTaskListClick,
-            enabled = editTaskListEnabled
-        )
-        SingleLineItem(
-            icon = {
+            supportingText = {
+                if (!deleteTaskListEnabled) {
+                    Text(
+                        stringResource(R.string.cannot_delete_this_task_list),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+            },
+            leadingContent = {
                 Icon(
                     Icons.Outlined.Delete,
                     contentDescription = stringResource(R.string.delete_task_list)
                 )
             },
-            text = {
-                Text(
-                    stringResource(R.string.delete_task_list),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            },
-            onClick = deleteTaskListClick,
-            enabled = deleteTaskListEnabled
+            modifier = Modifier.clickable(
+                enabled = deleteTaskListEnabled,
+                onClick = deleteTaskListClick
+            ).height(64.dp).alpha(if (deleteTaskListEnabled) 1f else 0.38f)
         )
         HorizontalDivider()
-        TwoLineItem(
-            icon = {
+        ListItem(
+            headlineText = {
+                Text(
+                    stringResource(R.string.theme),
+                    style = MaterialTheme.typography.titleSmall
+                )
+            },
+            supportingText = {
+                appThemeMap[currentTheme]?.modeNameRes?.let {
+                    Text(
+                        stringResource(it),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+            },
+            leadingContent = {
                 appThemeMap[currentTheme]?.themeIconRes?.let {
                     Icon(
                         painterResource(it),
@@ -716,18 +756,7 @@ fun MoreBottomSheet(
                     )
                 }
             },
-            text = {
-                Text(
-                    stringResource(R.string.theme),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            },
-            subtitle = {
-                appThemeMap[currentTheme]?.modeNameRes?.let {
-                    Text(stringResource(it), style = MaterialTheme.typography.labelLarge)
-                }
-            },
-            onClick = chooseThemeClick
+            modifier = Modifier.height(64.dp).clickable(onClick = chooseThemeClick)
         )
         HorizontalDivider()
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
