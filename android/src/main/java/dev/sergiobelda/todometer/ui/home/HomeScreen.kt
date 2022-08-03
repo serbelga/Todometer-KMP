@@ -89,7 +89,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
-import dev.sergiobelda.todometer.common.compose.ui.components.SingleLineItem
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
@@ -177,7 +176,6 @@ fun HomeScreen(
     ) {
         ModalNavigationDrawer(
             drawerState = drawerState,
-            // drawerShape = drawerShape,
             drawerContent = {
                 DrawerContent(
                     homeUiState.taskListSelected?.id ?: "",
@@ -457,7 +455,7 @@ fun DrawerContent(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun TasksListView(
     tasks: List<TaskItem>,
@@ -484,8 +482,8 @@ fun TasksListView(
         }
         if (tasksDone.isNotEmpty()) {
             item {
-                SingleLineItem(
-                    text = {
+                ListItem(
+                    headlineText = {
                         Text(
                             text = stringResource(
                                 R.string.completed_tasks,
@@ -493,14 +491,14 @@ fun TasksListView(
                             )
                         )
                     },
-                    trailingIcon = {
+                    trailingContent = {
                         if (areTasksDoneVisible) Icon(
                             Icons.Rounded.ExpandLess,
                             contentDescription = null
                         ) else Icon(Icons.Rounded.ExpandMore, contentDescription = null)
                     },
-                    modifier = Modifier.animateItemPlacement(),
-                    onClick = { areTasksDoneVisible = !areTasksDoneVisible }
+                    modifier = Modifier.animateItemPlacement()
+                        .clickable { areTasksDoneVisible = !areTasksDoneVisible }
                 )
             }
         }
