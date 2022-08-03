@@ -16,11 +16,17 @@
 
 package dev.sergiobelda.todometer.ui.about
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 
 @Composable
@@ -33,7 +39,19 @@ fun PrivacyPolicyDialog(
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(R.string.privacy_policy_body))
+            Column {
+                Text(stringResource(R.string.privacy_policy_user_data), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.privacy_policy_user_data_body))
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(stringResource(R.string.privacy_policy_permissions), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.privacy_policy_permissions_body))
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(stringResource(R.string.privacy_policy_device_and_network_abuse), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.privacy_policy_device_and_network_abuse_body))
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(stringResource(R.string.privacy_policy_public), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.privacy_policy_public_body))
+            }
         },
         confirmButton = {
             TextButton(

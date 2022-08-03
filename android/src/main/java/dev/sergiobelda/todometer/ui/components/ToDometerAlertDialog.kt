@@ -87,7 +87,8 @@ internal fun AlertDialogContent(
         modifier = modifier,
         shape = shape,
         color = backgroundColor,
-        contentColor = contentColor
+        contentColor = contentColor,
+        tonalElevation = DialogTonalElevation.dp
     ) {
         Column {
             title?.let {
@@ -108,3 +109,5 @@ internal fun AlertDialogContent(
         }
     }
 }
+
+private const val DialogTonalElevation = 6
