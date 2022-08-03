@@ -91,6 +91,8 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
+import dev.sergiobelda.todometer.common.compose.ui.theme.Alpha.Disabled
+import dev.sergiobelda.todometer.common.compose.ui.theme.Alpha.High
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -702,7 +704,7 @@ fun MoreBottomSheet(
             modifier = Modifier.clickable(
                 enabled = editTaskListEnabled,
                 onClick = editTaskListClick
-            ).height(64.dp).alpha(if (editTaskListEnabled) 1f else 0.38f)
+            ).height(64.dp).alpha(if (editTaskListEnabled) High else Disabled)
         )
         ListItem(
             headlineText = {
@@ -728,7 +730,7 @@ fun MoreBottomSheet(
             modifier = Modifier.clickable(
                 enabled = deleteTaskListEnabled,
                 onClick = deleteTaskListClick
-            ).height(64.dp).alpha(if (deleteTaskListEnabled) 1f else 0.38f)
+            ).height(64.dp).alpha(if (deleteTaskListEnabled) High else Disabled)
         )
         HorizontalDivider()
         ListItem(
