@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
+                // TODO: Remove material dependency when everything depend on material3.
                 api(compose.material)
                 api(compose.material3)
                 api(compose.materialIconsExtended)
@@ -40,7 +41,7 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.coreKtx)
-                api("androidx.compose.material3:material3:1.0.0-alpha15")
+                api(libs.androidx.compose.material3)
             }
         }
         val androidTest by getting {

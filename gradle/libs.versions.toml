@@ -10,6 +10,7 @@ androidGradlePlugin = "7.4.0-alpha09"
 appcompat = "1.4.2"
 compose = "1.2.0-rc03"
 composeCompiler = "1.2.0"
+composeMaterial3 = "1.0.0-alpha15"
 composeMultiplatform = "1.2.0-alpha01-dev753"
 dataStore = "1.0.0"
 espressoCore = "3.4.0"
@@ -53,6 +54,7 @@ androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidCo
 androidx-compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
 androidx-compose-ui-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
