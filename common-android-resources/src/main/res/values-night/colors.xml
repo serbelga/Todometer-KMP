@@ -44,6 +44,7 @@
     <color name="todometer_shadow">#000000</color>
     <color name="todometer_surfaceTint">#ADC6FF</color>
     <color name="todometer_surfaceTintColor">#ADC6FF</color>
+    <color name="todometer_check">#43E188</color>
 
     <color name="red">#E57373</color>
     <color name="deep_orange400">#ffa270</color>

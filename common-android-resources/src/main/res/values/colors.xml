@@ -45,6 +45,7 @@
     <color name="todometer_shadow">#000000</color>
     <color name="todometer_surfaceTint">#005AC1</color>
     <color name="todometer_surfaceTintColor">#005AC1</color>
+    <color name="todometer_check">#00894B</color>
 
     <color name="green">#3ddc84</color>
     <color name="greenDark">#00a956</color>

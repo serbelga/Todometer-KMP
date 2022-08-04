@@ -80,6 +80,9 @@ val todometer_dark_surfaceTintColor = Color(0xFFADC6FF)
 
 val seed = Color(0xFF4285F4)
 
+val todometer_secondary50 = Color(0xFF00894B)
+val todometer_secondary80 = Color(0xFF43E188)
+
 val pinkLight = Color(0xFFD81B60)
 val pinkDark = Color(0xFFF48FB1)
 

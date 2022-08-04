@@ -47,8 +47,8 @@ fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Mod
             .padding(start = 8.dp, end = 8.dp, bottom = 12.dp)
     ) {
         Text(
-            taskListName?.uppercase() ?: "",
-            style = MaterialTheme.typography.labelSmall,
+            taskListName ?: "",
+            style = MaterialTheme.typography.titleSmall,
             maxLines = 2
         )
         Text(

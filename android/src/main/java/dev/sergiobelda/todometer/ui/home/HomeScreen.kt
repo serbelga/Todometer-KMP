@@ -422,7 +422,7 @@ fun DrawerContent(
                 modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
             )
         }
-        HorizontalDivider()
+        HorizontalDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -430,18 +430,17 @@ fun DrawerContent(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(R.string.task_lists).uppercase(),
-                style = MaterialTheme.typography.labelSmall
+                text = stringResource(R.string.task_lists),
+                style = MaterialTheme.typography.titleSmall
             )
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = addTaskList) {
                 Text(
                     stringResource(R.string.add_task_list),
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.titleSmall
                 )
             }
         }
-        HorizontalDivider()
         LazyColumn(modifier = Modifier.padding(8.dp)) {
             item {
                 TaskListItem(defaultTaskListName, selectedTaskListId == "") {

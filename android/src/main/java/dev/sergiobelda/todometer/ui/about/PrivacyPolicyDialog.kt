@@ -40,16 +40,16 @@ fun PrivacyPolicyDialog(
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-                Text(stringResource(R.string.privacy_policy_user_data), fontWeight = FontWeight.Bold)
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_user_data))
                 Text(stringResource(R.string.privacy_policy_user_data_body))
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(stringResource(R.string.privacy_policy_permissions), fontWeight = FontWeight.Bold)
+                PrivacyPolicyDialogSeparator()
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_permissions))
                 Text(stringResource(R.string.privacy_policy_permissions_body))
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(stringResource(R.string.privacy_policy_device_and_network_abuse), fontWeight = FontWeight.Bold)
+                PrivacyPolicyDialogSeparator()
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_device_and_network_abuse))
                 Text(stringResource(R.string.privacy_policy_device_and_network_abuse_body))
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(stringResource(R.string.privacy_policy_public), fontWeight = FontWeight.Bold)
+                PrivacyPolicyDialogSeparator()
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_public))
                 Text(stringResource(R.string.privacy_policy_public_body))
             }
         },
@@ -61,4 +61,14 @@ fun PrivacyPolicyDialog(
             }
         }
     )
+}
+
+@Composable
+private fun PrivacyPolicyDialogSectionTitle(text: String) {
+    Text(text = text, fontWeight = FontWeight.Bold)
+}
+
+@Composable
+private fun PrivacyPolicyDialogSeparator() {
+    Spacer(modifier = Modifier.height(8.dp))
 }
