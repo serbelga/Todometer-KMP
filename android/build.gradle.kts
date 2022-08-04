@@ -1,3 +1,5 @@
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+
 plugins {
     alias(libs.plugins.composeMultiplatform)
     id("com.android.application")
@@ -41,9 +43,9 @@ android {
             )
         }
         getByName("debug") {
-            // firebaseCrashlytics {
-            //    mappingFileUploadEnabled = false
-            // }
+            configure<CrashlyticsExtension> {
+                mappingFileUploadEnabled = false
+            }
         }
         lint {
             abortOnError = false
