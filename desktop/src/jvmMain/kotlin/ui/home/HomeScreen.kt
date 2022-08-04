@@ -78,7 +78,7 @@ import ui.icons.iconToDometer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+internal fun HomeScreen() {
     var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
@@ -202,7 +202,7 @@ fun HomeScreen() {
 }
 
 @Composable
-fun EmptyTaskListsView(addTaskList: () -> Unit) {
+private fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -226,7 +226,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TasksListView(
+private fun TasksListView(
     tasks: List<TaskItem>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
@@ -248,7 +248,7 @@ fun TasksListView(
 }
 
 @Composable
-fun EmptyTasksListView() {
+private fun EmptyTasksListView() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -267,7 +267,7 @@ fun EmptyTasksListView() {
 }
 
 @Composable
-fun TaskListsNavigationDrawer(
+private fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,
     selectedTaskListId: String,
     defaultTaskListName: String,

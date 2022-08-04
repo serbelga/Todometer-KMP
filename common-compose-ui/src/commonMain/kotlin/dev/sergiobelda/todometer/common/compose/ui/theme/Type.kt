@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-expect val quickSandFontFamily: FontFamily
+internal expect val quickSandFontFamily: FontFamily
 
 object Type {
     val typography = Typography(

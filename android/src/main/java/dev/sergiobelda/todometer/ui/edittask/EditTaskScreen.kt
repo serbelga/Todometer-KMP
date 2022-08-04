@@ -54,7 +54,7 @@ import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditTaskScreen(
+internal fun EditTaskScreen(
     navigateUp: () -> Unit,
     editTaskViewModel: EditTaskViewModel
 ) {

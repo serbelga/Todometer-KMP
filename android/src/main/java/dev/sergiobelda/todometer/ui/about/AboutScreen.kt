@@ -56,7 +56,7 @@ import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(
+internal fun AboutScreen(
     openGithub: () -> Unit,
     openSourceLicenses: () -> Unit,
     navigateUp: () -> Unit
@@ -144,7 +144,7 @@ fun AboutScreen(
 }
 
 @Composable
-fun AboutItemCard(
+private fun AboutItemCard(
     onCardClick: () -> Unit,
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit

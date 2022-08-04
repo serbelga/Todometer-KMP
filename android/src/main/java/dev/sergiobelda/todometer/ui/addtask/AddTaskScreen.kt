@@ -69,7 +69,7 @@ import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskScreen(
+internal fun AddTaskScreen(
     navigateUp: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {

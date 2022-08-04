@@ -23,7 +23,7 @@ import dev.sergiobelda.todometer.common.data.api.client.TaskApiClient
 import dev.sergiobelda.todometer.common.data.api.client.TaskListApiClient
 import org.koin.dsl.module
 
-val networkModule = module {
+internal val networkModule = module {
     single { TodometerApi() }
     single<ITaskListApiClient> {
         TaskListApiClient(get())
