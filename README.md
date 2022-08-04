@@ -32,8 +32,15 @@ Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.googl
 | <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/remove_task.gif" /> |
 |---|---|---|
 
-| <img width="300" src="./screenshots/android/home_2.png" /> | <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
-|---|---|
+### Material Design 3 Dynamic color
+
+| <img width="300" src="./screenshots/android/drawer_dark_dynamic_color.png" /> | <img width="300" src="./screenshots/android/home_dark_dynamic_color.png" /> | <img width="300" src="./screenshots/android/home_light_dynamic_color.png" /> | <img width="300" src="./screenshots/android/add_task_dark_dynamic_color.png" /> |
+|---|---|---|---|
+
+### Glance App Widget - Material Design 3 Dynamic color
+
+| <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
+|---|
 
 ### Wear OS
 
@@ -59,7 +66,7 @@ Under construction
   * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-  * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)  
+  * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)
 * [Koin](https://insert-koin.io/docs/reference/koin-android/start)
 
 ### Wear OS
