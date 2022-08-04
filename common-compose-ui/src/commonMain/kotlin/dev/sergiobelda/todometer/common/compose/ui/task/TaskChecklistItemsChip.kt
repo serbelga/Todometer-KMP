@@ -33,9 +33,9 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 @Composable
 fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
     val completedChipTint =
-        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.teal else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.check else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
     val completedChipOutline =
-        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.teal else MaterialTheme.colorScheme.outline
+        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.check else MaterialTheme.colorScheme.outline
 
     ToDometerChip(
         borderStroke = BorderStroke(1.dp, completedChipOutline),
