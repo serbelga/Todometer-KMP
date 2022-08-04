@@ -23,15 +23,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.ProgressIndicatorDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 
@@ -47,13 +47,13 @@ fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Mod
             .padding(start = 8.dp, end = 8.dp, bottom = 12.dp)
     ) {
         Text(
-            taskListName?.uppercase() ?: "",
-            style = TodometerTypography.overline,
+            taskListName ?: "",
+            style = MaterialTheme.typography.titleSmall,
             maxLines = 2
         )
         Text(
             text = TaskProgress.getPercentage(progress),
-            style = TodometerTypography.body2,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = 4.dp)
         )
         LinearProgressIndicator(

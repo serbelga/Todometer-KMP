@@ -29,20 +29,21 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.ExtendedFloatingActionButton
-import androidx.compose.material.FabPosition
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -59,8 +60,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.VerticalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -77,11 +76,11 @@ import koin
 import kotlinx.coroutines.launch
 import ui.icons.iconToDometer
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
     var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
-    val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
 
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
@@ -107,7 +106,7 @@ fun HomeScreen() {
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            SmallTopAppBar(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
@@ -118,8 +117,6 @@ fun HomeScreen() {
                         Text(text = "ToDometer")
                     }
                 },
-                elevation = 0.dp,
-                backgroundColor = TodometerColors.surface,
                 actions = {
                     IconButton(onClick = {}) {
                         Icon(Icons.Outlined.Settings, contentDescription = "Settings")
@@ -135,12 +132,10 @@ fun HomeScreen() {
                 text = {
                     Text("Add task")
                 },
-                onClick = { addTaskAlertDialogState = true },
-                backgroundColor = TodometerColors.primary
+                onClick = { addTaskAlertDialogState = true }
             )
         },
-        floatingActionButtonPosition = FabPosition.End,
-        scaffoldState = scaffoldState
+        floatingActionButtonPosition = FabPosition.End
     ) {
         Divider()
         Column(modifier = Modifier.fillMaxSize()) {
@@ -287,7 +282,7 @@ fun TaskListsNavigationDrawer(
         ) {
             Text(
                 text = "TASK LISTS",
-                style = TodometerTypography.overline
+                style = MaterialTheme.typography.labelSmall
             )
             OutlinedButton(
                 onClick = onAddTaskListClick,

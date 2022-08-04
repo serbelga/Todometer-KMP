@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- TODO Use "@style/Theme.ToDometer.Starting" when https://github.com/material-components/material-components-android/issues/2555 is fixed -->
     <application
         android:name="dev.sergiobelda.todometer.app.ToDometerApplication"
         android:allowBackup="false"
@@ -11,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ToDometer.Starting"
+        android:theme="@style/Theme.ToDometer.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
             android:name="dev.sergiobelda.todometer.ui.MainActivity"

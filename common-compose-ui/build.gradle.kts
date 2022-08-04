@@ -18,11 +18,14 @@ kotlin {
     jvm("desktop")
 
     sourceSets {
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
+                // TODO: Remove material dependency when everything depend on material3.
                 api(compose.material)
+                api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
                 api(compose.uiTooling)
@@ -38,6 +41,7 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.coreKtx)
+                api(libs.androidx.compose.material3)
             }
         }
         val androidTest by getting {

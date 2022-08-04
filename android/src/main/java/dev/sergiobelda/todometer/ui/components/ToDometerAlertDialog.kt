@@ -23,10 +23,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Surface
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.Surface
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -44,8 +44,8 @@ fun ToDometerAlertDialog(
     dismissButton: @Composable (() -> Unit)? = null,
     title: @Composable (() -> Unit)? = null,
     body: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = MaterialTheme.shapes.extraLarge,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(backgroundColor),
     properties: DialogProperties = DialogProperties()
 ) {
@@ -77,34 +77,37 @@ fun ToDometerAlertDialog(
 internal fun AlertDialogContent(
     buttons: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    title: (@Composable () -> Unit)? = null,
-    body: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
-    contentColor: Color = contentColorFor(backgroundColor),
+    title: @Composable (() -> Unit)?,
+    body: @Composable (() -> Unit)?,
+    shape: Shape,
+    backgroundColor: Color,
+    contentColor: Color
 ) {
     Surface(
         modifier = modifier,
         shape = shape,
         color = backgroundColor,
-        contentColor = contentColor
+        contentColor = contentColor,
+        tonalElevation = DialogTonalElevation.dp
     ) {
         Column {
             title?.let {
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
-                    val textStyle = MaterialTheme.typography.subtitle1
-                    ProvideTextStyle(textStyle, title)
+                    val textStyle = MaterialTheme.typography.headlineSmall
+                    ProvideTextStyle(textStyle) { title() }
                 }
             }
             body?.let {
                 CompositionLocalProvider(
                     LocalContentAlpha provides ContentAlpha.medium
                 ) {
-                    val textStyle = MaterialTheme.typography.body2
-                    ProvideTextStyle(textStyle, body)
+                    val textStyle = MaterialTheme.typography.bodyMedium
+                    ProvideTextStyle(textStyle) { body() }
                 }
             }
             buttons()
         }
     }
 }
+
+private const val DialogTonalElevation = 6

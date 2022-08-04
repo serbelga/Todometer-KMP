@@ -68,34 +68,29 @@
     <string name="task_title_input">Nombre de la tarea</string>
     <string name="task_list_name_input">Nombre de la lista de tareas</string>
 
-    <string name="privacy_policy_body" translatable="false">
-        <![CDATA[
-            <h6>User data</h6>
-            <div>
-                The ToDometer application does not store any user\'s data on
-                any server since it is an application that runs in a local environment
-                without the need for a connection. No user data is collected, transferred, or disclosed.
-            </div>
-            <br></br>
-            <h6>Permissions</h6>
-            <div>
-                The system does not require the user to grant any location or call and messaging permissions.
-            </div>
-            <br></br>
-            <h6>Device and network abuse</h6>
-            <div>
-                The system does not block or interfere with another application that displays advertisements.
-                It does not provide or provide instructions on how to hack services, software or hardware,
-                or bypass security protections. You do not access or use a service or API in a way that violates
-                its terms of service.
-            </div>
-            <br></br>
-            <h6>Public</h6>
-            <div>
-                The system can be used by people over 3 years old. It does not contain violent material, sexual material, or offensive language.
-                Does not contain ads. Sensitive information for minors is not collected.
-            </div>
-            <br></br>
-        ]]>
+    <string name="privacy_policy_user_data" translatable="false">User data</string>
+    <string name="privacy_policy_user_data_body" translatable="false">
+        The ToDometer application does not store any user\'s data on
+        any server since it is an application that runs in a local environment
+        without the need for a connection. No user data is collected, transferred, or disclosed.
     </string>
+    <string name="privacy_policy_permissions" translatable="false">Permissions</string>
+    <string name="privacy_policy_permissions_body" translatable="false">
+        The system does not require the user to grant any location or call and messaging permissions.
+    </string>
+    <string name="privacy_policy_device_and_network_abuse" translatable="false">Device and network abuse</string>
+    <string name="privacy_policy_device_and_network_abuse_body" translatable="false">
+        The system does not block or interfere with another application that displays advertisements.
+        It does not provide or provide instructions on how to hack services, software or hardware,
+        or bypass security protections. You do not access or use a service or API in a way that violates
+        its terms of service.
+    </string>
+    <string name="privacy_policy_public" translatable="false">Public</string>
+    <string name="privacy_policy_public_body" translatable="false">
+        The system can be used by people over 3 years old. It does not contain violent material, sexual material, or offensive language.
+        Does not contain ads. Sensitive information for minors is not collected.
+    </string>
+
+    <string name="cannot_delete_this_task_list">No se puede eliminar esta lista de tareas</string>
+    <string name="cannot_edit_this_task_list">No se puede editar esta lista de tareas</string>
 </resources>

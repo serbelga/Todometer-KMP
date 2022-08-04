@@ -20,26 +20,24 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerShapes
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
 
 @Composable
 fun ToDometerChip(
-    borderStroke: BorderStroke = BorderStroke(1.dp, TodometerColors.outline),
+    borderStroke: BorderStroke = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
     modifier: Modifier = Modifier,
-    color: Color = TodometerColors.surface,
+    color: Color = MaterialTheme.colorScheme.surface,
     content: @Composable RowScope.() -> Unit
 ) {
     Surface(
         border = borderStroke,
-        shape = TodometerShapes.small,
+        shape = MaterialTheme.shapes.small,
         modifier = modifier,
         color = color
     ) {

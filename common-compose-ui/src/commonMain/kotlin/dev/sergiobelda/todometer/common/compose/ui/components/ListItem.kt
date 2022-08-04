@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+@Deprecated("Use ListItem from androidx.compose.material3 instead.")
 @Composable
 fun SingleLineItem(
     modifier: Modifier = Modifier,
@@ -73,6 +74,7 @@ fun SingleLineItem(
     }
 }
 
+@Deprecated("Use ListItem from androidx.compose.material3 instead.")
 @Composable
 fun TwoLineItem(
     modifier: Modifier = Modifier,

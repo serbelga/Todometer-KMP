@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.ToDometer.Material3.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+    <style name="TextAppearance.ToDometer.Material3.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
+</resources>
