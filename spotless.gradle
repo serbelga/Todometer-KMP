@@ -1,0 +1,15 @@
+apply plugin: "com.diffplug.spotless"
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        targetExclude("**/build/**/*.kt")
+        licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
+    }
+    format("xml") {
+        target("**/*.xml")
+        targetExclude("**/build/**/*.xml")
+        // Look for the first XML tag that isn't a comment (<!--) or the xml declaration (<?xml)
+        licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
+    }
+}

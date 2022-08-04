@@ -3,6 +3,8 @@ plugins {
     kotlin("android")
 }
 
+apply("${rootDir}/spotless.gradle")
+
 android {
     namespace = "dev.sergiobelda.todometer.common.android.resources"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()

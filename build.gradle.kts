@@ -1,3 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
+plugins {
+    alias(libs.plugins.spotless)
+}
+
 buildscript {
     repositories {
         gradlePluginPortal()
@@ -29,8 +34,6 @@ allprojects {
 
 subprojects {
     if (!project.name.contains("ios")) {
-        apply {
-            from("${rootDir}/ktlint.gradle.kts")
-        }
+        apply("${rootDir}/ktlint.gradle.kts")
     }
 }

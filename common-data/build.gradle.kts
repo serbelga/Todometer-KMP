@@ -8,6 +8,8 @@ plugins {
     id("app.cash.sqldelight")
 }
 
+apply("${rootDir}/spotless.gradle")
+
 version = "1.0"
 
 kotlin {

@@ -4,6 +4,8 @@ plugins {
     id("com.android.library")
 }
 
+apply("${rootDir}/spotless.gradle")
+
 version = "1.0"
 
 kotlin {

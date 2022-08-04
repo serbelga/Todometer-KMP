@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright $YEAR Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,3 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.data.api.request
-
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class UpdateTaskStateRequestBody(
-    val state: String
-)

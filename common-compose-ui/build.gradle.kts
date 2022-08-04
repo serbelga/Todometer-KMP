@@ -6,6 +6,8 @@ plugins {
     id("com.android.library")
 }
 
+apply("${rootDir}/spotless.gradle")
+
 group = "dev.sergiobelda.todometer.common.compose.ui"
 version = "1.0"
 

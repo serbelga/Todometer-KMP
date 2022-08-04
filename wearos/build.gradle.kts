@@ -8,6 +8,8 @@ plugins {
     kotlin("kapt")
 }
 
+apply("${rootDir}/spotless.gradle")
+
 // TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
 androidComponents {
     onVariants(selector().all()) {

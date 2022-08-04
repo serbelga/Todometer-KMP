@@ -20,6 +20,8 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
+apply("${rootDir}/spotless.gradle")
+
 dependencies {
 
     implementation(libs.ktor.serialization.gson)
