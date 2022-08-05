@@ -30,7 +30,7 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 
-fun Route.taskListsRouting(taskListService: ITaskListService) {
+internal fun Route.taskListsRouting(taskListService: ITaskListService) {
     route("/v1/tasklists") {
 
         // TODO: Handle exceptions

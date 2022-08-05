@@ -21,10 +21,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import dev.sergiobelda.todometer.common.compose.ui.R
 
-val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
-val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
+internal val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
+internal val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
 
-actual val quickSandFontFamily = FontFamily(
+internal actual val quickSandFontFamily = FontFamily(
     quickSandRegularFont,
     quickSandMediumFont
 )

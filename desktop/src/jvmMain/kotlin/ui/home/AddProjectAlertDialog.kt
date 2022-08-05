@@ -38,7 +38,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddTaskListAlertDialog(
+internal fun AddTaskListAlertDialog(
     onDismissRequest: () -> Unit,
     addTaskList: (name: String) -> Unit
 ) {

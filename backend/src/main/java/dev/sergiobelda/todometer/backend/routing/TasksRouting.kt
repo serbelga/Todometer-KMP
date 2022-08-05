@@ -31,7 +31,7 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 
-fun Route.tasksRouting(taskService: ITaskService) {
+internal fun Route.tasksRouting(taskService: ITaskService) {
     route("/v1/tasks") {
 
         get {

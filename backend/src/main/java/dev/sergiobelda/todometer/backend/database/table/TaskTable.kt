@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.backend.database.table
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 
-object TaskTable : Table() {
+internal object TaskTable : Table() {
     val id = uuid("id").autoGenerate()
     val title = text("title")
     val description = text("description")

@@ -20,13 +20,13 @@ import dev.sergiobelda.todometer.backend.database.entity.TaskListEntity
 import dev.sergiobelda.todometer.backend.database.table.TaskListTable
 import org.jetbrains.exposed.sql.ResultRow
 
-fun ResultRow.toTaskListEntity() =
+internal fun ResultRow.toTaskListEntity() =
     TaskListEntity(
         id = this[TaskListTable.id],
         name = this[TaskListTable.name],
         description = this[TaskListTable.description]
     )
 
-fun Iterable<ResultRow>.toTaskListEntityList() = this.map {
+internal fun Iterable<ResultRow>.toTaskListEntityList() = this.map {
     it.toTaskListEntity()
 }

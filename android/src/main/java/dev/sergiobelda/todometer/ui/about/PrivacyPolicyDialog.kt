@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 
 @Composable
-fun PrivacyPolicyDialog(
+internal fun PrivacyPolicyDialog(
     onDismissRequest: () -> Unit
 ) {
     AlertDialog(

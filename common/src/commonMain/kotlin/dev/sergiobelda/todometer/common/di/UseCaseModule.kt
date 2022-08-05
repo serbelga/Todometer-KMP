@@ -45,7 +45,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNa
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
 import org.koin.dsl.module
 
-val useCaseModule = module {
+internal val useCaseModule = module {
     single {
         GetTaskListsUseCase(get())
     }

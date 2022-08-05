@@ -41,7 +41,7 @@ import dev.sergiobelda.todometer.ui.theme.ToDometerAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToDometerTopAppBar(
+internal fun ToDometerTopAppBar(
     onMenuClick: () -> Unit,
     onMoreClick: () -> Unit,
     taskListName: String?,
@@ -84,7 +84,7 @@ fun ToDometerTopAppBar(
 
 @Preview
 @Composable
-fun ToDometerTopAppBarPreview() {
+private fun ToDometerTopAppBarPreview() {
     ToDometerAppTheme {
         ToDometerTopAppBar({}, {}, "", emptyList())
     }

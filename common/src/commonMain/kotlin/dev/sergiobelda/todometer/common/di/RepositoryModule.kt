@@ -26,7 +26,7 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 import org.koin.dsl.module
 
-val repositoryModule = module {
+internal val repositoryModule = module {
     single<ITaskListRepository> {
         TaskListRepository(get(), get())
     }

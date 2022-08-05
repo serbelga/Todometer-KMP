@@ -30,7 +30,7 @@ import androidx.wear.compose.material.dialog.Alert
 import dev.sergiobelda.todometer.wear.R
 
 @Composable
-fun DeleteTaskScreen(
+internal fun DeleteTaskScreen(
     onDeleteTask: () -> Unit,
     navigateUp: () -> Unit,
     deleteTaskViewModel: DeleteTaskViewModel

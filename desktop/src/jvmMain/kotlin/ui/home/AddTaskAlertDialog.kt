@@ -39,7 +39,7 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddTaskAlertDialog(
+internal fun AddTaskAlertDialog(
     onDismissRequest: () -> Unit,
     addTask: (title: String, description: String, tag: Tag) -> Unit
 ) {

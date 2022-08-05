@@ -22,14 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.wear.compose.material.Typography
 import dev.sergiobelda.todometer.wear.R
 
-val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
-val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
+internal val quickSandRegularFont = Font(R.font.quicksand_regular, FontWeight.Normal)
+internal val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medium)
 
-val quickSandFontFamily = FontFamily(
+internal val quickSandFontFamily = FontFamily(
     quickSandRegularFont,
     quickSandMediumFont
 )
 
-val typography = Typography(
+internal val typography = Typography(
     defaultFontFamily = quickSandFontFamily
 )

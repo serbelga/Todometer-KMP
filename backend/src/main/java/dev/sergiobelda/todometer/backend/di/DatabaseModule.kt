@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.backend.database.dao.TaskDao
 import dev.sergiobelda.todometer.backend.database.dao.TaskListDao
 import org.koin.dsl.module
 
-val databaseModule = module {
+internal val databaseModule = module {
     single<ITaskListDao> { TaskListDao() }
     single<ITaskDao> { TaskDao() }
 }

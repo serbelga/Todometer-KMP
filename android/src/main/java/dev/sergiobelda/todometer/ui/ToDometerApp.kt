@@ -56,7 +56,7 @@ import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
+internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
 
