@@ -6,6 +6,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("app.cash.sqldelight")
+    id("todometer.spotless")
 }
 
 version = "1.0"

@@ -18,6 +18,7 @@ plugins {
     application
     kotlin("jvm")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("todometer.spotless")
 }
 
 dependencies {

@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
     id("com.android.library")
+    id("todometer.spotless")
 }
 
 group = "dev.sergiobelda.todometer.common.compose.ui"
