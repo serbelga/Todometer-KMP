@@ -1,8 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
-plugins {
-    alias(libs.plugins.spotless)
-}
-
 buildscript {
     repositories {
         gradlePluginPortal()
@@ -18,11 +13,9 @@ buildscript {
         classpath(libs.google.ossLicensesPlugin)
         classpath(libs.google.services)
         classpath(libs.sqldelight.gradlePlugin)
+        classpath(libs.spotless.gradlePlugin)
     }
 }
-
-group = "dev.sergiobelda.todometer"
-version = "1.0"
 
 allprojects {
     repositories {
