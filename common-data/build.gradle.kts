@@ -6,9 +6,8 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("app.cash.sqldelight")
+    id("todometer.spotless")
 }
-
-apply("${rootDir}/spotless.gradle")
 
 version = "1.0"
 

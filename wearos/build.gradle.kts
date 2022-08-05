@@ -6,9 +6,8 @@ plugins {
     id("com.google.firebase.crashlytics")
     kotlin("android")
     kotlin("kapt")
+    id("todometer.spotless")
 }
-
-apply("${rootDir}/spotless.gradle")
 
 // TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
 androidComponents {

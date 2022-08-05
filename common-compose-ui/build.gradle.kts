@@ -4,9 +4,8 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
     id("com.android.library")
+    id("todometer.spotless")
 }
-
-apply("${rootDir}/spotless.gradle")
 
 group = "dev.sergiobelda.todometer.common.compose.ui"
 version = "1.0"

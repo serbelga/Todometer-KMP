@@ -1,9 +1,8 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("todometer.spotless")
 }
-
-apply("${rootDir}/spotless.gradle")
 
 android {
     namespace = "dev.sergiobelda.todometer.common.android.resources"

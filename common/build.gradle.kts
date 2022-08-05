@@ -4,9 +4,8 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("todometer.spotless")
 }
-
-apply("${rootDir}/spotless.gradle")
 
 version = "1.0"
 
