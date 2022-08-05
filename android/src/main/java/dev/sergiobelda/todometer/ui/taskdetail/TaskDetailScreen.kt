@@ -76,7 +76,7 @@ private const val SECTION_PADDING = 32
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskDetailScreen(
+internal fun TaskDetailScreen(
     editTask: () -> Unit,
     navigateUp: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel

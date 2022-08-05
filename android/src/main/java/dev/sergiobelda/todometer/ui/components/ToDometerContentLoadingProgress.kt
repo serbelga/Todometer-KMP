@@ -25,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ToDometerContentLoadingProgress() {
+internal fun ToDometerContentLoadingProgress() {
     Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
     }

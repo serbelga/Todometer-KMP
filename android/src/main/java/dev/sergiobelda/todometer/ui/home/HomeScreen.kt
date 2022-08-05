@@ -110,7 +110,7 @@ import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     addTaskList: () -> Unit,
     editTaskList: () -> Unit,
     addTask: () -> Unit,
@@ -289,7 +289,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun ChooseThemeAlertDialog(
+private fun ChooseThemeAlertDialog(
     currentTheme: AppTheme,
     onDismissRequest: () -> Unit,
     chooseTheme: (theme: AppTheme) -> Unit
@@ -351,7 +351,7 @@ fun ChooseThemeAlertDialog(
 }
 
 @Composable
-fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskList: () -> Unit) {
+private fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskList: () -> Unit) {
     AlertDialog(
         title = {
             Text(stringResource(R.string.delete_task_list))
@@ -379,7 +379,7 @@ fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskList: () -
 }
 
 @Composable
-fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) {
+private fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) {
     AlertDialog(
         title = {
             Text(stringResource(R.string.delete_task))
@@ -407,7 +407,7 @@ fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) 
 }
 
 @Composable
-fun DrawerContent(
+private fun DrawerContent(
     selectedTaskListId: String,
     defaultTaskListName: String,
     taskLists: List<TaskList>,
@@ -458,7 +458,7 @@ fun DrawerContent(
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun TasksListView(
+private fun TasksListView(
     tasks: List<TaskItem>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
@@ -533,7 +533,7 @@ fun TasksListView(
     ExperimentalAnimationGraphicsApi::class
 )
 @Composable
-fun SwipeableTaskItem(
+private fun SwipeableTaskItem(
     taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
@@ -608,7 +608,7 @@ fun SwipeableTaskItem(
 }
 
 @Composable
-fun TaskListIllustration(
+private fun TaskListIllustration(
     @DrawableRes drawableRes: Int,
     text: String,
     secondaryText: String? = null
@@ -639,7 +639,7 @@ fun TaskListIllustration(
 
 @Composable
 @Deprecated("To be removed")
-fun EmptyTaskListsView(addTaskList: () -> Unit) {
+private fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -665,7 +665,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoreBottomSheet(
+private fun MoreBottomSheet(
     editTaskListClick: () -> Unit,
     editTaskListEnabled: Boolean,
     deleteTaskListClick: () -> Unit,

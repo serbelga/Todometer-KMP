@@ -30,7 +30,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskScreen(navigateUp: () -> Unit) {
+internal fun AddTaskScreen(navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             SmallTopAppBar(

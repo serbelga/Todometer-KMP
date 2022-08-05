@@ -19,11 +19,11 @@ package dev.sergiobelda.todometer.common.domain.extensions
 /**
  * Returns an enum entry or null with specified [name].
  */
-inline fun <reified T : Enum<T>> safeEnumValueOf(name: String): T? =
+internal inline fun <reified T : Enum<T>> safeEnumValueOf(name: String): T? =
     enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) }
 
 /**
  * Returns an enum entry with specified [name] or [default].
  */
-inline fun <reified T : Enum<T>> enumValueOrDefaultOf(name: String, default: T): T =
+internal inline fun <reified T : Enum<T>> enumValueOrDefaultOf(name: String, default: T): T =
     enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) } ?: default

@@ -26,7 +26,7 @@ import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModelModule = module {
+internal val viewModelModule = module {
     viewModel {
         AddTaskListViewModel(get())
     }
