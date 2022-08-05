@@ -26,7 +26,7 @@ import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.transaction
 
-object AppDatabase {
+internal object AppDatabase {
 
     fun init() {
         Database.connect(hikari())

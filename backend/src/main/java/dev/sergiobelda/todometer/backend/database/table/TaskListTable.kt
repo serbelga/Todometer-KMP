@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.backend.database.table
 
 import org.jetbrains.exposed.sql.Table
 
-object TaskListTable : Table() {
+internal object TaskListTable : Table() {
     val id = uuid("id").autoGenerate()
     val name = varchar("name", length = 50)
     val description = text("description")
