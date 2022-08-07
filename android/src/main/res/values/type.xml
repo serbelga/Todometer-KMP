@@ -50,7 +50,7 @@
         <item name="fontFamily">@font/quicksand_medium</item>
     </style>
     <style name="TextAppearance.ToDometer.Material3.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
-        <item name="fontFamily">@font/quicksand_medium</item>
+        <item name="fontFamily">@font/quicksand_semi_bold</item>
     </style>
     <style name="TextAppearance.ToDometer.Material3.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
         <item name="fontFamily">@font/quicksand_medium</item>
