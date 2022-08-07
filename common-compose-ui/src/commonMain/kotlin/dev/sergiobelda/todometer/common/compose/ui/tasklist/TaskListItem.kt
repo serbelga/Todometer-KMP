@@ -28,7 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.Alpha.Medium
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 
 @Composable
 fun TaskListItem(
@@ -51,7 +51,7 @@ fun TaskListItem(
             .then(background)
     ) {
         val selectedColor =
-            if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = Medium)
+            if (isSelected) MaterialTheme.colorScheme.primary else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
         Text(
             text = text,
             color = selectedColor,

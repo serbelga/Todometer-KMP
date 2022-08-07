@@ -21,20 +21,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+
+private const val DialogTonalElevation = 6
 
 @Composable
 internal fun ToDometerAlertDialog(
@@ -92,22 +91,14 @@ internal fun AlertDialogContent(
     ) {
         Column {
             title?.let {
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
-                    val textStyle = MaterialTheme.typography.headlineSmall
-                    ProvideTextStyle(textStyle) { title() }
-                }
+                val textStyle = MaterialTheme.typography.headlineSmall
+                ProvideTextStyle(textStyle) { title() }
             }
             body?.let {
-                CompositionLocalProvider(
-                    LocalContentAlpha provides ContentAlpha.medium
-                ) {
-                    val textStyle = MaterialTheme.typography.bodyMedium
-                    ProvideTextStyle(textStyle) { body() }
-                }
+                val textStyle = MaterialTheme.typography.bodyMedium
+                ProvideTextStyle(textStyle) { body() }
             }
             buttons()
         }
     }
 }
-
-private const val DialogTonalElevation = 6

@@ -51,7 +51,7 @@ fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Mod
         )
         Text(
             text = TaskProgress.getPercentage(progress),
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = 4.dp)
         )
         LinearProgressIndicator(

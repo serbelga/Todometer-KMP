@@ -33,8 +33,6 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -50,7 +48,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,6 +57,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
@@ -73,7 +71,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 
-private const val SECTION_PADDING = 32
+private val SectionPadding: Dp = 32.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -278,23 +276,23 @@ private fun LazyListScope.taskDescription(description: String?) {
                 text = description,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(
-                    start = SECTION_PADDING.dp,
-                    end = SECTION_PADDING.dp,
-                    bottom = SECTION_PADDING.dp
+                    start = SectionPadding,
+                    end = SectionPadding,
+                    bottom = SectionPadding
                 )
             )
         } else {
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    text = stringResource(id = R.string.no_description),
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(
-                        top = 16.dp, start = SECTION_PADDING.dp,
-                        end = SECTION_PADDING.dp,
-                        bottom = SECTION_PADDING.dp
-                    )
-                )
-            }
+            Text(
+                text = stringResource(id = R.string.no_description),
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(
+                    top = 16.dp,
+                    start = SectionPadding,
+                    end = SectionPadding,
+                    bottom = SectionPadding
+                ),
+                color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+            )
         }
     }
 }
@@ -305,6 +303,6 @@ private fun TaskDetailSectionTitle(text: String) {
         text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier.padding(start = SECTION_PADDING.dp, bottom = 8.dp)
+        modifier = Modifier.padding(start = SectionPadding, bottom = 8.dp)
     )
 }

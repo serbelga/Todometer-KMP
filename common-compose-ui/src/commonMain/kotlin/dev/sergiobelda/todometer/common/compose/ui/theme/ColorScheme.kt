@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.common.compose.ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.ui.graphics.Color
 
 val LightColorScheme = lightColorScheme(
     primary = todometer_light_primary,
@@ -51,7 +50,7 @@ val LightColorScheme = lightColorScheme(
 )
 
 val ToDometerLightColors = toDometerLightColors(
-    onSurfaceMediumEmphasis = Color.Black.copy(alpha = 0.6f),
+    onSurfaceMediumEmphasis = todometer_light_onSurface.copy(alpha = Alpha.Medium),
     check = todometer_secondary50,
     amber = amberLight,
     blue = blueLight,
@@ -98,7 +97,7 @@ val DarkColorScheme = darkColorScheme(
 )
 
 val ToDometerDarkColors = toDometerDarkColors(
-    onSurfaceMediumEmphasis = Color.White.copy(alpha = 0.6f),
+    onSurfaceMediumEmphasis = todometer_dark_onSurface.copy(alpha = Alpha.Medium),
     check = todometer_secondary80,
     amber = amberDark,
     blue = blueDark,
