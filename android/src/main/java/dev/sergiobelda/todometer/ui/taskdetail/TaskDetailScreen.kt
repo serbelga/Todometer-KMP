@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -92,7 +93,11 @@ internal fun TaskDetailScreen(
                 title = {
                     if (lazyListState.firstVisibleItemIndex > 0) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
-                            Text(taskDetailUiState.task.title)
+                            Text(
+                                taskDetailUiState.task.title,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
                         }
                     }
                 },
@@ -154,9 +159,9 @@ internal fun TaskDetailScreen(
 
 private fun LazyListScope.taskTitle(task: Task) {
     item {
-        Surface(modifier = Modifier.height(64.dp)) {
+        Surface(modifier = Modifier.heightIn(max = 80.dp, min = 64.dp)) {
             Row(
-                modifier = Modifier.padding(start = 24.dp),
+                modifier = Modifier.padding(start = 24.dp, bottom = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
@@ -165,14 +170,13 @@ private fun LazyListScope.taskTitle(task: Task) {
                         .clip(CircleShape)
                         .background(ToDometerTheme.toDometerColors.composeColorOf(task.tag))
                 )
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
-                    Text(
-                        text = task.title,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
-                        maxLines = 1
-                    )
-                }
+                Text(
+                    text = task.title,
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.padding(start = 8.dp, bottom = 4.dp, end = 8.dp),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
         HorizontalDivider()
