@@ -31,6 +31,8 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerLightColors
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.theme.Type.typography
 import dev.sergiobelda.todometer.common.compose.ui.theme.shapes
+import dev.sergiobelda.todometer.common.compose.ui.theme.todometer_dark_outline
+import dev.sergiobelda.todometer.common.compose.ui.theme.todometer_light_outline
 
 @Composable
 internal fun ToDometerAppTheme(
@@ -41,7 +43,12 @@ internal fun ToDometerAppTheme(
 
     val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val context = LocalContext.current
-        if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        // Update default outline value for dynamic color schemes.
+        if (darkTheme) {
+            dynamicDarkColorScheme(context).copy(outline = todometer_dark_outline)
+        } else {
+            dynamicLightColorScheme(context).copy(outline = todometer_light_outline)
+        }
     } else {
         if (darkTheme) DarkColorScheme else LightColorScheme
     }
