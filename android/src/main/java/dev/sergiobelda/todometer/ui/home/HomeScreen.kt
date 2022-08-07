@@ -55,6 +55,7 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
+import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.AlertDialog
@@ -353,6 +354,13 @@ private fun ChooseThemeAlertDialog(
 @Composable
 private fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskList: () -> Unit) {
     AlertDialog(
+        icon = {
+            Icon(
+                Icons.Rounded.Warning,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
+        },
         title = {
             Text(stringResource(R.string.delete_task_list))
         },
