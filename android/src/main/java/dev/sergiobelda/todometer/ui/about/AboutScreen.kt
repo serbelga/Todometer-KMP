@@ -34,11 +34,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -92,45 +94,30 @@ internal fun AboutScreen(
                 icon = {
                     Icon(
                         painterResource(R.drawable.ic_github_24),
-                        contentDescription = stringResource(R.string.github),
-                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        contentDescription = stringResource(R.string.github)
                     )
                 },
-                text = {
-                    Text(
-                        text = stringResource(R.string.github)
-                    )
-                }
+                text = { Text(stringResource(R.string.github)) }
             )
             AboutItemCard(
                 onCardClick = { privacyPolicyDialogState = true },
                 icon = {
                     Icon(
                         Icons.Rounded.Description,
-                        contentDescription = stringResource(R.string.privacy_policy),
-                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        contentDescription = stringResource(R.string.privacy_policy)
                     )
                 },
-                text = {
-                    Text(
-                        text = stringResource(R.string.privacy_policy)
-                    )
-                }
+                text = { Text(stringResource(R.string.privacy_policy)) }
             )
             AboutItemCard(
                 onCardClick = { openSourceLicenses() },
                 icon = {
                     Icon(
                         Icons.Rounded.Code,
-                        contentDescription = stringResource(R.string.open_source_licenses),
-                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        contentDescription = stringResource(R.string.open_source_licenses)
                     )
                 },
-                text = {
-                    Text(
-                        text = stringResource(R.string.open_source_licenses)
-                    )
-                }
+                text = { Text(stringResource(R.string.open_source_licenses)) }
             )
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
@@ -149,15 +136,20 @@ private fun AboutItemCard(
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit
 ) {
-    Card(modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp).clickable { onCardClick() }) {
+    Card(
+        modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp)
+            .clickable { onCardClick() }
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxSize()
         ) {
-            Spacer(modifier = Modifier.width(24.dp))
-            icon()
-            Spacer(modifier = Modifier.width(24.dp))
-            text()
+            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onPrimaryContainer) {
+                Spacer(modifier = Modifier.width(24.dp))
+                icon()
+                Spacer(modifier = Modifier.width(24.dp))
+                text()
+            }
         }
     }
 }
