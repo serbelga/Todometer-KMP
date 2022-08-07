@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
-import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -43,8 +42,7 @@ fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Mod
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
     Column(
-        modifier = modifier.fillMaxWidth().requiredWidthIn(max = 360.dp)
-            .padding(start = 8.dp, end = 8.dp, bottom = 12.dp)
+        modifier = modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
     ) {
         Text(
             taskListName ?: "",
@@ -53,7 +51,7 @@ fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Mod
         )
         Text(
             text = TaskProgress.getPercentage(progress),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(top = 4.dp)
         )
         LinearProgressIndicator(
