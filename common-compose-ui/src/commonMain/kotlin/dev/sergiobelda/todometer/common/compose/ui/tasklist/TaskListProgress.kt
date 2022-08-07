@@ -42,7 +42,7 @@ fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Mod
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
     Column(
-        modifier = modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
+        modifier = modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, bottom = 16.dp)
     ) {
         Text(
             taskListName ?: "",
