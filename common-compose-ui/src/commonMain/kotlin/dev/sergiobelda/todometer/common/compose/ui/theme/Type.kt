@@ -74,7 +74,7 @@ object Type {
         ),
         labelLarge = TextStyle(
             fontFamily = quickSandFontFamily,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.SemiBold,
             fontSize = 12.sp
         ),
         labelMedium = TextStyle(
