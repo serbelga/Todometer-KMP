@@ -1,5 +1,3 @@
-import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -47,8 +45,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("debug") {
-            configure<CrashlyticsExtension> {
-                mappingFileUploadEnabled = false
+            getByName("debug") {
+                extra["enableCrashlytics"] = false
             }
         }
     }
