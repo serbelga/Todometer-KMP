@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.ui.about
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -130,6 +129,7 @@ internal fun AboutScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AboutItemCard(
     onCardClick: () -> Unit,
@@ -137,8 +137,8 @@ private fun AboutItemCard(
     text: @Composable () -> Unit
 ) {
     Card(
+        onClick = onCardClick,
         modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp)
-            .clickable { onCardClick() }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
