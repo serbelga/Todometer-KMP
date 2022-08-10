@@ -53,7 +53,7 @@ import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 private const val TASK_TITLE = "task_title"
 
 @Composable
-fun TaskDetailScreen(
+internal fun TaskDetailScreen(
     deleteTask: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel
 ) {
@@ -96,7 +96,7 @@ fun TaskDetailScreen(
 }
 
 @Composable
-fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
+private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
@@ -135,7 +135,7 @@ fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
 }
 
 @Composable
-fun DeleteTaskButton(onClick: () -> Unit) {
+private fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {

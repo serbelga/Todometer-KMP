@@ -21,12 +21,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,8 +38,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddChecklistItemField(
     placeholder: @Composable (() -> Unit)? = null,
@@ -75,7 +77,7 @@ fun AddChecklistItemField(
                 Icon(
                     Icons.Rounded.Check,
                     contentDescription = null,
-                    tint = TodometerColors.primary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

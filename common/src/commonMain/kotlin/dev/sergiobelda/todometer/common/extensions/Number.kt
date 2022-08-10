@@ -16,4 +16,4 @@
 
 package dev.sergiobelda.todometer.common.extensions
 
-expect fun Int.format(digits: Int): String
+internal expect fun Int.format(digits: Int): String

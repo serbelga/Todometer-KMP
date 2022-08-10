@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.backend.di
 
-import io.ktor.application.Application
-import io.ktor.application.install
-import org.koin.ktor.ext.Koin
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import org.koin.ktor.plugin.Koin
 import org.koin.logger.SLF4JLogger
 
 fun Application.configureKoin() {

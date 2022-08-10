@@ -6,6 +6,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("app.cash.sqldelight")
+    id("todometer.spotless")
 }
 
 version = "1.0"
@@ -31,9 +32,12 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.json)
-                implementation(libs.ktor.client.serialization)
+                implementation(libs.ktor.client.contentNegotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
+
                 implementation(libs.sqldelight.coroutines)
                 implementation(libs.sqldelight.primitiveAdapters)
+
                 implementation(projects.commonDomain)
                 implementation(projects.commonPreferences)
             }

@@ -19,7 +19,6 @@ package dev.sergiobelda.todometer.wear.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.navArgument
-import androidx.wear.compose.material.ExperimentalWearMaterialApi
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
@@ -39,7 +38,6 @@ import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalWearMaterialApi::class)
 @Composable
 fun ToDometerApp() {
     val navController = rememberSwipeDismissableNavController()

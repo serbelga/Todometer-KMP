@@ -6,6 +6,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     kotlin("android")
     kotlin("kapt")
+    id("todometer.spotless")
 }
 
 // TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
@@ -27,8 +28,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1220400
-        versionName = "android-2.2.0"
+        versionCode = 1230400
+        versionName = "android-2.3.0"
     }
 
     buildTypes {
@@ -41,9 +42,7 @@ android {
             )
         }
         getByName("debug") {
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = false
-            }
+            extra["enableCrashlytics"] = false
         }
         lint {
             abortOnError = false

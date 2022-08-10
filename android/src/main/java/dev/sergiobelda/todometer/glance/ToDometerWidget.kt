@@ -137,7 +137,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     Text(
                         text = taskListName ?: "",
                         style = TextStyle(
-                            color = ColorProvider(R.color.todometer_on_surface),
+                            color = ColorProvider(R.color.todometer_onSurface),
                             fontSize = 16.sp
                         ),
                         modifier = GlanceModifier.fillMaxWidth().defaultWeight()
@@ -186,11 +186,11 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             ) {
                 val textStyle = if (taskItem.state == TaskState.DONE) {
                     TextStyle(
-                        color = ColorProvider(R.color.todometer_on_surface),
+                        color = ColorProvider(R.color.todometer_onSurface),
                         textDecoration = TextDecoration.LineThrough
                     )
                 } else {
-                    TextStyle(color = ColorProvider(R.color.todometer_on_surface))
+                    TextStyle(color = ColorProvider(R.color.todometer_onSurface))
                 }
                 Text(
                     text = taskItem.title,

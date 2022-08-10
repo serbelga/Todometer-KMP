@@ -13,11 +13,9 @@ buildscript {
         classpath(libs.google.ossLicensesPlugin)
         classpath(libs.google.services)
         classpath(libs.sqldelight.gradlePlugin)
+        classpath(libs.spotless.gradlePlugin)
     }
 }
-
-group = "dev.sergiobelda.todometer"
-version = "1.0"
 
 allprojects {
     repositories {
@@ -29,8 +27,6 @@ allprojects {
 
 subprojects {
     if (!project.name.contains("ios")) {
-        apply {
-            from("${rootDir}/ktlint.gradle.kts")
-        }
+        apply("${rootDir}/ktlint.gradle.kts")
     }
 }

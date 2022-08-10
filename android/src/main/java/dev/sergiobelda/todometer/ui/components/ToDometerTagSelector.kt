@@ -28,10 +28,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -41,18 +42,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @Composable
-fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+internal fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     Text(
         text = stringResource(R.string.choose_tag),
-        color = TodometerColors.primary,
-        style = TodometerTypography.caption,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
         modifier = Modifier.padding(start = 32.dp)
     )
     LazyRow(
@@ -76,13 +76,13 @@ fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
                     modifier = Modifier
                         .size(32.dp)
                         .clip(CircleShape)
-                        .background(TodometerColors.composeColorOf(tag))
+                        .background(ToDometerTheme.toDometerColors.composeColorOf(tag))
                 ) {
                     if (tag == selectedTag) {
                         Icon(
                             Icons.Rounded.Check,
                             "Selected",
-                            tint = TodometerColors.onPrimary
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

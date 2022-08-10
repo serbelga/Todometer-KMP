@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.data.database.mapper
 import dev.sergiobelda.todometer.common.data.database.SelectTasksByTaskListId
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 
-fun SelectTasksByTaskListId.toTaskItem(): TaskItem =
+internal fun SelectTasksByTaskListId.toTaskItem(): TaskItem =
     TaskItem(
         id = id,
         title = title,

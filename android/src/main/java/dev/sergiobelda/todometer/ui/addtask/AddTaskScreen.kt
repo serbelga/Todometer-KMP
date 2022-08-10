@@ -18,26 +18,28 @@ package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -47,6 +49,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -57,23 +60,24 @@ import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskScreen(
+internal fun AddTaskScreen(
     navigateUp: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
     val activity = LocalContext.current as AppCompatActivity
     val lazyListState = rememberLazyListState()
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val topAppBarState = rememberTopAppBarState()
+    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(topAppBarState) }
 
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -89,26 +93,24 @@ fun AddTaskScreen(
     }
 
     if (addTaskUiState.errorUi != null) {
-        LaunchedEffect(scaffoldState.snackbarHostState) {
-            scaffoldState.snackbarHostState.showSnackbar(
+        LaunchedEffect(snackbarHostState) {
+            snackbarHostState.showSnackbar(
                 message = addTaskUiState.errorUi.message ?: ""
             )
         }
     }
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            TopAppBar(
-                backgroundColor = TodometerColors.surface,
-                contentColor = contentColorFor(TodometerColors.surface),
-                elevation = 0.dp,
+            SmallTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
                 },
@@ -132,22 +134,19 @@ fun AddTaskScreen(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
                             tint = if (addTaskUiState.isAddingTask)
-                                TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
+                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
                 },
-                title = { Text(stringResource(id = R.string.add_task)) }
+                title = { Text(stringResource(id = R.string.add_task)) },
+                scrollBehavior = scrollBehavior
             )
         },
-        content = {
+        content = { paddingValues ->
             if (addTaskUiState.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-            if (lazyListState.firstVisibleItemIndex > 0) {
-                HorizontalDivider()
-            }
-            LazyColumn(state = lazyListState) {
-                item { Spacer(modifier = Modifier.height(24.dp)) }
+            LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                 item {
                     TitledTextField(
                         title = stringResource(id = R.string.name),
@@ -187,8 +186,8 @@ fun AddTaskScreen(
                 item {
                     Text(
                         text = stringResource(R.string.checklist),
-                        color = TodometerColors.primary,
-                        style = TodometerTypography.caption,
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(start = 32.dp, top = 16.dp)
                     )
                 }
@@ -249,7 +248,7 @@ private fun TaskChecklistItem(
             Icon(
                 Icons.Rounded.Clear,
                 contentDescription = stringResource(R.string.clear),
-                tint = TodometerColors.onSurfaceMediumEmphasis
+                tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }
     }

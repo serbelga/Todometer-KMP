@@ -27,7 +27,7 @@ import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.di.initKoin
 import ui.home.HomeScreen
 import ui.icons.iconToDometer
-import ui.theme.ToDometerTheme
+import ui.theme.ToDometerAppTheme
 
 val koin = initKoin().koin
 
@@ -44,7 +44,7 @@ fun main() = application {
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        ToDometerTheme {
+        ToDometerAppTheme {
             Crossfade(currentPage) { screen ->
                 when (screen) {
                     Screen.Home -> HomeScreen()

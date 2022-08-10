@@ -19,18 +19,16 @@ package dev.sergiobelda.todometer.common.compose.ui.task
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Event
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerChip
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
-import dev.sergiobelda.todometer.common.compose.ui.theme.outline
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -45,9 +43,9 @@ fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
         currentInstant > Instant.fromEpochMilliseconds(dueDate).toLocalDateTime(TimeZone.UTC)
 
     val dueDateChipTint =
-        if (expired) TodometerColors.error else TodometerColors.onSurfaceMediumEmphasis
+        if (expired) MaterialTheme.colorScheme.error else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
     val dueDateChipOutline =
-        if (expired) TodometerColors.error else TodometerColors.outline
+        if (expired) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
     ToDometerChip(
         borderStroke = BorderStroke(1.dp, dueDateChipOutline),
         modifier = modifier
@@ -60,7 +58,7 @@ fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
         )
         Text(
             TaskDueDate.getDueDateFormatted(dueDate),
-            style = TodometerTypography.caption,
+            style = MaterialTheme.typography.labelLarge,
             color = dueDateChipTint
         )
     }

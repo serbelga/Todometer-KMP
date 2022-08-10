@@ -22,8 +22,8 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +38,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddTaskListAlertDialog(
+internal fun AddTaskListAlertDialog(
     onDismissRequest: () -> Unit,
     addTaskList: (name: String) -> Unit
 ) {

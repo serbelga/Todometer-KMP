@@ -73,7 +73,7 @@ private const val TASK_TITLE = "task_title"
 private const val TASK_LIST_NAME = "task_list_name"
 
 @Composable
-fun TaskListTasksScreen(
+internal fun TaskListTasksScreen(
     openTask: (String) -> Unit,
     deleteTaskList: () -> Unit,
     taskListTasksViewModel: TaskListTasksViewModel
@@ -156,7 +156,7 @@ fun TaskListTasksScreen(
 }
 
 @Composable
-fun TaskListProgressIndicator(progress: Float) {
+private fun TaskListProgressIndicator(progress: Float) {
     CircularProgressIndicator(
         modifier = Modifier.fillMaxSize(),
         startAngle = 300f,
@@ -166,7 +166,7 @@ fun TaskListProgressIndicator(progress: Float) {
 }
 
 @Composable
-fun TaskItem(
+private fun TaskItem(
     taskItem: TaskItem,
     onDoingClick: () -> Unit,
     onDoneClick: () -> Unit,
@@ -207,7 +207,7 @@ fun TaskItem(
 }
 
 @Composable
-fun AddTaskButton(onComplete: (String) -> Unit) {
+private fun AddTaskButton(onComplete: (String) -> Unit) {
     val taskTitleInput = stringResource(id = R.string.task_title_input)
     val addTaskLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
@@ -244,7 +244,7 @@ fun AddTaskButton(onComplete: (String) -> Unit) {
 }
 
 @Composable
-fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit) {
+private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit) {
     val editTaskListLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -281,7 +281,7 @@ fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit) {
 }
 
 @Composable
-fun DeleteTaskListButton(onClick: () -> Unit) {
+private fun DeleteTaskListButton(onClick: () -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {

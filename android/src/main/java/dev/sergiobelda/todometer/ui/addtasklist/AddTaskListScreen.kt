@@ -20,17 +20,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -45,17 +47,17 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskListScreen(
+internal fun AddTaskListScreen(
     navigateUp: () -> Unit,
     addTaskListViewModel: AddTaskListViewModel = getViewModel()
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
@@ -66,26 +68,23 @@ fun AddTaskListScreen(
     }
 
     if (addTaskListUiState.errorUi != null) {
-        LaunchedEffect(scaffoldState.snackbarHostState) {
-            scaffoldState.snackbarHostState.showSnackbar(
+        LaunchedEffect(snackbarHostState) {
+            snackbarHostState.showSnackbar(
                 message = addTaskListUiState.errorUi.message ?: ""
             )
         }
     }
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            TopAppBar(
-                backgroundColor = TodometerColors.surface,
-                contentColor = contentColorFor(TodometerColors.surface),
-                elevation = 0.dp,
+            SmallTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
                 },
@@ -106,17 +105,17 @@ fun AddTaskListScreen(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
                             tint = if (addTaskListUiState.isAddingTaskList)
-                                TodometerColors.onSurfaceMediumEmphasis else TodometerColors.primary
+                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
                 },
             )
         },
-        content = {
+        content = { paddingValues ->
             if (addTaskListUiState.isAddingTaskList) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-            Column(modifier = Modifier.padding(top = 24.dp)) {
+            Column(modifier = Modifier.padding(paddingValues)) {
                 TitledTextField(
                     title = stringResource(R.string.name),
                     value = taskListName,

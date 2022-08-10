@@ -22,25 +22,27 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
-import dev.sergiobelda.todometer.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.ui.theme.ToDometerAppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToDometerTopAppBar(
+internal fun ToDometerTopAppBar(
     onMenuClick: () -> Unit,
     onMoreClick: () -> Unit,
     taskListName: String?,
@@ -48,14 +50,14 @@ fun ToDometerTopAppBar(
 ) {
     Box {
         Column {
-            TopAppBar(
+            SmallTopAppBar(
                 title = {},
                 navigationIcon = {
                     IconButton(onClick = onMenuClick) {
                         Icon(
                             Icons.Rounded.Menu,
                             contentDescription = "Menu",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
                 },
@@ -64,14 +66,13 @@ fun ToDometerTopAppBar(
                         Icon(
                             Icons.Rounded.MoreVert,
                             contentDescription = "More",
-                            tint = TodometerColors.onSurfaceMediumEmphasis
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
-                },
-                backgroundColor = TodometerColors.surface,
-                elevation = 0.dp
+                }
             )
             TaskListProgress(taskListName, tasks)
+            HorizontalDivider()
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -85,8 +86,8 @@ fun ToDometerTopAppBar(
 
 @Preview
 @Composable
-fun ToDometerTopAppBarPreview() {
-    ToDometerTheme {
+private fun ToDometerTopAppBarPreview() {
+    ToDometerAppTheme {
         ToDometerTopAppBar({}, {}, "", emptyList())
     }
 }
