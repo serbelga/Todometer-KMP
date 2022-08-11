@@ -154,9 +154,8 @@ internal fun HomeScreen(
             )
         },
         floatingActionButtonPosition = FabPosition.End
-    ) {
-        Divider()
-        Column(modifier = Modifier.fillMaxSize()) {
+    ) { paddingValues ->
+        Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             if (addTaskListAlertDialogState) {
                 AddTaskListAlertDialog(
                     onDismissRequest = { addTaskListAlertDialogState = false }
@@ -190,7 +189,7 @@ internal fun HomeScreen(
                 }
             }
         }
-        Row {
+        Row(modifier = Modifier.padding(paddingValues)) {
             if (navigationDrawerStateVisible) {
                 TaskListsNavigationDrawer(
                     taskLists,
