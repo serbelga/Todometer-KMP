@@ -19,17 +19,42 @@ package dev.sergiobelda.todometer.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val mainViewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        // installSplashScreen()
 
         super.onCreate(savedInstanceState)
 
         setContent {
             ToDometerApp()
+        }
+
+        lifecycleScope.launch {
+            mainViewModel.appTheme.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { appTheme ->
+                    when (appTheme) {
+                        AppTheme.FOLLOW_SYSTEM -> AppCompatDelegate.setDefaultNightMode(
+                            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                        )
+                        AppTheme.DARK_THEME -> AppCompatDelegate.setDefaultNightMode(
+                            AppCompatDelegate.MODE_NIGHT_YES
+                        )
+                        AppTheme.LIGHT_THEME -> AppCompatDelegate.setDefaultNightMode(
+                            AppCompatDelegate.MODE_NIGHT_NO
+                        )
+                    }
+                }
         }
     }
 }

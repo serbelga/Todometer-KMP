@@ -18,4 +18,4 @@ package dev.sergiobelda.todometer.common.data.util
 
 import platform.Foundation.NSUUID
 
-actual fun randomUUIDString(): String = NSUUID().UUIDString()
+internal actual fun randomUUIDString(): String = NSUUID().UUIDString()

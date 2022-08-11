@@ -4,6 +4,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     kotlin("android")
     kotlin("kapt")
+    id("todometer.spotless")
 }
 
 // TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
@@ -25,8 +26,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 4110400
-        versionName = "wearos-1.1.0"
+        versionCode = 4120400
+        versionName = "wearos-1.2.0"
     }
 
     buildFeatures {
@@ -34,7 +35,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     buildTypes {
@@ -44,8 +45,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("debug") {
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = false
+            getByName("debug") {
+                extra["enableCrashlytics"] = false
             }
         }
     }

@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.common.data.remotedatasource.TaskListRemoteData
 import dev.sergiobelda.todometer.common.data.remotedatasource.TaskRemoteDataSource
 import org.koin.dsl.module
 
-val remoteDataSourceModule = module {
+internal val remoteDataSourceModule = module {
     single<ITaskListRemoteDataSource> {
         TaskListRemoteDataSource(get())
     }

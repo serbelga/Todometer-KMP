@@ -18,18 +18,17 @@ plugins {
     application
     kotlin("jvm")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("todometer.spotless")
 }
 
 dependencies {
 
-    implementation(libs.ktor.auth)
-    implementation(libs.ktor.client.apache)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.core.jvm)
-    implementation(libs.ktor.gson)
-    implementation(libs.ktor.locations)
-    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.serialization.gson)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.server.auth)
+    implementation(libs.ktor.server.contentNegotiation)
     implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.locations)
     implementation(libs.ktor.server.netty)
     testImplementation(libs.ktor.server.tests)
 

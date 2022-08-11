@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.backend.service.TaskListService
 import dev.sergiobelda.todometer.backend.service.TaskService
 import org.koin.dsl.module
 
-val serviceModule = module {
+internal val serviceModule = module {
     single<ITaskListService> { TaskListService(get()) }
     single<ITaskService> { TaskService(get()) }
 }

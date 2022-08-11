@@ -16,36 +16,56 @@
 
 package dev.sergiobelda.todometer.ui.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorPalette
-import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorPalette
+import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerDarkColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerLightColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.theme.Type.typography
 import dev.sergiobelda.todometer.common.compose.ui.theme.shapes
+import dev.sergiobelda.todometer.common.compose.ui.theme.todometer_dark_outline
+import dev.sergiobelda.todometer.common.compose.ui.theme.todometer_light_outline
 
 @Composable
-fun ToDometerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
+internal fun ToDometerAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val toDometerColors = if (darkTheme) ToDometerDarkColors else ToDometerLightColors
+
+    val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        val context = LocalContext.current
+        // Update default outline value for dynamic color schemes.
+        if (darkTheme) {
+            dynamicDarkColorScheme(context).copy(outline = todometer_dark_outline)
+        } else {
+            dynamicLightColorScheme(context).copy(outline = todometer_light_outline)
+        }
     } else {
-        LightColorPalette
+        if (darkTheme) DarkColorScheme else LightColorScheme
     }
 
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = colors.surface,
+            color = colorScheme.surface,
             darkIcons = !darkTheme
         )
     }
 
-    MaterialTheme(
-        colors = colors,
-        shapes = shapes,
+    ToDometerTheme(
+        toDometerColors = toDometerColors,
+        colorScheme = colorScheme,
         typography = typography,
+        shapes = shapes,
         content = content
     )
 }

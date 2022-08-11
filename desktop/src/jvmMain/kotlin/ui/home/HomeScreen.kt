@@ -29,22 +29,24 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.ExtendedFloatingActionButton
-import androidx.compose.material.FabPosition
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MenuOpen
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -61,8 +63,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.VerticalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -80,15 +80,15 @@ import koin
 import kotlinx.coroutines.launch
 import ui.icons.iconToDometer
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     navigateToTaskDetail: () -> Unit
 ) {
     var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
-    val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     var navigationDrawerStateVisible by remember { mutableStateOf(false) }
 
@@ -116,7 +116,7 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            SmallTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { navigationDrawerStateVisible = !navigationDrawerStateVisible }) {
                         if (navigationDrawerStateVisible) {
@@ -136,8 +136,6 @@ fun HomeScreen(
                         Text(text = "ToDometer")
                     }
                 },
-                elevation = 0.dp,
-                backgroundColor = TodometerColors.surface,
                 actions = {
                     IconButton(onClick = {}) {
                         Icon(Icons.Outlined.Settings, contentDescription = "Settings")
@@ -153,15 +151,12 @@ fun HomeScreen(
                 text = {
                     Text("Add task")
                 },
-                onClick = { addTaskAlertDialogState = true },
-                backgroundColor = TodometerColors.primary
+                onClick = { addTaskAlertDialogState = true }
             )
         },
-        floatingActionButtonPosition = FabPosition.End,
-        scaffoldState = scaffoldState
-    ) {
-        Divider()
-        Column(modifier = Modifier.fillMaxSize()) {
+        floatingActionButtonPosition = FabPosition.End
+    ) { paddingValues ->
+        Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             if (addTaskListAlertDialogState) {
                 AddTaskListAlertDialog(
                     onDismissRequest = { addTaskListAlertDialogState = false }
@@ -195,7 +190,7 @@ fun HomeScreen(
                 }
             }
         }
-        Row {
+        Row(modifier = Modifier.padding(paddingValues)) {
             if (navigationDrawerStateVisible) {
                 TaskListsNavigationDrawer(
                     taskLists,
@@ -246,7 +241,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun EmptyTaskListsView(addTaskList: () -> Unit) {
+private fun EmptyTaskListsView(addTaskList: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -270,7 +265,7 @@ fun EmptyTaskListsView(addTaskList: () -> Unit) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TasksListView(
+private fun TasksListView(
     tasks: List<TaskItem>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
@@ -292,7 +287,7 @@ fun TasksListView(
 }
 
 @Composable
-fun EmptyTasksListView() {
+private fun EmptyTasksListView() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -311,7 +306,7 @@ fun EmptyTasksListView() {
 }
 
 @Composable
-fun TaskListsNavigationDrawer(
+private fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,
     selectedTaskListId: String,
     defaultTaskListName: String,
@@ -326,9 +321,9 @@ fun TaskListsNavigationDrawer(
         ) {
             Text(
                 text = "TASK LISTS",
-                style = TodometerTypography.overline
+                style = MaterialTheme.typography.labelSmall
             )
-            OutlinedButton(
+            TextButton(
                 onClick = onAddTaskListClick,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp)
             ) {

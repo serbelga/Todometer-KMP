@@ -1,44 +1,47 @@
 [versions]
-accompanist = "0.23.0"
-activity = "1.4.0"
+accompanist = "0.24.13-rc"
+activity = "1.5.0"
 androidCore = "1.7.0"
 androidCompileSdk = "32"
 androidMinSdk = "24"
 androidWearMinSdk = "25"
 androidTargetSdk = "32"
-androidGradlePlugin = "7.4.0-alpha08"
-appcompat = "1.4.1"
-compose = "1.2.0-beta01"
-composeMultiplatform = "1.2.0-alpha01-dev724"
+androidGradlePlugin = "7.4.0-alpha09"
+appcompat = "1.4.2"
+compose = "1.2.0-rc03"
+composeCompiler = "1.2.0"
+composeMaterial3 = "1.0.0-alpha15"
+composeMultiplatform = "1.2.0-alpha01-dev753"
 dataStore = "1.0.0"
 espressoCore = "3.4.0"
 exposed = "0.32.1"
-firebaseBom = "29.0.4"
-firebaseCrashlyticsGradle = "2.5.2"
+firebaseBom = "30.1.0"
+firebaseCrashlyticsGradle = "2.9.1"
 glance = "1.0.0-alpha03"
 googleServices = "4.3.10"
 junit = "4.12"
 androidJunit = "1.1.3"
-koin = "3.1.6"
-kotlin = "1.6.21"
-kotlinCoroutines = "1.6.1"
-kotlinDatetime = "0.3.2"
+koin = "3.2.0"
+kotlin = "1.7.0"
+kotlinCoroutines = "1.6.3"
+kotlinDatetime = "0.4.0"
 ktlint = "0.45.2"
-ktor = "1.6.7"
-lifecycle = "2.4.1"
-material = "1.5.0"
-mockk = "1.12.3"
-navigation = "2.4.2"
-ossLicensesPlugin = "0.10.4"
+ktor = "2.0.3"
+lifecycle = "2.5.0"
+material = "1.7.0-alpha03"
+mockk = "1.12.4"
+navigation = "2.5.0"
+ossLicensesPlugin = "0.10.5"
 playServicesOssLicenses = "17.0.0"
 playServicesWearable = "17.1.0"
 robolectric = "4.3.1"
-splashscreen = "1.0.0-beta02"
-sqlDelight = "2.0.0-alpha02"
+splashscreen = "1.0.0-rc01"
+sqlDelight = "2.0.0-alpha03"
+spotless = "6.9.0"
 testCoreKtx = "1.4.0"
-timber = "4.7.1"
+timber = "5.0.1"
 wear = "1.3.0-alpha02"
-wearCompose = "1.0.0-beta03"
+wearCompose = "1.1.0-alpha01"
 wearInput = "1.2.0-alpha02"
 
 [libraries]
@@ -52,6 +55,7 @@ androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidCo
 androidx-compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
 androidx-compose-ui-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
@@ -96,18 +100,19 @@ kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", v
 
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 
-ktor-auth = { module = "io.ktor:ktor-auth", version.ref = "ktor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
+ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-core-jvm = { module = "io.ktor:ktor-client-core-jvm", version.ref = "ktor" }
 ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
 ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktor" }
-ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
-ktor-gson = { module = "io.ktor:ktor-gson", version.ref = "ktor" }
-ktor-locations = { module = "io.ktor:ktor-locations", version.ref = "ktor" }
-ktor-serialization = { module = "io.ktor:ktor-serialization", version.ref = "ktor" }
+ktor-serialization-gson = { module = "io.ktor:ktor-serialization-gson", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
+ktor-server-contentNegotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-locations = { module = "io.ktor:ktor-server-locations", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor-server-tests = { module = "io.ktor:ktor-server-tests", version.ref = "ktor" }
 
@@ -121,6 +126,8 @@ mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockk" }
 google-playServicesOssLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "playServicesOssLicenses" }
 google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
 google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
+
+spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 sqldelight-gradlePlugin = { module = "app.cash.sqldelight:gradle-plugin", version.ref = "sqlDelight" }
 sqldelight-androidDriver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }

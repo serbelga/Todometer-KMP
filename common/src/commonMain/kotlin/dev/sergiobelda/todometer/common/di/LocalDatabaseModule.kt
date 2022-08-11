@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.data.database.dao.TaskDao
 import dev.sergiobelda.todometer.common.data.database.dao.TaskListDao
 import org.koin.dsl.module
 
-val localDatabaseModule = module {
+internal val localDatabaseModule = module {
     single {
         createDatabase()
     }

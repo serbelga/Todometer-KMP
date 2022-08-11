@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright $YEAR Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,3 @@
  * limitations under the License.
  */
 
-repositories {
-    mavenCentral()
-}
-
-plugins {
-    `kotlin-dsl`
-}

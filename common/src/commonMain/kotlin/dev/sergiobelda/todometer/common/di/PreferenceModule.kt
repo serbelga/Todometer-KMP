@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.di
 import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 import org.koin.dsl.module
 
-val preferenceModule = module {
+internal val preferenceModule = module {
     single {
         PreferencesFactory.createPreferences()
     }

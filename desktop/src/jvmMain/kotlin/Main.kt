@@ -30,7 +30,7 @@ import dev.sergiobelda.todometer.common.di.initKoin
 import ui.home.HomeScreen
 import ui.icons.iconToDometer
 import ui.task.TaskDetailScreen
-import ui.theme.ToDometerTheme
+import ui.theme.ToDometerAppTheme
 
 val koin = initKoin().koin
 
@@ -52,7 +52,7 @@ fun main() = application {
         val navigateToTaskDetail: () -> Unit = {
             currentPage = Screen.TaskDetail
         }
-        ToDometerTheme {
+        ToDometerAppTheme {
             Crossfade(currentPage) { screen ->
                 when (screen) {
                     Screen.Home -> HomeScreen(navigateToTaskDetail)

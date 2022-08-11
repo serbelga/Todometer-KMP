@@ -18,4 +18,4 @@ package dev.sergiobelda.todometer.common.data.util
 
 import java.util.UUID
 
-actual fun randomUUIDString(): String = UUID.randomUUID().toString()
+internal actual fun randomUUIDString(): String = UUID.randomUUID().toString()

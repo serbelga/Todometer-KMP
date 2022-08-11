@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-sealed class Screen {
+internal sealed class Screen {
     object Home : Screen()
     object TaskDetail : Screen()
 }

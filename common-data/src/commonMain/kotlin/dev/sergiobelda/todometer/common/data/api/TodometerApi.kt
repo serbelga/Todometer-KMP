@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.common.data.api
 
 import io.ktor.client.HttpClient
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.serialization.json.Json
 
@@ -26,8 +26,8 @@ internal expect val ApplicationDispatcher: CoroutineDispatcher
 
 class TodometerApi {
     val client = HttpClient {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(
+        install(ContentNegotiation) {
+            json(
                 Json {
                     prettyPrint = true
                     isLenient = true

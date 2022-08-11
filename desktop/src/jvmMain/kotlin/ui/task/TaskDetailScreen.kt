@@ -16,34 +16,32 @@
 
 package ui.task
 
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskDetailScreen(navigateUp: () -> Unit) {
+internal fun TaskDetailScreen(navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            SmallTopAppBar(
                 title = {},
                 navigationIcon = {
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack, "Back")
-                        }
+                    IconButton(onClick = navigateUp) {
+                        Icon(
+                            Icons.Rounded.ArrowBack,
+                            "Back",
+                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        )
                     }
-                },
-                elevation = 0.dp,
-                backgroundColor = TodometerColors.surface
+                }
             )
         }
     ) {

@@ -61,7 +61,7 @@ import org.koin.androidx.compose.getViewModel
 private const val TASK_LIST_NAME = "task_list_name"
 
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
@@ -107,7 +107,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun ToDometerTitle() {
+private fun ToDometerTitle() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -122,7 +122,7 @@ fun ToDometerTitle() {
 }
 
 @Composable
-fun TaskListItem(taskListName: String, onClick: () -> Unit) {
+private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         label = {
@@ -138,7 +138,7 @@ fun TaskListItem(taskListName: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun AddTaskListButton(onComplete: (String) -> Unit) {
+private fun AddTaskListButton(onComplete: (String) -> Unit) {
     val taskListNameInput = stringResource(id = R.string.task_list_name_input)
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->

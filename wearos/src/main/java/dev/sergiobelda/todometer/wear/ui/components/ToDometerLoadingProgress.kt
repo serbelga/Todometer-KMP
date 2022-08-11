@@ -23,6 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.CircularProgressIndicator
 
 @Composable
-fun ToDometerLoadingProgress() {
+internal fun ToDometerLoadingProgress() {
     CircularProgressIndicator(modifier = Modifier.padding(top = 24.dp))
 }

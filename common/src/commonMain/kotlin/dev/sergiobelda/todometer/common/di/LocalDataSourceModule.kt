@@ -24,7 +24,7 @@ import dev.sergiobelda.todometer.common.data.localdatasource.TaskListLocalDataSo
 import dev.sergiobelda.todometer.common.data.localdatasource.TaskLocalDataSource
 import org.koin.dsl.module
 
-val localDataSourceModule = module {
+internal val localDataSourceModule = module {
     single<ITaskListLocalDataSource> {
         TaskListLocalDataSource(get())
     }

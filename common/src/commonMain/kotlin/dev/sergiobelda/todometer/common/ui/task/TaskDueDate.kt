@@ -22,7 +22,7 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.datetime.todayAt
+import kotlinx.datetime.todayIn
 
 object TaskDueDate {
 
@@ -34,7 +34,7 @@ object TaskDueDate {
         val dueDateInstant: Instant = Instant.fromEpochMilliseconds(dueDate)
         val dueDateLocalDateTime: LocalDateTime = dueDateInstant.toLocalDateTime(TimeZone.UTC)
 
-        val todayLocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
+        val todayLocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
 
         val formattedHour = "${dueDateLocalDateTime.hour.format(2)}:${dueDateLocalDateTime.minute.format(2)}h"
         return if (dueDateLocalDateTime.date.compareTo(todayLocalDate) == 0) {

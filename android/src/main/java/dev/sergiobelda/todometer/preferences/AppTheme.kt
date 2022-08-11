@@ -26,7 +26,7 @@ data class AppThemeOption(
     @StringRes val modeNameRes: Int
 )
 
-val appThemeMap = mapOf(
+internal val appThemeMap = mapOf(
     AppTheme.FOLLOW_SYSTEM to AppThemeOption(
         R.drawable.ic_baseline_default_theme_24,
         R.string.follow_system

@@ -16,15 +16,21 @@
 
 package dev.sergiobelda.todometer.ui.about
 
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 
 @Composable
-fun PrivacyPolicyDialog(
+internal fun PrivacyPolicyDialog(
     onDismissRequest: () -> Unit
 ) {
     AlertDialog(
@@ -33,7 +39,19 @@ fun PrivacyPolicyDialog(
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(R.string.privacy_policy_body))
+            Column {
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_user_data))
+                Text(stringResource(R.string.privacy_policy_user_data_body))
+                PrivacyPolicyDialogSeparator()
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_permissions))
+                Text(stringResource(R.string.privacy_policy_permissions_body))
+                PrivacyPolicyDialogSeparator()
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_device_and_network_abuse))
+                Text(stringResource(R.string.privacy_policy_device_and_network_abuse_body))
+                PrivacyPolicyDialogSeparator()
+                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_public))
+                Text(stringResource(R.string.privacy_policy_public_body))
+            }
         },
         confirmButton = {
             TextButton(
@@ -43,4 +61,14 @@ fun PrivacyPolicyDialog(
             }
         }
     )
+}
+
+@Composable
+private fun PrivacyPolicyDialogSectionTitle(text: String) {
+    Text(text = text, fontWeight = FontWeight.Bold)
+}
+
+@Composable
+private fun PrivacyPolicyDialogSeparator() {
+    Spacer(modifier = Modifier.height(8.dp))
 }

@@ -24,11 +24,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,14 +39,12 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerTypography
-import dev.sergiobelda.todometer.common.compose.ui.theme.onSurfaceMediumEmphasis
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import java.util.concurrent.TimeUnit
 
 @Composable
-fun ToDometerDateTimeSelector(
+internal fun ToDometerDateTimeSelector(
     activity: AppCompatActivity,
     taskDueDate: Long?,
     onDateTimeSelected: (Long?) -> Unit,
@@ -54,8 +53,8 @@ fun ToDometerDateTimeSelector(
     Column {
         Text(
             text = stringResource(R.string.date_time),
-            color = TodometerColors.primary,
-            style = TodometerTypography.caption,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(start = 32.dp)
         )
         Row(
@@ -69,7 +68,7 @@ fun ToDometerDateTimeSelector(
             Text(
                 text = taskDueDate?.let { TaskDueDate.getDueDateFormatted(it) }
                     ?: run { stringResource(R.string.enter_date_time) },
-                color = TodometerColors.onSurfaceMediumEmphasis,
+                color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
                 modifier = Modifier.padding(start = 32.dp)
             )
             taskDueDate?.let {
@@ -77,7 +76,7 @@ fun ToDometerDateTimeSelector(
                     Icon(
                         Icons.Rounded.Clear,
                         stringResource(R.string.clear),
-                        tint = TodometerColors.onSurfaceMediumEmphasis
+                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                     )
                 }
             }

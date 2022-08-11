@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright $YEAR Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,3 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.icons
-
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
-import dev.sergiobelda.todometer.R
-
-@Composable
-fun iconToDometer() =
-    if (MaterialTheme.colors.isLight)
-        painterResource(R.drawable.isotype_light)
-    else
-        painterResource(R.drawable.isotype_dark)

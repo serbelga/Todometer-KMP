@@ -20,18 +20,18 @@ import dev.sergiobelda.todometer.backend.model.NewTask
 import dev.sergiobelda.todometer.backend.model.TaskState
 import dev.sergiobelda.todometer.backend.model.UpdateTaskState
 import dev.sergiobelda.todometer.backend.service.ITaskService
-import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.routing.Route
-import io.ktor.routing.delete
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.put
-import io.ktor.routing.route
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.put
+import io.ktor.server.routing.route
 
-fun Route.tasksRouting(taskService: ITaskService) {
+internal fun Route.tasksRouting(taskService: ITaskService) {
     route("/v1/tasks") {
 
         get {
