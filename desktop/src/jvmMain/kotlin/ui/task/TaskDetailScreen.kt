@@ -28,7 +28,7 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AddTaskScreen(navigateUp: () -> Unit) {
+internal fun TaskDetailScreen(navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             SmallTopAppBar(
