@@ -62,6 +62,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.VerticalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
+import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
@@ -102,7 +103,7 @@ internal fun HomeScreen(
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
     val taskListResultState by getTaskListSelectedUseCase().collectAsState(null)
-    taskListResultState?.doIfSuccess { taskListSelected = it }
+    taskListResultState?.doIfSuccess { taskListSelected = it }?.doIfError { taskListSelected = null }
 
     var tasks: List<TaskItem> by remember { mutableStateOf(emptyList()) }
     val tasksResultState by getTaskListSelectedTasksUseCase().collectAsState(null)
@@ -177,8 +178,10 @@ internal fun HomeScreen(
             if (deleteTaskAlertDialogState) {
                 DeleteTaskAlertDialog(
                     onDismissRequest = {
-                        deleteTaskAlertDialogState = false
-                        selectedTask = ""
+                        coroutineScope.launch {
+                            selectedTask = ""
+                            deleteTaskAlertDialogState = false
+                        }
                     }
                 ) {
                     coroutineScope.launch {
@@ -229,7 +232,6 @@ internal fun HomeScreen(
                         onTaskItemLongClick = {
                             deleteTaskAlertDialogState = true
                             selectedTask = it
-                            println(selectedTask)
                         }
                     )
                 }
