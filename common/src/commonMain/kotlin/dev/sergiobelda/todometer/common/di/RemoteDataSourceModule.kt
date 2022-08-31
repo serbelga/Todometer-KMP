@@ -20,13 +20,11 @@ import dev.sergiobelda.todometer.common.data.remotedatasource.ITaskListRemoteDat
 import dev.sergiobelda.todometer.common.data.remotedatasource.ITaskRemoteDataSource
 import dev.sergiobelda.todometer.common.data.remotedatasource.TaskListRemoteDataSource
 import dev.sergiobelda.todometer.common.data.remotedatasource.TaskRemoteDataSource
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal val remoteDataSourceModule = module {
-    single<ITaskListRemoteDataSource> {
-        TaskListRemoteDataSource(get())
-    }
-    single<ITaskRemoteDataSource> {
-        TaskRemoteDataSource(get())
-    }
+    singleOf(::TaskListRemoteDataSource) bind ITaskListRemoteDataSource::class
+    singleOf(::TaskRemoteDataSource) bind ITaskRemoteDataSource::class
 }

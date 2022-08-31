@@ -22,14 +22,11 @@ import dev.sergiobelda.todometer.common.data.api.client.ITaskListApiClient
 import dev.sergiobelda.todometer.common.data.api.client.TaskApiClient
 import dev.sergiobelda.todometer.common.data.api.client.TaskListApiClient
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal val networkModule = module {
     singleOf(::TodometerApi)
-    single<ITaskListApiClient> {
-        TaskListApiClient(get())
-    }
-    single<ITaskApiClient> {
-        TaskApiClient(get())
-    }
+    singleOf(::TaskListApiClient) bind ITaskListApiClient::class
+    singleOf(::TaskApiClient) bind ITaskApiClient::class
 }

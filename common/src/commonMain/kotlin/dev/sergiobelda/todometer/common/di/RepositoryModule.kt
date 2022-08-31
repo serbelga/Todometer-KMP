@@ -24,19 +24,13 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal val repositoryModule = module {
-    single<ITaskListRepository> {
-        TaskListRepository(get(), get())
-    }
-    single<ITaskRepository> {
-        TaskRepository(get(), get())
-    }
-    single<IUserPreferencesRepository> {
-        UserPreferencesRepository(get())
-    }
-    single<ITaskChecklistItemsRepository> {
-        TaskChecklistItemsRepository(get())
-    }
+    singleOf(::TaskListRepository) bind ITaskListRepository::class
+    singleOf(::TaskRepository) bind ITaskRepository::class
+    singleOf(::UserPreferencesRepository) bind IUserPreferencesRepository::class
+    singleOf(::TaskChecklistItemsRepository) bind ITaskChecklistItemsRepository::class
 }

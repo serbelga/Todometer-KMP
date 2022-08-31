@@ -23,19 +23,13 @@ import dev.sergiobelda.todometer.common.data.database.dao.ITaskListDao
 import dev.sergiobelda.todometer.common.data.database.dao.TaskChecklistItemDao
 import dev.sergiobelda.todometer.common.data.database.dao.TaskDao
 import dev.sergiobelda.todometer.common.data.database.dao.TaskListDao
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal val localDatabaseModule = module {
-    single {
-        createDatabase()
-    }
-    single<ITaskDao> {
-        TaskDao(get())
-    }
-    single<ITaskListDao> {
-        TaskListDao(get())
-    }
-    single<ITaskChecklistItemDao> {
-        TaskChecklistItemDao(get())
-    }
+    single { createDatabase() }
+    singleOf(::TaskDao) bind ITaskDao::class
+    singleOf(::TaskListDao) bind ITaskListDao::class
+    singleOf(::TaskChecklistItemDao) bind ITaskChecklistItemDao::class
 }
