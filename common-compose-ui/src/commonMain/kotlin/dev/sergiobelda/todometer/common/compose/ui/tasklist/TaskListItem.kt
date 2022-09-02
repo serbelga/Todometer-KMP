@@ -16,48 +16,36 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.tasklist
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskListItem(
     text: String,
     isSelected: Boolean,
     onItemClick: () -> Unit
 ) {
-    val background = if (isSelected) {
-        Modifier.background(
-            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
-            shape = MaterialTheme.shapes.extraLarge
-        )
-    } else {
-        Modifier
-    }
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(56.dp).clip(MaterialTheme.shapes.extraLarge)
-            .selectable(isSelected, onClick = onItemClick)
-            .then(background)
-    ) {
-        val selectedColor =
-            if (isSelected) MaterialTheme.colorScheme.primary else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
-        Text(
-            text = text,
-            color = selectedColor,
-            style = MaterialTheme.typography.titleSmall,
-            maxLines = 1,
-            modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp)
-        )
-    }
+    val colors = NavigationDrawerItemDefaults.colors(
+        selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+        selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        unselectedTextColor = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+    )
+    NavigationDrawerItem(
+        label = {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleSmall,
+                maxLines = 1
+            )
+        },
+        onClick = onItemClick,
+        selected = isSelected,
+        colors = colors
+    )
 }

@@ -67,6 +67,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -181,22 +182,24 @@ internal fun HomeScreen(
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                DrawerContent(
-                    homeUiState.taskListSelected?.id ?: "",
-                    defaultTaskListName,
-                    homeUiState.taskLists,
-                    addTaskList = {
-                        scope.launch {
-                            closeDrawer()
+                ModalDrawerSheet {
+                    DrawerContent(
+                        homeUiState.taskListSelected?.id ?: "",
+                        defaultTaskListName,
+                        homeUiState.taskLists,
+                        addTaskList = {
+                            scope.launch {
+                                closeDrawer()
+                            }
+                            addTaskList()
+                        },
+                        selectTaskList = {
+                            homeViewModel.setTaskListSelected(it)
+                            scope.launch { closeDrawer() }
+                            updateToDometerWidgetData()
                         }
-                        addTaskList()
-                    },
-                    selectTaskList = {
-                        homeViewModel.setTaskListSelected(it)
-                        scope.launch { closeDrawer() }
-                        updateToDometerWidgetData()
-                    }
-                )
+                    )
+                }
             }
         ) {
             Scaffold(
@@ -423,40 +426,38 @@ private fun DrawerContent(
     addTaskList: () -> Unit,
     selectTaskList: (String) -> Unit
 ) {
-    Column {
-        Box(
-            modifier = Modifier.height(56.dp).fillMaxWidth()
-        ) {
-            ToDometerTitle(
-                modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
-            )
+    Box(
+        modifier = Modifier.height(56.dp).fillMaxWidth()
+    ) {
+        ToDometerTitle(
+            modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
+        )
+    }
+    HorizontalDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .height(56.dp)
+            .padding(start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.task_lists),
+            style = MaterialTheme.typography.titleSmall
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        TextButton(onClick = addTaskList) {
+            Text(stringResource(R.string.add_task_list))
         }
-        HorizontalDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .height(56.dp)
-                .padding(start = 16.dp, end = 16.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.task_lists),
-                style = MaterialTheme.typography.titleSmall
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            TextButton(onClick = addTaskList) {
-                Text(stringResource(R.string.add_task_list))
+    }
+    LazyColumn(modifier = Modifier.padding(8.dp)) {
+        item {
+            TaskListItem(defaultTaskListName, selectedTaskListId == "") {
+                selectTaskList("")
             }
         }
-        LazyColumn(modifier = Modifier.padding(8.dp)) {
-            item {
-                TaskListItem(defaultTaskListName, selectedTaskListId == "") {
-                    selectTaskList("")
-                }
-            }
-            items(taskLists) { taskList ->
-                TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
-                    selectTaskList(taskList.id)
-                }
+        items(taskLists) { taskList ->
+            TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
+                selectTaskList(taskList.id)
             }
         }
     }
@@ -805,7 +806,8 @@ private fun ChooseThemeListItem(
                 )
             }
         },
-        modifier = Modifier.height(MoreBottomSheetListItemHeight).clickable(onClick = chooseThemeClick)
+        modifier = Modifier.height(MoreBottomSheetListItemHeight)
+            .clickable(onClick = chooseThemeClick)
     )
 }
 
