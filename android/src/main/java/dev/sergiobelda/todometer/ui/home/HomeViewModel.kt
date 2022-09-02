@@ -33,8 +33,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.RefreshTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.RefreshTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -47,8 +45,6 @@ class HomeViewModel(
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val deleteTaskListSelectedUseCase: DeleteTaskListSelectedUseCase,
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
-    private val refreshTaskListsUseCase: RefreshTaskListsUseCase,
-    private val refreshTaskListSelectedUseCase: RefreshTaskListSelectedUseCase,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,

@@ -20,7 +20,5 @@ import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 import org.koin.dsl.module
 
 internal val preferenceModule = module {
-    single {
-        PreferencesFactory.createPreferences()
-    }
+    single { PreferencesFactory.createPreferences() }
 }

@@ -43,88 +43,35 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.RefreshTaskLists
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 internal val useCaseModule = module {
-    single {
-        GetTaskListsUseCase(get())
-    }
-    single {
-        RefreshTaskListsUseCase(get())
-    }
-    single {
-        RefreshTaskListSelectedUseCase(get(), get())
-    }
-    single {
-        InsertTaskListUseCase(get(), get())
-    }
-    single {
-        GetTaskUseCase(get())
-    }
-    single {
-        GetTaskListTasksUseCase(get())
-    }
-    single {
-        GetTaskListSelectedTasksUseCase(get(), get())
-    }
-    single {
-        InsertTaskUseCase(get())
-    }
-    single {
-        InsertTaskInTaskListSelectedUseCase(get(), get(), get())
-    }
-    single {
-        UpdateTaskUseCase(get())
-    }
-    single {
-        UpdateTaskListUseCase(get())
-    }
-    single {
-        SetTaskDoingUseCase(get())
-    }
-    single {
-        SetTaskDoneUseCase(get())
-    }
-    single {
-        DeleteTaskUseCase(get())
-    }
-    single {
-        DeleteTaskListUseCase(get())
-    }
-    single {
-        DeleteTaskListSelectedUseCase(get(), get())
-    }
-    single {
-        GetTaskListSelectedUseCase(get(), get())
-    }
-    single {
-        SetTaskListSelectedUseCase(get())
-    }
-    single {
-        GetAppThemeUseCase(get())
-    }
-    single {
-        SetAppThemeUseCase(get())
-    }
-    single {
-        GetTaskListUseCase(get())
-    }
-    single {
-        UpdateTaskListNameUseCase(get())
-    }
-    single {
-        GetTaskChecklistItemsUseCase(get())
-    }
-    single {
-        InsertTaskChecklistItemUseCase(get())
-    }
-    single {
-        SetTaskChecklistItemUncheckedUseCase(get())
-    }
-    single {
-        SetTaskChecklistItemCheckedUseCase(get())
-    }
-    single {
-        DeleteTaskChecklistItemUseCase(get())
-    }
+    singleOf(::GetTaskListsUseCase)
+    singleOf(::RefreshTaskListsUseCase)
+    singleOf(::RefreshTaskListSelectedUseCase)
+    singleOf(::InsertTaskListUseCase)
+    singleOf(::GetTaskUseCase)
+    singleOf(::GetTaskListTasksUseCase)
+    singleOf(::GetTaskListSelectedTasksUseCase)
+    singleOf(::InsertTaskUseCase)
+    singleOf(::InsertTaskInTaskListSelectedUseCase)
+    singleOf(::UpdateTaskUseCase)
+    singleOf(::UpdateTaskListUseCase)
+    singleOf(::SetTaskDoingUseCase)
+    singleOf(::SetTaskDoneUseCase)
+    singleOf(::DeleteTaskUseCase)
+    singleOf(::DeleteTaskListUseCase)
+    singleOf(::DeleteTaskListSelectedUseCase)
+    singleOf(::GetTaskListSelectedUseCase)
+    singleOf(::SetTaskListSelectedUseCase)
+    singleOf(::GetAppThemeUseCase)
+    singleOf(::SetAppThemeUseCase)
+    singleOf(::GetTaskListUseCase)
+    singleOf(::UpdateTaskListNameUseCase)
+    singleOf(::GetTaskChecklistItemsUseCase)
+    singleOf(::InsertTaskChecklistItemUseCase)
+    singleOf(::SetTaskChecklistItemUncheckedUseCase)
+    singleOf(::SetTaskChecklistItemCheckedUseCase)
+    singleOf(::DeleteTaskChecklistItemUseCase)
 }
