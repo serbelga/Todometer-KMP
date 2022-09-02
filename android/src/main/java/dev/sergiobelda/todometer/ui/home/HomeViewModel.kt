@@ -83,7 +83,7 @@ class HomeViewModel(
             }.doIfError {
                 homeUiState = homeUiState.copy(
                     taskListSelected = null,
-                    isDefaultTaskListSelected = true,
+                    isDefaultTaskListSelected = true
                 )
             }
         }

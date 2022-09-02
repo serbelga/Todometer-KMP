@@ -133,8 +133,7 @@ internal fun AddTaskScreen(
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
-                            tint = if (addTaskUiState.isAddingTask)
-                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
+                            tint = if (addTaskUiState.isAddingTask) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
                 },

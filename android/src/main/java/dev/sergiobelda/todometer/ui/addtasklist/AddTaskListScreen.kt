@@ -104,11 +104,10 @@ internal fun AddTaskListScreen(
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
-                            tint = if (addTaskListUiState.isAddingTaskList)
-                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
+                            tint = if (addTaskListUiState.isAddingTaskList) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
-                },
+                }
             )
         },
         content = { paddingValues ->

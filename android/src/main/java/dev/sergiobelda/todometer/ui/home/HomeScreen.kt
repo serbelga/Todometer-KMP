@@ -321,7 +321,7 @@ private fun ChooseThemeAlertDialog(
                                     onClick = { themeSelected = appTheme },
                                     role = Role.RadioButton
                                 )
-                                .padding(horizontal = 16.dp),
+                                .padding(horizontal = 16.dp)
                         ) {
                             RadioButton(
                                 selected = themeSelected == appTheme,

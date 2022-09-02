@@ -22,7 +22,8 @@ import androidx.compose.ui.res.painterResource
 
 @Composable
 internal fun iconToDometer() =
-    if (MaterialTheme.colors.isLight)
+    if (MaterialTheme.colors.isLight) {
         painterResource("images/isotype_light.svg")
-    else
+    } else {
         painterResource("images/isotype_dark.svg")
+    }

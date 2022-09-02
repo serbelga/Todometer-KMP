@@ -95,7 +95,7 @@ internal fun EditTaskListScreen(
                             )
                         }
                     }
-                },
+                }
             )
         },
         content = { paddingValues ->

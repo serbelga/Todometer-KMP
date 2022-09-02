@@ -182,7 +182,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                 modifier = GlanceModifier.fillMaxWidth()
                     .background(ImageProvider(R.drawable.todometer_widget_card))
                     .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
-                verticalAlignment = Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 val textStyle = if (taskItem.state == TaskState.DONE) {
                     TextStyle(
