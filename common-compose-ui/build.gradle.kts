@@ -42,6 +42,7 @@ kotlin {
             dependencies {
                 api(libs.androidx.appcompat)
                 api(libs.androidx.coreKtx)
+                // TODO: Remove this usage when compose.material3 reaches Material3 Compose 1.0.0-beta01.
                 api(libs.androidx.compose.material3)
             }
         }

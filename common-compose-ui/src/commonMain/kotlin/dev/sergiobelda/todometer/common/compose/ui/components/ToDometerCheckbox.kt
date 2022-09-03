@@ -35,11 +35,11 @@ fun ToDometerCheckbox(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     Checkbox(
-        checked,
-        onCheckedChange,
-        modifier,
-        enabled,
-        interactionSource,
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = interactionSource,
         colors = CheckboxDefaults.colors(checkedColor = MaterialTheme.colorScheme.primary)
     )
 }

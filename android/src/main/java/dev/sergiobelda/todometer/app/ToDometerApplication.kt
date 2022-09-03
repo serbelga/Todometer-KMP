@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.app
 
-import com.google.android.material.color.DynamicColors
 import dev.sergiobelda.todometer.common.app.ToDometerBaseApplication
 import dev.sergiobelda.todometer.common.di.initKoin
 import dev.sergiobelda.todometer.di.viewModelModule
@@ -26,7 +25,6 @@ class ToDometerApplication : ToDometerBaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        DynamicColors.applyToActivitiesIfAvailable(this)
         initKoin {
             modules(viewModelModule)
             androidContext(this@ToDometerApplication)

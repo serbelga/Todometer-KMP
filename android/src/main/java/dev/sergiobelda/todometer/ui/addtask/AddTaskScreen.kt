@@ -77,7 +77,7 @@ internal fun AddTaskScreen(
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
     val topAppBarState = rememberTopAppBarState()
-    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(topAppBarState) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
 
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -133,8 +133,7 @@ internal fun AddTaskScreen(
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
-                            tint = if (addTaskUiState.isAddingTask)
-                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
+                            tint = if (addTaskUiState.isAddingTask) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
                 },

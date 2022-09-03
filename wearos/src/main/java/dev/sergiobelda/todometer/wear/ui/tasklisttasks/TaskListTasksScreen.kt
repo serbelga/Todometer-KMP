@@ -176,7 +176,6 @@ private fun TaskItem(
     val textDecoration = if (isTaskDone) TextDecoration.LineThrough else null
     // Use SplitToggleChip if onClick is needed.
     SplitToggleChip(
-        // colors = ChipDefaults.secondaryChipColors(),
         checked = isTaskDone,
         onCheckedChange = {
             if (isTaskDone) {
