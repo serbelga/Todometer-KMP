@@ -31,7 +31,7 @@ class SetTaskStateAction : ActionCallback {
 
     private val setTaskDoingUseCase: SetTaskDoingUseCase by inject(SetTaskDoingUseCase::class.java)
 
-    override suspend fun onAction(
+    override suspend fun onRun(
         context: Context,
         glanceId: GlanceId,
         parameters: ActionParameters
