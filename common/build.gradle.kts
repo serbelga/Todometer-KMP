@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -36,6 +34,7 @@ kotlin {
 
                 api(projects.commonDomain)
                 implementation(projects.commonData)
+                implementation(projects.commonNetwork)
                 implementation(projects.commonPreferences)
 
                 implementation(libs.kotlin.datetime)

@@ -16,13 +16,13 @@
 
 package dev.sergiobelda.todometer.common.data.remotedatasource
 
-import dev.sergiobelda.todometer.common.data.api.client.ITaskListApiClient
-import dev.sergiobelda.todometer.common.data.api.mapper.toTaskList
-import dev.sergiobelda.todometer.common.data.api.mapper.toTaskLists
-import dev.sergiobelda.todometer.common.data.api.request.NewTaskListRequestBody
-import dev.sergiobelda.todometer.common.data.api.safeApiCall
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.network.client.ITaskListApiClient
+import dev.sergiobelda.todometer.common.network.mapper.asTaskList
+import dev.sergiobelda.todometer.common.network.mapper.asTaskLists
+import dev.sergiobelda.todometer.common.network.request.NewTaskListRequestBody
+import dev.sergiobelda.todometer.common.network.safeApiCall
 
 class TaskListRemoteDataSource(private val taskListApiClient: ITaskListApiClient) :
     ITaskListRemoteDataSource {
@@ -30,12 +30,12 @@ class TaskListRemoteDataSource(private val taskListApiClient: ITaskListApiClient
     override suspend fun getTaskLists(): Result<List<TaskList>> =
         safeApiCall {
             taskListApiClient.getTaskLists()
-        }.map { it.toTaskLists() }
+        }.map { it.asTaskLists() }
 
     override suspend fun getTaskList(id: String): Result<TaskList> =
         safeApiCall {
             taskListApiClient.getTaskList(id)
-        }.map { it.toTaskList() }
+        }.map { it.asTaskList() }
 
     override suspend fun insertTaskList(
         id: String?,

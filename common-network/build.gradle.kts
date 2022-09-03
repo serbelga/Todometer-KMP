@@ -1,9 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("kotlinx-serialization")
     id("com.android.library")
-    id("app.cash.sqldelight")
     id("todometer.spotless")
 }
 
@@ -17,52 +15,39 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Common data"
-        homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
+        summary = "Common network"
+        homepage = "Link to the Shared Module homepage"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "common-data"
+            baseName = "common-network"
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.sqldelight.coroutines)
-                implementation(libs.sqldelight.primitiveAdapters)
-
                 implementation(projects.commonDomain)
-                implementation(projects.commonNetwork)
-                implementation(projects.commonPreferences)
+
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.json)
+                implementation(libs.ktor.client.contentNegotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(libs.kotlin.coroutinesTest)
-                implementation(libs.mockk.common)
                 implementation(kotlin("test"))
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation(libs.sqldelight.androidDriver)
+                implementation(libs.ktor.client.android)
             }
         }
-        val androidTest by getting {
-            dependencies {
-                implementation(libs.junit)
-                implementation(libs.sqldelight.jvmDriver)
-                implementation(libs.mockk.mockk)
-            }
-        }
+        val androidTest by getting
         val desktopMain by getting {
             dependencies {
-                implementation(libs.sqldelight.jvmDriver)
-            }
-        }
-        val desktopTest by getting {
-            dependencies {
-                implementation(libs.mockk.mockk)
+                implementation(libs.ktor.client.apache)
             }
         }
         val iosX64Main by getting
@@ -70,7 +55,7 @@ kotlin {
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependencies {
-                implementation(libs.sqldelight.nativeDriver)
+                implementation(libs.ktor.client.ios)
             }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
@@ -100,11 +85,5 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
-    namespace = "dev.sergiobelda.todometer.common.data"
-}
-
-sqldelight {
-    database("TodometerDatabase") {
-        packageName = "dev.sergiobelda.todometer.common.data.database"
-    }
+    namespace = "dev.sergiobelda.todometer.common.network"
 }

@@ -16,22 +16,22 @@
 
 package dev.sergiobelda.todometer.common.data.remotedatasource
 
-import dev.sergiobelda.todometer.common.data.api.client.ITaskApiClient
-import dev.sergiobelda.todometer.common.data.api.mapper.toTaskTagList
-import dev.sergiobelda.todometer.common.data.api.request.NewTaskRequestBody
-import dev.sergiobelda.todometer.common.data.api.request.UpdateTaskStateRequestBody
-import dev.sergiobelda.todometer.common.data.api.safeApiCall
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.network.client.ITaskApiClient
+import dev.sergiobelda.todometer.common.network.mapper.asTaskTagList
+import dev.sergiobelda.todometer.common.network.request.NewTaskRequestBody
+import dev.sergiobelda.todometer.common.network.request.UpdateTaskStateRequestBody
+import dev.sergiobelda.todometer.common.network.safeApiCall
 
 class TaskRemoteDataSource(private val taskApiClient: ITaskApiClient) : ITaskRemoteDataSource {
 
     override suspend fun getTasks(taskListId: String?): Result<List<Task>> =
         safeApiCall {
             taskApiClient.getTasks(taskListId)
-        }.map { it.toTaskTagList() }
+        }.map { it.asTaskTagList() }
 
     override suspend fun insertTask(
         id: String?,
