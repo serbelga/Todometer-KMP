@@ -19,18 +19,18 @@ package dev.sergiobelda.todometer.common.database.mapper
 import dev.sergiobelda.todometer.common.database.TaskListEntity
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 
-internal fun TaskListEntity.toTaskList(): TaskList = TaskList(
+fun TaskListEntity.asTaskList(): TaskList = TaskList(
     id,
     name,
     description,
     sync
 )
 
-internal fun Iterable<TaskListEntity>.toTaskLists(): List<TaskList> = this.map {
-    it.toTaskList()
+fun Iterable<TaskListEntity>.asTaskLists(): List<TaskList> = this.map {
+    it.asTaskList()
 }
 
-internal fun TaskList.toTaskListEntity(): TaskListEntity = TaskListEntity(
+fun TaskList.asTaskListEntity(): TaskListEntity = TaskListEntity(
     id,
     name,
     description,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.app
+package dev.sergiobelda.todometer.common.database
 
-import android.app.Application
-import dev.sergiobelda.todometer.common.database.DriverFactory
-import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
-open class ToDometerBaseApplication : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        PreferencesFactory.appContext = this
-        DriverFactory.appContext = this
-    }
+actual fun createSqlDriver(): SqlDriver {
+    return NativeSqliteDriver(TodometerDatabase.Schema, "todometer.db")
 }

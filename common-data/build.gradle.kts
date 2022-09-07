@@ -1,9 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("kotlinx-serialization")
     id("com.android.library")
-    id("app.cash.sqldelight")
     id("todometer.spotless")
 }
 
@@ -28,13 +26,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.sqldelight.coroutines)
-                implementation(libs.sqldelight.primitiveAdapters)
-
                 implementation(projects.commonDomain)
-                implementation(projects.commonData)
+                implementation(projects.commonDatabase)
                 implementation(projects.commonNetwork)
                 implementation(projects.commonPreferences)
+
+                implementation(libs.kotlin.coroutinesCore)
             }
         }
         val commonTest by getting {
@@ -44,23 +41,14 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.androidDriver)
-            }
-        }
+        val androidMain by getting
         val androidTest by getting {
             dependencies {
                 implementation(libs.junit)
-                implementation(libs.sqldelight.jvmDriver)
                 implementation(libs.mockk.mockk)
             }
         }
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.jvmDriver)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting {
             dependencies {
                 implementation(libs.mockk.mockk)
@@ -70,9 +58,6 @@ kotlin {
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
-            dependencies {
-                implementation(libs.sqldelight.nativeDriver)
-            }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -102,10 +87,4 @@ android {
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
     namespace = "dev.sergiobelda.todometer.common.data"
-}
-
-sqldelight {
-    database("TodometerDatabase") {
-        packageName = "dev.sergiobelda.todometer.common.data.database"
-    }
 }

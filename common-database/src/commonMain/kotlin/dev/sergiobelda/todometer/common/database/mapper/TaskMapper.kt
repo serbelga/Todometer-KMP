@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.database.mapper
 import dev.sergiobelda.todometer.common.database.TaskEntity
 import dev.sergiobelda.todometer.common.domain.model.Task
 
-internal fun TaskEntity.toTask(): Task = Task(
+fun TaskEntity.asTask(): Task = Task(
     id = id,
     title = title,
     tag = tag,
@@ -30,11 +30,11 @@ internal fun TaskEntity.toTask(): Task = Task(
     sync = sync
 )
 
-internal fun Iterable<TaskEntity>.toTasks(): List<Task> = this.map {
-    it.toTask()
+fun Iterable<TaskEntity>.asTasks(): List<Task> = this.map {
+    it.asTask()
 }
 
-internal fun Task.toTaskEntity(): TaskEntity = TaskEntity(
+fun Task.asTaskEntity(): TaskEntity = TaskEntity(
     id = id,
     title = title,
     tag = tag,

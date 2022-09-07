@@ -35,6 +35,7 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
+                implementation(libs.kotlin.coroutinesTest)
                 implementation(kotlin("test"))
             }
         }
@@ -43,7 +44,11 @@ kotlin {
                 implementation(libs.sqldelight.androidDriver)
             }
         }
-        val androidTest by getting
+        val androidTest by getting {
+            dependencies {
+                implementation(libs.sqldelight.jvmDriver)
+            }
+        }
         val desktopMain by getting {
             dependencies {
                 implementation(libs.sqldelight.jvmDriver)

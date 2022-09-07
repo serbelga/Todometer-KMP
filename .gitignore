@@ -22,3 +22,4 @@ local.properties
 /android/google-services.json
 /wearos/google-services.json
 /common-network/build/
+/common-database/build/

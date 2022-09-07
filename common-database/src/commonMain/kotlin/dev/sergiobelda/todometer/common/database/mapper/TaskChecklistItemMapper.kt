@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.database.mapper
 import dev.sergiobelda.todometer.common.database.TaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 
-internal fun TaskChecklistItemEntity.asTaskChecklistItem(): TaskChecklistItem =
+fun TaskChecklistItemEntity.asTaskChecklistItem(): TaskChecklistItem =
     TaskChecklistItem(
         id = id,
         text = text,
@@ -27,11 +27,11 @@ internal fun TaskChecklistItemEntity.asTaskChecklistItem(): TaskChecklistItem =
         state = state
     )
 
-internal fun Iterable<TaskChecklistItemEntity>.toTaskChecklist(): List<TaskChecklistItem> = this.map {
+fun Iterable<TaskChecklistItemEntity>.asTaskChecklist(): List<TaskChecklistItem> = this.map {
     it.asTaskChecklistItem()
 }
 
-internal fun TaskChecklistItem.toTaskChecklistItemEntity(): TaskChecklistItemEntity =
+fun TaskChecklistItem.asTaskChecklistItemEntity(): TaskChecklistItemEntity =
     TaskChecklistItemEntity(
         id = id,
         text = text,

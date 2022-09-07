@@ -16,10 +16,10 @@
 
 package dev.sergiobelda.todometer.common.data.localdatasource
 
-import dev.sergiobelda.todometer.common.data.database.dao.ITaskDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toTask
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskEntity
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskItems
+import dev.sergiobelda.todometer.common.database.dao.ITaskDao
+import dev.sergiobelda.todometer.common.database.mapper.asTask
+import dev.sergiobelda.todometer.common.database.mapper.asTaskEntity
+import dev.sergiobelda.todometer.common.database.mapper.asTaskItems
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -33,25 +33,25 @@ class TaskLocalDataSource(
 
     override fun getTask(id: String): Flow<Result<Task>> =
         taskDao.getTask(id).map { taskEntity ->
-            taskEntity?.let { Result.Success(it.toTask()) } ?: Result.Error()
+            taskEntity?.let { Result.Success(it.asTask()) } ?: Result.Error()
         }
 
     override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
         taskDao.getTasks(taskListId).map { list ->
-            Result.Success(list.toTaskItems())
+            Result.Success(list.asTaskItems())
         }
 
     override suspend fun insertTask(task: Task): Result<String> {
-        val taskId = taskDao.insertTask(task.toTaskEntity())
+        val taskId = taskDao.insertTask(task.asTaskEntity())
         return Result.Success(taskId)
     }
 
     override suspend fun insertTasks(tasks: List<Task>) {
-        taskDao.insertTasks(tasks.map { it.toTaskEntity() })
+        taskDao.insertTasks(tasks.map { it.asTaskEntity() })
     }
 
     override suspend fun updateTask(task: Task) =
-        taskDao.updateTask(task.toTaskEntity())
+        taskDao.updateTask(task.asTaskEntity())
 
     override suspend fun updateTaskSync(id: String, sync: Boolean) =
         taskDao.updateTaskSync(id, sync)
