@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml:2:1-65
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml:2:1-65
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml:2:1-65
+	package
+		ADDED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml:2:11-62
+		INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml:2:1-65
+uses-sdk
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/n946984/AndroidStudioProjects/Personal/ToDometerKotlinMultiplatform2/common-database/src/androidMain/AndroidManifest.xml

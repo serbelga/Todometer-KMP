@@ -32,6 +32,7 @@ kotlin {
                 implementation(libs.sqldelight.primitiveAdapters)
 
                 implementation(projects.commonDomain)
+                implementation(projects.commonData)
                 implementation(projects.commonNetwork)
                 implementation(projects.commonPreferences)
             }

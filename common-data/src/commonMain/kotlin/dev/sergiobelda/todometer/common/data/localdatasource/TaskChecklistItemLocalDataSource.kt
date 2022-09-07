@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.common.data.localdatasource
 
-import dev.sergiobelda.todometer.common.data.database.dao.ITaskChecklistItemDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskChecklist
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskChecklistItemEntity
+import dev.sergiobelda.todometer.common.database.dao.ITaskChecklistItemDao
+import dev.sergiobelda.todometer.common.database.mapper.toTaskChecklist
+import dev.sergiobelda.todometer.common.database.mapper.toTaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState

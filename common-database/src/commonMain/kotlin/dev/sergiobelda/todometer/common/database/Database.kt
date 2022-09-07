@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.di
+package dev.sergiobelda.todometer.common.database
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import app.cash.sqldelight.EnumColumnAdapter
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(
-        networkModule +
-            databaseModule +
-            preferenceModule +
-            remoteDataSourceModule +
-            localDataSourceModule +
-            repositoryModule +
-            useCaseModule
+fun createDatabase(): TodometerDatabase =
+    TodometerDatabase(
+        DriverFactory.createDriver(),
+        TaskEntityAdapter = TaskEntity.Adapter(
+            stateAdapter = EnumColumnAdapter(),
+            tagAdapter = EnumColumnAdapter()
+        ),
+        TaskChecklistItemEntityAdapter = TaskChecklistItemEntity.Adapter(
+            stateAdapter = EnumColumnAdapter()
+        )
     )
-}
-
-fun initKoin() = initKoin {}

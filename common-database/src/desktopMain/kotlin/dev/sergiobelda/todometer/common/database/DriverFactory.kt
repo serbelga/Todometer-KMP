@@ -14,22 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.di
+package dev.sergiobelda.todometer.common.database
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(
-        networkModule +
-            databaseModule +
-            preferenceModule +
-            remoteDataSourceModule +
-            localDataSourceModule +
-            repositoryModule +
-            useCaseModule
-    )
+actual object DriverFactory {
+    actual fun createDriver(): SqlDriver {
+        val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        TodometerDatabase.Schema.create(driver)
+        return driver
+    }
 }
-
-fun initKoin() = initKoin {}

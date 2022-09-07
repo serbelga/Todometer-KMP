@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.di
+package dev.sergiobelda.todometer.common.database
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import app.cash.sqldelight.db.SqlDriver
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(
-        networkModule +
-            databaseModule +
-            preferenceModule +
-            remoteDataSourceModule +
-            localDataSourceModule +
-            repositoryModule +
-            useCaseModule
-    )
+expect object DriverFactory {
+    fun createDriver(): SqlDriver
 }
-
-fun initKoin() = initKoin {}

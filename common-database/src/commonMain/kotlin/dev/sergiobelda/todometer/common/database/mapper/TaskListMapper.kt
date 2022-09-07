@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.di
+package dev.sergiobelda.todometer.common.database.mapper
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import dev.sergiobelda.todometer.common.database.TaskListEntity
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(
-        networkModule +
-            databaseModule +
-            preferenceModule +
-            remoteDataSourceModule +
-            localDataSourceModule +
-            repositoryModule +
-            useCaseModule
-    )
+internal fun TaskListEntity.toTaskList(): TaskList = TaskList(
+    id,
+    name,
+    description,
+    sync
+)
+
+internal fun Iterable<TaskListEntity>.toTaskLists(): List<TaskList> = this.map {
+    it.toTaskList()
 }
 
-fun initKoin() = initKoin {}
+internal fun TaskList.toTaskListEntity(): TaskListEntity = TaskListEntity(
+    id,
+    name,
+    description,
+    sync
+)
