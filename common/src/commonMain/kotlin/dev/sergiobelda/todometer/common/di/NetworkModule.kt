@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.common.di
 
-import dev.sergiobelda.todometer.common.data.api.TodometerApi
-import dev.sergiobelda.todometer.common.data.api.client.ITaskApiClient
-import dev.sergiobelda.todometer.common.data.api.client.ITaskListApiClient
-import dev.sergiobelda.todometer.common.data.api.client.TaskApiClient
-import dev.sergiobelda.todometer.common.data.api.client.TaskListApiClient
+import dev.sergiobelda.todometer.common.network.TodometerApi
+import dev.sergiobelda.todometer.common.network.client.ITaskApiClient
+import dev.sergiobelda.todometer.common.network.client.ITaskListApiClient
+import dev.sergiobelda.todometer.common.network.client.TaskApiClient
+import dev.sergiobelda.todometer.common.network.client.TaskListApiClient
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
