@@ -23,15 +23,17 @@ import dev.sergiobelda.todometer.common.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import kotlinx.coroutines.flow.Flow
 
-class TaskChecklistItemDao(private val database: TodometerDatabase) : ITaskChecklistItemDao {
+class TaskChecklistItemDao(private val todometerDatabase: TodometerDatabase) :
+    ITaskChecklistItemDao {
 
     override fun getTaskChecklistItems(taskId: String): Flow<List<TaskChecklistItemEntity>> =
-        database.taskChecklistItemEntityQueries.selectTaskChecklistItems(taskId).asFlow().mapToList()
+        todometerDatabase.taskChecklistItemEntityQueries.selectTaskChecklistItems(taskId).asFlow()
+            .mapToList()
 
     override suspend fun insertTaskChecklistItems(vararg taskChecklistItemEntities: TaskChecklistItemEntity) =
-        database.taskChecklistItemEntityQueries.transaction {
+        todometerDatabase.taskChecklistItemEntityQueries.transaction {
             taskChecklistItemEntities.forEach { taskChecklistItemEntity ->
-                database.taskChecklistItemEntityQueries.insertTaskChecklistItem(
+                todometerDatabase.taskChecklistItemEntityQueries.insertTaskChecklistItem(
                     id = taskChecklistItemEntity.id,
                     text = taskChecklistItemEntity.text,
                     task_id = taskChecklistItemEntity.task_id,
@@ -41,11 +43,11 @@ class TaskChecklistItemDao(private val database: TodometerDatabase) : ITaskCheck
         }
 
     override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
-        database.taskChecklistItemEntityQueries.updateTaskChecklistItemState(
+        todometerDatabase.taskChecklistItemEntityQueries.updateTaskChecklistItemState(
             id = id,
             state = state
         )
 
     override suspend fun deleteTaskChecklistItem(id: String) =
-        database.taskChecklistItemEntityQueries.deleteTaskChecklistItem(id)
+        todometerDatabase.taskChecklistItemEntityQueries.deleteTaskChecklistItem(id)
 }

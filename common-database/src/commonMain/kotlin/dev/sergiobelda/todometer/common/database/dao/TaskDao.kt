@@ -25,17 +25,17 @@ import dev.sergiobelda.todometer.common.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
-class TaskDao(private val database: TodometerDatabase) : ITaskDao {
+class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
 
     override fun getTask(id: String): Flow<TaskEntity?> =
-        database.taskEntityQueries.selectTask(id).asFlow().mapToOneOrNull()
+        todometerDatabase.taskEntityQueries.selectTask(id).asFlow().mapToOneOrNull()
 
     override fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId>> =
-        database.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
+        todometerDatabase.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
 
     override suspend fun insertTask(task: TaskEntity): String {
-        database.pragmaQueries.pragmaForeignKeysOff()
-        database.taskEntityQueries.insertOrReplaceTask(
+        todometerDatabase.pragmaQueries.pragmaForeignKeysOff()
+        todometerDatabase.taskEntityQueries.insertOrReplaceTask(
             id = task.id,
             title = task.title,
             description = task.description,
@@ -45,7 +45,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
             sync = task.sync,
             dueDate = task.dueDate
         )
-        database.pragmaQueries.pragmaForeignKeysOn()
+        todometerDatabase.pragmaQueries.pragmaForeignKeysOn()
         // TODO Call return last_insert_rowid() from SQLDelight.
         return task.id
     }
@@ -56,7 +56,7 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
         }
 
     override suspend fun updateTask(task: TaskEntity) =
-        database.taskEntityQueries.updateTask(
+        todometerDatabase.taskEntityQueries.updateTask(
             id = task.id,
             title = task.title,
             description = task.description,
@@ -65,18 +65,18 @@ class TaskDao(private val database: TodometerDatabase) : ITaskDao {
         )
 
     override suspend fun updateTaskSync(id: String, sync: Boolean) {
-        database.taskEntityQueries.updateTaskSync(
+        todometerDatabase.taskEntityQueries.updateTaskSync(
             id = id,
             sync = sync
         )
     }
 
     override suspend fun updateTaskState(id: String, state: TaskState) {
-        database.taskEntityQueries.updateTaskState(
+        todometerDatabase.taskEntityQueries.updateTaskState(
             id = id,
             state = state
         )
     }
 
-    override suspend fun deleteTask(id: String) = database.taskEntityQueries.deleteTask(id)
+    override suspend fun deleteTask(id: String) = todometerDatabase.taskEntityQueries.deleteTask(id)
 }
