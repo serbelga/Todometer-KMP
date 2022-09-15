@@ -16,15 +16,15 @@
 
 package dev.sergiobelda.todometer.common.data.localdatasource
 
-import dev.sergiobelda.todometer.common.data.database.dao.ITaskDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toTask
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskEntity
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskItem
+import dev.sergiobelda.todometer.common.database.dao.ITaskDao
+import dev.sergiobelda.todometer.common.database.mapper.asTask
+import dev.sergiobelda.todometer.common.database.mapper.asTaskEntity
+import dev.sergiobelda.todometer.common.database.mapper.asTaskItem
+import dev.sergiobelda.todometer.common.database.testutils.task1
+import dev.sergiobelda.todometer.common.database.testutils.taskEntity1
+import dev.sergiobelda.todometer.common.database.testutils.taskItemsEntities
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.testutils.task1
-import dev.sergiobelda.todometer.common.testutils.taskEntity1
-import dev.sergiobelda.todometer.common.testutils.taskItemsEntities
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
@@ -53,7 +53,7 @@ class TaskLocalDataSourceTest {
 
         val result = taskLocalDataSource.getTask("1").first()
         assertTrue { result is Result.Success }
-        assertEquals(taskEntity1.toTask(), (result as? Result.Success)?.value)
+        assertEquals(taskEntity1.asTask(), (result as? Result.Success)?.value)
     }
 
     @Test
@@ -75,7 +75,7 @@ class TaskLocalDataSourceTest {
         val result = taskLocalDataSource.getTasks("1").first()
         assertTrue { result is Result.Success }
         assertEquals(
-            taskItemsEntities.map { it.toTaskItem() },
+            taskItemsEntities.map { it.asTaskItem() },
             (result as? Result.Success)?.value
         )
     }
@@ -84,7 +84,7 @@ class TaskLocalDataSourceTest {
     fun testInsertTask() = runTest {
         coEvery { taskDao.insertTask(taskEntity1) } returns taskEntity1.id
 
-        val result = taskLocalDataSource.insertTask(taskEntity1.toTask())
+        val result = taskLocalDataSource.insertTask(taskEntity1.asTask())
         assertTrue { result is Result.Success }
     }
 
@@ -92,7 +92,7 @@ class TaskLocalDataSourceTest {
     fun testUpdateTask() = runTest {
         taskLocalDataSource.updateTask(task1)
 
-        coVerify { taskDao.updateTask(task1.toTaskEntity()) }
+        coVerify { taskDao.updateTask(task1.asTaskEntity()) }
     }
 
     @Test

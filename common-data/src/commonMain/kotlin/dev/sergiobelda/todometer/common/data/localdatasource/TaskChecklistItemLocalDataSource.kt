@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.common.data.localdatasource
 
-import dev.sergiobelda.todometer.common.data.database.dao.ITaskChecklistItemDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskChecklist
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskChecklistItemEntity
+import dev.sergiobelda.todometer.common.database.dao.ITaskChecklistItemDao
+import dev.sergiobelda.todometer.common.database.mapper.asTaskChecklist
+import dev.sergiobelda.todometer.common.database.mapper.asTaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
@@ -31,12 +31,12 @@ class TaskChecklistItemLocalDataSource(
 
     override fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
         taskChecklistItemDao.getTaskChecklistItems(taskId).map { list ->
-            Result.Success(list.toTaskChecklist())
+            Result.Success(list.asTaskChecklist())
         }
 
     override suspend fun insertTaskChecklistItems(vararg taskChecklistItems: TaskChecklistItem) =
         taskChecklistItemDao.insertTaskChecklistItems(
-            *taskChecklistItems.map { it.toTaskChecklistItemEntity() }.toTypedArray()
+            *taskChecklistItems.map { it.asTaskChecklistItemEntity() }.toTypedArray()
         )
 
     override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =

@@ -16,10 +16,10 @@
 
 package dev.sergiobelda.todometer.common.data.localdatasource
 
-import dev.sergiobelda.todometer.common.data.database.dao.ITaskListDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskList
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskListEntity
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskLists
+import dev.sergiobelda.todometer.common.database.dao.ITaskListDao
+import dev.sergiobelda.todometer.common.database.mapper.asTaskList
+import dev.sergiobelda.todometer.common.database.mapper.asTaskListEntity
+import dev.sergiobelda.todometer.common.database.mapper.asTaskLists
 import dev.sergiobelda.todometer.common.domain.Result
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import kotlinx.coroutines.flow.Flow
@@ -32,24 +32,24 @@ class TaskListLocalDataSource(
 
     override fun getTaskLists(): Flow<Result<List<TaskList>>> =
         taskListDao.getTaskLists().map { list ->
-            Result.Success(list.toTaskLists())
+            Result.Success(list.asTaskLists())
         }
 
     override fun getTaskList(id: String): Flow<Result<TaskList>> =
         taskListDao.getTaskList(id).map { taskListEntity ->
-            taskListEntity?.let { Result.Success(it.toTaskList()) } ?: Result.Error()
+            taskListEntity?.let { Result.Success(it.asTaskList()) } ?: Result.Error()
         }
 
     override suspend fun insertTaskList(taskList: TaskList): Result<String> {
-        val taskListId = taskListDao.insertTaskList(taskList.toTaskListEntity())
+        val taskListId = taskListDao.insertTaskList(taskList.asTaskListEntity())
         return Result.Success(taskListId)
     }
 
     override suspend fun insertTaskLists(taskLists: List<TaskList>) =
-        taskListDao.insertTaskLists(taskLists.map { it.toTaskListEntity() })
+        taskListDao.insertTaskLists(taskLists.map { it.asTaskListEntity() })
 
     override suspend fun updateTaskList(taskList: TaskList) =
-        taskListDao.updateTaskList(taskList.toTaskListEntity())
+        taskListDao.updateTaskList(taskList.asTaskListEntity())
 
     override suspend fun updateTaskListName(id: String, name: String) =
         taskListDao.updateTaskListName(id, name)

@@ -34,6 +34,7 @@ kotlin {
 
                 api(projects.commonDomain)
                 implementation(projects.commonData)
+                implementation(projects.commonDatabase)
                 implementation(projects.commonNetwork)
                 implementation(projects.commonPreferences)
 

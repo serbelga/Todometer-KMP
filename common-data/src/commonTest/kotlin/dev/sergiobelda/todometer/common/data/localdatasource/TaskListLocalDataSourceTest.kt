@@ -16,13 +16,13 @@
 
 package dev.sergiobelda.todometer.common.data.localdatasource
 
-import dev.sergiobelda.todometer.common.data.database.dao.ITaskListDao
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskList
-import dev.sergiobelda.todometer.common.data.database.mapper.toTaskListEntity
+import dev.sergiobelda.todometer.common.database.dao.ITaskListDao
+import dev.sergiobelda.todometer.common.database.mapper.asTaskList
+import dev.sergiobelda.todometer.common.database.mapper.asTaskListEntity
+import dev.sergiobelda.todometer.common.database.testutils.taskList1
+import dev.sergiobelda.todometer.common.database.testutils.taskListEntities
+import dev.sergiobelda.todometer.common.database.testutils.taskListEntity1
 import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.testutils.taskList1
-import dev.sergiobelda.todometer.common.testutils.taskListEntities
-import dev.sergiobelda.todometer.common.testutils.taskListEntity1
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
@@ -51,7 +51,7 @@ class TaskListLocalDataSourceTest {
 
         val result = taskListLocalDataSource.getTaskList("1").first()
         assertTrue { result is Result.Success }
-        assertEquals(taskListEntity1.toTaskList(), (result as? Result.Success)?.value)
+        assertEquals(taskListEntity1.asTaskList(), (result as? Result.Success)?.value)
     }
 
     @Test
@@ -73,7 +73,7 @@ class TaskListLocalDataSourceTest {
         val result = taskListLocalDataSource.getTaskLists().first()
         assertTrue { result is Result.Success }
         assertEquals(
-            taskListEntities.map { it.toTaskList() },
+            taskListEntities.map { it.asTaskList() },
             (result as? Result.Success)?.value
         )
     }
@@ -82,7 +82,7 @@ class TaskListLocalDataSourceTest {
     fun testInsertTaskList() = runTest {
         coEvery { taskListDao.insertTaskList(taskListEntity1) } returns taskListEntity1.id
 
-        val result = taskListLocalDataSource.insertTaskList(taskListEntity1.toTaskList())
+        val result = taskListLocalDataSource.insertTaskList(taskListEntity1.asTaskList())
         assertTrue { result is Result.Success }
     }
 
@@ -90,7 +90,7 @@ class TaskListLocalDataSourceTest {
     fun testUpdateTaskList() = runTest {
         taskListLocalDataSource.updateTaskList(taskList1)
 
-        coVerify { taskListDao.updateTaskList(taskList1.toTaskListEntity()) }
+        coVerify { taskListDao.updateTaskList(taskList1.asTaskListEntity()) }
     }
 
     @Test

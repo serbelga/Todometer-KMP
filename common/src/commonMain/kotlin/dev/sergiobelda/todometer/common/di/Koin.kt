@@ -23,7 +23,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
     modules(
         networkModule +
-            localDatabaseModule +
+            databaseModule +
             preferenceModule +
             remoteDataSourceModule +
             localDataSourceModule +
