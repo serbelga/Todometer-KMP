@@ -51,12 +51,15 @@ import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun EditTaskScreen(
+    taskId: String,
     navigateUp: () -> Unit,
-    editTaskViewModel: EditTaskViewModel
+    editTaskViewModel: EditTaskViewModel = getViewModel { parametersOf(taskId) }
 ) {
     val activity = LocalContext.current as AppCompatActivity
 

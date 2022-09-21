@@ -69,15 +69,18 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 private val SectionPadding: Dp = 32.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TaskDetailScreen(
+    taskId: String,
     editTask: () -> Unit,
     navigateUp: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel
+    taskDetailViewModel: TaskDetailViewModel = getViewModel { parametersOf(taskId) }
 ) {
     val lazyListState = rememberLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
