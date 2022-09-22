@@ -16,10 +16,6 @@
 
 package dev.sergiobelda.todometer.navigation
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
@@ -47,13 +43,4 @@ class Action(private val navController: NavHostController) {
             navController.navigate(navigationParams.navigationRoute)
         }
     }
-}
-
-fun openWebPage(context: Context, url: String) {
-    val webpage: Uri = Uri.parse(url)
-    ContextCompat.startActivity(
-        context,
-        Intent(Intent.ACTION_VIEW, webpage),
-        null
-    )
 }

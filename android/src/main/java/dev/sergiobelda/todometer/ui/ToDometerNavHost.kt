@@ -16,20 +16,15 @@
 
 package dev.sergiobelda.todometer.ui
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.navigation.Action
-import dev.sergiobelda.todometer.navigation.openWebPage
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
 import dev.sergiobelda.todometer.ui.about.navigateToAbout
@@ -54,7 +49,6 @@ import dev.sergiobelda.todometer.ui.taskdetail.navigateToTaskDetail
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ToDometerNavHost(
-    context: Context,
     navController: NavHostController,
     action: Action,
     modifier: Modifier = Modifier
@@ -76,7 +70,6 @@ fun ToDometerNavHost(
                 editTaskList = action.navigateToEditTaskList,
                 addTask = action.navigateToAddTask,
                 openTask = action.navigateToTaskDetail,
-                openSourceLicenses = { startOpenSourceLicensesActivity(context) },
                 about = action.navigateToAbout
             )
         }
@@ -110,24 +103,7 @@ fun ToDometerNavHost(
             EditTaskScreen(taskId = taskId, navigateUp = navigateBackAction)
         }
         composable(AboutDestination.route) {
-            AboutScreen(
-                openGithub = {
-                    openWebPage(
-                        context,
-                        "https://github.com/serbelga/ToDometer_Multiplatform"
-                    )
-                },
-                openSourceLicenses = { startOpenSourceLicensesActivity(context) },
-                navigateUp = navigateBackAction
-            )
+            AboutScreen(navigateUp = navigateBackAction)
         }
     }
-}
-
-private fun startOpenSourceLicensesActivity(context: Context) {
-    ContextCompat.startActivity(
-        context,
-        Intent(context, OssLicensesMenuActivity::class.java),
-        null
-    )
 }
