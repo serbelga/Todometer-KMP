@@ -1,16 +1,16 @@
 PODS:
-  - common (1.0)
+  - core (1.0)
 
 DEPENDENCIES:
-  - common (from `../common`)
+  - core (from `../common/core`)
 
 EXTERNAL SOURCES:
-  common:
-    :path: "../common"
+  core:
+    :path: "../common/core"
 
 SPEC CHECKSUMS:
-  common: ac8059219e229b47b3233fd155a4c2706705dbcc
+  core: c1b12c6ad46c0424e4a2cdc9c25dd64407e5265d
 
-PODFILE CHECKSUM: 6b9ff379b68bf83b1e066f6d6e4d4c6f72c5815d
+PODFILE CHECKSUM: 1a617af32384a18adbf6828f86cf10f23e760a31
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

@@ -1,24 +1,24 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'common_database'
+    spec.name                     = 'network'
     spec.version                  = '1.0'
     spec.homepage                 = 'Link to the Shared Module homepage'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Common database'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/common-database.framework'
+    spec.summary                  = 'Common network'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/common-network.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
-        'KOTLIN_PROJECT_PATH' => ':common-database',
-        'PRODUCT_MODULE_NAME' => 'common-database',
+        'KOTLIN_PROJECT_PATH' => ':common:network',
+        'PRODUCT_MODULE_NAME' => 'common-network',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build common_database',
+            :name => 'Build network',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
                 fi
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                "$REPO_ROOT/../../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
                     -Pkotlin.native.cocoapods.archs="$ARCHS" \
                     -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"

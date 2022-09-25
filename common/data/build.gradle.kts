@@ -26,10 +26,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.commonDomain)
-                implementation(projects.commonDatabase)
-                implementation(projects.commonNetwork)
-                implementation(projects.commonPreferences)
+                implementation(projects.common.domain)
+                implementation(projects.common.database)
+                implementation(projects.common.network)
+                implementation(projects.common.preferences)
 
                 implementation(libs.kotlin.coroutinesCore)
             }

@@ -1,24 +1,24 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'common_preferences'
+    spec.name                     = 'data'
     spec.version                  = '1.0'
     spec.homepage                 = 'https://github.com/serbelga/ToDometer_Kotlin_Multiplatform'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Common preferences'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/common-preferences.framework'
+    spec.summary                  = 'Common data'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/common-data.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
-        'KOTLIN_PROJECT_PATH' => ':common-preferences',
-        'PRODUCT_MODULE_NAME' => 'common-preferences',
+        'KOTLIN_PROJECT_PATH' => ':common:data',
+        'PRODUCT_MODULE_NAME' => 'common-data',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build common_preferences',
+            :name => 'Build data',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
                 fi
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                "$REPO_ROOT/../../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
                     -Pkotlin.native.cocoapods.archs="$ARCHS" \
                     -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"

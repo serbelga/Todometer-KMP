@@ -30,7 +30,7 @@ kotlin {
                 implementation(libs.sqldelight.coroutines)
                 implementation(libs.sqldelight.primitiveAdapters)
 
-                implementation(projects.commonDomain)
+                implementation(projects.common.domain)
             }
         }
         val commonTest by getting {

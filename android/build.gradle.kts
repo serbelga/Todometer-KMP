@@ -60,9 +60,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.common)
-    implementation(projects.commonAndroidResources)
-    implementation(projects.commonComposeUi)
+    implementation(projects.common.core)
+    implementation(projects.common.androidResources)
+    implementation(projects.common.composeUi)
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.animation.graphics)
