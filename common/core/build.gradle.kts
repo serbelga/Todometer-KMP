@@ -7,6 +7,10 @@ plugins {
 
 version = "1.0"
 
+repositories {
+    google()
+}
+
 kotlin {
     android()
     jvm("desktop")
@@ -15,48 +19,56 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Common network"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Common core"
+        homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "common-network"
+            baseName = "common-core"
         }
     }
-    
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.commonDomain)
+                api(libs.koin.core)
+                api(libs.koin.test)
 
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.json)
-                implementation(libs.ktor.client.contentNegotiation)
-                implementation(libs.ktor.serialization.kotlinx.json)
+                api(projects.common.domain)
+                implementation(projects.common.data)
+                implementation(projects.common.database)
+                implementation(projects.common.network)
+                implementation(projects.common.preferences)
+
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.coroutinesTest)
+                implementation(libs.mockk.common)
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation(libs.ktor.client.android)
+                api(libs.androidx.appcompat)
+                api(libs.androidx.coreKtx)
             }
         }
-        val androidTest by getting
-        val desktopMain by getting {
+        val androidTest by getting {
             dependencies {
-                implementation(libs.ktor.client.apache)
+                implementation(libs.junit)
+                implementation(libs.mockk.mockk)
+            }
+        }
+        val desktopMain by getting
+        val desktopTest by getting {
+            dependencies {
+                implementation(libs.mockk.mockk)
             }
         }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
-            dependencies {
-                implementation(libs.ktor.client.ios)
-            }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -71,10 +83,6 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
-
-        all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
-        }
     }
 }
 
@@ -85,5 +93,5 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
-    namespace = "dev.sergiobelda.todometer.common.network"
+    namespace = "dev.sergiobelda.todometer.common"
 }

@@ -15,11 +15,9 @@
 local.properties
 /.idea/
 /desktop/build/
-/common/build/
 /buildSrc/build/
 /android/build/
 /android/release/*
 /android/google-services.json
 /wearos/google-services.json
-/common-network/build/
-/common-database/build/
+/common/**/build/
