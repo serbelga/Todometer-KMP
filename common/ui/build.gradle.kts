@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.common.domain)
+                implementation(projects.common.domain)
                 implementation(libs.kotlin.datetime)
             }
         }

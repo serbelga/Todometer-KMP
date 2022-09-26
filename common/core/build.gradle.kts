@@ -32,7 +32,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.test)
 
-                api(projects.common.domain)
+                implementation(projects.common.domain)
                 implementation(projects.common.data)
                 implementation(projects.common.database)
                 implementation(projects.common.network)
