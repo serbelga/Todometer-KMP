@@ -30,7 +30,7 @@ kotlin {
                 api(compose.materialIconsExtended)
                 api(compose.ui)
                 api(compose.uiTooling)
-                implementation(projects.common.core)
+                implementation(projects.common.ui)
 
                 api(libs.kotlin.coroutinesSwing)
 

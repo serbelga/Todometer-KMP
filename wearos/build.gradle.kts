@@ -66,6 +66,7 @@ dependencies {
 
     implementation(projects.common.core)
     implementation(projects.common.androidResources)
+    implementation(projects.common.ui)
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.coreKtx)

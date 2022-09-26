@@ -19,27 +19,27 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Common core"
+        summary = "Common ui"
         homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "common-core"
+            baseName = "common-ui"
         }
     }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.koin.core)
-                api(libs.koin.test)
-
                 api(projects.common.domain)
-                implementation(projects.common.data)
-                implementation(projects.common.database)
-                implementation(projects.common.network)
-                implementation(projects.common.preferences)
+                implementation(libs.kotlin.datetime)
             }
         }
-        val commonTest by getting
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlin.coroutinesTest)
+                implementation(libs.mockk.common)
+                implementation(kotlin("test"))
+            }
+        }
         val androidMain by getting {
             dependencies {
                 api(libs.androidx.appcompat)
@@ -53,7 +53,11 @@ kotlin {
             }
         }
         val desktopMain by getting
-        val desktopTest by getting
+        val desktopTest by getting {
+            dependencies {
+                implementation(libs.mockk.mockk)
+            }
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -82,5 +86,5 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
-    namespace = "dev.sergiobelda.todometer.common"
+    namespace = "dev.sergiobelda.todometer.common.ui"
 }

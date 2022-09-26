@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.common.core.di
 
-import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.core.di.initKoin
-import dev.sergiobelda.todometer.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
 
-class ToDometerApplication : ToDometerBaseApplication() {
-
-    override fun onCreate() {
-        super.onCreate()
-        initKoin {
-            modules(viewModelModule)
-            androidContext(this@ToDometerApplication)
-        }
-    }
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
+    appDeclaration()
+    modules(
+        networkModule +
+            databaseModule +
+            preferenceModule +
+            remoteDataSourceModule +
+            localDataSourceModule +
+            repositoryModule +
+            useCaseModule
+    )
 }
+
+fun initKoin() = initKoin {}

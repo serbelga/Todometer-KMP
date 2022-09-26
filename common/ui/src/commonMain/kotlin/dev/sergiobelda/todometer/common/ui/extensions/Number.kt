@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,6 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.common.ui.extensions
 
-import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.core.di.initKoin
-import dev.sergiobelda.todometer.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
-
-class ToDometerApplication : ToDometerBaseApplication() {
-
-    override fun onCreate() {
-        super.onCreate()
-        initKoin {
-            modules(viewModelModule)
-            androidContext(this@ToDometerApplication)
-        }
-    }
-}
+internal expect fun Int.format(digits: Int): String
