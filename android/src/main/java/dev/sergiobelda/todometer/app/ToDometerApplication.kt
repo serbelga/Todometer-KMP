@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.app
 
-import dev.sergiobelda.todometer.common.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.di.initKoin
+import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
+import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 
