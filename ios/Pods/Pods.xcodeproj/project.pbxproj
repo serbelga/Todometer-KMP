@@ -7,42 +7,41 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		8217FBB9D1218C346C0781D0B8F2BBE8 /* common */ = {
+		19F71CC6D1110E2EF706A022AB55F1DA /* core */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = EA096F597D80BB0D913F0FE4279EC0E1 /* Build configuration list for PBXAggregateTarget "common" */;
+			buildConfigurationList = D3156EE0F2063A7D096B7EF4267B3D20 /* Build configuration list for PBXAggregateTarget "core" */;
 			buildPhases = (
-				B1BF98AE8F6EE2A3D1FB38C53F124287 /* [CP-User] Build common */,
+				D8AF6E4565D4334FB481A0BC30B28E2D /* [CP-User] Build core */,
 			);
 			dependencies = (
 			);
-			name = common;
+			name = core;
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		4FE15713A59A71DEE492037DEDDE7C09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		88CA2F05343EF9349110F7BA93C8F3EC /* Pods-ToDometer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 72BEE59A7478BCC252EECF1334101E98 /* Pods-ToDometer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E33663A14149B033A2AAE1F6DADAFDDA /* Pods-ToDometer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A26DA0095DE53120170EF4C965AF70 /* Pods-ToDometer-dummy.m */; };
+		0D8D3B70438291E16BA1AFE908A497E8 /* Pods-ToDometer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 72BEE59A7478BCC252EECF1334101E98 /* Pods-ToDometer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38B5A9F350352F3045D5788CF72D6664 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8DFBD442A53B06BD78E9CF5DB27D1A94 /* Pods-ToDometer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A26DA0095DE53120170EF4C965AF70 /* Pods-ToDometer-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		55032206FC39732D7EFE45BB4ED8E1AC /* PBXContainerItemProxy */ = {
+		1E01B47FF9B7408429D5DB9BD21F5B43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8217FBB9D1218C346C0781D0B8F2BBE8;
-			remoteInfo = common;
+			remoteGlobalIDString = 19F71CC6D1110E2EF706A022AB55F1DA;
+			remoteInfo = core;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0E57AC582B59F513671C6FEA3EEFCE00 /* Pods-ToDometer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ToDometer-acknowledgements.markdown"; sourceTree = "<group>"; };
-		50F23192AFA70E5F0C72CC4A7C941DDD /* common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = common.framework; path = build/cocoapods/framework/common.framework; sourceTree = "<group>"; };
-		5322F4D58F773B8686AB4E3C7D1175E0 /* common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = common.release.xcconfig; sourceTree = "<group>"; };
-		66CB301C7AFFA80B04FF8C97876B8394 /* common.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = common.debug.xcconfig; sourceTree = "<group>"; };
+		5D31EFD5CA28FCD3C0948F8FCFCD3360 /* common-core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "common-core.framework"; path = "build/cocoapods/framework/common-core.framework"; sourceTree = "<group>"; };
 		72BEE59A7478BCC252EECF1334101E98 /* Pods-ToDometer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ToDometer-umbrella.h"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		97713D97AAEED94F7795B9A7B1CFCFB1 /* common.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = common.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		793B1ADACEF4987967D37A02877AF51B /* core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = core.debug.xcconfig; sourceTree = "<group>"; };
+		7CFBB187B75B7C14F25826F637934CB2 /* core.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = core.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B481B14F05485E07846B4F00D0C7DB88 /* Pods-ToDometer */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-ToDometer"; path = Pods_ToDometer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB722C7B697DFC67FAD9399CE2A00775 /* Pods-ToDometer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ToDometer.modulemap"; sourceTree = "<group>"; };
@@ -51,26 +50,45 @@
 		D7A26DA0095DE53120170EF4C965AF70 /* Pods-ToDometer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ToDometer-dummy.m"; sourceTree = "<group>"; };
 		D9F78B87BC28358CF1807AD588C5773E /* Pods-ToDometer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ToDometer.debug.xcconfig"; sourceTree = "<group>"; };
 		ED6BCBD4116D6E8D834906254EF75F76 /* Pods-ToDometer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ToDometer-Info.plist"; sourceTree = "<group>"; };
+		FF3F4E40CFB080660B657E31A1DD3CE7 /* core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = core.release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F6A17796134577E2717A4C83D8AE51F7 /* Frameworks */ = {
+		A8BD1D5927B4C2466EE90CEA1FA5BCC1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FE15713A59A71DEE492037DEDDE7C09 /* Foundation.framework in Frameworks */,
+				38B5A9F350352F3045D5788CF72D6664 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		153B1A4EDF1379D6441D29366DB6B1A9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				793B1ADACEF4987967D37A02877AF51B /* core.debug.xcconfig */,
+				FF3F4E40CFB080660B657E31A1DD3CE7 /* core.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../../ios/Pods/Target Support Files/core";
+			sourceTree = "<group>";
+		};
 		2977AFD2CE11DF77EB41D96C755F198D /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
 				BE3443040A1B43C40E9B6D637765DE38 /* Pods-ToDometer */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		3CC85B7E9EAD41BAE2480FC09C6DD6DB /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				7CFBB187B75B7C14F25826F637934CB2 /* core.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -81,28 +99,10 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		5F2A29831F31B876774DC0778F1484B3 /* Support Files */ = {
+		78AC65228CB521CBACA433AF6CECFD05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				66CB301C7AFFA80B04FF8C97876B8394 /* common.debug.xcconfig */,
-				5322F4D58F773B8686AB4E3C7D1175E0 /* common.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../ios/Pods/Target Support Files/common";
-			sourceTree = "<group>";
-		};
-		61BB301BCB2971D167BA3AFB6B1288F0 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				97713D97AAEED94F7795B9A7B1CFCFB1 /* common.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		7E2197AE3DF2F7563F552492F52AECA5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				50F23192AFA70E5F0C72CC4A7C941DDD /* common.framework */,
+				5D31EFD5CA28FCD3C0948F8FCFCD3360 /* common-core.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -115,12 +115,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A534ECAEA5F0A03EFFABCF1B79475E00 /* Development Pods */ = {
+		BCD7E066A6020DA968205DC27F64A305 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				FFFDDE6ED69B83B23091AF23F80AE6DC /* common */,
+				78AC65228CB521CBACA433AF6CECFD05 /* Frameworks */,
+				3CC85B7E9EAD41BAE2480FC09C6DD6DB /* Pod */,
+				153B1A4EDF1379D6441D29366DB6B1A9 /* Support Files */,
 			);
-			name = "Development Pods";
+			name = core;
+			path = ../../common/core;
 			sourceTree = "<group>";
 		};
 		BE3443040A1B43C40E9B6D637765DE38 /* Pods-ToDometer */ = {
@@ -143,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				A534ECAEA5F0A03EFFABCF1B79475E00 /* Development Pods */,
+				DEAD3AB5BB5610A0A5DE42CB6C95B1A7 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				9E05BFB68B127013657C12F1EC1763FF /* Products */,
 				2977AFD2CE11DF77EB41D96C755F198D /* Targets Support Files */,
@@ -158,25 +161,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FFFDDE6ED69B83B23091AF23F80AE6DC /* common */ = {
+		DEAD3AB5BB5610A0A5DE42CB6C95B1A7 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7E2197AE3DF2F7563F552492F52AECA5 /* Frameworks */,
-				61BB301BCB2971D167BA3AFB6B1288F0 /* Pod */,
-				5F2A29831F31B876774DC0778F1484B3 /* Support Files */,
+				BCD7E066A6020DA968205DC27F64A305 /* core */,
 			);
-			name = common;
-			path = ../../common;
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		C887CE19B41E6B53094BEC5E8F5EBD4F /* Headers */ = {
+		E3885AA3C2276BE361AE7336B33B96A1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88CA2F05343EF9349110F7BA93C8F3EC /* Pods-ToDometer-umbrella.h in Headers */,
+				0D8D3B70438291E16BA1AFE908A497E8 /* Pods-ToDometer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,17 +185,17 @@
 /* Begin PBXNativeTarget section */
 		5A36533557A7B50627951A9E0558AAE3 /* Pods-ToDometer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 85547F6CE73F8D1E3A7A85292F29374D /* Build configuration list for PBXNativeTarget "Pods-ToDometer" */;
+			buildConfigurationList = 5E4558556E774F839484FE350E59507C /* Build configuration list for PBXNativeTarget "Pods-ToDometer" */;
 			buildPhases = (
-				C887CE19B41E6B53094BEC5E8F5EBD4F /* Headers */,
-				20765DD9C8DC81F949DC6DE6E016D47C /* Sources */,
-				F6A17796134577E2717A4C83D8AE51F7 /* Frameworks */,
-				5B2F9E94E0C325F92C3EC53EE8A4B83C /* Resources */,
+				E3885AA3C2276BE361AE7336B33B96A1 /* Headers */,
+				B8DF710473C3EC8049C5057304BFA4D3 /* Sources */,
+				A8BD1D5927B4C2466EE90CEA1FA5BCC1 /* Frameworks */,
+				1FEE692E1960889EF9EB476394DA7254 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				64F0F6D4F4106AB0E779A2B701EC89CA /* PBXTargetDependency */,
+				B0F20FE28E51E6880E5F9B647EBAFC75 /* PBXTargetDependency */,
 			);
 			name = "Pods-ToDometer";
 			productName = Pods_ToDometer;
@@ -224,14 +224,14 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8217FBB9D1218C346C0781D0B8F2BBE8 /* common */,
+				19F71CC6D1110E2EF706A022AB55F1DA /* core */,
 				5A36533557A7B50627951A9E0558AAE3 /* Pods-ToDometer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5B2F9E94E0C325F92C3EC53EE8A4B83C /* Resources */ = {
+		1FEE692E1960889EF9EB476394DA7254 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -241,55 +241,76 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B1BF98AE8F6EE2A3D1FB38C53F124287 /* [CP-User] Build common */ = {
+		D8AF6E4565D4334FB481A0BC30B28E2D /* [CP-User] Build core */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			name = "[CP-User] Build common";
+			name = "[CP-User] Build core";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "                if [ \"YES\" = \"$COCOAPODS_SKIP_KOTLIN_BUILD\" ]; then\n                  echo \"Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=$CONFIGURATION\n";
+			shellScript = "                if [ \"YES\" = \"$COCOAPODS_SKIP_KOTLIN_BUILD\" ]; then\n                  echo \"Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		20765DD9C8DC81F949DC6DE6E016D47C /* Sources */ = {
+		B8DF710473C3EC8049C5057304BFA4D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E33663A14149B033A2AAE1F6DADAFDDA /* Pods-ToDometer-dummy.m in Sources */,
+				8DFBD442A53B06BD78E9CF5DB27D1A94 /* Pods-ToDometer-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		64F0F6D4F4106AB0E779A2B701EC89CA /* PBXTargetDependency */ = {
+		B0F20FE28E51E6880E5F9B647EBAFC75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = common;
-			target = 8217FBB9D1218C346C0781D0B8F2BBE8 /* common */;
-			targetProxy = 55032206FC39732D7EFE45BB4ED8E1AC /* PBXContainerItemProxy */;
+			name = core;
+			target = 19F71CC6D1110E2EF706A022AB55F1DA /* core */;
+			targetProxy = 1E01B47FF9B7408429D5DB9BD21F5B43 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		366F223EC528699FCFBA47E2001F7A50 /* Debug */ = {
+		355366C2D7C7640595ACB474FB8871FF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66CB301C7AFFA80B04FF8C97876B8394 /* common.debug.xcconfig */;
+			baseConfigurationReference = CD0108CEA4B2CAF42ABD28E3DA24B35F /* Pods-ToDometer.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ToDometer/Pods-ToDometer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ToDometer/Pods-ToDometer.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		593F10BFFA94DAC7D6E17FB8A7F32D72 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -350,6 +371,24 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		6489B3C1C4480CDBC84545ACC479F80B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF3F4E40CFB080660B657E31A1DD3CE7 /* core.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -419,9 +458,9 @@
 			};
 			name = Debug;
 		};
-		AC7A7943A9E74FF98C16DDD0ED4E7520 /* Release */ = {
+		ACA6EA1332441358981D10CEB8B6EE70 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5322F4D58F773B8686AB4E3C7D1175E0 /* common.release.xcconfig */;
+			baseConfigurationReference = 793B1ADACEF4987967D37A02877AF51B /* core.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -433,49 +472,10 @@
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
-		CBB05CB56034B8CF6B250221E8D278BF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD0108CEA4B2CAF42ABD28E3DA24B35F /* Pods-ToDometer.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ToDometer/Pods-ToDometer-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ToDometer/Pods-ToDometer.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		EDAC9A8FE71ADD871CBA64F97FE0EAA4 /* Debug */ = {
+		FF7B3FAD3B647CC7F9057EE3260277A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9F78B87BC28358CF1807AD588C5773E /* Pods-ToDometer.debug.xcconfig */;
 			buildSettings = {
@@ -524,20 +524,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		85547F6CE73F8D1E3A7A85292F29374D /* Build configuration list for PBXNativeTarget "Pods-ToDometer" */ = {
+		5E4558556E774F839484FE350E59507C /* Build configuration list for PBXNativeTarget "Pods-ToDometer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EDAC9A8FE71ADD871CBA64F97FE0EAA4 /* Debug */,
-				CBB05CB56034B8CF6B250221E8D278BF /* Release */,
+				FF7B3FAD3B647CC7F9057EE3260277A0 /* Debug */,
+				355366C2D7C7640595ACB474FB8871FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EA096F597D80BB0D913F0FE4279EC0E1 /* Build configuration list for PBXAggregateTarget "common" */ = {
+		D3156EE0F2063A7D096B7EF4267B3D20 /* Build configuration list for PBXAggregateTarget "core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				366F223EC528699FCFBA47E2001F7A50 /* Debug */,
-				AC7A7943A9E74FF98C16DDD0ED4E7520 /* Release */,
+				ACA6EA1332441358981D10CEB8B6EE70 /* Debug */,
+				6489B3C1C4480CDBC84545ACC479F80B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
