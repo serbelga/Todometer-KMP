@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.ui.about
 
-import dev.sergiobelda.todometer.navigation.Action
-import dev.sergiobelda.todometer.navigation.Destination
-import dev.sergiobelda.todometer.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.android.navigation.Destination
+import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
+import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object AboutDestination : Destination {
     override val route: String = "about"
@@ -28,7 +28,7 @@ object AboutNavigationParams : NavigationParams(AboutDestination) {
     override val navigationRoute: String = destination.route
 }
 
-val Action.navigateToAbout: () -> Unit
+val NavigationAction.navigateToAbout: () -> Unit
     get() = {
         navigate(AboutNavigationParams)
     }

@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.taskdetail
 
+import androidx.navigation.NavBackStackEntry
 import dev.sergiobelda.todometer.common.android.navigation.Destination
 import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
-object AddTaskDestination : Destination {
-    override val route: String = "addtask"
+object TaskDetailDestination : Destination {
+    const val TaskDetail = "taskdetail"
+    private const val TaskIdArg = "taskId"
 
-    private const val AddTaskDeepLink = "app://open.add.task"
-    const val uriPattern = AddTaskDeepLink
+    override val route: String = "$TaskDetail/{$TaskIdArg}"
+
+    fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
+        navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""
 }
 
-object AddTaskNavigationParams : NavigationParams(AddTaskDestination) {
-    override val navigationRoute: String = destination.route
+class TaskDetailNavigationParams(taskId: String) : NavigationParams(TaskDetailDestination) {
+    override val navigationRoute: String = "${TaskDetailDestination.TaskDetail}/$taskId"
 }
 
-val NavigationAction.navigateToAddTask: () -> Unit
-    get() = {
-        navigate(AddTaskNavigationParams)
+val NavigationAction.navigateToTaskDetail: (String) -> Unit
+    get() = { taskId ->
+        navigate(TaskDetailNavigationParams(taskId))
     }

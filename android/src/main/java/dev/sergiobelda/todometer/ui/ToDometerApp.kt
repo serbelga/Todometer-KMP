@@ -21,15 +21,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
+import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.navigation.Action
 import dev.sergiobelda.todometer.ui.theme.ToDometerAppTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     val navController = rememberNavController()
-    val action = remember(navController) { Action(navController) }
+    val action = remember(navController) { NavigationAction(navController) }
 
     val appThemeState = mainViewModel.appTheme.collectAsState()
     val darkTheme: Boolean = when (appThemeState.value) {

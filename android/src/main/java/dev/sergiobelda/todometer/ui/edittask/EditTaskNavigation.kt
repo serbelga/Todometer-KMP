@@ -17,9 +17,9 @@
 package dev.sergiobelda.todometer.ui.edittask
 
 import androidx.navigation.NavBackStackEntry
-import dev.sergiobelda.todometer.navigation.Action
-import dev.sergiobelda.todometer.navigation.Destination
-import dev.sergiobelda.todometer.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.android.navigation.Destination
+import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
+import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object EditTaskDestination : Destination {
     private const val TaskIdArg = "taskId"
@@ -35,7 +35,7 @@ class EditTaskNavigationParams(taskId: String) : NavigationParams(EditTaskDestin
     override val navigationRoute: String = "${EditTaskDestination.EditTask}/$taskId"
 }
 
-val Action.navigateToEditTask: (String) -> Unit
+val NavigationAction.navigateToEditTask: (String) -> Unit
     get() = { taskId ->
         navigate(EditTaskNavigationParams(taskId))
     }

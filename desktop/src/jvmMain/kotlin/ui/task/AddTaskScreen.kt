@@ -28,13 +28,13 @@ import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AddTaskScreen(navigateUp: () -> Unit) {
+internal fun AddTaskScreen(navigateBack: () -> Unit) {
     Scaffold(
         topBar = {
             SmallTopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             "Back",

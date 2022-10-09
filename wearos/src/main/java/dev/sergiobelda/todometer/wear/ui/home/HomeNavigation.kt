@@ -14,24 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.home
 
 import dev.sergiobelda.todometer.common.android.navigation.Destination
 import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
-import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
-object AddTaskDestination : Destination {
-    override val route: String = "addtask"
-
-    private const val AddTaskDeepLink = "app://open.add.task"
-    const val uriPattern = AddTaskDeepLink
+object HomeDestination : Destination {
+    override val route: String = "home"
 }
 
-object AddTaskNavigationParams : NavigationParams(AddTaskDestination) {
-    override val navigationRoute: String = destination.route
-}
-
-val NavigationAction.navigateToAddTask: () -> Unit
+val NavigationAction.popBackStackToHome: () -> Unit
     get() = {
-        navigate(AddTaskNavigationParams)
+        popBackStack(HomeDestination.route, false)
     }

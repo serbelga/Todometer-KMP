@@ -63,8 +63,7 @@ android {
 }
 
 dependencies {
-
-    implementation(projects.common.androidResources)
+    implementation(projects.common.android)
     implementation(projects.common.core)
     implementation(projects.common.domain)
     implementation(projects.common.ui)

@@ -58,7 +58,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 internal fun EditTaskScreen(
     taskId: String,
-    navigateUp: () -> Unit,
+    navigateBack: () -> Unit,
     editTaskViewModel: EditTaskViewModel = getViewModel { parametersOf(taskId) }
 ) {
     val activity = LocalContext.current as AppCompatActivity
@@ -80,7 +80,7 @@ internal fun EditTaskScreen(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
@@ -102,7 +102,7 @@ internal fun EditTaskScreen(
                                         taskDueDate
                                     )
                                     ToDometerWidgetReceiver().updateData()
-                                    navigateUp()
+                                    navigateBack()
                                 }
                             }
                         ) {

@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
-import dev.sergiobelda.todometer.navigation.Action
+import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
 import dev.sergiobelda.todometer.ui.about.navigateToAbout
@@ -48,15 +48,15 @@ import dev.sergiobelda.todometer.ui.taskdetail.navigateToTaskDetail
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ToDometerNavHost(
+internal fun ToDometerNavHost(
     navController: NavHostController,
-    action: Action,
+    navigationAction: NavigationAction,
     modifier: Modifier = Modifier
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val navigateBackAction: () -> Unit = {
         keyboardController?.hide()
-        action.navigateUp()
+        navigationAction.navigateUp()
     }
 
     NavHost(
@@ -66,11 +66,11 @@ fun ToDometerNavHost(
     ) {
         composable(HomeDestination.route) {
             HomeScreen(
-                addTaskList = action.navigateToAddTaskList,
-                editTaskList = action.navigateToEditTaskList,
-                addTask = action.navigateToAddTask,
-                openTask = action.navigateToTaskDetail,
-                about = action.navigateToAbout
+                addTaskList = navigationAction.navigateToAddTaskList,
+                editTaskList = navigationAction.navigateToEditTaskList,
+                addTask = navigationAction.navigateToAddTask,
+                openTask = navigationAction.navigateToTaskDetail,
+                about = navigationAction.navigateToAbout
             )
         }
         composable(
@@ -82,28 +82,28 @@ fun ToDometerNavHost(
             val taskId = TaskDetailDestination.navArgsTaskId(navBackStackEntry)
             TaskDetailScreen(
                 taskId = taskId,
-                editTask = { action.navigateToEditTask(taskId) },
-                navigateUp = navigateBackAction
+                editTask = { navigationAction.navigateToEditTask(taskId) },
+                navigateBack = navigateBackAction
             )
         }
         composable(AddTaskListDestination.route) {
-            AddTaskListScreen(navigateBackAction)
+            AddTaskListScreen(navigateBack = navigateBackAction)
         }
         composable(EditTaskListDestination.route) {
-            EditTaskListScreen(navigateBackAction)
+            EditTaskListScreen(navigateBack = navigateBackAction)
         }
         composable(
             AddTaskDestination.route,
             deepLinks = listOf(navDeepLink { uriPattern = AddTaskDestination.uriPattern })
         ) {
-            AddTaskScreen(navigateBackAction)
+            AddTaskScreen(navigateBack = navigateBackAction)
         }
         composable(EditTaskDestination.route) { backStackEntry ->
             val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)
-            EditTaskScreen(taskId = taskId, navigateUp = navigateBackAction)
+            EditTaskScreen(taskId = taskId, navigateBack = navigateBackAction)
         }
         composable(AboutDestination.route) {
-            AboutScreen(navigateUp = navigateBackAction)
+            AboutScreen(navigateBack = navigateBackAction)
         }
     }
 }

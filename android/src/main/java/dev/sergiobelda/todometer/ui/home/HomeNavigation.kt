@@ -16,13 +16,8 @@
 
 package dev.sergiobelda.todometer.ui.home
 
-import dev.sergiobelda.todometer.navigation.Destination
-import dev.sergiobelda.todometer.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.android.navigation.Destination
 
 object HomeDestination : Destination {
     override val route: String = "home"
-}
-
-object HomeNavigationParams : NavigationParams(HomeDestination) {
-    override val navigationRoute: String = destination.route
 }

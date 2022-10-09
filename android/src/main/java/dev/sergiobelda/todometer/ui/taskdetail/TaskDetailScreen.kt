@@ -79,7 +79,7 @@ private val SectionPadding: Dp = 32.dp
 internal fun TaskDetailScreen(
     taskId: String,
     editTask: () -> Unit,
-    navigateUp: () -> Unit,
+    navigateBack: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel = getViewModel { parametersOf(taskId) }
 ) {
     val lazyListState = rememberLazyListState()
@@ -102,7 +102,7 @@ internal fun TaskDetailScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",

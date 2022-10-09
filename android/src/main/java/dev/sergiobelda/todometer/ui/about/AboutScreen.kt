@@ -63,7 +63,7 @@ private const val GITHUB_URL = "https://github.com/serbelga/ToDometer_Multiplatf
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AboutScreen(
-    navigateUp: () -> Unit
+    navigateBack: () -> Unit
 ) {
     var privacyPolicyDialogState by remember { mutableStateOf(false) }
     val context = LocalContext.current
@@ -71,7 +71,7 @@ internal fun AboutScreen(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
@@ -93,9 +93,7 @@ internal fun AboutScreen(
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
-                onCardClick = {
-                    context.openWebPage(GITHUB_URL)
-                },
+                onCardClick = { context.openWebPage(GITHUB_URL) },
                 icon = {
                     Icon(
                         painterResource(R.drawable.ic_github_24),

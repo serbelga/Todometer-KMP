@@ -70,7 +70,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AddTaskScreen(
-    navigateUp: () -> Unit,
+    navigateBack: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
     val activity = LocalContext.current as AppCompatActivity
@@ -89,7 +89,7 @@ internal fun AddTaskScreen(
     val addTaskUiState = addTaskViewModel.addTaskUiState
     if (addTaskUiState.isAdded) {
         ToDometerWidgetReceiver().updateData()
-        navigateUp()
+        navigateBack()
     }
 
     if (addTaskUiState.errorUi != null) {
@@ -106,7 +106,7 @@ internal fun AddTaskScreen(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",

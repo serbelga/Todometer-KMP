@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.wear.ui.deletetask
 
+import androidx.navigation.NavBackStackEntry
 import dev.sergiobelda.todometer.common.android.navigation.Destination
 import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
-object AddTaskDestination : Destination {
-    override val route: String = "addtask"
+object DeleteTaskDestination : Destination {
+    const val DeleteTask = "deletetask"
+    private const val TaskIdArg = "taskId"
 
-    private const val AddTaskDeepLink = "app://open.add.task"
-    const val uriPattern = AddTaskDeepLink
+    override val route: String = "$DeleteTask/{$TaskIdArg}"
+
+    fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
+        navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""
 }
 
-object AddTaskNavigationParams : NavigationParams(AddTaskDestination) {
-    override val navigationRoute: String = destination.route
+class DeleteTaskNavigationParams(taskId: String) : NavigationParams(DeleteTaskDestination) {
+    override val navigationRoute: String = "${DeleteTaskDestination.DeleteTask}/$taskId"
 }
 
-val NavigationAction.navigateToAddTask: () -> Unit
-    get() = {
-        navigate(AddTaskNavigationParams)
+val NavigationAction.navigateToDeleteTask: (String) -> Unit
+    get() = { taskId ->
+        navigate(DeleteTaskNavigationParams(taskId))
     }

@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.navigation
+package dev.sergiobelda.todometer.common.android.navigation
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
-class Action(private val navController: NavHostController) {
-    fun navigateUp() {
-        navController.navigateUp()
-    }
+class NavigationAction(private val navController: NavHostController) {
 
     fun navigate(navigationParams: NavigationParams) {
         if (navigationParams.destination is TopLevelDestination) {
@@ -43,4 +40,14 @@ class Action(private val navController: NavHostController) {
             navController.navigate(navigationParams.navigationRoute)
         }
     }
+
+    fun popBackStack() = navController.popBackStack()
+
+    fun popBackStack(
+        route: String,
+        inclusive: Boolean,
+        saveState: Boolean = false
+    ) = navController.popBackStack(route, inclusive, saveState)
+
+    fun navigateUp() = navController.navigateUp()
 }
