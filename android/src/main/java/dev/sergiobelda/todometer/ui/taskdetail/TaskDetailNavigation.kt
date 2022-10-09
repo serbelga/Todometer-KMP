@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.ui.taskdetail
 
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.navDeepLink
 import dev.sergiobelda.todometer.common.android.navigation.Destination
 import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
@@ -28,7 +29,8 @@ object TaskDetailDestination : Destination {
     override val route: String = "$TaskDetail/{$TaskIdArg}"
 
     private const val TaskDetailDeepLink = "app://open.task"
-    const val uriPattern = "$TaskDetailDeepLink/{$TaskIdArg}"
+
+    val taskDetailNavDeepLink = navDeepLink { uriPattern = "$TaskDetailDeepLink/{$TaskIdArg}" }
 
     fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
         navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""

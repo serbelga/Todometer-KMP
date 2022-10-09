@@ -23,7 +23,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navDeepLink
 import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
@@ -75,9 +74,7 @@ internal fun ToDometerNavHost(
         }
         composable(
             TaskDetailDestination.route,
-            deepLinks = listOf(
-                navDeepLink { uriPattern = TaskDetailDestination.uriPattern }
-            )
+            deepLinks = listOf(TaskDetailDestination.taskDetailNavDeepLink)
         ) { navBackStackEntry ->
             val taskId = TaskDetailDestination.navArgsTaskId(navBackStackEntry)
             TaskDetailScreen(
@@ -94,7 +91,7 @@ internal fun ToDometerNavHost(
         }
         composable(
             AddTaskDestination.route,
-            deepLinks = listOf(navDeepLink { uriPattern = AddTaskDestination.uriPattern })
+            deepLinks = listOf(AddTaskDestination.addTaskNavDeepLink)
         ) {
             AddTaskScreen(navigateBack = navigateBackAction)
         }

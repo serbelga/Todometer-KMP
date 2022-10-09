@@ -29,7 +29,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     val navController = rememberNavController()
-    val action = remember(navController) { NavigationAction(navController) }
+    val navigationAction = remember(navController) { NavigationAction(navController) }
 
     val appThemeState = mainViewModel.appTheme.collectAsState()
     val darkTheme: Boolean = when (appThemeState.value) {
@@ -39,6 +39,6 @@ internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     }
 
     ToDometerAppTheme(darkTheme) {
-        ToDometerNavHost(navController, action)
+        ToDometerNavHost(navController, navigationAction)
     }
 }
