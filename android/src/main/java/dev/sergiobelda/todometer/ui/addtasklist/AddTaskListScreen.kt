@@ -54,7 +54,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AddTaskListScreen(
-    navigateUp: () -> Unit,
+    navigateBack: () -> Unit,
     addTaskListViewModel: AddTaskListViewModel = getViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -64,7 +64,7 @@ internal fun AddTaskListScreen(
 
     val addTaskListUiState = addTaskListViewModel.addTaskListUiState
     if (addTaskListUiState.isAdded) {
-        navigateUp()
+        navigateBack()
     }
 
     if (addTaskListUiState.errorUi != null) {
@@ -80,7 +80,7 @@ internal fun AddTaskListScreen(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
@@ -104,11 +104,10 @@ internal fun AddTaskListScreen(
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = "Save",
-                            tint = if (addTaskListUiState.isAddingTaskList)
-                                ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
+                            tint = if (addTaskListUiState.isAddingTaskList) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
                         )
                     }
-                },
+                }
             )
         },
         content = { paddingValues ->

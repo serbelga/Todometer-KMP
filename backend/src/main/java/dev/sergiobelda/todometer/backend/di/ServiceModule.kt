@@ -20,9 +20,11 @@ import dev.sergiobelda.todometer.backend.service.ITaskListService
 import dev.sergiobelda.todometer.backend.service.ITaskService
 import dev.sergiobelda.todometer.backend.service.TaskListService
 import dev.sergiobelda.todometer.backend.service.TaskService
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal val serviceModule = module {
-    single<ITaskListService> { TaskListService(get()) }
-    single<ITaskService> { TaskService(get()) }
+    singleOf(::TaskListService) bind ITaskListService::class
+    singleOf(::TaskService) bind ITaskService::class
 }

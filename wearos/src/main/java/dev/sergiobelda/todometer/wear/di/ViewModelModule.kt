@@ -22,12 +22,11 @@ import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailViewModel
 import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 internal val viewModelModule = module {
-    viewModel {
-        HomeViewModel(get(), get())
-    }
+    viewModelOf(::HomeViewModel)
     viewModel { parameters ->
         TaskListTasksViewModel(
             taskListId = parameters.get(),

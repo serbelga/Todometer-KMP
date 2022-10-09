@@ -50,7 +50,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun EditTaskListScreen(
-    navigateUp: () -> Unit,
+    navigateBack: () -> Unit,
     editTaskListViewModel: EditTaskListViewModel = getViewModel()
 ) {
     var taskListName by rememberSaveable { mutableStateOf("") }
@@ -64,7 +64,7 @@ internal fun EditTaskListScreen(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
@@ -84,7 +84,7 @@ internal fun EditTaskListScreen(
                                         taskListName
                                     )
                                     ToDometerWidgetReceiver().updateData()
-                                    navigateUp()
+                                    navigateBack()
                                 }
                             }
                         ) {
@@ -95,7 +95,7 @@ internal fun EditTaskListScreen(
                             )
                         }
                     }
-                },
+                }
             )
         },
         content = { paddingValues ->

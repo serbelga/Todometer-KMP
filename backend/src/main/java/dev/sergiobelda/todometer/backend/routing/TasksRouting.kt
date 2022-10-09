@@ -33,7 +33,6 @@ import io.ktor.server.routing.route
 
 internal fun Route.tasksRouting(taskService: ITaskService) {
     route("/v1/tasks") {
-
         get {
             call.respond(taskService.getTasks(call.parameters["taskListId"]))
         }

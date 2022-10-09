@@ -50,24 +50,28 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.extensions.getVersionName
+import dev.sergiobelda.todometer.extensions.launchActivity
+import dev.sergiobelda.todometer.extensions.openWebPage
 import dev.sergiobelda.todometer.ui.components.ToDometerTitle
+
+private const val GITHUB_URL = "https://github.com/serbelga/ToDometer_Multiplatform"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AboutScreen(
-    openGithub: () -> Unit,
-    openSourceLicenses: () -> Unit,
-    navigateUp: () -> Unit
+    navigateBack: () -> Unit
 ) {
     var privacyPolicyDialogState by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
@@ -89,7 +93,7 @@ internal fun AboutScreen(
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
-                onCardClick = { openGithub() },
+                onCardClick = { context.openWebPage(GITHUB_URL) },
                 icon = {
                     Icon(
                         painterResource(R.drawable.ic_github_24),
@@ -109,7 +113,7 @@ internal fun AboutScreen(
                 text = { Text(stringResource(R.string.privacy_policy)) }
             )
             AboutItemCard(
-                onCardClick = { openSourceLicenses() },
+                onCardClick = { context.launchActivity<OssLicensesMenuActivity>() },
                 icon = {
                     Icon(
                         Icons.Rounded.Code,

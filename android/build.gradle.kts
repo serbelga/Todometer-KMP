@@ -28,8 +28,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1230400
-        versionName = "android-2.3.0"
+        versionCode = 1231400
+        versionName = "android-2.3.1"
     }
 
     buildTypes {
@@ -60,9 +60,11 @@ android {
 }
 
 dependencies {
-    implementation(projects.common)
-    implementation(projects.commonAndroidResources)
-    implementation(projects.commonComposeUi)
+    implementation(projects.common.android)
+    implementation(projects.common.composeUi)
+    implementation(projects.common.core)
+    implementation(projects.common.domain)
+    implementation(projects.common.ui)
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.animation.graphics)

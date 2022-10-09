@@ -67,6 +67,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -84,11 +85,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
@@ -101,6 +104,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.extensions.launchActivity
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
@@ -117,10 +121,11 @@ internal fun HomeScreen(
     editTaskList: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
-    openSourceLicenses: () -> Unit,
     about: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
+    val context = LocalContext.current
+
     val scope = rememberCoroutineScope()
     // TODO: Use skipHalfExpanded when available.
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -164,7 +169,7 @@ internal fun HomeScreen(
                 openSourceLicensesClick = {
                     scope.launch {
                         sheetState.hide()
-                        openSourceLicenses()
+                        context.launchActivity<OssLicensesMenuActivity>()
                     }
                 },
                 aboutClick = {
@@ -181,22 +186,24 @@ internal fun HomeScreen(
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                DrawerContent(
-                    homeUiState.taskListSelected?.id ?: "",
-                    defaultTaskListName,
-                    homeUiState.taskLists,
-                    addTaskList = {
-                        scope.launch {
-                            closeDrawer()
+                ModalDrawerSheet {
+                    DrawerContent(
+                        homeUiState.taskListSelected?.id ?: "",
+                        defaultTaskListName,
+                        homeUiState.taskLists,
+                        addTaskList = {
+                            scope.launch {
+                                closeDrawer()
+                            }
+                            addTaskList()
+                        },
+                        selectTaskList = {
+                            homeViewModel.setTaskListSelected(it)
+                            scope.launch { closeDrawer() }
+                            updateToDometerWidgetData()
                         }
-                        addTaskList()
-                    },
-                    selectTaskList = {
-                        homeViewModel.setTaskListSelected(it)
-                        scope.launch { closeDrawer() }
-                        updateToDometerWidgetData()
-                    }
-                )
+                    )
+                }
             }
         ) {
             Scaffold(
@@ -318,7 +325,7 @@ private fun ChooseThemeAlertDialog(
                                     onClick = { themeSelected = appTheme },
                                     role = Role.RadioButton
                                 )
-                                .padding(horizontal = 16.dp),
+                                .padding(horizontal = 16.dp)
                         ) {
                             RadioButton(
                                 selected = themeSelected == appTheme,
@@ -423,40 +430,38 @@ private fun DrawerContent(
     addTaskList: () -> Unit,
     selectTaskList: (String) -> Unit
 ) {
-    Column {
-        Box(
-            modifier = Modifier.height(56.dp).fillMaxWidth()
-        ) {
-            ToDometerTitle(
-                modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
-            )
+    Box(
+        modifier = Modifier.height(56.dp).fillMaxWidth()
+    ) {
+        ToDometerTitle(
+            modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp)
+        )
+    }
+    HorizontalDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .height(56.dp)
+            .padding(start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.task_lists),
+            style = MaterialTheme.typography.titleSmall
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        TextButton(onClick = addTaskList) {
+            Text(stringResource(R.string.add_task_list))
         }
-        HorizontalDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .height(56.dp)
-                .padding(start = 16.dp, end = 16.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.task_lists),
-                style = MaterialTheme.typography.titleSmall
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            TextButton(onClick = addTaskList) {
-                Text(stringResource(R.string.add_task_list))
+    }
+    LazyColumn(modifier = Modifier.padding(8.dp)) {
+        item {
+            TaskListItem(defaultTaskListName, selectedTaskListId == "") {
+                selectTaskList("")
             }
         }
-        LazyColumn(modifier = Modifier.padding(8.dp)) {
-            item {
-                TaskListItem(defaultTaskListName, selectedTaskListId == "") {
-                    selectTaskList("")
-                }
-            }
-            items(taskLists) { taskList ->
-                TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
-                    selectTaskList(taskList.id)
-                }
+        items(taskLists) { taskList ->
+            TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
+                selectTaskList(taskList.id)
             }
         }
     }
@@ -805,7 +810,8 @@ private fun ChooseThemeListItem(
                 )
             }
         },
-        modifier = Modifier.height(MoreBottomSheetListItemHeight).clickable(onClick = chooseThemeClick)
+        modifier = Modifier.height(MoreBottomSheetListItemHeight)
+            .clickable(onClick = chooseThemeClick)
     )
 }
 

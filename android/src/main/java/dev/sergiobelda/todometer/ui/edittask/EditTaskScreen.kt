@@ -51,12 +51,15 @@ import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun EditTaskScreen(
-    navigateUp: () -> Unit,
-    editTaskViewModel: EditTaskViewModel
+    taskId: String,
+    navigateBack: () -> Unit,
+    editTaskViewModel: EditTaskViewModel = getViewModel { parametersOf(taskId) }
 ) {
     val activity = LocalContext.current as AppCompatActivity
 
@@ -77,7 +80,7 @@ internal fun EditTaskScreen(
         topBar = {
             SmallTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",
@@ -99,7 +102,7 @@ internal fun EditTaskScreen(
                                         taskDueDate
                                     )
                                     ToDometerWidgetReceiver().updateData()
-                                    navigateUp()
+                                    navigateBack()
                                 }
                             }
                         ) {

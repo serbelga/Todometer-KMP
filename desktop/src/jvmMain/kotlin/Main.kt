@@ -24,7 +24,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
-import dev.sergiobelda.todometer.common.di.initKoin
+import dev.sergiobelda.todometer.common.core.di.initKoin
 import ui.home.HomeScreen
 import ui.icons.iconToDometer
 import ui.theme.ToDometerAppTheme

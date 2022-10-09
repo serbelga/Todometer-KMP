@@ -48,7 +48,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -70,20 +69,23 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 private val SectionPadding: Dp = 32.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TaskDetailScreen(
+    taskId: String,
     editTask: () -> Unit,
-    navigateUp: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel
+    navigateBack: () -> Unit,
+    taskDetailViewModel: TaskDetailViewModel = getViewModel { parametersOf(taskId) }
 ) {
     val lazyListState = rememberLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
     val topAppBarState = rememberTopAppBarState()
-    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(topAppBarState) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -100,7 +102,7 @@ internal fun TaskDetailScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
                             contentDescription = "Back",

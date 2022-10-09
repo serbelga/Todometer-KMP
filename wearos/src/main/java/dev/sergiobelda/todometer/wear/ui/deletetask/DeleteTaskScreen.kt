@@ -28,12 +28,15 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
 import dev.sergiobelda.todometer.wear.R
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun DeleteTaskScreen(
+    taskId: String,
     onDeleteTask: () -> Unit,
-    navigateUp: () -> Unit,
-    deleteTaskViewModel: DeleteTaskViewModel
+    navigateBack: () -> Unit,
+    deleteTaskViewModel: DeleteTaskViewModel = getViewModel(parameters = { parametersOf(taskId) })
 ) {
     Alert(
         icon = { Icon(Icons.Outlined.Delete, null) },
@@ -50,7 +53,7 @@ internal fun DeleteTaskScreen(
             }
         },
         negativeButton = {
-            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateUp) {
+            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateBack) {
                 Icon(Icons.Rounded.Clear, null)
             }
         }

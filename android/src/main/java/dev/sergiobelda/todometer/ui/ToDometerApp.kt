@@ -16,56 +16,20 @@
 
 package dev.sergiobelda.todometer.ui
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navDeepLink
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.ui.Destinations.About
-import dev.sergiobelda.todometer.ui.Destinations.AddTask
-import dev.sergiobelda.todometer.ui.Destinations.AddTaskDeepLink
-import dev.sergiobelda.todometer.ui.Destinations.AddTaskList
-import dev.sergiobelda.todometer.ui.Destinations.EditTask
-import dev.sergiobelda.todometer.ui.Destinations.EditTaskList
-import dev.sergiobelda.todometer.ui.Destinations.Home
-import dev.sergiobelda.todometer.ui.Destinations.TaskDetail
-import dev.sergiobelda.todometer.ui.Destinations.TaskDetailArgs.TaskId
-import dev.sergiobelda.todometer.ui.Destinations.TaskDetailDeepLink
-import dev.sergiobelda.todometer.ui.about.AboutScreen
-import dev.sergiobelda.todometer.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListScreen
-import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
-import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListScreen
-import dev.sergiobelda.todometer.ui.home.HomeScreen
-import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.ui.theme.ToDometerAppTheme
 import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val context = LocalContext.current
-
     val navController = rememberNavController()
-    val actions = remember(navController) { Actions(navController) }
-    val navigateBackAction: () -> Unit = {
-        keyboardController?.hide()
-        actions.navigateUp()
-    }
+    val action = remember(navController) { Action(navController) }
 
     val appThemeState = mainViewModel.appTheme.collectAsState()
     val darkTheme: Boolean = when (appThemeState.value) {
@@ -75,78 +39,6 @@ internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     }
 
     ToDometerAppTheme(darkTheme) {
-        NavHost(navController, startDestination = Home) {
-            composable(Home) {
-                HomeScreen(
-                    addTaskList = actions.navigateToAddTaskList,
-                    editTaskList = actions.navigateToEditTaskList,
-                    addTask = actions.navigateToAddTask,
-                    openTask = actions.navigateToTaskDetail,
-                    openSourceLicenses = { startOpenSourceLicensesActivity(context) },
-                    about = actions.navigateToAbout
-                )
-            }
-            composable(
-                "$TaskDetail/{$TaskId}",
-                deepLinks = listOf(navDeepLink { uriPattern = "$TaskDetailDeepLink/{$TaskId}" })
-            ) { navBackStackEntry ->
-                val taskId = navBackStackEntry.arguments?.getString(TaskId) ?: ""
-                TaskDetailScreen(
-                    editTask = { actions.navigateToEditTask(taskId) },
-                    navigateUp = navigateBackAction,
-                    taskDetailViewModel = getViewModel { parametersOf(taskId) }
-                )
-            }
-            composable(AddTaskList) {
-                AddTaskListScreen(navigateBackAction)
-            }
-            composable(EditTaskList) {
-                EditTaskListScreen(navigateBackAction)
-            }
-            composable(
-                AddTask,
-                deepLinks = listOf(navDeepLink { uriPattern = AddTaskDeepLink })
-            ) {
-                AddTaskScreen(navigateBackAction)
-            }
-            composable(
-                "$EditTask/{$TaskId}"
-            ) { backStackEntry ->
-                val taskId = backStackEntry.arguments?.getString(TaskId) ?: ""
-                EditTaskScreen(
-                    navigateUp = navigateBackAction,
-                    editTaskViewModel = getViewModel { parametersOf(taskId) }
-                )
-            }
-            composable(About) {
-                AboutScreen(
-                    openGithub = {
-                        openWebPage(
-                            context,
-                            "https://github.com/serbelga/ToDometer_Multiplatform"
-                        )
-                    },
-                    openSourceLicenses = { startOpenSourceLicensesActivity(context) },
-                    navigateUp = navigateBackAction
-                )
-            }
-        }
+        ToDometerNavHost(navController, action)
     }
-}
-
-private fun startOpenSourceLicensesActivity(context: Context) {
-    startActivity(
-        context,
-        Intent(context, OssLicensesMenuActivity::class.java),
-        null
-    )
-}
-
-private fun openWebPage(context: Context, url: String) {
-    val webpage: Uri = Uri.parse(url)
-    startActivity(
-        context,
-        Intent(Intent.ACTION_VIEW, webpage),
-        null
-    )
 }
