@@ -41,6 +41,8 @@ class NavigationAction(private val navController: NavHostController) {
         }
     }
 
+    fun navigateUp() = navController.navigateUp()
+
     fun popBackStack() = navController.popBackStack()
 
     fun popBackStack(
@@ -48,6 +50,4 @@ class NavigationAction(private val navController: NavHostController) {
         inclusive: Boolean,
         saveState: Boolean = false
     ) = navController.popBackStack(route, inclusive, saveState)
-
-    fun navigateUp() = navController.navigateUp()
 }

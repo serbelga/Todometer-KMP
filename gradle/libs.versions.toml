@@ -30,7 +30,7 @@ ktor = "2.0.3"
 lifecycle = "2.5.1"
 material = "1.7.0-rc01"
 mockk = "1.12.4"
-navigation = "2.5.1"
+navigation = "2.5.2"
 ossLicensesPlugin = "0.10.5"
 playServicesOssLicenses = "17.0.0"
 playServicesWearable = "17.1.0"
@@ -66,6 +66,7 @@ androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+androidx-navigation-runtimeKtx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigation" }
 androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
