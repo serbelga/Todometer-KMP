@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.wear.ui.deletetasklist
 
 import androidx.navigation.NavBackStackEntry
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object DeleteTaskListDestination : Destination {
@@ -37,7 +37,7 @@ class DeleteTaskListNavigationParams(taskListId: String) :
     override val navigationRoute: String = "${DeleteTaskListDestination.DeleteTaskList}/$taskListId"
 }
 
-val NavigationAction.navigateToDeleteTaskList: (String) -> Unit
+val Action.navigateToDeleteTaskList: (String) -> Unit
     get() = { taskListId ->
         navigate(DeleteTaskListNavigationParams(taskListId))
     }

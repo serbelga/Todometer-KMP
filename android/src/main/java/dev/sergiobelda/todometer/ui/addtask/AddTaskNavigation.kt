@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.navigation.navDeepLink
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object AddTaskDestination : Destination {
@@ -33,7 +33,7 @@ object AddTaskNavigationParams : NavigationParams(AddTaskDestination) {
     override val navigationRoute: String = destination.route
 }
 
-val NavigationAction.navigateToAddTask: () -> Unit
+val Action.navigateToAddTask: () -> Unit
     get() = {
         navigate(AddTaskNavigationParams)
     }

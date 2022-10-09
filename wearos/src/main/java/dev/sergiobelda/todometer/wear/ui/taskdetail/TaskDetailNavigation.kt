@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.wear.ui.taskdetail
 
 import androidx.navigation.NavBackStackEntry
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object TaskDetailDestination : Destination {
@@ -35,7 +35,7 @@ class TaskDetailNavigationParams(taskId: String) : NavigationParams(TaskDetailDe
     override val navigationRoute: String = "${TaskDetailDestination.TaskDetail}/$taskId"
 }
 
-val NavigationAction.navigateToTaskDetail: (String) -> Unit
+val Action.navigateToTaskDetail: (String) -> Unit
     get() = { taskId ->
         navigate(TaskDetailNavigationParams(taskId))
     }

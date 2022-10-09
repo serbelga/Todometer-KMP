@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.ui.addtasklist
 
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object AddTaskListDestination : Destination {
@@ -28,7 +28,7 @@ object AddTaskListNavigationParams : NavigationParams(AddTaskListDestination) {
     override val navigationRoute: String = destination.route
 }
 
-val NavigationAction.navigateToAddTaskList: () -> Unit
+val Action.navigateToAddTaskList: () -> Unit
     get() = {
         navigate(AddTaskListNavigationParams)
     }

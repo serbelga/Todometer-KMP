@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.ui.edittasklist
 
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object EditTaskListDestination : Destination {
@@ -28,6 +28,6 @@ object EditTaskListNavigationParams : NavigationParams(EditTaskListDestination) 
     override val navigationRoute: String = destination.route
 }
 
-val NavigationAction.navigateToEditTaskList: () -> Unit get() = {
+val Action.navigateToEditTaskList: () -> Unit get() = {
     navigate(EditTaskListNavigationParams)
 }

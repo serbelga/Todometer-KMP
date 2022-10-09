@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.android.navigation
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
-class NavigationAction(private val navController: NavHostController) {
+class Action(private val navController: NavHostController) {
 
     fun navigate(navigationParams: NavigationParams) {
         if (navigationParams.destination is TopLevelDestination) {

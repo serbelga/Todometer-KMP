@@ -23,7 +23,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
 import dev.sergiobelda.todometer.ui.about.navigateToAbout
@@ -49,13 +49,13 @@ import dev.sergiobelda.todometer.ui.taskdetail.navigateToTaskDetail
 @Composable
 internal fun ToDometerNavHost(
     navController: NavHostController,
-    navigationAction: NavigationAction,
+    action: Action,
     modifier: Modifier = Modifier
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val navigateBackAction: () -> Unit = {
         keyboardController?.hide()
-        navigationAction.navigateUp()
+        action.navigateUp()
     }
 
     NavHost(
@@ -65,11 +65,11 @@ internal fun ToDometerNavHost(
     ) {
         composable(HomeDestination.route) {
             HomeScreen(
-                addTaskList = navigationAction.navigateToAddTaskList,
-                editTaskList = navigationAction.navigateToEditTaskList,
-                addTask = navigationAction.navigateToAddTask,
-                openTask = navigationAction.navigateToTaskDetail,
-                about = navigationAction.navigateToAbout
+                addTaskList = action.navigateToAddTaskList,
+                editTaskList = action.navigateToEditTaskList,
+                addTask = action.navigateToAddTask,
+                openTask = action.navigateToTaskDetail,
+                about = action.navigateToAbout
             )
         }
         composable(
@@ -79,7 +79,7 @@ internal fun ToDometerNavHost(
             val taskId = TaskDetailDestination.navArgsTaskId(navBackStackEntry)
             TaskDetailScreen(
                 taskId = taskId,
-                editTask = { navigationAction.navigateToEditTask(taskId) },
+                editTask = { action.navigateToEditTask(taskId) },
                 navigateBack = navigateBackAction
             )
         }

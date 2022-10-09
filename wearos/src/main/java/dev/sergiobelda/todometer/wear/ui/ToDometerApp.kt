@@ -19,15 +19,15 @@ package dev.sergiobelda.todometer.wear.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 
 @Composable
 fun ToDometerApp() {
     val navController = rememberSwipeDismissableNavController()
-    val navigationAction = remember(navController) { NavigationAction(navController) }
+    val action = remember(navController) { Action(navController) }
 
     ToDometerTheme {
-        ToDometerNavHost(navController = navController, navigationAction = navigationAction)
+        ToDometerNavHost(navController = navController, action = action)
     }
 }

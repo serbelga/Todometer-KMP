@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.wear.ui.deletetask
 
 import androidx.navigation.NavBackStackEntry
+import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationAction
 import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
 object DeleteTaskDestination : Destination {
@@ -35,7 +35,7 @@ class DeleteTaskNavigationParams(taskId: String) : NavigationParams(DeleteTaskDe
     override val navigationRoute: String = "${DeleteTaskDestination.DeleteTask}/$taskId"
 }
 
-val NavigationAction.navigateToDeleteTask: (String) -> Unit
+val Action.navigateToDeleteTask: (String) -> Unit
     get() = { taskId ->
         navigate(DeleteTaskNavigationParams(taskId))
     }
