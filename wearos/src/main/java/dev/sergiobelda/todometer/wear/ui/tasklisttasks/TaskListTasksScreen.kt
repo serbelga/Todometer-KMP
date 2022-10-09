@@ -68,15 +68,18 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wear.R
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 private const val TASK_TITLE = "task_title"
 private const val TASK_LIST_NAME = "task_list_name"
 
 @Composable
 internal fun TaskListTasksScreen(
+    taskListId: String,
     openTask: (String) -> Unit,
     deleteTaskList: () -> Unit,
-    taskListTasksViewModel: TaskListTasksViewModel
+    taskListTasksViewModel: TaskListTasksViewModel = getViewModel { parametersOf(taskListId) }
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskListTasksUiState = taskListTasksViewModel.taskListTasksUiState

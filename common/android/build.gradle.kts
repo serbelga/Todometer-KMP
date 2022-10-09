@@ -12,3 +12,7 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
     }
 }
+
+dependencies {
+    implementation(libs.androidx.navigation.runtimeKtx)
+}

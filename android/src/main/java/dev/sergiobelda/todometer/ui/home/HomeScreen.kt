@@ -85,11 +85,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
@@ -102,6 +104,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.extensions.launchActivity
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
@@ -118,10 +121,11 @@ internal fun HomeScreen(
     editTaskList: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
-    openSourceLicenses: () -> Unit,
     about: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
+    val context = LocalContext.current
+
     val scope = rememberCoroutineScope()
     // TODO: Use skipHalfExpanded when available.
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -165,7 +169,7 @@ internal fun HomeScreen(
                 openSourceLicensesClick = {
                     scope.launch {
                         sheetState.hide()
-                        openSourceLicenses()
+                        context.launchActivity<OssLicensesMenuActivity>()
                     }
                 },
                 aboutClick = {

@@ -16,8 +16,12 @@
 
 package dev.sergiobelda.todometer.extensions
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Bundle
 
 internal fun Context.getVersionName(): String? =
     try {
@@ -26,3 +30,42 @@ internal fun Context.getVersionName(): String? =
     } catch (e: PackageManager.NameNotFoundException) {
         null
     }
+
+/**
+ * Launch a new Activity and runs the Intent body that will be passed to the new Activity.
+ *
+ * ```
+ * launchActivity<MyActivity>()
+ *
+ * launchActivity<MyActivity> {
+ *      putExtra(...)
+ * }
+ * ```
+ *
+ * @param options Additional options for how the Activity should be started.
+ * @param block Intent body to start.
+ */
+internal inline fun <reified A : Activity> Context.launchActivity(
+    options: Bundle? = null,
+    block: Intent.() -> Unit = {}
+) = startActivity(
+    Intent(this, A::class.java).apply(block),
+    options
+)
+
+/**
+ * Open a Web page given a URL.
+ *
+ * ```
+ * openWebPage(URL)
+ * ```
+ *
+ * @param url The url of the website to be opened.
+ */
+internal fun Context.openWebPage(url: String) {
+    val webpage: Uri = Uri.parse(url)
+    startActivity(
+        Intent(Intent.ACTION_VIEW, webpage),
+        null
+    )
+}

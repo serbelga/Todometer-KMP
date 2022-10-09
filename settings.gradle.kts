@@ -14,7 +14,7 @@ rootProject.name = "ToDometerMultiplatform"
 
 include(":android")
 include(":backend")
-include(":common:android-resources")
+include(":common:android")
 include(":common:core")
 include(":common:compose-ui")
 include(":common:data")

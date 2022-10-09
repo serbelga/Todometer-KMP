@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui
+package dev.sergiobelda.todometer.ui.edittasklist
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.common.android.navigation.Action
-import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.android.navigation.Destination
+import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
 
-@Composable
-fun ToDometerApp() {
-    val navController = rememberSwipeDismissableNavController()
-    val action = remember(navController) { Action(navController) }
+object EditTaskListDestination : Destination {
+    override val route: String = "edittasklist"
+}
 
-    ToDometerTheme {
-        ToDometerNavHost(navController = navController, action = action)
-    }
+object EditTaskListNavigationParams : NavigationParams(EditTaskListDestination) {
+    override val navigationRoute: String = destination.route
+}
+
+val Action.navigateToEditTaskList: () -> Unit get() = {
+    navigate(EditTaskListNavigationParams)
 }
