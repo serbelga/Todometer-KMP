@@ -24,41 +24,19 @@ import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 internal val viewModelModule = module {
-    viewModel {
-        AddTaskListViewModel(get())
-    }
-    viewModel {
-        AddTaskViewModel(get())
-    }
-    viewModel {
-        EditTaskListViewModel(get(), get())
-    }
+    viewModelOf(::AddTaskListViewModel)
+    viewModelOf(::AddTaskViewModel)
+    viewModelOf(::EditTaskListViewModel)
     viewModel { parameters ->
         EditTaskViewModel(parameters.get(), get(), get())
     }
-    viewModel {
-        HomeViewModel(
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get()
-        )
-    }
+    viewModelOf(::HomeViewModel)
     viewModel { parameters ->
         TaskDetailViewModel(parameters.get(), get(), get(), get(), get(), get(), get())
     }
-    viewModel {
-        MainViewModel(get())
-    }
+    viewModelOf(::MainViewModel)
 }

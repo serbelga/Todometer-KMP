@@ -57,6 +57,14 @@ Under construction
 
 <br/>
 
+## Modules
+
+<div align="center">
+<img src="./resources/arch/modules.png" width="700" />
+</div>
+
+<br/>
+
 ## Technologies
 
 ### Android
@@ -96,19 +104,7 @@ Under construction
 
 * [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
-</br>
-
-<div align="center">
-<img src="./resources/arch/diagram.jpg" width="700" />
-</div>
-
 <br/>
-
-## Modules
-
-<div align="center">
-<img src="./resources/arch/modules.png" width="700" />
-</div>
 
 ### Desktop
 

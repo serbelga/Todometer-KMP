@@ -49,13 +49,16 @@ import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.wear.R
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 private const val TASK_TITLE = "task_title"
 
 @Composable
 internal fun TaskDetailScreen(
+    taskId: String,
     deleteTask: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel
+    taskDetailViewModel: TaskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
@@ -87,7 +90,7 @@ internal fun TaskDetailScreen(
                         EditTaskButton(taskDetailUiState.task) { taskDetailViewModel.updateTask(it) }
                     }
                     item {
-                        DeleteTaskButton(deleteTask)
+                        DeleteTaskButton { deleteTask() }
                     }
                 }
             }

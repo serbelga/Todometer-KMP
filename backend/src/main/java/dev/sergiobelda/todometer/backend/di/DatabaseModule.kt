@@ -20,9 +20,11 @@ import dev.sergiobelda.todometer.backend.database.dao.ITaskDao
 import dev.sergiobelda.todometer.backend.database.dao.ITaskListDao
 import dev.sergiobelda.todometer.backend.database.dao.TaskDao
 import dev.sergiobelda.todometer.backend.database.dao.TaskListDao
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal val databaseModule = module {
-    single<ITaskListDao> { TaskListDao() }
-    single<ITaskDao> { TaskDao() }
+    singleOf(::TaskListDao) bind ITaskListDao::class
+    singleOf(::TaskDao) bind ITaskDao::class
 }

@@ -32,7 +32,6 @@ import io.ktor.server.routing.route
 
 internal fun Route.taskListsRouting(taskListService: ITaskListService) {
     route("/v1/tasklists") {
-
         // TODO: Handle exceptions
         get {
             call.respond(taskListService.getTaskLists())
