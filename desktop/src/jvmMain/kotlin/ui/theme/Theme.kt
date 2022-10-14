@@ -17,7 +17,6 @@
 package ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorScheme
