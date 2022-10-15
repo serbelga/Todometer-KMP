@@ -57,10 +57,10 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
-import dev.sergiobelda.todometer.common.compose.ui.components.TitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.taskchecklistitem.AddChecklistItemField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector

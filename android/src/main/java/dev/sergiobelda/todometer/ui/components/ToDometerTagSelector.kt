@@ -41,8 +41,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.mapper.composeColorOf
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @Composable
