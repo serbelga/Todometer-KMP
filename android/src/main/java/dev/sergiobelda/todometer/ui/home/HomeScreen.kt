@@ -504,10 +504,14 @@ private fun TasksListView(
                         )
                     },
                     trailingContent = {
-                        if (areTasksDoneVisible) Icon(
-                            Icons.Rounded.ExpandLess,
-                            contentDescription = null
-                        ) else Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                        if (areTasksDoneVisible) {
+                            Icon(
+                                Icons.Rounded.ExpandLess,
+                                contentDescription = null
+                            )
+                        } else {
+                            Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                        }
                     },
                     modifier = Modifier.animateItemPlacement()
                         .clickable { areTasksDoneVisible = !areTasksDoneVisible }

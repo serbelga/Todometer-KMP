@@ -42,9 +42,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -89,7 +89,7 @@ internal fun TaskDetailScreen(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 title = {
                     if (lazyListState.firstVisibleItemIndex > 0) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
@@ -138,9 +138,13 @@ internal fun TaskDetailScreen(
                         taskChecklist(
                             taskDetailUiState.taskChecklistItems,
                             onTaskChecklistItemClick = { id, checked ->
-                                if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
-                                    id
-                                )
+                                if (checked) {
+                                    taskDetailViewModel.setTaskChecklistItemChecked(id)
+                                } else {
+                                    taskDetailViewModel.setTaskChecklistItemUnchecked(
+                                        id
+                                    )
+                                }
                             },
                             onDeleteTaskCheckListItem = { id ->
                                 taskDetailViewModel.deleteTaskChecklistItem(id)
