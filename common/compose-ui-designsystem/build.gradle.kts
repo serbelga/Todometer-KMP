@@ -31,18 +31,11 @@ kotlin {
                 api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
-
-                implementation(projects.common.domain)
-                implementation(projects.common.ui)
-
-                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                api(libs.androidx.appcompat)
-                api(libs.androidx.coreKtx)
                 // TODO: Remove this usage when compose.material3 reaches Material3 Compose 1.0.0-beta01.
                 api(libs.androidx.compose.material3)
                 api(compose.uiTooling)

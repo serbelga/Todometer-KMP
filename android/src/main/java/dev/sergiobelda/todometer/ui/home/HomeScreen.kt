@@ -94,12 +94,12 @@ import androidx.compose.ui.unit.dp
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.task.TaskItem
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.Disabled
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.High
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.sheetShape
+import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
+import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState

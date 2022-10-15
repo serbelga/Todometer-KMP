@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.designsystem.taskchecklistitem
+package dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
