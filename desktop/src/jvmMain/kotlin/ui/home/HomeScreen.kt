@@ -56,7 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.VerticalDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.VerticalDivider
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress

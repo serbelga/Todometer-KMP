@@ -52,7 +52,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.extensions.getVersionName
 import dev.sergiobelda.todometer.extensions.launchActivity
 import dev.sergiobelda.todometer.extensions.openWebPage

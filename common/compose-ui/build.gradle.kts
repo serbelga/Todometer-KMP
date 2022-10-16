@@ -1,5 +1,4 @@
-import org.jetbrains.compose.compose
-
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
@@ -17,6 +16,9 @@ repositories {
 kotlin {
     android()
     jvm("desktop")
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
@@ -29,12 +31,10 @@ kotlin {
                 api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
-                api(compose.uiTooling)
 
                 implementation(projects.common.domain)
+                implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.ui)
-
-                api(libs.kotlin.coroutinesSwing)
 
                 implementation(libs.kotlin.datetime)
             }
@@ -42,19 +42,37 @@ kotlin {
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                api(libs.androidx.appcompat)
-                api(libs.androidx.coreKtx)
                 // TODO: Remove this usage when compose.material3 reaches Material3 Compose 1.0.0-beta01.
                 api(libs.androidx.compose.material3)
+                api(compose.uiTooling)
             }
         }
-        val androidTest by getting {
+        val androidTest by getting
+        val desktopMain by getting {
             dependencies {
-                implementation(libs.junit)
+                api(libs.kotlin.coroutinesSwing)
+                api(compose.uiTooling)
             }
         }
-        val desktopMain by getting
         val desktopTest by getting
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+        }
+        val iosX64Test by getting
+        val iosArm64Test by getting
+        val iosSimulatorArm64Test by getting
+        val iosTest by creating {
+            dependsOn(commonTest)
+            iosX64Test.dependsOn(this)
+            iosArm64Test.dependsOn(this)
+            iosSimulatorArm64Test.dependsOn(this)
+        }
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
