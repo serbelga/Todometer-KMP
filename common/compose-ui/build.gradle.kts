@@ -24,6 +24,14 @@ kotlin {
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
+                api(compose.runtime)
+                api(compose.foundation)
+                // TODO: Remove material dependency when everything depend on material3.
+                api(compose.material)
+                api(compose.material3)
+                api(compose.materialIconsExtended)
+                api(compose.ui)
+
                 implementation(projects.common.domain)
                 implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.ui)
@@ -32,9 +40,20 @@ kotlin {
             }
         }
         val commonTest by getting
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                // TODO: Remove this usage when compose.material3 reaches Material3 Compose 1.0.0-beta01.
+                api(libs.androidx.compose.material3)
+                api(compose.uiTooling)
+            }
+        }
         val androidTest by getting
-        val desktopMain by getting
+        val desktopMain by getting {
+            dependencies {
+                api(libs.kotlin.coroutinesSwing)
+                api(compose.uiTooling)
+            }
+        }
         val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
