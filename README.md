@@ -88,17 +88,13 @@ Under construction
 
 ### Common
 
+* [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
   * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)
 * [Ktor Client](https://ktor.io/docs/client.html)
-* [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
-
-### Desktop
-
-### iOS
 
 <br/>
 
