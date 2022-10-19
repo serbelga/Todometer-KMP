@@ -16,9 +16,23 @@
 
 package dev.sergiobelda.todometer.ios
 
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
+import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
 import kotlinx.cinterop.autoreleasepool
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.memScoped
@@ -60,8 +74,36 @@ class SkikoAppDelegate @OverrideInit constructor() : UIResponder(),
     ): Boolean {
         window = UIWindow(frame = UIScreen.mainScreen.bounds)
         window?.rootViewController = Application("ToDometer") {
-            Button(onClick = {}) {
-                Text("text")
+            ToDometerAppTheme {
+                Column {
+                    Box(modifier = Modifier.height(64.dp))
+                    Scaffold(
+                        topBar = {
+                            TopAppBar(
+                                navigationIcon = {
+                                    IconButton(onClick = {}) {
+                                        Icon(Icons.Rounded.Menu, contentDescription = null)
+                                    }
+                                },
+                                title = {
+                                    Text("ToDometer")
+                                },
+                                actions = {
+                                    IconButton(onClick = {}) {
+                                        Icon(Icons.Rounded.MoreVert, contentDescription = null)
+                                    }
+                                }
+                            )
+                        },
+                        floatingActionButton = {
+                            FloatingActionButton(onClick = {}) {
+                                Icon(Icons.Rounded.Add, contentDescription = null)
+                            }
+                        }
+                    ) { paddingValues ->
+
+                    }
+                }
             }
         }
         window?.makeKeyAndVisible()

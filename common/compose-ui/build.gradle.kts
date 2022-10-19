@@ -42,8 +42,6 @@ kotlin {
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                // TODO: Remove this usage when compose.material3 reaches Material3 Compose 1.0.0-beta01.
-                api(libs.androidx.compose.material3)
                 api(compose.uiTooling)
             }
         }

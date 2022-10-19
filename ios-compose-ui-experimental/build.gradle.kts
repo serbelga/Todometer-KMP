@@ -37,8 +37,8 @@ kotlin {
         val uikitMain by creating {
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             dependencies {
-                // implementation(projects.common.composeUi)
-                // implementation(projects.common.composeUiDesignsystem)
+                implementation(projects.common.composeUi)
+                implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.core)
                 implementation(projects.common.domain)
                 implementation(projects.common.ui)
