@@ -1,6 +1,6 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 implementation(projects.common.core)
                 implementation(projects.common.composeUi)
+                implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.domain)
                 implementation(compose.desktop.currentOs)
             }

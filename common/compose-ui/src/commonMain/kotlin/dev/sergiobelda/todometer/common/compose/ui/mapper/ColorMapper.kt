@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.common.compose.ui.mapper
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerColors
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerColors
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
 typealias ComposeColor = androidx.compose.ui.graphics.Color

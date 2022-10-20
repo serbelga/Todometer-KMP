@@ -24,15 +24,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.sergiobelda.todometer.common.compose.ui.theme.DarkColorScheme
-import dev.sergiobelda.todometer.common.compose.ui.theme.LightColorScheme
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerDarkColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerLightColors
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.theme.Type.typography
-import dev.sergiobelda.todometer.common.compose.ui.theme.shapes
-import dev.sergiobelda.todometer.common.compose.ui.theme.todometer_dark_outline
-import dev.sergiobelda.todometer.common.compose.ui.theme.todometer_light_outline
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerDarkColors
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerLightColors
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type.typography
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.shapes
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.todometer_dark_outline
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.todometer_light_outline
 
 @Composable
 internal fun ToDometerAppTheme(
