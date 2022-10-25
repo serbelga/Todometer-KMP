@@ -36,8 +36,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -52,7 +52,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.extensions.getVersionName
 import dev.sergiobelda.todometer.extensions.launchActivity
 import dev.sergiobelda.todometer.extensions.openWebPage
@@ -69,7 +69,7 @@ internal fun AboutScreen(
     val context = LocalContext.current
     Scaffold(
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(

@@ -1,3 +1,4 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.composeMultiplatform)
     id("com.android.application")
@@ -62,6 +63,7 @@ android {
 dependencies {
     implementation(projects.common.android)
     implementation(projects.common.composeUi)
+    implementation(projects.common.composeUiDesignsystem)
     implementation(projects.common.core)
     implementation(projects.common.domain)
     implementation(projects.common.ui)

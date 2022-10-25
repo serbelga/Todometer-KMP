@@ -93,13 +93,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.Disabled
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.High
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.sheetShape
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
-import dev.sergiobelda.todometer.common.compose.ui.theme.Alpha.Disabled
-import dev.sergiobelda.todometer.common.compose.ui.theme.Alpha.High
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -504,10 +504,14 @@ private fun TasksListView(
                         )
                     },
                     trailingContent = {
-                        if (areTasksDoneVisible) Icon(
-                            Icons.Rounded.ExpandLess,
-                            contentDescription = null
-                        ) else Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                        if (areTasksDoneVisible) {
+                            Icon(
+                                Icons.Rounded.ExpandLess,
+                                contentDescription = null
+                            )
+                        } else {
+                            Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                        }
                     },
                     modifier = Modifier.animateItemPlacement()
                         .clickable { areTasksDoneVisible = !areTasksDoneVisible }

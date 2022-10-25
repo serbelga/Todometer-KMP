@@ -42,9 +42,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -59,12 +59,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
-import dev.sergiobelda.todometer.common.compose.ui.components.HorizontalDivider
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerCheckbox
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.compose.ui.task.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
@@ -89,7 +89,7 @@ internal fun TaskDetailScreen(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 title = {
                     if (lazyListState.firstVisibleItemIndex > 0) {
                         if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
@@ -138,9 +138,13 @@ internal fun TaskDetailScreen(
                         taskChecklist(
                             taskDetailUiState.taskChecklistItems,
                             onTaskChecklistItemClick = { id, checked ->
-                                if (checked) taskDetailViewModel.setTaskChecklistItemChecked(id) else taskDetailViewModel.setTaskChecklistItemUnchecked(
-                                    id
-                                )
+                                if (checked) {
+                                    taskDetailViewModel.setTaskChecklistItemChecked(id)
+                                } else {
+                                    taskDetailViewModel.setTaskChecklistItemUnchecked(
+                                        id
+                                    )
+                                }
                             },
                             onDeleteTaskCheckListItem = { id ->
                                 taskDetailViewModel.deleteTaskChecklistItem(id)

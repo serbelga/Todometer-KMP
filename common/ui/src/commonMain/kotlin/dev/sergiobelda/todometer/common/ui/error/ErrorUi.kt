@@ -25,4 +25,6 @@ data class ErrorUi(
 fun <T : Any> Result<T>.mapToErrorUi(): ErrorUi? =
     if (this is Result.Error) {
         ErrorUi(message = message)
-    } else null
+    } else {
+        null
+    }

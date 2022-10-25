@@ -70,7 +70,6 @@ Under construction
 ### Android
 
 * [Android Jetpack](https://developer.android.com/jetpack)
-  * [Compose UI](https://developer.android.com/jetpack/compose)
   * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
   * [Android KTX](https://developer.android.com/kotlin/ktx)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
@@ -89,20 +88,13 @@ Under construction
 
 ### Common
 
+* [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
   * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)
 * [Ktor Client](https://ktor.io/docs/client.html)
-
-### Desktop
-
-* [Compose for Desktop](https://github.com/JetBrains/compose-jb)
-
-### iOS
-
-* [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
 <br/>
 
