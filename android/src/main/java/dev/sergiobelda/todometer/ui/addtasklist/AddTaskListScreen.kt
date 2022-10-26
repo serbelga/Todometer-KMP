@@ -125,7 +125,7 @@ internal fun AddTaskListScreen(
                     placeholder = { Text(stringResource(id = MR.strings.enter_task_list_name.resourceId)) },
                     singleLine = true,
                     isError = taskListNameInputError,
-                    errorMessage = stringResource(id = MR.stringsstrings.field_not_empty.resourceId),
+                    errorMessage = stringResource(id = MR.strings.field_not_empty.resourceId),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done

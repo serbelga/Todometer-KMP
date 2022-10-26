@@ -255,7 +255,7 @@ internal fun HomeScreen(
                         if (homeUiState.tasks.isEmpty()) {
                             TaskListIllustration(
                                 R.drawable.no_tasks,
-                                stringResource(id = MR.stringsstrings.no_tasks.resourceId)
+                                stringResource(id = MR.strings.no_tasks.resourceId)
                             )
                         } else {
                             TasksListView(
