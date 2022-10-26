@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.task
+package dev.sergiobelda.todometer.common.compose.ui.components.task
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Event
+import androidx.compose.material.icons.outlined.CheckBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,37 +29,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerChip
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 @Composable
-fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
-    val currentInstant =
-        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-    val expired =
-        currentInstant > Instant.fromEpochMilliseconds(dueDate).toLocalDateTime(TimeZone.UTC)
+fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
+    val completedChipTint =
+        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.check else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+    val completedChipOutline =
+        if (checklistItemsDone == totalChecklistItems) ToDometerTheme.toDometerColors.check else MaterialTheme.colorScheme.outline
 
-    val dueDateChipTint =
-        if (expired) MaterialTheme.colorScheme.error else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
-    val dueDateChipOutline =
-        if (expired) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
     ToDometerChip(
-        borderStroke = BorderStroke(1.dp, dueDateChipOutline),
-        modifier = modifier
+        borderStroke = BorderStroke(1.dp, completedChipOutline),
+        modifier = Modifier.padding(bottom = 8.dp)
     ) {
         Icon(
-            Icons.Rounded.Event,
+            Icons.Outlined.CheckBox,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
-            tint = dueDateChipTint
+            tint = completedChipTint
         )
         Text(
-            TaskDueDate.getDueDateFormatted(dueDate),
+            "$checklistItemsDone/$totalChecklistItems",
             style = MaterialTheme.typography.labelLarge,
-            color = dueDateChipTint
+            color = completedChipTint
         )
     }
 }

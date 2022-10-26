@@ -58,16 +58,16 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskDueDateChip
+import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.task.TaskDueDateChip
-import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
+import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -115,7 +115,7 @@ internal fun TaskDetailScreen(
                         IconButton(onClick = editTask) {
                             Icon(
                                 Icons.Outlined.Edit,
-                                contentDescription = stringResource(R.string.edit_task),
+                                contentDescription = stringResource(id = MR.strings.edit_task.resourceId),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -205,14 +205,14 @@ private fun LazyListScope.taskChecklist(
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(stringResource(R.string.checklist))
+        TaskDetailSectionTitle(stringResource(id = MR.strings.checklist.resourceId))
     }
     items(taskChecklistItems, key = { it.id }) { taskChecklistItem ->
         TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
     }
     item {
         AddChecklistItemField(
-            placeholder = { Text(stringResource(R.string.add_element)) },
+            placeholder = { Text(stringResource(id = MR.strings.add_element.resourceId)) },
             onAddTaskCheckListItem = onAddTaskCheckListItem
         )
     }
@@ -262,7 +262,7 @@ private fun LazyItemScope.TaskChecklistItem(
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
                 Icons.Rounded.Clear,
-                contentDescription = stringResource(R.string.clear),
+                contentDescription = stringResource(id = MR.strings.clear.resourceId),
                 tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }
@@ -274,7 +274,7 @@ private fun LazyListScope.taskDescription(description: String?) {
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(stringResource(R.string.description))
+        TaskDetailSectionTitle(stringResource(id = MR.strings.description.resourceId))
     }
     item {
         if (!description.isNullOrBlank()) {
@@ -289,7 +289,7 @@ private fun LazyListScope.taskDescription(description: String?) {
             )
         } else {
             Text(
-                text = stringResource(id = R.string.no_description),
+                text = stringResource(id = MR.strings.no_description.resourceId),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(
                     top = 16.dp,

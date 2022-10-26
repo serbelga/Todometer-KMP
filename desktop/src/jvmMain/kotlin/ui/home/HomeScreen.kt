@@ -22,29 +22,32 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MenuOpen
-import androidx.compose.material3.Button
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -54,13 +57,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.VerticalDivider
-import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
-import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
-import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListProgress
+import dev.icerock.moko.resources.compose.stringResource
+import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskItem
+import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListItem
+import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListProgress
+import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -74,9 +78,9 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelec
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.resources.MR
 import koin
 import kotlinx.coroutines.launch
-import ui.icons.iconToDometer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,8 +91,6 @@ internal fun HomeScreen(
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
-    val coroutineScope = rememberCoroutineScope()
-    var navigationDrawerStateVisible by remember { mutableStateOf(false) }
 
     val setTaskDoingUseCase = koin.get<SetTaskDoingUseCase>()
     val setTaskDoneUseCase = koin.get<SetTaskDoneUseCase>()
@@ -102,7 +104,8 @@ internal fun HomeScreen(
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
     val taskListResultState by getTaskListSelectedUseCase().collectAsState(null)
-    taskListResultState?.doIfSuccess { taskListSelected = it }?.doIfError { taskListSelected = null }
+    taskListResultState?.doIfSuccess { taskListSelected = it }
+        ?.doIfError { taskListSelected = null }
 
     var tasks: List<TaskItem> by remember { mutableStateOf(emptyList()) }
     val tasksResultState by getTaskListSelectedTasksUseCase().collectAsState(null)
@@ -112,100 +115,109 @@ internal fun HomeScreen(
     val taskListsResultState by getTaskListsUseCase().collectAsState(null)
     taskListsResultState?.doIfSuccess { taskLists = it }
 
-    Scaffold(
-        topBar = {
-            SmallTopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = { navigationDrawerStateVisible = !navigationDrawerStateVisible }) {
-                        if (navigationDrawerStateVisible) {
-                            Icon(Icons.Rounded.MenuOpen, contentDescription = null)
-                        } else {
-                            Icon(Icons.Rounded.Menu, contentDescription = null)
-                        }
+    val coroutineScope = rememberCoroutineScope()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val closeDrawer: suspend () -> Unit = {
+        drawerState.close()
+    }
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            // TODO: Use ModalDrawerSheet when it's available on material3 1.0.0-rc01 for desktop
+            TaskListsNavigationDrawer(
+                taskLists,
+                taskListSelected?.id ?: "",
+                stringResource(resource = MR.strings.default_task_list_name),
+                onTaskListClick = {
+                    coroutineScope.launch {
+                        setTaskListSelectedUseCase.invoke(it)
                     }
                 },
-                title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painter = iconToDometer(),
-                            contentDescription = null,
-                            modifier = Modifier.size(32.dp).padding(end = 8.dp)
-                        )
-                        Text(text = "ToDometer")
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(Icons.Outlined.Settings, contentDescription = "Settings")
-                    }
-                }
+                onAddTaskListClick = { addTaskListAlertDialogState = true },
+                onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
             )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                icon = {
-                    Icon(Icons.Rounded.Add, "Add task")
-                },
-                text = {
-                    Text("Add task")
-                },
-                onClick = { addTaskAlertDialogState = true }
-            )
-        },
-        floatingActionButtonPosition = FabPosition.End
-    ) { paddingValues ->
-        Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-            if (addTaskListAlertDialogState) {
-                AddTaskListAlertDialog(
-                    onDismissRequest = { addTaskListAlertDialogState = false }
-                ) { taskListName ->
-                    coroutineScope.launch {
-                        insertTaskListUseCase.invoke(taskListName)
-                    }
-                }
-            }
-            if (addTaskAlertDialogState) {
-                AddTaskAlertDialog(
-                    onDismissRequest = { addTaskAlertDialogState = false }
-                ) { title, description, tag ->
-                    coroutineScope.launch {
-                        insertTaskInTaskListSelectedUseCase(title, tag, description)
-                    }
-                }
-            }
-            if (deleteTaskAlertDialogState) {
-                DeleteTaskAlertDialog(
-                    onDismissRequest = {
-                        coroutineScope.launch {
-                            selectedTask = ""
-                            deleteTaskAlertDialogState = false
-                        }
-                    }
-                ) {
-                    coroutineScope.launch {
-                        deleteTaskUseCase(selectedTask)
-                    }
-                }
-            }
         }
-        Row(modifier = Modifier.padding(paddingValues)) {
-            if (navigationDrawerStateVisible) {
-                TaskListsNavigationDrawer(
-                    taskLists,
-                    taskListSelected?.id ?: "",
-                    "My tasks",
-                    onTaskListClick = {
-                        coroutineScope.launch {
-                            setTaskListSelectedUseCase.invoke(it)
+    ) {
+        Scaffold(
+            topBar = {
+                SmallTopAppBar(
+                    navigationIcon = {
+                        IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
+                            if (drawerState.isOpen) {
+                                Icon(Icons.Rounded.MenuOpen, contentDescription = null)
+                            } else {
+                                Icon(Icons.Rounded.Menu, contentDescription = null)
+                            }
                         }
                     },
-                    onAddTaskListClick = { addTaskListAlertDialogState = true }
+                    title = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxWidth().height(56.dp)
+                        ) {
+                            ToDometerTitle()
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = {}) {
+                            Icon(Icons.Outlined.MoreVert, contentDescription = "Settings")
+                        }
+                    }
                 )
-                VerticalDivider()
+            },
+            floatingActionButton = {
+                ExtendedFloatingActionButton(
+                    icon = {
+                        Icon(Icons.Rounded.Add, stringResource(resource = MR.strings.add_task))
+                    },
+                    text = {
+                        Text(stringResource(resource = MR.strings.add_task))
+                    },
+                    onClick = { addTaskAlertDialogState = true }
+                )
+            },
+            floatingActionButtonPosition = FabPosition.End
+        ) { paddingValues ->
+            Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+                if (addTaskListAlertDialogState) {
+                    AddTaskListAlertDialog(
+                        onDismissRequest = { addTaskListAlertDialogState = false }
+                    ) { taskListName ->
+                        coroutineScope.launch {
+                            insertTaskListUseCase.invoke(taskListName)
+                        }
+                    }
+                }
+                if (addTaskAlertDialogState) {
+                    AddTaskAlertDialog(
+                        onDismissRequest = { addTaskAlertDialogState = false }
+                    ) { title, description, tag ->
+                        coroutineScope.launch {
+                            insertTaskInTaskListSelectedUseCase(title, tag, description)
+                        }
+                    }
+                }
+                if (deleteTaskAlertDialogState) {
+                    DeleteTaskAlertDialog(
+                        onDismissRequest = {
+                            coroutineScope.launch {
+                                selectedTask = ""
+                                deleteTaskAlertDialogState = false
+                            }
+                        }
+                    ) {
+                        coroutineScope.launch {
+                            deleteTaskUseCase(selectedTask)
+                        }
+                    }
+                }
             }
-            Column {
+            Column(modifier = Modifier.padding(paddingValues)) {
                 TaskListProgress(
-                    taskListSelected?.name ?: "My tasks",
+                    taskListSelected?.name
+                        ?: stringResource(resource = MR.strings.default_task_list_name),
                     tasks,
                     modifier = Modifier.padding(top = 16.dp)
                 )
@@ -233,29 +245,6 @@ internal fun HomeScreen(
                         }
                     )
                 }
-            }
-        }
-    }
-}
-
-@Composable
-private fun EmptyTaskListsView(addTaskList: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painterResource("images/no_task_lists.svg"),
-                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
-            Text("There's any task list", modifier = Modifier.padding(bottom = 48.dp))
-            Button(onClick = addTaskList) {
-                Text("Add task list")
             }
         }
     }
@@ -298,50 +287,58 @@ private fun EmptyTasksListView() {
                 modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
                 contentDescription = null
             )
-            Text("There are any task")
+            Text(stringResource(resource = MR.strings.no_tasks))
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,
     selectedTaskListId: String,
     defaultTaskListName: String,
     onTaskListClick: (taskListId: String) -> Unit,
-    onAddTaskListClick: () -> Unit
+    onAddTaskListClick: () -> Unit,
+    onMenuCloseClick: () -> Unit
 ) {
-    Column(modifier = Modifier.requiredWidth(280.dp).padding(top = 16.dp)) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "TASK LISTS",
-                style = MaterialTheme.typography.labelSmall
-            )
-            OutlinedButton(
-                onClick = onAddTaskListClick,
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-            ) {
-                Icon(Icons.Rounded.Add, contentDescription = "Add task list")
-                Text(text = "Add task list")
+    Row(
+        modifier = Modifier.height(72.dp).fillMaxWidth().padding(start = 6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(onClick = onMenuCloseClick) {
+            Icon(Icons.Rounded.MenuOpen, contentDescription = null)
+        }
+        ToDometerTitle(modifier = Modifier.padding(start = 4.dp))
+    }
+    HorizontalDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .height(56.dp)
+            .padding(start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = stringResource(resource = MR.strings.task_lists),
+            style = MaterialTheme.typography.titleSmall
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        TextButton(onClick = onAddTaskListClick) {
+            Text(text = stringResource(resource = MR.strings.add_task_list))
+        }
+    }
+    LazyColumn(modifier = Modifier.padding(8.dp)) {
+        item {
+            TaskListItem(defaultTaskListName, selectedTaskListId == "") {
+                onTaskListClick("")
             }
         }
-        LazyColumn(modifier = Modifier.padding(8.dp)) {
-            item {
-                TaskListItem(defaultTaskListName, selectedTaskListId == "") {
-                    onTaskListClick("")
-                }
-            }
-            items(taskLists) { taskList ->
-                TaskListItem(
-                    taskList.name,
-                    taskList.id == selectedTaskListId
-                ) {
-                    onTaskListClick(taskList.id)
-                }
+        items(taskLists) { taskList ->
+            TaskListItem(
+                taskList.name,
+                taskList.id == selectedTaskListId
+            ) {
+                onTaskListClick(taskList.id)
             }
         }
     }

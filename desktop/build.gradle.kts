@@ -25,6 +25,7 @@ kotlin {
                 implementation(projects.common.composeUi)
                 implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.domain)
+                implementation(projects.common.resources)
                 implementation(compose.desktop.currentOs)
             }
         }

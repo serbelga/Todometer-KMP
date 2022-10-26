@@ -42,11 +42,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
@@ -114,7 +114,7 @@ internal fun EditTaskScreen(
                         }
                     }
                 },
-                title = { Text(stringResource(id = R.string.edit_task)) }
+                title = { Text(stringResource(id = MR.strings.edit_task.resourceId)) }
             )
         },
         content = { paddingValues ->
@@ -123,15 +123,15 @@ internal fun EditTaskScreen(
             } else {
                 Column(modifier = Modifier.padding(paddingValues)) {
                     TitledTextField(
-                        title = stringResource(id = R.string.name),
+                        title = stringResource(id = MR.strings.name.resourceId),
                         value = taskTitle,
                         onValueChange = {
                             taskTitle = it
                             taskTitleInputError = false
                         },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
+                        placeholder = { Text(stringResource(id = MR.strings.enter_task_name.resourceId)) },
                         isError = taskTitleInputError,
-                        errorMessage = stringResource(id = R.string.field_not_empty),
+                        errorMessage = stringResource(id = MR.strings.field_not_empty.resourceId),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
@@ -153,10 +153,10 @@ internal fun EditTaskScreen(
                         onClearDateTimeClick = { taskDueDate = null }
                     )
                     TitledTextField(
-                        title = stringResource(id = R.string.description),
+                        title = stringResource(id = MR.strings.description.resourceId),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
-                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
+                        placeholder = { Text(stringResource(id = MR.strings.enter_description.resourceId)) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done

@@ -40,7 +40,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "ToDometer",
         state = WindowState(
-            size = DpSize(800.dp, 800.dp),
+            size = DpSize(600.dp, 800.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
         icon = iconToDometer()

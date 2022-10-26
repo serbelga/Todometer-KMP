@@ -56,12 +56,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
@@ -137,7 +137,7 @@ internal fun AddTaskScreen(
                         )
                     }
                 },
-                title = { Text(stringResource(id = R.string.add_task)) },
+                title = { Text(stringResource(id = MR.strings.add_task.resourceId)) },
                 scrollBehavior = scrollBehavior
             )
         },
@@ -148,15 +148,15 @@ internal fun AddTaskScreen(
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                 item {
                     TitledTextField(
-                        title = stringResource(id = R.string.name),
+                        title = stringResource(id = MR.strings.name.resourceId),
                         value = taskTitle,
                         onValueChange = {
                             taskTitle = it
                             taskTitleInputError = false
                         },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
+                        placeholder = { Text(stringResource(id = MR.strings.enter_task_name.resourceId)) },
                         isError = taskTitleInputError,
-                        errorMessage = stringResource(id = R.string.field_not_empty),
+                        errorMessage = stringResource(id = MR.strings.field_not_empty.resourceId),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
@@ -184,7 +184,7 @@ internal fun AddTaskScreen(
                 }
                 item {
                     Text(
-                        text = stringResource(R.string.checklist),
+                        text = stringResource(id = MR.strings.checklist.resourceId),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(start = 32.dp, top = 16.dp)
@@ -197,16 +197,16 @@ internal fun AddTaskScreen(
                 }
                 item {
                     AddChecklistItemField(
-                        placeholder = { Text(stringResource(R.string.add_element_optional)) },
+                        placeholder = { Text(stringResource(id = MR.strings.add_element_optional.resourceId)) },
                         onAddTaskCheckListItem = { addTaskViewModel.taskChecklistItems.add(it) }
                     )
                 }
                 item {
                     TitledTextField(
-                        title = stringResource(id = R.string.description),
+                        title = stringResource(id = MR.strings.description.resourceId),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
-                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
+                        placeholder = { Text(stringResource(id = MR.strings.enter_description.resourceId)) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
@@ -246,7 +246,7 @@ private fun TaskChecklistItem(
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
                 Icons.Rounded.Clear,
-                contentDescription = stringResource(R.string.clear),
+                contentDescription = stringResource(id = MR.strings.clear.resourceId),
                 tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }

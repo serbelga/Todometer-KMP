@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.task
+package dev.sergiobelda.todometer.common.compose.ui.components.task
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="app_name">ToDometer</string>
+
+    <string name="task">Tarea</string>
+    <string name="tasks">Tareas</string>
+    <string name="task_list">Lista de tareas</string>
+    <string name="task_lists">Listas de tareas</string>
+    <string name="title">Título</string>
+    <string name="name">Nombre</string>
+    <string name="description">Descripción</string>
+    <string name="no_description">No hay descripción</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_task">Eliminar tarea</string>
+    <string name="delete_task_question">¿Desea eliminar esta tarea?</string>
+    <string name="delete_task_list">Eliminar lista de tareas</string>
+    <string name="delete_task_list_question">Se eliminarán todas las tareas de esta lista de tareas. ¿Desea continuar?</string>
+    <string name="add">Añadir</string>
+    <string name="add_task">Añadir tarea</string>
+    <string name="add_task_list">Añadir lista de tareas</string>
+    <string name="edit_task">Editar tarea</string>
+    <string name="edit_task_list">Editar lista de tareas</string>
+    <string name="theme">Tema</string>
+    <string name="choose_theme">Elegir un tema</string>
+    <string name="follow_system">Predeterminado del sistema</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Oscuro</string>
+    <string name="about">Acerca de</string>
+    <string name="open_source_licenses">Licencias de código abierto</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="enter_task_name">Introduce el nombre de la tarea</string>
+    <string name="enter_description">Introduce una descripción (opcional)</string>
+    <string name="enter_date_time">Añadir fecha y hora (opcional)</string>
+    <string name="enter_task_list_name">Introduce un nombre para la lista de tareas</string>
+    <string name="choose_tag">Elige una etiqueta</string>
+    <string name="field_not_empty">El campo no puede quedar vacío</string>
+    <string name="default_task_list_name">Mis tareas</string>
+    <string name="no_tasks">No has añadido ninguna tarea</string>
+    <string name="no_pending_tasks">No tienes ninguna tarea pendiente</string>
+    <string name="no_task_lists">No hay listas de tareas</string>
+    <string name="you_have_not_any_task_list">No tienes ninguna lista de tareas</string>
+    <string name="completed_tasks">Completadas (%1$d)</string>
+    <string name="you_have_completed_all_tasks">Has completado todas las tareas</string>
+    <string name="congratulations">Enhorabuena!</string>
+    <string name="date_time">Fecha y hora</string>
+    <string name="clear">Limpiar</string>
+    <string name="checklist">Checklist</string>
+    <string name="add_element">Añadir elemento</string>
+    <string name="add_element_optional">Añadir elemento (opcional)</string>
+
+    <string name="task_title_input">Nombre de la tarea</string>
+    <string name="task_list_name_input">Nombre de la lista de tareas</string>
+
+    <string name="cannot_delete_this_task_list">No se puede eliminar la lista predeterminada</string>
+    <string name="cannot_edit_this_task_list">No se puede editar la lista predeterminada</string>
+</resources>

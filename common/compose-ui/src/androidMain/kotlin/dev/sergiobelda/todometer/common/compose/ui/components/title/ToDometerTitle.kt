@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.components
+package dev.sergiobelda.todometer.common.compose.ui.components.title
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -27,10 +27,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.R
+import dev.sergiobelda.todometer.common.resources.MR
 
 @Composable
-internal fun ToDometerTitle(modifier: Modifier = Modifier) {
+actual fun ToDometerTitle(modifier: Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -41,7 +42,7 @@ internal fun ToDometerTitle(modifier: Modifier = Modifier) {
             contentDescription = null
         )
         Text(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = MR.strings.app_name.resourceId),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(start = 6.dp, bottom = 4.dp)
         )

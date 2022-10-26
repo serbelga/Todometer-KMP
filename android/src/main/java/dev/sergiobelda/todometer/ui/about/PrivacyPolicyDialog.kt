@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.resources.MR
 
 @Composable
 internal fun PrivacyPolicyDialog(
@@ -35,22 +36,22 @@ internal fun PrivacyPolicyDialog(
 ) {
     AlertDialog(
         title = {
-            Text(stringResource(R.string.privacy_policy))
+            Text(stringResource(id = MR.strings.privacy_policy.resourceId))
         },
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_user_data))
-                Text(stringResource(R.string.privacy_policy_user_data_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = MR.strings.privacy_policy_user_data.resourceId))
+                Text(stringResource(id = MR.strings.privacy_policy_user_data_body.resourceId))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_permissions))
-                Text(stringResource(R.string.privacy_policy_permissions_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = MR.strings.privacy_policy_permissions.resourceId))
+                Text(stringResource(id = MR.strings.privacy_policy_permissions_body.resourceId))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_device_and_network_abuse))
-                Text(stringResource(R.string.privacy_policy_device_and_network_abuse_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = MR.strings.privacy_policy_device_and_network_abuse.resourceId))
+                Text(stringResource(id = MR.strings.privacy_policy_device_and_network_abuse_body.resourceId))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_public))
-                Text(stringResource(R.string.privacy_policy_public_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = MR.strings.privacy_policy_public.resourceId))
+                Text(stringResource(id = MR.strings.privacy_policy_public_body.resourceId))
             }
         },
         confirmButton = {
