@@ -72,6 +72,9 @@ android {
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
     namespace = "dev.sergiobelda.todometer.common.resources"
+    lint {
+        abortOnError = false
+    }
 }
 
 multiplatformResources {
