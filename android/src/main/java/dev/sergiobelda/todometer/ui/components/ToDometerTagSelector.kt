@@ -40,17 +40,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.MR
 
 @Composable
 internal fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     Text(
-        text = stringResource(id = MR.strings.choose_tag.resourceId),
+        text = stringResource(id = R.string.choose_tag),
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
         modifier = Modifier.padding(start = 32.dp)

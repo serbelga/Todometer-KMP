@@ -45,9 +45,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
@@ -88,7 +88,7 @@ internal fun AddTaskListScreen(
                         )
                     }
                 },
-                title = { Text(stringResource(id = MR.strings.add_task_list.resourceId)) },
+                title = { Text(stringResource(id = R.string.add_task_list)) },
                 actions = {
                     IconButton(
                         enabled = !addTaskListUiState.isAddingTaskList,
@@ -116,16 +116,16 @@ internal fun AddTaskListScreen(
             }
             Column(modifier = Modifier.padding(paddingValues)) {
                 TitledTextField(
-                    title = stringResource(id = MR.strings.name.resourceId),
+                    title = stringResource(id = R.string.name),
                     value = taskListName,
                     onValueChange = {
                         taskListName = it
                         taskListNameInputError = false
                     },
-                    placeholder = { Text(stringResource(id = MR.strings.enter_task_list_name.resourceId)) },
+                    placeholder = { Text(stringResource(id = R.string.enter_task_list_name)) },
                     singleLine = true,
                     isError = taskListNameInputError,
-                    errorMessage = stringResource(id = MR.strings.field_not_empty.resourceId),
+                    errorMessage = stringResource(id = R.string.field_not_empty),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done
