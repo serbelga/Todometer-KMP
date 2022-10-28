@@ -66,8 +66,10 @@ dependencies {
     implementation(projects.common.android)
     implementation(projects.common.core)
     implementation(projects.common.domain)
+    implementation(projects.common.resources)
     implementation(projects.common.ui)
 
+    implementation(platform(libs.androidx.compose.composeBom))
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.compose.foundation)

@@ -32,8 +32,9 @@ kotlin {
                 api(compose.materialIconsExtended)
                 api(compose.ui)
 
-                implementation(projects.common.domain)
                 implementation(projects.common.composeUiDesignsystem)
+                implementation(projects.common.domain)
+                implementation(projects.common.resources)
                 implementation(projects.common.ui)
 
                 implementation(libs.kotlin.datetime)

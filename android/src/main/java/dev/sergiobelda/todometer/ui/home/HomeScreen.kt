@@ -93,13 +93,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskItem
+import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListItem
+import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.Disabled
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.High
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.sheetShape
-import dev.sergiobelda.todometer.common.compose.ui.task.TaskItem
-import dev.sergiobelda.todometer.common.compose.ui.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -109,7 +110,6 @@ import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
-import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
@@ -143,7 +143,7 @@ internal fun HomeScreen(
     val homeUiState = homeViewModel.homeUiState
     val appTheme by homeViewModel.appTheme.collectAsState()
 
-    val defaultTaskListName = stringResource(R.string.default_task_list_name)
+    val defaultTaskListName = stringResource(id = R.string.default_task_list_name)
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -254,7 +254,7 @@ internal fun HomeScreen(
                         if (homeUiState.tasks.isEmpty()) {
                             TaskListIllustration(
                                 R.drawable.no_tasks,
-                                stringResource(R.string.no_tasks)
+                                stringResource(id = R.string.no_tasks)
                             )
                         } else {
                             TasksListView(
@@ -287,7 +287,7 @@ internal fun HomeScreen(
                     ) {
                         Icon(
                             Icons.Rounded.Add,
-                            contentDescription = stringResource(R.string.add_task)
+                            contentDescription = stringResource(id = R.string.add_task)
                         )
                     }
                 },
@@ -307,7 +307,7 @@ private fun ChooseThemeAlertDialog(
     ToDometerAlertDialog(
         title = {
             Text(
-                text = stringResource(R.string.choose_theme),
+                text = stringResource(id = R.string.choose_theme),
                 modifier = Modifier.padding(16.dp)
             )
         },
@@ -353,7 +353,7 @@ private fun ChooseThemeAlertDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(id = R.string.cancel))
             }
         }
     )
@@ -370,11 +370,11 @@ private fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskLi
             )
         },
         title = {
-            Text(stringResource(R.string.delete_task_list))
+            Text(stringResource(id = R.string.delete_task_list))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(R.string.delete_task_list_question))
+            Text(stringResource(id = R.string.delete_task_list_question))
         },
         confirmButton = {
             TextButton(
@@ -388,7 +388,7 @@ private fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskLi
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(id = R.string.cancel))
             }
         }
     )
@@ -398,11 +398,11 @@ private fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskLi
 private fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) {
     AlertDialog(
         title = {
-            Text(stringResource(R.string.delete_task))
+            Text(stringResource(id = R.string.delete_task))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(R.string.delete_task_question))
+            Text(stringResource(id = R.string.delete_task_question))
         },
         confirmButton = {
             TextButton(
@@ -416,7 +416,7 @@ private fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(id = R.string.cancel))
             }
         }
     )
@@ -445,12 +445,12 @@ private fun DrawerContent(
             .padding(start = 16.dp, end = 16.dp)
     ) {
         Text(
-            text = stringResource(R.string.task_lists),
+            text = stringResource(id = R.string.task_lists),
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = addTaskList) {
-            Text(stringResource(R.string.add_task_list))
+            Text(stringResource(id = R.string.add_task_list))
         }
     }
     LazyColumn(modifier = Modifier.padding(8.dp)) {
@@ -497,10 +497,7 @@ private fun TasksListView(
                 ListItem(
                     headlineText = {
                         Text(
-                            text = stringResource(
-                                R.string.completed_tasks,
-                                tasksDone.size
-                            )
+                            text = stringResource(id = R.string.completed_tasks, tasksDone.size)
                         )
                     },
                     trailingContent = {
@@ -537,8 +534,8 @@ private fun TasksListView(
     if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
         TaskListIllustration(
             R.drawable.completed_tasks,
-            stringResource(R.string.you_have_completed_all_tasks),
-            stringResource(R.string.congratulations)
+            stringResource(id = R.string.you_have_completed_all_tasks),
+            stringResource(id = R.string.congratulations)
         )
     }
 }
@@ -596,7 +593,7 @@ private fun SwipeableTaskItem(
                         icon,
                         atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
                     ),
-                    contentDescription = stringResource(R.string.delete_task),
+                    contentDescription = stringResource(id = R.string.delete_task),
                     tint = tint
                 )
             }
@@ -668,11 +665,11 @@ private fun EmptyTaskListsView(addTaskList: () -> Unit) {
                 contentDescription = null
             )
             Text(
-                stringResource(R.string.no_task_lists),
+                stringResource(id = R.string.no_task_lists),
                 modifier = Modifier.padding(bottom = 48.dp)
             )
             Button(onClick = addTaskList) {
-                Text(text = stringResource(R.string.add_task_list))
+                Text(text = stringResource(id = R.string.add_task_list))
             }
         }
     }
@@ -701,13 +698,13 @@ private fun MoreBottomSheet(
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
             TextButton(onClick = openSourceLicensesClick) {
                 Text(
-                    stringResource(R.string.open_source_licenses),
+                    stringResource(id = R.string.open_source_licenses),
                     style = MaterialTheme.typography.labelLarge
                 )
             }
             Text("·")
             TextButton(onClick = aboutClick) {
-                Text(stringResource(R.string.about), style = MaterialTheme.typography.labelLarge)
+                Text(stringResource(id = R.string.about), style = MaterialTheme.typography.labelLarge)
             }
         }
     }
@@ -722,14 +719,14 @@ private fun EditTaskListItem(
     ListItem(
         headlineText = {
             Text(
-                stringResource(R.string.edit_task_list),
+                stringResource(id = R.string.edit_task_list),
                 style = MaterialTheme.typography.titleSmall
             )
         },
         supportingText = {
             if (!editTaskListEnabled) {
                 Text(
-                    stringResource(R.string.cannot_edit_this_task_list),
+                    stringResource(id = R.string.cannot_edit_this_task_list),
                     style = MaterialTheme.typography.labelLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -739,7 +736,7 @@ private fun EditTaskListItem(
         leadingContent = {
             Icon(
                 Icons.Outlined.Edit,
-                contentDescription = stringResource(R.string.edit_task_list)
+                contentDescription = stringResource(id = R.string.edit_task_list)
             )
         },
         modifier = Modifier.clickable(
@@ -758,14 +755,14 @@ private fun DeleteTaskListItem(
     ListItem(
         headlineText = {
             Text(
-                stringResource(R.string.delete_task_list),
+                stringResource(id = R.string.delete_task_list),
                 style = MaterialTheme.typography.titleSmall
             )
         },
         supportingText = {
             if (!deleteTaskListEnabled) {
                 Text(
-                    stringResource(R.string.cannot_delete_this_task_list),
+                    stringResource(id = R.string.cannot_delete_this_task_list),
                     style = MaterialTheme.typography.labelLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -775,7 +772,7 @@ private fun DeleteTaskListItem(
         leadingContent = {
             Icon(
                 Icons.Outlined.Delete,
-                contentDescription = stringResource(R.string.delete_task_list)
+                contentDescription = stringResource(id = R.string.delete_task_list)
             )
         },
         modifier = Modifier.clickable(
@@ -794,7 +791,7 @@ private fun ChooseThemeListItem(
     ListItem(
         headlineText = {
             Text(
-                stringResource(R.string.theme),
+                stringResource(id = R.string.theme),
                 style = MaterialTheme.typography.titleSmall
             )
         },
@@ -810,7 +807,7 @@ private fun ChooseThemeListItem(
             appThemeMap[currentTheme]?.themeIconRes?.let {
                 Icon(
                     painterResource(it),
-                    contentDescription = stringResource(R.string.theme)
+                    contentDescription = stringResource(id = R.string.theme)
                 )
             }
         },

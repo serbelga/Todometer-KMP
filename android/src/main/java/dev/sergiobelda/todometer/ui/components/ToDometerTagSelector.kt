@@ -50,7 +50,7 @@ internal fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     Text(
-        text = stringResource(R.string.choose_tag),
+        text = stringResource(id = R.string.choose_tag),
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
         modifier = Modifier.padding(start = 32.dp)

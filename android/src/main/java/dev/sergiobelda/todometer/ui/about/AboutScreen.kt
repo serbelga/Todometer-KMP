@@ -52,11 +52,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.extensions.getVersionName
 import dev.sergiobelda.todometer.extensions.launchActivity
 import dev.sergiobelda.todometer.extensions.openWebPage
-import dev.sergiobelda.todometer.ui.components.ToDometerTitle
 
 private const val GITHUB_URL = "https://github.com/serbelga/ToDometer_Multiplatform"
 
@@ -97,30 +97,30 @@ internal fun AboutScreen(
                 icon = {
                     Icon(
                         painterResource(R.drawable.ic_github_24),
-                        contentDescription = stringResource(R.string.github)
+                        contentDescription = stringResource(id = R.string.github)
                     )
                 },
-                text = { Text(stringResource(R.string.github)) }
+                text = { Text(stringResource(id = R.string.github)) }
             )
             AboutItemCard(
                 onCardClick = { privacyPolicyDialogState = true },
                 icon = {
                     Icon(
                         Icons.Rounded.Description,
-                        contentDescription = stringResource(R.string.privacy_policy)
+                        contentDescription = stringResource(id = R.string.privacy_policy)
                     )
                 },
-                text = { Text(stringResource(R.string.privacy_policy)) }
+                text = { Text(stringResource(id = R.string.privacy_policy)) }
             )
             AboutItemCard(
                 onCardClick = { context.launchActivity<OssLicensesMenuActivity>() },
                 icon = {
                     Icon(
                         Icons.Rounded.Code,
-                        contentDescription = stringResource(R.string.open_source_licenses)
+                        contentDescription = stringResource(id = R.string.open_source_licenses)
                     )
                 },
-                text = { Text(stringResource(R.string.open_source_licenses)) }
+                text = { Text(stringResource(id = R.string.open_source_licenses)) }
             )
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {

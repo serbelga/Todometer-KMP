@@ -12,7 +12,10 @@ version = "1.0"
 kotlin {
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions {
+                jvmTarget = "11"
+                freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+            }
         }
     }
     sourceSets {
@@ -22,6 +25,7 @@ kotlin {
                 implementation(projects.common.composeUi)
                 implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.domain)
+                implementation(projects.common.resources)
                 implementation(compose.desktop.currentOs)
             }
         }

@@ -52,7 +52,7 @@ internal fun ToDometerDateTimeSelector(
 ) {
     Column {
         Text(
-            text = stringResource(R.string.date_time),
+            text = stringResource(id = R.string.date_time),
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(start = 32.dp)
@@ -67,7 +67,7 @@ internal fun ToDometerDateTimeSelector(
         ) {
             Text(
                 text = taskDueDate?.let { TaskDueDate.getDueDateFormatted(it) }
-                    ?: run { stringResource(R.string.enter_date_time) },
+                    ?: run { stringResource(id = R.string.enter_date_time) },
                 color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
                 modifier = Modifier.padding(start = 32.dp)
             )
@@ -75,7 +75,7 @@ internal fun ToDometerDateTimeSelector(
                 IconButton(onClick = onClearDateTimeClick) {
                     Icon(
                         Icons.Rounded.Clear,
-                        stringResource(R.string.clear),
+                        stringResource(id = R.string.clear),
                         tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                     )
                 }
