@@ -95,6 +95,7 @@ Under construction
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)
 * [Ktor Client](https://ktor.io/docs/client.html)
+* [moko-resources](https://github.com/icerockdev/moko-resources)
 
 <br/>
 
