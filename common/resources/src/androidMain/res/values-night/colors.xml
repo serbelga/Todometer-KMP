@@ -42,10 +42,6 @@
     <color name="todometer_shadow">#000000</color>
     <color name="todometer_surfaceTint">#ADC6FF</color>
     <color name="todometer_surfaceTintColor">#ADC6FF</color>
-    <color name="todometer_check">#43E188</color>
-    <color name="todometer_widget_background">#171B23</color>
-    <color name="todometer_widget_button_background">#80B4FF</color>
-    <color name="todometer_widget_card_background">#2A313E</color>
 
     <color name="red">#E57373</color>
     <color name="deep_orange400">#ffa270</color>

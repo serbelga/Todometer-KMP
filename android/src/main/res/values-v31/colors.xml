@@ -13,7 +13,8 @@
 -->
 
 <resources>
-    <color name="todometer_widget_background">@color/m3_sys_color_dynamic_light_secondary_container</color>
-    <color name="todometer_widget_button_background">@color/m3_sys_color_dynamic_light_primary</color>
-    <color name="todometer_widget_card_background">@color/m3_sys_color_dynamic_light_surface</color>
+    <color name="todometer_widget_background">@color/material_dynamic_secondary95</color>
+    <color name="todometer_widget_button_icon">@color/material_dynamic_primary90</color>
+    <color name="todometer_widget_button_background">@color/material_dynamic_primary40</color>
+    <color name="todometer_widget_card_background">@color/material_dynamic_secondary90</color>
 </resources>

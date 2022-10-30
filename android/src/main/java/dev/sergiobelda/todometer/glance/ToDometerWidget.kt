@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
@@ -48,6 +49,7 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
+import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextDecoration
 import androidx.glance.text.TextStyle
@@ -60,6 +62,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskIdKey
 import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskStateKey
 import dev.sergiobelda.todometer.ui.MainActivity
@@ -80,6 +83,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     private val coroutineScope = MainScope()
 
     private var taskList: TaskList? by mutableStateOf(null)
+
+    private var taskListProgress: Float = 0F
 
     private var tasks: List<TaskItem> by mutableStateOf(emptyList())
 
@@ -109,7 +114,11 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             }
 
             getTaskListSelectedTasksUseCase().first().doIfSuccess {
-                tasks = it.filter { task -> task.state == TaskState.DOING }
+                taskListProgress = TaskProgress.getTasksDoneProgress(it)
+                tasks = it // it.filter { task -> task.state == TaskState.DOING }
+            }.doIfError {
+                tasks = emptyList()
+                taskListProgress = 0F
             }
 
             updateAll(context)
@@ -134,14 +143,26 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalAlignment = Alignment.End
                 ) {
-                    Text(
-                        text = taskListName ?: "",
-                        style = TextStyle(
-                            color = ColorProvider(R.color.todometer_onSurface),
-                            fontSize = 16.sp
-                        ),
-                        modifier = GlanceModifier.fillMaxWidth().defaultWeight()
-                    )
+                    Column(
+                        modifier = GlanceModifier.fillMaxWidth().defaultWeight().clickable(
+                            onClick = actionStartActivity<MainActivity>()
+                        )
+                    ) {
+                        Text(
+                            text = taskListName ?: "",
+                            style = TextStyle(
+                                color = ColorProvider(R.color.todometer_onSurface),
+                                fontSize = 16.sp
+                            )
+                        )
+                        Text(
+                            text = TaskProgress.getPercentage(taskListProgress),
+                            style = TextStyle(
+                                color = ColorProvider(R.color.todometer_onSurfaceVariant),
+                                fontSize = 16.sp
+                            )
+                        )
+                    }
                     Image(
                         ImageProvider(R.drawable.todometer_widget_add_button),
                         modifier = GlanceModifier.clickable(
@@ -180,6 +201,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
         Column {
             Row(
                 modifier = GlanceModifier.fillMaxWidth()
+                    .height(48.dp)
                     .background(ImageProvider(R.drawable.todometer_widget_card))
                     .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
                 verticalAlignment = Alignment.CenterVertically
@@ -198,7 +220,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
                 )
                 Image(
-                    ImageProvider(if (taskItem.state == TaskState.DONE) R.drawable.ic_round_replay_24 else R.drawable.ic_round_check_24),
+                    ImageProvider(if (taskItem.state == TaskState.DONE) R.drawable.todometer_widget_ic_round_replay_24 else R.drawable.todometer_widget_ic_round_check_24),
                     contentDescription = null,
                     modifier = GlanceModifier.padding(8.dp).clickable(
                         onClick = actionRunCallback<SetTaskStateAction>(
