@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.components
+package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -25,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-internal fun ToDometerContentLoadingProgress() {
+fun ToDometerContentLoadingProgress() {
     Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
     }

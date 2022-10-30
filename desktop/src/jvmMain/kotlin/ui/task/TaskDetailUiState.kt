@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,13 @@
  * limitations under the License.
  */
 
-internal sealed class Screen {
-    object Home : Screen()
-    data class TaskDetail(val taskId: String) : Screen()
-}
+package ui.task
+
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+
+data class TaskDetailUiState(
+    val isLoadingTask: Boolean = false,
+    val task: Task? = null,
+    val errorUi: ErrorUi? = null
+)

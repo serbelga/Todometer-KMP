@@ -49,14 +49,14 @@ fun main() = application {
         val navigateToHome: () -> Unit = {
             currentPage = Screen.Home
         }
-        val navigateToTaskDetail: () -> Unit = {
-            currentPage = Screen.TaskDetail
+        val navigateToTaskDetail: (String) -> Unit = {
+            currentPage = Screen.TaskDetail(it)
         }
         ToDometerAppTheme {
             Crossfade(currentPage) { screen ->
                 when (screen) {
                     Screen.Home -> HomeScreen(navigateToTaskDetail)
-                    Screen.TaskDetail -> TaskDetailScreen(navigateToHome)
+                    is Screen.TaskDetail -> TaskDetailScreen(screen.taskId, navigateToHome)
                 }
             }
         }

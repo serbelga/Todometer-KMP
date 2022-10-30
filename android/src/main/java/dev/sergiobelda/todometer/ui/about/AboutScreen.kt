@@ -74,7 +74,7 @@ internal fun AboutScreen(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             Icons.Rounded.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = stringResource(id = R.string.back),
                             tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }
