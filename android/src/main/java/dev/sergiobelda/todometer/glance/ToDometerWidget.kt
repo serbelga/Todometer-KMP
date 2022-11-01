@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
@@ -49,7 +48,6 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
-import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextDecoration
 import androidx.glance.text.TextStyle
@@ -114,8 +112,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             }
 
             getTaskListSelectedTasksUseCase().first().doIfSuccess {
-                taskListProgress = TaskProgress.getTasksDoneProgress(it)
-                tasks = it // it.filter { task -> task.state == TaskState.DOING }
+                tasks = it
+                taskListProgress = TaskProgress.getTasksDoneProgress(tasks)
             }.doIfError {
                 tasks = emptyList()
                 taskListProgress = 0F
@@ -130,6 +128,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
         glanceId = LocalGlanceId.current
         val taskListName: String? =
             if (taskList != null) taskList?.name else context.getString(R.string.default_task_list_name)
+        val tasksDoing = tasks.filter { it.state == TaskState.DOING }
+        val tasksDone = tasks.filter { it.state == TaskState.DONE }
         // TODO: Use Loading Progress indicator.
         Box(
             modifier = GlanceModifier.fillMaxSize()
@@ -172,7 +172,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     )
                 }
                 Spacer(modifier = GlanceModifier.height(12.dp))
-                if (tasks.isEmpty()) {
+                if (tasksDoing.isEmpty()) {
                     Box(
                         modifier = GlanceModifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -181,8 +181,21 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     }
                 } else {
                     LazyColumn {
-                        items(tasks) {
+                        items(tasksDoing) {
                             TaskItem(it)
+                        }
+                        item {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = GlanceModifier.height(48.dp)
+                            ) {
+                                Text(
+                                    text = context.getString(
+                                        R.string.completed_tasks,
+                                        tasksDone.size
+                                    )
+                                )
+                            }
                         }
                     }
                 }
