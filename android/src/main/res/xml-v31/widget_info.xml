@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright 2022 Sergio Belda
+     Copyright 2021 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -12,10 +12,8 @@
      limitations under the License.
 -->
 
-<resources>
-    <color name="todometer_check">#43E188</color>
-    <color name="todometer_widget_background">#171B23</color>
-    <color name="todometer_widget_button_icon">#171B23</color>
-    <color name="todometer_widget_button_background">#80B4FF</color>
-    <color name="todometer_widget_card_background">#2A313E</color>
-</resources>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="180dp"
+    android:minHeight="60dp"
+    android:previewLayout="@layout/todometer_widget_preview_layout"
+    android:resizeMode="horizontal|vertical" />

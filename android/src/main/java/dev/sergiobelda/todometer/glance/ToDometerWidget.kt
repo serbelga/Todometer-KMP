@@ -185,17 +185,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                             TaskItem(it)
                         }
                         item {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = GlanceModifier.height(48.dp)
-                            ) {
-                                Text(
-                                    text = context.getString(
-                                        R.string.completed_tasks,
-                                        tasksDone.size
-                                    )
-                                )
-                            }
+                            TasksDoneItem(tasksDone.size)
                         }
                     }
                 }
@@ -231,6 +221,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     text = taskItem.title,
                     style = textStyle,
                     modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
+                        .clickable(actionStartActivityIntent(openTaskDeepLinkIntent))
                 )
                 Image(
                     ImageProvider(if (taskItem.state == TaskState.DONE) R.drawable.todometer_widget_ic_round_replay_24 else R.drawable.todometer_widget_ic_round_check_24),
@@ -246,6 +237,22 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                 )
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
+        }
+    }
+
+    @Composable
+    private fun TasksDoneItem(tasksDone: Int) {
+        Row(
+            modifier = GlanceModifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = context.getString(
+                    R.string.completed_tasks,
+                    tasksDone
+                )
+            )
         }
     }
 
