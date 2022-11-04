@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.task
+package ui.taskdetail
 
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi

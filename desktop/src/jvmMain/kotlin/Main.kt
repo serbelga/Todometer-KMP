@@ -29,7 +29,7 @@ import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.core.di.initKoin
 import ui.home.HomeScreen
 import ui.icons.iconToDometer
-import ui.task.TaskDetailScreen
+import ui.taskdetail.TaskDetailScreen
 import ui.theme.ToDometerAppTheme
 
 val koin = initKoin().koin
