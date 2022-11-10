@@ -42,6 +42,7 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -124,19 +125,20 @@ internal fun HomeScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            // TODO: Use ModalDrawerSheet when it's available on material3 1.0.0-rc01 for desktop
-            TaskListsNavigationDrawer(
-                taskLists,
-                taskListSelected?.id ?: "",
-                stringResource(resource = MR.strings.default_task_list_name),
-                onTaskListClick = {
-                    coroutineScope.launch {
-                        setTaskListSelectedUseCase.invoke(it)
-                    }
-                },
-                onAddTaskListClick = { addTaskListAlertDialogState = true },
-                onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
-            )
+            ModalDrawerSheet {
+                TaskListsNavigationDrawer(
+                    taskLists,
+                    taskListSelected?.id ?: "",
+                    stringResource(resource = MR.strings.default_task_list_name),
+                    onTaskListClick = {
+                        coroutineScope.launch {
+                            setTaskListSelectedUseCase.invoke(it)
+                        }
+                    },
+                    onAddTaskListClick = { addTaskListAlertDialogState = true },
+                    onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
+                )
+            }
         }
     ) {
         Scaffold(
@@ -292,7 +294,6 @@ private fun EmptyTasksListView() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,
