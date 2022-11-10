@@ -104,7 +104,7 @@ internal fun EditTaskListScreen(
             } else {
                 Column(modifier = Modifier.padding(paddingValues)) {
                     TitledTextField(
-                        title = stringResource(R.string.name),
+                        title = stringResource(id = R.string.name),
                         value = taskListName,
                         onValueChange = {
                             taskListName = it
@@ -113,7 +113,7 @@ internal fun EditTaskListScreen(
                         placeholder = { Text(stringResource(id = R.string.enter_task_list_name)) },
                         singleLine = true,
                         isError = taskListNameInputError,
-                        errorMessage = stringResource(R.string.field_not_empty),
+                        errorMessage = stringResource(id = R.string.field_not_empty),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done

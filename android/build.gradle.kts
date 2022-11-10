@@ -10,18 +10,6 @@ plugins {
     id("todometer.spotless")
 }
 
-// TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
-androidComponents {
-    onVariants(selector().all()) {
-        val capitalizedVariantName = it.name.substring(0, 1).toUpperCase() + it.name.substring(1)
-        afterEvaluate {
-            tasks.named("map${capitalizedVariantName}SourceSetPaths").configure {
-                dependsOn("process${capitalizedVariantName}GoogleServices")
-            }
-        }
-    }
-}
-
 android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
@@ -29,8 +17,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1231400
-        versionName = "android-2.3.1"
+        versionCode = 1232400
+        versionName = "android-2.3.2"
     }
 
     buildTypes {
@@ -66,8 +54,10 @@ dependencies {
     implementation(projects.common.composeUiDesignsystem)
     implementation(projects.common.core)
     implementation(projects.common.domain)
+    implementation(projects.common.resources)
     implementation(projects.common.ui)
 
+    implementation(platform(libs.androidx.compose.composeBom))
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.animation.graphics)
     implementation(libs.androidx.navigation.compose)

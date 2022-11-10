@@ -12,6 +12,7 @@ buildscript {
         classpath(libs.google.firebase.crashlyticsGradle)
         classpath(libs.google.ossLicensesPlugin)
         classpath(libs.google.services)
+        classpath(libs.moko.resources.generator)
         classpath(libs.sqldelight.gradlePlugin)
         classpath(libs.spotless.gradlePlugin)
     }

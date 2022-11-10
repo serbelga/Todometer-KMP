@@ -49,7 +49,7 @@ Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.googl
 
 ### Desktop
 
-<img width="720" src="./screenshots/desktop/home.png" />
+<img width="560" src="./screenshots/desktop/home.png" />
 
 ### iOS
 
@@ -95,6 +95,7 @@ Under construction
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)
 * [Ktor Client](https://ktor.io/docs/client.html)
+* [moko-resources](https://github.com/icerockdev/moko-resources)
 
 <br/>
 

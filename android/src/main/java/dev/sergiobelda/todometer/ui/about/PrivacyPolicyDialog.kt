@@ -35,22 +35,22 @@ internal fun PrivacyPolicyDialog(
 ) {
     AlertDialog(
         title = {
-            Text(stringResource(R.string.privacy_policy))
+            Text(stringResource(id = R.string.privacy_policy))
         },
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_user_data))
-                Text(stringResource(R.string.privacy_policy_user_data_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_user_data))
+                Text(stringResource(id = R.string.privacy_policy_user_data_body))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_permissions))
-                Text(stringResource(R.string.privacy_policy_permissions_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_permissions))
+                Text(stringResource(id = R.string.privacy_policy_permissions_body))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_device_and_network_abuse))
-                Text(stringResource(R.string.privacy_policy_device_and_network_abuse_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_device_and_network_abuse))
+                Text(stringResource(id = R.string.privacy_policy_device_and_network_abuse_body))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(R.string.privacy_policy_public))
-                Text(stringResource(R.string.privacy_policy_public_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_public))
+                Text(stringResource(id = R.string.privacy_policy_public_body))
             }
         },
         confirmButton = {

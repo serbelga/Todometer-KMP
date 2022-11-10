@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2021 Sergio Belda
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <color name="seed">#4285f4</color>
+    <color name="todometer_primary">#005AC1</color>
+    <color name="todometer_onPrimary">#FFFFFF</color>
+    <color name="todometer_primaryContainer">#D8E2FF</color>
+    <color name="todometer_onPrimaryContainer">#001A41</color>
+    <color name="todometer_secondary">#006D3B</color>
+    <color name="todometer_onSecondary">#FFFFFF</color>
+    <color name="todometer_secondaryContainer">#66FEA2</color>
+    <color name="todometer_onSecondaryContainer">#00210E</color>
+    <color name="todometer_tertiary">#AC3400</color>
+    <color name="todometer_onTertiary">#FFFFFF</color>
+    <color name="todometer_tertiaryContainer">#FFDBD0</color>
+    <color name="todometer_onTertiaryContainer">#390B00</color>
+    <color name="todometer_error">#BA1A1A</color>
+    <color name="todometer_errorContainer">#FFDAD6</color>
+    <color name="todometer_onError">#FFFFFF</color>
+    <color name="todometer_onErrorContainer">#410002</color>
+    <color name="todometer_background">#FEFBFF</color>
+    <color name="todometer_onBackground">#171B23</color>
+    <color name="todometer_surface">#FEFBFF</color>
+    <color name="todometer_onSurface">#171B23</color>
+    <color name="todometer_surfaceVariant">#E1E2EC</color>
+    <color name="todometer_onSurfaceVariant">#44474F</color>
+    <color name="todometer_outline">#74777F</color>
+    <color name="todometer_inverseOnSurface">#F2F0F4</color>
+    <color name="todometer_inverseSurface">#303033</color>
+    <color name="todometer_inversePrimary">#ADC6FF</color>
+    <color name="todometer_shadow">#000000</color>
+    <color name="todometer_surfaceTint">#005AC1</color>
+    <color name="todometer_surfaceTintColor">#005AC1</color>
+
+    <color name="green">#3ddc84</color>
+    <color name="greenDark">#00a956</color>
+    <color name="greenLight">#7affb4</color>
+    <color name="orange">#F86734</color>
+    <color name="orange500">#FF9800</color>
+    <color name="deep_orange400">#FF7043</color>
+    <color name="blue">#4285f4</color>
+    <color name="blueLight">#80b4ff</color>
+    <color name="blueDark">#0059c1</color>
+    <color name="navy">#073042</color>
+    <color name="red">#D32F2F</color>
+    <color name="amber">#ffc107</color>
+    <color name="yellow">#ffeb3b</color>
+    <color name="teal">#009688</color>
+    <color name="indigo">#3f51b5</color>
+    <color name="pink">#d81b60</color>
+    <color name="lime">#cddc39</color>
+    <color name="brown">#795548</color>
+    <color name="white">#FFF</color>
+</resources>

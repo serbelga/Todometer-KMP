@@ -57,10 +57,10 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
@@ -246,7 +246,7 @@ private fun TaskChecklistItem(
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
                 Icons.Rounded.Clear,
-                contentDescription = stringResource(R.string.clear),
+                contentDescription = stringResource(id = R.string.clear),
                 tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }
