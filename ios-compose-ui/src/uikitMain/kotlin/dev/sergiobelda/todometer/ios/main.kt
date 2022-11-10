@@ -27,6 +27,8 @@ import androidx.compose.ui.window.ComposeUIViewController
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
 
+val koin = initKoin().koin
+
 @OptIn(ExperimentalMaterial3Api::class)
 fun main() {
     defaultUIKitMain(
