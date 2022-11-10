@@ -16,6 +16,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.androidx.datastore.preferences.core)
                 implementation(libs.kotlin.coroutinesCore)
             }
         }
@@ -24,17 +25,9 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.androidx.datastore.preferences)
-            }
-        }
+        val androidMain by getting
         val androidTest by getting
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.androidx.datastore.preferences.core)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

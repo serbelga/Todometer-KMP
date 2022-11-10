@@ -16,6 +16,17 @@
 
 package dev.sergiobelda.todometer.common.preferences
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory.createWithPath
+import okio.Path.Companion.toPath
+import androidx.datastore.preferences.core.Preferences as DataStorePreferences
+
+internal const val dataStoreFileName = "todometer_preferences.preferences_pb"
+
+fun createDataStore(path: String): DataStore<DataStorePreferences> = createWithPath(
+    produceFile = { path.toPath() }
+)
+
 expect object PreferencesFactory {
 
     fun createPreferences(): Preferences
