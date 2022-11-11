@@ -29,7 +29,7 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.unit.dp
 
 @Composable
-actual fun ToDometerTitle(modifier: Modifier) {
+fun ToDometerTitle(modifier: Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically

@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
     id("todometer.spotless")
 }
@@ -14,14 +13,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Common domain"
-        homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
-        ios.deploymentTarget = "14.1"
-        framework {
-            baseName = "common-domain"
-        }
-    }
     sourceSets {
         val commonMain by getting {
             dependencies {
