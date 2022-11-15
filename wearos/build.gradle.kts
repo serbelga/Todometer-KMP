@@ -37,6 +37,9 @@ android {
                 extra["enableCrashlytics"] = false
             }
         }
+        lint {
+            abortOnError = false
+        }
     }
 
     compileOptions {
