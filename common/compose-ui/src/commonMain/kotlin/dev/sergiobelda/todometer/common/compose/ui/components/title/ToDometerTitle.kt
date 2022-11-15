@@ -18,34 +18,31 @@ package dev.sergiobelda.todometer.common.compose.ui.components.title
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.compose.stringResource
-import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
+import dev.sergiobelda.todometer.common.compose.ui.resources.StringResources
 
 @Composable
-fun ToDometerTitle(modifier: Modifier) {
+fun ToDometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource("images/isotype_monochrome.svg"),
+            painter = PainterResources.iconToDometer(),
             tint = MaterialTheme.colorScheme.primary,
-            contentDescription = null,
-            modifier = Modifier.size(24.dp)
+            contentDescription = null
         )
         Text(
-            text = stringResource(resource = MR.strings.app_name),
+            text = StringResources.toDometerAppName(),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(start = 6.dp)
+            modifier = Modifier.padding(start = 6.dp, bottom = 4.dp)
         )
     }
 }
