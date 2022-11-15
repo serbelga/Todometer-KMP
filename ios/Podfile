@@ -1,5 +1,0 @@
-target 'ToDometer' do
-    use_frameworks!
-    platform :ios, '14.1'
-    pod 'core', :path => '../common/core'
-end

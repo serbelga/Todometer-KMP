@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,33 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.components.title
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
+import dev.sergiobelda.todometer.common.compose.ui.resources.StringResources
 
 @Composable
-expect fun ToDometerTitle(modifier: Modifier = Modifier)
+fun ToDometerTitle(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            painter = PainterResources.iconToDometer(),
+            tint = MaterialTheme.colorScheme.primary,
+            contentDescription = null
+        )
+        Text(
+            text = StringResources.toDometerAppName(),
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = Modifier.padding(start = 6.dp, bottom = 4.dp)
+        )
+    }
+}
