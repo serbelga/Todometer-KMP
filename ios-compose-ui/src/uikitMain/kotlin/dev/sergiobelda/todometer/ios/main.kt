@@ -29,10 +29,7 @@ import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.Application
-import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
-
-val koin = initKoin().koin
 
 fun main() {
     defaultUIKitMain(
