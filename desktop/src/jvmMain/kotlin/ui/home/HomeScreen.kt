@@ -42,11 +42,12 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -124,24 +125,25 @@ internal fun HomeScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            // TODO: Use ModalDrawerSheet when it's available on material3 1.0.0-rc01 for desktop
-            TaskListsNavigationDrawer(
-                taskLists,
-                taskListSelected?.id ?: "",
-                stringResource(resource = MR.strings.default_task_list_name),
-                onTaskListClick = {
-                    coroutineScope.launch {
-                        setTaskListSelectedUseCase.invoke(it)
-                    }
-                },
-                onAddTaskListClick = { addTaskListAlertDialogState = true },
-                onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
-            )
+            ModalDrawerSheet {
+                TaskListsNavigationDrawer(
+                    taskLists,
+                    taskListSelected?.id ?: "",
+                    stringResource(resource = MR.strings.default_task_list_name),
+                    onTaskListClick = {
+                        coroutineScope.launch {
+                            setTaskListSelectedUseCase.invoke(it)
+                        }
+                    },
+                    onAddTaskListClick = { addTaskListAlertDialogState = true },
+                    onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
+                )
+            }
         }
     ) {
         Scaffold(
             topBar = {
-                SmallTopAppBar(
+                TopAppBar(
                     navigationIcon = {
                         IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
                             if (drawerState.isOpen) {
@@ -292,7 +294,6 @@ private fun EmptyTasksListView() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.preferences
+package dev.sergiobelda.todometer.common.compose.ui.resources
 
-actual object PreferencesFactory {
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 
-    actual fun createPreferences(): Preferences = Preferences(
-        createDataStore("./$dataStoreFileName")
-    )
+actual object PainterResources {
+    @Composable
+    actual fun iconToDometer(): Painter = painterResource("images/isotype_monochrome.svg")
 }

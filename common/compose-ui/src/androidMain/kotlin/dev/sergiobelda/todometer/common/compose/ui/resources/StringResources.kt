@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.preferences
+package dev.sergiobelda.todometer.common.compose.ui.resources
 
-actual object PreferencesFactory {
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import dev.sergiobelda.todometer.common.compose.ui.R
 
-    actual fun createPreferences(): Preferences = Preferences(
-        createDataStore("./$dataStoreFileName")
-    )
+actual object StringResources {
+
+    @Composable
+    actual fun toDometerAppName(): String = stringResource(id = R.string.app_name)
 }
