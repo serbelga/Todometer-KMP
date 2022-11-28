@@ -16,67 +16,53 @@
 
 package dev.sergiobelda.todometer.ios
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.Application
 import dev.icerock.moko.resources.desc.desc
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
-import platform.Foundation.NSLog
 
+@OptIn(ExperimentalMaterial3Api::class)
 fun main() {
-    val str: String = try {
-        val string = MR.strings.app_name.desc().localized()
-        NSLog("got $string")
-        string
-    } catch (exc: Throwable) {
-        NSLog("error! $exc")
-        "error $exc"
-    }
+    val appName: String = MR.strings.app_name.desc().localized()
 
     defaultUIKitMain(
-        "ToDometer",
-        Application("ToDometer") {
+        appName,
+        Application(appName) {
             ToDometerAppTheme {
-                Column {
-                    Text(text = str)
-
-                    Scaffold(
-                        topBar = {
-                            TopAppBar(
-                                navigationIcon = {
-                                    IconButton(onClick = {}) {
-                                        Icon(Icons.Rounded.Menu, contentDescription = null)
-                                    }
-                                },
-                                title = {
-                                    Text("ToDometer")
-                                },
-                                actions = {
-                                    IconButton(onClick = {}) {
-                                        Icon(Icons.Rounded.MoreVert, contentDescription = null)
-                                    }
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            navigationIcon = {
+                                IconButton(onClick = {}) {
+                                    Icon(Icons.Rounded.Menu, contentDescription = null)
                                 }
-                            )
-                        },
-                        floatingActionButton = {
-                            FloatingActionButton(onClick = {}) {
-                                Icon(Icons.Rounded.Add, contentDescription = null)
+                            },
+                            title = { Text(text = appName) },
+                            actions = {
+                                IconButton(onClick = {}) {
+                                    Icon(Icons.Rounded.MoreVert, contentDescription = null)
+                                }
                             }
+                        )
+                    },
+                    floatingActionButton = {
+                        FloatingActionButton(onClick = {}) {
+                            Icon(Icons.Rounded.Add, contentDescription = null)
                         }
-                    ) { paddingValues ->
-
                     }
+                ) { paddingValues ->
                 }
             }
         }

@@ -86,6 +86,7 @@ compose.experimental {
     }
 }
 
+// Workaround to use Moko resources in ios.
 // copy .bundle from all .klib to .kexe
 tasks.withType<KotlinNativeLink>()
     .configureEach {

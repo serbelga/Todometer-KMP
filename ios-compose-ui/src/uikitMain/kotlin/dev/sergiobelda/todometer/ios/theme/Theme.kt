@@ -17,23 +17,24 @@
 package dev.sergiobelda.todometer.ios.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 
 @Composable
 internal fun ToDometerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
+    val colorScheme = if (darkTheme) {
+        DarkColorScheme
     } else {
-        LightColorPalette
+        LightColorScheme
     }
 
-    // TODO: Import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-    MaterialTheme(
-        colors = colors,
+    ToDometerTheme(
+        colorScheme = colorScheme,
         content = content
     )
 }
