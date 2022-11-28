@@ -29,14 +29,28 @@ import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.Application
+import dev.icerock.moko.resources.desc.desc
+import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
+import platform.Foundation.NSLog
 
 fun main() {
+    val str: String = try {
+        val string = MR.strings.app_name.desc().localized()
+        NSLog("got $string")
+        string
+    } catch (exc: Throwable) {
+        NSLog("error! $exc")
+        "error $exc"
+    }
+
     defaultUIKitMain(
         "ToDometer",
         Application("ToDometer") {
             ToDometerAppTheme {
                 Column {
+                    Text(text = str)
+
                     Scaffold(
                         topBar = {
                             TopAppBar(
