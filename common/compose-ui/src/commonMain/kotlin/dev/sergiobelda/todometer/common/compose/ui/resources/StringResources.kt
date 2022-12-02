@@ -18,8 +18,7 @@ package dev.sergiobelda.todometer.common.compose.ui.resources
 
 import androidx.compose.runtime.Composable
 
-// TODO: Remove this class when androidx.compose.ui.res.stringResource is available for ios and
-//  Moko resources ready for Compose iOS.
+// TODO: Remove this class when stringResource is available in Moko resources.
 expect object StringResources {
 
     @Composable

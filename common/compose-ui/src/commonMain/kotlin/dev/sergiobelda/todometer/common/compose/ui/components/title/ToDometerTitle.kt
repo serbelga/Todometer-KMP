@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.compose.ui.components.title
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -37,7 +38,8 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         Icon(
             painter = PainterResources.iconToDometer(),
             tint = MaterialTheme.colorScheme.primary,
-            contentDescription = null
+            contentDescription = null,
+            modifier = Modifier.size(24.dp)
         )
         Text(
             text = StringResources.toDometerAppName(),
