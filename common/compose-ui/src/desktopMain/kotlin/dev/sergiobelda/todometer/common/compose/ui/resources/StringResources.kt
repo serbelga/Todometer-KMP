@@ -17,11 +17,15 @@
 package dev.sergiobelda.todometer.common.compose.ui.resources
 
 import androidx.compose.runtime.Composable
-import dev.icerock.moko.resources.compose.stringResource
-import dev.sergiobelda.todometer.common.resources.MR
+import dev.icerock.moko.resources.StringResource
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.ResourceFormatted
+import dev.icerock.moko.resources.desc.StringDesc
 
-actual object StringResources {
+@Composable
+actual fun stringResource(resource: StringResource): String =
+    StringDesc.Resource(resource).localized()
 
-    @Composable
-    actual fun toDometerAppName(): String = stringResource(resource = MR.strings.app_name)
-}
+@Composable
+actual fun stringResource(resource: StringResource, vararg args: Any): String =
+    StringDesc.ResourceFormatted(resource, *args).localized()
