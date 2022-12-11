@@ -25,11 +25,11 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.Application
 import dev.icerock.moko.resources.desc.desc
+import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
 
@@ -49,7 +49,7 @@ fun main() {
                                     Icon(Icons.Rounded.Menu, contentDescription = null)
                                 }
                             },
-                            title = { Text(text = appName) },
+                            title = { ToDometerTitle() },
                             actions = {
                                 IconButton(onClick = {}) {
                                     Icon(Icons.Rounded.MoreVert, contentDescription = null)
