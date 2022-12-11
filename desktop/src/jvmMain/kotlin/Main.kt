@@ -27,6 +27,7 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.core.di.initKoin
+import ui.addtasklist.AddTaskListScreen
 import ui.home.HomeScreen
 import ui.icons.iconToDometer
 import ui.task.TaskDetailScreen
@@ -52,11 +53,15 @@ fun main() = application {
         val navigateToTaskDetail: () -> Unit = {
             currentPage = Screen.TaskDetail
         }
+        val navigateToAddTaskList: () -> Unit = {
+            currentPage = Screen.AddTaskList
+        }
         ToDometerAppTheme {
             Crossfade(currentPage) { screen ->
                 when (screen) {
-                    Screen.Home -> HomeScreen(navigateToTaskDetail)
+                    Screen.Home -> HomeScreen(navigateToTaskDetail, navigateToAddTaskList)
                     Screen.TaskDetail -> TaskDetailScreen(navigateToHome)
+                    Screen.AddTaskList -> AddTaskListScreen(navigateToHome)
                 }
             }
         }

@@ -86,9 +86,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeScreen(
-    navigateToTaskDetail: () -> Unit
+    navigateToTaskDetail: () -> Unit,
+    navigateToAddTaskList: () -> Unit
 ) {
-    var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
@@ -135,7 +135,10 @@ internal fun HomeScreen(
                             setTaskListSelectedUseCase.invoke(it)
                         }
                     },
-                    onAddTaskListClick = { addTaskListAlertDialogState = true },
+                    onAddTaskListClick = {
+                        // addTaskListAlertDialogState = true
+                        navigateToAddTaskList()
+                    },
                     onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
                 )
             }
@@ -183,15 +186,6 @@ internal fun HomeScreen(
             floatingActionButtonPosition = FabPosition.End
         ) { paddingValues ->
             Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-                if (addTaskListAlertDialogState) {
-                    AddTaskListAlertDialog(
-                        onDismissRequest = { addTaskListAlertDialogState = false }
-                    ) { taskListName ->
-                        coroutineScope.launch {
-                            insertTaskListUseCase.invoke(taskListName)
-                        }
-                    }
-                }
                 if (addTaskAlertDialogState) {
                     AddTaskAlertDialog(
                         onDismissRequest = { addTaskAlertDialogState = false }
