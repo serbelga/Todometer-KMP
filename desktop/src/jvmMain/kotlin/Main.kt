@@ -34,6 +34,16 @@ import ui.theme.ToDometerAppTheme
 
 val koin = initKoin().koin
 
+
+internal class Navigator(startDestination: Screen) {
+    var currentPage: Screen by mutableStateOf(Screen.Home)
+        private set
+
+    fun navigateTo(screen: Screen) {
+        currentPage = screen
+    }
+}
+
 fun main() = application {
     Window(
         resizable = false,
@@ -45,20 +55,23 @@ fun main() = application {
         ),
         icon = iconToDometer()
     ) {
-        var currentPage: Screen by remember { mutableStateOf(Screen.Home) }
-        val navigateToHome: () -> Unit = {
-            currentPage = Screen.Home
-        }
+        val navigator by remember { mutableStateOf(Navigator(Screen.Home)) }
+
         val navigateToTaskDetail: () -> Unit = {
-            currentPage = Screen.TaskDetail
+            navigator.navigateTo(Screen.TaskDetail)
         }
         ToDometerAppTheme {
-            Crossfade(currentPage) { screen ->
+            Crossfade(navigator.currentPage) { screen ->
                 when (screen) {
                     Screen.Home -> HomeScreen(navigateToTaskDetail)
-                    Screen.TaskDetail -> TaskDetailScreen(navigateToHome)
+                    Screen.TaskDetail -> TaskDetailScreen(navigator.navigateToHome)
                 }
             }
         }
     }
 }
+
+internal val Navigator.navigateToHome: () -> Unit
+    get() = {
+        navigateTo(Screen.Home)
+    }
