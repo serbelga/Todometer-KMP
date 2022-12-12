@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.theme
+package dev.sergiobelda.todometer.desktop.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

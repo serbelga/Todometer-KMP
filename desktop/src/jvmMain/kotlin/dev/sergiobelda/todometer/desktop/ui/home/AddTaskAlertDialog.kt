@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.home
+package dev.sergiobelda.todometer.desktop.ui.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

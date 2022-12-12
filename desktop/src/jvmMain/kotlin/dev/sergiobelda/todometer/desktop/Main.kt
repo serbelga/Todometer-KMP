@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import androidx.compose.animation.Crossfade
+package dev.sergiobelda.todometer.desktop
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -27,22 +27,17 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.core.di.initKoin
-import ui.home.HomeScreen
-import ui.icons.iconToDometer
-import ui.task.TaskDetailScreen
-import ui.theme.ToDometerAppTheme
+import dev.sergiobelda.todometer.desktop.navigation.NavController
+import dev.sergiobelda.todometer.desktop.navigation.NavGraph
+import dev.sergiobelda.todometer.desktop.navigation.NavHost
+import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
+import dev.sergiobelda.todometer.desktop.ui.home.HomeScreen
+import dev.sergiobelda.todometer.desktop.ui.icons.iconToDometer
+import dev.sergiobelda.todometer.desktop.ui.task.TaskDetailDestination
+import dev.sergiobelda.todometer.desktop.ui.task.TaskDetailScreen
+import dev.sergiobelda.todometer.desktop.ui.theme.ToDometerAppTheme
 
 val koin = initKoin().koin
-
-
-internal class Navigator(startDestination: Screen) {
-    var currentPage: Screen by mutableStateOf(Screen.Home)
-        private set
-
-    fun navigateTo(screen: Screen) {
-        currentPage = screen
-    }
-}
 
 fun main() = application {
     Window(
@@ -55,23 +50,18 @@ fun main() = application {
         ),
         icon = iconToDometer()
     ) {
-        val navigator by remember { mutableStateOf(Navigator(Screen.Home)) }
+        val navGraph = NavGraph()
+        navGraph.addDestination(HomeDestination)
+        navGraph.addDestination(TaskDetailDestination)
+        navGraph.startDestination = HomeDestination
+        val navController by remember { mutableStateOf(NavController(navGraph)) }
+        navController.composablesMap[HomeDestination.route] = {
+            HomeScreen { navController.navigateTo(TaskDetailDestination) }
+        }
+        navController.composablesMap[TaskDetailDestination.route] = {
+            TaskDetailScreen { navController.navigateTo(HomeDestination) }
+        }
 
-        val navigateToTaskDetail: () -> Unit = {
-            navigator.navigateTo(Screen.TaskDetail)
-        }
-        ToDometerAppTheme {
-            Crossfade(navigator.currentPage) { screen ->
-                when (screen) {
-                    Screen.Home -> HomeScreen(navigateToTaskDetail)
-                    Screen.TaskDetail -> TaskDetailScreen(navigator.navigateToHome)
-                }
-            }
-        }
+        ToDometerAppTheme { NavHost(navController) }
     }
 }
-
-internal val Navigator.navigateToHome: () -> Unit
-    get() = {
-        navigateTo(Screen.Home)
-    }

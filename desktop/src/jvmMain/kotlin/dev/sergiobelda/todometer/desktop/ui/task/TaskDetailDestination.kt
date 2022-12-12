@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-internal sealed class Screen {
-    object Home : Screen()
-    object TaskDetail : Screen()
+package dev.sergiobelda.todometer.desktop.ui.task
+
+import dev.sergiobelda.todometer.desktop.navigation.Destination
+
+object TaskDetailDestination : Destination {
+    override val route: String get() = "task_destination"
 }

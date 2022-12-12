@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.task
+package dev.sergiobelda.todometer.desktop.ui.task
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack

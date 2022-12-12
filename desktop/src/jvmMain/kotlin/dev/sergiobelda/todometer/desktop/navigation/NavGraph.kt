@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package ui.icons
+package dev.sergiobelda.todometer.desktop.navigation
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
+interface Destination {
+    val route: String
+}
 
-@Composable
-internal fun iconToDometer() =
-    if (MaterialTheme.colors.isLight) {
-        painterResource("images/isotype_light.svg")
-    } else {
-        painterResource("images/isotype_dark.svg")
+class NavGraph {
+
+    var startDestination: Destination? = null
+
+    private var _destinations: MutableList<Destination> = mutableListOf()
+    val destinations: List<Destination> get() = _destinations
+
+    fun addDestination(destination: Destination) {
+        _destinations.add(destination)
     }
+
+    fun clear() {
+        _destinations.clear()
+    }
+}

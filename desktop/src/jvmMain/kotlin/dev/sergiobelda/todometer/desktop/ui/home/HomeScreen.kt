@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.home
+package dev.sergiobelda.todometer.desktop.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -80,7 +80,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseC
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.resources.MR
-import koin
+import dev.sergiobelda.todometer.desktop.koin
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
