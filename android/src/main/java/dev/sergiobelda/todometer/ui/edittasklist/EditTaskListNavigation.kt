@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.ui.edittasklist
 
-import dev.sergiobelda.todometer.common.android.navigation.Action
-import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
 object EditTaskListDestination : Destination {
     override val route: String = "edittasklist"

@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.desktop.ui.task
 
-import dev.sergiobelda.todometer.desktop.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.Destination
 
 object TaskDetailDestination : Destination {
     override val route: String get() = "taskdetail"

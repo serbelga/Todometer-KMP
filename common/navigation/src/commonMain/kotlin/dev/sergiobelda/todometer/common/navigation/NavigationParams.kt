@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.android.navigation
+package dev.sergiobelda.todometer.common.navigation
 
 abstract class NavigationParams(val destination: Destination) {
     abstract val navigationRoute: String

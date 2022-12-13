@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.navigation
+package dev.sergiobelda.todometer.common.navigation
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
@@ -24,28 +24,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
 @Composable
-fun NavHost(
-    navController: NavController,
+fun NavigationHost(
+    navigationController: NavigationController,
     modifier: Modifier = Modifier,
     startDestination: String,
-    block: NavGraph.Builder.() -> Unit
+    block: NavigationGraph.Builder.() -> Unit
 ) {
-    val navGraph: NavGraph by remember {
+    val navigationGraph: NavigationGraph by remember {
         mutableStateOf(
-            NavGraph.Builder().apply { startDestinationId = startDestination }.also(block).build()
+            NavigationGraph.Builder().apply { startDestinationId = startDestination }.also(block).build()
         )
     }
-    NavHost(navController, navGraph, modifier)
+    NavigationHost(navigationController, navigationGraph, modifier)
 }
 
 @Composable
-fun NavHost(
-    navController: NavController,
-    navGraph: NavGraph,
+fun NavigationHost(
+    navigationController: NavigationController,
+    navigationGraph: NavigationGraph,
     modifier: Modifier = Modifier
 ) {
-    navController.navGraph = navGraph
-    Crossfade(navController.currentDestinationId, modifier = modifier) { destination ->
-        navGraph.composableNodes[destination]?.invoke()
+    navigationController.navigationGraph = navigationGraph
+    Crossfade(navigationController.currentDestinationId, modifier = modifier) { destination ->
+        navigationGraph.composableNodes[destination]?.invoke()
     }
 }

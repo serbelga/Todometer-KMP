@@ -27,9 +27,9 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.core.di.initKoin
-import dev.sergiobelda.todometer.desktop.navigation.NavController
-import dev.sergiobelda.todometer.desktop.navigation.NavHost
-import dev.sergiobelda.todometer.desktop.navigation.composableNode
+import dev.sergiobelda.todometer.common.navigation.NavigationController
+import dev.sergiobelda.todometer.common.navigation.NavigationHost
+import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
 import dev.sergiobelda.todometer.desktop.ui.home.HomeScreen
 import dev.sergiobelda.todometer.desktop.ui.icons.iconToDometer
@@ -50,17 +50,17 @@ fun main() = application {
         ),
         icon = iconToDometer()
     ) {
-        val navController by remember { mutableStateOf(NavController()) }
+        val navigationController by remember { mutableStateOf(NavigationController()) }
         ToDometerAppTheme {
-            NavHost(navController, startDestination = HomeDestination.route) {
+            NavigationHost(navigationController, startDestination = HomeDestination.route) {
                 composableNode(destinationId = HomeDestination.route) {
                     HomeScreen {
-                        navController.navigateTo(TaskDetailDestination.route)
+                        navigationController.navigateTo(TaskDetailDestination.route)
                     }
                 }
                 composableNode(destinationId = TaskDetailDestination.route) {
                     TaskDetailScreen {
-                        navController.navigateTo(HomeDestination.route)
+                        navigationController.navigateTo(HomeDestination.route)
                     }
                 }
             }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.android.navigation
+package dev.sergiobelda.todometer.common.navigation
 
 interface Destination {
     val route: String

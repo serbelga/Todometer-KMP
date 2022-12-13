@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
-import dev.sergiobelda.todometer.common.android.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskDestination
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskScreen
 import dev.sergiobelda.todometer.wear.ui.deletetask.navigateToDeleteTask

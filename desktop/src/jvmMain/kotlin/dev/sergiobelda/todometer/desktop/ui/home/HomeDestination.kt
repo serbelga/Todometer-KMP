@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.desktop.ui.home
 
-import dev.sergiobelda.todometer.desktop.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.Destination
 
 object HomeDestination : Destination {
     override val route: String get() = "home"

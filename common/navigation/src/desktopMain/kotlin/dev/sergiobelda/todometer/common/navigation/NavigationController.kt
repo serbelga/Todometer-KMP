@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.navigation
+package dev.sergiobelda.todometer.common.navigation
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-class NavController {
+class NavigationController {
 
-    var navGraph: NavGraph? = null
+    var navigationGraph: NavigationGraph? = null
         set(value) {
-            if (navGraph != value) {
+            if (navigationGraph != value) {
                 currentDestinationId = value?.startDestinationId
             }
             field = value
         }
 
-    var currentDestinationId: String? by mutableStateOf(navGraph?.startDestinationId)
+    var currentDestinationId: String? by mutableStateOf(navigationGraph?.startDestinationId)
         private set
 
     fun navigateTo(destinationId: String) {
-        navGraph?.composableNodes?.get(destinationId)?.let {
+        navigationGraph?.composableNodes?.get(destinationId)?.let {
             currentDestinationId = destinationId
         }
     }

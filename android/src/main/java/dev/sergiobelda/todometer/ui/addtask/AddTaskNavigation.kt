@@ -17,9 +17,9 @@
 package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.navigation.navDeepLink
-import dev.sergiobelda.todometer.common.android.navigation.Action
-import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
 object AddTaskDestination : Destination {
     override val route: String = "addtask"

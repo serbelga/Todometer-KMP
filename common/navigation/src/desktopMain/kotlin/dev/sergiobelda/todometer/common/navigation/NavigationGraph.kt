@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.navigation
+package dev.sergiobelda.todometer.common.navigation
 
 import androidx.compose.runtime.Composable
 
-class NavGraph(
+class NavigationGraph(
     val startDestinationId: String? = null,
     val composableNodes: Map<String, @Composable () -> Unit> = mapOf()
 ) {
@@ -36,11 +36,11 @@ class NavGraph(
             _composableNodes[destinationId] = content
         }
 
-        fun build(): NavGraph = NavGraph(this)
+        fun build(): NavigationGraph = NavigationGraph(this)
     }
 }
 
-fun NavGraph.Builder.composableNode(
+fun NavigationGraph.Builder.composableNode(
     destinationId: String,
     content: @Composable () -> Unit
 ) {

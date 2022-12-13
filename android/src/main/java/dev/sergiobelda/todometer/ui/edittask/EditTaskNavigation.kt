@@ -17,9 +17,9 @@
 package dev.sergiobelda.todometer.ui.edittask
 
 import androidx.navigation.NavBackStackEntry
-import dev.sergiobelda.todometer.common.android.navigation.Action
-import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
 object EditTaskDestination : Destination {
     private const val TaskIdArg = "taskId"
