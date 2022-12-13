@@ -112,5 +112,5 @@ Under construction
 ▶️ Run:
 
 ```
-./gradlew :backend:run
+cd backend && ./gradlew run
 ```

@@ -13,7 +13,6 @@ pluginManagement {
 rootProject.name = "ToDometerMultiplatform"
 
 include(":android")
-include(":backend")
 include(":common:android")
 include(":common:core")
 include(":common:compose-ui")
