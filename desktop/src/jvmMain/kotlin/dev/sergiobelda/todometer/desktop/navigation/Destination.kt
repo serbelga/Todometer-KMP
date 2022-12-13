@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.task
+package dev.sergiobelda.todometer.desktop.navigation
 
-import dev.sergiobelda.todometer.desktop.navigation.Destination
-
-object TaskDetailDestination : Destination {
-    override val route: String get() = "taskdetail"
+interface Destination {
+    val route: String
 }

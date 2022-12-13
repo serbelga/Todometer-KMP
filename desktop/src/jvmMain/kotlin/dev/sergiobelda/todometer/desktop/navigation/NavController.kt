@@ -16,20 +16,26 @@
 
 package dev.sergiobelda.todometer.desktop.navigation
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-class NavController(private val navGraph: NavGraph) {
-    var currentDestination: Destination? by mutableStateOf(navGraph.startDestination)
+class NavController {
+
+    var navGraph: NavGraph? = null
+        set(value) {
+            if (navGraph != value) {
+                currentDestinationId = value?.startDestinationId
+            }
+            field = value
+        }
+
+    var currentDestinationId: String? by mutableStateOf(navGraph?.startDestinationId)
         private set
 
-    var composablesMap: MutableMap<String, @Composable () -> Unit> = mutableMapOf()
-
-    fun navigateTo(destination: Destination) {
-        navGraph.destinations.find { it == destination }?.let {
-            currentDestination = destination
+    fun navigateTo(destinationId: String) {
+        navGraph?.composableNodes?.get(destinationId)?.let {
+            currentDestinationId = destinationId
         }
     }
 }

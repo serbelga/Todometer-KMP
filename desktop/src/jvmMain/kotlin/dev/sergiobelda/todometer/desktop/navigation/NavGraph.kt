@@ -16,22 +16,33 @@
 
 package dev.sergiobelda.todometer.desktop.navigation
 
-interface Destination {
-    val route: String
+import androidx.compose.runtime.Composable
+
+class NavGraph(
+    val startDestinationId: String? = null,
+    val composableNodes: Map<String, @Composable () -> Unit> = mapOf()
+) {
+
+    private constructor(builder: Builder) : this(builder.startDestinationId, builder.composableNodes)
+
+    class Builder {
+
+        var startDestinationId: String? = null
+
+        private val _composableNodes: MutableMap<String, @Composable () -> Unit> = mutableMapOf()
+        val composableNodes: Map<String, @Composable () -> Unit> get() = _composableNodes
+
+        fun addDestination(destinationId: String, content: @Composable () -> Unit) {
+            _composableNodes[destinationId] = content
+        }
+
+        fun build(): NavGraph = NavGraph(this)
+    }
 }
 
-class NavGraph {
-
-    var startDestination: Destination? = null
-
-    private var _destinations: MutableList<Destination> = mutableListOf()
-    val destinations: List<Destination> get() = _destinations
-
-    fun addDestination(destination: Destination) {
-        _destinations.add(destination)
-    }
-
-    fun clear() {
-        _destinations.clear()
-    }
+fun NavGraph.Builder.composableNode(
+    destinationId: String,
+    content: @Composable () -> Unit
+) {
+    addDestination(destinationId, content)
 }
