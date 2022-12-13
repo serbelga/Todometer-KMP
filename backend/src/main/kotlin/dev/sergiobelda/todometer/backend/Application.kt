@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.backend
 
+import io.ktor.server.application.Application
 import dev.sergiobelda.todometer.backend.database.AppDatabase
 import dev.sergiobelda.todometer.backend.di.configureKoin
 import dev.sergiobelda.todometer.backend.plugins.configureSerialization
@@ -29,18 +30,20 @@ import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
 
 fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        configureSerialization()
-        configureKoin()
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module).start(wait = true)
+}
 
-        AppDatabase.init()
+fun Application.module() {
+    configureSerialization()
+    configureKoin()
 
-        val taskListService: ITaskListService by inject()
-        val taskService: ITaskService by inject()
+    AppDatabase.init()
 
-        routing {
-            taskListsRouting(taskListService)
-            tasksRouting(taskService)
-        }
-    }.start(wait = true)
+    val taskListService: ITaskListService by inject()
+    val taskService: ITaskService by inject()
+
+    routing {
+        taskListsRouting(taskListService)
+        tasksRouting(taskService)
+    }
 }
