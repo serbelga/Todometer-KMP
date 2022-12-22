@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.addtasklist
+package dev.sergiobelda.todometer.desktop.ui.addtasklist
 
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 

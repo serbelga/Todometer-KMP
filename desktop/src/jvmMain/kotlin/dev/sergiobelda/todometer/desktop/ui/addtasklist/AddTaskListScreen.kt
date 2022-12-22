@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.addtasklist
+package dev.sergiobelda.todometer.desktop.ui.addtasklist
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,7 +49,7 @@ import dev.icerock.moko.resources.compose.stringResource
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.resources.MR
-import koin
+import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)

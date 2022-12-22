@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ui.addtasklist
+package dev.sergiobelda.todometer.desktop.ui.addtasklist
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

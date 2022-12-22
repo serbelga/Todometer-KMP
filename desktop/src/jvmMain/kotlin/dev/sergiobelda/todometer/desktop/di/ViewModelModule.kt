@@ -1,8 +1,8 @@
-package di
+package dev.sergiobelda.todometer.desktop.di
 
+import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
-import ui.addtasklist.AddTaskListViewModel
 
 internal val viewModelModule = module {
     factoryOf(::AddTaskListViewModel)

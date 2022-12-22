@@ -27,11 +27,12 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.core.di.initKoin
-import dev.sergiobelda.todometer.desktop.di.viewModelModule
-import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
+import dev.sergiobelda.todometer.desktop.di.viewModelModule
+import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListDestination
+import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
 import dev.sergiobelda.todometer.desktop.ui.home.HomeScreen
 import dev.sergiobelda.todometer.desktop.ui.icons.iconToDometer
@@ -55,20 +56,27 @@ fun main() = application {
         icon = iconToDometer()
     ) {
         val navigationController by remember { mutableStateOf(NavigationController()) }
-        val navigateToAddTaskList: () -> Unit = {
-            currentPage = Screen.AddTaskList
-        }
         ToDometerAppTheme {
             NavigationHost(navigationController, startDestination = HomeDestination.route) {
                 composableNode(destinationId = HomeDestination.route) {
-                    HomeScreen {
-                        navigationController.navigateTo(TaskDetailDestination.route)
-                    }
+                    HomeScreen(
+                        navigateToTaskDetail = {
+                            navigationController.navigateTo(TaskDetailDestination.route)
+                        },
+                        navigateToAddTaskList = {
+                            navigationController.navigateTo(AddTaskListDestination.route)
+                        }
+                    )
                 }
                 composableNode(destinationId = TaskDetailDestination.route) {
-                    TaskDetailScreen {
-                        navigationController.navigateTo(HomeDestination.route)
-                    }
+                    TaskDetailScreen(
+                        navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+                    )
+                }
+                composableNode(destinationId = AddTaskListDestination.route) {
+                    AddTaskListScreen(
+                        navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+                    )
                 }
             }
         }
