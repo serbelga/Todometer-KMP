@@ -77,7 +77,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.resources.MR
 import koin
@@ -99,7 +98,6 @@ internal fun HomeScreen(
     val setTaskListSelectedUseCase = koin.get<SetTaskListSelectedUseCase>()
     val getTaskListSelectedTasksUseCase = koin.get<GetTaskListSelectedTasksUseCase>()
     val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
-    val insertTaskListUseCase = koin.get<InsertTaskListUseCase>()
     val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
     val deleteTaskUseCase = koin.get<DeleteTaskUseCase>()
 
@@ -136,7 +134,6 @@ internal fun HomeScreen(
                         }
                     },
                     onAddTaskListClick = {
-                        // addTaskListAlertDialogState = true
                         navigateToAddTaskList()
                     },
                     onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
