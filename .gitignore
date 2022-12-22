@@ -21,3 +21,4 @@ local.properties
 /android/google-services.json
 /wearos/google-services.json
 /common/**/build/
+todometer_preferences.preferences_pb

@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
     id("todometer.spotless")
 }
@@ -13,15 +12,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
-    cocoapods {
-        summary = "Common network"
-        homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "14.1"
-        framework {
-            baseName = "common-network"
-        }
-    }
     
     sourceSets {
         val commonMain by getting {

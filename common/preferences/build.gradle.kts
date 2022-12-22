@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
     id("todometer.spotless")
 }
@@ -14,18 +13,10 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Common preferences"
-        homepage = "https://github.com/serbelga/ToDometer_Kotlin_Multiplatform"
-        ios.deploymentTarget = "14.1"
-        framework {
-            baseName = "common-preferences"
-        }
-    }
-    
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.androidx.datastore.preferences.core)
                 implementation(libs.kotlin.coroutinesCore)
             }
         }
@@ -34,17 +25,9 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.androidx.datastore.preferences)
-            }
-        }
+        val androidMain by getting
         val androidTest by getting
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.androidx.datastore.preferences.core)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

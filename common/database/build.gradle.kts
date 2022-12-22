@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
     id("app.cash.sqldelight")
     id("todometer.spotless")
@@ -15,15 +14,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Common database"
-        homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "14.1"
-        framework {
-            baseName = "common-database"
-        }
-    }
-    
     sourceSets {
         val commonMain by getting {
             dependencies {

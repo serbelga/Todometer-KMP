@@ -17,4 +17,5 @@
 internal sealed class Screen {
     object Home : Screen()
     data class TaskDetail(val taskId: String) : Screen()
+    object AddTaskList : Screen()
 }

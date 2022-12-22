@@ -42,11 +42,12 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -76,7 +77,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.resources.MR
 import koin
@@ -85,9 +85,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeScreen(
-    navigateToTaskDetail: (String) -> Unit
+    navigateToTaskDetail: (String) -> Unit,
+    navigateToAddTaskList: () -> Unit
 ) {
-    var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
@@ -98,7 +98,6 @@ internal fun HomeScreen(
     val setTaskListSelectedUseCase = koin.get<SetTaskListSelectedUseCase>()
     val getTaskListSelectedTasksUseCase = koin.get<GetTaskListSelectedTasksUseCase>()
     val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
-    val insertTaskListUseCase = koin.get<InsertTaskListUseCase>()
     val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
     val deleteTaskUseCase = koin.get<DeleteTaskUseCase>()
 
@@ -124,24 +123,27 @@ internal fun HomeScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            // TODO: Use ModalDrawerSheet when it's available on material3 1.0.0-rc01 for desktop
-            TaskListsNavigationDrawer(
-                taskLists,
-                taskListSelected?.id ?: "",
-                stringResource(resource = MR.strings.default_task_list_name),
-                onTaskListClick = {
-                    coroutineScope.launch {
-                        setTaskListSelectedUseCase.invoke(it)
-                    }
-                },
-                onAddTaskListClick = { addTaskListAlertDialogState = true },
-                onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
-            )
+            ModalDrawerSheet {
+                TaskListsNavigationDrawer(
+                    taskLists,
+                    taskListSelected?.id ?: "",
+                    stringResource(resource = MR.strings.default_task_list_name),
+                    onTaskListClick = {
+                        coroutineScope.launch {
+                            setTaskListSelectedUseCase.invoke(it)
+                        }
+                    },
+                    onAddTaskListClick = {
+                        navigateToAddTaskList()
+                    },
+                    onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
+                )
+            }
         }
     ) {
         Scaffold(
             topBar = {
-                SmallTopAppBar(
+                TopAppBar(
                     navigationIcon = {
                         IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
                             if (drawerState.isOpen) {
@@ -181,15 +183,6 @@ internal fun HomeScreen(
             floatingActionButtonPosition = FabPosition.End
         ) { paddingValues ->
             Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-                if (addTaskListAlertDialogState) {
-                    AddTaskListAlertDialog(
-                        onDismissRequest = { addTaskListAlertDialogState = false }
-                    ) { taskListName ->
-                        coroutineScope.launch {
-                            insertTaskListUseCase.invoke(taskListName)
-                        }
-                    }
-                }
                 if (addTaskAlertDialogState) {
                     AddTaskAlertDialog(
                         onDismissRequest = { addTaskAlertDialogState = false }
@@ -292,7 +285,6 @@ private fun EmptyTasksListView() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TaskListsNavigationDrawer(
     taskLists: List<TaskList>,

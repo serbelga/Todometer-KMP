@@ -75,7 +75,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -91,6 +90,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskItem
@@ -114,7 +115,11 @@ import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalMaterialApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalLifecycleComposeApi::class
+)
 @Composable
 internal fun HomeScreen(
     addTaskList: () -> Unit,
@@ -141,7 +146,7 @@ internal fun HomeScreen(
     var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
     val homeUiState = homeViewModel.homeUiState
-    val appTheme by homeViewModel.appTheme.collectAsState()
+    val appTheme by homeViewModel.appTheme.collectAsStateWithLifecycle()
 
     val defaultTaskListName = stringResource(id = R.string.default_task_list_name)
 
@@ -704,7 +709,10 @@ private fun MoreBottomSheet(
             }
             Text("·")
             TextButton(onClick = aboutClick) {
-                Text(stringResource(id = R.string.about), style = MaterialTheme.typography.labelLarge)
+                Text(
+                    stringResource(id = R.string.about),
+                    style = MaterialTheme.typography.labelLarge
+                )
             }
         }
     }

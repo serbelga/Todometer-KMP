@@ -22,5 +22,7 @@ actual object PreferencesFactory {
     lateinit var appContext: Context
 
     actual fun createPreferences(): Preferences =
-        Preferences(appContext)
+        Preferences(
+            createDataStore(appContext.filesDir.resolve(dataStoreFileName).absolutePath)
+        )
 }

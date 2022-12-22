@@ -16,18 +16,9 @@
 
 package dev.sergiobelda.todometer.common.preferences
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import java.io.File
-import androidx.datastore.preferences.core.Preferences as DataStorePreferences
-
 actual object PreferencesFactory {
 
-    private const val DATA_STORE_NAME = "preferences.preferences_pb"
-
-    private var dataStore: DataStore<DataStorePreferences> = PreferenceDataStoreFactory.create {
-        File(File(".").absolutePath, DATA_STORE_NAME)
-    }
-
-    actual fun createPreferences(): Preferences = Preferences(dataStore)
+    actual fun createPreferences(): Preferences = Preferences(
+        createDataStore("./$dataStoreFileName")
+    )
 }

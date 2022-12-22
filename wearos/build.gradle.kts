@@ -7,18 +7,6 @@ plugins {
     id("todometer.spotless")
 }
 
-// TODO: Workaround until https://issuetracker.google.com/issues/223240936 is fixed
-androidComponents {
-    onVariants(selector().all()) {
-        val capitalizedVariantName = it.name.substring(0, 1).toUpperCase() + it.name.substring(1)
-        afterEvaluate {
-            tasks.named("map${capitalizedVariantName}SourceSetPaths").configure {
-                dependsOn("process${capitalizedVariantName}GoogleServices")
-            }
-        }
-    }
-}
-
 android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
@@ -26,8 +14,8 @@ android {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 4122302
-        versionName = "wearos-1.2.2-rc02"
+        versionCode = 4122400
+        versionName = "wearos-1.2.2"
     }
 
     buildFeatures {
@@ -48,6 +36,9 @@ android {
             getByName("debug") {
                 extra["enableCrashlytics"] = false
             }
+        }
+        lint {
+            abortOnError = false
         }
     }
 
