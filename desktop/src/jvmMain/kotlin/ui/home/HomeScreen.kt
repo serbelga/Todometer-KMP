@@ -77,7 +77,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.resources.MR
 import koin
@@ -86,9 +85,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeScreen(
-    navigateToTaskDetail: () -> Unit
+    navigateToTaskDetail: () -> Unit,
+    navigateToAddTaskList: () -> Unit
 ) {
-    var addTaskListAlertDialogState by remember { mutableStateOf(false) }
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
@@ -99,7 +98,6 @@ internal fun HomeScreen(
     val setTaskListSelectedUseCase = koin.get<SetTaskListSelectedUseCase>()
     val getTaskListSelectedTasksUseCase = koin.get<GetTaskListSelectedTasksUseCase>()
     val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
-    val insertTaskListUseCase = koin.get<InsertTaskListUseCase>()
     val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
     val deleteTaskUseCase = koin.get<DeleteTaskUseCase>()
 
@@ -135,7 +133,9 @@ internal fun HomeScreen(
                             setTaskListSelectedUseCase.invoke(it)
                         }
                     },
-                    onAddTaskListClick = { addTaskListAlertDialogState = true },
+                    onAddTaskListClick = {
+                        navigateToAddTaskList()
+                    },
                     onMenuCloseClick = { coroutineScope.launch { closeDrawer() } }
                 )
             }
@@ -183,15 +183,6 @@ internal fun HomeScreen(
             floatingActionButtonPosition = FabPosition.End
         ) { paddingValues ->
             Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-                if (addTaskListAlertDialogState) {
-                    AddTaskListAlertDialog(
-                        onDismissRequest = { addTaskListAlertDialogState = false }
-                    ) { taskListName ->
-                        coroutineScope.launch {
-                            insertTaskListUseCase.invoke(taskListName)
-                        }
-                    }
-                }
                 if (addTaskAlertDialogState) {
                     AddTaskAlertDialog(
                         onDismissRequest = { addTaskAlertDialogState = false }

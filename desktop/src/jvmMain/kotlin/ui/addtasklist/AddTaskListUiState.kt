@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-internal sealed class Screen {
-    object Home : Screen()
-    object TaskDetail : Screen()
+package ui.addtasklist
 
-    object AddTaskList : Screen()
-}
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+
+data class AddTaskListUiState(
+    val isAddingTaskList: Boolean = false,
+    val isAdded: Boolean = false,
+    val errorUi: ErrorUi? = null
+)
