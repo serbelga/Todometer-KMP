@@ -27,6 +27,8 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.core.di.initKoin
+import dev.sergiobelda.todometer.desktop.di.viewModelModule
+import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListScreen
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
@@ -37,7 +39,9 @@ import dev.sergiobelda.todometer.desktop.ui.task.TaskDetailDestination
 import dev.sergiobelda.todometer.desktop.ui.task.TaskDetailScreen
 import dev.sergiobelda.todometer.desktop.ui.theme.ToDometerAppTheme
 
-val koin = initKoin().koin
+val koin = initKoin {
+    modules(viewModelModule)
+}.koin
 
 fun main() = application {
     Window(
@@ -51,6 +55,9 @@ fun main() = application {
         icon = iconToDometer()
     ) {
         val navigationController by remember { mutableStateOf(NavigationController()) }
+        val navigateToAddTaskList: () -> Unit = {
+            currentPage = Screen.AddTaskList
+        }
         ToDometerAppTheme {
             NavigationHost(navigationController, startDestination = HomeDestination.route) {
                 composableNode(destinationId = HomeDestination.route) {
