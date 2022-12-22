@@ -27,10 +27,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
-    private val insertTaskListUseCase: InsertTaskListUseCase,
-    private val coroutineScope: CoroutineScope
+    private val coroutineScope: CoroutineScope,
+    private val insertTaskListUseCase: InsertTaskListUseCase
 ) {
-
     var addTaskListUiState by mutableStateOf(AddTaskListUiState())
         private set
 

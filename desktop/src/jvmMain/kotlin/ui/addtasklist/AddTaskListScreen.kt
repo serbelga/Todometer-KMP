@@ -48,22 +48,16 @@ import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.compose.stringResource
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.resources.MR
 import koin
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AddTaskListScreen(navigateBack: () -> Unit) {
-    val insertTaskListUseCase = koin.get<InsertTaskListUseCase>()
     val coroutineScope = rememberCoroutineScope()
-    val addTaskListViewModel: AddTaskListViewModel by remember {
-        mutableStateOf(
-            AddTaskListViewModel(
-                insertTaskListUseCase,
-                coroutineScope
-            )
-        )
+    val addTaskListViewModel: AddTaskListViewModel = remember {
+        koin.get { parametersOf(coroutineScope) }
     }
 
     val snackbarHostState = remember { SnackbarHostState() }
