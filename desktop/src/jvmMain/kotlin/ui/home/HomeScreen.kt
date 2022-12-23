@@ -72,7 +72,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
@@ -86,9 +85,9 @@ import kotlinx.coroutines.launch
 @Composable
 internal fun HomeScreen(
     navigateToTaskDetail: () -> Unit,
-    navigateToAddTaskList: () -> Unit
+    navigateToAddTaskList: () -> Unit,
+    navigateToAddTask: () -> Unit
 ) {
-    var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
 
@@ -98,7 +97,6 @@ internal fun HomeScreen(
     val setTaskListSelectedUseCase = koin.get<SetTaskListSelectedUseCase>()
     val getTaskListSelectedTasksUseCase = koin.get<GetTaskListSelectedTasksUseCase>()
     val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
-    val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
     val deleteTaskUseCase = koin.get<DeleteTaskUseCase>()
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
@@ -177,21 +175,12 @@ internal fun HomeScreen(
                     text = {
                         Text(stringResource(resource = MR.strings.add_task))
                     },
-                    onClick = { addTaskAlertDialogState = true }
+                    onClick = { navigateToAddTask() }
                 )
             },
             floatingActionButtonPosition = FabPosition.End
         ) { paddingValues ->
             Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-                if (addTaskAlertDialogState) {
-                    AddTaskAlertDialog(
-                        onDismissRequest = { addTaskAlertDialogState = false }
-                    ) { title, description, tag ->
-                        coroutineScope.launch {
-                            insertTaskInTaskListSelectedUseCase(title, tag, description)
-                        }
-                    }
-                }
                 if (deleteTaskAlertDialogState) {
                     DeleteTaskAlertDialog(
                         onDismissRequest = {

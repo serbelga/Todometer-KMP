@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.components
+package dev.sergiobelda.todometer.common.compose.ui.components.tag
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,19 +38,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
+import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Tag
+import dev.sergiobelda.todometer.common.resources.MR
 
 @Composable
-internal fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     Text(
-        text = stringResource(id = R.string.choose_tag),
+        text = stringResource(resource = MR.strings.choose_tag),
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
         modifier = Modifier.padding(start = 32.dp)
