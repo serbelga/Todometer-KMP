@@ -18,9 +18,9 @@ package dev.sergiobelda.todometer.wear.ui.tasklisttasks
 
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.navArgument
-import dev.sergiobelda.todometer.common.android.navigation.Action
-import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
 object TaskListTasksDestination : Destination {
     const val TaskListTasks = "tasklisttasks"

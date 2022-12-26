@@ -17,9 +17,9 @@
 package dev.sergiobelda.todometer.wear.ui.taskdetail
 
 import androidx.navigation.NavBackStackEntry
-import dev.sergiobelda.todometer.common.android.navigation.Action
-import dev.sergiobelda.todometer.common.android.navigation.Destination
-import dev.sergiobelda.todometer.common.android.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
 object TaskDetailDestination : Destination {
     const val TaskDetail = "taskdetail"

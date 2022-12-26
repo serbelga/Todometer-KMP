@@ -4,6 +4,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
+    id("todometer.spotless")
 }
 
 group = "dev.sergiobelda.todometer"
@@ -25,6 +26,7 @@ kotlin {
                 implementation(projects.common.composeUi)
                 implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.domain)
+                implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
                 implementation(compose.desktop.currentOs)
@@ -36,7 +38,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "dev.sergiobelda.todometer.desktop.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "jvm"

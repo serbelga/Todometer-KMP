@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.wear.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
-import dev.sergiobelda.todometer.common.android.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.wear.ui.theme.ToDometerTheme
 
 @Composable

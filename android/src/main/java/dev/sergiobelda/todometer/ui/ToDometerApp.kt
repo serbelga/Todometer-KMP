@@ -21,8 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
-import dev.sergiobelda.todometer.common.android.navigation.Action
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.ui.theme.ToDometerAppTheme
 import org.koin.androidx.compose.getViewModel
 
