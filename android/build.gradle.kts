@@ -49,11 +49,11 @@ android {
 }
 
 dependencies {
-    implementation(projects.common.android)
     implementation(projects.common.composeUi)
     implementation(projects.common.composeUiDesignsystem)
     implementation(projects.common.core)
     implementation(projects.common.domain)
+    implementation(projects.common.navigation)
     implementation(projects.common.resources)
     implementation(projects.common.ui)
 
