@@ -19,10 +19,14 @@ package dev.sergiobelda.todometer.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import dev.sergiobelda.todometer.common.android.extensions.launchActivity
+import dev.sergiobelda.todometer.common.android.extensions.openWebPage
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
@@ -52,6 +56,7 @@ internal fun ToDometerNavHost(
     action: Action,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val navigateBackAction: () -> Unit = {
         keyboardController?.hide()
@@ -100,7 +105,13 @@ internal fun ToDometerNavHost(
             EditTaskScreen(taskId = taskId, navigateBack = navigateBackAction)
         }
         composable(AboutDestination.route) {
-            AboutScreen(navigateBack = navigateBackAction)
+            AboutScreen(
+                openGithub = { context.openWebPage(GITHUB_URL) },
+                openLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
+                navigateBack = navigateBackAction
+            )
         }
     }
 }
+
+private const val GITHUB_URL = "https://github.com/serbelga/ToDometer_Multiplatform"

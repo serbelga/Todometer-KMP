@@ -44,6 +44,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 api(compose.uiTooling)
+
+                implementation(projects.common.android)
             }
         }
         val androidTest by getting

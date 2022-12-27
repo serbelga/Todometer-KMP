@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.extensions
+package dev.sergiobelda.todometer.common.android.extensions
 
 import android.app.Activity
 import android.content.Context
@@ -23,7 +23,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 
-internal fun Context.getVersionName(): String? =
+fun Context.getVersionName(): String? =
     try {
         val packageInfo = packageManager.getPackageInfo(packageName, 0)
         packageInfo.versionName
@@ -45,7 +45,7 @@ internal fun Context.getVersionName(): String? =
  * @param options Additional options for how the Activity should be started.
  * @param block Intent body to start.
  */
-internal inline fun <reified A : Activity> Context.launchActivity(
+inline fun <reified A : Activity> Context.launchActivity(
     options: Bundle? = null,
     block: Intent.() -> Unit = {}
 ) = startActivity(
@@ -62,7 +62,7 @@ internal inline fun <reified A : Activity> Context.launchActivity(
  *
  * @param url The url of the website to be opened.
  */
-internal fun Context.openWebPage(url: String) {
+fun Context.openWebPage(url: String) {
     val webpage: Uri = Uri.parse(url)
     startActivity(
         Intent(Intent.ACTION_VIEW, webpage),

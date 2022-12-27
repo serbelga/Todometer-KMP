@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.common.android)
     implementation(projects.common.composeUi)
     implementation(projects.common.composeUiDesignsystem)
     implementation(projects.common.core)
