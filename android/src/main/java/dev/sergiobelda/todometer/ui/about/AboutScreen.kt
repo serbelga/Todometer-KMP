@@ -42,8 +42,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.android.extensions.getVersionName
-import dev.sergiobelda.todometer.common.compose.ui.R
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutItemCard
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutTopBar
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
