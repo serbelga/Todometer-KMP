@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittasklist
+package dev.sergiobelda.todometer.common.compose.ui.addtasklist
 
-import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
-data class EditTaskListUiState(
-    val isLoading: Boolean = false,
-    val taskList: TaskList? = null,
-    val errorUi: ErrorUi? = null
-)
+object AddTaskListNavigationParams : NavigationParams(AddTaskListDestination) {
+    override val navigationRoute: String = destination.route
+}
+
+val Action.navigateToAddTaskList: () -> Unit
+    get() = {
+        navigate(AddTaskListNavigationParams)
+    }

@@ -59,6 +59,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
@@ -68,7 +69,6 @@ import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
-import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 

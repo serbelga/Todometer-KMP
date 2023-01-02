@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtasklist
+package dev.sergiobelda.todometer.common.compose.ui.edittasklist
 
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.navigation.Destination
 
-data class AddTaskListUiState(
-    val isAddingTaskList: Boolean = false,
-    val isAdded: Boolean = false,
-    val errorUi: ErrorUi? = null
-)
+object EditTaskListDestination : Destination {
+    override val route: String = "edittasklist"
+}

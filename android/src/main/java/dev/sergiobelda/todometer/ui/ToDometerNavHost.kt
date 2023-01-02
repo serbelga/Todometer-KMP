@@ -19,10 +19,18 @@ package dev.sergiobelda.todometer.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import dev.sergiobelda.todometer.common.android.extensions.launchActivity
+import dev.sergiobelda.todometer.common.android.extensions.openWebPage
+import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.addtasklist.navigateToAddTaskList
+import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.edittasklist.navigateToEditTaskList
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
@@ -30,15 +38,11 @@ import dev.sergiobelda.todometer.ui.about.navigateToAbout
 import dev.sergiobelda.todometer.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.ui.addtask.navigateToAddTask
-import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListDestination
-import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListScreen
-import dev.sergiobelda.todometer.ui.addtasklist.navigateToAddTaskList
+import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
 import dev.sergiobelda.todometer.ui.edittask.navigateToEditTask
-import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListDestination
-import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListScreen
-import dev.sergiobelda.todometer.ui.edittasklist.navigateToEditTaskList
+import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.ui.home.HomeDestination
 import dev.sergiobelda.todometer.ui.home.HomeScreen
 import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailDestination
@@ -52,6 +56,7 @@ internal fun ToDometerNavHost(
     action: Action,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val navigateBackAction: () -> Unit = {
         keyboardController?.hide()
@@ -84,10 +89,10 @@ internal fun ToDometerNavHost(
             )
         }
         composable(AddTaskListDestination.route) {
-            AddTaskListScreen(navigateBack = navigateBackAction)
+            AddTaskListRoute(navigateBack = navigateBackAction)
         }
         composable(EditTaskListDestination.route) {
-            EditTaskListScreen(navigateBack = navigateBackAction)
+            EditTaskListRoute(navigateBack = navigateBackAction)
         }
         composable(
             AddTaskDestination.route,
@@ -100,7 +105,13 @@ internal fun ToDometerNavHost(
             EditTaskScreen(taskId = taskId, navigateBack = navigateBackAction)
         }
         composable(AboutDestination.route) {
-            AboutScreen(navigateBack = navigateBackAction)
+            AboutScreen(
+                openGithub = { context.openWebPage(GITHUB_URL) },
+                openLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
+                navigateBack = navigateBackAction
+            )
         }
     }
 }
+
+private const val GITHUB_URL = "https://github.com/serbelga/ToDometer_Multiplatform"

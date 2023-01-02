@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittasklist
+package dev.sergiobelda.todometer.common.compose.ui.components
 
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
-object EditTaskListDestination : Destination {
-    override val route: String = "edittasklist"
-}
-
-object EditTaskListNavigationParams : NavigationParams(EditTaskListDestination) {
-    override val navigationRoute: String = destination.route
-}
-
-val Action.navigateToEditTaskList: () -> Unit get() = {
-    navigate(EditTaskListNavigationParams)
+@Composable
+fun ToDometerContentLoadingProgress() {
+    Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+    }
 }

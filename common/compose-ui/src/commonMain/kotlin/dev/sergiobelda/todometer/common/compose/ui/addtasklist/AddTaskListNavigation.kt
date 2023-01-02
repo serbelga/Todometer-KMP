@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.components
+package dev.sergiobelda.todometer.common.compose.ui.addtasklist
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import dev.sergiobelda.todometer.common.navigation.Destination
 
-@Composable
-internal fun ToDometerContentLoadingProgress() {
-    Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
-        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-    }
+object AddTaskListDestination : Destination {
+    override val route: String = "addtasklist"
 }

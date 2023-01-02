@@ -94,6 +94,8 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.android.extensions.launchActivity
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
@@ -106,11 +108,9 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.extensions.launchActivity
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import dev.sergiobelda.todometer.preferences.appThemeMap
 import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
-import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel

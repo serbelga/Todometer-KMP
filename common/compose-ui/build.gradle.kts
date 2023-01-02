@@ -34,6 +34,7 @@ kotlin {
 
                 implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.domain)
+                implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
 
@@ -44,6 +45,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 api(compose.uiTooling)
+
+                implementation(projects.common.android)
             }
         }
         val androidTest by getting

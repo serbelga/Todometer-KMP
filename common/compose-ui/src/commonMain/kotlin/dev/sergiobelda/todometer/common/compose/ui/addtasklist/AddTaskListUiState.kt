@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtasklist
+package dev.sergiobelda.todometer.common.compose.ui.addtasklist
 
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
-object AddTaskListDestination : Destination {
-    override val route: String = "addtasklist"
-}
-
-object AddTaskListNavigationParams : NavigationParams(AddTaskListDestination) {
-    override val navigationRoute: String = destination.route
-}
-
-val Action.navigateToAddTaskList: () -> Unit
-    get() = {
-        navigate(AddTaskListNavigationParams)
-    }
+data class AddTaskListUiState(
+    val isAddingTaskList: Boolean = false,
+    val isAdded: Boolean = false,
+    val errorUi: ErrorUi? = null
+)

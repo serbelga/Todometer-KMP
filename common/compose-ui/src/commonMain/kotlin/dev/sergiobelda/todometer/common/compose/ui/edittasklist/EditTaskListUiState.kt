@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.addtasklist
+package dev.sergiobelda.todometer.common.compose.ui.edittasklist
 
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
-data class AddTaskListUiState(
-    val isAddingTaskList: Boolean = false,
-    val isAdded: Boolean = false,
+data class EditTaskListUiState(
+    val isLoading: Boolean = false,
+    val taskList: TaskList? = null,
     val errorUi: ErrorUi? = null
 )

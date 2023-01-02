@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittasklist
+package dev.sergiobelda.todometer.common.compose.ui.edittasklist
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -36,27 +36,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
-import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
-import org.koin.androidx.compose.getViewModel
+import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.MR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun EditTaskListScreen(
+fun EditTaskListScreen(
     navigateBack: () -> Unit,
-    editTaskListViewModel: EditTaskListViewModel = getViewModel()
+    editTaskList: (String) -> Unit,
+    editTaskListUiState: EditTaskListUiState
 ) {
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
-
-    val editTaskListUiState = editTaskListViewModel.editTaskListUiState
     editTaskListUiState.taskList?.let { taskList ->
         taskListName = taskList.name
     }
@@ -72,7 +69,7 @@ internal fun EditTaskListScreen(
                         )
                     }
                 },
-                title = { Text(stringResource(id = R.string.edit_task_list)) },
+                title = { Text(stringResource(MR.strings.edit_task_list)) },
                 actions = {
                     if (!editTaskListUiState.isLoading && editTaskListUiState.taskList != null) {
                         IconButton(
@@ -80,10 +77,7 @@ internal fun EditTaskListScreen(
                                 if (taskListName.isBlank()) {
                                     taskListNameInputError = true
                                 } else {
-                                    editTaskListViewModel.updateTaskList(
-                                        taskListName
-                                    )
-                                    ToDometerWidgetReceiver().updateData()
+                                    editTaskList(taskListName)
                                     navigateBack()
                                 }
                             }
@@ -104,16 +98,16 @@ internal fun EditTaskListScreen(
             } else {
                 Column(modifier = Modifier.padding(paddingValues)) {
                     TitledTextField(
-                        title = stringResource(id = R.string.name),
+                        title = stringResource(MR.strings.name),
                         value = taskListName,
                         onValueChange = {
                             taskListName = it
                             taskListNameInputError = false
                         },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_list_name)) },
+                        placeholder = { Text(stringResource(MR.strings.enter_task_list_name)) },
                         singleLine = true,
                         isError = taskListNameInputError,
-                        errorMessage = stringResource(id = R.string.field_not_empty),
+                        errorMessage = stringResource(MR.strings.field_not_empty),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
