@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.addtasklist
+package dev.sergiobelda.todometer.common.compose.ui.addtasklist
 
 import dev.sergiobelda.todometer.common.navigation.Destination
 
 object AddTaskListDestination : Destination {
-    override val route: String get() = "addtasklist"
+    override val route: String = "addtasklist"
 }

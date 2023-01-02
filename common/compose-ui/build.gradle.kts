@@ -34,6 +34,7 @@ kotlin {
 
                 implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.domain)
+                implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
 
