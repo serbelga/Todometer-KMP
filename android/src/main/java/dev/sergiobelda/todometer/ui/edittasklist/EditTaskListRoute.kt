@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtasklist
+package dev.sergiobelda.todometer.ui.edittasklist
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListScreen
+import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun AddTaskListRoute(
+fun EditTaskListRoute(
     navigateBack: () -> Unit,
-    addTaskListViewModel: AddTaskListViewModel = getViewModel()
+    editTaskListViewModel: EditTaskListViewModel = getViewModel()
 ) {
-    if (addTaskListViewModel.addTaskListUiState.isAdded) {
-        ToDometerWidgetReceiver().updateData()
-    }
-    AddTaskListScreen(
+    EditTaskListScreen(
         navigateBack = navigateBack,
-        insertTaskList = { taskListName ->
-            addTaskListViewModel.insertTaskList(taskListName)
+        editTaskList = { taskListName ->
+            editTaskListViewModel.updateTaskList(taskListName)
+            ToDometerWidgetReceiver().updateData()
         },
-        addTaskListUiState = addTaskListViewModel.addTaskListUiState
+        editTaskListUiState = editTaskListViewModel.editTaskListUiState
     )
 }

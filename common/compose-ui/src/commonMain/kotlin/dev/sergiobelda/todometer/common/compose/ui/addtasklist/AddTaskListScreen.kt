@@ -55,7 +55,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 @Composable
 fun AddTaskListScreen(
     navigateBack: () -> Unit,
-    onAddTaskList: (String) -> Unit,
+    insertTaskList: (String) -> Unit,
     addTaskListUiState: AddTaskListUiState
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -85,7 +85,7 @@ fun AddTaskListScreen(
                     if (taskListName.isBlank()) {
                         taskListNameInputError = true
                     } else {
-                        onAddTaskList(taskListName)
+                        insertTaskList(taskListName)
                     }
                 },
                 saveButtonTintColor = if (addTaskListUiState.isAddingTaskList) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary

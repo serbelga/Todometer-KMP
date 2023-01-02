@@ -43,12 +43,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
-import dev.sergiobelda.todometer.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
 import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel

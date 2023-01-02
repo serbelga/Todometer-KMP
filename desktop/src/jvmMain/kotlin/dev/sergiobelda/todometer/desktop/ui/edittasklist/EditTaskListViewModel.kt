@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittasklist
+package dev.sergiobelda.todometer.desktop.ui.edittasklist
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class EditTaskListViewModel(
+    private val coroutineScope: CoroutineScope,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val updateTaskListUseCase: UpdateTaskListUseCase
-) : ViewModel() {
+) {
 
     var editTaskListUiState by mutableStateOf(EditTaskListUiState(isLoading = true))
         private set
@@ -41,7 +41,7 @@ class EditTaskListViewModel(
         getTaskListSelected()
     }
 
-    private fun getTaskListSelected() = viewModelScope.launch {
+    private fun getTaskListSelected() = coroutineScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 editTaskListUiState = editTaskListUiState.copy(
@@ -59,7 +59,7 @@ class EditTaskListViewModel(
         }
     }
 
-    fun updateTaskList(name: String) = viewModelScope.launch {
+    fun updateTaskList(name: String) = coroutineScope.launch {
         editTaskListUiState.taskList?.let {
             updateTaskListUseCase(it.copy(name = name))
         }

@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.di
+package dev.sergiobelda.todometer.common.compose.ui.components
 
-import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListViewModel
-import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListViewModel
-import org.koin.core.module.dsl.factoryOf
-import org.koin.dsl.module
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
-internal val viewModelModule = module {
-    factoryOf(::AddTaskListViewModel)
-    factoryOf(::EditTaskListViewModel)
+@Composable
+fun ToDometerContentLoadingProgress() {
+    Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+    }
 }

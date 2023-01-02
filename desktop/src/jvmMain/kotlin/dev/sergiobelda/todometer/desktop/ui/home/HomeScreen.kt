@@ -31,7 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MenuOpen
@@ -86,7 +86,8 @@ import kotlinx.coroutines.launch
 @Composable
 internal fun HomeScreen(
     navigateToTaskDetail: () -> Unit,
-    navigateToAddTaskList: () -> Unit
+    navigateToAddTaskList: () -> Unit,
+    navigateToEditTaskList: () -> Unit
 ) {
     var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
@@ -163,8 +164,8 @@ internal fun HomeScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = {}) {
-                            Icon(Icons.Outlined.MoreVert, contentDescription = "Settings")
+                        IconButton(onClick = navigateToEditTaskList) {
+                            Icon(Icons.Outlined.Edit, contentDescription = "Settings")
                         }
                     }
                 )

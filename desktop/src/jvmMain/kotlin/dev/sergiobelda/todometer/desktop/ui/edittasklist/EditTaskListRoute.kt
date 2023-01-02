@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.addtasklist
+package dev.sergiobelda.todometer.desktop.ui.edittasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListScreen
+import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun AddTaskListRoute(
+fun EditTaskListRoute(
     navigateBack: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val addTaskListViewModel: AddTaskListViewModel = remember {
+    val editTaskListViewModel: EditTaskListViewModel = remember {
         koin.get { parametersOf(coroutineScope) }
     }
 
-    AddTaskListScreen(
+    EditTaskListScreen(
         navigateBack = navigateBack,
-        insertTaskList = { taskListName ->
-            addTaskListViewModel.insertTaskList(taskListName)
+        editTaskList = { taskListName ->
+            editTaskListViewModel.updateTaskList(taskListName)
         },
-        addTaskListUiState = addTaskListViewModel.addTaskListUiState
+        editTaskListUiState = editTaskListViewModel.editTaskListUiState
     )
 }

@@ -27,12 +27,14 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.desktop.di.viewModelModule
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
+import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
 import dev.sergiobelda.todometer.desktop.ui.home.HomeScreen
 import dev.sergiobelda.todometer.desktop.ui.icons.iconToDometer
@@ -65,6 +67,9 @@ fun main() = application {
                         },
                         navigateToAddTaskList = {
                             navigationController.navigateTo(AddTaskListDestination.route)
+                        },
+                        navigateToEditTaskList = {
+                            navigationController.navigateTo(EditTaskListDestination.route)
                         }
                     )
                 }
@@ -75,6 +80,11 @@ fun main() = application {
                 }
                 composableNode(destinationId = AddTaskListDestination.route) {
                     AddTaskListRoute(
+                        navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+                    )
+                }
+                composableNode(destinationId = EditTaskListDestination.route) {
+                    EditTaskListRoute(
                         navigateBack = { navigationController.navigateTo(HomeDestination.route) }
                     )
                 }
