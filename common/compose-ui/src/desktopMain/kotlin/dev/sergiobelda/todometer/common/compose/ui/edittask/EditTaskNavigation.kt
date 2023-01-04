@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittask
+package dev.sergiobelda.todometer.common.compose.ui.edittask
 
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.navigation.Destination
 
-data class EditTaskUiState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val errorUi: ErrorUi? = null
-)
+object EditTaskDestination : Destination {
+    const val TaskIdArg = "taskId"
+    override val route: String = "edittask"
+}

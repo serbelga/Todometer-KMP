@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittask
+package dev.sergiobelda.todometer.common.compose.ui.edittask
 
 import androidx.navigation.NavBackStackEntry
 import dev.sergiobelda.todometer.common.navigation.Action
