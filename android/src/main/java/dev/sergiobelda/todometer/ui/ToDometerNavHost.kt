@@ -31,6 +31,8 @@ import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtask.navigateToAddTask
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.navigateToAddTaskList
+import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
+import dev.sergiobelda.todometer.common.compose.ui.edittask.navigateToEditTask
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.navigateToEditTaskList
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
@@ -41,9 +43,7 @@ import dev.sergiobelda.todometer.ui.about.AboutScreen
 import dev.sergiobelda.todometer.ui.about.navigateToAbout
 import dev.sergiobelda.todometer.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
-import dev.sergiobelda.todometer.ui.edittask.EditTaskDestination
-import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
-import dev.sergiobelda.todometer.ui.edittask.navigateToEditTask
+import dev.sergiobelda.todometer.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.ui.home.HomeDestination
 import dev.sergiobelda.todometer.ui.home.HomeScreen
@@ -102,7 +102,7 @@ internal fun ToDometerNavHost(
         }
         composable(EditTaskDestination.route) { backStackEntry ->
             val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)
-            EditTaskScreen(taskId = taskId, navigateBack = navigateBackAction)
+            EditTaskRoute(taskId = taskId, navigateBack = navigateBackAction)
         }
         composable(AboutDestination.route) {
             AboutScreen(

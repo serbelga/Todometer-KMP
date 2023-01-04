@@ -28,9 +28,9 @@ import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
-import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination.TaskIdArg
 import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
@@ -38,6 +38,7 @@ import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.desktop.di.viewModelModule
 import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
+import dev.sergiobelda.todometer.desktop.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
 import dev.sergiobelda.todometer.desktop.ui.home.HomeScreen
@@ -68,7 +69,7 @@ fun main() = application {
                         navigateToTaskDetail = { taskId ->
                             navigationController.navigateTo(
                                 TaskDetailsDestination.route,
-                                TaskIdArg to taskId
+                                TaskDetailsDestination.TaskIdArg to taskId
                             )
                         },
                         navigateToAddTaskList = {
@@ -77,15 +78,21 @@ fun main() = application {
                         navigateToEditTaskList = {
                             navigationController.navigateTo(EditTaskListDestination.route)
                         },
-                        navigateToAddTask = {
-                            navigationController.navigateTo(AddTaskDestination.route)
-                        }
+                        navigateToAddTask = { navigationController.navigateTo(AddTaskDestination.route) }
                     )
                 }
                 composableNode(destinationId = TaskDetailsDestination.route) {
+                    val taskId =
+                        navigationController.getStringArgOrNull(TaskDetailsDestination.TaskIdArg)
+                            ?: ""
                     TaskDetailsRoute(
-                        taskId = navigationController.getStringArgOrNull(TaskIdArg) ?: "",
-                        navigateToEditTask = {},
+                        taskId = taskId,
+                        navigateToEditTask = {
+                            navigationController.navigateTo(
+                                EditTaskDestination.route,
+                                EditTaskDestination.TaskIdArg to taskId
+                            )
+                        },
                         navigateBack = { navigationController.navigateTo(HomeDestination.route) }
                     )
                 }
@@ -102,6 +109,20 @@ fun main() = application {
                 composableNode(destinationId = AddTaskDestination.route) {
                     AddTaskRoute(
                         navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+                    )
+                }
+                composableNode(destinationId = EditTaskDestination.route) {
+                    val taskId =
+                        navigationController.getStringArgOrNull(EditTaskDestination.TaskIdArg)
+                            ?: ""
+                    EditTaskRoute(
+                        taskId = taskId,
+                        navigateBack = {
+                            navigationController.navigateTo(
+                                TaskDetailsDestination.route,
+                                TaskDetailsDestination.TaskIdArg to taskId
+                            )
+                        }
                     )
                 }
             }
