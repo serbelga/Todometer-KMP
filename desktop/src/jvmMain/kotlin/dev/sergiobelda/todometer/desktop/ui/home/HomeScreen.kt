@@ -31,7 +31,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.MenuOpen
@@ -72,7 +72,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
@@ -88,7 +87,8 @@ internal fun HomeScreen(
     navigateToTaskDetail: (String) -> Unit,
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit,
-    navigateToAddTask: () -> Unit
+    navigateToAddTask: () -> Unit,
+    navigateToAbout: () -> Unit
 ) {
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
@@ -99,7 +99,6 @@ internal fun HomeScreen(
     val setTaskListSelectedUseCase = koin.get<SetTaskListSelectedUseCase>()
     val getTaskListSelectedTasksUseCase = koin.get<GetTaskListSelectedTasksUseCase>()
     val getTaskListsUseCase = koin.get<GetTaskListsUseCase>()
-    val insertTaskInTaskListSelectedUseCase = koin.get<InsertTaskInTaskListSelectedUseCase>()
     val deleteTaskUseCase = koin.get<DeleteTaskUseCase>()
 
     var taskListSelected: TaskList? by remember { mutableStateOf(null) }
@@ -120,6 +119,8 @@ internal fun HomeScreen(
     val closeDrawer: suspend () -> Unit = {
         drawerState.close()
     }
+
+    var moreDropdownExpanded by remember { mutableStateOf(false) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -164,9 +165,16 @@ internal fun HomeScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = navigateToEditTaskList) {
-                            Icon(Icons.Outlined.Edit, contentDescription = "Settings")
+                        IconButton(onClick = { moreDropdownExpanded = true }) {
+                            Icon(Icons.Outlined.MoreVert, contentDescription = "Settings")
                         }
+                        MoreDropdownMenu(
+                            editTaskListEnabled = taskListSelected != null,
+                            editTaskListClick = navigateToEditTaskList,
+                            aboutClick = navigateToAbout,
+                            expanded = moreDropdownExpanded,
+                            onDismissRequest = { moreDropdownExpanded = false }
+                        )
                     }
                 )
             },
