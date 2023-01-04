@@ -27,6 +27,8 @@ import androidx.navigation.compose.composable
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.android.extensions.openWebPage
+import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
+import dev.sergiobelda.todometer.common.compose.ui.addtask.navigateToAddTask
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.navigateToAddTaskList
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
@@ -37,9 +39,7 @@ import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
 import dev.sergiobelda.todometer.ui.about.navigateToAbout
-import dev.sergiobelda.todometer.ui.addtask.AddTaskDestination
-import dev.sergiobelda.todometer.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.ui.addtask.navigateToAddTask
+import dev.sergiobelda.todometer.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.ui.edittask.EditTaskScreen
@@ -98,7 +98,7 @@ internal fun ToDometerNavHost(
             AddTaskDestination.route,
             deepLinks = listOf(AddTaskDestination.addTaskNavDeepLink)
         ) {
-            AddTaskScreen(navigateBack = navigateBackAction)
+            AddTaskRoute(navigateBack = navigateBackAction)
         }
         composable(EditTaskDestination.route) { backStackEntry ->
             val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)

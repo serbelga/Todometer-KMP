@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.ui.edittask
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -37,20 +36,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerDateTimeSelector
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
-import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
-import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -61,8 +59,6 @@ internal fun EditTaskScreen(
     navigateBack: () -> Unit,
     editTaskViewModel: EditTaskViewModel = getViewModel { parametersOf(taskId) }
 ) {
-    val activity = LocalContext.current as AppCompatActivity
-
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
@@ -147,7 +143,6 @@ internal fun EditTaskScreen(
                         selectedTag = tag
                     }
                     ToDometerDateTimeSelector(
-                        activity,
                         taskDueDate,
                         onDateTimeSelected = { taskDueDate = it },
                         onClearDateTimeClick = { taskDueDate = null }
