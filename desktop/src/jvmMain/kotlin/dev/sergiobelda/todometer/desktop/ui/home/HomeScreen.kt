@@ -87,9 +87,9 @@ import kotlinx.coroutines.launch
 internal fun HomeScreen(
     navigateToTaskDetail: (String) -> Unit,
     navigateToAddTaskList: () -> Unit,
-    navigateToEditTaskList: () -> Unit
+    navigateToEditTaskList: () -> Unit,
+    navigateToAddTask: () -> Unit
 ) {
-    var addTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var selectedTask by remember { mutableStateOf("") }
 
@@ -178,21 +178,12 @@ internal fun HomeScreen(
                     text = {
                         Text(stringResource(resource = MR.strings.add_task))
                     },
-                    onClick = { addTaskAlertDialogState = true }
+                    onClick = navigateToAddTask
                 )
             },
             floatingActionButtonPosition = FabPosition.End
         ) { paddingValues ->
             Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-                if (addTaskAlertDialogState) {
-                    AddTaskAlertDialog(
-                        onDismissRequest = { addTaskAlertDialogState = false }
-                    ) { title, description, tag ->
-                        coroutineScope.launch {
-                            insertTaskInTaskListSelectedUseCase(title, tag, description)
-                        }
-                    }
-                }
                 if (deleteTaskAlertDialogState) {
                     DeleteTaskAlertDialog(
                         onDismissRequest = {

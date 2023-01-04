@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.desktop.di
 
+import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsViewModel
@@ -26,4 +27,5 @@ internal val viewModelModule = module {
     factoryOf(::AddTaskListViewModel)
     factoryOf(::EditTaskListViewModel)
     factoryOf(::TaskDetailsViewModel)
+    factoryOf(::AddTaskViewModel)
 }

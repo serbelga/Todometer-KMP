@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.common.compose.ui.addtask
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -50,30 +49,30 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerDateTimeSelector
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTagSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
-import dev.sergiobelda.todometer.ui.components.ToDometerDateTimeSelector
-import dev.sergiobelda.todometer.ui.components.ToDometerTagSelector
-import org.koin.androidx.compose.getViewModel
+import dev.sergiobelda.todometer.common.resources.MR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AddTaskScreen(
+fun AddTaskScreen(
     navigateBack: () -> Unit,
-    addTaskViewModel: AddTaskViewModel = getViewModel()
+    insertTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit,
+    addTaskUiState: AddTaskUiState,
+    taskChecklistItems: List<String>,
+    onAddTaskCheckListItem: (String) -> Unit,
+    onDeleteTaskCheckListItem: (index: Int) -> Unit
 ) {
-    val activity = LocalContext.current as AppCompatActivity
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
     val topAppBarState = rememberTopAppBarState()
@@ -86,16 +85,14 @@ internal fun AddTaskScreen(
     var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
 
-    val addTaskUiState = addTaskViewModel.addTaskUiState
     if (addTaskUiState.isAdded) {
-        ToDometerWidgetReceiver().updateData()
         navigateBack()
     }
 
     if (addTaskUiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = addTaskUiState.errorUi.message ?: ""
+                message = addTaskUiState.errorUi?.message ?: ""
             )
         }
     }
@@ -121,7 +118,7 @@ internal fun AddTaskScreen(
                             if (taskTitle.isBlank()) {
                                 taskTitleInputError = true
                             } else {
-                                addTaskViewModel.insertTask(
+                                insertTask(
                                     taskTitle,
                                     selectedTag,
                                     taskDescription,
@@ -137,7 +134,7 @@ internal fun AddTaskScreen(
                         )
                     }
                 },
-                title = { Text(stringResource(id = R.string.add_task)) },
+                title = { Text(stringResource(MR.strings.add_task)) },
                 scrollBehavior = scrollBehavior
             )
         },
@@ -148,15 +145,15 @@ internal fun AddTaskScreen(
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                 item {
                     TitledTextField(
-                        title = stringResource(id = R.string.name),
+                        title = stringResource(MR.strings.name),
                         value = taskTitle,
                         onValueChange = {
                             taskTitle = it
                             taskTitleInputError = false
                         },
-                        placeholder = { Text(stringResource(id = R.string.enter_task_name)) },
+                        placeholder = { Text(stringResource(MR.strings.enter_task_name)) },
                         isError = taskTitleInputError,
-                        errorMessage = stringResource(id = R.string.field_not_empty),
+                        errorMessage = stringResource(MR.strings.field_not_empty),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
@@ -176,7 +173,6 @@ internal fun AddTaskScreen(
                 }
                 item {
                     ToDometerDateTimeSelector(
-                        activity,
                         taskDueDate,
                         onDateTimeSelected = { taskDueDate = it },
                         onClearDateTimeClick = { taskDueDate = null }
@@ -184,29 +180,30 @@ internal fun AddTaskScreen(
                 }
                 item {
                     Text(
-                        text = stringResource(R.string.checklist),
+                        text = stringResource(MR.strings.checklist),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(start = 32.dp, top = 16.dp)
                     )
                 }
-                itemsIndexed(addTaskViewModel.taskChecklistItems) { index, item ->
+                itemsIndexed(taskChecklistItems) { index, item ->
                     TaskChecklistItem(
-                        item
-                    ) { addTaskViewModel.taskChecklistItems.removeAt(index) }
+                        item,
+                        onDeleteTaskCheckListItem = { onDeleteTaskCheckListItem(index) }
+                    )
                 }
                 item {
                     AddChecklistItemField(
-                        placeholder = { Text(stringResource(R.string.add_element_optional)) },
-                        onAddTaskCheckListItem = { addTaskViewModel.taskChecklistItems.add(it) }
+                        placeholder = { Text(stringResource(MR.strings.add_element_optional)) },
+                        onAddTaskCheckListItem = onAddTaskCheckListItem
                     )
                 }
                 item {
                     TitledTextField(
-                        title = stringResource(id = R.string.description),
+                        title = stringResource(MR.strings.description),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
-                        placeholder = { Text(stringResource(id = R.string.enter_description)) },
+                        placeholder = { Text(stringResource(MR.strings.enter_description)) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
@@ -246,7 +243,7 @@ private fun TaskChecklistItem(
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
                 Icons.Rounded.Clear,
-                contentDescription = stringResource(id = R.string.clear),
+                contentDescription = stringResource(MR.strings.clear),
                 tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }

@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.common.compose.ui.components
 
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import androidx.compose.runtime.Composable
 
-data class AddTaskUiState(
-    val isAddingTask: Boolean = false,
-    val isAdded: Boolean = false,
-    val errorUi: ErrorUi? = null
+@Composable
+expect fun ToDometerDateTimeSelector(
+    taskDueDate: Long?,
+    onDateTimeSelected: (Long?) -> Unit,
+    onClearDateTimeClick: () -> Unit
 )

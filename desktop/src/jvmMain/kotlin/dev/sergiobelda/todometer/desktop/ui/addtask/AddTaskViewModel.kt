@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtask
+package dev.sergiobelda.todometer.desktop.ui.addtask
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
+    private val coroutineScope: CoroutineScope,
     private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase
-) : ViewModel() {
+) {
 
     var addTaskUiState by mutableStateOf(AddTaskUiState())
         private set
@@ -44,7 +44,7 @@ class AddTaskViewModel(
         tag: Tag,
         description: String? = null,
         dueDate: Long? = null
-    ) = viewModelScope.launch {
+    ) = coroutineScope.launch {
         addTaskUiState = addTaskUiState.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(
             title,
