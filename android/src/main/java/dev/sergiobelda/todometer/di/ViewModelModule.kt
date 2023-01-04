@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.ui.edittask.EditTaskViewModel
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.ui.home.HomeViewModel
-import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailViewModel
+import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
@@ -36,7 +36,7 @@ internal val viewModelModule = module {
     }
     viewModelOf(::HomeViewModel)
     viewModel { parameters ->
-        TaskDetailViewModel(parameters.get(), get(), get(), get(), get(), get(), get())
+        TaskDetailsViewModel(parameters.get(), get(), get(), get(), get(), get(), get())
     }
     viewModelOf(::MainViewModel)
 }

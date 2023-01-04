@@ -18,10 +18,12 @@ package dev.sergiobelda.todometer.desktop.di
 
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListViewModel
+import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 internal val viewModelModule = module {
     factoryOf(::AddTaskListViewModel)
     factoryOf(::EditTaskListViewModel)
+    factoryOf(::TaskDetailsViewModel)
 }

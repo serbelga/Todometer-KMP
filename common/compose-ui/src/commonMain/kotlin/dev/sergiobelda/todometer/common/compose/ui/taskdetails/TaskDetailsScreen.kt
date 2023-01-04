@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.compose.ui.taskdetails
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -53,12 +53,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
@@ -66,24 +64,25 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.Horiz
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
+import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
+import dev.sergiobelda.todometer.common.resources.MR
 
 private val SectionPadding: Dp = 32.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TaskDetailScreen(
-    taskId: String,
-    editTask: () -> Unit,
+fun TaskDetailsScreen(
+    navigateToEditTask: () -> Unit,
     navigateBack: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel = getViewModel { parametersOf(taskId) }
+    taskDetailsUiState: TaskDetailsUiState,
+    onTaskChecklistItemClick: (String, Boolean) -> Unit,
+    onDeleteTaskCheckListItem: (String) -> Unit,
+    onAddTaskCheckListItem: (String) -> Unit
 ) {
     val lazyListState = rememberLazyListState()
-    val taskDetailUiState = taskDetailViewModel.taskDetailUiState
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
     Scaffold(
@@ -92,9 +91,9 @@ internal fun TaskDetailScreen(
             TopAppBar(
                 title = {
                     if (lazyListState.firstVisibleItemIndex > 0) {
-                        if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
+                        if (!taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null) {
                             Text(
-                                taskDetailUiState.task.title,
+                                taskDetailsUiState.task.title,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -111,11 +110,11 @@ internal fun TaskDetailScreen(
                     }
                 },
                 actions = {
-                    if (!taskDetailUiState.isLoadingTask && taskDetailUiState.task != null) {
-                        IconButton(onClick = editTask) {
+                    if (!taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null) {
+                        IconButton(onClick = navigateToEditTask) {
                             Icon(
                                 Icons.Outlined.Edit,
-                                contentDescription = stringResource(id = R.string.edit_task),
+                                contentDescription = stringResource(MR.strings.edit_task),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -128,30 +127,18 @@ internal fun TaskDetailScreen(
             if (lazyListState.firstVisibleItemIndex > 0) {
                 HorizontalDivider()
             }
-            if (taskDetailUiState.isLoadingTask) {
+            if (taskDetailsUiState.isLoadingTask) {
                 ToDometerContentLoadingProgress()
             } else {
-                taskDetailUiState.task?.let { task ->
+                taskDetailsUiState.task?.let { task ->
                     LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                         taskTitle(task)
                         taskChips(task)
                         taskChecklist(
-                            taskDetailUiState.taskChecklistItems,
-                            onTaskChecklistItemClick = { id, checked ->
-                                if (checked) {
-                                    taskDetailViewModel.setTaskChecklistItemChecked(id)
-                                } else {
-                                    taskDetailViewModel.setTaskChecklistItemUnchecked(
-                                        id
-                                    )
-                                }
-                            },
-                            onDeleteTaskCheckListItem = { id ->
-                                taskDetailViewModel.deleteTaskChecklistItem(id)
-                            },
-                            onAddTaskCheckListItem = { text ->
-                                taskDetailViewModel.insertTaskChecklistItem(text)
-                            }
+                            taskDetailsUiState.taskChecklistItems,
+                            onTaskChecklistItemClick = onTaskChecklistItemClick,
+                            onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
+                            onAddTaskCheckListItem = onAddTaskCheckListItem
                         )
                         taskDescription(task.description)
                     }
@@ -205,14 +192,14 @@ private fun LazyListScope.taskChecklist(
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(stringResource(id = R.string.checklist))
+        TaskDetailSectionTitle(stringResource(MR.strings.checklist))
     }
     items(taskChecklistItems, key = { it.id }) { taskChecklistItem ->
         TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
     }
     item {
         AddChecklistItemField(
-            placeholder = { Text(stringResource(id = R.string.add_element)) },
+            placeholder = { Text(stringResource(MR.strings.add_element)) },
             onAddTaskCheckListItem = onAddTaskCheckListItem
         )
     }
@@ -262,7 +249,7 @@ private fun LazyItemScope.TaskChecklistItem(
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
                 Icons.Rounded.Clear,
-                contentDescription = stringResource(id = R.string.clear),
+                contentDescription = stringResource(MR.strings.clear),
                 tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )
         }
@@ -274,7 +261,7 @@ private fun LazyListScope.taskDescription(description: String?) {
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(stringResource(id = R.string.description))
+        TaskDetailSectionTitle(stringResource(MR.strings.description))
     }
     item {
         if (!description.isNullOrBlank()) {
@@ -289,7 +276,7 @@ private fun LazyListScope.taskDescription(description: String?) {
             )
         } else {
             Text(
-                text = stringResource(id = R.string.no_description),
+                text = stringResource(MR.strings.no_description),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(
                     top = 16.dp,

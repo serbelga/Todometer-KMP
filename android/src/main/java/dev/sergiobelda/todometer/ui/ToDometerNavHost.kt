@@ -31,6 +31,8 @@ import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestin
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.navigateToAddTaskList
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.navigateToEditTaskList
+import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
+import dev.sergiobelda.todometer.common.compose.ui.taskdetails.navigateToTaskDetails
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.ui.about.AboutDestination
 import dev.sergiobelda.todometer.ui.about.AboutScreen
@@ -45,9 +47,7 @@ import dev.sergiobelda.todometer.ui.edittask.navigateToEditTask
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.ui.home.HomeDestination
 import dev.sergiobelda.todometer.ui.home.HomeScreen
-import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailDestination
-import dev.sergiobelda.todometer.ui.taskdetail.TaskDetailScreen
-import dev.sergiobelda.todometer.ui.taskdetail.navigateToTaskDetail
+import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -73,18 +73,18 @@ internal fun ToDometerNavHost(
                 addTaskList = action.navigateToAddTaskList,
                 editTaskList = action.navigateToEditTaskList,
                 addTask = action.navigateToAddTask,
-                openTask = action.navigateToTaskDetail,
+                openTask = action.navigateToTaskDetails,
                 about = action.navigateToAbout
             )
         }
         composable(
-            TaskDetailDestination.route,
-            deepLinks = listOf(TaskDetailDestination.taskDetailNavDeepLink)
+            TaskDetailsDestination.route,
+            deepLinks = listOf(TaskDetailsDestination.taskDetailNavDeepLink)
         ) { navBackStackEntry ->
-            val taskId = TaskDetailDestination.navArgsTaskId(navBackStackEntry)
-            TaskDetailScreen(
+            val taskId = TaskDetailsDestination.navArgsTaskId(navBackStackEntry)
+            TaskDetailsRoute(
                 taskId = taskId,
-                editTask = { action.navigateToEditTask(taskId) },
+                navigateToEditTask = { action.navigateToEditTask(taskId) },
                 navigateBack = navigateBackAction
             )
         }

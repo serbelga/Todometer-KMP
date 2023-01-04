@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.ui.taskdetails
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
@@ -32,7 +33,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTask
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
-class TaskDetailViewModel(
+class TaskDetailsViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val getTaskChecklistItemsUseCase: GetTaskChecklistItemsUseCase,
@@ -42,8 +43,8 @@ class TaskDetailViewModel(
     private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase
 ) : ViewModel() {
 
-    var taskDetailUiState by mutableStateOf(
-        TaskDetailUiState(
+    var taskDetailsUiState by mutableStateOf(
+        TaskDetailsUiState(
             isLoadingTask = true,
             isLoadingTaskChecklistItems = true
         )
@@ -58,13 +59,13 @@ class TaskDetailViewModel(
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                taskDetailUiState = taskDetailUiState.copy(
+                taskDetailsUiState = taskDetailsUiState.copy(
                     isLoadingTask = false,
                     task = task,
                     errorUi = null
                 )
             }.doIfError { error ->
-                taskDetailUiState = taskDetailUiState.copy(
+                taskDetailsUiState = taskDetailsUiState.copy(
                     isLoadingTask = false,
                     task = null,
                     errorUi = error.mapToErrorUi()
@@ -76,12 +77,12 @@ class TaskDetailViewModel(
     private fun getTaskChecklistItems() = viewModelScope.launch {
         getTaskChecklistItemsUseCase(taskId).collect { result ->
             result.doIfSuccess { taskChecklistItems ->
-                taskDetailUiState = taskDetailUiState.copy(
+                taskDetailsUiState = taskDetailsUiState.copy(
                     isLoadingTaskChecklistItems = false,
                     taskChecklistItems = taskChecklistItems
                 )
             }.doIfError {
-                taskDetailUiState = taskDetailUiState.copy(
+                taskDetailsUiState = taskDetailsUiState.copy(
                     isLoadingTaskChecklistItems = false,
                     taskChecklistItems = emptyList()
                 )
