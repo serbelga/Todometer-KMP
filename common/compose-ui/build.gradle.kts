@@ -47,6 +47,8 @@ kotlin {
                 api(compose.uiTooling)
 
                 implementation(projects.common.android)
+
+                implementation(libs.androidx.navigation.compose)
             }
         }
         val androidTest by getting

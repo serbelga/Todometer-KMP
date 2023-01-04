@@ -85,7 +85,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeScreen(
-    navigateToTaskDetail: () -> Unit,
+    navigateToTaskDetail: (String) -> Unit,
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit
 ) {
@@ -231,7 +231,7 @@ internal fun HomeScreen(
                             }
                         },
                         onTaskItemClick = {
-                            navigateToTaskDetail()
+                            navigateToTaskDetail(it)
                         },
                         onTaskItemLongClick = {
                             deleteTaskAlertDialogState = true

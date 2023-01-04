@@ -33,9 +33,15 @@ class NavigationController {
     var currentDestinationId: String? by mutableStateOf(navigationGraph?.startDestinationId)
         private set
 
-    fun navigateTo(destinationId: String) {
+    private val _arguments: MutableMap<String, Any> = mutableMapOf()
+
+    fun navigateTo(destinationId: String, vararg arguments: Pair<String, Any>) {
+        _arguments.clear()
         navigationGraph?.composableNodes?.get(destinationId)?.let {
+            _arguments.putAll(arguments)
             currentDestinationId = destinationId
         }
     }
+
+    fun getStringArgumentOrNull(key: String): String? = _arguments[key] as? String
 }

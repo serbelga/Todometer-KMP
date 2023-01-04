@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetail
+package dev.sergiobelda.todometer.common.compose.ui.taskdetails
 
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.navDeepLink
@@ -22,25 +22,25 @@ import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.common.navigation.Destination
 import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
-object TaskDetailDestination : Destination {
+object TaskDetailsDestination : Destination {
     private const val TaskIdArg = "taskId"
-    const val TaskDetail = "taskdetail"
+    const val TaskDetails = "taskdetail"
 
-    override val route: String = "$TaskDetail/{$TaskIdArg}"
+    override val route: String = "$TaskDetails/{$TaskIdArg}"
 
-    private const val TaskDetailDeepLink = "app://open.task"
+    private const val TaskDetailsDeepLink = "app://open.task"
 
-    val taskDetailNavDeepLink = navDeepLink { uriPattern = "$TaskDetailDeepLink/{$TaskIdArg}" }
+    val taskDetailNavDeepLink = navDeepLink { uriPattern = "$TaskDetailsDeepLink/{$TaskIdArg}" }
 
     fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
         navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""
 }
 
-class TaskDetailNavigationParams(taskId: String) : NavigationParams(TaskDetailDestination) {
-    override val navigationRoute: String = "${TaskDetailDestination.TaskDetail}/$taskId"
+class TaskDetailsNavigationParams(taskId: String) : NavigationParams(TaskDetailsDestination) {
+    override val navigationRoute: String = "${TaskDetailsDestination.TaskDetails}/$taskId"
 }
 
-val Action.navigateToTaskDetail: (String) -> Unit
+val Action.navigateToTaskDetails: (String) -> Unit
     get() = { taskId ->
-        navigate(TaskDetailNavigationParams(taskId))
+        navigate(TaskDetailsNavigationParams(taskId))
     }

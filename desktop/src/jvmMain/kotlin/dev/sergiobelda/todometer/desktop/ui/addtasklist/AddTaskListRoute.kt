@@ -24,9 +24,7 @@ import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun AddTaskListRoute(
-    navigateBack: () -> Unit
-) {
+fun AddTaskListRoute(navigateBack: () -> Unit) {
     val coroutineScope = rememberCoroutineScope()
     val addTaskListViewModel: AddTaskListViewModel = remember {
         koin.get { parametersOf(coroutineScope) }

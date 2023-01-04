@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.task
+package dev.sergiobelda.todometer.common.compose.ui.taskdetails
 
-import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
-object TaskDetailDestination : Destination {
-    override val route: String get() = "taskdetail"
-}
+data class TaskDetailsUiState(
+    val isLoadingTask: Boolean = false,
+    val task: Task? = null,
+    val isLoadingTaskChecklistItems: Boolean = false,
+    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
+    val errorUi: ErrorUi? = null
+)
