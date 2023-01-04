@@ -79,7 +79,7 @@ fun main() = application {
                 }
                 composableNode(destinationId = TaskDetailsDestination.route) {
                     TaskDetailsRoute(
-                        taskId = navigationController.getStringArgumentOrNull(TaskIdArg) ?: "",
+                        taskId = navigationController.getStringArgOrNull(TaskIdArg) ?: "",
                         navigateToEditTask = {},
                         navigateBack = { navigationController.navigateTo(HomeDestination.route) }
                     )
