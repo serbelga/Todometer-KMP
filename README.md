@@ -57,14 +57,6 @@ Under construction
 
 <br/>
 
-## Modules
-
-<div align="center">
-<img src="./resources/arch/modules.png" width="700" />
-</div>
-
-<br/>
-
 ## Technologies
 
 ### Android
