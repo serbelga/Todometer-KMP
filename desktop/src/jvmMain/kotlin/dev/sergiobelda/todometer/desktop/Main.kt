@@ -78,7 +78,8 @@ fun main() = application {
                         navigateToEditTaskList = {
                             navigationController.navigateTo(EditTaskListDestination.route)
                         },
-                        navigateToAddTask = { navigationController.navigateTo(AddTaskDestination.route) }
+                        navigateToAddTask = { navigationController.navigateTo(AddTaskDestination.route) },
+                        navigateToAbout = {}
                     )
                 }
                 composableNode(destinationId = TaskDetailsDestination.route) {

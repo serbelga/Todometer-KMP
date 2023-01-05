@@ -50,8 +50,6 @@ import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
@@ -82,13 +80,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -100,8 +96,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListItem
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.Disabled
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.High
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.sheetShape
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -680,152 +674,6 @@ private fun EmptyTaskListsView(addTaskList: () -> Unit) {
     }
 }
 
-@Composable
-private fun MoreBottomSheet(
-    editTaskListEnabled: Boolean,
-    editTaskListClick: () -> Unit,
-    deleteTaskListEnabled: Boolean,
-    deleteTaskListClick: () -> Unit,
-    currentTheme: AppTheme,
-    chooseThemeClick: () -> Unit,
-    openSourceLicensesClick: () -> Unit,
-    aboutClick: () -> Unit
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(top = 16.dp)
-    ) {
-        EditTaskListItem(editTaskListEnabled, editTaskListClick)
-        DeleteTaskListItem(deleteTaskListEnabled, deleteTaskListClick)
-        HorizontalDivider()
-        ChooseThemeListItem(currentTheme, chooseThemeClick)
-        HorizontalDivider()
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
-            TextButton(onClick = openSourceLicensesClick) {
-                Text(
-                    stringResource(id = R.string.open_source_licenses),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-            Text("·")
-            TextButton(onClick = aboutClick) {
-                Text(
-                    stringResource(id = R.string.about),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun EditTaskListItem(
-    editTaskListEnabled: Boolean,
-    editTaskListClick: () -> Unit
-) {
-    ListItem(
-        headlineText = {
-            Text(
-                stringResource(id = R.string.edit_task_list),
-                style = MaterialTheme.typography.titleSmall
-            )
-        },
-        supportingText = {
-            if (!editTaskListEnabled) {
-                Text(
-                    stringResource(id = R.string.cannot_edit_this_task_list),
-                    style = MaterialTheme.typography.labelLarge,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        },
-        leadingContent = {
-            Icon(
-                Icons.Outlined.Edit,
-                contentDescription = stringResource(id = R.string.edit_task_list)
-            )
-        },
-        modifier = Modifier.clickable(
-            enabled = editTaskListEnabled,
-            onClick = editTaskListClick
-        ).height(MoreBottomSheetListItemHeight).alpha(if (editTaskListEnabled) High else Disabled)
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun DeleteTaskListItem(
-    deleteTaskListEnabled: Boolean,
-    deleteTaskListClick: () -> Unit
-) {
-    ListItem(
-        headlineText = {
-            Text(
-                stringResource(id = R.string.delete_task_list),
-                style = MaterialTheme.typography.titleSmall
-            )
-        },
-        supportingText = {
-            if (!deleteTaskListEnabled) {
-                Text(
-                    stringResource(id = R.string.cannot_delete_this_task_list),
-                    style = MaterialTheme.typography.labelLarge,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        },
-        leadingContent = {
-            Icon(
-                Icons.Outlined.Delete,
-                contentDescription = stringResource(id = R.string.delete_task_list)
-            )
-        },
-        modifier = Modifier.clickable(
-            enabled = deleteTaskListEnabled,
-            onClick = deleteTaskListClick
-        ).height(MoreBottomSheetListItemHeight).alpha(if (deleteTaskListEnabled) High else Disabled)
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ChooseThemeListItem(
-    currentTheme: AppTheme,
-    chooseThemeClick: () -> Unit
-) {
-    ListItem(
-        headlineText = {
-            Text(
-                stringResource(id = R.string.theme),
-                style = MaterialTheme.typography.titleSmall
-            )
-        },
-        supportingText = {
-            appThemeMap[currentTheme]?.modeNameRes?.let {
-                Text(
-                    stringResource(it),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-        },
-        leadingContent = {
-            appThemeMap[currentTheme]?.themeIconRes?.let {
-                Icon(
-                    painterResource(it),
-                    contentDescription = stringResource(id = R.string.theme)
-                )
-            }
-        },
-        modifier = Modifier.height(MoreBottomSheetListItemHeight)
-            .clickable(onClick = chooseThemeClick)
-    )
-}
-
 private fun updateToDometerWidgetData() {
     ToDometerWidgetReceiver().updateData()
 }
-
-private val MoreBottomSheetListItemHeight = 64.dp
