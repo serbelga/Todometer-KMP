@@ -12,7 +12,7 @@ java {
 dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
-    implementation("com.vanniktech:gradle-dependency-graph-generator-plugin:0.8.0")
+    implementation(libs.dependencyGraphGenerator)
 }
 
 gradlePlugin {
