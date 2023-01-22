@@ -15,6 +15,7 @@ buildscript {
         classpath(libs.moko.resources.generator)
         classpath(libs.sqldelight.gradlePlugin)
         classpath(libs.spotless.gradlePlugin)
+        classpath(libs.dependencyGraphGenerator)
     }
 }
 

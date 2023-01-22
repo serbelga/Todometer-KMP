@@ -1,0 +1,241 @@
+<svg width="1984px" height="531px"
+ viewBox="0.00 0.00 1428.18 382.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1.0007919936640506 1.0007919936640506) rotate(0.0) translate(4.0 378.0)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-378 1424.18,-378 1424.18,4 -4,4"/>
+<text text-anchor="middle" x="710.09" y="-338.5" font-family="Times,serif" font-size="35.00">android</text>
+<!-- :android -->
+<g id="node1" class="node">
+<title>:android</title>
+<polygon fill="#66bb6a" stroke="black" points="771.86,-324 709.54,-324 709.54,-288 771.86,-288 771.86,-324"/>
+<text text-anchor="middle" x="740.7" y="-301.8" font-family="Times,serif" font-size="14.00">:android</text>
+</g>
+<!-- :common:android -->
+<g id="node2" class="node">
+<title>:common:android</title>
+<ellipse fill="#66bb6a" stroke="black" cx="79.7" cy="-162" rx="79.9" ry="18"/>
+<text text-anchor="middle" x="79.7" y="-157.8" font-family="Times,serif" font-size="14.00">:common:android</text>
+</g>
+<!-- :android&#45;&gt;:common:android -->
+<g id="edge1" class="edge">
+<title>:android&#45;&gt;:common:android</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M709.3,-301C650.67,-293.3 520.72,-275.1 412.7,-252 314.04,-230.9 200.9,-198.99 135.14,-179.66"/>
+<polygon fill="black" stroke="black" points="135.98,-176.26 125.4,-176.79 134,-182.97 135.98,-176.26"/>
+</g>
+<!-- :common:compose&#45;ui -->
+<g id="node3" class="node">
+<title>:common:compose&#45;ui</title>
+<ellipse fill="#7f52ff" stroke="black" cx="592.7" cy="-234" rx="95.01" ry="18"/>
+<text text-anchor="middle" x="592.7" y="-229.8" font-family="Times,serif" font-size="14.00">:common:compose&#45;ui</text>
+</g>
+<!-- :android&#45;&gt;:common:compose&#45;ui -->
+<g id="edge2" class="edge">
+<title>:android&#45;&gt;:common:compose&#45;ui</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M709.31,-290.15C687.81,-279.99 659.04,-266.38 635.45,-255.22"/>
+<polygon fill="black" stroke="black" points="636.89,-252.03 626.36,-250.92 633.9,-258.36 636.89,-252.03"/>
+</g>
+<!-- :common:compose&#45;ui&#45;designsystem -->
+<g id="node4" class="node">
+<title>:common:compose&#45;ui&#45;designsystem</title>
+<ellipse fill="#7f52ff" stroke="black" cx="327.7" cy="-162" rx="150.5" ry="18"/>
+<text text-anchor="middle" x="327.7" y="-157.8" font-family="Times,serif" font-size="14.00">:common:compose&#45;ui&#45;designsystem</text>
+</g>
+<!-- :android&#45;&gt;:common:compose&#45;ui&#45;designsystem -->
+<g id="edge3" class="edge">
+<title>:android&#45;&gt;:common:compose&#45;ui&#45;designsystem</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M709.22,-301.44C660.68,-295.27 565.17,-280.45 488.7,-252 442.05,-234.65 392.53,-205.44 360.92,-185.24"/>
+<polygon fill="black" stroke="black" points="362.8,-182.28 352.5,-179.8 359,-188.16 362.8,-182.28"/>
+</g>
+<!-- :common:domain -->
+<g id="node5" class="node">
+<title>:common:domain</title>
+<ellipse fill="#7f52ff" stroke="black" cx="1113.7" cy="-18" rx="79.34" ry="18"/>
+<text text-anchor="middle" x="1113.7" y="-13.8" font-family="Times,serif" font-size="14.00">:common:domain</text>
+</g>
+<!-- :android&#45;&gt;:common:domain -->
+<g id="edge5" class="edge">
+<title>:android&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M772.12,-304.47C873.97,-302.37 1193.9,-292.61 1287.7,-252 1332.21,-232.73 1339.66,-218.08 1369.7,-180 1401.22,-140.05 1440.33,-111.04 1407.7,-72 1381.76,-40.96 1278.26,-28.07 1201.36,-22.74"/>
+<polygon fill="black" stroke="black" points="1201.39,-19.23 1191.18,-22.06 1200.92,-26.21 1201.39,-19.23"/>
+</g>
+<!-- :common:navigation -->
+<g id="node6" class="node">
+<title>:common:navigation</title>
+<ellipse fill="#7f52ff" stroke="black" cx="759.7" cy="-162" rx="90.93" ry="18"/>
+<text text-anchor="middle" x="759.7" y="-157.8" font-family="Times,serif" font-size="14.00">:common:navigation</text>
+</g>
+<!-- :android&#45;&gt;:common:navigation -->
+<g id="edge6" class="edge">
+<title>:android&#45;&gt;:common:navigation</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M742.99,-287.87C746.23,-263.67 752.18,-219.21 756.03,-190.39"/>
+<polygon fill="black" stroke="black" points="759.54,-190.57 757.4,-180.19 752.6,-189.64 759.54,-190.57"/>
+</g>
+<!-- :common:resources -->
+<g id="node7" class="node">
+<title>:common:resources</title>
+<ellipse fill="#7f52ff" stroke="black" cx="955.7" cy="-162" rx="86.82" ry="18"/>
+<text text-anchor="middle" x="955.7" y="-157.8" font-family="Times,serif" font-size="14.00">:common:resources</text>
+</g>
+<!-- :android&#45;&gt;:common:resources -->
+<g id="edge7" class="edge">
+<title>:android&#45;&gt;:common:resources</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M766.63,-287.87C805.71,-262.06 879.68,-213.21 922.59,-184.86"/>
+<polygon fill="black" stroke="black" points="924.59,-187.74 931,-179.31 920.73,-181.9 924.59,-187.74"/>
+</g>
+<!-- :common:ui -->
+<g id="node8" class="node">
+<title>:common:ui</title>
+<ellipse fill="#7f52ff" stroke="black" cx="592.7" cy="-162" rx="57.93" ry="18"/>
+<text text-anchor="middle" x="592.7" y="-157.8" font-family="Times,serif" font-size="14.00">:common:ui</text>
+</g>
+<!-- :android&#45;&gt;:common:ui -->
+<g id="edge8" class="edge">
+<title>:android&#45;&gt;:common:ui</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M735.89,-287.98C729.64,-268.49 717.05,-236.6 696.7,-216 680.97,-200.08 659.46,-188.03 640.08,-179.48"/>
+<polygon fill="black" stroke="black" points="641.35,-176.22 630.78,-175.56 638.63,-182.67 641.35,-176.22"/>
+</g>
+<!-- :common:core -->
+<g id="node9" class="node">
+<title>:common:core</title>
+<ellipse fill="#7f52ff" stroke="black" cx="1211.7" cy="-234" rx="66.63" ry="18"/>
+<text text-anchor="middle" x="1211.7" y="-229.8" font-family="Times,serif" font-size="14.00">:common:core</text>
+</g>
+<!-- :android&#45;&gt;:common:core -->
+<g id="edge4" class="edge">
+<title>:android&#45;&gt;:common:core</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M771.97,-300.35C847.53,-289.12 1041.4,-260.31 1144.65,-244.96"/>
+<polygon fill="black" stroke="black" points="1145.28,-248.41 1154.65,-243.48 1144.25,-241.49 1145.28,-248.41"/>
+</g>
+<!-- :common:compose&#45;ui&#45;&gt;:common:android -->
+<g id="edge9" class="edge">
+<title>:common:compose&#45;ui&#45;&gt;:common:android</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M511.39,-224.49C425.69,-215.14 286.85,-198.92 167.7,-180 160.99,-178.93 154.01,-177.74 147.04,-176.49"/>
+<polygon fill="black" stroke="black" points="147.35,-172.98 136.88,-174.62 146.08,-179.87 147.35,-172.98"/>
+</g>
+<!-- :common:compose&#45;ui&#45;&gt;:common:compose&#45;ui&#45;designsystem -->
+<g id="edge10" class="edge">
+<title>:common:compose&#45;ui&#45;&gt;:common:compose&#45;ui&#45;designsystem</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M539.71,-219C498.71,-208.17 441.58,-193.08 396.96,-181.3"/>
+<polygon fill="black" stroke="black" points="397.62,-177.85 387.06,-178.68 395.84,-184.62 397.62,-177.85"/>
+</g>
+<!-- :common:compose&#45;ui&#45;&gt;:common:domain -->
+<g id="edge11" class="edge">
+<title>:common:compose&#45;ui&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M561.58,-216.91C547.9,-208.03 533.26,-195.62 525.7,-180 518.73,-165.6 517.01,-157.44 525.7,-144 579.47,-60.84 876.62,-32.29 1026.78,-23.07"/>
+<polygon fill="black" stroke="black" points="1027.12,-26.56 1036.89,-22.47 1026.7,-19.57 1027.12,-26.56"/>
+</g>
+<!-- :common:compose&#45;ui&#45;&gt;:common:navigation -->
+<g id="edge12" class="edge">
+<title>:common:compose&#45;ui&#45;&gt;:common:navigation</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M630.18,-217.29C654.76,-206.99 687.08,-193.44 713.28,-182.46"/>
+<polygon fill="black" stroke="black" points="714.76,-185.63 722.63,-178.54 712.06,-179.17 714.76,-185.63"/>
+</g>
+<!-- :common:compose&#45;ui&#45;&gt;:common:resources -->
+<g id="edge13" class="edge">
+<title>:common:compose&#45;ui&#45;&gt;:common:resources</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M656.76,-220.65C720.55,-208.35 818.26,-189.5 884.46,-176.74"/>
+<polygon fill="black" stroke="black" points="885.24,-180.15 894.39,-174.82 883.91,-173.28 885.24,-180.15"/>
+</g>
+<!-- :common:compose&#45;ui&#45;&gt;:common:ui -->
+<g id="edge14" class="edge">
+<title>:common:compose&#45;ui&#45;&gt;:common:ui</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M592.7,-215.7C592.7,-207.98 592.7,-198.71 592.7,-190.11"/>
+<polygon fill="black" stroke="black" points="596.2,-190.1 592.7,-180.1 589.2,-190.1 596.2,-190.1"/>
+</g>
+<!-- :common:ui&#45;&gt;:common:domain -->
+<g id="edge15" class="edge">
+<title>:common:ui&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M618.21,-145.65C652.85,-125.52 717.26,-90.6 776.7,-72 860.47,-45.79 960.2,-32.16 1029.33,-25.33"/>
+<polygon fill="black" stroke="black" points="1029.68,-28.82 1039.3,-24.38 1029.01,-21.85 1029.68,-28.82"/>
+</g>
+<!-- :common:core&#45;&gt;:common:domain -->
+<g id="edge16" class="edge">
+<title>:common:core&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1249.65,-219.07C1315.5,-192.85 1439.28,-133.26 1388.7,-72 1365.06,-43.37 1271.73,-30.03 1200.29,-23.94"/>
+<polygon fill="black" stroke="black" points="1200.18,-20.42 1189.92,-23.09 1199.61,-27.39 1200.18,-20.42"/>
+</g>
+<!-- :common:data -->
+<g id="node10" class="node">
+<title>:common:data</title>
+<ellipse fill="#7f52ff" stroke="black" cx="1164.7" cy="-162" rx="66.07" ry="18"/>
+<text text-anchor="middle" x="1164.7" y="-157.8" font-family="Times,serif" font-size="14.00">:common:data</text>
+</g>
+<!-- :common:core&#45;&gt;:common:data -->
+<g id="edge17" class="edge">
+<title>:common:core&#45;&gt;:common:data</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1200.32,-216.05C1194.72,-207.71 1187.86,-197.49 1181.65,-188.25"/>
+<polygon fill="black" stroke="black" points="1184.45,-186.14 1175.97,-179.79 1178.64,-190.04 1184.45,-186.14"/>
+</g>
+<!-- :common:database -->
+<g id="node11" class="node">
+<title>:common:database</title>
+<ellipse fill="#7f52ff" stroke="black" cx="1296.7" cy="-90" rx="83.39" ry="18"/>
+<text text-anchor="middle" x="1296.7" y="-85.8" font-family="Times,serif" font-size="14.00">:common:database</text>
+</g>
+<!-- :common:core&#45;&gt;:common:database -->
+<g id="edge18" class="edge">
+<title>:common:core&#45;&gt;:common:database</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1236.26,-217.02C1248.87,-207.64 1263.47,-194.74 1272.7,-180 1284.41,-161.29 1290.47,-136.91 1293.57,-118.39"/>
+<polygon fill="black" stroke="black" points="1297.07,-118.66 1295.07,-108.26 1290.14,-117.64 1297.07,-118.66"/>
+</g>
+<!-- :common:network -->
+<g id="node12" class="node">
+<title>:common:network</title>
+<ellipse fill="#7f52ff" stroke="black" cx="1113.7" cy="-90" rx="81.68" ry="18"/>
+<text text-anchor="middle" x="1113.7" y="-85.8" font-family="Times,serif" font-size="14.00">:common:network</text>
+</g>
+<!-- :common:core&#45;&gt;:common:network -->
+<g id="edge19" class="edge">
+<title>:common:core&#45;&gt;:common:network</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1225.16,-216.04C1238.39,-197.17 1254.58,-166.4 1239.7,-144 1227.17,-125.14 1206.49,-112.98 1185.46,-105.14"/>
+<polygon fill="black" stroke="black" points="1186.4,-101.76 1175.81,-101.84 1184.13,-108.39 1186.4,-101.76"/>
+</g>
+<!-- :common:preferences -->
+<g id="node13" class="node">
+<title>:common:preferences</title>
+<ellipse fill="#7f52ff" stroke="black" cx="880.7" cy="-90" rx="94.88" ry="18"/>
+<text text-anchor="middle" x="880.7" y="-85.8" font-family="Times,serif" font-size="14.00">:common:preferences</text>
+</g>
+<!-- :common:core&#45;&gt;:common:preferences -->
+<g id="edge20" class="edge">
+<title>:common:core&#45;&gt;:common:preferences</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1171.46,-219.57C1146.77,-210.38 1115.13,-196.81 1089.7,-180 1070.29,-167.17 1071.78,-155.75 1051.7,-144 1021.93,-126.58 985.83,-114.3 954.48,-105.98"/>
+<polygon fill="black" stroke="black" points="955.05,-102.51 944.49,-103.42 953.31,-109.29 955.05,-102.51"/>
+</g>
+<!-- :common:data&#45;&gt;:common:domain -->
+<g id="edge21" class="edge">
+<title>:common:data&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1116.87,-149.4C1080.15,-139.42 1033.88,-124.1 1022.7,-108 1013.58,-94.86 1014.73,-85.87 1022.7,-72 1031.3,-57.04 1045.93,-45.9 1060.98,-37.81"/>
+<polygon fill="black" stroke="black" points="1062.95,-40.73 1070.35,-33.15 1059.84,-34.46 1062.95,-40.73"/>
+</g>
+<!-- :common:data&#45;&gt;:common:database -->
+<g id="edge22" class="edge">
+<title>:common:data&#45;&gt;:common:database</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1193.67,-145.64C1212.36,-135.73 1236.91,-122.71 1257.35,-111.87"/>
+<polygon fill="black" stroke="black" points="1259.23,-114.83 1266.42,-107.06 1255.95,-108.65 1259.23,-114.83"/>
+</g>
+<!-- :common:data&#45;&gt;:common:network -->
+<g id="edge23" class="edge">
+<title>:common:data&#45;&gt;:common:network</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1152.35,-144.05C1146.3,-135.75 1138.9,-125.58 1132.19,-116.38"/>
+<polygon fill="black" stroke="black" points="1135,-114.3 1126.29,-108.28 1129.35,-118.42 1135,-114.3"/>
+</g>
+<!-- :common:data&#45;&gt;:common:preferences -->
+<g id="edge24" class="edge">
+<title>:common:data&#45;&gt;:common:preferences</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1117.48,-149.36C1070.66,-137.82 998.53,-120.04 946.18,-107.14"/>
+<polygon fill="black" stroke="black" points="946.87,-103.7 936.32,-104.71 945.19,-110.5 946.87,-103.7"/>
+</g>
+<!-- :common:database&#45;&gt;:common:domain -->
+<g id="edge25" class="edge">
+<title>:common:database&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1257.44,-73.98C1229.39,-63.25 1191.49,-48.76 1161.65,-37.34"/>
+<polygon fill="black" stroke="black" points="1162.85,-34.06 1152.26,-33.75 1160.35,-40.59 1162.85,-34.06"/>
+</g>
+<!-- :common:network&#45;&gt;:common:domain -->
+<g id="edge26" class="edge">
+<title>:common:network&#45;&gt;:common:domain</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1113.7,-71.7C1113.7,-63.98 1113.7,-54.71 1113.7,-46.11"/>
+<polygon fill="black" stroke="black" points="1117.2,-46.1 1113.7,-36.1 1110.2,-46.1 1117.2,-46.1"/>
+</g>
+</g>
+</svg>

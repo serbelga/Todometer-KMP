@@ -8,6 +8,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("todometer.spotless")
+    id("todometer.dependency-graph-generator")
 }
 
 android {
