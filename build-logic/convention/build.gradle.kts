@@ -12,10 +12,15 @@ java {
 dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
+    implementation(libs.dependencyGraphGenerator)
 }
 
 gradlePlugin {
     plugins {
+        register("dependency-graph-generator") {
+            id = "todometer.dependency-graph-generator"
+            implementationClass = "DependencyGraphGeneratorConventionPlugin"
+        }
         register("spotless") {
             id = "todometer.spotless"
             implementationClass = "SpotlessConventionPlugin"
