@@ -32,7 +32,7 @@ kotlin {
             }
         }
         val androidMain by getting
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(libs.junit)
                 implementation(libs.mockk.mockk)

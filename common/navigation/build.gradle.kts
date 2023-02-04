@@ -32,7 +32,7 @@ kotlin {
                 implementation(libs.androidx.navigation.runtimeKtx)
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)

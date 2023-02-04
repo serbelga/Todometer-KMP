@@ -31,7 +31,7 @@ kotlin {
                 api(libs.moko.resources.compose)
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
         val desktopMain by getting {
             dependencies {
                 api(libs.moko.resources.compose)
