@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.28.0"
-activity = "1.6.0"
+activity = "1.6.1"
 androidCore = "1.9.0"
 androidCompileSdk = "33"
 androidMinSdk = "24"
