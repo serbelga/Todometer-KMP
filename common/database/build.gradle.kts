@@ -34,7 +34,7 @@ kotlin {
                 implementation(libs.sqldelight.androidDriver)
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(libs.sqldelight.jvmDriver)
             }

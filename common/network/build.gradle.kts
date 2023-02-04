@@ -34,7 +34,7 @@ kotlin {
                 implementation(libs.ktor.client.android)
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
         val desktopMain by getting {
             dependencies {
                 implementation(libs.ktor.client.apache)
