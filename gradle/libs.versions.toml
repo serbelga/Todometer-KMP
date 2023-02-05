@@ -127,7 +127,7 @@ ktor-server-locations = { module = "io.ktor:ktor-server-locations", version.ref 
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor-server-tests = { module = "io.ktor:ktor-server-tests", version.ref = "ktor" }
 
-logback = "ch.qos.logback:logback-classic:1.2.3"
+logback = "ch.qos.logback:logback-classic:1.4.5"
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 
