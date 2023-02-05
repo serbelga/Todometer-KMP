@@ -90,7 +90,7 @@ google-services = { module = "com.google.gms:google-services", version.ref = "go
 
 h2Database = "com.h2database:h2:1.4.200"
 
-hikariCP = "com.zaxxer:HikariCP:4.0.3"
+hikariCP = "com.zaxxer:HikariCP:5.0.1"
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
