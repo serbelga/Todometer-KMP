@@ -27,7 +27,7 @@ jobs:
       - name: Create service_account.json
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
       - name: Deploy to Develop
-        uses: r0adkll/upload-google-play@v1.0.15
+        uses: r0adkll/upload-google-play@v1.0.19
         with:
           serviceAccountJson: service_account.json
           packageName: dev.sergiobelda.todometer
