@@ -88,7 +88,7 @@ google-firebase-firebaseCrashlyticsKtx = { module = "com.google.firebase:firebas
 google-firebase-firebaseBom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 
-h2Database = "com.h2database:h2:1.4.200"
+h2Database = "com.h2database:h2:2.1.214"
 
 hikariCP = "com.zaxxer:HikariCP:4.0.3"
 
