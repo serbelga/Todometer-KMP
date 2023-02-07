@@ -83,7 +83,9 @@ android {
 }
 
 sqldelight {
-    database("TodometerDatabase") {
-        packageName = "dev.sergiobelda.todometer.common.database"
+    databases {
+        create("TodometerDatabase") {
+            packageName.set("dev.sergiobelda.todometer.common.database")
+        }
     }
 }
