@@ -23,15 +23,18 @@ import dev.sergiobelda.todometer.common.database.SelectTasksByTaskListId
 import dev.sergiobelda.todometer.common.database.TaskEntity
 import dev.sergiobelda.todometer.common.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 
 class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
 
     override fun getTask(id: String): Flow<TaskEntity?> =
-        todometerDatabase.taskEntityQueries.selectTask(id).asFlow().mapToOneOrNull()
+        todometerDatabase.taskEntityQueries.selectTask(id).asFlow()
+            .mapToOneOrNull(Dispatchers.Default)
 
     override fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId>> =
-        todometerDatabase.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow().mapToList()
+        todometerDatabase.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow()
+            .mapToList(Dispatchers.Default)
 
     override suspend fun insertTask(task: TaskEntity): String {
         todometerDatabase.pragmaQueries.pragmaForeignKeysOff()

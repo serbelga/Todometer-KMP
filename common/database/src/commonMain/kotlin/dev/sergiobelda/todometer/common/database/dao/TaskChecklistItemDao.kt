@@ -21,6 +21,7 @@ import app.cash.sqldelight.coroutines.mapToList
 import dev.sergiobelda.todometer.common.database.TaskChecklistItemEntity
 import dev.sergiobelda.todometer.common.database.TodometerDatabase
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 
 class TaskChecklistItemDao(private val todometerDatabase: TodometerDatabase) :
@@ -28,7 +29,7 @@ class TaskChecklistItemDao(private val todometerDatabase: TodometerDatabase) :
 
     override fun getTaskChecklistItems(taskId: String): Flow<List<TaskChecklistItemEntity>> =
         todometerDatabase.taskChecklistItemEntityQueries.selectTaskChecklistItems(taskId).asFlow()
-            .mapToList()
+            .mapToList(Dispatchers.Default)
 
     override suspend fun insertTaskChecklistItems(vararg taskChecklistItemEntities: TaskChecklistItemEntity) =
         todometerDatabase.taskChecklistItemEntityQueries.transaction {
