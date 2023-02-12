@@ -21,6 +21,7 @@ import dev.sergiobelda.todometer.backend.database.entity.TaskListEntity
 import dev.sergiobelda.todometer.backend.database.mapper.toTaskListEntity
 import dev.sergiobelda.todometer.backend.database.mapper.toTaskListEntityList
 import dev.sergiobelda.todometer.backend.database.table.TaskListTable
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.replace
 import org.jetbrains.exposed.sql.select
