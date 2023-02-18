@@ -40,7 +40,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DismissDirection
 import androidx.compose.material.DismissValue
@@ -53,11 +52,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -67,7 +63,6 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -84,9 +79,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
@@ -101,12 +94,8 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
-import dev.sergiobelda.todometer.preferences.appThemeMap
-import dev.sergiobelda.todometer.ui.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.ui.components.ToDometerTopAppBar
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
 
 @OptIn(
     ExperimentalMaterialApi::class,
@@ -114,12 +103,19 @@ import org.koin.androidx.compose.getViewModel
 )
 @Composable
 internal fun HomeScreen(
-    addTaskList: () -> Unit,
-    editTaskList: () -> Unit,
-    addTask: () -> Unit,
-    openTask: (String) -> Unit,
-    about: () -> Unit,
-    homeViewModel: HomeViewModel = getViewModel()
+    navigateToAddTaskList: () -> Unit,
+    navigateToEditTaskList: () -> Unit,
+    navigateToAddTask: () -> Unit,
+    onTaskItemClick: (String) -> Unit,
+    onDeleteTaskClick: (String) -> Unit,
+    navigateToAboutClick: () -> Unit,
+    onTaskItemDoingClick: (String) -> Unit,
+    onTaskItemDoneClick: (String) -> Unit,
+    onTaskListItemClick: (String) -> Unit,
+    onDeleteTaskListClick: () -> Unit,
+    onChooseThemeClick: (AppTheme) -> Unit,
+    homeUiState: HomeUiState,
+    appTheme: AppTheme = AppTheme.FOLLOW_SYSTEM
 ) {
     val context = LocalContext.current
 
@@ -137,9 +133,6 @@ internal fun HomeScreen(
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
     var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
-    val homeUiState = homeViewModel.homeUiState
-    val appTheme by homeViewModel.appTheme.collectAsStateWithLifecycle()
-
     val defaultTaskListName = stringResource(id = R.string.default_task_list_name)
 
     ModalBottomSheetLayout(
@@ -151,7 +144,7 @@ internal fun HomeScreen(
                 editTaskListClick = {
                     scope.launch {
                         sheetState.hide()
-                        editTaskList()
+                        navigateToEditTaskList()
                     }
                 },
                 editTaskListEnabled = !homeUiState.isDefaultTaskListSelected,
@@ -172,7 +165,7 @@ internal fun HomeScreen(
                 aboutClick = {
                     scope.launch {
                         sheetState.hide()
-                        about()
+                        navigateToAboutClick()
                     }
                 }
             )
@@ -188,16 +181,13 @@ internal fun HomeScreen(
                         homeUiState.taskListSelected?.id ?: "",
                         defaultTaskListName,
                         homeUiState.taskLists,
-                        addTaskList = {
-                            scope.launch {
-                                closeDrawer()
-                            }
-                            addTaskList()
-                        },
-                        selectTaskList = {
-                            homeViewModel.setTaskListSelected(it)
+                        onAddTaskList = {
                             scope.launch { closeDrawer() }
-                            updateToDometerWidgetData()
+                            navigateToAddTaskList()
+                        },
+                        onTaskListItemClick = {
+                            onTaskListItemClick(it)
+                            scope.launch { closeDrawer() }
                         }
                     )
                 }
@@ -220,21 +210,15 @@ internal fun HomeScreen(
                     if (deleteTaskAlertDialogState) {
                         DeleteTaskAlertDialog(
                             onDismissRequest = { deleteTaskAlertDialogState = false },
-                            deleteTask = {
-                                homeViewModel.deleteTask(selectedTask)
-                                updateToDometerWidgetData()
-                            }
+                            onDeleteTaskClick = { onDeleteTaskClick(selectedTask) }
                         )
                     }
                     if (deleteTaskListAlertDialogState) {
                         DeleteTaskListAlertDialog(
                             onDismissRequest = { deleteTaskListAlertDialogState = false },
-                            deleteTaskList = {
-                                homeViewModel.deleteTaskList()
-                                updateToDometerWidgetData()
-                                scope.launch {
-                                    sheetState.hide()
-                                }
+                            onDeleteTaskListClick = {
+                                onDeleteTaskListClick()
+                                scope.launch { sheetState.hide() }
                             }
                         )
                     }
@@ -242,7 +226,7 @@ internal fun HomeScreen(
                         ChooseThemeAlertDialog(
                             currentTheme = appTheme,
                             onDismissRequest = { chooseThemeAlertDialogState = false },
-                            chooseTheme = { theme -> homeViewModel.setAppTheme(theme) }
+                            onChooseThemeClick = onChooseThemeClick
                         )
                     }
                     if (homeUiState.isLoadingTasks) {
@@ -256,15 +240,9 @@ internal fun HomeScreen(
                         } else {
                             TasksListView(
                                 homeUiState.tasks,
-                                onDoingClick = {
-                                    homeViewModel.setTaskDoing(it)
-                                    updateToDometerWidgetData()
-                                },
-                                onDoneClick = {
-                                    homeViewModel.setTaskDone(it)
-                                    updateToDometerWidgetData()
-                                },
-                                onTaskItemClick = openTask,
+                                onDoingClick = onTaskItemDoingClick,
+                                onDoneClick = onTaskItemDoneClick,
+                                onTaskItemClick = onTaskItemClick,
                                 onTaskItemLongClick = {
                                     deleteTaskAlertDialogState = true
                                     selectedTask = it
@@ -280,7 +258,7 @@ internal fun HomeScreen(
                 },
                 floatingActionButton = {
                     FloatingActionButton(
-                        onClick = addTask
+                        onClick = navigateToAddTask
                     ) {
                         Icon(
                             Icons.Rounded.Add,
@@ -295,137 +273,12 @@ internal fun HomeScreen(
 }
 
 @Composable
-private fun ChooseThemeAlertDialog(
-    currentTheme: AppTheme,
-    onDismissRequest: () -> Unit,
-    chooseTheme: (theme: AppTheme) -> Unit
-) {
-    var themeSelected by remember { mutableStateOf(currentTheme) }
-    ToDometerAlertDialog(
-        title = {
-            Text(
-                text = stringResource(id = R.string.choose_theme),
-                modifier = Modifier.padding(16.dp)
-            )
-        },
-        onDismissRequest = onDismissRequest,
-        body = {
-            LazyColumn {
-                appThemeMap.forEach { (appTheme, appThemeOption) ->
-                    item {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.fillMaxWidth()
-                                .height(56.dp)
-                                .selectable(
-                                    selected = themeSelected == appTheme,
-                                    onClick = { themeSelected = appTheme },
-                                    role = Role.RadioButton
-                                )
-                                .padding(horizontal = 16.dp)
-                        ) {
-                            RadioButton(
-                                selected = themeSelected == appTheme,
-                                onClick = { themeSelected = appTheme }
-                            )
-                            Text(
-                                text = stringResource(appThemeOption.modeNameRes),
-                                style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier.padding(start = 16.dp)
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    chooseTheme(themeSelected)
-                    onDismissRequest()
-                }
-            ) {
-                Text(stringResource(android.R.string.ok))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(stringResource(id = R.string.cancel))
-            }
-        }
-    )
-}
-
-@Composable
-private fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, deleteTaskList: () -> Unit) {
-    AlertDialog(
-        icon = {
-            Icon(
-                Icons.Rounded.Warning,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        },
-        title = {
-            Text(stringResource(id = R.string.delete_task_list))
-        },
-        onDismissRequest = onDismissRequest,
-        text = {
-            Text(stringResource(id = R.string.delete_task_list_question))
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    deleteTaskList()
-                    onDismissRequest()
-                }
-            ) {
-                Text(stringResource(android.R.string.ok))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(stringResource(id = R.string.cancel))
-            }
-        }
-    )
-}
-
-@Composable
-private fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, deleteTask: () -> Unit) {
-    AlertDialog(
-        title = {
-            Text(stringResource(id = R.string.delete_task))
-        },
-        onDismissRequest = onDismissRequest,
-        text = {
-            Text(stringResource(id = R.string.delete_task_question))
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    deleteTask()
-                    onDismissRequest()
-                }
-            ) {
-                Text(stringResource(android.R.string.ok))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(stringResource(id = R.string.cancel))
-            }
-        }
-    )
-}
-
-@Composable
 private fun DrawerContent(
     selectedTaskListId: String,
     defaultTaskListName: String,
     taskLists: List<TaskList>,
-    addTaskList: () -> Unit,
-    selectTaskList: (String) -> Unit
+    onAddTaskList: () -> Unit,
+    onTaskListItemClick: (String) -> Unit
 ) {
     Box(
         modifier = Modifier.height(56.dp).fillMaxWidth()
@@ -446,19 +299,19 @@ private fun DrawerContent(
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = Modifier.weight(1f))
-        TextButton(onClick = addTaskList) {
+        TextButton(onClick = onAddTaskList) {
             Text(stringResource(id = R.string.add_task_list))
         }
     }
     LazyColumn(modifier = Modifier.padding(8.dp)) {
         item {
             TaskListItem(defaultTaskListName, selectedTaskListId == "") {
-                selectTaskList("")
+                onTaskListItemClick("")
             }
         }
         items(taskLists) { taskList ->
             TaskListItem(taskList.name, taskList.id == selectedTaskListId) {
-                selectTaskList(taskList.id)
+                onTaskListItemClick(taskList.id)
             }
         }
     }
@@ -644,34 +497,4 @@ private fun TaskListIllustration(
             }
         }
     }
-}
-
-@Composable
-@Deprecated("To be removed")
-private fun EmptyTaskListsView(addTaskList: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painterResource(R.drawable.no_task_lists),
-                modifier = Modifier.size(240.dp).padding(bottom = 24.dp),
-                contentDescription = null
-            )
-            Text(
-                stringResource(id = R.string.no_task_lists),
-                modifier = Modifier.padding(bottom = 48.dp)
-            )
-            Button(onClick = addTaskList) {
-                Text(text = stringResource(id = R.string.add_task_list))
-            }
-        }
-    }
-}
-
-private fun updateToDometerWidgetData() {
-    ToDometerWidgetReceiver().updateData()
 }

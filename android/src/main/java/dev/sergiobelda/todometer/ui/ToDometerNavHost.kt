@@ -46,7 +46,7 @@ import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.ui.home.HomeDestination
-import dev.sergiobelda.todometer.ui.home.HomeScreen
+import dev.sergiobelda.todometer.ui.home.HomeRoute
 import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -69,9 +69,9 @@ internal fun ToDometerNavHost(
         modifier = modifier
     ) {
         composable(HomeDestination.route) {
-            HomeScreen(
-                addTaskList = action.navigateToAddTaskList,
-                editTaskList = action.navigateToEditTaskList,
+            HomeRoute(
+                navigateToAddTaskList = action.navigateToAddTaskList,
+                navigateToEditTaskList = action.navigateToEditTaskList,
                 addTask = action.navigateToAddTask,
                 openTask = action.navigateToTaskDetails,
                 about = action.navigateToAbout
