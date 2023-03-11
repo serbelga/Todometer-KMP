@@ -24,6 +24,14 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    }
+}
+
 subprojects {
     if (!project.name.contains("ios")) {
         apply("${rootDir}/ktlint.gradle.kts")
