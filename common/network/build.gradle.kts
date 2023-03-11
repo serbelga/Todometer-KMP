@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.androidLibrary)
     id("todometer.spotless")
 }
 

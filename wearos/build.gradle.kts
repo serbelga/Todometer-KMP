@@ -1,5 +1,6 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     kotlin("android")

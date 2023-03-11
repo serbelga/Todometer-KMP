@@ -1,7 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
-    id("app.cash.sqldelight")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.sqlDelight)
     id("todometer.spotless")
 }
 

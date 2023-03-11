@@ -2,7 +2,7 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
-    id("com.android.library")
+    alias(libs.plugins.androidLibrary)
     id("todometer.spotless")
 }
 
