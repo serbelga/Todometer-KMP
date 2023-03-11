@@ -1,8 +1,8 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.androidApplication)
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.firebaseCrashlytics)
     kotlin("android")
     kotlin("kapt")
     id("todometer.spotless")

@@ -9,10 +9,6 @@ plugins {
 group = "dev.sergiobelda.todometer.common.compose.ui.designsystem"
 version = "1.0"
 
-repositories {
-    google()
-}
-
 kotlin {
     android()
     jvm("desktop")

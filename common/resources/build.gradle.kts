@@ -2,16 +2,12 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.mokoResources)
     id("todometer.spotless")
-    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 group = "dev.sergiobelda.todometer.common.resources"
 version = "1.0"
-
-repositories {
-    google()
-}
 
 kotlin {
     android()
