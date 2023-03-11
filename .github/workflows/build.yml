@@ -25,4 +25,4 @@ jobs:
     - name: Build android app
       run:  ./gradlew android:assembleDebug
     - name: Build wearos app
-      run:  ./gradlew android:assembleDebug
+      run:  ./gradlew wearos:assembleDebug
