@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+
         versionCode = 1232400
         versionName = "android-2.3.2"
     }
@@ -44,7 +44,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
     }
     namespace = "dev.sergiobelda.todometer"
 }

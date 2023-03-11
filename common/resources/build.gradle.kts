@@ -66,11 +66,15 @@ android {
     sourceSets["main"].res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
     defaultConfig {
         minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
     namespace = "dev.sergiobelda.todometer.common.resources"
     lint {
         abortOnError = false
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
