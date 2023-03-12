@@ -1,3 +1,17 @@
+@Suppress("DSL_SCOPE_VIOLATION")
+plugins {
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.dependencyGraphGenerator) apply false
+    alias(libs.plugins.firebaseCrashlytics) apply false
+    alias(libs.plugins.googleServices) apply false
+    alias(libs.plugins.kotlin) apply false
+    alias(libs.plugins.kotlinSerialization) apply false
+    alias(libs.plugins.mokoResources) apply false
+    alias(libs.plugins.sqlDelight) apply false
+    alias(libs.plugins.spotless)
+}
+
 buildscript {
     repositories {
         gradlePluginPortal()
@@ -6,16 +20,7 @@ buildscript {
     }
 
     dependencies {
-        classpath(libs.kotlin.gradlePlugin)
-        classpath(libs.kotlin.serialization)
-        classpath(libs.android.gradlePlugin)
-        classpath(libs.google.firebase.crashlyticsGradle)
         classpath(libs.google.ossLicensesPlugin)
-        classpath(libs.google.services)
-        classpath(libs.moko.resources.generator)
-        classpath(libs.sqldelight.gradlePlugin)
-        classpath(libs.spotless.gradlePlugin)
-        classpath(libs.dependencyGraphGenerator)
     }
 }
 

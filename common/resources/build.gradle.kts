@@ -1,16 +1,13 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.mokoResources)
     id("todometer.spotless")
-    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 group = "dev.sergiobelda.todometer.common.resources"
 version = "1.0"
-
-repositories {
-    google()
-}
 
 kotlin {
     android()
@@ -69,11 +66,15 @@ android {
     sourceSets["main"].res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
     defaultConfig {
         minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
     namespace = "dev.sergiobelda.todometer.common.resources"
     lint {
         abortOnError = false
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 

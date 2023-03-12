@@ -27,7 +27,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
-import androidx.compose.ui.window.Application
+import androidx.compose.ui.window.ComposeUIViewController
 import dev.icerock.moko.resources.desc.desc
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.resources.MR
@@ -39,7 +39,7 @@ fun main() {
 
     defaultUIKitMain(
         appName,
-        Application(appName) {
+        ComposeUIViewController {
             ToDometerAppTheme {
                 Scaffold(
                     topBar = {
@@ -62,7 +62,7 @@ fun main() {
                             Icon(Icons.Rounded.Add, contentDescription = null)
                         }
                     }
-                ) { paddingValues ->
+                ) {
                 }
             }
         }

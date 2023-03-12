@@ -2,7 +2,7 @@
 plugins {
     application
     kotlin("jvm") version libs.versions.kotlin.get()
-    id("org.jetbrains.kotlin.plugin.serialization") version libs.versions.kotlin.get()
+    alias(libs.plugins.kotlinSerialization)
 }
 
 group = "dev.sergiobelda.todometer.backend"
