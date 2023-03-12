@@ -87,7 +87,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListItem
@@ -164,6 +166,7 @@ internal fun HomeScreen(
                 openSourceLicensesClick = {
                     scope.launch {
                         sheetState.hide()
+                        context.launchActivity<OssLicensesMenuActivity>()
                     }
                 },
                 aboutClick = {

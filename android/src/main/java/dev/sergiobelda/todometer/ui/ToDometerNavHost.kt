@@ -24,6 +24,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.android.extensions.openWebPage
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtask.navigateToAddTask
@@ -105,7 +107,7 @@ internal fun ToDometerNavHost(
         composable(AboutDestination.route) {
             AboutScreen(
                 openGithub = { context.openWebPage(GITHUB_URL) },
-                openLicenses = {},
+                openLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
                 navigateBack = navigateBackAction
             )
         }
