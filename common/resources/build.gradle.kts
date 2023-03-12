@@ -9,6 +9,10 @@ plugins {
 group = "dev.sergiobelda.todometer.common.resources"
 version = "1.0"
 
+repositories {
+    google()
+}
+
 kotlin {
     android()
     jvm("desktop")

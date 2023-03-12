@@ -7,6 +7,10 @@ plugins {
 
 version = "1.0"
 
+repositories {
+    google()
+}
+
 kotlin {
     android()
     jvm("desktop")
