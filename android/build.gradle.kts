@@ -1,10 +1,10 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.composeMultiplatform)
-    id("com.android.application")
+    alias(libs.plugins.androidApplication)
     id("com.google.android.gms.oss-licenses-plugin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.firebaseCrashlytics)
     kotlin("android")
     kotlin("kapt")
     id("todometer.spotless")
@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+
         versionCode = 1232400
         versionName = "android-2.3.2"
     }
@@ -44,7 +44,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
     }
     namespace = "dev.sergiobelda.todometer"
 }

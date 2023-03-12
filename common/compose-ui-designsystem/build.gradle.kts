@@ -2,16 +2,12 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
-    id("com.android.library")
+    alias(libs.plugins.androidLibrary)
     id("todometer.spotless")
 }
 
 group = "dev.sergiobelda.todometer.common.compose.ui.designsystem"
 version = "1.0"
-
-repositories {
-    google()
-}
 
 kotlin {
     android()
@@ -78,7 +74,12 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+
     }
     namespace = "dev.sergiobelda.todometer.common.compose.ui.designsystem"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 }
