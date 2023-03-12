@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2022 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -36,21 +35,20 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="app" android:host="open.add.task" />
+                <data
+                    android:scheme="app"
+                    android:host="open.add.task" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="app" android:host="open.task" />
+                <data
+                    android:scheme="app"
+                    android:host="open.task" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/Theme.ToDometer" />
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/Theme.ToDometer" />
 
-        <receiver android:name="dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver"
+        <receiver
+            android:name="dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver"
             android:label="ToDometer"
             android:exported="true">
             <intent-filter>

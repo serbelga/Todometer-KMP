@@ -2,7 +2,6 @@
 plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidApplication)
-    id("com.google.android.gms.oss-licenses-plugin")
     alias(libs.plugins.googleServices)
     alias(libs.plugins.firebaseCrashlytics)
     kotlin("android")

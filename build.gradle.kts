@@ -12,26 +12,6 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath(libs.google.ossLicensesPlugin)
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    }
-}
-
 subprojects {
     if (!project.name.contains("ios")) {
         apply("${rootDir}/ktlint.gradle.kts")
