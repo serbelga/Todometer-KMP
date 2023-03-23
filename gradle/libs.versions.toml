@@ -30,7 +30,8 @@ ktlint = "0.48.2"
 ktor = "2.2.4"
 lifecycle = "2.6.1"
 material = "1.8.0"
-mockk = "1.12.4"
+mockk = "1.13.4"
+mockkCommon = "1.12.5"
 mokoResources = "0.20.1"
 navigation = "2.5.3"
 ossLicenses = "0.10.6"
@@ -123,7 +124,7 @@ logback = "ch.qos.logback:logback-classic:1.4.6"
 material = { module = "com.google.android.material:material", version.ref = "material" }
 
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
-mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockk" }
+mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }
 
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "mokoResources" }
 moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "mokoResources" }
