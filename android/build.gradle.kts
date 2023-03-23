@@ -59,15 +59,16 @@ dependencies {
     implementation(projects.common.resources)
     implementation(projects.common.ui)
 
-    implementation(platform(libs.androidx.compose.composeBom))
+    implementation(compose.animationGraphics)
+
     implementation(libs.androidx.activityCompose)
-    implementation(libs.androidx.compose.animation.graphics)
-    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.viewmodelCompose)
+
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.splashscreen)
 
