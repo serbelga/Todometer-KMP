@@ -1,5 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.firebaseCrashlytics)
@@ -65,12 +66,13 @@ dependencies {
     implementation(projects.common.resources)
     implementation(projects.common.ui)
 
-    implementation(platform(libs.androidx.compose.composeBom))
+    implementation(compose.foundation)
+    implementation(compose.materialIconsExtended)
+    implementation(compose.uiTooling)
+
     implementation(libs.androidx.activityCompose)
+
     implementation(libs.androidx.coreKtx)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material.iconsExtended)
-    implementation(libs.androidx.compose.ui.toolingPreview)
 
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
