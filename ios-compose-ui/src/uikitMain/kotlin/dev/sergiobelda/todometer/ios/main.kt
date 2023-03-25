@@ -16,10 +16,6 @@
 
 package dev.sergiobelda.todometer.ios
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -31,6 +27,8 @@ import androidx.compose.ui.window.ComposeUIViewController
 import dev.icerock.moko.resources.desc.desc
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,20 +44,26 @@ fun main() {
                         TopAppBar(
                             navigationIcon = {
                                 IconButton(onClick = {}) {
-                                    Icon(Icons.Rounded.Menu, contentDescription = null)
+                                    Icon(
+                                        painterResource(ToDometerIcons.Menu),
+                                        contentDescription = null
+                                    )
                                 }
                             },
                             title = { ToDometerTitle() },
                             actions = {
                                 IconButton(onClick = {}) {
-                                    Icon(Icons.Rounded.MoreVert, contentDescription = null)
+                                    Icon(
+                                        painterResource(ToDometerIcons.MoreVert),
+                                        contentDescription = null
+                                    )
                                 }
                             }
                         )
                     },
                     floatingActionButton = {
                         FloatingActionButton(onClick = {}) {
-                            Icon(Icons.Rounded.Add, contentDescription = null)
+                            Icon(painterResource(ToDometerIcons.Add), contentDescription = null)
                         }
                     }
                 ) {

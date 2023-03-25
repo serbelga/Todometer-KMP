@@ -38,13 +38,13 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(ToDometerSymbols.isotype),
+            painter = painterResource(ToDometerSymbols.IsotypeMonochrome),
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null,
             modifier = Modifier.size(24.dp)
         )
         Text(
-            text = stringResource(resource = MR.strings.app_name),
+            text = stringResource(MR.strings.app_name),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(start = 6.dp, bottom = 4.dp)
         )

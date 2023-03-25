@@ -29,17 +29,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Replay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedLayout
@@ -65,8 +58,11 @@ import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
-import dev.sergiobelda.todometer.wear.R
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -108,7 +104,7 @@ internal fun TaskListTasksScreen(
             if (!taskListTasksUiState.isLoadingTaskList) {
                 when {
                     taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
-                        item { Text(stringResource(R.string.default_task_list_name)) }
+                        item { Text(stringResource(MR.strings.default_task_list_name)) }
                     taskListTasksUiState.taskList != null ->
                         item { Text(taskListTasksUiState.taskList.name) }
                 }
@@ -119,7 +115,7 @@ internal fun TaskListTasksScreen(
                     item { ToDometerLoadingProgress() }
                 }
                 taskListTasksUiState.tasks.isEmpty() -> {
-                    item { Text(text = stringResource(id = R.string.no_tasks)) }
+                    item { Text(text = stringResource(MR.strings.no_tasks)) }
                 }
                 else -> {
                     items(taskListTasksUiState.tasks, key = { it.id }) { task ->
@@ -198,9 +194,9 @@ private fun TaskItem(
         onClick = onClick,
         toggleControl = {
             if (isTaskDone) {
-                Icon(Icons.Rounded.Replay, null)
+                Icon(painterResource(ToDometerIcons.Replay), null)
             } else {
-                Icon(Icons.Rounded.Check, null)
+                Icon(painterResource(ToDometerIcons.Check), null)
             }
         },
         colors = ToggleChipDefaults.splitToggleChipColors(uncheckedToggleControlColor = MaterialTheme.colors.secondary),
@@ -210,7 +206,7 @@ private fun TaskItem(
 
 @Composable
 private fun AddTaskButton(onComplete: (String) -> Unit) {
-    val taskTitleInput = stringResource(id = R.string.task_title_input)
+    val taskTitleInput = stringResource(MR.strings.task_title_input)
     val addTaskLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -221,10 +217,10 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(Icons.Rounded.Add, null)
+            Icon(painterResource(ToDometerIcons.Add), null)
         },
         label = {
-            Text(text = stringResource(id = R.string.add_task))
+            Text(text = stringResource(MR.strings.add_task))
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -257,10 +253,10 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(Icons.Outlined.Edit, null)
+            Icon(painterResource(ToDometerIcons.Edit), null)
         },
         label = {
-            Text(text = stringResource(R.string.edit_task_list))
+            Text(text = stringResource(MR.strings.edit_task_list))
         },
         onClick = {
             val intent: Intent =
@@ -287,10 +283,13 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(Icons.Outlined.Delete, null)
+            Icon(
+                painterResource(ToDometerIcons.Delete),
+                stringResource(MR.strings.delete_task_list)
+            )
         },
         label = {
-            Text(text = stringResource(R.string.delete_task_list))
+            Text(text = stringResource(MR.strings.delete_task_list))
         },
         onClick = onClick,
         modifier = Modifier.fillMaxWidth()

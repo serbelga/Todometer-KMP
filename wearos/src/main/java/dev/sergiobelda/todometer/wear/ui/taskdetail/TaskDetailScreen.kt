@@ -27,13 +27,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
@@ -47,7 +43,10 @@ import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -113,10 +112,10 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(Icons.Outlined.Edit, null)
+            Icon(painterResource(ToDometerIcons.Edit), null)
         },
         label = {
-            Text(text = stringResource(R.string.edit_task))
+            Text(text = stringResource(MR.strings.edit_task))
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -142,10 +141,10 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(Icons.Outlined.Delete, null)
+            Icon(painterResource(ToDometerIcons.Delete), stringResource(MR.strings.delete_task))
         },
         label = {
-            Text(text = stringResource(R.string.delete_task))
+            Text(text = stringResource(MR.strings.delete_task))
         },
         onClick = onClick,
         modifier = Modifier.fillMaxWidth()

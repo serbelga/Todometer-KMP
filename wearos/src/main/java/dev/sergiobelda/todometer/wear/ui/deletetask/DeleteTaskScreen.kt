@@ -16,18 +16,16 @@
 
 package dev.sergiobelda.todometer.wear.ui.deletetask
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
-import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -39,9 +37,14 @@ internal fun DeleteTaskScreen(
     deleteTaskViewModel: DeleteTaskViewModel = getViewModel(parameters = { parametersOf(taskId) })
 ) {
     Alert(
-        icon = { Icon(Icons.Outlined.Delete, null) },
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.Delete),
+                stringResource(MR.strings.delete_task)
+            )
+        },
         title = {},
-        content = { Text(stringResource(R.string.delete_task_question)) },
+        content = { Text(stringResource(MR.strings.delete_task_question)) },
         positiveButton = {
             Button(
                 onClick = {
@@ -49,12 +52,12 @@ internal fun DeleteTaskScreen(
                     onDeleteTask()
                 }
             ) {
-                Icon(Icons.Rounded.Check, null)
+                Icon(painterResource(ToDometerIcons.Check), null)
             }
         },
         negativeButton = {
             Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateBack) {
-                Icon(Icons.Rounded.Clear, null)
+                Icon(painterResource(ToDometerIcons.Close), null)
             }
         }
     )

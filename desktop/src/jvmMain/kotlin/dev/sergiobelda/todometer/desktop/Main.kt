@@ -30,12 +30,13 @@ import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
-import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
+import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.desktop.di.viewModelModule
 import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
@@ -59,7 +60,7 @@ fun main() = application {
             size = DpSize(600.dp, 800.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
-        icon = PainterResources.iconToDometer()
+        icon = painterResource(ToDometerSymbols.IsotypeMonochrome)
     ) {
         val navigationController by remember { mutableStateOf(NavigationController()) }
         ToDometerAppTheme {
@@ -73,7 +74,7 @@ fun main() = application {
                             navigationController.navigateTo(EditTaskListDestination.route)
                         },
                         addTask = {
-                            navigationController.navigateTo(EditTaskListDestination.route)
+                            navigationController.navigateTo(AddTaskDestination.route)
                         },
                         openTask = { taskId ->
                             navigationController.navigateTo(

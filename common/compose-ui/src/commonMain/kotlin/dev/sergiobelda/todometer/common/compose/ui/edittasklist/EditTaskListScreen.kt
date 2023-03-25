@@ -19,9 +19,6 @@ package dev.sergiobelda.todometer.common.compose.ui.edittasklist
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,6 +40,8 @@ import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLo
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,7 +62,7 @@ fun EditTaskListScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            Icons.Rounded.ArrowBack,
+                            painterResource(ToDometerIcons.ArrowBack),
                             contentDescription = "Back",
                             tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
@@ -83,7 +82,7 @@ fun EditTaskListScreen(
                             }
                         ) {
                             Icon(
-                                Icons.Rounded.Check,
+                                painterResource(ToDometerIcons.Check),
                                 contentDescription = "Save",
                                 tint = MaterialTheme.colorScheme.primary
                             )

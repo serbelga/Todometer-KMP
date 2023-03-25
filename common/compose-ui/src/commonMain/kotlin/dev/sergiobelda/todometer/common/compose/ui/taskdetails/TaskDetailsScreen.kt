@@ -33,10 +33,6 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -68,6 +64,8 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 private val SectionPadding: Dp = 32.dp
@@ -103,7 +101,7 @@ fun TaskDetailsScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            Icons.Rounded.ArrowBack,
+                            painterResource(ToDometerIcons.ArrowBack),
                             contentDescription = "Back",
                             tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
@@ -113,7 +111,7 @@ fun TaskDetailsScreen(
                     if (!taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null) {
                         IconButton(onClick = navigateToEditTask) {
                             Icon(
-                                Icons.Outlined.Edit,
+                                painterResource(ToDometerIcons.Edit),
                                 contentDescription = stringResource(MR.strings.edit_task),
                                 tint = MaterialTheme.colorScheme.primary
                             )
@@ -248,7 +246,7 @@ private fun LazyItemScope.TaskChecklistItem(
         )
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
-                Icons.Rounded.Clear,
+                painterResource(ToDometerIcons.Close),
                 contentDescription = stringResource(MR.strings.clear),
                 tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
             )

@@ -22,9 +22,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,6 +35,8 @@ import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTit
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +53,7 @@ internal fun ToDometerTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = onMenuClick) {
                         Icon(
-                            Icons.Rounded.Menu,
+                            painterResource(ToDometerIcons.Menu),
                             contentDescription = "Menu",
                             tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
@@ -63,7 +62,7 @@ internal fun ToDometerTopAppBar(
                 actions = {
                     IconButton(onClick = onMoreClick) {
                         Icon(
-                            Icons.Rounded.MoreVert,
+                            painterResource(ToDometerIcons.MoreVert),
                             contentDescription = "More",
                             tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )

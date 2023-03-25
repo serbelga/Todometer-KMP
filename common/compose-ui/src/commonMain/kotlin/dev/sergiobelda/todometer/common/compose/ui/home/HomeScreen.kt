@@ -43,10 +43,6 @@ import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.ExpandLess
-import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.DrawerValue
@@ -129,7 +125,7 @@ fun HomeScreen(
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
     var chooseThemeAlertDialogState by remember { mutableStateOf(false) }
 
-    val defaultTaskListName = stringResource(resource = MR.strings.default_task_list_name)
+    val defaultTaskListName = stringResource(MR.strings.default_task_list_name)
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -230,8 +226,8 @@ fun HomeScreen(
                     } else {
                         if (homeUiState.tasks.isEmpty()) {
                             TaskListIllustration(
-                                painterResource(resource = ToDometerIllustrations.noTasks),
-                                stringResource(resource = MR.strings.no_tasks)
+                                painterResource(ToDometerIllustrations.NoTasks),
+                                stringResource(MR.strings.no_tasks)
                             )
                         } else {
                             TasksListView(
@@ -257,8 +253,8 @@ fun HomeScreen(
                         onClick = navigateToAddTask
                     ) {
                         Icon(
-                            Icons.Rounded.Add,
-                            contentDescription = stringResource(resource = MR.strings.add_task)
+                            painterResource(ToDometerIcons.Add),
+                            contentDescription = stringResource(MR.strings.add_task)
                         )
                     }
                 },
@@ -291,12 +287,12 @@ private fun DrawerContent(
             .padding(start = 16.dp, end = 16.dp)
     ) {
         Text(
-            text = stringResource(resource = MR.strings.task_lists),
+            text = stringResource(MR.strings.task_lists),
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = onAddTaskList) {
-            Text(stringResource(resource = MR.strings.add_task_list))
+            Text(stringResource(MR.strings.add_task_list))
         }
     }
     LazyColumn(modifier = Modifier.padding(8.dp)) {
@@ -352,11 +348,14 @@ private fun TasksListView(
                     trailingContent = {
                         if (areTasksDoneVisible) {
                             Icon(
-                                Icons.Rounded.ExpandLess,
+                                painterResource(ToDometerIcons.ExpandLess),
                                 contentDescription = null
                             )
                         } else {
-                            Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                            Icon(
+                                painterResource(ToDometerIcons.ExpandMore),
+                                contentDescription = null
+                            )
                         }
                     },
                     modifier = Modifier.animateItemPlacement()
@@ -382,9 +381,9 @@ private fun TasksListView(
     }
     if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
         TaskListIllustration(
-            painterResource(resource = ToDometerIllustrations.completedTasks),
-            stringResource(resource = MR.strings.you_have_completed_all_tasks),
-            stringResource(resource = MR.strings.congratulations)
+            painterResource(ToDometerIllustrations.CompletedTasks),
+            stringResource(MR.strings.you_have_completed_all_tasks),
+            stringResource(MR.strings.congratulations)
         )
     }
 }
@@ -442,13 +441,13 @@ private fun SwipeableTaskItem(
                         icon,
                         atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
                     ),
-                    contentDescription = stringResource(resource = MR.strings.delete_task),
+                    contentDescription = stringResource(MR.strings.delete_task),
                     tint = tint
                 )
                 */
                 Icon(
-                    painter = painterResource(resource = ToDometerIcons.delete),
-                    contentDescription = stringResource(resource = MR.strings.delete_task),
+                    painter = painterResource(ToDometerIcons.Delete),
+                    contentDescription = stringResource(MR.strings.delete_task),
                     tint = tint
                 )
             }

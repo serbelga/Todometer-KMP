@@ -21,9 +21,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -42,6 +39,8 @@ import dev.sergiobelda.todometer.common.compose.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.common.compose.ui.preferences.themeName
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -67,14 +66,14 @@ fun MoreBottomSheet(
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
             TextButton(onClick = openSourceLicensesClick) {
                 Text(
-                    stringResource(resource = MR.strings.open_source_licenses),
+                    stringResource(MR.strings.open_source_licenses),
                     style = MaterialTheme.typography.labelLarge
                 )
             }
             Text("·")
             TextButton(onClick = aboutClick) {
                 Text(
-                    stringResource(resource = MR.strings.about),
+                    stringResource(MR.strings.about),
                     style = MaterialTheme.typography.labelLarge
                 )
             }
@@ -91,14 +90,14 @@ private fun EditTaskListItem(
     ListItem(
         headlineText = {
             Text(
-                stringResource(resource = MR.strings.edit_task_list),
+                stringResource(MR.strings.edit_task_list),
                 style = MaterialTheme.typography.titleSmall
             )
         },
         supportingText = {
             if (!editTaskListEnabled) {
                 Text(
-                    stringResource(resource = MR.strings.cannot_edit_this_task_list),
+                    stringResource(MR.strings.cannot_edit_this_task_list),
                     style = MaterialTheme.typography.labelLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -107,8 +106,8 @@ private fun EditTaskListItem(
         },
         leadingContent = {
             Icon(
-                Icons.Outlined.Edit,
-                contentDescription = stringResource(resource = MR.strings.edit_task_list)
+                painterResource(ToDometerIcons.Edit),
+                contentDescription = stringResource(MR.strings.edit_task_list)
             )
         },
         modifier = Modifier.clickable(
@@ -128,14 +127,14 @@ private fun DeleteTaskListItem(
     ListItem(
         headlineText = {
             Text(
-                stringResource(resource = MR.strings.delete_task_list),
+                stringResource(MR.strings.delete_task_list),
                 style = MaterialTheme.typography.titleSmall
             )
         },
         supportingText = {
             if (!deleteTaskListEnabled) {
                 Text(
-                    stringResource(resource = MR.strings.cannot_delete_this_task_list),
+                    stringResource(MR.strings.cannot_delete_this_task_list),
                     style = MaterialTheme.typography.labelLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -144,8 +143,8 @@ private fun DeleteTaskListItem(
         },
         leadingContent = {
             Icon(
-                Icons.Outlined.Delete,
-                contentDescription = stringResource(resource = MR.strings.delete_task_list)
+                painterResource(ToDometerIcons.Delete),
+                contentDescription = stringResource(MR.strings.delete_task_list)
             )
         },
         modifier = Modifier.clickable(
@@ -165,7 +164,7 @@ private fun ChooseThemeListItem(
     ListItem(
         headlineText = {
             Text(
-                stringResource(resource = MR.strings.theme),
+                stringResource(MR.strings.theme),
                 style = MaterialTheme.typography.titleSmall
             )
         },

@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-     Copyright 2021 Sergio Belda
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2023 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -15,9 +16,9 @@
     android:width="24dp"
     android:height="24dp"
     android:tint="?attr/colorControlNormal"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:viewportWidth="960"
+    android:viewportHeight="960">
     <path
-        android:fillColor="@android:color/white"
-        android:pathData="M6,19c0,1.1 0.9,2 2,2h8c1.1,0 2,-0.9 2,-2V7H6v12zM19,4h-3.5l-1,-1h-5l-1,1H5v2h14V4z" />
+        android:fillColor="#FF000000"
+        android:pathData="M200,760h56l345,-345 -56,-56 -345,345v56ZM772,357L602,189l56,-56q23,-23 56.5,-23t56.5,23l56,56q23,23 24,55.5T829,300l-57,57ZM714,416L290,840L120,840L120,670l424,-424 170,170ZM573,387 L545,359 601,415 573,387Z" />
 </vector>

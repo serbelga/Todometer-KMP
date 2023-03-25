@@ -24,10 +24,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
+import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 internal fun PrivacyPolicyDialog(
@@ -35,29 +35,29 @@ internal fun PrivacyPolicyDialog(
 ) {
     AlertDialog(
         title = {
-            Text(stringResource(id = R.string.privacy_policy))
+            Text(stringResource(MR.strings.privacy_policy))
         },
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_user_data))
-                Text(stringResource(id = R.string.privacy_policy_user_data_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_user_data))
+                Text(stringResource(MR.strings.privacy_policy_user_data_body))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_permissions))
-                Text(stringResource(id = R.string.privacy_policy_permissions_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_permissions))
+                Text(stringResource(MR.strings.privacy_policy_permissions_body))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_device_and_network_abuse))
-                Text(stringResource(id = R.string.privacy_policy_device_and_network_abuse_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_device_and_network_abuse))
+                Text(stringResource(MR.strings.privacy_policy_device_and_network_abuse_body))
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(id = R.string.privacy_policy_public))
-                Text(stringResource(id = R.string.privacy_policy_public_body))
+                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_public))
+                Text(stringResource(MR.strings.privacy_policy_public_body))
             }
         },
         confirmButton = {
             TextButton(
                 onClick = onDismissRequest
             ) {
-                Text(stringResource(android.R.string.ok))
+                Text(stringResource(MR.strings.ok))
             }
         }
     )

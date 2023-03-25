@@ -28,6 +28,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 api(libs.moko.resources.compose)
+                implementation(libs.material)
             }
         }
         val androidUnitTest by getting

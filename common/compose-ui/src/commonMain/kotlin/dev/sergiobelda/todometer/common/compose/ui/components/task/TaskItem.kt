@@ -30,9 +30,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Replay
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -48,6 +45,8 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerT
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -90,7 +89,7 @@ fun TaskItem(
                         onClick = { onDoneClick(taskItem.id) }
                     ) {
                         Icon(
-                            Icons.Rounded.Check,
+                            painterResource(ToDometerIcons.Check),
                             contentDescription = "Done",
                             tint = ToDometerTheme.toDometerColors.check
                         )
@@ -108,7 +107,7 @@ fun TaskItem(
                         onClick = { onDoingClick(taskItem.id) }
                     ) {
                         Icon(
-                            Icons.Filled.Replay,
+                            painterResource(ToDometerIcons.Replay),
                             contentDescription = "Doing",
                             tint = ToDometerTheme.toDometerColors.check
                         )

@@ -23,9 +23,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Code
-import androidx.compose.material.icons.rounded.Description
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -39,14 +36,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.R
 import dev.sergiobelda.todometer.common.android.extensions.getVersionName
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutItemCard
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutTopBar
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
+import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -72,31 +70,31 @@ fun AboutScreen(
                 onCardClick = openGithub,
                 icon = {
                     Icon(
-                        painterResource(R.drawable.ic_github_24),
-                        contentDescription = stringResource(id = R.string.github)
+                        painterResource(ToDometerIcons.GitHub),
+                        contentDescription = stringResource(MR.strings.github)
                     )
                 },
-                text = { Text(stringResource(id = R.string.github)) }
+                text = { Text(stringResource(MR.strings.github)) }
             )
             AboutItemCard(
                 onCardClick = { privacyPolicyDialogState = true },
                 icon = {
                     Icon(
-                        Icons.Rounded.Description,
-                        contentDescription = stringResource(id = R.string.privacy_policy)
+                        painterResource(ToDometerIcons.Description),
+                        contentDescription = stringResource(MR.strings.privacy_policy)
                     )
                 },
-                text = { Text(stringResource(id = R.string.privacy_policy)) }
+                text = { Text(stringResource(MR.strings.privacy_policy)) }
             )
             AboutItemCard(
                 onCardClick = openLicenses,
                 icon = {
                     Icon(
-                        Icons.Rounded.Code,
-                        contentDescription = stringResource(id = R.string.open_source_licenses)
+                        painterResource(ToDometerIcons.Code),
+                        contentDescription = stringResource(MR.strings.open_source_licenses)
                     )
                 },
-                text = { Text(stringResource(id = R.string.open_source_licenses)) }
+                text = { Text(stringResource(MR.strings.open_source_licenses)) }
             )
         }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {

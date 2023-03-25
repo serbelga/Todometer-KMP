@@ -30,13 +30,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.AutoCenteringParams
 import androidx.wear.compose.material.Chip
@@ -54,7 +50,11 @@ import androidx.wear.compose.material.items
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.wear.R
+import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 
@@ -90,7 +90,7 @@ internal fun HomeScreen(
             } else {
                 item {
                     TaskListItem(
-                        stringResource(id = R.string.default_task_list_name),
+                        stringResource(MR.strings.default_task_list_name),
                         onClick = { openTaskList(null) }
                     )
                 }
@@ -113,11 +113,11 @@ private fun ToDometerTitle() {
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Image(
-            painterResource(R.drawable.isotype_dark),
+            painterResource(ToDometerSymbols.IsotypeDark),
             contentDescription = null,
             modifier = Modifier.size(16.dp)
         )
-        Text(stringResource(R.string.app_name))
+        Text(stringResource(MR.strings.app_name))
     }
 }
 
@@ -139,7 +139,7 @@ private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
 
 @Composable
 private fun AddTaskListButton(onComplete: (String) -> Unit) {
-    val taskListNameInput = stringResource(id = R.string.task_list_name_input)
+    val taskListNameInput = stringResource(MR.strings.task_list_name_input)
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -150,12 +150,12 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(Icons.Rounded.Add, null)
+            Icon(painterResource(ToDometerIcons.Add), null)
         },
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = stringResource(id = R.string.add_task_list)
+                text = stringResource(MR.strings.add_task_list)
             )
         },
         onClick = {

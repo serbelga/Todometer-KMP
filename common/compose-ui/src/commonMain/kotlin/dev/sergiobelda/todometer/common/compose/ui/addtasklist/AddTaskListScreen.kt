@@ -21,9 +21,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -49,6 +46,8 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -118,7 +117,7 @@ internal fun AddTaskListTopBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    Icons.Rounded.ArrowBack,
+                    painterResource(ToDometerIcons.ArrowBack),
                     contentDescription = "Back",
                     tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                 )
@@ -131,7 +130,7 @@ internal fun AddTaskListTopBar(
                 onClick = onSaveButtonClick
             ) {
                 Icon(
-                    Icons.Rounded.Check,
+                    painterResource(ToDometerIcons.Check),
                     contentDescription = "Save",
                     tint = saveButtonTintColor
                 )
