@@ -22,5 +22,21 @@ import androidx.compose.ui.res.painterResource
 
 actual object PainterResources {
     @Composable
-    actual fun iconToDometer(): Painter = painterResource("images/isotype_monochrome.svg")
+    actual fun iconToDometer(): Painter =
+        painterResource("images/isotype_monochrome.svg")
+
+    // TODO: Update SVG
+    @Composable
+    actual fun iconDelete(): Painter =
+        painterResource("images/isotype_monochrome.svg")
+
+    // TODO: Update SVG
+    @Composable
+    actual fun completedTasks(): Painter =
+        painterResource("images/isotype_monochrome.svg")
+
+    // TODO: Update SVG
+    @Composable
+    actual fun noTasks(): Painter =
+        painterResource("images/isotype_monochrome.svg")
 }

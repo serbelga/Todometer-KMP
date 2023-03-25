@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2022 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -26,11 +25,14 @@
     <string name="description">Descripció</string>
     <string name="no_description">No hi ha descripció</string>
     <string name="save">Guardar</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_task">Eliminar tasca</string>
     <string name="delete_task_question">Vols eliminar aquesta tasca?</string>
     <string name="delete_task_list">Eliminar llista de tasques</string>
-    <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de tasques. Vols continuar?</string>
+    <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de
+        tasques. Vols continuar?
+    </string>
     <string name="add">Afegir</string>
     <string name="add_task">Afegir tasca</string>
     <string name="add_task_list">Afegir llista de tasques</string>

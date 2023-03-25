@@ -48,8 +48,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

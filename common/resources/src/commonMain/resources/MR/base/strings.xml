@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2022 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -26,11 +25,14 @@
     <string name="description">Description</string>
     <string name="no_description">No description provided</string>
     <string name="save">Save</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="delete_task">Delete task</string>
     <string name="delete_task_question">Do you want to delete this task?</string>
     <string name="delete_task_list">Delete task list</string>
-    <string name="delete_task_list_question">All tasks in this task list will be deleted. Do you want to continue?</string>
+    <string name="delete_task_list_question">All tasks in this task list will be deleted. Do you
+        want to continue?
+    </string>
     <string name="add">Add</string>
     <string name="add_task">Add task</string>
     <string name="add_task_list">Add task list</string>
@@ -77,18 +79,22 @@
     </string>
     <string name="privacy_policy_permissions">Permissions</string>
     <string name="privacy_policy_permissions_body">
-        The system does not require the user to grant any location or call and messaging permissions.
+        The system does not require the user to grant any location or call and messaging
+        permissions.
     </string>
     <string name="privacy_policy_device_and_network_abuse">Device and network abuse</string>
     <string name="privacy_policy_device_and_network_abuse_body">
-        The system does not block or interfere with another application that displays advertisements.
+        The system does not block or interfere with another application that displays
+        advertisements.
         It does not provide or provide instructions on how to hack services, software or hardware,
-        or bypass security protections. You do not access or use a service or API in a way that violates
+        or bypass security protections. You do not access or use a service or API in a way that
+        violates
         its terms of service.
     </string>
     <string name="privacy_policy_public">Public</string>
     <string name="privacy_policy_public_body">
-        The system can be used by people over 3 years old. It does not contain violent material, sexual material, or offensive language.
+        The system can be used by people over 3 years old. It does not contain violent material,
+        sexual material, or offensive language.
         Does not contain ads. Sensitive information for minors is not collected.
     </string>
 </resources>

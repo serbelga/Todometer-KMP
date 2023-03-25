@@ -25,4 +25,16 @@ actual object PainterResources {
     @Composable
     actual fun iconToDometer(): Painter =
         BitmapPainter(image = ImageBitmap(width = 24, height = 24))
+
+    @Composable
+    actual fun iconDelete(): Painter =
+        BitmapPainter(image = ImageBitmap(width = 24, height = 24))
+
+    @Composable
+    actual fun completedTasks(): Painter =
+        BitmapPainter(image = ImageBitmap(width = 24, height = 24))
+
+    @Composable
+    actual fun noTasks(): Painter =
+        BitmapPainter(image = ImageBitmap(width = 24, height = 24))
 }

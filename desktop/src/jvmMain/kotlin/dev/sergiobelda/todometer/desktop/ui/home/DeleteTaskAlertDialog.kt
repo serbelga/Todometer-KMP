@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+@Deprecated("Replace by common DeleteTaskAlertDialog")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DeleteTaskAlertDialog(

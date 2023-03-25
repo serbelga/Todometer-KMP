@@ -22,4 +22,13 @@ import androidx.compose.ui.graphics.painter.Painter
 expect object PainterResources {
     @Composable
     fun iconToDometer(): Painter
+
+    @Composable
+    fun iconDelete(): Painter
+
+    @Composable
+    fun completedTasks(): Painter
+
+    @Composable
+    fun noTasks(): Painter
 }

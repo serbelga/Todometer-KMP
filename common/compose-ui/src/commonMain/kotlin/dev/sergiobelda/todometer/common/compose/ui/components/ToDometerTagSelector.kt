@@ -41,9 +41,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {

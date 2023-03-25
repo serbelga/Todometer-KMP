@@ -3,6 +3,7 @@ package dev.sergiobelda.todometer.ui.home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
@@ -12,6 +13,7 @@ fun HomeRoute(
     navigateToEditTaskList: () -> Unit,
     addTask: () -> Unit,
     openTask: (String) -> Unit,
+    openSourceLicenses: () -> Unit,
     about: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
@@ -21,7 +23,8 @@ fun HomeRoute(
         navigateToEditTaskList = navigateToEditTaskList,
         navigateToAddTask = addTask,
         onTaskItemClick = openTask,
-        navigateToAboutClick = about,
+        navigateToOpenSourceLicenses = openSourceLicenses,
+        navigateToAbout = about,
         onTaskItemDoingClick = {
             homeViewModel.setTaskDoing(it)
             updateToDometerWidgetData()

@@ -34,15 +34,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
+import dev.sergiobelda.todometer.common.compose.ui.preferences.themeIcon
+import dev.sergiobelda.todometer.common.compose.ui.preferences.themeName
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.preferences.appThemeMap
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 fun MoreBottomSheet(
@@ -114,7 +114,8 @@ private fun EditTaskListItem(
         modifier = Modifier.clickable(
             enabled = editTaskListEnabled,
             onClick = editTaskListClick
-        ).height(MoreBottomSheetListItemHeight).alpha(if (editTaskListEnabled) Alpha.High else Alpha.Disabled)
+        ).height(MoreBottomSheetListItemHeight)
+            .alpha(if (editTaskListEnabled) Alpha.High else Alpha.Disabled)
     )
 }
 
@@ -150,7 +151,8 @@ private fun DeleteTaskListItem(
         modifier = Modifier.clickable(
             enabled = deleteTaskListEnabled,
             onClick = deleteTaskListClick
-        ).height(MoreBottomSheetListItemHeight).alpha(if (deleteTaskListEnabled) Alpha.High else Alpha.Disabled)
+        ).height(MoreBottomSheetListItemHeight)
+            .alpha(if (deleteTaskListEnabled) Alpha.High else Alpha.Disabled)
     )
 }
 
@@ -168,20 +170,16 @@ private fun ChooseThemeListItem(
             )
         },
         supportingText = {
-            appThemeMap[currentTheme]?.modeNameRes?.let {
-                Text(
-                    stringResource(it),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
+            Text(
+                currentTheme.themeName(),
+                style = MaterialTheme.typography.labelLarge
+            )
         },
         leadingContent = {
-            appThemeMap[currentTheme]?.themeIconRes?.let {
-                Icon(
-                    painterResource(it),
-                    contentDescription = stringResource(resource = MR.strings.theme)
-                )
-            }
+            Icon(
+                currentTheme.themeIcon(),
+                contentDescription = currentTheme.themeName()
+            )
         },
         modifier = Modifier.height(MoreBottomSheetListItemHeight)
             .clickable(onClick = chooseThemeClick)

@@ -30,6 +30,7 @@ import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.common.navigation.NavigationController
@@ -41,8 +42,7 @@ import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
-import dev.sergiobelda.todometer.desktop.ui.home.HomeScreen
-import dev.sergiobelda.todometer.desktop.ui.icons.iconToDometer
+import dev.sergiobelda.todometer.desktop.ui.home.HomeRoute
 import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsRoute
 import dev.sergiobelda.todometer.desktop.ui.theme.ToDometerAppTheme
 
@@ -59,27 +59,30 @@ fun main() = application {
             size = DpSize(600.dp, 800.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
-        icon = iconToDometer()
+        icon = PainterResources.iconToDometer()
     ) {
         val navigationController by remember { mutableStateOf(NavigationController()) }
         ToDometerAppTheme {
             NavigationHost(navigationController, startDestination = HomeDestination.route) {
                 composableNode(destinationId = HomeDestination.route) {
-                    HomeScreen(
-                        navigateToTaskDetail = { taskId ->
-                            navigationController.navigateTo(
-                                TaskDetailsDestination.route,
-                                TaskDetailsDestination.TaskIdArg to taskId
-                            )
-                        },
+                    HomeRoute(
                         navigateToAddTaskList = {
                             navigationController.navigateTo(AddTaskListDestination.route)
                         },
                         navigateToEditTaskList = {
                             navigationController.navigateTo(EditTaskListDestination.route)
                         },
-                        navigateToAddTask = { navigationController.navigateTo(AddTaskDestination.route) },
-                        navigateToAbout = {}
+                        addTask = {
+                            navigationController.navigateTo(EditTaskListDestination.route)
+                        },
+                        openTask = { taskId ->
+                            navigationController.navigateTo(
+                                TaskDetailsDestination.route,
+                                TaskDetailsDestination.TaskIdArg to taskId
+                            )
+                        },
+                        openSourceLicenses = {},
+                        about = {}
                     )
                 }
                 composableNode(destinationId = TaskDetailsDestination.route) {

@@ -24,7 +24,7 @@ import dev.icerock.moko.resources.compose.stringResource
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.resources.MR
 
-// TODO: Replace by material3 implementation when available
+@Deprecated("Replace by common MoreDropdownMenu")
 @Composable
 fun MoreDropdownMenu(
     editTaskListEnabled: Boolean,

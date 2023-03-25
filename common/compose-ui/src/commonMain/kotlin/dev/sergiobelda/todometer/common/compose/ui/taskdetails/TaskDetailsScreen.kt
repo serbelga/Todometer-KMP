@@ -64,11 +64,11 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.Horiz
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 private val SectionPadding: Dp = 32.dp
 

@@ -81,6 +81,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.desktop.koin
 import kotlinx.coroutines.launch
 
+@Deprecated("Replace by common HomeScreen")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeScreen(

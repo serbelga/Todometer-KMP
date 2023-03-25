@@ -27,8 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 fun ToDometerTitle(modifier: Modifier = Modifier) {

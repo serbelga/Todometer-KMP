@@ -39,8 +39,8 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import java.util.concurrent.TimeUnit
 

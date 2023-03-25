@@ -31,10 +31,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 
 private const val DialogTonalElevation = 6
 
+// TODO: Remove
 @Composable
 internal fun ToDometerAlertDialog(
     onDismissRequest: () -> Unit,
@@ -45,12 +45,10 @@ internal fun ToDometerAlertDialog(
     body: @Composable (() -> Unit)? = null,
     shape: Shape = MaterialTheme.shapes.extraLarge,
     backgroundColor: Color = MaterialTheme.colorScheme.surface,
-    contentColor: Color = contentColorFor(backgroundColor),
-    properties: DialogProperties = DialogProperties()
+    contentColor: Color = contentColorFor(backgroundColor)
 ) {
     Dialog(
-        onDismissRequest = onDismissRequest,
-        properties = properties
+        onDismissRequest = onDismissRequest
     ) {
         AlertDialogContent(
             buttons = {
@@ -72,6 +70,7 @@ internal fun ToDometerAlertDialog(
     }
 }
 
+// TODO: Remove
 @Composable
 internal fun AlertDialogContent(
     buttons: @Composable () -> Unit,

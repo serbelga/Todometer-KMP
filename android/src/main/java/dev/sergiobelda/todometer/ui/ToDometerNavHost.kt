@@ -35,6 +35,7 @@ import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.navigateToEditTask
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.navigateToEditTaskList
+import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.navigateToTaskDetails
 import dev.sergiobelda.todometer.common.navigation.Action
@@ -45,7 +46,6 @@ import dev.sergiobelda.todometer.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListRoute
-import dev.sergiobelda.todometer.ui.home.HomeDestination
 import dev.sergiobelda.todometer.ui.home.HomeRoute
 import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsRoute
 
@@ -74,6 +74,7 @@ internal fun ToDometerNavHost(
                 navigateToEditTaskList = action.navigateToEditTaskList,
                 addTask = action.navigateToAddTask,
                 openTask = action.navigateToTaskDetails,
+                openSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
                 about = action.navigateToAbout
             )
         }

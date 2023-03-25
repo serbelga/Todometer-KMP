@@ -24,4 +24,16 @@ import dev.sergiobelda.todometer.common.compose.ui.R
 actual object PainterResources {
     @Composable
     actual fun iconToDometer(): Painter = painterResource(id = R.drawable.isotype_monochrome)
+
+    @Composable
+    actual fun iconDelete(): Painter =
+        painterResource(id = R.drawable.ic_baseline_delete_24)
+
+    @Composable
+    actual fun completedTasks(): Painter =
+        painterResource(id = R.drawable.completed_tasks)
+
+    @Composable
+    actual fun noTasks(): Painter =
+        painterResource(id = R.drawable.no_tasks)
 }

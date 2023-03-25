@@ -59,9 +59,9 @@ import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
