@@ -10,5 +10,5 @@ import androidx.compose.ui.res.painterResource
 actual class PainterResource(@DrawableRes val drawableRes: Int)
 
 @Composable
-actual fun painterResource(painterResource: PainterResource): Painter =
-    painterResource(id = painterResource.drawableRes)
+actual fun painterResource(resource: PainterResource): Painter =
+    painterResource(id = resource.drawableRes)

@@ -3,11 +3,15 @@ package dev.sergiobelda.todometer.common.resources
 actual object ToDometerIcons {
 
     // TODO: Update
-    actual val followSystemTheme: PainterResource =
+    actual val darkTheme: PainterResource =
         PainterResource("images/isotype_monochrome.svg")
 
     // TODO: Update
-    actual val darkTheme: PainterResource =
+    actual val delete: PainterResource =
+        PainterResource("images/isotype_monochrome.svg")
+
+    // TODO: Update
+    actual val followSystemTheme: PainterResource =
         PainterResource("images/isotype_monochrome.svg")
 
     // TODO: Update

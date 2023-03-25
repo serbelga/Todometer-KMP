@@ -1,9 +1,11 @@
 package dev.sergiobelda.todometer.common.resources
 
 expect object ToDometerIcons {
-    val followSystemTheme: PainterResource
-
     val darkTheme: PainterResource
+
+    val delete: PainterResource
+
+    val followSystemTheme: PainterResource
 
     val lightTheme: PainterResource
 }

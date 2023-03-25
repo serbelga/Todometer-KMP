@@ -10,5 +10,5 @@ import androidx.compose.ui.graphics.painter.Painter
 actual class PainterResource(val resourcePath: String)
 
 @Composable
-actual fun painterResource(painterResource: PainterResource): Painter =
+actual fun painterResource(resource: PainterResource): Painter =
     BitmapPainter(image = ImageBitmap(width = 24, height = 24))

@@ -26,8 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -37,7 +38,7 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = PainterResources.iconToDometer(),
+            painter = painterResource(ToDometerSymbols.isotype),
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null,
             modifier = Modifier.size(24.dp)

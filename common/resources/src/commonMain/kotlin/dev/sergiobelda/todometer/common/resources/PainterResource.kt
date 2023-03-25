@@ -6,4 +6,4 @@ import androidx.compose.ui.graphics.painter.Painter
 expect class PainterResource
 
 @Composable
-expect fun painterResource(painterResource: PainterResource): Painter
+expect fun painterResource(resource: PainterResource): Painter

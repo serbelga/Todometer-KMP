@@ -81,12 +81,14 @@ import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTit
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.sheetShape
-import dev.sergiobelda.todometer.common.compose.ui.resources.PainterResources
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.ToDometerIllustrations
+import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import kotlinx.coroutines.launch
 
@@ -228,7 +230,7 @@ fun HomeScreen(
                     } else {
                         if (homeUiState.tasks.isEmpty()) {
                             TaskListIllustration(
-                                PainterResources.noTasks(),
+                                painterResource(resource = ToDometerIllustrations.noTasks),
                                 stringResource(resource = MR.strings.no_tasks)
                             )
                         } else {
@@ -380,7 +382,7 @@ private fun TasksListView(
     }
     if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
         TaskListIllustration(
-            PainterResources.completedTasks(),
+            painterResource(resource = ToDometerIllustrations.completedTasks),
             stringResource(resource = MR.strings.you_have_completed_all_tasks),
             stringResource(resource = MR.strings.congratulations)
         )
@@ -445,7 +447,7 @@ private fun SwipeableTaskItem(
                 )
                 */
                 Icon(
-                    painter = PainterResources.iconDelete(),
+                    painter = painterResource(resource = ToDometerIcons.delete),
                     contentDescription = stringResource(resource = MR.strings.delete_task),
                     tint = tint
                 )

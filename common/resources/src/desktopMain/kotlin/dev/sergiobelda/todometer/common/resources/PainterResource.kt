@@ -9,5 +9,5 @@ import androidx.compose.ui.res.painterResource
 actual class PainterResource(val resourcePath: String)
 
 @Composable
-actual fun painterResource(painterResource: PainterResource): Painter =
-    painterResource(resourcePath = painterResource.resourcePath)
+actual fun painterResource(resource: PainterResource): Painter =
+    painterResource(resourcePath = resource.resourcePath)
