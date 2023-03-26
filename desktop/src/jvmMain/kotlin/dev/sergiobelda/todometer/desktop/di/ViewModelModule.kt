@@ -21,6 +21,7 @@ import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.desktop.ui.edittask.EditTaskViewModel
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.desktop.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.desktop.ui.settings.SettingsViewModel
 import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -32,4 +33,5 @@ internal val viewModelModule = module {
     factoryOf(::AddTaskViewModel)
     factoryOf(::EditTaskViewModel)
     factoryOf(::HomeViewModel)
+    factoryOf(::SettingsViewModel)
 }

@@ -22,6 +22,7 @@ import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.ui.edittask.EditTaskViewModel
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.ui.settings.SettingsViewModel
 import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -39,4 +40,5 @@ internal val viewModelModule = module {
         TaskDetailsViewModel(parameters.get(), get(), get(), get(), get(), get(), get())
     }
     viewModelOf(::MainViewModel)
+    viewModelOf(::SettingsViewModel)
 }

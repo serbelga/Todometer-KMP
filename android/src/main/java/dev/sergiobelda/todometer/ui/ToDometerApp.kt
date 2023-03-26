@@ -18,8 +18,8 @@ package dev.sergiobelda.todometer.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.navigation.Action
@@ -31,7 +31,7 @@ internal fun ToDometerApp(mainViewModel: MainViewModel = getViewModel()) {
     val navController = rememberNavController()
     val action = remember(navController) { Action(navController) }
 
-    val appThemeState = mainViewModel.appTheme.collectAsState()
+    val appThemeState = mainViewModel.appTheme.collectAsStateWithLifecycle()
     val darkTheme: Boolean = when (appThemeState.value) {
         AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
         AppTheme.DARK_THEME -> true
