@@ -30,6 +30,7 @@ import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.core.di.initKoin
 import dev.sergiobelda.todometer.common.navigation.NavigationController
@@ -44,6 +45,7 @@ import dev.sergiobelda.todometer.desktop.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
 import dev.sergiobelda.todometer.desktop.ui.home.HomeRoute
+import dev.sergiobelda.todometer.desktop.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsRoute
 import dev.sergiobelda.todometer.desktop.ui.theme.ToDometerAppTheme
 
@@ -73,17 +75,19 @@ fun main() = application {
                         navigateToEditTaskList = {
                             navigationController.navigateTo(EditTaskListDestination.route)
                         },
-                        addTask = {
+                        navigateToAddTask = {
                             navigationController.navigateTo(AddTaskDestination.route)
                         },
-                        openTask = { taskId ->
+                        navigateToTaskDetails = { taskId ->
                             navigationController.navigateTo(
                                 TaskDetailsDestination.route,
                                 TaskDetailsDestination.TaskIdArg to taskId
                             )
                         },
-                        openSourceLicenses = {},
-                        about = {}
+                        navigateToSettings = {
+                            navigationController.navigateTo(SettingsDestination.route)
+                        },
+                        navigateToAbout = {}
                     )
                 }
                 composableNode(destinationId = TaskDetailsDestination.route) {
@@ -128,6 +132,11 @@ fun main() = application {
                                 TaskDetailsDestination.TaskIdArg to taskId
                             )
                         }
+                    )
+                }
+                composableNode(destinationId = SettingsDestination.route) {
+                    SettingsRoute(
+                        navigateBack = { navigationController.navigateTo(HomeDestination.route) }
                     )
                 }
             }

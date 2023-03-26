@@ -36,8 +36,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,7 +49,7 @@ fun AboutTopBar(navigateBack: () -> Unit) {
             IconButton(onClick = navigateBack) {
                 Icon(
                     painterResource(ToDometerIcons.ArrowBack),
-                    contentDescription = "Back",
+                    contentDescription = stringResource(MR.strings.back),
                     tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                 )
             }

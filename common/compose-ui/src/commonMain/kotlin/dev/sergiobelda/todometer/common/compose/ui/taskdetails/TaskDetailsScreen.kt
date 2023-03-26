@@ -102,7 +102,7 @@ fun TaskDetailsScreen(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             painterResource(ToDometerIcons.ArrowBack),
-                            contentDescription = "Back",
+                            contentDescription = stringResource(MR.strings.back),
                             tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                         )
                     }

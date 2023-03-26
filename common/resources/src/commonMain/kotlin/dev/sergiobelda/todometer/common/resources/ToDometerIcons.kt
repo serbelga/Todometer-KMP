@@ -29,7 +29,9 @@ expect object ToDometerIcons {
 
     val Code: PainterResource
 
-    val DarkTheme: PainterResource
+    val Contrast: PainterResource
+
+    val DarkMode: PainterResource
 
     val Delete: PainterResource
 
@@ -43,15 +45,17 @@ expect object ToDometerIcons {
 
     val ExpandMore: PainterResource
 
-    val FollowSystemTheme: PainterResource
-
     val GitHub: PainterResource
 
-    val LightTheme: PainterResource
+    val Info: PainterResource
+
+    val LightMode: PainterResource
 
     val Menu: PainterResource
 
     val MoreVert: PainterResource
 
     val Replay: PainterResource
+
+    val Settings: PainterResource
 }

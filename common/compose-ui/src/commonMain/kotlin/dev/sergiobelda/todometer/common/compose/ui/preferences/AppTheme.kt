@@ -27,9 +27,9 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 @Composable
 internal fun AppTheme.themeIcon(): Painter =
     when (this) {
-        AppTheme.FOLLOW_SYSTEM -> painterResource(ToDometerIcons.FollowSystemTheme)
-        AppTheme.DARK_THEME -> painterResource(ToDometerIcons.DarkTheme)
-        AppTheme.LIGHT_THEME -> painterResource(ToDometerIcons.LightTheme)
+        AppTheme.FOLLOW_SYSTEM -> painterResource(ToDometerIcons.Contrast)
+        AppTheme.DARK_THEME -> painterResource(ToDometerIcons.DarkMode)
+        AppTheme.LIGHT_THEME -> painterResource(ToDometerIcons.LightMode)
     }
 
 @Composable

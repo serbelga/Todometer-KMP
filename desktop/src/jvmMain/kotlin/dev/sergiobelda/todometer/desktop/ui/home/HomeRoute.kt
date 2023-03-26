@@ -17,8 +17,6 @@
 package dev.sergiobelda.todometer.desktop.ui.home
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
@@ -29,24 +27,22 @@ import org.koin.core.parameter.parametersOf
 fun HomeRoute(
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit,
-    addTask: () -> Unit,
-    openTask: (String) -> Unit,
-    openSourceLicenses: () -> Unit,
-    about: () -> Unit
+    navigateToAddTask: () -> Unit,
+    navigateToTaskDetails: (String) -> Unit,
+    navigateToSettings: () -> Unit,
+    navigateToAbout: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val homeViewModel: HomeViewModel = remember {
         koin.get { parametersOf(coroutineScope) }
     }
-
-    val appTheme by homeViewModel.appTheme.collectAsState()
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,
-        navigateToAddTask = addTask,
-        onTaskItemClick = openTask,
-        navigateToOpenSourceLicenses = openSourceLicenses,
-        navigateToAbout = about,
+        navigateToAddTask = navigateToAddTask,
+        onTaskItemClick = navigateToTaskDetails,
+        navigateToSettings = navigateToSettings,
+        navigateToAbout = navigateToAbout,
         onTaskItemDoingClick = {
             homeViewModel.setTaskDoing(it)
         },
@@ -62,8 +58,6 @@ fun HomeRoute(
         onDeleteTaskListClick = {
             homeViewModel.deleteTaskList()
         },
-        onChooseThemeClick = { homeViewModel.setAppTheme(it) },
-        homeUiState = homeViewModel.homeUiState,
-        appTheme = appTheme
+        homeUiState = homeViewModel.homeUiState
     )
 }

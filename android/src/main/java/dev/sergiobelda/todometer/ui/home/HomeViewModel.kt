@@ -24,9 +24,6 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
@@ -35,9 +32,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSe
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -48,17 +42,8 @@ class HomeViewModel(
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val getTaskListsUseCase: GetTaskListsUseCase,
-    private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
-    getAppThemeUseCase: GetAppThemeUseCase,
-    private val setAppThemeUseCase: SetAppThemeUseCase
+    private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase
 ) : ViewModel() {
-
-    val appTheme: StateFlow<AppTheme> =
-        getAppThemeUseCase().stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(),
-            AppTheme.FOLLOW_SYSTEM
-        )
 
     var homeUiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
         private set
@@ -138,9 +123,5 @@ class HomeViewModel(
 
     fun setTaskListSelected(id: String) = viewModelScope.launch {
         setTaskListSelectedUseCase(id)
-    }
-
-    fun setAppTheme(theme: AppTheme) = viewModelScope.launch {
-        setAppThemeUseCase(theme)
     }
 }

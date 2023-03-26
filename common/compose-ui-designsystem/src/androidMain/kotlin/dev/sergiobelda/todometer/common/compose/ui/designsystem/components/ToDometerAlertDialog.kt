@@ -19,9 +19,6 @@ package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
 
 @Composable
 actual fun ToDometerAlertDialog(
@@ -29,29 +26,15 @@ actual fun ToDometerAlertDialog(
     confirmButton: @Composable () -> Unit,
     modifier: Modifier,
     dismissButton: @Composable (() -> Unit)?,
-    icon: @Composable (() -> Unit)?,
     title: @Composable (() -> Unit)?,
-    text: @Composable (() -> Unit)?,
-    shape: Shape,
-    containerColor: Color,
-    iconContentColor: Color,
-    titleContentColor: Color,
-    textContentColor: Color,
-    tonalElevation: Dp
+    text: @Composable (() -> Unit)?
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = confirmButton,
         modifier = modifier,
-        dismissButton,
-        icon,
-        title,
-        text,
-        shape,
-        containerColor,
-        iconContentColor,
-        titleContentColor,
-        textContentColor,
-        tonalElevation
+        dismissButton = dismissButton,
+        title = title,
+        text = text
     )
 }

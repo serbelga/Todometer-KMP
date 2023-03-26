@@ -49,8 +49,8 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
-    openGithub: () -> Unit,
-    openLicenses: () -> Unit,
+    navigateToGitHub: () -> Unit,
+    navigateToOpenSourceLicenses: () -> Unit,
     navigateBack: () -> Unit
 ) {
     var privacyPolicyDialogState by remember { mutableStateOf(false) }
@@ -67,7 +67,7 @@ fun AboutScreen(
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
-                onCardClick = openGithub,
+                onCardClick = navigateToGitHub,
                 icon = {
                     Icon(
                         painterResource(ToDometerIcons.GitHub),
@@ -87,7 +87,7 @@ fun AboutScreen(
                 text = { Text(stringResource(MR.strings.privacy_policy)) }
             )
             AboutItemCard(
-                onCardClick = openLicenses,
+                onCardClick = navigateToOpenSourceLicenses,
                 icon = {
                     Icon(
                         painterResource(ToDometerIcons.Code),

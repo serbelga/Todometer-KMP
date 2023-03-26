@@ -36,7 +36,10 @@ actual object ToDometerIcons {
     actual val Code: PainterResource =
         PainterResource(R.drawable.ic_rounded_code_24)
 
-    actual val DarkTheme: PainterResource =
+    actual val Contrast: PainterResource =
+        PainterResource(R.drawable.ic_rounded_contrast_24)
+
+    actual val DarkMode: PainterResource =
         PainterResource(R.drawable.ic_rounded_dark_mode_24)
 
     actual val Delete: PainterResource =
@@ -57,14 +60,13 @@ actual object ToDometerIcons {
     actual val ExpandMore: PainterResource =
         PainterResource(R.drawable.ic_rounded_expand_more_24)
 
-    // TODO
-    actual val FollowSystemTheme: PainterResource =
-        PainterResource(R.drawable.ic_baseline_default_theme_24)
-
     actual val GitHub: PainterResource =
         PainterResource(R.drawable.ic_github_24)
 
-    actual val LightTheme: PainterResource =
+    actual val Info: PainterResource =
+        PainterResource(R.drawable.ic_rounded_info_24)
+
+    actual val LightMode: PainterResource =
         PainterResource(R.drawable.ic_rounded_light_mode_24)
 
     actual val Menu: PainterResource =
@@ -75,4 +77,7 @@ actual object ToDometerIcons {
 
     actual val Replay: PainterResource =
         PainterResource(R.drawable.ic_rounded_replay_24)
+
+    actual val Settings: PainterResource =
+        PainterResource(R.drawable.ic_rounded_settings_24)
 }

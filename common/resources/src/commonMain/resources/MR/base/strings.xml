@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2022 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -39,6 +38,7 @@
     <string name="add_task_list">Add task list</string>
     <string name="edit_task">Edit task</string>
     <string name="edit_task_list">Edit task list</string>
+    <string name="settings">Settings</string>
     <string name="theme">Theme</string>
     <string name="choose_theme">Choose theme</string>
     <string name="follow_system">Follow system</string>
@@ -98,4 +98,7 @@
         sexual material, or offensive language.
         Does not contain ads. Sensitive information for minors is not collected.
     </string>
+    <string name="menu">Menu</string>
+    <string name="more">More</string>
+    <string name="back">Back</string>
 </resources>

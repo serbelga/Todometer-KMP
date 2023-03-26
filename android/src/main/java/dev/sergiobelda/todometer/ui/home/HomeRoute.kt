@@ -17,8 +17,6 @@
 package dev.sergiobelda.todometer.ui.home
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
 import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
@@ -27,20 +25,19 @@ import org.koin.androidx.compose.getViewModel
 fun HomeRoute(
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit,
-    addTask: () -> Unit,
-    openTask: (String) -> Unit,
-    openSourceLicenses: () -> Unit,
-    about: () -> Unit,
+    navigateToAddTask: () -> Unit,
+    navigateToTaskDetails: (String) -> Unit,
+    navigateToSettings: () -> Unit,
+    navigateToAbout: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
-    val appTheme by homeViewModel.appTheme.collectAsStateWithLifecycle()
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,
-        navigateToAddTask = addTask,
-        onTaskItemClick = openTask,
-        navigateToOpenSourceLicenses = openSourceLicenses,
-        navigateToAbout = about,
+        navigateToAddTask = navigateToAddTask,
+        onTaskItemClick = navigateToTaskDetails,
+        navigateToSettings = navigateToSettings,
+        navigateToAbout = navigateToAbout,
         onTaskItemDoingClick = {
             homeViewModel.setTaskDoing(it)
             updateToDometerWidgetData()
@@ -61,9 +58,7 @@ fun HomeRoute(
             homeViewModel.deleteTaskList()
             updateToDometerWidgetData()
         },
-        onChooseThemeClick = { homeViewModel.setAppTheme(it) },
-        homeUiState = homeViewModel.homeUiState,
-        appTheme = appTheme
+        homeUiState = homeViewModel.homeUiState
     )
 }
 

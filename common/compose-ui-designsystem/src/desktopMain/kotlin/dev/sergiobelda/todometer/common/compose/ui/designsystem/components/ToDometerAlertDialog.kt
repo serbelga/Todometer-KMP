@@ -16,13 +16,16 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -31,25 +34,28 @@ actual fun ToDometerAlertDialog(
     confirmButton: @Composable () -> Unit,
     modifier: Modifier,
     dismissButton: @Composable (() -> Unit)?,
-    icon: @Composable (() -> Unit)?,
     title: @Composable (() -> Unit)?,
-    text: @Composable (() -> Unit)?,
-    shape: Shape,
-    containerColor: Color,
-    iconContentColor: Color,
-    titleContentColor: Color,
-    textContentColor: Color,
-    tonalElevation: Dp
+    text: @Composable (() -> Unit)?
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = confirmButton,
-        modifier = modifier,
+        modifier = modifier.widthIn(
+            min = ToDometerAlertDialogMinWidth,
+            max = ToDometerAlertDialogMaxWidth
+        ),
         dismissButton = dismissButton,
         title = title,
         text = text,
-        shape = shape,
-        backgroundColor = containerColor,
-        contentColor = textContentColor
+        backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
+            ToDometerAlertDialogElevation
+        ),
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        shape = ToDometerAlertDialogShape,
     )
 }
+
+private val ToDometerAlertDialogMinWidth: Dp = 360.dp
+private val ToDometerAlertDialogMaxWidth: Dp = 480.dp
+private val ToDometerAlertDialogElevation: Dp = 6.dp
+private val ToDometerAlertDialogShape: RoundedCornerShape = RoundedCornerShape(28.dp)
