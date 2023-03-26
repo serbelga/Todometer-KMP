@@ -51,7 +51,7 @@ actual fun ToDometerAlertDialog(
             ToDometerAlertDialogElevation
         ),
         contentColor = MaterialTheme.colorScheme.onSurface,
-        shape = ToDometerAlertDialogShape,
+        shape = ToDometerAlertDialogShape
     )
 }
 

@@ -124,7 +124,6 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
     )
 }
 
-
 @Composable
 private fun HomeDrawerTaskListsSection(
     selectedTaskListId: String,
@@ -187,7 +186,6 @@ private fun HomeNavigationDrawerTaskListItem(
         colors = colors
     )
 }
-
 
 private val HomeDrawerTopHeight: Dp = 56.dp
 private val HomeDrawerTopPaddingHorizontal: Dp = 16.dp
