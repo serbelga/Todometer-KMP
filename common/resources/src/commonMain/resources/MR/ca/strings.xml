@@ -41,7 +41,7 @@
     <string name="settings">Configuració</string>
     <string name="theme">Tema</string>
     <string name="choose_theme">Elegir un tema</string>
-    <string name="follow_system">Predeterminat del sistema</string>
+    <string name="follow_system">Seguir sistema</string>
     <string name="light_theme">Clar</string>
     <string name="dark_theme">Obscur</string>
     <string name="about">Sobre</string>

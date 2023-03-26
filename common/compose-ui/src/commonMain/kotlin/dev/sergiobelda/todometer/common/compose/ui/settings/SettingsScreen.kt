@@ -20,12 +20,13 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -58,7 +59,7 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    navigateBack: () -> Unit,
+    navigateBack: () -> Unit
 ) {
     var appTheme by remember { mutableStateOf(AppTheme.FOLLOW_SYSTEM) }
     Scaffold(
@@ -89,11 +90,12 @@ private fun SettingsChooseAppTheme(appTheme: AppTheme, onItemClick: (AppTheme) -
     Column(modifier = Modifier.fillMaxWidth().padding(SettingsItemPaddingHorizontal)) {
         Text(text = stringResource(MR.strings.theme))
         Spacer(modifier = Modifier.height(SettingsItemInternalSpacing))
-        Row(
+        LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(AppThemeItemsSpacing),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            columns = GridCells.Adaptive(minSize = AppThemeItemWidth)
         ) {
-            enumValues<AppTheme>().forEach {
+            items(enumValues<AppTheme>()) {
                 AppThemeItem(
                     it,
                     onClick = { onItemClick(it) },
@@ -120,7 +122,7 @@ private fun AppThemeItem(
             width = AppThemeItemBorder,
             color = MaterialTheme.colorScheme.outline.copy(alpha = selectedAlpha)
         ),
-        modifier = modifier.height(AppThemeItemHeight).width(AppThemeItemWidth),
+        modifier = modifier.height(AppThemeItemHeight).fillMaxWidth(),
         tonalElevation = if (selected) AppThemeItemSelectedElevation else AppThemeItemUnselectedElevation,
         contentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = selectedAlpha)
     ) {
@@ -138,7 +140,8 @@ private fun AppThemeItem(
                     appTheme.themeName(),
                     textAlign = TextAlign.Center,
                     maxLines = AppThemeItemMaxLines,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.labelLarge
                 )
             }
         }
@@ -155,6 +158,6 @@ private val AppThemeItemUnselectedElevation: Dp = 0.dp
 private val AppThemeItemCornerRadius: Dp = 8.dp
 private val AppThemeItemBorder: Dp = 1.dp
 private val AppThemeItemHeight: Dp = 96.dp
-private val AppThemeItemWidth: Dp = 120.dp
+private val AppThemeItemWidth: Dp = 96.dp
 private val AppThemeItemSelectedSpacing: Dp = 6.dp
 private const val AppThemeItemMaxLines: Int = 2
