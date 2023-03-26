@@ -41,7 +41,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerDateTimeS
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -74,8 +73,7 @@ fun EditTaskScreen(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             painterResource(ToDometerIcons.ArrowBack),
-                            contentDescription = stringResource(MR.strings.back),
-                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                            contentDescription = stringResource(MR.strings.back)
                         )
                     }
                 },

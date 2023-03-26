@@ -259,8 +259,7 @@ private fun HomeTopAppBar(
                 IconButton(onClick = onMenuClick) {
                     Icon(
                         painterResource(ToDometerIcons.Menu),
-                        contentDescription = stringResource(MR.strings.menu),
-                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        contentDescription = stringResource(MR.strings.menu)
                     )
                 }
             },
@@ -268,8 +267,7 @@ private fun HomeTopAppBar(
                 IconButton(onClick = onMoreClick) {
                     Icon(
                         painterResource(ToDometerIcons.MoreVert),
-                        contentDescription = stringResource(MR.strings.more),
-                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        contentDescription = stringResource(MR.strings.more)
                     )
                 }
                 HomeMoreDropdownMenu(
