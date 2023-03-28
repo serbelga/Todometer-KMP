@@ -28,8 +28,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,9 +39,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
@@ -80,7 +80,7 @@ fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
                 ) {
                     if (tag == selectedTag) {
                         Icon(
-                            Icons.Rounded.Check,
+                            painterResource(ToDometerIcons.Check),
                             "Selected",
                             tint = MaterialTheme.colorScheme.onPrimary
                         )

@@ -2,6 +2,7 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.mokoResources)
     id("todometer.spotless")
 }
@@ -20,12 +21,14 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(libs.moko.resources)
+                implementation(compose.ui)
             }
         }
         val commonTest by getting
         val androidMain by getting {
             dependencies {
                 api(libs.moko.resources.compose)
+                implementation(libs.material)
             }
         }
         val androidUnitTest by getting

@@ -24,8 +24,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,8 +37,10 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import java.util.concurrent.TimeUnit
 
@@ -76,7 +76,7 @@ actual fun ToDometerDateTimeSelector(
             taskDueDate?.let {
                 IconButton(onClick = onClearDateTimeClick) {
                     Icon(
-                        Icons.Rounded.Clear,
+                        painterResource(ToDometerIcons.Close),
                         stringResource(MR.strings.clear),
                         tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
                     )

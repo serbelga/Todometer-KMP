@@ -26,19 +26,23 @@
     <string name="description">Descripció</string>
     <string name="no_description">No hi ha descripció</string>
     <string name="save">Guardar</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_task">Eliminar tasca</string>
     <string name="delete_task_question">Vols eliminar aquesta tasca?</string>
     <string name="delete_task_list">Eliminar llista de tasques</string>
-    <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de tasques. Vols continuar?</string>
+    <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de
+        tasques. Vols continuar?
+    </string>
     <string name="add">Afegir</string>
     <string name="add_task">Afegir tasca</string>
     <string name="add_task_list">Afegir llista de tasques</string>
     <string name="edit_task">Editar tasca</string>
     <string name="edit_task_list">Editar llista de tasques</string>
+    <string name="settings">Configuració</string>
     <string name="theme">Tema</string>
     <string name="choose_theme">Elegir un tema</string>
-    <string name="follow_system">Predeterminat del sistema</string>
+    <string name="follow_system">Seguir sistema</string>
     <string name="light_theme">Clar</string>
     <string name="dark_theme">Obscur</string>
     <string name="about">Sobre</string>
@@ -68,4 +72,7 @@
     <string name="add_element_optional">Afegir element (opcional)</string>
     <string name="cannot_delete_this_task_list">No es pot eliminar la llista predeterminada</string>
     <string name="cannot_edit_this_task_list">No es pot editar la llista predeterminada</string>
+    <string name="menu">Menú</string>
+    <string name="more">Més</string>
+    <string name="back">Enrere</string>
 </resources>

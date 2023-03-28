@@ -19,8 +19,6 @@ package dev.sergiobelda.todometer.common.compose.ui.components.task
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.CheckBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerChip
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
 
 @Composable
 fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
@@ -42,7 +42,7 @@ fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) 
         modifier = Modifier.padding(bottom = 8.dp)
     ) {
         Icon(
-            Icons.Outlined.CheckBox,
+            painterResource(ToDometerIcons.CheckBox),
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
             tint = completedChipTint

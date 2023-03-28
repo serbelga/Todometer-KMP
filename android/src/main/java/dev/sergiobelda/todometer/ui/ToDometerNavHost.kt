@@ -35,6 +35,9 @@ import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.navigateToEditTask
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.navigateToEditTaskList
+import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
+import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
+import dev.sergiobelda.todometer.common.compose.ui.settings.navigateToSettings
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.navigateToTaskDetails
 import dev.sergiobelda.todometer.common.navigation.Action
@@ -45,8 +48,8 @@ import dev.sergiobelda.todometer.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.ui.edittasklist.EditTaskListRoute
-import dev.sergiobelda.todometer.ui.home.HomeDestination
-import dev.sergiobelda.todometer.ui.home.HomeScreen
+import dev.sergiobelda.todometer.ui.home.HomeRoute
+import dev.sergiobelda.todometer.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -69,12 +72,13 @@ internal fun ToDometerNavHost(
         modifier = modifier
     ) {
         composable(HomeDestination.route) {
-            HomeScreen(
-                addTaskList = action.navigateToAddTaskList,
-                editTaskList = action.navigateToEditTaskList,
-                addTask = action.navigateToAddTask,
-                openTask = action.navigateToTaskDetails,
-                about = action.navigateToAbout
+            HomeRoute(
+                navigateToAddTaskList = action.navigateToAddTaskList,
+                navigateToEditTaskList = action.navigateToEditTaskList,
+                navigateToAddTask = action.navigateToAddTask,
+                navigateToTaskDetails = action.navigateToTaskDetails,
+                navigateToSettings = action.navigateToSettings,
+                navigateToAbout = action.navigateToAbout
             )
         }
         composable(
@@ -104,10 +108,15 @@ internal fun ToDometerNavHost(
             val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)
             EditTaskRoute(taskId = taskId, navigateBack = navigateBackAction)
         }
+        composable(SettingsDestination.route) {
+            SettingsRoute(
+                navigateBack = navigateBackAction
+            )
+        }
         composable(AboutDestination.route) {
             AboutScreen(
-                openGithub = { context.openWebPage(GITHUB_URL) },
-                openLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
+                navigateToGitHub = { context.openWebPage(GITHUB_URL) },
+                navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
                 navigateBack = navigateBackAction
             )
         }

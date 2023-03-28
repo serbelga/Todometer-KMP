@@ -19,9 +19,6 @@ package dev.sergiobelda.todometer.common.compose.ui.edittask
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -44,10 +41,11 @@ import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerDateTimeS
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.resources.stringResource
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.painterResource
+import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,9 +72,8 @@ fun EditTaskScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            Icons.Rounded.ArrowBack,
-                            contentDescription = "Back",
-                            tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                            painterResource(ToDometerIcons.ArrowBack),
+                            contentDescription = stringResource(MR.strings.back)
                         )
                     }
                 },
@@ -93,7 +90,7 @@ fun EditTaskScreen(
                             }
                         ) {
                             Icon(
-                                Icons.Rounded.Check,
+                                painterResource(ToDometerIcons.Check),
                                 contentDescription = "Save",
                                 tint = MaterialTheme.colorScheme.primary
                             )
