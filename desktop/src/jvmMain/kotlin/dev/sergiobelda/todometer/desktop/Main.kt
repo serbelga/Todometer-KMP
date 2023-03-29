@@ -16,6 +16,8 @@
 
 package dev.sergiobelda.todometer.desktop
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +35,8 @@ import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDest
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.core.di.initKoin
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
@@ -64,8 +68,15 @@ fun main() = application {
         ),
         icon = painterResource(ToDometerSymbols.IsotypeMonochrome)
     ) {
+        val getAppThemeUseCase = koin.get<GetAppThemeUseCase>()
+        val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)
+        val darkTheme: Boolean = when (appThemeState.value) {
+            AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+            AppTheme.DARK_THEME -> true
+            AppTheme.LIGHT_THEME -> false
+        }
         val navigationController by remember { mutableStateOf(NavigationController()) }
-        ToDometerAppTheme {
+        ToDometerAppTheme(darkTheme) {
             NavigationHost(navigationController, startDestination = HomeDestination.route) {
                 composableNode(destinationId = HomeDestination.route) {
                     HomeRoute(
