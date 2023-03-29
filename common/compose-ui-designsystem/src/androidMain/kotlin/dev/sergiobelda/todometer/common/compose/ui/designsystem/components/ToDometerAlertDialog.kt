@@ -21,7 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-actual fun ToDometerAlertDialog(
+internal actual fun ToDometerPlatformAlertDialog(
     onDismissRequest: () -> Unit,
     confirmButton: @Composable () -> Unit,
     modifier: Modifier,

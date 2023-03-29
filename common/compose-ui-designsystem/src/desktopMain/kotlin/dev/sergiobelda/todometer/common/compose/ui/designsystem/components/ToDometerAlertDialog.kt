@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-actual fun ToDometerAlertDialog(
+internal actual fun ToDometerPlatformAlertDialog(
     onDismissRequest: () -> Unit,
     confirmButton: @Composable () -> Unit,
     modifier: Modifier,
@@ -37,6 +37,7 @@ actual fun ToDometerAlertDialog(
     title: @Composable (() -> Unit)?,
     text: @Composable (() -> Unit)?
 ) {
+    // TODO: Use material3 AlertDialog when available for Desktop.
     AlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = confirmButton,

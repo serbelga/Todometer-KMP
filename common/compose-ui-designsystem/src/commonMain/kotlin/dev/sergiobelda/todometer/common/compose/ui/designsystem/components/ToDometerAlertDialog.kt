@@ -19,12 +19,33 @@ package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+// TODO: Remove this component when AlertDialog is available for every platform.
 @Composable
-expect fun ToDometerAlertDialog(
+fun ToDometerAlertDialog(
     onDismissRequest: () -> Unit,
     confirmButton: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     dismissButton: @Composable (() -> Unit)? = null,
     title: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit)? = null
+) {
+    //  Workaround to have default parameters in Kotlin Multiplatform.
+    ToDometerPlatformAlertDialog(
+        onDismissRequest = onDismissRequest,
+        confirmButton = confirmButton,
+        modifier = modifier,
+        dismissButton = dismissButton,
+        title = title,
+        text = text
+    )
+}
+
+@Composable
+internal expect fun ToDometerPlatformAlertDialog(
+    onDismissRequest: () -> Unit,
+    confirmButton: @Composable () -> Unit,
+    modifier: Modifier,
+    dismissButton: @Composable (() -> Unit)?,
+    title: @Composable (() -> Unit)?,
+    text: @Composable (() -> Unit)?
 )
