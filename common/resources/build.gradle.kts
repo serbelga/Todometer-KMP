@@ -21,22 +21,18 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(libs.moko.resources)
+                api(libs.moko.resources.compose)
                 implementation(compose.ui)
             }
         }
         val commonTest by getting
         val androidMain by getting {
             dependencies {
-                api(libs.moko.resources.compose)
                 implementation(libs.material)
             }
         }
         val androidUnitTest by getting
-        val desktopMain by getting {
-            dependencies {
-                api(libs.moko.resources.compose)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

@@ -18,10 +18,12 @@ package dev.sergiobelda.todometer.common.resources
 
 import androidx.compose.runtime.Composable
 import dev.icerock.moko.resources.StringResource
-
-// TODO: Remove this when stringResource is available in Moko resources for ios.
-@Composable
-expect fun stringResource(resource: StringResource): String
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
-expect fun stringResource(resource: StringResource, vararg args: Any): String
+fun stringResource(resource: StringResource): String =
+    stringResource(resource)
+
+@Composable
+fun stringResource(resource: StringResource, vararg args: Any): String =
+    stringResource(resource, args)

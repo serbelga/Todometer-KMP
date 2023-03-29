@@ -24,19 +24,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.icerock.moko.resources.desc.desc
 import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
-import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun main() {
-    val appName: String = MR.strings.app_name.desc().localized()
-
     defaultUIKitMain(
-        appName,
+        "ToDometer",
         ComposeUIViewController {
             ToDometerAppTheme {
                 Scaffold(
