@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.about
+package dev.sergiobelda.todometer.common.compose.ui.about
 
 import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
 import dev.sergiobelda.todometer.common.navigation.NavigationParams
-
-object AboutDestination : Destination {
-    override val route: String = "about"
-}
 
 object AboutNavigationParams : NavigationParams(AboutDestination) {
     override val navigationRoute: String = destination.route

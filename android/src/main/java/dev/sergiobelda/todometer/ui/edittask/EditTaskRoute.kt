@@ -23,7 +23,7 @@ import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun EditTaskRoute(
+internal fun EditTaskRoute(
     taskId: String,
     navigateBack: () -> Unit,
     editTaskViewModel: EditTaskViewModel = getViewModel { parametersOf(taskId) }

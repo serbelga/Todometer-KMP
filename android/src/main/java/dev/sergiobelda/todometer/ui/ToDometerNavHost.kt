@@ -27,6 +27,9 @@ import androidx.navigation.compose.composable
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.android.extensions.openWebPage
+import dev.sergiobelda.todometer.common.compose.ui.about.AboutDestination
+import dev.sergiobelda.todometer.common.compose.ui.about.GitHubUrl
+import dev.sergiobelda.todometer.common.compose.ui.about.navigateToAbout
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtask.navigateToAddTask
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
@@ -41,9 +44,7 @@ import dev.sergiobelda.todometer.common.compose.ui.settings.navigateToSettings
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.navigateToTaskDetails
 import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.ui.about.AboutDestination
-import dev.sergiobelda.todometer.ui.about.AboutScreen
-import dev.sergiobelda.todometer.ui.about.navigateToAbout
+import dev.sergiobelda.todometer.ui.about.AboutRoute
 import dev.sergiobelda.todometer.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ui.edittask.EditTaskRoute
@@ -114,13 +115,11 @@ internal fun ToDometerNavHost(
             )
         }
         composable(AboutDestination.route) {
-            AboutScreen(
-                navigateToGitHub = { context.openWebPage(GITHUB_URL) },
+            AboutRoute(
+                navigateToGitHub = { context.openWebPage(GitHubUrl) },
                 navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
                 navigateBack = navigateBackAction
             )
         }
     }
 }
-
-private const val GITHUB_URL = "https://github.com/serbelga/ToDometer_Multiplatform"

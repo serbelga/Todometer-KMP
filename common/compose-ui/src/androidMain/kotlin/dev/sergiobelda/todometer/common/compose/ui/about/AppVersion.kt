@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.settings
+package dev.sergiobelda.todometer.common.compose.ui.about
 
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsScreen
-import org.koin.androidx.compose.getViewModel
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
-internal fun SettingsRoute(
-    navigateBack: () -> Unit,
-    settingsViewModel: SettingsViewModel = getViewModel()
-) {
-    val appTheme by settingsViewModel.appTheme.collectAsStateWithLifecycle()
-    SettingsScreen(
-        navigateBack = navigateBack,
-        onChooseAppTheme = { settingsViewModel.setAppTheme(it) },
-        appTheme = appTheme
-    )
+internal actual fun versionName(): String? {
+    val context = LocalContext.current
+    return context.getVersionName()
 }
+
+private fun Context.getVersionName(): String? =
+    try {
+        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+        packageInfo.versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        null
+    }

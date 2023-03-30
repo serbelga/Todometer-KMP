@@ -28,6 +28,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
+import dev.sergiobelda.todometer.common.compose.ui.about.AboutDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
@@ -43,6 +44,7 @@ import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.desktop.di.viewModelModule
+import dev.sergiobelda.todometer.desktop.ui.about.AboutRoute
 import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.edittask.EditTaskRoute
@@ -98,7 +100,9 @@ fun main() = application {
                         navigateToSettings = {
                             navigationController.navigateTo(SettingsDestination.route)
                         },
-                        navigateToAbout = {}
+                        navigateToAbout = {
+                            navigationController.navigateTo(AboutDestination.route)
+                        }
                     )
                 }
                 composableNode(destinationId = TaskDetailsDestination.route) {
@@ -147,6 +151,11 @@ fun main() = application {
                 }
                 composableNode(destinationId = SettingsDestination.route) {
                     SettingsRoute(
+                        navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+                    )
+                }
+                composableNode(destinationId = AboutDestination.route) {
+                    AboutRoute(
                         navigateBack = { navigationController.navigateTo(HomeDestination.route) }
                     )
                 }

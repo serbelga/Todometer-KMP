@@ -24,7 +24,7 @@ import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun HomeRoute(
+internal fun HomeRoute(
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit,
     navigateToAddTask: () -> Unit,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.about
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,14 +25,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -40,9 +41,62 @@ import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
+@Composable
+internal fun AboutAppVersion() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
+        Text(
+            text = versionName() ?: "",
+            style = MaterialTheme.typography.labelSmall,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+    }
+}
+
+@Composable
+internal fun GitHubAboutItemCard(onCardClick: () -> Unit) {
+    AboutItemCard(
+        onCardClick = onCardClick,
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.GitHub),
+                contentDescription = stringResource(MR.strings.github)
+            )
+        },
+        text = { Text(stringResource(MR.strings.github)) }
+    )
+}
+
+@Composable
+internal fun PrivacyPolicyAboutItemCard(onCardClick: () -> Unit) {
+    AboutItemCard(
+        onCardClick = onCardClick,
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.Description),
+                contentDescription = stringResource(MR.strings.privacy_policy)
+            )
+        },
+        text = { Text(stringResource(MR.strings.privacy_policy)) }
+    )
+}
+
+@Composable
+internal fun OpenSourceLicensesAboutItemCard(onCardClick: () -> Unit) {
+    AboutItemCard(
+        onCardClick = onCardClick,
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.Code),
+                contentDescription = stringResource(MR.strings.open_source_licenses)
+            )
+        },
+        text = { Text(stringResource(MR.strings.open_source_licenses)) }
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutTopBar(navigateBack: () -> Unit) {
+internal fun AboutTopBar(navigateBack: () -> Unit) {
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
@@ -58,25 +112,26 @@ fun AboutTopBar(navigateBack: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutItemCard(
+internal fun AboutItemCard(
     onCardClick: () -> Unit,
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit
 ) {
     Card(
         onClick = onCardClick,
-        modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp)
+        modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp),
+        colors = CardDefaults.cardColors(contentColor = MaterialTheme.colorScheme.onPrimaryContainer)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxSize()
         ) {
-            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onPrimaryContainer) {
-                Spacer(modifier = Modifier.width(24.dp))
-                icon()
-                Spacer(modifier = Modifier.width(24.dp))
-                text()
-            }
+            Spacer(modifier = Modifier.width(24.dp))
+            icon()
+            Spacer(modifier = Modifier.width(24.dp))
+            text()
         }
     }
 }
+
+const val GitHubUrl: String = "https://github.com/serbelga/ToDometer_Multiplatform"
