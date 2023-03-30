@@ -26,7 +26,7 @@ import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun SettingsRoute(
+internal fun SettingsRoute(
     navigateBack: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()

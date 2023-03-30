@@ -24,7 +24,7 @@ import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun EditTaskRoute(
+internal fun EditTaskRoute(
     taskId: String,
     navigateBack: () -> Unit
 ) {

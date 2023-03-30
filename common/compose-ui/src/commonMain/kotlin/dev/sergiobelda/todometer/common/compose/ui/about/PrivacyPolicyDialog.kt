@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.about
+package dev.sergiobelda.todometer.common.compose.ui.about
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 
@@ -33,7 +33,7 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 internal fun PrivacyPolicyDialog(
     onDismissRequest: () -> Unit
 ) {
-    AlertDialog(
+    ToDometerAlertDialog(
         title = {
             Text(stringResource(MR.strings.privacy_policy))
         },

@@ -19,17 +19,8 @@ package dev.sergiobelda.todometer.common.android.extensions
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-
-fun Context.getVersionName(): String? =
-    try {
-        val packageInfo = packageManager.getPackageInfo(packageName, 0)
-        packageInfo.versionName
-    } catch (e: PackageManager.NameNotFoundException) {
-        null
-    }
 
 /**
  * Launch a new Activity and runs the Intent body that will be passed to the new Activity.

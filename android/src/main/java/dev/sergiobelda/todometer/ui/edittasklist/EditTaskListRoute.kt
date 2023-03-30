@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun EditTaskListRoute(
+internal fun EditTaskListRoute(
     navigateBack: () -> Unit,
     editTaskListViewModel: EditTaskListViewModel = getViewModel()
 ) {

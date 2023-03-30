@@ -22,7 +22,7 @@ import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun TaskDetailsRoute(
+internal fun TaskDetailsRoute(
     taskId: String,
     navigateToEditTask: () -> Unit,
     navigateBack: () -> Unit,

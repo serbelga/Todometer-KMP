@@ -23,7 +23,7 @@ import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsScreen
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun SettingsRoute(
+internal fun SettingsRoute(
     navigateBack: () -> Unit,
     settingsViewModel: SettingsViewModel = getViewModel()
 ) {

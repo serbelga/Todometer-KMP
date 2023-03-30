@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.about
+package dev.sergiobelda.todometer.common.compose.ui.about
 
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.common.navigation.Destination
