@@ -8,14 +8,14 @@ plugins {
     id("todometer.dependency-graph-generator")
 }
 
-group = "dev.sergiobelda.todometer"
-version = "1.0"
+group = "dev.sergiobelda.todometer.desktop"
+version = "1.0.0-alpha01"
 
 kotlin {
     jvm {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
                 freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             }
         }
@@ -42,8 +42,8 @@ compose.desktop {
         mainClass = "dev.sergiobelda.todometer.desktop.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "jvm"
             packageVersion = "1.0.0"
+            licenseFile.set(project.file("../LICENSE"))
         }
     }
 }
