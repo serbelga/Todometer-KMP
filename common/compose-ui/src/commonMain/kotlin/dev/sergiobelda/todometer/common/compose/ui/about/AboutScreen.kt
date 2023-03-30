@@ -81,7 +81,7 @@ internal fun PrivacyPolicyAboutItemCard(onCardClick: () -> Unit) {
 }
 
 @Composable
-internal fun OpenSourceLicenses(onCardClick: () -> Unit) {
+internal fun OpenSourceLicensesAboutItemCard(onCardClick: () -> Unit) {
     AboutItemCard(
         onCardClick = onCardClick,
         icon = {

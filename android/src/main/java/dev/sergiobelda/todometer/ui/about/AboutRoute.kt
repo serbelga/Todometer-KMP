@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutScreen
 
 @Composable
-fun AboutRoute(
+internal fun AboutRoute(
     navigateToGitHub: () -> Unit,
     navigateToOpenSourceLicenses: () -> Unit,
     navigateBack: () -> Unit

@@ -39,7 +39,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.height(72.dp))
             GitHubAboutItemCard(onCardClick = navigateToGitHub)
             PrivacyPolicyAboutItemCard(onCardClick = { privacyPolicyDialogState = true })
-            OpenSourceLicenses(onCardClick = navigateToOpenSourceLicenses)
+            OpenSourceLicensesAboutItemCard(onCardClick = navigateToOpenSourceLicenses)
         }
         AboutAppVersion()
     }
