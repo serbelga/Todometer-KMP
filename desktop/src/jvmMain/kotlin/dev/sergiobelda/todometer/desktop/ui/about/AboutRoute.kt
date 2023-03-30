@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.about
+package dev.sergiobelda.todometer.desktop.ui.about
 
-import dev.sergiobelda.todometer.common.navigation.Destination
+import androidx.compose.runtime.Composable
+import dev.sergiobelda.todometer.common.compose.ui.about.AboutScreen
 
-object AboutDestination : Destination {
-    override val route: String = "about"
+@Composable
+fun AboutRoute(
+    navigateBack: () -> Unit
+) {
+    AboutScreen(
+        navigateBack = navigateBack
+    )
 }

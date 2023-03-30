@@ -16,4 +16,8 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.about
 
-internal actual fun versionName(): String? = ""
+import dev.sergiobelda.todometer.common.navigation.Destination
+
+object AboutDestination : Destination {
+    override val route: String = "about"
+}

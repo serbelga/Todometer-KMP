@@ -49,6 +49,8 @@ Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.googl
 
 ### Desktop
 
+`./gradlew :desktop:run`
+
 <img width="560" src="./screenshots/desktop/home.png" />
 
 ### iOS

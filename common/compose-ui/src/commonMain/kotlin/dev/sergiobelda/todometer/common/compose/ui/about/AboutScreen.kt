@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.common.compose.ui.about
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,82 +30,68 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(
-    navigateToGitHub: () -> Unit,
-    navigateToOpenSourceLicenses: () -> Unit,
-    navigateBack: () -> Unit
-) {
-    var privacyPolicyDialogState by remember { mutableStateOf(false) }
-    Scaffold(
-        topBar = { AboutTopBar(navigateBack = navigateBack) }
-    ) { paddingValues ->
-        if (privacyPolicyDialogState) {
-            PrivacyPolicyDialog { privacyPolicyDialogState = false }
-        }
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth().padding(paddingValues)
-        ) {
-            ToDometerTitle()
-            Spacer(modifier = Modifier.height(72.dp))
-            AboutItemCard(
-                onCardClick = navigateToGitHub,
-                icon = {
-                    Icon(
-                        painterResource(ToDometerIcons.GitHub),
-                        contentDescription = stringResource(MR.strings.github)
-                    )
-                },
-                text = { Text(stringResource(MR.strings.github)) }
-            )
-            AboutItemCard(
-                onCardClick = { privacyPolicyDialogState = true },
-                icon = {
-                    Icon(
-                        painterResource(ToDometerIcons.Description),
-                        contentDescription = stringResource(MR.strings.privacy_policy)
-                    )
-                },
-                text = { Text(stringResource(MR.strings.privacy_policy)) }
-            )
-            AboutItemCard(
-                onCardClick = navigateToOpenSourceLicenses,
-                icon = {
-                    Icon(
-                        painterResource(ToDometerIcons.Code),
-                        contentDescription = stringResource(MR.strings.open_source_licenses)
-                    )
-                },
-                text = { Text(stringResource(MR.strings.open_source_licenses)) }
-            )
-        }
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
-            Text(
-                text = versionName() ?: "",
-                style = MaterialTheme.typography.labelSmall,
-                modifier = Modifier.padding(bottom = 24.dp)
-            )
-        }
+internal fun AboutAppVersion() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
+        Text(
+            text = versionName() ?: "",
+            style = MaterialTheme.typography.labelSmall,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
     }
+}
+
+@Composable
+internal fun GitHubAboutItemCard(onCardClick: () -> Unit) {
+    AboutItemCard(
+        onCardClick = onCardClick,
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.GitHub),
+                contentDescription = stringResource(MR.strings.github)
+            )
+        },
+        text = { Text(stringResource(MR.strings.github)) }
+    )
+}
+
+@Composable
+internal fun PrivacyPolicyAboutItemCard(onCardClick: () -> Unit) {
+    AboutItemCard(
+        onCardClick = onCardClick,
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.Description),
+                contentDescription = stringResource(MR.strings.privacy_policy)
+            )
+        },
+        text = { Text(stringResource(MR.strings.privacy_policy)) }
+    )
+}
+
+@Composable
+internal fun OpenSourceLicenses(onCardClick: () -> Unit) {
+    AboutItemCard(
+        onCardClick = onCardClick,
+        icon = {
+            Icon(
+                painterResource(ToDometerIcons.Code),
+                contentDescription = stringResource(MR.strings.open_source_licenses)
+            )
+        },
+        text = { Text(stringResource(MR.strings.open_source_licenses)) }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -148,3 +133,5 @@ internal fun AboutItemCard(
         }
     }
 }
+
+const val GitHubUrl: String = "https://github.com/serbelga/ToDometer_Multiplatform"
