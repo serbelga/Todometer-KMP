@@ -26,4 +26,4 @@ fun stringResource(resource: StringResource): String =
 
 @Composable
 fun stringResource(resource: StringResource, vararg args: Any): String =
-    stringResource(resource, args)
+    stringResource(resource, *args)
