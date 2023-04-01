@@ -42,6 +42,8 @@ compose.desktop {
         mainClass = "dev.sergiobelda.todometer.desktop.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            modules("java.instrument", "java.management", "java.sql", "jdk.unsupported", "java.naming")
+            packageName = "ToDometer"
             packageVersion = "1.0.0"
             licenseFile.set(project.file("../LICENSE"))
         }
