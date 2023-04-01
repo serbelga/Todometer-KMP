@@ -280,4 +280,4 @@ private fun taskItemActionContentDescription(state: TaskState): String =
 
 private val TaskItemTagIndicatorSize: Dp = 16.dp
 private val TaskItemPaddingStart: Dp = 20.dp
-private val TaskItemPaddingEnd: Dp = 8.dp
+private val TaskItemPaddingEnd: Dp = 12.dp
