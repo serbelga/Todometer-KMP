@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.sergiobelda.todometer.desktop"
-version = "1.0.0-alpha01"
+version = "1.0.0-beta01"
 
 kotlin {
     jvm {
