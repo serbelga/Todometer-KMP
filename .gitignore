@@ -20,5 +20,6 @@ local.properties
 /android/release/*
 /android/google-services.json
 /wearos/google-services.json
+/wearos/release/*
 /common/**/build/
 todometer_preferences.preferences_pb
