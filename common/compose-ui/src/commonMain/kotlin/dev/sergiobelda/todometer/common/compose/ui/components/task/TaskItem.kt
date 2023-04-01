@@ -51,7 +51,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
@@ -168,60 +172,60 @@ private fun TaskItem(
             }
         ).fillMaxWidth().background(MaterialTheme.colorScheme.surface)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(start = 20.dp, end = 8.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(16.dp)
-                    .clip(CircleShape)
-                    .background(ToDometerTheme.toDometerColors.composeColorOf(taskItem.tag))
-            )
-            when (taskItem.state) {
-                TaskState.DOING -> {
-                    Text(
-                        taskItem.title,
-                        modifier = Modifier.padding(start = 8.dp).weight(1f),
-                        maxLines = 1
-                    )
-                    IconButton(
-                        onClick = { onDoneClick(taskItem.id) }
-                    ) {
-                        Icon(
-                            painterResource(ToDometerIcons.Check),
-                            contentDescription = "Done",
-                            tint = ToDometerTheme.toDometerColors.check
-                        )
-                    }
-                }
-                TaskState.DONE -> {
-                    Text(
-                        taskItem.title,
-                        textDecoration = TextDecoration.LineThrough,
-                        color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
-                        modifier = Modifier.padding(start = 8.dp).weight(1f),
-                        maxLines = 1
-                    )
-                    IconButton(
-                        onClick = { onDoingClick(taskItem.id) }
-                    ) {
-                        Icon(
-                            painterResource(ToDometerIcons.Replay),
-                            contentDescription = "Doing",
-                            tint = ToDometerTheme.toDometerColors.check
-                        )
-                    }
-                }
-            }
-        }
-        TaskItemAdditionalInformationRow(taskItem)
+        TaskItemHeadlineContent(
+            taskItem = taskItem,
+            onDoingClick = onDoingClick,
+            onDoneClick = onDoneClick
+        )
+        TaskItemSupportingContent(taskItem)
         HorizontalDivider()
     }
 }
 
 @Composable
-private fun TaskItemAdditionalInformationRow(taskItem: TaskItem) {
+private fun TaskItemHeadlineContent(
+    taskItem: TaskItem,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(start = TaskItemPaddingStart, end = TaskItemPaddingEnd)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(TaskItemTagIndicatorSize)
+                .clip(CircleShape)
+                .background(ToDometerTheme.toDometerColors.composeColorOf(taskItem.tag))
+        )
+        Text(
+            taskItem.title,
+            textDecoration = taskItemTitleTextDecoration(taskItem.state),
+            color = taskItemTitleColor(taskItem.state),
+            modifier = Modifier.padding(start = 8.dp).weight(1f),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+        IconButton(
+            onClick = {
+                if (taskItem.state == TaskState.DONE) {
+                    onDoingClick(taskItem.id)
+                } else {
+                    onDoneClick(taskItem.id)
+                }
+            }
+        ) {
+            Icon(
+                taskItemActionIcon(taskItem.state),
+                contentDescription = taskItemActionContentDescription(taskItem.state),
+                tint = ToDometerTheme.toDometerColors.check
+            )
+        }
+    }
+}
+
+@Composable
+private fun TaskItemSupportingContent(taskItem: TaskItem) {
     LazyRow(
         modifier = Modifier.padding(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -246,3 +250,34 @@ private fun TaskItemAdditionalInformationRow(taskItem: TaskItem) {
         }
     }
 }
+
+@Composable
+private fun taskItemTitleColor(state: TaskState): Color =
+    when (state) {
+        TaskState.DOING -> MaterialTheme.colorScheme.onSurface
+        TaskState.DONE -> ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+    }
+
+private fun taskItemTitleTextDecoration(state: TaskState): TextDecoration =
+    when (state) {
+        TaskState.DOING -> TextDecoration.None
+        TaskState.DONE -> TextDecoration.LineThrough
+    }
+
+@Composable
+private fun taskItemActionIcon(state: TaskState): Painter =
+    when (state) {
+        TaskState.DOING -> painterResource(ToDometerIcons.Check)
+        TaskState.DONE -> painterResource(ToDometerIcons.Replay)
+    }
+
+@Composable
+private fun taskItemActionContentDescription(state: TaskState): String =
+    when (state) {
+        TaskState.DOING -> stringResource(MR.strings.check_task)
+        TaskState.DONE -> stringResource(MR.strings.uncheck_task)
+    }
+
+private val TaskItemTagIndicatorSize: Dp = 16.dp
+private val TaskItemPaddingStart: Dp = 20.dp
+private val TaskItemPaddingEnd: Dp = 8.dp

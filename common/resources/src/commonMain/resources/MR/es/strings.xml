@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2022 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -75,4 +74,6 @@
     <string name="menu">Menú</string>
     <string name="more">Més</string>
     <string name="back">Atrás</string>
+    <string name="check_task">Marcar tarea</string>
+    <string name="uncheck_task">Desmarcar tarea</string>
 </resources>
