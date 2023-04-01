@@ -58,8 +58,6 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 
-private const val TASK_LIST_NAME = "task_list_name"
-
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
@@ -143,7 +141,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TaskListName)
                 name?.let { onComplete(it) }
             }
         }
@@ -161,7 +159,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
             val remoteInputs: List<RemoteInput> = listOf(
-                RemoteInput.Builder(TASK_LIST_NAME)
+                RemoteInput.Builder(TaskListName)
                     .setLabel(taskListNameInput)
                     .wearableExtender {
                         setEmojisAllowed(false)
@@ -176,3 +174,5 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         modifier = Modifier.fillMaxWidth()
     )
 }
+
+private const val TaskListName = "task_list_name"

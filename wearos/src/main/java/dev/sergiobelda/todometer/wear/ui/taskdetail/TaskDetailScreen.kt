@@ -51,8 +51,6 @@ import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
-private const val TASK_TITLE = "task_title"
-
 @Composable
 internal fun TaskDetailScreen(
     taskId: String,
@@ -102,7 +100,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TaskTitle)
                 if (!title.isNullOrEmpty()) {
                     onComplete(title)
                 }
@@ -120,7 +118,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
             val remoteInputs: List<RemoteInput> = listOf(
-                RemoteInput.Builder(TASK_TITLE)
+                RemoteInput.Builder(TaskTitle)
                     .setLabel(task.title)
                     .wearableExtender {
                         setEmojisAllowed(false)
@@ -150,3 +148,5 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
         modifier = Modifier.fillMaxWidth()
     )
 }
+
+private const val TaskTitle = "task_title"

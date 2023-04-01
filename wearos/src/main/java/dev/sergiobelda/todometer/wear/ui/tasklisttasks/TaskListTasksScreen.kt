@@ -67,9 +67,6 @@ import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
-private const val TASK_TITLE = "task_title"
-private const val TASK_LIST_NAME = "task_list_name"
-
 @Composable
 internal fun TaskListTasksScreen(
     taskListId: String,
@@ -172,7 +169,7 @@ private fun TaskItem(
     onClick: () -> Unit
 ) {
     val isTaskDone = taskItem.state == TaskState.DONE
-    val textDecoration = if (isTaskDone) TextDecoration.LineThrough else null
+    val textDecoration = if (isTaskDone) TextDecoration.LineThrough else TextDecoration.None
     // Use SplitToggleChip if onClick is needed.
     SplitToggleChip(
         checked = isTaskDone,
@@ -210,7 +207,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
     val addTaskLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TaskTitle)
                 title?.let { onComplete(it) }
             }
         }
@@ -225,7 +222,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
             val remoteInputs: List<RemoteInput> = listOf(
-                RemoteInput.Builder(TASK_TITLE)
+                RemoteInput.Builder(TaskTitle)
                     .setLabel(taskTitleInput)
                     .wearableExtender {
                         setEmojisAllowed(false)
@@ -246,7 +243,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
     val editTaskListLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TaskListName)
                 name?.let { onComplete(it) }
             }
         }
@@ -262,7 +259,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
             val intent: Intent =
                 RemoteInputIntentHelper.createActionRemoteInputIntent()
             val remoteInputs: List<RemoteInput> = listOf(
-                RemoteInput.Builder(TASK_LIST_NAME)
+                RemoteInput.Builder(TaskListName)
                     .setLabel(taskList.name)
                     .wearableExtender {
                         setEmojisAllowed(false)
@@ -295,3 +292,6 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
         modifier = Modifier.fillMaxWidth()
     )
 }
+
+private const val TaskTitle = "task_title"
+private const val TaskListName = "task_list_name"
