@@ -25,7 +25,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,6 +44,7 @@ import androidx.compose.material.rememberDismissState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -52,12 +52,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -86,6 +86,27 @@ fun SwipeableTaskItem(
             it != DismissValue.DismissedToEnd
         }
     )
+    val backgroundColor by animateColorAsState(
+        if (dismissState.targetValue == DismissValue.Default) MaterialTheme.colorScheme.outline else MaterialTheme.colorScheme.error,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = FastOutSlowInEasing
+        )
+    )
+    val backgroundIconTint by animateColorAsState(
+        if (dismissState.targetValue == DismissValue.Default) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.onError,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = FastOutSlowInEasing
+        )
+    )
+    val taskItemCornerRadius by animateDpAsState(
+        if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = FastOutSlowInEasing
+        )
+    )
     SwipeToDismiss(
         state = dismissState,
         directions = setOf(DismissDirection.StartToEnd),
@@ -93,24 +114,10 @@ fun SwipeableTaskItem(
             FractionalThreshold(0.1f)
         },
         background = {
-            val color by animateColorAsState(
-                if (dismissState.targetValue == DismissValue.Default) MaterialTheme.colorScheme.outline else MaterialTheme.colorScheme.error,
-                animationSpec = tween(
-                    durationMillis = 400,
-                    easing = FastOutSlowInEasing
-                )
-            )
-            val tint by animateColorAsState(
-                if (dismissState.targetValue == DismissValue.Default) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.onError,
-                animationSpec = tween(
-                    durationMillis = 400,
-                    easing = FastOutSlowInEasing
-                )
-            )
             // TODO: Enable AVD when available in multiplatform.
             // val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
             Box(
-                Modifier.fillMaxSize().background(color).padding(horizontal = 16.dp),
+                Modifier.fillMaxSize().background(backgroundColor).padding(horizontal = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
                 // TODO: Enable AVD when available in multiplatform.
@@ -127,25 +134,18 @@ fun SwipeableTaskItem(
                 Icon(
                     painter = painterResource(ToDometerIcons.Delete),
                     contentDescription = stringResource(MR.strings.delete_task),
-                    tint = tint
+                    tint = backgroundIconTint
                 )
             }
         },
         dismissContent = {
-            val dp by animateDpAsState(
-                if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
-                animationSpec = tween(
-                    durationMillis = 400,
-                    easing = FastOutSlowInEasing
-                )
-            )
             TaskItem(
                 taskItem,
                 onDoingClick = onDoingClick,
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
                 onLongClick = onTaskItemLongClick,
-                modifier = Modifier.clip(RoundedCornerShape(dp))
+                shape = RoundedCornerShape(taskItemCornerRadius)
             )
         },
         modifier = modifier
@@ -160,9 +160,11 @@ private fun TaskItem(
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
     onLongClick: (String) -> Unit,
+    shape: Shape,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Surface(
+        shape = shape,
         modifier = modifier.combinedClickable(
             onClick = {
                 onClick(taskItem.id)
@@ -170,7 +172,7 @@ private fun TaskItem(
             onLongClick = {
                 onLongClick(taskItem.id)
             }
-        ).fillMaxWidth().background(MaterialTheme.colorScheme.surface)
+        ).fillMaxWidth()
     ) {
         TaskItemHeadlineContent(
             taskItem = taskItem,
@@ -178,7 +180,6 @@ private fun TaskItem(
             onDoneClick = onDoneClick
         )
         TaskItemSupportingContent(taskItem)
-        HorizontalDivider()
     }
 }
 
