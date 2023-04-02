@@ -60,8 +60,6 @@ dependencies {
     implementation(projects.common.resources)
     implementation(projects.common.ui)
 
-    implementation(compose.animationGraphics)
-
     implementation(libs.androidx.activityCompose)
 
     implementation(libs.androidx.lifecycle.runtime)

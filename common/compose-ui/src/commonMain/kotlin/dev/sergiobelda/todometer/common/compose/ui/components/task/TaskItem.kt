@@ -37,6 +37,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DismissDirection
+import androidx.compose.material.DismissState
 import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
@@ -115,28 +116,11 @@ fun SwipeableTaskItem(
             FractionalThreshold(0.1f)
         },
         background = {
-            // TODO: Enable AVD when available in multiplatform.
-            // val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
             Box(
                 Modifier.fillMaxSize().background(backgroundColor).padding(horizontal = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
-                // TODO: Enable AVD when available in multiplatform.
-                /*
-                Icon(
-                    rememberAnimatedVectorPainter(
-                        icon,
-                        atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
-                    ),
-                    contentDescription = stringResource(MR.strings.delete_task),
-                    tint = tint
-                )
-                */
-                Icon(
-                    painter = painterResource(ToDometerIcons.Delete),
-                    contentDescription = stringResource(MR.strings.delete_task),
-                    tint = backgroundIconTint
-                )
+                TaskItemBackgroundIcon(dismissState, backgroundIconTint)
             }
         },
         dismissContent = {
@@ -152,6 +136,10 @@ fun SwipeableTaskItem(
         modifier = modifier
     )
 }
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+internal expect fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
