@@ -307,6 +307,7 @@ private fun TasksList(
                 onTaskItemLongClick,
                 modifier = Modifier.animateItemPlacement()
             ) { onSwipeToDismiss(task.id) }
+            HorizontalDivider()
         }
         if (tasksDone.isNotEmpty()) {
             item {
@@ -347,6 +348,7 @@ private fun TasksList(
                     onTaskItemLongClick,
                     modifier = Modifier.animateItemPlacement()
                 ) { onSwipeToDismiss(task.id) }
+                HorizontalDivider()
             }
         }
         item {

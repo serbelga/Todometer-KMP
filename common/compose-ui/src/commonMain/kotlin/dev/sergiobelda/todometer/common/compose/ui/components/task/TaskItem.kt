@@ -25,6 +25,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -174,12 +175,14 @@ private fun TaskItem(
             }
         ).fillMaxWidth()
     ) {
-        TaskItemHeadlineContent(
-            taskItem = taskItem,
-            onDoingClick = onDoingClick,
-            onDoneClick = onDoneClick
-        )
-        TaskItemSupportingContent(taskItem)
+        Column {
+            TaskItemHeadlineContent(
+                taskItem = taskItem,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick
+            )
+            TaskItemSupportingContent(taskItem)
+        }
     }
 }
 
