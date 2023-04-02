@@ -45,7 +45,18 @@ compose.desktop {
             modules("java.instrument", "java.management", "java.sql", "jdk.unsupported", "java.naming")
             packageName = "ToDometer"
             packageVersion = "1.0.0"
+            copyright = "© 2023 Sergio Belda. Licensed under the Apache License."
             licenseFile.set(project.file("../LICENSE"))
+
+            macOS {
+                iconFile.set(project.file("./launcher_icons/icon.icns"))
+            }
+            windows {
+                iconFile.set(project.file("./launcher_icons/icon.ico"))
+            }
+            linux {
+                iconFile.set(project.file("./launcher_icons/icon.png"))
+            }
         }
     }
 }
