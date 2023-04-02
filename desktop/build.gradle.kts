@@ -8,14 +8,14 @@ plugins {
     id("todometer.dependency-graph-generator")
 }
 
-group = "dev.sergiobelda.todometer"
-version = "1.0"
+group = "dev.sergiobelda.todometer.desktop"
+version = "1.0.0-beta01"
 
 kotlin {
     jvm {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
                 freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             }
         }
@@ -42,8 +42,21 @@ compose.desktop {
         mainClass = "dev.sergiobelda.todometer.desktop.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "jvm"
+            modules("java.instrument", "java.management", "java.sql", "jdk.unsupported", "java.naming")
+            packageName = "ToDometer"
             packageVersion = "1.0.0"
+            copyright = "© 2023 Sergio Belda. Licensed under the Apache License."
+            licenseFile.set(project.file("../LICENSE"))
+
+            macOS {
+                iconFile.set(project.file("./launcher_icons/icon.icns"))
+            }
+            windows {
+                iconFile.set(project.file("./launcher_icons/icon.ico"))
+            }
+            linux {
+                iconFile.set(project.file("./launcher_icons/icon.png"))
+            }
         }
     }
 }
