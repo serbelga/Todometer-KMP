@@ -36,8 +36,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -94,7 +94,7 @@ fun EditTaskListScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 Column(modifier = Modifier.padding(paddingValues)) {
-                    TitledTextField(
+                    ToDometerTitledTextField(
                         title = stringResource(MR.strings.name),
                         value = taskListName,
                         onValueChange = {

@@ -56,11 +56,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
-import dev.sergiobelda.todometer.common.compose.ui.components.task.SwipeableTaskItem
-import dev.sergiobelda.todometer.common.compose.ui.components.tasklist.TaskListProgress
-import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.SwipeableTaskItem
+import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -279,7 +279,7 @@ private fun HomeTopAppBar(
             }
         )
         TaskListProgress(taskListName, tasks)
-        HorizontalDivider()
+        ToDometerDivider()
     }
 }
 
@@ -307,7 +307,7 @@ private fun TasksList(
                 onTaskItemLongClick,
                 modifier = Modifier.animateItemPlacement()
             ) { onSwipeToDismiss(task.id) }
-            HorizontalDivider()
+            ToDometerDivider()
         }
         if (tasksDone.isNotEmpty()) {
             item {
@@ -348,7 +348,7 @@ private fun TasksList(
                     onTaskItemLongClick,
                     modifier = Modifier.animateItemPlacement()
                 ) { onSwipeToDismiss(task.id) }
-                HorizontalDivider()
+                ToDometerDivider()
             }
         }
         item {

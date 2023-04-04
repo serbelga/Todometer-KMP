@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.components.tasklist
+package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Column
@@ -35,7 +35,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 
 @Composable
-fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Modifier = Modifier) {
+internal fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modifier: Modifier = Modifier) {
     val progress = TaskProgress.getTasksDoneProgress(tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,

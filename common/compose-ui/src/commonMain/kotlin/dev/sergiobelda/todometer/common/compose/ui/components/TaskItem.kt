@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.components.task
+package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -71,7 +71,7 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SwipeableTaskItem(
+internal fun SwipeableTaskItem(
     taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,

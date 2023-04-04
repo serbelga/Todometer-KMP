@@ -24,7 +24,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
@@ -46,7 +45,7 @@ fun main() {
                                     )
                                 }
                             },
-                            title = { ToDometerTitle() },
+                            title = {},
                             actions = {
                                 IconButton(onClick = {}) {
                                     Icon(

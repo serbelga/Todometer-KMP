@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.common.compose.ui.components.task
+package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.material.DismissState
 import androidx.compose.material.ExperimentalMaterialApi

@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.common.compose.ui.components.task
+package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource

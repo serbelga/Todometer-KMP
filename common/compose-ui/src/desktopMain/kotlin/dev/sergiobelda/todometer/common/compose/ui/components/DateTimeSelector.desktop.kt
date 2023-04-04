@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.compose.ui.components
 import androidx.compose.runtime.Composable
 
 @Composable
-actual fun ToDometerDateTimeSelector(
+internal actual fun DateTimeSelector(
     taskDueDate: Long?,
     onDateTimeSelected: (Long?) -> Unit,
     onClearDateTimeClick: () -> Unit

@@ -46,7 +46,7 @@ import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-fun ToDometerTagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+internal fun TagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     Text(

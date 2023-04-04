@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.components.title
+package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
@@ -32,7 +33,7 @@ import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-fun ToDometerTitle(modifier: Modifier = Modifier) {
+internal fun ToDometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -41,12 +42,19 @@ fun ToDometerTitle(modifier: Modifier = Modifier) {
             painter = painterResource(ToDometerSymbols.IsotypeMonochrome),
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(ToDometerTitleIconSize)
         )
         Text(
             text = stringResource(MR.strings.app_name),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(start = 6.dp, bottom = 4.dp)
+            modifier = Modifier.padding(
+                start = ToDometerTitleTextPaddingStart,
+                bottom = ToDometerTitleTextPaddingBottom
+            )
         )
     }
 }
+
+private val ToDometerTitleIconSize: Dp = 24.dp
+private val ToDometerTitleTextPaddingStart: Dp = 6.dp
+private val ToDometerTitleTextPaddingBottom: Dp = 4.dp

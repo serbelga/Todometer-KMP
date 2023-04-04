@@ -16,24 +16,29 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HorizontalDivider(modifier: Modifier = Modifier) {
-    Divider(thickness = 1.dp, color = MaterialTheme.colorScheme.outline, modifier = modifier)
+fun ToDometerDivider(
+    modifier: Modifier = Modifier,
+    thickness: Dp = ToDometerDividerDefaults.thickness,
+    color: Color = ToDometerDividerDefaults.color
+) {
+    Divider(
+        modifier = modifier,
+        thickness = thickness,
+        color = color
+    )
 }
 
-@Composable
-fun VerticalDivider(modifier: Modifier = Modifier) {
-    Divider(
-        thickness = 1.dp,
-        color = MaterialTheme.colorScheme.outline,
-        modifier = modifier.fillMaxHeight().width(1.dp)
-    )
+private object ToDometerDividerDefaults {
+    val thickness: Dp = 1.0.dp
+
+    val color: Color @Composable get() = MaterialTheme.colorScheme.outline
 }
