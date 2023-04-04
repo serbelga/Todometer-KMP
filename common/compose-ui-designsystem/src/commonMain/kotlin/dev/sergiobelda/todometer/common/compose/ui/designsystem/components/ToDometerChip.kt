@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -30,19 +31,34 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ToDometerChip(
-    borderStroke: BorderStroke = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.surface,
+    border: BorderStroke = ToDometerChipDefaults.borderStroke,
+    color: Color = ToDometerChipDefaults.color,
     content: @Composable RowScope.() -> Unit
 ) {
     Surface(
-        border = borderStroke,
-        shape = MaterialTheme.shapes.small,
         modifier = modifier,
+        border = border,
+        shape = MaterialTheme.shapes.small,
         color = color
     ) {
-        Row(modifier = Modifier.padding(6.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(ToDometerChipContentPadding),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             content()
         }
     }
 }
+
+private object ToDometerChipDefaults {
+    val borderStroke: BorderStroke
+        @Composable get() = BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.outline
+        )
+
+    val color: Color @Composable get() = MaterialTheme.colorScheme.surface
+}
+
+private val ToDometerChipContentPadding: PaddingValues = PaddingValues(6.dp)

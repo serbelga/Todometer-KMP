@@ -37,8 +37,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.MR
@@ -65,7 +65,7 @@ internal fun HomeDrawerContent(
                 .padding(horizontal = HomeDrawerTopPaddingHorizontal)
         )
     }
-    HorizontalDivider()
+    ToDometerDivider()
     HomeDrawerTaskListsSection(
         selectedTaskListId,
         defaultTaskListName,
@@ -73,7 +73,7 @@ internal fun HomeDrawerContent(
         onAddTaskList,
         onTaskListItemClick
     )
-    HorizontalDivider()
+    ToDometerDivider()
     Column(modifier = Modifier.padding(HomeDrawerItemPadding)) {
         HomeNavigationDrawerSettingsItem(onSettingsItemClick)
         HomeNavigationDrawerAboutItem(onAboutItemClick)

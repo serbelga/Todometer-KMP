@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TitledTextField(
+fun ToDometerTitledTextField(
     title: String = "",
     modifier: Modifier = Modifier,
     value: String,

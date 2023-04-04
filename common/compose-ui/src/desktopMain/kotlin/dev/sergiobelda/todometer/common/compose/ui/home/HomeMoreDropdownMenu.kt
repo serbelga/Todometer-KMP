@@ -27,7 +27,7 @@ import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-actual fun HomeMoreDropdownMenu(
+internal actual fun HomeMoreDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
     onEditTaskListClick: () -> Unit,

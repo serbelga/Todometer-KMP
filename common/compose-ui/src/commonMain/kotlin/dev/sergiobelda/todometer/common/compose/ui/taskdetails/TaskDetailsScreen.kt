@@ -53,11 +53,11 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
-import dev.sergiobelda.todometer.common.compose.ui.components.task.TaskDueDateChip
-import dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem.AddChecklistItemField
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
+import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Task
@@ -122,7 +122,7 @@ fun TaskDetailsScreen(
         },
         content = { paddingValues ->
             if (lazyListState.firstVisibleItemIndex > 0) {
-                HorizontalDivider()
+                ToDometerDivider()
             }
             if (taskDetailsUiState.isLoadingTask) {
                 ToDometerContentLoadingProgress()
@@ -167,7 +167,7 @@ private fun LazyListScope.taskTitle(task: Task) {
                 )
             }
         }
-        HorizontalDivider()
+        ToDometerDivider()
     }
 }
 
@@ -201,7 +201,7 @@ private fun LazyListScope.taskChecklist(
         )
     }
     item {
-        HorizontalDivider()
+        ToDometerDivider()
     }
 }
 

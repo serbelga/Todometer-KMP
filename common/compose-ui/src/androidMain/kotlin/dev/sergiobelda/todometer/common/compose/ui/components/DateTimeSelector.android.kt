@@ -45,7 +45,7 @@ import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import java.util.concurrent.TimeUnit
 
 @Composable
-actual fun ToDometerDateTimeSelector(
+internal actual fun DateTimeSelector(
     taskDueDate: Long?,
     onDateTimeSelected: (Long?) -> Unit,
     onClearDateTimeClick: () -> Unit

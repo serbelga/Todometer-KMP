@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.components.taskchecklistitem
+package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,7 +41,7 @@ import dev.sergiobelda.todometer.common.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddChecklistItemField(
+internal fun AddChecklistItemField(
     placeholder: @Composable (() -> Unit)? = null,
     onAddTaskCheckListItem: (String) -> Unit
 ) {

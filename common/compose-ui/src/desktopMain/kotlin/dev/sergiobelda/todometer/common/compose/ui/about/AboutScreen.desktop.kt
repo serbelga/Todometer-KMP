@@ -15,7 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.title.ToDometerTitle
+import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -36,11 +36,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerContentLoadingProgress
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerDateTimeSelector
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTagSelector
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.HorizontalDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
+import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -105,7 +105,7 @@ fun EditTaskScreen(
                 ToDometerContentLoadingProgress()
             } else {
                 Column(modifier = Modifier.padding(paddingValues)) {
-                    TitledTextField(
+                    ToDometerTitledTextField(
                         title = stringResource(MR.strings.name),
                         value = taskTitle,
                         onValueChange = {
@@ -126,15 +126,15 @@ fun EditTaskScreen(
                             bottom = 8.dp
                         )
                     )
-                    ToDometerTagSelector(selectedTag) { tag ->
+                    TagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
-                    ToDometerDateTimeSelector(
+                    DateTimeSelector(
                         taskDueDate,
                         onDateTimeSelected = { taskDueDate = it },
                         onClearDateTimeClick = { taskDueDate = null }
                     )
-                    TitledTextField(
+                    ToDometerTitledTextField(
                         title = stringResource(MR.strings.description),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
@@ -151,7 +151,7 @@ fun EditTaskScreen(
                         ),
                         maxLines = 4
                     )
-                    HorizontalDivider()
+                    ToDometerDivider()
                 }
             }
         }

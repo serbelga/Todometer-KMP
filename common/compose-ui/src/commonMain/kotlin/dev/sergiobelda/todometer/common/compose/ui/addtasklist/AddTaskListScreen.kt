@@ -43,7 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -150,7 +150,7 @@ internal fun AddTaskListContent(
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
     Column(modifier = Modifier.padding(paddingValues)) {
-        TitledTextField(
+        ToDometerTitledTextField(
             title = stringResource(MR.strings.name),
             value = taskListNameValue,
             onValueChange = onTaskListNameValueChange,

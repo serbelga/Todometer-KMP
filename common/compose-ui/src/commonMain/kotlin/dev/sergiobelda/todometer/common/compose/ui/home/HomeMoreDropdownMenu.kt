@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.compose.ui.home
 import androidx.compose.runtime.Composable
 
 @Composable
-expect fun HomeMoreDropdownMenu(
+internal expect fun HomeMoreDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
     onEditTaskListClick: () -> Unit,
