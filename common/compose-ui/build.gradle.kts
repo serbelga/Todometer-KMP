@@ -40,6 +40,7 @@ kotlin {
         val commonTest by getting
         val androidMain by getting {
             dependencies {
+                implementation(compose.animationGraphics)
                 api(compose.uiTooling)
 
                 implementation(projects.common.android)
