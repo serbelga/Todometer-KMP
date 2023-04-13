@@ -18,66 +18,47 @@ package dev.sergiobelda.todometer.common.resources
 
 actual object ToDometerIcons {
 
-    actual val Add: PainterResource =
-        PainterResource(R.drawable.ic_rounded_add_24)
+    actual val Add: PainterResource = PainterResource(R.drawable.ic_rounded_add_24)
 
-    actual val ArrowBack: PainterResource =
-        PainterResource(R.drawable.ic_rounded_arrow_back_24)
+    actual val ArrowBack: PainterResource = PainterResource(R.drawable.ic_rounded_arrow_back_24)
 
-    actual val CheckBox: PainterResource =
-        PainterResource(R.drawable.ic_rounded_check_box_24)
+    actual val CheckBox: PainterResource = PainterResource(R.drawable.ic_rounded_check_box_24)
 
-    actual val Check: PainterResource =
-        PainterResource(R.drawable.ic_rounded_check_24)
+    actual val Check: PainterResource = PainterResource(R.drawable.ic_rounded_check_24)
 
-    actual val Close: PainterResource =
-        PainterResource(R.drawable.ic_rounded_close_24)
+    actual val Close: PainterResource = PainterResource(R.drawable.ic_rounded_close_24)
 
-    actual val Code: PainterResource =
-        PainterResource(R.drawable.ic_rounded_code_24)
+    actual val Code: PainterResource = PainterResource(R.drawable.ic_rounded_code_24)
 
-    actual val Contrast: PainterResource =
-        PainterResource(R.drawable.ic_rounded_contrast_24)
+    actual val Contrast: PainterResource = PainterResource(R.drawable.ic_rounded_contrast_24)
 
-    actual val DarkMode: PainterResource =
-        PainterResource(R.drawable.ic_rounded_dark_mode_24)
+    actual val DarkMode: PainterResource = PainterResource(R.drawable.ic_rounded_dark_mode_24)
 
-    actual val Delete: PainterResource =
-        PainterResource(R.drawable.ic_rounded_delete_24)
+    actual val Delete: PainterResource = PainterResource(R.drawable.ic_rounded_delete_24)
 
-    actual val Description: PainterResource =
-        PainterResource(R.drawable.ic_rounded_description_24)
+    actual val Description: PainterResource = PainterResource(R.drawable.ic_rounded_description_24)
 
-    actual val Edit: PainterResource =
-        PainterResource(R.drawable.ic_rounded_edit_24)
+    actual val Edit: PainterResource = PainterResource(R.drawable.ic_rounded_edit_24)
 
-    actual val Event: PainterResource =
-        PainterResource(R.drawable.ic_rounded_event_24)
+    actual val Event: PainterResource = PainterResource(R.drawable.ic_rounded_event_24)
 
-    actual val ExpandLess: PainterResource =
-        PainterResource(R.drawable.ic_rounded_expand_less_24)
+    actual val ExpandLess: PainterResource = PainterResource(R.drawable.ic_rounded_expand_less_24)
 
-    actual val ExpandMore: PainterResource =
-        PainterResource(R.drawable.ic_rounded_expand_more_24)
+    actual val ExpandMore: PainterResource = PainterResource(R.drawable.ic_rounded_expand_more_24)
 
-    actual val GitHub: PainterResource =
-        PainterResource(R.drawable.ic_github_24)
+    actual val GitHub: PainterResource = PainterResource(R.drawable.ic_github_24)
 
-    actual val Info: PainterResource =
-        PainterResource(R.drawable.ic_rounded_info_24)
+    actual val Info: PainterResource = PainterResource(R.drawable.ic_rounded_info_24)
 
-    actual val LightMode: PainterResource =
-        PainterResource(R.drawable.ic_rounded_light_mode_24)
+    actual val LightMode: PainterResource = PainterResource(R.drawable.ic_rounded_light_mode_24)
 
-    actual val Menu: PainterResource =
-        PainterResource(R.drawable.ic_rounded_menu_24)
+    actual val Menu: PainterResource = PainterResource(R.drawable.ic_rounded_menu_24)
 
-    actual val MoreVert: PainterResource =
-        PainterResource(R.drawable.ic_rounded_more_vert_24)
+    actual val MoreVert: PainterResource = PainterResource(R.drawable.ic_rounded_more_vert_24)
 
-    actual val Replay: PainterResource =
-        PainterResource(R.drawable.ic_rounded_replay_24)
+    actual val Replay: PainterResource = PainterResource(R.drawable.ic_rounded_replay_24)
 
-    actual val Settings: PainterResource =
-        PainterResource(R.drawable.ic_rounded_settings_24)
+    actual val Settings: PainterResource = PainterResource(R.drawable.ic_rounded_settings_24)
+
+    actual val Warning: PainterResource = PainterResource(R.drawable.ic_rounded_warning_24)
 }

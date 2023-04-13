@@ -25,6 +25,7 @@ internal actual fun ToDometerPlatformAlertDialog(
     confirmButton: @Composable () -> Unit,
     modifier: Modifier,
     dismissButton: @Composable (() -> Unit)?,
+    icon: @Composable (() -> Unit)?,
     title: @Composable (() -> Unit)?,
     text: @Composable (() -> Unit)?
 ) {

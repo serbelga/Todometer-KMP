@@ -58,4 +58,6 @@ expect object ToDometerIcons {
     val Replay: PainterResource
 
     val Settings: PainterResource
+
+    val Warning: PainterResource
 }

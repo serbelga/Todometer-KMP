@@ -80,4 +80,7 @@ actual object ToDometerIcons {
 
     actual val Settings: PainterResource =
         PainterResource("icons/ic_rounded_settings_24.svg")
+
+    actual val Warning: PainterResource =
+        PainterResource("icons/ic_rounded_warning_24.svg")
 }

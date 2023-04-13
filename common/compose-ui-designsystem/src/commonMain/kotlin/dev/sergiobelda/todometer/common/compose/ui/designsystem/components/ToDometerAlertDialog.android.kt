@@ -26,6 +26,7 @@ fun ToDometerAlertDialog(
     confirmButton: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     dismissButton: @Composable (() -> Unit)? = null,
+    icon: @Composable (() -> Unit)? = null,
     title: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit)? = null
 ) {
@@ -35,6 +36,7 @@ fun ToDometerAlertDialog(
         confirmButton = confirmButton,
         modifier = modifier,
         dismissButton = dismissButton,
+        icon = icon,
         title = title,
         text = text
     )
@@ -46,6 +48,7 @@ internal expect fun ToDometerPlatformAlertDialog(
     confirmButton: @Composable () -> Unit,
     modifier: Modifier,
     dismissButton: @Composable (() -> Unit)?,
+    icon: @Composable (() -> Unit)? = null,
     title: @Composable (() -> Unit)?,
     text: @Composable (() -> Unit)?
 )
