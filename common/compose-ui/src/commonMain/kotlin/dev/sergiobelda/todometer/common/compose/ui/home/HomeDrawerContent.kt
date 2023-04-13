@@ -35,6 +35,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
@@ -94,7 +95,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
             Text(
                 text = stringResource(MR.strings.settings),
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = 1
+                maxLines = HomeDrawerItemMaxLines
             )
         },
         onClick = onClick,
@@ -116,7 +117,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
             Text(
                 text = stringResource(MR.strings.about),
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = 1
+                maxLines = HomeDrawerItemMaxLines
             )
         },
         onClick = onClick,
@@ -178,7 +179,8 @@ private fun HomeNavigationDrawerTaskListItem(
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = 1
+                maxLines = HomeDrawerItemMaxLines,
+                overflow = TextOverflow.Ellipsis
             )
         },
         onClick = onItemClick,
@@ -192,3 +194,4 @@ private val HomeDrawerTopPaddingHorizontal: Dp = 16.dp
 private val HomeDrawerSectionTitleHeight: Dp = 56.dp
 private val HomeDrawerSectionTitlePaddingHorizontal: Dp = 16.dp
 private val HomeDrawerItemPadding: Dp = 8.dp
+private const val HomeDrawerItemMaxLines: Int = 1
