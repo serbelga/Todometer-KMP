@@ -18,7 +18,9 @@ package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
@@ -47,17 +50,21 @@ internal fun TaskListProgress(taskListName: String?, tasks: List<TaskItem>, modi
         Text(
             taskListName ?: "",
             style = MaterialTheme.typography.titleSmall,
-            maxLines = 2
+            maxLines = TaskListNameMaxLines,
+            overflow = TextOverflow.Ellipsis
         )
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = TaskProgress.getPercentage(progress),
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(top = 4.dp)
+            style = MaterialTheme.typography.bodyMedium
         )
         LinearProgressIndicator(
             progress = animatedProgress,
             modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp)
+                // TODO: Use StrokeCap.Rounded
                 .clip(RoundedCornerShape(2.dp))
         )
     }
 }
+
+private const val TaskListNameMaxLines: Int = 2
