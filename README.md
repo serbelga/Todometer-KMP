@@ -4,9 +4,6 @@
   <a href="https://github.com/serbelga/ToDometer_Multiplatform/actions/workflows/build.yml" target="_blank">
     <img src="https://github.com/serbelga/ToDometer_Kotlin_Multiplatform/actions/workflows/build.yml/badge.svg">
   </a>
-  <a href="https://github.com/serbelga/ToDometer_Multiplatform/actions/workflows/ktlint.yml" target="_blank">
-    <img src="https://github.com/serbelga/ToDometer_Kotlin_Multiplatform/actions/workflows/ktlint.yml/badge.svg">
-  </a>
 </p>
 
 <h5 align="center">
