@@ -2,7 +2,6 @@ import org.jetbrains.compose.experimental.uikit.tasks.ExperimentalPackComposeApp
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 import kotlin.reflect.full.declaredMemberProperties
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
