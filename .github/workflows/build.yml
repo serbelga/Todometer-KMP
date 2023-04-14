@@ -28,6 +28,8 @@ jobs:
       run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > android/google-services.json
     - name: Create google-services.json in wearos
       run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > wearos/google-services.json
+    - name: Apply ktlintCheck
+      run: ./gradlew ktlintCheck
     - name: Build android app
       run:  ./gradlew android:assembleDebug
     - name: Build wearos app
