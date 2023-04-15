@@ -28,13 +28,11 @@ dependencies {
 
     // Koin for Ktor
     implementation(libs.koin.ktor)
-    // SLF4J Logger
-    implementation(libs.koin.logger)
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "18"
+        kotlinOptions.jvmTarget = "17"
     }
 }
 

@@ -90,7 +90,7 @@ fun AddTaskScreen(
     if (addTaskUiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = addTaskUiState.errorUi?.message ?: ""
+                message = addTaskUiState.errorUi.message ?: ""
             )
         }
     }

@@ -11,6 +11,7 @@ plugins {
 }
 
 android {
+    namespace = "dev.sergiobelda.todometer"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
@@ -46,7 +47,6 @@ android {
         jvmTarget = "17"
         freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
     }
-    namespace = "dev.sergiobelda.todometer"
 }
 
 dependencies {
