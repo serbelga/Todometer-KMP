@@ -52,7 +52,6 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.appl
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -127,7 +126,7 @@ private fun AddTaskListTopBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    painterResource(ToDometerIcons.ArrowBack),
+                    ToDometerIcons.ArrowBack,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }
@@ -139,7 +138,7 @@ private fun AddTaskListTopBar(
                 onClick = onSaveButtonClick
             ) {
                 Icon(
-                    painterResource(ToDometerIcons.Check),
+                    ToDometerIcons.Check,
                     contentDescription = stringResource(MR.strings.save),
                     tint = saveButtonTintColor
                 )

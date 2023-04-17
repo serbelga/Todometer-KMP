@@ -62,7 +62,6 @@ import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -244,7 +243,7 @@ private fun TaskChecklistItem(
         )
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
-                painterResource(ToDometerIcons.Close),
+                ToDometerIcons.Close,
                 contentDescription = stringResource(MR.strings.clear),
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )

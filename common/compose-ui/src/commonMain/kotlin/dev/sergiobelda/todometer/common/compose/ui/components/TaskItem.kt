@@ -63,7 +63,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -259,8 +258,8 @@ private fun taskItemTitleTextDecoration(state: TaskState): TextDecoration =
 @Composable
 private fun taskItemActionIcon(state: TaskState): Painter =
     when (state) {
-        TaskState.DOING -> painterResource(ToDometerIcons.Check)
-        TaskState.DONE -> painterResource(ToDometerIcons.Replay)
+        TaskState.DOING -> ToDometerIcons.Check
+        TaskState.DONE -> ToDometerIcons.Replay
     }
 
 @Composable

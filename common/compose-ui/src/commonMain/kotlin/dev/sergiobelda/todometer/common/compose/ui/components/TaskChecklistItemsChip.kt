@@ -29,7 +29,6 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDom
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 
 @Composable
 internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
@@ -51,7 +50,7 @@ internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItem
         modifier = Modifier.padding(bottom = 8.dp)
     ) {
         Icon(
-            painterResource(ToDometerIcons.CheckBox),
+            ToDometerIcons.CheckBox,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
             tint = completedChipTint

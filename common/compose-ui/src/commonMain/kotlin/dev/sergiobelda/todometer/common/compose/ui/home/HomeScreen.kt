@@ -228,7 +228,7 @@ fun HomeScreen(
                     onClick = navigateToAddTask
                 ) {
                     Icon(
-                        painterResource(ToDometerIcons.Add),
+                        ToDometerIcons.Add,
                         contentDescription = stringResource(MR.strings.add_task)
                     )
                 }
@@ -259,7 +259,7 @@ private fun HomeTopAppBar(
             navigationIcon = {
                 IconButton(onClick = onMenuClick) {
                     Icon(
-                        painterResource(ToDometerIcons.Menu),
+                        ToDometerIcons.Menu,
                         contentDescription = stringResource(MR.strings.menu)
                     )
                 }
@@ -267,7 +267,7 @@ private fun HomeTopAppBar(
             actions = {
                 IconButton(onClick = onMoreClick) {
                     Icon(
-                        painterResource(ToDometerIcons.MoreVert),
+                        ToDometerIcons.MoreVert,
                         contentDescription = stringResource(MR.strings.more)
                     )
                 }
@@ -324,12 +324,12 @@ private fun TasksList(
                     trailingContent = {
                         if (areTasksDoneVisible) {
                             Icon(
-                                painterResource(ToDometerIcons.ExpandLess),
+                                ToDometerIcons.ExpandLess,
                                 contentDescription = null
                             )
                         } else {
                             Icon(
-                                painterResource(ToDometerIcons.ExpandMore),
+                                ToDometerIcons.ExpandMore,
                                 contentDescription = null
                             )
                         }

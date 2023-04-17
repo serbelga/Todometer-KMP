@@ -61,7 +61,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,7 +94,7 @@ fun TaskDetailsScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            painterResource(ToDometerIcons.ArrowBack),
+                            ToDometerIcons.ArrowBack,
                             contentDescription = stringResource(MR.strings.back)
                         )
                     }
@@ -104,7 +103,7 @@ fun TaskDetailsScreen(
                     if (!taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null) {
                         IconButton(onClick = navigateToEditTask) {
                             Icon(
-                                painterResource(ToDometerIcons.Edit),
+                                ToDometerIcons.Edit,
                                 contentDescription = stringResource(MR.strings.edit_task),
                                 tint = MaterialTheme.colorScheme.primary
                             )
@@ -246,7 +245,7 @@ private fun LazyItemScope.TaskChecklistItem(
         )
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
-                painterResource(ToDometerIcons.Close),
+                ToDometerIcons.Close,
                 contentDescription = stringResource(MR.strings.clear),
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )

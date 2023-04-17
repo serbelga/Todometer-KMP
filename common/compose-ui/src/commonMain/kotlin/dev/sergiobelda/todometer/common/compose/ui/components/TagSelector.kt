@@ -48,7 +48,6 @@ import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -118,7 +117,7 @@ private fun TagItem(
         ) {
             if (selected) {
                 Icon(
-                    painterResource(ToDometerIcons.Check),
+                    ToDometerIcons.Check,
                     stringResource(MR.strings.selected),
                     tint = checkColor
                 )

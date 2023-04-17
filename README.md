@@ -23,22 +23,22 @@
 ### Android
 
 | <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/remove_task.gif" /> |
-|---|---|---|
+|----------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------|
 
 ### Material Design 3 Dynamic color
 
 | <img width="300" src="./screenshots/android/drawer_dark_dynamic_color.png" /> | <img width="300" src="./screenshots/android/home_dark_dynamic_color.png" /> | <img width="300" src="./screenshots/android/home_light_dynamic_color.png" /> | <img width="300" src="./screenshots/android/add_task_dark_dynamic_color.png" /> |
-|---|---|---|---|
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 
 ### Glance App Widget - Material Design 3 Dynamic color
 
 | <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
-|---|
+|--------------------------------------------------------------------------|
 
 ### Wear OS
 
 | <img width="240" src="./screenshots/wearos/home.png" /> | <img width="240" src="./screenshots/wearos/tasks.png" /> | <img width="240" src="./screenshots/wearos/task.png" /> | <img width="240" src="./screenshots/wearos/delete_task_list.png" /> | <img width="240" src="./screenshots/wearos/delete_task.png" /> |
-|---|---|---|---|---|
+|---------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------|---------------------------------------------------------------------|----------------------------------------------------------------|
 
 ### Desktop
 
@@ -47,6 +47,8 @@
 <img width="560" src="./screenshots/desktop/home.png" />
 
 ### iOS
+
+`./gradlew iosDeployIPhone13ProMaxDebug`
 
 Under construction
 
@@ -57,10 +59,10 @@ Under construction
 ### Android
 
 * [Android Jetpack](https://developer.android.com/jetpack)
-  * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
-  * [Android KTX](https://developer.android.com/kotlin/ktx)
-  * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-  * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)
+    * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
+    * [Android KTX](https://developer.android.com/kotlin/ktx)
+    * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+    * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)
 * [Koin](https://insert-koin.io/docs/reference/koin-android/start)
 
 ### Wear OS
@@ -77,7 +79,7 @@ Under construction
 
 * [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
-  * [Flow](https://kotlinlang.org/docs/flow.html)
+    * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [ktlint](https://ktlint.github.io/)

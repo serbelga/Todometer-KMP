@@ -49,7 +49,6 @@ import dev.sergiobelda.todometer.common.compose.ui.preferences.themeName
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,7 +64,7 @@ fun SettingsScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            painterResource(ToDometerIcons.ArrowBack),
+                            ToDometerIcons.ArrowBack,
                             contentDescription = stringResource(MR.strings.back)
                         )
                     }

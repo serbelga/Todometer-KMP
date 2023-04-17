@@ -148,7 +148,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(painterResource(ToDometerIcons.Add), null)
+            Icon(ToDometerIcons.Add, null)
         },
         label = {
             Text(
