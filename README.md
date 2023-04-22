@@ -16,10 +16,6 @@
 </p>
 </a>
 
-## Setup
-
-Android and Wear OS apps are using [Firebase Crashlytics](https://firebase.google.com/products/crashlytics). You need to create a project in Firebase Console and copy `google-services.json` file into android and wearos folders to be able to launch them. I've created an issue for this in order to avoid requiring this file https://github.com/serbelga/ToDometerMultiplatform/issues/114.
-
 <br/>
 
 ## Screenshots

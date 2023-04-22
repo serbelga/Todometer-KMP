@@ -2,12 +2,15 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidApplication)
     id("com.google.android.gms.oss-licenses-plugin")
-    alias(libs.plugins.googleServices)
-    alias(libs.plugins.firebaseCrashlytics)
     kotlin("android")
     kotlin("kapt")
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
+}
+
+if (file("google-services.json").exists()) {
+    apply(plugin = libs.plugins.googleServices.get().pluginId)
+    apply(plugin = libs.plugins.firebaseCrashlytics.get().pluginId)
 }
 
 android {
