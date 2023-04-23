@@ -41,15 +41,13 @@ class TaskRepository(
 
     override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
         taskLocalDataSource.getTasks(taskListId)
-    /*
-    taskLocalDataSource.getTasks(taskListId).map { result ->
+    /*taskLocalDataSource.getTasks(taskListId).map { result ->
         result.doIfSuccess { tasks ->
             synchronizeTasksRemotely(tasks.filter { !it.sync })
             // TODO Remove ?: ""
             refreshTasks(taskListId ?: "")
         }
-    }
-    */
+    }*/
 
     /**
      * Synchronize a list of [Task] remotely.
@@ -93,16 +91,14 @@ class TaskRepository(
     ): Result<String> {
         val taskId = randomUUIDString()
         val sync = false
-        /*
-        taskRemoteDataSource.insertTask(
+        /*taskRemoteDataSource.insertTask(
             title = title, description = description, taskListId = taskListId, tag = tag
         ).doIfSuccess {
             taskId = it
             sync = true
         }.doIfError {
             taskId = randomUUIDString()
-        }
-        */
+        }*/
         return taskLocalDataSource.insertTask(
             Task(
                 id = taskId,
@@ -125,20 +121,16 @@ class TaskRepository(
      */
     override suspend fun updateTaskState(id: String, state: TaskState) {
         taskLocalDataSource.updateTaskState(id, state)
-        /*
-        taskRemoteDataSource.updateTaskState(id, state).doIfError {
+        /*taskRemoteDataSource.updateTaskState(id, state).doIfError {
             taskLocalDataSource.updateTaskSync(id, false)
-        }
-        */
+        }*/
     }
 
     /**
      * It only removes task from local database if remote call is successful.
      */
     override suspend fun deleteTask(id: String) = taskLocalDataSource.deleteTask(id)
-    /*
-    taskRemoteDataSource.deleteTask(id).doIfSuccess {
-        taskLocalDataSource.deleteTask(id)
-    }
-    */
+        /*taskRemoteDataSource.deleteTask(id).doIfSuccess {
+            taskLocalDataSource.deleteTask(id)
+        }*/
 }
