@@ -21,12 +21,10 @@ import androidx.compose.ui.graphics.Color
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerColors
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
-typealias ComposeColor = Color
-
 @Composable
-fun ToDometerColors.composeColorOf(tag: Tag): ComposeColor =
+fun ToDometerColors.composeColorOf(tag: Tag): Color =
     when (tag) {
-        Tag.UNSPECIFIED -> ComposeColor.Unspecified
+        Tag.UNSPECIFIED -> Color.Unspecified
         Tag.PINK -> pink
         Tag.RED -> red
         Tag.INDIGO -> indigo
