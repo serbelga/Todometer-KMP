@@ -40,7 +40,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.values.TitledTextFieldPadding
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -119,7 +119,7 @@ fun EditTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.padding(TitledTextFieldPadding)
+                        modifier = Modifier.padding(TextFieldPadding)
                     )
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
@@ -138,7 +138,7 @@ fun EditTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(TitledTextFieldPadding),
+                        modifier = Modifier.padding(TextFieldPadding),
                         maxLines = 4
                     )
                     ToDometerDivider()

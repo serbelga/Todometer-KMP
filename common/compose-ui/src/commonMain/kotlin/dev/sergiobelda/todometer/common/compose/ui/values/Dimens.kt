@@ -4,4 +4,4 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 internal val SectionPadding: Dp = 24.dp
-internal val TitledTextFieldPadding: Dp = 8.dp
+internal val TextFieldPadding: Dp = 8.dp

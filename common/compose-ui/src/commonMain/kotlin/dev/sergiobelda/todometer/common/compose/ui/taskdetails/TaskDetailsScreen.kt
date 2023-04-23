@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
@@ -149,7 +148,6 @@ private fun LazyListScope.taskTitle(task: Task) {
             ) {
                 if (task.tag != Tag.UNSPECIFIED) {
                     TaskTagIndicator(task.tag)
-                    Spacer(modifier = Modifier.size(12.dp))
                 }
                 Text(
                     text = task.title,
@@ -217,12 +215,16 @@ private fun LazyItemScope.TaskChecklistItem(
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().clickable {
-            onTaskChecklistItemClick(
-                taskChecklistItem.id,
-                taskChecklistItem.state == TaskChecklistItemState.UNCHECKED
-            )
-        }.animateItemPlacement().padding(horizontal = 8.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onTaskChecklistItemClick(
+                    taskChecklistItem.id,
+                    taskChecklistItem.state == TaskChecklistItemState.UNCHECKED
+                )
+            }
+            .animateItemPlacement()
+            .padding(horizontal = 8.dp)
     ) {
         ToDometerCheckbox(
             checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,

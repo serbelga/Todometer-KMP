@@ -3,6 +3,7 @@ package dev.sergiobelda.todometer.common.compose.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -20,9 +21,10 @@ fun TaskTagIndicator(
 ) {
     Box(
         modifier = modifier
-            .clip(shape = CircleShape)
             .background(color = ToDometerTheme.toDometerColors.composeColorOf(tag))
-            .width(4.dp)
+            .clip(shape = CircleShape)
             .height(20.dp)
+            .padding(end = 12.dp)
+            .width(4.dp)
     )
 }

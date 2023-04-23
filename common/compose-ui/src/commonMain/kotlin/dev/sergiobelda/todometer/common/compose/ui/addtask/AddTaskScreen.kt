@@ -56,7 +56,7 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDom
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
-import dev.sergiobelda.todometer.common.compose.ui.values.TitledTextFieldPadding
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -157,7 +157,7 @@ fun AddTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.padding(TitledTextFieldPadding)
+                        modifier = Modifier.padding(TextFieldPadding)
                     )
                 }
                 item {
@@ -206,7 +206,7 @@ fun AddTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(TitledTextFieldPadding),
+                        modifier = Modifier.padding(TextFieldPadding),
                         maxLines = 4
                     )
                 }

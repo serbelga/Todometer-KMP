@@ -44,7 +44,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
-import dev.sergiobelda.todometer.common.compose.ui.values.TitledTextFieldPadding
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -166,7 +166,7 @@ internal fun AddTaskListContent(
                 capitalization = KeyboardCapitalization.Sentences,
                 imeAction = ImeAction.Done
             ),
-            modifier = Modifier.padding(TitledTextFieldPadding)
+            modifier = Modifier.padding(TextFieldPadding)
         )
     }
 }
