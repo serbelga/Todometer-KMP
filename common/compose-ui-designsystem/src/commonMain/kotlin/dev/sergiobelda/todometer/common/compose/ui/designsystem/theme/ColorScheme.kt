@@ -50,7 +50,6 @@ val LightColorScheme = lightColorScheme(
 )
 
 val ToDometerLightColors = toDometerLightColors(
-    onSurfaceMediumEmphasis = todometer_light_onSurface.copy(alpha = Alpha.Medium),
     check = todometer_secondary50,
     amber = amberLight,
     blue = blueLight,
@@ -97,7 +96,6 @@ val DarkColorScheme = darkColorScheme(
 )
 
 val ToDometerDarkColors = toDometerDarkColors(
-    onSurfaceMediumEmphasis = todometer_dark_onSurface.copy(alpha = Alpha.Medium),
     check = todometer_secondary80,
     amber = amberDark,
     blue = blueDark,

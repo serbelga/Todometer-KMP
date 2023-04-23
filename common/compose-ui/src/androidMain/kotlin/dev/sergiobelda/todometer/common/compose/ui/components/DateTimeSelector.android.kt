@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -70,7 +70,7 @@ internal actual fun DateTimeSelector(
             Text(
                 text = taskDueDate?.let { TaskDueDate.getDueDateFormatted(it) }
                     ?: run { stringResource(MR.strings.enter_date_time) },
-                color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
+                color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
                 modifier = Modifier.padding(start = 32.dp)
             )
             taskDueDate?.let {
@@ -78,7 +78,7 @@ internal actual fun DateTimeSelector(
                     Icon(
                         painterResource(ToDometerIcons.Close),
                         stringResource(MR.strings.clear),
-                        tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                        tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                     )
                 }
             }

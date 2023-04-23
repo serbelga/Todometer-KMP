@@ -58,6 +58,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Task
@@ -212,10 +213,16 @@ private fun LazyItemScope.TaskChecklistItem(
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit
 ) {
-    val textColor =
-        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.onSurface
-    val textDecoration =
-        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) TextDecoration.LineThrough else null
+    val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
+        MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+    } else {
+        MaterialTheme.colorScheme.onSurface
+    }
+    val textDecoration = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
+        TextDecoration.LineThrough
+    } else {
+        null
+    }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().clickable {
@@ -247,7 +254,7 @@ private fun LazyItemScope.TaskChecklistItem(
             Icon(
                 painterResource(ToDometerIcons.Close),
                 contentDescription = stringResource(MR.strings.clear),
-                tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )
         }
     }
@@ -281,7 +288,7 @@ private fun LazyListScope.taskDescription(description: String?) {
                     end = SectionPadding,
                     bottom = SectionPadding
                 ),
-                color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )
         }
     }

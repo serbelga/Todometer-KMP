@@ -54,7 +54,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -127,7 +127,7 @@ fun AddTaskScreen(
                         Icon(
                             painterResource(ToDometerIcons.Check),
                             contentDescription = "Save",
-                            tint = if (addTaskUiState.isAddingTask) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
+                            tint = if (addTaskUiState.isAddingTask) MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha() else MaterialTheme.colorScheme.primary
                         )
                     }
                 },
@@ -241,7 +241,7 @@ private fun TaskChecklistItem(
             Icon(
                 painterResource(ToDometerIcons.Close),
                 contentDescription = stringResource(MR.strings.clear),
-                tint = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+                tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )
         }
     }
