@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -37,13 +36,12 @@ class AddTaskViewModel(
     var addTaskUiState by mutableStateOf(AddTaskUiState())
         private set
 
-    val taskChecklistItems = mutableStateListOf<String>()
-
     fun insertTask(
         title: String,
         tag: Tag,
         description: String? = null,
-        dueDate: Long? = null
+        dueDate: Long? = null,
+        taskChecklistItems: List<String> = emptyList()
     ) = viewModelScope.launch {
         addTaskUiState = addTaskUiState.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(

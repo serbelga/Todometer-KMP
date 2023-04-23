@@ -38,6 +38,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -67,11 +68,8 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 @Composable
 fun AddTaskScreen(
     navigateBack: () -> Unit,
-    insertTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit,
-    addTaskUiState: AddTaskUiState,
-    taskChecklistItems: List<String>,
-    onAddTaskCheckListItem: (String) -> Unit,
-    onDeleteTaskCheckListItem: (index: Int) -> Unit
+    insertTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?, taskChecklistItems: List<String>) -> Unit,
+    addTaskUiState: AddTaskUiState
 ) {
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -84,6 +82,7 @@ fun AddTaskScreen(
     val tags = enumValues<Tag>()
     var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
+    val taskChecklistItems = mutableStateListOf<String>()
 
     if (addTaskUiState.isAdded) {
         navigateBack()
@@ -121,7 +120,8 @@ fun AddTaskScreen(
                                     taskTitle,
                                     selectedTag,
                                     taskDescription,
-                                    taskDueDate
+                                    taskDueDate,
+                                    taskChecklistItems
                                 )
                             }
                         }
@@ -187,13 +187,13 @@ fun AddTaskScreen(
                 itemsIndexed(taskChecklistItems) { index, item ->
                     TaskChecklistItem(
                         item,
-                        onDeleteTaskCheckListItem = { onDeleteTaskCheckListItem(index) }
+                        onDeleteTaskCheckListItem = { taskChecklistItems.removeAt(index) }
                     )
                 }
                 item {
                     AddChecklistItemField(
                         placeholder = { Text(stringResource(MR.strings.add_element_optional)) },
-                        onAddTaskCheckListItem = onAddTaskCheckListItem
+                        onAddTaskCheckListItem = { taskChecklistItems.add(it) }
                     )
                 }
                 item {

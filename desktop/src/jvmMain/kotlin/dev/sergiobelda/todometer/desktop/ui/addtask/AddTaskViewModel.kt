@@ -43,7 +43,8 @@ class AddTaskViewModel(
         title: String,
         tag: Tag,
         description: String? = null,
-        dueDate: Long? = null
+        dueDate: Long? = null,
+        taskChecklistItems: List<String> = emptyList()
     ) = coroutineScope.launch {
         addTaskUiState = addTaskUiState.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(

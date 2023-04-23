@@ -34,12 +34,15 @@ internal fun AddTaskRoute(
 
     AddTaskScreen(
         navigateBack = navigateBack,
-        insertTask = { taskTitle, selectedTag, taskDescription, taskDueDate ->
-            addTaskViewModel.insertTask(taskTitle, selectedTag, taskDescription, taskDueDate)
+        insertTask = { taskTitle, selectedTag, taskDescription, taskDueDate, taskChecklistItems ->
+            addTaskViewModel.insertTask(
+                taskTitle,
+                selectedTag,
+                taskDescription,
+                taskDueDate,
+                taskChecklistItems
+            )
         },
-        addTaskUiState = addTaskViewModel.addTaskUiState,
-        taskChecklistItems = addTaskViewModel.taskChecklistItems,
-        onAddTaskCheckListItem = { addTaskViewModel.taskChecklistItems.add(it) },
-        onDeleteTaskCheckListItem = { index -> addTaskViewModel.taskChecklistItems.removeAt(index) }
+        addTaskUiState = addTaskViewModel.addTaskUiState
     )
 }
