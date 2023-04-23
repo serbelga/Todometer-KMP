@@ -55,6 +55,8 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -126,7 +128,7 @@ fun AddTaskScreen(
                     ) {
                         Icon(
                             painterResource(ToDometerIcons.Check),
-                            contentDescription = "Save",
+                            contentDescription = stringResource(MR.strings.save),
                             tint = if (addTaskUiState.isAddingTask) MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha() else MaterialTheme.colorScheme.primary
                         )
                     }
@@ -155,12 +157,7 @@ fun AddTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
+                        modifier = Modifier.padding(TextFieldPadding)
                     )
                 }
                 item {
@@ -180,7 +177,11 @@ fun AddTaskScreen(
                         text = stringResource(MR.strings.checklist),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
-                        modifier = Modifier.padding(start = 32.dp, top = 16.dp)
+                        modifier = Modifier.padding(
+                            start = SectionPadding,
+                            top = 16.dp,
+                            end = SectionPadding
+                        )
                     )
                 }
                 itemsIndexed(taskChecklistItems) { index, item ->
@@ -205,12 +206,7 @@ fun AddTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        ),
+                        modifier = Modifier.padding(TextFieldPadding),
                         maxLines = 4
                     )
                 }
@@ -229,7 +225,7 @@ private fun TaskChecklistItem(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = 32.dp)
+        modifier = Modifier.padding(start = SectionPadding, end = 8.dp)
     ) {
         Text(
             text = taskChecklistItem,

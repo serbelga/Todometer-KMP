@@ -35,9 +35,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -81,7 +81,7 @@ fun EditTaskListScreen(
                         ) {
                             Icon(
                                 painterResource(ToDometerIcons.Check),
-                                contentDescription = "Save",
+                                contentDescription = stringResource(MR.strings.save),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -109,12 +109,7 @@ fun EditTaskListScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
+                        modifier = Modifier.padding(TextFieldPadding)
                     )
                 }
             }

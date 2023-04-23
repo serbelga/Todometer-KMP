@@ -35,7 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 
@@ -52,7 +52,7 @@ internal fun AddChecklistItemField(
             taskChecklistItemText = ""
         }
     }
-    Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
+    Row(modifier = Modifier.fillMaxWidth().padding(horizontal = TextFieldPadding)) {
         OutlinedTextField(
             value = taskChecklistItemText,
             onValueChange = { taskChecklistItemText = it },

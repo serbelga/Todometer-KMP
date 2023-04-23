@@ -37,6 +37,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -57,7 +58,7 @@ internal actual fun DateTimeSelector(
             text = stringResource(MR.strings.date_time),
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = 32.dp)
+            modifier = Modifier.padding(horizontal = SectionPadding)
         )
         Row(
             modifier = Modifier.height(48.dp).fillMaxWidth().clickable {
@@ -71,7 +72,7 @@ internal actual fun DateTimeSelector(
                 text = taskDueDate?.let { TaskDueDate.getDueDateFormatted(it) }
                     ?: run { stringResource(MR.strings.enter_date_time) },
                 color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
-                modifier = Modifier.padding(start = 32.dp)
+                modifier = Modifier.padding(horizontal = SectionPadding)
             )
             taskDueDate?.let {
                 IconButton(onClick = onClearDateTimeClick) {

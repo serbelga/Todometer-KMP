@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.common.domain.model
 
 enum class Tag {
-    GRAY,
+    UNSPECIFIED,
     PINK,
     RED,
     INDIGO,
@@ -28,5 +28,6 @@ enum class Tag {
     YELLOW,
     AMBER,
     ORANGE,
-    BROWN
+    BROWN,
+    GRAY
 }

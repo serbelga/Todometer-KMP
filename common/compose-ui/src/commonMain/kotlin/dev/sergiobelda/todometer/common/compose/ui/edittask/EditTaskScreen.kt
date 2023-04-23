@@ -35,12 +35,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -91,7 +91,7 @@ fun EditTaskScreen(
                         ) {
                             Icon(
                                 painterResource(ToDometerIcons.Check),
-                                contentDescription = "Save",
+                                contentDescription = stringResource(MR.strings.save),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -119,12 +119,7 @@ fun EditTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
+                        modifier = Modifier.padding(TextFieldPadding)
                     )
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
@@ -143,12 +138,7 @@ fun EditTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        ),
+                        modifier = Modifier.padding(TextFieldPadding),
                         maxLines = 4
                     )
                     ToDometerDivider()

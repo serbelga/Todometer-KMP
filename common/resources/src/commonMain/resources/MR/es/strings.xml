@@ -99,4 +99,5 @@
     <string name="back">Atrás</string>
     <string name="check_task">Marcar tarea</string>
     <string name="uncheck_task">Desmarcar tarea</string>
+    <string name="selected">Seleccionado</string>
 </resources>
