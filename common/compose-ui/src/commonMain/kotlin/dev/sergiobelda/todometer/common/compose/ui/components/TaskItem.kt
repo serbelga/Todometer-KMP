@@ -60,6 +60,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -89,14 +90,22 @@ internal fun SwipeableTaskItem(
         }
     )
     val backgroundColor by animateColorAsState(
-        if (dismissState.targetValue == DismissValue.Default) MaterialTheme.colorScheme.outline else MaterialTheme.colorScheme.error,
+        targetValue = if (dismissState.targetValue == DismissValue.Default) {
+            MaterialTheme.colorScheme.outline
+        } else {
+            MaterialTheme.colorScheme.error
+        },
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
         )
     )
     val backgroundIconTint by animateColorAsState(
-        if (dismissState.targetValue == DismissValue.Default) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.onError,
+        targetValue = if (dismissState.targetValue == DismissValue.Default) {
+            MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+        } else {
+            MaterialTheme.colorScheme.onError
+        },
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
@@ -247,7 +256,7 @@ private fun TaskItemSupportingContent(taskItem: TaskItem) {
 private fun taskItemTitleColor(state: TaskState): Color =
     when (state) {
         TaskState.DOING -> MaterialTheme.colorScheme.onSurface
-        TaskState.DONE -> ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+        TaskState.DONE -> MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
     }
 
 private fun taskItemTitleTextDecoration(state: TaskState): TextDecoration =

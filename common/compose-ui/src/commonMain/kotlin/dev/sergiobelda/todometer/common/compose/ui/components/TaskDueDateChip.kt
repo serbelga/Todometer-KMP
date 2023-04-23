@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerChip
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
@@ -42,10 +42,16 @@ internal fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
     val expired =
         currentInstant > Instant.fromEpochMilliseconds(dueDate).toLocalDateTime(TimeZone.UTC)
 
-    val dueDateChipTint =
-        if (expired) MaterialTheme.colorScheme.error else ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
-    val dueDateChipOutline =
-        if (expired) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
+    val dueDateChipTint = if (expired) {
+        MaterialTheme.colorScheme.error
+    } else {
+        MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+    }
+    val dueDateChipOutline = if (expired) {
+        MaterialTheme.colorScheme.error
+    } else {
+        MaterialTheme.colorScheme.outline
+    }
     ToDometerChip(
         border = BorderStroke(1.dp, dueDateChipOutline),
         modifier = modifier

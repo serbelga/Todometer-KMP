@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -172,7 +172,7 @@ private fun HomeNavigationDrawerTaskListItem(
     val colors = NavigationDrawerItemDefaults.colors(
         selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
         selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
-        unselectedTextColor = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis
+        unselectedTextColor = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
     )
     NavigationDrawerItem(
         label = {

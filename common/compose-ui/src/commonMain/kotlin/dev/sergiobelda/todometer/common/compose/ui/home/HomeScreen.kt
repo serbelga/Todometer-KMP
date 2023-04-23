@@ -39,6 +39,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -61,7 +62,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
@@ -386,7 +387,7 @@ private fun HomeInfoIllustration(
             secondaryText?.let {
                 Text(
                     text = it,
-                    color = ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis,
+                    color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
                     modifier = Modifier.padding(top = 8.dp)
                 )
             }

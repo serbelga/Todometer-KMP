@@ -44,7 +44,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -87,7 +87,11 @@ fun AddTaskListScreen(
                         insertTaskList(taskListName)
                     }
                 },
-                saveButtonTintColor = if (addTaskListUiState.isAddingTaskList) ToDometerTheme.toDometerColors.onSurfaceMediumEmphasis else MaterialTheme.colorScheme.primary
+                saveButtonTintColor = if (addTaskListUiState.isAddingTaskList) {
+                    MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                } else {
+                    MaterialTheme.colorScheme.primary
+                }
             )
         },
         content = { paddingValues ->
