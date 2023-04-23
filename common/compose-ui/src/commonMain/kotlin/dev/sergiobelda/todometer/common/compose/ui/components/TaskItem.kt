@@ -270,6 +270,5 @@ private fun taskItemActionContentDescription(state: TaskState): String =
         TaskState.DONE -> stringResource(MR.strings.uncheck_task)
     }
 
-private val TaskItemTagIndicatorSize: Dp = 16.dp
 private val TaskItemPaddingStart: Dp = 16.dp
 private val TaskItemPaddingEnd: Dp = 12.dp

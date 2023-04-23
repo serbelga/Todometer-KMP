@@ -20,12 +20,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,12 +31,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,34 +52,16 @@ fun EditTaskListScreen(
     }
     Scaffold(
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            painterResource(ToDometerIcons.ArrowBack),
-                            contentDescription = stringResource(MR.strings.back)
-                        )
-                    }
-                },
-                title = { Text(stringResource(MR.strings.edit_task_list)) },
-                actions = {
-                    if (!editTaskListUiState.isLoading && editTaskListUiState.taskList != null) {
-                        IconButton(
-                            onClick = {
-                                if (taskListName.isBlank()) {
-                                    taskListNameInputError = true
-                                } else {
-                                    editTaskList(taskListName)
-                                    navigateBack()
-                                }
-                            }
-                        ) {
-                            Icon(
-                                painterResource(ToDometerIcons.Check),
-                                contentDescription = stringResource(MR.strings.save),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
+            SaveActionTopAppBar(
+                navigateBack = navigateBack,
+                title = stringResource(MR.strings.edit_task_list),
+                isSaveButtonEnabled = !editTaskListUiState.isLoading && editTaskListUiState.taskList != null,
+                onSaveButtonClick = {
+                    if (taskListName.isBlank()) {
+                        taskListNameInputError = true
+                    } else {
+                        editTaskList(taskListName)
+                        navigateBack()
                     }
                 }
             )

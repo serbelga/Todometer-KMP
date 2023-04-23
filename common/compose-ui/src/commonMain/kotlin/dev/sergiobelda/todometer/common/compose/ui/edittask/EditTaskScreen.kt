@@ -20,12 +20,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
+import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
@@ -43,8 +40,6 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDom
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,36 +63,18 @@ fun EditTaskScreen(
     }
     Scaffold(
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            painterResource(ToDometerIcons.ArrowBack),
-                            contentDescription = stringResource(MR.strings.back)
-                        )
+            SaveActionTopAppBar(
+                navigateBack = navigateBack,
+                title = stringResource(MR.strings.edit_task),
+                isSaveButtonEnabled = !editTaskUiState.isLoading && editTaskUiState.task != null,
+                onSaveButtonClick = {
+                    if (taskTitle.isBlank()) {
+                        taskTitleInputError = true
+                    } else {
+                        updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
+                        navigateBack()
                     }
-                },
-                actions = {
-                    if (!editTaskUiState.isLoading && editTaskUiState.task != null) {
-                        IconButton(
-                            onClick = {
-                                if (taskTitle.isBlank()) {
-                                    taskTitleInputError = true
-                                } else {
-                                    updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
-                                    navigateBack()
-                                }
-                            }
-                        ) {
-                            Icon(
-                                painterResource(ToDometerIcons.Check),
-                                contentDescription = stringResource(MR.strings.save),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                },
-                title = { Text(stringResource(MR.strings.edit_task)) }
+                }
             )
         },
         content = { paddingValues ->

@@ -18,8 +18,10 @@ package dev.sergiobelda.todometer.common.compose.ui.addtasklist
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -30,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -42,6 +45,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
@@ -77,8 +82,9 @@ fun AddTaskListScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            AddTaskListTopBar(
+            SaveActionTopAppBar(
                 navigateBack = navigateBack,
+                title = stringResource(MR.strings.add_task_list),
                 isSaveButtonEnabled = !addTaskListUiState.isAddingTaskList,
                 onSaveButtonClick = {
                     if (taskListName.isBlank()) {
@@ -111,7 +117,7 @@ fun AddTaskListScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AddTaskListTopBar(
+private fun AddTaskListTopBar(
     navigateBack: () -> Unit,
     isSaveButtonEnabled: Boolean,
     onSaveButtonClick: () -> Unit,
@@ -128,7 +134,7 @@ internal fun AddTaskListTopBar(
         },
         title = { Text(stringResource(MR.strings.add_task_list)) },
         actions = {
-            IconButton(
+            TextButton(
                 enabled = isSaveButtonEnabled,
                 onClick = onSaveButtonClick
             ) {
@@ -137,13 +143,20 @@ internal fun AddTaskListTopBar(
                     contentDescription = stringResource(MR.strings.save),
                     tint = saveButtonTintColor
                 )
+                Spacer(modifier = Modifier.size(4.dp))
+                Text(
+                    text = stringResource(MR.strings.save),
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.alignByBaseline(),
+                    color = saveButtonTintColor
+                )
             }
         }
     )
 }
 
 @Composable
-internal fun AddTaskListContent(
+private fun AddTaskListContent(
     paddingValues: PaddingValues,
     showProgress: Boolean,
     taskListNameValue: String,

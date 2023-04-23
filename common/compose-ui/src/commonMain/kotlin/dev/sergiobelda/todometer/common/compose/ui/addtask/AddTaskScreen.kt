@@ -32,7 +32,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -52,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
+import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
@@ -100,41 +100,28 @@ fun AddTaskScreen(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            painterResource(ToDometerIcons.ArrowBack),
-                            contentDescription = stringResource(MR.strings.back)
+            SaveActionTopAppBar(
+                navigateBack = navigateBack,
+                title = stringResource(MR.strings.add_task),
+                isSaveButtonEnabled = !addTaskUiState.isAddingTask,
+                onSaveButtonClick = {
+                    if (taskTitle.isBlank()) {
+                        taskTitleInputError = true
+                    } else {
+                        insertTask(
+                            taskTitle,
+                            selectedTag,
+                            taskDescription,
+                            taskDueDate,
+                            taskChecklistItems
                         )
                     }
                 },
-                actions = {
-                    IconButton(
-                        enabled = !addTaskUiState.isAddingTask,
-                        onClick = {
-                            if (taskTitle.isBlank()) {
-                                taskTitleInputError = true
-                            } else {
-                                insertTask(
-                                    taskTitle,
-                                    selectedTag,
-                                    taskDescription,
-                                    taskDueDate,
-                                    taskChecklistItems
-                                )
-                            }
-                        }
-                    ) {
-                        Icon(
-                            painterResource(ToDometerIcons.Check),
-                            contentDescription = stringResource(MR.strings.save),
-                            tint = if (addTaskUiState.isAddingTask) MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha() else MaterialTheme.colorScheme.primary
-                        )
-                    }
-                },
-                title = { Text(stringResource(MR.strings.add_task)) },
-                scrollBehavior = scrollBehavior
+                saveButtonTintColor = if (addTaskUiState.isAddingTask) {
+                    MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                } else {
+                    MaterialTheme.colorScheme.primary
+                }
             )
         },
         content = { paddingValues ->
