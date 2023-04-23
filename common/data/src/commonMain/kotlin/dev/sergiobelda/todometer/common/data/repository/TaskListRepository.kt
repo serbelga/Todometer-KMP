@@ -39,16 +39,13 @@ class TaskListRepository(
     override fun getTaskLists(): Flow<Result<List<TaskList>>> =
         taskListLocalDataSource.getTaskLists()
 
-    /*
-    taskListLocalDataSource.getTaskLists().map { result ->
+    /*taskListLocalDataSource.getTaskLists().map { result ->
         result.doIfSuccess { taskLists ->
             synchronizeTaskListsRemotely(taskLists.filter { !it.sync })
             refreshTaskLists()
         }
     }
-    */
 
-    /*
     private suspend fun synchronizeTaskListsRemotely(taskLists: List<TaskList>) {
         taskLists.forEach { taskList ->
             val result = taskListRemoteDataSource.insertTaskList(
@@ -62,8 +59,7 @@ class TaskListRepository(
                 )
             }
         }
-    }
-    */
+    }*/
 
     override suspend fun refreshTaskList(id: String) {
         val taskListResult = taskListRemoteDataSource.getTaskList(id)
@@ -82,14 +78,12 @@ class TaskListRepository(
     override suspend fun insertTaskList(name: String): Result<String> {
         val taskListId = randomUUIDString()
         val sync = false
-        /*
-        taskListRemoteDataSource.insertTaskList(name = name, description = "").doIfSuccess {
+        /*taskListRemoteDataSource.insertTaskList(name = name, description = "").doIfSuccess {
             taskListId = it
             sync = true
         }.doIfError {
             taskListId = randomUUIDString()
-        }
-        */
+        }*/
         return taskListLocalDataSource.insertTaskList(
             TaskList(
                 id = taskListId,
@@ -107,9 +101,7 @@ class TaskListRepository(
         taskListLocalDataSource.updateTaskListName(id, name)
 
     override suspend fun deleteTaskList(id: String) = taskListLocalDataSource.deleteTaskList(id)
-    /*
-    taskListRemoteDataSource.deleteTaskList(id).doIfSuccess {
-        taskListLocalDataSource.deleteTaskList(id)
-    }
-    */
+        /*taskListRemoteDataSource.deleteTaskList(id).doIfSuccess {
+            taskListLocalDataSource.deleteTaskList(id)
+        }*/
 }
