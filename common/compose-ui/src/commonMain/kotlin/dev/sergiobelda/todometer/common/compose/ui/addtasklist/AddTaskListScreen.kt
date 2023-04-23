@@ -42,9 +42,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.compose.ui.values.TitledTextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
@@ -134,7 +134,7 @@ internal fun AddTaskListTopBar(
             ) {
                 Icon(
                     painterResource(ToDometerIcons.Check),
-                    contentDescription = "Save",
+                    contentDescription = stringResource(MR.strings.save),
                     tint = saveButtonTintColor
                 )
             }
@@ -166,7 +166,7 @@ internal fun AddTaskListContent(
                 capitalization = KeyboardCapitalization.Sentences,
                 imeAction = ImeAction.Done
             ),
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(TitledTextFieldPadding)
         )
     }
 }

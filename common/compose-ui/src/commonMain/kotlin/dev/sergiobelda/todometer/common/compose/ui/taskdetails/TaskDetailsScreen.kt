@@ -47,7 +47,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
@@ -57,6 +56,7 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDom
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
@@ -65,8 +65,6 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
-
-private val SectionPadding: Dp = 24.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

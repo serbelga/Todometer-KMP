@@ -77,4 +77,5 @@
     <string name="back">Enrere</string>
     <string name="check_task">Marcar tasca</string>
     <string name="uncheck_task">Desmarcar tasca</string>
+    <string name="selected">Seleccionat</string>
 </resources>
