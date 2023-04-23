@@ -119,12 +119,7 @@ fun EditTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
+                        modifier = Modifier.padding(8.dp)
                     )
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
@@ -143,12 +138,7 @@ fun EditTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        ),
+                        modifier = Modifier.padding(8.dp),
                         maxLines = 4
                     )
                     ToDometerDivider()

@@ -26,10 +26,13 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -42,6 +45,9 @@ import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.SwipeToDismiss
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.KeyboardDoubleArrowDown
+import androidx.compose.material.icons.rounded.KeyboardDoubleArrowUp
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -63,6 +69,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
+import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
@@ -191,19 +198,20 @@ private fun TaskItemHeadlineContent(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = TaskItemPaddingStart, end = TaskItemPaddingEnd)
-    ) {
-        Box(
-            modifier = Modifier
-                .size(TaskItemTagIndicatorSize)
-                .clip(CircleShape)
-                .background(ToDometerTheme.toDometerColors.composeColorOf(taskItem.tag))
+        modifier = Modifier.padding(
+            start = TaskItemPaddingStart,
+            end = TaskItemPaddingEnd
         )
+    ) {
+        if (taskItem.tag != Tag.UNSPECIFIED) {
+            TaskTagIndicator(taskItem.tag)
+            Spacer(modifier = Modifier.size(12.dp))
+        }
         Text(
             taskItem.title,
             textDecoration = taskItemTitleTextDecoration(taskItem.state),
             color = taskItemTitleColor(taskItem.state),
-            modifier = Modifier.padding(start = 8.dp).weight(1f),
+            modifier = Modifier.weight(1f),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -228,12 +236,10 @@ private fun TaskItemHeadlineContent(
 @Composable
 private fun TaskItemSupportingContent(taskItem: TaskItem) {
     LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
         modifier = Modifier.padding(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        item {
-            Spacer(modifier = Modifier.width(32.dp))
-        }
         if (taskItem.state == TaskState.DOING) {
             taskItem.dueDate?.let { dueDate ->
                 item {
@@ -245,9 +251,6 @@ private fun TaskItemSupportingContent(taskItem: TaskItem) {
             item {
                 TaskChecklistItemsChip(taskItem.checklistItemsDone, taskItem.totalChecklistItems)
             }
-        }
-        item {
-            Spacer(modifier = Modifier.width(8.dp))
         }
     }
 }
@@ -280,5 +283,5 @@ private fun taskItemActionContentDescription(state: TaskState): String =
     }
 
 private val TaskItemTagIndicatorSize: Dp = 16.dp
-private val TaskItemPaddingStart: Dp = 20.dp
+private val TaskItemPaddingStart: Dp = 16.dp
 private val TaskItemPaddingEnd: Dp = 12.dp

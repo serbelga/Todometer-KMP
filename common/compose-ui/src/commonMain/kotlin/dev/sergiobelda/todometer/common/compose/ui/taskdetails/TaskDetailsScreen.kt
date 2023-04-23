@@ -17,9 +17,7 @@
 package dev.sergiobelda.todometer.common.compose.ui.taskdetails
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +30,6 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,7 +43,6 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextDecoration
@@ -55,12 +51,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
+import dev.sergiobelda.todometer.common.compose.ui.components.TaskTagIndicator
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
+import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
@@ -69,7 +66,7 @@ import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
-private val SectionPadding: Dp = 32.dp
+private val SectionPadding: Dp = 24.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -150,19 +147,17 @@ private fun LazyListScope.taskTitle(task: Task) {
     item {
         Surface(modifier = Modifier.heightIn(max = 80.dp, min = 64.dp)) {
             Row(
-                modifier = Modifier.padding(start = 24.dp, bottom = 8.dp),
+                modifier = Modifier.padding(start = 24.dp, bottom = 8.dp, end = 24.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(16.dp)
-                        .clip(CircleShape)
-                        .background(ToDometerTheme.toDometerColors.composeColorOf(task.tag))
-                )
+                if (task.tag != Tag.UNSPECIFIED) {
+                    TaskTagIndicator(task.tag)
+                    Spacer(modifier = Modifier.size(12.dp))
+                }
                 Text(
                     text = task.title,
                     style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(start = 8.dp, bottom = 4.dp, end = 8.dp),
+                    modifier = Modifier.padding(bottom = 4.dp),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -230,7 +225,7 @@ private fun LazyItemScope.TaskChecklistItem(
                 taskChecklistItem.id,
                 taskChecklistItem.state == TaskChecklistItemState.UNCHECKED
             )
-        }.animateItemPlacement()
+        }.animateItemPlacement().padding(horizontal = 8.dp)
     ) {
         ToDometerCheckbox(
             checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,
@@ -240,7 +235,7 @@ private fun LazyItemScope.TaskChecklistItem(
                     checked
                 )
             },
-            modifier = Modifier.scale(0.85f).padding(start = 16.dp)
+            modifier = Modifier.scale(0.85f)
         )
         Text(
             text = taskChecklistItem.text,

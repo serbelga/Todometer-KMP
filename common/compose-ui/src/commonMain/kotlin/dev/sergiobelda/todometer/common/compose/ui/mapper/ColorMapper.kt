@@ -17,14 +17,16 @@
 package dev.sergiobelda.todometer.common.compose.ui.mapper
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerColors
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
-typealias ComposeColor = androidx.compose.ui.graphics.Color
+typealias ComposeColor = Color
 
 @Composable
-fun ToDometerColors.composeColorOf(tag: Tag): ComposeColor {
-    return when (tag) {
+fun ToDometerColors.composeColorOf(tag: Tag): ComposeColor =
+    when (tag) {
+        Tag.UNSPECIFIED -> ComposeColor.Unspecified
         Tag.PINK -> pink
         Tag.RED -> red
         Tag.INDIGO -> indigo
@@ -37,6 +39,4 @@ fun ToDometerColors.composeColorOf(tag: Tag): ComposeColor {
         Tag.ORANGE -> orange
         Tag.BROWN -> brown
         Tag.GRAY -> gray
-        else -> gray
     }
-}

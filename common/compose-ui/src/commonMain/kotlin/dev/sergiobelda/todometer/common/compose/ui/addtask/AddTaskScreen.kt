@@ -155,12 +155,7 @@ fun AddTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
+                        modifier = Modifier.padding(8.dp)
                     )
                 }
                 item {
@@ -180,7 +175,7 @@ fun AddTaskScreen(
                         text = stringResource(MR.strings.checklist),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
-                        modifier = Modifier.padding(start = 32.dp, top = 16.dp)
+                        modifier = Modifier.padding(start = 24.dp, top = 16.dp, end = 24.dp)
                     )
                 }
                 itemsIndexed(taskChecklistItems) { index, item ->
@@ -205,12 +200,7 @@ fun AddTaskScreen(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
                         ),
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 8.dp,
-                            bottom = 8.dp
-                        ),
+                        modifier = Modifier.padding(8.dp),
                         maxLines = 4
                     )
                 }
@@ -229,7 +219,7 @@ private fun TaskChecklistItem(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = 32.dp)
+        modifier = Modifier.padding(start = 24.dp, end = 8.dp)
     ) {
         Text(
             text = taskChecklistItem,

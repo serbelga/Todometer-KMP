@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -43,6 +44,8 @@ import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import java.util.concurrent.TimeUnit
+
+private val SectionPadding: Dp = 24.dp
 
 @Composable
 internal actual fun DateTimeSelector(
@@ -57,7 +60,7 @@ internal actual fun DateTimeSelector(
             text = stringResource(MR.strings.date_time),
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = 32.dp)
+            modifier = Modifier.padding(horizontal = SectionPadding)
         )
         Row(
             modifier = Modifier.height(48.dp).fillMaxWidth().clickable {
@@ -71,7 +74,7 @@ internal actual fun DateTimeSelector(
                 text = taskDueDate?.let { TaskDueDate.getDueDateFormatted(it) }
                     ?: run { stringResource(MR.strings.enter_date_time) },
                 color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
-                modifier = Modifier.padding(start = 32.dp)
+                modifier = Modifier.padding(horizontal = SectionPadding)
             )
             taskDueDate?.let {
                 IconButton(onClick = onClearDateTimeClick) {

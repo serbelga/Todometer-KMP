@@ -52,7 +52,7 @@ internal fun AddChecklistItemField(
             taskChecklistItemText = ""
         }
     }
-    Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp)) {
+    Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
         OutlinedTextField(
             value = taskChecklistItemText,
             onValueChange = { taskChecklistItemText = it },
