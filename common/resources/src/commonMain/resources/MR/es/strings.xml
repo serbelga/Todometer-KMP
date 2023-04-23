@@ -65,13 +65,35 @@
     <string name="checklist">Checklist</string>
     <string name="add_element">Añadir elemento</string>
     <string name="add_element_optional">Añadir elemento (opcional)</string>
-
     <string name="task_title_input">Nombre de la tarea</string>
     <string name="task_list_name_input">Nombre de la lista de tareas</string>
-
     <string name="cannot_delete_this_task_list">No se puede eliminar la lista predeterminada
     </string>
     <string name="cannot_edit_this_task_list">No se puede editar la lista predeterminada</string>
+
+    <string name="privacy_policy_user_data">Datos del usuario</string>
+    <string name="privacy_policy_user_data_body">
+        La aplicación ToDometer no almacena ningún dato de usuario en
+        ningún servidor ya que es una aplicación que se ejecuta en un entorno local
+        sin necesidad de conexión. No se recoge, transfiere o divulga ningún dato del usuario.
+    </string>
+    <string name="privacy_policy_permissions">Permisos</string>
+    <string name="privacy_policy_permissions_body">
+        El sistema no requiere que el usuario conceda ningún permiso de ubicación o llamada y mensajería.
+    </string>
+    <string name="privacy_policy_device_and_network_abuse">Abuso de dispositivos y redes</string>
+    <string name="privacy_policy_device_and_network_abuse_body">
+        El sistema no bloquea ni interfiere con otra aplicación en la que se muestren
+        anuncios.
+        No proporciona ni proporciona instrucciones sobre cómo piratear servicios, software o hardware,
+        o evitar las protecciones de seguridad.
+    </string>
+    <string name="privacy_policy_public">Público</string>
+    <string name="privacy_policy_public_body">
+        El sistema puede ser utilizado por personas mayores de 3 años. No contiene material violento,
+        material sexual o lenguaje ofensivo.
+        No contiene anuncios. No se recoge información sensible de menores de edad.
+    </string>
     <string name="menu">Menú</string>
     <string name="more">Més</string>
     <string name="back">Atrás</string>

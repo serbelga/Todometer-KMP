@@ -72,6 +72,30 @@
     <string name="add_element_optional">Afegir element (opcional)</string>
     <string name="cannot_delete_this_task_list">No es pot eliminar la llista predeterminada</string>
     <string name="cannot_edit_this_task_list">No es pot editar la llista predeterminada</string>
+
+    <string name="privacy_policy_user_data">Dades de l\'usuari</string>
+    <string name="privacy_policy_user_data_body">
+        L\'aplicació ToDometer no emmagatzema cap dada d\'usuari a
+        cap servidor ja que és una aplicació que s\'executa en un entorn local
+        sense necessitat de connexió. No es recull, es transfereix o es divulga cap dada de l\'usuari.
+    </string>
+    <string name="privacy_policy_permissions">Permisos</string>
+    <string name="privacy_policy_permissions_body">
+        El sistema no requereix que l\'usuari concedeixi cap permís d\'ubicació o trucada i missatgeria.
+    </string>
+    <string name="privacy_policy_device_and_network_abuse">Abús de dispositius i xarxes</string>
+    <string name="privacy_policy_device_and_network_abuse_body">
+        El sistema no bloqueja ni interfereix amb una altra aplicació en la que es mostrin
+        anuncis.
+        No proporciona ni proporciona instruccions sobre com piratejar serveis, programari o maquinari,
+        o evitar les proteccions de seguretat.
+    </string>
+    <string name="privacy_policy_public">Públic</string>
+    <string name="privacy_policy_public_body">
+        El sistema pot ser utilitzat per persones més grans de 3 anys. No conté material violent,
+        material sexual o llenguatge ofensiu.
+        No conté anuncis. No s\'hi recull informació sensible de menors d\'edat.
+    </string>
     <string name="menu">Menú</string>
     <string name="more">Més</string>
     <string name="back">Enrere</string>
