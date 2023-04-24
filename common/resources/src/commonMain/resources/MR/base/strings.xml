@@ -105,4 +105,8 @@
     <string name="check_task">Check task</string>
     <string name="uncheck_task">Uncheck task</string>
     <string name="selected">Selected</string>
+    <string name="discard_task_alert_dialog_title">Discard task</string>
+    <string name="discard_task_alert_dialog_body">
+        Are you sure? If you exit the current process without saving, you will lose the entered information.
+    </string>
 </resources>

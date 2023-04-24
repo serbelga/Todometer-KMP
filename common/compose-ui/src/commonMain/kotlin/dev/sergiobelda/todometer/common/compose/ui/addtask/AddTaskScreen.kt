@@ -49,6 +49,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
@@ -76,13 +77,28 @@ fun AddTaskScreen(
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
 
+    var discardTaskAlertDialogState by remember { mutableStateOf(false) }
+
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
     val tags = enumValues<Tag>()
-    var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.GRAY) }
+    var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.UNSPECIFIED) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
     val taskChecklistItems = mutableStateListOf<String>()
+    fun initialValuesUpdated() =
+        taskTitle.isNotBlank() ||
+            taskDueDate != null ||
+            taskDescription.isNotBlank() ||
+            taskChecklistItems.isNotEmpty()
+    val onBack: () -> Unit = {
+        if (initialValuesUpdated()) {
+            discardTaskAlertDialogState = true
+        } else {
+            navigateBack()
+        }
+    }
+    SystemBackHandler(onBack = onBack)
 
     if (addTaskUiState.isAdded) {
         navigateBack()
@@ -101,7 +117,7 @@ fun AddTaskScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             SaveActionTopAppBar(
-                navigateBack = navigateBack,
+                navigateBack = onBack,
                 title = stringResource(MR.strings.add_task),
                 isSaveButtonEnabled = !addTaskUiState.isAddingTask,
                 onSaveButtonClick = {
@@ -200,6 +216,12 @@ fun AddTaskScreen(
                 item {
                     ToDometerDivider()
                 }
+            }
+            if (discardTaskAlertDialogState) {
+                DiscardTaskAlertDialog(
+                    onDismissRequest = { discardTaskAlertDialogState = false },
+                    onConfirmButtonClick = navigateBack
+                )
             }
         }
     )

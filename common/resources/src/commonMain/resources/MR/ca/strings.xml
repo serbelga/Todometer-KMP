@@ -102,4 +102,8 @@
     <string name="check_task">Marcar tasca</string>
     <string name="uncheck_task">Desmarcar tasca</string>
     <string name="selected">Seleccionat</string>
+    <string name="discard_task_alert_dialog_title">Descartar tasca</string>
+    <string name="discard_task_alert_dialog_body">
+        Estàs segur? Si ixes del procés actual sense guardar, perdràs la informació introduïda.
+    </string>
 </resources>
