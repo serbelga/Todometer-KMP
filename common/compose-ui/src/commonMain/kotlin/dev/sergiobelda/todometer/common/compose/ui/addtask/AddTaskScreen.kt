@@ -86,7 +86,8 @@ fun AddTaskScreen(
     var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.UNSPECIFIED) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
     val taskChecklistItems = mutableStateListOf<String>()
-    fun initialValuesUpdated() = taskTitle.isNotBlank() ||
+    fun initialValuesUpdated() =
+        taskTitle.isNotBlank() ||
             taskDueDate != null ||
             taskDescription.isNotBlank() ||
             taskChecklistItems.isNotEmpty()
