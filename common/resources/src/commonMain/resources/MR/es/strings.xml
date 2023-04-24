@@ -100,4 +100,8 @@
     <string name="check_task">Marcar tarea</string>
     <string name="uncheck_task">Desmarcar tarea</string>
     <string name="selected">Seleccionado</string>
+    <string name="discard_task_alert_dialog_title">Descartar tarea</string>
+    <string name="discard_task_alert_dialog_body">
+        Estás seguro? Si sales del proceso actual sin guardar, perderás la información introducida.
+    </string>
 </resources>

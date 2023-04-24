@@ -52,7 +52,7 @@ fun EditTaskScreen(
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
-    var selectedTag by rememberSaveable { mutableStateOf(Tag.GRAY) }
+    var selectedTag by rememberSaveable { mutableStateOf(Tag.UNSPECIFIED) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
 
     editTaskUiState.task?.let { task ->
