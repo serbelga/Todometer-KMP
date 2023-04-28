@@ -22,11 +22,13 @@ import dev.sergiobelda.todometer.common.compose.ui.about.AboutScreen
 @Composable
 internal fun AboutRoute(
     navigateToGitHub: () -> Unit,
+    navigateToPrivacyPolicy: () -> Unit,
     navigateToOpenSourceLicenses: () -> Unit,
     navigateBack: () -> Unit
 ) {
     AboutScreen(
         navigateToGitHub = navigateToGitHub,
+        navigateToPrivacyPolicy = navigateToPrivacyPolicy,
         navigateToOpenSourceLicenses = navigateToOpenSourceLicenses,
         navigateBack = navigateBack
     )

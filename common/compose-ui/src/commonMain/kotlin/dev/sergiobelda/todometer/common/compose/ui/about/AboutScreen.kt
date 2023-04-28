@@ -135,3 +135,5 @@ internal fun AboutItemCard(
 }
 
 const val GitHubUrl: String = "https://github.com/serbelga/ToDometer_Multiplatform"
+const val PrivacyPolicyUrl: String =
+    "https://github.com/serbelga/ToDometerKotlinMultiplatform/blob/main/PRIVACY_POLICY.md"

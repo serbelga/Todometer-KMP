@@ -29,6 +29,7 @@ import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.android.extensions.openWebPage
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutDestination
 import dev.sergiobelda.todometer.common.compose.ui.about.GitHubUrl
+import dev.sergiobelda.todometer.common.compose.ui.about.PrivacyPolicyUrl
 import dev.sergiobelda.todometer.common.compose.ui.about.navigateToAbout
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtask.navigateToAddTask
@@ -117,6 +118,7 @@ internal fun ToDometerNavHost(
         composable(AboutDestination.route) {
             AboutRoute(
                 navigateToGitHub = { context.openWebPage(GitHubUrl) },
+                navigateToPrivacyPolicy = { context.openWebPage(PrivacyPolicyUrl) },
                 navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
                 navigateBack = navigateBackAction
             )
