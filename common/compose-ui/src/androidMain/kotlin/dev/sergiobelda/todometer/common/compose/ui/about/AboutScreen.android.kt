@@ -24,10 +24,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -37,16 +33,13 @@ import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
 @Composable
 fun AboutScreen(
     navigateToGitHub: () -> Unit,
+    navigateToPrivacyPolicy: () -> Unit,
     navigateToOpenSourceLicenses: () -> Unit,
     navigateBack: () -> Unit
 ) {
-    var privacyPolicyDialogState by remember { mutableStateOf(false) }
     Scaffold(
         topBar = { AboutTopBar(navigateBack = navigateBack) }
     ) { paddingValues ->
-        if (privacyPolicyDialogState) {
-            PrivacyPolicyDialog { privacyPolicyDialogState = false }
-        }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(paddingValues)
@@ -54,7 +47,7 @@ fun AboutScreen(
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             GitHubAboutItemCard(onCardClick = navigateToGitHub)
-            PrivacyPolicyAboutItemCard(onCardClick = { privacyPolicyDialogState = true })
+            PrivacyPolicyAboutItemCard(onCardClick = navigateToPrivacyPolicy)
             OpenSourceLicensesAboutItemCard(onCardClick = navigateToOpenSourceLicenses)
         }
         AboutAppVersion()
