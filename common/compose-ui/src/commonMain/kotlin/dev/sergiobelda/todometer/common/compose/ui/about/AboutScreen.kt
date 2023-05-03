@@ -100,7 +100,7 @@ internal fun AboutTopBar(navigateBack: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    ToDometerIcons.ArrowBack,
+                    ToDometerIcons.NavigateBefore,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }
