@@ -24,7 +24,7 @@ import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
-    private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val deleteTasksUseCase: DeleteTasksUseCase,
     private val deleteTaskListSelectedUseCase: DeleteTaskListSelectedUseCase,
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
@@ -105,8 +105,8 @@ class HomeViewModel(
         }
     }
 
-    fun deleteTask(id: String) = viewModelScope.launch {
-        deleteTaskUseCase(id)
+    fun deleteTasks() = viewModelScope.launch {
+        deleteTasksUseCase(homeUiState.selectedTasks)
     }
 
     fun deleteTaskList() = viewModelScope.launch {
@@ -123,5 +123,21 @@ class HomeViewModel(
 
     fun setTaskListSelected(id: String) = viewModelScope.launch {
         setTaskListSelectedUseCase(id)
+    }
+
+    fun toggleSelectTask(id: String) {
+        val selectedTasks = homeUiState.selectedTasks.toMutableList()
+        if (!selectedTasks.contains(id)) {
+            selectedTasks.add(id)
+        } else {
+            selectedTasks.removeAll { it == id }
+        }
+        homeUiState = homeUiState.copy(
+            selectedTasks = selectedTasks
+        )
+    }
+
+    fun clearSelectedTasks() {
+        homeUiState = homeUiState.copy(selectedTasks = emptyList())
     }
 }

@@ -111,8 +111,8 @@ class TaskLocalDataSourceTest {
 
     @Test
     fun taskDeleteTask() = runTest {
-        taskLocalDataSource.deleteTask("1")
+        taskLocalDataSource.deleteTasks("1")
 
-        coVerify { taskDao.deleteTask("1") }
+        coVerify { taskDao.deleteTasks("1") }
     }
 }

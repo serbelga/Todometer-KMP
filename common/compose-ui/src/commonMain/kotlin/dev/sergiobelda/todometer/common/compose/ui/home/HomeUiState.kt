@@ -23,6 +23,7 @@ import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 data class HomeUiState(
     val isLoadingTasks: Boolean = false,
     val tasks: List<TaskItem> = emptyList(),
+    val selectedTasks: List<String> = emptyList(),
     val taskLists: List<TaskList> = emptyList(),
     val taskListSelected: TaskList? = null,
     val isDefaultTaskListSelected: Boolean = true,

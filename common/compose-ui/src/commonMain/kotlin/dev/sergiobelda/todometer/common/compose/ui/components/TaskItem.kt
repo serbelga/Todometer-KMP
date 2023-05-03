@@ -49,6 +49,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
@@ -74,6 +75,7 @@ internal fun SwipeableTaskItem(
     onTaskItemClick: (String) -> Unit,
     onTaskItemLongClick: (String) -> Unit,
     modifier: Modifier = Modifier,
+    selected: Boolean = false,
     onSwipeToDismiss: () -> Unit
 ) {
     val dismissState = rememberDismissState(
@@ -134,7 +136,8 @@ internal fun SwipeableTaskItem(
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
                 onLongClick = onTaskItemLongClick,
-                shape = RoundedCornerShape(taskItemCornerRadius)
+                shape = RoundedCornerShape(taskItemCornerRadius),
+                selected = selected
             )
         },
         modifier = modifier
@@ -154,8 +157,11 @@ private fun TaskItem(
     onClick: (String) -> Unit,
     onLongClick: (String) -> Unit,
     shape: Shape,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    selected: Boolean = false
 ) {
+    // TODO: Improve this - Same that HomeScreen
+    val tonalElevation = if (selected) 2.dp else 0.dp
     Surface(
         shape = shape,
         modifier = modifier.combinedClickable(
@@ -165,13 +171,15 @@ private fun TaskItem(
             onLongClick = {
                 onLongClick(taskItem.id)
             }
-        ).fillMaxWidth()
+        ).fillMaxWidth(),
+        tonalElevation = tonalElevation
     ) {
         Column {
             TaskItemHeadlineContent(
                 taskItem = taskItem,
                 onDoingClick = onDoingClick,
-                onDoneClick = onDoneClick
+                onDoneClick = onDoneClick,
+                selected = selected
             )
             TaskItemSupportingContent(taskItem)
         }
@@ -182,7 +190,8 @@ private fun TaskItem(
 private fun TaskItemHeadlineContent(
     taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
-    onDoneClick: (String) -> Unit
+    onDoneClick: (String) -> Unit,
+    selected: Boolean = false
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -209,7 +218,10 @@ private fun TaskItemHeadlineContent(
                 } else {
                     onDoneClick(taskItem.id)
                 }
-            }
+            },
+            // TODO: Improve this
+            modifier = Modifier.alpha(if (selected) 0f else 1f),
+            enabled = !selected
         ) {
             Icon(
                 taskItemActionIcon(taskItem.state),

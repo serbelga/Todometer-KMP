@@ -30,11 +30,12 @@ internal fun HomeRoute(
     navigateToAbout: () -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
+    // TODO: Reorder parameters invocation
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,
         navigateToAddTask = navigateToAddTask,
-        onTaskItemClick = navigateToTaskDetails,
+        navigateToTaskDetails = navigateToTaskDetails,
         navigateToSettings = navigateToSettings,
         navigateToAbout = navigateToAbout,
         onTaskItemDoingClick = {
@@ -46,12 +47,16 @@ internal fun HomeRoute(
         onTaskListItemClick = {
             homeViewModel.setTaskListSelected(it)
         },
-        onDeleteTaskClick = {
-            homeViewModel.deleteTask(it)
+        onDeleteTasksClick = {
+            homeViewModel.deleteTasks()
         },
         onDeleteTaskListClick = {
             homeViewModel.deleteTaskList()
         },
+        onClearSelectedTasks = {
+            homeViewModel.clearSelectedTasks()
+        },
+        onSelectTaskItem = { homeViewModel.toggleSelectTask(it) },
         homeUiState = homeViewModel.homeUiState
     )
 }

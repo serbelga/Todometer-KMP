@@ -59,6 +59,6 @@ class TaskLocalDataSource(
     override suspend fun updateTaskState(id: String, state: TaskState) =
         taskDao.updateTaskState(id, state)
 
-    override suspend fun deleteTask(id: String) =
-        taskDao.deleteTask(id)
+    override suspend fun deleteTasks(ids: List<String>) =
+        taskDao.deleteTasks(ids)
 }

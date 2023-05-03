@@ -18,15 +18,15 @@ package dev.sergiobelda.todometer.wear.ui.deletetask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import kotlinx.coroutines.launch
 
 class DeleteTaskViewModel(
     private val taskId: String,
-    private val deleteTaskUseCase: DeleteTaskUseCase
+    private val deleteTasksUseCase: DeleteTasksUseCase
 ) : ViewModel() {
 
     fun deleteTask() = viewModelScope.launch {
-        deleteTaskUseCase(taskId)
+        deleteTasksUseCase(taskId)
     }
 }

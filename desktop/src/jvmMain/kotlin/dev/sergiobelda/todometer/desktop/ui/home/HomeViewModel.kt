@@ -22,7 +22,7 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
@@ -37,7 +37,7 @@ class HomeViewModel(
     private val coroutineScope: CoroutineScope,
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
-    private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val deleteTasksUseCase: DeleteTasksUseCase,
     private val deleteTaskListSelectedUseCase: DeleteTaskListSelectedUseCase,
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
@@ -106,7 +106,7 @@ class HomeViewModel(
     }
 
     fun deleteTask(id: String) = coroutineScope.launch {
-        deleteTaskUseCase(id)
+        deleteTasksUseCase(id)
     }
 
     fun deleteTaskList() = coroutineScope.launch {
