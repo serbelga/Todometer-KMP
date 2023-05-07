@@ -38,6 +38,9 @@ import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.SwipeToDismiss
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.RadioButtonUnchecked
+import androidx.compose.material.icons.rounded.TaskAlt
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -52,7 +55,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -87,7 +90,7 @@ internal fun SwipeableTaskItem(
         }
     )
     val taskItemShadowElevation by animateDpAsState(
-        if (dismissState.targetValue != DismissValue.Default || selected) 4.dp else 0.dp,
+        if (dismissState.targetValue != DismissValue.Default) 4.dp else 0.dp,
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
@@ -220,7 +223,7 @@ private fun TaskItemHeadlineContent(
             Icon(
                 taskItemActionIcon(taskItem.state),
                 contentDescription = taskItemActionContentDescription(taskItem.state),
-                tint = ToDometerTheme.toDometerColors.check
+                tint = taskItemActionTintColor(taskItem.state)
             )
         }
     }
@@ -262,10 +265,18 @@ private fun taskItemTitleTextDecoration(state: TaskState): TextDecoration =
     }
 
 @Composable
-private fun taskItemActionIcon(state: TaskState): Painter =
+private fun taskItemActionTintColor(state: TaskState): Color =
     when (state) {
-        TaskState.DOING -> ToDometerIcons.Check
-        TaskState.DONE -> ToDometerIcons.Replay
+        TaskState.DOING -> MaterialTheme.colorScheme.onPrimaryContainer
+        TaskState.DONE -> ToDometerTheme.toDometerColors.check
+    }
+
+@Composable
+private fun taskItemActionIcon(state: TaskState): ImageVector =
+    when (state) {
+        // TODO: Update icons
+        TaskState.DOING -> Icons.Rounded.RadioButtonUnchecked // painterResource(ToDometerIcons.Check)
+        TaskState.DONE -> Icons.Rounded.TaskAlt // painterResource(ToDometerIcons.Replay)
     }
 
 @Composable
@@ -276,4 +287,4 @@ private fun taskItemActionContentDescription(state: TaskState): String =
     }
 
 private val TaskItemPaddingStart: Dp = 16.dp
-private val TaskItemPaddingEnd: Dp = 12.dp
+private val TaskItemPaddingEnd: Dp = 8.dp

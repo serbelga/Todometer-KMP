@@ -296,7 +296,7 @@ private fun HomeTopAppBar(
     val selectedMode = selectedTasks > 0
     // TODO: Animate tonalElevation
     val tonalElevation by animateDpAsState(
-        if (selectedMode) 8.dp else 0.dp,
+        if (selectedMode) 4.dp else 0.dp,
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
