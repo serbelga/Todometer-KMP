@@ -105,8 +105,8 @@ class HomeViewModel(
         }
     }
 
-    fun deleteTask(id: String) = coroutineScope.launch {
-        deleteTasksUseCase(id)
+    fun deleteTasks() = coroutineScope.launch {
+        deleteTasksUseCase(homeUiState.selectedTasks)
     }
 
     fun deleteTaskList() = coroutineScope.launch {
@@ -123,5 +123,21 @@ class HomeViewModel(
 
     fun setTaskListSelected(id: String) = coroutineScope.launch {
         setTaskListSelectedUseCase(id)
+    }
+
+    fun toggleSelectTask(id: String) {
+        val selectedTasks = homeUiState.selectedTasks.toMutableList()
+        if (!selectedTasks.contains(id)) {
+            selectedTasks.add(id)
+        } else {
+            selectedTasks.removeAll { it == id }
+        }
+        homeUiState = homeUiState.copy(
+            selectedTasks = selectedTasks
+        )
+    }
+
+    fun clearSelectedTasks() {
+        homeUiState = homeUiState.copy(selectedTasks = emptyList())
     }
 }

@@ -16,6 +16,9 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.home
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -49,6 +52,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,7 +63,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.SwipeableTaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
@@ -240,7 +243,7 @@ fun HomeScreen(
                             onDoingClick = onTaskItemDoingClick,
                             onDoneClick = onTaskItemDoneClick,
                             onTaskItemClick = { taskId ->
-                                if (homeUiState.selectedTasks.contains(taskId)) {
+                                if (homeUiState.selectedTasks.isNotEmpty()) {
                                     onSelectTaskItem(taskId)
                                 } else {
                                     navigateToTaskDetails(taskId)
@@ -257,6 +260,7 @@ fun HomeScreen(
                 }
             },
             floatingActionButton = {
+                // TODO: Animate appearance
                 if (homeUiState.selectedTasks.isEmpty()) {
                     FloatingActionButton(
                         onClick = navigateToAddTask
@@ -291,7 +295,13 @@ private fun HomeTopAppBar(
 ) {
     val selectedMode = selectedTasks > 0
     // TODO: Animate tonalElevation
-    val tonalElevation = if (selectedMode) 2.dp else 0.dp
+    val tonalElevation by animateDpAsState(
+        if (selectedMode) 8.dp else 0.dp,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = FastOutSlowInEasing
+        )
+    )
     Surface(tonalElevation = tonalElevation) {
         Column {
             if (selectedMode) {
@@ -315,7 +325,10 @@ private fun HomeTopAppBar(
                                 contentDescription = null
                             )
                         }
-                    }
+                    },
+                    colors = TopAppBarDefaults.smallTopAppBarColors(
+
+                    )
                 )
             } else {
                 CenterAlignedTopAppBar(
@@ -380,7 +393,7 @@ private fun TasksList(
                 modifier = Modifier.animateItemPlacement(),
                 selected = selected
             ) { onSwipeToDismiss(task.id) }
-            ToDometerDivider(thickness = Dp.Hairline)
+            // ToDometerDivider(thickness = Dp.Hairline)
         }
         // TODO: Update this behavior
         if (tasksDone.isNotEmpty()) {
@@ -415,6 +428,8 @@ private fun TasksList(
         }
         if (areTasksDoneVisible) {
             items(tasksDone, key = { it.id }) { task ->
+                // TODO: Improve this
+                val selected = selectedTasks.contains(task.id)
                 // TODO: Update this too
                 SwipeableTaskItem(
                     task,
@@ -422,9 +437,10 @@ private fun TasksList(
                     onDoneClick,
                     onTaskItemClick,
                     onTaskItemLongClick,
-                    modifier = Modifier.animateItemPlacement()
+                    modifier = Modifier.animateItemPlacement(),
+                    selected = selected
                 ) { onSwipeToDismiss(task.id) }
-                ToDometerDivider()
+                // ToDometerDivider()
             }
         }
         item {

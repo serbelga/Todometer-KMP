@@ -16,10 +16,10 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.components
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,6 +49,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
@@ -86,30 +86,8 @@ internal fun SwipeableTaskItem(
             it != DismissValue.DismissedToEnd
         }
     )
-    val backgroundColor by animateColorAsState(
-        targetValue = if (dismissState.targetValue == DismissValue.Default) {
-            MaterialTheme.colorScheme.outline
-        } else {
-            MaterialTheme.colorScheme.error
-        },
-        animationSpec = tween(
-            durationMillis = 400,
-            easing = FastOutSlowInEasing
-        )
-    )
-    val backgroundIconTint by animateColorAsState(
-        targetValue = if (dismissState.targetValue == DismissValue.Default) {
-            MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-        } else {
-            MaterialTheme.colorScheme.onError
-        },
-        animationSpec = tween(
-            durationMillis = 400,
-            easing = FastOutSlowInEasing
-        )
-    )
-    val taskItemCornerRadius by animateDpAsState(
-        if (dismissState.targetValue == DismissValue.Default) 0.dp else 8.dp,
+    val taskItemShadowElevation by animateDpAsState(
+        if (dismissState.targetValue != DismissValue.Default || selected) 4.dp else 0.dp,
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
@@ -122,11 +100,20 @@ internal fun SwipeableTaskItem(
             FractionalThreshold(0.1f)
         },
         background = {
+            // TODO: Update background color and tint color
             Box(
-                Modifier.fillMaxSize().background(backgroundColor).padding(horizontal = 16.dp),
+                Modifier
+                    .padding(4.dp)
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(MaterialTheme.colorScheme.errorContainer)
+                    .padding(horizontal = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
-                TaskItemBackgroundIcon(dismissState, backgroundIconTint)
+                TaskItemBackgroundIcon(
+                    dismissState,
+                    MaterialTheme.colorScheme.onErrorContainer
+                )
             }
         },
         dismissContent = {
@@ -136,8 +123,9 @@ internal fun SwipeableTaskItem(
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
                 onLongClick = onTaskItemLongClick,
-                shape = RoundedCornerShape(taskItemCornerRadius),
-                selected = selected
+                shape = RoundedCornerShape(12.dp),
+                selected = selected,
+                shadowElevation = taskItemShadowElevation
             )
         },
         modifier = modifier
@@ -158,23 +146,29 @@ private fun TaskItem(
     onLongClick: (String) -> Unit,
     shape: Shape,
     modifier: Modifier = Modifier,
-    selected: Boolean = false
+    selected: Boolean = false,
+    shadowElevation: Dp
 ) {
     // TODO: Improve this - Same that HomeScreen
-    val tonalElevation = if (selected) 2.dp else 0.dp
+    val tonalElevation = if (selected) 6.dp else 2.dp
+    val border = if (selected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null
     Surface(
         shape = shape,
-        modifier = modifier.combinedClickable(
-            onClick = {
-                onClick(taskItem.id)
-            },
-            onLongClick = {
-                onLongClick(taskItem.id)
-            }
-        ).fillMaxWidth(),
-        tonalElevation = tonalElevation
+        modifier = modifier.padding(4.dp),
+        tonalElevation = tonalElevation,
+        shadowElevation = shadowElevation,
+        border = border
     ) {
-        Column {
+        Column(
+            modifier = Modifier.clip(shape).combinedClickable(
+                onClick = {
+                    onClick(taskItem.id)
+                },
+                onLongClick = {
+                    onLongClick(taskItem.id)
+                }
+            )
+        ) {
             TaskItemHeadlineContent(
                 taskItem = taskItem,
                 onDoingClick = onDoingClick,

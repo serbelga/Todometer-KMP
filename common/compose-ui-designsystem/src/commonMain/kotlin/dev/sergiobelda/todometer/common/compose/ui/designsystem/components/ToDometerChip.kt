@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -36,10 +37,11 @@ fun ToDometerChip(
     color: Color = ToDometerChipDefaults.color,
     content: @Composable RowScope.() -> Unit
 ) {
+    // TODO: Put shape dimen as a variable
     Surface(
         modifier = modifier,
         border = border,
-        shape = MaterialTheme.shapes.small,
+        shape = RoundedCornerShape(6.dp),
         color = color
     ) {
         Row(
