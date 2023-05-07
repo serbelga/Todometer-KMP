@@ -98,8 +98,8 @@ val tealDark = Color(0xFF80CBC4)
 val indigoLight = Color(0xFF3F51B5)
 val indigoDark = Color(0xFF7986CB)
 
-val greenLight = Color(0xFF7AFFB4)
-val greenDark = Color(0xFF00A956)
+val greenLight = Color(0xFF37BD71)
+val greenDark = Color(0xFF7CFCB3)
 
 val limeLight = Color(0xFFCDDC39)
 val limeDark = Color(0xFFdce775)
