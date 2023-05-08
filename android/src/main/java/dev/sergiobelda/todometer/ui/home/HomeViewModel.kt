@@ -109,6 +109,11 @@ class HomeViewModel(
         deleteTasksUseCase(homeUiState.selectedTasks)
     }
 
+    fun deleteTask(id: String) = viewModelScope.launch {
+        // TODO: Update
+        deleteTasksUseCase(listOf(id))
+    }
+
     fun deleteTaskList() = viewModelScope.launch {
         deleteTaskListSelectedUseCase()
     }

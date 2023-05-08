@@ -55,6 +55,9 @@ internal fun HomeRoute(
         onDeleteTasksClick = {
             homeViewModel.deleteTasks()
         },
+        onDeleteTask = {
+            homeViewModel.deleteTask(it)
+        },
         onDeleteTaskListClick = {
             homeViewModel.deleteTaskList()
         },

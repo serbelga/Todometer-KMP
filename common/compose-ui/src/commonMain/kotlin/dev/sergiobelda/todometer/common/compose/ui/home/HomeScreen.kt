@@ -64,6 +64,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.SwipeableTaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
@@ -91,6 +92,7 @@ fun HomeScreen(
     navigateToTaskDetails: (String) -> Unit,
     onSelectTaskItem: (String) -> Unit,
     onDeleteTasksClick: () -> Unit,
+    onDeleteTask: (String) -> Unit,
     onClearSelectedTasks: () -> Unit,
     navigateToSettings: () -> Unit,
     navigateToAbout: () -> Unit,
@@ -125,6 +127,10 @@ fun HomeScreen(
     val cannotEditTaskList = stringResource(MR.strings.cannot_edit_this_task_list)
     val cannotDeleteTaskList = stringResource(MR.strings.cannot_delete_this_task_list)
     val snackbarActionLabel = stringResource(MR.strings.ok)
+
+    SystemBackHandler(enabled = homeUiState.selectedTasks.isNotEmpty()) {
+        onClearSelectedTasks()
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -205,8 +211,7 @@ fun HomeScreen(
                             swipedTaskId = ""
                         },
                         onDeleteTaskClick = {
-                            // TODO: Update
-                            // onDeleteTasksClick()
+                            onDeleteTask(swipedTaskId)
                         }
                     )
                 }
