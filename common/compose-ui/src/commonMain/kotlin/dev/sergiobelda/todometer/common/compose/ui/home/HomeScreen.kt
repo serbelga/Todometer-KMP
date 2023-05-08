@@ -16,9 +16,15 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.home
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -81,7 +87,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(
     ExperimentalMaterialApi::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class
 )
 @Composable
 fun HomeScreen(
@@ -265,8 +271,11 @@ fun HomeScreen(
                 }
             },
             floatingActionButton = {
-                // TODO: Animate appearance
-                if (homeUiState.selectedTasks.isEmpty()) {
+                AnimatedVisibility(
+                    visible = homeUiState.selectedTasks.isEmpty(),
+                    enter = scaleIn() + fadeIn(),
+                    exit = scaleOut() + fadeOut(),
+                ) {
                     FloatingActionButton(
                         onClick = navigateToAddTask
                     ) {

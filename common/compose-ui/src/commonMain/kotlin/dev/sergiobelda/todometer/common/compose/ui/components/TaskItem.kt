@@ -39,6 +39,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.RadioButtonUnchecked
 import androidx.compose.material.icons.rounded.TaskAlt
 import androidx.compose.material.rememberDismissState
@@ -62,7 +63,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
@@ -153,14 +153,14 @@ private fun TaskItem(
     shadowElevation: Dp
 ) {
     // TODO: Improve this - Same that HomeScreen
-    val tonalElevation = if (selected) 6.dp else 2.dp
+    val tonalElevation = if (selected) 16.dp else 2.dp
     val border = if (selected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null
     Surface(
         shape = shape,
         modifier = modifier.padding(4.dp),
         tonalElevation = tonalElevation,
         shadowElevation = shadowElevation,
-        border = border
+        // border = border
     ) {
         Column(
             modifier = Modifier.clip(shape).combinedClickable(
@@ -197,8 +197,12 @@ private fun TaskItemHeadlineContent(
             end = TaskItemPaddingEnd
         )
     ) {
-        if (taskItem.tag != Tag.UNSPECIFIED) {
-            TaskTagIndicator(taskItem.tag)
+        if (selected) {
+            Icon(
+                Icons.Rounded.CheckCircle,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
         }
         Text(
             taskItem.title,
