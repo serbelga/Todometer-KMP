@@ -42,7 +42,6 @@ import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.desktop.di.viewModelModule
 import dev.sergiobelda.todometer.desktop.ui.about.AboutRoute
 import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
@@ -68,7 +67,7 @@ fun main() = application {
             size = DpSize(600.dp, 800.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
-        icon = painterResource(ToDometerSymbols.IsotypeMonochrome)
+        icon = ToDometerSymbols.IsotypeMonochrome
     ) {
         val getAppThemeUseCase = koin.get<GetAppThemeUseCase>()
         val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)

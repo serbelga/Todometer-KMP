@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2022 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,10 +11,8 @@
      limitations under the License.
 -->
 
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="692.60516dp"
-    android:height="748.73303dp"
-    android:viewportWidth="692.60516"
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="692.60516dp"
+    android:height="748.73303dp" android:viewportWidth="692.60516"
     android:viewportHeight="748.73303">
     <path
         android:pathData="M485.389,252.49m-75.365,0a75.365,75.365 0,1 1,150.731 0a75.365,75.365 0,1 1,-150.731 0"
@@ -68,11 +65,9 @@
     <path
         android:pathData="M119.252,509.004c-2.478,-187.337 -65.158,-363.14 -65.791,-364.893l-5.716,2.062c0.63,1.744 62.966,176.627 65.431,362.913Z"
         android:fillColor="#18b375" />
-    <path
-        android:pathData="M6.175,239.559l1.87,-5.783l75.04,24.268l-1.87,5.783z"
+    <path android:pathData="M6.175,239.559l1.87,-5.783l75.04,24.268l-1.87,5.783z"
         android:fillColor="#18b375" />
-    <path
-        android:pathData="M87.374,276.228l61.828,-48.966l3.773,4.765l-61.828,48.966z"
+    <path android:pathData="M87.374,276.228l61.828,-48.966l3.773,4.765l-61.828,48.966z"
         android:fillColor="#18b375" />
     <path
         android:pathData="M226.28,212.589a83.219,169.801 0,1 0,166.438 0a83.219,169.801 0,1 0,-166.438 0z"
@@ -80,11 +75,9 @@
     <path
         android:pathData="M301.815,490.526c33.33,-199.975 0.336,-399.227 -0.002,-401.215l-6.483,1.098c0.336,1.978 33.141,200.183 -0.002,399.037Z"
         android:fillColor="#18b375" />
-    <path
-        android:pathData="M233.131,181.876l3.102,-5.799l75.253,40.251l-3.102,5.799z"
+    <path android:pathData="M233.131,181.876l3.102,-5.799l75.253,40.251l-3.102,5.799z"
         android:fillColor="#18b375" />
-    <path
-        android:pathData="M312.561,236.514l75.244,-40.274l3.104,5.798l-75.244,40.274z"
+    <path android:pathData="M312.561,236.514l75.244,-40.274l3.104,5.798l-75.244,40.274z"
         android:fillColor="#18b375" />
     <path
         android:pathData="M670.979,327.77a634.407,634.407 0,0 0,-95.374 -43.606c-182.14,-65.907 -362.751,-40.506 -433.446,53.817 55.017,-115.553 251.327,-151.888 449.432,-80.206a646.926,646.926 0,0 1,67.585 28.872A343.542,343.542 0,0 1,670.979 327.77Z"
