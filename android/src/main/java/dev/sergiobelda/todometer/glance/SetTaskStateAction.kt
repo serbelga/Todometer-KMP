@@ -42,7 +42,6 @@ class SetTaskStateAction : ActionCallback {
                 TaskState.DOING -> setTaskDoneUseCase.invoke(taskId)
                 TaskState.DONE -> setTaskDoingUseCase.invoke(taskId)
             }
-            ToDometerWidget().loadData()
         }
     }
 

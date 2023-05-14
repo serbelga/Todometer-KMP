@@ -85,6 +85,7 @@ dependencies {
 
     implementation(libs.androidx.glance.appWidget)
     implementation(libs.androidx.glance.glance)
+    implementation(libs.androidx.glance.material3)
 
     implementation(libs.google.playServicesOssLicenses)
 
