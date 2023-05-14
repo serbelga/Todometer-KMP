@@ -53,7 +53,6 @@ import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
@@ -111,7 +110,7 @@ private fun ToDometerTitle() {
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Image(
-            painterResource(ToDometerSymbols.IsotypeDark),
+            ToDometerSymbols.IsotypeDark,
             contentDescription = null,
             modifier = Modifier.size(16.dp)
         )
@@ -148,7 +147,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(painterResource(ToDometerIcons.Add), null)
+            Icon(ToDometerIcons.Add, null)
         },
         label = {
             Text(

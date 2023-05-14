@@ -40,7 +40,6 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.appl
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import java.util.concurrent.TimeUnit
@@ -77,7 +76,7 @@ internal actual fun DateTimeSelector(
             taskDueDate?.let {
                 IconButton(onClick = onClearDateTimeClick) {
                     Icon(
-                        painterResource(ToDometerIcons.Close),
+                        ToDometerIcons.Close,
                         stringResource(MR.strings.clear),
                         tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                     )

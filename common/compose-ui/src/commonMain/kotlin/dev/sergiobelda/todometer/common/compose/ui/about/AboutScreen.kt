@@ -38,7 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -58,7 +57,7 @@ internal fun GitHubAboutItemCard(onCardClick: () -> Unit) {
         onCardClick = onCardClick,
         icon = {
             Icon(
-                painterResource(ToDometerIcons.GitHub),
+                ToDometerIcons.GitHub,
                 contentDescription = stringResource(MR.strings.github)
             )
         },
@@ -72,7 +71,7 @@ internal fun PrivacyPolicyAboutItemCard(onCardClick: () -> Unit) {
         onCardClick = onCardClick,
         icon = {
             Icon(
-                painterResource(ToDometerIcons.Description),
+                ToDometerIcons.Description,
                 contentDescription = stringResource(MR.strings.privacy_policy)
             )
         },
@@ -86,7 +85,7 @@ internal fun OpenSourceLicensesAboutItemCard(onCardClick: () -> Unit) {
         onCardClick = onCardClick,
         icon = {
             Icon(
-                painterResource(ToDometerIcons.Code),
+                ToDometerIcons.Code,
                 contentDescription = stringResource(MR.strings.open_source_licenses)
             )
         },
@@ -101,7 +100,7 @@ internal fun AboutTopBar(navigateBack: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    painterResource(ToDometerIcons.ArrowBack),
+                    ToDometerIcons.ArrowBack,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }

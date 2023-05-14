@@ -68,7 +68,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.ToDometerIllustrations
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import kotlinx.coroutines.launch
 
@@ -201,7 +200,7 @@ fun HomeScreen(
                 } else {
                     if (homeUiState.tasks.isEmpty()) {
                         HomeInfoIllustration(
-                            painterResource(ToDometerIllustrations.NoTasks),
+                            ToDometerIllustrations.NoTasks,
                             stringResource(MR.strings.no_tasks)
                         )
                     } else {
@@ -228,7 +227,7 @@ fun HomeScreen(
                     onClick = navigateToAddTask
                 ) {
                     Icon(
-                        painterResource(ToDometerIcons.Add),
+                        ToDometerIcons.Add,
                         contentDescription = stringResource(MR.strings.add_task)
                     )
                 }
@@ -259,7 +258,7 @@ private fun HomeTopAppBar(
             navigationIcon = {
                 IconButton(onClick = onMenuClick) {
                     Icon(
-                        painterResource(ToDometerIcons.Menu),
+                        ToDometerIcons.Menu,
                         contentDescription = stringResource(MR.strings.menu)
                     )
                 }
@@ -267,7 +266,7 @@ private fun HomeTopAppBar(
             actions = {
                 IconButton(onClick = onMoreClick) {
                     Icon(
-                        painterResource(ToDometerIcons.MoreVert),
+                        ToDometerIcons.MoreVert,
                         contentDescription = stringResource(MR.strings.more)
                     )
                 }
@@ -324,12 +323,12 @@ private fun TasksList(
                     trailingContent = {
                         if (areTasksDoneVisible) {
                             Icon(
-                                painterResource(ToDometerIcons.ExpandLess),
+                                ToDometerIcons.ExpandLess,
                                 contentDescription = null
                             )
                         } else {
                             Icon(
-                                painterResource(ToDometerIcons.ExpandMore),
+                                ToDometerIcons.ExpandMore,
                                 contentDescription = null
                             )
                         }
@@ -358,7 +357,7 @@ private fun TasksList(
     }
     if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
         HomeInfoIllustration(
-            painterResource(ToDometerIllustrations.CompletedTasks),
+            ToDometerIllustrations.CompletedTasks,
             stringResource(MR.strings.you_have_completed_all_tasks),
             stringResource(MR.strings.congratulations)
         )

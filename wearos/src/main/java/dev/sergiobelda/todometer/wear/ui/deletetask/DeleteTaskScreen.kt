@@ -24,7 +24,6 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -39,7 +38,7 @@ internal fun DeleteTaskScreen(
     Alert(
         icon = {
             Icon(
-                painterResource(ToDometerIcons.Delete),
+                ToDometerIcons.Delete,
                 stringResource(MR.strings.delete_task)
             )
         },
@@ -52,12 +51,12 @@ internal fun DeleteTaskScreen(
                     onDeleteTask()
                 }
             ) {
-                Icon(painterResource(ToDometerIcons.Check), null)
+                Icon(ToDometerIcons.Check, null)
             }
         },
         negativeButton = {
             Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateBack) {
-                Icon(painterResource(ToDometerIcons.Close), null)
+                Icon(ToDometerIcons.Close, null)
             }
         }
     )

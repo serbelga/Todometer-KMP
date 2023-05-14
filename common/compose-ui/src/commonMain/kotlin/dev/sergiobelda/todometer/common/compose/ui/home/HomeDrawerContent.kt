@@ -44,7 +44,6 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.appl
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -87,7 +86,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                painterResource(ToDometerIcons.Settings),
+                ToDometerIcons.Settings,
                 contentDescription = null
             )
         },
@@ -109,7 +108,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                painterResource(ToDometerIcons.Info),
+                ToDometerIcons.Info,
                 contentDescription = null
             )
         },

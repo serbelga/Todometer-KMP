@@ -45,7 +45,6 @@ import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
 import org.koin.androidx.compose.getViewModel
@@ -110,7 +109,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(painterResource(ToDometerIcons.Edit), null)
+            Icon(ToDometerIcons.Edit, null)
         },
         label = {
             Text(text = stringResource(MR.strings.edit_task))
@@ -139,7 +138,7 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(painterResource(ToDometerIcons.Delete), stringResource(MR.strings.delete_task))
+            Icon(ToDometerIcons.Delete, stringResource(MR.strings.delete_task))
         },
         label = {
             Text(text = stringResource(MR.strings.delete_task))
