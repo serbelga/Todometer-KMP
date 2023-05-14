@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.ui.home
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -40,28 +39,19 @@ internal fun HomeRoute(
         navigateToAbout = navigateToAbout,
         onTaskItemDoingClick = {
             homeViewModel.setTaskDoing(it)
-            updateToDometerWidgetData()
         },
         onTaskItemDoneClick = {
             homeViewModel.setTaskDone(it)
-            updateToDometerWidgetData()
         },
         onTaskListItemClick = {
             homeViewModel.setTaskListSelected(it)
-            updateToDometerWidgetData()
         },
         onDeleteTaskClick = {
             homeViewModel.deleteTask(it)
-            updateToDometerWidgetData()
         },
         onDeleteTaskListClick = {
             homeViewModel.deleteTaskList()
-            updateToDometerWidgetData()
         },
         homeUiState = homeViewModel.homeUiState
     )
-}
-
-private fun updateToDometerWidgetData() {
-    ToDometerWidgetReceiver().updateData()
 }

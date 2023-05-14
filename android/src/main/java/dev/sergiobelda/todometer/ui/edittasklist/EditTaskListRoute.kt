@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.ui.edittasklist
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListScreen
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -30,7 +29,6 @@ internal fun EditTaskListRoute(
         navigateBack = navigateBack,
         editTaskList = { taskListName ->
             editTaskListViewModel.updateTaskList(taskListName)
-            ToDometerWidgetReceiver().updateData()
         },
         editTaskListUiState = editTaskListViewModel.editTaskListUiState
     )

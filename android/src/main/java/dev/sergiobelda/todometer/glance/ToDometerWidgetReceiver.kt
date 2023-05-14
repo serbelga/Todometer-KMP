@@ -22,8 +22,4 @@ import androidx.glance.appwidget.GlanceAppWidgetReceiver
 class ToDometerWidgetReceiver : GlanceAppWidgetReceiver() {
 
     override val glanceAppWidget: GlanceAppWidget get() = ToDometerWidget()
-
-    fun updateData() {
-        (glanceAppWidget as? ToDometerWidget)?.loadData()
-    }
 }
