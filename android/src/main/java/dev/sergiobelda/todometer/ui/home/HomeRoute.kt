@@ -55,4 +55,3 @@ internal fun HomeRoute(
         homeUiState = homeViewModel.homeUiState
     )
 }
-
