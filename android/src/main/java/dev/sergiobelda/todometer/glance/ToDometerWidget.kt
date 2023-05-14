@@ -133,12 +133,16 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     ) {
         // TODO: Use Loading Progress indicator.
         Box(
-            modifier = GlanceModifier.fillMaxSize()
+            modifier = GlanceModifier
+                .fillMaxSize()
+                // TODO: Update background color to use GlanceTheme.
                 .background(ImageProvider(R.drawable.todometer_widget_background))
         ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
                 Row(
-                    modifier = GlanceModifier.fillMaxWidth().padding(start = 8.dp)
+                    modifier = GlanceModifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp)
                         .clickable(
                             onClick = actionStartActivity<MainActivity>()
                         ),
@@ -146,9 +150,12 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     horizontalAlignment = Alignment.End
                 ) {
                     Column(
-                        modifier = GlanceModifier.fillMaxWidth().defaultWeight().clickable(
-                            onClick = actionStartActivity<MainActivity>()
-                        )
+                        modifier = GlanceModifier
+                            .fillMaxWidth()
+                            .defaultWeight()
+                            .clickable(
+                                onClick = actionStartActivity<MainActivity>()
+                            )
                     ) {
                         Text(
                             text = taskListName ?: "",
@@ -165,6 +172,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                             )
                         )
                     }
+                    // TODO: Use Button when available.
                     Image(
                         ImageProvider(R.drawable.todometer_widget_add_button),
                         modifier = GlanceModifier.clickable(
@@ -207,8 +215,10 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
             MainActivity::class.java
         )
         Column {
+            // TODO: Use Card with GlanceTheme color surface when available.
             Row(
-                modifier = GlanceModifier.fillMaxWidth()
+                modifier = GlanceModifier
+                    .fillMaxWidth()
                     .height(48.dp)
                     .background(ImageProvider(R.drawable.todometer_widget_card))
                     .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
@@ -229,8 +239,13 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                         .clickable(actionStartActivityIntent(openTaskDeepLinkIntent))
                 )
                 Image(
-                    // TODO: Update icons
-                    ImageProvider(if (taskItem.state == TaskState.DONE) R.drawable.todometer_widget_ic_round_replay_24 else R.drawable.todometer_widget_ic_round_check_24),
+                    ImageProvider(
+                        if (taskItem.state == TaskState.DONE) {
+                            R.drawable.todometer_widget_ic_round_task_alt_24
+                        } else {
+                            R.drawable.todometer_widget_ic_round_radio_button_unchecked_24
+                        }
+                    ),
                     contentDescription = null,
                     modifier = GlanceModifier.padding(8.dp).clickable(
                         onClick = actionRunCallback<SetTaskStateAction>(

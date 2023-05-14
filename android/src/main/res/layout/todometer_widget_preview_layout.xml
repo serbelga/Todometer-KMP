@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/todometer_widget_ic_round_check_24" />
+                android:src="@drawable/todometer_widget_ic_round_radio_button_unchecked_24" />
         </FrameLayout>
 
         <TextView
