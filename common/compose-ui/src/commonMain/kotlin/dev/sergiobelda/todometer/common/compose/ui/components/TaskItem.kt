@@ -62,11 +62,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -152,15 +150,13 @@ private fun TaskItem(
     selected: Boolean = false,
     shadowElevation: Dp
 ) {
-    // TODO: Improve this - Same that HomeScreen
-    val tonalElevation = if (selected) 16.dp else 2.dp
     val border = if (selected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null
     Surface(
         shape = shape,
         modifier = modifier.padding(4.dp),
-        tonalElevation = tonalElevation,
+        tonalElevation = 2.dp,
         shadowElevation = shadowElevation,
-        // border = border
+        border = border
     ) {
         Column(
             modifier = Modifier.clip(shape).combinedClickable(
@@ -272,7 +268,7 @@ private fun taskItemTitleTextDecoration(state: TaskState): TextDecoration =
 private fun taskItemActionTintColor(state: TaskState): Color =
     when (state) {
         TaskState.DOING -> MaterialTheme.colorScheme.onPrimaryContainer
-        TaskState.DONE -> ToDometerTheme.toDometerColors.check
+        TaskState.DONE -> MaterialTheme.colorScheme.primary
     }
 
 @Composable
