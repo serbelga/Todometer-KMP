@@ -24,20 +24,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
+import androidx.glance.ColorFilter
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.Image
 import androidx.glance.ImageProvider
-import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
 import androidx.glance.appwidget.provideContent
@@ -60,12 +60,13 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
-import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskIdKey
-import dev.sergiobelda.todometer.glance.SetTaskStateAction.Companion.taskStateKey
 import dev.sergiobelda.todometer.glance.theme.ToDometerWidgetTheme
 import dev.sergiobelda.todometer.ui.MainActivity
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import androidx.glance.appwidget.action.actionStartActivity as actionStartActivityIntent
@@ -76,17 +77,22 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
 
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase by inject()
 
+    private val setTaskDoneUseCase: SetTaskDoneUseCase by inject()
+
+    private val setTaskDoingUseCase: SetTaskDoingUseCase by inject()
+
     private val context by inject<Context>()
 
     private val openAddTaskDeepLinkIntent = Intent(
         Intent.ACTION_VIEW,
-        OPEN_ADD_TASK_DEEP_LINK.toUri(),
+        AddTaskDeepLink.toUri(),
         context,
         MainActivity::class.java
     )
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
+            val scope = rememberCoroutineScope()
             var taskListName: String by remember { mutableStateOf("") }
             val taskListSelected by getTaskListSelectedUseCase().collectAsState(null)
             taskListSelected?.doIfSuccess {
@@ -118,7 +124,13 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                     taskListName = taskListName,
                     taskListProgress = taskListProgress,
                     tasksDoing = tasksDoing,
-                    tasksDone = tasksDone
+                    tasksDone = tasksDone,
+                    toggleTaskItemState = { id, state ->
+                        when (state) {
+                            TaskState.DOING -> scope.launch { setTaskDoneUseCase.invoke(id) }
+                            TaskState.DONE -> scope.launch { setTaskDoingUseCase.invoke(id) }
+                        }
+                    }
                 )
             }
         }
@@ -129,9 +141,9 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
         taskListName: String,
         taskListProgress: Float,
         tasksDoing: List<TaskItem>,
-        tasksDone: List<TaskItem>
+        tasksDone: List<TaskItem>,
+        toggleTaskItemState: (String, TaskState) -> Unit
     ) {
-        // TODO: Use Loading Progress indicator.
         Box(
             modifier = GlanceModifier
                 .fillMaxSize()
@@ -139,78 +151,101 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                 .background(ImageProvider(R.drawable.todometer_widget_background))
         ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
-                Row(
-                    modifier = GlanceModifier
-                        .fillMaxWidth()
-                        .padding(start = 8.dp)
-                        .clickable(
-                            onClick = actionStartActivity<MainActivity>()
-                        ),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalAlignment = Alignment.End
-                ) {
-                    Column(
-                        modifier = GlanceModifier
-                            .fillMaxWidth()
-                            .defaultWeight()
-                            .clickable(
-                                onClick = actionStartActivity<MainActivity>()
-                            )
-                    ) {
-                        Text(
-                            text = taskListName ?: "",
-                            style = TextStyle(
-                                color = GlanceTheme.colors.onSurface,
-                                fontSize = 16.sp
-                            )
-                        )
-                        Text(
-                            text = TaskProgress.getPercentage(taskListProgress),
-                            style = TextStyle(
-                                color = GlanceTheme.colors.onSurfaceVariant,
-                                fontSize = 16.sp
-                            )
-                        )
-                    }
-                    // TODO: Use Button when available.
-                    Image(
-                        ImageProvider(R.drawable.todometer_widget_add_button),
-                        modifier = GlanceModifier.clickable(
-                            onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent)
-                        ),
-                        contentDescription = null
+                ToDometerWidgetHeader(taskListName, taskListProgress)
+                Spacer(modifier = GlanceModifier.height(12.dp))
+                ToDometerWidgetBody(tasksDoing, tasksDone, toggleTaskItemState)
+            }
+        }
+    }
+
+    @Composable
+    private fun ToDometerWidgetHeader(taskListName: String, taskListProgress: Float) {
+        // TODO: Use Loading Progress indicator.
+        Row(
+            modifier = GlanceModifier
+                .fillMaxWidth()
+                .padding(start = 8.dp)
+                .clickable(
+                    onClick = actionStartActivity<MainActivity>()
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalAlignment = Alignment.End
+        ) {
+            Column(
+                modifier = GlanceModifier
+                    .fillMaxWidth()
+                    .defaultWeight()
+                    .clickable(
+                        onClick = actionStartActivity<MainActivity>()
+                    )
+            ) {
+                Text(
+                    text = taskListName,
+                    style = TextStyle(
+                        color = GlanceTheme.colors.onSurface,
+                        fontSize = 16.sp
+                    )
+                )
+                Text(
+                    text = TaskProgress.getPercentage(taskListProgress),
+                    style = TextStyle(
+                        color = GlanceTheme.colors.onSurfaceVariant,
+                        fontSize = 16.sp
+                    )
+                )
+            }
+            // TODO: Use Button when available.
+            Image(
+                ImageProvider(R.drawable.todometer_widget_add_button),
+                modifier = GlanceModifier.clickable(
+                    onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent)
+                ),
+                contentDescription = null
+            )
+        }
+    }
+
+    @Composable
+    private fun ToDometerWidgetBody(
+        tasksDoing: List<TaskItem>,
+        tasksDone: List<TaskItem>,
+        toggleTaskItemState: (String, TaskState) -> Unit
+    ) {
+        if (tasksDoing.isEmpty()) {
+            Box(
+                modifier = GlanceModifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = context.getString(R.string.no_pending_tasks),
+                    style = TextStyle(color = GlanceTheme.colors.onBackground)
+                )
+            }
+        } else {
+            LazyColumn {
+                items(tasksDoing) { taskItem ->
+                    TaskItem(
+                        taskItem,
+                        toggleTaskItemState = {
+                            toggleTaskItemState(taskItem.id, taskItem.state)
+                        }
                     )
                 }
-                Spacer(modifier = GlanceModifier.height(12.dp))
-                if (tasksDoing.isEmpty()) {
-                    Box(
-                        modifier = GlanceModifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = context.getString(R.string.no_pending_tasks),
-                            style = TextStyle(color = GlanceTheme.colors.onBackground)
-                        )
-                    }
-                } else {
-                    LazyColumn {
-                        items(tasksDoing) {
-                            TaskItem(it)
-                        }
-                        item {
-                            TasksDoneItem(tasksDone.size)
-                        }
-                    }
+                item {
+                    TasksDoneItem(tasksDone.size)
                 }
             }
         }
     }
 
     @Composable
-    private fun TaskItem(taskItem: TaskItem) {
+    private fun TaskItem(
+        taskItem: TaskItem,
+        toggleTaskItemState: () -> Unit
+    ) {
         val openTaskDeepLinkIntent = Intent(
             Intent.ACTION_VIEW,
-            "$OPEN_TASK_DEEP_LINK/${taskItem.id}".toUri(),
+            "$TaskDetailsDeepLink/${taskItem.id}".toUri(),
             context,
             MainActivity::class.java
         )
@@ -247,14 +282,10 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                         }
                     ),
                     contentDescription = null,
-                    modifier = GlanceModifier.padding(8.dp).clickable(
-                        onClick = actionRunCallback<SetTaskStateAction>(
-                            actionParametersOf(
-                                taskIdKey to taskItem.id,
-                                taskStateKey to taskItem.state
-                            )
-                        )
-                    )
+                    modifier = GlanceModifier.padding(8.dp).clickable {
+                        toggleTaskItemState()
+                    },
+                    colorFilter = ColorFilter.tint(GlanceTheme.colors.onSurface)
                 )
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
@@ -279,7 +310,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     companion object {
-        private const val OPEN_ADD_TASK_DEEP_LINK: String = "app://open.add.task"
-        private const val OPEN_TASK_DEEP_LINK: String = "app://open.task"
+        private const val AddTaskDeepLink: String = "app://open.add.task"
+        private const val TaskDetailsDeepLink: String = "app://open.task"
     }
 }
