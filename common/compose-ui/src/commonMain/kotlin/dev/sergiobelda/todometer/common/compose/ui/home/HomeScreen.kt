@@ -87,7 +87,8 @@ import kotlinx.coroutines.launch
 
 @OptIn(
     ExperimentalMaterialApi::class,
-    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class
+    ExperimentalMaterial3Api::class,
+    ExperimentalAnimationApi::class
 )
 @Composable
 fun HomeScreen(
@@ -274,7 +275,7 @@ fun HomeScreen(
                 AnimatedVisibility(
                     visible = homeUiState.selectedTasks.isEmpty(),
                     enter = scaleIn() + fadeIn(),
-                    exit = scaleOut() + fadeOut(),
+                    exit = scaleOut() + fadeOut()
                 ) {
                     FloatingActionButton(
                         onClick = navigateToAddTask
@@ -340,9 +341,7 @@ private fun HomeTopAppBar(
                             )
                         }
                     },
-                    colors = TopAppBarDefaults.smallTopAppBarColors(
-
-                    )
+                    colors = TopAppBarDefaults.smallTopAppBarColors()
                 )
             } else {
                 CenterAlignedTopAppBar(
