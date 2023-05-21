@@ -29,9 +29,9 @@ object ToDometerSymbols {
 
     val IsotypeLight: Painter
         @Composable
-        get() = painterResource("symbols/isotype_dark.xml")
+        get() = painterResource("symbols/isotype_light.xml")
 
     val IsotypeMonochrome: Painter
         @Composable
-        get() = painterResource("symbols/isotype_dark.xml")
+        get() = painterResource("symbols/isotype_monochrome.xml")
 }

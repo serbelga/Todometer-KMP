@@ -126,7 +126,7 @@ private fun AddTaskListTopBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    ToDometerIcons.ArrowBack,
+                    ToDometerIcons.NavigateBefore,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }

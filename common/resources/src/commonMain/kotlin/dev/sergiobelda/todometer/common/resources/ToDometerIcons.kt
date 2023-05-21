@@ -99,6 +99,10 @@ object ToDometerIcons {
         @Composable
         get() = painterResource("icons/ic_rounded_more_vert_24.xml")
 
+    val NavigateBefore: Painter
+        @Composable
+        get() = painterResource("icons/ic_rounded_navigate_before_24.xml")
+
     val Replay: Painter
         @Composable
         get() = painterResource("icons/ic_rounded_replay_24.xml")
