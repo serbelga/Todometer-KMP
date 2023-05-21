@@ -46,9 +46,9 @@ fun AboutScreen(
         ) {
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
-            GitHubAboutItemCard(onCardClick = navigateToGitHub)
-            PrivacyPolicyAboutItemCard(onCardClick = navigateToPrivacyPolicy)
-            OpenSourceLicensesAboutItemCard(onCardClick = navigateToOpenSourceLicenses)
+            AboutItemCard(onCardClick = navigateToGitHub, AboutItem.GitHub)
+            AboutItemCard(onCardClick = navigateToPrivacyPolicy, AboutItem.PrivacyPolicy)
+            AboutItemCard(onCardClick = navigateToOpenSourceLicenses, AboutItem.OpenSourceLicenses)
         }
         AboutAppVersion()
     }
