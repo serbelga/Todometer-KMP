@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -37,11 +38,10 @@ fun ToDometerChip(
     color: Color = ToDometerChipDefaults.color,
     content: @Composable RowScope.() -> Unit
 ) {
-    // TODO: Put shape dimen as a variable
     Surface(
         modifier = modifier,
         border = border,
-        shape = RoundedCornerShape(6.dp),
+        shape = RoundedCornerShape(ToDometerChipCornerRadius),
         color = color
     ) {
         Row(
@@ -64,3 +64,4 @@ private object ToDometerChipDefaults {
 }
 
 private val ToDometerChipContentPadding: PaddingValues = PaddingValues(6.dp)
+private val ToDometerChipCornerRadius: Dp = 6.dp
