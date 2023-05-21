@@ -38,10 +38,6 @@ import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.RadioButtonUnchecked
-import androidx.compose.material.icons.rounded.TaskAlt
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -56,7 +52,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -65,6 +61,7 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.appl
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
+import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -195,7 +192,7 @@ private fun TaskItemHeadlineContent(
     ) {
         if (selected) {
             Icon(
-                Icons.Rounded.CheckCircle,
+                ToDometerIcons.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -272,11 +269,10 @@ private fun taskItemActionTintColor(state: TaskState): Color =
     }
 
 @Composable
-private fun taskItemActionIcon(state: TaskState): ImageVector =
+private fun taskItemActionIcon(state: TaskState): Painter =
     when (state) {
-        // TODO: Update icons
-        TaskState.DOING -> Icons.Rounded.RadioButtonUnchecked // painterResource(ToDometerIcons.Check)
-        TaskState.DONE -> Icons.Rounded.TaskAlt // painterResource(ToDometerIcons.Replay)
+        TaskState.DOING -> ToDometerIcons.RadioButtonUnchecked
+        TaskState.DONE -> ToDometerIcons.TaskAlt
     }
 
 @Composable
