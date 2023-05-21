@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.compose.ui.home
 
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 data class HomeUiState(
@@ -26,6 +27,13 @@ data class HomeUiState(
     val selectedTasks: List<String> = emptyList(),
     val taskLists: List<TaskList> = emptyList(),
     val taskListSelected: TaskList? = null,
-    val isDefaultTaskListSelected: Boolean = true,
     val errorUi: ErrorUi? = null
-)
+) {
+    val selectionMode: Boolean get() = selectedTasks.isNotEmpty()
+
+    val tasksDoing: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING }
+
+    val tasksDone: List<TaskItem> get() = tasks.filter { it.state == TaskState.DONE }
+
+    val isDefaultTaskListSelected: Boolean get() = taskListSelected == null
+}

@@ -52,24 +52,17 @@ class HomeViewModel(
         getTaskListSelected()
         getTaskListSelectedTasks()
         getTaskLists()
-
-        viewModelScope.launch {
-            // refreshTaskListsUseCase()
-            // refreshTaskListSelectedUseCase()
-        }
     }
 
     private fun getTaskListSelected() = viewModelScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 homeUiState = homeUiState.copy(
-                    taskListSelected = taskList,
-                    isDefaultTaskListSelected = false
+                    taskListSelected = taskList
                 )
             }.doIfError {
                 homeUiState = homeUiState.copy(
-                    taskListSelected = null,
-                    isDefaultTaskListSelected = true
+                    taskListSelected = null
                 )
             }
         }
