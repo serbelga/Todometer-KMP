@@ -43,6 +43,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -154,7 +155,8 @@ fun HomeScreen(
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     cannotEditTaskList,
-                                    snackbarActionLabel
+                                    snackbarActionLabel,
+                                    duration = SnackbarDuration.Short
                                 )
                             }
                         } else {
@@ -167,7 +169,8 @@ fun HomeScreen(
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     cannotDeleteTaskList,
-                                    snackbarActionLabel
+                                    snackbarActionLabel,
+                                    duration = SnackbarDuration.Short
                                 )
                             }
                         } else {
