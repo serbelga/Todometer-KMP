@@ -89,7 +89,7 @@ internal fun AboutItemCard(
 ) {
     Surface(
         onClick = onCardClick,
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(AboutItemCardCornerRadius),
         tonalElevation = AboutItemCardTonalElevation,
         modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp),
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -127,3 +127,4 @@ const val PrivacyPolicyUrl: String =
 private val AboutItemCardHeight: Dp = 72.dp
 private val AboutItemCardSpacing: Dp = 24.dp
 private val AboutItemCardTonalElevation: Dp = 2.dp
+private val AboutItemCardCornerRadius: Dp = 16.dp
