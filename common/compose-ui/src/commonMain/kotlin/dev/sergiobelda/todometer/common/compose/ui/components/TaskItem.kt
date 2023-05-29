@@ -85,7 +85,7 @@ internal fun SwipeableTaskItem(
         }
     )
     val taskItemShadowElevation by animateDpAsState(
-        if (dismissState.targetValue != DismissValue.Default) 4.dp else 0.dp,
+        if (dismissState.targetValue != DismissValue.Default) TaskItemShadowElevation else 0.dp,
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
@@ -98,14 +98,13 @@ internal fun SwipeableTaskItem(
             FractionalThreshold(0.1f)
         },
         background = {
-            // TODO: Update background color and tint color
             Box(
                 Modifier
                     .padding(4.dp)
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(14.dp))
+                    .clip(TaskItemBackgroundShape)
                     .background(MaterialTheme.colorScheme.errorContainer)
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = TaskItemBackgroundHorizontalPadding),
                 contentAlignment = Alignment.CenterStart
             ) {
                 TaskItemBackgroundIcon(
@@ -121,7 +120,6 @@ internal fun SwipeableTaskItem(
                 onDoneClick = onDoneClick,
                 onClick = onTaskItemClick,
                 onLongClick = onTaskItemLongClick,
-                shape = RoundedCornerShape(12.dp),
                 selected = selected,
                 shadowElevation = taskItemShadowElevation
             )
@@ -142,21 +140,20 @@ private fun TaskItem(
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
     onLongClick: (String) -> Unit,
-    shape: Shape,
     modifier: Modifier = Modifier,
     selected: Boolean = false,
     shadowElevation: Dp
 ) {
     val border = if (selected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null
     Surface(
-        shape = shape,
-        modifier = modifier.padding(4.dp),
-        tonalElevation = 2.dp,
+        shape = TaskItemShape,
+        modifier = modifier.padding(TaskItemPadding),
+        tonalElevation = TaskItemTonalElevation,
         shadowElevation = shadowElevation,
         border = border
     ) {
         Column(
-            modifier = Modifier.clip(shape).combinedClickable(
+            modifier = Modifier.combinedClickable(
                 onClick = {
                     onClick(taskItem.id)
                 },
@@ -186,8 +183,8 @@ private fun TaskItemHeadlineContent(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(
-            start = TaskItemPaddingStart,
-            end = TaskItemPaddingEnd
+            start = TaskItemInnerPaddingStart,
+            end = TaskItemInnerPaddingEnd
         )
     ) {
         if (selected) {
@@ -282,5 +279,12 @@ private fun taskItemActionContentDescription(state: TaskState): String =
         TaskState.DONE -> stringResource(MR.strings.uncheck_task)
     }
 
-private val TaskItemPaddingStart: Dp = 16.dp
-private val TaskItemPaddingEnd: Dp = 8.dp
+private val TaskItemBackgroundHorizontalPadding = 16.dp
+private val TaskItemBackgroundShape: Shape = RoundedCornerShape(14.dp)
+
+private val TaskItemInnerPaddingEnd: Dp = 8.dp
+private val TaskItemInnerPaddingStart: Dp = 16.dp
+private val TaskItemPadding: Dp = 4.dp
+private val TaskItemShape: Shape = RoundedCornerShape(12.dp)
+private val TaskItemTonalElevation: Dp = 2.dp
+private val TaskItemShadowElevation: Dp = 4.dp

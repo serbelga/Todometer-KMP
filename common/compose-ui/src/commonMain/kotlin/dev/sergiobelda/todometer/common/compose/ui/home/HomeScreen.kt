@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.compose.ui.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -272,7 +273,7 @@ fun HomeScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 private fun HomeTopAppBar(
     onMenuClick: () -> Unit,
@@ -288,7 +289,6 @@ private fun HomeTopAppBar(
     taskListName: String?,
     tasks: List<TaskItem>
 ) {
-    // TODO: Animate tonalElevation
     val tonalElevation by animateDpAsState(
         if (selectionMode) 4.dp else 0.dp,
         animationSpec = tween(
@@ -298,31 +298,8 @@ private fun HomeTopAppBar(
     )
     Surface(tonalElevation = tonalElevation) {
         Column {
-            if (selectionMode) {
-                // TODO: Animate appearance
-                TopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = onClearSelectedTasksClick) {
-                            Icon(
-                                ToDometerIcons.Close,
-                                contentDescription = null
-                            )
-                        }
-                    },
-                    title = {
-                        Text(text = "$selectedTasks selected")
-                    },
-                    actions = {
-                        IconButton(onClick = onDeleteSelectedTasksClick) {
-                            Icon(
-                                ToDometerIcons.Delete,
-                                contentDescription = null
-                            )
-                        }
-                    },
-                    colors = TopAppBarDefaults.smallTopAppBarColors()
-                )
-            } else {
+            Box {
+                // TODO: Improve this
                 CenterAlignedTopAppBar(
                     title = {
                         ToDometerTitle()
@@ -350,11 +327,59 @@ private fun HomeTopAppBar(
                         )
                     }
                 )
+                androidx.compose.animation.AnimatedVisibility(
+                    visible = selectionMode,
+                    enter = scaleIn(
+                        animationSpec = tween(durationMillis = 2500, easing = FastOutLinearInEasing)
+                    ) + fadeIn(
+                        animationSpec = tween(durationMillis = 3500, easing = FastOutLinearInEasing)
+                    ),
+                    exit = scaleOut(
+                        animationSpec = tween(durationMillis = 250, easing = FastOutLinearInEasing)
+                    ) + fadeOut()
+                ) {
+                    SelectedTasksTopAppBar(
+                        onClearSelectedTasksClick = onClearSelectedTasksClick,
+                        selectedTasks = selectedTasks,
+                        onDeleteSelectedTasksClick = onDeleteSelectedTasksClick
+                    )
+                }
             }
             TaskListProgress(taskListName, tasks)
             ToDometerDivider()
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SelectedTasksTopAppBar(
+    onClearSelectedTasksClick: () -> Unit,
+    selectedTasks: Int,
+    onDeleteSelectedTasksClick: () -> Unit
+) {
+    TopAppBar(
+        navigationIcon = {
+            IconButton(onClick = onClearSelectedTasksClick) {
+                Icon(
+                    ToDometerIcons.Close,
+                    contentDescription = null
+                )
+            }
+        },
+        title = {
+            Text(text = "$selectedTasks selected")
+        },
+        actions = {
+            IconButton(onClick = onDeleteSelectedTasksClick) {
+                Icon(
+                    ToDometerIcons.Delete,
+                    contentDescription = null
+                )
+            }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors()
+    )
 }
 
 @OptIn(ExperimentalAnimationApi::class)
