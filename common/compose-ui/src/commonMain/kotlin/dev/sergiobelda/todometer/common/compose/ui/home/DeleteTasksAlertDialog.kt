@@ -27,11 +27,11 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 fun DeleteTasksAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskClick: () -> Unit) {
     ToDometerAlertDialog(
         title = {
-            Text(stringResource(MR.strings.delete_task))
+            Text(stringResource(MR.strings.delete_tasks))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(MR.strings.delete_task_question))
+            Text(stringResource(MR.strings.delete_tasks_question))
         },
         confirmButton = {
             TextButton(

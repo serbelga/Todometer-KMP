@@ -30,7 +30,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DismissDirection
 import androidx.compose.material.DismissState
@@ -57,6 +59,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -66,66 +69,81 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-internal fun SwipeableTaskItem(
+internal fun TaskItem(
     taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
     onTaskItemLongClick: (String) -> Unit,
     modifier: Modifier = Modifier,
+    swipeable: Boolean = false,
+    checkEnabled: Boolean = false,
     selected: Boolean = false,
     onSwipeToDismiss: () -> Unit
 ) {
-    val dismissState = rememberDismissState(
-        confirmStateChange = {
-            if (it == DismissValue.DismissedToEnd) {
-                onSwipeToDismiss()
-            }
-            it != DismissValue.DismissedToEnd
-        }
-    )
-    val taskItemShadowElevation by animateDpAsState(
-        if (dismissState.targetValue != DismissValue.Default) TaskItemShadowElevation else 0.dp,
-        animationSpec = tween(
-            durationMillis = 400,
-            easing = FastOutSlowInEasing
+    if (!swipeable) {
+        TaskItemContent(
+            taskItem,
+            onDoingClick = onDoingClick,
+            onDoneClick = onDoneClick,
+            onClick = onTaskItemClick,
+            onLongClick = onTaskItemLongClick,
+            checkEnabled = checkEnabled,
+            selected = selected
         )
-    )
-    SwipeToDismiss(
-        state = dismissState,
-        directions = setOf(DismissDirection.StartToEnd),
-        dismissThresholds = {
-            FractionalThreshold(0.1f)
-        },
-        background = {
-            Box(
-                Modifier
-                    .padding(4.dp)
-                    .fillMaxSize()
-                    .clip(TaskItemBackgroundShape)
-                    .background(MaterialTheme.colorScheme.errorContainer)
-                    .padding(horizontal = TaskItemBackgroundHorizontalPadding),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                TaskItemBackgroundIcon(
-                    dismissState,
-                    MaterialTheme.colorScheme.onErrorContainer
-                )
+    } else {
+        val dismissState = rememberDismissState(
+            confirmStateChange = {
+                if (it == DismissValue.DismissedToEnd) {
+                    onSwipeToDismiss()
+                }
+                it != DismissValue.DismissedToEnd
             }
-        },
-        dismissContent = {
-            TaskItem(
-                taskItem,
-                onDoingClick = onDoingClick,
-                onDoneClick = onDoneClick,
-                onClick = onTaskItemClick,
-                onLongClick = onTaskItemLongClick,
-                selected = selected,
-                shadowElevation = taskItemShadowElevation
+        )
+        val taskItemShadowElevation by animateDpAsState(
+            if (dismissState.targetValue != DismissValue.Default) TaskItemDismissedShadowElevation else 0.dp,
+            animationSpec = tween(
+                durationMillis = 400,
+                easing = FastOutSlowInEasing
             )
-        },
-        modifier = modifier
-    )
+        )
+        SwipeToDismiss(
+            state = dismissState,
+            directions = setOf(DismissDirection.StartToEnd),
+            dismissThresholds = {
+                FractionalThreshold(0.1f)
+            },
+            background = {
+                Box(
+                    Modifier
+                        .padding(4.dp)
+                        .fillMaxSize()
+                        .clip(TaskItemBackgroundShape)
+                        .background(MaterialTheme.colorScheme.errorContainer)
+                        .padding(horizontal = TaskItemBackgroundHorizontalPadding),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    TaskItemBackgroundIcon(
+                        dismissState,
+                        MaterialTheme.colorScheme.onErrorContainer
+                    )
+                }
+            },
+            dismissContent = {
+                TaskItemContent(
+                    taskItem,
+                    onDoingClick = onDoingClick,
+                    onDoneClick = onDoneClick,
+                    onClick = onTaskItemClick,
+                    onLongClick = onTaskItemLongClick,
+                    shadowElevation = taskItemShadowElevation,
+                    selected = selected,
+                    checkEnabled = checkEnabled
+                )
+            },
+            modifier = modifier
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -134,43 +152,63 @@ internal expect fun TaskItemBackgroundIcon(dismissState: DismissState, backgroun
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun TaskItem(
+private fun TaskItemContent(
     taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onClick: (String) -> Unit,
     onLongClick: (String) -> Unit,
+    checkEnabled: Boolean,
+    selected: Boolean,
     modifier: Modifier = Modifier,
-    selected: Boolean = false,
-    shadowElevation: Dp
+    shadowElevation: Dp = 0.dp
 ) {
     val border = if (selected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null
-    Surface(
-        shape = TaskItemShape,
-        modifier = modifier.padding(TaskItemPadding),
-        tonalElevation = TaskItemTonalElevation,
-        shadowElevation = shadowElevation,
-        border = border
-    ) {
-        Column(
-            modifier = Modifier.combinedClickable(
-                onClick = {
-                    onClick(taskItem.id)
-                },
-                onLongClick = {
-                    onLongClick(taskItem.id)
-                }
-            )
+
+    Box {
+        Surface(
+            shape = TaskItemShape,
+            modifier = modifier.padding(TaskItemPadding),
+            tonalElevation = TaskItemTonalElevation,
+            shadowElevation = shadowElevation,
+            border = border
         ) {
-            TaskItemHeadlineContent(
-                taskItem = taskItem,
-                onDoingClick = onDoingClick,
-                onDoneClick = onDoneClick,
-                selected = selected
+            Column(
+                modifier = Modifier.combinedClickable(
+                    onClick = {
+                        onClick(taskItem.id)
+                    },
+                    onLongClick = {
+                        onLongClick(taskItem.id)
+                    }
+                )
+            ) {
+                TaskItemHeadlineContent(
+                    taskItem = taskItem,
+                    onDoingClick = onDoingClick,
+                    onDoneClick = onDoneClick,
+                    checkEnabled = checkEnabled
+                )
+                TaskItemSupportingContent(taskItem)
+            }
+        }
+        if (selected) {
+            Icon(
+                ToDometerIcons.CheckCircle,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    // TODO: Improve
+                    .padding(start = 2.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.background)
+                    .size(20.dp)
+                    .align(Alignment.TopStart),
             )
-            TaskItemSupportingContent(taskItem)
         }
     }
+
+
 }
 
 @Composable
@@ -178,7 +216,7 @@ private fun TaskItemHeadlineContent(
     taskItem: TaskItem,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
-    selected: Boolean = false
+    checkEnabled: Boolean = true
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -187,13 +225,6 @@ private fun TaskItemHeadlineContent(
             end = TaskItemInnerPaddingEnd
         )
     ) {
-        if (selected) {
-            Icon(
-                ToDometerIcons.CheckCircle,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
         Text(
             taskItem.title,
             textDecoration = taskItemTitleTextDecoration(taskItem.state),
@@ -210,9 +241,8 @@ private fun TaskItemHeadlineContent(
                     onDoneClick(taskItem.id)
                 }
             },
-            // TODO: Improve this
-            modifier = Modifier.alpha(if (selected) 0f else 1f),
-            enabled = !selected
+            modifier = Modifier.alpha(if (checkEnabled) Alpha.Disabled else Alpha.High),
+            enabled = !checkEnabled
         ) {
             Icon(
                 taskItemActionIcon(taskItem.state),
@@ -287,4 +317,4 @@ private val TaskItemInnerPaddingStart: Dp = 16.dp
 private val TaskItemPadding: Dp = 4.dp
 private val TaskItemShape: Shape = RoundedCornerShape(12.dp)
 private val TaskItemTonalElevation: Dp = 2.dp
-private val TaskItemShadowElevation: Dp = 4.dp
+private val TaskItemDismissedShadowElevation: Dp = 4.dp
