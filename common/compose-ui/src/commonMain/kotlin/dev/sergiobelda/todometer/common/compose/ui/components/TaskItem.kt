@@ -16,9 +16,13 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -150,7 +154,7 @@ internal fun TaskItem(
 @Composable
 internal expect fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color)
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
 @Composable
 private fun TaskItemContent(
     taskItem: TaskItem,
@@ -192,7 +196,14 @@ private fun TaskItemContent(
                 TaskItemSupportingContent(taskItem)
             }
         }
-        if (selected) {
+        AnimatedVisibility(
+            visible = selected,
+            enter = scaleIn(
+                // TODO: Use const
+                animationSpec = tween(durationMillis = 150, easing = FastOutSlowInEasing)
+            ),
+            exit = fadeOut()
+        ) {
             Icon(
                 ToDometerIcons.CheckCircle,
                 contentDescription = null,
