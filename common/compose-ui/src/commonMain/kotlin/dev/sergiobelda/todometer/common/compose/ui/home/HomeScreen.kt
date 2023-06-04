@@ -404,7 +404,7 @@ private fun TasksListArea(
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit,
     selectionMode: Boolean,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     var areTasksDoneVisible by remember { mutableStateOf(false) }
     if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {

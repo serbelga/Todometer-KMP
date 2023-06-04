@@ -199,8 +199,10 @@ private fun TaskItemContent(
         AnimatedVisibility(
             visible = selected,
             enter = scaleIn(
-                // TODO: Use const
-                animationSpec = tween(durationMillis = 150, easing = FastOutSlowInEasing)
+                animationSpec = tween(
+                    durationMillis = TaskItemSelectedIconAnimationDuration,
+                    easing = FastOutSlowInEasing
+                )
             ),
             exit = fadeOut()
         ) {
@@ -209,17 +211,14 @@ private fun TaskItemContent(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
-                    // TODO: Improve
-                    .padding(start = 2.dp)
+                    .padding(start = TaskItemSelectedIconPadding)
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.background)
-                    .size(20.dp)
-                    .align(Alignment.TopStart),
+                    .size(TaskItemSelectedIconSize)
+                    .align(Alignment.TopStart)
             )
         }
     }
-
-
 }
 
 @Composable
@@ -325,6 +324,9 @@ private val TaskItemBackgroundShape: Shape = RoundedCornerShape(14.dp)
 
 private val TaskItemInnerPaddingEnd: Dp = 8.dp
 private val TaskItemInnerPaddingStart: Dp = 16.dp
+private const val TaskItemSelectedIconAnimationDuration: Int = 150
+private val TaskItemSelectedIconPadding: Dp = 2.dp
+private val TaskItemSelectedIconSize: Dp = 20.dp
 private val TaskItemPadding: Dp = 4.dp
 private val TaskItemShape: Shape = RoundedCornerShape(12.dp)
 private val TaskItemTonalElevation: Dp = 2.dp
