@@ -221,9 +221,11 @@ fun HomeScreen(
                     DeleteTasksAlertDialog(
                         onDismissRequest = {
                             deleteTasksAlertDialogState = false
-                            onClearSelectedTasks()
                         },
-                        onDeleteTaskClick = { onDeleteTasksClick() }
+                        onDeleteTaskClick = {
+                            onDeleteTasksClick()
+                            onClearSelectedTasks()
+                        }
                     )
                 }
                 if (deleteTaskListAlertDialogState) {
