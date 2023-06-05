@@ -100,6 +100,7 @@ class HomeViewModel(
 
     fun deleteSelectedTasks() = viewModelScope.launch {
         deleteTasksUseCase(homeUiState.selectedTasks)
+        clearSelectedTasks()
     }
 
     fun deleteTask(id: String) = viewModelScope.launch {

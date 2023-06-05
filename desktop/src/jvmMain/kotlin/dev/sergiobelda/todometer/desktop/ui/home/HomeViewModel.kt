@@ -100,6 +100,7 @@ class HomeViewModel(
 
     fun deleteSelectedTasks() = coroutineScope.launch {
         deleteTasksUseCase(homeUiState.selectedTasks)
+        clearSelectedTasks()
     }
 
     fun deleteTask(id: String) = coroutineScope.launch {

@@ -224,7 +224,6 @@ fun HomeScreen(
                         },
                         onDeleteTaskClick = {
                             onDeleteTasksClick()
-                            onClearSelectedTasks()
                         }
                     )
                 }
