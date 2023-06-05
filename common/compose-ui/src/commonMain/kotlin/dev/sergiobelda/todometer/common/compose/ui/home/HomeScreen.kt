@@ -393,7 +393,7 @@ private fun HomeFloatingActionButton(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TasksListArea(
     tasksDoing: List<TaskItem>,
@@ -424,43 +424,21 @@ private fun TasksListArea(
                     onDoneClick = onDoneClick,
                     onTaskItemClick = onTaskItemClick,
                     onTaskItemLongClick = onTaskItemLongClick,
+                    onSwipeToDismiss = { onSwipeToDismiss(task.id) },
                     modifier = Modifier.animateItemPlacement(),
                     swipeable = !selectionMode,
                     checkEnabled = selectionMode,
                     selected = selected
-                ) { onSwipeToDismiss(task.id) }
+                )
             }
-            // TODO: Update this behavior
             if (tasksDone.isNotEmpty()) {
                 item {
-                    ListItem(
-                        headlineText = {
-                            Text(
-                                text = stringResource(
-                                    resource = MR.strings.completed_tasks,
-                                    tasksDone.size
-                                )
-                            )
-                        },
-                        trailingContent = {
-                            if (!selectionMode) {
-                                if (areTasksDoneVisible) {
-                                    Icon(
-                                        ToDometerIcons.ExpandLess,
-                                        contentDescription = null
-                                    )
-                                } else {
-                                    Icon(
-                                        ToDometerIcons.ExpandMore,
-                                        contentDescription = null
-                                    )
-                                }
-                            }
-                        },
-                        modifier = Modifier.clickable(
-                            enabled = !selectionMode,
-                            onClick = { areTasksDoneVisible = !areTasksDoneVisible }
-                        )
+                    CompletedTasksHeader(
+                        completedTasks = tasksDone.size,
+                        enabled = !selectionMode,
+                        expanded = areTasksDoneVisible,
+                        showExpandIcon = !selectionMode,
+                        onClick = { areTasksDoneVisible = !areTasksDoneVisible }
                     )
                 }
             }
@@ -469,20 +447,21 @@ private fun TasksListArea(
                     // TODO: Improve this
                     val selected = selectedTasks.contains(task.id)
                     TaskItem(
-                        task,
-                        onDoingClick,
-                        onDoneClick,
-                        onTaskItemClick,
-                        onTaskItemLongClick,
+                        taskItem = task,
+                        onDoingClick = onDoingClick,
+                        onDoneClick = onDoneClick,
+                        onTaskItemClick = onTaskItemClick,
+                        onTaskItemLongClick = onTaskItemLongClick,
+                        onSwipeToDismiss = { onSwipeToDismiss(task.id) },
                         modifier = Modifier.animateItemPlacement(),
                         swipeable = !selectionMode,
                         checkEnabled = selectionMode,
                         selected = selected
-                    ) { onSwipeToDismiss(task.id) }
+                    )
                 }
             }
             item {
-                Spacer(modifier = Modifier.height(84.dp))
+                Spacer(modifier = Modifier.height(HomeTaskListAreaBottomPadding))
             }
         }
         if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
@@ -493,6 +472,46 @@ private fun TasksListArea(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun CompletedTasksHeader(
+    completedTasks: Int,
+    enabled: Boolean,
+    expanded: Boolean,
+    showExpandIcon: Boolean,
+    onClick: () -> Unit
+) {
+    ListItem(
+        headlineText = {
+            Text(
+                text = stringResource(
+                    resource = MR.strings.completed_tasks,
+                    completedTasks
+                )
+            )
+        },
+        trailingContent = {
+            if (showExpandIcon) {
+                if (expanded) {
+                    Icon(
+                        ToDometerIcons.ExpandLess,
+                        contentDescription = null
+                    )
+                } else {
+                    Icon(
+                        ToDometerIcons.ExpandMore,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
+        modifier = Modifier.clickable(
+            enabled = enabled,
+            onClick = onClick
+        )
+    )
 }
 
 @Composable
@@ -527,3 +546,4 @@ private fun HomeInfoIllustration(
 
 private val HomeTopAppBarTonalElevation: Dp = 4.dp
 private const val HomeTopAppBarAnimationDuration: Int = 400
+private val HomeTaskListAreaBottomPadding: Dp = 84.dp

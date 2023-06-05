@@ -79,11 +79,11 @@ internal fun TaskItem(
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
     onTaskItemLongClick: (String) -> Unit,
+    onSwipeToDismiss: () -> Unit,
     modifier: Modifier = Modifier,
     swipeable: Boolean = false,
     checkEnabled: Boolean = false,
-    selected: Boolean = false,
-    onSwipeToDismiss: () -> Unit
+    selected: Boolean = false
 ) {
     if (!swipeable) {
         TaskItemContent(
