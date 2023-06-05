@@ -52,11 +52,6 @@ class HomeViewModel(
         getTaskListSelected()
         getTaskListSelectedTasks()
         getTaskLists()
-
-        coroutineScope.launch {
-            // refreshTaskListsUseCase()
-            // refreshTaskListSelectedUseCase()
-        }
     }
 
     private fun getTaskListSelected() = coroutineScope.launch {
@@ -103,13 +98,12 @@ class HomeViewModel(
         }
     }
 
-    fun deleteTasks() = coroutineScope.launch {
+    fun deleteSelectedTasks() = coroutineScope.launch {
         deleteTasksUseCase(homeUiState.selectedTasks)
     }
 
     fun deleteTask(id: String) = coroutineScope.launch {
-        // TODO: Update
-        deleteTasksUseCase(listOf(id))
+        deleteTasksUseCase(id)
     }
 
     fun deleteTaskList() = coroutineScope.launch {

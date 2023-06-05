@@ -81,7 +81,7 @@ class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
         )
     }
 
-    override suspend fun deleteTasks(ids: List<String>) =
+    override suspend fun deleteTasks(vararg ids: String) =
         ids.forEach { id ->
             todometerDatabase.taskEntityQueries.deleteTask(id)
         }

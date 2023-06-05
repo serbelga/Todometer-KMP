@@ -61,5 +61,5 @@ interface ITaskRepository {
     /**
      * Deletes a [Task] given its [id].
      */
-    suspend fun deleteTasks(ids: List<String>)
+    suspend fun deleteTasks(vararg ids: String)
 }

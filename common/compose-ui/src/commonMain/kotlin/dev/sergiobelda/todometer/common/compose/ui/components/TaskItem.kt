@@ -107,7 +107,7 @@ internal fun TaskItem(
         val taskItemShadowElevation by animateDpAsState(
             if (dismissState.targetValue != DismissValue.Default) TaskItemDismissedShadowElevation else 0.dp,
             animationSpec = tween(
-                durationMillis = 400,
+                durationMillis = TaskItemShadowElevationAnimationDuration,
                 easing = FastOutSlowInEasing
             )
         )
@@ -330,4 +330,5 @@ private val TaskItemSelectedIconSize: Dp = 20.dp
 private val TaskItemPadding: Dp = 4.dp
 private val TaskItemShape: Shape = RoundedCornerShape(12.dp)
 private val TaskItemTonalElevation: Dp = 2.dp
+private const val TaskItemShadowElevationAnimationDuration: Int = 400
 private val TaskItemDismissedShadowElevation: Dp = 4.dp

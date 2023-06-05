@@ -68,6 +68,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskItem
@@ -89,17 +90,16 @@ import kotlinx.coroutines.launch
 )
 @Composable
 fun HomeScreen(
-    // TODO: Rename parameters
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit,
     navigateToAddTask: () -> Unit,
     navigateToTaskDetails: (String) -> Unit,
+    navigateToSettings: () -> Unit,
+    navigateToAbout: () -> Unit,
     onSelectTaskItem: (String) -> Unit,
     onDeleteTasksClick: () -> Unit,
     onDeleteTask: (String) -> Unit,
     onClearSelectedTasks: () -> Unit,
-    navigateToSettings: () -> Unit,
-    navigateToAbout: () -> Unit,
     onTaskItemDoingClick: (String) -> Unit,
     onTaskItemDoneClick: (String) -> Unit,
     onTaskListItemClick: (String) -> Unit,
@@ -292,9 +292,9 @@ private fun HomeTopAppBar(
     tasks: List<TaskItem>
 ) {
     val tonalElevation by animateDpAsState(
-        if (selectionMode) 4.dp else 0.dp,
+        if (selectionMode) HomeTopAppBarTonalElevation else 0.dp,
         animationSpec = tween(
-            durationMillis = 400,
+            durationMillis = HomeTopAppBarAnimationDuration,
             easing = FastOutSlowInEasing
         )
     )
@@ -525,3 +525,6 @@ private fun HomeInfoIllustration(
         }
     }
 }
+
+private val HomeTopAppBarTonalElevation: Dp = 4.dp
+private const val HomeTopAppBarAnimationDuration: Int = 400
