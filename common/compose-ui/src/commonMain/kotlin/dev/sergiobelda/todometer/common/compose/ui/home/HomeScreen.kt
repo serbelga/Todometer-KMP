@@ -416,8 +416,6 @@ private fun TasksListArea(
     } else {
         LazyColumn(modifier = modifier) {
             items(tasksDoing, key = { it.id }) { task ->
-                // TODO: Improve this
-                val selected = selectedTasks.contains(task.id)
                 TaskItem(
                     taskItem = task,
                     onDoingClick = onDoingClick,
@@ -428,7 +426,7 @@ private fun TasksListArea(
                     modifier = Modifier.animateItemPlacement(),
                     swipeable = !selectionMode,
                     checkEnabled = selectionMode,
-                    selected = selected
+                    selected = selectedTasks.contains(task.id)
                 )
             }
             if (tasksDone.isNotEmpty()) {
@@ -444,8 +442,6 @@ private fun TasksListArea(
             }
             if (areTasksDoneVisible || selectionMode) {
                 items(tasksDone, key = { it.id }) { task ->
-                    // TODO: Improve this
-                    val selected = selectedTasks.contains(task.id)
                     TaskItem(
                         taskItem = task,
                         onDoingClick = onDoingClick,
@@ -456,7 +452,7 @@ private fun TasksListArea(
                         modifier = Modifier.animateItemPlacement(),
                         swipeable = !selectionMode,
                         checkEnabled = selectionMode,
-                        selected = selected
+                        selected = selectedTasks.contains(task.id)
                     )
                 }
             }
