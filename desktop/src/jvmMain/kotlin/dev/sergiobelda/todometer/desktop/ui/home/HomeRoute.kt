@@ -40,7 +40,7 @@ internal fun HomeRoute(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,
         navigateToAddTask = navigateToAddTask,
-        onTaskItemClick = navigateToTaskDetails,
+        navigateToTaskDetails = navigateToTaskDetails,
         navigateToSettings = navigateToSettings,
         navigateToAbout = navigateToAbout,
         onTaskItemDoingClick = {
@@ -52,12 +52,19 @@ internal fun HomeRoute(
         onTaskListItemClick = {
             homeViewModel.setTaskListSelected(it)
         },
-        onDeleteTaskClick = {
+        onDeleteTasksClick = {
+            homeViewModel.deleteSelectedTasks()
+        },
+        onDeleteTask = {
             homeViewModel.deleteTask(it)
         },
         onDeleteTaskListClick = {
             homeViewModel.deleteTaskList()
         },
+        onClearSelectedTasks = {
+            homeViewModel.clearSelectedTasks()
+        },
+        onSelectTaskItem = { homeViewModel.toggleSelectTask(it) },
         homeUiState = homeViewModel.homeUiState
     )
 }

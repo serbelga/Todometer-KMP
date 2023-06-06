@@ -49,13 +49,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
-import dev.sergiobelda.todometer.common.compose.ui.components.TaskTagIndicator
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
-import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
@@ -145,9 +143,6 @@ private fun LazyListScope.taskTitle(task: Task) {
                 modifier = Modifier.padding(start = 24.dp, bottom = 8.dp, end = 24.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                if (task.tag != Tag.UNSPECIFIED) {
-                    TaskTagIndicator(task.tag)
-                }
                 Text(
                     text = task.title,
                     style = MaterialTheme.typography.headlineSmall,

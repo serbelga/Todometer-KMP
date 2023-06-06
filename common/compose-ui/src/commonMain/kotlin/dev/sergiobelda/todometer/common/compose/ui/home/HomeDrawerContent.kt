@@ -28,6 +28,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
@@ -46,6 +47,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeDrawerContent(
     selectedTaskListId: String,
@@ -56,27 +58,29 @@ internal fun HomeDrawerContent(
     onSettingsItemClick: () -> Unit,
     onAboutItemClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier.height(HomeDrawerTopHeight).fillMaxWidth()
-    ) {
-        ToDometerTitle(
-            modifier = Modifier
-                .align(Alignment.CenterStart)
-                .padding(horizontal = HomeDrawerTopPaddingHorizontal)
+    ModalDrawerSheet {
+        Box(
+            modifier = Modifier.height(HomeDrawerTopHeight).fillMaxWidth()
+        ) {
+            ToDometerTitle(
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(horizontal = HomeDrawerTopPaddingHorizontal)
+            )
+        }
+        ToDometerDivider()
+        HomeDrawerTaskListsSection(
+            selectedTaskListId,
+            defaultTaskListName,
+            taskLists,
+            onAddTaskList,
+            onTaskListItemClick
         )
-    }
-    ToDometerDivider()
-    HomeDrawerTaskListsSection(
-        selectedTaskListId,
-        defaultTaskListName,
-        taskLists,
-        onAddTaskList,
-        onTaskListItemClick
-    )
-    ToDometerDivider()
-    Column(modifier = Modifier.padding(HomeDrawerItemPadding)) {
-        HomeNavigationDrawerSettingsItem(onSettingsItemClick)
-        HomeNavigationDrawerAboutItem(onAboutItemClick)
+        ToDometerDivider()
+        Column(modifier = Modifier.padding(HomeDrawerItemPadding)) {
+            HomeNavigationDrawerSettingsItem(onSettingsItemClick)
+            HomeNavigationDrawerAboutItem(onAboutItemClick)
+        }
     }
 }
 

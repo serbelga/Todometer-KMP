@@ -37,5 +37,5 @@ interface ITaskDao {
 
     suspend fun updateTaskState(id: String, state: TaskState)
 
-    suspend fun deleteTask(id: String)
+    suspend fun deleteTasks(vararg ids: String)
 }

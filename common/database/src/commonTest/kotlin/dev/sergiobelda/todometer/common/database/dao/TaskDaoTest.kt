@@ -105,7 +105,7 @@ class TaskDaoTest : DatabaseTest() {
     fun testDeleteTask() = runTest {
         val id = taskDao.insertTask(taskEntity1)
         assertNotNull(taskDao.getTask(id).first())
-        taskDao.deleteTask(id)
+        taskDao.deleteTasks(id)
         assertNull(taskDao.getTask(id).first())
     }
 }

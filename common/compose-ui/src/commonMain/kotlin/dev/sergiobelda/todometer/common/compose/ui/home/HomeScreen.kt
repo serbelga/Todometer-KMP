@@ -16,6 +16,15 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.home
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -40,13 +49,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,15 +68,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.SwipeableTaskItem
+import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
+import dev.sergiobelda.todometer.common.compose.ui.components.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
-import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.ToDometerIllustrations
@@ -81,10 +93,13 @@ fun HomeScreen(
     navigateToAddTaskList: () -> Unit,
     navigateToEditTaskList: () -> Unit,
     navigateToAddTask: () -> Unit,
-    onTaskItemClick: (String) -> Unit,
-    onDeleteTaskClick: (String) -> Unit,
+    navigateToTaskDetails: (String) -> Unit,
     navigateToSettings: () -> Unit,
     navigateToAbout: () -> Unit,
+    onSelectTaskItem: (String) -> Unit,
+    onDeleteTasksClick: () -> Unit,
+    onDeleteTask: (String) -> Unit,
+    onClearSelectedTasks: () -> Unit,
     onTaskItemDoingClick: (String) -> Unit,
     onTaskItemDoneClick: (String) -> Unit,
     onTaskListItemClick: (String) -> Unit,
@@ -103,52 +118,58 @@ fun HomeScreen(
         drawerState.close()
     }
 
-    var selectedTask by remember { mutableStateOf("") }
+    var swipedTaskId by remember { mutableStateOf("") }
+
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
+    var deleteTasksAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
 
     val defaultTaskListName = stringResource(MR.strings.default_task_list_name)
 
     var homeMoreDropdownExpanded by remember { mutableStateOf(false) }
+    val closeHomeMoreDropdown = { homeMoreDropdownExpanded = false }
 
     val cannotEditTaskList = stringResource(MR.strings.cannot_edit_this_task_list)
     val cannotDeleteTaskList = stringResource(MR.strings.cannot_delete_this_task_list)
     val snackbarActionLabel = stringResource(MR.strings.ok)
 
+    SystemBackHandler(enabled = homeUiState.selectionMode) { onClearSelectedTasks() }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet {
-                HomeDrawerContent(
-                    homeUiState.taskListSelected?.id ?: "",
-                    defaultTaskListName,
-                    homeUiState.taskLists,
-                    onAddTaskList = {
-                        scope.launch { closeDrawer() }
-                        navigateToAddTaskList()
-                    },
-                    onTaskListItemClick = {
-                        onTaskListItemClick(it)
-                        scope.launch { closeDrawer() }
-                    },
-                    onSettingsItemClick = {
-                        navigateToSettings()
-                        scope.launch { closeDrawer() }
-                    },
-                    onAboutItemClick = {
-                        navigateToAbout()
-                        scope.launch { closeDrawer() }
-                    }
-                )
-            }
-        }
+            HomeDrawerContent(
+                homeUiState.taskListSelected?.id ?: "",
+                defaultTaskListName,
+                homeUiState.taskLists,
+                onAddTaskList = {
+                    scope.launch { closeDrawer() }
+                    navigateToAddTaskList()
+                },
+                onTaskListItemClick = {
+                    onTaskListItemClick(it)
+                    scope.launch { closeDrawer() }
+                },
+                onSettingsItemClick = {
+                    navigateToSettings()
+                    scope.launch { closeDrawer() }
+                },
+                onAboutItemClick = {
+                    navigateToAbout()
+                    scope.launch { closeDrawer() }
+                }
+            )
+        },
+        gesturesEnabled = !homeUiState.selectionMode
     ) {
         Scaffold(
             topBar = {
                 HomeTopAppBar(
+                    onClearSelectedTasksClick = onClearSelectedTasks,
+                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true },
                     onMenuClick = { scope.launch { drawerState.open() } },
                     onMoreClick = { homeMoreDropdownExpanded = true },
-                    onHomeMoreDropdownDismissRequest = { homeMoreDropdownExpanded = false },
+                    onHomeMoreDropdownDismissRequest = closeHomeMoreDropdown,
                     homeMoreDropdownExpanded = homeMoreDropdownExpanded,
                     onEditTaskListClick = {
                         if (homeUiState.isDefaultTaskListSelected) {
@@ -162,7 +183,7 @@ fun HomeScreen(
                         } else {
                             navigateToEditTaskList()
                         }
-                        homeMoreDropdownExpanded = false
+                        closeHomeMoreDropdown()
                     },
                     onDeleteTaskListClick = {
                         if (homeUiState.isDefaultTaskListSelected) {
@@ -176,17 +197,34 @@ fun HomeScreen(
                         } else {
                             deleteTaskListAlertDialogState = true
                         }
-                        homeMoreDropdownExpanded = false
+                        closeHomeMoreDropdown()
                     },
                     taskListName = homeUiState.taskListSelected?.name ?: defaultTaskListName,
-                    tasks = homeUiState.tasks
+                    tasks = homeUiState.tasks,
+                    selectedTasks = homeUiState.selectedTasks.size,
+                    selectionMode = homeUiState.selectionMode
                 )
             },
             content = { paddingValues ->
                 if (deleteTaskAlertDialogState) {
                     DeleteTaskAlertDialog(
-                        onDismissRequest = { deleteTaskAlertDialogState = false },
-                        onDeleteTaskClick = { onDeleteTaskClick(selectedTask) }
+                        onDismissRequest = {
+                            deleteTaskAlertDialogState = false
+                            swipedTaskId = ""
+                        },
+                        onDeleteTaskClick = {
+                            onDeleteTask(swipedTaskId)
+                        }
+                    )
+                }
+                if (deleteTasksAlertDialogState) {
+                    DeleteTasksAlertDialog(
+                        onDismissRequest = {
+                            deleteTasksAlertDialogState = false
+                        },
+                        onDeleteTaskClick = {
+                            onDeleteTasksClick()
+                        }
                     )
                 }
                 if (deleteTaskListAlertDialogState) {
@@ -201,39 +239,34 @@ fun HomeScreen(
                 if (homeUiState.isLoadingTasks) {
                     ToDometerContentLoadingProgress()
                 } else {
-                    if (homeUiState.tasks.isEmpty()) {
-                        HomeInfoIllustration(
-                            ToDometerIllustrations.NoTasks,
-                            stringResource(MR.strings.no_tasks)
-                        )
-                    } else {
-                        TasksList(
-                            homeUiState.tasks,
-                            onDoingClick = onTaskItemDoingClick,
-                            onDoneClick = onTaskItemDoneClick,
-                            onTaskItemClick = onTaskItemClick,
-                            onTaskItemLongClick = {
-                                deleteTaskAlertDialogState = true
-                                selectedTask = it
-                            },
-                            onSwipeToDismiss = {
-                                deleteTaskAlertDialogState = true
-                                selectedTask = it
-                            },
-                            modifier = Modifier.padding(paddingValues)
-                        )
-                    }
+                    TasksListArea(
+                        homeUiState.tasksDoing,
+                        homeUiState.tasksDone,
+                        homeUiState.selectedTasks,
+                        onDoingClick = onTaskItemDoingClick,
+                        onDoneClick = onTaskItemDoneClick,
+                        onTaskItemClick = { taskId ->
+                            if (homeUiState.selectionMode) {
+                                onSelectTaskItem(taskId)
+                            } else {
+                                navigateToTaskDetails(taskId)
+                            }
+                        },
+                        onTaskItemLongClick = onSelectTaskItem,
+                        onSwipeToDismiss = {
+                            deleteTaskAlertDialogState = true
+                            swipedTaskId = it
+                        },
+                        selectionMode = homeUiState.selectionMode,
+                        modifier = Modifier.padding(paddingValues)
+                    )
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(
-                    onClick = navigateToAddTask
-                ) {
-                    Icon(
-                        ToDometerIcons.Add,
-                        contentDescription = stringResource(MR.strings.add_task)
-                    )
-                }
+                HomeFloatingActionButton(
+                    visible = !homeUiState.selectionMode,
+                    navigateToAddTask = navigateToAddTask
+                )
             },
             floatingActionButtonPosition = FabPosition.End,
             snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -241,7 +274,7 @@ fun HomeScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 private fun HomeTopAppBar(
     onMenuClick: () -> Unit,
@@ -250,121 +283,231 @@ private fun HomeTopAppBar(
     homeMoreDropdownExpanded: Boolean,
     onEditTaskListClick: () -> Unit,
     onDeleteTaskListClick: () -> Unit,
+    onClearSelectedTasksClick: () -> Unit,
+    selectedTasks: Int,
+    selectionMode: Boolean,
+    onDeleteSelectedTasksClick: () -> Unit,
     taskListName: String?,
     tasks: List<TaskItem>
 ) {
-    Column {
-        CenterAlignedTopAppBar(
-            title = {
-                ToDometerTitle()
-            },
-            navigationIcon = {
-                IconButton(onClick = onMenuClick) {
-                    Icon(
-                        ToDometerIcons.Menu,
-                        contentDescription = stringResource(MR.strings.menu)
-                    )
-                }
-            },
-            actions = {
-                IconButton(onClick = onMoreClick) {
-                    Icon(
-                        ToDometerIcons.MoreVert,
-                        contentDescription = stringResource(MR.strings.more)
-                    )
-                }
-                HomeMoreDropdownMenu(
-                    onEditTaskListClick = onEditTaskListClick,
-                    onDeleteTaskListClick = onDeleteTaskListClick,
-                    expanded = homeMoreDropdownExpanded,
-                    onDismissRequest = onHomeMoreDropdownDismissRequest
-                )
-            }
+    val tonalElevation by animateDpAsState(
+        if (selectionMode) HomeTopAppBarTonalElevation else 0.dp,
+        animationSpec = tween(
+            durationMillis = HomeTopAppBarAnimationDuration,
+            easing = FastOutSlowInEasing
         )
-        TaskListProgress(taskListName, tasks)
-        ToDometerDivider()
+    )
+    Surface(tonalElevation = tonalElevation) {
+        Column {
+            Box {
+                if (selectionMode) {
+                    SelectedTasksTopAppBar(
+                        onClearSelectedTasksClick = onClearSelectedTasksClick,
+                        selectedTasks = selectedTasks,
+                        onDeleteSelectedTasksClick = onDeleteSelectedTasksClick
+                    )
+                } else {
+                    CenterAlignedTopAppBar(
+                        title = {
+                            ToDometerTitle()
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = onMenuClick) {
+                                Icon(
+                                    ToDometerIcons.Menu,
+                                    contentDescription = stringResource(MR.strings.menu)
+                                )
+                            }
+                        },
+                        actions = {
+                            IconButton(onClick = onMoreClick) {
+                                Icon(
+                                    ToDometerIcons.MoreVert,
+                                    contentDescription = stringResource(MR.strings.more)
+                                )
+                            }
+                            HomeMoreDropdownMenu(
+                                onEditTaskListClick = onEditTaskListClick,
+                                onDeleteTaskListClick = onDeleteTaskListClick,
+                                expanded = homeMoreDropdownExpanded,
+                                onDismissRequest = onHomeMoreDropdownDismissRequest
+                            )
+                        }
+                    )
+                }
+            }
+            TaskListProgress(taskListName, tasks)
+            ToDometerDivider()
+        }
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TasksList(
-    tasks: List<TaskItem>,
+private fun SelectedTasksTopAppBar(
+    onClearSelectedTasksClick: () -> Unit,
+    selectedTasks: Int,
+    onDeleteSelectedTasksClick: () -> Unit
+) {
+    TopAppBar(
+        navigationIcon = {
+            IconButton(onClick = onClearSelectedTasksClick) {
+                Icon(
+                    ToDometerIcons.Close,
+                    contentDescription = null
+                )
+            }
+        },
+        title = {
+            Text(text = "$selectedTasks selected")
+        },
+        actions = {
+            IconButton(onClick = onDeleteSelectedTasksClick) {
+                Icon(
+                    ToDometerIcons.Delete,
+                    contentDescription = null
+                )
+            }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors()
+    )
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+private fun HomeFloatingActionButton(
+    visible: Boolean,
+    navigateToAddTask: () -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = scaleIn() + fadeIn(),
+        exit = scaleOut() + fadeOut()
+    ) {
+        FloatingActionButton(onClick = navigateToAddTask) {
+            Icon(
+                ToDometerIcons.Add,
+                contentDescription = stringResource(MR.strings.add_task)
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun TasksListArea(
+    tasksDoing: List<TaskItem>,
+    tasksDone: List<TaskItem>,
+    selectedTasks: List<String>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit,
+    selectionMode: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val tasksDoing = tasks.filter { it.state == TaskState.DOING }
-    val tasksDone = tasks.filter { it.state == TaskState.DONE }
     var areTasksDoneVisible by remember { mutableStateOf(false) }
-    LazyColumn(modifier = modifier) {
-        items(tasksDoing, key = { it.id }) { task ->
-            SwipeableTaskItem(
-                task,
-                onDoingClick,
-                onDoneClick,
-                onTaskItemClick,
-                onTaskItemLongClick,
-                modifier = Modifier.animateItemPlacement()
-            ) { onSwipeToDismiss(task.id) }
-            ToDometerDivider()
-        }
-        if (tasksDone.isNotEmpty()) {
-            item {
-                ListItem(
-                    headlineText = {
-                        Text(
-                            text = stringResource(
-                                resource = MR.strings.completed_tasks,
-                                tasksDone.size
-                            )
-                        )
-                    },
-                    trailingContent = {
-                        if (areTasksDoneVisible) {
-                            Icon(
-                                ToDometerIcons.ExpandLess,
-                                contentDescription = null
-                            )
-                        } else {
-                            Icon(
-                                ToDometerIcons.ExpandMore,
-                                contentDescription = null
-                            )
-                        }
-                    },
-                    modifier = Modifier.animateItemPlacement()
-                        .clickable { areTasksDoneVisible = !areTasksDoneVisible }
+    if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {
+        HomeInfoIllustration(
+            ToDometerIllustrations.NoTasks,
+            stringResource(MR.strings.no_tasks)
+        )
+    } else {
+        LazyColumn(modifier = modifier) {
+            items(tasksDoing, key = { it.id }) { task ->
+                TaskItem(
+                    taskItem = task,
+                    onDoingClick = onDoingClick,
+                    onDoneClick = onDoneClick,
+                    onTaskItemClick = onTaskItemClick,
+                    onTaskItemLongClick = onTaskItemLongClick,
+                    onSwipeToDismiss = { onSwipeToDismiss(task.id) },
+                    modifier = Modifier.animateItemPlacement(),
+                    swipeable = !selectionMode,
+                    checkEnabled = selectionMode,
+                    selected = selectedTasks.contains(task.id)
                 )
             }
-        }
-        if (areTasksDoneVisible) {
-            items(tasksDone, key = { it.id }) { task ->
-                SwipeableTaskItem(
-                    task,
-                    onDoingClick,
-                    onDoneClick,
-                    onTaskItemClick,
-                    onTaskItemLongClick,
-                    modifier = Modifier.animateItemPlacement()
-                ) { onSwipeToDismiss(task.id) }
-                ToDometerDivider()
+            if (tasksDone.isNotEmpty()) {
+                item {
+                    CompletedTasksHeader(
+                        completedTasks = tasksDone.size,
+                        enabled = !selectionMode,
+                        expanded = areTasksDoneVisible,
+                        showExpandIcon = !selectionMode,
+                        onClick = { areTasksDoneVisible = !areTasksDoneVisible }
+                    )
+                }
+            }
+            if (areTasksDoneVisible || selectionMode) {
+                items(tasksDone, key = { it.id }) { task ->
+                    TaskItem(
+                        taskItem = task,
+                        onDoingClick = onDoingClick,
+                        onDoneClick = onDoneClick,
+                        onTaskItemClick = onTaskItemClick,
+                        onTaskItemLongClick = onTaskItemLongClick,
+                        onSwipeToDismiss = { onSwipeToDismiss(task.id) },
+                        modifier = Modifier.animateItemPlacement(),
+                        swipeable = !selectionMode,
+                        checkEnabled = selectionMode,
+                        selected = selectedTasks.contains(task.id)
+                    )
+                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(HomeTaskListAreaBottomPadding))
             }
         }
-        item {
-            Spacer(modifier = Modifier.height(84.dp))
+        if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
+            HomeInfoIllustration(
+                ToDometerIllustrations.CompletedTasks,
+                stringResource(MR.strings.you_have_completed_all_tasks),
+                stringResource(MR.strings.congratulations)
+            )
         }
     }
-    if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
-        HomeInfoIllustration(
-            ToDometerIllustrations.CompletedTasks,
-            stringResource(MR.strings.you_have_completed_all_tasks),
-            stringResource(MR.strings.congratulations)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun CompletedTasksHeader(
+    completedTasks: Int,
+    enabled: Boolean,
+    expanded: Boolean,
+    showExpandIcon: Boolean,
+    onClick: () -> Unit
+) {
+    ListItem(
+        headlineText = {
+            Text(
+                text = stringResource(
+                    resource = MR.strings.completed_tasks,
+                    completedTasks
+                )
+            )
+        },
+        trailingContent = {
+            if (showExpandIcon) {
+                if (expanded) {
+                    Icon(
+                        ToDometerIcons.ExpandLess,
+                        contentDescription = null
+                    )
+                } else {
+                    Icon(
+                        ToDometerIcons.ExpandMore,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
+        modifier = Modifier.clickable(
+            enabled = enabled,
+            onClick = onClick
         )
-    }
+    )
 }
 
 @Composable
@@ -396,3 +539,7 @@ private fun HomeInfoIllustration(
         }
     }
 }
+
+private val HomeTopAppBarTonalElevation: Dp = 4.dp
+private const val HomeTopAppBarAnimationDuration: Int = 400
+private val HomeTaskListAreaBottomPadding: Dp = 84.dp

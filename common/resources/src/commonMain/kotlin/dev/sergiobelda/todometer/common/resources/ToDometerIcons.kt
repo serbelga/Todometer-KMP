@@ -31,13 +31,17 @@ object ToDometerIcons {
         @Composable
         get() = painterResource("icons/ic_rounded_arrow_back_24.xml")
 
+    val Check: Painter
+        @Composable
+        get() = painterResource("icons/ic_rounded_check_24.xml")
+
     val CheckBox: Painter
         @Composable
         get() = painterResource("icons/ic_rounded_check_box_24.xml")
 
-    val Check: Painter
+    val CheckCircle: Painter
         @Composable
-        get() = painterResource("icons/ic_rounded_check_24.xml")
+        get() = painterResource("icons/ic_rounded_check_circle_24.xml")
 
     val Close: Painter
         @Composable
@@ -103,6 +107,10 @@ object ToDometerIcons {
         @Composable
         get() = painterResource("icons/ic_rounded_navigate_before_24.xml")
 
+    val RadioButtonUnchecked: Painter
+        @Composable
+        get() = painterResource("icons/ic_rounded_radio_button_unchecked_24.xml")
+
     val Replay: Painter
         @Composable
         get() = painterResource("icons/ic_rounded_replay_24.xml")
@@ -110,6 +118,10 @@ object ToDometerIcons {
     val Settings: Painter
         @Composable
         get() = painterResource("icons/ic_rounded_settings_24.xml")
+
+    val TaskAlt: Painter
+        @Composable
+        get() = painterResource("icons/ic_rounded_task_alt_24.xml")
 
     val Warning: Painter
         @Composable

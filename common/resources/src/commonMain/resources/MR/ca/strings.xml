@@ -29,7 +29,9 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_task">Eliminar tasca</string>
+    <string name="delete_tasks">Eliminar tasques</string>
     <string name="delete_task_question">Vols eliminar aquesta tasca?</string>
+    <string name="delete_tasks_question">Vols eliminar aquestes tasques?</string>
     <string name="delete_task_list">Eliminar llista de tasques</string>
     <string name="delete_task_list_question">S\'eliminaran totes les tasques d\'aquesta llista de
         tasques. Vols continuar?
@@ -77,17 +79,20 @@
     <string name="privacy_policy_user_data_body">
         L\'aplicació ToDometer no emmagatzema cap dada d\'usuari a
         cap servidor ja que és una aplicació que s\'executa en un entorn local
-        sense necessitat de connexió. No es recull, es transfereix o es divulga cap dada de l\'usuari.
+        sense necessitat de connexió. No es recull, es transfereix o es divulga cap dada de
+        l\'usuari.
     </string>
     <string name="privacy_policy_permissions">Permisos</string>
     <string name="privacy_policy_permissions_body">
-        El sistema no requereix que l\'usuari concedeixi cap permís d\'ubicació o trucada i missatgeria.
+        El sistema no requereix que l\'usuari concedeixi cap permís d\'ubicació o trucada i
+        missatgeria.
     </string>
     <string name="privacy_policy_device_and_network_abuse">Abús de dispositius i xarxes</string>
     <string name="privacy_policy_device_and_network_abuse_body">
         El sistema no bloqueja ni interfereix amb una altra aplicació en la que es mostrin
         anuncis.
-        No proporciona ni proporciona instruccions sobre com piratejar serveis, programari o maquinari,
+        No proporciona ni proporciona instruccions sobre com piratejar serveis, programari o
+        maquinari,
         o evitar les proteccions de seguretat.
     </string>
     <string name="privacy_policy_public">Públic</string>

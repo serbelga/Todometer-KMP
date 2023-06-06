@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.common.compose.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.common.compose.ui.preferences.themeName
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
@@ -110,17 +111,17 @@ private fun AppThemeItem(
     selected: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val selectedAlpha = if (selected) Alpha.High else Alpha.Disabled
+    val selectedAlpha = if (selected) Alpha.High else Alpha.Medium
     Surface(
         onClick = onClick,
         shape = RoundedCornerShape(AppThemeItemCornerRadius),
         border = BorderStroke(
             width = AppThemeItemBorder,
-            color = MaterialTheme.colorScheme.outline.copy(alpha = selectedAlpha)
+            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
         ),
         modifier = modifier.height(AppThemeItemHeight).fillMaxWidth(),
         tonalElevation = if (selected) AppThemeItemSelectedElevation else AppThemeItemUnselectedElevation,
-        contentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = selectedAlpha)
+        contentColor = MaterialTheme.colorScheme.onSurface.withAlpha(selectedAlpha)
     ) {
         Box {
             Column(
