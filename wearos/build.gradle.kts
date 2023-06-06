@@ -21,8 +21,8 @@ android {
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
-        versionCode = 4140400
-        versionName = "wearos-1.4.0"
+        versionCode = 4150101
+        versionName = "wearos-1.5.0-alpha01"
     }
 
     buildFeatures {
