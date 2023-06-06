@@ -194,12 +194,15 @@ private fun TaskItem(
         onClick = onClick,
         toggleControl = {
             if (isTaskDone) {
-                Icon(ToDometerIcons.Replay, null)
+                Icon(ToDometerIcons.TaskAlt, null)
             } else {
-                Icon(ToDometerIcons.Check, null)
+                Icon(ToDometerIcons.RadioButtonUnchecked, null)
             }
         },
-        colors = ToggleChipDefaults.splitToggleChipColors(uncheckedToggleControlColor = MaterialTheme.colors.secondary),
+        colors = ToggleChipDefaults.splitToggleChipColors(
+            uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
+            checkedToggleControlColor = MaterialTheme.colors.primary
+        ),
         modifier = Modifier.fillMaxWidth()
     )
 }
