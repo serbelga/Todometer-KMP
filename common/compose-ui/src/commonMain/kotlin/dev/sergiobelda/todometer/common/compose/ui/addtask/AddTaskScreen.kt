@@ -53,6 +53,7 @@ import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
+import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -80,6 +81,8 @@ fun AddTaskScreen(
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
+    val tags = enumValues<Tag>()
+    var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.UNSPECIFIED) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
     val taskChecklistItems = mutableStateListOf<String>()
     fun initialValuesUpdated() =
@@ -87,7 +90,6 @@ fun AddTaskScreen(
             taskDueDate != null ||
             taskDescription.isNotBlank() ||
             taskChecklistItems.isNotEmpty()
-
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
             discardTaskAlertDialogState = true
@@ -123,7 +125,7 @@ fun AddTaskScreen(
                     } else {
                         insertTask(
                             taskTitle,
-                            Tag.UNSPECIFIED,
+                            selectedTag,
                             taskDescription,
                             taskDueDate,
                             taskChecklistItems
@@ -159,6 +161,11 @@ fun AddTaskScreen(
                         ),
                         modifier = Modifier.padding(TextFieldPadding)
                     )
+                }
+                item {
+                    TagSelector(selectedTag) { tag ->
+                        selectedTag = tag
+                    }
                 }
                 item {
                     DateTimeSelector(
