@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
+import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
@@ -97,6 +98,9 @@ fun EditTaskScreen(
                         ),
                         modifier = Modifier.padding(TextFieldPadding)
                     )
+                    TagSelector(selectedTag) { tag ->
+                        selectedTag = tag
+                    }
                     DateTimeSelector(
                         taskDueDate,
                         onDateTimeSelected = { taskDueDate = it },

@@ -65,6 +65,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
@@ -235,6 +236,9 @@ private fun TaskItemHeadlineContent(
             end = TaskItemInnerPaddingEnd
         )
     ) {
+        if (taskItem.tag != Tag.UNSPECIFIED) {
+            TaskTagIndicator(taskItem.tag)
+        }
         Text(
             taskItem.title,
             textDecoration = taskItemTitleTextDecoration(taskItem.state),
