@@ -64,4 +64,4 @@ private object ToDometerChipDefaults {
 }
 
 private val ToDometerChipContentPadding: PaddingValues = PaddingValues(6.dp)
-private val ToDometerChipCornerRadius: Dp = 6.dp
+private val ToDometerChipCornerRadius: Dp = 14.dp
