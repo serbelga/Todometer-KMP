@@ -37,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,7 +74,7 @@ internal fun AddChecklistItemField(
                 onClick = addTaskChecklistItemAction
             ) {
                 Icon(
-                    painterResource(ToDometerIcons.Check),
+                    ToDometerIcons.Check,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )

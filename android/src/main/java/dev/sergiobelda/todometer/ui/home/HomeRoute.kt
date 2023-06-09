@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.ui.home
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -35,33 +34,31 @@ internal fun HomeRoute(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,
         navigateToAddTask = navigateToAddTask,
-        onTaskItemClick = navigateToTaskDetails,
+        navigateToTaskDetails = navigateToTaskDetails,
         navigateToSettings = navigateToSettings,
         navigateToAbout = navigateToAbout,
         onTaskItemDoingClick = {
             homeViewModel.setTaskDoing(it)
-            updateToDometerWidgetData()
         },
         onTaskItemDoneClick = {
             homeViewModel.setTaskDone(it)
-            updateToDometerWidgetData()
         },
         onTaskListItemClick = {
             homeViewModel.setTaskListSelected(it)
-            updateToDometerWidgetData()
         },
-        onDeleteTaskClick = {
-            homeViewModel.deleteTask(it)
-            updateToDometerWidgetData()
+        onDeleteTasksClick = {
+            homeViewModel.deleteSelectedTasks()
         },
         onDeleteTaskListClick = {
             homeViewModel.deleteTaskList()
-            updateToDometerWidgetData()
         },
+        onDeleteTask = {
+            homeViewModel.deleteTask(it)
+        },
+        onClearSelectedTasks = {
+            homeViewModel.clearSelectedTasks()
+        },
+        onSelectTaskItem = { homeViewModel.toggleSelectTask(it) },
         homeUiState = homeViewModel.homeUiState
     )
-}
-
-private fun updateToDometerWidgetData() {
-    ToDometerWidgetReceiver().updateData()
 }

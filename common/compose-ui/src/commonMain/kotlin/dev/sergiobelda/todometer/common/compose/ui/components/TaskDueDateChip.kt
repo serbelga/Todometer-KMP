@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerChip
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -57,7 +56,7 @@ internal fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         Icon(
-            painterResource(ToDometerIcons.Event),
+            ToDometerIcons.Event,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
             tint = dueDateChipTint

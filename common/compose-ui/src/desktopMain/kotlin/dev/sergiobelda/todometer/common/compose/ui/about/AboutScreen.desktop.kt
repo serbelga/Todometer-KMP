@@ -51,7 +51,10 @@ fun AboutScreen(
         ) {
             ToDometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
-            PrivacyPolicyAboutItemCard(onCardClick = { privacyPolicyDialogState = true })
+            AboutItemCard(
+                onCardClick = { privacyPolicyDialogState = true },
+                AboutItem.PrivacyPolicy
+            )
         }
         AboutAppVersion()
     }

@@ -22,6 +22,8 @@ kotlin {
                 api(libs.moko.resources)
                 api(libs.moko.resources.compose)
                 implementation(compose.ui)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
             }
         }
         val commonTest by getting
@@ -62,6 +64,7 @@ android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
+    sourceSets["main"].resources.srcDir("src/commonMain/resources")
     defaultConfig {
         minSdk = libs.versions.androidMinSdk.get().toInt()
     }

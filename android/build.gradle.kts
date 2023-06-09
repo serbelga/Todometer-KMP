@@ -22,8 +22,8 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
-        versionCode = 1250400
-        versionName = "android-2.5.0"
+        versionCode = 1260400
+        versionName = "android-2.6.0"
     }
 
     buildTypes {
@@ -85,6 +85,7 @@ dependencies {
 
     implementation(libs.androidx.glance.appWidget)
     implementation(libs.androidx.glance.glance)
+    implementation(libs.androidx.glance.material3)
 
     implementation(libs.google.playServicesOssLicenses)
 

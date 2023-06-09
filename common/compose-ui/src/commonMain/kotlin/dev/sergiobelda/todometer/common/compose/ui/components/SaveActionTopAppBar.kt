@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,7 +46,7 @@ internal fun SaveActionTopAppBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    painterResource(ToDometerIcons.ArrowBack),
+                    ToDometerIcons.NavigateBefore,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }
@@ -59,7 +58,7 @@ internal fun SaveActionTopAppBar(
                 onClick = onSaveButtonClick
             ) {
                 Icon(
-                    painterResource(ToDometerIcons.Check),
+                    ToDometerIcons.Check,
                     contentDescription = stringResource(MR.strings.save),
                     tint = saveButtonTintColor
                 )

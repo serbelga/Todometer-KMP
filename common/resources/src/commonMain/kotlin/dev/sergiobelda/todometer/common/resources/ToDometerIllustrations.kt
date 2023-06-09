@@ -16,8 +16,18 @@
 
 package dev.sergiobelda.todometer.common.resources
 
-expect object ToDometerIllustrations {
-    val CompletedTasks: PainterResource
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.painter.Painter
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
-    val NoTasks: PainterResource
+@OptIn(ExperimentalResourceApi::class)
+object ToDometerIllustrations {
+    val CompletedTasks: Painter
+        @Composable
+        get() = painterResource("illustrations/completed_tasks.xml")
+
+    val NoTasks: Painter
+        @Composable
+        get() = painterResource("illustrations/no_tasks.xml")
 }

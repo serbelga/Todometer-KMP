@@ -60,7 +60,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
@@ -102,6 +101,7 @@ internal fun TaskListTasksScreen(
                 when {
                     taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
                         item { Text(stringResource(MR.strings.default_task_list_name)) }
+
                     taskListTasksUiState.taskList != null ->
                         item { Text(taskListTasksUiState.taskList.name) }
                 }
@@ -111,9 +111,11 @@ internal fun TaskListTasksScreen(
                 taskListTasksUiState.isLoadingTasks -> {
                     item { ToDometerLoadingProgress() }
                 }
+
                 taskListTasksUiState.tasks.isEmpty() -> {
                     item { Text(text = stringResource(MR.strings.no_tasks)) }
                 }
+
                 else -> {
                     items(taskListTasksUiState.tasks, key = { it.id }) { task ->
                         TaskItem(
@@ -133,6 +135,7 @@ internal fun TaskListTasksScreen(
                             AddTaskButton { taskListTasksViewModel.insertTask(it) }
                         }
                     }
+
                     taskListTasksUiState.taskList != null -> {
                         item {
                             AddTaskButton { taskListTasksViewModel.insertTask(it) }
@@ -191,12 +194,15 @@ private fun TaskItem(
         onClick = onClick,
         toggleControl = {
             if (isTaskDone) {
-                Icon(painterResource(ToDometerIcons.Replay), null)
+                Icon(ToDometerIcons.TaskAlt, null)
             } else {
-                Icon(painterResource(ToDometerIcons.Check), null)
+                Icon(ToDometerIcons.RadioButtonUnchecked, null)
             }
         },
-        colors = ToggleChipDefaults.splitToggleChipColors(uncheckedToggleControlColor = MaterialTheme.colors.secondary),
+        colors = ToggleChipDefaults.splitToggleChipColors(
+            uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
+            checkedToggleControlColor = MaterialTheme.colors.primary
+        ),
         modifier = Modifier.fillMaxWidth()
     )
 }
@@ -214,7 +220,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(painterResource(ToDometerIcons.Add), null)
+            Icon(ToDometerIcons.Add, null)
         },
         label = {
             Text(text = stringResource(MR.strings.add_task))
@@ -250,7 +256,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(painterResource(ToDometerIcons.Edit), null)
+            Icon(ToDometerIcons.Edit, null)
         },
         label = {
             Text(text = stringResource(MR.strings.edit_task_list))
@@ -281,7 +287,7 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
         colors = secondaryChipColors(),
         icon = {
             Icon(
-                painterResource(ToDometerIcons.Delete),
+                ToDometerIcons.Delete,
                 stringResource(MR.strings.delete_task_list)
             )
         },

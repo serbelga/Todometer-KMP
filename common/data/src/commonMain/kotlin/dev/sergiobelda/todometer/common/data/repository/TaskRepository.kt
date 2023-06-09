@@ -129,7 +129,7 @@ class TaskRepository(
     /**
      * It only removes task from local database if remote call is successful.
      */
-    override suspend fun deleteTask(id: String) = taskLocalDataSource.deleteTask(id)
+    override suspend fun deleteTasks(vararg ids: String) = taskLocalDataSource.deleteTasks(*ids)
         /*taskRemoteDataSource.deleteTask(id).doIfSuccess {
             taskLocalDataSource.deleteTask(id)
         }*/

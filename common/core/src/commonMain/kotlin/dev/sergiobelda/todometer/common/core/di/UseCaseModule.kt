@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.common.core.di
 
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
@@ -60,7 +60,7 @@ internal val useCaseModule = module {
     singleOf(::UpdateTaskListUseCase)
     singleOf(::SetTaskDoingUseCase)
     singleOf(::SetTaskDoneUseCase)
-    singleOf(::DeleteTaskUseCase)
+    singleOf(::DeleteTasksUseCase)
     singleOf(::DeleteTaskListUseCase)
     singleOf(::DeleteTaskListSelectedUseCase)
     singleOf(::GetTaskListSelectedUseCase)

@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.glance.ToDometerWidgetReceiver
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -26,9 +25,6 @@ internal fun AddTaskRoute(
     navigateBack: () -> Unit,
     addTaskViewModel: AddTaskViewModel = getViewModel()
 ) {
-    if (addTaskViewModel.addTaskUiState.isAdded) {
-        ToDometerWidgetReceiver().updateData()
-    }
     AddTaskScreen(
         navigateBack = navigateBack,
         insertTask = { taskTitle, selectedTag, taskDescription, taskDueDate, taskChecklistItems ->

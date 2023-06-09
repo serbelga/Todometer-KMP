@@ -1,12 +1,13 @@
 [versions]
 accompanist = "0.30.1"
-activity = "1.7.1"
-androidCore = "1.10.0"
+activity = "1.7.2"
 androidCompileSdk = "33"
+androidCore = "1.10.1"
+androidGradlePlugin = "8.0.2"
+androidJunit = "1.1.3"
 androidMinSdk = "24"
-androidWearMinSdk = "25"
 androidTargetSdk = "33"
-androidGradlePlugin = "8.0.1"
+androidWearMinSdk = "25"
 appcompat = "1.6.1"
 composeCompiler = "1.4.5"
 composeMultiplatform = "1.4.0"
@@ -14,36 +15,37 @@ dataStore = "1.1.0-alpha04"
 dependencyGraphGenerator = "0.8.0"
 espressoCore = "3.4.0"
 exposed = "0.41.1"
-firebaseBom = "32.0.0"
+firebaseBom = "32.1.0"
 firebaseCrashlyticsGradle = "2.9.5"
-glance = "1.0.0-alpha05"
+glance = "1.0.0-beta01"
 googleServices = "4.3.15"
 junit = "4.13.2"
-androidJunit = "1.1.3"
-koin = "3.4.0"
-koinAndroidCompose = "3.4.4"
-koinKtor = "3.4.0"
+koinAndroid = "3.4.2"
+koinAndroidCompose = "3.4.5"
+koinCore = "3.4.2"
+koinKtor = "3.4.1"
+koinTest = "3.4.1"
 kotlin = "1.8.20"
-kotlinCoroutines = "1.7.0"
+kotlinCoroutines = "1.7.1"
 kotlinDatetime = "0.4.0"
-ktlint = "0.49.0"
-ktor = "2.3.0"
+ktlint = "0.49.1"
+ktor = "2.3.1"
 lifecycle = "2.6.1"
 material = "1.9.0"
 mockk = "1.13.5"
 mockkCommon = "1.12.5"
-mokoResources = "0.22.0"
-navigation = "2.5.3"
+mokoResources = "0.23.0"
+navigation = "2.6.0"
 ossLicenses = "0.10.6"
 playServicesOssLicenses = "17.0.1"
 playServicesWearable = "18.0.0"
 robolectric = "4.3.1"
 splashscreen = "1.0.1"
+spotless = "6.19.0"
 sqlDelight = "2.0.0-alpha05"
-spotless = "6.18.0"
 testCoreKtx = "1.4.0"
 timber = "5.0.1"
-wear = "1.3.0-alpha05"
+wear = "1.3.0-beta01"
 wearCompose = "1.1.2"
 wearInput = "1.2.0-alpha02"
 
@@ -57,8 +59,9 @@ androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidCo
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 androidx-datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "dataStore" }
 
-androidx-glance-glance = { module = "androidx.glance:glance", version.ref = "glance" }
 androidx-glance-appWidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
+androidx-glance-glance = { module = "androidx.glance:glance", version.ref = "glance" }
+androidx-glance-material3 = { module = "androidx.glance:glance-material3", version.ref = "glance" }
 
 androidx-lifecycle-runtimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
@@ -85,11 +88,11 @@ hikariCP = "com.zaxxer:HikariCP:5.0.1"
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidCompose" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinKtor" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinTest" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }

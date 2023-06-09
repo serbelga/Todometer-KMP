@@ -28,7 +28,10 @@ object TaskListTasksDestination : Destination {
 
     override val route: String = "$TaskListTasks/{$TaskListIdArg}"
 
-    val taskListIdNavArgument = navArgument(TaskListIdArg) { defaultValue = "" }
+    val taskListIdNavArgument = navArgument(TaskListIdArg) {
+        defaultValue = ""
+        nullable = true
+    }
 
     fun navArgsTaskListId(navBackStackEntry: NavBackStackEntry): String =
         navBackStackEntry.arguments?.getString(TaskListIdArg) ?: ""

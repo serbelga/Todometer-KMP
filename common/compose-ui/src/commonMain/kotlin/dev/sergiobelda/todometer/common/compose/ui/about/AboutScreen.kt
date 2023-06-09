@@ -24,22 +24,90 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.common.resources.stringResource
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun AboutTopBar(navigateBack: () -> Unit) {
+    TopAppBar(
+        navigationIcon = {
+            IconButton(onClick = navigateBack) {
+                Icon(
+                    ToDometerIcons.NavigateBefore,
+                    contentDescription = stringResource(MR.strings.back)
+                )
+            }
+        },
+        title = {}
+    )
+}
+
+internal enum class AboutItem {
+    GitHub,
+    PrivacyPolicy,
+    OpenSourceLicenses
+}
+
+@Composable
+private fun AboutItem.icon(): Painter =
+    when (this) {
+        AboutItem.GitHub -> ToDometerIcons.GitHub
+        AboutItem.PrivacyPolicy -> ToDometerIcons.Description
+        AboutItem.OpenSourceLicenses -> ToDometerIcons.Code
+    }
+
+@Composable
+private fun AboutItem.text(): String =
+    when (this) {
+        AboutItem.GitHub -> stringResource(MR.strings.github)
+        AboutItem.PrivacyPolicy -> stringResource(MR.strings.privacy_policy)
+        AboutItem.OpenSourceLicenses -> stringResource(MR.strings.open_source_licenses)
+    }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun AboutItemCard(
+    onCardClick: () -> Unit,
+    aboutItem: AboutItem,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        onClick = onCardClick,
+        shape = RoundedCornerShape(AboutItemCardCornerRadius),
+        tonalElevation = AboutItemCardTonalElevation,
+        modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp),
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Spacer(modifier = Modifier.width(AboutItemCardSpacing))
+            Icon(
+                aboutItem.icon(),
+                contentDescription = aboutItem.text()
+            )
+            Spacer(modifier = Modifier.width(AboutItemCardSpacing))
+            Text(aboutItem.text())
+        }
+    }
+}
 
 @Composable
 internal fun AboutAppVersion() {
@@ -52,88 +120,11 @@ internal fun AboutAppVersion() {
     }
 }
 
-@Composable
-internal fun GitHubAboutItemCard(onCardClick: () -> Unit) {
-    AboutItemCard(
-        onCardClick = onCardClick,
-        icon = {
-            Icon(
-                painterResource(ToDometerIcons.GitHub),
-                contentDescription = stringResource(MR.strings.github)
-            )
-        },
-        text = { Text(stringResource(MR.strings.github)) }
-    )
-}
-
-@Composable
-internal fun PrivacyPolicyAboutItemCard(onCardClick: () -> Unit) {
-    AboutItemCard(
-        onCardClick = onCardClick,
-        icon = {
-            Icon(
-                painterResource(ToDometerIcons.Description),
-                contentDescription = stringResource(MR.strings.privacy_policy)
-            )
-        },
-        text = { Text(stringResource(MR.strings.privacy_policy)) }
-    )
-}
-
-@Composable
-internal fun OpenSourceLicensesAboutItemCard(onCardClick: () -> Unit) {
-    AboutItemCard(
-        onCardClick = onCardClick,
-        icon = {
-            Icon(
-                painterResource(ToDometerIcons.Code),
-                contentDescription = stringResource(MR.strings.open_source_licenses)
-            )
-        },
-        text = { Text(stringResource(MR.strings.open_source_licenses)) }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal fun AboutTopBar(navigateBack: () -> Unit) {
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = navigateBack) {
-                Icon(
-                    painterResource(ToDometerIcons.ArrowBack),
-                    contentDescription = stringResource(MR.strings.back)
-                )
-            }
-        },
-        title = {}
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal fun AboutItemCard(
-    onCardClick: () -> Unit,
-    icon: @Composable () -> Unit,
-    text: @Composable () -> Unit
-) {
-    Card(
-        onClick = onCardClick,
-        modifier = Modifier.height(81.dp).fillMaxWidth().padding(8.dp),
-        colors = CardDefaults.cardColors(contentColor = MaterialTheme.colorScheme.onPrimaryContainer)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Spacer(modifier = Modifier.width(24.dp))
-            icon()
-            Spacer(modifier = Modifier.width(24.dp))
-            text()
-        }
-    }
-}
-
 const val GitHubUrl: String = "https://github.com/serbelga/ToDometer_Multiplatform"
 const val PrivacyPolicyUrl: String =
     "https://github.com/serbelga/ToDometerKotlinMultiplatform/blob/main/PRIVACY_POLICY.md"
+
+private val AboutItemCardHeight: Dp = 72.dp
+private val AboutItemCardSpacing: Dp = 24.dp
+private val AboutItemCardTonalElevation: Dp = 2.dp
+private val AboutItemCardCornerRadius: Dp = 16.dp

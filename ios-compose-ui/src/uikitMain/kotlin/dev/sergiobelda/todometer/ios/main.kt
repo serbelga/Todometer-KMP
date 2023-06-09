@@ -25,7 +25,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.ComposeUIViewController
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.painterResource
 import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,7 +39,7 @@ fun main() {
                             navigationIcon = {
                                 IconButton(onClick = {}) {
                                     Icon(
-                                        painterResource(ToDometerIcons.Menu),
+                                        ToDometerIcons.Menu,
                                         contentDescription = null
                                     )
                                 }
@@ -49,7 +48,7 @@ fun main() {
                             actions = {
                                 IconButton(onClick = {}) {
                                     Icon(
-                                        painterResource(ToDometerIcons.MoreVert),
+                                        ToDometerIcons.MoreVert,
                                         contentDescription = null
                                     )
                                 }
@@ -58,7 +57,7 @@ fun main() {
                     },
                     floatingActionButton = {
                         FloatingActionButton(onClick = {}) {
-                            Icon(painterResource(ToDometerIcons.Add), contentDescription = null)
+                            Icon(ToDometerIcons.Add, contentDescription = null)
                         }
                     }
                 ) {

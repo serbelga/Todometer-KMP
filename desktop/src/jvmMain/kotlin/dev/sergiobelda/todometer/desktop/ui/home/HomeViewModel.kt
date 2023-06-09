@@ -22,7 +22,7 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
@@ -37,7 +37,7 @@ class HomeViewModel(
     private val coroutineScope: CoroutineScope,
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
-    private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val deleteTasksUseCase: DeleteTasksUseCase,
     private val deleteTaskListSelectedUseCase: DeleteTaskListSelectedUseCase,
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
@@ -52,24 +52,17 @@ class HomeViewModel(
         getTaskListSelected()
         getTaskListSelectedTasks()
         getTaskLists()
-
-        coroutineScope.launch {
-            // refreshTaskListsUseCase()
-            // refreshTaskListSelectedUseCase()
-        }
     }
 
     private fun getTaskListSelected() = coroutineScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 homeUiState = homeUiState.copy(
-                    taskListSelected = taskList,
-                    isDefaultTaskListSelected = false
+                    taskListSelected = taskList
                 )
             }.doIfError {
                 homeUiState = homeUiState.copy(
-                    taskListSelected = null,
-                    isDefaultTaskListSelected = true
+                    taskListSelected = null
                 )
             }
         }
@@ -105,8 +98,13 @@ class HomeViewModel(
         }
     }
 
+    fun deleteSelectedTasks() = coroutineScope.launch {
+        deleteTasksUseCase(homeUiState.selectedTasks)
+        clearSelectedTasks()
+    }
+
     fun deleteTask(id: String) = coroutineScope.launch {
-        deleteTaskUseCase(id)
+        deleteTasksUseCase(id)
     }
 
     fun deleteTaskList() = coroutineScope.launch {
@@ -123,5 +121,21 @@ class HomeViewModel(
 
     fun setTaskListSelected(id: String) = coroutineScope.launch {
         setTaskListSelectedUseCase(id)
+    }
+
+    fun toggleSelectTask(id: String) {
+        val selectedTasks = homeUiState.selectedTasks.toMutableList()
+        if (!selectedTasks.contains(id)) {
+            selectedTasks.add(id)
+        } else {
+            selectedTasks.removeAll { it == id }
+        }
+        homeUiState = homeUiState.copy(
+            selectedTasks = selectedTasks
+        )
+    }
+
+    fun clearSelectedTasks() {
+        homeUiState = homeUiState.copy(selectedTasks = emptyList())
     }
 }
