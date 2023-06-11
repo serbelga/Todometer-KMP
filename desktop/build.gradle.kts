@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
     id("todometer.spotless")
-    id("todometer.dependency-graph-generator")
+    id("todometer.dependency.graph.generator")
 }
 
 group = "dev.sergiobelda.todometer.desktop"
