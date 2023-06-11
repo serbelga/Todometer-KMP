@@ -18,17 +18,17 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("commonLibraryAndroid") {
+            id = "todometer.common.library.android"
+            implementationClass = "CommonLibraryAndroidConventionPlugin"
+        }
         register("dependencyGraphGenerator") {
-            id = "todometer.dependency.graph.generator"
+            id = "todometer.dependency-graph-generator"
             implementationClass = "DependencyGraphGeneratorConventionPlugin"
         }
         register("spotless") {
             id = "todometer.spotless"
             implementationClass = "SpotlessConventionPlugin"
-        }
-        register("commonLibraryAndroid") {
-            id = "todometer.common.library.android"
-            implementationClass = "CommonLibraryAndroidConventionPlugin"
         }
     }
 }
