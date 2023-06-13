@@ -1,6 +1,6 @@
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState;
 
-CREATE TABLE TaskChecklistItemEntity (
+CREATE TABLE IF NOT EXISTS TaskChecklistItemEntity (
     id TEXT PRIMARY KEY NOT NULL,
     text TEXT NOT NULL,
     task_id TEXT NOT NULL,
