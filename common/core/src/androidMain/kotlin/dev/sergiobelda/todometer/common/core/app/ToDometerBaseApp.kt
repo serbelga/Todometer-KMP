@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.common.core.app
 
-import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.core.di.startAppDI
-import dev.sergiobelda.todometer.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import android.app.Application
+import dev.sergiobelda.todometer.common.database.DriverFactory
+import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 
-class ToDometerApplication : ToDometerBaseApplication() {
+open class ToDometerBaseApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startAppDI {
-            modules(viewModelModule)
-            androidContext(this@ToDometerApplication)
-        }
+        PreferencesFactory.appContext = this
+        DriverFactory.appContext = this
     }
 }
