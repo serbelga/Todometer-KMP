@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app
 
 import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.core.di.initKoin
+import dev.sergiobelda.todometer.common.core.di.startAppDI
 import dev.sergiobelda.todometer.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 
@@ -25,7 +25,7 @@ class ToDometerApplication : ToDometerBaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        initKoin {
+        startAppDI {
             modules(viewModelModule)
             androidContext(this@ToDometerApplication)
         }

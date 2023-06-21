@@ -19,17 +19,22 @@ package dev.sergiobelda.todometer.common.core.di
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
+internal fun startDI(appDeclaration: KoinAppDeclaration) = startKoin {
     modules(
         networkModule +
-            databaseModule +
-            preferenceModule +
-            remoteDataSourceModule +
-            localDataSourceModule +
-            repositoryModule +
-            useCaseModule
+                databaseModule +
+                preferenceModule +
+                remoteDataSourceModule +
+                localDataSourceModule +
+                repositoryModule +
+                useCaseModule
     )
+    appDeclaration()
 }
 
-fun initKoin() = initKoin {}
+fun startAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI {
+    modules(viewModelModule)
+    appDeclaration()
+}
+
+fun startWearAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI(appDeclaration)

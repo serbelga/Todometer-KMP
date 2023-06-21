@@ -14,28 +14,26 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.addtasklist
+package dev.sergiobelda.todometer.common.compose.ui.addtasklist
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     var addTaskListUiState by mutableStateOf(AddTaskListUiState())
         private set
 
-    fun insertTaskList(name: String) = viewModelScope.launch {
+    fun insertTaskList(name: String) = coroutineScope.launch {
         addTaskListUiState = addTaskListUiState.copy(isAddingTaskList = true)
         val result = insertTaskListUseCase.invoke(name)
         result.doIfSuccess {

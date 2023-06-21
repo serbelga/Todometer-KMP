@@ -18,18 +18,13 @@ package dev.sergiobelda.todometer.desktop.ui.addtasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListScreen
+import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListViewModel
 import dev.sergiobelda.todometer.desktop.koin
-import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun AddTaskListRoute(navigateBack: () -> Unit) {
-    val coroutineScope = rememberCoroutineScope()
-    val addTaskListViewModel: AddTaskListViewModel = remember {
-        koin.get { parametersOf(coroutineScope) }
-    }
-
+    val addTaskListViewModel: AddTaskListViewModel = remember { koin.get() }
     AddTaskListScreen(
         navigateBack = navigateBack,
         insertTaskList = { taskListName ->

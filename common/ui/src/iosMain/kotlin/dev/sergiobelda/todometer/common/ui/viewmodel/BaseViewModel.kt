@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.di
+package dev.sergiobelda.todometer.common.ui.viewmodel
 
-import dev.sergiobelda.todometer.ui.MainViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.dsl.module
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
-internal val viewModelModule = module {
-    viewModelOf(::MainViewModel)
+actual abstract class BaseViewModel {
+    actual val coroutineScope: CoroutineScope = MainScope()
+
+    protected actual open fun onCleared() {
+        coroutineScope.cancel()
+    }
 }

@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.edittask
+package dev.sergiobelda.todometer.common.compose.ui.edittask
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 class EditTaskViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     var editTaskUiState by mutableStateOf(EditTaskUiState(isLoading = true))
         private set
@@ -43,7 +41,7 @@ class EditTaskViewModel(
         getTask()
     }
 
-    private fun getTask() = viewModelScope.launch {
+    private fun getTask() = coroutineScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
                 editTaskUiState = editTaskUiState.copy(
@@ -66,7 +64,7 @@ class EditTaskViewModel(
         tag: Tag,
         description: String? = null,
         dueDate: Long? = null
-    ) = viewModelScope.launch {
+    ) = coroutineScope.launch {
         editTaskUiState.task?.let {
             updateTaskUseCase(
                 it.copy(

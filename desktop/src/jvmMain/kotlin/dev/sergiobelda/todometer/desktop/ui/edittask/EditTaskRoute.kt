@@ -18,8 +18,8 @@ package dev.sergiobelda.todometer.desktop.ui.edittask
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskScreen
+import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskViewModel
 import dev.sergiobelda.todometer.desktop.koin
 import org.koin.core.parameter.parametersOf
 
@@ -28,9 +28,8 @@ internal fun EditTaskRoute(
     taskId: String,
     navigateBack: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
     val editTaskViewModel: EditTaskViewModel = remember {
-        koin.get { parametersOf(coroutineScope, taskId) }
+        koin.get { parametersOf(taskId) }
     }
     EditTaskScreen(
         navigateBack = navigateBack,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,23 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.edittasklist
+package dev.sergiobelda.todometer.common.compose.ui.edittasklist
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import kotlinx.coroutines.CoroutineScope
+import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 class EditTaskListViewModel(
-    private val coroutineScope: CoroutineScope,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val updateTaskListUseCase: UpdateTaskListUseCase
-) {
+) : BaseViewModel() {
 
     var editTaskListUiState by mutableStateOf(EditTaskListUiState(isLoading = true))
         private set

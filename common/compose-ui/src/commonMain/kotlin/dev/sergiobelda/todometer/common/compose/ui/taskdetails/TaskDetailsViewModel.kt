@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.taskdetails
+package dev.sergiobelda.todometer.common.compose.ui.taskdetails
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
@@ -31,6 +28,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertT
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 class TaskDetailsViewModel(
@@ -41,7 +39,7 @@ class TaskDetailsViewModel(
     private val deleteTaskChecklistItemUseCase: DeleteTaskChecklistItemUseCase,
     private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
     private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     var taskDetailsUiState by mutableStateOf(
         TaskDetailsUiState(
@@ -56,7 +54,7 @@ class TaskDetailsViewModel(
         getTaskChecklistItems()
     }
 
-    private fun getTask() = viewModelScope.launch {
+    private fun getTask() = coroutineScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
                 taskDetailsUiState = taskDetailsUiState.copy(
@@ -74,7 +72,7 @@ class TaskDetailsViewModel(
         }
     }
 
-    private fun getTaskChecklistItems() = viewModelScope.launch {
+    private fun getTaskChecklistItems() = coroutineScope.launch {
         getTaskChecklistItemsUseCase(taskId).collect { result ->
             result.doIfSuccess { taskChecklistItems ->
                 taskDetailsUiState = taskDetailsUiState.copy(
@@ -90,19 +88,19 @@ class TaskDetailsViewModel(
         }
     }
 
-    fun insertTaskChecklistItem(text: String) = viewModelScope.launch {
+    fun insertTaskChecklistItem(text: String) = coroutineScope.launch {
         insertTaskChecklistItemsUseCase(taskId, text)
     }
 
-    fun setTaskChecklistItemUnchecked(id: String) = viewModelScope.launch {
+    fun setTaskChecklistItemUnchecked(id: String) = coroutineScope.launch {
         setTaskChecklistItemUncheckedUseCase(id)
     }
 
-    fun setTaskChecklistItemChecked(id: String) = viewModelScope.launch {
+    fun setTaskChecklistItemChecked(id: String) = coroutineScope.launch {
         setTaskChecklistItemCheckedUseCase(id)
     }
 
-    fun deleteTaskChecklistItem(id: String) = viewModelScope.launch {
+    fun deleteTaskChecklistItem(id: String) = coroutineScope.launch {
         deleteTaskChecklistItemUseCase(id)
     }
 }

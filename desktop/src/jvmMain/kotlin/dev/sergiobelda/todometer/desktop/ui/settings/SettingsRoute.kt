@@ -20,19 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsScreen
+import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsViewModel
 import dev.sergiobelda.todometer.desktop.koin
-import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun SettingsRoute(
     navigateBack: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val settingsViewModel: SettingsViewModel = remember {
-        koin.get { parametersOf(coroutineScope) }
-    }
+    val settingsViewModel: SettingsViewModel = remember { koin.get() }
     val appTheme by settingsViewModel.appTheme.collectAsState()
     SettingsScreen(
         navigateBack = navigateBack,
