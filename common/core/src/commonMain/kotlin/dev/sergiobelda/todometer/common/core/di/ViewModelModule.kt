@@ -36,7 +36,13 @@ internal val viewModelModule = module {
     factoryOf(::HomeViewModel)
     factory { parameters ->
         TaskDetailsViewModel(
-            taskId = parameters.get(), get(), get(), get(), get(), get(), get()
+            taskId = parameters.get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
         )
     }
     factoryOf(::SettingsViewModel)

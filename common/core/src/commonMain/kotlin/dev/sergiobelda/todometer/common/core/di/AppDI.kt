@@ -22,12 +22,12 @@ import org.koin.dsl.KoinAppDeclaration
 internal fun startDI(appDeclaration: KoinAppDeclaration) = startKoin {
     modules(
         networkModule +
-                databaseModule +
-                preferenceModule +
-                remoteDataSourceModule +
-                localDataSourceModule +
-                repositoryModule +
-                useCaseModule
+            databaseModule +
+            preferenceModule +
+            remoteDataSourceModule +
+            localDataSourceModule +
+            repositoryModule +
+            useCaseModule
     )
     appDeclaration()
 }
