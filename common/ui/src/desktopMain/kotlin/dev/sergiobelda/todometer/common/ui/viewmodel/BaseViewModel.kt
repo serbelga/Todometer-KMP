@@ -26,4 +26,8 @@ actual abstract class BaseViewModel {
     protected actual open fun onCleared() {
         coroutineScope.cancel()
     }
+
+    fun clear() {
+        onCleared()
+    }
 }

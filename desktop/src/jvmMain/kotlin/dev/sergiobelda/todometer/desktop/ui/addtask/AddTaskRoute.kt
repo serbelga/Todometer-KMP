@@ -21,12 +21,14 @@ import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskScreen
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.desktop.koin
+import dev.sergiobelda.todometer.desktop.ui.viewmodel.clearDisposableEffect
 
 @Composable
 internal fun AddTaskRoute(
     navigateBack: () -> Unit
 ) {
     val addTaskViewModel: AddTaskViewModel = remember { koin.get() }
+    addTaskViewModel.clearDisposableEffect()
     AddTaskScreen(
         navigateBack = navigateBack,
         insertTask = { taskTitle, selectedTag, taskDescription, taskDueDate, taskChecklistItems ->
@@ -41,3 +43,4 @@ internal fun AddTaskRoute(
         addTaskUiState = addTaskViewModel.addTaskUiState
     )
 }
+

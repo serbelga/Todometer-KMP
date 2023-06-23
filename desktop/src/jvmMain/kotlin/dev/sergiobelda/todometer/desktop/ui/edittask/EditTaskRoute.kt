@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskScreen
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskViewModel
 import dev.sergiobelda.todometer.desktop.koin
+import dev.sergiobelda.todometer.desktop.ui.viewmodel.clearDisposableEffect
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -31,6 +32,7 @@ internal fun EditTaskRoute(
     val editTaskViewModel: EditTaskViewModel = remember {
         koin.get { parametersOf(taskId) }
     }
+    editTaskViewModel.clearDisposableEffect()
     EditTaskScreen(
         navigateBack = navigateBack,
         updateTask = { taskTitle, selectedTag, taskDescription, taskDueDate ->
