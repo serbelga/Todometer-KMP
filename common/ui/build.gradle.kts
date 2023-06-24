@@ -18,6 +18,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(projects.common.domain)
+                implementation(libs.kotlin.coroutinesCore)
                 implementation(libs.kotlin.datetime)
             }
         }
@@ -30,8 +31,9 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api(libs.androidx.appcompat)
-                api(libs.androidx.coreKtx)
+                implementation(libs.androidx.appcompat)
+                implementation(libs.androidx.coreKtx)
+                implementation(libs.androidx.lifecycle.viewmodel)
             }
         }
         val androidUnitTest by getting {

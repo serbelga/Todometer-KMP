@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.wear.app
 
-import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.core.di.initKoin
-import dev.sergiobelda.todometer.di.viewModelModule
+import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApp
+import dev.sergiobelda.todometer.common.core.di.startWearAppDI
+import dev.sergiobelda.todometer.wear.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 
-class ToDometerApplication : ToDometerBaseApplication() {
+class ToDometerWearApp : ToDometerBaseApp() {
 
     override fun onCreate() {
         super.onCreate()
-        initKoin {
+        startWearAppDI {
             modules(viewModelModule)
-            androidContext(this@ToDometerApplication)
+            androidContext(this@ToDometerWearApp)
         }
     }
 }

@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.home
+package dev.sergiobelda.todometer.common.compose.ui.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeUiState
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
@@ -32,6 +29,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSe
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -54,7 +52,7 @@ class HomeViewModel(
         getTaskLists()
     }
 
-    private fun getTaskListSelected() = viewModelScope.launch {
+    private fun getTaskListSelected() = coroutineScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 homeUiState = homeUiState.copy(
@@ -68,7 +66,7 @@ class HomeViewModel(
         }
     }
 
-    private fun getTaskListSelectedTasks() = viewModelScope.launch {
+    private fun getTaskListSelectedTasks() = coroutineScope.launch {
         getTaskListSelectedTasksUseCase().collect { result ->
             result.doIfSuccess { tasks ->
                 homeUiState = homeUiState.copy(
@@ -84,7 +82,7 @@ class HomeViewModel(
         }
     }
 
-    private fun getTaskLists() = viewModelScope.launch {
+    private fun getTaskLists() = coroutineScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
                 homeUiState = homeUiState.copy(
@@ -98,28 +96,28 @@ class HomeViewModel(
         }
     }
 
-    fun deleteSelectedTasks() = viewModelScope.launch {
+    fun deleteSelectedTasks() = coroutineScope.launch {
         deleteTasksUseCase(homeUiState.selectedTasks)
         clearSelectedTasks()
     }
 
-    fun deleteTask(id: String) = viewModelScope.launch {
+    fun deleteTask(id: String) = coroutineScope.launch {
         deleteTasksUseCase(id)
     }
 
-    fun deleteTaskList() = viewModelScope.launch {
+    fun deleteTaskList() = coroutineScope.launch {
         deleteTaskListSelectedUseCase()
     }
 
-    fun setTaskDoing(id: String) = viewModelScope.launch {
+    fun setTaskDoing(id: String) = coroutineScope.launch {
         setTaskDoingUseCase(id)
     }
 
-    fun setTaskDone(id: String) = viewModelScope.launch {
+    fun setTaskDone(id: String) = coroutineScope.launch {
         setTaskDoneUseCase(id)
     }
 
-    fun setTaskListSelected(id: String) = viewModelScope.launch {
+    fun setTaskListSelected(id: String) = coroutineScope.launch {
         setTaskListSelectedUseCase(id)
     }
 
