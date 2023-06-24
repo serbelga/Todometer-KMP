@@ -16,4 +16,4 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.about
 
-internal actual fun versionName(): String? = "1.0.0-beta02"
+internal actual fun appVersionName(): String? = "1.0.0-beta02"

@@ -113,7 +113,7 @@ internal fun AboutItemCard(
 internal fun AboutAppVersion() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
         Text(
-            text = versionName() ?: "",
+            text = appVersionName() ?: "",
             style = MaterialTheme.typography.labelSmall,
             modifier = Modifier.padding(bottom = 24.dp)
         )
