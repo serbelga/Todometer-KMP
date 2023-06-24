@@ -18,20 +18,18 @@ package dev.sergiobelda.todometer.common.resources
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import dev.icerock.moko.resources.compose.painterResource
 
-@OptIn(ExperimentalResourceApi::class)
 object ToDometerSymbols {
     val IsotypeDark: Painter
         @Composable
-        get() = painterResource("symbols/isotype_dark.xml")
+        get() = painterResource(MR.images.isotype_dark)
 
     val IsotypeLight: Painter
         @Composable
-        get() = painterResource("symbols/isotype_light.xml")
+        get() = painterResource(MR.images.isotype_light)
 
     val IsotypeMonochrome: Painter
         @Composable
-        get() = painterResource("symbols/isotype_monochrome.xml")
+        get() = painterResource(MR.images.isotype_monochrome)
 }
