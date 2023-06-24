@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.core.app
+package dev.sergiobelda.todometer.common.ui.viewmodel
 
-import android.app.Application
-import dev.sergiobelda.todometer.common.database.DriverFactory
-import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
-open class ToDometerBaseApplication : Application() {
+actual abstract class ViewModel {
+    actual val coroutineScope: CoroutineScope = MainScope()
 
-    override fun onCreate() {
-        super.onCreate()
-        PreferencesFactory.appContext = this
-        DriverFactory.appContext = this
+    protected actual open fun onCleared() {
+        coroutineScope.cancel()
     }
 }

@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.settings
+package dev.sergiobelda.todometer.common.compose.ui.settings
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -32,12 +31,12 @@ class SettingsViewModel(
 ) : ViewModel() {
     val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
-            viewModelScope,
+            coroutineScope,
             SharingStarted.WhileSubscribed(),
             AppTheme.FOLLOW_SYSTEM
         )
 
-    fun setAppTheme(theme: AppTheme) = viewModelScope.launch {
+    fun setAppTheme(theme: AppTheme) = coroutineScope.launch {
         setAppThemeUseCase(theme)
     }
 }

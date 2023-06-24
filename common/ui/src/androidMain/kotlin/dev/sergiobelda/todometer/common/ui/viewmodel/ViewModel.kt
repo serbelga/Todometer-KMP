@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.app
+package dev.sergiobelda.todometer.common.ui.viewmodel
 
-import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApplication
-import dev.sergiobelda.todometer.common.core.di.initKoin
-import dev.sergiobelda.todometer.wear.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.ViewModel as AndroidXViewModel
 
-class ToDometerApplication : ToDometerBaseApplication() {
+actual abstract class ViewModel actual constructor() : AndroidXViewModel() {
+    actual val coroutineScope: CoroutineScope = viewModelScope
 
-    override fun onCreate() {
-        super.onCreate()
-        initKoin {
-            modules(viewModelModule)
-            androidContext(this@ToDometerApplication)
-        }
+    actual override fun onCleared() {
+        super.onCleared()
     }
 }

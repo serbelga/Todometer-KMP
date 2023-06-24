@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.di
+package dev.sergiobelda.todometer.common.core.app
 
-import dev.sergiobelda.todometer.ui.MainViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.dsl.module
+import android.app.Application
+import dev.sergiobelda.todometer.common.database.DriverFactory
+import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 
-internal val viewModelModule = module {
-    viewModelOf(::MainViewModel)
+open class ToDometerBaseApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        PreferencesFactory.appContext = this
+        DriverFactory.appContext = this
+    }
 }

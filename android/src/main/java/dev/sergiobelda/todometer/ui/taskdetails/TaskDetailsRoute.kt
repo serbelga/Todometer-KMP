@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.ui.taskdetails
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsScreen
+import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 

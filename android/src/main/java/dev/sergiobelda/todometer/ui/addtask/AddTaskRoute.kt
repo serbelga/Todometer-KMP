@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.ui.addtask
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskScreen
+import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
