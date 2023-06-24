@@ -16,53 +16,18 @@
 
 package dev.sergiobelda.todometer.ios
 
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.ios.theme.ToDometerAppTheme
+import dev.sergiobelda.todometer.common.core.di.startAppDI
+import dev.sergiobelda.todometer.ios.ui.settings.SettingsRoute
 
-@OptIn(ExperimentalMaterial3Api::class)
+val koin = startAppDI().koin
+
 fun main() {
     defaultUIKitMain(
         "ToDometer",
         ComposeUIViewController {
-            ToDometerAppTheme {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            navigationIcon = {
-                                IconButton(onClick = {}) {
-                                    Icon(
-                                        ToDometerIcons.Menu,
-                                        contentDescription = null
-                                    )
-                                }
-                            },
-                            title = {},
-                            actions = {
-                                IconButton(onClick = {}) {
-                                    Icon(
-                                        ToDometerIcons.MoreVert,
-                                        contentDescription = null
-                                    )
-                                }
-                            }
-                        )
-                    },
-                    floatingActionButton = {
-                        FloatingActionButton(onClick = {}) {
-                            Icon(ToDometerIcons.Add, contentDescription = null)
-                        }
-                    }
-                ) {
-                }
-            }
+            SettingsRoute(navigateBack = {})
         }
     )
 }
