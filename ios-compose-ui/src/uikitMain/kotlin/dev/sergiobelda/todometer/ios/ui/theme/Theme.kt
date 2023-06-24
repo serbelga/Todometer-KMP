@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ios.theme
+package dev.sergiobelda.todometer.ios.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerDarkColors
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerLightColors
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type.typography
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.shapes
 
 @Composable
 internal fun ToDometerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val toDometerColors = if (darkTheme) ToDometerDarkColors else ToDometerLightColors
     val colorScheme = if (darkTheme) {
         DarkColorScheme
     } else {
@@ -34,7 +39,10 @@ internal fun ToDometerAppTheme(
     }
 
     ToDometerTheme(
+        toDometerColors = toDometerColors,
         colorScheme = colorScheme,
+        shapes = shapes,
+        typography = typography,
         content = content
     )
 }

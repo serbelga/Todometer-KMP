@@ -27,7 +27,10 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type.typog
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.shapes
 
 @Composable
-internal fun ToDometerAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+internal fun ToDometerAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val toDometerColors = if (darkTheme) ToDometerDarkColors else ToDometerLightColors
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 

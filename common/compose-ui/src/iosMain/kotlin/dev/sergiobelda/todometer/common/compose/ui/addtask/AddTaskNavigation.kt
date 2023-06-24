@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.desktop.ui.home
+package dev.sergiobelda.todometer.common.compose.ui.addtask
 
 import dev.sergiobelda.todometer.common.navigation.Destination
 
-object HomeDestination : Destination {
-    override val route: String get() = "home"
+object AddTaskDestination : Destination {
+    override val route: String = "addtask"
 }

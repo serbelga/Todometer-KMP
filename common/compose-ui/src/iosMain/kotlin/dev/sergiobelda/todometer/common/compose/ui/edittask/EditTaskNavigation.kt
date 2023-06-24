@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.about
+package dev.sergiobelda.todometer.common.compose.ui.edittask
 
-internal actual fun appVersionName(): String? = "1.0.0-dev01"
+import dev.sergiobelda.todometer.common.navigation.Destination
+
+object EditTaskDestination : Destination {
+    const val TaskIdArg = "taskId"
+    override val route: String = "edittask"
+}

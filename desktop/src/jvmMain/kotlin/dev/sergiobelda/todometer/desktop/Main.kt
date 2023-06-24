@@ -33,6 +33,7 @@ import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
+import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.core.di.startAppDI
@@ -47,7 +48,6 @@ import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.desktop.ui.edittask.EditTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.edittasklist.EditTaskListRoute
-import dev.sergiobelda.todometer.desktop.ui.home.HomeDestination
 import dev.sergiobelda.todometer.desktop.ui.home.HomeRoute
 import dev.sergiobelda.todometer.desktop.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsRoute

@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.about
+package dev.sergiobelda.todometer.ios.ui.about
 
-internal actual fun appVersionName(): String? = "1.0.0-dev01"
+import androidx.compose.runtime.Composable
+import dev.sergiobelda.todometer.common.compose.ui.about.AboutScreen
+
+@Composable
+internal fun AboutRoute(
+    navigateBack: () -> Unit
+) {
+    AboutScreen(
+        navigateBack = navigateBack
+    )
+}
