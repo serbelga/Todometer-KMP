@@ -61,7 +61,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "ToDometer",
         state = WindowState(
-            size = DpSize(600.dp, 800.dp),
+            size = DpSize(480.dp, 860.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
         icon = ToDometerSymbols.IsotypeMonochrome

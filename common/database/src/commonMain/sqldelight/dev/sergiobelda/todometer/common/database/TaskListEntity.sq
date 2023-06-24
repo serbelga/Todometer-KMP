@@ -1,6 +1,6 @@
 import kotlin.Boolean;
 
-CREATE TABLE TaskListEntity (
+CREATE TABLE IF NOT EXISTS TaskListEntity (
     id TEXT PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
