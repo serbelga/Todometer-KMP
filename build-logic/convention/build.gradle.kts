@@ -10,6 +10,7 @@ java {
 }
 
 dependencies {
+    implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
@@ -17,7 +18,11 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("dependency-graph-generator") {
+        register("commonLibraryAndroid") {
+            id = "todometer.common.library.android"
+            implementationClass = "CommonLibraryAndroidConventionPlugin"
+        }
+        register("dependencyGraphGenerator") {
             id = "todometer.dependency-graph-generator"
             implementationClass = "DependencyGraphGeneratorConventionPlugin"
         }

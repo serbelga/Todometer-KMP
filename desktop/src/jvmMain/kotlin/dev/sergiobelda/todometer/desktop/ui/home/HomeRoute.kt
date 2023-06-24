@@ -18,10 +18,10 @@ package dev.sergiobelda.todometer.desktop.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
+import dev.sergiobelda.todometer.common.compose.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.common.compose.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
-import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun HomeRoute(
@@ -30,12 +30,10 @@ internal fun HomeRoute(
     navigateToAddTask: () -> Unit,
     navigateToTaskDetails: (String) -> Unit,
     navigateToSettings: () -> Unit,
-    navigateToAbout: () -> Unit
+    navigateToAbout: () -> Unit,
+    homeViewModel: HomeViewModel = remember { koin.get() }
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val homeViewModel: HomeViewModel = remember {
-        koin.get { parametersOf(coroutineScope) }
-    }
+    homeViewModel.subscribeToComposition()
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,

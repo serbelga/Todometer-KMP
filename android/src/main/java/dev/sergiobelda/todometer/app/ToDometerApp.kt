@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.di
+package dev.sergiobelda.todometer.app
 
-import dev.sergiobelda.todometer.ui.MainViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.dsl.module
+import dev.sergiobelda.todometer.common.core.app.ToDometerBaseApp
+import dev.sergiobelda.todometer.common.core.di.startAppDI
+import dev.sergiobelda.todometer.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
 
-internal val viewModelModule = module {
-    viewModelOf(::MainViewModel)
+class ToDometerApp : ToDometerBaseApp() {
+
+    override fun onCreate() {
+        super.onCreate()
+        startAppDI {
+            modules(viewModelModule)
+            androidContext(this@ToDometerApp)
+        }
+    }
 }

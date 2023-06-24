@@ -18,10 +18,12 @@ package dev.sergiobelda.todometer.common.database
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
+import java.io.File
 
 actual object DriverFactory {
     actual fun createDriver(): SqlDriver {
-        val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        val databasePath = File(System.getProperty("java.io.tmpdir"), "todometer_database.db")
+        val driver: SqlDriver = JdbcSqliteDriver(url = "jdbc:sqlite:${databasePath.absolutePath}")
         TodometerDatabase.Schema.create(driver)
         return driver
     }

@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.ui.edittask
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskScreen
+import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 

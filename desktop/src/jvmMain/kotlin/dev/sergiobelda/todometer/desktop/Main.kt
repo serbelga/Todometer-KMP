@@ -35,14 +35,13 @@ import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
-import dev.sergiobelda.todometer.common.core.di.initKoin
+import dev.sergiobelda.todometer.common.core.di.startAppDI
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
-import dev.sergiobelda.todometer.desktop.di.viewModelModule
 import dev.sergiobelda.todometer.desktop.ui.about.AboutRoute
 import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
@@ -54,9 +53,7 @@ import dev.sergiobelda.todometer.desktop.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.desktop.ui.taskdetails.TaskDetailsRoute
 import dev.sergiobelda.todometer.desktop.ui.theme.ToDometerAppTheme
 
-val koin = initKoin {
-    modules(viewModelModule)
-}.koin
+val koin = startAppDI().koin
 
 fun main() = application {
     Window(
@@ -64,7 +61,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "ToDometer",
         state = WindowState(
-            size = DpSize(600.dp, 800.dp),
+            size = DpSize(480.dp, 860.dp),
             position = WindowPosition.Aligned(Alignment.Center)
         ),
         icon = ToDometerSymbols.IsotypeMonochrome
