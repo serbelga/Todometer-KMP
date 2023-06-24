@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.common.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.ViewModel as AndroidXViewModel
 
-actual abstract class BaseViewModel actual constructor() : ViewModel() {
+actual abstract class ViewModel actual constructor() : AndroidXViewModel() {
     actual val coroutineScope: CoroutineScope = viewModelScope
 
     actual override fun onCleared() {

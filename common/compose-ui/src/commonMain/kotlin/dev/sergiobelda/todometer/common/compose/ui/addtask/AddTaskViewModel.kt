@@ -24,12 +24,12 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
     private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     var addTaskUiState by mutableStateOf(AddTaskUiState())
         private set

@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.compose.ui.settings
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 class SettingsViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase
-) : BaseViewModel() {
+) : ViewModel() {
     val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
             coroutineScope,

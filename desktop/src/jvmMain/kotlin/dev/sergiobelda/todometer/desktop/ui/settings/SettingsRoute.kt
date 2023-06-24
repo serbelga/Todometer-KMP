@@ -22,15 +22,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsScreen
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsViewModel
+import dev.sergiobelda.todometer.common.compose.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
-import dev.sergiobelda.todometer.desktop.ui.viewmodel.clearDisposableEffect
 
 @Composable
 internal fun SettingsRoute(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    settingsViewModel: SettingsViewModel = remember { koin.get() }
 ) {
-    val settingsViewModel: SettingsViewModel = remember { koin.get() }
-    settingsViewModel.clearDisposableEffect()
+    settingsViewModel.subscribeToComposition()
     val appTheme by settingsViewModel.appTheme.collectAsState()
     SettingsScreen(
         navigateBack = navigateBack,

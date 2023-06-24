@@ -28,7 +28,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertT
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class TaskDetailsViewModel(
@@ -39,7 +39,7 @@ class TaskDetailsViewModel(
     private val deleteTaskChecklistItemUseCase: DeleteTaskChecklistItemUseCase,
     private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
     private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     var taskDetailsUiState by mutableStateOf(
         TaskDetailsUiState(

@@ -29,7 +29,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSe
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -41,7 +41,7 @@ class HomeViewModel(
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     var homeUiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
         private set

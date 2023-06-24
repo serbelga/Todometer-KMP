@@ -1,11 +1,11 @@
-package dev.sergiobelda.todometer.desktop.ui.viewmodel
+package dev.sergiobelda.todometer.common.compose.ui.viewmodel
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 
 @Composable
-internal fun BaseViewModel.clearDisposableEffect() {
+fun ViewModel.subscribeToComposition() {
     DisposableEffect(Unit) {
         onDispose {
             clear()

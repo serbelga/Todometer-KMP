@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.common.ui.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
 
-expect abstract class BaseViewModel() {
+expect abstract class ViewModel() {
     protected val coroutineScope: CoroutineScope
 
     protected open fun onCleared()

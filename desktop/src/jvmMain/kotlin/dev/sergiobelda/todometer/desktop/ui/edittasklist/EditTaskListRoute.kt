@@ -20,13 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListScreen
 import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListViewModel
+import dev.sergiobelda.todometer.common.compose.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
-import dev.sergiobelda.todometer.desktop.ui.viewmodel.clearDisposableEffect
 
 @Composable
-internal fun EditTaskListRoute(navigateBack: () -> Unit) {
-    val editTaskListViewModel: EditTaskListViewModel = remember { koin.get() }
-    editTaskListViewModel.clearDisposableEffect()
+internal fun EditTaskListRoute(
+    navigateBack: () -> Unit,
+    editTaskListViewModel: EditTaskListViewModel = remember { koin.get() }
+) {
+    editTaskListViewModel.subscribeToComposition()
     EditTaskListScreen(
         navigateBack = navigateBack,
         editTaskList = { taskListName ->

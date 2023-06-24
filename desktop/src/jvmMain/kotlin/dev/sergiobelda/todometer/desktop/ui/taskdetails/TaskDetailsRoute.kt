@@ -20,20 +20,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsScreen
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsViewModel
+import dev.sergiobelda.todometer.common.compose.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
-import dev.sergiobelda.todometer.desktop.ui.viewmodel.clearDisposableEffect
 import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun TaskDetailsRoute(
     taskId: String,
     navigateToEditTask: () -> Unit,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    taskDetailsViewModel: TaskDetailsViewModel = remember { koin.get { parametersOf(taskId) } }
 ) {
-    val taskDetailsViewModel: TaskDetailsViewModel = remember {
-        koin.get { parametersOf(taskId) }
-    }
-    taskDetailsViewModel.clearDisposableEffect()
+    taskDetailsViewModel.subscribeToComposition()
     TaskDetailsScreen(
         navigateToEditTask = navigateToEditTask,
         navigateBack = navigateBack,

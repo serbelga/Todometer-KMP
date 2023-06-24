@@ -20,8 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.common.compose.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
-import dev.sergiobelda.todometer.desktop.ui.viewmodel.clearDisposableEffect
 
 @Composable
 internal fun HomeRoute(
@@ -30,10 +30,10 @@ internal fun HomeRoute(
     navigateToAddTask: () -> Unit,
     navigateToTaskDetails: (String) -> Unit,
     navigateToSettings: () -> Unit,
-    navigateToAbout: () -> Unit
+    navigateToAbout: () -> Unit,
+    homeViewModel: HomeViewModel = remember { koin.get() }
 ) {
-    val homeViewModel: HomeViewModel = remember { koin.get() }
-    homeViewModel.clearDisposableEffect()
+    homeViewModel.subscribeToComposition()
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,

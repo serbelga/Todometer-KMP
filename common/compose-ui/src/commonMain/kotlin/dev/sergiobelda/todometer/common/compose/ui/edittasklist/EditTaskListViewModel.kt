@@ -24,13 +24,13 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.ui.viewmodel.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class EditTaskListViewModel(
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val updateTaskListUseCase: UpdateTaskListUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     var editTaskListUiState by mutableStateOf(EditTaskListUiState(isLoading = true))
         private set
