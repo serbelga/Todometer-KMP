@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,35 +14,30 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ios.ui.theme
+package dev.sergiobelda.todometer.common.compose.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerDarkColors
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerLightColors
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type.typography
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.shapes
 
 @Composable
-internal fun ToDometerAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+actual fun ToDometerAppTheme(
+    darkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
     val toDometerColors = if (darkTheme) ToDometerDarkColors else ToDometerLightColors
-    val colorScheme = if (darkTheme) {
-        DarkColorScheme
-    } else {
-        LightColorScheme
-    }
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     ToDometerTheme(
         toDometerColors = toDometerColors,
         colorScheme = colorScheme,
         shapes = shapes,
-        typography = typography,
+        typography = Type.typography,
         content = content
     )
 }

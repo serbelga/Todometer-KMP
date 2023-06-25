@@ -31,14 +31,15 @@ import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDest
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
+import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerAppTheme
 import dev.sergiobelda.todometer.common.core.di.startAppDI
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.navigation.NavigationController
+import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.ios.ui.about.AboutRoute
-import dev.sergiobelda.todometer.ios.ui.theme.ToDometerAppTheme
 import dev.sergiobelda.todometer.ios.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ios.ui.addtasklist.AddTaskListRoute
 import dev.sergiobelda.todometer.ios.ui.edittask.EditTaskRoute
@@ -63,87 +64,119 @@ fun main() {
             val navigationController by remember { mutableStateOf(NavigationController()) }
             ToDometerAppTheme(darkTheme) {
                 NavigationHost(navigationController, startDestination = HomeDestination.route) {
-                    composableNode(destinationId = HomeDestination.route) {
-                        HomeRoute(
-                            navigateToAddTaskList = {
-                                navigationController.navigateTo(AddTaskListDestination.route)
-                            },
-                            navigateToEditTaskList = {
-                                navigationController.navigateTo(EditTaskListDestination.route)
-                            },
-                            navigateToAddTask = {
-                                navigationController.navigateTo(AddTaskDestination.route)
-                            },
-                            navigateToTaskDetails = { taskId ->
-                                navigationController.navigateTo(
-                                    TaskDetailsDestination.route,
-                                    TaskDetailsDestination.TaskIdArg to taskId
-                                )
-                            },
-                            navigateToSettings = {
-                                navigationController.navigateTo(SettingsDestination.route)
-                            },
-                            navigateToAbout = {
-                                navigationController.navigateTo(AboutDestination.route)
-                            }
-                        )
-                    }
-                    composableNode(destinationId = TaskDetailsDestination.route) {
-                        val taskId =
-                            navigationController.getStringArgOrNull(TaskDetailsDestination.TaskIdArg)
-                                ?: ""
-                        TaskDetailsRoute(
-                            taskId = taskId,
-                            navigateToEditTask = {
-                                navigationController.navigateTo(
-                                    EditTaskDestination.route,
-                                    EditTaskDestination.TaskIdArg to taskId
-                                )
-                            },
-                            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
-                        )
-                    }
-                    composableNode(destinationId = AddTaskListDestination.route) {
-                        AddTaskListRoute(
-                            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
-                        )
-                    }
-                    composableNode(destinationId = EditTaskListDestination.route) {
-                        EditTaskListRoute(
-                            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
-                        )
-                    }
-                    composableNode(destinationId = AddTaskDestination.route) {
-                        AddTaskRoute(
-                            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
-                        )
-                    }
-                    composableNode(destinationId = EditTaskDestination.route) {
-                        val taskId =
-                            navigationController.getStringArgOrNull(EditTaskDestination.TaskIdArg)
-                                ?: ""
-                        EditTaskRoute(
-                            taskId = taskId,
-                            navigateBack = {
-                                navigationController.navigateTo(
-                                    TaskDetailsDestination.route,
-                                    TaskDetailsDestination.TaskIdArg to taskId
-                                )
-                            }
-                        )
-                    }
-                    composableNode(destinationId = SettingsDestination.route) {
-                        SettingsRoute(
-                            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
-                        )
-                    }
-                    composableNode(destinationId = AboutDestination.route) {
-                        AboutRoute(
-                            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
-                        )
-                    }
+                    homeComposableNode(navigationController)
+                    taskDetailsComposableNode(navigationController)
+                    addTaskListComposableNode(navigationController)
+                    editTaskListComposableNode(navigationController)
+                    addTaskComposableNode(navigationController)
+                    editTaskComposableNode(navigationController)
+                    settingsComposableNode(navigationController)
+                    aboutComposableNode(navigationController)
                 }
             }
         }
     )
+}
+
+private fun NavigationGraph.Builder.homeComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = HomeDestination.route) {
+        HomeRoute(
+            navigateToAddTaskList = {
+                navigationController.navigateTo(AddTaskListDestination.route)
+            },
+            navigateToEditTaskList = {
+                navigationController.navigateTo(EditTaskListDestination.route)
+            },
+            navigateToAddTask = {
+                navigationController.navigateTo(AddTaskDestination.route)
+            },
+            navigateToTaskDetails = { taskId ->
+                navigationController.navigateTo(
+                    TaskDetailsDestination.route,
+                    TaskDetailsDestination.TaskIdArg to taskId
+                )
+            },
+            navigateToSettings = {
+                navigationController.navigateTo(SettingsDestination.route)
+            },
+            navigateToAbout = {
+                navigationController.navigateTo(AboutDestination.route)
+            }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.taskDetailsComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = TaskDetailsDestination.route) {
+        val taskId =
+            navigationController.getStringArgOrNull(TaskDetailsDestination.TaskIdArg)
+                ?: ""
+        TaskDetailsRoute(
+            taskId = taskId,
+            navigateToEditTask = {
+                navigationController.navigateTo(
+                    EditTaskDestination.route,
+                    EditTaskDestination.TaskIdArg to taskId
+                )
+            },
+            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.addTaskListComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = AddTaskListDestination.route) {
+        AddTaskListRoute(
+            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.editTaskListComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = EditTaskListDestination.route) {
+        EditTaskListRoute(
+            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.addTaskComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = AddTaskDestination.route) {
+        AddTaskRoute(
+            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.editTaskComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = EditTaskDestination.route) {
+        val taskId =
+            navigationController.getStringArgOrNull(EditTaskDestination.TaskIdArg)
+                ?: ""
+        EditTaskRoute(
+            taskId = taskId,
+            navigateBack = {
+                navigationController.navigateTo(
+                    TaskDetailsDestination.route,
+                    TaskDetailsDestination.TaskIdArg to taskId
+                )
+            }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.settingsComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = SettingsDestination.route) {
+        SettingsRoute(
+            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+        )
+    }
+}
+
+private fun NavigationGraph.Builder.aboutComposableNode(navigationController: NavigationController) {
+    composableNode(destinationId = AboutDestination.route) {
+        AboutRoute(
+            navigateBack = { navigationController.navigateTo(HomeDestination.route) }
+        )
+    }
 }

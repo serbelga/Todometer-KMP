@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2023 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.ui.theme
+package dev.sergiobelda.todometer.common.compose.ui.theme
 
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
@@ -29,14 +28,14 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColor
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerDarkColors
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerLightColors
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type.typography
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.shapes
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.todometer_dark_outline
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.todometer_light_outline
 
 @Composable
-internal fun ToDometerAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+actual fun ToDometerAppTheme(
+    darkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
     val toDometerColors = if (darkTheme) ToDometerDarkColors else ToDometerLightColors
@@ -64,7 +63,7 @@ internal fun ToDometerAppTheme(
     ToDometerTheme(
         toDometerColors = toDometerColors,
         colorScheme = colorScheme,
-        typography = typography,
+        typography = Type.typography,
         shapes = shapes,
         content = content
     )

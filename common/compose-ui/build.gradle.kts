@@ -45,6 +45,7 @@ kotlin {
 
                 implementation(projects.common.android)
 
+                implementation(libs.accompanist.systemUiController)
                 implementation(libs.androidx.navigation.compose)
                 implementation(libs.material)
             }

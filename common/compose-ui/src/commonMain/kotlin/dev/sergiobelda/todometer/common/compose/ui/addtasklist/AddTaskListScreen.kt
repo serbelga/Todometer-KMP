@@ -146,7 +146,6 @@ private fun AddTaskListTopBar(
                 Text(
                     text = stringResource(MR.strings.save),
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.alignByBaseline(),
                     color = saveButtonTintColor
                 )
             }
