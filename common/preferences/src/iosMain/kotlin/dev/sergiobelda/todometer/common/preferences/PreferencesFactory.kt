@@ -32,5 +32,9 @@ actual object PreferencesFactory {
     )
 
     actual fun createPreferences(): Preferences =
-        Preferences(createDataStore(documentDirectory?.path ?: ""))
+        Preferences(
+            createDataStore(
+                requireNotNull(documentDirectory).path + "/$dataStoreFileName"
+            )
+        )
 }
