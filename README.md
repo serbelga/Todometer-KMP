@@ -7,7 +7,7 @@
 </p>
 
 <h5 align="center">
-✅ A meter to-do list built with Android Jetpack based on https://cassidoo.github.io/todometer/
+✅ A meter to-do list built with Kotlin Multiplatform and Compose UI Multiplatform based on https://cassidoo.github.io/todometer/
 </h5>
 
 <a target="_blank" href="https://play.google.com/store/apps/details?id=dev.sergiobelda.todometer">
