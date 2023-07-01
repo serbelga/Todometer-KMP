@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-internal actual fun versionName(): String? {
+internal actual fun appVersionName(): String? {
     val context = LocalContext.current
     return context.getVersionName()
 }

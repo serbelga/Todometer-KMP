@@ -20,6 +20,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.unit.sp
 
 internal expect val quickSandFontFamily: FontFamily
@@ -65,7 +66,8 @@ object Type {
         bodyMedium = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 14.sp
+            fontSize = 14.sp,
+            baselineShift = BaselineShift(+0.3f)
         ),
         bodySmall = TextStyle(
             fontFamily = quickSandFontFamily,

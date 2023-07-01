@@ -81,8 +81,6 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.koin.core)
 
-    implementation(libs.accompanist.systemUiController)
-
     implementation(libs.androidx.glance.appWidget)
     implementation(libs.androidx.glance.glance)
     implementation(libs.androidx.glance.material3)
