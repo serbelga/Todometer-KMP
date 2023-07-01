@@ -50,7 +50,8 @@
 
 `./gradlew iosDeployIPhone13ProMaxDebug`
 
-Under construction
+| <img width="240" src="./screenshots/ios/home_dark.png" /> | <img width="240" src="./screenshots/ios/add_task_dark.png" /> |
+|-----------------------------------------------------------|---------------------------------------------------------------|
 
 <br/>
 
