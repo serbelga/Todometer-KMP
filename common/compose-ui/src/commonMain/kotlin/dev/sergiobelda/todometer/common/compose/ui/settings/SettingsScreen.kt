@@ -103,7 +103,6 @@ private fun SettingsChooseAppTheme(appTheme: AppTheme, onItemClick: (AppTheme) -
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppThemeItem(
     appTheme: AppTheme,

@@ -80,7 +80,6 @@ private fun AboutItem.text(): String =
         AboutItem.OpenSourceLicenses -> stringResource(MR.strings.open_source_licenses)
     }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun AboutItemCard(
     onCardClick: () -> Unit,

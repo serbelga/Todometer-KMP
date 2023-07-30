@@ -38,7 +38,7 @@ class CommonLibraryAndroidConventionPlugin : Plugin<Project> {
 }
 
 internal fun Project.configureCommonAndroid(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 

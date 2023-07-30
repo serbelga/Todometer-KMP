@@ -54,7 +54,6 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskListScreen(
     navigateBack: () -> Unit,
