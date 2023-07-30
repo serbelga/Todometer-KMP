@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
@@ -47,7 +46,6 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeDrawerContent(
     selectedTaskListId: String,
@@ -84,7 +82,6 @@ internal fun HomeDrawerContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
     NavigationDrawerItem(
@@ -106,7 +103,6 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
     NavigationDrawerItem(
@@ -165,7 +161,6 @@ private fun HomeDrawerTaskListsSection(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeNavigationDrawerTaskListItem(
     text: String,

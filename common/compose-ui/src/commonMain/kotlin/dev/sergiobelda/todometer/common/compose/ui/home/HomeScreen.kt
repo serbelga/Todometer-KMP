@@ -84,10 +84,7 @@ import dev.sergiobelda.todometer.common.resources.ToDometerIllustrations
 import dev.sergiobelda.todometer.common.resources.stringResource
 import kotlinx.coroutines.launch
 
-@OptIn(
-    ExperimentalMaterialApi::class,
-    ExperimentalMaterial3Api::class
-)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     navigateToAddTaskList: () -> Unit,
@@ -274,7 +271,7 @@ fun HomeScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeTopAppBar(
     onMenuClick: () -> Unit,
@@ -470,7 +467,6 @@ private fun TasksListArea(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CompletedTasksHeader(
     completedTasks: Int,
@@ -480,7 +476,7 @@ private fun CompletedTasksHeader(
     onClick: () -> Unit
 ) {
     ListItem(
-        headlineText = {
+        headlineContent = {
             Text(
                 text = stringResource(
                     resource = MR.strings.completed_tasks,
