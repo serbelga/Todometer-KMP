@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.ios
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.collectAsState
@@ -27,8 +28,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.main.defaultUIKitMain
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.window.ComposeUIViewController
 import dev.sergiobelda.todometer.common.compose.ui.about.AboutDestination
 import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
@@ -54,8 +53,6 @@ import dev.sergiobelda.todometer.ios.ui.edittasklist.EditTaskListRoute
 import dev.sergiobelda.todometer.ios.ui.home.HomeRoute
 import dev.sergiobelda.todometer.ios.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.ios.ui.taskdetails.TaskDetailsRoute
-import kotlinx.cinterop.useContents
-import platform.UIKit.UIApplication
 
 val koin = startAppDI().koin
 
@@ -77,7 +74,7 @@ fun main() {
                     startDestination = HomeDestination.route,
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background)
-                        .statusBarPadding()
+                        .windowInsetsPadding(WindowInsets.Companion.statusBars)
                 ) {
                     homeComposableNode(navigationController)
                     taskDetailsComposableNode(navigationController)
@@ -92,21 +89,6 @@ fun main() {
         }
     )
 }
-
-private val statusBarInset = object : WindowInsets {
-    override fun getTop(density: Density): Int =
-        UIApplication.sharedApplication.keyWindow?.safeAreaInsets?.let { safeAreaInsets ->
-            val topInset = safeAreaInsets.useContents { this.top }
-            (topInset * density.density).toInt()
-        } ?: 0
-
-    override fun getLeft(density: Density, layoutDirection: LayoutDirection): Int = 0
-    override fun getRight(density: Density, layoutDirection: LayoutDirection): Int = 0
-    override fun getBottom(density: Density): Int = 0
-}
-
-fun Modifier.statusBarPadding(): Modifier =
-    this.windowInsetsPadding(statusBarInset)
 
 private fun NavigationGraph.Builder.homeComposableNode(navigationController: NavigationController) {
     composableNode(destinationId = HomeDestination.route) {
