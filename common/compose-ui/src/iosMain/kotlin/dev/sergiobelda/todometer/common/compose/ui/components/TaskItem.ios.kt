@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.components
 
-import androidx.compose.material.DismissState
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.DismissState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal actual fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color) {
     Icon(

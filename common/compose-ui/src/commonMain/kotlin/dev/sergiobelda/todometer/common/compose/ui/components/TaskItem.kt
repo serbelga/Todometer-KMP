@@ -38,18 +38,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.DismissDirection
-import androidx.compose.material.DismissState
-import androidx.compose.material.DismissValue
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.SwipeToDismiss
-import androidx.compose.material.rememberDismissState
+import androidx.compose.material3.DismissDirection
+import androidx.compose.material3.DismissState
+import androidx.compose.material3.DismissValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.SwipeToDismiss
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -72,7 +71,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TaskItem(
     taskItem: TaskItem,
@@ -98,7 +97,7 @@ internal fun TaskItem(
         )
     } else {
         val dismissState = rememberDismissState(
-            confirmStateChange = {
+            confirmValueChange = {
                 if (it == DismissValue.DismissedToEnd) {
                     onSwipeToDismiss()
                 }
@@ -115,9 +114,6 @@ internal fun TaskItem(
         SwipeToDismiss(
             state = dismissState,
             directions = setOf(DismissDirection.StartToEnd),
-            dismissThresholds = {
-                FractionalThreshold(0.1f)
-            },
             background = {
                 Box(
                     Modifier
@@ -151,7 +147,7 @@ internal fun TaskItem(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal expect fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color)
 

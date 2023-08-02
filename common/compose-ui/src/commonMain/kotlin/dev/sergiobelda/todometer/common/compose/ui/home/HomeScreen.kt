@@ -37,9 +37,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -84,7 +81,6 @@ import dev.sergiobelda.todometer.common.resources.ToDometerIllustrations
 import dev.sergiobelda.todometer.common.resources.stringResource
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     navigateToAddTaskList: () -> Unit,
@@ -104,10 +100,6 @@ fun HomeScreen(
     homeUiState: HomeUiState
 ) {
     val scope = rememberCoroutineScope()
-    val sheetState = rememberModalBottomSheetState(
-        ModalBottomSheetValue.Hidden,
-        skipHalfExpanded = true
-    )
     val snackbarHostState = remember { SnackbarHostState() }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -229,7 +221,6 @@ fun HomeScreen(
                         onDismissRequest = { deleteTaskListAlertDialogState = false },
                         onDeleteTaskListClick = {
                             onDeleteTaskListClick()
-                            scope.launch { sheetState.hide() }
                         }
                     )
                 }
