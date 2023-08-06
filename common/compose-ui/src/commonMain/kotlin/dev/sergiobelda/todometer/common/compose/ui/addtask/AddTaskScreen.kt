@@ -33,6 +33,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -54,6 +55,7 @@ import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemFi
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDatePickerDialog
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -77,6 +79,8 @@ fun AddTaskScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
 
     var discardTaskAlertDialogState by remember { mutableStateOf(false) }
+
+    var datePickerDialogState by remember { mutableStateOf(true) }
 
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -224,6 +228,13 @@ fun AddTaskScreen(
             }
         }
     )
+    if (datePickerDialogState) {
+        ToDometerDatePickerDialog(
+            state = rememberDatePickerState(),
+            onDismissRequest = {  },
+            confirmButton = {}
+        )
+    }
 }
 
 @Composable
