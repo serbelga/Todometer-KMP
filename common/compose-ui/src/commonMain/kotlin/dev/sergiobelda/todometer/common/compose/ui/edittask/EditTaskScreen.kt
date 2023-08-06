@@ -101,6 +101,7 @@ fun EditTaskScreen(
                     }
                     DateTimeSelector(
                         taskDueDate,
+                        onClick = {},
                         onDateTimeSelected = { taskDueDate = it },
                         onClearDateTimeClick = { taskDueDate = null }
                     )

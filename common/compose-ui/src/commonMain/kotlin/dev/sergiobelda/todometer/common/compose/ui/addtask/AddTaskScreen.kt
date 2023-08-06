@@ -32,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTopAppBarState
@@ -79,8 +80,7 @@ fun AddTaskScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
 
     var discardTaskAlertDialogState by remember { mutableStateOf(false) }
-
-    var datePickerDialogState by remember { mutableStateOf(true) }
+    var datePickerDialogState by remember { mutableStateOf(false) }
 
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -174,6 +174,7 @@ fun AddTaskScreen(
                 item {
                     DateTimeSelector(
                         taskDueDate,
+                        onClick = { datePickerDialogState = true },
                         onDateTimeSelected = { taskDueDate = it },
                         onClearDateTimeClick = { taskDueDate = null }
                     )
@@ -231,8 +232,21 @@ fun AddTaskScreen(
     if (datePickerDialogState) {
         ToDometerDatePickerDialog(
             state = rememberDatePickerState(),
-            onDismissRequest = {  },
-            confirmButton = {}
+            onDismissRequest = { datePickerDialogState = false },
+            dismissButton = {
+                TextButton(
+                    onClick = { datePickerDialogState = false }
+                ) {
+                    Text(stringResource(MR.strings.cancel))
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {}
+                ) {
+                    Text(stringResource(MR.strings.ok))
+                }
+            }
         )
     }
 }
