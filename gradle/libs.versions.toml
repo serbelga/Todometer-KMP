@@ -46,7 +46,7 @@ sqlDelight = "2.0.0"
 testCoreKtx = "1.4.0"
 timber = "5.0.1"
 wear = "1.3.0-rc01"
-wearCompose = "1.1.2"
+wearCompose = "1.2.0"
 wearInput = "1.2.0-alpha02"
 
 [libraries]
