@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.android.gms.oss-licenses-plugin")
     kotlin("android")
-    kotlin("kapt")
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
 }
