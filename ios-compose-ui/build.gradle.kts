@@ -41,7 +41,6 @@ kotlin {
 
     sourceSets {
         val uikitMain by creating {
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             dependencies {
                 implementation(projects.common.composeUi)
                 implementation(projects.common.composeUiDesignsystem)

@@ -17,7 +17,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)

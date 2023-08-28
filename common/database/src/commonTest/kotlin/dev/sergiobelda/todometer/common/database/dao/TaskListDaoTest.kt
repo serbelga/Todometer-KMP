@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.database.testutils.taskListEntities
 import dev.sergiobelda.todometer.common.database.testutils.taskListEntity1
 import dev.sergiobelda.todometer.common.database.testutils.taskListEntity1Updated
 import dev.sergiobelda.todometer.common.database.testutils.taskListEntity2
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
@@ -31,7 +30,6 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class TaskListDaoTest : DatabaseTest() {
 
     private lateinit var taskListDao: TaskListDao

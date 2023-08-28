@@ -18,13 +18,11 @@ package dev.sergiobelda.todometer.common.database.dao
 
 import dev.sergiobelda.todometer.common.database.DatabaseTest
 import dev.sergiobelda.todometer.common.database.testutils.taskChecklistItemEntity
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class TaskChecklistItemDaoTest : DatabaseTest() {
 
     private lateinit var taskChecklistItemDao: ITaskChecklistItemDao

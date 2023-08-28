@@ -23,7 +23,6 @@ import dev.sergiobelda.todometer.common.database.testutils.taskEntity2
 import dev.sergiobelda.todometer.common.database.testutils.taskListEntity1
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
@@ -33,7 +32,6 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class TaskDaoTest : DatabaseTest() {
 
     private lateinit var taskDao: TaskDao
