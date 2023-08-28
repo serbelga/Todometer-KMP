@@ -16,16 +16,16 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.home
 
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 fun DeleteTasksAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskClick: () -> Unit) {
-    ToDometerAlertDialog(
+    AlertDialog(
         title = {
             Text(stringResource(MR.strings.delete_tasks))
         },
