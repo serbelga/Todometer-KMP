@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -151,7 +150,7 @@ internal fun TaskItem(
 @Composable
 internal expect fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color)
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TaskItemContent(
     taskItem: TaskItem,

@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.common.compose.ui.home
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -361,7 +360,6 @@ private fun SelectedTasksTopAppBar(
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun HomeFloatingActionButton(
     visible: Boolean,
