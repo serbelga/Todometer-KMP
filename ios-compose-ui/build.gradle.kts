@@ -48,7 +48,6 @@ kotlin {
                 implementation(projects.common.domain)
                 implementation(projects.common.ui)
 
-                implementation(compose.material)
                 implementation(compose.material3)
             }
         }
