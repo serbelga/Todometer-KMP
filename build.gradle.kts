@@ -16,9 +16,3 @@ buildscript {
         classpath(libs.google.ossLicensesPlugin)
     }
 }
-
-subprojects {
-    if (!project.name.contains("ios")) {
-        apply("${rootDir}/ktlint.gradle.kts")
-    }
-}
