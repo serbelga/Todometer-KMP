@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidApplication)
     kotlin("android")
-    kotlin("kapt")
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
 }
