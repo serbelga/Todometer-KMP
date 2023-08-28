@@ -16,16 +16,16 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.addtask
 
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerAlertDialog
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 internal fun DiscardTaskAlertDialog(onDismissRequest: () -> Unit, onConfirmButtonClick: () -> Unit) {
-    ToDometerAlertDialog(
+    AlertDialog(
         title = {
             Text(stringResource(MR.strings.discard_task_alert_dialog_title))
         },
