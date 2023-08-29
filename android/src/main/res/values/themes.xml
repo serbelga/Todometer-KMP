@@ -50,8 +50,7 @@
         <item name="elevationOverlayColor">@color/todometer_surfaceTint</item>
         <item name="colorPrimaryInverse">@color/todometer_inversePrimary</item>
 
-        <item name="android:statusBarColor">?attr/colorSurface</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="android:windowTranslucentStatus">true</item>
 
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.ToDometer.Material3.DisplayLarge</item>
         <item name="textAppearanceDisplayMedium">@style/TextAppearance.ToDometer.Material3.DisplayMedium</item>

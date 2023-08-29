@@ -20,9 +20,7 @@ import android.os.Build
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerDarkColors
@@ -50,14 +48,6 @@ actual fun ToDometerAppTheme(
         }
     } else {
         if (darkTheme) DarkColorScheme else LightColorScheme
-    }
-
-    val systemUiController = rememberSystemUiController()
-    SideEffect {
-        systemUiController.setSystemBarsColor(
-            color = colorScheme.surface,
-            darkIcons = !darkTheme
-        )
     }
 
     ToDometerTheme(

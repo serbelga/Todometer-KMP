@@ -1,5 +1,4 @@
 [versions]
-accompanist = "0.32.0"
 activity = "1.7.2"
 androidCompileSdk = "34"
 androidCore = "1.10.1"
@@ -50,8 +49,6 @@ wearCompose = "1.2.0"
 wearInput = "1.2.0-alpha02"
 
 [libraries]
-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
-
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activity" }

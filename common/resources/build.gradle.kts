@@ -28,11 +28,7 @@ kotlin {
             }
         }
         val commonTest by getting
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.material)
-            }
-        }
+        val androidMain by getting
         val androidUnitTest by getting
         val desktopMain by getting
         val desktopTest by getting
