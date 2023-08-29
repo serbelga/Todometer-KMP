@@ -112,4 +112,5 @@
         Are you sure? If you exit the current process without saving, you will lose the entered
         information.
     </string>
+    <string name="select_time">Select time</string>
 </resources>

@@ -111,4 +111,5 @@
     <string name="discard_task_alert_dialog_body">
         Estàs segur? Si ixes del procés actual sense guardar, perdràs la informació introduïda.
     </string>
+    <string name="select_time">Seleccionar hora</string>
 </resources>

@@ -41,7 +41,6 @@ import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 internal fun DateTimeSelector(
     taskDueDate: Long?,
     onClick: () -> Unit,
-    onDateTimeSelected: (Long?) -> Unit,
     onClearDateTimeClick: () -> Unit
 ) {
     Column {

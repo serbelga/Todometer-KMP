@@ -23,6 +23,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,8 +36,10 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -56,7 +61,6 @@ import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemFi
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDatePickerDialog
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -66,6 +70,8 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,7 +86,12 @@ fun AddTaskScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
 
     var discardTaskAlertDialogState by remember { mutableStateOf(false) }
+
     var datePickerDialogState by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState()
+
+    var timePickerDialogState by remember { mutableStateOf(false) }
+    val timePickerState = rememberTimePickerState()
 
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
@@ -175,7 +186,6 @@ fun AddTaskScreen(
                     DateTimeSelector(
                         taskDueDate,
                         onClick = { datePickerDialogState = true },
-                        onDateTimeSelected = { taskDueDate = it },
                         onClearDateTimeClick = { taskDueDate = null }
                     )
                 }
@@ -230,8 +240,7 @@ fun AddTaskScreen(
         }
     )
     if (datePickerDialogState) {
-        ToDometerDatePickerDialog(
-            state = rememberDatePickerState(),
+        DatePickerDialog(
             onDismissRequest = { datePickerDialogState = false },
             dismissButton = {
                 TextButton(
@@ -242,7 +251,50 @@ fun AddTaskScreen(
             },
             confirmButton = {
                 TextButton(
-                    onClick = {}
+                    onClick = {
+                        taskDueDate = datePickerState.selectedDateMillis
+                        datePickerDialogState = false
+                        timePickerDialogState = true
+                    }
+                ) {
+                    Text(stringResource(MR.strings.ok))
+                }
+            }
+        ) {
+            DatePicker(
+                state = datePickerState
+            )
+        }
+    }
+    if (timePickerDialogState) {
+        AlertDialog(
+            onDismissRequest = { timePickerDialogState = false },
+            title = {
+                Text(
+                    stringResource(MR.strings.select_time),
+                    style = MaterialTheme.typography.labelLarge
+                )
+            },
+            text = {
+                TimePicker(state = timePickerState)
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { timePickerDialogState = false }
+                ) {
+                    Text(stringResource(MR.strings.cancel))
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        timePickerDialogState = false
+
+                        val hourMilliseconds = timePickerState.hour.hours.inWholeMilliseconds
+                        val minuteMilliseconds = timePickerState.minute.minutes.inWholeMilliseconds
+
+                        taskDueDate = taskDueDate?.plus(hourMilliseconds + minuteMilliseconds)
+                    }
                 ) {
                     Text(stringResource(MR.strings.ok))
                 }
