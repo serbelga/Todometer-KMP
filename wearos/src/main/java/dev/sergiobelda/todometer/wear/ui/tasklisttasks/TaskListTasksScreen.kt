@@ -24,11 +24,15 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -36,8 +40,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedLayout
-import androidx.wear.compose.material.AutoCenteringParams
+import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
+import androidx.wear.compose.foundation.SwipeToReveal
+import androidx.wear.compose.foundation.createAnchors
+import androidx.wear.compose.foundation.lazy.AutoCenteringParams
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.lazy.items
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rememberRevealState
 import androidx.wear.compose.material.Chip
+import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.Icon
@@ -45,14 +58,10 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.ProgressIndicatorDefaults
 import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.ScalingLazyColumn
-import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
-import androidx.wear.compose.material.items
-import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -164,6 +173,7 @@ private fun TaskListProgressIndicator(progress: Float) {
     )
 }
 
+@OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 private fun TaskItem(
     taskItem: TaskItem,
@@ -173,38 +183,65 @@ private fun TaskItem(
 ) {
     val isTaskDone = taskItem.state == TaskState.DONE
     val textDecoration = if (isTaskDone) TextDecoration.LineThrough else TextDecoration.None
-    // Use SplitToggleChip if onClick is needed.
-    SplitToggleChip(
-        checked = isTaskDone,
-        onCheckedChange = {
-            if (isTaskDone) {
-                onDoingClick()
-            } else {
-                onDoneClick()
+    SwipeToReveal(
+        action = {
+            Chip(
+                onClick = { /*TODO*/ },
+                colors = ChipDefaults.chipColors(backgroundColor = MaterialTheme.colors.error),
+                border = ChipDefaults.chipBorder(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp)
+            ) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Icon(
+                        imageVector = Icons.Outlined.Delete,
+                        contentDescription = "Delete",
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
             }
         },
-        label = {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                color = MaterialTheme.colors.onSurface,
-                text = taskItem.title,
-                textDecoration = textDecoration
+        state = rememberRevealState(
+            anchors = createAnchors(
+                revealedAnchor = 0.4f,
+                revealingAnchor = 0.4f
             )
-        },
-        onClick = onClick,
-        toggleControl = {
-            if (isTaskDone) {
-                Icon(ToDometerIcons.TaskAlt, null)
-            } else {
-                Icon(ToDometerIcons.RadioButtonUnchecked, null)
-            }
-        },
-        colors = ToggleChipDefaults.splitToggleChipColors(
-            uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
-            checkedToggleControlColor = MaterialTheme.colors.primary
-        ),
-        modifier = Modifier.fillMaxWidth()
-    )
+        )
+    ) {
+        // Use SplitToggleChip if onClick is needed.
+        SplitToggleChip(
+            checked = isTaskDone,
+            onCheckedChange = {
+                if (isTaskDone) {
+                    onDoingClick()
+                } else {
+                    onDoneClick()
+                }
+            },
+            label = {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colors.onSurface,
+                    text = taskItem.title,
+                    textDecoration = textDecoration
+                )
+            },
+            onClick = onClick,
+            toggleControl = {
+                if (isTaskDone) {
+                    Icon(ToDometerIcons.TaskAlt, null)
+                } else {
+                    Icon(ToDometerIcons.RadioButtonUnchecked, null)
+                }
+            },
+            colors = ToggleChipDefaults.splitToggleChipColors(
+                uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
+                checkedToggleControlColor = MaterialTheme.colors.primary
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
 
 @Composable
