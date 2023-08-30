@@ -79,11 +79,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
 
-    implementation(libs.wear.wear)
     implementation(libs.wear.compose.foundation)
     implementation(libs.wear.compose.material)
     implementation(libs.wear.compose.navigation)
     implementation(libs.wear.input)
+    implementation(libs.wear.wear)
 
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
