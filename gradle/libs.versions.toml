@@ -7,6 +7,7 @@ androidJunit = "1.1.3"
 androidMinSdk = "24"
 androidTargetSdk = "34"
 androidWearMinSdk = "25"
+animationGraphicsAndroid = "1.5.0"
 appcompat = "1.6.1"
 composeCompiler = "1.4.8"
 composeMultiplatform = "1.5.1"
@@ -49,7 +50,11 @@ wearInput = "1.2.0-alpha02"
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+
+androidx-compose-animationGraphicsAndroid = { module = "androidx.compose.animation:animation-graphics-android", version.ref = "animationGraphicsAndroid" }
+
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidCore" }
 
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }

@@ -74,6 +74,8 @@ dependencies {
 
     implementation(libs.androidx.activityCompose)
 
+    implementation(libs.androidx.compose.animationGraphicsAndroid)
+
     implementation(libs.androidx.coreKtx)
 
     implementation(libs.androidx.lifecycle.runtime)

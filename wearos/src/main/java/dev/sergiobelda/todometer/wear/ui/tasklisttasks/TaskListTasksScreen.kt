@@ -23,6 +23,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,8 +35,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -41,6 +43,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedLayout
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
+import androidx.wear.compose.foundation.RevealValue.Companion.Covered
+import androidx.wear.compose.foundation.RevealValue.Companion.Revealing
 import androidx.wear.compose.foundation.SwipeToReveal
 import androidx.wear.compose.foundation.createAnchors
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
@@ -64,6 +68,7 @@ import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
+import dev.sergiobelda.todometer.common.compose.ui.R
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -173,7 +178,7 @@ private fun TaskListProgressIndicator(progress: Float) {
     )
 }
 
-@OptIn(ExperimentalWearFoundationApi::class)
+@OptIn(ExperimentalWearFoundationApi::class, ExperimentalAnimationGraphicsApi::class)
 @Composable
 private fun TaskItem(
     taskItem: TaskItem,
@@ -183,6 +188,14 @@ private fun TaskItem(
 ) {
     val isTaskDone = taskItem.state == TaskState.DONE
     val textDecoration = if (isTaskDone) TextDecoration.LineThrough else TextDecoration.None
+    val revealState = rememberRevealState(
+        anchors = createAnchors(
+            // TODO: Const values
+            revealingAnchor = 0.5f,
+            revealedAnchor = 0.5f
+        )
+    )
+    val deleteIcon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
     SwipeToReveal(
         action = {
             Chip(
@@ -195,19 +208,17 @@ private fun TaskItem(
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     Icon(
-                        imageVector = Icons.Outlined.Delete,
-                        contentDescription = "Delete",
+                        painter = rememberAnimatedVectorPainter(
+                            deleteIcon,
+                            atEnd = revealState.currentValue == Revealing
+                        ),
+                        contentDescription = stringResource(MR.strings.delete_task),
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
             }
         },
-        state = rememberRevealState(
-            anchors = createAnchors(
-                revealedAnchor = 0.4f,
-                revealingAnchor = 0.4f
-            )
-        )
+        state = revealState
     ) {
         // Use SplitToggleChip if onClick is needed.
         SplitToggleChip(
@@ -239,7 +250,8 @@ private fun TaskItem(
                 uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
                 checkedToggleControlColor = MaterialTheme.colors.primary
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            enabled = revealState.currentValue == Covered
         )
     }
 }
