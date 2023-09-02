@@ -25,15 +25,11 @@ import androidx.wear.compose.material.dialog.Alert
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
-internal fun DeleteTaskScreen(
-    taskId: String,
+internal fun DeleteTaskAlertDialog(
     onDeleteTask: () -> Unit,
-    navigateBack: () -> Unit,
-    deleteTaskViewModel: DeleteTaskViewModel = getViewModel(parameters = { parametersOf(taskId) })
+    onCancel: () -> Unit
 ) {
     Alert(
         icon = {
@@ -45,17 +41,12 @@ internal fun DeleteTaskScreen(
         title = {},
         content = { Text(stringResource(MR.strings.delete_task_question)) },
         positiveButton = {
-            Button(
-                onClick = {
-                    deleteTaskViewModel.deleteTask()
-                    onDeleteTask()
-                }
-            ) {
+            Button(onClick = onDeleteTask) {
                 Icon(ToDometerIcons.Check, null)
             }
         },
         negativeButton = {
-            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = navigateBack) {
+            Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = onCancel) {
                 Icon(ToDometerIcons.Close, null)
             }
         }

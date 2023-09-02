@@ -37,6 +37,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
@@ -77,6 +80,7 @@ import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -94,77 +98,94 @@ internal fun TaskListTasksScreen(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
-    Scaffold(
-        timeText = {
-            CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
-        },
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-    ) {
-        ScalingLazyColumn(
-            autoCentering = AutoCenteringParams(itemIndex = 2),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp
-            ),
-            state = scalingLazyListState,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth()
+    var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
+    var selectedTaskId by remember { mutableStateOf("") }
+    if (deleteTaskAlertDialogState) {
+        DeleteTaskAlertDialog(
+            onDeleteTask = {
+                taskListTasksViewModel.deleteTask(selectedTaskId)
+                deleteTaskAlertDialogState = false
+            },
+            onCancel = { deleteTaskAlertDialogState = false }
+        )
+    } else {
+        Scaffold(
+            timeText = {
+                CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
+            },
+            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
         ) {
-            if (!taskListTasksUiState.isLoadingTaskList) {
-                when {
-                    taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
-                        item { Text(stringResource(MR.strings.default_task_list_name)) }
+            ScalingLazyColumn(
+                autoCentering = AutoCenteringParams(itemIndex = 2),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp
+                ),
+                state = scalingLazyListState,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (!taskListTasksUiState.isLoadingTaskList) {
+                    when {
+                        taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
+                            item { Text(stringResource(MR.strings.default_task_list_name)) }
 
-                    taskListTasksUiState.taskList != null ->
-                        item { Text(taskListTasksUiState.taskList.name) }
-                }
-            }
-            item { Spacer(modifier = Modifier.height(4.dp)) }
-            when {
-                taskListTasksUiState.isLoadingTasks -> {
-                    item { ToDometerLoadingProgress() }
-                }
-
-                taskListTasksUiState.tasks.isEmpty() -> {
-                    item { Text(text = stringResource(MR.strings.no_tasks)) }
-                }
-
-                else -> {
-                    items(taskListTasksUiState.tasks, key = { it.id }) { task ->
-                        TaskItem(
-                            task,
-                            onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
-                            onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
-                            onClick = { openTask(task.id) }
-                        )
+                        taskListTasksUiState.taskList != null ->
+                            item { Text(taskListTasksUiState.taskList.name) }
                     }
                 }
-            }
-            item { Spacer(modifier = Modifier.height(4.dp)) }
-            if (!taskListTasksUiState.isLoadingTaskList) {
+                item { Spacer(modifier = Modifier.height(4.dp)) }
                 when {
-                    taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
-                        item {
-                            AddTaskButton { taskListTasksViewModel.insertTask(it) }
-                        }
+                    taskListTasksUiState.isLoadingTasks -> {
+                        item { ToDometerLoadingProgress() }
                     }
 
-                    taskListTasksUiState.taskList != null -> {
-                        item {
-                            AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                    taskListTasksUiState.tasks.isEmpty() -> {
+                        item { Text(text = stringResource(MR.strings.no_tasks)) }
+                    }
+
+                    else -> {
+                        items(taskListTasksUiState.tasks, key = { it.id }) { task ->
+                            TaskItem(
+                                task,
+                                onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
+                                onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
+                                onDeleteTask = {
+                                    // TODO: Refactor this assignment
+                                    selectedTaskId = task.id
+                                    deleteTaskAlertDialogState = true
+                                },
+                                onClick = { openTask(task.id) }
+                            )
                         }
-                        item {
-                            EditTaskListButton(taskListTasksUiState.taskList) {
-                                taskListTasksViewModel.updateTaskListName(it)
+                    }
+                }
+                item { Spacer(modifier = Modifier.height(4.dp)) }
+                if (!taskListTasksUiState.isLoadingTaskList) {
+                    when {
+                        taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
+                            item {
+                                AddTaskButton { taskListTasksViewModel.insertTask(it) }
                             }
                         }
-                        item { DeleteTaskListButton(deleteTaskList) }
+
+                        taskListTasksUiState.taskList != null -> {
+                            item {
+                                AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                            }
+                            item {
+                                EditTaskListButton(taskListTasksUiState.taskList) {
+                                    taskListTasksViewModel.updateTaskListName(it)
+                                }
+                            }
+                            item { DeleteTaskListButton(deleteTaskList) }
+                        }
                     }
                 }
             }
+            TaskListProgressIndicator(progress = animatedProgress)
         }
-        TaskListProgressIndicator(progress = animatedProgress)
     }
 }
 
@@ -184,6 +205,7 @@ private fun TaskItem(
     taskItem: TaskItem,
     onDoingClick: () -> Unit,
     onDoneClick: () -> Unit,
+    onDeleteTask: () -> Unit,
     onClick: () -> Unit
 ) {
     val isTaskDone = taskItem.state == TaskState.DONE
@@ -199,7 +221,7 @@ private fun TaskItem(
     SwipeToReveal(
         action = {
             Chip(
-                onClick = { /*TODO*/ },
+                onClick = onDeleteTask,
                 colors = ChipDefaults.chipColors(backgroundColor = MaterialTheme.colors.error),
                 border = ChipDefaults.chipBorder(),
                 modifier = Modifier

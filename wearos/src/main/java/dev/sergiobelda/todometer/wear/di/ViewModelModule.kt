@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.wear.di
 
-import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskViewModel
 import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListViewModel
 import dev.sergiobelda.todometer.wear.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailViewModel
@@ -35,6 +34,7 @@ internal val viewModelModule = module {
             get(),
             get(),
             get(),
+            get(),
             get()
         )
     }
@@ -42,9 +42,6 @@ internal val viewModelModule = module {
         DeleteTaskListViewModel(taskListId = parameters.get(), get())
     }
     viewModel { parameters ->
-        TaskDetailViewModel(taskId = parameters.get(), get(), get())
-    }
-    viewModel { parameters ->
-        DeleteTaskViewModel(taskId = parameters.get(), get())
+        TaskDetailViewModel(taskId = parameters.get(), get(), get(), get())
     }
 }
