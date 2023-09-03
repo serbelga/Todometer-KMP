@@ -32,8 +32,6 @@ interface ITaskListRepository {
      */
     fun getTaskLists(): Flow<Result<List<TaskList>>>
 
-    suspend fun refreshTaskList(id: String)
-
     /**
      * Inserts a [TaskList] given a [name].
      */
@@ -49,11 +47,8 @@ interface ITaskListRepository {
      */
     suspend fun updateTaskListName(id: String, name: String)
 
-    suspend fun refreshTaskLists()
-
     /**
      * Deletes a [TaskList] given its [id].
      */
     suspend fun deleteTaskList(id: String)
-    // suspend fun deleteTaskList(id: String): Result<String>
 }

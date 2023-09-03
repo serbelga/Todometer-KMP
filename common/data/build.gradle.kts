@@ -19,7 +19,6 @@ kotlin {
             dependencies {
                 implementation(projects.common.domain)
                 implementation(projects.common.database)
-                implementation(projects.common.network)
                 implementation(projects.common.preferences)
 
                 implementation(libs.kotlin.coroutinesCore)

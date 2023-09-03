@@ -35,8 +35,6 @@ interface ITaskRepository {
      */
     fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>>
 
-    suspend fun refreshTasks(taskListId: String)
-
     /**
      * Inserts a [Task] given a [title], [description], [taskListId] and [tag].
      */
@@ -59,7 +57,7 @@ interface ITaskRepository {
     suspend fun updateTaskState(id: String, state: TaskState)
 
     /**
-     * Deletes a [Task] given its [id].
+     * Deletes a [Task] given its [ids].
      */
     suspend fun deleteTasks(vararg ids: String)
 }

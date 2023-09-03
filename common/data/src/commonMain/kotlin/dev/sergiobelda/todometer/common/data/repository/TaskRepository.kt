@@ -17,10 +17,8 @@
 package dev.sergiobelda.todometer.common.data.repository
 
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskLocalDataSource
-import dev.sergiobelda.todometer.common.data.remotedatasource.ITaskRemoteDataSource
 import dev.sergiobelda.todometer.common.data.util.randomUUIDString
 import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -31,57 +29,14 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Repository for performing [Task] data operations.
  */
-class TaskRepository(
-    private val taskLocalDataSource: ITaskLocalDataSource,
-    private val taskRemoteDataSource: ITaskRemoteDataSource
-) : ITaskRepository {
+class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : ITaskRepository {
 
     override fun getTask(id: String): Flow<Result<Task>> =
         taskLocalDataSource.getTask(id)
 
     override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
         taskLocalDataSource.getTasks(taskListId)
-    /*taskLocalDataSource.getTasks(taskListId).map { result ->
-        result.doIfSuccess { tasks ->
-            synchronizeTasksRemotely(tasks.filter { !it.sync })
-            // TODO Remove ?: ""
-            refreshTasks(taskListId ?: "")
-        }
-    }*/
 
-    /**
-     * Synchronize a list of [Task] remotely.
-     * For each task, calls insert to remote service and if it goes successful
-     * sets sync flag to true.
-     */
-    private suspend fun synchronizeTasksRemotely(tasks: List<Task>) {
-        tasks.forEach { task ->
-            // TODO Maybe use Update
-            val result = taskRemoteDataSource.insertTask(
-                id = task.id,
-                title = task.title,
-                description = task.description,
-                taskListId = task.taskListId,
-                state = task.state,
-                tag = task.tag
-            )
-            result.doIfSuccess {
-                taskLocalDataSource.updateTaskSync(task.id, true)
-            }
-        }
-    }
-
-    override suspend fun refreshTasks(taskListId: String) {
-        val result = taskRemoteDataSource.getTasks(taskListId)
-        result.doIfSuccess { list ->
-            taskLocalDataSource.insertTasks(list)
-        }
-    }
-
-    /**
-     * Depending on whether the remote call is successful or not,
-     * inserts this task into the local database with true or false sync flag.
-     */
     override suspend fun insertTask(
         title: String,
         tag: Tag,
@@ -91,14 +46,6 @@ class TaskRepository(
     ): Result<String> {
         val taskId = randomUUIDString()
         val sync = false
-        /*taskRemoteDataSource.insertTask(
-            title = title, description = description, taskListId = taskListId, tag = tag
-        ).doIfSuccess {
-            taskId = it
-            sync = true
-        }.doIfError {
-            taskId = randomUUIDString()
-        }*/
         return taskLocalDataSource.insertTask(
             Task(
                 id = taskId,
@@ -115,22 +62,9 @@ class TaskRepository(
 
     override suspend fun updateTask(task: Task) = taskLocalDataSource.updateTask(task)
 
-    /**
-     * Update Task state locally and remotely. If remote call returns an error,
-     * sync flag for this task is set to false in local database.
-     */
     override suspend fun updateTaskState(id: String, state: TaskState) {
         taskLocalDataSource.updateTaskState(id, state)
-        /*taskRemoteDataSource.updateTaskState(id, state).doIfError {
-            taskLocalDataSource.updateTaskSync(id, false)
-        }*/
     }
 
-    /**
-     * It only removes task from local database if remote call is successful.
-     */
     override suspend fun deleteTasks(vararg ids: String) = taskLocalDataSource.deleteTasks(*ids)
-        /*taskRemoteDataSource.deleteTask(id).doIfSuccess {
-            taskLocalDataSource.deleteTask(id)
-        }*/
 }

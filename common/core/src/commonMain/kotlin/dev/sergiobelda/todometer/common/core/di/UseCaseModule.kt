@@ -38,8 +38,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelec
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.RefreshTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.domain.usecase.tasklist.RefreshTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
@@ -48,8 +46,6 @@ import org.koin.dsl.module
 
 internal val useCaseModule = module {
     singleOf(::GetTaskListsUseCase)
-    singleOf(::RefreshTaskListsUseCase)
-    singleOf(::RefreshTaskListSelectedUseCase)
     singleOf(::InsertTaskListUseCase)
     singleOf(::GetTaskUseCase)
     singleOf(::GetTaskListTasksUseCase)

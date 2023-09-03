@@ -13,7 +13,6 @@ composeMultiplatform = "1.5.0"
 dataStore = "1.1.0-alpha04"
 dependencyGraphGenerator = "0.8.0"
 espressoCore = "3.4.0"
-exposed = "0.43.0"
 firebaseBom = "32.2.3"
 firebaseCrashlyticsGradle = "2.9.9"
 glance = "1.0.0-rc01"
@@ -22,13 +21,11 @@ junit = "4.13.2"
 koinAndroid = "3.4.3"
 koinAndroidCompose = "3.4.6"
 koinCore = "3.4.3"
-koinKtor = "3.4.3"
 koinTest = "3.4.3"
 kotlin = "1.8.22"
 kotlinCoroutines = "1.7.3"
 kotlinDatetime = "0.4.1"
 ktlint = "0.50.0"
-ktor = "2.3.4"
 lifecycle = "2.6.1"
 material = "1.9.0"
 mockk = "1.13.7"
@@ -74,9 +71,6 @@ androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.re
 
 dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
 
-exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
-exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
-
 google-firebase-firebaseAnalyticsKtx = { module = "com.google.firebase:firebase-analytics-ktx" }
 google-firebase-firebaseCrashlyticsKtx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 google-firebase-firebaseBom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -90,7 +84,6 @@ junit = { module = "junit:junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinKtor" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinTest" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -101,24 +94,6 @@ kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.r
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
-
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
-ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
-ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-client-core-jvm = { module = "io.ktor:ktor-client-core-jvm", version.ref = "ktor" }
-ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
-ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktor" }
-ktor-serialization-gson = { module = "io.ktor:ktor-serialization-gson", version.ref = "ktor" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
-ktor-server-contentNegotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
-ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
-ktor-server-locations = { module = "io.ktor:ktor-server-locations", version.ref = "ktor" }
-ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
-ktor-server-tests = { module = "io.ktor:ktor-server-tests", version.ref = "ktor" }
-
-logback = "ch.qos.logback:logback-classic:1.4.11"
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 
@@ -156,7 +131,6 @@ dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", v
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 mokoResources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "mokoResources" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }

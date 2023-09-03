@@ -17,10 +17,8 @@
 package dev.sergiobelda.todometer.common.data.repository
 
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskListLocalDataSource
-import dev.sergiobelda.todometer.common.data.remotedatasource.ITaskListRemoteDataSource
 import dev.sergiobelda.todometer.common.data.util.randomUUIDString
 import dev.sergiobelda.todometer.common.domain.Result
-import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import kotlinx.coroutines.flow.Flow
@@ -29,8 +27,7 @@ import kotlinx.coroutines.flow.Flow
  * Repository for performing [TaskList] data operations.
  */
 class TaskListRepository(
-    private val taskListLocalDataSource: ITaskListLocalDataSource,
-    private val taskListRemoteDataSource: ITaskListRemoteDataSource
+    private val taskListLocalDataSource: ITaskListLocalDataSource
 ) : ITaskListRepository {
 
     override fun getTaskList(id: String): Flow<Result<TaskList>> =
@@ -39,51 +36,9 @@ class TaskListRepository(
     override fun getTaskLists(): Flow<Result<List<TaskList>>> =
         taskListLocalDataSource.getTaskLists()
 
-    /*taskListLocalDataSource.getTaskLists().map { result ->
-        result.doIfSuccess { taskLists ->
-            synchronizeTaskListsRemotely(taskLists.filter { !it.sync })
-            refreshTaskLists()
-        }
-    }
-
-    private suspend fun synchronizeTaskListsRemotely(taskLists: List<TaskList>) {
-        taskLists.forEach { taskList ->
-            val result = taskListRemoteDataSource.insertTaskList(
-                id = taskList.id,
-                name = taskList.name,
-                description = taskList.description
-            )
-            result.doIfSuccess {
-                taskListLocalDataSource.updateTaskList(
-                    taskList.copy(sync = true)
-                )
-            }
-        }
-    }*/
-
-    override suspend fun refreshTaskList(id: String) {
-        val taskListResult = taskListRemoteDataSource.getTaskList(id)
-        taskListResult.doIfSuccess { taskList ->
-            taskListLocalDataSource.insertTaskList(taskList)
-        }
-    }
-
-    override suspend fun refreshTaskLists() {
-        val taskListsResult = taskListRemoteDataSource.getTaskLists()
-        taskListsResult.doIfSuccess {
-            taskListLocalDataSource.insertTaskLists(it)
-        }
-    }
-
     override suspend fun insertTaskList(name: String): Result<String> {
         val taskListId = randomUUIDString()
         val sync = false
-        /*taskListRemoteDataSource.insertTaskList(name = name, description = "").doIfSuccess {
-            taskListId = it
-            sync = true
-        }.doIfError {
-            taskListId = randomUUIDString()
-        }*/
         return taskListLocalDataSource.insertTaskList(
             TaskList(
                 id = taskListId,
@@ -101,7 +56,4 @@ class TaskListRepository(
         taskListLocalDataSource.updateTaskListName(id, name)
 
     override suspend fun deleteTaskList(id: String) = taskListLocalDataSource.deleteTaskList(id)
-        /*taskListRemoteDataSource.deleteTaskList(id).doIfSuccess {
-            taskListLocalDataSource.deleteTaskList(id)
-        }*/
 }
