@@ -83,11 +83,3 @@
 * [moko-resources](https://github.com/icerockdev/moko-resources)
 
 <br/>
-
-### Desktop
-
-▶️ Run:
-
-```
-./gradlew :desktop:run
-```
