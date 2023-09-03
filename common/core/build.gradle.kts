@@ -24,7 +24,6 @@ kotlin {
                 implementation(projects.common.data)
                 implementation(projects.common.database)
                 implementation(projects.common.domain)
-                implementation(projects.common.network)
                 implementation(projects.common.preferences)
             }
         }

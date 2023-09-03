@@ -71,11 +71,6 @@
 * [Wear Compose](https://developer.android.com/jetpack/androidx/releases/wear-compose)
 * [Wear Compose Navigation](https://developer.android.com/reference/kotlin/androidx/wear/compose/navigation/package-summary)
 
-### 🚧 Backend
-
-* [Ktor Server](https://ktor.io/)
-* [Jetbrains Exposed](https://github.com/JetBrains/Exposed)
-
 ### Common
 
 * [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
@@ -88,19 +83,3 @@
 * [moko-resources](https://github.com/icerockdev/moko-resources)
 
 <br/>
-
-### Desktop
-
-▶️ Run:
-
-```
-./gradlew :desktop:run
-```
-
-### Backend
-
-▶️ Run:
-
-```
-cd backend && ./gradlew run
-```
