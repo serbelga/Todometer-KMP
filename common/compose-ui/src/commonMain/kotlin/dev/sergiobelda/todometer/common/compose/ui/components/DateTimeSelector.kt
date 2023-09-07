@@ -19,9 +19,11 @@ package dev.sergiobelda.todometer.common.compose.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -50,12 +52,12 @@ internal fun DateTimeSelector(
 ) {
     if (taskDueDate != null) {
         Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(Modifier.width(16.dp))
             TextButton(onClick = onDateClick) {
                 Text(
                     text = taskDueDate.dateFormat(),
                     color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(start = SectionPadding)
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
             TextButton(onClick = onTimeClick) {
