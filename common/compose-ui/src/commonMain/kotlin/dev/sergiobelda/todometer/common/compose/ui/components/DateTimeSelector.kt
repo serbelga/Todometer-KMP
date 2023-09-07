@@ -54,15 +54,15 @@ internal fun DateTimeSelector(
                 Text(
                     text = taskDueDate.dateFormat(),
                     color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(start = SectionPadding)
                 )
             }
             TextButton(onClick = onTimeClick) {
                 Text(
                     text = taskDueDate.timeFormat(),
                     color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(start = SectionPadding)
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
             IconButton(onClick = onClearDateTimeClick) {
