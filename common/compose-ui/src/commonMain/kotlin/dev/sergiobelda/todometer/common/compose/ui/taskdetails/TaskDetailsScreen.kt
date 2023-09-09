@@ -139,7 +139,6 @@ fun TaskDetailsScreen(
             )
         }
     }
-
 }
 
 private fun LazyListScope.taskTitle(task: Task) {

@@ -101,9 +101,9 @@ fun AddTaskScreen(
     val taskChecklistItems = mutableStateListOf<String>()
     fun initialValuesUpdated() =
         taskTitle.isNotBlank() ||
-                taskDueDate != null ||
-                taskDescription.isNotBlank() ||
-                taskChecklistItems.isNotEmpty()
+            taskDueDate != null ||
+            taskDescription.isNotBlank() ||
+            taskChecklistItems.isNotEmpty()
 
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
