@@ -31,8 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
@@ -43,51 +43,53 @@ fun EditTaskListScreen(
     editTaskList: (String) -> Unit,
     editTaskListUiState: EditTaskListUiState
 ) {
-    var taskListName by rememberSaveable { mutableStateOf("") }
-    var taskListNameInputError by remember { mutableStateOf(false) }
-    editTaskListUiState.taskList?.let { taskList ->
-        taskListName = taskList.name
-    }
-    Scaffold(
-        topBar = {
-            SaveActionTopAppBar(
-                navigateBack = navigateBack,
-                title = stringResource(MR.strings.edit_task_list),
-                isSaveButtonEnabled = !editTaskListUiState.isLoading && editTaskListUiState.taskList != null,
-                onSaveButtonClick = {
-                    if (taskListName.isBlank()) {
-                        taskListNameInputError = true
-                    } else {
-                        editTaskList(taskListName)
-                        navigateBack()
+    when {
+        editTaskListUiState.isLoading -> {
+            LoadingScreenDialog(navigateBack)
+        }
+
+        !editTaskListUiState.isLoading && editTaskListUiState.taskList != null -> {
+            var taskListName by rememberSaveable { mutableStateOf(editTaskListUiState.taskList.name) }
+            var taskListNameInputError by remember { mutableStateOf(false) }
+
+            Scaffold(
+                topBar = {
+                    SaveActionTopAppBar(
+                        navigateBack = navigateBack,
+                        title = stringResource(MR.strings.edit_task_list),
+                        isSaveButtonEnabled = !editTaskListUiState.isLoading,
+                        onSaveButtonClick = {
+                            if (taskListName.isBlank()) {
+                                taskListNameInputError = true
+                            } else {
+                                editTaskList(taskListName)
+                                navigateBack()
+                            }
+                        }
+                    )
+                },
+                content = { paddingValues ->
+                    Column(modifier = Modifier.padding(paddingValues)) {
+                        ToDometerTitledTextField(
+                            title = stringResource(MR.strings.name),
+                            value = taskListName,
+                            onValueChange = {
+                                taskListName = it
+                                taskListNameInputError = false
+                            },
+                            placeholder = { Text(stringResource(MR.strings.enter_task_list_name)) },
+                            singleLine = true,
+                            isError = taskListNameInputError,
+                            errorMessage = stringResource(MR.strings.field_not_empty),
+                            keyboardOptions = KeyboardOptions(
+                                capitalization = KeyboardCapitalization.Sentences,
+                                imeAction = ImeAction.Done
+                            ),
+                            modifier = Modifier.padding(TextFieldPadding)
+                        )
                     }
                 }
             )
-        },
-        content = { paddingValues ->
-            if (editTaskListUiState.isLoading) {
-                ToDometerContentLoadingProgress()
-            } else {
-                Column(modifier = Modifier.padding(paddingValues)) {
-                    ToDometerTitledTextField(
-                        title = stringResource(MR.strings.name),
-                        value = taskListName,
-                        onValueChange = {
-                            taskListName = it
-                            taskListNameInputError = false
-                        },
-                        placeholder = { Text(stringResource(MR.strings.enter_task_list_name)) },
-                        singleLine = true,
-                        isError = taskListNameInputError,
-                        errorMessage = stringResource(MR.strings.field_not_empty),
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Done
-                        ),
-                        modifier = Modifier.padding(TextFieldPadding)
-                    )
-                }
-            }
         }
-    )
+    }
 }

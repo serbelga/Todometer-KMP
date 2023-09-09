@@ -113,6 +113,10 @@ object ToDometerIcons {
         @Composable
         get() = painterResource(MR.images.ic_rounded_replay_24)
 
+    val Schedule: Painter
+        @Composable
+        get() = painterResource(MR.images.ic_rounded_schedule_24)
+
     val Settings: Painter
         @Composable
         get() = painterResource(MR.images.ic_rounded_settings_24)

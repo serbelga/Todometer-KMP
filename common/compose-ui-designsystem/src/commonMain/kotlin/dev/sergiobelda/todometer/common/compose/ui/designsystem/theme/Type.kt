@@ -61,7 +61,8 @@ object Type {
         bodyLarge = TextStyle(
             fontFamily = quickSandFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 16.sp
+            fontSize = 16.sp,
+            baselineShift = BaselineShift(+0.1f)
         ),
         bodyMedium = TextStyle(
             fontFamily = quickSandFontFamily,

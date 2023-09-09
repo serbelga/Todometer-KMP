@@ -64,14 +64,13 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDom
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.extensions.addStyledOptionalSuffix
+import dev.sergiobelda.todometer.common.compose.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -102,9 +101,9 @@ fun AddTaskScreen(
     val taskChecklistItems = mutableStateListOf<String>()
     fun initialValuesUpdated() =
         taskTitle.isNotBlank() ||
-            taskDueDate != null ||
-            taskDescription.isNotBlank() ||
-            taskChecklistItems.isNotEmpty()
+                taskDueDate != null ||
+                taskDescription.isNotBlank() ||
+                taskChecklistItems.isNotEmpty()
 
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
@@ -258,8 +257,9 @@ fun AddTaskScreen(
         DatePickerDialog(
             onDismissRequest = { datePickerDialogState = false },
             onConfirm = {
-                taskDueDate = datePickerState.selectedDateMillis
                 datePickerDialogState = false
+                taskDueDate =
+                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
             }
         ) {
             DatePicker(state = datePickerState)
@@ -270,11 +270,8 @@ fun AddTaskScreen(
             onDismissRequest = { timePickerDialogState = false },
             onConfirm = {
                 timePickerDialogState = false
-
-                val hourMilliseconds = timePickerState.hour.hours.inWholeMilliseconds
-                val minuteMilliseconds = timePickerState.minute.minutes.inWholeMilliseconds
-
-                taskDueDate = taskDueDate?.plus(hourMilliseconds + minuteMilliseconds)
+                taskDueDate =
+                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
             }
         ) {
             TimePicker(state = timePickerState)

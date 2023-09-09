@@ -2,6 +2,7 @@ package dev.sergiobelda.todometer.common.ui.extensions
 
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -22,6 +23,8 @@ fun Long.dateFormat(): String {
 
     return "${localDateTime.dayOfMonth.format(2)}-${localDateTime.monthNumber.format(2)}-${localDateTime.year}"
 }
+
+fun Long.localTime(): LocalTime = this.toLocalDateTime().time
 
 internal fun Long.toLocalDateTime(): LocalDateTime =
     Instant.fromEpochMilliseconds(this).toLocalDateTime(TimeZone.UTC)

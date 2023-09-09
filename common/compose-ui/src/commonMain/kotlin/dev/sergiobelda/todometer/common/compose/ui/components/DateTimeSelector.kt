@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,6 +33,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -44,29 +46,25 @@ import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
 
 @Composable
 internal fun DateTimeSelector(
-    taskDueDate: Long?,
+    dateMillis: Long?,
     onDateClick: () -> Unit,
     onTimeClick: () -> Unit,
     onEnterDateTimeClick: () -> Unit,
     onClearDateTimeClick: () -> Unit
 ) {
-    if (taskDueDate != null) {
+    if (dateMillis != null) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Spacer(Modifier.width(16.dp))
-            TextButton(onClick = onDateClick) {
-                Text(
-                    text = taskDueDate.dateFormat(),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-            TextButton(onClick = onTimeClick) {
-                Text(
-                    text = taskDueDate.timeFormat(),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
+            Spacer(Modifier.width(12.dp))
+            ClickableField(
+                onClick = onDateClick,
+                text = dateMillis.dateFormat(),
+                painter = ToDometerIcons.Event
+            )
+            ClickableField(
+                onClick = onTimeClick,
+                text = dateMillis.timeFormat(),
+                painter = ToDometerIcons.Schedule
+            )
             IconButton(onClick = onClearDateTimeClick) {
                 Icon(
                     ToDometerIcons.Close,
@@ -88,6 +86,30 @@ internal fun DateTimeSelector(
                     .fillMaxWidth()
             )
         }
+    }
+}
+
+@Composable
+private fun ClickableField(
+    onClick: () -> Unit,
+    text: String,
+    painter: Painter? = null
+) {
+    TextButton(onClick = onClick) {
+        painter?.let {
+            Icon(
+                it,
+                contentDescription = null,
+                modifier = Modifier.size(16.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        Spacer(modifier = Modifier.size(4.dp))
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 

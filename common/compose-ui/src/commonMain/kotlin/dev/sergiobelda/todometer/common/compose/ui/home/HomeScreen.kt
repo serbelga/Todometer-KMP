@@ -70,9 +70,9 @@ import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.compose.ui.loading.ContentLoadingProgress
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
@@ -224,7 +224,7 @@ fun HomeScreen(
                     )
                 }
                 if (homeUiState.isLoadingTasks) {
-                    ToDometerContentLoadingProgress()
+                    ContentLoadingProgress()
                 } else {
                     TasksListArea(
                         homeUiState.tasksDoing,
