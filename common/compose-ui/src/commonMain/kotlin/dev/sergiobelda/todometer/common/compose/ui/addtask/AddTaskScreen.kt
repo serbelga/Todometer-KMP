@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.DatePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,7 +33,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -45,18 +49,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
+import dev.sergiobelda.todometer.common.compose.ui.components.DatePickerDialog
 import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
+import dev.sergiobelda.todometer.common.compose.ui.components.TimePickerDialog
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.compose.ui.extensions.addStyledOptionalSuffix
+import dev.sergiobelda.todometer.common.compose.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
@@ -78,6 +87,12 @@ fun AddTaskScreen(
 
     var discardTaskAlertDialogState by remember { mutableStateOf(false) }
 
+    var datePickerDialogState by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState()
+
+    var timePickerDialogState by remember { mutableStateOf(false) }
+    val timePickerState = rememberTimePickerState()
+
     var taskTitle by rememberSaveable { mutableStateOf("") }
     var taskTitleInputError by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable { mutableStateOf("") }
@@ -90,6 +105,7 @@ fun AddTaskScreen(
             taskDueDate != null ||
             taskDescription.isNotBlank() ||
             taskChecklistItems.isNotEmpty()
+
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
             discardTaskAlertDialogState = true
@@ -163,20 +179,24 @@ fun AddTaskScreen(
                     )
                 }
                 item {
+                    FieldTitle(text = stringResource(MR.strings.choose_tag))
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
                 }
                 item {
+                    FieldTitle(text = stringResource(MR.strings.date_time).addStyledOptionalSuffix())
                     DateTimeSelector(
                         taskDueDate,
-                        onDateTimeSelected = { taskDueDate = it },
+                        onEnterDateTimeClick = { datePickerDialogState = true },
+                        onDateClick = { datePickerDialogState = true },
+                        onTimeClick = { timePickerDialogState = true },
                         onClearDateTimeClick = { taskDueDate = null }
                     )
                 }
                 item {
                     Text(
-                        text = stringResource(MR.strings.checklist),
+                        text = stringResource(MR.strings.checklist).addStyledOptionalSuffix(),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(
@@ -200,7 +220,7 @@ fun AddTaskScreen(
                 }
                 item {
                     ToDometerTitledTextField(
-                        title = stringResource(MR.strings.description),
+                        title = stringResource(MR.strings.description).addStyledOptionalSuffix(),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
                         placeholder = { Text(stringResource(MR.strings.enter_description)) },
@@ -223,6 +243,52 @@ fun AddTaskScreen(
                 )
             }
         }
+    )
+    if (datePickerDialogState) {
+        DatePickerDialog(
+            onDismissRequest = { datePickerDialogState = false },
+            onConfirm = {
+                datePickerDialogState = false
+                taskDueDate =
+                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+    if (timePickerDialogState) {
+        TimePickerDialog(
+            onDismissRequest = { timePickerDialogState = false },
+            onConfirm = {
+                timePickerDialogState = false
+                taskDueDate =
+                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
+            }
+        ) {
+            TimePicker(state = timePickerState)
+        }
+    }
+}
+
+@Composable
+private fun FieldTitle(text: String) {
+    Text(
+        text = text,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
+        modifier = Modifier.padding(horizontal = SectionPadding)
+    )
+}
+
+@Composable
+private fun FieldTitle(
+    text: AnnotatedString
+) {
+    Text(
+        text = text,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
+        modifier = Modifier.padding(horizontal = SectionPadding)
     )
 }
 

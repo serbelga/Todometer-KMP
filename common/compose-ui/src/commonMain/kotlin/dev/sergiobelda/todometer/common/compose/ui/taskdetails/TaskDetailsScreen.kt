@@ -51,9 +51,9 @@ import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemFi
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskTagIndicator
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerContentLoadingProgress
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.compose.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
@@ -76,66 +76,69 @@ fun TaskDetailsScreen(
     val lazyListState = rememberLazyListState()
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
+
+    when {
+        taskDetailsUiState.isLoadingTask -> {
+            LoadingScreenDialog(navigateBack)
+        }
+
+        !taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null -> {
+            Scaffold(
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            if (lazyListState.firstVisibleItemIndex > 0) {
+                                if (!taskDetailsUiState.isLoadingTask) {
+                                    Text(
+                                        taskDetailsUiState.task.title,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                            }
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = navigateBack) {
+                                Icon(
+                                    ToDometerIcons.NavigateBefore,
+                                    contentDescription = stringResource(MR.strings.back)
+                                )
+                            }
+                        },
+                        actions = {
+                            if (!taskDetailsUiState.isLoadingTask) {
+                                IconButton(onClick = navigateToEditTask) {
+                                    Icon(
+                                        ToDometerIcons.Edit,
+                                        contentDescription = stringResource(MR.strings.edit_task),
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                        },
+                        scrollBehavior = scrollBehavior
+                    )
+                },
+                content = { paddingValues ->
                     if (lazyListState.firstVisibleItemIndex > 0) {
-                        if (!taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null) {
-                            Text(
-                                taskDetailsUiState.task.title,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
+                        ToDometerDivider()
                     }
-                },
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            ToDometerIcons.NavigateBefore,
-                            contentDescription = stringResource(MR.strings.back)
-                        )
-                    }
-                },
-                actions = {
-                    if (!taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null) {
-                        IconButton(onClick = navigateToEditTask) {
-                            Icon(
-                                ToDometerIcons.Edit,
-                                contentDescription = stringResource(MR.strings.edit_task),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                },
-                scrollBehavior = scrollBehavior
-            )
-        },
-        content = { paddingValues ->
-            if (lazyListState.firstVisibleItemIndex > 0) {
-                ToDometerDivider()
-            }
-            if (taskDetailsUiState.isLoadingTask) {
-                ToDometerContentLoadingProgress()
-            } else {
-                taskDetailsUiState.task?.let { task ->
                     LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
-                        taskTitle(task)
-                        taskChips(task)
+                        taskTitle(taskDetailsUiState.task)
+                        taskChips(taskDetailsUiState.task)
                         taskChecklist(
                             taskDetailsUiState.taskChecklistItems,
                             onTaskChecklistItemClick = onTaskChecklistItemClick,
                             onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
                             onAddTaskCheckListItem = onAddTaskCheckListItem
                         )
-                        taskDescription(task.description)
+                        taskDescription(taskDetailsUiState.task.description)
                     }
                 }
-            }
+            )
         }
-    )
+    }
 }
 
 private fun LazyListScope.taskTitle(task: Task) {

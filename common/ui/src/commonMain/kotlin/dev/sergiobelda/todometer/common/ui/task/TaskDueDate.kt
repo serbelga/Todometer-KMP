@@ -16,12 +16,12 @@
 
 package dev.sergiobelda.todometer.common.ui.task
 
-import dev.sergiobelda.todometer.common.ui.extensions.format
+import dev.sergiobelda.todometer.common.ui.extensions.dateFormat
+import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
+import dev.sergiobelda.todometer.common.ui.extensions.toLocalDateTime
 import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.todayIn
 
 object TaskDueDate {
@@ -31,16 +31,13 @@ object TaskDueDate {
      * otherwise it displays dd-MM-yyyy HH:mm.
      */
     fun getDueDateFormatted(dueDate: Long): String {
-        val dueDateInstant: Instant = Instant.fromEpochMilliseconds(dueDate)
-        val dueDateLocalDateTime: LocalDateTime = dueDateInstant.toLocalDateTime(TimeZone.UTC)
-
+        val localDateTime: LocalDateTime = dueDate.toLocalDateTime()
         val todayLocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
 
-        val formattedHour = "${dueDateLocalDateTime.hour.format(2)}:${dueDateLocalDateTime.minute.format(2)}h"
-        return if (dueDateLocalDateTime.date.compareTo(todayLocalDate) == 0) {
-            formattedHour
+        return if (localDateTime.date.compareTo(todayLocalDate) == 0) {
+            dueDate.timeFormat()
         } else {
-            "${dueDateLocalDateTime.dayOfMonth.format(2)}-${dueDateLocalDateTime.monthNumber.format(2)}-${dueDateLocalDateTime.year} $formattedHour"
+            "${dueDate.dateFormat()} ${dueDate.timeFormat()}"
         }
     }
 }

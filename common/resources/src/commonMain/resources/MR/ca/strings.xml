@@ -51,8 +51,8 @@
     <string name="open_source_licenses">Llicències de codi obert</string>
     <string name="privacy_policy">Política de privacitat</string>
     <string name="enter_task_name">Introdueix el nom de la tasca</string>
-    <string name="enter_description">Introdueix una descripció (opcional)</string>
-    <string name="enter_date_time">Introdueix data i hora (opcional)</string>
+    <string name="enter_description">Introdueix una descripció</string>
+    <string name="enter_date_time">Introdueix data i hora</string>
     <string name="enter_task_list_name">Introdueix el nom de la llista de tasques</string>
     <string name="choose_tag">Tria una etiqueta</string>
     <string name="field_not_empty">El camp no pot quedar buit</string>
@@ -71,7 +71,7 @@
     <string name="task_list_name_input">Nom de la llista de tasques</string>
     <string name="checklist">Checklist</string>
     <string name="add_element">Afegir element</string>
-    <string name="add_element_optional">Afegir element (opcional)</string>
+    <string name="add_element_optional">Afegir element</string>
     <string name="cannot_delete_this_task_list">No es pot eliminar la llista predeterminada</string>
     <string name="cannot_edit_this_task_list">No es pot editar la llista predeterminada</string>
 
@@ -111,4 +111,6 @@
     <string name="discard_task_alert_dialog_body">
         Estàs segur? Si ixes del procés actual sense guardar, perdràs la informació introduïda.
     </string>
+    <string name="select_time">Seleccionar hora</string>
+    <string name="optional">Opcional</string>
 </resources>
