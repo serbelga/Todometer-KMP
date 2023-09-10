@@ -21,8 +21,6 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                // TODO: Remove material dependency when everything depend on material3.
-                api(compose.material)
                 api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.ui)
@@ -45,7 +43,6 @@ kotlin {
                 implementation(projects.common.android)
 
                 implementation(libs.androidx.navigation.compose)
-                implementation(libs.material)
             }
         }
         val androidUnitTest by getting
