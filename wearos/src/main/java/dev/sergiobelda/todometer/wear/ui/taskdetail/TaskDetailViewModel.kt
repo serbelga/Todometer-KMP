@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
@@ -31,7 +32,8 @@ import kotlinx.coroutines.launch
 class TaskDetailViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
-    private val updateTaskUseCase: UpdateTaskUseCase
+    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val deleteTasksUseCase: DeleteTasksUseCase
 ) : ViewModel() {
 
     var taskDetailUiState by mutableStateOf(TaskDetailUiState(isLoading = true))
@@ -63,5 +65,9 @@ class TaskDetailViewModel(
         taskDetailUiState.task?.let { task ->
             updateTaskUseCase(task.copy(title = title))
         }
+    }
+
+    fun deleteTask() = viewModelScope.launch {
+        deleteTasksUseCase(taskId)
     }
 }

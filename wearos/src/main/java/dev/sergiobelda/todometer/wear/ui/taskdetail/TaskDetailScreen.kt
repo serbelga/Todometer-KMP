@@ -28,65 +28,88 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.ScalingLazyColumn
-import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.components.ContentLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun TaskDetailScreen(
     taskId: String,
-    deleteTask: () -> Unit,
+    navigateBack: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
+    var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
 
-    Scaffold(
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-    ) {
-        ScalingLazyColumn(
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp
-            ),
-            state = scalingLazyListState,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth()
+    if (deleteTaskAlertDialogState) {
+        DeleteTaskAlertDialog(
+            onDeleteTask = {
+                taskDetailViewModel.deleteTask()
+                navigateBack()
+            },
+            onCancel = { deleteTaskAlertDialogState = false }
+        )
+    } else {
+        Scaffold(
+            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
         ) {
-            if (taskDetailUiState.isLoading) {
-                item { ToDometerLoadingProgress() }
-            } else {
-                taskDetailUiState.task?.let { task ->
-                    item {
-                        Text(text = task.title)
+            ScalingLazyColumn(
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp
+                ),
+                state = scalingLazyListState,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                when {
+                    taskDetailUiState.isLoading -> {
+                        item { ContentLoadingProgress() }
                     }
-                    item {
-                        Spacer(modifier = Modifier.height(24.dp))
-                    }
-                    item {
-                        EditTaskButton(taskDetailUiState.task) { taskDetailViewModel.updateTask(it) }
-                    }
-                    item {
-                        DeleteTaskButton { deleteTask() }
+                    else -> {
+                        taskDetailUiState.task?.let { task ->
+                            item {
+                                Text(text = task.title)
+                            }
+                            item {
+                                Spacer(modifier = Modifier.height(24.dp))
+                            }
+                            item {
+                                EditTaskButton(taskDetailUiState.task) {
+                                    taskDetailViewModel.updateTask(
+                                        it
+                                    )
+                                }
+                            }
+                            item {
+                                DeleteTaskButton { deleteTaskAlertDialogState = true }
+                            }
+                        }
                     }
                 }
             }

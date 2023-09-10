@@ -22,15 +22,8 @@ import androidx.navigation.NavHostController
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskDestination
-import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskScreen
-import dev.sergiobelda.todometer.wear.ui.deletetask.navigateToDeleteTask
-import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListDestination
-import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListScreen
-import dev.sergiobelda.todometer.wear.ui.deletetasklist.navigateToDeleteTaskList
 import dev.sergiobelda.todometer.wear.ui.home.HomeDestination
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wear.ui.home.popBackStackToHome
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailDestination
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wear.ui.taskdetail.navigateToTaskDetail
@@ -60,14 +53,6 @@ fun ToDometerNavHost(
             TaskListTasksScreen(
                 taskListId = taskListId,
                 openTask = action.navigateToTaskDetail,
-                deleteTaskList = { action.navigateToDeleteTaskList(taskListId) }
-            )
-        }
-        composable(DeleteTaskListDestination.route) { navBackStackEntry ->
-            val taskListId = DeleteTaskListDestination.navArgsTaskListId(navBackStackEntry)
-            DeleteTaskListScreen(
-                taskListId = taskListId,
-                onDeleteTaskList = action.popBackStackToHome,
                 navigateBack = { action.popBackStack() }
             )
         }
@@ -75,17 +60,6 @@ fun ToDometerNavHost(
             val taskId = TaskDetailDestination.navArgsTaskId(navBackStackEntry)
             TaskDetailScreen(
                 taskId = taskId,
-                deleteTask = { action.navigateToDeleteTask(taskId) }
-            )
-        }
-        composable(DeleteTaskDestination.route) { navBackStackEntry ->
-            val taskId = DeleteTaskDestination.navArgsTaskId(navBackStackEntry)
-            DeleteTaskScreen(
-                taskId = taskId,
-                onDeleteTask = {
-                    action.popBackStack()
-                    action.navigateUp()
-                },
                 navigateBack = { action.popBackStack() }
             )
         }

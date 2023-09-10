@@ -34,27 +34,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material.AutoCenteringParams
+import androidx.wear.compose.foundation.lazy.AutoCenteringParams
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.lazy.items
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.ScalingLazyColumn
-import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
-import androidx.wear.compose.material.items
-import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.components.ContentLoadingProgress
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -82,21 +82,24 @@ internal fun HomeScreen(
         ) {
             item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            if (homeUiState.isLoading) {
-                item { ToDometerLoadingProgress() }
-            } else {
-                item {
-                    TaskListItem(
-                        stringResource(MR.strings.default_task_list_name),
-                        onClick = { openTaskList(null) }
-                    )
+            when {
+                homeUiState.isLoading -> {
+                    item { ContentLoadingProgress() }
                 }
-                items(homeUiState.taskLists) { taskList ->
-                    TaskListItem(taskList.name) { openTaskList(taskList.id) }
-                }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                item {
-                    AddTaskListButton { homeViewModel.insertTaskList(it) }
+                else -> {
+                    item {
+                        TaskListItem(
+                            stringResource(MR.strings.default_task_list_name),
+                            onClick = { openTaskList(null) }
+                        )
+                    }
+                    items(homeUiState.taskLists) { taskList ->
+                        TaskListItem(taskList.name) { openTaskList(taskList.id) }
+                    }
+                    item { Spacer(modifier = Modifier.height(4.dp)) }
+                    item {
+                        AddTaskListButton { homeViewModel.insertTaskList(it) }
+                    }
                 }
             }
         }

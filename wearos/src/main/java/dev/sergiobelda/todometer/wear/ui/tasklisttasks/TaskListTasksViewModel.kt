@@ -23,10 +23,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
 import kotlinx.coroutines.launch
@@ -38,7 +40,9 @@ class TaskListTasksViewModel(
     private val insertTaskUseCase: InsertTaskUseCase,
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
-    private val updateTaskListNameUseCase: UpdateTaskListNameUseCase
+    private val updateTaskListNameUseCase: UpdateTaskListNameUseCase,
+    private val deleteTasksUseCase: DeleteTasksUseCase,
+    private val deleteTaskListUseCase: DeleteTaskListUseCase
 ) : ViewModel() {
 
     var taskListTasksUiState by mutableStateOf(
@@ -102,5 +106,13 @@ class TaskListTasksViewModel(
 
     fun updateTaskListName(name: String) = viewModelScope.launch {
         updateTaskListNameUseCase(taskListId, name)
+    }
+
+    fun deleteTask(id: String) = viewModelScope.launch {
+        deleteTasksUseCase(id)
+    }
+
+    fun deleteTaskList() = viewModelScope.launch {
+        deleteTaskListUseCase(taskListId)
     }
 }
