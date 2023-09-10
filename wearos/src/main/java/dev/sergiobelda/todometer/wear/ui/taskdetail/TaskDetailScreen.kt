@@ -50,7 +50,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.components.ContentLoadingProgress
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -87,25 +87,28 @@ internal fun TaskDetailScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                if (taskDetailUiState.isLoading) {
-                    item { ToDometerLoadingProgress() }
-                } else {
-                    taskDetailUiState.task?.let { task ->
-                        item {
-                            Text(text = task.title)
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(24.dp))
-                        }
-                        item {
-                            EditTaskButton(taskDetailUiState.task) {
-                                taskDetailViewModel.updateTask(
-                                    it
-                                )
+                when {
+                    taskDetailUiState.isLoading -> {
+                        item { ContentLoadingProgress() }
+                    }
+                    else -> {
+                        taskDetailUiState.task?.let { task ->
+                            item {
+                                Text(text = task.title)
                             }
-                        }
-                        item {
-                            DeleteTaskButton { deleteTaskAlertDialogState = true }
+                            item {
+                                Spacer(modifier = Modifier.height(24.dp))
+                            }
+                            item {
+                                EditTaskButton(taskDetailUiState.task) {
+                                    taskDetailViewModel.updateTask(
+                                        it
+                                    )
+                                }
+                            }
+                            item {
+                                DeleteTaskButton { deleteTaskAlertDialogState = true }
+                            }
                         }
                     }
                 }

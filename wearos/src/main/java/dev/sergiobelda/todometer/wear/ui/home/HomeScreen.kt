@@ -54,7 +54,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.components.ContentLoadingProgress
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -82,21 +82,24 @@ internal fun HomeScreen(
         ) {
             item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            if (homeUiState.isLoading) {
-                item { ToDometerLoadingProgress() }
-            } else {
-                item {
-                    TaskListItem(
-                        stringResource(MR.strings.default_task_list_name),
-                        onClick = { openTaskList(null) }
-                    )
+            when {
+                homeUiState.isLoading -> {
+                    item { ContentLoadingProgress() }
                 }
-                items(homeUiState.taskLists) { taskList ->
-                    TaskListItem(taskList.name) { openTaskList(taskList.id) }
-                }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                item {
-                    AddTaskListButton { homeViewModel.insertTaskList(it) }
+                else -> {
+                    item {
+                        TaskListItem(
+                            stringResource(MR.strings.default_task_list_name),
+                            onClick = { openTaskList(null) }
+                        )
+                    }
+                    items(homeUiState.taskLists) { taskList ->
+                        TaskListItem(taskList.name) { openTaskList(taskList.id) }
+                    }
+                    item { Spacer(modifier = Modifier.height(4.dp)) }
+                    item {
+                        AddTaskListButton { homeViewModel.insertTaskList(it) }
+                    }
                 }
             }
         }

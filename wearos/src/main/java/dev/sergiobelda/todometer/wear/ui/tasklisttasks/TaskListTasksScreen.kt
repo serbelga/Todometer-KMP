@@ -79,8 +79,9 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
-import dev.sergiobelda.todometer.wear.ui.components.ToDometerLoadingProgress
+import dev.sergiobelda.todometer.wear.ui.components.ContentLoadingProgress
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
+import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListAlertDialog
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -88,7 +89,7 @@ import org.koin.core.parameter.parametersOf
 internal fun TaskListTasksScreen(
     taskListId: String,
     openTask: (String) -> Unit,
-    deleteTaskList: () -> Unit,
+    navigateBack: () -> Unit,
     taskListTasksViewModel: TaskListTasksViewModel = getViewModel { parametersOf(taskListId) }
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
@@ -99,92 +100,111 @@ internal fun TaskListTasksScreen(
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
+    var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
     var selectedTaskId by remember { mutableStateOf("") }
-    if (deleteTaskAlertDialogState) {
-        DeleteTaskAlertDialog(
-            onDeleteTask = {
-                taskListTasksViewModel.deleteTask(selectedTaskId)
-                deleteTaskAlertDialogState = false
-            },
-            onCancel = { deleteTaskAlertDialogState = false }
-        )
-    } else {
-        Scaffold(
-            timeText = {
-                CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
-            },
-            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-        ) {
-            ScalingLazyColumn(
-                autoCentering = AutoCenteringParams(itemIndex = 2),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp
-                ),
-                state = scalingLazyListState,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
+    when {
+        deleteTaskAlertDialogState -> {
+            DeleteTaskAlertDialog(
+                onDeleteTask = {
+                    taskListTasksViewModel.deleteTask(selectedTaskId)
+                    deleteTaskAlertDialogState = false
+                },
+                onCancel = { deleteTaskAlertDialogState = false }
+            )
+        }
+        deleteTaskListAlertDialogState -> {
+            DeleteTaskListAlertDialog(
+                onDeleteTaskList = {
+                    taskListTasksViewModel.deleteTaskList()
+                    navigateBack()
+                },
+                onCancel = { deleteTaskListAlertDialogState = false }
+            )
+        }
+        else -> {
+            Scaffold(
+                timeText = {
+                    CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
+                },
+                positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
             ) {
-                if (!taskListTasksUiState.isLoadingTaskList) {
-                    when {
-                        taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
-                            item { Text(stringResource(MR.strings.default_task_list_name)) }
+                ScalingLazyColumn(
+                    autoCentering = AutoCenteringParams(itemIndex = 2),
+                    contentPadding = PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp
+                    ),
+                    state = scalingLazyListState,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (!taskListTasksUiState.isLoadingTaskList) {
+                        when {
+                            taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList ->
+                                item { Text(stringResource(MR.strings.default_task_list_name)) }
 
-                        taskListTasksUiState.taskList != null ->
-                            item { Text(taskListTasksUiState.taskList.name) }
-                    }
-                }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                when {
-                    taskListTasksUiState.isLoadingTasks -> {
-                        item { ToDometerLoadingProgress() }
-                    }
-
-                    taskListTasksUiState.tasks.isEmpty() -> {
-                        item { Text(text = stringResource(MR.strings.no_tasks)) }
-                    }
-
-                    else -> {
-                        items(taskListTasksUiState.tasks, key = { it.id }) { task ->
-                            TaskItem(
-                                task,
-                                onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
-                                onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
-                                onDeleteTask = {
-                                    // TODO: Refactor this assignment
-                                    selectedTaskId = task.id
-                                    deleteTaskAlertDialogState = true
-                                },
-                                onClick = { openTask(task.id) }
-                            )
+                            taskListTasksUiState.taskList != null ->
+                                item { Text(taskListTasksUiState.taskList.name) }
                         }
                     }
-                }
-                item { Spacer(modifier = Modifier.height(4.dp)) }
-                if (!taskListTasksUiState.isLoadingTaskList) {
+                    item { Spacer(modifier = Modifier.height(4.dp)) }
                     when {
-                        taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
-                            item {
-                                AddTaskButton { taskListTasksViewModel.insertTask(it) }
-                            }
+                        taskListTasksUiState.isLoadingTasks -> {
+                            item { ContentLoadingProgress() }
                         }
 
-                        taskListTasksUiState.taskList != null -> {
-                            item {
-                                AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                        taskListTasksUiState.tasks.isEmpty() -> {
+                            item { Text(text = stringResource(MR.strings.no_tasks)) }
+                        }
+
+                        else -> {
+                            items(taskListTasksUiState.tasks, key = { it.id }) { task ->
+                                TaskItem(
+                                    task,
+                                    onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
+                                    onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
+                                    onDeleteTask = {
+                                        // TODO: Refactor this assignment
+                                        selectedTaskId = task.id
+                                        deleteTaskAlertDialogState = true
+                                    },
+                                    onClick = { openTask(task.id) }
+                                )
                             }
-                            item {
-                                EditTaskListButton(taskListTasksUiState.taskList) {
-                                    taskListTasksViewModel.updateTaskListName(it)
+                        }
+                    }
+                    item { Spacer(modifier = Modifier.height(4.dp)) }
+                    if (!taskListTasksUiState.isLoadingTaskList) {
+                        when {
+                            taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
+                                item {
+                                    AddTaskButton { taskListTasksViewModel.insertTask(it) }
                                 }
                             }
-                            item { DeleteTaskListButton(deleteTaskList) }
+
+                            taskListTasksUiState.taskList != null -> {
+                                item {
+                                    AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                                }
+                                item {
+                                    EditTaskListButton(taskListTasksUiState.taskList) {
+                                        taskListTasksViewModel.updateTaskListName(it)
+                                    }
+                                }
+                                item {
+                                    DeleteTaskListButton(
+                                        onClick = {
+                                            deleteTaskListAlertDialogState = true
+                                        }
+                                    )
+                                }
+                            }
                         }
                     }
                 }
+                TaskListProgressIndicator(progress = animatedProgress)
             }
-            TaskListProgressIndicator(progress = animatedProgress)
         }
     }
 }

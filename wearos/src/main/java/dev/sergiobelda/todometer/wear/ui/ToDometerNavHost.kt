@@ -22,12 +22,8 @@ import androidx.navigation.NavHostController
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListDestination
-import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListScreen
-import dev.sergiobelda.todometer.wear.ui.deletetasklist.navigateToDeleteTaskList
 import dev.sergiobelda.todometer.wear.ui.home.HomeDestination
 import dev.sergiobelda.todometer.wear.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wear.ui.home.popBackStackToHome
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailDestination
 import dev.sergiobelda.todometer.wear.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wear.ui.taskdetail.navigateToTaskDetail
@@ -57,14 +53,6 @@ fun ToDometerNavHost(
             TaskListTasksScreen(
                 taskListId = taskListId,
                 openTask = action.navigateToTaskDetail,
-                deleteTaskList = { action.navigateToDeleteTaskList(taskListId) }
-            )
-        }
-        composable(DeleteTaskListDestination.route) { navBackStackEntry ->
-            val taskListId = DeleteTaskListDestination.navArgsTaskListId(navBackStackEntry)
-            DeleteTaskListScreen(
-                taskListId = taskListId,
-                onDeleteTaskList = action.popBackStackToHome,
                 navigateBack = { action.popBackStack() }
             )
         }
