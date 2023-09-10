@@ -49,6 +49,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
@@ -178,23 +179,13 @@ fun AddTaskScreen(
                     )
                 }
                 item {
-                    Text(
-                        text = stringResource(MR.strings.choose_tag),
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.labelLarge,
-                        modifier = Modifier.padding(horizontal = SectionPadding)
-                    )
+                    FieldTitle(text = stringResource(MR.strings.choose_tag))
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
                 }
                 item {
-                    Text(
-                        text = stringResource(MR.strings.date_time).addStyledOptionalSuffix(),
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.labelLarge,
-                        modifier = Modifier.padding(horizontal = SectionPadding)
-                    )
+                    FieldTitle(text = stringResource(MR.strings.date_time).addStyledOptionalSuffix())
                     DateTimeSelector(
                         taskDueDate,
                         onEnterDateTimeClick = { datePickerDialogState = true },
@@ -277,6 +268,28 @@ fun AddTaskScreen(
             TimePicker(state = timePickerState)
         }
     }
+}
+
+@Composable
+private fun FieldTitle(text: String) {
+    Text(
+        text = text,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
+        modifier = Modifier.padding(horizontal = SectionPadding)
+    )
+}
+
+@Composable
+private fun FieldTitle(
+    text: AnnotatedString
+) {
+    Text(
+        text = text,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
+        modifier = Modifier.padding(horizontal = SectionPadding)
+    )
 }
 
 @Composable
