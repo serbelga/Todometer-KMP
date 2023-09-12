@@ -89,4 +89,8 @@ dependencies {
     implementation(platform(libs.google.firebase.firebaseBom))
     implementation(libs.google.firebase.firebaseAnalyticsKtx)
     implementation(libs.google.firebase.firebaseCrashlyticsKtx)
+
+    // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
+    // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved
+    compileOnly(libs.kotlin.serialization.json)
 }
