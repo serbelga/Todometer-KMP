@@ -22,18 +22,25 @@ import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
@@ -50,8 +57,9 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.ToDometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.wear.ui.components.ContentLoadingProgress
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
+import dev.sergiobelda.todometer.wear.ui.loading.ContentLoadingProgress
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -61,53 +69,71 @@ internal fun TaskDetailScreen(
     navigateBack: () -> Unit,
     taskDetailViewModel: TaskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
 ) {
-    val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
 
-    if (deleteTaskAlertDialogState) {
-        DeleteTaskAlertDialog(
-            onDeleteTask = {
-                taskDetailViewModel.deleteTask()
-                navigateBack()
-            },
-            onCancel = { deleteTaskAlertDialogState = false }
-        )
-    } else {
-        Scaffold(
-            positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
-        ) {
-            ScalingLazyColumn(
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp
-                ),
-                state = scalingLazyListState,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
+    when {
+        deleteTaskAlertDialogState -> {
+            DeleteTaskAlertDialog(
+                onDeleteTask = {
+                    taskDetailViewModel.deleteTask()
+                    navigateBack()
+                },
+                onCancel = { deleteTaskAlertDialogState = false }
+            )
+        }
+
+        else -> {
+            val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
+            val focusRequester = remember { FocusRequester() }
+            val coroutineScope = rememberCoroutineScope()
+
+            Scaffold(
+                positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
             ) {
-                when {
-                    taskDetailUiState.isLoading -> {
-                        item { ContentLoadingProgress() }
-                    }
-                    else -> {
-                        taskDetailUiState.task?.let { task ->
-                            item {
-                                Text(text = task.title)
+                LaunchedEffect(Unit) { focusRequester.requestFocus() }
+                ScalingLazyColumn(
+                    contentPadding = PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp
+                    ),
+                    state = scalingLazyListState,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .onRotaryScrollEvent {
+                            coroutineScope.launch {
+                                scalingLazyListState.scrollBy(it.verticalScrollPixels)
                             }
-                            item {
-                                Spacer(modifier = Modifier.height(24.dp))
-                            }
-                            item {
-                                EditTaskButton(taskDetailUiState.task) {
-                                    taskDetailViewModel.updateTask(
-                                        it
-                                    )
+                            true
+                        }
+                        .focusRequester(focusRequester)
+                        .focusable()
+                ) {
+                    when {
+                        taskDetailUiState.isLoading -> {
+                            item { ContentLoadingProgress() }
+                        }
+
+                        else -> {
+                            taskDetailUiState.task?.let { task ->
+                                item {
+                                    Text(text = task.title)
                                 }
-                            }
-                            item {
-                                DeleteTaskButton { deleteTaskAlertDialogState = true }
+                                item {
+                                    Spacer(modifier = Modifier.height(24.dp))
+                                }
+                                item {
+                                    EditTaskButton(taskDetailUiState.task) {
+                                        taskDetailViewModel.updateTask(
+                                            it
+                                        )
+                                    }
+                                }
+                                item {
+                                    DeleteTaskButton { deleteTaskAlertDialogState = true }
+                                }
                             }
                         }
                     }
