@@ -23,13 +23,13 @@ import dev.icerock.moko.resources.compose.painterResource
 object ToDometerSymbols {
     val IsotypeDark: Painter
         @Composable
-        get() = painterResource(MR.images.isotype_dark)
+        get() = painterResource(MR.images.isotype_cut_dark_48)
 
     val IsotypeLight: Painter
         @Composable
-        get() = painterResource(MR.images.isotype_light)
+        get() = painterResource(MR.images.isotype_cut_light_48)
 
     val IsotypeMonochrome: Painter
         @Composable
-        get() = painterResource(MR.images.isotype_monochrome)
+        get() = painterResource(MR.images.isotype_cut_monochrome_48)
 }

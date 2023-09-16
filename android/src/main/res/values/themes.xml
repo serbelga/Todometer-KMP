@@ -17,7 +17,7 @@
     <style name="Theme.ToDometer.Starting" parent="Theme.SplashScreen">
         <item name="postSplashScreenTheme">@style/Theme.ToDometer.NoActionBar</item>
 
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splashscreen_launcher_foreground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="windowSplashScreenBackground">@color/todometer_background</item>
     </style>
 

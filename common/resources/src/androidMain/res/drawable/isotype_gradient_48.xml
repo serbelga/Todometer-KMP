@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2023 Sergio Belda
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+  <path
+      android:pathData="M13.11,33.268L39.882,6.496C41.221,5.157 43.392,5.157 44.731,6.496L46.811,8.576C48.15,9.915 48.15,12.086 46.811,13.425L20.039,40.196L13.11,33.268Z"
+      android:fillColor="#0059C1"/>
+  <path
+      android:pathData="M13.11,33.268L17.338,29.04L24.267,35.968L20.039,40.196L13.11,33.268Z">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:startX="19.91"
+          android:startY="33.018"
+          android:endX="15.488"
+          android:endY="37.441"
+          android:type="linear">
+        <item android:offset="0" android:color="#FF0059C1"/>
+        <item android:offset="1" android:color="#00073042"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path
+      android:pathData="M2.07,32.455C-0.608,29.777 -0.589,25.416 2.089,22.738C3.093,21.734 4.729,21.727 5.733,22.731L21.619,38.617L19.774,40.461C17.096,43.139 12.754,43.139 10.076,40.461L2.07,32.455Z"
+      android:fillColor="#4285F4"/>
+</vector>
