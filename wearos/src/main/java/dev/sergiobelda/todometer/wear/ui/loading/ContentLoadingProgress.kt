@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.ui.components
+package dev.sergiobelda.todometer.wear.ui.loading
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
