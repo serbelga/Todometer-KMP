@@ -81,6 +81,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
 
+    implementation(libs.androidx.splashscreen)
+
     implementation(libs.wear.compose.foundation)
     implementation(libs.wear.compose.material)
     implementation(libs.wear.compose.navigation)

@@ -24,7 +24,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.DeviceDefault">
+        android:theme="@style/Theme.ToDometer.Starting">
 
         <uses-library
             android:name="com.google.android.wearable"
