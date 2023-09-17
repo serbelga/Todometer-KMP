@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
@@ -70,7 +70,7 @@ fun EditTaskListScreen(
                 },
                 content = { paddingValues ->
                     Column(modifier = Modifier.padding(paddingValues)) {
-                        ToDometerTitledTextField(
+                        TodometerTitledTextField(
                             title = stringResource(MR.strings.name),
                             value = taskListName,
                             onValueChange = {

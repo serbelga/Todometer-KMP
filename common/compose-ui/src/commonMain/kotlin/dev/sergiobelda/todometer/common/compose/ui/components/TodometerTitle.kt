@@ -28,32 +28,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
+import dev.sergiobelda.todometer.common.resources.TodometerSymbols
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-internal fun ToDometerTitle(modifier: Modifier = Modifier) {
+internal fun TodometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = ToDometerSymbols.IsotypeMonochrome,
+            painter = TodometerSymbols.IsotypeMonochrome,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null,
-            modifier = Modifier.size(ToDometerTitleIconSize)
+            modifier = Modifier.size(TodometerTitleIconSize)
         )
         Text(
             text = stringResource(MR.strings.app_name),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(
-                start = ToDometerTitleTextPaddingStart,
-                bottom = ToDometerTitleTextPaddingBottom
+                start = TodometerTitleTextPaddingStart,
+                bottom = TodometerTitleTextPaddingBottom
             )
         )
     }
 }
 
-private val ToDometerTitleIconSize: Dp = 24.dp
-private val ToDometerTitleTextPaddingStart: Dp = 6.dp
-private val ToDometerTitleTextPaddingBottom: Dp = 4.dp
+private val TodometerTitleIconSize: Dp = 24.dp
+private val TodometerTitleTextPaddingStart: Dp = 6.dp
+private val TodometerTitleTextPaddingBottom: Dp = 4.dp

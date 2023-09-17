@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.extensions.dateFormat
 import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
@@ -58,16 +58,16 @@ internal fun DateTimeSelector(
             ClickableField(
                 onClick = onDateClick,
                 text = dateMillis.dateFormat(),
-                painter = ToDometerIcons.Event
+                painter = TodometerIcons.Event
             )
             ClickableField(
                 onClick = onTimeClick,
                 text = dateMillis.timeFormat(),
-                painter = ToDometerIcons.Schedule
+                painter = TodometerIcons.Schedule
             )
             IconButton(onClick = onClearDateTimeClick) {
                 Icon(
-                    ToDometerIcons.Close,
+                    TodometerIcons.Close,
                     stringResource(MR.strings.clear),
                     tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 )

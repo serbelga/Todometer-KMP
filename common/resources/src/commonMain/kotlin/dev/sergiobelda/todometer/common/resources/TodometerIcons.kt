@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import dev.icerock.moko.resources.compose.painterResource
 
-object ToDometerIcons {
+object TodometerIcons {
     val Add: Painter
         @Composable
         get() = painterResource(MR.images.ic_rounded_add_24)

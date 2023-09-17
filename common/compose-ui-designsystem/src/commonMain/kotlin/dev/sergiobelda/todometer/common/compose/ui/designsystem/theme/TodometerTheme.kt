@@ -25,25 +25,25 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 
-internal val LocalToDometerColors = staticCompositionLocalOf { toDometerLightColors() }
+internal val LocalTodometerColors = staticCompositionLocalOf { todometerLightColors() }
 
-object ToDometerTheme {
-    val toDometerColors: ToDometerColors
+object TodometerTheme {
+    val todometerColors: TodometerColors
         @Composable
         @ReadOnlyComposable
-        get() = LocalToDometerColors.current
+        get() = LocalTodometerColors.current
 }
 
 @Composable
-fun ToDometerTheme(
-    toDometerColors: ToDometerColors = ToDometerTheme.toDometerColors,
+fun TodometerTheme(
+    todometerColors: TodometerColors = TodometerTheme.todometerColors,
     colorScheme: ColorScheme = MaterialTheme.colorScheme,
     shapes: Shapes = MaterialTheme.shapes,
     typography: Typography = MaterialTheme.typography,
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
-        LocalToDometerColors provides toDometerColors
+        LocalTodometerColors provides todometerColors
     ) {
         MaterialTheme(
             colorScheme = colorScheme,

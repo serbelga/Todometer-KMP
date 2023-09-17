@@ -13,7 +13,7 @@
 -->
 
 <resources>
-    <string name="app_name">ToDometer</string>
+    <string name="app_name">Todometer</string>
 
     <string name="task">Tarea</string>
     <string name="tasks">Tareas</string>
@@ -75,7 +75,7 @@
 
     <string name="privacy_policy_user_data">Datos del usuario</string>
     <string name="privacy_policy_user_data_body">
-        La aplicación ToDometer no almacena ningún dato de usuario en
+        La aplicación Todometer no almacena ningún dato de usuario en
         ningún servidor ya que es una aplicación que se ejecuta en un entorno local
         sin necesidad de conexión. No se recoge, transfiere o divulga ningún dato del usuario.
     </string>

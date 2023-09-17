@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.glance
+package dev.sergiobelda.todometer.wear.app
 
-import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
+import dev.sergiobelda.todometer.common.core.di.startWearAppDI
+import dev.sergiobelda.todometer.wear.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
 
-class ToDometerWidgetReceiver : GlanceAppWidgetReceiver() {
+class TodometerWearApp : TodometerBaseApp() {
 
-    override val glanceAppWidget: GlanceAppWidget = ToDometerWidget()
+    override fun onCreate() {
+        super.onCreate()
+        startWearAppDI {
+            modules(viewModelModule)
+            androidContext(this@TodometerWearApp)
+        }
+    }
 }

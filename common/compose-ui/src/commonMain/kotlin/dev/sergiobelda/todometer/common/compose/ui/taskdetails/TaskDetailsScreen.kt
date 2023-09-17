@@ -50,8 +50,8 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskTagIndicator
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerCheckbox
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerCheckbox
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
@@ -60,7 +60,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,7 +101,7 @@ fun TaskDetailsScreen(
                         navigationIcon = {
                             IconButton(onClick = navigateBack) {
                                 Icon(
-                                    ToDometerIcons.NavigateBefore,
+                                    TodometerIcons.NavigateBefore,
                                     contentDescription = stringResource(MR.strings.back)
                                 )
                             }
@@ -110,7 +110,7 @@ fun TaskDetailsScreen(
                             if (!taskDetailsUiState.isLoadingTask) {
                                 IconButton(onClick = navigateToEditTask) {
                                     Icon(
-                                        ToDometerIcons.Edit,
+                                        TodometerIcons.Edit,
                                         contentDescription = stringResource(MR.strings.edit_task),
                                         tint = MaterialTheme.colorScheme.primary
                                     )
@@ -122,7 +122,7 @@ fun TaskDetailsScreen(
                 },
                 content = { paddingValues ->
                     if (lazyListState.firstVisibleItemIndex > 0) {
-                        ToDometerDivider()
+                        TodometerDivider()
                     }
                     LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                         taskTitle(taskDetailsUiState.task)
@@ -160,7 +160,7 @@ private fun LazyListScope.taskTitle(task: Task) {
                 )
             }
         }
-        ToDometerDivider()
+        TodometerDivider()
     }
 }
 
@@ -194,7 +194,7 @@ private fun LazyListScope.taskChecklist(
         )
     }
     item {
-        ToDometerDivider()
+        TodometerDivider()
     }
 }
 
@@ -228,7 +228,7 @@ private fun LazyItemScope.TaskChecklistItem(
             .animateItemPlacement()
             .padding(horizontal = 8.dp)
     ) {
-        ToDometerCheckbox(
+        TodometerCheckbox(
             checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,
             onCheckedChange = { checked ->
                 onTaskChecklistItemClick(
@@ -248,7 +248,7 @@ private fun LazyItemScope.TaskChecklistItem(
         )
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
-                ToDometerIcons.Close,
+                TodometerIcons.Close,
                 contentDescription = stringResource(MR.strings.clear),
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )

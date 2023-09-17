@@ -28,7 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.TodometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
@@ -40,7 +40,7 @@ fun RowScope.TaskTagIndicator(
     Box(
         modifier = modifier
             .clip(shape = CircleShape)
-            .background(color = ToDometerTheme.toDometerColors.composeColorOf(tag))
+            .background(color = TodometerTheme.todometerColors.composeColorOf(tag))
             .height(20.dp)
             .width(4.dp)
     )

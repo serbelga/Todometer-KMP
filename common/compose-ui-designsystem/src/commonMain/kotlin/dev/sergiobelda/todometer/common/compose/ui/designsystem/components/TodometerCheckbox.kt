@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,28 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.designsystem.components
 
-import androidx.compose.material3.Divider
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 @Composable
-fun ToDometerDivider(
+fun TodometerCheckbox(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
-    thickness: Dp = ToDometerDividerDefaults.thickness,
-    color: Color = ToDometerDividerDefaults.color
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
-    Divider(
+    Checkbox(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
         modifier = modifier,
-        thickness = thickness,
-        color = color
+        enabled = enabled,
+        interactionSource = interactionSource,
+        colors = CheckboxDefaults.colors(checkedColor = MaterialTheme.colorScheme.primary)
     )
-}
-
-private object ToDometerDividerDefaults {
-    val thickness: Dp = 1.0.dp
-
-    val color: Color @Composable get() = MaterialTheme.colorScheme.outline
 }

@@ -22,14 +22,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal actual fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color) {
     Icon(
-        painter = ToDometerIcons.Delete,
+        painter = TodometerIcons.Delete,
         contentDescription = stringResource(MR.strings.delete_task),
         tint = backgroundIconTint
     )

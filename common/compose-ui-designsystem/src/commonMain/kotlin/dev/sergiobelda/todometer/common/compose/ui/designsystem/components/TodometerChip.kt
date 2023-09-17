@@ -32,20 +32,20 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ToDometerChip(
+fun TodometerChip(
     modifier: Modifier = Modifier,
-    border: BorderStroke = ToDometerChipDefaults.borderStroke,
-    color: Color = ToDometerChipDefaults.color,
+    border: BorderStroke = TodometerChipDefaults.borderStroke,
+    color: Color = TodometerChipDefaults.color,
     content: @Composable RowScope.() -> Unit
 ) {
     Surface(
         modifier = modifier,
         border = border,
-        shape = RoundedCornerShape(ToDometerChipCornerRadius),
+        shape = RoundedCornerShape(TodometerChipCornerRadius),
         color = color
     ) {
         Row(
-            modifier = Modifier.padding(ToDometerChipContentPadding),
+            modifier = Modifier.padding(TodometerChipContentPadding),
             verticalAlignment = Alignment.CenterVertically
         ) {
             content()
@@ -53,7 +53,7 @@ fun ToDometerChip(
     }
 }
 
-private object ToDometerChipDefaults {
+private object TodometerChipDefaults {
     val borderStroke: BorderStroke
         @Composable get() = BorderStroke(
             1.dp,
@@ -63,5 +63,5 @@ private object ToDometerChipDefaults {
     val color: Color @Composable get() = MaterialTheme.colorScheme.surface
 }
 
-private val ToDometerChipContentPadding: PaddingValues = PaddingValues(6.dp)
-private val ToDometerChipCornerRadius: Dp = 14.dp
+private val TodometerChipContentPadding: PaddingValues = PaddingValues(6.dp)
+private val TodometerChipCornerRadius: Dp = 14.dp

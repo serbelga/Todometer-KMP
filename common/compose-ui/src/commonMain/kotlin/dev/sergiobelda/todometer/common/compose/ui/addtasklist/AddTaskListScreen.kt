@@ -47,11 +47,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -125,7 +125,7 @@ private fun AddTaskListTopBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    ToDometerIcons.NavigateBefore,
+                    TodometerIcons.NavigateBefore,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }
@@ -137,7 +137,7 @@ private fun AddTaskListTopBar(
                 onClick = onSaveButtonClick
             ) {
                 Icon(
-                    ToDometerIcons.Check,
+                    TodometerIcons.Check,
                     contentDescription = stringResource(MR.strings.save),
                     tint = saveButtonTintColor
                 )
@@ -164,7 +164,7 @@ private fun AddTaskListContent(
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
     Column(modifier = Modifier.padding(paddingValues)) {
-        ToDometerTitledTextField(
+        TodometerTitledTextField(
             title = stringResource(MR.strings.name),
             value = taskListNameValue,
             onValueChange = onTaskListNameValueChange,

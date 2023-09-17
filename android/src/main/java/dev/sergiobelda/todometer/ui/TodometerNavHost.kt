@@ -56,7 +56,7 @@ import dev.sergiobelda.todometer.ui.taskdetails.TaskDetailsRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-internal fun ToDometerNavHost(
+internal fun TodometerNavHost(
     navController: NavHostController,
     action: Action,
     modifier: Modifier = Modifier

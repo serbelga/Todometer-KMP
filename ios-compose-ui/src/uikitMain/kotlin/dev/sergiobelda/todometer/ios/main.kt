@@ -37,7 +37,7 @@ import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDest
 import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
 import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
 import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
-import dev.sergiobelda.todometer.common.compose.ui.theme.ToDometerAppTheme
+import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.common.core.di.startAppDI
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
@@ -58,7 +58,7 @@ val koin = startAppDI().koin
 
 fun main() {
     defaultUIKitMain(
-        "ToDometer",
+        "Todometer",
         ComposeUIViewController {
             val getAppThemeUseCase = koin.get<GetAppThemeUseCase>()
             val appTheme by getAppThemeUseCase.invoke().collectAsState(AppTheme.DARK_THEME)
@@ -68,7 +68,7 @@ fun main() {
                 AppTheme.LIGHT_THEME -> false
             }
             val navigationController by remember { mutableStateOf(NavigationController()) }
-            ToDometerAppTheme(darkTheme) {
+            TodometerAppTheme(darkTheme) {
                 NavigationHost(
                     navigationController,
                     startDestination = HomeDestination.route,

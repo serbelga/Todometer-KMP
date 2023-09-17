@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.common.compose.ui.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-class ToDometerColors(
+class TodometerColors(
     val check: Color,
     val amber: Color,
     val blue: Color,
@@ -34,7 +34,7 @@ class ToDometerColors(
     val yellow: Color
 )
 
-fun toDometerLightColors(
+fun todometerLightColors(
     check: Color = Color.Unspecified,
     amber: Color = Color.Unspecified,
     blue: Color = Color.Unspecified,
@@ -48,8 +48,8 @@ fun toDometerLightColors(
     pink: Color = Color.Unspecified,
     teal: Color = Color.Unspecified,
     yellow: Color = Color.Unspecified
-): ToDometerColors =
-    ToDometerColors(
+): TodometerColors =
+    TodometerColors(
         check = check,
         amber = amber,
         blue = blue,
@@ -65,7 +65,7 @@ fun toDometerLightColors(
         yellow = yellow
     )
 
-fun toDometerDarkColors(
+fun todometerDarkColors(
     check: Color = Color.Unspecified,
     amber: Color = Color.Unspecified,
     blue: Color = Color.Unspecified,
@@ -79,8 +79,8 @@ fun toDometerDarkColors(
     pink: Color = Color.Unspecified,
     teal: Color = Color.Unspecified,
     yellow: Color = Color.Unspecified
-): ToDometerColors =
-    ToDometerColors(
+): TodometerColors =
+    TodometerColors(
         check = check,
         amber = amber,
         blue = blue,

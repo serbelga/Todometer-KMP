@@ -23,20 +23,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerDarkColors
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerLightColors
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.TodometerDarkColors
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.TodometerLightColors
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.TodometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Type
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.shapes
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.todometer_dark_outline
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.todometer_light_outline
 
 @Composable
-actual fun ToDometerAppTheme(
+actual fun TodometerAppTheme(
     darkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
-    val toDometerColors = if (darkTheme) ToDometerDarkColors else ToDometerLightColors
+    val toDometerColors = if (darkTheme) TodometerDarkColors else TodometerLightColors
 
     val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val context = LocalContext.current
@@ -50,8 +50,8 @@ actual fun ToDometerAppTheme(
         if (darkTheme) DarkColorScheme else LightColorScheme
     }
 
-    ToDometerTheme(
-        toDometerColors = toDometerColors,
+    TodometerTheme(
+        todometerColors = toDometerColors,
         colorScheme = colorScheme,
         typography = Type.typography,
         shapes = shapes,

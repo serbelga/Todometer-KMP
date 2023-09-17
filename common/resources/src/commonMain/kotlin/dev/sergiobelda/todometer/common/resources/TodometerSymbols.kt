@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import dev.icerock.moko.resources.compose.painterResource
 
-object ToDometerSymbols {
+object TodometerSymbols {
     val IsotypeDark: Painter
         @Composable
         get() = painterResource(MR.images.isotype_cut_dark_48)

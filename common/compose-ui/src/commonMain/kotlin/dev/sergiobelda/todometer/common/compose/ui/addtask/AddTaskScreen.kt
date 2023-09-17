@@ -61,8 +61,8 @@ import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.TimePickerDialog
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.extensions.addStyledOptionalSuffix
 import dev.sergiobelda.todometer.common.compose.ui.extensions.selectedTimeMillis
@@ -70,7 +70,7 @@ import dev.sergiobelda.todometer.common.compose.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.compose.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -161,7 +161,7 @@ fun AddTaskScreen(
             }
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                 item {
-                    ToDometerTitledTextField(
+                    TodometerTitledTextField(
                         title = stringResource(MR.strings.name),
                         value = taskTitle,
                         onValueChange = {
@@ -219,7 +219,7 @@ fun AddTaskScreen(
                     )
                 }
                 item {
-                    ToDometerTitledTextField(
+                    TodometerTitledTextField(
                         title = stringResource(MR.strings.description).addStyledOptionalSuffix(),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
@@ -233,7 +233,7 @@ fun AddTaskScreen(
                     )
                 }
                 item {
-                    ToDometerDivider()
+                    TodometerDivider()
                 }
             }
             if (discardTaskAlertDialogState) {
@@ -309,7 +309,7 @@ private fun TaskChecklistItem(
         )
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
-                ToDometerIcons.Close,
+                TodometerIcons.Close,
                 contentDescription = stringResource(MR.strings.clear),
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )

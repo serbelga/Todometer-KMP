@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.compose.ui.theme
+package dev.sergiobelda.todometer.wear.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.wear.ui.theme.TodometerTheme
 
 @Composable
-expect fun ToDometerAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-)
+fun TodometerApp() {
+    val navController = rememberSwipeDismissableNavController()
+    val action = remember(navController) { Action(navController) }
+
+    TodometerTheme {
+        TodometerNavHost(navController = navController, action = action)
+    }
+}

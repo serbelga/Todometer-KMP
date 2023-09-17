@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorS
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
 
 @Composable
-fun ToDometerWidgetTheme(
+fun TodometerWidgetTheme(
     content: @GlanceComposable @Composable () -> Unit
 ) {
     GlanceTheme(

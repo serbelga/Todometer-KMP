@@ -13,7 +13,7 @@
 -->
 
 <resources>
-    <string name="app_name">ToDometer</string>
+    <string name="app_name">Todometer</string>
 
     <string name="task">Tasca</string>
     <string name="tasks">Tasques</string>
@@ -77,7 +77,7 @@
 
     <string name="privacy_policy_user_data">Dades de l\'usuari</string>
     <string name="privacy_policy_user_data_body">
-        L\'aplicació ToDometer no emmagatzema cap dada d\'usuari a
+        L\'aplicació Todometer no emmagatzema cap dada d\'usuari a
         cap servidor ja que és una aplicació que s\'executa en un entorn local
         sense necessitat de connexió. No es recull, es transfereix o es divulga cap dada de
         l\'usuari.

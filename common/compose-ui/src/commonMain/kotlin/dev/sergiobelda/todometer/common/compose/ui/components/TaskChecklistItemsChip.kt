@@ -25,32 +25,32 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerChip
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerChip
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.TodometerTheme
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 
 @Composable
 internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
     val completedChipTint =
         if (checklistItemsDone == totalChecklistItems) {
-            ToDometerTheme.toDometerColors.check
+            TodometerTheme.todometerColors.check
         } else {
             MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
         }
     val completedChipOutline =
         if (checklistItemsDone == totalChecklistItems) {
-            ToDometerTheme.toDometerColors.check
+            TodometerTheme.todometerColors.check
         } else {
             MaterialTheme.colorScheme.outline
         }
 
-    ToDometerChip(
+    TodometerChip(
         border = BorderStroke(1.dp, completedChipOutline),
         modifier = Modifier.padding(bottom = 8.dp)
     ) {
         Icon(
-            ToDometerIcons.CheckBox,
+            TodometerIcons.CheckBox,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
             tint = completedChipTint

@@ -13,7 +13,7 @@
 -->
 
 <resources>
-    <string name="app_name">ToDometer</string>
+    <string name="app_name">Todometer</string>
 
     <string name="task">Task</string>
     <string name="tasks">Tasks</string>
@@ -77,7 +77,7 @@
 
     <string name="privacy_policy_user_data">User data</string>
     <string name="privacy_policy_user_data_body">
-        The ToDometer application does not store any user\'s data on
+        The Todometer application does not store any user\'s data on
         any server since it is an application that runs in a local environment
         without the need for a connection. No user data is collected, transferred, or disclosed.
     </string>

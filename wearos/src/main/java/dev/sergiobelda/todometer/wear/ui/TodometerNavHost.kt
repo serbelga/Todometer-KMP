@@ -32,7 +32,7 @@ import dev.sergiobelda.todometer.wear.ui.tasklisttasks.TaskListTasksScreen
 import dev.sergiobelda.todometer.wear.ui.tasklisttasks.navigateToTaskListTasks
 
 @Composable
-fun ToDometerNavHost(
+fun TodometerNavHost(
     navController: NavHostController,
     action: Action,
     modifier: Modifier = Modifier

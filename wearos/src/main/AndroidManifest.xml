@@ -19,12 +19,12 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
-        android:name="dev.sergiobelda.todometer.wear.app.ToDometerWearApp"
+        android:name="dev.sergiobelda.todometer.wear.app.TodometerWearApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ToDometer.Starting">
+        android:theme="@style/Theme.Todometer.Starting">
 
         <uses-library
             android:name="com.google.android.wearable"

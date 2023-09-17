@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ToDometerTitledTextField(
+fun TodometerTitledTextField(
     title: String = "",
     modifier: Modifier = Modifier,
     value: String,
@@ -59,7 +59,7 @@ fun ToDometerTitledTextField(
             title,
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = ToDometerTitledTextFieldTitlePaddingStart)
+            modifier = Modifier.padding(start = TodometerTitledTextFieldTitlePaddingStart)
         )
         TextField(
             value = value,
@@ -77,7 +77,7 @@ fun ToDometerTitledTextField(
 }
 
 @Composable
-fun ToDometerTitledTextField(
+fun TodometerTitledTextField(
     title: AnnotatedString = buildAnnotatedString { },
     modifier: Modifier = Modifier,
     value: String,
@@ -102,7 +102,7 @@ fun ToDometerTitledTextField(
             title,
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = ToDometerTitledTextFieldTitlePaddingStart)
+            modifier = Modifier.padding(start = TodometerTitledTextFieldTitlePaddingStart)
         )
         TextField(
             value = value,
@@ -158,4 +158,4 @@ private fun TextField(
     }
 }
 
-private val ToDometerTitledTextFieldTitlePaddingStart: Dp = 16.dp
+private val TodometerTitledTextFieldTitlePaddingStart: Dp = 16.dp

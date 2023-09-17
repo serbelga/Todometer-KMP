@@ -22,14 +22,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
 fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskListClick: () -> Unit) {
     AlertDialog(
         icon = {
-            Icon(ToDometerIcons.Warning, contentDescription = null)
+            Icon(TodometerIcons.Warning, contentDescription = null)
         },
         title = {
             Text(stringResource(MR.strings.delete_task_list))

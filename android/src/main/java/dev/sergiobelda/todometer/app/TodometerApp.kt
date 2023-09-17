@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.resources
+package dev.sergiobelda.todometer.app
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.painter.Painter
-import dev.icerock.moko.resources.compose.painterResource
+import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
+import dev.sergiobelda.todometer.common.core.di.startAppDI
+import dev.sergiobelda.todometer.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
 
-object ToDometerIllustrations {
-    val CompletedTasks: Painter
-        @Composable
-        get() = painterResource(MR.images.completed_tasks)
+class TodometerApp : TodometerBaseApp() {
 
-    val NoTasks: Painter
-        @Composable
-        get() = painterResource(MR.images.no_tasks)
+    override fun onCreate() {
+        super.onCreate()
+        startAppDI {
+            modules(viewModelModule)
+            androidContext(this@TodometerApp)
+        }
+    }
 }

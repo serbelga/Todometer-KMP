@@ -64,14 +64,14 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
-import dev.sergiobelda.todometer.glance.theme.ToDometerWidgetTheme
+import dev.sergiobelda.todometer.glance.theme.TodometerWidgetTheme
 import dev.sergiobelda.todometer.ui.MainActivity
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import androidx.glance.appwidget.action.actionStartActivity as actionStartActivityIntent
 
-class ToDometerWidget : GlanceAppWidget(), KoinComponent {
+class TodometerWidget : GlanceAppWidget(), KoinComponent {
 
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase by inject()
 
@@ -119,8 +119,8 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                 taskListProgress = 0F
             }
 
-            ToDometerWidgetTheme {
-                ToDometerWidgetContent(
+            TodometerWidgetTheme {
+                TodometerWidgetContent(
                     taskListName = taskListName,
                     taskListProgress = taskListProgress,
                     tasksDoing = tasksDoing,
@@ -137,7 +137,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     @Composable
-    private fun ToDometerWidgetContent(
+    private fun TodometerWidgetContent(
         taskListName: String,
         taskListProgress: Float,
         tasksDoing: List<TaskItem>,
@@ -151,15 +151,15 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
                 .background(ImageProvider(R.drawable.todometer_widget_background))
         ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
-                ToDometerWidgetHeader(taskListName, taskListProgress)
+                TodometerWidgetHeader(taskListName, taskListProgress)
                 Spacer(modifier = GlanceModifier.height(12.dp))
-                ToDometerWidgetBody(tasksDoing, tasksDone, toggleTaskItemState)
+                TodometerWidgetBody(tasksDoing, tasksDone, toggleTaskItemState)
             }
         }
     }
 
     @Composable
-    private fun ToDometerWidgetHeader(taskListName: String, taskListProgress: Float) {
+    private fun TodometerWidgetHeader(taskListName: String, taskListProgress: Float) {
         // TODO: Use Loading Progress indicator.
         Row(
             modifier = GlanceModifier
@@ -206,7 +206,7 @@ class ToDometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     @Composable
-    private fun ToDometerWidgetBody(
+    private fun TodometerWidgetBody(
         tasksDoing: List<TaskItem>,
         tasksDone: List<TaskItem>,
         toggleTaskItemState: (String, TaskState) -> Unit

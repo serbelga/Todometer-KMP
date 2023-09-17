@@ -23,7 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -39,7 +39,7 @@ internal actual fun HomeMoreDropdownMenu(
     ) {
         DropdownMenuItem(
             onClick = onEditTaskListClick,
-            leadingIcon = { Icon(ToDometerIcons.Edit, contentDescription = null) },
+            leadingIcon = { Icon(TodometerIcons.Edit, contentDescription = null) },
             text = {
                 Text(
                     stringResource(MR.strings.edit_task_list),
@@ -51,7 +51,7 @@ internal actual fun HomeMoreDropdownMenu(
             onClick = onDeleteTaskListClick,
             leadingIcon = {
                 Icon(
-                    ToDometerIcons.Delete,
+                    TodometerIcons.Delete,
                     contentDescription = null
                 )
             },

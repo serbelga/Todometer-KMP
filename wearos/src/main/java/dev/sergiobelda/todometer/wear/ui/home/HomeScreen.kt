@@ -59,8 +59,8 @@ import androidx.wear.compose.material.VignettePosition
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerSymbols
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
@@ -101,7 +101,7 @@ internal fun HomeScreen(
                 .focusRequester(focusRequester)
                 .focusable()
         ) {
-            item { ToDometerTitle() }
+            item { TodometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             when {
                 homeUiState.isLoading -> {
@@ -129,13 +129,13 @@ internal fun HomeScreen(
 }
 
 @Composable
-private fun ToDometerTitle() {
+private fun TodometerTitle() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Image(
-            ToDometerSymbols.IsotypeDark,
+            TodometerSymbols.IsotypeDark,
             contentDescription = null,
             modifier = Modifier.size(16.dp)
         )
@@ -172,7 +172,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(ToDometerIcons.Add, null)
+            Icon(TodometerIcons.Add, null)
         },
         label = {
             Text(
