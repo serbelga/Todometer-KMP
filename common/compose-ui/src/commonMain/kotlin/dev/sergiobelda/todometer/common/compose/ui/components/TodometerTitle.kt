@@ -18,17 +18,15 @@ package dev.sergiobelda.todometer.common.compose.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.TodometerSymbols
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -37,19 +35,33 @@ internal fun TodometerTitle(modifier: Modifier = Modifier) {
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            painter = TodometerSymbols.IsotypeMonochrome,
-            tint = MaterialTheme.colorScheme.primary,
-            contentDescription = null,
-            modifier = Modifier.size(TodometerTitleIconSize)
-        )
         Text(
             text = stringResource(MR.strings.app_name),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(
                 start = TodometerTitleTextPaddingStart,
                 bottom = TodometerTitleTextPaddingBottom
-            )
+            ),
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+internal fun TodometerLogotype(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(MR.strings.app_name),
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(
+                start = TodometerTitleTextPaddingStart,
+                bottom = TodometerTitleTextPaddingBottom
+            ),
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
