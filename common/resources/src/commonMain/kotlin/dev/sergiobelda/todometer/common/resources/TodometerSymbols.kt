@@ -32,4 +32,8 @@ object TodometerSymbols {
     val IsotypeMonochrome: Painter
         @Composable
         get() = painterResource(MR.images.isotype_cut_monochrome_48)
+
+    val Logotype: Painter
+        @Composable
+        get() = painterResource(MR.images.logotype)
 }

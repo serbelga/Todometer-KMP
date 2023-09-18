@@ -36,7 +36,7 @@ actual fun TodometerAppTheme(
     darkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
-    val toDometerColors = if (darkTheme) TodometerDarkColors else TodometerLightColors
+    val todometerColors = if (darkTheme) TodometerDarkColors else TodometerLightColors
 
     val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val context = LocalContext.current
@@ -51,7 +51,7 @@ actual fun TodometerAppTheme(
     }
 
     TodometerTheme(
-        todometerColors = toDometerColors,
+        todometerColors = todometerColors,
         colorScheme = colorScheme,
         typography = Type.typography,
         shapes = shapes,
