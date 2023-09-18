@@ -82,10 +82,6 @@ google-firebase-firebaseAnalyticsKtx = { module = "com.google.firebase:firebase-
 google-firebase-firebaseCrashlyticsKtx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 google-firebase-firebaseBom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 
-h2Database = "com.h2database:h2:2.2.222"
-
-hikariCP = "com.zaxxer:HikariCP:5.0.1"
-
 junit = { module = "junit:junit", version.ref = "junit" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
