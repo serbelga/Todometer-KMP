@@ -60,7 +60,7 @@ internal fun TodometerLogotype(modifier: Modifier = Modifier) {
             TodometerSymbols.Logotype,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(180.dp)
+            modifier = Modifier.size(160.dp)
         )
     }
 }
