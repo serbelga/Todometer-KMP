@@ -41,8 +41,8 @@ import dev.sergiobelda.todometer.common.compose.ui.components.DateTimeSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.common.compose.ui.components.TagSelector
 import dev.sergiobelda.todometer.common.compose.ui.components.TimePickerDialog
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerTitledTextField
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.common.compose.ui.extensions.addStyledOptionalSuffix
 import dev.sergiobelda.todometer.common.compose.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.common.compose.ui.loading.LoadingScreenDialog
@@ -104,7 +104,7 @@ fun EditTaskScreen(
                 },
                 content = { paddingValues ->
                     Column(modifier = Modifier.padding(paddingValues)) {
-                        ToDometerTitledTextField(
+                        TodometerTitledTextField(
                             title = stringResource(MR.strings.name),
                             value = taskTitle,
                             onValueChange = {
@@ -142,7 +142,7 @@ fun EditTaskScreen(
                             onTimeClick = { timePickerDialogState = true },
                             onClearDateTimeClick = { taskDueDate = null }
                         )
-                        ToDometerTitledTextField(
+                        TodometerTitledTextField(
                             title = stringResource(MR.strings.description).addStyledOptionalSuffix(),
                             value = taskDescription,
                             onValueChange = { taskDescription = it },
@@ -154,7 +154,7 @@ fun EditTaskScreen(
                             modifier = Modifier.padding(TextFieldPadding),
                             maxLines = 4
                         )
-                        ToDometerDivider()
+                        TodometerDivider()
                     }
                 }
             )

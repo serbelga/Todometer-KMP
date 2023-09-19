@@ -10,7 +10,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "ToDometer-KMP"
+rootProject.name = "Todometer-KMP"
 
 include(":android")
 include(":common:android")

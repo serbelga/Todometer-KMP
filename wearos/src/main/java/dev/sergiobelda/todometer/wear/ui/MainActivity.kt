@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
 
         setContent {
-            ToDometerApp()
+            TodometerApp()
         }
     }
 }

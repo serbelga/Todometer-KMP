@@ -69,14 +69,14 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.compose.ui.actions.SystemBackHandler
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskItem
 import dev.sergiobelda.todometer.common.compose.ui.components.TaskListProgress
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.TodometerTitle
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.compose.ui.loading.ContentLoadingProgress
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.ToDometerIllustrations
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIllustrations
 import dev.sergiobelda.todometer.common.resources.stringResource
 import kotlinx.coroutines.launch
 
@@ -296,12 +296,12 @@ private fun HomeTopAppBar(
                 } else {
                     CenterAlignedTopAppBar(
                         title = {
-                            ToDometerTitle()
+                            TodometerTitle()
                         },
                         navigationIcon = {
                             IconButton(onClick = onMenuClick) {
                                 Icon(
-                                    ToDometerIcons.Menu,
+                                    TodometerIcons.Menu,
                                     contentDescription = stringResource(MR.strings.menu)
                                 )
                             }
@@ -309,7 +309,7 @@ private fun HomeTopAppBar(
                         actions = {
                             IconButton(onClick = onMoreClick) {
                                 Icon(
-                                    ToDometerIcons.MoreVert,
+                                    TodometerIcons.MoreVert,
                                     contentDescription = stringResource(MR.strings.more)
                                 )
                             }
@@ -324,7 +324,7 @@ private fun HomeTopAppBar(
                 }
             }
             TaskListProgress(taskListName, tasks)
-            ToDometerDivider()
+            TodometerDivider()
         }
     }
 }
@@ -340,7 +340,7 @@ private fun SelectedTasksTopAppBar(
         navigationIcon = {
             IconButton(onClick = onClearSelectedTasksClick) {
                 Icon(
-                    ToDometerIcons.Close,
+                    TodometerIcons.Close,
                     contentDescription = null
                 )
             }
@@ -351,7 +351,7 @@ private fun SelectedTasksTopAppBar(
         actions = {
             IconButton(onClick = onDeleteSelectedTasksClick) {
                 Icon(
-                    ToDometerIcons.Delete,
+                    TodometerIcons.Delete,
                     contentDescription = null
                 )
             }
@@ -372,7 +372,7 @@ private fun HomeFloatingActionButton(
     ) {
         FloatingActionButton(onClick = navigateToAddTask) {
             Icon(
-                ToDometerIcons.Add,
+                TodometerIcons.Add,
                 contentDescription = stringResource(MR.strings.add_task)
             )
         }
@@ -396,7 +396,7 @@ private fun TasksListArea(
     var areTasksDoneVisible by remember { mutableStateOf(false) }
     if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {
         HomeInfoIllustration(
-            ToDometerIllustrations.NoTasks,
+            TodometerIllustrations.NoTasks,
             stringResource(MR.strings.no_tasks)
         )
     } else {
@@ -448,7 +448,7 @@ private fun TasksListArea(
         }
         if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
             HomeInfoIllustration(
-                ToDometerIllustrations.CompletedTasks,
+                TodometerIllustrations.CompletedTasks,
                 stringResource(MR.strings.you_have_completed_all_tasks),
                 stringResource(MR.strings.congratulations)
             )
@@ -477,12 +477,12 @@ private fun CompletedTasksHeader(
             if (showExpandIcon) {
                 if (expanded) {
                     Icon(
-                        ToDometerIcons.ExpandLess,
+                        TodometerIcons.ExpandLess,
                         contentDescription = null
                     )
                 } else {
                     Icon(
-                        ToDometerIcons.ExpandMore,
+                        TodometerIcons.ExpandMore,
                         contentDescription = null
                     )
                 }

@@ -67,7 +67,7 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -203,7 +203,7 @@ private fun TaskItemContent(
             exit = fadeOut()
         ) {
             Icon(
-                ToDometerIcons.CheckCircle,
+                TodometerIcons.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
@@ -307,8 +307,8 @@ private fun taskItemActionTintColor(state: TaskState): Color =
 @Composable
 private fun taskItemActionIcon(state: TaskState): Painter =
     when (state) {
-        TaskState.DOING -> ToDometerIcons.RadioButtonUnchecked
-        TaskState.DONE -> ToDometerIcons.TaskAlt
+        TaskState.DOING -> TodometerIcons.RadioButtonUnchecked
+        TaskState.DONE -> TodometerIcons.TaskAlt
     }
 
 @Composable

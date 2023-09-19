@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.wear.compose.material.MaterialTheme
 
 @Composable
-internal fun ToDometerTheme(content: @Composable () -> Unit) {
+internal fun TodometerTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colors = colorPalette,
         typography = typography,

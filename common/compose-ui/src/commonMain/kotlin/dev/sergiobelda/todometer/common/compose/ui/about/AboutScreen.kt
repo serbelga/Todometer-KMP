@@ -40,7 +40,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +50,7 @@ internal fun AboutTopBar(navigateBack: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    ToDometerIcons.NavigateBefore,
+                    TodometerIcons.NavigateBefore,
                     contentDescription = stringResource(MR.strings.back)
                 )
             }
@@ -68,9 +68,9 @@ internal enum class AboutItem {
 @Composable
 private fun AboutItem.icon(): Painter =
     when (this) {
-        AboutItem.GitHub -> ToDometerIcons.GitHub
-        AboutItem.PrivacyPolicy -> ToDometerIcons.Description
-        AboutItem.OpenSourceLicenses -> ToDometerIcons.Code
+        AboutItem.GitHub -> TodometerIcons.GitHub
+        AboutItem.PrivacyPolicy -> TodometerIcons.Description
+        AboutItem.OpenSourceLicenses -> TodometerIcons.Code
     }
 
 @Composable
@@ -121,9 +121,9 @@ internal fun AboutAppVersion() {
     }
 }
 
-const val GitHubUrl: String = "https://github.com/serbelga/ToDometer_Multiplatform"
+const val GitHubUrl: String = "https://github.com/serbelga/Todometer-KMP"
 const val PrivacyPolicyUrl: String =
-    "https://github.com/serbelga/ToDometerKotlinMultiplatform/blob/main/PRIVACY_POLICY.md"
+    "https://github.com/serbelga/Todometer-KMP/blob/main/PRIVACY_POLICY.md"
 
 private val AboutItemCardHeight: Dp = 72.dp
 private val AboutItemCardSpacing: Dp = 24.dp

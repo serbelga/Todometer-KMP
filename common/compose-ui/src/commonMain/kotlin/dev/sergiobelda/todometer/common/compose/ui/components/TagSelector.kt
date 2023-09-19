@@ -41,11 +41,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.ToDometerTheme
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.TodometerTheme
 import dev.sergiobelda.todometer.common.compose.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -86,7 +86,7 @@ private fun TagItem(
             .clip(CircleShape)
             .clickable(onClick = onClick)
     ) {
-        val color = ToDometerTheme.toDometerColors.composeColorOf(tag)
+        val color = TodometerTheme.todometerColors.composeColorOf(tag)
         val borderColor = if (color == Color.Unspecified) {
             MaterialTheme.colorScheme.outline
         } else {
@@ -109,7 +109,7 @@ private fun TagItem(
         ) {
             if (selected) {
                 Icon(
-                    ToDometerIcons.Check,
+                    TodometerIcons.Check,
                     stringResource(MR.strings.selected),
                     tint = checkColor
                 )

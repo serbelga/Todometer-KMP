@@ -49,7 +49,7 @@ val LightColorScheme = lightColorScheme(
     surfaceTint = todometer_light_surfaceTint
 )
 
-val ToDometerLightColors = toDometerLightColors(
+val TodometerLightColors = todometerLightColors(
     check = todometer_secondary50,
     amber = amberLight,
     blue = blueLight,
@@ -95,7 +95,7 @@ val DarkColorScheme = darkColorScheme(
     surfaceTint = todometer_dark_surfaceTint
 )
 
-val ToDometerDarkColors = toDometerDarkColors(
+val TodometerDarkColors = todometerDarkColors(
     check = todometer_secondary80,
     amber = amberDark,
     blue = blueDark,

@@ -83,7 +83,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
@@ -295,9 +295,9 @@ private fun TaskItem(
             onClick = onClick,
             toggleControl = {
                 if (isTaskDone) {
-                    Icon(ToDometerIcons.TaskAlt, null)
+                    Icon(TodometerIcons.TaskAlt, null)
                 } else {
-                    Icon(ToDometerIcons.RadioButtonUnchecked, null)
+                    Icon(TodometerIcons.RadioButtonUnchecked, null)
                 }
             },
             colors = ToggleChipDefaults.splitToggleChipColors(
@@ -323,7 +323,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(ToDometerIcons.Add, null)
+            Icon(TodometerIcons.Add, null)
         },
         label = {
             Text(text = stringResource(MR.strings.add_task))
@@ -359,7 +359,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
     Chip(
         colors = secondaryChipColors(),
         icon = {
-            Icon(ToDometerIcons.Edit, null)
+            Icon(TodometerIcons.Edit, null)
         },
         label = {
             Text(text = stringResource(MR.strings.edit_task_list))
@@ -390,7 +390,7 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
         colors = secondaryChipColors(),
         icon = {
             Icon(
-                ToDometerIcons.Delete,
+                TodometerIcons.Delete,
                 stringResource(MR.strings.delete_task_list)
             )
         },

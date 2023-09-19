@@ -22,12 +22,10 @@ import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -59,8 +57,8 @@ import androidx.wear.compose.material.VignettePosition
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
-import dev.sergiobelda.todometer.common.resources.ToDometerSymbols
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerSymbols
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
@@ -101,8 +99,8 @@ internal fun HomeScreen(
                 .focusRequester(focusRequester)
                 .focusable()
         ) {
-            item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
+            item { TodometerLogotype() }
             when {
                 homeUiState.isLoading -> {
                     item { ContentLoadingProgress() }
@@ -129,18 +127,13 @@ internal fun HomeScreen(
 }
 
 @Composable
-private fun ToDometerTitle() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Image(
-            ToDometerSymbols.IsotypeDark,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp)
-        )
-        Text(stringResource(MR.strings.app_name))
-    }
+private fun TodometerLogotype() {
+    Icon(
+        TodometerSymbols.Logotype,
+        contentDescription = null,
+        tint = MaterialTheme.colors.primary,
+        modifier = Modifier.size(96.dp)
+    )
 }
 
 @Composable
@@ -172,7 +165,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.secondaryChipColors(),
         icon = {
-            Icon(ToDometerIcons.Add, null)
+            Icon(TodometerIcons.Add, null)
         },
         label = {
             Text(

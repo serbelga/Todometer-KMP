@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright 2022 Sergio Belda
+     Copyright 2023 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -13,41 +13,23 @@
 -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
+    android:viewportWidth="224"
+    android:viewportHeight="224">
     <group
-        android:scaleX="0.18652174"
-        android:scaleY="0.18652174"
-        android:translateX="32.55"
-        android:translateY="37.213043">
+        android:scaleX="0.3361111"
+        android:scaleY="0.3361111"
+        android:translateX="74.35555"
+        android:translateY="74.35555">
         <group>
-            <clip-path android:pathData="M0,0h229.77v179.46h-229.77z" />
+            <clip-path android:pathData="M0,0h224v224h-224z" />
             <path
-                android:pathData="M68.19,129.22L81.67,115.82L92.48,126.48L100.55,118.48L89.74,107.75L100.55,96.93L119.36,115.82L127.43,107.75L108.62,88.86L119.36,78.13L130.17,88.86L138.24,80.79L127.43,70.05L138.24,59.24L157.05,78.13L165.12,70.05L146.31,51.17L157.05,40.43L167.79,51.17L175.93,43.1L165.12,32.36L175.93,21.55L194.66,40.43L202.81,32.36L184,13.48L197.41,0L229.77,32.36L100.55,161.58L68.19,129.22Z"
-                android:fillColor="#7BD69F" />
-            <path android:pathData="M78.217,119.22L53.985,143.453L86.328,175.796L110.56,151.563L78.217,119.22Z">
-                <aapt:attr name="android:fillColor">
-                    <gradient
-                        android:startY="136.029"
-                        android:startX="95.3856"
-                        android:endY="160.279"
-                        android:endX="71.1036"
-                        android:type="linear">
-                        <item
-                            android:offset="0"
-                            android:color="#FF7BD69F" />
-                        <item
-                            android:offset="1"
-                            android:color="#FF073042" />
-                    </gradient>
-                </aapt:attr>
-            </path>
+                android:pathData="M65.18,151.25L185.26,31.17C194.19,22.24 208.67,22.24 217.6,31.17C226.53,40.1 226.53,54.57 217.6,63.5L97.51,183.58L65.18,151.25Z"
+                android:fillColor="#005AC1" />
             <path
-                android:pathData="M27.223,87.595L100.762,161.135C100.788,161.161 100.803,161.197 100.803,161.234C100.803,161.271 100.788,161.306 100.762,161.333L91.867,170.228C85.965,176.13 77.96,179.445 69.614,179.445C61.268,179.445 53.263,176.13 47.361,170.228L9.178,132.044C6.256,129.123 3.939,125.655 2.358,121.838C0.777,118.021 -0.037,113.93 -0.037,109.799C-0.037,105.667 0.777,101.576 2.358,97.759C3.939,93.943 6.256,90.474 9.178,87.553C10.363,86.367 11.771,85.428 13.321,84.788C14.871,84.148 16.532,83.821 18.209,83.825C19.886,83.828 21.545,84.164 23.092,84.811C24.639,85.458 26.043,86.404 27.223,87.595V87.595Z"
-                android:fillColor="#7AFFB4" />
+                android:pathData="M6.65,140.45C-1.97,131.82 -1.97,117.84 6.65,109.21C15.28,100.58 29.26,100.58 37.89,109.21L104.89,176.21L90.62,190.48C81.25,199.85 66.05,199.85 56.68,190.48L6.65,140.45Z"
+                android:fillColor="#4285F4" />
         </group>
     </group>
 </vector>

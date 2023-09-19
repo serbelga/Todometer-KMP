@@ -38,12 +38,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.ToDometerTitle
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.ToDometerDivider
+import dev.sergiobelda.todometer.common.compose.ui.components.TodometerTitle
+import dev.sergiobelda.todometer.common.compose.ui.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.ToDometerIcons
+import dev.sergiobelda.todometer.common.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
@@ -60,13 +60,13 @@ internal fun HomeDrawerContent(
         Box(
             modifier = Modifier.height(HomeDrawerTopHeight).fillMaxWidth()
         ) {
-            ToDometerTitle(
+            TodometerTitle(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(horizontal = HomeDrawerTopPaddingHorizontal)
             )
         }
-        ToDometerDivider()
+        TodometerDivider()
         HomeDrawerTaskListsSection(
             selectedTaskListId,
             defaultTaskListName,
@@ -74,7 +74,7 @@ internal fun HomeDrawerContent(
             onAddTaskList,
             onTaskListItemClick
         )
-        ToDometerDivider()
+        TodometerDivider()
         Column(modifier = Modifier.padding(HomeDrawerItemPadding)) {
             HomeNavigationDrawerSettingsItem(onSettingsItemClick)
             HomeNavigationDrawerAboutItem(onAboutItemClick)
@@ -87,7 +87,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                ToDometerIcons.Settings,
+                TodometerIcons.Settings,
                 contentDescription = null
             )
         },
@@ -108,7 +108,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                ToDometerIcons.Info,
+                TodometerIcons.Info,
                 contentDescription = null
             )
         },

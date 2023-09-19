@@ -13,13 +13,13 @@
 -->
 
 <resources>
-    <style name="Theme.ToDometer" parent="@android:style/Theme.DeviceDefault" />
+    <style name="Theme.Todometer" parent="@android:style/Theme.DeviceDefault" />
 
-    <style name="Theme.ToDometer.Starting" parent="Theme.SplashScreen.IconBackground">
+    <style name="Theme.Todometer.Starting" parent="Theme.SplashScreen.IconBackground">
         <item name="windowSplashScreenBackground">@android:color/black</item>
         <item name="windowSplashScreenIconBackgroundColor">@android:color/white</item>
 
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splashscreen_wear</item>
-        <item name="postSplashScreenTheme">@style/Theme.ToDometer</item>
+        <item name="postSplashScreenTheme">@style/Theme.Todometer</item>
     </style>
 </resources>
