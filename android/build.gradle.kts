@@ -21,8 +21,8 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
-        versionCode = 1270201
-        versionName = "android-2.7.0-beta01"
+        versionCode = 1270400
+        versionName = "android-2.7.0"
     }
 
     buildTypes {
