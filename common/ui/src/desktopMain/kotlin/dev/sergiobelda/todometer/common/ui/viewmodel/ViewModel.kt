@@ -16,18 +16,15 @@
 
 package dev.sergiobelda.todometer.common.ui.viewmodel
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 
-actual abstract class ViewModel {
-    actual val coroutineScope: CoroutineScope = MainScope()
-
-    protected actual open fun onCleared() {
-        coroutineScope.cancel()
-    }
-
-    fun clear() {
-        onCleared()
+@Composable
+fun ViewModel.subscribeToComposition() {
+    DisposableEffect(Unit) {
+        onDispose {
+            clear()
+        }
     }
 }

@@ -19,8 +19,8 @@ package dev.sergiobelda.todometer.ui.settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsScreen
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsViewModel
+import dev.sergiobelda.todometer.common.ui.settings.SettingsScreen
+import dev.sergiobelda.todometer.common.ui.settings.SettingsViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable

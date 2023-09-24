@@ -27,24 +27,23 @@ import androidx.navigation.compose.composable
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.android.extensions.openWebPage
-import dev.sergiobelda.todometer.common.compose.ui.about.AboutDestination
-import dev.sergiobelda.todometer.common.compose.ui.about.GitHubUrl
-import dev.sergiobelda.todometer.common.compose.ui.about.PrivacyPolicyUrl
-import dev.sergiobelda.todometer.common.compose.ui.about.navigateToAbout
-import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
-import dev.sergiobelda.todometer.common.compose.ui.addtask.navigateToAddTask
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.navigateToAddTaskList
-import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
-import dev.sergiobelda.todometer.common.compose.ui.edittask.navigateToEditTask
-import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
-import dev.sergiobelda.todometer.common.compose.ui.edittasklist.navigateToEditTaskList
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
-import dev.sergiobelda.todometer.common.compose.ui.settings.navigateToSettings
-import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
-import dev.sergiobelda.todometer.common.compose.ui.taskdetails.navigateToTaskDetails
 import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.ui.about.GitHubUrl
+import dev.sergiobelda.todometer.common.ui.about.PrivacyPolicyUrl
+import dev.sergiobelda.todometer.common.ui.about.navigateToAbout
+import dev.sergiobelda.todometer.common.ui.addtask.AddTaskDestination
+import dev.sergiobelda.todometer.common.ui.addtask.navigateToAddTask
+import dev.sergiobelda.todometer.common.ui.addtasklist.AddTaskListDestination
+import dev.sergiobelda.todometer.common.ui.addtasklist.navigateToAddTaskList
+import dev.sergiobelda.todometer.common.ui.edittask.EditTaskDestination
+import dev.sergiobelda.todometer.common.ui.edittask.navigateToEditTask
+import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListDestination
+import dev.sergiobelda.todometer.common.ui.edittasklist.navigateToEditTaskList
+import dev.sergiobelda.todometer.common.ui.home.HomeDestination
+import dev.sergiobelda.todometer.common.ui.settings.SettingsDestination
+import dev.sergiobelda.todometer.common.ui.settings.navigateToSettings
+import dev.sergiobelda.todometer.common.ui.taskdetails.TaskDetailsDestination
+import dev.sergiobelda.todometer.common.ui.taskdetails.navigateToTaskDetails
 import dev.sergiobelda.todometer.ui.about.AboutRoute
 import dev.sergiobelda.todometer.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ui.addtasklist.AddTaskListRoute
@@ -115,7 +114,7 @@ internal fun TodometerNavHost(
                 navigateBack = navigateBackAction
             )
         }
-        composable(AboutDestination.route) {
+        composable(dev.sergiobelda.todometer.common.ui.about.AboutDestination.route) {
             AboutRoute(
                 navigateToGitHub = { context.openWebPage(GitHubUrl) },
                 navigateToPrivacyPolicy = { context.openWebPage(PrivacyPolicyUrl) },

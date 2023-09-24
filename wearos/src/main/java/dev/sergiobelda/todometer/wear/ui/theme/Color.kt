@@ -16,19 +16,15 @@
 
 package dev.sergiobelda.todometer.wear.ui.theme
 
-import androidx.compose.ui.graphics.Color
 import androidx.wear.compose.material.Colors
-
-internal val todometer_dark_primary = Color(0xFFADC6FF)
-internal val todometer_dark_onPrimary = Color(0xFF002E69)
-internal val todometer_dark_secondary = Color(0xFF43E188)
-internal val todometer_dark_onSecondary = Color(0xFF00391C)
-internal val todometer_dark_tertiary = Color(0xFFFFB59D)
-internal val todometer_dark_onTertiary = Color(0xFF5D1800)
-internal val todometer_dark_error = Color(0xFFFFB4AB)
-internal val todometer_dark_onError = Color(0xFF690005)
-internal val todometer_dark_surface = Color(0xFF171B23)
-internal val todometer_dark_onSurface = Color(0xFFE3E2E6)
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_error
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_onError
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_onPrimary
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_onSecondary
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_onSurface
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_primary
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_secondary
+import dev.sergiobelda.todometer.common.designsystem.theme.todometer_dark_surface
 
 internal val colorPalette = Colors(
     primary = todometer_dark_primary,

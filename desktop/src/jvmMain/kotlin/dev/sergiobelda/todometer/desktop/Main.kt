@@ -28,23 +28,22 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
-import dev.sergiobelda.todometer.common.compose.ui.about.AboutDestination
-import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskDestination
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListDestination
-import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskDestination
-import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListDestination
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeDestination
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsDestination
-import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsDestination
-import dev.sergiobelda.todometer.common.compose.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.common.core.di.startAppDI
+import dev.sergiobelda.todometer.common.designsystem.resources.TodometerSymbols
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
-import dev.sergiobelda.todometer.common.resources.TodometerSymbols
+import dev.sergiobelda.todometer.common.ui.addtask.AddTaskDestination
+import dev.sergiobelda.todometer.common.ui.addtasklist.AddTaskListDestination
+import dev.sergiobelda.todometer.common.ui.edittask.EditTaskDestination
+import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListDestination
+import dev.sergiobelda.todometer.common.ui.home.HomeDestination
+import dev.sergiobelda.todometer.common.ui.settings.SettingsDestination
+import dev.sergiobelda.todometer.common.ui.taskdetails.TaskDetailsDestination
+import dev.sergiobelda.todometer.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.desktop.ui.about.AboutRoute
 import dev.sergiobelda.todometer.desktop.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.desktop.ui.addtasklist.AddTaskListRoute
@@ -112,7 +111,7 @@ private fun NavigationGraph.Builder.homeComposableNode(navigationController: Nav
                 navigationController.navigateTo(SettingsDestination.route)
             },
             navigateToAbout = {
-                navigationController.navigateTo(AboutDestination.route)
+                navigationController.navigateTo(dev.sergiobelda.todometer.common.ui.about.AboutDestination.route)
             }
         )
     }
@@ -186,7 +185,7 @@ private fun NavigationGraph.Builder.settingsComposableNode(navigationController:
 }
 
 private fun NavigationGraph.Builder.aboutComposableNode(navigationController: NavigationController) {
-    composableNode(destinationId = AboutDestination.route) {
+    composableNode(destinationId = dev.sergiobelda.todometer.common.ui.about.AboutDestination.route) {
         AboutRoute(
             navigateBack = { navigationController.navigateTo(HomeDestination.route) }
         )

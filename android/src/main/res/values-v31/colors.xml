@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2023 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,8 +12,8 @@
 -->
 
 <resources>
-    <color name="todometer_widget_background">@color/material_dynamic_secondary95</color>
-    <color name="todometer_widget_button_icon">@color/material_dynamic_primary90</color>
-    <color name="todometer_widget_button_background">@color/material_dynamic_primary40</color>
-    <color name="todometer_widget_card_background">@color/material_dynamic_secondary90</color>
+    <color name="todometer_widget_background">@android:color/system_accent2_50</color>
+    <color name="todometer_widget_button_icon">@android:color/system_accent1_100</color>
+    <color name="todometer_widget_button_background">@android:color/system_accent1_600</color>
+    <color name="todometer_widget_card_background">@android:color/system_accent2_100</color>
 </resources>

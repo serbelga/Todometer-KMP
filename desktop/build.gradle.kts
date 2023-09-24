@@ -23,12 +23,12 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(projects.common.core)
-                implementation(projects.common.composeUi)
-                implementation(projects.common.composeUiDesignsystem)
+                implementation(projects.common.designSystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
+
                 implementation(compose.desktop.currentOs)
             }
         }
@@ -41,7 +41,13 @@ compose.desktop {
         mainClass = "dev.sergiobelda.todometer.desktop.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            modules("java.instrument", "java.management", "java.sql", "jdk.unsupported", "java.naming")
+            modules(
+                "java.instrument",
+                "java.management",
+                "java.sql",
+                "jdk.unsupported",
+                "java.naming"
+            )
             packageName = "ToDometer"
             packageVersion = "1.0.0"
             copyright = "© 2023 Sergio Belda. Licensed under the Apache License."

@@ -16,13 +16,13 @@
 
 package dev.sergiobelda.todometer.common.core.di
 
-import dev.sergiobelda.todometer.common.compose.ui.addtask.AddTaskViewModel
-import dev.sergiobelda.todometer.common.compose.ui.addtasklist.AddTaskListViewModel
-import dev.sergiobelda.todometer.common.compose.ui.edittask.EditTaskViewModel
-import dev.sergiobelda.todometer.common.compose.ui.edittasklist.EditTaskListViewModel
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeViewModel
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsViewModel
-import dev.sergiobelda.todometer.common.compose.ui.taskdetails.TaskDetailsViewModel
+import dev.sergiobelda.todometer.common.ui.addtask.AddTaskViewModel
+import dev.sergiobelda.todometer.common.ui.addtasklist.AddTaskListViewModel
+import dev.sergiobelda.todometer.common.ui.edittask.EditTaskViewModel
+import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListViewModel
+import dev.sergiobelda.todometer.common.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.common.ui.settings.SettingsViewModel
+import dev.sergiobelda.todometer.common.ui.taskdetails.TaskDetailsViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 

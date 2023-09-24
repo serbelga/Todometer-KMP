@@ -42,9 +42,8 @@ kotlin {
     sourceSets {
         val uikitMain by creating {
             dependencies {
-                implementation(projects.common.composeUi)
-                implementation(projects.common.composeUiDesignsystem)
                 implementation(projects.common.core)
+                implementation(projects.common.designSystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.ui)
 

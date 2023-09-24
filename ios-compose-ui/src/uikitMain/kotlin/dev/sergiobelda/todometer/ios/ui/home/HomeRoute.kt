@@ -18,8 +18,8 @@ package dev.sergiobelda.todometer.ios.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.common.ui.home.HomeScreen
+import dev.sergiobelda.todometer.common.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.ios.koin
 
 @Composable

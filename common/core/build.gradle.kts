@@ -20,7 +20,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.test)
 
-                implementation(projects.common.composeUi)
+                implementation(projects.common.ui)
                 implementation(projects.common.data)
                 implementation(projects.common.database)
                 implementation(projects.common.domain)

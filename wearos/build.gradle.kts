@@ -63,6 +63,7 @@ android {
 
 dependencies {
     implementation(projects.common.core)
+    implementation(projects.common.designSystem)
     implementation(projects.common.domain)
     implementation(projects.common.navigation)
     implementation(projects.common.resources)

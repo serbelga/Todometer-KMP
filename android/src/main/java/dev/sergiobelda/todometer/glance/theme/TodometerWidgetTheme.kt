@@ -21,8 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.glance.GlanceComposable
 import androidx.glance.GlanceTheme
 import androidx.glance.material3.ColorProviders
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.DarkColorScheme
-import dev.sergiobelda.todometer.common.compose.ui.designsystem.theme.LightColorScheme
+import dev.sergiobelda.todometer.common.designsystem.theme.DarkColorScheme
+import dev.sergiobelda.todometer.common.designsystem.theme.LightColorScheme
 
 @Composable
 fun TodometerWidgetTheme(

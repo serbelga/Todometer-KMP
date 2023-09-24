@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.ui.home
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeScreen
-import dev.sergiobelda.todometer.common.compose.ui.home.HomeViewModel
+import dev.sergiobelda.todometer.common.ui.home.HomeScreen
+import dev.sergiobelda.todometer.common.ui.home.HomeViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable

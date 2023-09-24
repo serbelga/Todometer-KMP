@@ -20,8 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsScreen
-import dev.sergiobelda.todometer.common.compose.ui.settings.SettingsViewModel
+import dev.sergiobelda.todometer.common.ui.settings.SettingsScreen
+import dev.sergiobelda.todometer.common.ui.settings.SettingsViewModel
 import dev.sergiobelda.todometer.ios.koin
 
 @Composable
