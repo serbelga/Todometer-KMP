@@ -27,7 +27,7 @@
         android:theme="@style/Theme.Todometer.Starting"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="dev.sergiobelda.todometer.ui.MainActivity"
+            android:name="dev.sergiobelda.todometer.ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

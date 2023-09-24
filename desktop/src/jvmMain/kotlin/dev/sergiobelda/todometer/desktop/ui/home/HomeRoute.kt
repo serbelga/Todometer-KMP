@@ -18,10 +18,10 @@ package dev.sergiobelda.todometer.desktop.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.home.HomeScreen
-import dev.sergiobelda.todometer.common.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
+import dev.sergiobelda.todometer.feature.home.ui.HomeScreen
+import dev.sergiobelda.todometer.feature.home.ui.HomeViewModel
 
 @Composable
 internal fun HomeRoute(

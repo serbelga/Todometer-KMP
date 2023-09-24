@@ -45,7 +45,7 @@ import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
 import dev.sergiobelda.todometer.common.ui.values.SectionPadding
 
 @Composable
-internal fun DateTimeSelector(
+fun DateTimeSelector(
     dateMillis: Long?,
     onDateClick: () -> Unit,
     onTimeClick: () -> Unit,

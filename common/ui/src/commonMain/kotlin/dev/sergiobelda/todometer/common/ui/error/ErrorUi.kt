@@ -22,7 +22,7 @@ data class ErrorUi(
     val message: String? = null
 )
 
-internal fun <T : Any> Result<T>.mapToErrorUi(): ErrorUi? =
+fun <T : Any> Result<T>.mapToErrorUi(): ErrorUi? =
     if (this is Result.Error) {
         ErrorUi(message = message)
     } else {

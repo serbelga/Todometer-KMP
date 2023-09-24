@@ -23,11 +23,20 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(projects.common.core)
-                implementation(projects.common.designSystem)
+                implementation(projects.common.designsystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
+                implementation(projects.common.viewmodel)
+                implementation(projects.feature.about)
+                implementation(projects.feature.addtask)
+                implementation(projects.feature.addtasklist)
+                implementation(projects.feature.edittask)
+                implementation(projects.feature.edittasklist)
+                implementation(projects.feature.home)
+                implementation(projects.feature.settings)
+                implementation(projects.feature.taskdetails)
 
                 implementation(compose.desktop.currentOs)
             }

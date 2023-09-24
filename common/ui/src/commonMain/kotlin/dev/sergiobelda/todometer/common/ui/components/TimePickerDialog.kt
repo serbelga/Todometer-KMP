@@ -9,7 +9,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-internal fun TimePickerDialog(
+fun TimePickerDialog(
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
     content: @Composable () -> Unit

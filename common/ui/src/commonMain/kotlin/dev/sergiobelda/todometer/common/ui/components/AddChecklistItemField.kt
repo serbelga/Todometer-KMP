@@ -38,7 +38,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.ui.values.TextFieldPadding
 
 @Composable
-internal fun AddChecklistItemField(
+fun AddChecklistItemField(
     placeholder: @Composable (() -> Unit)? = null,
     onAddTaskCheckListItem: (String) -> Unit
 ) {

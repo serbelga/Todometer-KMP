@@ -49,7 +49,7 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.mapper.composeColorOf
 
 @Composable
-internal fun TagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+fun TagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
     LazyRow(

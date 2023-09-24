@@ -24,7 +24,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-internal fun AppTheme.themeIcon(): Painter =
+fun AppTheme.themeIcon(): Painter =
     when (this) {
         AppTheme.FOLLOW_SYSTEM -> TodometerIcons.Contrast
         AppTheme.DARK_THEME -> TodometerIcons.DarkMode
@@ -32,7 +32,7 @@ internal fun AppTheme.themeIcon(): Painter =
     }
 
 @Composable
-internal fun AppTheme.themeName(): String =
+fun AppTheme.themeName(): String =
     when (this) {
         AppTheme.FOLLOW_SYSTEM -> stringResource(MR.strings.follow_system)
         AppTheme.DARK_THEME -> stringResource(MR.strings.dark_theme)

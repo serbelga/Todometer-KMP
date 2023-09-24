@@ -35,7 +35,7 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SaveActionTopAppBar(
+fun SaveActionTopAppBar(
     navigateBack: () -> Unit,
     title: String,
     isSaveButtonEnabled: Boolean,

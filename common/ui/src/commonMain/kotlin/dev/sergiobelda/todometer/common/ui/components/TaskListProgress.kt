@@ -37,7 +37,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 
 @Composable
-internal fun TaskListProgress(
+fun TaskListProgress(
     taskListName: String?,
     tasks: List<TaskItem>,
     modifier: Modifier = Modifier

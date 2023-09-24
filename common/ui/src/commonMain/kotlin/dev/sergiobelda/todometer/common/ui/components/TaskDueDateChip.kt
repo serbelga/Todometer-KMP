@@ -35,7 +35,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 @Composable
-internal fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
+fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
     val currentInstant =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
     val expired =

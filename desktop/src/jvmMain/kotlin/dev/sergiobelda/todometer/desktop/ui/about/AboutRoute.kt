@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.desktop.ui.about
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.ui.about.AboutScreen
+import dev.sergiobelda.todometer.feature.about.ui.AboutScreen
 
 @Composable
 internal fun AboutRoute(

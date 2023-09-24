@@ -43,11 +43,17 @@ kotlin {
         val uikitMain by creating {
             dependencies {
                 implementation(projects.common.core)
-                implementation(projects.common.designSystem)
+                implementation(projects.common.designsystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.ui)
-
-                implementation(compose.material3)
+                implementation(projects.feature.about)
+                implementation(projects.feature.addtask)
+                implementation(projects.feature.addtasklist)
+                implementation(projects.feature.edittask)
+                implementation(projects.feature.edittasklist)
+                implementation(projects.feature.home)
+                implementation(projects.feature.settings)
+                implementation(projects.feature.taskdetails)
             }
         }
         val uikitX64Main by getting {

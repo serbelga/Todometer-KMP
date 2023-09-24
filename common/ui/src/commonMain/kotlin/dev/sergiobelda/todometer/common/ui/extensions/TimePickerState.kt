@@ -6,5 +6,5 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
 @OptIn(ExperimentalMaterial3Api::class)
-internal val TimePickerState.selectedTimeMillis: Long
+val TimePickerState.selectedTimeMillis: Long
     get() = this.hour.hours.inWholeMilliseconds + this.minute.minutes.inWholeMilliseconds

@@ -18,8 +18,8 @@ package dev.sergiobelda.todometer.ios.ui.edittasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListScreen
-import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListViewModel
+import dev.sergiobelda.todometer.feature.edittasklist.ui.EditTaskListScreen
+import dev.sergiobelda.todometer.feature.edittasklist.ui.EditTaskListViewModel
 import dev.sergiobelda.todometer.ios.koin
 
 @Composable

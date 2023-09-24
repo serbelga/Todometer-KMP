@@ -25,21 +25,14 @@ kotlin {
                 implementation(projects.common.database)
                 implementation(projects.common.domain)
                 implementation(projects.common.preferences)
+
+                implementation(libs.koin.core)
+                implementation(libs.koin.test)
             }
         }
         val commonTest by getting
-        val androidMain by getting {
-            dependencies {
-                api(libs.androidx.appcompat)
-                api(libs.androidx.coreKtx)
-            }
-        }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.junit)
-                implementation(libs.mockk.mockk)
-            }
-        }
+        val androidMain by getting
+        val androidUnitTest by getting
         val desktopMain by getting
         val desktopTest by getting
         val iosX64Main by getting
@@ -64,5 +57,5 @@ kotlin {
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.common"
+    namespace = "dev.sergiobelda.todometer.common.core"
 }

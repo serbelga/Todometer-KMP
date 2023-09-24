@@ -19,12 +19,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.common.designSystem)
+                implementation(projects.common.designsystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
                 implementation(projects.common.viewmodel)
+
+                implementation(libs.koin.core)
             }
         }
         val commonTest by getting
@@ -32,8 +34,6 @@ kotlin {
             dependencies {
                 implementation(compose.animationGraphics)
                 api(compose.uiTooling)
-
-                implementation(projects.common.android)
 
                 implementation(libs.androidx.navigation.compose)
             }

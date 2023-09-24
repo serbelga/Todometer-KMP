@@ -18,10 +18,10 @@ package dev.sergiobelda.todometer.desktop.ui.addtask
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.addtask.AddTaskScreen
-import dev.sergiobelda.todometer.common.ui.addtask.AddTaskViewModel
 import dev.sergiobelda.todometer.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
+import dev.sergiobelda.todometer.feature.addtask.ui.AddTaskScreen
+import dev.sergiobelda.todometer.feature.addtask.ui.AddTaskViewModel
 
 @Composable
 internal fun AddTaskRoute(

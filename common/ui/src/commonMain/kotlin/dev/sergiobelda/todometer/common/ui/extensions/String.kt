@@ -11,7 +11,7 @@ import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 
 @Composable
-internal fun String.addStyledOptionalSuffix(): AnnotatedString = buildAnnotatedString {
+fun String.addStyledOptionalSuffix(): AnnotatedString = buildAnnotatedString {
     append(this@addStyledOptionalSuffix)
     withStyle(
         style = SpanStyle(color = MaterialTheme.colorScheme.onBackground.applyMediumEmphasisAlpha())

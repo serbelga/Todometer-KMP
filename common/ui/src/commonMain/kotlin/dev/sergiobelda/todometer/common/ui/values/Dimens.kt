@@ -19,5 +19,5 @@ package dev.sergiobelda.todometer.common.ui.values
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-internal val SectionPadding: Dp = 24.dp
-internal val TextFieldPadding: Dp = 8.dp
+val SectionPadding: Dp = 24.dp
+val TextFieldPadding: Dp = 8.dp

@@ -25,7 +25,7 @@ kotlin {
                 api(compose.materialIconsExtended)
                 api(compose.ui)
 
-                implementation(projects.common.designSystem)
+                implementation(projects.common.designsystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)

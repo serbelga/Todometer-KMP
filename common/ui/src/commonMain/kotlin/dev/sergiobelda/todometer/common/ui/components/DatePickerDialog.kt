@@ -10,7 +10,7 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun DatePickerDialog(
+fun DatePickerDialog(
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
     content: @Composable () -> Unit

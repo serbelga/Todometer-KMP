@@ -36,14 +36,22 @@ import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
-import dev.sergiobelda.todometer.common.ui.addtask.AddTaskDestination
-import dev.sergiobelda.todometer.common.ui.addtasklist.AddTaskListDestination
-import dev.sergiobelda.todometer.common.ui.edittask.EditTaskDestination
-import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListDestination
-import dev.sergiobelda.todometer.common.ui.home.HomeDestination
-import dev.sergiobelda.todometer.common.ui.settings.SettingsDestination
-import dev.sergiobelda.todometer.common.ui.taskdetails.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.ui.theme.TodometerAppTheme
+import dev.sergiobelda.todometer.feature.about.ui.AboutDestination
+import dev.sergiobelda.todometer.feature.addtask.di.addTaskViewModelModule
+import dev.sergiobelda.todometer.feature.addtask.ui.AddTaskDestination
+import dev.sergiobelda.todometer.feature.addtasklist.di.addTaskListViewModelModule
+import dev.sergiobelda.todometer.feature.addtasklist.ui.AddTaskListDestination
+import dev.sergiobelda.todometer.feature.edittask.di.editTaskViewModelModule
+import dev.sergiobelda.todometer.feature.edittask.ui.EditTaskDestination
+import dev.sergiobelda.todometer.feature.edittasklist.di.editTaskListViewModelModule
+import dev.sergiobelda.todometer.feature.edittasklist.ui.EditTaskListDestination
+import dev.sergiobelda.todometer.feature.home.di.homeViewModelModule
+import dev.sergiobelda.todometer.feature.home.ui.HomeDestination
+import dev.sergiobelda.todometer.feature.settings.di.settingsViewModelModule
+import dev.sergiobelda.todometer.feature.settings.ui.SettingsDestination
+import dev.sergiobelda.todometer.feature.taskdetails.di.taskDetailsViewModelModule
+import dev.sergiobelda.todometer.feature.taskdetails.ui.TaskDetailsDestination
 import dev.sergiobelda.todometer.ios.ui.about.AboutRoute
 import dev.sergiobelda.todometer.ios.ui.addtask.AddTaskRoute
 import dev.sergiobelda.todometer.ios.ui.addtasklist.AddTaskListRoute
@@ -53,7 +61,17 @@ import dev.sergiobelda.todometer.ios.ui.home.HomeRoute
 import dev.sergiobelda.todometer.ios.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.ios.ui.taskdetails.TaskDetailsRoute
 
-val koin = startAppDI().koin
+val koin = startAppDI{
+    modules(
+        addTaskViewModelModule +
+                addTaskListViewModelModule +
+                editTaskViewModelModule +
+                editTaskListViewModelModule +
+                homeViewModelModule +
+                settingsViewModelModule +
+                taskDetailsViewModelModule
+    )
+}.koin
 
 fun main() {
     defaultUIKitMain(
@@ -111,7 +129,7 @@ private fun NavigationGraph.Builder.homeComposableNode(navigationController: Nav
                 navigationController.navigateTo(SettingsDestination.route)
             },
             navigateToAbout = {
-                navigationController.navigateTo(dev.sergiobelda.todometer.common.ui.about.AboutDestination.route)
+                navigationController.navigateTo(AboutDestination.route)
             }
         )
     }
@@ -185,7 +203,7 @@ private fun NavigationGraph.Builder.settingsComposableNode(navigationController:
 }
 
 private fun NavigationGraph.Builder.aboutComposableNode(navigationController: NavigationController) {
-    composableNode(destinationId = dev.sergiobelda.todometer.common.ui.about.AboutDestination.route) {
+    composableNode(destinationId = AboutDestination.route) {
         AboutRoute(
             navigateBack = { navigationController.navigateTo(HomeDestination.route) }
         )

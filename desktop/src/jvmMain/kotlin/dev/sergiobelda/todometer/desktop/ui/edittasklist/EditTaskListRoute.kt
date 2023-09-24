@@ -18,10 +18,10 @@ package dev.sergiobelda.todometer.desktop.ui.edittasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListScreen
-import dev.sergiobelda.todometer.common.ui.edittasklist.EditTaskListViewModel
 import dev.sergiobelda.todometer.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.desktop.koin
+import dev.sergiobelda.todometer.feature.edittasklist.ui.EditTaskListScreen
+import dev.sergiobelda.todometer.feature.edittasklist.ui.EditTaskListViewModel
 
 @Composable
 internal fun EditTaskListRoute(

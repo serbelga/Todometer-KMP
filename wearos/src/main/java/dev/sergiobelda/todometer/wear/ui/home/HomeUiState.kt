@@ -22,5 +22,5 @@ import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 data class HomeUiState(
     val isLoading: Boolean = false,
     val taskLists: List<TaskList> = emptyList(),
-    val errorUi: dev.sergiobelda.todometer.common.compose.ui.error.ErrorUi? = null
+    val errorUi: ErrorUi? = null
 )

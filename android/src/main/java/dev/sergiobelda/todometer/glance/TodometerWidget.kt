@@ -65,7 +65,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.glance.theme.TodometerWidgetTheme
-import dev.sergiobelda.todometer.ui.MainActivity
+import dev.sergiobelda.todometer.ui.main.MainActivity
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

@@ -54,14 +54,20 @@ android {
 dependencies {
     implementation(projects.common.android)
     implementation(projects.common.core)
-    implementation(projects.common.designSystem)
+    implementation(projects.common.designsystem)
     implementation(projects.common.domain)
     implementation(projects.common.navigation)
     implementation(projects.common.resources)
     implementation(projects.common.ui)
     implementation(projects.common.viewmodel)
-
     implementation(projects.feature.about)
+    implementation(projects.feature.addtask)
+    implementation(projects.feature.addtasklist)
+    implementation(projects.feature.edittask)
+    implementation(projects.feature.edittasklist)
+    implementation(projects.feature.home)
+    implementation(projects.feature.settings)
+    implementation(projects.feature.taskdetails)
 
     implementation(libs.androidx.activityCompose)
 
@@ -80,7 +86,6 @@ dependencies {
 
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-    implementation(libs.koin.core)
 
     implementation(libs.androidx.glance.appWidget)
     implementation(libs.androidx.glance.glance)

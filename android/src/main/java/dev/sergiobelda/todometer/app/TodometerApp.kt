@@ -18,7 +18,14 @@ package dev.sergiobelda.todometer.app
 
 import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
 import dev.sergiobelda.todometer.common.core.di.startAppDI
-import dev.sergiobelda.todometer.di.viewModelModule
+import dev.sergiobelda.todometer.di.mainViewModelModule
+import dev.sergiobelda.todometer.feature.addtask.di.addTaskViewModelModule
+import dev.sergiobelda.todometer.feature.addtasklist.di.addTaskListViewModelModule
+import dev.sergiobelda.todometer.feature.edittask.di.editTaskViewModelModule
+import dev.sergiobelda.todometer.feature.edittasklist.di.editTaskListViewModelModule
+import dev.sergiobelda.todometer.feature.home.di.homeViewModelModule
+import dev.sergiobelda.todometer.feature.settings.di.settingsViewModelModule
+import dev.sergiobelda.todometer.feature.taskdetails.di.taskDetailsViewModelModule
 import org.koin.android.ext.koin.androidContext
 
 class TodometerApp : TodometerBaseApp() {
@@ -26,8 +33,17 @@ class TodometerApp : TodometerBaseApp() {
     override fun onCreate() {
         super.onCreate()
         startAppDI {
-            modules(viewModelModule)
             androidContext(this@TodometerApp)
+            modules(
+                mainViewModelModule +
+                    addTaskViewModelModule +
+                    addTaskListViewModelModule +
+                    editTaskViewModelModule +
+                    editTaskListViewModelModule +
+                    homeViewModelModule +
+                    settingsViewModelModule +
+                    taskDetailsViewModelModule
+            )
         }
     }
 }
