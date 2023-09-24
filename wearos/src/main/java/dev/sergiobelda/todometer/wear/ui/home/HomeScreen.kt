@@ -26,6 +26,7 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
@@ -99,8 +101,8 @@ internal fun HomeScreen(
                 .focusRequester(focusRequester)
                 .focusable()
         ) {
+            item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
-            item { TodometerLogotype() }
             when {
                 homeUiState.isLoading -> {
                     item { ContentLoadingProgress() }
@@ -127,13 +129,23 @@ internal fun HomeScreen(
 }
 
 @Composable
-private fun TodometerLogotype() {
-    Icon(
-        TodometerSymbols.Logotype,
-        contentDescription = null,
-        tint = MaterialTheme.colors.primary,
-        modifier = Modifier.size(96.dp)
-    )
+private fun ToDometerTitle() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Icon(
+            TodometerSymbols.IsotypeDark,
+            contentDescription = null,
+            modifier = Modifier.size(16.dp),
+            tint = MaterialTheme.colors.primary
+        )
+        Text(
+            stringResource(MR.strings.app_name),
+            style = MaterialTheme.typography.body1,
+            fontWeight = FontWeight.Bold
+        )
+    }
 }
 
 @Composable
@@ -163,7 +175,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
             }
         }
     Chip(
-        colors = ChipDefaults.secondaryChipColors(),
+        colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
             Icon(TodometerIcons.Add, null)
         },

@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.compose.ui.components.TodometerLogotype
+import dev.sergiobelda.todometer.common.compose.ui.components.TodometerTitle
 
 @Composable
 fun AboutScreen(
@@ -42,7 +42,7 @@ fun AboutScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(paddingValues)
         ) {
-            TodometerLogotype()
+            TodometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(onCardClick = navigateToGitHub, AboutItem.GitHub)
             AboutItemCard(onCardClick = navigateToPrivacyPolicy, AboutItem.PrivacyPolicy)

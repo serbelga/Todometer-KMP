@@ -41,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
@@ -48,6 +49,7 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
+import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
@@ -119,7 +121,7 @@ internal fun TaskDetailScreen(
                         else -> {
                             taskDetailUiState.task?.let { task ->
                                 item {
-                                    Text(text = task.title)
+                                    Text(text = task.title, fontWeight = FontWeight.Bold)
                                 }
                                 item {
                                     Spacer(modifier = Modifier.height(24.dp))
@@ -156,7 +158,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
         }
 
     Chip(
-        colors = ChipDefaults.secondaryChipColors(),
+        colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
             Icon(TodometerIcons.Edit, null)
         },
@@ -185,7 +187,9 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
 @Composable
 private fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
-        colors = ChipDefaults.secondaryChipColors(),
+        colors = ChipDefaults.primaryChipColors(
+            backgroundColor = MaterialTheme.colors.error
+        ),
         icon = {
             Icon(TodometerIcons.Delete, stringResource(MR.strings.delete_task))
         },

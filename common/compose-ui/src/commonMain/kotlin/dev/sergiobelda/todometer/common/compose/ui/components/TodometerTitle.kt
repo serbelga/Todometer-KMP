@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.common.compose.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,13 +37,19 @@ import dev.sergiobelda.todometer.common.resources.stringResource
 internal fun TodometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(TodometerTitleTextPaddingStart)
     ) {
+        Icon(
+            TodometerSymbols.IsotypeMonochrome,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(TodometerTitleIconSize)
+        )
         Text(
             text = stringResource(MR.strings.app_name),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(
-                start = TodometerTitleTextPaddingStart,
                 bottom = TodometerTitleTextPaddingBottom
             ),
             fontWeight = FontWeight.Bold
@@ -50,21 +57,6 @@ internal fun TodometerTitle(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-internal fun TodometerLogotype(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            TodometerSymbols.Logotype,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(160.dp)
-        )
-    }
-}
-
 private val TodometerTitleIconSize: Dp = 24.dp
-private val TodometerTitleTextPaddingStart: Dp = 6.dp
+private val TodometerTitleTextPaddingStart: Dp = 8.dp
 private val TodometerTitleTextPaddingBottom: Dp = 4.dp

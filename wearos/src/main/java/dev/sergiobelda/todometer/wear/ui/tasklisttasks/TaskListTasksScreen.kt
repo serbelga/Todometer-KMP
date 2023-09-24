@@ -49,6 +49,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedLayout
@@ -65,7 +67,6 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.foundation.rememberRevealState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
-import androidx.wear.compose.material.ChipDefaults.secondaryChipColors
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
@@ -161,7 +162,6 @@ internal fun TaskListTasksScreen(
                         .focusRequester(focusRequester)
                         .focusable()
                 ) {
-                    item { Spacer(modifier = Modifier.height(4.dp)) }
                     when {
                         taskListTasksUiState.isLoadingTaskList -> {
                             item { ContentLoadingProgress() }
@@ -170,15 +170,32 @@ internal fun TaskListTasksScreen(
                         !taskListTasksUiState.isLoadingTaskList -> {
                             when {
                                 taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
-                                    item { Text(stringResource(MR.strings.default_task_list_name)) }
+                                    item {
+                                        Text(
+                                            stringResource(MR.strings.default_task_list_name),
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
                                 }
 
                                 taskListTasksUiState.taskList != null -> {
-                                    item { Text(taskListTasksUiState.taskList.name) }
+                                    item {
+                                        Text(
+                                            taskListTasksUiState.taskList.name,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
                                 }
                             }
+                            item { Spacer(modifier = Modifier.height(4.dp)) }
                             if (taskListTasksUiState.tasks.isEmpty()) {
-                                item { Text(text = stringResource(MR.strings.no_tasks)) }
+                                item {
+                                    Text(
+                                        text = stringResource(MR.strings.no_tasks),
+                                        textAlign = TextAlign.Center,
+                                        style = MaterialTheme.typography.body2
+                                    )
+                                }
                             } else {
                                 items(taskListTasksUiState.tasks, key = { it.id }) { task ->
                                     TaskItem(
@@ -321,7 +338,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
             }
         }
     Chip(
-        colors = secondaryChipColors(),
+        colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
             Icon(TodometerIcons.Add, null)
         },
@@ -357,7 +374,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
             }
         }
     Chip(
-        colors = secondaryChipColors(),
+        colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
             Icon(TodometerIcons.Edit, null)
         },
@@ -387,7 +404,9 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
 @Composable
 private fun DeleteTaskListButton(onClick: () -> Unit) {
     Chip(
-        colors = secondaryChipColors(),
+        colors = ChipDefaults.primaryChipColors(
+            backgroundColor = MaterialTheme.colors.error
+        ),
         icon = {
             Icon(
                 TodometerIcons.Delete,

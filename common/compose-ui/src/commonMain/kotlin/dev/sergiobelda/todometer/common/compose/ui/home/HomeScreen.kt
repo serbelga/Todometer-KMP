@@ -525,6 +525,7 @@ private fun HomeInfoIllustration(
     }
 }
 
+private const val HomeTopAppBarTaskListNameMaxLines: Int = 2
 private val HomeTopAppBarTonalElevation: Dp = 4.dp
 private const val HomeTopAppBarAnimationDuration: Int = 400
 private val HomeTaskListAreaBottomPadding: Dp = 84.dp
