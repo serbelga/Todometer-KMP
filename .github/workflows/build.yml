@@ -32,5 +32,9 @@ jobs:
       run: ./gradlew spotlessCheck
     - name: Build android app
       run:  ./gradlew android:assembleDebug
+    - name: Build desktop app
+      run:  ./gradlew desktop:assemble
+    - name: Build ios-compose-ui app
+      run:  ./gradlew ios-compose-ui:assemble
     - name: Build wearos app
       run:  ./gradlew wearos:assembleDebug
