@@ -13,8 +13,10 @@ version = "1.0.0-beta02"
 kotlin {
     jvm {
         compilations.all {
+            kotlin {
+                jvmToolchain(17)
+            }
             kotlinOptions {
-                jvmTarget = "17"
                 freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             }
         }

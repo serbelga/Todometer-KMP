@@ -61,7 +61,7 @@ import dev.sergiobelda.todometer.feature.settings.ui.SettingsDestination
 import dev.sergiobelda.todometer.feature.taskdetails.di.taskDetailsViewModelModule
 import dev.sergiobelda.todometer.feature.taskdetails.ui.TaskDetailsDestination
 
-val koin = startAppDI{
+val koin = startAppDI {
     modules(
         addTaskViewModelModule +
             addTaskListViewModelModule +

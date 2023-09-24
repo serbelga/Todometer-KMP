@@ -61,15 +61,15 @@ import dev.sergiobelda.todometer.ios.ui.home.HomeRoute
 import dev.sergiobelda.todometer.ios.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.ios.ui.taskdetails.TaskDetailsRoute
 
-val koin = startAppDI{
+val koin = startAppDI {
     modules(
         addTaskViewModelModule +
-                addTaskListViewModelModule +
-                editTaskViewModelModule +
-                editTaskListViewModelModule +
-                homeViewModelModule +
-                settingsViewModelModule +
-                taskDetailsViewModelModule
+            addTaskListViewModelModule +
+            editTaskViewModelModule +
+            editTaskListViewModelModule +
+            homeViewModelModule +
+            settingsViewModelModule +
+            taskDetailsViewModelModule
     )
 }.koin
 
