@@ -30,6 +30,8 @@ jobs:
       run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > wearos/google-services.json
     - name: Run spotlessCheck
       run: ./gradlew spotlessCheck
+    - name: Run Unit tests
+      run: ./gradlew testDebugUnitTest
     - name: Build android app
       run:  ./gradlew android:assembleDebug
     - name: Build desktop app
