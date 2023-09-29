@@ -18,7 +18,7 @@
         <item name="postSplashScreenTheme">@style/Theme.Todometer.NoActionBar</item>
 
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="windowSplashScreenBackground">@color/todometer_background</item>
+        <item name="windowSplashScreenBackground">@color/todometer_splash_screen_background</item>
         <item name="android:windowSplashScreenIconBackgroundColor">@android:color/white</item>
     </style>
 </resources>

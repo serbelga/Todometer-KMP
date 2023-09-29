@@ -82,8 +82,6 @@ dependencies {
 
     implementation(libs.androidx.splashscreen)
 
-    implementation(libs.material)
-
     implementation(libs.timber)
 
     implementation(libs.koin.android)

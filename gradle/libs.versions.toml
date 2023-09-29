@@ -30,7 +30,6 @@ kotlinDatetime = "0.4.1"
 kotlinSerializationJson = "1.6.0"
 ktlint = "0.50.0"
 lifecycle = "2.6.2"
-material = "1.9.0"
 mockk = "1.13.8"
 mockkCommon = "1.12.5"
 mokoResources = "0.23.0"
@@ -98,8 +97,6 @@ kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializat
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
-
-material = { module = "com.google.android.material:material", version.ref = "material" }
 
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }

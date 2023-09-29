@@ -85,8 +85,8 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.common.ui.R
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
+import dev.sergiobelda.todometer.wear.R
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListAlertDialog
 import dev.sergiobelda.todometer.wear.ui.loading.ContentLoadingProgress

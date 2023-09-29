@@ -25,7 +25,6 @@ import androidx.compose.runtime.remember
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.google.android.material.color.DynamicColors
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.common.ui.theme.TodometerAppTheme
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-        DynamicColors.applyToActivityIfAvailable(this)
 
         super.onCreate(savedInstanceState)
 

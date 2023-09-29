@@ -32,13 +32,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My tasks"
-            android:textColor="@color/todometer_onSurface" />
+            android:textColor="@color/todometer_widget_preview_onSurface" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="80%"
-            android:textColor="@color/todometer_onSurfaceVariant" />
+            android:textColor="@color/todometer_widget_preview_onSurfaceVariant" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="12dp"
                 android:text="Read documents"
-                android:textColor="@color/todometer_onSurface" />
+                android:textColor="@color/todometer_widget_preview_onSurface" />
 
             <ImageView
                 android:layout_width="wrap_content"
