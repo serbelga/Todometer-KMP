@@ -47,7 +47,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.components.TodometerTitledTextField
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource

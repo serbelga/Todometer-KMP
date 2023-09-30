@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.components.TodometerChip
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
 import kotlinx.datetime.Clock

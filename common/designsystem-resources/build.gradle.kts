@@ -28,7 +28,11 @@ kotlin {
             }
         }
         val commonTest by getting
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(compose.animationGraphics)
+            }
+        }
         val androidUnitTest by getting
         val desktopMain by getting
         val desktopTest by getting

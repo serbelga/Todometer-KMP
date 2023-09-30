@@ -49,7 +49,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.components.TodometerCheckbox
 import dev.sergiobelda.todometer.common.designsystem.components.TodometerDivider
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task

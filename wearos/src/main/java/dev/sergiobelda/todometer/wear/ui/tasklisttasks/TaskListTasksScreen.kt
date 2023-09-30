@@ -24,9 +24,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
-import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
@@ -79,15 +77,14 @@ import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerAnimatedImageVector
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedImageVector
+import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
-import dev.sergiobelda.todometer.wear.R
 import dev.sergiobelda.todometer.wear.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wear.ui.deletetasklist.DeleteTaskListAlertDialog
 import dev.sergiobelda.todometer.wear.ui.loading.ContentLoadingProgress

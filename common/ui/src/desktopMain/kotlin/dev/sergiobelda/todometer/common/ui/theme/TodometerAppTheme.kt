@@ -22,8 +22,6 @@ import dev.sergiobelda.todometer.common.designsystem.theme.LightColorScheme
 import dev.sergiobelda.todometer.common.designsystem.theme.TodometerDarkColors
 import dev.sergiobelda.todometer.common.designsystem.theme.TodometerLightColors
 import dev.sergiobelda.todometer.common.designsystem.theme.TodometerTheme
-import dev.sergiobelda.todometer.common.designsystem.theme.Type
-import dev.sergiobelda.todometer.common.designsystem.theme.shapes
 
 @Composable
 actual fun TodometerAppTheme(
@@ -36,8 +34,6 @@ actual fun TodometerAppTheme(
     TodometerTheme(
         todometerColors = todometerColors,
         colorScheme = colorScheme,
-        shapes = shapes,
-        typography = Type.typography,
         content = content
     )
 }

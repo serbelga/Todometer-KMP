@@ -58,8 +58,8 @@ import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
-import dev.sergiobelda.todometer.common.designsystem.resources.TodometerSymbols
+import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerSymbols
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
 import dev.sergiobelda.todometer.wear.ui.loading.ContentLoadingProgress
