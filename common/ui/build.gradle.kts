@@ -25,11 +25,7 @@ kotlin {
                 api(compose.materialIconsExtended)
                 api(compose.ui)
 
-                implementation(projects.common.designsystem)
                 implementation(projects.common.domain)
-                implementation(projects.common.navigation)
-                implementation(projects.common.resources)
-                implementation(projects.common.viewmodel)
 
                 implementation(libs.kotlin.datetime)
             }
@@ -43,19 +39,11 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(projects.common.android)
-                implementation(compose.animationGraphics)
                 implementation(compose.uiTooling)
-                implementation(libs.androidx.navigation.compose)
             }
         }
         val androidUnitTest by getting
-        val desktopMain by getting {
-            dependencies {
-                api(libs.kotlin.coroutinesSwing)
-                api(compose.uiTooling)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

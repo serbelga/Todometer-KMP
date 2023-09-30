@@ -14,8 +14,8 @@
 .cxx
 local.properties
 /.idea/
-/android/release/*
-/android/google-services.json
-/wearos/google-services.json
-/wearos/release/*
+/app-android/release/*
+/app-android/google-services.json
+/wearapp-wearos/google-services.json
+/wearapp-wearos/release/*
 todometer_preferences.preferences_pb
