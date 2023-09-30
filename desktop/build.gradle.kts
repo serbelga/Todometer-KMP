@@ -48,13 +48,13 @@ compose.desktop {
             licenseFile.set(project.file("../LICENSE"))
 
             macOS {
-                iconFile.set(project.file("./launcher_icons/icon.icns"))
+                iconFile.set(project.file("./launcher_icons/macos_icon.icns"))
             }
             windows {
-                iconFile.set(project.file("./launcher_icons/icon.ico"))
+                iconFile.set(project.file("./launcher_icons/windows_icon.ico"))
             }
             linux {
-                iconFile.set(project.file("./launcher_icons/icon.png"))
+                iconFile.set(project.file("./launcher_icons/linux_icon.png"))
             }
         }
     }
