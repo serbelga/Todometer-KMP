@@ -38,4 +38,4 @@ include(":common:resources")
 include(":common:ui")
 include(":common:viewmodel")
 
-include(":wearapp-wearos")
+include(":wear-app")
