@@ -79,6 +79,7 @@ import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
+import dev.sergiobelda.todometer.common.designsystem.resources.TodometerAnimatedImageVector
 import dev.sergiobelda.todometer.common.designsystem.resources.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
@@ -266,7 +267,6 @@ private fun TaskItem(
             revealedAnchor = 0.5f
         )
     )
-    val deleteIcon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
     SwipeToReveal(
         action = {
             Chip(
@@ -280,7 +280,7 @@ private fun TaskItem(
                 Box(modifier = Modifier.fillMaxSize()) {
                     Icon(
                         painter = rememberAnimatedVectorPainter(
-                            deleteIcon,
+                            TodometerAnimatedImageVector.Delete,
                             atEnd = revealState.currentValue == Revealing
                         ),
                         contentDescription = stringResource(MR.strings.delete_task),

@@ -31,6 +31,7 @@ kotlin {
         val commonTest by getting
         val androidMain by getting {
             dependencies {
+                implementation(compose.animationGraphics)
                 implementation(compose.uiTooling)
             }
         }

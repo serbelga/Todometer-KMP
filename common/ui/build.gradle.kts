@@ -43,11 +43,9 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(compose.animationGraphics)
-                api(compose.uiTooling)
-
                 implementation(projects.common.android)
-
+                implementation(compose.animationGraphics)
+                implementation(compose.uiTooling)
                 implementation(libs.androidx.navigation.compose)
             }
         }

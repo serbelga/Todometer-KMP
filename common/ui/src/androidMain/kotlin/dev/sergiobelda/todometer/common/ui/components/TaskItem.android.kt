@@ -17,26 +17,23 @@
 package dev.sergiobelda.todometer.common.ui.components
 
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
-import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.material3.DismissState
 import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import dev.sergiobelda.todometer.common.designsystem.resources.TodometerAnimatedImageVector
 import dev.sergiobelda.todometer.common.resources.MR
 import dev.sergiobelda.todometer.common.resources.stringResource
-import dev.sergiobelda.todometer.common.ui.R
 
 @OptIn(ExperimentalAnimationGraphicsApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal actual fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color) {
-    val icon = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete)
     Icon(
         painter = rememberAnimatedVectorPainter(
-            icon,
+            TodometerAnimatedImageVector.Delete,
             atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
         ),
         contentDescription = stringResource(MR.strings.delete_task),
