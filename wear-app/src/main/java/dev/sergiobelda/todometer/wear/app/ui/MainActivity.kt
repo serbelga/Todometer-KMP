@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.app
+package dev.sergiobelda.todometer.wear.app.ui
 
-import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
-import dev.sergiobelda.todometer.common.core.di.startWearAppDI
-import dev.sergiobelda.todometer.wear.app.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
-class TodometerWearApp : TodometerBaseApp() {
+class MainActivity : ComponentActivity() {
 
-    override fun onCreate() {
-        super.onCreate()
-        startWearAppDI {
-            modules(viewModelModule)
-            androidContext(this@TodometerWearApp)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        installSplashScreen()
+
+        setContent {
+            TodometerApp()
         }
     }
 }

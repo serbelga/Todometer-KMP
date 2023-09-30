@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.app
+package dev.sergiobelda.todometer.wear.app.ui.tasklisttasks
 
-import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
-import dev.sergiobelda.todometer.common.core.di.startWearAppDI
-import dev.sergiobelda.todometer.wear.app.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 
-class TodometerWearApp : TodometerBaseApp() {
-
-    override fun onCreate() {
-        super.onCreate()
-        startWearAppDI {
-            modules(viewModelModule)
-            androidContext(this@TodometerWearApp)
-        }
-    }
-}
+data class TaskListTasksUiState(
+    val isLoadingTaskList: Boolean = false,
+    val taskList: TaskList? = null,
+    val isDefaultTaskList: Boolean = false,
+    val isLoadingTasks: Boolean = false,
+    val tasks: List<TaskItem> = emptyList()
+)

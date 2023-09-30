@@ -12,7 +12,7 @@ if (file("google-services.json").exists()) {
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.wear"
+    namespace = "dev.sergiobelda.todometer.wear.app"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
@@ -64,6 +64,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.common.android)
     implementation(projects.common.core)
     implementation(projects.common.designsystemResources)
     implementation(projects.common.domain)

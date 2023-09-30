@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.app
+package dev.sergiobelda.todometer.wear.app.ui.theme
 
-import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
-import dev.sergiobelda.todometer.common.core.di.startWearAppDI
-import dev.sergiobelda.todometer.wear.app.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import androidx.compose.runtime.Composable
+import androidx.wear.compose.material.MaterialTheme
 
-class TodometerWearApp : TodometerBaseApp() {
-
-    override fun onCreate() {
-        super.onCreate()
-        startWearAppDI {
-            modules(viewModelModule)
-            androidContext(this@TodometerWearApp)
-        }
-    }
+@Composable
+internal fun TodometerTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colors = colorPalette,
+        typography = typography,
+        content = content
+    )
 }

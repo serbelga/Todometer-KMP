@@ -13,7 +13,7 @@ if (file("google-services.json").exists()) {
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer"
+    namespace = "dev.sergiobelda.todometer.app.android"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {

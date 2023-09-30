@@ -7,7 +7,7 @@ plugins {
     id("todometer.dependency-graph-generator")
 }
 
-group = "dev.sergiobelda.todometer.desktop"
+group = "dev.sergiobelda.todometer.app.desktop"
 version = "1.0.0-beta02"
 
 kotlin {
@@ -51,7 +51,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "dev.sergiobelda.todometer.desktop.MainKt"
+        mainClass = "dev.sergiobelda.todometer.app.desktop.TodometerAppKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules(
@@ -61,7 +61,7 @@ compose.desktop {
                 "jdk.unsupported",
                 "java.naming"
             )
-            packageName = "ToDometer"
+            packageName = "Todometer"
             packageVersion = "1.0.0"
             copyright = "© 2023 Sergio Belda. Licensed under the Apache License."
             licenseFile.set(project.file("../LICENSE"))

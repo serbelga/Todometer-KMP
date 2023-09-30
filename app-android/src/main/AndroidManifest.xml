@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="dev.sergiobelda.todometer.app.TodometerApp"
+        android:name="dev.sergiobelda.todometer.app.android.TodometerApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +27,7 @@
         android:theme="@style/Theme.Todometer.Starting"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="dev.sergiobelda.todometer.ui.main.MainActivity"
+            android:name="dev.sergiobelda.todometer.app.android.ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -55,7 +55,7 @@
             android:theme="@style/Theme.Todometer" />
 
         <receiver
-            android:name="dev.sergiobelda.todometer.glance.TodometerWidgetReceiver"
+            android:name="dev.sergiobelda.todometer.app.android.glance.TodometerWidgetReceiver"
             android:label="Todometer"
             android:exported="true">
             <intent-filter>

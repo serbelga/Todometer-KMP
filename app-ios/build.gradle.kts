@@ -9,7 +9,7 @@ plugins {
     id("todometer.dependency-graph-generator")
 }
 
-group = "dev.sergiobelda.todometer.ios"
+group = "dev.sergiobelda.todometer.app.ios"
 
 kotlin {
     iosX64("uikitX64") {
@@ -72,8 +72,8 @@ kotlin {
 
 compose.experimental {
     uikit.application {
-        bundleIdPrefix = "dev.sergiobelda.todometer.ios"
-        projectName = "ToDometer"
+        bundleIdPrefix = "dev.sergiobelda.todometer.app.ios"
+        projectName = "Todometer"
         deployConfigurations {
             simulator("IPhone13ProMax") {
                 //Usage: ./gradlew iosDeployIPhone13ProMaxDebug

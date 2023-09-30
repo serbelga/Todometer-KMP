@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wear.app
+package dev.sergiobelda.todometer.wear.app.ui
 
-import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
-import dev.sergiobelda.todometer.common.core.di.startWearAppDI
-import dev.sergiobelda.todometer.wear.app.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.wear.app.ui.theme.TodometerTheme
 
-class TodometerWearApp : TodometerBaseApp() {
+@Composable
+fun TodometerApp() {
+    val navController = rememberSwipeDismissableNavController()
+    val action = remember(navController) { Action(navController) }
 
-    override fun onCreate() {
-        super.onCreate()
-        startWearAppDI {
-            modules(viewModelModule)
-            androidContext(this@TodometerWearApp)
-        }
+    TodometerTheme {
+        TodometerNavHost(navController = navController, action = action)
     }
 }
