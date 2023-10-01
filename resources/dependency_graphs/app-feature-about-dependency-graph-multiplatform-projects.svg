@@ -184,14 +184,6 @@
             <polygon fill="black" stroke="black"
                 points="554.72,-116.02 560.26,-106.99 550.3,-110.59 554.72,-116.02" />
         </g>
-        <!-- :common:viewmodel&#45;&gt;:common:domain -->
-        <g id="edge14" class="edge">
-            <title>:common:viewmodel&#45;&gt;:common:domain</title>
-            <path fill="none" stroke="black" stroke-dasharray="1,5"
-                d="M400.97,-72.76C417.74,-63.07 439.22,-50.64 457.31,-40.17" />
-            <polygon fill="black" stroke="black"
-                points="459.51,-42.94 466.41,-34.91 456,-36.88 459.51,-42.94" />
-        </g>
         <!-- :common:ui&#45;&gt;:common:domain -->
         <g id="edge15" class="edge">
             <title>:common:ui&#45;&gt;:common:domain</title>
