@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("todometer.common.library.android")
+    id("todometer.dependency-graph-generator")
     id("todometer.spotless")
 }
 
@@ -44,7 +45,6 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(projects.common.android)
                 implementation(compose.animationGraphics)
                 implementation(compose.uiTooling)
                 implementation(libs.androidx.navigation.compose)

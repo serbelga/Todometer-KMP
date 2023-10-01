@@ -1,3 +1,3 @@
-## :ios-compose-ui
+## :app-ios
 
-<img src="../resources/dependency_graphs/ios-compose-ui-project-dependency-graph-multiplatform-projects.svg">
+<img src="../resources/dependency_graphs/app-ios-dependency-graph-multiplatform-projects.svg">

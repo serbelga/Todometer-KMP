@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.mokoResources)
     id("todometer.common.library.android")
+    id("todometer.dependency-graph-generator")
     id("todometer.spotless")
 }
 

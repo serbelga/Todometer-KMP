@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     kotlin("android")
     id("todometer.common.library.android")
+    id("todometer.dependency-graph-generator")
     id("todometer.spotless")
 }
 

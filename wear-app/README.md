@@ -1,3 +1,3 @@
-## :wearos
+## :wear-app
 
-<img src="../resources/dependency_graphs/wearos-project-dependency-graph-multiplatform-projects.svg">
+<img src="../resources/dependency_graphs/wear-app-dependency-graph-multiplatform-projects.svg">

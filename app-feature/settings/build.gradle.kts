@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("todometer.common.library.android")
+    id("todometer.dependency-graph-generator")
     id("todometer.spotless")
 }
 
