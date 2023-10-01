@@ -18,7 +18,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(projects.common.domain)
                 implementation(libs.kotlin.coroutinesCore)
                 implementation(libs.kotlin.datetime)
             }
