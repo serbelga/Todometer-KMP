@@ -23,7 +23,7 @@ import androidx.datastore.preferences.core.Preferences as DataStorePreferences
 
 internal const val dataStoreFileName = "todometer_preferences.preferences_pb"
 
-fun createDataStore(path: String): DataStore<DataStorePreferences> = createWithPath(
+internal fun createDataStore(path: String): DataStore<DataStorePreferences> = createWithPath(
     produceFile = { path.toPath() }
 )
 

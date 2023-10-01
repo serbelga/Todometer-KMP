@@ -1,0 +1,76 @@
+<svg width="603px" height="331px" viewBox="0.00 0.00 433.86 238.00"
+    xmlns="http://www.w3.org/2000/svg">
+    <g id="graph0" class="graph"
+        transform="scale(1.0007919936640506 1.0007919936640506) rotate(0.0) translate(4.0 234.0)">
+        <polygon fill="white" stroke="transparent"
+            points="-4,4 -4,-234 429.86,-234 429.86,4 -4,4" />
+        <text text-anchor="middle" x="212.93" y="-194.5" font-family="Times,serif"
+            font-size="35.00">data
+        </text>
+        <!-- :common:data -->
+        <g id="node1" class="node">
+            <title>:common:data</title>
+            <polygon fill="#7f52ff" stroke="black"
+                points="183.27,-180 87.07,-180 87.07,-144 183.27,-144 183.27,-180" />
+            <text text-anchor="middle" x="135.17" y="-157.8" font-family="Times,serif"
+                font-size="14.00">:common:data
+            </text>
+        </g>
+        <!-- :common:domain -->
+        <g id="node2" class="node">
+            <title>:common:domain</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="79.17" cy="-18" rx="79.34" ry="18" />
+            <text text-anchor="middle" x="79.17" y="-13.8" font-family="Times,serif"
+                font-size="14.00">:common:domain
+            </text>
+        </g>
+        <!-- :common:data&#45;&gt;:common:domain -->
+        <g id="edge1" class="edge">
+            <title>:common:data&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M87.01,-144.92C70.07,-136.68 52.85,-124.76 43.17,-108 31.23,-87.35 43.89,-61.98 57.37,-43.62" />
+            <polygon fill="black" stroke="black"
+                points="60.14,-45.75 63.54,-35.72 54.63,-41.45 60.14,-45.75" />
+        </g>
+        <!-- :common:database -->
+        <g id="node3" class="node">
+            <title>:common:database</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="135.17" cy="-90" rx="83.39" ry="18" />
+            <text text-anchor="middle" x="135.17" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:database
+            </text>
+        </g>
+        <!-- :common:data&#45;&gt;:common:database -->
+        <g id="edge2" class="edge">
+            <title>:common:data&#45;&gt;:common:database</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M135.17,-143.7C135.17,-135.98 135.17,-126.71 135.17,-118.11" />
+            <polygon fill="black" stroke="black"
+                points="138.67,-118.1 135.17,-108.1 131.67,-118.1 138.67,-118.1" />
+        </g>
+        <!-- :common:preferences -->
+        <g id="node4" class="node">
+            <title>:common:preferences</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="331.17" cy="-90" rx="94.88" ry="18" />
+            <text text-anchor="middle" x="331.17" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:preferences
+            </text>
+        </g>
+        <!-- :common:data&#45;&gt;:common:preferences -->
+        <g id="edge3" class="edge">
+            <title>:common:data&#45;&gt;:common:preferences</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M182.86,-143.97C212.01,-133.56 249.29,-120.24 279.18,-109.57" />
+            <polygon fill="black" stroke="black"
+                points="280.37,-112.86 288.61,-106.2 278.01,-106.27 280.37,-112.86" />
+        </g>
+        <!-- :common:database&#45;&gt;:common:domain -->
+        <g id="edge4" class="edge">
+            <title>:common:database&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M121.61,-72.05C114.8,-63.54 106.42,-53.07 98.91,-43.68" />
+            <polygon fill="black" stroke="black"
+                points="101.58,-41.41 92.6,-35.79 96.11,-45.78 101.58,-41.41" />
+        </g>
+    </g>
+</svg>

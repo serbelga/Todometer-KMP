@@ -1,0 +1,196 @@
+<svg width="1441px" height="431px" viewBox="0.00 0.00 1037.56 310.00"
+    xmlns="http://www.w3.org/2000/svg">
+    <g id="graph0" class="graph"
+        transform="scale(1.0007919936640506 1.0007919936640506) rotate(0.0) translate(4.0 306.0)">
+        <polygon fill="white" stroke="transparent"
+            points="-4,4 -4,-306 1033.56,-306 1033.56,4 -4,4" />
+        <text text-anchor="middle" x="514.78" y="-266.5" font-family="Times,serif"
+            font-size="35.00">about
+        </text>
+        <!-- :app&#45;feature:about -->
+        <g id="node1" class="node">
+            <title>:app&#45;feature:about</title>
+            <polygon fill="#7f52ff" stroke="black"
+                points="604.02,-252 485.79,-252 485.79,-216 604.02,-216 604.02,-252" />
+            <text text-anchor="middle" x="544.91" y="-229.8" font-family="Times,serif"
+                font-size="14.00">:app&#45;feature:about
+            </text>
+        </g>
+        <!-- :app&#45;common:designsystem -->
+        <g id="node2" class="node">
+            <title>:app&#45;common:designsystem</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="141.91" cy="-90" rx="119.28" ry="18" />
+            <text text-anchor="middle" x="141.91" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:app&#45;common:designsystem
+            </text>
+        </g>
+        <!-- :app&#45;feature:about&#45;&gt;:app&#45;common:designsystem -->
+        <g id="edge1" class="edge">
+            <title>:app&#45;feature:about&#45;&gt;:app&#45;common:designsystem</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M491.45,-215.91C460.04,-205.74 419.62,-192.44 383.91,-180 317.72,-156.94 241.98,-128.8 193.12,-110.42" />
+            <polygon fill="black" stroke="black"
+                points="194.31,-107.12 183.72,-106.87 191.84,-113.68 194.31,-107.12" />
+        </g>
+        <!-- :app&#45;common:ui -->
+        <g id="node4" class="node">
+            <title>:app&#45;common:ui</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="493.91" cy="-162" rx="74.74" ry="18" />
+            <text text-anchor="middle" x="493.91" y="-157.8" font-family="Times,serif"
+                font-size="14.00">:app&#45;common:ui
+            </text>
+        </g>
+        <!-- :app&#45;feature:about&#45;&gt;:app&#45;common:ui -->
+        <g id="edge2" class="edge">
+            <title>:app&#45;feature:about&#45;&gt;:app&#45;common:ui</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M532.3,-215.7C526.31,-207.47 519.03,-197.48 512.43,-188.42" />
+            <polygon fill="black" stroke="black"
+                points="515.09,-186.13 506.37,-180.1 509.43,-190.25 515.09,-186.13" />
+        </g>
+        <!-- :common:navigation -->
+        <g id="node6" class="node">
+            <title>:common:navigation</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="746.91" cy="-90" rx="90.93" ry="18" />
+            <text text-anchor="middle" x="746.91" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:navigation
+            </text>
+        </g>
+        <!-- :app&#45;feature:about&#45;&gt;:common:navigation -->
+        <g id="edge3" class="edge">
+            <title>:app&#45;feature:about&#45;&gt;:common:navigation</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M569.27,-215.87C605.74,-190.24 674.53,-141.88 714.97,-113.45" />
+            <polygon fill="black" stroke="black"
+                points="717.22,-116.14 723.39,-107.53 713.2,-110.42 717.22,-116.14" />
+        </g>
+        <!-- :common:resources -->
+        <g id="node7" class="node">
+            <title>:common:resources</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="942.91" cy="-90" rx="86.82" ry="18" />
+            <text text-anchor="middle" x="942.91" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:resources
+            </text>
+        </g>
+        <!-- :app&#45;feature:about&#45;&gt;:common:resources -->
+        <g id="edge4" class="edge">
+            <title>:app&#45;feature:about&#45;&gt;:common:resources</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M592.91,-215.87C668.46,-188.92 814.42,-136.84 891.82,-109.23" />
+            <polygon fill="black" stroke="black"
+                points="893.12,-112.48 901.37,-105.82 890.77,-105.89 893.12,-112.48" />
+        </g>
+        <!-- :common:viewmodel -->
+        <g id="node8" class="node">
+            <title>:common:viewmodel</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="372.91" cy="-90" rx="93.22" ry="18" />
+            <text text-anchor="middle" x="372.91" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:viewmodel
+            </text>
+        </g>
+        <!-- :app&#45;feature:about&#45;&gt;:common:viewmodel -->
+        <g id="edge6" class="edge">
+            <title>:app&#45;feature:about&#45;&gt;:common:viewmodel</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M485.64,-220.82C459.67,-212.91 430.49,-200.18 409.91,-180 392.89,-163.32 383.36,-137.66 378.25,-118.17" />
+            <polygon fill="black" stroke="black"
+                points="381.63,-117.26 375.9,-108.34 374.82,-118.88 381.63,-117.26" />
+        </g>
+        <!-- :common:ui -->
+        <g id="node9" class="node">
+            <title>:common:ui</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="579.91" cy="-90" rx="57.93" ry="18" />
+            <text text-anchor="middle" x="579.91" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:ui
+            </text>
+        </g>
+        <!-- :app&#45;feature:about&#45;&gt;:common:ui -->
+        <g id="edge5" class="edge">
+            <title>:app&#45;feature:about&#45;&gt;:common:ui</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M559.12,-215.53C566.2,-205.72 574.07,-192.88 577.91,-180 583.89,-159.91 584.1,-136.13 582.97,-118.21" />
+            <polygon fill="black" stroke="black"
+                points="586.45,-117.83 582.16,-108.14 579.47,-118.39 586.45,-117.83" />
+        </g>
+        <!-- :common:designsystem&#45;resources -->
+        <g id="node3" class="node">
+            <title>:common:designsystem&#45;resources</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="141.91" cy="-18" rx="141.81" ry="18" />
+            <text text-anchor="middle" x="141.91" y="-13.8" font-family="Times,serif"
+                font-size="14.00">:common:designsystem&#45;resources
+            </text>
+        </g>
+        <!-- :app&#45;common:designsystem&#45;&gt;:common:designsystem&#45;resources -->
+        <g id="edge7" class="edge">
+            <title>:app&#45;common:designsystem&#45;&gt;:common:designsystem&#45;resources</title>
+            <path fill="none" stroke="black"
+                d="M141.91,-71.7C141.91,-63.98 141.91,-54.71 141.91,-46.11" />
+            <polygon fill="black" stroke="black"
+                points="145.41,-46.1 141.91,-36.1 138.41,-46.1 145.41,-46.1" />
+        </g>
+        <!-- :app&#45;common:ui&#45;&gt;:app&#45;common:designsystem -->
+        <g id="edge8" class="edge">
+            <title>:app&#45;common:ui&#45;&gt;:app&#45;common:designsystem</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M438.13,-149.91C379.59,-138.27 287.05,-119.86 220.98,-106.73" />
+            <polygon fill="black" stroke="black"
+                points="221.52,-103.26 211.03,-104.75 220.15,-110.13 221.52,-103.26" />
+        </g>
+        <!-- :common:domain -->
+        <g id="node5" class="node">
+            <title>:common:domain</title>
+            <ellipse fill="#7f52ff" stroke="black" cx="493.91" cy="-18" rx="79.34" ry="18" />
+            <text text-anchor="middle" x="493.91" y="-13.8" font-family="Times,serif"
+                font-size="14.00">:common:domain
+            </text>
+        </g>
+        <!-- :app&#45;common:ui&#45;&gt;:common:domain -->
+        <g id="edge9" class="edge">
+            <title>:app&#45;common:ui&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M493.91,-143.87C493.91,-119.67 493.91,-75.21 493.91,-46.39" />
+            <polygon fill="black" stroke="black"
+                points="497.41,-46.19 493.91,-36.19 490.41,-46.19 497.41,-46.19" />
+        </g>
+        <!-- :app&#45;common:ui&#45;&gt;:common:navigation -->
+        <g id="edge10" class="edge">
+            <title>:app&#45;common:ui&#45;&gt;:common:navigation</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M541.2,-147.92C582.28,-136.55 642.02,-120.02 686.55,-107.7" />
+            <polygon fill="black" stroke="black"
+                points="687.67,-111.02 696.38,-104.98 685.81,-104.27 687.67,-111.02" />
+        </g>
+        <!-- :app&#45;common:ui&#45;&gt;:common:resources -->
+        <g id="edge11" class="edge">
+            <title>:app&#45;common:ui&#45;&gt;:common:resources</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M556.47,-152.11C627.1,-141.96 745.38,-124.61 846.91,-108 854.42,-106.77 862.26,-105.45 870.08,-104.1" />
+            <polygon fill="black" stroke="black"
+                points="870.69,-107.55 879.95,-102.39 869.5,-100.65 870.69,-107.55" />
+        </g>
+        <!-- :app&#45;common:ui&#45;&gt;:common:viewmodel -->
+        <g id="edge12" class="edge">
+            <title>:app&#45;common:ui&#45;&gt;:common:viewmodel</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M466.45,-145.12C449.82,-135.5 428.4,-123.1 410.24,-112.6" />
+            <polygon fill="black" stroke="black"
+                points="411.5,-109.29 401.09,-107.31 408,-115.34 411.5,-109.29" />
+        </g>
+        <!-- :app&#45;common:ui&#45;&gt;:common:ui -->
+        <g id="edge13" class="edge">
+            <title>:app&#45;common:ui&#45;&gt;:common:ui</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M514.29,-144.41C525.7,-135.12 540.07,-123.42 552.46,-113.34" />
+            <polygon fill="black" stroke="black"
+                points="554.72,-116.02 560.26,-106.99 550.3,-110.59 554.72,-116.02" />
+        </g>
+        <!-- :common:ui&#45;&gt;:common:domain -->
+        <g id="edge15" class="edge">
+            <title>:common:ui&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M559.96,-72.76C548.73,-63.62 534.51,-52.05 522.15,-41.99" />
+            <polygon fill="black" stroke="black"
+                points="524.31,-39.23 514.34,-35.63 519.89,-44.66 524.31,-39.23" />
+        </g>
+    </g>
+</svg>

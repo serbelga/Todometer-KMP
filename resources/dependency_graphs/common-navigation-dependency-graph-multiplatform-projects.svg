@@ -1,0 +1,19 @@
+<svg width="239px" height="131px" viewBox="0.00 0.00 171.75 94.00"
+    xmlns="http://www.w3.org/2000/svg">
+    <g id="graph0" class="graph"
+        transform="scale(1.0007919936640506 1.0007919936640506) rotate(0.0) translate(4.0 90.0)">
+        <polygon fill="white" stroke="transparent" points="-4,4 -4,-90 167.75,-90 167.75,4 -4,4" />
+        <text text-anchor="middle" x="81.88" y="-50.5" font-family="Times,serif" font-size="35.00">
+            navigation
+        </text>
+        <!-- :common:navigation -->
+        <g id="node1" class="node">
+            <title>:common:navigation</title>
+            <polygon fill="#7f52ff" stroke="black"
+                points="147.75,-36 16,-36 16,0 147.75,0 147.75,-36" />
+            <text text-anchor="middle" x="81.88" y="-13.8" font-family="Times,serif"
+                font-size="14.00">:common:navigation
+            </text>
+        </g>
+    </g>
+</svg>

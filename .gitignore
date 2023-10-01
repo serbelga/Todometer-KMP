@@ -14,12 +14,8 @@
 .cxx
 local.properties
 /.idea/
-/desktop/build/
-/buildSrc/build/
-/android/build/
-/android/release/*
-/android/google-services.json
-/wearos/google-services.json
-/wearos/release/*
-/common/**/build/
+/app-android/release/*
+/app-android/google-services.json
+/wear-app/google-services.json
+/wear-app/release/*
 todometer_preferences.preferences_pb

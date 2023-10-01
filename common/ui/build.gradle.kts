@@ -1,10 +1,13 @@
 plugins {
     kotlin("multiplatform")
+    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("todometer.common.library.android")
+    id("todometer.dependency-graph-generator")
     id("todometer.spotless")
 }
 
+group = "dev.sergiobelda.todometer.common.ui"
 version = "1.0"
 
 kotlin {
@@ -17,8 +20,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(compose.runtime)
+                api(compose.foundation)
+                api(compose.material3)
+                api(compose.materialIconsExtended)
+                api(compose.ui)
+
                 implementation(projects.common.domain)
-                implementation(libs.kotlin.coroutinesCore)
+
                 implementation(libs.kotlin.datetime)
             }
         }
@@ -31,23 +40,12 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(libs.androidx.appcompat)
-                implementation(libs.androidx.coreKtx)
-                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(compose.uiTooling)
             }
         }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.junit)
-                implementation(libs.mockk.mockk)
-            }
-        }
+        val androidUnitTest by getting
         val desktopMain by getting
-        val desktopTest by getting {
-            dependencies {
-                implementation(libs.mockk.mockk)
-            }
-        }
+        val desktopTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -65,6 +63,10 @@ kotlin {
             iosX64Test.dependsOn(this)
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
+        }
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
         }
     }
 }

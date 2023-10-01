@@ -1,0 +1,19 @@
+<svg width="217px" height="131px" viewBox="0.00 0.00 156.14 94.00"
+    xmlns="http://www.w3.org/2000/svg">
+    <g id="graph0" class="graph"
+        transform="scale(1.0007919936640506 1.0007919936640506) rotate(0.0) translate(4.0 90.0)">
+        <polygon fill="white" stroke="transparent" points="-4,4 -4,-90 152.14,-90 152.14,4 -4,4" />
+        <text text-anchor="middle" x="74.07" y="-50.5" font-family="Times,serif" font-size="35.00">
+            resources
+        </text>
+        <!-- :common:resources -->
+        <g id="node1" class="node">
+            <title>:common:resources</title>
+            <polygon fill="#7f52ff" stroke="black"
+                points="136.7,-36 11.44,-36 11.44,0 136.7,0 136.7,-36" />
+            <text text-anchor="middle" x="74.07" y="-13.8" font-family="Times,serif"
+                font-size="14.00">:common:resources
+            </text>
+        </g>
+    </g>
+</svg>

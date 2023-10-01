@@ -30,9 +30,6 @@ internal fun startDI(appDeclaration: KoinAppDeclaration) = startKoin {
     appDeclaration()
 }
 
-fun startAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI {
-    modules(viewModelModule)
-    appDeclaration()
-}
+fun startAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI(appDeclaration)
 
 fun startWearAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI(appDeclaration)
