@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,6 +43,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
@@ -53,6 +55,8 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.Vignette
+import androidx.wear.compose.material.VignettePosition
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
@@ -91,7 +95,10 @@ internal fun TaskDetailScreen(
             val coroutineScope = rememberCoroutineScope()
 
             Scaffold(
-                positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+                positionIndicator = {
+                    PositionIndicator(scalingLazyListState = scalingLazyListState)
+                },
+                vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
             ) {
                 LaunchedEffect(Unit) { focusRequester.requestFocus() }
                 ScalingLazyColumn(
@@ -121,10 +128,16 @@ internal fun TaskDetailScreen(
                         else -> {
                             taskDetailUiState.task?.let { task ->
                                 item {
-                                    Text(text = task.title, fontWeight = FontWeight.Bold)
+                                    Text(
+                                        text = task.title,
+                                        fontWeight = FontWeight.Bold,
+                                        maxLines = 2,
+                                        modifier = Modifier.padding(horizontal = 24.dp),
+                                        overflow = TextOverflow.Ellipsis
+                                    )
                                 }
                                 item {
-                                    Spacer(modifier = Modifier.height(24.dp))
+                                    Spacer(modifier = Modifier.height(12.dp))
                                 }
                                 item {
                                     EditTaskButton(taskDetailUiState.task) {

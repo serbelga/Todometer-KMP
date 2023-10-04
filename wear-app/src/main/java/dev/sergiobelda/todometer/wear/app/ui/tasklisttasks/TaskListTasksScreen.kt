@@ -50,6 +50,7 @@ import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedLayout
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
@@ -74,6 +75,8 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.ToggleChipDefaults
+import androidx.wear.compose.material.Vignette
+import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
@@ -137,7 +140,10 @@ internal fun TaskListTasksScreen(
                 timeText = {
                     CurvedLayout { curvedText(text = TaskProgress.getPercentage(progress)) }
                 },
-                positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+                positionIndicator = {
+                    PositionIndicator(scalingLazyListState = scalingLazyListState)
+                },
+                vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
             ) {
                 LaunchedEffect(Unit) { focusRequester.requestFocus() }
                 ScalingLazyColumn(
@@ -171,7 +177,8 @@ internal fun TaskListTasksScreen(
                                     item {
                                         Text(
                                             stringResource(MR.strings.default_task_list_name),
-                                            fontWeight = FontWeight.Bold
+                                            fontWeight = FontWeight.Bold,
+                                            overflow = TextOverflow.Ellipsis
                                         )
                                     }
                                 }
@@ -180,7 +187,10 @@ internal fun TaskListTasksScreen(
                                     item {
                                         Text(
                                             taskListTasksUiState.taskList.name,
-                                            fontWeight = FontWeight.Bold
+                                            fontWeight = FontWeight.Bold,
+                                            overflow = TextOverflow.Ellipsis,
+                                            maxLines = 2,
+                                            modifier = Modifier.padding(horizontal = 24.dp)
                                         )
                                     }
                                 }
@@ -303,7 +313,8 @@ private fun TaskItem(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colors.onSurface,
                     text = taskItem.title,
-                    textDecoration = textDecoration
+                    textDecoration = textDecoration,
+                    overflow = TextOverflow.Ellipsis
                 )
             },
             onClick = onClick,

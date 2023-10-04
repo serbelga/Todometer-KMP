@@ -41,6 +41,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
@@ -143,7 +144,8 @@ private fun ToDometerTitle() {
         Text(
             stringResource(MR.strings.app_name),
             style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
@@ -156,7 +158,8 @@ private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colors.onSurface,
-                text = taskListName
+                text = taskListName,
+                overflow = TextOverflow.Ellipsis
             )
         },
         onClick = onClick,
