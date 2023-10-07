@@ -15,7 +15,7 @@ kotlin {
     iosX64("uikitX64") {
         binaries {
             executable {
-                entryPoint = "dev.sergiobelda.todometer.ios.main"
+                entryPoint = "dev.sergiobelda.todometer.app.ios.main"
                 freeCompilerArgs += listOf(
                     "-linker-option", "-framework", "-linker-option", "Metal",
                     "-linker-option", "-framework", "-linker-option", "CoreText",
@@ -28,7 +28,7 @@ kotlin {
     iosArm64("uikitArm64") {
         binaries {
             executable {
-                entryPoint = "dev.sergiobelda.todometer.ios.main"
+                entryPoint = "dev.sergiobelda.todometer.app.ios.main"
                 freeCompilerArgs += listOf(
                     "-linker-option", "-framework", "-linker-option", "Metal",
                     "-linker-option", "-framework", "-linker-option", "CoreText",
