@@ -313,7 +313,7 @@ private fun taskItemActionIcon(state: TaskState): Painter =
 @Composable
 private fun taskItemActionContentDescription(state: TaskState): String =
     when (state) {
-        TaskState.DOING -> TodometerResources.strings.check_task
+        TaskState.DOING -> TodometerResources.strings.checkTask
         TaskState.DONE -> TodometerResources.strings.uncheck_task
     }
 

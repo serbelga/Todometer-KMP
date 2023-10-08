@@ -3,16 +3,16 @@ package dev.sergiobelda.todometer.common.resources
 data class TodometerStrings(
     val about: String,
     val add: String,
-    val add_element: String,
-    val add_element_optional: String,
-    val add_task: String,
-    val add_task_list: String,
+    val addElement: String,
+    val addElementOptional: String,
+    val addTask: String,
+    val addTaskList: String,
     val appName: String = "Todometer",
     val back: String,
     val cancel: String,
     val cannot_delete_this_task_list: String,
     val cannot_edit_this_task_list: String,
-    val check_task: String,
+    val checkTask: String,
     val checklist: String,
     val choose_tag: String,
     val choose_theme: String,
@@ -74,11 +74,11 @@ data class TodometerStrings(
     val title: String,
     val uncheck_task: String,
     val you_have_completed_all_tasks: String,
-    val you_have_not_any_task_list: String,
+    val you_have_not_any_task_list: String
 )
 
 internal val Strings: Map<String, TodometerStrings> = mapOf(
     Locales.CA to CaTodometerStrings,
     Locales.EN to EnTodometerStrings,
-    Locales.ES to EsTodometerStrings,
+    Locales.ES to EsTodometerStrings
 )

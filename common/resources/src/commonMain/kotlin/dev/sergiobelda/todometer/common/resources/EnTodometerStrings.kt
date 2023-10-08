@@ -6,15 +6,15 @@ import cafe.adriel.lyricist.LyricistStrings
 internal val EnTodometerStrings = TodometerStrings(
     about = "About",
     add = "Add",
-    add_element = "Add element",
-    add_element_optional = "Add element",
-    add_task = "Add task",
-    add_task_list = "Add task list",
+    addElement = "Add element",
+    addElementOptional = "Add element",
+    addTask = "Add task",
+    addTaskList = "Add task list",
     back = "Back",
     cancel = "Cancel",
     cannot_delete_this_task_list = "Can\'t delete the default task list",
     cannot_edit_this_task_list = "Can\'t edit the default task list",
-    check_task = "Check task",
+    checkTask = "Check task",
     checklist = "Checklist",
     choose_tag = "Choose a Tag",
     choose_theme = "Choose theme",
@@ -76,5 +76,5 @@ internal val EnTodometerStrings = TodometerStrings(
     title = "Title",
     uncheck_task = "Uncheck task",
     you_have_completed_all_tasks = "You have completed all tasks",
-    you_have_not_any_task_list = "You haven\'t any task list",
+    you_have_not_any_task_list = "You haven\'t any task list"
 )

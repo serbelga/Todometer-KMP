@@ -81,7 +81,7 @@ fun AddTaskListScreen(
         topBar = {
             SaveActionTopAppBar(
                 navigateBack = navigateBack,
-                title = TodometerResources.strings.add_task_list,
+                title = TodometerResources.strings.addTaskList,
                 isSaveButtonEnabled = !addTaskListUiState.isAddingTaskList,
                 onSaveButtonClick = {
                     if (taskListName.isBlank()) {
@@ -129,7 +129,7 @@ private fun AddTaskListTopBar(
                 )
             }
         },
-        title = { Text(TodometerResources.strings.add_task_list) },
+        title = { Text(TodometerResources.strings.addTaskList) },
         actions = {
             TextButton(
                 enabled = isSaveButtonEnabled,

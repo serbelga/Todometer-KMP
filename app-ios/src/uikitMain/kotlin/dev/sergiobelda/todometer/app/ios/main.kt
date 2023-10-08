@@ -18,13 +18,10 @@ package dev.sergiobelda.todometer.app.ios
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +54,6 @@ import dev.sergiobelda.todometer.app.ios.ui.home.HomeRoute
 import dev.sergiobelda.todometer.app.ios.ui.settings.SettingsRoute
 import dev.sergiobelda.todometer.app.ios.ui.taskdetails.TaskDetailsRoute
 import dev.sergiobelda.todometer.common.core.di.startAppDI
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.navigation.NavigationController
@@ -65,7 +61,6 @@ import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
-import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 val koin = startAppDI {
     modules(
@@ -93,7 +88,7 @@ fun main() {
             val navigationController by remember { mutableStateOf(NavigationController()) }
             ProvideTodometerStrings {
                 TodometerAppTheme(darkTheme) {
-                    /*NavigationHost(
+                    NavigationHost(
                         navigationController,
                         startDestination = HomeDestination.route,
                         modifier = Modifier
@@ -108,15 +103,7 @@ fun main() {
                         editTaskComposableNode(navigationController)
                         settingsComposableNode(navigationController)
                         aboutComposableNode(navigationController)
-                    }*/
-                    Column {
-                        Icon(
-                            TodometerIcons.GitHub,
-                            contentDescription = null
-                        )
                     }
-
-
                 }
             }
         }

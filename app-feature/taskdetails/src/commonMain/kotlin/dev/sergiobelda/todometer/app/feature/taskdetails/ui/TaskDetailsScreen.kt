@@ -188,7 +188,7 @@ private fun LazyListScope.taskChecklist(
     }
     item {
         AddChecklistItemField(
-            placeholder = { Text(TodometerResources.strings.add_element) },
+            placeholder = { Text(TodometerResources.strings.addElement) },
             onAddTaskCheckListItem = onAddTaskCheckListItem
         )
     }

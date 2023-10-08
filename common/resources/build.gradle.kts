@@ -12,7 +12,7 @@ group = "dev.sergiobelda.todometer.common.resources"
 version = "1.0"
 
 kotlin {
-    android()
+    androidTarget()
     jvm("desktop")
     iosX64()
     iosArm64()
@@ -23,7 +23,7 @@ kotlin {
             dependencies {
                 implementation(compose.ui)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
+                api(compose.components.resources)
                 api(libs.lyricist.lyricist)
             }
         }

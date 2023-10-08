@@ -143,7 +143,7 @@ private fun HomeDrawerTaskListsSection(
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = onAddTaskList) {
-            Text(TodometerResources.strings.add_task_list)
+            Text(TodometerResources.strings.addTaskList)
         }
     }
     LazyColumn(modifier = Modifier.padding(HomeDrawerItemPadding)) {

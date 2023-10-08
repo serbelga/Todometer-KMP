@@ -132,7 +132,7 @@ fun AddTaskScreen(
         topBar = {
             SaveActionTopAppBar(
                 navigateBack = onBack,
-                title = TodometerResources.strings.add_task,
+                title = TodometerResources.strings.addTask,
                 isSaveButtonEnabled = !addTaskUiState.isAddingTask,
                 onSaveButtonClick = {
                     if (taskTitle.isBlank()) {
@@ -213,7 +213,7 @@ fun AddTaskScreen(
                 }
                 item {
                     AddChecklistItemField(
-                        placeholder = { Text(TodometerResources.strings.add_element_optional) },
+                        placeholder = { Text(TodometerResources.strings.addElementOptional) },
                         onAddTaskCheckListItem = { taskChecklistItems.add(it) }
                     )
                 }

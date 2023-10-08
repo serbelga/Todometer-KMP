@@ -347,7 +347,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
             Icon(TodometerIcons.Add, null)
         },
         label = {
-            Text(text = TodometerResources.strings.add_task)
+            Text(text = TodometerResources.strings.addTask)
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()

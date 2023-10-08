@@ -6,15 +6,15 @@ import cafe.adriel.lyricist.LyricistStrings
 internal val CaTodometerStrings = TodometerStrings(
     about = "Sobre",
     add = "Afegir",
-    add_element = "Afegir element",
-    add_element_optional = "Afegir element",
-    add_task = "Afegir tasca",
-    add_task_list = "Afegir llista de tasques",
+    addElement = "Afegir element",
+    addElementOptional = "Afegir element",
+    addTask = "Afegir tasca",
+    addTaskList = "Afegir llista de tasques",
     back = "Enrere",
     cancel = "Cancelar",
     cannot_delete_this_task_list = "No es pot eliminar la llista predeterminada",
     cannot_edit_this_task_list = "No es pot editar la llista predeterminada",
-    check_task = "Marcar tasca",
+    checkTask = "Marcar tasca",
     checklist = "Checklist",
     choose_tag = "Tria una etiqueta",
     choose_theme = "Elegir un tema",
@@ -75,5 +75,5 @@ internal val CaTodometerStrings = TodometerStrings(
     title = "Títol",
     uncheck_task = "Desmarcar tasca",
     you_have_completed_all_tasks = "Has completat totes les tasques",
-    you_have_not_any_task_list = "No tens cap llista de tasques",
+    you_have_not_any_task_list = "No tens cap llista de tasques"
 )

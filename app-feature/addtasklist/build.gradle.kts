@@ -11,7 +11,7 @@ group = "dev.sergiobelda.todometer.app.feature.addtasklist"
 version = "1.0"
 
 kotlin {
-    android()
+    androidTarget()
     jvm("desktop")
     iosX64()
     iosArm64()

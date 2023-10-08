@@ -181,7 +181,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = TodometerResources.strings.add_task_list
+                text = TodometerResources.strings.addTaskList
             )
         },
         onClick = {

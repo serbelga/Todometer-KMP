@@ -373,7 +373,7 @@ private fun HomeFloatingActionButton(
         FloatingActionButton(onClick = navigateToAddTask) {
             Icon(
                 TodometerIcons.Add,
-                contentDescription = TodometerResources.strings.add_task
+                contentDescription = TodometerResources.strings.addTask
             )
         }
     }
