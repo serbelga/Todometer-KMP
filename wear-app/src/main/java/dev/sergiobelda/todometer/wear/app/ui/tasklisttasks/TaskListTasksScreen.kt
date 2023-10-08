@@ -83,8 +83,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerI
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wear.app.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wear.app.ui.deletetasklist.DeleteTaskListAlertDialog
@@ -173,7 +172,7 @@ internal fun TaskListTasksScreen(
                                 taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
                                     item {
                                         Text(
-                                            stringResource(MR.strings.default_task_list_name),
+                                            TodometerResources.strings.default_task_list_name,
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis
                                         )
@@ -196,7 +195,7 @@ internal fun TaskListTasksScreen(
                             if (taskListTasksUiState.tasks.isEmpty()) {
                                 item {
                                     Text(
-                                        text = stringResource(MR.strings.no_tasks),
+                                        text = TodometerResources.strings.no_tasks,
                                         textAlign = TextAlign.Center,
                                         style = MaterialTheme.typography.body2
                                     )
@@ -287,7 +286,7 @@ private fun TaskItem(
                             TodometerAnimatedImageVector.Delete,
                             atEnd = revealState.currentValue == Revealing
                         ),
-                        contentDescription = stringResource(MR.strings.delete_task),
+                        contentDescription = TodometerResources.strings.delete_task,
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
@@ -334,7 +333,7 @@ private fun TaskItem(
 
 @Composable
 private fun AddTaskButton(onComplete: (String) -> Unit) {
-    val taskTitleInput = stringResource(MR.strings.task_title_input)
+    val taskTitleInput = TodometerResources.strings.task_title_input
     val addTaskLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -348,7 +347,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
             Icon(TodometerIcons.Add, null)
         },
         label = {
-            Text(text = stringResource(MR.strings.add_task))
+            Text(text = TodometerResources.strings.add_task)
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -384,7 +383,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
             Icon(TodometerIcons.Edit, null)
         },
         label = {
-            Text(text = stringResource(MR.strings.edit_task_list))
+            Text(text = TodometerResources.strings.edit_task_list)
         },
         onClick = {
             val intent: Intent =
@@ -415,12 +414,12 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
         icon = {
             Icon(
                 TodometerIcons.Delete,
-                stringResource(MR.strings.delete_task_list)
+                TodometerResources.strings.delete_task_list
             )
         },
         label = {
             Text(
-                text = stringResource(MR.strings.delete_task_list),
+                text = TodometerResources.strings.delete_task_list,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )

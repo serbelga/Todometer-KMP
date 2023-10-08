@@ -5,8 +5,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,12 +18,12 @@ fun DatePickerDialog(
         onDismissRequest = onDismissRequest,
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(MR.strings.cancel))
+                Text(TodometerResources.strings.cancel)
             }
         },
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text(stringResource(MR.strings.ok))
+                Text(TodometerResources.strings.ok)
             }
         }
     ) {

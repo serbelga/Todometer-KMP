@@ -67,8 +67,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerI
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -314,8 +313,8 @@ private fun taskItemActionIcon(state: TaskState): Painter =
 @Composable
 private fun taskItemActionContentDescription(state: TaskState): String =
     when (state) {
-        TaskState.DOING -> stringResource(MR.strings.check_task)
-        TaskState.DONE -> stringResource(MR.strings.uncheck_task)
+        TaskState.DOING -> TodometerResources.strings.check_task
+        TaskState.DONE -> TodometerResources.strings.uncheck_task
     }
 
 private val TaskItemBackgroundHorizontalPadding = 16.dp

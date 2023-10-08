@@ -30,8 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerSymbols
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 fun TodometerTitle(modifier: Modifier = Modifier) {
@@ -47,7 +46,7 @@ fun TodometerTitle(modifier: Modifier = Modifier) {
             modifier = Modifier.size(TodometerTitleIconSize)
         )
         Text(
-            text = stringResource(MR.strings.app_name),
+            text = TodometerResources.strings.appName,
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(
                 bottom = TodometerTitleTextPaddingBottom

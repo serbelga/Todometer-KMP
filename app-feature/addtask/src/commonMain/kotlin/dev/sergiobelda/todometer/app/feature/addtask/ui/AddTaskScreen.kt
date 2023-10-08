@@ -70,8 +70,7 @@ import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -102,9 +101,9 @@ fun AddTaskScreen(
     val taskChecklistItems = mutableStateListOf<String>()
     fun initialValuesUpdated() =
         taskTitle.isNotBlank() ||
-            taskDueDate != null ||
-            taskDescription.isNotBlank() ||
-            taskChecklistItems.isNotEmpty()
+                taskDueDate != null ||
+                taskDescription.isNotBlank() ||
+                taskChecklistItems.isNotEmpty()
 
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
@@ -133,7 +132,7 @@ fun AddTaskScreen(
         topBar = {
             SaveActionTopAppBar(
                 navigateBack = onBack,
-                title = stringResource(MR.strings.add_task),
+                title = TodometerResources.strings.add_task,
                 isSaveButtonEnabled = !addTaskUiState.isAddingTask,
                 onSaveButtonClick = {
                     if (taskTitle.isBlank()) {
@@ -162,15 +161,15 @@ fun AddTaskScreen(
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                 item {
                     TodometerTitledTextField(
-                        title = stringResource(MR.strings.name),
+                        title = TodometerResources.strings.name,
                         value = taskTitle,
                         onValueChange = {
                             taskTitle = it
                             taskTitleInputError = false
                         },
-                        placeholder = { Text(stringResource(MR.strings.enter_task_name)) },
+                        placeholder = { Text(TodometerResources.strings.enter_task_name) },
                         isError = taskTitleInputError,
-                        errorMessage = stringResource(MR.strings.field_not_empty),
+                        errorMessage = TodometerResources.strings.field_not_empty,
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
@@ -179,13 +178,13 @@ fun AddTaskScreen(
                     )
                 }
                 item {
-                    FieldTitle(text = stringResource(MR.strings.choose_tag))
+                    FieldTitle(text = TodometerResources.strings.choose_tag)
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
                 }
                 item {
-                    FieldTitle(text = stringResource(MR.strings.date_time).addStyledOptionalSuffix())
+                    FieldTitle(text = TodometerResources.strings.date_time.addStyledOptionalSuffix())
                     DateTimeSelector(
                         taskDueDate,
                         onEnterDateTimeClick = { datePickerDialogState = true },
@@ -196,7 +195,7 @@ fun AddTaskScreen(
                 }
                 item {
                     Text(
-                        text = stringResource(MR.strings.checklist).addStyledOptionalSuffix(),
+                        text = TodometerResources.strings.checklist.addStyledOptionalSuffix(),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(
@@ -214,16 +213,16 @@ fun AddTaskScreen(
                 }
                 item {
                     AddChecklistItemField(
-                        placeholder = { Text(stringResource(MR.strings.add_element_optional)) },
+                        placeholder = { Text(TodometerResources.strings.add_element_optional) },
                         onAddTaskCheckListItem = { taskChecklistItems.add(it) }
                     )
                 }
                 item {
                     TodometerTitledTextField(
-                        title = stringResource(MR.strings.description).addStyledOptionalSuffix(),
+                        title = TodometerResources.strings.description.addStyledOptionalSuffix(),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
-                        placeholder = { Text(stringResource(MR.strings.enter_description)) },
+                        placeholder = { Text(TodometerResources.strings.enter_description) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
@@ -310,7 +309,7 @@ private fun TaskChecklistItem(
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
                 TodometerIcons.Close,
-                contentDescription = stringResource(MR.strings.clear),
+                contentDescription = TodometerResources.strings.clear,
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )
         }

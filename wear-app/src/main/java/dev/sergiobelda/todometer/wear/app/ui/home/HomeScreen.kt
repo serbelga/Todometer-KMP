@@ -59,8 +59,7 @@ import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerSymbols
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wear.app.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
@@ -109,7 +108,7 @@ internal fun HomeScreen(
                 else -> {
                     item {
                         TaskListItem(
-                            stringResource(MR.strings.default_task_list_name),
+                            TodometerResources.strings.default_task_list_name,
                             onClick = { openTaskList(null) }
                         )
                     }
@@ -139,7 +138,7 @@ private fun ToDometerTitle() {
             tint = MaterialTheme.colors.primary
         )
         Text(
-            stringResource(MR.strings.app_name),
+            TodometerResources.strings.appName,
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis
@@ -166,7 +165,7 @@ private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
 
 @Composable
 private fun AddTaskListButton(onComplete: (String) -> Unit) {
-    val taskListNameInput = stringResource(MR.strings.task_list_name_input)
+    val taskListNameInput = TodometerResources.strings.task_list_name_input
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -182,7 +181,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = stringResource(MR.strings.add_task_list)
+                text = TodometerResources.strings.add_task_list
             )
         },
         onClick = {

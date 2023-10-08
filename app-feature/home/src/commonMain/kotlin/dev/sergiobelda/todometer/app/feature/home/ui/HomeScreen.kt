@@ -77,8 +77,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.NoTasks
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIllustrations
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import kotlinx.coroutines.launch
 
 @Composable
@@ -113,14 +112,14 @@ fun HomeScreen(
     var deleteTasksAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
 
-    val defaultTaskListName = stringResource(MR.strings.default_task_list_name)
+    val defaultTaskListName = TodometerResources.strings.default_task_list_name
 
     var homeMoreDropdownExpanded by remember { mutableStateOf(false) }
     val closeHomeMoreDropdown = { homeMoreDropdownExpanded = false }
 
-    val cannotEditTaskList = stringResource(MR.strings.cannot_edit_this_task_list)
-    val cannotDeleteTaskList = stringResource(MR.strings.cannot_delete_this_task_list)
-    val snackbarActionLabel = stringResource(MR.strings.ok)
+    val cannotEditTaskList = TodometerResources.strings.cannot_edit_this_task_list
+    val cannotDeleteTaskList = TodometerResources.strings.cannot_delete_this_task_list
+    val snackbarActionLabel = TodometerResources.strings.ok
 
     SystemBackHandler(enabled = homeUiState.selectionMode) { onClearSelectedTasks() }
 
@@ -303,7 +302,7 @@ private fun HomeTopAppBar(
                             IconButton(onClick = onMenuClick) {
                                 Icon(
                                     TodometerIcons.Menu,
-                                    contentDescription = stringResource(MR.strings.menu)
+                                    contentDescription = TodometerResources.strings.menu
                                 )
                             }
                         },
@@ -311,7 +310,7 @@ private fun HomeTopAppBar(
                             IconButton(onClick = onMoreClick) {
                                 Icon(
                                     TodometerIcons.MoreVert,
-                                    contentDescription = stringResource(MR.strings.more)
+                                    contentDescription = TodometerResources.strings.more
                                 )
                             }
                             HomeMoreDropdownMenu(
@@ -374,7 +373,7 @@ private fun HomeFloatingActionButton(
         FloatingActionButton(onClick = navigateToAddTask) {
             Icon(
                 TodometerIcons.Add,
-                contentDescription = stringResource(MR.strings.add_task)
+                contentDescription = TodometerResources.strings.add_task
             )
         }
     }
@@ -398,7 +397,7 @@ private fun TasksListArea(
     if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {
         HomeInfoIllustration(
             TodometerIllustrations.NoTasks,
-            stringResource(MR.strings.no_tasks)
+            TodometerResources.strings.no_tasks
         )
     } else {
         LazyColumn(modifier = modifier) {
@@ -450,8 +449,8 @@ private fun TasksListArea(
         if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
             HomeInfoIllustration(
                 TodometerIllustrations.CompletedTasks,
-                stringResource(MR.strings.you_have_completed_all_tasks),
-                stringResource(MR.strings.congratulations)
+                TodometerResources.strings.you_have_completed_all_tasks,
+                TodometerResources.strings.congratulations
             )
         }
     }
@@ -468,10 +467,7 @@ private fun CompletedTasksHeader(
     ListItem(
         headlineContent = {
             Text(
-                text = stringResource(
-                    resource = MR.strings.completed_tasks,
-                    completedTasks
-                )
+                text = TodometerResources.strings.completed_tasks(completedTasks)
             )
         },
         trailingContent = {

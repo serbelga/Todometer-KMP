@@ -25,8 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedImageVector
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalAnimationGraphicsApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +35,7 @@ internal actual fun TaskItemBackgroundIcon(dismissState: DismissState, backgroun
             TodometerAnimatedImageVector.Delete,
             atEnd = dismissState.targetValue == DismissValue.DismissedToEnd
         ),
-        contentDescription = stringResource(MR.strings.delete_task),
+        contentDescription = TodometerResources.strings.delete_task,
         tint = backgroundIconTint
     )
 }

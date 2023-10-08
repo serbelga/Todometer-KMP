@@ -33,6 +33,7 @@ import dev.sergiobelda.todometer.app.android.ui.navhost.TodometerNavHost
 import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +46,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            MainContent()
+            ProvideTodometerStrings {
+                MainContent()
+            }
         }
     }
 

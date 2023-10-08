@@ -23,8 +23,7 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun DeleteTaskAlertDialog(
@@ -35,11 +34,11 @@ internal fun DeleteTaskAlertDialog(
         icon = {
             Icon(
                 TodometerIcons.Delete,
-                stringResource(MR.strings.delete_task)
+                TodometerResources.strings.delete_task
             )
         },
         title = {},
-        content = { Text(stringResource(MR.strings.delete_task_question)) },
+        content = { Text(TodometerResources.strings.delete_task_question) },
         positiveButton = {
             Button(onClick = onDeleteTask) {
                 Icon(TodometerIcons.Check, null)

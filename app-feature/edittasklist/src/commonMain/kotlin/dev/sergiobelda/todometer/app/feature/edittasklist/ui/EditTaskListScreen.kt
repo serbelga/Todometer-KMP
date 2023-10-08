@@ -34,8 +34,7 @@ import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTit
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 fun EditTaskListScreen(
@@ -56,7 +55,7 @@ fun EditTaskListScreen(
                 topBar = {
                     SaveActionTopAppBar(
                         navigateBack = navigateBack,
-                        title = stringResource(MR.strings.edit_task_list),
+                        title = TodometerResources.strings.edit_task_list,
                         isSaveButtonEnabled = !editTaskListUiState.isLoading,
                         onSaveButtonClick = {
                             if (taskListName.isBlank()) {
@@ -71,16 +70,16 @@ fun EditTaskListScreen(
                 content = { paddingValues ->
                     Column(modifier = Modifier.padding(paddingValues)) {
                         TodometerTitledTextField(
-                            title = stringResource(MR.strings.name),
+                            title = TodometerResources.strings.name,
                             value = taskListName,
                             onValueChange = {
                                 taskListName = it
                                 taskListNameInputError = false
                             },
-                            placeholder = { Text(stringResource(MR.strings.enter_task_list_name)) },
+                            placeholder = { Text(TodometerResources.strings.enter_task_list_name) },
                             singleLine = true,
                             isError = taskListNameInputError,
-                            errorMessage = stringResource(MR.strings.field_not_empty),
+                            errorMessage = TodometerResources.strings.field_not_empty,
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Sentences,
                                 imeAction = ImeAction.Done

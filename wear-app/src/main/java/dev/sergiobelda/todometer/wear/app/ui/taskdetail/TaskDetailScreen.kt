@@ -59,8 +59,7 @@ import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wear.app.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wear.app.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
@@ -173,7 +172,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
             Icon(TodometerIcons.Edit, null)
         },
         label = {
-            Text(text = stringResource(MR.strings.edit_task))
+            Text(text = TodometerResources.strings.edit_task)
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -201,10 +200,10 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
             backgroundColor = MaterialTheme.colors.error
         ),
         icon = {
-            Icon(TodometerIcons.Delete, stringResource(MR.strings.delete_task))
+            Icon(TodometerIcons.Delete, TodometerResources.strings.delete_task)
         },
         label = {
-            Text(text = stringResource(MR.strings.delete_task))
+            Text(text = TodometerResources.strings.delete_task)
         },
         onClick = onClick,
         modifier = Modifier.fillMaxWidth()

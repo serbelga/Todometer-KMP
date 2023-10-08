@@ -20,6 +20,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 
 class MainActivity : ComponentActivity() {
 
@@ -28,7 +29,9 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
 
         setContent {
-            TodometerApp()
+            ProvideTodometerStrings {
+                TodometerApp()
+            }
         }
     }
 }

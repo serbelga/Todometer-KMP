@@ -51,8 +51,7 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMedium
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 fun AddTaskListScreen(
@@ -82,7 +81,7 @@ fun AddTaskListScreen(
         topBar = {
             SaveActionTopAppBar(
                 navigateBack = navigateBack,
-                title = stringResource(MR.strings.add_task_list),
+                title = TodometerResources.strings.add_task_list,
                 isSaveButtonEnabled = !addTaskListUiState.isAddingTaskList,
                 onSaveButtonClick = {
                     if (taskListName.isBlank()) {
@@ -126,11 +125,11 @@ private fun AddTaskListTopBar(
             IconButton(onClick = navigateBack) {
                 Icon(
                     TodometerIcons.NavigateBefore,
-                    contentDescription = stringResource(MR.strings.back)
+                    contentDescription = TodometerResources.strings.back
                 )
             }
         },
-        title = { Text(stringResource(MR.strings.add_task_list)) },
+        title = { Text(TodometerResources.strings.add_task_list) },
         actions = {
             TextButton(
                 enabled = isSaveButtonEnabled,
@@ -138,12 +137,12 @@ private fun AddTaskListTopBar(
             ) {
                 Icon(
                     TodometerIcons.Check,
-                    contentDescription = stringResource(MR.strings.save),
+                    contentDescription = TodometerResources.strings.save,
                     tint = saveButtonTintColor
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Text(
-                    text = stringResource(MR.strings.save),
+                    text = TodometerResources.strings.save,
                     style = MaterialTheme.typography.bodyMedium,
                     color = saveButtonTintColor
                 )
@@ -165,13 +164,13 @@ private fun AddTaskListContent(
     }
     Column(modifier = Modifier.padding(paddingValues)) {
         TodometerTitledTextField(
-            title = stringResource(MR.strings.name),
+            title = TodometerResources.strings.name,
             value = taskListNameValue,
             onValueChange = onTaskListNameValueChange,
-            placeholder = { Text(stringResource(MR.strings.enter_task_list_name)) },
+            placeholder = { Text(TodometerResources.strings.enter_task_list_name) },
             singleLine = true,
             isError = taskListNameInputError,
-            errorMessage = stringResource(MR.strings.field_not_empty),
+            errorMessage = TodometerResources.strings.field_not_empty,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
                 imeAction = ImeAction.Done

@@ -20,8 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 fun AppTheme.themeIcon(): Painter =
@@ -34,7 +33,7 @@ fun AppTheme.themeIcon(): Painter =
 @Composable
 fun AppTheme.themeName(): String =
     when (this) {
-        AppTheme.FOLLOW_SYSTEM -> stringResource(MR.strings.follow_system)
-        AppTheme.DARK_THEME -> stringResource(MR.strings.dark_theme)
-        AppTheme.LIGHT_THEME -> stringResource(MR.strings.light_theme)
+        AppTheme.FOLLOW_SYSTEM -> TodometerResources.strings.follow_system
+        AppTheme.DARK_THEME -> TodometerResources.strings.dark_theme
+        AppTheme.LIGHT_THEME -> TodometerResources.strings.light_theme
     }

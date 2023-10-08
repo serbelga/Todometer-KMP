@@ -60,8 +60,7 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -102,7 +101,7 @@ fun TaskDetailsScreen(
                             IconButton(onClick = navigateBack) {
                                 Icon(
                                     TodometerIcons.NavigateBefore,
-                                    contentDescription = stringResource(MR.strings.back)
+                                    contentDescription = TodometerResources.strings.back
                                 )
                             }
                         },
@@ -111,7 +110,7 @@ fun TaskDetailsScreen(
                                 IconButton(onClick = navigateToEditTask) {
                                     Icon(
                                         TodometerIcons.Edit,
-                                        contentDescription = stringResource(MR.strings.edit_task),
+                                        contentDescription = TodometerResources.strings.edit_task,
                                         tint = MaterialTheme.colorScheme.primary
                                     )
                                 }
@@ -182,14 +181,14 @@ private fun LazyListScope.taskChecklist(
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(stringResource(MR.strings.checklist))
+        TaskDetailSectionTitle(TodometerResources.strings.checklist)
     }
     items(taskChecklistItems, key = { it.id }) { taskChecklistItem ->
         TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
     }
     item {
         AddChecklistItemField(
-            placeholder = { Text(stringResource(MR.strings.add_element)) },
+            placeholder = { Text(TodometerResources.strings.add_element) },
             onAddTaskCheckListItem = onAddTaskCheckListItem
         )
     }
@@ -249,7 +248,7 @@ private fun LazyItemScope.TaskChecklistItem(
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
                 TodometerIcons.Close,
-                contentDescription = stringResource(MR.strings.clear),
+                contentDescription = TodometerResources.strings.clear,
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )
         }
@@ -261,7 +260,7 @@ private fun LazyListScope.taskDescription(description: String?) {
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(stringResource(MR.strings.description))
+        TaskDetailSectionTitle(TodometerResources.strings.description)
     }
     item {
         if (!description.isNullOrBlank()) {
@@ -276,7 +275,7 @@ private fun LazyListScope.taskDescription(description: String?) {
             )
         } else {
             Text(
-                text = stringResource(MR.strings.no_description),
+                text = TodometerResources.strings.no_description,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(
                     top = 16.dp,

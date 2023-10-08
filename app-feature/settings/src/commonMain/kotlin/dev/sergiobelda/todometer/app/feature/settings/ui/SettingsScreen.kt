@@ -58,8 +58,7 @@ import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeName
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,12 +74,12 @@ fun SettingsScreen(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             TodometerIcons.NavigateBefore,
-                            contentDescription = stringResource(MR.strings.back)
+                            contentDescription = TodometerResources.strings.back
                         )
                     }
                 },
                 title = {
-                    Text(stringResource(MR.strings.settings))
+                    Text(TodometerResources.strings.settings)
                 }
             )
         }
@@ -94,7 +93,7 @@ fun SettingsScreen(
 @Composable
 private fun SettingsChooseAppTheme(appTheme: AppTheme, onItemClick: (AppTheme) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth().padding(SettingsItemPaddingHorizontal)) {
-        Text(text = stringResource(MR.strings.theme))
+        Text(text = TodometerResources.strings.theme)
         Spacer(modifier = Modifier.height(SettingsItemInternalSpacing))
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(AppThemeItemsSpacing),

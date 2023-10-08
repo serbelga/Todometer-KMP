@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright 2023 Sergio Belda
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp"
+    android:height="24dp" android:viewportWidth="960" android:viewportHeight="960">
+    <path android:fillColor="#FF000000"
+        android:pathData="M480,880q-83,0 -156,-31.5T197,763q-54,-54 -85.5,-127T80,480q0,-83 31.5,-156T197,197q54,-54 127,-85.5T480,80q48,0 93.5,11t87.5,32q15,8 19.5,24t-5.5,30q-10,14 -26.5,18t-32.5,-4q-32,-15 -66.5,-23t-69.5,-8q-133,0 -226.5,93.5T160,480q0,133 93.5,226.5T480,800q133,0 226.5,-93.5T800,480q0,-8 -0.5,-15.5T798,449q-2,-17 6.5,-32.5T830,396q16,-5 30,3t16,24q2,14 3,28t1,29q0,83 -31.5,156T763,763q-54,54 -127,85.5T480,880ZM424,552 L796,179q11,-11 27.5,-11.5T852,179q11,11 11,28t-11,28L452,636q-12,12 -28,12t-28,-12L282,522q-11,-11 -11,-28t11,-28q11,-11 28,-11t28,11l86,86Z" />
+</vector>

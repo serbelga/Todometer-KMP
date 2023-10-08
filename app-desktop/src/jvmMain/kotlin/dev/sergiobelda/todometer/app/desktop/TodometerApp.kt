@@ -60,16 +60,17 @@ import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
+import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 
 val koin = startAppDI {
     modules(
         addTaskViewModelModule +
-            addTaskListViewModelModule +
-            editTaskViewModelModule +
-            editTaskListViewModelModule +
-            homeViewModelModule +
-            settingsViewModelModule +
-            taskDetailsViewModelModule
+                addTaskListViewModelModule +
+                editTaskViewModelModule +
+                editTaskListViewModelModule +
+                homeViewModelModule +
+                settingsViewModelModule +
+                taskDetailsViewModelModule
     )
 }.koin
 
@@ -92,16 +93,18 @@ fun main() = application {
             AppTheme.LIGHT_THEME -> false
         }
         val navigationController by remember { mutableStateOf(NavigationController()) }
-        TodometerAppTheme(darkTheme) {
-            NavigationHost(navigationController, startDestination = HomeDestination.route) {
-                homeComposableNode(navigationController)
-                taskDetailsComposableNode(navigationController)
-                addTaskListComposableNode(navigationController)
-                editTaskListComposableNode(navigationController)
-                addTaskComposableNode(navigationController)
-                editTaskComposableNode(navigationController)
-                settingsComposableNode(navigationController)
-                aboutComposableNode(navigationController)
+        ProvideTodometerStrings {
+            TodometerAppTheme(darkTheme) {
+                NavigationHost(navigationController, startDestination = HomeDestination.route) {
+                    homeComposableNode(navigationController)
+                    taskDetailsComposableNode(navigationController)
+                    addTaskListComposableNode(navigationController)
+                    editTaskListComposableNode(navigationController)
+                    addTaskComposableNode(navigationController)
+                    editTaskComposableNode(navigationController)
+                    settingsComposableNode(navigationController)
+                    aboutComposableNode(navigationController)
+                }
             }
         }
     }

@@ -45,8 +45,7 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.TodometerTheme
 import dev.sergiobelda.todometer.app.common.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 fun TagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
@@ -110,7 +109,7 @@ private fun TagItem(
             if (selected) {
                 Icon(
                     TodometerIcons.Check,
-                    stringResource(MR.strings.selected),
+                    TodometerResources.strings.selected,
                     tint = checkColor
                 )
             }

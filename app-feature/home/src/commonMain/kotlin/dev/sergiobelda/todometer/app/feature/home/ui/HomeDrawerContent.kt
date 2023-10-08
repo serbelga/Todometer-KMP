@@ -43,8 +43,7 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMedium
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun HomeDrawerContent(
@@ -93,7 +92,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
         },
         label = {
             Text(
-                text = stringResource(MR.strings.settings),
+                text = TodometerResources.strings.settings,
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HomeDrawerItemMaxLines
             )
@@ -114,7 +113,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
         },
         label = {
             Text(
-                text = stringResource(MR.strings.about),
+                text = TodometerResources.strings.about,
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HomeDrawerItemMaxLines
             )
@@ -139,12 +138,12 @@ private fun HomeDrawerTaskListsSection(
             .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal)
     ) {
         Text(
-            text = stringResource(MR.strings.task_lists),
+            text = TodometerResources.strings.task_lists,
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = onAddTaskList) {
-            Text(stringResource(MR.strings.add_task_list))
+            Text(TodometerResources.strings.add_task_list)
         }
     }
     LazyColumn(modifier = Modifier.padding(HomeDrawerItemPadding)) {

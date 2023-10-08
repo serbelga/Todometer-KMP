@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright 2023 Sergio Belda
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp"
+    android:height="24dp" android:tint="?attr/colorControlNormal" android:viewportWidth="960"
+    android:viewportHeight="960">
+    <path android:fillColor="#FF000000"
+        android:pathData="M580,720q-42,0 -71,-29t-29,-71q0,-42 29,-71t71,-29q42,0 71,29t29,71q0,42 -29,71t-71,29ZM200,880q-33,0 -56.5,-23.5T120,800L120,240q0,-33 23.5,-56.5T200,160h40v-40q0,-17 11.5,-28.5T280,80q17,0 28.5,11.5T320,120v40h320v-40q0,-17 11.5,-28.5T680,80q17,0 28.5,11.5T720,120v40h40q33,0 56.5,23.5T840,240v560q0,33 -23.5,56.5T760,880L200,880ZM200,800h560L760,400L200,400v400ZM200,320h560v-80L200,240v80ZM200,320v-80,80Z" />
+</vector>
