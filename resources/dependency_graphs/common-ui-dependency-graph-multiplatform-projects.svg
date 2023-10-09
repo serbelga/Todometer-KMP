@@ -10,7 +10,7 @@
         <!-- :common:ui -->
         <g id="node1" class="node">
             <title>:common:ui</title>
-            <polygon fill="#7f52ff" stroke="black"
+            <polygon fill="#A280FF" stroke="black"
                 points="120.84,-108 37.5,-108 37.5,-72 120.84,-72 120.84,-108" />
             <text text-anchor="middle" x="79.17" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:ui
@@ -19,7 +19,7 @@
         <!-- :common:domain -->
         <g id="node2" class="node">
             <title>:common:domain</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="79.17" cy="-18" rx="79.34" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="79.17" cy="-18" rx="79.34" ry="18" />
             <text text-anchor="middle" x="79.17" y="-13.8" font-family="Times,serif"
                 font-size="14.00">:common:domain
             </text>

@@ -10,7 +10,7 @@
         <!-- :common:data -->
         <g id="node1" class="node">
             <title>:common:data</title>
-            <polygon fill="#7f52ff" stroke="black"
+            <polygon fill="#A280FF" stroke="black"
                 points="183.27,-180 87.07,-180 87.07,-144 183.27,-144 183.27,-180" />
             <text text-anchor="middle" x="135.17" y="-157.8" font-family="Times,serif"
                 font-size="14.00">:common:data
@@ -19,7 +19,7 @@
         <!-- :common:domain -->
         <g id="node2" class="node">
             <title>:common:domain</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="79.17" cy="-18" rx="79.34" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="79.17" cy="-18" rx="79.34" ry="18" />
             <text text-anchor="middle" x="79.17" y="-13.8" font-family="Times,serif"
                 font-size="14.00">:common:domain
             </text>
@@ -35,7 +35,7 @@
         <!-- :common:database -->
         <g id="node3" class="node">
             <title>:common:database</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="135.17" cy="-90" rx="83.39" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="135.17" cy="-90" rx="83.39" ry="18" />
             <text text-anchor="middle" x="135.17" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:database
             </text>
@@ -51,7 +51,7 @@
         <!-- :common:preferences -->
         <g id="node4" class="node">
             <title>:common:preferences</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="331.17" cy="-90" rx="94.88" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="331.17" cy="-90" rx="94.88" ry="18" />
             <text text-anchor="middle" x="331.17" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:preferences
             </text>

@@ -10,7 +10,7 @@
         <!-- :app&#45;common:designsystem -->
         <g id="node1" class="node">
             <title>:app&#45;common:designsystem</title>
-            <polygon fill="#7f52ff" stroke="black"
+            <polygon fill="#A280FF" stroke="black"
                 points="228.49,-108 55.32,-108 55.32,-72 228.49,-72 228.49,-108" />
             <text text-anchor="middle" x="141.91" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;common:designsystem
@@ -19,7 +19,7 @@
         <!-- :common:designsystem&#45;resources -->
         <g id="node2" class="node">
             <title>:common:designsystem&#45;resources</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="141.91" cy="-18" rx="141.81" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="141.91" cy="-18" rx="141.81" ry="18" />
             <text text-anchor="middle" x="141.91" y="-13.8" font-family="Times,serif"
                 font-size="14.00">:common:designsystem&#45;resources
             </text>

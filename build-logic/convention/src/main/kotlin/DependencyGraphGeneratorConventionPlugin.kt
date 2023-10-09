@@ -32,7 +32,7 @@ class DependencyGraphGeneratorConventionPlugin : Plugin<Project> {
                     projectNode = { node, project ->
                         node.add(Style.FILLED)
                         if (project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
-                            node.add(Color.rgb("#7F52FF").fill())
+                            node.add(Color.rgb("#A280FF").fill())
                         }
                         node
                     }

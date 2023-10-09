@@ -10,7 +10,7 @@
         <!-- :common:core -->
         <g id="node1" class="node">
             <title>:common:core</title>
-            <polygon fill="#7f52ff" stroke="black"
+            <polygon fill="#A280FF" stroke="black"
                 points="257.72,-252 160.99,-252 160.99,-216 257.72,-216 257.72,-252" />
             <text text-anchor="middle" x="209.35" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:common:core
@@ -19,7 +19,7 @@
         <!-- :common:ui -->
         <g id="node2" class="node">
             <title>:common:ui</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="429.35" cy="-162" rx="57.93" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="429.35" cy="-162" rx="57.93" ry="18" />
             <text text-anchor="middle" x="429.35" y="-157.8" font-family="Times,serif"
                 font-size="14.00">:common:ui
             </text>
@@ -35,7 +35,7 @@
         <!-- :common:domain -->
         <g id="node3" class="node">
             <title>:common:domain</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="153.35" cy="-18" rx="79.34" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="153.35" cy="-18" rx="79.34" ry="18" />
             <text text-anchor="middle" x="153.35" y="-13.8" font-family="Times,serif"
                 font-size="14.00">:common:domain
             </text>
@@ -51,7 +51,7 @@
         <!-- :common:data -->
         <g id="node4" class="node">
             <title>:common:data</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="209.35" cy="-162" rx="66.07" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="209.35" cy="-162" rx="66.07" ry="18" />
             <text text-anchor="middle" x="209.35" y="-157.8" font-family="Times,serif"
                 font-size="14.00">:common:data
             </text>
@@ -67,7 +67,7 @@
         <!-- :common:database -->
         <g id="node5" class="node">
             <title>:common:database</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="98.35" cy="-90" rx="83.39" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="98.35" cy="-90" rx="83.39" ry="18" />
             <text text-anchor="middle" x="98.35" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:database
             </text>
@@ -83,7 +83,7 @@
         <!-- :common:preferences -->
         <g id="node6" class="node">
             <title>:common:preferences</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="332.35" cy="-90" rx="94.88" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="332.35" cy="-90" rx="94.88" ry="18" />
             <text text-anchor="middle" x="332.35" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:preferences
             </text>

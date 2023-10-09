@@ -10,7 +10,7 @@
         <!-- :app&#45;ios -->
         <g id="node1" class="node">
             <title>:app&#45;ios</title>
-            <polygon fill="#7f52ff" stroke="black"
+            <polygon fill="#A280FF" stroke="black"
                 points="1021.24,-324 960.04,-324 960.04,-288 1021.24,-288 1021.24,-324" />
             <text text-anchor="middle" x="990.64" y="-301.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;ios
@@ -19,7 +19,7 @@
         <!-- :app&#45;common:designsystem -->
         <g id="node2" class="node">
             <title>:app&#45;common:designsystem</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="440.64" cy="-90" rx="119.28" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="440.64" cy="-90" rx="119.28" ry="18" />
             <text text-anchor="middle" x="440.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;common:designsystem
             </text>
@@ -35,7 +35,7 @@
         <!-- :app&#45;common:ui -->
         <g id="node4" class="node">
             <title>:app&#45;common:ui</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="825.64" cy="-162" rx="74.74" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="825.64" cy="-162" rx="74.74" ry="18" />
             <text text-anchor="middle" x="825.64" y="-157.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;common:ui
             </text>
@@ -51,7 +51,7 @@
         <!-- :common:domain -->
         <g id="node6" class="node">
             <title>:common:domain</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1712.64" cy="-18" rx="79.34" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1712.64" cy="-18" rx="79.34" ry="18" />
             <text text-anchor="middle" x="1712.64" y="-13.8" font-family="Times,serif"
                 font-size="14.00">:common:domain
             </text>
@@ -67,7 +67,7 @@
         <!-- :common:ui -->
         <g id="node10" class="node">
             <title>:common:ui</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1660.64" cy="-90" rx="57.93" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1660.64" cy="-90" rx="57.93" ry="18" />
             <text text-anchor="middle" x="1660.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:ui
             </text>
@@ -83,7 +83,7 @@
         <!-- :app&#45;feature:about -->
         <g id="node11" class="node">
             <title>:app&#45;feature:about</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="572.64" cy="-234" rx="81.64" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="572.64" cy="-234" rx="81.64" ry="18" />
             <text text-anchor="middle" x="572.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:about
             </text>
@@ -99,7 +99,7 @@
         <!-- :app&#45;feature:addtask -->
         <g id="node12" class="node">
             <title>:app&#45;feature:addtask</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1378.64" cy="-234" rx="89.72" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1378.64" cy="-234" rx="89.72" ry="18" />
             <text text-anchor="middle" x="1378.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:addtask
             </text>
@@ -115,7 +115,7 @@
         <!-- :app&#45;feature:addtasklist -->
         <g id="node13" class="node">
             <title>:app&#45;feature:addtasklist</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="361.64" cy="-234" rx="101.84" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="361.64" cy="-234" rx="101.84" ry="18" />
             <text text-anchor="middle" x="361.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:addtasklist
             </text>
@@ -131,7 +131,7 @@
         <!-- :app&#45;feature:edittask -->
         <g id="node14" class="node">
             <title>:app&#45;feature:edittask</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="762.64" cy="-234" rx="90.3" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="762.64" cy="-234" rx="90.3" ry="18" />
             <text text-anchor="middle" x="762.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:edittask
             </text>
@@ -147,7 +147,7 @@
         <!-- :app&#45;feature:edittasklist -->
         <g id="node15" class="node">
             <title>:app&#45;feature:edittasklist</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1588.64" cy="-234" rx="102.42" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1588.64" cy="-234" rx="102.42" ry="18" />
             <text text-anchor="middle" x="1588.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:edittasklist
             </text>
@@ -163,7 +163,7 @@
         <!-- :app&#45;feature:home -->
         <g id="node16" class="node">
             <title>:app&#45;feature:home</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="990.64" cy="-234" rx="81.64" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="990.64" cy="-234" rx="81.64" ry="18" />
             <text text-anchor="middle" x="990.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:home
             </text>
@@ -179,7 +179,7 @@
         <!-- :app&#45;feature:settings -->
         <g id="node17" class="node">
             <title>:app&#45;feature:settings</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1180.64" cy="-234" rx="89.74" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1180.64" cy="-234" rx="89.74" ry="18" />
             <text text-anchor="middle" x="1180.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:settings
             </text>
@@ -195,7 +195,7 @@
         <!-- :app&#45;feature:taskdetails -->
         <g id="node18" class="node">
             <title>:app&#45;feature:taskdetails</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="119.64" cy="-234" rx="101.25" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="119.64" cy="-234" rx="101.25" ry="18" />
             <text text-anchor="middle" x="119.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:app&#45;feature:taskdetails
             </text>
@@ -211,7 +211,7 @@
         <!-- :common:core -->
         <g id="node19" class="node">
             <title>:common:core</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="2011.64" cy="-234" rx="66.63" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="2011.64" cy="-234" rx="66.63" ry="18" />
             <text text-anchor="middle" x="2011.64" y="-229.8" font-family="Times,serif"
                 font-size="14.00">:common:core
             </text>
@@ -227,7 +227,7 @@
         <!-- :common:designsystem&#45;resources -->
         <g id="node3" class="node">
             <title>:common:designsystem&#45;resources</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="440.64" cy="-18" rx="141.81" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="440.64" cy="-18" rx="141.81" ry="18" />
             <text text-anchor="middle" x="440.64" y="-13.8" font-family="Times,serif"
                 font-size="14.00">:common:designsystem&#45;resources
             </text>
@@ -275,7 +275,7 @@
         <!-- :common:navigation -->
         <g id="node7" class="node">
             <title>:common:navigation</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1088.64" cy="-90" rx="90.93" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1088.64" cy="-90" rx="90.93" ry="18" />
             <text text-anchor="middle" x="1088.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:navigation
             </text>
@@ -291,7 +291,7 @@
         <!-- :common:resources -->
         <g id="node8" class="node">
             <title>:common:resources</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="1322.64" cy="-90" rx="86.82" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="1322.64" cy="-90" rx="86.82" ry="18" />
             <text text-anchor="middle" x="1322.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:resources
             </text>
@@ -307,7 +307,7 @@
         <!-- :common:viewmodel -->
         <g id="node9" class="node">
             <title>:common:viewmodel</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="708.64" cy="-90" rx="93.22" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="708.64" cy="-90" rx="93.22" ry="18" />
             <text text-anchor="middle" x="708.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:viewmodel
             </text>
@@ -795,7 +795,7 @@
         <!-- :common:data -->
         <g id="node20" class="node">
             <title>:common:data</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="2133.64" cy="-162" rx="66.07" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="2133.64" cy="-162" rx="66.07" ry="18" />
             <text text-anchor="middle" x="2133.64" y="-157.8" font-family="Times,serif"
                 font-size="14.00">:common:data
             </text>
@@ -811,7 +811,7 @@
         <!-- :common:database -->
         <g id="node21" class="node">
             <title>:common:database</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="2030.64" cy="-90" rx="83.39" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="2030.64" cy="-90" rx="83.39" ry="18" />
             <text text-anchor="middle" x="2030.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:database
             </text>
@@ -827,7 +827,7 @@
         <!-- :common:preferences -->
         <g id="node22" class="node">
             <title>:common:preferences</title>
-            <ellipse fill="#7f52ff" stroke="black" cx="2264.64" cy="-90" rx="94.88" ry="18" />
+            <ellipse fill="#A280FF" stroke="black" cx="2264.64" cy="-90" rx="94.88" ry="18" />
             <text text-anchor="middle" x="2264.64" y="-85.8" font-family="Times,serif"
                 font-size="14.00">:common:preferences
             </text>
