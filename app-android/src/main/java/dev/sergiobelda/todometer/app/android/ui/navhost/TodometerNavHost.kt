@@ -16,6 +16,8 @@
 
 package dev.sergiobelda.todometer.app.android.ui.navhost
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -71,7 +73,9 @@ internal fun TodometerNavHost(
     NavHost(
         navController = navController,
         startDestination = HomeDestination.route,
-        modifier = modifier
+        modifier = modifier,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
     ) {
         composable(HomeDestination.route) {
             HomeRoute(
