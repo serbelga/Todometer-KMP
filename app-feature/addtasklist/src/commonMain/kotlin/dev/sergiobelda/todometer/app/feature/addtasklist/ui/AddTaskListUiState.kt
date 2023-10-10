@@ -16,8 +16,10 @@
 
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
+@Immutable
 data class AddTaskListUiState(
     val isAddingTaskList: Boolean = false,
     val isAdded: Boolean = false,

@@ -16,11 +16,13 @@
 
 package dev.sergiobelda.todometer.app.feature.home.ui
 
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
+@Immutable
 data class HomeUiState(
     val isLoadingTasks: Boolean = false,
     val tasks: List<TaskItem> = emptyList(),

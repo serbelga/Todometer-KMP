@@ -16,10 +16,12 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
+@Immutable
 data class TaskDetailsUiState(
     val isLoadingTask: Boolean = false,
     val task: Task? = null,

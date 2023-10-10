@@ -16,9 +16,11 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
+@Immutable
 data class EditTaskUiState(
     val isLoading: Boolean = false,
     val task: Task? = null,

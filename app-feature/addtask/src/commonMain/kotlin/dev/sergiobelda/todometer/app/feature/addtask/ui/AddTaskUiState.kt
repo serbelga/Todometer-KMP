@@ -16,8 +16,10 @@
 
 package dev.sergiobelda.todometer.app.feature.addtask.ui
 
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
+@Immutable
 data class AddTaskUiState(
     val isAddingTask: Boolean = false,
     val isAdded: Boolean = false,

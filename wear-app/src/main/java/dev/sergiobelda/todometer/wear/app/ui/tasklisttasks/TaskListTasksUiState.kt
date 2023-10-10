@@ -16,9 +16,11 @@
 
 package dev.sergiobelda.todometer.wear.app.ui.tasklisttasks
 
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 
+@Immutable
 data class TaskListTasksUiState(
     val isLoadingTaskList: Boolean = false,
     val taskList: TaskList? = null,
