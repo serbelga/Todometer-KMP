@@ -78,8 +78,7 @@ internal fun HomeScreen(
     val homeUiState = homeViewModel.homeUiState
 
     Scaffold(
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
-        vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
+        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
         LaunchedEffect(Unit) { focusRequester.requestFocus() }
         ScalingLazyColumn(

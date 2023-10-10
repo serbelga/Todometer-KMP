@@ -97,8 +97,7 @@ internal fun TaskDetailScreen(
             Scaffold(
                 positionIndicator = {
                     PositionIndicator(scalingLazyListState = scalingLazyListState)
-                },
-                vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
+                }
             ) {
                 LaunchedEffect(Unit) { focusRequester.requestFocus() }
                 ScalingLazyColumn(

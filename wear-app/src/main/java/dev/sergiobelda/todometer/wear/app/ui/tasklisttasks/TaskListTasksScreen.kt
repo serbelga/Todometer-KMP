@@ -142,8 +142,7 @@ internal fun TaskListTasksScreen(
                 },
                 positionIndicator = {
                     PositionIndicator(scalingLazyListState = scalingLazyListState)
-                },
-                vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
+                }
             ) {
                 LaunchedEffect(Unit) { focusRequester.requestFocus() }
                 ScalingLazyColumn(
@@ -189,7 +188,7 @@ internal fun TaskListTasksScreen(
                                             taskListTasksUiState.taskList.name,
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis,
-                                            maxLines = 2,
+                                            maxLines = 1,
                                             modifier = Modifier.padding(horizontal = 24.dp)
                                         )
                                     }
@@ -422,7 +421,11 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
             )
         },
         label = {
-            Text(text = stringResource(MR.strings.delete_task_list))
+            Text(
+                text = stringResource(MR.strings.delete_task_list),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
         },
         onClick = onClick,
         modifier = Modifier.fillMaxWidth()
