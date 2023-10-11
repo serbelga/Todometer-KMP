@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.app.android.ui.main
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -62,10 +63,9 @@ class MainActivity : ComponentActivity() {
 
         DisposableEffect(darkTheme) {
             enableEdgeToEdge(
-                statusBarStyle = SystemBarStyle.auto(
-                    android.graphics.Color.TRANSPARENT,
-                    android.graphics.Color.TRANSPARENT,
-                ) { darkTheme }
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
+                    darkTheme
+                }
             )
             onDispose {}
         }
