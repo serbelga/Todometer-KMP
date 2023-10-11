@@ -17,10 +17,13 @@
 package dev.sergiobelda.todometer.app.android.ui.main
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -31,32 +34,44 @@ import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.navigation.Action
 import org.koin.androidx.compose.getViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
 
+        enableEdgeToEdge()
+
         setContent {
             MainContent()
         }
     }
-}
 
-@Composable
-private fun MainContent(mainViewModel: MainViewModel = getViewModel()) {
-    val navController = rememberNavController()
-    val action = remember(navController) { Action(navController) }
+    @Composable
+    private fun MainContent(mainViewModel: MainViewModel = getViewModel()) {
+        val navController = rememberNavController()
+        val action = remember(navController) { Action(navController) }
 
-    val appThemeState = mainViewModel.appTheme.collectAsStateWithLifecycle()
-    val darkTheme: Boolean = when (appThemeState.value) {
-        AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-        AppTheme.DARK_THEME -> true
-        AppTheme.LIGHT_THEME -> false
-    }
+        val appThemeState = mainViewModel.appTheme.collectAsStateWithLifecycle()
+        val darkTheme: Boolean = when (appThemeState.value) {
+            AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+            AppTheme.DARK_THEME -> true
+            AppTheme.LIGHT_THEME -> false
+        }
 
-    TodometerAppTheme(darkTheme) {
-        TodometerNavHost(navController, action)
+        DisposableEffect(darkTheme) {
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(
+                    android.graphics.Color.TRANSPARENT,
+                    android.graphics.Color.TRANSPARENT,
+                ) { darkTheme }
+            )
+            onDispose {}
+        }
+
+        TodometerAppTheme(darkTheme) {
+            TodometerNavHost(navController, action)
+        }
     }
 }

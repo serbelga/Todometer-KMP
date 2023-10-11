@@ -73,6 +73,7 @@ import dev.sergiobelda.todometer.app.common.ui.components.TaskItem
 import dev.sergiobelda.todometer.app.common.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.common.ui.loading.ContentLoadingProgress
+import dev.sergiobelda.todometer.common.designsystem.resources.images.NoTasks
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
 import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIllustrations
 import dev.sergiobelda.todometer.common.domain.model.TaskItem

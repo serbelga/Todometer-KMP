@@ -22,7 +22,6 @@
     </style>
 
     <style name="Theme.Todometer" parent="Theme.AppCompat.DayNight">
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="actionBarStyle">@style/Todometer.ActionBar</item>
     </style>
 

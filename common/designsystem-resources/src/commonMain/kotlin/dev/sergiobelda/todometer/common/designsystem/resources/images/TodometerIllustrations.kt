@@ -25,8 +25,6 @@ object TodometerIllustrations {
     val CompletedTasks: Painter
         @Composable
         get() = painterResource(MR.images.completed_tasks)
-
-    val NoTasks: Painter
-        @Composable
-        get() = painterResource(MR.images.no_tasks)
 }
+
+expect val TodometerIllustrations.NoTasks: Painter
