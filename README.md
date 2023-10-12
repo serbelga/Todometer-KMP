@@ -22,7 +22,7 @@
 
 ### Android
 
-| <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/remove_task.gif" /> |
+| <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/delete_task.gif" /> |
 |----------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------|
 
 ### Material Design 3 Dynamic color
