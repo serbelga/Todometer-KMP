@@ -55,7 +55,10 @@ import dev.sergiobelda.todometer.app.common.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.app.common.ui.components.TaskTagIndicator
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
@@ -100,7 +103,7 @@ fun TaskDetailsScreen(
                         navigationIcon = {
                             IconButton(onClick = navigateBack) {
                                 Icon(
-                                    TodometerIcons.NavigateBefore,
+                                    Images.Icons.NavigateBefore,
                                     contentDescription = TodometerResources.strings.back
                                 )
                             }
@@ -109,7 +112,7 @@ fun TaskDetailsScreen(
                             if (!taskDetailsUiState.isLoadingTask) {
                                 IconButton(onClick = navigateToEditTask) {
                                     Icon(
-                                        TodometerIcons.Edit,
+                                        Images.Icons.Edit,
                                         contentDescription = TodometerResources.strings.edit_task,
                                         tint = MaterialTheme.colorScheme.primary
                                     )
@@ -247,7 +250,7 @@ private fun LazyItemScope.TaskChecklistItem(
         )
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
-                TodometerIcons.Close,
+                Images.Icons.Close,
                 contentDescription = TodometerResources.strings.clear,
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )

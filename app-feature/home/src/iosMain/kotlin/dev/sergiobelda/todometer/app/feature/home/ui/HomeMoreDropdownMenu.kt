@@ -21,7 +21,9 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
@@ -38,14 +40,14 @@ internal actual fun HomeMoreDropdownMenu(
         // TODO: Add icons and supportingText when use DropdownMenuItem from material3
         DropdownMenuItem(
             onClick = onEditTaskListClick,
-            leadingIcon = { Icon(TodometerIcons.Edit, contentDescription = null) },
+            leadingIcon = { Icon(Images.Icons.Edit, contentDescription = null) },
             text = { Text(TodometerResources.strings.edit_task_list) }
         )
         DropdownMenuItem(
             onClick = onDeleteTaskListClick,
             leadingIcon = {
                 Icon(
-                    TodometerIcons.Delete,
+                    Images.Icons.Delete,
                     contentDescription = null
                 )
             },

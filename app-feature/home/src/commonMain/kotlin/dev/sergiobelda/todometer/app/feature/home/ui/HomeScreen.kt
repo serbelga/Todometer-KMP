@@ -63,7 +63,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
@@ -73,9 +73,16 @@ import dev.sergiobelda.todometer.app.common.ui.components.TaskItem
 import dev.sergiobelda.todometer.app.common.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.common.ui.loading.ContentLoadingProgress
-import dev.sergiobelda.todometer.common.designsystem.resources.images.NoTasks
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIllustrations
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.ExpandLess
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.ExpandMore
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Menu
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.MoreVert
+import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.CompletedTasks
+import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.NoTasks
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import kotlinx.coroutines.launch
@@ -301,7 +308,7 @@ private fun HomeTopAppBar(
                         navigationIcon = {
                             IconButton(onClick = onMenuClick) {
                                 Icon(
-                                    TodometerIcons.Menu,
+                                    Images.Icons.Menu,
                                     contentDescription = TodometerResources.strings.menu
                                 )
                             }
@@ -309,7 +316,7 @@ private fun HomeTopAppBar(
                         actions = {
                             IconButton(onClick = onMoreClick) {
                                 Icon(
-                                    TodometerIcons.MoreVert,
+                                    Images.Icons.MoreVert,
                                     contentDescription = TodometerResources.strings.more
                                 )
                             }
@@ -340,7 +347,7 @@ private fun SelectedTasksTopAppBar(
         navigationIcon = {
             IconButton(onClick = onClearSelectedTasksClick) {
                 Icon(
-                    TodometerIcons.Close,
+                    Images.Icons.Close,
                     contentDescription = null
                 )
             }
@@ -351,7 +358,7 @@ private fun SelectedTasksTopAppBar(
         actions = {
             IconButton(onClick = onDeleteSelectedTasksClick) {
                 Icon(
-                    TodometerIcons.Delete,
+                    Images.Icons.Delete,
                     contentDescription = null
                 )
             }
@@ -372,7 +379,7 @@ private fun HomeFloatingActionButton(
     ) {
         FloatingActionButton(onClick = navigateToAddTask) {
             Icon(
-                TodometerIcons.Add,
+                Images.Icons.Add,
                 contentDescription = TodometerResources.strings.addTask
             )
         }
@@ -396,7 +403,7 @@ private fun TasksListArea(
     var areTasksDoneVisible by remember { mutableStateOf(false) }
     if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {
         HomeInfoIllustration(
-            TodometerIllustrations.NoTasks,
+            Images.Illustrations.NoTasks,
             TodometerResources.strings.no_tasks
         )
     } else {
@@ -448,7 +455,7 @@ private fun TasksListArea(
         }
         if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
             HomeInfoIllustration(
-                TodometerIllustrations.CompletedTasks,
+                Images.Illustrations.CompletedTasks,
                 TodometerResources.strings.you_have_completed_all_tasks,
                 TodometerResources.strings.congratulations
             )
@@ -474,12 +481,12 @@ private fun CompletedTasksHeader(
             if (showExpandIcon) {
                 if (expanded) {
                     Icon(
-                        TodometerIcons.ExpandLess,
+                        Images.Icons.ExpandLess,
                         contentDescription = null
                     )
                 } else {
                     Icon(
-                        TodometerIcons.ExpandMore,
+                        Images.Icons.ExpandMore,
                         contentDescription = null
                     )
                 }
@@ -494,7 +501,7 @@ private fun CompletedTasksHeader(
 
 @Composable
 private fun HomeInfoIllustration(
-    painter: Painter,
+    imageVector: ImageVector,
     text: String,
     secondaryText: String? = null
 ) {
@@ -506,7 +513,7 @@ private fun HomeInfoIllustration(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter,
+                imageVector,
                 modifier = Modifier.size(220.dp).padding(bottom = 36.dp),
                 contentDescription = null
             )

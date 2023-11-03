@@ -57,7 +57,9 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wear.app.ui.deletetask.DeleteTaskAlertDialog
@@ -169,7 +171,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
-            Icon(TodometerIcons.Edit, null)
+            Icon(Images.Icons.Edit, null)
         },
         label = {
             Text(text = TodometerResources.strings.edit_task)
@@ -200,7 +202,7 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
             backgroundColor = MaterialTheme.colors.error
         ),
         icon = {
-            Icon(TodometerIcons.Delete, TodometerResources.strings.delete_task)
+            Icon(Images.Icons.Delete, TodometerResources.strings.delete_task)
         },
         label = {
             Text(text = TodometerResources.strings.delete_task)

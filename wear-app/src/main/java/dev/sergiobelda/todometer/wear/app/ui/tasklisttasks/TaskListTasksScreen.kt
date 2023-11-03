@@ -79,7 +79,12 @@ import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedImageVector
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.RadioButtonUnchecked
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.TaskAlt
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -316,9 +321,9 @@ private fun TaskItem(
             onClick = onClick,
             toggleControl = {
                 if (isTaskDone) {
-                    Icon(TodometerIcons.TaskAlt, null)
+                    Icon(Images.Icons.TaskAlt, null)
                 } else {
-                    Icon(TodometerIcons.RadioButtonUnchecked, null)
+                    Icon(Images.Icons.RadioButtonUnchecked, null)
                 }
             },
             colors = ToggleChipDefaults.splitToggleChipColors(
@@ -344,7 +349,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
-            Icon(TodometerIcons.Add, null)
+            Icon(Images.Icons.Add, null)
         },
         label = {
             Text(text = TodometerResources.strings.addTask)
@@ -380,7 +385,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
     Chip(
         colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
-            Icon(TodometerIcons.Edit, null)
+            Icon(Images.Icons.Edit, null)
         },
         label = {
             Text(text = TodometerResources.strings.edit_task_list)
@@ -413,7 +418,7 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
         ),
         icon = {
             Icon(
-                TodometerIcons.Delete,
+                Images.Icons.Delete,
                 TodometerResources.strings.delete_task_list
             )
         },

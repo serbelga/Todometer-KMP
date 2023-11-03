@@ -17,17 +17,20 @@
 package dev.sergiobelda.todometer.app.common.ui.preferences
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.painter.Painter
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import androidx.compose.ui.graphics.vector.ImageVector
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Contrast
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.DarkMode
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.LightMode
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
-fun AppTheme.themeIcon(): Painter =
+fun AppTheme.themeIcon(): ImageVector =
     when (this) {
-        AppTheme.FOLLOW_SYSTEM -> TodometerIcons.Contrast
-        AppTheme.DARK_THEME -> TodometerIcons.DarkMode
-        AppTheme.LIGHT_THEME -> TodometerIcons.LightMode
+        AppTheme.FOLLOW_SYSTEM -> Images.Icons.Contrast
+        AppTheme.DARK_THEME -> Images.Icons.DarkMode
+        AppTheme.LIGHT_THEME -> Images.Icons.LightMode
     }
 
 @Composable

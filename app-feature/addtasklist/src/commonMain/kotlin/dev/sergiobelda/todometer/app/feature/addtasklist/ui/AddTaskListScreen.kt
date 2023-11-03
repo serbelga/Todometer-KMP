@@ -50,7 +50,9 @@ import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTit
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
@@ -124,7 +126,7 @@ private fun AddTaskListTopBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    TodometerIcons.NavigateBefore,
+                    Images.Icons.NavigateBefore,
                     contentDescription = TodometerResources.strings.back
                 )
             }
@@ -136,7 +138,7 @@ private fun AddTaskListTopBar(
                 onClick = onSaveButtonClick
             ) {
                 Icon(
-                    TodometerIcons.Check,
+                    Images.Icons.Check,
                     contentDescription = TodometerResources.strings.save,
                     tint = saveButtonTintColor
                 )

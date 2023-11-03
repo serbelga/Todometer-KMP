@@ -68,7 +68,8 @@ import dev.sergiobelda.todometer.app.common.ui.extensions.addStyledOptionalSuffi
 import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
@@ -101,9 +102,9 @@ fun AddTaskScreen(
     val taskChecklistItems = mutableStateListOf<String>()
     fun initialValuesUpdated() =
         taskTitle.isNotBlank() ||
-                taskDueDate != null ||
-                taskDescription.isNotBlank() ||
-                taskChecklistItems.isNotEmpty()
+            taskDueDate != null ||
+            taskDescription.isNotBlank() ||
+            taskChecklistItems.isNotEmpty()
 
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
@@ -308,7 +309,7 @@ private fun TaskChecklistItem(
         )
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
-                TodometerIcons.Close,
+                Images.Icons.Close,
                 contentDescription = TodometerResources.strings.clear,
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
             )

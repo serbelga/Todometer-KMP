@@ -36,10 +36,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Code
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +53,7 @@ internal fun AboutTopBar(navigateBack: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    TodometerIcons.NavigateBefore,
+                    Images.Icons.NavigateBefore,
                     contentDescription = TodometerResources.strings.back
                 )
             }
@@ -65,11 +69,11 @@ internal enum class AboutItem {
 }
 
 @Composable
-private fun AboutItem.icon(): Painter =
+private fun AboutItem.icon(): ImageVector =
     when (this) {
-        AboutItem.GitHub -> TodometerIcons.GitHub
-        AboutItem.PrivacyPolicy -> TodometerIcons.Description
-        AboutItem.OpenSourceLicenses -> TodometerIcons.Code
+        AboutItem.GitHub -> Images.Icons.Github
+        AboutItem.PrivacyPolicy -> Images.Icons.Description
+        AboutItem.OpenSourceLicenses -> Images.Icons.Code
     }
 
 @Composable

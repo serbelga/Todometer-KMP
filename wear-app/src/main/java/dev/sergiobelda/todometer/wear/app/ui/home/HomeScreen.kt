@@ -57,8 +57,9 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerSymbols
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
+import dev.sergiobelda.todometer.common.designsystem.resources.images.symbols.IsotypeCutDark
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wear.app.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
@@ -132,7 +133,7 @@ private fun ToDometerTitle() {
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Icon(
-            TodometerSymbols.IsotypeDark,
+            Images.Symbols.IsotypeCutDark,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
             tint = MaterialTheme.colors.primary
@@ -176,7 +177,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
-            Icon(TodometerIcons.Add, null)
+            Icon(Images.Icons.Add, null)
         },
         label = {
             Text(

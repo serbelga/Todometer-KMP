@@ -41,7 +41,9 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Info
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Settings
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
@@ -86,7 +88,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                TodometerIcons.Settings,
+                Images.Icons.Settings,
                 contentDescription = null
             )
         },
@@ -107,7 +109,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                TodometerIcons.Info,
+                Images.Icons.Info,
                 contentDescription = null
             )
         },

@@ -5,6 +5,7 @@ plugins {
     id("todometer.common.library.android")
     id("todometer.dependency-graph-generator")
     id("todometer.spotless")
+    id("todometer.common.generateImages")
 }
 
 group = "dev.sergiobelda.todometer.common.designsystem.resources"
@@ -21,8 +22,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(compose.ui)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
             }
         }
         val commonTest by getting

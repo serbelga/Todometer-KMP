@@ -33,12 +33,15 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Event
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Schedule
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.extensions.dateFormat
 import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
@@ -57,16 +60,16 @@ fun DateTimeSelector(
             ClickableField(
                 onClick = onDateClick,
                 text = dateMillis.dateFormat(),
-                painter = TodometerIcons.Event
+                imageVector = Images.Icons.Event
             )
             ClickableField(
                 onClick = onTimeClick,
                 text = dateMillis.timeFormat(),
-                painter = TodometerIcons.Schedule
+                imageVector = Images.Icons.Schedule
             )
             IconButton(onClick = onClearDateTimeClick) {
                 Icon(
-                    TodometerIcons.Close,
+                    Images.Icons.Close,
                     TodometerResources.strings.clear,
                     tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 )
@@ -92,10 +95,10 @@ fun DateTimeSelector(
 private fun ClickableField(
     onClick: () -> Unit,
     text: String,
-    painter: Painter? = null
+    imageVector: ImageVector? = null
 ) {
     TextButton(onClick = onClick) {
-        painter?.let {
+        imageVector?.let {
             Icon(
                 it,
                 contentDescription = null,

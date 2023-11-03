@@ -22,8 +22,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(compose.ui)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                api(compose.components.resources)
                 api(libs.lyricist.lyricist)
             }
         }

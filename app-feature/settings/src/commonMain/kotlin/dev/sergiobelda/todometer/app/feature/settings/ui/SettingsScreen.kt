@@ -56,7 +56,9 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeName
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
@@ -73,7 +75,7 @@ fun SettingsScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            TodometerIcons.NavigateBefore,
+                            Images.Icons.NavigateBefore,
                             contentDescription = TodometerResources.strings.back
                         )
                     }
@@ -165,7 +167,7 @@ private fun AppThemeItem(
             exit = fadeOut()
         ) {
             Icon(
-                TodometerIcons.CheckCircle,
+                Images.Icons.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
