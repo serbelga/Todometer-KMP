@@ -17,6 +17,8 @@
 package dev.sergiobelda.todometer.app.desktop
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,13 +55,13 @@ import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.di.taskDetailsViewModelModule
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsDestination
 import dev.sergiobelda.todometer.common.core.di.startAppDI
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerSymbols
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.navigation.NavigationController
 import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
+import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 
 val koin = startAppDI {
     modules(
@@ -74,6 +76,7 @@ val koin = startAppDI {
 }.koin
 
 fun main() = application {
+    Icons.Rounded.Add
     Window(
         resizable = false,
         onCloseRequest = ::exitApplication,
@@ -81,8 +84,8 @@ fun main() = application {
         state = WindowState(
             size = DpSize(480.dp, 860.dp),
             position = WindowPosition.Aligned(Alignment.Center)
-        ),
-        icon = TodometerSymbols.IsotypeMonochrome
+        )
+        // icon = Images.Symbols.IsotypeCutMonochrome
     ) {
         val getAppThemeUseCase = koin.get<GetAppThemeUseCase>()
         val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)
@@ -92,16 +95,18 @@ fun main() = application {
             AppTheme.LIGHT_THEME -> false
         }
         val navigationController by remember { mutableStateOf(NavigationController()) }
-        TodometerAppTheme(darkTheme) {
-            NavigationHost(navigationController, startDestination = HomeDestination.route) {
-                homeComposableNode(navigationController)
-                taskDetailsComposableNode(navigationController)
-                addTaskListComposableNode(navigationController)
-                editTaskListComposableNode(navigationController)
-                addTaskComposableNode(navigationController)
-                editTaskComposableNode(navigationController)
-                settingsComposableNode(navigationController)
-                aboutComposableNode(navigationController)
+        ProvideTodometerStrings {
+            TodometerAppTheme(darkTheme) {
+                NavigationHost(navigationController, startDestination = HomeDestination.route) {
+                    homeComposableNode(navigationController)
+                    taskDetailsComposableNode(navigationController)
+                    addTaskListComposableNode(navigationController)
+                    editTaskListComposableNode(navigationController)
+                    addTaskComposableNode(navigationController)
+                    editTaskComposableNode(navigationController)
+                    settingsComposableNode(navigationController)
+                    aboutComposableNode(navigationController)
+                }
             }
         }
     }

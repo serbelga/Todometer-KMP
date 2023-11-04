@@ -65,6 +65,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedT
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -98,7 +99,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
             taskListSelected?.doIfSuccess {
                 taskListName = it.name
             }?.doIfError {
-                taskListName = context.getString(R.string.default_task_list_name)
+                taskListName = TodometerResources.strings.default_task_list_name
             }
 
             val tasksDoing = remember { mutableStateListOf<TaskItem>() }
@@ -217,7 +218,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = context.getString(R.string.no_pending_tasks),
+                    text = TodometerResources.strings.no_pending_tasks,
                     style = TextStyle(color = GlanceTheme.colors.onBackground)
                 )
             }
@@ -300,10 +301,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = context.getString(
-                    R.string.completed_tasks,
-                    tasksDone
-                ),
+                text = TodometerResources.strings.completed_tasks(tasksDone),
                 style = TextStyle(color = GlanceTheme.colors.onBackground)
             )
         }

@@ -2,17 +2,17 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.mokoResources)
     id("todometer.common.library.android")
     id("todometer.dependency-graph-generator")
     id("todometer.spotless")
+    id("todometer.common.generateImages")
 }
 
 group = "dev.sergiobelda.todometer.common.designsystem.resources"
 version = "1.0"
 
 kotlin {
-    android()
+    androidTarget()
     jvm("desktop")
     iosX64()
     iosArm64()
@@ -21,11 +21,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.moko.resources)
-                api(libs.moko.resources.compose)
                 implementation(compose.ui)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
             }
         }
         val commonTest by getting
@@ -63,7 +59,6 @@ kotlin {
 }
 
 android {
-    sourceSets["main"].res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
     sourceSets["main"].resources.srcDir("src/commonMain/resources")
 
     namespace = "dev.sergiobelda.todometer.common.designsystem.resources"
@@ -71,8 +66,4 @@ android {
     lint {
         abortOnError = false
     }
-}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "dev.sergiobelda.todometer.common.designsystem.resources"
 }

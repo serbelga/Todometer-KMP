@@ -41,10 +41,11 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Info
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Settings
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun HomeDrawerContent(
@@ -87,13 +88,13 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                TodometerIcons.Settings,
+                Images.Icons.Settings,
                 contentDescription = null
             )
         },
         label = {
             Text(
-                text = stringResource(MR.strings.settings),
+                text = TodometerResources.strings.settings,
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HomeDrawerItemMaxLines
             )
@@ -108,13 +109,13 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
     NavigationDrawerItem(
         icon = {
             Icon(
-                TodometerIcons.Info,
+                Images.Icons.Info,
                 contentDescription = null
             )
         },
         label = {
             Text(
-                text = stringResource(MR.strings.about),
+                text = TodometerResources.strings.about,
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HomeDrawerItemMaxLines
             )
@@ -139,12 +140,12 @@ private fun HomeDrawerTaskListsSection(
             .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal)
     ) {
         Text(
-            text = stringResource(MR.strings.task_lists),
+            text = TodometerResources.strings.task_lists,
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = onAddTaskList) {
-            Text(stringResource(MR.strings.add_task_list))
+            Text(TodometerResources.strings.addTaskList)
         }
     }
     LazyColumn(modifier = Modifier.padding(HomeDrawerItemPadding)) {

@@ -57,10 +57,10 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerSymbols
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
+import dev.sergiobelda.todometer.common.designsystem.resources.images.symbols.IsotypeCutDark
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wear.app.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
@@ -109,7 +109,7 @@ internal fun HomeScreen(
                 else -> {
                     item {
                         TaskListItem(
-                            stringResource(MR.strings.default_task_list_name),
+                            TodometerResources.strings.default_task_list_name,
                             onClick = { openTaskList(null) }
                         )
                     }
@@ -133,13 +133,13 @@ private fun ToDometerTitle() {
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Icon(
-            TodometerSymbols.IsotypeDark,
+            Images.Symbols.IsotypeCutDark,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
             tint = MaterialTheme.colors.primary
         )
         Text(
-            stringResource(MR.strings.app_name),
+            TodometerResources.strings.appName,
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis
@@ -166,7 +166,7 @@ private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
 
 @Composable
 private fun AddTaskListButton(onComplete: (String) -> Unit) {
-    val taskListNameInput = stringResource(MR.strings.task_list_name_input)
+    val taskListNameInput = TodometerResources.strings.task_list_name_input
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -177,12 +177,12 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     Chip(
         colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
-            Icon(TodometerIcons.Add, null)
+            Icon(Images.Icons.Add, null)
         },
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = stringResource(MR.strings.add_task_list)
+                text = TodometerResources.strings.addTaskList
             )
         },
         onClick = {

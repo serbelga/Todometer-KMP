@@ -10,7 +10,7 @@ androidWearMinSdk = "25"
 androidWearTargetSdk = "33"
 animationGraphicsAndroid = "1.5.4"
 appcompat = "1.6.1"
-composeCompiler = "1.4.8"
+composeCompiler = "1.5.3"
 composeMultiplatform = "1.5.3"
 dataStore = "1.1.0-alpha04"
 dependencyGraphGenerator = "0.8.0"
@@ -22,17 +22,19 @@ googleServices = "4.4.0"
 junit = "4.13.2"
 koinAndroid = "3.5.0"
 koinAndroidCompose = "3.5.0"
-koinCore = "3.4.3"
-koinTest = "3.4.3"
-kotlin = "1.8.22"
+koinCore = "3.5.0"
+koinTest = "3.5.0"
+kotlin = "1.9.10"
 kotlinCoroutines = "1.7.3"
 kotlinDatetime = "0.4.1"
 kotlinSerializationJson = "1.6.0"
+kotlinpoet = "1.14.2"
+ksp = "1.9.10-1.0.13"
 ktlint = "0.50.0"
 lifecycle = "2.6.2"
+lyricist = "1.4.2"
 mockk = "1.13.8"
 mockkCommon = "1.12.5"
-mokoResources = "0.23.0"
 navigation = "2.7.4"
 ossLicenses = "0.10.6"
 playServicesOssLicenses = "17.0.1"
@@ -83,6 +85,9 @@ google-firebase-firebaseBom = { module = "com.google.firebase:firebase-bom", ver
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
+lyricist-lyricist = { module = "cafe.adriel.lyricist:lyricist", version.ref = "lyricist" }
+lyricist-processor = { module = "cafe.adriel.lyricist:lyricist-processor", version.ref = "lyricist" }
+
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
@@ -101,9 +106,6 @@ ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }
 
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "mokoResources" }
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "mokoResources" }
-
 google-playServicesOssLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "playServicesOssLicenses" }
 google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
 google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicenses" }
@@ -116,6 +118,8 @@ sqldelight-nativeDriver = { module = "app.cash.sqldelight:native-driver", versio
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqldelight-primitiveAdapters = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 
+squareup-kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
+
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 wear-wear = { module = "androidx.wear:wear", version.ref = "wear" }
@@ -123,6 +127,9 @@ wear-compose-foundation = { module = "androidx.wear.compose:compose-foundation",
 wear-compose-material = { module = "androidx.wear.compose:compose-material", version.ref = "wearCompose" }
 wear-compose-navigation = { module = "androidx.wear.compose:compose-navigation", version.ref = "wearCompose" }
 wear-input = { module = "androidx.wear:wear-input", version.ref = "wearInput" }
+
+xpp3 = { module = "xpp3:xpp3", version = "1.1.4c" }
+xmlpull = { module = "xmlpull:xmlpull", version = "1.1.3.1" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -132,6 +139,6 @@ dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", v
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-mokoResources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "mokoResources" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }

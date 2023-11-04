@@ -36,12 +36,15 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Code
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,8 +53,8 @@ internal fun AboutTopBar(navigateBack: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    TodometerIcons.NavigateBefore,
-                    contentDescription = stringResource(MR.strings.back)
+                    Images.Icons.NavigateBefore,
+                    contentDescription = TodometerResources.strings.back
                 )
             }
         },
@@ -66,19 +69,19 @@ internal enum class AboutItem {
 }
 
 @Composable
-private fun AboutItem.icon(): Painter =
+private fun AboutItem.icon(): ImageVector =
     when (this) {
-        AboutItem.GitHub -> TodometerIcons.GitHub
-        AboutItem.PrivacyPolicy -> TodometerIcons.Description
-        AboutItem.OpenSourceLicenses -> TodometerIcons.Code
+        AboutItem.GitHub -> Images.Icons.Github
+        AboutItem.PrivacyPolicy -> Images.Icons.Description
+        AboutItem.OpenSourceLicenses -> Images.Icons.Code
     }
 
 @Composable
 private fun AboutItem.text(): String =
     when (this) {
-        AboutItem.GitHub -> stringResource(MR.strings.github)
-        AboutItem.PrivacyPolicy -> stringResource(MR.strings.privacy_policy)
-        AboutItem.OpenSourceLicenses -> stringResource(MR.strings.open_source_licenses)
+        AboutItem.GitHub -> TodometerResources.strings.github
+        AboutItem.PrivacyPolicy -> TodometerResources.strings.privacy_policy
+        AboutItem.OpenSourceLicenses -> TodometerResources.strings.open_source_licenses
     }
 
 @Composable

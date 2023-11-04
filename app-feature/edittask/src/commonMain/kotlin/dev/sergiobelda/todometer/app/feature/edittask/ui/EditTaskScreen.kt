@@ -49,8 +49,7 @@ import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -90,7 +89,7 @@ fun EditTaskScreen(
                 topBar = {
                     SaveActionTopAppBar(
                         navigateBack = navigateBack,
-                        title = stringResource(MR.strings.edit_task),
+                        title = TodometerResources.strings.edit_task,
                         isSaveButtonEnabled = !editTaskUiState.isLoading,
                         onSaveButtonClick = {
                             if (taskTitle.isBlank()) {
@@ -105,15 +104,15 @@ fun EditTaskScreen(
                 content = { paddingValues ->
                     Column(modifier = Modifier.padding(paddingValues)) {
                         TodometerTitledTextField(
-                            title = stringResource(MR.strings.name),
+                            title = TodometerResources.strings.name,
                             value = taskTitle,
                             onValueChange = {
                                 taskTitle = it
                                 taskTitleInputError = false
                             },
-                            placeholder = { Text(stringResource(MR.strings.enter_task_name)) },
+                            placeholder = { Text(TodometerResources.strings.enter_task_name) },
                             isError = taskTitleInputError,
-                            errorMessage = stringResource(MR.strings.field_not_empty),
+                            errorMessage = TodometerResources.strings.field_not_empty,
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Sentences,
                                 imeAction = ImeAction.Next
@@ -121,7 +120,7 @@ fun EditTaskScreen(
                             modifier = Modifier.padding(TextFieldPadding)
                         )
                         Text(
-                            text = stringResource(MR.strings.choose_tag).addStyledOptionalSuffix(),
+                            text = TodometerResources.strings.choose_tag.addStyledOptionalSuffix(),
                             color = MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.labelLarge,
                             modifier = Modifier.padding(horizontal = SectionPadding)
@@ -130,7 +129,7 @@ fun EditTaskScreen(
                             selectedTag = tag
                         }
                         Text(
-                            text = stringResource(MR.strings.date_time).addStyledOptionalSuffix(),
+                            text = TodometerResources.strings.date_time.addStyledOptionalSuffix(),
                             color = MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.labelLarge,
                             modifier = Modifier.padding(horizontal = SectionPadding)
@@ -143,10 +142,10 @@ fun EditTaskScreen(
                             onClearDateTimeClick = { taskDueDate = null }
                         )
                         TodometerTitledTextField(
-                            title = stringResource(MR.strings.description).addStyledOptionalSuffix(),
+                            title = TodometerResources.strings.description.addStyledOptionalSuffix(),
                             value = taskDescription,
                             onValueChange = { taskDescription = it },
-                            placeholder = { Text(stringResource(MR.strings.enter_description)) },
+                            placeholder = { Text(TodometerResources.strings.enter_description) },
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Sentences,
                                 imeAction = ImeAction.Done

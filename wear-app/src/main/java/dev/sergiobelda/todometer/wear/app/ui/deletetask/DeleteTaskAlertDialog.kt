@@ -22,9 +22,11 @@ import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun DeleteTaskAlertDialog(
@@ -34,20 +36,20 @@ internal fun DeleteTaskAlertDialog(
     Alert(
         icon = {
             Icon(
-                TodometerIcons.Delete,
-                stringResource(MR.strings.delete_task)
+                Images.Icons.Delete,
+                TodometerResources.strings.delete_task
             )
         },
         title = {},
-        content = { Text(stringResource(MR.strings.delete_task_question)) },
+        content = { Text(TodometerResources.strings.delete_task_question) },
         positiveButton = {
             Button(onClick = onDeleteTask) {
-                Icon(TodometerIcons.Check, null)
+                Icon(Images.Icons.Check, null)
             }
         },
         negativeButton = {
             Button(colors = ButtonDefaults.secondaryButtonColors(), onClick = onCancel) {
-                Icon(TodometerIcons.Close, null)
+                Icon(Images.Icons.Close, null)
             }
         }
     )

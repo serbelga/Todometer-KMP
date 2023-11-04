@@ -56,19 +56,21 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.RadioButtonUnchecked
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.TaskAlt
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -203,7 +205,7 @@ private fun TaskItemContent(
             exit = fadeOut()
         ) {
             Icon(
-                TodometerIcons.CheckCircle,
+                Images.Icons.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
@@ -305,17 +307,17 @@ private fun taskItemActionTintColor(state: TaskState): Color =
     }
 
 @Composable
-private fun taskItemActionIcon(state: TaskState): Painter =
+private fun taskItemActionIcon(state: TaskState): ImageVector =
     when (state) {
-        TaskState.DOING -> TodometerIcons.RadioButtonUnchecked
-        TaskState.DONE -> TodometerIcons.TaskAlt
+        TaskState.DOING -> Images.Icons.RadioButtonUnchecked
+        TaskState.DONE -> Images.Icons.TaskAlt
     }
 
 @Composable
 private fun taskItemActionContentDescription(state: TaskState): String =
     when (state) {
-        TaskState.DOING -> stringResource(MR.strings.check_task)
-        TaskState.DONE -> stringResource(MR.strings.uncheck_task)
+        TaskState.DOING -> TodometerResources.strings.checkTask
+        TaskState.DONE -> TodometerResources.strings.uncheck_task
     }
 
 private val TaskItemBackgroundHorizontalPadding = 16.dp

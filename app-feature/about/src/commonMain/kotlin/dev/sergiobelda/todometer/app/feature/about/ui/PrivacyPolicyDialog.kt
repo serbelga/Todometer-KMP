@@ -26,8 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun PrivacyPolicyDialog(
@@ -35,29 +34,29 @@ internal fun PrivacyPolicyDialog(
 ) {
     AlertDialog(
         title = {
-            Text(stringResource(MR.strings.privacy_policy))
+            Text(TodometerResources.strings.privacy_policy)
         },
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_user_data))
-                Text(stringResource(MR.strings.privacy_policy_user_data_body))
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_user_data)
+                Text(TodometerResources.strings.privacy_policy_user_data_body)
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_permissions))
-                Text(stringResource(MR.strings.privacy_policy_permissions_body))
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_permissions)
+                Text(TodometerResources.strings.privacy_policy_permissions_body)
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_device_and_network_abuse))
-                Text(stringResource(MR.strings.privacy_policy_device_and_network_abuse_body))
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_device_and_network_abuse)
+                Text(TodometerResources.strings.privacy_policy_device_and_network_abuse_body)
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(stringResource(MR.strings.privacy_policy_public))
-                Text(stringResource(MR.strings.privacy_policy_public_body))
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_public)
+                Text(TodometerResources.strings.privacy_policy_public_body)
             }
         },
         confirmButton = {
             TextButton(
                 onClick = onDismissRequest
             ) {
-                Text(stringResource(MR.strings.ok))
+                Text(TodometerResources.strings.ok)
             }
         }
     )

@@ -29,9 +29,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,8 +47,8 @@ fun SaveActionTopAppBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
-                    TodometerIcons.NavigateBefore,
-                    contentDescription = stringResource(MR.strings.back)
+                    Images.Icons.NavigateBefore,
+                    contentDescription = TodometerResources.strings.back
                 )
             }
         },
@@ -58,13 +59,13 @@ fun SaveActionTopAppBar(
                 onClick = onSaveButtonClick
             ) {
                 Icon(
-                    TodometerIcons.Check,
-                    contentDescription = stringResource(MR.strings.save),
+                    Images.Icons.Check,
+                    contentDescription = TodometerResources.strings.save,
                     tint = saveButtonTintColor
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Text(
-                    text = stringResource(MR.strings.save),
+                    text = TodometerResources.strings.save,
                     style = MaterialTheme.typography.bodyMedium,
                     color = saveButtonTintColor
                 )

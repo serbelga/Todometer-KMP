@@ -20,8 +20,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun DiscardTaskAlertDialog(
@@ -30,11 +29,11 @@ internal fun DiscardTaskAlertDialog(
 ) {
     AlertDialog(
         title = {
-            Text(stringResource(MR.strings.discard_task_alert_dialog_title))
+            Text(TodometerResources.strings.discard_task_alert_dialog_title)
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(stringResource(MR.strings.discard_task_alert_dialog_body))
+            Text(TodometerResources.strings.discard_task_alert_dialog_body)
         },
         confirmButton = {
             TextButton(
@@ -43,12 +42,12 @@ internal fun DiscardTaskAlertDialog(
                     onDismissRequest()
                 }
             ) {
-                Text(stringResource(MR.strings.ok))
+                Text(TodometerResources.strings.ok)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(MR.strings.cancel))
+                Text(TodometerResources.strings.cancel)
             }
         }
     )

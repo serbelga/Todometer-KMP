@@ -56,10 +56,11 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeName
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.resources.MR
-import dev.sergiobelda.todometer.common.resources.stringResource
+import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,13 +75,13 @@ fun SettingsScreen(
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
-                            TodometerIcons.NavigateBefore,
-                            contentDescription = stringResource(MR.strings.back)
+                            Images.Icons.NavigateBefore,
+                            contentDescription = TodometerResources.strings.back
                         )
                     }
                 },
                 title = {
-                    Text(stringResource(MR.strings.settings))
+                    Text(TodometerResources.strings.settings)
                 }
             )
         }
@@ -94,7 +95,7 @@ fun SettingsScreen(
 @Composable
 private fun SettingsChooseAppTheme(appTheme: AppTheme, onItemClick: (AppTheme) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth().padding(SettingsItemPaddingHorizontal)) {
-        Text(text = stringResource(MR.strings.theme))
+        Text(text = TodometerResources.strings.theme)
         Spacer(modifier = Modifier.height(SettingsItemInternalSpacing))
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(AppThemeItemsSpacing),
@@ -166,7 +167,7 @@ private fun AppThemeItem(
             exit = fadeOut()
         ) {
             Icon(
-                TodometerIcons.CheckCircle,
+                Images.Icons.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier

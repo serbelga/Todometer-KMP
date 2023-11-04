@@ -28,7 +28,8 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerChip
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.TodometerTheme
-import dev.sergiobelda.todometer.common.designsystem.resources.images.TodometerIcons
+import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckBox
 
 @Composable
 internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
@@ -50,7 +51,7 @@ internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItem
         modifier = Modifier.padding(bottom = 8.dp)
     ) {
         Icon(
-            TodometerIcons.CheckBox,
+            Images.Icons.CheckBox,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
             tint = completedChipTint
