@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator
 
 import java.io.File
 

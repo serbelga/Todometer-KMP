@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator.vector
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector
 
 /**
  * Class representing a singular path command in a vector.
@@ -59,7 +59,8 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
         val dx3: Float,
         val dy3: Float
     ) : PathNode(isCurve = true) {
-        override fun asFunctionCall() = "curveToRelative(${dx1}f, ${dy1}f, ${dx2}f, ${dy2}f, ${dx3}f, ${dy3}f)"
+        override fun asFunctionCall() =
+            "curveToRelative(${dx1}f, ${dy1}f, ${dx2}f, ${dy2}f, ${dx3}f, ${dy3}f)"
     }
 
     data class CurveTo(

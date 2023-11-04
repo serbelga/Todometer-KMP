@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator.utils
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.utils
 
 import com.squareup.kotlinpoet.FileSpec
 

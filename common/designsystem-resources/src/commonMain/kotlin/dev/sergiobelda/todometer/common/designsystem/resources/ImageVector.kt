@@ -3,7 +3,7 @@ package dev.sergiobelda.todometer.common.designsystem.resources
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
-inline fun imageVector(
+internal inline fun imageVector(
     name: String,
     width: Float,
     height: Float,

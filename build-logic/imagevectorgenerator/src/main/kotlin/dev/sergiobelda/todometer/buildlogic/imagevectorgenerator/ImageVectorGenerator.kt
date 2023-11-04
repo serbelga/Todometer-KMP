@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -7,10 +7,10 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.buildCodeBlock
-import dev.sergiobelda.todometer.imagevector.generator.utils.setIndent
-import dev.sergiobelda.todometer.imagevector.generator.vector.FillType
-import dev.sergiobelda.todometer.imagevector.generator.vector.Vector
-import dev.sergiobelda.todometer.imagevector.generator.vector.VectorNode
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.utils.setIndent
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.FillType
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.Vector
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.VectorNode
 import java.util.Locale
 
 /**

@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
@@ -28,7 +28,10 @@ object MemberNames {
     val Color = MemberName(PackageNames.GraphicsPackage.packageName, "Color")
     val EvenOdd = MemberName(ClassNames.PathFillType, "EvenOdd")
     val Group = MemberName(PackageNames.VectorPackage.packageName, "group")
-    val ImageVector = MemberName(PackageNames.TodometerCommonDesignSystemResourcesPackage.packageName, "imageVector")
+    val ImageVector = MemberName(
+        PackageNames.TodometerCommonDesignSystemResourcesPackage.packageName,
+        "imageVector"
+    )
     val Path = MemberName(PackageNames.VectorPackage.packageName, "path")
     val SolidColor = MemberName(PackageNames.GraphicsPackage.packageName, "SolidColor")
 }

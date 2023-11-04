@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.convention
+package dev.sergiobelda.todometer.buildlogic.convention
 /*
  * Copyright 2023 Sergio Belda
  *

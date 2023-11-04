@@ -1,9 +1,9 @@
-package dev.sergiobelda.todometer.imagevector.generator
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator
 
-import dev.sergiobelda.todometer.imagevector.generator.vector.FillType
-import dev.sergiobelda.todometer.imagevector.generator.vector.PathParser
-import dev.sergiobelda.todometer.imagevector.generator.vector.Vector
-import dev.sergiobelda.todometer.imagevector.generator.vector.VectorNode
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.FillType
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.PathParser
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.Vector
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector.VectorNode
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParser.END_DOCUMENT
 import org.xmlpull.v1.XmlPullParser.END_TAG

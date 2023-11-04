@@ -1,10 +1,10 @@
-package dev.sergiobelda.todometer.imagevector.generator.task
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.task
 
-import dev.sergiobelda.todometer.imagevector.generator.Image
-import dev.sergiobelda.todometer.imagevector.generator.ImageCategoriesProcessor
-import dev.sergiobelda.todometer.imagevector.generator.ImageCategoriesWriter
-import dev.sergiobelda.todometer.imagevector.generator.ImageProcessor
-import dev.sergiobelda.todometer.imagevector.generator.ImageWriter
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.Image
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.ImageCategoriesProcessor
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.ImageCategoriesWriter
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.ImageProcessor
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.ImageWriter
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.CacheableTask

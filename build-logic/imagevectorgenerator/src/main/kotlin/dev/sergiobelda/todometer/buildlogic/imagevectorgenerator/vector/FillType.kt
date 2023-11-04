@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator.vector
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.vector
 
 /**
  * Determines the winding rule that decides how the interior of a [VectorNode.Path] is calculated.

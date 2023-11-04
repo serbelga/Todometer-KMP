@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator
 
 /**
  * Represents a image's Kotlin name, image category name, processed XML file name, and XML file content.

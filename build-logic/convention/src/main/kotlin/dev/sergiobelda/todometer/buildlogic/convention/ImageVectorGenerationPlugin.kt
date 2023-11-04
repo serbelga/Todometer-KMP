@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.convention
+package dev.sergiobelda.todometer.buildlogic.convention
 /*
  * Copyright 2022 Sergio Belda
  *
@@ -15,7 +15,7 @@ package dev.sergiobelda.todometer.convention
  * limitations under the License.
  */
 
-import dev.sergiobelda.todometer.imagevector.generator.task.ImageVectorGenerationTask
+import dev.sergiobelda.todometer.buildlogic.imagevectorgenerator.task.ImageVectorGenerationTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
