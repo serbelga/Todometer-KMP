@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 
 include(":convention")
+include(":imagevectorgenerator")

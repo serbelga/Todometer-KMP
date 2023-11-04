@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.imagevector.generator
+package dev.sergiobelda.todometer.buildlogic.imagevectorgenerator
 
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeSpec
@@ -12,7 +12,8 @@ class ImageCategoriesGenerator(private val categories: List<String>) {
     }
 
     private fun createImagesFileSpecBuilder(): FileSpec.Builder {
-        val imagesPackage = PackageNames.TodometerCommonDesignSystemResourcesImagesPackage.packageName
+        val imagesPackage =
+            PackageNames.TodometerCommonDesignSystemResourcesImagesPackage.packageName
         return FileSpec.builder(
             packageName = imagesPackage,
             fileName = Images
