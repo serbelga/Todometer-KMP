@@ -28,6 +28,7 @@ kotlin = "1.9.10"
 kotlinCoroutines = "1.7.3"
 kotlinDatetime = "0.4.1"
 kotlinSerializationJson = "1.6.0"
+kotlinpoet = "1.14.2"
 ksp = "1.9.10-1.0.13"
 ktlint = "0.50.0"
 lifecycle = "2.6.2"
@@ -116,6 +117,8 @@ sqldelight-jvmDriver = { module = "app.cash.sqldelight:sqlite-driver", version.r
 sqldelight-nativeDriver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqldelight-primitiveAdapters = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+
+squareup-kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 

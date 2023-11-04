@@ -1,3 +1,4 @@
+package dev.sergiobelda.todometer.convention
 /*
  * Copyright 2022 Sergio Belda
  *
@@ -40,7 +41,10 @@ class SpotlessConventionPlugin : Plugin<Project> {
                     target("**/*.kts")
                     targetExclude("**/build/**/*.kts")
                     // Look for the first line that doesn't have a block comment (assumed to be the license)
-                    licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
+                    licenseHeaderFile(
+                        rootProject.file("spotless/copyright.kts"),
+                        "(^(?![\\/ ]\\*).*$)"
+                    )
                 }
                 format("xml") {
                     target("**/*.xml")

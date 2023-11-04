@@ -1,4 +1,4 @@
-package imagevector.generator
+package dev.sergiobelda.todometer.imagevector.generator
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName

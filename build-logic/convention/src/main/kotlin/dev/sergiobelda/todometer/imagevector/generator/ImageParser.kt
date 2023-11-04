@@ -1,9 +1,9 @@
-package imagevector.generator
+package dev.sergiobelda.todometer.imagevector.generator
 
-import imagevector.generator.vector.FillType
-import imagevector.generator.vector.PathParser
-import imagevector.generator.vector.Vector
-import imagevector.generator.vector.VectorNode
+import dev.sergiobelda.todometer.imagevector.generator.vector.FillType
+import dev.sergiobelda.todometer.imagevector.generator.vector.PathParser
+import dev.sergiobelda.todometer.imagevector.generator.vector.Vector
+import dev.sergiobelda.todometer.imagevector.generator.vector.VectorNode
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParser.END_DOCUMENT
 import org.xmlpull.v1.XmlPullParser.END_TAG
@@ -40,9 +40,8 @@ class ImageParser(private val image: Image) {
                 START_TAG -> {
                     when (parser.name) {
                         VECTOR -> {
-                            // TODO: To extension function
-                            width = parser.getValueAsString(WIDTH).replace("dp", "")
-                            height = parser.getValueAsString(HEIGHT).replace("dp", "")
+                            width = parser.getValueAsString(WIDTH).processDpDimension()
+                            height = parser.getValueAsString(HEIGHT).processDpDimension()
                             viewportWidth = parser.getValueAsFloat(VIEWPORT_WIDTH) ?: 0f
                             viewportHeight = parser.getValueAsFloat(VIEWPORT_HEIGHT) ?: 0f
                         }
@@ -54,14 +53,7 @@ class ImageParser(private val image: Image) {
                             )
                             val fillAlpha = parser.getValueAsFloat(FILL_ALPHA)
                             val strokeAlpha = parser.getValueAsFloat(STROKE_ALPHA)
-                            var fillColor = parser.getValueAsString(FILL_COLOR)
-
-                            // TODO: Move to const value and function
-                            val diff = 9 - fillColor.length
-                            if (diff > 0) {
-                                fillColor = fillColor
-                                    .replace("#", "#${"F".repeat(diff)}")
-                            }
+                            val fillColor = parser.getValueAsString(FILL_COLOR).processFillColor()
 
                             val fillType = when (parser.getAttributeValue(null, FILL_TYPE)) {
                                 // evenOdd and nonZero are the only supported values here, where
@@ -134,6 +126,18 @@ private fun XmlPullParser.seekToStartTag(): XmlPullParser {
 
 private fun XmlPullParser.isAtEnd() =
     eventType == END_DOCUMENT || (depth < 1 && eventType == END_TAG)
+
+private fun String.processDpDimension(): String =
+    this.replace("dp", "")
+
+private fun String.processFillColor(): String {
+    val diff = ARGB_HEXADECIMAL_COLOR_LENGTH - this.length
+    return if (diff > 0) {
+        this.replace("#", "#${"F".repeat(diff)}")
+    } else this
+}
+
+private const val ARGB_HEXADECIMAL_COLOR_LENGTH = 9
 
 // XML tag names
 private const val VECTOR = "vector"

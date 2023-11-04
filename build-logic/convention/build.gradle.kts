@@ -15,8 +15,7 @@ dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
-
-    implementation("com.squareup:kotlinpoet:1.12.0")
+    implementation(libs.squareup.kotlinpoet)
     implementation(libs.xmlpull)
     implementation(libs.xpp3)
 }
@@ -25,19 +24,19 @@ gradlePlugin {
     plugins {
         register("commonLibraryAndroid") {
             id = "todometer.common.library.android"
-            implementationClass = "CommonLibraryAndroidConventionPlugin"
+            implementationClass = "dev.sergiobelda.todometer.convention.CommonLibraryAndroidConventionPlugin"
         }
         register("dependencyGraphGenerator") {
             id = "todometer.dependency-graph-generator"
-            implementationClass = "DependencyGraphGeneratorConventionPlugin"
+            implementationClass = "dev.sergiobelda.todometer.convention.DependencyGraphGeneratorConventionPlugin"
         }
         register("spotless") {
             id = "todometer.spotless"
-            implementationClass = "SpotlessConventionPlugin"
+            implementationClass = "dev.sergiobelda.todometer.convention.SpotlessConventionPlugin"
         }
         register("generateImages") {
             id = "todometer.common.generateImages"
-            implementationClass = "imagevector.generator.plugin.ImageVectorGenerationPlugin"
+            implementationClass = "dev.sergiobelda.todometer.convention.ImageVectorGenerationPlugin"
         }
     }
 }

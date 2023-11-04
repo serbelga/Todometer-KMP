@@ -1,4 +1,4 @@
-package imagevector.generator
+package dev.sergiobelda.todometer.imagevector.generator
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -7,10 +7,10 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.buildCodeBlock
-import imagevector.generator.utils.setIndent
-import imagevector.generator.vector.FillType
-import imagevector.generator.vector.Vector
-import imagevector.generator.vector.VectorNode
+import dev.sergiobelda.todometer.imagevector.generator.utils.setIndent
+import dev.sergiobelda.todometer.imagevector.generator.vector.FillType
+import dev.sergiobelda.todometer.imagevector.generator.vector.Vector
+import dev.sergiobelda.todometer.imagevector.generator.vector.VectorNode
 import java.util.Locale
 
 /**
@@ -39,10 +39,10 @@ class ImageVectorGenerator(
         val backingProperty = getBackingProperty()
         val propertySpecBuilder =
             PropertySpec.builder(name = imageName, type = ClassNames.ImageVector)
-                // TODO: Move string images to const
                 .receiver(
                     ClassName(
                         PackageNames.TodometerCommonDesignSystemResourcesImagesPackage.packageName,
+                        // TODO: Make Images string dynamic.
                         "Images",
                         imageCategoryName
                     )

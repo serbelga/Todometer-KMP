@@ -1,4 +1,4 @@
-package imagevector.generator
+package dev.sergiobelda.todometer.imagevector.generator
 
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeSpec
@@ -29,7 +29,7 @@ class ImageCategoriesGenerator(private val categories: List<String>) {
         )
 
     private companion object {
-        // TODO: Make this dynamic class name.
+        // TODO: Make Images string dynamic.
         const val Images = "Images"
     }
 }

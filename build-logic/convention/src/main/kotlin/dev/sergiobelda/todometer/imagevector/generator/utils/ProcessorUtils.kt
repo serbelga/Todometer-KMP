@@ -1,4 +1,4 @@
-package imagevector.generator.utils
+package dev.sergiobelda.todometer.imagevector.generator.utils
 
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 

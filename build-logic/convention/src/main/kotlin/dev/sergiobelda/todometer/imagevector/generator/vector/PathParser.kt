@@ -1,4 +1,4 @@
-package imagevector.generator.vector
+package dev.sergiobelda.todometer.imagevector.generator.vector
 
 import kotlin.math.min
 

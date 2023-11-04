@@ -1,3 +1,4 @@
+package dev.sergiobelda.todometer.convention
 /*
  * Copyright 2023 Sergio Belda
  *

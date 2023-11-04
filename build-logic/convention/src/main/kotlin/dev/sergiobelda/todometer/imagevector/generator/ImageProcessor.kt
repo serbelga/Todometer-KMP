@@ -1,6 +1,6 @@
-package imagevector.generator
+package dev.sergiobelda.todometer.imagevector.generator
 
-import imagevector.generator.utils.toKotlinPropertyName
+import dev.sergiobelda.todometer.imagevector.generator.utils.toKotlinPropertyName
 import java.io.File
 import java.util.Locale
 

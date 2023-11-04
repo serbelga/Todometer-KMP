@@ -1,4 +1,4 @@
-package imagevector.generator.vector
+package dev.sergiobelda.todometer.imagevector.generator.vector
 
 /**
  * Class representing a singular path command in a vector.
@@ -22,6 +22,7 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
     data class RelativeMoveTo(val x: Float, val y: Float) : PathNode() {
         override fun asFunctionCall() = "moveToRelative(${x}f, ${y}f)"
     }
+
     data class MoveTo(val x: Float, val y: Float) : PathNode() {
         override fun asFunctionCall() = "moveTo(${x}f, ${y}f)"
     }
@@ -29,6 +30,7 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
     data class RelativeLineTo(val x: Float, val y: Float) : PathNode() {
         override fun asFunctionCall() = "lineToRelative(${x}f, ${y}f)"
     }
+
     data class LineTo(val x: Float, val y: Float) : PathNode() {
         override fun asFunctionCall() = "lineTo(${x}f, ${y}f)"
     }
@@ -36,6 +38,7 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
     data class RelativeHorizontalTo(val x: Float) : PathNode() {
         override fun asFunctionCall() = "horizontalLineToRelative(${x}f)"
     }
+
     data class HorizontalTo(val x: Float) : PathNode() {
         override fun asFunctionCall() = "horizontalLineTo(${x}f)"
     }
@@ -43,6 +46,7 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
     data class RelativeVerticalTo(val y: Float) : PathNode() {
         override fun asFunctionCall() = "verticalLineToRelative(${y}f)"
     }
+
     data class VerticalTo(val y: Float) : PathNode() {
         override fun asFunctionCall() = "verticalLineTo(${y}f)"
     }
@@ -128,7 +132,8 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
         val arcStartDx: Float,
         val arcStartDy: Float
     ) : PathNode() {
-        override fun asFunctionCall() = "arcToRelative(${horizontalEllipseRadius}f, ${verticalEllipseRadius}f, ${theta}f, $isMoreThanHalf, $isPositiveArc, ${arcStartDx}f, ${arcStartDy}f)"
+        override fun asFunctionCall() =
+            "arcToRelative(${horizontalEllipseRadius}f, ${verticalEllipseRadius}f, ${theta}f, $isMoreThanHalf, $isPositiveArc, ${arcStartDx}f, ${arcStartDy}f)"
     }
 
     data class ArcTo(
@@ -140,7 +145,8 @@ sealed class PathNode(val isCurve: Boolean = false, val isQuad: Boolean = false)
         val arcStartX: Float,
         val arcStartY: Float
     ) : PathNode() {
-        override fun asFunctionCall() = "arcTo(${horizontalEllipseRadius}f, ${verticalEllipseRadius}f, ${theta}f, $isMoreThanHalf, $isPositiveArc, ${arcStartX}f, ${arcStartY}f)"
+        override fun asFunctionCall() =
+            "arcTo(${horizontalEllipseRadius}f, ${verticalEllipseRadius}f, ${theta}f, $isMoreThanHalf, $isPositiveArc, ${arcStartX}f, ${arcStartY}f)"
     }
 }
 
@@ -154,6 +160,7 @@ internal fun Char.toPathNodes(args: FloatArray): List<PathNode> = when (this) {
     RelativeCloseKey, CloseKey -> listOf(
         PathNode.Close
     )
+
     RelativeMoveToKey ->
         pathNodesFromArgs(
             args,
@@ -386,11 +393,13 @@ private inline fun pathNodesFromArgs(
                 subArray[0],
                 subArray[1]
             )
+
             node is PathNode.RelativeMoveTo && index > 0 ->
                 PathNode.RelativeLineTo(
                     subArray[0],
                     subArray[1]
                 )
+
             else -> node
         }
     }
