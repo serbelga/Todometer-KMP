@@ -17,8 +17,6 @@
 package dev.sergiobelda.todometer.app.desktop
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -76,7 +74,6 @@ val koin = startAppDI {
 }.koin
 
 fun main() = application {
-    Icons.Rounded.Add
     Window(
         resizable = false,
         onCloseRequest = ::exitApplication,
