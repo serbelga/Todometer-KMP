@@ -65,12 +65,12 @@ import platform.UIKit.UIViewController
 val koin = startAppDI {
     modules(
         addTaskViewModelModule +
-                addTaskListViewModelModule +
-                editTaskViewModelModule +
-                editTaskListViewModelModule +
-                homeViewModelModule +
-                settingsViewModelModule +
-                taskDetailsViewModelModule
+            addTaskListViewModelModule +
+            editTaskViewModelModule +
+            editTaskListViewModelModule +
+            homeViewModelModule +
+            settingsViewModelModule +
+            taskDetailsViewModelModule
     )
 }.koin
 
