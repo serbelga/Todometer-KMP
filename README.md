@@ -78,6 +78,7 @@
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
+* [Lyricist](https://github.com/adrielcafe/lyricist)
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [spotless](https://github.com/diffplug/spotless)
 
