@@ -27,7 +27,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.main.defaultUIKitMain
 import androidx.compose.ui.window.ComposeUIViewController
 import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutDestination
@@ -61,6 +60,7 @@ import dev.sergiobelda.todometer.common.navigation.NavigationGraph
 import dev.sergiobelda.todometer.common.navigation.NavigationHost
 import dev.sergiobelda.todometer.common.navigation.composableNode
 import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
+import platform.UIKit.UIViewController
 
 val koin = startAppDI {
     modules(
@@ -74,40 +74,35 @@ val koin = startAppDI {
     )
 }.koin
 
-fun main() {
-    defaultUIKitMain(
-        "Todometer",
-        ComposeUIViewController {
-            val getAppThemeUseCase = koin.get<GetAppThemeUseCase>()
-            val appTheme by getAppThemeUseCase.invoke().collectAsState(AppTheme.DARK_THEME)
-            val darkTheme: Boolean = when (appTheme) {
-                AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-                AppTheme.DARK_THEME -> true
-                AppTheme.LIGHT_THEME -> false
-            }
-            val navigationController by remember { mutableStateOf(NavigationController()) }
-            ProvideTodometerStrings {
-                TodometerAppTheme(darkTheme) {
-                    NavigationHost(
-                        navigationController,
-                        startDestination = HomeDestination.route,
-                        modifier = Modifier
-                            .background(MaterialTheme.colorScheme.background)
-                            .windowInsetsPadding(WindowInsets.statusBars)
-                    ) {
-                        homeComposableNode(navigationController)
-                        taskDetailsComposableNode(navigationController)
-                        addTaskListComposableNode(navigationController)
-                        editTaskListComposableNode(navigationController)
-                        addTaskComposableNode(navigationController)
-                        editTaskComposableNode(navigationController)
-                        settingsComposableNode(navigationController)
-                        aboutComposableNode(navigationController)
-                    }
-                }
+fun MainViewController(): UIViewController = ComposeUIViewController {
+    val getAppThemeUseCase = koin.get<GetAppThemeUseCase>()
+    val appTheme by getAppThemeUseCase.invoke().collectAsState(AppTheme.DARK_THEME)
+    val darkTheme: Boolean = when (appTheme) {
+        AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+        AppTheme.DARK_THEME -> true
+        AppTheme.LIGHT_THEME -> false
+    }
+    val navigationController by remember { mutableStateOf(NavigationController()) }
+    ProvideTodometerStrings {
+        TodometerAppTheme(darkTheme) {
+            NavigationHost(
+                navigationController,
+                startDestination = HomeDestination.route,
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background)
+                    .windowInsetsPadding(WindowInsets.statusBars)
+            ) {
+                homeComposableNode(navigationController)
+                taskDetailsComposableNode(navigationController)
+                addTaskListComposableNode(navigationController)
+                editTaskListComposableNode(navigationController)
+                addTaskComposableNode(navigationController)
+                editTaskComposableNode(navigationController)
+                settingsComposableNode(navigationController)
+                aboutComposableNode(navigationController)
             }
         }
-    )
+    }
 }
 
 private fun NavigationGraph.Builder.homeComposableNode(navigationController: NavigationController) {

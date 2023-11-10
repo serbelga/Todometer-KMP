@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
@@ -8,35 +10,21 @@ plugins {
 group = "dev.sergiobelda.todometer.app.ios"
 
 kotlin {
-    iosX64("uikitX64") {
-        binaries {
-            executable {
-                entryPoint = "dev.sergiobelda.todometer.app.ios.main"
-                freeCompilerArgs += listOf(
-                    "-linker-option", "-framework", "-linker-option", "Metal",
-                    "-linker-option", "-framework", "-linker-option", "CoreText",
-                    "-linker-option", "-framework", "-linker-option", "CoreGraphics",
-                    "-linker-option", "-lsqlite3"
-                )
-            }
-        }
-    }
-    iosArm64("uikitArm64") {
-        binaries {
-            executable {
-                entryPoint = "dev.sergiobelda.todometer.app.ios.main"
-                freeCompilerArgs += listOf(
-                    "-linker-option", "-framework", "-linker-option", "Metal",
-                    "-linker-option", "-framework", "-linker-option", "CoreText",
-                    "-linker-option", "-framework", "-linker-option", "CoreGraphics",
-                    "-linker-option", "-lsqlite3"
-                )
-            }
+    val xcf = XCFramework()
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "app-ios"
+            isStatic = true
+            xcf.add(this)
         }
     }
 
     sourceSets {
-        val uikitMain by creating {
+        val iosMain by creating {
             dependencies {
                 implementation(projects.appCommon.designsystem)
                 implementation(projects.appCommon.ui)
@@ -53,37 +41,18 @@ kotlin {
                 implementation(projects.common.ui)
             }
         }
-        val uikitX64Main by getting {
-            dependsOn(uikitMain)
+        val iosX64Main by getting {
+            dependsOn(iosMain)
         }
-        val uikitArm64Main by getting {
-            dependsOn(uikitMain)
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
         }
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
-        }
-    }
-}
-
-compose.experimental {
-    uikit.application {
-        bundleIdPrefix = "dev.sergiobelda.todometer.app.ios"
-        projectName = "Todometer"
-        deployConfigurations {
-            simulator("IPhone13ProMax") {
-                //Usage: ./gradlew iosDeployIPhone13ProMaxDebug
-                device = org.jetbrains.compose.experimental.dsl.IOSDevices.IPHONE_13_PRO_MAX
-            }
-            simulator("IPad") {
-                //Usage: ./gradlew iosDeployIPadDebug
-                device = org.jetbrains.compose.experimental.dsl.IOSDevices.IPAD_MINI_6th_Gen
-            }
-            connectedDevice("Device") {
-                //First need specify your teamId here, or in local.properties (compose.ios.teamId=***)
-                //teamId="***"
-                //Usage: ./gradlew iosDeployDeviceRelease
-            }
         }
     }
 }
