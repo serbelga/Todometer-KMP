@@ -58,26 +58,25 @@
 
 ## Technologies
 
-### Android
+#### Android
 
 * [Android Jetpack](https://developer.android.com/jetpack)
     * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
     * [Android KTX](https://developer.android.com/kotlin/ktx)
     * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
     * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)
-* [Koin](https://insert-koin.io/docs/reference/koin-android/start)
 
-### Wear OS
+#### Wear OS
 
 * [Wear Compose](https://developer.android.com/jetpack/androidx/releases/wear-compose)
 * [Wear Compose Navigation](https://developer.android.com/reference/kotlin/androidx/wear/compose/navigation/package-summary)
 
-### Common
+#### Common
 
 * [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/flow.html)
-* [Koin Multiplatform](https://insert-koin.io/docs/setup/v3/)
+* [Koin Multiplatform](https://insert-koin.io/docs/reference/koin-mp/kmp)
 * [Lyricist](https://github.com/adrielcafe/lyricist)
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [spotless](https://github.com/diffplug/spotless)
