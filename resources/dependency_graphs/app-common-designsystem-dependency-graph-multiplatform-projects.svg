@@ -7,13 +7,13 @@
         <text text-anchor="middle" x="141.91" y="-122.5" font-family="Times,serif"
             font-size="35.00">designsystem
         </text>
-        <!-- :app&#45;common:designsystem -->
+        <!-- :app:common:designsystem -->
         <g id="node1" class="node">
-            <title>:app&#45;common:designsystem</title>
+            <title>:app:common:designsystem</title>
             <polygon fill="#A280FF" stroke="black"
                 points="228.49,-108 55.32,-108 55.32,-72 228.49,-72 228.49,-108" />
             <text text-anchor="middle" x="141.91" y="-85.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;common:designsystem
+                font-size="14.00">:app:common:designsystem
             </text>
         </g>
         <!-- :common:designsystem&#45;resources -->
@@ -24,9 +24,9 @@
                 font-size="14.00">:common:designsystem&#45;resources
             </text>
         </g>
-        <!-- :app&#45;common:designsystem&#45;&gt;:common:designsystem&#45;resources -->
+        <!-- :app:common:designsystem&#45;&gt;:common:designsystem&#45;resources -->
         <g id="edge1" class="edge">
-            <title>:app&#45;common:designsystem&#45;&gt;:common:designsystem&#45;resources</title>
+            <title>:app:common:designsystem&#45;&gt;:common:designsystem&#45;resources</title>
             <path fill="none" stroke="black"
                 d="M141.91,-71.7C141.91,-63.98 141.91,-54.71 141.91,-46.11" />
             <polygon fill="black" stroke="black"

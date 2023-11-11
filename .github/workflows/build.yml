@@ -38,5 +38,5 @@ jobs:
       run:  ./gradlew app-desktop:assemble
     - name: Build app-ios
       run:  ./gradlew app-ios:assemble
-    - name: Build wear-app
-      run:  ./gradlew wear-app:assembleDebug
+    - name: Build wearapp-wearos
+      run:  ./gradlew wearapp-wearos:assembleDebug

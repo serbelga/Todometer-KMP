@@ -16,17 +16,17 @@
                 font-size="14.00">:app&#45;desktop
             </text>
         </g>
-        <!-- :app&#45;common:designsystem -->
+        <!-- :app:common:designsystem -->
         <g id="node2" class="node">
-            <title>:app&#45;common:designsystem</title>
+            <title>:app:common:designsystem</title>
             <ellipse fill="#A280FF" stroke="black" cx="437.84" cy="-90" rx="119.28" ry="18" />
             <text text-anchor="middle" x="437.84" y="-85.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;common:designsystem
+                font-size="14.00">:app:common:designsystem
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app&#45;desktop&#45;&gt;:app:common:designsystem -->
         <g id="edge1" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app&#45;desktop&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1018.47,-304.41C825.13,-301.62 64.38,-288.35 29.84,-252 6.17,-227.08 43.3,-153.47 54.84,-144 93.19,-112.54 214.88,-99.74 310.92,-94.54" />
             <polygon fill="black" stroke="black"
@@ -48,17 +48,17 @@
             <polygon fill="black" stroke="black"
                 points="123.86,-44.9 129.6,-36 119.56,-39.38 123.86,-44.9" />
         </g>
-        <!-- :app&#45;common:ui -->
+        <!-- :app:common:ui -->
         <g id="node4" class="node">
-            <title>:app&#45;common:ui</title>
+            <title>:app:common:ui</title>
             <ellipse fill="#A280FF" stroke="black" cx="923.84" cy="-162" rx="74.74" ry="18" />
             <text text-anchor="middle" x="923.84" y="-157.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;common:ui
+                font-size="14.00">:app:common:ui
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;common:ui -->
+        <!-- :app&#45;desktop&#45;&gt;:app:common:ui -->
         <g id="edge2" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;common:ui</title>
+            <title>:app&#45;desktop&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1018.62,-303.02C948.87,-298.86 818.33,-286.55 789.84,-252 779.66,-239.66 780.85,-229.23 789.84,-216 804,-195.18 827.73,-182.54 851.33,-174.86" />
             <polygon fill="black" stroke="black"
@@ -144,129 +144,129 @@
             <polygon fill="black" stroke="black"
                 points="1612.47,-93.36 1602.09,-95.47 1611.52,-100.3 1612.47,-93.36" />
         </g>
-        <!-- :app&#45;feature:about -->
+        <!-- :app:feature:about -->
         <g id="node11" class="node">
-            <title>:app&#45;feature:about</title>
+            <title>:app:feature:about</title>
             <ellipse fill="#A280FF" stroke="black" cx="880.84" cy="-234" rx="81.64" ry="18" />
             <text text-anchor="middle" x="880.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:about
+                font-size="14.00">:app:feature:about
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:about -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:about -->
         <g id="edge3" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:about</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:about</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1018.32,-287.88C991.3,-277.48 956.81,-264.22 929.14,-253.58" />
             <polygon fill="black" stroke="black"
                 points="930.25,-250.25 919.66,-249.93 927.74,-256.79 930.25,-250.25" />
         </g>
-        <!-- :app&#45;feature:addtask -->
+        <!-- :app:feature:addtask -->
         <g id="node12" class="node">
-            <title>:app&#45;feature:addtask</title>
+            <title>:app:feature:addtask</title>
             <ellipse fill="#A280FF" stroke="black" cx="1672.84" cy="-234" rx="89.72" ry="18" />
             <text text-anchor="middle" x="1672.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:addtask
+                font-size="14.00">:app:feature:addtask
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:addtask -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:addtask -->
         <g id="edge4" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:addtask</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:addtask</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1107.05,-301.42C1195.77,-294 1401.76,-275.67 1573.84,-252 1581.89,-250.89 1590.28,-249.63 1598.63,-248.3" />
             <polygon fill="black" stroke="black"
                 points="1599.46,-251.71 1608.77,-246.64 1598.34,-244.8 1599.46,-251.71" />
         </g>
-        <!-- :app&#45;feature:addtasklist -->
+        <!-- :app:feature:addtasklist -->
         <g id="node13" class="node">
-            <title>:app&#45;feature:addtasklist</title>
+            <title>:app:feature:addtasklist</title>
             <ellipse fill="#A280FF" stroke="black" cx="1462.84" cy="-234" rx="101.84" ry="18" />
             <text text-anchor="middle" x="1462.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:addtasklist
+                font-size="14.00">:app:feature:addtasklist
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:addtasklist -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:addtasklist -->
         <g id="edge5" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:addtasklist</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:addtasklist</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1107.18,-297.24C1173.73,-285.59 1300.48,-263.41 1383.3,-248.92" />
             <polygon fill="black" stroke="black"
                 points="1383.93,-252.36 1393.17,-247.19 1382.72,-245.47 1383.93,-252.36" />
         </g>
-        <!-- :app&#45;feature:edittask -->
+        <!-- :app:feature:edittask -->
         <g id="node14" class="node">
-            <title>:app&#45;feature:edittask</title>
+            <title>:app:feature:edittask</title>
             <ellipse fill="#A280FF" stroke="black" cx="1252.84" cy="-234" rx="90.3" ry="18" />
             <text text-anchor="middle" x="1252.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:edittask
+                font-size="14.00">:app:feature:edittask
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:edittask -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:edittask -->
         <g id="edge6" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:edittask</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:edittask</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1107.39,-288.59C1135.77,-278.13 1172.61,-264.56 1202.12,-253.69" />
             <polygon fill="black" stroke="black"
                 points="1203.65,-256.85 1211.82,-250.11 1201.23,-250.29 1203.65,-256.85" />
         </g>
-        <!-- :app&#45;feature:edittasklist -->
+        <!-- :app:feature:edittasklist -->
         <g id="node15" class="node">
-            <title>:app&#45;feature:edittasklist</title>
+            <title>:app:feature:edittasklist</title>
             <ellipse fill="#A280FF" stroke="black" cx="399.84" cy="-234" rx="102.42" ry="18" />
             <text text-anchor="middle" x="399.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:edittasklist
+                font-size="14.00">:app:feature:edittasklist
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:edittasklist -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:edittasklist -->
         <g id="edge7" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:edittasklist</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:edittasklist</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1018.58,-300.48C930.21,-291.45 725.66,-270.43 553.84,-252 534.4,-249.91 513.57,-247.64 493.72,-245.46" />
             <polygon fill="black" stroke="black"
                 points="494.08,-241.98 483.75,-244.36 493.31,-248.93 494.08,-241.98" />
         </g>
-        <!-- :app&#45;feature:home -->
+        <!-- :app:feature:home -->
         <g id="node16" class="node">
-            <title>:app&#45;feature:home</title>
+            <title>:app:feature:home</title>
             <ellipse fill="#A280FF" stroke="black" cx="1062.84" cy="-234" rx="81.64" ry="18" />
             <text text-anchor="middle" x="1062.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:home
+                font-size="14.00">:app:feature:home
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:home -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:home -->
         <g id="edge8" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:home</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:home</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1062.84,-287.7C1062.84,-279.98 1062.84,-270.71 1062.84,-262.11" />
             <polygon fill="black" stroke="black"
                 points="1066.34,-262.1 1062.84,-252.1 1059.34,-262.1 1066.34,-262.1" />
         </g>
-        <!-- :app&#45;feature:settings -->
+        <!-- :app:feature:settings -->
         <g id="node17" class="node">
-            <title>:app&#45;feature:settings</title>
+            <title>:app:feature:settings</title>
             <ellipse fill="#A280FF" stroke="black" cx="652.84" cy="-234" rx="89.74" ry="18" />
             <text text-anchor="middle" x="652.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:settings
+                font-size="14.00">:app:feature:settings
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:settings -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:settings -->
         <g id="edge9" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:settings</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:settings</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1018.58,-297.44C949.16,-285.59 813.86,-262.49 728.71,-247.95" />
             <polygon fill="black" stroke="black"
                 points="729.28,-244.5 718.83,-246.27 728.1,-251.4 729.28,-244.5" />
         </g>
-        <!-- :app&#45;feature:taskdetails -->
+        <!-- :app:feature:taskdetails -->
         <g id="node18" class="node">
-            <title>:app&#45;feature:taskdetails</title>
+            <title>:app:feature:taskdetails</title>
             <ellipse fill="#A280FF" stroke="black" cx="155.84" cy="-234" rx="101.25" ry="18" />
             <text text-anchor="middle" x="155.84" y="-229.8" font-family="Times,serif"
-                font-size="14.00">:app&#45;feature:taskdetails
+                font-size="14.00">:app:feature:taskdetails
             </text>
         </g>
-        <!-- :app&#45;desktop&#45;&gt;:app&#45;feature:taskdetails -->
+        <!-- :app&#45;desktop&#45;&gt;:app:feature:taskdetails -->
         <g id="edge10" class="edge">
-            <title>:app&#45;desktop&#45;&gt;:app&#45;feature:taskdetails</title>
+            <title>:app&#45;desktop&#45;&gt;:app:feature:taskdetails</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1018.27,-302.87C899.51,-296.98 565.65,-279.14 288.84,-252 274.02,-250.55 258.3,-248.76 243.05,-246.89" />
             <polygon fill="black" stroke="black"
@@ -288,17 +288,17 @@
             <polygon fill="black" stroke="black"
                 points="2069.4,-247.28 2078.91,-242.61 2068.57,-240.33 2069.4,-247.28" />
         </g>
-        <!-- :app&#45;common:designsystem&#45;&gt;:common:designsystem&#45;resources -->
+        <!-- :app:common:designsystem&#45;&gt;:common:designsystem&#45;resources -->
         <g id="edge18" class="edge">
-            <title>:app&#45;common:designsystem&#45;&gt;:common:designsystem&#45;resources</title>
+            <title>:app:common:designsystem&#45;&gt;:common:designsystem&#45;resources</title>
             <path fill="none" stroke="black"
                 d="M378.1,-74.33C333.45,-63.36 272.21,-48.32 224.86,-36.69" />
             <polygon fill="black" stroke="black"
                 points="225.52,-33.25 214.97,-34.26 223.85,-40.04 225.52,-33.25" />
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:common:ui&#45;&gt;:app:common:designsystem -->
         <g id="edge20" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:common:ui&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M861.3,-151.99C777.49,-139.92 628.05,-118.4 530.98,-104.41" />
             <polygon fill="black" stroke="black"
@@ -312,49 +312,49 @@
                 font-size="14.00">:common:android
             </text>
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:common:android -->
+        <!-- :app:common:ui&#45;&gt;:common:android -->
         <g id="edge19" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:common:android</title>
+            <title>:app:common:ui&#45;&gt;:common:android</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M919.39,-143.7C917.39,-135.9 914.97,-126.51 912.74,-117.83" />
             <polygon fill="black" stroke="black"
                 points="916.12,-116.92 910.24,-108.1 909.34,-118.66 916.12,-116.92" />
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:common:domain -->
+        <!-- :app:common:ui&#45;&gt;:common:domain -->
         <g id="edge21" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:common:domain</title>
+            <title>:app:common:ui&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M947.07,-144.71C961.2,-134.55 979.43,-120.98 994.84,-108 1012.64,-93.02 1011.62,-81.53 1032.84,-72 1124.52,-30.83 1411.67,-21.53 1559.27,-19.51" />
             <polygon fill="black" stroke="black"
                 points="1559.7,-23 1569.66,-19.37 1559.61,-16 1559.7,-23" />
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:common:navigation -->
+        <!-- :app:common:ui&#45;&gt;:common:navigation -->
         <g id="edge22" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:common:navigation</title>
+            <title>:app:common:ui&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M876.22,-148.08C834.17,-136.67 772.62,-119.97 726.95,-107.58" />
             <polygon fill="black" stroke="black"
                 points="727.73,-104.17 717.17,-104.92 725.9,-110.92 727.73,-104.17" />
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:common:resources -->
+        <!-- :app:common:ui&#45;&gt;:common:resources -->
         <g id="edge23" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:common:resources</title>
+            <title>:app:common:ui&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M965.33,-146.83C997.17,-135.96 1041.35,-120.87 1075.77,-109.12" />
             <polygon fill="black" stroke="black"
                 points="1077.32,-112.29 1085.65,-105.75 1075.06,-105.67 1077.32,-112.29" />
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:common:viewmodel -->
+        <!-- :app:common:ui&#45;&gt;:common:viewmodel -->
         <g id="edge24" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:common:viewmodel</title>
+            <title>:app:common:ui&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M982.87,-150.75C1053.49,-138.48 1171.9,-117.91 1249.7,-104.4" />
             <polygon fill="black" stroke="black"
                 points="1250.67,-107.78 1259.93,-102.62 1249.47,-100.89 1250.67,-107.78" />
         </g>
-        <!-- :app&#45;common:ui&#45;&gt;:common:ui -->
+        <!-- :app:common:ui&#45;&gt;:common:ui -->
         <g id="edge25" class="edge">
-            <title>:app&#45;common:ui&#45;&gt;:common:ui</title>
+            <title>:app:common:ui&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M992.55,-154.64C1089.81,-145.43 1273.13,-127.38 1428.84,-108 1447.47,-105.68 1467.71,-102.87 1486.09,-100.21" />
             <polygon fill="black" stroke="black"
@@ -368,441 +368,441 @@
             <polygon fill="black" stroke="black"
                 points="1618.7,-43.93 1624.96,-35.39 1614.74,-38.16 1618.7,-43.93" />
         </g>
-        <!-- :app&#45;feature:about&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:about&#45;&gt;:app:common:designsystem -->
         <g id="edge28" class="edge">
-            <title>:app&#45;feature:about&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:about&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M831,-219.72C793.19,-209.45 740.03,-194.56 693.84,-180 623.02,-157.67 542.22,-129.05 490.66,-110.38" />
             <polygon fill="black" stroke="black"
                 points="491.66,-107.02 481.07,-106.89 489.28,-113.6 491.66,-107.02" />
         </g>
-        <!-- :app&#45;feature:about&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:about&#45;&gt;:app:common:ui -->
         <g id="edge29" class="edge">
-            <title>:app&#45;feature:about&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:about&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M891.25,-216.05C896.25,-207.92 902.34,-198 907.91,-188.94" />
             <polygon fill="black" stroke="black"
                 points="910.98,-190.63 913.23,-180.28 905.01,-186.96 910.98,-190.63" />
         </g>
-        <!-- :app&#45;feature:about&#45;&gt;:common:navigation -->
+        <!-- :app:feature:about&#45;&gt;:common:navigation -->
         <g id="edge30" class="edge">
-            <title>:app&#45;feature:about&#45;&gt;:common:navigation</title>
+            <title>:app:feature:about&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M822.79,-221.17C793.21,-213.1 757.87,-200.12 730.84,-180 708.45,-163.33 690.47,-136.76 679.15,-116.98" />
             <polygon fill="black" stroke="black"
                 points="682.17,-115.22 674.27,-108.16 676.05,-118.61 682.17,-115.22" />
         </g>
-        <!-- :app&#45;feature:about&#45;&gt;:common:resources -->
+        <!-- :app:feature:about&#45;&gt;:common:resources -->
         <g id="edge31" class="edge">
-            <title>:app&#45;feature:about&#45;&gt;:common:resources</title>
+            <title>:app:feature:about&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M922.63,-218.45C947.98,-208.93 980.6,-195.41 1007.84,-180 1041.95,-160.71 1077.71,-133.39 1101.43,-114.13" />
             <polygon fill="black" stroke="black"
                 points="1103.79,-116.72 1109.3,-107.67 1099.35,-111.31 1103.79,-116.72" />
         </g>
-        <!-- :app&#45;feature:about&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:about&#45;&gt;:common:viewmodel -->
         <g id="edge33" class="edge">
-            <title>:app&#45;feature:about&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:about&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M925.5,-218.85C959.14,-208.18 1006.39,-193.19 1047.84,-180 1125.31,-155.35 1214.85,-126.77 1271.16,-108.79" />
             <polygon fill="black" stroke="black"
                 points="1272.48,-112.04 1280.94,-105.67 1270.35,-105.38 1272.48,-112.04" />
         </g>
-        <!-- :app&#45;feature:about&#45;&gt;:common:ui -->
+        <!-- :app:feature:about&#45;&gt;:common:ui -->
         <g id="edge32" class="edge">
-            <title>:app&#45;feature:about&#45;&gt;:common:ui</title>
+            <title>:app:feature:about&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M937.34,-220.95C1063.18,-194.12 1365.3,-129.71 1490.75,-102.96" />
             <polygon fill="black" stroke="black"
                 points="1491.5,-106.38 1500.55,-100.87 1490.04,-99.53 1491.5,-106.38" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:addtask&#45;&gt;:app:common:designsystem -->
         <g id="edge34" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:addtask&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1607.92,-221.55C1596.57,-219.64 1584.87,-217.72 1573.84,-216 1345.04,-180.4 1288.1,-168.46 1057.84,-144 839.82,-120.84 783.94,-130.44 565.84,-108 554.8,-106.86 543.25,-105.53 531.79,-104.12" />
             <polygon fill="black" stroke="black"
                 points="532.12,-100.64 521.76,-102.87 531.25,-107.58 532.12,-100.64" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:addtask&#45;&gt;:app:common:ui -->
         <g id="edge35" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:addtask&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1609.33,-221.24C1597.56,-219.3 1585.35,-217.45 1573.84,-216 1370.63,-190.32 1130.01,-174.47 1006.35,-167.38" />
             <polygon fill="black" stroke="black"
                 points="1006.38,-163.87 996.2,-166.8 1005.98,-170.86 1006.38,-163.87" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:common:domain -->
+        <!-- :app:feature:addtask&#45;&gt;:common:domain -->
         <g id="edge36" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:common:domain</title>
+            <title>:app:feature:addtask&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1755.73,-226.93C1791.11,-220.26 1830.29,-206.81 1856.84,-180 1891.2,-145.32 1907.2,-110.23 1876.84,-72 1858.54,-48.96 1788,-35.03 1730.16,-27.27" />
             <polygon fill="black" stroke="black"
                 points="1730.27,-23.75 1719.9,-25.94 1729.37,-30.7 1730.27,-23.75" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:common:navigation -->
+        <!-- :app:feature:addtask&#45;&gt;:common:navigation -->
         <g id="edge37" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:common:navigation</title>
+            <title>:app:feature:addtask&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1622.74,-219.01C1595.52,-210.15 1561.98,-197.11 1534.84,-180 1515.16,-167.59 1518.22,-153.18 1496.84,-144 1357.8,-84.29 967.65,-120.47 816.84,-108 795.39,-106.23 772.28,-103.86 750.74,-101.45" />
             <polygon fill="black" stroke="black"
                 points="750.97,-97.95 740.64,-100.31 750.19,-104.91 750.97,-97.95" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:common:resources -->
+        <!-- :app:feature:addtask&#45;&gt;:common:resources -->
         <g id="edge38" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:common:resources</title>
+            <title>:app:feature:addtask&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1639.7,-217.25C1596.48,-197.34 1518.12,-163.33 1447.84,-144 1351.04,-117.38 1323.83,-124.75 1224.84,-108 1217.47,-106.75 1209.79,-105.43 1202.12,-104.1" />
             <polygon fill="black" stroke="black"
                 points="1202.53,-100.61 1192.08,-102.34 1201.33,-107.51 1202.53,-100.61" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:addtask&#45;&gt;:common:viewmodel -->
         <g id="edge40" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:addtask&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1682.58,-216.08C1692.48,-196.38 1704.12,-164.01 1686.84,-144 1677.98,-133.73 1518.92,-113.38 1415.22,-101.1" />
             <polygon fill="black" stroke="black"
                 points="1415.39,-97.6 1405.05,-99.9 1414.57,-104.55 1415.39,-97.6" />
         </g>
-        <!-- :app&#45;feature:addtask&#45;&gt;:common:ui -->
+        <!-- :app:feature:addtask&#45;&gt;:common:ui -->
         <g id="edge39" class="edge">
-            <title>:app&#45;feature:addtask&#45;&gt;:common:ui</title>
+            <title>:app:feature:addtask&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1739.23,-221.84C1798.92,-208.97 1872.43,-184.23 1838.84,-144 1810.76,-110.36 1691.06,-98.02 1613.91,-93.53" />
             <polygon fill="black" stroke="black"
                 points="1613.96,-90.03 1603.78,-92.98 1613.58,-97.02 1613.96,-90.03" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:addtasklist&#45;&gt;:app:common:designsystem -->
         <g id="edge41" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:addtasklist&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1389.43,-221.54C1376.9,-219.64 1364,-217.73 1351.84,-216 1230.68,-198.74 1195.75,-216.19 1078.84,-180 1045.05,-169.54 1041.89,-153.62 1007.84,-144 818.17,-90.43 761.82,-128.98 565.84,-108 554.9,-106.83 543.44,-105.48 532.07,-104.07" />
             <polygon fill="black" stroke="black"
                 points="532.47,-100.59 522.11,-102.81 531.6,-107.54 532.47,-100.59" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:addtasklist&#45;&gt;:app:common:ui -->
         <g id="edge42" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:addtasklist&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1389.75,-221.46C1377.12,-219.56 1364.11,-217.67 1351.84,-216 1218.35,-197.8 1184.51,-196.94 1050.84,-180 1033.5,-177.8 1014.84,-175.35 997.3,-173.01" />
             <polygon fill="black" stroke="black"
                 points="997.5,-169.51 987.13,-171.65 996.57,-176.45 997.5,-169.51" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:common:domain -->
+        <!-- :app:feature:addtasklist&#45;&gt;:common:domain -->
         <g id="edge43" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:common:domain</title>
+            <title>:app:feature:addtasklist&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1534.7,-221.23C1574.63,-212.99 1624.46,-199.84 1665.84,-180 1714.26,-156.79 1738.71,-155.96 1762.84,-108 1770.03,-93.71 1771.45,-85.49 1762.84,-72 1751.6,-54.37 1732.8,-42.51 1713.68,-34.57" />
             <polygon fill="black" stroke="black"
                 points="1714.88,-31.29 1704.29,-30.98 1712.38,-37.83 1714.88,-31.29" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:common:navigation -->
+        <!-- :app:feature:addtasklist&#45;&gt;:common:navigation -->
         <g id="edge44" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:common:navigation</title>
+            <title>:app:feature:addtasklist&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1408.54,-218.7C1334.14,-199.52 1196.15,-165.39 1076.84,-144 1016.36,-133.15 853.61,-113.19 752,-101.1" />
             <polygon fill="black" stroke="black"
                 points="752.4,-97.62 742.05,-99.92 751.57,-104.57 752.4,-97.62" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:common:resources -->
+        <!-- :app:feature:addtasklist&#45;&gt;:common:resources -->
         <g id="edge45" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:common:resources</title>
+            <title>:app:feature:addtasklist&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1459.69,-215.96C1454.97,-195.52 1444.02,-161.79 1420.84,-144 1419.75,-143.16 1288.4,-119.54 1202.26,-104.12" />
             <polygon fill="black" stroke="black"
                 points="1202.71,-100.64 1192.25,-102.33 1201.48,-107.53 1202.71,-100.64" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:addtasklist&#45;&gt;:common:viewmodel -->
         <g id="edge47" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:addtasklist&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1520.15,-219.11C1540.37,-211.15 1561,-198.85 1572.84,-180 1581.35,-166.45 1582.9,-156.45 1572.84,-144 1553.64,-120.21 1481.9,-106.59 1420.82,-99.14" />
             <polygon fill="black" stroke="black"
                 points="1421.07,-95.64 1410.72,-97.95 1420.25,-102.59 1421.07,-95.64" />
         </g>
-        <!-- :app&#45;feature:addtasklist&#45;&gt;:common:ui -->
+        <!-- :app:feature:addtasklist&#45;&gt;:common:ui -->
         <g id="edge46" class="edge">
-            <title>:app&#45;feature:addtasklist&#45;&gt;:common:ui</title>
+            <title>:app:feature:addtasklist&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1536.07,-221.39C1581.93,-212.45 1634.88,-198.49 1648.84,-180 1658.48,-167.23 1657.15,-157.68 1648.84,-144 1637.9,-125.98 1618.62,-113.81 1599.74,-105.72" />
             <polygon fill="black" stroke="black"
                 points="1600.84,-102.39 1590.25,-101.97 1598.26,-108.9 1600.84,-102.39" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:edittask&#45;&gt;:app:common:designsystem -->
         <g id="edge48" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:edittask&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1188.22,-221.37C1176.79,-219.46 1164.98,-217.59 1153.84,-216 1014.79,-196.11 978.38,-203.21 839.84,-180 721.36,-160.15 585.19,-128 505.62,-108.26" />
             <polygon fill="black" stroke="black"
                 points="506.27,-104.82 495.72,-105.8 504.58,-111.61 506.27,-104.82" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:edittask&#45;&gt;:app:common:ui -->
         <g id="edge49" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:edittask&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1193.26,-220.32C1135.24,-207.98 1047.31,-189.27 987.83,-176.61" />
             <polygon fill="black" stroke="black"
                 points="988.31,-173.14 977.8,-174.48 986.85,-179.98 988.31,-173.14" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:common:domain -->
+        <!-- :app:feature:edittask&#45;&gt;:common:domain -->
         <g id="edge50" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:common:domain</title>
+            <title>:app:feature:edittask&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1309.77,-219.89C1400.19,-198.02 1570.85,-152.12 1613.84,-108 1630.34,-91.07 1639.32,-65.43 1644.03,-46.02" />
             <polygon fill="black" stroke="black"
                 points="1647.45,-46.76 1646.18,-36.24 1640.62,-45.25 1647.45,-46.76" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:common:navigation -->
+        <!-- :app:feature:edittask&#45;&gt;:common:navigation -->
         <g id="edge51" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:common:navigation</title>
+            <title>:app:feature:edittask&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1216.61,-217.31C1169.4,-197.45 1083.9,-163.51 1007.84,-144 960.38,-131.82 834.55,-113.65 749.49,-102.06" />
             <polygon fill="black" stroke="black"
                 points="749.71,-98.56 739.33,-100.68 748.76,-105.49 749.71,-98.56" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:common:resources -->
+        <!-- :app:feature:edittask&#45;&gt;:common:resources -->
         <g id="edge52" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:common:resources</title>
+            <title>:app:feature:edittask&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1238.13,-216.15C1216.32,-191.17 1175.28,-144.17 1150.17,-115.42" />
             <polygon fill="black" stroke="black"
                 points="1152.75,-113.06 1143.54,-107.82 1147.48,-117.66 1152.75,-113.06" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:edittask&#45;&gt;:common:viewmodel -->
         <g id="edge54" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:edittask&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1319.59,-221.82C1343.66,-214.21 1368.43,-201.44 1382.84,-180 1391.77,-166.72 1389.17,-158.7 1382.84,-144 1377.88,-132.47 1369.04,-122.28 1359.83,-113.99" />
             <polygon fill="black" stroke="black"
                 points="1362,-111.24 1352.09,-107.49 1357.5,-116.6 1362,-111.24" />
         </g>
-        <!-- :app&#45;feature:edittask&#45;&gt;:common:ui -->
+        <!-- :app:feature:edittask&#45;&gt;:common:ui -->
         <g id="edge53" class="edge">
-            <title>:app&#45;feature:edittask&#45;&gt;:common:ui</title>
+            <title>:app:feature:edittask&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1299.81,-218.52C1328.9,-208.93 1366.71,-195.32 1398.84,-180 1440.79,-160.01 1486.18,-131.61 1515.48,-112.3" />
             <polygon fill="black" stroke="black"
                 points="1517.64,-115.07 1524.04,-106.62 1513.77,-109.24 1517.64,-115.07" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:edittasklist&#45;&gt;:app:common:designsystem -->
         <g id="edge55" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:edittasklist&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M332.97,-220.3C310.66,-212.53 288.12,-200.05 274.84,-180 266.01,-166.66 265.44,-156.95 274.84,-144 289,-124.51 310.5,-112.05 333.28,-104.12" />
             <polygon fill="black" stroke="black"
                 points="334.64,-107.36 343.1,-100.99 332.51,-100.69 334.64,-107.36" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:edittasklist&#45;&gt;:app:common:ui -->
         <g id="edge56" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:edittasklist&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M478.57,-222.48C579.16,-209.05 751.93,-185.97 850.07,-172.86" />
             <polygon fill="black" stroke="black"
                 points="850.75,-176.3 860.2,-171.5 849.83,-169.36 850.75,-176.3" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:common:domain -->
+        <!-- :app:feature:edittasklist&#45;&gt;:common:domain -->
         <g id="edge57" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:common:domain</title>
+            <title>:app:feature:edittasklist&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M327.06,-221.35C303.2,-213.69 279.17,-201.01 264.84,-180 246.22,-152.68 284.28,-74.71 287.84,-72 338.44,-33.51 1264.65,-22.29 1559.5,-19.68" />
             <polygon fill="black" stroke="black"
                 points="1559.75,-23.18 1569.72,-19.59 1559.69,-16.18 1559.75,-23.18" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:common:navigation -->
+        <!-- :app:feature:edittasklist&#45;&gt;:common:navigation -->
         <g id="edge58" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:common:navigation</title>
+            <title>:app:feature:edittasklist&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M356.53,-217.5C339.77,-209.13 322.37,-196.96 312.84,-180 305.01,-166.05 302.36,-156.08 312.84,-144 350.06,-101.11 509.73,-116.76 565.84,-108 573.7,-106.77 581.89,-105.45 590.06,-104.1" />
             <polygon fill="black" stroke="black"
                 points="590.7,-107.55 599.99,-102.46 589.55,-100.64 590.7,-107.55" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:common:resources -->
+        <!-- :app:feature:edittasklist&#45;&gt;:common:resources -->
         <g id="edge59" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:common:resources</title>
+            <title>:app:feature:edittasklist&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M390.64,-215.78C381.37,-195.8 370.8,-163.15 388.84,-144 435.1,-94.91 927.68,-114.25 994.84,-108 1012.31,-106.37 1031.02,-104.25 1048.74,-102.05" />
             <polygon fill="black" stroke="black"
                 points="1049.56,-105.47 1059.05,-100.75 1048.69,-98.53 1049.56,-105.47" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:edittasklist&#45;&gt;:common:viewmodel -->
         <g id="edge61" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:edittasklist&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M430.4,-216.67C471.47,-195.61 547.37,-159.84 616.84,-144 880.77,-83.82 955.85,-138.29 1224.84,-108 1233.53,-107.02 1242.6,-105.8 1251.59,-104.47" />
             <polygon fill="black" stroke="black"
                 points="1252.34,-107.89 1261.69,-102.92 1251.28,-100.97 1252.34,-107.89" />
         </g>
-        <!-- :app&#45;feature:edittasklist&#45;&gt;:common:ui -->
+        <!-- :app:feature:edittasklist&#45;&gt;:common:ui -->
         <g id="edge60" class="edge">
-            <title>:app&#45;feature:edittasklist&#45;&gt;:common:ui</title>
+            <title>:app:feature:edittasklist&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M456.38,-218.95C539.73,-198.82 700.75,-162.23 839.84,-144 1099.89,-109.92 1167.94,-134.72 1428.84,-108 1447.78,-106.06 1468.34,-103.32 1486.91,-100.61" />
             <polygon fill="black" stroke="black"
                 points="1487.63,-104.04 1497,-99.1 1486.6,-97.11 1487.63,-104.04" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:home&#45;&gt;:app:common:designsystem -->
         <g id="edge62" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:home&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1003.7,-221.45C993.11,-219.53 982.16,-217.63 971.84,-216 848.34,-196.51 814.52,-208.75 692.84,-180 653.64,-170.74 552.2,-133.82 489.72,-110.54" />
             <polygon fill="black" stroke="black"
                 points="490.64,-107.15 480.05,-106.93 488.19,-113.7 490.64,-107.15" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:home&#45;&gt;:app:common:ui -->
         <g id="edge63" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:home&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1031.65,-217.29C1011.71,-207.25 985.65,-194.12 964.15,-183.3" />
             <polygon fill="black" stroke="black"
                 points="965.44,-180.03 954.93,-178.66 962.29,-186.28 965.44,-180.03" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:common:domain -->
+        <!-- :app:feature:home&#45;&gt;:common:domain -->
         <g id="edge64" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:common:domain</title>
+            <title>:app:feature:home&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1002.34,-221.79C940.5,-209.84 851.85,-191.12 839.84,-180 803.85,-146.64 783.26,-107.79 816.84,-72 842.01,-45.18 1351.89,-27.53 1560.77,-21.4" />
             <polygon fill="black" stroke="black"
                 points="1560.89,-24.9 1570.79,-21.11 1560.69,-17.9 1560.89,-24.9" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:common:navigation -->
+        <!-- :app:feature:home&#45;&gt;:common:navigation -->
         <g id="edge65" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:common:navigation</title>
+            <title>:app:feature:home&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1002.65,-221.67C992.37,-219.76 981.8,-217.81 971.84,-216 881.7,-199.59 851.59,-219.37 768.84,-180 736.3,-164.52 705.97,-135.89 686.77,-115.28" />
             <polygon fill="black" stroke="black"
                 points="689.3,-112.86 679.98,-107.82 684.12,-117.57 689.3,-112.86" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:common:resources -->
+        <!-- :app:feature:home&#45;&gt;:common:resources -->
         <g id="edge66" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:common:resources</title>
+            <title>:app:feature:home&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1070.8,-215.87C1082.2,-191.35 1103.26,-146.03 1116.64,-117.26" />
             <polygon fill="black" stroke="black"
                 points="1119.81,-118.73 1120.85,-108.19 1113.46,-115.78 1119.81,-118.73" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:home&#45;&gt;:common:viewmodel -->
         <g id="edge68" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:home&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1121.07,-221.35C1154.67,-213.03 1196.87,-199.75 1230.84,-180 1260.33,-162.86 1288.24,-135.23 1306.28,-115.3" />
             <polygon fill="black" stroke="black"
                 points="1308.91,-117.61 1312.93,-107.81 1303.67,-112.97 1308.91,-117.61" />
         </g>
-        <!-- :app&#45;feature:home&#45;&gt;:common:ui -->
+        <!-- :app:feature:home&#45;&gt;:common:ui -->
         <g id="edge67" class="edge">
-            <title>:app&#45;feature:home&#45;&gt;:common:ui</title>
+            <title>:app:feature:home&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M1121.86,-221.41C1182.58,-209.27 1272.95,-190.53 1306.84,-180 1347.2,-167.47 1355.32,-158.96 1394.84,-144 1429.48,-130.89 1468.99,-117.15 1499.04,-106.94" />
             <polygon fill="black" stroke="black"
                 points="1500.5,-110.15 1508.85,-103.63 1498.26,-103.52 1500.5,-110.15" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:settings&#45;&gt;:app:common:designsystem -->
         <g id="edge69" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:settings&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M608.87,-218.23C584.77,-209.09 554.98,-196.04 530.84,-180 503.36,-161.73 476.64,-134.93 458.95,-115.51" />
             <polygon fill="black" stroke="black"
                 points="461.45,-113.06 452.17,-107.95 456.24,-117.74 461.45,-113.06" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:settings&#45;&gt;:app:common:ui -->
         <g id="edge70" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:settings&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M705.74,-219.34C751.47,-207.52 817.5,-190.47 864.91,-178.22" />
             <polygon fill="black" stroke="black"
                 points="865.92,-181.58 874.73,-175.69 864.17,-174.8 865.92,-181.58" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:common:domain -->
+        <!-- :app:feature:settings&#45;&gt;:common:domain -->
         <g id="edge71" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:common:domain</title>
+            <title>:app:feature:settings&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M577.45,-224.18C452.3,-206.79 223.57,-161.75 309.84,-72 353.14,-26.96 1266.7,-20.19 1559.44,-19.18" />
             <polygon fill="black" stroke="black"
                 points="1559.6,-22.68 1569.59,-19.14 1559.58,-15.68 1559.6,-22.68" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:common:navigation -->
+        <!-- :app:feature:settings&#45;&gt;:common:navigation -->
         <g id="edge72" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:common:navigation</title>
+            <title>:app:feature:settings&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M595.99,-219.91C574.94,-212.01 553.21,-199.54 540.84,-180 532.28,-166.48 532.01,-157.34 540.84,-144 552.75,-126.02 572.12,-114.12 592.09,-106.25" />
             <polygon fill="black" stroke="black"
                 points="593.39,-109.5 601.6,-102.81 591,-102.92 593.39,-109.5" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:common:resources -->
+        <!-- :app:feature:settings&#45;&gt;:common:resources -->
         <g id="edge73" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:common:resources</title>
+            <title>:app:feature:settings&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M675.55,-216.32C704.51,-195.92 756.83,-161.89 806.84,-144 849.69,-128.67 965.54,-111.71 1045.91,-101.2" />
             <polygon fill="black" stroke="black"
                 points="1046.55,-104.65 1056.02,-99.89 1045.65,-97.71 1046.55,-104.65" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:settings&#45;&gt;:common:viewmodel -->
         <g id="edge75" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:settings&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M695.33,-218.11C721.41,-208.42 755.2,-194.84 783.84,-180 810.12,-166.39 811.87,-153.65 839.84,-144 1002.3,-87.94 1054.42,-130.14 1224.84,-108 1233.22,-106.91 1241.97,-105.65 1250.67,-104.31" />
             <polygon fill="black" stroke="black"
                 points="1251.49,-107.72 1260.83,-102.71 1250.41,-100.81 1251.49,-107.72" />
         </g>
-        <!-- :app&#45;feature:settings&#45;&gt;:common:ui -->
+        <!-- :app:feature:settings&#45;&gt;:common:ui -->
         <g id="edge74" class="edge">
-            <title>:app&#45;feature:settings&#45;&gt;:common:ui</title>
+            <title>:app:feature:settings&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M725.06,-223.17C796.9,-213.16 910.19,-196.78 1007.84,-180 1090.4,-165.81 1110.29,-158.2 1192.84,-144 1247.8,-134.54 1399.66,-112.3 1485.56,-99.85" />
             <polygon fill="black" stroke="black"
                 points="1486.31,-103.27 1495.7,-98.38 1485.3,-96.35 1486.31,-103.27" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:app&#45;common:designsystem -->
+        <!-- :app:feature:taskdetails&#45;&gt;:app:common:designsystem -->
         <g id="edge76" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:app&#45;common:designsystem</title>
+            <title>:app:feature:taskdetails&#45;&gt;:app:common:designsystem</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M122.17,-216.87C107.9,-208.11 92.77,-195.81 84.84,-180 77.67,-165.7 74.4,-156.12 84.84,-144 113.8,-110.37 220.86,-97.78 309.55,-93.21" />
             <polygon fill="black" stroke="black"
                 points="309.9,-96.7 319.72,-92.72 309.56,-89.71 309.9,-96.7" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:app&#45;common:ui -->
+        <!-- :app:feature:taskdetails&#45;&gt;:app:common:ui -->
         <g id="edge77" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:app&#45;common:ui</title>
+            <title>:app:feature:taskdetails&#45;&gt;:app:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M233.84,-222.45C251.88,-220.17 271.02,-217.88 288.84,-216 487.41,-195.03 721.63,-177.29 842.52,-168.64" />
             <polygon fill="black" stroke="black"
                 points="843.07,-172.11 852.8,-167.91 842.58,-165.13 843.07,-172.11" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:common:domain -->
+        <!-- :app:feature:taskdetails&#45;&gt;:common:domain -->
         <g id="edge78" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:common:domain</title>
+            <title>:app:feature:taskdetails&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M116.29,-217.27C100.42,-208.77 83.8,-196.56 74.84,-180 67.23,-165.93 65.72,-157.14 74.84,-144 127.06,-68.8 178.07,-89.98 267.84,-72 516.11,-22.27 1293.67,-18.51 1559.05,-18.73" />
             <polygon fill="black" stroke="black"
                 points="1559.4,-22.23 1569.41,-18.74 1559.41,-15.23 1559.4,-22.23" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:common:navigation -->
+        <!-- :app:feature:taskdetails&#45;&gt;:common:navigation -->
         <g id="edge79" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:common:navigation</title>
+            <title>:app:feature:taskdetails&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M140.17,-215.9C124.15,-196.32 104.08,-164.35 122.84,-144 156.32,-107.69 516.84,-114.14 565.84,-108 574.13,-106.96 582.78,-105.72 591.38,-104.4" />
             <polygon fill="black" stroke="black"
                 points="592.09,-107.83 601.41,-102.8 590.99,-100.91 592.09,-107.83" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:common:resources -->
+        <!-- :app:feature:taskdetails&#45;&gt;:common:resources -->
         <g id="edge80" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:common:resources</title>
+            <title>:app:feature:taskdetails&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M150.82,-215.87C146.06,-195.66 142.12,-162.48 160.84,-144 193.85,-111.42 948.63,-111.92 994.84,-108 1012.6,-106.49 1031.63,-104.38 1049.6,-102.16" />
             <polygon fill="black" stroke="black"
                 points="1050.27,-105.6 1059.76,-100.88 1049.4,-98.66 1050.27,-105.6" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:common:viewmodel -->
+        <!-- :app:feature:taskdetails&#45;&gt;:common:viewmodel -->
         <g id="edge82" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:common:viewmodel</title>
+            <title>:app:feature:taskdetails&#45;&gt;:common:viewmodel</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M182.72,-216.64C219.25,-195.38 287.32,-159.19 350.84,-144 539.9,-98.8 1031.49,-128.02 1224.84,-108 1233.76,-107.08 1243.08,-105.87 1252.31,-104.52" />
             <polygon fill="black" stroke="black"
                 points="1252.9,-107.97 1262.26,-103 1251.84,-101.05 1252.9,-107.97" />
         </g>
-        <!-- :app&#45;feature:taskdetails&#45;&gt;:common:ui -->
+        <!-- :app:feature:taskdetails&#45;&gt;:common:ui -->
         <g id="edge81" class="edge">
-            <title>:app&#45;feature:taskdetails&#45;&gt;:common:ui</title>
+            <title>:app:feature:taskdetails&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M214.31,-219.3C303.55,-199.02 479.36,-161.52 630.84,-144 983.52,-103.21 1075.39,-141.35 1428.84,-108 1447.88,-106.2 1468.55,-103.49 1487.19,-100.75" />
             <polygon fill="black" stroke="black"

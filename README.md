@@ -35,11 +35,6 @@
 | <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
 |--------------------------------------------------------------------------|
 
-### Wear OS
-
-| <img width="240" src="./screenshots/wearos/home.png" /> | <img width="240" src="./screenshots/wearos/tasks.png" /> | <img width="240" src="./screenshots/wearos/task.png" /> | <img width="240" src="./screenshots/wearos/delete_task_list.png" /> | <img width="240" src="./screenshots/wearos/delete_task.png" /> |
-|---------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------|---------------------------------------------------------------------|----------------------------------------------------------------|
-
 ### Desktop
 
 `./gradlew :desktop:run`
@@ -49,10 +44,15 @@
 
 ### iOS
 
-`./gradlew iosDeployIPhone13ProMaxDebug`
+`./gradlew assembleXCFramework`
 
 | <img width="240" src="./screenshots/ios/home_dark.png" /> | <img width="240" src="./screenshots/ios/add_task_dark.png" /> |
 |-----------------------------------------------------------|---------------------------------------------------------------|
+
+### Wear OS
+
+| <img width="240" src="./screenshots/wearos/home.png" /> | <img width="240" src="./screenshots/wearos/tasks.png" /> | <img width="240" src="./screenshots/wearos/task.png" /> | <img width="240" src="./screenshots/wearos/delete_task_list.png" /> | <img width="240" src="./screenshots/wearos/delete_task.png" /> |
+|---------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------|---------------------------------------------------------------------|----------------------------------------------------------------|
 
 <br/>
 

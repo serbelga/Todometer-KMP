@@ -5,15 +5,15 @@
         <polygon fill="white" stroke="transparent"
             points="-4,4 -4,-378 1201.36,-378 1201.36,4 -4,4" />
         <text text-anchor="middle" x="598.68" y="-338.5" font-family="Times,serif"
-            font-size="35.00">wear&#45;app
+            font-size="35.00">wearapp&#45;wearos
         </text>
-        <!-- :wear&#45;app -->
+        <!-- :wearapp&#45;wearos -->
         <g id="node1" class="node">
-            <title>:wear&#45;app</title>
+            <title>:wearapp&#45;wearos</title>
             <polygon fill="#66bb6a" stroke="black"
                 points="529.67,-324 457.74,-324 457.74,-288 529.67,-288 529.67,-324" />
             <text text-anchor="middle" x="493.71" y="-301.8" font-family="Times,serif"
-                font-size="14.00">:wear&#45;app
+                font-size="14.00">:wearapp&#45;wearos
             </text>
         </g>
         <!-- :common:android -->
@@ -24,9 +24,9 @@
                 font-size="14.00">:common:android
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:android -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:android -->
         <g id="edge1" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:android</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:android</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M457.65,-297.38C402.8,-285.77 297.49,-263.5 228.69,-248.95" />
             <polygon fill="black" stroke="black"
@@ -40,9 +40,9 @@
                 font-size="14.00">:common:core
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:core -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:core -->
         <g id="edge2" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:core</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:core</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M462.39,-287.88C444.46,-278.07 421.84,-265.7 402.99,-255.39" />
             <polygon fill="black" stroke="black"
@@ -56,9 +56,9 @@
                 font-size="14.00">:common:ui
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:ui -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:ui -->
         <g id="edge7" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:ui</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:ui</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M457.4,-301.14C414.95,-295.4 343.63,-281.9 289.71,-252 269.36,-240.72 271.67,-227.94 251.71,-216 233.13,-204.89 182.58,-188.91 143.22,-177.41" />
             <polygon fill="black" stroke="black"
@@ -72,9 +72,9 @@
                 font-size="14.00">:common:domain
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:domain -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:domain -->
         <g id="edge4" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:domain</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:domain</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M496.72,-287.88C503.19,-245.12 513.46,-132.75 455.71,-72 433.39,-48.53 354.43,-34.47 291.91,-26.79" />
             <polygon fill="black" stroke="black"
@@ -88,9 +88,9 @@
                 font-size="14.00">:common:designsystem&#45;resources
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:designsystem&#45;resources -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:designsystem&#45;resources -->
         <g id="edge3" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:designsystem&#45;resources</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:designsystem&#45;resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M529.76,-290.15C554.52,-279.96 587.69,-266.3 614.82,-255.13" />
             <polygon fill="black" stroke="black"
@@ -104,9 +104,9 @@
                 font-size="14.00">:common:navigation
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:navigation -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:navigation -->
         <g id="edge5" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:navigation</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:navigation</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M529.82,-299.09C589.25,-289.36 711.37,-269.31 814.71,-252 822.34,-250.72 830.3,-249.38 838.24,-248.04" />
             <polygon fill="black" stroke="black"
@@ -120,9 +120,9 @@
                 font-size="14.00">:common:resources
             </text>
         </g>
-        <!-- :wear&#45;app&#45;&gt;:common:resources -->
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:resources -->
         <g id="edge6" class="edge">
-            <title>:wear&#45;app&#45;&gt;:common:resources</title>
+            <title>:wearapp&#45;wearos&#45;&gt;:common:resources</title>
             <path fill="none" stroke="black" stroke-dasharray="1,5"
                 d="M529.82,-302.25C614.67,-295.59 833.25,-277.26 1014.71,-252 1022.57,-250.9 1030.78,-249.64 1038.94,-248.3" />
             <polygon fill="black" stroke="black"
