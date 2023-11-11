@@ -22,24 +22,24 @@
 
 ### Android
 
-| <img width="300" src="./screenshots/android/home.png" /> | <img width="300" src="./screenshots/android/add_task.png" /> | <img width="300" src="./screenshots/android/delete_task.gif" /> |
+| <img width="240" src="./screenshots/android/home.png" /> | <img width="240" src="./screenshots/android/add_task.png" /> | <img width="240" src="./screenshots/android/delete_task.gif" /> |
 |----------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------|
 
 ### Material Design 3 Dynamic color
 
-| <img width="300" src="./screenshots/android/drawer_dark_dynamic_color.png" /> | <img width="300" src="./screenshots/android/home_dark_dynamic_color.png" /> | <img width="300" src="./screenshots/android/home_light_dynamic_color.png" /> | <img width="300" src="./screenshots/android/add_task_dark_dynamic_color.png" /> |
+| <img width="240" src="./screenshots/android/drawer_dark_dynamic_color.png" /> | <img width="240" src="./screenshots/android/home_dark_dynamic_color.png" /> | <img width="240" src="./screenshots/android/home_light_dynamic_color.png" /> | <img width="240" src="./screenshots/android/add_task_dark_dynamic_color.png" /> |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 
 ### Glance App Widget - Material Design 3 Dynamic color
 
-| <img width="300" src="./screenshots/android/widget_dynamic_color.png" /> |
+| <img width="240" src="./screenshots/android/widget_dynamic_color.png" /> |
 |--------------------------------------------------------------------------|
 
 ### Desktop
 
 `./gradlew :app-desktop:run`
 
-| <img width="560" src="./screenshots/desktop/home.png" /> | <img width="560" src="./screenshots/desktop/add_task.png" /> |
+| <img width="240" src="./screenshots/desktop/home.png" /> | <img width="240" src="./screenshots/desktop/add_task.png" /> |
 |----------------------------------------------------------|--------------------------------------------------------------|
 
 ### iOS
@@ -82,13 +82,13 @@
 * [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [spotless](https://github.com/diffplug/spotless)
 
-<br/>
-
 ## Images
 
 - Illustrations: https://undraw.co/illustrations
 - Icons: https://fonts.google.com/icons
 - Logotype, Isotype: Made with Figma
+
+<br/>
 
 ## License
 
