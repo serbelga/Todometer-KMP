@@ -13,7 +13,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - name: Checkout the code
@@ -26,8 +26,8 @@ jobs:
         cache: gradle  
     - name: Create google-services.json in app-android
       run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app-android/google-services.json
-    - name: Create google-services.json in wear-app
-      run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > wear-app/google-services.json
+    - name: Create google-services.json in wearapp-wearos
+      run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > wearapp-wearos/google-services.json
     - name: Run spotlessCheck
       run: ./gradlew spotlessCheck
     - name: Run Unit tests
@@ -36,7 +36,5 @@ jobs:
       run:  ./gradlew app-android:assembleDebug
     - name: Build app-desktop
       run:  ./gradlew app-desktop:assemble
-    - name: Build app-ios
-      run:  ./gradlew app-ios:assemble
-    - name: Build wear-app
-      run:  ./gradlew wear-app:assembleDebug
+    - name: Build wearapp-wearos
+      run:  ./gradlew wearapp-wearos:assembleDebug

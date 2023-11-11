@@ -1,0 +1,236 @@
+<svg width="1674px" height="531px" viewBox="0.00 0.00 1205.36 382.00"
+    xmlns="http://www.w3.org/2000/svg">
+    <g id="graph0" class="graph"
+        transform="scale(1.0007919936640506 1.0007919936640506) rotate(0.0) translate(4.0 378.0)">
+        <polygon fill="white" stroke="transparent"
+            points="-4,4 -4,-378 1201.36,-378 1201.36,4 -4,4" />
+        <text text-anchor="middle" x="598.68" y="-338.5" font-family="Times,serif"
+            font-size="35.00">wearapp&#45;wearos
+        </text>
+        <!-- :wearapp&#45;wearos -->
+        <g id="node1" class="node">
+            <title>:wearapp&#45;wearos</title>
+            <polygon fill="#66bb6a" stroke="black"
+                points="529.67,-324 457.74,-324 457.74,-288 529.67,-288 529.67,-324" />
+            <text text-anchor="middle" x="493.71" y="-301.8" font-family="Times,serif"
+                font-size="14.00">:wearapp&#45;wearos
+            </text>
+        </g>
+        <!-- :common:android -->
+        <g id="node2" class="node">
+            <title>:common:android</title>
+            <ellipse fill="#66bb6a" stroke="black" cx="162.71" cy="-234" rx="79.9" ry="18" />
+            <text text-anchor="middle" x="162.71" y="-229.8" font-family="Times,serif"
+                font-size="14.00">:common:android
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:android -->
+        <g id="edge1" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:android</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M457.65,-297.38C402.8,-285.77 297.49,-263.5 228.69,-248.95" />
+            <polygon fill="black" stroke="black"
+                points="229.32,-245.51 218.81,-246.87 227.87,-252.36 229.32,-245.51" />
+        </g>
+        <!-- :common:core -->
+        <g id="node3" class="node">
+            <title>:common:core</title>
+            <ellipse fill="#A280FF" stroke="black" cx="365.71" cy="-234" rx="66.63" ry="18" />
+            <text text-anchor="middle" x="365.71" y="-229.8" font-family="Times,serif"
+                font-size="14.00">:common:core
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:core -->
+        <g id="edge2" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:core</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M462.39,-287.88C444.46,-278.07 421.84,-265.7 402.99,-255.39" />
+            <polygon fill="black" stroke="black"
+                points="404.53,-252.24 394.07,-250.51 401.17,-258.38 404.53,-252.24" />
+        </g>
+        <!-- :common:ui -->
+        <g id="node4" class="node">
+            <title>:common:ui</title>
+            <ellipse fill="#A280FF" stroke="black" cx="91.71" cy="-162" rx="57.93" ry="18" />
+            <text text-anchor="middle" x="91.71" y="-157.8" font-family="Times,serif"
+                font-size="14.00">:common:ui
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:ui -->
+        <g id="edge7" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:ui</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M457.4,-301.14C414.95,-295.4 343.63,-281.9 289.71,-252 269.36,-240.72 271.67,-227.94 251.71,-216 233.13,-204.89 182.58,-188.91 143.22,-177.41" />
+            <polygon fill="black" stroke="black"
+                points="144.06,-174.01 133.48,-174.59 142.11,-180.74 144.06,-174.01" />
+        </g>
+        <!-- :common:domain -->
+        <g id="node5" class="node">
+            <title>:common:domain</title>
+            <ellipse fill="#A280FF" stroke="black" cx="209.71" cy="-18" rx="79.34" ry="18" />
+            <text text-anchor="middle" x="209.71" y="-13.8" font-family="Times,serif"
+                font-size="14.00">:common:domain
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:domain -->
+        <g id="edge4" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M496.72,-287.88C503.19,-245.12 513.46,-132.75 455.71,-72 433.39,-48.53 354.43,-34.47 291.91,-26.79" />
+            <polygon fill="black" stroke="black"
+                points="291.97,-23.27 281.63,-25.57 291.15,-30.23 291.97,-23.27" />
+        </g>
+        <!-- :common:designsystem&#45;resources -->
+        <g id="node9" class="node">
+            <title>:common:designsystem&#45;resources</title>
+            <ellipse fill="#A280FF" stroke="black" cx="663.71" cy="-234" rx="141.81" ry="18" />
+            <text text-anchor="middle" x="663.71" y="-229.8" font-family="Times,serif"
+                font-size="14.00">:common:designsystem&#45;resources
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:designsystem&#45;resources -->
+        <g id="edge3" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:designsystem&#45;resources</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M529.76,-290.15C554.52,-279.96 587.69,-266.3 614.82,-255.13" />
+            <polygon fill="black" stroke="black"
+                points="616.23,-258.33 624.14,-251.29 613.56,-251.86 616.23,-258.33" />
+        </g>
+        <!-- :common:navigation -->
+        <g id="node10" class="node">
+            <title>:common:navigation</title>
+            <ellipse fill="#A280FF" stroke="black" cx="914.71" cy="-234" rx="90.93" ry="18" />
+            <text text-anchor="middle" x="914.71" y="-229.8" font-family="Times,serif"
+                font-size="14.00">:common:navigation
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:navigation -->
+        <g id="edge5" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:navigation</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M529.82,-299.09C589.25,-289.36 711.37,-269.31 814.71,-252 822.34,-250.72 830.3,-249.38 838.24,-248.04" />
+            <polygon fill="black" stroke="black"
+                points="839.01,-251.46 848.28,-246.34 837.84,-244.56 839.01,-251.46" />
+        </g>
+        <!-- :common:resources -->
+        <g id="node11" class="node">
+            <title>:common:resources</title>
+            <ellipse fill="#A280FF" stroke="black" cx="1110.71" cy="-234" rx="86.82" ry="18" />
+            <text text-anchor="middle" x="1110.71" y="-229.8" font-family="Times,serif"
+                font-size="14.00">:common:resources
+            </text>
+        </g>
+        <!-- :wearapp&#45;wearos&#45;&gt;:common:resources -->
+        <g id="edge6" class="edge">
+            <title>:wearapp&#45;wearos&#45;&gt;:common:resources</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M529.82,-302.25C614.67,-295.59 833.25,-277.26 1014.71,-252 1022.57,-250.9 1030.78,-249.64 1038.94,-248.3" />
+            <polygon fill="black" stroke="black"
+                points="1039.56,-251.75 1048.84,-246.65 1038.4,-244.85 1039.56,-251.75" />
+        </g>
+        <!-- :common:core&#45;&gt;:common:ui -->
+        <g id="edge8" class="edge">
+            <title>:common:core&#45;&gt;:common:ui</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M318.91,-221.05C270.62,-208.71 195.42,-189.5 144.9,-176.59" />
+            <polygon fill="black" stroke="black"
+                points="145.69,-173.18 135.14,-174.1 143.96,-179.96 145.69,-173.18" />
+        </g>
+        <!-- :common:core&#45;&gt;:common:domain -->
+        <g id="edge11" class="edge">
+            <title>:common:core&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M383.63,-216.46C415,-185.54 473.16,-117.95 436.71,-72 418.52,-49.08 348.48,-35.15 290.95,-27.36" />
+            <polygon fill="black" stroke="black"
+                points="291.11,-23.85 280.74,-26.02 290.2,-30.79 291.11,-23.85" />
+        </g>
+        <!-- :common:data -->
+        <g id="node6" class="node">
+            <title>:common:data</title>
+            <ellipse fill="#A280FF" stroke="black" cx="271.71" cy="-162" rx="66.07" ry="18" />
+            <text text-anchor="middle" x="271.71" y="-157.8" font-family="Times,serif"
+                font-size="14.00">:common:data
+            </text>
+        </g>
+        <!-- :common:core&#45;&gt;:common:data -->
+        <g id="edge9" class="edge">
+            <title>:common:core&#45;&gt;:common:data</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M343.9,-216.76C331.33,-207.4 315.33,-195.49 301.6,-185.26" />
+            <polygon fill="black" stroke="black"
+                points="303.5,-182.31 293.39,-179.15 299.32,-187.93 303.5,-182.31" />
+        </g>
+        <!-- :common:database -->
+        <g id="node7" class="node">
+            <title>:common:database</title>
+            <ellipse fill="#A280FF" stroke="black" cx="98.71" cy="-90" rx="83.39" ry="18" />
+            <text text-anchor="middle" x="98.71" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:database
+            </text>
+        </g>
+        <!-- :common:core&#45;&gt;:common:database -->
+        <g id="edge10" class="edge">
+            <title>:common:core&#45;&gt;:common:database</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M312.89,-222.94C278.21,-214.82 232.76,-201.18 196.71,-180 176.65,-168.22 175.87,-159.7 158.71,-144 147.92,-134.13 135.87,-123.43 125.41,-114.24" />
+            <polygon fill="black" stroke="black"
+                points="127.6,-111.5 117.77,-107.54 122.99,-116.76 127.6,-111.5" />
+        </g>
+        <!-- :common:preferences -->
+        <g id="node8" class="node">
+            <title>:common:preferences</title>
+            <ellipse fill="#A280FF" stroke="black" cx="332.71" cy="-90" rx="94.88" ry="18" />
+            <text text-anchor="middle" x="332.71" y="-85.8" font-family="Times,serif"
+                font-size="14.00">:common:preferences
+            </text>
+        </g>
+        <!-- :common:core&#45;&gt;:common:preferences -->
+        <g id="edge12" class="edge">
+            <title>:common:core&#45;&gt;:common:preferences</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M362.3,-215.88C358.68,-197.92 352.65,-168.9 346.71,-144 344.69,-135.54 342.32,-126.36 340.12,-118.06" />
+            <polygon fill="black" stroke="black"
+                points="343.43,-116.88 337.45,-108.13 336.67,-118.7 343.43,-116.88" />
+        </g>
+        <!-- :common:ui&#45;&gt;:common:domain -->
+        <g id="edge13" class="edge">
+            <title>:common:ui&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M54.68,-147.89C36.79,-139.46 17,-126.55 6.71,-108 -1.06,-94.01 -3.08,-84.66 6.71,-72 22.36,-51.73 82.07,-37.74 132.71,-29.24" />
+            <polygon fill="black" stroke="black"
+                points="133.4,-32.68 142.7,-27.62 132.27,-25.77 133.4,-32.68" />
+        </g>
+        <!-- :common:data&#45;&gt;:common:domain -->
+        <g id="edge14" class="edge">
+            <title>:common:data&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M254.68,-144.3C245.66,-134.52 235.14,-121.47 228.71,-108 219.36,-88.46 214.58,-64.32 212.15,-46.12" />
+            <polygon fill="black" stroke="black"
+                points="215.62,-45.68 210.97,-36.16 208.67,-46.51 215.62,-45.68" />
+        </g>
+        <!-- :common:data&#45;&gt;:common:database -->
+        <g id="edge15" class="edge">
+            <title>:common:data&#45;&gt;:common:database</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M236.28,-146.67C210.08,-136.06 174.14,-121.52 145.56,-109.96" />
+            <polygon fill="black" stroke="black"
+                points="146.76,-106.67 136.18,-106.16 144.14,-113.16 146.76,-106.67" />
+        </g>
+        <!-- :common:data&#45;&gt;:common:preferences -->
+        <g id="edge16" class="edge">
+            <title>:common:data&#45;&gt;:common:preferences</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M286.16,-144.41C293.65,-135.82 302.94,-125.16 311.24,-115.63" />
+            <polygon fill="black" stroke="black"
+                points="314,-117.79 317.93,-107.96 308.72,-113.2 314,-117.79" />
+        </g>
+        <!-- :common:database&#45;&gt;:common:domain -->
+        <g id="edge17" class="edge">
+            <title>:common:database&#45;&gt;:common:domain</title>
+            <path fill="none" stroke="black" stroke-dasharray="1,5"
+                d="M124.45,-72.76C139.58,-63.22 158.9,-51.04 175.32,-40.68" />
+            <polygon fill="black" stroke="black"
+                points="177.51,-43.44 184.1,-35.15 173.77,-37.52 177.51,-43.44" />
+        </g>
+    </g>
+</svg>

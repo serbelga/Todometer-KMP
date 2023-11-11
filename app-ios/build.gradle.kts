@@ -7,8 +7,6 @@ plugins {
     id("todometer.dependency-graph-generator")
 }
 
-group = "dev.sergiobelda.todometer.app.ios"
-
 kotlin {
     val xcf = XCFramework()
     listOf(
@@ -26,29 +24,20 @@ kotlin {
     sourceSets {
         val iosMain by creating {
             dependencies {
-                implementation(projects.appCommon.designsystem)
-                implementation(projects.appCommon.ui)
-                implementation(projects.appFeature.about)
-                implementation(projects.appFeature.addtask)
-                implementation(projects.appFeature.addtasklist)
-                implementation(projects.appFeature.edittask)
-                implementation(projects.appFeature.edittasklist)
-                implementation(projects.appFeature.home)
-                implementation(projects.appFeature.settings)
-                implementation(projects.appFeature.taskdetails)
+                implementation(projects.app.common.designsystem)
+                implementation(projects.app.common.ui)
+                implementation(projects.app.feature.about)
+                implementation(projects.app.feature.addtask)
+                implementation(projects.app.feature.addtasklist)
+                implementation(projects.app.feature.edittask)
+                implementation(projects.app.feature.edittasklist)
+                implementation(projects.app.feature.home)
+                implementation(projects.app.feature.settings)
+                implementation(projects.app.feature.taskdetails)
                 implementation(projects.common.core)
                 implementation(projects.common.domain)
                 implementation(projects.common.ui)
             }
-        }
-        val iosX64Main by getting {
-            dependsOn(iosMain)
-        }
-        val iosArm64Main by getting {
-            dependsOn(iosMain)
-        }
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
         }
 
         all {
