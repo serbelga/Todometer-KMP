@@ -10,8 +10,7 @@ import app_ios
 
 struct ContentView: View {
     var body: some View {
-        ComposeView()
-            .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+        ComposeView().ignoresSafeArea(.all) // Compose has own keyboard handler
     }
 }
 

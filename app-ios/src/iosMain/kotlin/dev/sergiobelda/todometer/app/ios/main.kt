@@ -16,17 +16,11 @@
 
 package dev.sergiobelda.todometer.app.ios
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.ComposeUIViewController
 import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutDestination
@@ -87,10 +81,7 @@ fun MainViewController(): UIViewController = ComposeUIViewController {
         TodometerAppTheme(darkTheme) {
             NavigationHost(
                 navigationController,
-                startDestination = HomeDestination.route,
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
-                    .windowInsetsPadding(WindowInsets.statusBars)
+                startDestination = HomeDestination.route
             ) {
                 homeComposableNode(navigationController)
                 taskDetailsComposableNode(navigationController)
