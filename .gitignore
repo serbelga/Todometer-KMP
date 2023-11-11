@@ -16,6 +16,6 @@ local.properties
 /.idea/
 /app-android/release/*
 /app-android/google-services.json
-/wear-app/google-services.json
-/wear-app/release/*
+/wearapp-wearos/google-services.json
+/wearapp-wearos/release/*
 todometer_preferences.preferences_pb
