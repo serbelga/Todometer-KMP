@@ -135,7 +135,7 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }

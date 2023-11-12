@@ -1,14 +1,11 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-
 plugins {
-    kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.kotlinMultiplatform)
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
 }
 
 kotlin {
-    val xcf = XCFramework()
     listOf(
         iosX64(),
         iosArm64(),
@@ -17,7 +14,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "app-ios"
             isStatic = true
-            xcf.add(this)
         }
     }
 

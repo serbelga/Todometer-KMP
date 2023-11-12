@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform")
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     id("todometer.common.library.android")
     id("todometer.dependency-graph-generator")

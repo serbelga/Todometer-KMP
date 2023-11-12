@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidApplication)
-    id("com.google.android.gms.oss-licenses-plugin")
+    alias(libs.plugins.composeMultiplatform)
     kotlin("android")
+    id("com.google.android.gms.oss-licenses-plugin")
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
 }
@@ -21,8 +21,8 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
-        versionCode = 1272400
-        versionName = "android-2.7.2"
+        versionCode = 1280101
+        versionName = "android-2.8.0-alpha01"
     }
 
     buildTypes {

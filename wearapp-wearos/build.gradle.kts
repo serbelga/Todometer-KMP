@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.androidApplication)
+    alias(libs.plugins.composeMultiplatform)
     kotlin("android")
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
@@ -20,8 +20,8 @@ android {
         minSdk = libs.versions.androidWearMinSdk.get().toInt()
         targetSdk = libs.versions.androidWearTargetSdk.get().toInt()
 
-        versionCode = 4160205
-        versionName = "wearos-1.6.0-beta05"
+        versionCode = 4170101
+        versionName = "wearos-1.7.0-alpha01"
     }
 
     buildFeatures {

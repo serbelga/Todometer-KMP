@@ -7,104 +7,77 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42A4D1482AFE1BA900D58FEE /* TodometerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4D1472AFE1BA900D58FEE /* TodometerApp.swift */; };
-		42A4D14A2AFE1BA900D58FEE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4D1492AFE1BA900D58FEE /* ContentView.swift */; };
-		42A4D14C2AFE1BAA00D58FEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A4D14B2AFE1BAA00D58FEE /* Assets.xcassets */; };
-		42A4D14F2AFE1BAA00D58FEE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A4D14E2AFE1BAA00D58FEE /* Preview Assets.xcassets */; };
-		42A4D1572AFE1C2900D58FEE /* app_ios.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A4D1562AFE1C2900D58FEE /* app_ios.xcframework */; };
-		42A4D1582AFE1C2900D58FEE /* app_ios.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42A4D1562AFE1C2900D58FEE /* app_ios.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42C700D52B01013800346845 /* TodometerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C700D42B01013800346845 /* TodometerApp.swift */; };
+		42C700D72B01013800346845 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C700D62B01013800346845 /* ContentView.swift */; };
+		42C700D92B01013800346845 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C700D82B01013800346845 /* Assets.xcassets */; };
+		42C700DC2B01013800346845 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C700DB2B01013800346845 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		42A4D1592AFE1C2900D58FEE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				42A4D1582AFE1C2900D58FEE /* app_ios.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		42A4D1442AFE1BA900D58FEE /* Todometer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todometer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		42A4D1472AFE1BA900D58FEE /* TodometerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodometerApp.swift; sourceTree = "<group>"; };
-		42A4D1492AFE1BA900D58FEE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		42A4D14B2AFE1BAA00D58FEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		42A4D14E2AFE1BAA00D58FEE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		42A4D1562AFE1C2900D58FEE /* app_ios.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = app_ios.xcframework; path = ../build/XCFrameworks/debug/app_ios.xcframework; sourceTree = "<group>"; };
+		42C700D12B01013800346845 /* Todometer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todometer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42C700D42B01013800346845 /* TodometerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodometerApp.swift; sourceTree = "<group>"; };
+		42C700D62B01013800346845 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		42C700D82B01013800346845 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		42C700DB2B01013800346845 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		42A4D1412AFE1BA900D58FEE /* Frameworks */ = {
+		42C700CE2B01013800346845 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42A4D1572AFE1C2900D58FEE /* app_ios.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		42A4D13B2AFE1BA900D58FEE = {
+		42C700C82B01013800346845 = {
 			isa = PBXGroup;
 			children = (
-				42A4D1462AFE1BA900D58FEE /* Todometer */,
-				42A4D1452AFE1BA900D58FEE /* Products */,
-				42A4D1552AFE1C2900D58FEE /* Frameworks */,
+				42C700D32B01013800346845 /* Todometer */,
+				42C700D22B01013800346845 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		42A4D1452AFE1BA900D58FEE /* Products */ = {
+		42C700D22B01013800346845 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				42A4D1442AFE1BA900D58FEE /* Todometer.app */,
+				42C700D12B01013800346845 /* Todometer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		42A4D1462AFE1BA900D58FEE /* Todometer */ = {
+		42C700D32B01013800346845 /* Todometer */ = {
 			isa = PBXGroup;
 			children = (
-				42A4D1472AFE1BA900D58FEE /* TodometerApp.swift */,
-				42A4D1492AFE1BA900D58FEE /* ContentView.swift */,
-				42A4D14B2AFE1BAA00D58FEE /* Assets.xcassets */,
-				42A4D14D2AFE1BAA00D58FEE /* Preview Content */,
+				42C700D42B01013800346845 /* TodometerApp.swift */,
+				42C700D62B01013800346845 /* ContentView.swift */,
+				42C700D82B01013800346845 /* Assets.xcassets */,
+				42C700DA2B01013800346845 /* Preview Content */,
 			);
 			path = Todometer;
 			sourceTree = "<group>";
 		};
-		42A4D14D2AFE1BAA00D58FEE /* Preview Content */ = {
+		42C700DA2B01013800346845 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				42A4D14E2AFE1BAA00D58FEE /* Preview Assets.xcassets */,
+				42C700DB2B01013800346845 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		42A4D1552AFE1C2900D58FEE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				42A4D1562AFE1C2900D58FEE /* app_ios.xcframework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		42A4D1432AFE1BA900D58FEE /* Todometer */ = {
+		42C700D02B01013800346845 /* Todometer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42A4D1522AFE1BAA00D58FEE /* Build configuration list for PBXNativeTarget "Todometer" */;
+			buildConfigurationList = 42C700DF2B01013800346845 /* Build configuration list for PBXNativeTarget "Todometer" */;
 			buildPhases = (
-				42A4D1402AFE1BA900D58FEE /* Sources */,
-				42A4D1412AFE1BA900D58FEE /* Frameworks */,
-				42A4D1422AFE1BA900D58FEE /* Resources */,
-				42A4D1592AFE1C2900D58FEE /* Embed Frameworks */,
+				4221CA792B0101E60007FC33 /* ShellScript */,
+				42C700CD2B01013800346845 /* Sources */,
+				42C700CE2B01013800346845 /* Frameworks */,
+				42C700CF2B01013800346845 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -112,25 +85,25 @@
 			);
 			name = Todometer;
 			productName = Todometer;
-			productReference = 42A4D1442AFE1BA900D58FEE /* Todometer.app */;
+			productReference = 42C700D12B01013800346845 /* Todometer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		42A4D13C2AFE1BA900D58FEE /* Project object */ = {
+		42C700C92B01013800346845 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					42A4D1432AFE1BA900D58FEE = {
+					42C700D02B01013800346845 = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
 			};
-			buildConfigurationList = 42A4D13F2AFE1BA900D58FEE /* Build configuration list for PBXProject "Todometer" */;
+			buildConfigurationList = 42C700CC2B01013800346845 /* Build configuration list for PBXProject "Todometer" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -138,42 +111,62 @@
 				en,
 				Base,
 			);
-			mainGroup = 42A4D13B2AFE1BA900D58FEE;
-			productRefGroup = 42A4D1452AFE1BA900D58FEE /* Products */;
+			mainGroup = 42C700C82B01013800346845;
+			productRefGroup = 42C700D22B01013800346845 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				42A4D1432AFE1BA900D58FEE /* Todometer */,
+				42C700D02B01013800346845 /* Todometer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		42A4D1422AFE1BA900D58FEE /* Resources */ = {
+		42C700CF2B01013800346845 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42A4D14F2AFE1BAA00D58FEE /* Preview Assets.xcassets in Resources */,
-				42A4D14C2AFE1BAA00D58FEE /* Assets.xcassets in Resources */,
+				42C700DC2B01013800346845 /* Preview Assets.xcassets in Resources */,
+				42C700D92B01013800346845 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4221CA792B0101E60007FC33 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :app-ios:embedAndSignAppleFrameworkForXcode\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		42A4D1402AFE1BA900D58FEE /* Sources */ = {
+		42C700CD2B01013800346845 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42A4D14A2AFE1BA900D58FEE /* ContentView.swift in Sources */,
-				42A4D1482AFE1BA900D58FEE /* TodometerApp.swift in Sources */,
+				42C700D72B01013800346845 /* ContentView.swift in Sources */,
+				42C700D52B01013800346845 /* TodometerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		42A4D1502AFE1BAA00D58FEE /* Debug */ = {
+		42C700DD2B01013800346845 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -233,7 +226,7 @@
 			};
 			name = Debug;
 		};
-		42A4D1512AFE1BAA00D58FEE /* Release */ = {
+		42C700DE2B01013800346845 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -287,7 +280,7 @@
 			};
 			name = Release;
 		};
-		42A4D1532AFE1BAA00D58FEE /* Debug */ = {
+		42C700E02B01013800346845 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -297,6 +290,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Todometer/Preview Content\"";
 				DEVELOPMENT_TEAM = 9B3DS6JXG9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../app-ios/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -308,7 +302,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-lsqlite3";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"app_ios",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.app.ios.Todometer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -317,16 +316,17 @@
 			};
 			name = Debug;
 		};
-		42A4D1542AFE1BAA00D58FEE /* Release */ = {
+		42C700E12B01013800346845 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "1.0.0-beta01";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Todometer/Preview Content\"";
 				DEVELOPMENT_TEAM = 9B3DS6JXG9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../app-ios/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -338,7 +338,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-lsqlite3";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"app_ios",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.app.ios.Todometer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -350,25 +355,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		42A4D13F2AFE1BA900D58FEE /* Build configuration list for PBXProject "Todometer" */ = {
+		42C700CC2B01013800346845 /* Build configuration list for PBXProject "Todometer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				42A4D1502AFE1BAA00D58FEE /* Debug */,
-				42A4D1512AFE1BAA00D58FEE /* Release */,
+				42C700DD2B01013800346845 /* Debug */,
+				42C700DE2B01013800346845 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42A4D1522AFE1BAA00D58FEE /* Build configuration list for PBXNativeTarget "Todometer" */ = {
+		42C700DF2B01013800346845 /* Build configuration list for PBXNativeTarget "Todometer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				42A4D1532AFE1BAA00D58FEE /* Debug */,
-				42A4D1542AFE1BAA00D58FEE /* Release */,
+				42C700E02B01013800346845 /* Debug */,
+				42C700E12B01013800346845 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 42A4D13C2AFE1BA900D58FEE /* Project object */;
+	rootObject = 42C700C92B01013800346845 /* Project object */;
 }

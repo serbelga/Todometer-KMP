@@ -1,8 +1,8 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    kotlin("multiplatform")
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.kotlinMultiplatform)
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
 }
@@ -42,7 +42,6 @@ kotlin {
                 implementation(compose.desktop.currentOs)
             }
         }
-        val jvmTest by getting
     }
 }
 
