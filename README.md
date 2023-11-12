@@ -44,7 +44,7 @@
 
 ### iOS
 
-`./gradlew assembleXCFramework`
+Open `app-ios/Todometer.xcodeproj` in XCode or run it in Android Studio using Kotlin Multiplatform Mobile plugin.
 
 | <img width="240" src="./screenshots/ios/home_dark.png" /> | <img width="240" src="./screenshots/ios/add_task_dark.png" /> |
 |-----------------------------------------------------------|---------------------------------------------------------------|
