@@ -7,9 +7,6 @@ plugins {
     id("todometer.spotless")
 }
 
-group = "dev.sergiobelda.todometer.app.common.ui"
-version = "1.0"
-
 kotlin {
     androidTarget()
     jvm("desktop")

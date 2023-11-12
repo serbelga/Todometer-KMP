@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "dev.sergiobelda.todometer.buildlogic.imagevectorgenerator"
+group = "dev.sergiobelda.todometer.buildlogic"
 
 java {
     toolchain {
