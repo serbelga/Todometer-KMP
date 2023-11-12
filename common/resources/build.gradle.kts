@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform")
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.ksp)
     id("todometer.common.library.android")
