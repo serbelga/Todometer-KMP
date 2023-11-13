@@ -167,7 +167,7 @@ internal fun TaskListTasksScreen(
                             true
                         }
                         .focusRequester(focusRequester)
-                        .focusable(),
+                        .focusable()
                 ) {
                     when {
                         taskListTasksUiState.isLoadingTaskList -> {

@@ -100,7 +100,7 @@ internal fun HomeScreen(
                     true
                 }
                 .focusRequester(focusRequester)
-                .focusable(),
+                .focusable()
         ) {
             item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }

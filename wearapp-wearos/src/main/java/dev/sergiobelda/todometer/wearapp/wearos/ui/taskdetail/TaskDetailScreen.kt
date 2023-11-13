@@ -120,7 +120,7 @@ internal fun TaskDetailScreen(
                             true
                         }
                         .focusRequester(focusRequester)
-                        .focusable(),
+                        .focusable()
                 ) {
                     when {
                         taskDetailUiState.isLoading -> {
