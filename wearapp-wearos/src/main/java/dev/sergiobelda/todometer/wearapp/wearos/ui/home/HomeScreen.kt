@@ -23,6 +23,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -32,22 +33,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rememberActiveFocusRequester
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
@@ -65,20 +65,21 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgres
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
     homeViewModel: HomeViewModel = getViewModel()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val focusRequester = remember { FocusRequester() }
-    val coroutineScope = rememberCoroutineScope()
     val homeUiState = homeViewModel.homeUiState
 
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
     ) {
-        LaunchedEffect(Unit) { focusRequester.requestFocus() }
+        val focusRequester = rememberActiveFocusRequester()
+        val coroutineScope = rememberCoroutineScope()
+
         ScalingLazyColumn(
             autoCentering = AutoCenteringParams(itemIndex = 1),
             contentPadding = PaddingValues(
@@ -93,11 +94,13 @@ internal fun HomeScreen(
                 .onRotaryScrollEvent {
                     coroutineScope.launch {
                         scalingLazyListState.scrollBy(it.verticalScrollPixels)
+
+                        scalingLazyListState.animateScrollBy(0f)
                     }
                     true
                 }
                 .focusRequester(focusRequester)
-                .focusable()
+                .focusable(),
         ) {
             item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }

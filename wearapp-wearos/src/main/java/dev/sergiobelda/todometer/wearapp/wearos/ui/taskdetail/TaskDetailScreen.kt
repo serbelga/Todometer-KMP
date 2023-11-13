@@ -23,6 +23,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,7 +32,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,15 +39,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rememberActiveFocusRequester
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
@@ -68,6 +69,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun TaskDetailScreen(
     taskId: String,
@@ -90,15 +92,15 @@ internal fun TaskDetailScreen(
 
         else -> {
             val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-            val focusRequester = remember { FocusRequester() }
-            val coroutineScope = rememberCoroutineScope()
 
             Scaffold(
                 positionIndicator = {
                     PositionIndicator(scalingLazyListState = scalingLazyListState)
                 }
             ) {
-                LaunchedEffect(Unit) { focusRequester.requestFocus() }
+                val focusRequester = rememberActiveFocusRequester()
+                val coroutineScope = rememberCoroutineScope()
+
                 ScalingLazyColumn(
                     contentPadding = PaddingValues(
                         start = 16.dp,
@@ -112,11 +114,13 @@ internal fun TaskDetailScreen(
                         .onRotaryScrollEvent {
                             coroutineScope.launch {
                                 scalingLazyListState.scrollBy(it.verticalScrollPixels)
+
+                                scalingLazyListState.animateScrollBy(0f)
                             }
                             true
                         }
                         .focusRequester(focusRequester)
-                        .focusable()
+                        .focusable(),
                 ) {
                     when {
                         taskDetailUiState.isLoading -> {
