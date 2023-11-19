@@ -1,5 +1,5 @@
 [versions]
-activity = "1.8.0"
+activity = "1.8.1"
 androidCompileSdk = "34"
 androidCore = "1.12.0"
 androidGradlePlugin = "8.2.0-rc03"
