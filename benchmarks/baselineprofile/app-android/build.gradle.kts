@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidTest)
     alias(libs.plugins.androidxBaselineprofile)
     alias(libs.plugins.kotlinAndroid)
+    id("todometer.spotless")
 }
 
 android {
