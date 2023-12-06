@@ -26,11 +26,10 @@ class BaselineProfileGenerator {
             pressHome()
             startActivityAndWait()
 
-            device.wait(Until.hasObject(By.res("task_list")), 5000)
+            device.wait(Until.hasObject(By.res("task_list")), 5_000)
             val taskList = device.findObject(By.res("task_list"))
             taskList.setGestureMargin(device.displayWidth / 5)
             taskList.fling(Direction.DOWN)
-            device.waitForIdle()
         }
     }
 }
