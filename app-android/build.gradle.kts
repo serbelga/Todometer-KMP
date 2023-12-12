@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidxBaselineprofile)
     alias(libs.plugins.composeMultiplatform)
     kotlin("android")
     id("com.google.android.gms.oss-licenses-plugin")
@@ -93,6 +94,8 @@ dependencies {
     implementation(platform(libs.google.firebase.firebaseBom))
     implementation(libs.google.firebase.firebaseAnalyticsKtx)
     implementation(libs.google.firebase.firebaseCrashlyticsKtx)
+    implementation(libs.androidx.profileinstaller)
+    "baselineProfile"(project(":benchmarks:baselineprofile:app-android"))
 
     // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
     // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved

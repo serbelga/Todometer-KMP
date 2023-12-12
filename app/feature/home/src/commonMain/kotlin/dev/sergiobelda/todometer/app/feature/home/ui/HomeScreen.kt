@@ -64,6 +64,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
@@ -407,7 +408,7 @@ private fun TasksListArea(
             TodometerResources.strings.no_tasks
         )
     } else {
-        LazyColumn(modifier = modifier) {
+        LazyColumn(modifier = modifier.testTag("task_list")) {
             items(tasksDoing, key = { it.id }) { task ->
                 TaskItem(
                     taskItem = task,

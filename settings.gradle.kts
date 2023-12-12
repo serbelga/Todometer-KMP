@@ -26,6 +26,8 @@ include(":app:feature:settings")
 include(":app:feature:taskdetails")
 include(":app-ios")
 
+include(":benchmarks:baselineprofile:app-android")
+
 include(":common:android")
 include(":common:core")
 include(":common:data")
