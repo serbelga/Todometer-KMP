@@ -91,7 +91,7 @@ dependencies {
 
     implementation(libs.google.playServicesOssLicenses)
 
-    implementation(platform(libs.google.firebase.firebaseBom))
+    implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
     implementation(libs.google.firebase.firebaseAnalyticsKtx)
     implementation(libs.google.firebase.firebaseCrashlyticsKtx)
 
