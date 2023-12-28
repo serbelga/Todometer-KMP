@@ -25,6 +25,7 @@ kotlin {
                 implementation(projects.common.ui)
                 implementation(projects.common.viewmodel)
 
+                implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
             }
         }

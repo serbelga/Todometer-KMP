@@ -20,10 +20,7 @@ firebaseCrashlyticsGradle = "2.9.9"
 glance = "1.0.0"
 googleServices = "4.4.0"
 junit = "4.13.2"
-koinAndroid = "3.5.3"
-koinAndroidCompose = "3.5.0"
-koinCore = "3.5.3"
-koinTest = "3.5.3"
+koinBom = "3.5.3"
 kotlin = "1.9.20"
 kotlinCoroutines = "1.7.3"
 kotlinDatetime = "0.5.0"
@@ -88,10 +85,11 @@ junit = { module = "junit:junit", version.ref = "junit" }
 lyricist-lyricist = { module = "cafe.adriel.lyricist:lyricist", version.ref = "lyricist" }
 lyricist-processor = { module = "cafe.adriel.lyricist:lyricist-processor", version.ref = "lyricist" }
 
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidCompose" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinTest" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koinBom" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-test = { module = "io.insert-koin:koin-test" }
 
 kotlin-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinCoroutines" }

@@ -16,17 +16,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.koin.core)
-                api(libs.koin.test)
-
                 implementation(projects.common.ui)
                 implementation(projects.common.data)
                 implementation(projects.common.database)
                 implementation(projects.common.domain)
                 implementation(projects.common.preferences)
 
-                implementation(libs.koin.core)
-                implementation(libs.koin.test)
+                api(project.dependencies.platform(libs.koin.bom))
+                api(libs.koin.core)
+                api(libs.koin.test)
             }
         }
         val commonTest by getting
