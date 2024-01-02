@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.composeMultiplatform)
     kotlin("android")
+    alias(libs.plugins.composeMultiplatform)
     id("com.google.android.gms.oss-licenses-plugin")
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")

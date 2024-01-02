@@ -17,8 +17,10 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             dependencies {
                 implementation(compose.ui)
+                implementation(compose.components.resources)
                 implementation(libs.composeVectorize.core)
             }
         }

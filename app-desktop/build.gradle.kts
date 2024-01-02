@@ -1,8 +1,8 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.composeMultiplatform)
     id("todometer.spotless")
     id("todometer.dependency-graph-generator")
 }
