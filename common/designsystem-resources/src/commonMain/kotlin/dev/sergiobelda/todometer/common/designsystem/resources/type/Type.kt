@@ -35,7 +35,7 @@ val quickSandFontFamily: FontFamily
     @Composable get() = FontFamily(
         quickSandFontBold,
         quickSandFontMedium,
-        quickSandFontSemiBold,
+        quickSandFontSemiBold
     )
 
 @OptIn(ExperimentalResourceApi::class)
@@ -49,11 +49,7 @@ private fun resolveFont(
     Font(
         FontResource(
             id,
-            setOf(ResourceItem(
-                    setOf(),
-                    path
-                ),
-            )
+            setOf(ResourceItem(setOf(), path))
         ),
         weight,
         style
