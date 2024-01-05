@@ -2,10 +2,10 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeVectorize)
     id("todometer.common.library.android")
     id("todometer.dependency-graph-generator")
     id("todometer.spotless")
-    id("todometer.common.generateImages")
 }
 
 kotlin {
@@ -19,6 +19,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(compose.ui)
+                implementation(libs.composeVectorize.core)
             }
         }
         val commonTest by getting
@@ -47,4 +48,8 @@ android {
     lint {
         abortOnError = false
     }
+}
+
+composeVectorize {
+    packageName = "dev.sergiobelda.todometer.common.designsystem.resources.images"
 }

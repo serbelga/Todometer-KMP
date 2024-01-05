@@ -11,7 +11,6 @@ java {
 }
 
 dependencies {
-    implementation(projects.imagevectorgenerator)
     implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
@@ -37,11 +36,6 @@ gradlePlugin {
             id = "todometer.spotless"
             implementationClass =
                 "dev.sergiobelda.todometer.buildlogic.convention.SpotlessConventionPlugin"
-        }
-        register("generateImages") {
-            id = "todometer.common.generateImages"
-            implementationClass =
-                "dev.sergiobelda.todometer.buildlogic.convention.ImageVectorGenerationPlugin"
         }
     }
 }
