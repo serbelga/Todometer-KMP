@@ -15,7 +15,6 @@ dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
-    implementation(libs.squareup.kotlinpoet)
     implementation(libs.xmlpull)
     implementation(libs.xpp3)
 }
