@@ -29,7 +29,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.rounded.FormatColorReset
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -44,9 +43,9 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.TodometerTheme
 import dev.sergiobelda.todometer.app.common.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.FormatColorReset
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import androidx.compose.material.icons.Icons as MaterialIcons
 
 @Composable
 fun TagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
@@ -116,7 +115,7 @@ private fun TagItem(
             }
             if (tag == Tag.UNSPECIFIED && !selected) {
                 Icon(
-                    MaterialIcons.Rounded.FormatColorReset,
+                    Images.Icons.FormatColorReset,
                     null,
                     tint = MaterialTheme.colorScheme.onBackground
                 )
