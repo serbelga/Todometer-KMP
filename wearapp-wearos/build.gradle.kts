@@ -69,7 +69,6 @@ dependencies {
     implementation(projects.common.ui)
 
     implementation(compose.foundation)
-    implementation(compose.materialIconsExtended)
     implementation(compose.uiTooling)
 
     implementation(libs.androidx.activityCompose)
