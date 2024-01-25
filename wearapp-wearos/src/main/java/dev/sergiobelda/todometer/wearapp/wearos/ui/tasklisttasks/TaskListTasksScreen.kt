@@ -55,7 +55,6 @@ import androidx.wear.compose.foundation.CurvedLayout
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 import androidx.wear.compose.foundation.RevealValue.Companion.Covered
 import androidx.wear.compose.foundation.RevealValue.Companion.Revealing
-import androidx.wear.compose.foundation.SwipeToReveal
 import androidx.wear.compose.foundation.createAnchors
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
@@ -67,12 +66,15 @@ import androidx.wear.compose.foundation.rememberRevealState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CircularProgressIndicator
+import androidx.wear.compose.material.ExperimentalWearMaterialApi
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.ProgressIndicatorDefaults
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.SplitToggleChip
+import androidx.wear.compose.material.SwipeToRevealChip
+import androidx.wear.compose.material.SwipeToRevealPrimaryAction
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
@@ -259,7 +261,11 @@ private fun TaskListProgressIndicator(progress: Float) {
     )
 }
 
-@OptIn(ExperimentalWearFoundationApi::class, ExperimentalAnimationGraphicsApi::class)
+@OptIn(
+    ExperimentalWearFoundationApi::class,
+    ExperimentalAnimationGraphicsApi::class,
+    ExperimentalWearMaterialApi::class
+)
 @Composable
 private fun TaskItem(
     taskItem: TaskItem,
@@ -277,29 +283,28 @@ private fun TaskItem(
             revealedAnchor = 0.5f
         )
     )
-    SwipeToReveal(
-        action = {
-            Chip(
-                onClick = onDeleteTask,
-                colors = ChipDefaults.chipColors(backgroundColor = MaterialTheme.colors.error),
-                border = ChipDefaults.chipBorder(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 8.dp)
-            ) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Icon(
-                        painter = rememberAnimatedVectorPainter(
-                            TodometerAnimatedImageVector.Delete,
-                            atEnd = revealState.currentValue == Revealing
-                        ),
-                        contentDescription = TodometerResources.strings.delete_task,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-            }
+    SwipeToRevealChip(
+        primaryAction = {
+            SwipeToRevealPrimaryAction(
+                revealState = revealState,
+                icon = {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Icon(
+                            painter = rememberAnimatedVectorPainter(
+                                TodometerAnimatedImageVector.Delete,
+                                atEnd = revealState.currentValue == Revealing
+                            ),
+                            contentDescription = TodometerResources.strings.delete_task,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
+                },
+                label = { Text(TodometerResources.strings.delete_task) },
+                onClick = onDeleteTask
+            )
         },
-        state = revealState
+        revealState = revealState,
+        onFullSwipe = {}
     ) {
         // Use SplitToggleChip if onClick is needed.
         SplitToggleChip(
