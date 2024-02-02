@@ -19,4 +19,4 @@ package dev.sergiobelda.todometer.app.feature.about.ui
 import androidx.compose.runtime.Composable
 
 @Composable
-internal actual fun appVersionName(): String? = "1.0.0-beta02"
+internal actual fun appVersionName(): String? = "1.0.0"
