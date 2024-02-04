@@ -74,12 +74,13 @@ Open `app-ios/Todometer.xcodeproj` in XCode or run it in Android Studio using Ko
 #### Common
 
 * [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
+* [compose-vectorize](https://github.com/serbelga/compose-vectorize)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/reference/koin-mp/kmp)
 * [Lyricist](https://github.com/adrielcafe/lyricist)
-* [SQLDelight](https://cashapp.github.io/sqldelight/)
 * [spotless](https://github.com/diffplug/spotless)
+* [SQLDelight](https://cashapp.github.io/sqldelight/)
 
 ## Images
 
