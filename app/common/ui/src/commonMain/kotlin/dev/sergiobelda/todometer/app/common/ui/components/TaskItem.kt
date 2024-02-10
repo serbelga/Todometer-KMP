@@ -37,17 +37,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.DismissDirection
-import androidx.compose.material3.DismissState
-import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.SwipeToDismiss
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxState
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDismissState
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -97,25 +96,25 @@ fun TaskItem(
             selected = selected
         )
     } else {
-        val dismissState = rememberDismissState(
+        val state = rememberSwipeToDismissBoxState(
             confirmValueChange = {
-                if (it == DismissValue.DismissedToEnd) {
+                if (it == SwipeToDismissBoxValue.StartToEnd) {
                     onSwipeToDismiss()
                 }
-                it != DismissValue.DismissedToEnd
+                it != SwipeToDismissBoxValue.StartToEnd
             }
         )
         val taskItemShadowElevation by animateDpAsState(
-            if (dismissState.targetValue != DismissValue.Default) TaskItemDismissedShadowElevation else 0.dp,
+            if (state.targetValue != SwipeToDismissBoxValue.Settled) TaskItemDismissedShadowElevation else 0.dp,
             animationSpec = tween(
                 durationMillis = TaskItemShadowElevationAnimationDuration,
                 easing = FastOutSlowInEasing
             )
         )
-        SwipeToDismiss(
-            state = dismissState,
-            directions = setOf(DismissDirection.StartToEnd),
-            background = {
+        SwipeToDismissBox(
+            state = state,
+            enableDismissFromEndToStart = false,
+            backgroundContent = {
                 Box(
                     Modifier
                         .padding(4.dp)
@@ -126,12 +125,12 @@ fun TaskItem(
                     contentAlignment = Alignment.CenterStart
                 ) {
                     TaskItemBackgroundIcon(
-                        dismissState,
+                        state,
                         MaterialTheme.colorScheme.onErrorContainer
                     )
                 }
             },
-            dismissContent = {
+            content = {
                 TaskItemContent(
                     taskItem,
                     onDoingClick = onDoingClick,
@@ -150,7 +149,10 @@ fun TaskItem(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal expect fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color)
+internal expect fun TaskItemBackgroundIcon(
+    state: SwipeToDismissBoxState,
+    backgroundIconTint: Color
+)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

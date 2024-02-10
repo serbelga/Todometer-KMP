@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.app.common.ui.components
 
-import androidx.compose.material3.DismissState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
@@ -27,7 +27,10 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal actual fun TaskItemBackgroundIcon(dismissState: DismissState, backgroundIconTint: Color) {
+internal actual fun TaskItemBackgroundIcon(
+    state: SwipeToDismissBoxState,
+    backgroundIconTint: Color
+) {
     Icon(
         Images.Icons.Delete,
         contentDescription = TodometerResources.strings.delete_task,
