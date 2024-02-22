@@ -33,7 +33,9 @@ data class HomeUiState(
 ) {
     val selectionMode: Boolean get() = selectedTasks.isNotEmpty()
 
-    val tasksDoing: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING }
+    val tasksDoingPinned: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING && it.isPinned }
+
+    val tasksDoingNotPinned: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING && !it.isPinned }
 
     val tasksDone: List<TaskItem> get() = tasks.filter { it.state == TaskState.DONE }
 

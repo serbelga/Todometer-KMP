@@ -48,9 +48,11 @@ data class TodometerStrings(
     val no_pending_tasks: String,
     val no_task_lists: String,
     val no_tasks: String,
+    val not_pinner_task: String,
     val ok: String,
     val open_source_licenses: String,
     val optional: String,
+    val pinned_task: String,
     val privacy_policy: String,
     val privacy_policy_device_and_network_abuse: String,
     val privacy_policy_device_and_network_abuse_body: String,
@@ -74,7 +76,7 @@ data class TodometerStrings(
     val title: String,
     val uncheck_task: String,
     val you_have_completed_all_tasks: String,
-    val you_have_not_any_task_list: String
+    val you_have_not_any_task_list: String,
 )
 
 internal val Strings: Map<String, TodometerStrings> = mapOf(

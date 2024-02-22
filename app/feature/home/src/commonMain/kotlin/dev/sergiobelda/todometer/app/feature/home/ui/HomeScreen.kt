@@ -233,10 +233,11 @@ fun HomeScreen(
                 if (homeUiState.isLoadingTasks) {
                     ContentLoadingProgress()
                 } else {
-                    TasksListArea(
-                        homeUiState.tasksDoing,
-                        homeUiState.tasksDone,
-                        homeUiState.selectedTasks,
+                    TasksListView(
+                        tasksDoingPinned = homeUiState.tasksDoingPinned,
+                        tasksDoingNotPinned = homeUiState.tasksDoingNotPinned,
+                        tasksDone = homeUiState.tasksDone,
+                        selectedTasks = homeUiState.selectedTasks,
                         onDoingClick = onTaskItemDoingClick,
                         onDoneClick = onTaskItemDoneClick,
                         onTaskItemClick = { taskId ->
@@ -388,8 +389,9 @@ private fun HomeFloatingActionButton(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun TasksListArea(
-    tasksDoing: List<TaskItem>,
+private fun TasksListView(
+    tasksDoingPinned: List<TaskItem>,
+    tasksDoingNotPinned: List<TaskItem>,
     tasksDone: List<TaskItem>,
     selectedTasks: List<String>,
     onDoingClick: (String) -> Unit,
@@ -401,14 +403,38 @@ private fun TasksListArea(
     modifier: Modifier = Modifier
 ) {
     var areTasksDoneVisible by remember { mutableStateOf(false) }
-    if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {
+    if ((tasksDoingPinned + tasksDoingNotPinned + tasksDone).isEmpty()) {
         HomeInfoIllustration(
             Images.Illustrations.NoTasks,
             TodometerResources.strings.no_tasks
         )
     } else {
         LazyColumn(modifier = modifier) {
-            items(tasksDoing, key = { it.id }) { task ->
+            if (tasksDoingPinned.isNotEmpty()) {
+                item {
+                    Text("Pinned")
+                }
+            }
+            items(tasksDoingPinned, key = { it.id }) { task ->
+                TaskItem(
+                    taskItem = task,
+                    onDoingClick = onDoingClick,
+                    onDoneClick = onDoneClick,
+                    onTaskItemClick = onTaskItemClick,
+                    onTaskItemLongClick = onTaskItemLongClick,
+                    onSwipeToDismiss = { onSwipeToDismiss(task.id) },
+                    modifier = Modifier.animateItemPlacement(),
+                    swipeable = !selectionMode,
+                    checkEnabled = selectionMode,
+                    selected = selectedTasks.contains(task.id)
+                )
+            }
+            if (tasksDoingPinned.isNotEmpty() && tasksDoingNotPinned.isNotEmpty()) {
+                item {
+                    Text("Other")
+                }
+            }
+            items(tasksDoingNotPinned, key = { it.id }) { task ->
                 TaskItem(
                     taskItem = task,
                     onDoingClick = onDoingClick,
@@ -453,7 +479,7 @@ private fun TasksListArea(
                 Spacer(modifier = Modifier.height(HomeTaskListAreaBottomPadding))
             }
         }
-        if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
+        if ((tasksDoingPinned + tasksDoingNotPinned).isEmpty() && !areTasksDoneVisible) {
             HomeInfoIllustration(
                 Images.Illustrations.CompletedTasks,
                 TodometerResources.strings.you_have_completed_all_tasks,
