@@ -48,7 +48,7 @@ data class TodometerStrings(
     val no_pending_tasks: String,
     val no_task_lists: String,
     val no_tasks: String,
-    val not_pinner_task: String,
+    val not_pinned_task: String,
     val ok: String,
     val open_source_licenses: String,
     val optional: String,

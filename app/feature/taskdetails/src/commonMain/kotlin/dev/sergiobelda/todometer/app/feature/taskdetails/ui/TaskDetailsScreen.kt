@@ -123,7 +123,7 @@ fun TaskDetailsScreen(
                                         contentDescription = if (taskDetailsUiState.task.isPinned) {
                                             TodometerResources.strings.pinned_task
                                         } else {
-                                            TodometerResources.strings.not_pinner_task
+                                            TodometerResources.strings.not_pinned_task
                                         },
                                         tint = MaterialTheme.colorScheme.primary
                                     )
