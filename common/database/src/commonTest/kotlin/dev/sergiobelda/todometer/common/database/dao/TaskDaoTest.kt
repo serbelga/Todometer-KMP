@@ -106,4 +106,15 @@ class TaskDaoTest : DatabaseTest() {
         taskDao.deleteTasks(id)
         assertNull(taskDao.getTask(id).first())
     }
+
+    @Test
+    fun testToggleTaskPinnedValue() = runTest {
+        val id = taskDao.insertTask(taskEntity1)
+        var task = taskDao.getTask(id).first()
+        assertEquals(false, task?.isPinned)
+
+        taskDao.toggleTaskPinnedValue(id)
+        task = taskDao.getTask(id).first()
+        assertEquals(true, task?.isPinned)
+    }
 }
