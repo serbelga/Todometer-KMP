@@ -76,7 +76,7 @@ fun TaskDetailsScreen(
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
-    onPinTaskItemToggleClick: () -> Unit,
+    onPinTaskItemToggleClick: () -> Unit
 ) {
     val lazyListState = rememberLazyListState()
     val topAppBarState = rememberTopAppBarState()

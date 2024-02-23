@@ -73,6 +73,7 @@ import dev.sergiobelda.todometer.app.common.ui.components.TaskItem
 import dev.sergiobelda.todometer.app.common.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.common.ui.loading.ContentLoadingProgress
+import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
@@ -412,7 +413,7 @@ private fun TasksListView(
         LazyColumn(modifier = modifier) {
             if (tasksDoingPinned.isNotEmpty()) {
                 item {
-                    Text("Pinned")
+                    TasksSeparator(TodometerResources.strings.pinned)
                 }
             }
             items(tasksDoingPinned, key = { it.id }) { task ->
@@ -431,7 +432,7 @@ private fun TasksListView(
             }
             if (tasksDoingPinned.isNotEmpty() && tasksDoingNotPinned.isNotEmpty()) {
                 item {
-                    Text("Other")
+                    TasksSeparator(TodometerResources.strings.others)
                 }
             }
             items(tasksDoingNotPinned, key = { it.id }) { task ->
@@ -487,6 +488,18 @@ private fun TasksListView(
             )
         }
     }
+}
+
+@Composable
+private fun TasksSeparator(
+    text: String
+) {
+    Text(
+        text,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
+        modifier = Modifier.padding(horizontal = SectionPadding, vertical = 8.dp)
+    )
 }
 
 @Composable
