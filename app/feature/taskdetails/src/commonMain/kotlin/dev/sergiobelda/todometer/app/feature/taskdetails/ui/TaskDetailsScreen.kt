@@ -70,13 +70,26 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskDetailsScreen(
+    taskDetailsViewModel: TaskDetailsViewModel,
     navigateToEditTask: () -> Unit,
     navigateBack: () -> Unit,
-    taskDetailsUiState: TaskDetailsUiState,
-    onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit,
-    onAddTaskCheckListItem: (String) -> Unit,
-    onPinTaskItemToggleClick: () -> Unit
+    taskDetailsUiState: TaskDetailsUiState = taskDetailsViewModel.taskDetailsUiState,
+    onTaskChecklistItemClick: (String, Boolean) -> Unit = { id, checked ->
+        if (checked) {
+            taskDetailsViewModel.setTaskChecklistItemChecked(id)
+        } else {
+            taskDetailsViewModel.setTaskChecklistItemUnchecked(id)
+        }
+    },
+    onDeleteTaskCheckListItem: (String) -> Unit = { id ->
+        taskDetailsViewModel.deleteTaskChecklistItem(id)
+    },
+    onAddTaskCheckListItem: (String) -> Unit = { text ->
+        taskDetailsViewModel.insertTaskChecklistItem(text)
+    },
+    onPinTaskItemToggleClick: () -> Unit = {
+        taskDetailsViewModel.toggleTaskPinnedValueUseCase()
+    }
 ) {
     val lazyListState = rememberLazyListState()
     val topAppBarState = rememberTopAppBarState()

@@ -19,7 +19,6 @@ package dev.sergiobelda.todometer.app.ios.ui.taskdetails
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsViewModel
 import dev.sergiobelda.todometer.app.ios.koin
 import org.koin.core.parameter.parametersOf
 
@@ -27,28 +26,11 @@ import org.koin.core.parameter.parametersOf
 internal fun TaskDetailsRoute(
     taskId: String,
     navigateToEditTask: () -> Unit,
-    navigateBack: () -> Unit,
-    taskDetailsViewModel: TaskDetailsViewModel = remember { koin.get { parametersOf(taskId) } }
+    navigateBack: () -> Unit
 ) {
     TaskDetailsScreen(
         navigateToEditTask = navigateToEditTask,
         navigateBack = navigateBack,
-        taskDetailsUiState = taskDetailsViewModel.taskDetailsUiState,
-        onTaskChecklistItemClick = { id, checked ->
-            if (checked) {
-                taskDetailsViewModel.setTaskChecklistItemChecked(id)
-            } else {
-                taskDetailsViewModel.setTaskChecklistItemUnchecked(id)
-            }
-        },
-        onDeleteTaskCheckListItem = { id ->
-            taskDetailsViewModel.deleteTaskChecklistItem(id)
-        },
-        onAddTaskCheckListItem = { text ->
-            taskDetailsViewModel.insertTaskChecklistItem(text)
-        },
-        onPinTaskItemToggleClick = {
-            taskDetailsViewModel.toggleTaskPinnedValueUseCase()
-        }
+        taskDetailsViewModel =  remember { koin.get { parametersOf(taskId) } }
     )
 }

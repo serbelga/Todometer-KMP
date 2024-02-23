@@ -21,17 +21,17 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun SettingsRoute(
-    navigateBack: () -> Unit,
-    settingsViewModel: SettingsViewModel = getViewModel()
+    navigateBack: () -> Unit
 ) {
+    val settingsViewModel: SettingsViewModel = koinViewModel()
     val appTheme by settingsViewModel.appTheme.collectAsStateWithLifecycle()
     SettingsScreen(
+        settingsViewModel = settingsViewModel,
         navigateBack = navigateBack,
-        onChooseAppTheme = { settingsViewModel.setAppTheme(it) },
         appTheme = appTheme
     )
 }

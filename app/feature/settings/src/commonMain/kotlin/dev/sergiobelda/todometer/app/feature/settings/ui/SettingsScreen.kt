@@ -65,8 +65,9 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
+    settingsViewModel: SettingsViewModel,
     navigateBack: () -> Unit,
-    onChooseAppTheme: (AppTheme) -> Unit,
+    onChooseAppTheme: (AppTheme) -> Unit = { settingsViewModel.setAppTheme(it) },
     appTheme: AppTheme
 ) {
     Scaffold(

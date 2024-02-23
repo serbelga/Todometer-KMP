@@ -27,14 +27,14 @@ import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
 
 @Composable
 internal fun SettingsRoute(
-    navigateBack: () -> Unit,
-    settingsViewModel: SettingsViewModel = remember { koin.get() }
+    navigateBack: () -> Unit
 ) {
+    val settingsViewModel: SettingsViewModel = remember { koin.get() }
     settingsViewModel.subscribeToComposition()
     val appTheme by settingsViewModel.appTheme.collectAsState()
     SettingsScreen(
+        settingsViewModel = settingsViewModel,
         navigateBack = navigateBack,
-        onChooseAppTheme = { settingsViewModel.setAppTheme(it) },
         appTheme = appTheme
     )
 }

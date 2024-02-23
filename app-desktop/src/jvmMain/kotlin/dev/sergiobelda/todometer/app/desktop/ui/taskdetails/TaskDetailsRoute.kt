@@ -28,29 +28,13 @@ import org.koin.core.parameter.parametersOf
 internal fun TaskDetailsRoute(
     taskId: String,
     navigateToEditTask: () -> Unit,
-    navigateBack: () -> Unit,
-    taskDetailsViewModel: TaskDetailsViewModel = remember { koin.get { parametersOf(taskId) } }
+    navigateBack: () -> Unit
 ) {
+    val taskDetailsViewModel: TaskDetailsViewModel = remember { koin.get { parametersOf(taskId) } }
     taskDetailsViewModel.subscribeToComposition()
     TaskDetailsScreen(
         navigateToEditTask = navigateToEditTask,
         navigateBack = navigateBack,
-        taskDetailsUiState = taskDetailsViewModel.taskDetailsUiState,
-        onTaskChecklistItemClick = { id, checked ->
-            if (checked) {
-                taskDetailsViewModel.setTaskChecklistItemChecked(id)
-            } else {
-                taskDetailsViewModel.setTaskChecklistItemUnchecked(id)
-            }
-        },
-        onDeleteTaskCheckListItem = { id ->
-            taskDetailsViewModel.deleteTaskChecklistItem(id)
-        },
-        onAddTaskCheckListItem = { text ->
-            taskDetailsViewModel.insertTaskChecklistItem(text)
-        },
-        onPinTaskItemToggleClick = {
-            taskDetailsViewModel.toggleTaskPinnedValueUseCase()
-        }
+        taskDetailsViewModel = taskDetailsViewModel
     )
 }
