@@ -87,7 +87,7 @@ fun TaskDetailsScreen(
     onAddTaskCheckListItem: (String) -> Unit = { text ->
         taskDetailsViewModel.insertTaskChecklistItem(text)
     },
-    onPinTaskItemToggleClick: () -> Unit = {
+    toggleTaskPinnedValueClick: () -> Unit = {
         taskDetailsViewModel.toggleTaskPinnedValueUseCase()
     }
 ) {
@@ -126,7 +126,7 @@ fun TaskDetailsScreen(
                         },
                         actions = {
                             if (!taskDetailsUiState.isLoadingTask) {
-                                IconButton(onClick = onPinTaskItemToggleClick) {
+                                IconButton(onClick = toggleTaskPinnedValueClick) {
                                     Icon(
                                         imageVector = if (taskDetailsUiState.task.isPinned) {
                                             Images.Icons.PushPinFilled

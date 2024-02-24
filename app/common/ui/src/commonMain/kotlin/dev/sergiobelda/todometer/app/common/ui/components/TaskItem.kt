@@ -75,10 +75,10 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 fun TaskItem(
     taskItem: TaskItem,
-    onDoingClick: (String) -> Unit,
-    onDoneClick: (String) -> Unit,
-    onTaskItemClick: (String) -> Unit,
-    onTaskItemLongClick: (String) -> Unit,
+    onDoingClick: () -> Unit,
+    onDoneClick: () -> Unit,
+    onTaskItemClick: () -> Unit,
+    onTaskItemLongClick: () -> Unit,
     onSwipeToDismiss: () -> Unit,
     modifier: Modifier = Modifier,
     swipeable: Boolean = false,
@@ -158,10 +158,10 @@ internal expect fun TaskItemBackgroundIcon(
 @Composable
 private fun TaskItemContent(
     taskItem: TaskItem,
-    onDoingClick: (String) -> Unit,
-    onDoneClick: (String) -> Unit,
-    onClick: (String) -> Unit,
-    onLongClick: (String) -> Unit,
+    onDoingClick: () -> Unit,
+    onDoneClick: () -> Unit,
+    onClick: () -> Unit,
+    onLongClick: () -> Unit,
     checkEnabled: Boolean,
     selected: Boolean,
     modifier: Modifier = Modifier,
@@ -179,12 +179,8 @@ private fun TaskItemContent(
         ) {
             Column(
                 modifier = Modifier.combinedClickable(
-                    onClick = {
-                        onClick(taskItem.id)
-                    },
-                    onLongClick = {
-                        onLongClick(taskItem.id)
-                    }
+                    onClick = onClick,
+                    onLongClick = onLongClick
                 )
             ) {
                 TaskItemHeadlineContent(
@@ -224,8 +220,8 @@ private fun TaskItemContent(
 @Composable
 private fun TaskItemHeadlineContent(
     taskItem: TaskItem,
-    onDoingClick: (String) -> Unit,
-    onDoneClick: (String) -> Unit,
+    onDoingClick: () -> Unit,
+    onDoneClick: () -> Unit,
     checkEnabled: Boolean = true
 ) {
     Row(
@@ -249,9 +245,9 @@ private fun TaskItemHeadlineContent(
         IconButton(
             onClick = {
                 if (taskItem.state == TaskState.DONE) {
-                    onDoingClick(taskItem.id)
+                    onDoingClick()
                 } else {
-                    onDoneClick(taskItem.id)
+                    onDoneClick()
                 }
             },
             modifier = Modifier.alpha(if (checkEnabled) Alpha.Disabled else Alpha.High),

@@ -68,6 +68,7 @@ internal val EsTodometerStrings = TodometerStrings(
     save = "Guardar",
     select_time = "Seleccionar hora",
     selected = "Seleccionado",
+    selected_tasks = { d -> "$d seleccionadas" },
     settings = "Ajustes",
     task = "Tarea",
     task_list = "Lista de tareas",
