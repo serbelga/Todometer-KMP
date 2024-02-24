@@ -55,6 +55,7 @@ val taskEntity1 = TaskEntity(
     dueDate = 1649887517234,
     state = TaskState.DOING,
     tasklist_id = "1",
+    isPinned = false,
     sync = false
 )
 
@@ -66,6 +67,7 @@ val taskEntity1Updated = TaskEntity(
     dueDate = 1649887517234,
     state = TaskState.DOING,
     tasklist_id = "1",
+    isPinned = false,
     sync = false
 )
 
@@ -77,6 +79,7 @@ val taskEntity2 = TaskEntity(
     dueDate = 1649887517234,
     state = TaskState.DOING,
     tasklist_id = "1",
+    isPinned = false,
     sync = false
 )
 

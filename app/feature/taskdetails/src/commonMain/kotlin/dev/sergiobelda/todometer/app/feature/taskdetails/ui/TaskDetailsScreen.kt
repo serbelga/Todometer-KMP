@@ -59,6 +59,8 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.PushPin
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.PushPinFilled
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
@@ -73,7 +75,8 @@ fun TaskDetailsScreen(
     taskDetailsUiState: TaskDetailsUiState,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
-    onAddTaskCheckListItem: (String) -> Unit
+    onAddTaskCheckListItem: (String) -> Unit,
+    toggleTaskPinnedValueClick: () -> Unit
 ) {
     val lazyListState = rememberLazyListState()
     val topAppBarState = rememberTopAppBarState()
@@ -110,6 +113,21 @@ fun TaskDetailsScreen(
                         },
                         actions = {
                             if (!taskDetailsUiState.isLoadingTask) {
+                                IconButton(onClick = toggleTaskPinnedValueClick) {
+                                    Icon(
+                                        imageVector = if (taskDetailsUiState.task.isPinned) {
+                                            Images.Icons.PushPinFilled
+                                        } else {
+                                            Images.Icons.PushPin
+                                        },
+                                        contentDescription = if (taskDetailsUiState.task.isPinned) {
+                                            TodometerResources.strings.pinned_task
+                                        } else {
+                                            TodometerResources.strings.not_pinned_task
+                                        },
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                }
                                 IconButton(onClick = navigateToEditTask) {
                                     Icon(
                                         Images.Icons.Edit,

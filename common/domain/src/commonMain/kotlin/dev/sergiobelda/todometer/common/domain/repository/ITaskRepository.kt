@@ -60,4 +60,9 @@ interface ITaskRepository {
      * Deletes a [Task] given its [ids].
      */
     suspend fun deleteTasks(vararg ids: String)
+
+    /**
+     * Toggles the pinned value of a [Task] given its [id].
+     */
+    suspend fun toggleTaskPinnedValue(id: String)
 }

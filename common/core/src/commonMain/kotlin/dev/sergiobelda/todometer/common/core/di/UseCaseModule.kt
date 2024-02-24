@@ -26,6 +26,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskList
 import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.ToggleTaskPinnedValueUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.DeleteTaskChecklistItemUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.GetTaskChecklistItemsUseCase
@@ -70,4 +71,5 @@ internal val useCaseModule = module {
     singleOf(::SetTaskChecklistItemUncheckedUseCase)
     singleOf(::SetTaskChecklistItemCheckedUseCase)
     singleOf(::DeleteTaskChecklistItemUseCase)
+    singleOf(::ToggleTaskPinnedValueUseCase)
 }

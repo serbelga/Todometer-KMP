@@ -35,6 +35,7 @@ class TaskMapperTest {
             dueDate = 1649887517234,
             state = TaskState.DOING,
             taskListId = "2",
+            isPinned = false,
             sync = true
         )
         val taskEntity = task.asTaskEntity()
@@ -44,6 +45,7 @@ class TaskMapperTest {
         assertEquals(task.state, taskEntity.state)
         assertEquals(task.taskListId, taskEntity.tasklist_id)
         assertEquals(task.tag, taskEntity.tag)
+        assertEquals(task.isPinned, taskEntity.isPinned)
         assertEquals(task.sync, taskEntity.sync)
     }
 
@@ -57,6 +59,7 @@ class TaskMapperTest {
             dueDate = 1649887517234,
             state = TaskState.DOING,
             tasklist_id = "2",
+            isPinned = false,
             sync = true
         )
         val task = taskEntity.asTask()
@@ -66,6 +69,7 @@ class TaskMapperTest {
         assertEquals(taskEntity.state, task.state)
         assertEquals(taskEntity.tasklist_id, task.taskListId)
         assertEquals(taskEntity.tag, task.tag)
+        assertEquals(taskEntity.isPinned, task.isPinned)
         assertEquals(taskEntity.sync, task.sync)
     }
 }

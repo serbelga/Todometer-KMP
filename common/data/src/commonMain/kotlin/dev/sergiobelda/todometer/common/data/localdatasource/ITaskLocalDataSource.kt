@@ -39,4 +39,6 @@ interface ITaskLocalDataSource {
     suspend fun updateTaskState(id: String, state: TaskState)
 
     suspend fun deleteTasks(vararg ids: String)
+
+    suspend fun toggleTaskPinnedValue(id: String)
 }

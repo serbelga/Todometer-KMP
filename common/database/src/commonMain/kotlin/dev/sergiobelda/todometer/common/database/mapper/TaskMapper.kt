@@ -27,6 +27,7 @@ fun TaskEntity.asTask(): Task = Task(
     dueDate = dueDate,
     state = state,
     taskListId = tasklist_id,
+    isPinned = isPinned,
     sync = sync
 )
 
@@ -42,5 +43,6 @@ fun Task.asTaskEntity(): TaskEntity = TaskEntity(
     dueDate = dueDate,
     state = state,
     tasklist_id = taskListId,
+    isPinned = isPinned,
     sync = sync
 )

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS TaskEntity (
     tag TEXT AS Tag NOT NULL,
     sync INTEGER AS Boolean NOT NULL DEFAULT 0,
     dueDate INTEGER,
+    isPinned INTEGER AS Boolean NOT NULL DEFAULT 0,
     FOREIGN KEY(tasklist_id) REFERENCES TaskListEntity(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -20,7 +21,7 @@ FROM TaskEntity
 WHERE id = ?;
 
 selectTasksByTaskListId:
-SELECT t.id, t.title, t.state, t.tasklist_id, t.tag, t.sync, t.dueDate, COUNT(CASE WHEN c.state = 'CHECKED' THEN 1 ELSE NULL END) AS 'checklistItemsDone', COUNT(c.id) AS 'totalChecklistItems'
+SELECT t.id, t.title, t.state, t.tasklist_id, t.tag, t.sync, t.dueDate, t.isPinned, COUNT(CASE WHEN c.state = 'CHECKED' THEN 1 ELSE NULL END) AS 'checklistItemsDone', COUNT(c.id) AS 'totalChecklistItems'
 FROM TaskEntity t LEFT OUTER JOIN TaskChecklistItemEntity c ON t.id = c.task_id
 WHERE t.tasklist_id = ? GROUP BY t.id; ---- ORDER BY state ASC;
 
@@ -30,8 +31,8 @@ FROM TaskEntity;
 
 insertOrReplaceTask:
 INSERT OR REPLACE INTO TaskEntity
-(id, title, description, state, tasklist_id, tag, sync, dueDate)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+(id, title, description, state, tasklist_id, tag, sync, dueDate, isPinned)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 updateTask:
 UPDATE TaskEntity
@@ -39,7 +40,14 @@ SET
     title = ?,
     description = ?,
     tag = ?,
-    dueDate = ?
+    dueDate = ?,
+    isPinned = ?
+WHERE id = ?;
+
+toggleTaskPinnedValue:
+UPDATE TaskEntity
+SET
+    isPinned = CASE WHEN isPinned == 0 THEN 1 ELSE 0 END
 WHERE id = ?;
 
 updateTaskSync:

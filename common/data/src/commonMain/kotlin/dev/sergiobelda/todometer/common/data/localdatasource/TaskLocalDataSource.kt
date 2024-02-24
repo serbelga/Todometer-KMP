@@ -60,5 +60,8 @@ class TaskLocalDataSource(
         taskDao.updateTaskState(id, state)
 
     override suspend fun deleteTasks(vararg ids: String) =
-        taskDao.deleteTasks(*ids)
+        taskDao.deleteTasks(ids = ids)
+
+    override suspend fun toggleTaskPinnedValue(id: String) =
+        taskDao.toggleTaskPinnedValue(id)
 }

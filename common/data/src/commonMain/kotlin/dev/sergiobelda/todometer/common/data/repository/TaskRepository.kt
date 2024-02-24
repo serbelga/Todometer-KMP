@@ -55,6 +55,7 @@ class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : IT
                 dueDate = dueDate,
                 state = TaskState.DOING,
                 taskListId = taskListId,
+                isPinned = false,
                 sync = sync
             )
         )
@@ -66,5 +67,10 @@ class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : IT
         taskLocalDataSource.updateTaskState(id, state)
     }
 
-    override suspend fun deleteTasks(vararg ids: String) = taskLocalDataSource.deleteTasks(*ids)
+    override suspend fun deleteTasks(vararg ids: String) =
+        taskLocalDataSource.deleteTasks(ids = ids)
+
+    override suspend fun toggleTaskPinnedValue(id: String) {
+        taskLocalDataSource.toggleTaskPinnedValue(id)
+    }
 }

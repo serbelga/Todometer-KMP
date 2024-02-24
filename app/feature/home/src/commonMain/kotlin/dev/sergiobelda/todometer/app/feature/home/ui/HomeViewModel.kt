@@ -25,6 +25,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.ToggleTaskPinnedValueUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
@@ -40,7 +41,8 @@ class HomeViewModel(
     private val setTaskListSelectedUseCase: SetTaskListSelectedUseCase,
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val getTaskListsUseCase: GetTaskListsUseCase,
-    private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase
+    private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
+    private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
 ) : ViewModel() {
 
     var homeUiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
@@ -97,7 +99,7 @@ class HomeViewModel(
     }
 
     fun deleteSelectedTasks() = coroutineScope.launch {
-        deleteTasksUseCase(homeUiState.selectedTasks)
+        deleteTasksUseCase(homeUiState.selectedTasksIds)
         clearSelectedTasks()
     }
 
@@ -122,18 +124,31 @@ class HomeViewModel(
     }
 
     fun toggleSelectTask(id: String) {
-        val selectedTasks = homeUiState.selectedTasks.toMutableList()
-        if (!selectedTasks.contains(id)) {
-            selectedTasks.add(id)
+        val selectedTasksIds = homeUiState.selectedTasksIds.toMutableList()
+        if (!selectedTasksIds.contains(id)) {
+            selectedTasksIds.add(id)
         } else {
-            selectedTasks.removeAll { it == id }
+            selectedTasksIds.removeAll { it == id }
         }
         homeUiState = homeUiState.copy(
-            selectedTasks = selectedTasks
+            selectedTasksIds = selectedTasksIds
         )
     }
 
     fun clearSelectedTasks() {
-        homeUiState = homeUiState.copy(selectedTasks = emptyList())
+        homeUiState = homeUiState.copy(selectedTasksIds = emptyList())
+    }
+
+    fun toggleSelectedTasksPinnedValue() = coroutineScope.launch {
+        val notPinnedSelectedTasks = homeUiState.selectedTasks.filter { !it.isPinned }
+        if (notPinnedSelectedTasks.isNotEmpty()) {
+            notPinnedSelectedTasks.forEach {
+                toggleTaskPinnedValueUseCase(it.id)
+            }
+        } else {
+            homeUiState.selectedTasks.forEach {
+                toggleTaskPinnedValueUseCase(it.id)
+            }
+        }
     }
 }

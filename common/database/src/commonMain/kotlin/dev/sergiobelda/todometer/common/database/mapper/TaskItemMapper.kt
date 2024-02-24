@@ -29,7 +29,8 @@ fun SelectTasksByTaskListId.asTaskItem(): TaskItem =
         sync = sync,
         dueDate = dueDate,
         checklistItemsDone = checklistItemsDone,
-        totalChecklistItems = totalChecklistItems
+        totalChecklistItems = totalChecklistItems,
+        isPinned = isPinned
     )
 
 fun Iterable<SelectTasksByTaskListId>.asTaskItems(): List<TaskItem> = this.map {
