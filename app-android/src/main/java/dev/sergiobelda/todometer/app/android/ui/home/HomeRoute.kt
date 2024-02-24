@@ -60,6 +60,7 @@ internal fun HomeRoute(
             homeViewModel.clearSelectedTasks()
         },
         onSelectTaskItem = { homeViewModel.toggleSelectTask(it) },
+        onToggleSelectedTasksPinnedValueClick = { homeViewModel.toggleSelectedTasksPinnedValue() },
         homeUiState = homeViewModel.homeUiState
     )
 }

@@ -67,6 +67,7 @@ data class TodometerStrings(
     val save: String,
     val select_time: String,
     val selected: String,
+    val selected_tasks: (d: Int) -> String,
     val settings: String,
     val task: String,
     val task_list: String,

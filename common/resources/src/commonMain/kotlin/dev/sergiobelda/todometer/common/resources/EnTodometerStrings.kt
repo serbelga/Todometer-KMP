@@ -69,6 +69,7 @@ internal val EnTodometerStrings = TodometerStrings(
     save = "Save",
     select_time = "Select time",
     selected = "Selected",
+    selected_tasks = { d -> "$d selected" },
     settings = "Settings",
     task = "Task",
     task_list = "Task list",

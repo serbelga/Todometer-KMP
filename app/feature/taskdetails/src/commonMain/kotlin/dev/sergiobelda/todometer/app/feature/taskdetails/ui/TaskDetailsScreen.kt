@@ -76,7 +76,7 @@ fun TaskDetailsScreen(
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
-    onPinTaskItemToggleClick: () -> Unit
+    toggleTaskPinnedValueClick: () -> Unit
 ) {
     val lazyListState = rememberLazyListState()
     val topAppBarState = rememberTopAppBarState()
@@ -113,7 +113,7 @@ fun TaskDetailsScreen(
                         },
                         actions = {
                             if (!taskDetailsUiState.isLoadingTask) {
-                                IconButton(onClick = onPinTaskItemToggleClick) {
+                                IconButton(onClick = toggleTaskPinnedValueClick) {
                                     Icon(
                                         imageVector = if (taskDetailsUiState.task.isPinned) {
                                             Images.Icons.PushPinFilled

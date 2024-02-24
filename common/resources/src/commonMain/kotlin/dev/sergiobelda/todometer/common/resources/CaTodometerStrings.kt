@@ -68,6 +68,7 @@ internal val CaTodometerStrings = TodometerStrings(
     save = "Guardar",
     select_time = "Seleccionar hora",
     selected = "Seleccionat",
+    selected_tasks = { d -> "$d seleccionades" },
     settings = "Configuració",
     task = "Tasca",
     task_list = "Llista de tasques",

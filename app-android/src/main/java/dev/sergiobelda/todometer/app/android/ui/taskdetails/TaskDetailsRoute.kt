@@ -46,7 +46,7 @@ internal fun TaskDetailsRoute(
         onAddTaskCheckListItem = { text ->
             taskDetailsViewModel.insertTaskChecklistItem(text)
         },
-        onPinTaskItemToggleClick = {
+        toggleTaskPinnedValueClick = {
             taskDetailsViewModel.toggleTaskPinnedValueUseCase()
         }
     )
