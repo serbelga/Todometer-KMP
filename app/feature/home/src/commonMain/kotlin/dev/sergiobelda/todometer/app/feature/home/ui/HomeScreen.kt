@@ -204,7 +204,7 @@ fun HomeScreen(
                     selectedTasks = homeUiState.selectedTasks,
                     onClearSelectedTasksClick = onClearSelectedTasks,
                     onToggleSelectedTasksPinnedValueClick = onToggleSelectedTasksPinnedValueClick,
-                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true },
+                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true }
                 )
             },
             content = { paddingValues ->
