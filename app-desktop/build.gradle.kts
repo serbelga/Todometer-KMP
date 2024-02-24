@@ -58,7 +58,7 @@ compose.desktop {
                 "java.naming"
             )
             packageName = "Todometer"
-            packageVersion = "1.0.0"
+            packageVersion = "1.1.0"
             copyright = "© 2023 Sergio Belda. Licensed under the Apache License."
             licenseFile.set(project.file("../LICENSE"))
 
