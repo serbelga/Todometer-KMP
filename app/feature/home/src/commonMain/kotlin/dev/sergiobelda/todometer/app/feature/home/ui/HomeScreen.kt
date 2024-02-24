@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
@@ -388,7 +389,6 @@ private fun HomeFloatingActionButton(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TasksListView(
     tasksDoingPinned: List<TaskItem>,
@@ -416,39 +416,31 @@ private fun TasksListView(
                     TasksSeparator(TodometerResources.strings.pinned)
                 }
             }
-            items(tasksDoingPinned, key = { it.id }) { task ->
-                TaskItem(
-                    taskItem = task,
-                    onDoingClick = onDoingClick,
-                    onDoneClick = onDoneClick,
-                    onTaskItemClick = onTaskItemClick,
-                    onTaskItemLongClick = onTaskItemLongClick,
-                    onSwipeToDismiss = { onSwipeToDismiss(task.id) },
-                    modifier = Modifier.animateItemPlacement(),
-                    swipeable = !selectionMode,
-                    checkEnabled = selectionMode,
-                    selected = selectedTasks.contains(task.id)
-                )
-            }
+            taskItems(
+                tasks = tasksDoingPinned,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick,
+                onTaskItemClick = onTaskItemClick,
+                onTaskItemLongClick = onTaskItemLongClick,
+                onSwipeToDismiss = onSwipeToDismiss,
+                selectionMode = selectionMode,
+                selectedTasks = selectedTasks
+            )
             if (tasksDoingPinned.isNotEmpty() && tasksDoingNotPinned.isNotEmpty()) {
                 item {
                     TasksSeparator(TodometerResources.strings.others)
                 }
             }
-            items(tasksDoingNotPinned, key = { it.id }) { task ->
-                TaskItem(
-                    taskItem = task,
-                    onDoingClick = onDoingClick,
-                    onDoneClick = onDoneClick,
-                    onTaskItemClick = onTaskItemClick,
-                    onTaskItemLongClick = onTaskItemLongClick,
-                    onSwipeToDismiss = { onSwipeToDismiss(task.id) },
-                    modifier = Modifier.animateItemPlacement(),
-                    swipeable = !selectionMode,
-                    checkEnabled = selectionMode,
-                    selected = selectedTasks.contains(task.id)
-                )
-            }
+            taskItems(
+                tasks = tasksDoingNotPinned,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick,
+                onTaskItemClick = onTaskItemClick,
+                onTaskItemLongClick = onTaskItemLongClick,
+                onSwipeToDismiss = onSwipeToDismiss,
+                selectionMode = selectionMode,
+                selectedTasks = selectedTasks
+            )
             if (tasksDone.isNotEmpty()) {
                 item {
                     CompletedTasksHeader(
@@ -461,20 +453,16 @@ private fun TasksListView(
                 }
             }
             if (areTasksDoneVisible || selectionMode) {
-                items(tasksDone, key = { it.id }) { task ->
-                    TaskItem(
-                        taskItem = task,
-                        onDoingClick = onDoingClick,
-                        onDoneClick = onDoneClick,
-                        onTaskItemClick = onTaskItemClick,
-                        onTaskItemLongClick = onTaskItemLongClick,
-                        onSwipeToDismiss = { onSwipeToDismiss(task.id) },
-                        modifier = Modifier.animateItemPlacement(),
-                        swipeable = !selectionMode,
-                        checkEnabled = selectionMode,
-                        selected = selectedTasks.contains(task.id)
-                    )
-                }
+                taskItems(
+                    tasks = tasksDone,
+                    onDoingClick = onDoingClick,
+                    onDoneClick = onDoneClick,
+                    onTaskItemClick = onTaskItemClick,
+                    onTaskItemLongClick = onTaskItemLongClick,
+                    onSwipeToDismiss = onSwipeToDismiss,
+                    selectionMode = selectionMode,
+                    selectedTasks = selectedTasks
+                )
             }
             item {
                 Spacer(modifier = Modifier.height(HomeTaskListAreaBottomPadding))
@@ -487,6 +475,37 @@ private fun TasksListView(
                 TodometerResources.strings.congratulations
             )
         }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+fun LazyListScope.taskItems(
+    tasks: List<TaskItem>,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onTaskItemClick: (String) -> Unit,
+    onTaskItemLongClick: (String) -> Unit,
+    onSwipeToDismiss: (String) -> Unit,
+    selectionMode: Boolean,
+    selectedTasks: List<String>
+) {
+    items(
+        tasks,
+        key = { it.id },
+        contentType = { it }
+    ) { task ->
+        TaskItem(
+            taskItem = task,
+            onDoingClick = onDoingClick,
+            onDoneClick = onDoneClick,
+            onTaskItemClick = onTaskItemClick,
+            onTaskItemLongClick = onTaskItemLongClick,
+            onSwipeToDismiss = { onSwipeToDismiss(task.id) },
+            modifier = Modifier.animateItemPlacement(),
+            swipeable = !selectionMode,
+            checkEnabled = selectionMode,
+            selected = selectedTasks.contains(task.id)
+        )
     }
 }
 
