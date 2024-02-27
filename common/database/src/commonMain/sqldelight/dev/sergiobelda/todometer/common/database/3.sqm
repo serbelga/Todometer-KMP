@@ -1,0 +1,3 @@
+import kotlin.Boolean;
+
+ALTER TABLE TaskEntity ADD COLUMN isPinned INTEGER AS Boolean NOT NULL DEFAULT 0;

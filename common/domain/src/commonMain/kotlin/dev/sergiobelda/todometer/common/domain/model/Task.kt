@@ -24,5 +24,6 @@ data class Task(
     val dueDate: Long?,
     val state: TaskState,
     val taskListId: String,
+    val isPinned: Boolean,
     val sync: Boolean
 )

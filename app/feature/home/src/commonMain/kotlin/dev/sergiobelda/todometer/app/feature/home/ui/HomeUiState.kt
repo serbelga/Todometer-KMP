@@ -26,14 +26,18 @@ import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 data class HomeUiState(
     val isLoadingTasks: Boolean = false,
     val tasks: List<TaskItem> = emptyList(),
-    val selectedTasks: List<String> = emptyList(),
+    val selectedTasksIds: List<String> = emptyList(),
     val taskLists: List<TaskList> = emptyList(),
     val taskListSelected: TaskList? = null,
     val errorUi: ErrorUi? = null
 ) {
+    val selectedTasks: List<TaskItem> get() = tasks.filter { it.id in selectedTasksIds }
+
     val selectionMode: Boolean get() = selectedTasks.isNotEmpty()
 
-    val tasksDoing: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING }
+    val tasksDoingPinned: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING && it.isPinned }
+
+    val tasksDoingNotPinned: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING && !it.isPinned }
 
     val tasksDone: List<TaskItem> get() = tasks.filter { it.state == TaskState.DONE }
 

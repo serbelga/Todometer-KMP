@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
+import dev.sergiobelda.todometer.common.domain.usecase.task.ToggleTaskPinnedValueUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.DeleteTaskChecklistItemUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.GetTaskChecklistItemsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertTaskChecklistItemUseCase
@@ -38,7 +39,8 @@ class TaskDetailsViewModel(
     private val insertTaskChecklistItemsUseCase: InsertTaskChecklistItemUseCase,
     private val deleteTaskChecklistItemUseCase: DeleteTaskChecklistItemUseCase,
     private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
-    private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase
+    private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase,
+    private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
 ) : ViewModel() {
 
     var taskDetailsUiState by mutableStateOf(
@@ -102,5 +104,9 @@ class TaskDetailsViewModel(
 
     fun deleteTaskChecklistItem(id: String) = coroutineScope.launch {
         deleteTaskChecklistItemUseCase(id)
+    }
+
+    fun toggleTaskPinnedValueUseCase() = coroutineScope.launch {
+        toggleTaskPinnedValueUseCase(taskId)
     }
 }

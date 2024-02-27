@@ -30,5 +30,5 @@ class DeleteTasksUseCase(private val taskRepository: ITaskRepository) {
      * Deletes a task.
      */
     suspend operator fun invoke(ids: List<String>) =
-        taskRepository.deleteTasks(*ids.toTypedArray())
+        taskRepository.deleteTasks(ids = ids.toTypedArray())
 }

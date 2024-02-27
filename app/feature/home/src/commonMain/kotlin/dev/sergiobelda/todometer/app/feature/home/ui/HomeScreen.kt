@@ -29,12 +29,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
@@ -73,6 +75,7 @@ import dev.sergiobelda.todometer.app.common.ui.components.TaskItem
 import dev.sergiobelda.todometer.app.common.ui.components.TaskListProgress
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.common.ui.loading.ContentLoadingProgress
+import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
@@ -81,6 +84,8 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Expa
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.ExpandMore
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Menu
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.MoreVert
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.PushPin
+import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.PushPinFilled
 import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.CompletedTasks
 import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.NoTasks
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
@@ -96,6 +101,7 @@ fun HomeScreen(
     navigateToSettings: () -> Unit,
     navigateToAbout: () -> Unit,
     onSelectTaskItem: (String) -> Unit,
+    onToggleSelectedTasksPinnedValueClick: () -> Unit,
     onDeleteTasksClick: () -> Unit,
     onDeleteTask: (String) -> Unit,
     onClearSelectedTasks: () -> Unit,
@@ -160,8 +166,6 @@ fun HomeScreen(
         Scaffold(
             topBar = {
                 HomeTopAppBar(
-                    onClearSelectedTasksClick = onClearSelectedTasks,
-                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true },
                     onMenuClick = { scope.launch { drawerState.open() } },
                     onMoreClick = { homeMoreDropdownExpanded = true },
                     onHomeMoreDropdownDismissRequest = closeHomeMoreDropdown,
@@ -196,8 +200,11 @@ fun HomeScreen(
                     },
                     taskListName = homeUiState.taskListSelected?.name ?: defaultTaskListName,
                     tasks = homeUiState.tasks,
-                    selectedTasks = homeUiState.selectedTasks.size,
-                    selectionMode = homeUiState.selectionMode
+                    selectionMode = homeUiState.selectionMode,
+                    selectedTasks = homeUiState.selectedTasks,
+                    onClearSelectedTasksClick = onClearSelectedTasks,
+                    onToggleSelectedTasksPinnedValueClick = onToggleSelectedTasksPinnedValueClick,
+                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true }
                 )
             },
             content = { paddingValues ->
@@ -233,10 +240,11 @@ fun HomeScreen(
                 if (homeUiState.isLoadingTasks) {
                     ContentLoadingProgress()
                 } else {
-                    TasksListArea(
-                        homeUiState.tasksDoing,
-                        homeUiState.tasksDone,
-                        homeUiState.selectedTasks,
+                    TasksListView(
+                        tasksDoingPinned = homeUiState.tasksDoingPinned,
+                        tasksDoingNotPinned = homeUiState.tasksDoingNotPinned,
+                        tasksDone = homeUiState.tasksDone,
+                        selectedTasksIds = homeUiState.selectedTasksIds,
                         onDoingClick = onTaskItemDoingClick,
                         onDoneClick = onTaskItemDoneClick,
                         onTaskItemClick = { taskId ->
@@ -277,9 +285,10 @@ private fun HomeTopAppBar(
     homeMoreDropdownExpanded: Boolean,
     onEditTaskListClick: () -> Unit,
     onDeleteTaskListClick: () -> Unit,
-    onClearSelectedTasksClick: () -> Unit,
-    selectedTasks: Int,
     selectionMode: Boolean,
+    selectedTasks: List<TaskItem>,
+    onClearSelectedTasksClick: () -> Unit,
+    onToggleSelectedTasksPinnedValueClick: () -> Unit,
     onDeleteSelectedTasksClick: () -> Unit,
     taskListName: String?,
     tasks: List<TaskItem>
@@ -297,8 +306,9 @@ private fun HomeTopAppBar(
                 if (selectionMode) {
                     SelectedTasksTopAppBar(
                         onClearSelectedTasksClick = onClearSelectedTasksClick,
-                        selectedTasks = selectedTasks,
-                        onDeleteSelectedTasksClick = onDeleteSelectedTasksClick
+                        onToggleSelectedTasksPinnedValueClick = onToggleSelectedTasksPinnedValueClick,
+                        onDeleteSelectedTasksClick = onDeleteSelectedTasksClick,
+                        selectedTasks = selectedTasks
                     )
                 } else {
                     CenterAlignedTopAppBar(
@@ -340,9 +350,11 @@ private fun HomeTopAppBar(
 @Composable
 private fun SelectedTasksTopAppBar(
     onClearSelectedTasksClick: () -> Unit,
-    selectedTasks: Int,
-    onDeleteSelectedTasksClick: () -> Unit
+    onToggleSelectedTasksPinnedValueClick: () -> Unit,
+    onDeleteSelectedTasksClick: () -> Unit,
+    selectedTasks: List<TaskItem>
 ) {
+    val atLeastOneNotPinnedTaskItem = remember(selectedTasks) { selectedTasks.any { !it.isPinned } }
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = onClearSelectedTasksClick) {
@@ -353,13 +365,27 @@ private fun SelectedTasksTopAppBar(
             }
         },
         title = {
-            Text(text = "$selectedTasks selected")
+            Text(text = TodometerResources.strings.selected_tasks(selectedTasks.size))
         },
         actions = {
+            IconButton(onClick = onToggleSelectedTasksPinnedValueClick) {
+                Icon(
+                    imageVector = if (atLeastOneNotPinnedTaskItem) {
+                        Images.Icons.PushPin
+                    } else {
+                        Images.Icons.PushPinFilled
+                    },
+                    contentDescription = if (atLeastOneNotPinnedTaskItem) {
+                        TodometerResources.strings.not_pinned_task
+                    } else {
+                        TodometerResources.strings.pinned_task
+                    }
+                )
+            }
             IconButton(onClick = onDeleteSelectedTasksClick) {
                 Icon(
                     Images.Icons.Delete,
-                    contentDescription = null
+                    contentDescription = TodometerResources.strings.delete_tasks
                 )
             }
         },
@@ -386,12 +412,12 @@ private fun HomeFloatingActionButton(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun TasksListArea(
-    tasksDoing: List<TaskItem>,
+private fun TasksListView(
+    tasksDoingPinned: List<TaskItem>,
+    tasksDoingNotPinned: List<TaskItem>,
     tasksDone: List<TaskItem>,
-    selectedTasks: List<String>,
+    selectedTasksIds: List<String>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
@@ -401,27 +427,46 @@ private fun TasksListArea(
     modifier: Modifier = Modifier
 ) {
     var areTasksDoneVisible by remember { mutableStateOf(false) }
-    if (tasksDoing.isEmpty() && tasksDone.isEmpty()) {
+    if ((tasksDoingPinned + tasksDoingNotPinned + tasksDone).isEmpty()) {
         HomeInfoIllustration(
             Images.Illustrations.NoTasks,
             TodometerResources.strings.no_tasks
         )
     } else {
-        LazyColumn(modifier = modifier) {
-            items(tasksDoing, key = { it.id }) { task ->
-                TaskItem(
-                    taskItem = task,
-                    onDoingClick = onDoingClick,
-                    onDoneClick = onDoneClick,
-                    onTaskItemClick = onTaskItemClick,
-                    onTaskItemLongClick = onTaskItemLongClick,
-                    onSwipeToDismiss = { onSwipeToDismiss(task.id) },
-                    modifier = Modifier.animateItemPlacement(),
-                    swipeable = !selectionMode,
-                    checkEnabled = selectionMode,
-                    selected = selectedTasks.contains(task.id)
-                )
+        LazyColumn(
+            modifier = modifier,
+            contentPadding = PaddingValues(top = 8.dp)
+        ) {
+            if (tasksDoingPinned.isNotEmpty()) {
+                item {
+                    TasksSeparator(TodometerResources.strings.pinned)
+                }
             }
+            taskItems(
+                tasks = tasksDoingPinned,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick,
+                onTaskItemClick = onTaskItemClick,
+                onTaskItemLongClick = onTaskItemLongClick,
+                onSwipeToDismiss = onSwipeToDismiss,
+                selectionMode = selectionMode,
+                selectedTasksIds = selectedTasksIds
+            )
+            if (tasksDoingPinned.isNotEmpty() && tasksDoingNotPinned.isNotEmpty()) {
+                item {
+                    TasksSeparator(TodometerResources.strings.others)
+                }
+            }
+            taskItems(
+                tasks = tasksDoingNotPinned,
+                onDoingClick = onDoingClick,
+                onDoneClick = onDoneClick,
+                onTaskItemClick = onTaskItemClick,
+                onTaskItemLongClick = onTaskItemLongClick,
+                onSwipeToDismiss = onSwipeToDismiss,
+                selectionMode = selectionMode,
+                selectedTasksIds = selectedTasksIds
+            )
             if (tasksDone.isNotEmpty()) {
                 item {
                     CompletedTasksHeader(
@@ -434,26 +479,22 @@ private fun TasksListArea(
                 }
             }
             if (areTasksDoneVisible || selectionMode) {
-                items(tasksDone, key = { it.id }) { task ->
-                    TaskItem(
-                        taskItem = task,
-                        onDoingClick = onDoingClick,
-                        onDoneClick = onDoneClick,
-                        onTaskItemClick = onTaskItemClick,
-                        onTaskItemLongClick = onTaskItemLongClick,
-                        onSwipeToDismiss = { onSwipeToDismiss(task.id) },
-                        modifier = Modifier.animateItemPlacement(),
-                        swipeable = !selectionMode,
-                        checkEnabled = selectionMode,
-                        selected = selectedTasks.contains(task.id)
-                    )
-                }
+                taskItems(
+                    tasks = tasksDone,
+                    onDoingClick = onDoingClick,
+                    onDoneClick = onDoneClick,
+                    onTaskItemClick = onTaskItemClick,
+                    onTaskItemLongClick = onTaskItemLongClick,
+                    onSwipeToDismiss = onSwipeToDismiss,
+                    selectionMode = selectionMode,
+                    selectedTasksIds = selectedTasksIds
+                )
             }
             item {
                 Spacer(modifier = Modifier.height(HomeTaskListAreaBottomPadding))
             }
         }
-        if (tasksDoing.isEmpty() && !areTasksDoneVisible) {
+        if ((tasksDoingPinned + tasksDoingNotPinned).isEmpty() && !areTasksDoneVisible) {
             HomeInfoIllustration(
                 Images.Illustrations.CompletedTasks,
                 TodometerResources.strings.you_have_completed_all_tasks,
@@ -461,6 +502,50 @@ private fun TasksListArea(
             )
         }
     }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+fun LazyListScope.taskItems(
+    tasks: List<TaskItem>,
+    onDoingClick: (String) -> Unit,
+    onDoneClick: (String) -> Unit,
+    onTaskItemClick: (String) -> Unit,
+    onTaskItemLongClick: (String) -> Unit,
+    onSwipeToDismiss: (String) -> Unit,
+    selectionMode: Boolean,
+    selectedTasksIds: List<String>
+) {
+    items(
+        tasks,
+        key = { it.id },
+        contentType = { it }
+    ) { taskItem ->
+        TaskItem(
+            taskItem = taskItem,
+            onDoingClick = { onDoingClick(taskItem.id) },
+            onDoneClick = { onDoneClick(taskItem.id) },
+            onTaskItemClick = { onTaskItemClick(taskItem.id) },
+            onTaskItemLongClick = { onTaskItemLongClick(taskItem.id) },
+            onSwipeToDismiss = { onSwipeToDismiss(taskItem.id) },
+            modifier = Modifier.animateItemPlacement(),
+            swipeable = !selectionMode,
+            checkEnabled = selectionMode,
+            selected = selectedTasksIds.contains(taskItem.id)
+        )
+    }
+}
+
+@Composable
+private fun TasksSeparator(
+    text: String
+) {
+    Text(
+        text,
+        color = MaterialTheme.colorScheme.primary,
+        style = MaterialTheme.typography.labelLarge,
+        modifier = Modifier
+            .padding(horizontal = SectionPadding, vertical = 8.dp)
+    )
 }
 
 @Composable
