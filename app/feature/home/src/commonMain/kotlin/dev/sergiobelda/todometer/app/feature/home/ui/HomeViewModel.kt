@@ -31,6 +31,7 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelec
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.viewmodel.ViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -135,7 +136,8 @@ class HomeViewModel(
         )
     }
 
-    fun clearSelectedTasks() {
+    fun clearSelectedTasks() = coroutineScope.launch {
+        delay(CLEAR_SELECTED_TASKS_DELAY_MILLIS)
         homeUiState = homeUiState.copy(selectedTasksIds = emptyList())
     }
 
@@ -150,5 +152,10 @@ class HomeViewModel(
                 toggleTaskPinnedValueUseCase(it.id)
             }
         }
+        clearSelectedTasks()
+    }
+
+    companion object {
+        private const val CLEAR_SELECTED_TASKS_DELAY_MILLIS: Long = 150
     }
 }

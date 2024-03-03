@@ -111,12 +111,15 @@ fun HomeScreen(
     onDeleteTaskListClick: () -> Unit,
     homeUiState: HomeUiState
 ) {
-    val scope = rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val closeDrawer: suspend () -> Unit = {
-        drawerState.close()
+    fun drawerAction(action: () -> Unit) {
+        coroutineScope.launch {
+            drawerState.close()
+            action.invoke()
+        }
     }
 
     var swipedTaskId by remember { mutableStateOf("") }
@@ -144,20 +147,16 @@ fun HomeScreen(
                 defaultTaskListName,
                 homeUiState.taskLists,
                 onAddTaskList = {
-                    scope.launch { closeDrawer() }
-                    navigateToAddTaskList()
+                    drawerAction(navigateToAddTaskList)
                 },
                 onTaskListItemClick = {
-                    onTaskListItemClick(it)
-                    scope.launch { closeDrawer() }
+                    drawerAction(action = { onTaskListItemClick(it) })
                 },
                 onSettingsItemClick = {
-                    navigateToSettings()
-                    scope.launch { closeDrawer() }
+                    drawerAction(navigateToSettings)
                 },
                 onAboutItemClick = {
-                    navigateToAbout()
-                    scope.launch { closeDrawer() }
+                    drawerAction(navigateToAbout)
                 }
             )
         },
@@ -166,13 +165,13 @@ fun HomeScreen(
         Scaffold(
             topBar = {
                 HomeTopAppBar(
-                    onMenuClick = { scope.launch { drawerState.open() } },
+                    onMenuClick = { coroutineScope.launch { drawerState.open() } },
                     onMoreClick = { homeMoreDropdownExpanded = true },
                     onHomeMoreDropdownDismissRequest = closeHomeMoreDropdown,
                     homeMoreDropdownExpanded = homeMoreDropdownExpanded,
                     onEditTaskListClick = {
                         if (homeUiState.isDefaultTaskListSelected) {
-                            scope.launch {
+                            coroutineScope.launch {
                                 snackbarHostState.showSnackbar(
                                     cannotEditTaskList,
                                     snackbarActionLabel,
@@ -186,7 +185,7 @@ fun HomeScreen(
                     },
                     onDeleteTaskListClick = {
                         if (homeUiState.isDefaultTaskListSelected) {
-                            scope.launch {
+                            coroutineScope.launch {
                                 snackbarHostState.showSnackbar(
                                     cannotDeleteTaskList,
                                     snackbarActionLabel,
