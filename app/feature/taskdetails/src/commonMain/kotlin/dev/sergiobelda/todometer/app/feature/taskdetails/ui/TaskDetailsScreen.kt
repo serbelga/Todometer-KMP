@@ -16,6 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -40,6 +43,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -82,6 +88,10 @@ fun TaskDetailsScreen(
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
 
+    val showTopAppBarTitle by remember {
+        derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
+    }
+
     when {
         taskDetailsUiState.isLoadingTask -> {
             LoadingScreenDialog(navigateBack)
@@ -93,14 +103,16 @@ fun TaskDetailsScreen(
                 topBar = {
                     TopAppBar(
                         title = {
-                            if (lazyListState.firstVisibleItemIndex > 0) {
-                                if (!taskDetailsUiState.isLoadingTask) {
-                                    Text(
-                                        taskDetailsUiState.task.title,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
-                                }
+                            AnimatedVisibility(
+                                visible = showTopAppBarTitle && !taskDetailsUiState.isLoadingTask,
+                                enter = fadeIn(),
+                                exit = fadeOut()
+                            ) {
+                                Text(
+                                    taskDetailsUiState.task.title,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
                             }
                         },
                         navigationIcon = {
@@ -141,9 +153,6 @@ fun TaskDetailsScreen(
                     )
                 },
                 content = { paddingValues ->
-                    if (lazyListState.firstVisibleItemIndex > 0) {
-                        TodometerDivider()
-                    }
                     LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
                         taskTitle(taskDetailsUiState.task)
                         taskChips(taskDetailsUiState.task)
