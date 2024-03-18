@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     kotlin("android")
-    id("todometer.common.library.android")
-    id("todometer.dependency-graph-generator")
-    id("todometer.spotless")
+    id("dev.sergiobelda.gradle.common.library.android")
+    id("dev.sergiobelda.gradle.dependency-graph-generator")
+    id("dev.sergiobelda.gradle.spotless")
 }
 
 android {

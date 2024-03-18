@@ -15,26 +15,24 @@ dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
-    implementation(libs.xmlpull)
-    implementation(libs.xpp3)
 }
 
 gradlePlugin {
     plugins {
         register("commonLibraryAndroid") {
-            id = "todometer.common.library.android"
+            id = "dev.sergiobelda.gradle.common.library.android"
             implementationClass =
-                "dev.sergiobelda.todometer.buildlogic.convention.CommonLibraryAndroidConventionPlugin"
+                "dev.sergiobelda.gradle.buildlogic.convention.CommonLibraryAndroidConventionPlugin"
         }
         register("dependencyGraphGenerator") {
-            id = "todometer.dependency-graph-generator"
+            id = "dev.sergiobelda.gradle.dependency-graph-generator"
             implementationClass =
-                "dev.sergiobelda.todometer.buildlogic.convention.DependencyGraphGeneratorConventionPlugin"
+                "dev.sergiobelda.gradle.buildlogic.convention.DependencyGraphGeneratorConventionPlugin"
         }
         register("spotless") {
-            id = "todometer.spotless"
+            id = "dev.sergiobelda.gradle.spotless"
             implementationClass =
-                "dev.sergiobelda.todometer.buildlogic.convention.SpotlessConventionPlugin"
+                "dev.sergiobelda.gradle.buildlogic.convention.SpotlessConventionPlugin"
         }
     }
 }

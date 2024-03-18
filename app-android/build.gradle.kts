@@ -3,8 +3,8 @@ plugins {
     kotlin("android")
     alias(libs.plugins.composeMultiplatform)
     id("com.google.android.gms.oss-licenses-plugin")
-    id("todometer.spotless")
-    id("todometer.dependency-graph-generator")
+    id("dev.sergiobelda.gradle.spotless")
+    id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
 
 if (file("google-services.json").exists()) {

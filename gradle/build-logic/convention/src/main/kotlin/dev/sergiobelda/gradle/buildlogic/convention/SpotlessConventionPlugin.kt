@@ -1,4 +1,4 @@
-package dev.sergiobelda.todometer.buildlogic.convention
+package dev.sergiobelda.gradle.buildlogic.convention
 /*
  * Copyright 2022 Sergio Belda
  *
