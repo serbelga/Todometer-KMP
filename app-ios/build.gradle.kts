@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
-    id("todometer.spotless")
-    id("todometer.dependency-graph-generator")
+    id("dev.sergiobelda.gradle.spotless")
+    id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
 
 kotlin {
