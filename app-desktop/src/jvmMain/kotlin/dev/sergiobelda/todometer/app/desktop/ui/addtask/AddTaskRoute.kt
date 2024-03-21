@@ -25,21 +25,12 @@ import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskViewModel
 
 @Composable
 internal fun AddTaskRoute(
-    navigateBack: () -> Unit,
-    addTaskViewModel: AddTaskViewModel = remember { koin.get() }
+    navigateBack: () -> Unit
 ) {
+    val addTaskViewModel: AddTaskViewModel = remember { koin.get() }
     addTaskViewModel.subscribeToComposition()
     AddTaskScreen(
-        navigateBack = navigateBack,
-        insertTask = { taskTitle, selectedTag, taskDescription, taskDueDate, taskChecklistItems ->
-            addTaskViewModel.insertTask(
-                taskTitle,
-                selectedTag,
-                taskDescription,
-                taskDueDate,
-                taskChecklistItems
-            )
-        },
-        addTaskUiState = addTaskViewModel.addTaskUiState
+        addTaskViewModel = addTaskViewModel,
+        navigateBack = navigateBack
     )
 }

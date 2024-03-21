@@ -27,12 +27,12 @@ import dev.sergiobelda.todometer.app.ios.koin
 @Composable
 internal fun SettingsRoute(
     navigateBack: () -> Unit,
-    settingsViewModel: SettingsViewModel = remember { koin.get() }
 ) {
+    val settingsViewModel: SettingsViewModel = remember { koin.get() }
     val appTheme by settingsViewModel.appTheme.collectAsState()
     SettingsScreen(
+        settingsViewModel = settingsViewModel,
         navigateBack = navigateBack,
-        onChooseAppTheme = { settingsViewModel.setAppTheme(it) },
         appTheme = appTheme
     )
 }

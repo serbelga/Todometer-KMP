@@ -17,37 +17,19 @@
 package dev.sergiobelda.todometer.app.android.ui.taskdetails
 
 import androidx.compose.runtime.Composable
+import org.koin.androidx.compose.koinViewModel
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsViewModel
-import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun TaskDetailsRoute(
     taskId: String,
     navigateToEditTask: () -> Unit,
-    navigateBack: () -> Unit,
-    taskDetailsViewModel: TaskDetailsViewModel = getViewModel { parametersOf(taskId) }
+    navigateBack: () -> Unit
 ) {
     TaskDetailsScreen(
         navigateToEditTask = navigateToEditTask,
         navigateBack = navigateBack,
-        taskDetailsUiState = taskDetailsViewModel.taskDetailsUiState,
-        onTaskChecklistItemClick = { id, checked ->
-            if (checked) {
-                taskDetailsViewModel.setTaskChecklistItemChecked(id)
-            } else {
-                taskDetailsViewModel.setTaskChecklistItemUnchecked(id)
-            }
-        },
-        onDeleteTaskCheckListItem = { id ->
-            taskDetailsViewModel.deleteTaskChecklistItem(id)
-        },
-        onAddTaskCheckListItem = { text ->
-            taskDetailsViewModel.insertTaskChecklistItem(text)
-        },
-        toggleTaskPinnedValueClick = {
-            taskDetailsViewModel.toggleTaskPinnedValueUseCase()
-        }
+        taskDetailsViewModel = koinViewModel { parametersOf(taskId) }
     )
 }

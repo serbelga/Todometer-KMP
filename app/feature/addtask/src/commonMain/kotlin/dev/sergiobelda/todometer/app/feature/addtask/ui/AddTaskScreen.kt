@@ -76,9 +76,17 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskScreen(
+    addTaskViewModel: AddTaskViewModel,
     navigateBack: () -> Unit,
-    insertTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?, taskChecklistItems: List<String>) -> Unit,
-    addTaskUiState: AddTaskUiState
+    insertTask: (String, Tag, String, Long?, List<String>) -> Unit = { taskTitle, selectedTag, taskDescription, taskDueDate, taskChecklistItems ->
+        addTaskViewModel.insertTask(
+            taskTitle,
+            selectedTag,
+            taskDescription,
+            taskDueDate,
+            taskChecklistItems
+        )
+    }
 ) {
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -102,9 +110,9 @@ fun AddTaskScreen(
     val taskChecklistItems = mutableStateListOf<String>()
     fun initialValuesUpdated() =
         taskTitle.isNotBlank() ||
-            taskDueDate != null ||
-            taskDescription.isNotBlank() ||
-            taskChecklistItems.isNotEmpty()
+                taskDueDate != null ||
+                taskDescription.isNotBlank() ||
+                taskChecklistItems.isNotEmpty()
 
     val onBack: () -> Unit = {
         if (initialValuesUpdated()) {
@@ -115,14 +123,14 @@ fun AddTaskScreen(
     }
     SystemBackHandler(onBack = onBack)
 
-    if (addTaskUiState.isAdded) {
+    if (addTaskViewModel.addTaskUiState.isAdded) {
         navigateBack()
     }
 
-    if (addTaskUiState.errorUi != null) {
+    if (addTaskViewModel.addTaskUiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = addTaskUiState.errorUi.message ?: ""
+                message = addTaskViewModel.addTaskUiState.errorUi?.message ?: ""
             )
         }
     }
@@ -134,7 +142,7 @@ fun AddTaskScreen(
             SaveActionTopAppBar(
                 navigateBack = onBack,
                 title = TodometerResources.strings.addTask,
-                isSaveButtonEnabled = !addTaskUiState.isAddingTask,
+                isSaveButtonEnabled = !addTaskViewModel.addTaskUiState.isAddingTask,
                 onSaveButtonClick = {
                     if (taskTitle.isBlank()) {
                         taskTitleInputError = true
@@ -148,7 +156,7 @@ fun AddTaskScreen(
                         )
                     }
                 },
-                saveButtonTintColor = if (addTaskUiState.isAddingTask) {
+                saveButtonTintColor = if (addTaskViewModel.addTaskUiState.isAddingTask) {
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
@@ -156,7 +164,7 @@ fun AddTaskScreen(
             )
         },
         content = { paddingValues ->
-            if (addTaskUiState.isAddingTask) {
+            if (addTaskViewModel.addTaskUiState.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
