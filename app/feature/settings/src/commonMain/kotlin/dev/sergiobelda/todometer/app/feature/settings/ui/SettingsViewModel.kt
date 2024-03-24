@@ -16,10 +16,11 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -31,12 +32,12 @@ class SettingsViewModel(
 ) : ViewModel() {
     val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
-            coroutineScope,
+            viewModelScope,
             SharingStarted.WhileSubscribed(),
             AppTheme.FOLLOW_SYSTEM
         )
 
-    fun setAppTheme(theme: AppTheme) = coroutineScope.launch {
+    fun setAppTheme(theme: AppTheme) = viewModelScope.launch {
         setAppThemeUseCase(theme)
     }
 }

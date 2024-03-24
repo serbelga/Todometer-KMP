@@ -66,14 +66,13 @@ dependencies {
     implementation(projects.common.navigation)
     implementation(projects.common.resources)
     implementation(projects.common.ui)
-    implementation(projects.common.viewmodel)
 
     implementation(libs.androidx.activityCompose)
 
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodelCompose)
+    // TODO: Remove when update Compose Multiplatform to 1.7.0
+    implementation("androidx.compose.ui:ui:1.7.0-alpha05")
 
     implementation(libs.androidx.navigation.compose)
 

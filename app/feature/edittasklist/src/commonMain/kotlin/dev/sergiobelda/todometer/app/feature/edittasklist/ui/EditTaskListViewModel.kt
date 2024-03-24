@@ -19,12 +19,13 @@ package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class EditTaskListViewModel(
@@ -39,7 +40,7 @@ class EditTaskListViewModel(
         getTaskListSelected()
     }
 
-    private fun getTaskListSelected() = coroutineScope.launch {
+    private fun getTaskListSelected() = viewModelScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 editTaskListUiState = editTaskListUiState.copy(
@@ -57,7 +58,7 @@ class EditTaskListViewModel(
         }
     }
 
-    fun updateTaskList(name: String) = coroutineScope.launch {
+    fun updateTaskList(name: String) = viewModelScope.launch {
         editTaskListUiState.taskList?.let {
             updateTaskListUseCase(it.copy(name = name))
         }

@@ -19,12 +19,13 @@ package dev.sergiobelda.todometer.app.feature.addtask.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.task.InsertTaskInTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
@@ -40,7 +41,7 @@ class AddTaskViewModel(
         description: String? = null,
         dueDate: Long? = null,
         taskChecklistItems: List<String> = emptyList()
-    ) = coroutineScope.launch {
+    ) = viewModelScope.launch {
         addTaskUiState = addTaskUiState.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(
             title,

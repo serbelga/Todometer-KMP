@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.app.android.ui.home
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeViewModel
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun HomeRoute(
@@ -29,7 +29,7 @@ internal fun HomeRoute(
     navigateToTaskDetails: (String) -> Unit,
     navigateToSettings: () -> Unit,
     navigateToAbout: () -> Unit,
-    homeViewModel: HomeViewModel = getViewModel()
+    homeViewModel: HomeViewModel = koinViewModel()
 ) {
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,

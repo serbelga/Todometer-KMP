@@ -34,7 +34,7 @@ import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun MainContent(mainViewModel: MainViewModel = getViewModel()) {
+    private fun MainContent(mainViewModel: MainViewModel = koinViewModel()) {
         val navController = rememberNavController()
         val action = remember(navController) { Action(navController) }
 
