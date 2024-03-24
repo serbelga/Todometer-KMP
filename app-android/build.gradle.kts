@@ -71,8 +71,6 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodelCompose)
     // TODO: Remove when update Compose Multiplatform to 1.7.0
     implementation("androidx.compose.ui:ui:1.7.0-alpha05")
 

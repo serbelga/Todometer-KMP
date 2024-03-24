@@ -21,6 +21,7 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material3)
                 api(compose.ui)
+                api(libs.androidx.lifecycle.viewmodel)
 
                 implementation(projects.common.domain)
 

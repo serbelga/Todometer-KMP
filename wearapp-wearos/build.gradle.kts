@@ -78,7 +78,6 @@ dependencies {
     implementation(libs.androidx.coreKtx)
 
     implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.lifecycle.viewmodel)
 
     implementation(libs.androidx.splashscreen)
 
