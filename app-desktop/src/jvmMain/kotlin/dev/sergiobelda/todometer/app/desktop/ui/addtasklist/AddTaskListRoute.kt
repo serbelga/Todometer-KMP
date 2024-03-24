@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.app.desktop.ui.addtasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.app.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.app.desktop.koin
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
@@ -28,7 +27,6 @@ internal fun AddTaskListRoute(
     navigateBack: () -> Unit,
     addTaskListViewModel: AddTaskListViewModel = remember { koin.get() }
 ) {
-    addTaskListViewModel.subscribeToComposition()
     AddTaskListScreen(
         navigateBack = navigateBack,
         insertTaskList = { taskListName ->

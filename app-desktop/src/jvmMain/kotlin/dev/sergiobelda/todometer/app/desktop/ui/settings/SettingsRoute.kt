@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.app.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.app.desktop.koin
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
@@ -30,7 +29,6 @@ internal fun SettingsRoute(
     navigateBack: () -> Unit,
     settingsViewModel: SettingsViewModel = remember { koin.get() }
 ) {
-    settingsViewModel.subscribeToComposition()
     val appTheme by settingsViewModel.appTheme.collectAsState()
     SettingsScreen(
         navigateBack = navigateBack,

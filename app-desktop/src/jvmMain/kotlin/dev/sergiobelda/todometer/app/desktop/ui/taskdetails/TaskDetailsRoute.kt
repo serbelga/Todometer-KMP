@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.app.desktop.ui.taskdetails
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.app.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.app.desktop.koin
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsViewModel
@@ -31,7 +30,6 @@ internal fun TaskDetailsRoute(
     navigateBack: () -> Unit,
     taskDetailsViewModel: TaskDetailsViewModel = remember { koin.get { parametersOf(taskId) } }
 ) {
-    taskDetailsViewModel.subscribeToComposition()
     TaskDetailsScreen(
         navigateToEditTask = navigateToEditTask,
         navigateBack = navigateBack,

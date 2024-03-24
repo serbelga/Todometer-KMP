@@ -19,11 +19,12 @@ package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
@@ -33,7 +34,7 @@ class AddTaskListViewModel(
     var addTaskListUiState by mutableStateOf(AddTaskListUiState())
         private set
 
-    fun insertTaskList(name: String) = coroutineScope.launch {
+    fun insertTaskList(name: String) = viewModelScope.launch {
         addTaskListUiState = addTaskListUiState.copy(isAddingTaskList = true)
         val result = insertTaskListUseCase.invoke(name)
         result.doIfSuccess {

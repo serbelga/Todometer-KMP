@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.app.desktop.ui.edittasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.app.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.app.desktop.koin
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListViewModel
@@ -28,7 +27,6 @@ internal fun EditTaskListRoute(
     navigateBack: () -> Unit,
     editTaskListViewModel: EditTaskListViewModel = remember { koin.get() }
 ) {
-    editTaskListViewModel.subscribeToComposition()
     EditTaskListScreen(
         navigateBack = navigateBack,
         editTaskList = { taskListName ->

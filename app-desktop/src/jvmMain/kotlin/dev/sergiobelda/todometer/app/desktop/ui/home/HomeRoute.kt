@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.app.desktop.ui.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.app.common.ui.viewmodel.subscribeToComposition
 import dev.sergiobelda.todometer.app.desktop.koin
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeViewModel
@@ -33,7 +32,6 @@ internal fun HomeRoute(
     navigateToAbout: () -> Unit,
     homeViewModel: HomeViewModel = remember { koin.get() }
 ) {
-    homeViewModel.subscribeToComposition()
     HomeScreen(
         navigateToAddTaskList = navigateToAddTaskList,
         navigateToEditTaskList = navigateToEditTaskList,

@@ -22,7 +22,6 @@ kotlin {
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
-                implementation(projects.common.viewmodel)
             }
         }
         val commonTest by getting

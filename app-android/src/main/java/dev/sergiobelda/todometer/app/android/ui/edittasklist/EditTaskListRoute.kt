@@ -19,12 +19,12 @@ package dev.sergiobelda.todometer.app.android.ui.edittasklist
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListViewModel
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun EditTaskListRoute(
     navigateBack: () -> Unit,
-    editTaskListViewModel: EditTaskListViewModel = getViewModel()
+    editTaskListViewModel: EditTaskListViewModel = koinViewModel()
 ) {
     EditTaskListScreen(
         navigateBack = navigateBack,

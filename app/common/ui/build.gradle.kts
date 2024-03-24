@@ -21,12 +21,12 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material3)
                 api(compose.ui)
+                api(libs.androidx.lifecycle.viewmodelCompose)
 
                 implementation(projects.app.common.designsystem)
                 implementation(projects.common.domain)
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)
-                implementation(projects.common.viewmodel)
                 implementation(projects.common.ui)
 
                 implementation(libs.kotlin.datetime)
