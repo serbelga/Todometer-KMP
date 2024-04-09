@@ -19,3 +19,4 @@ local.properties
 /wearapp-wearos/google-services.json
 /wearapp-wearos/release/*
 todometer_preferences.preferences_pb
+/.kotlin/
