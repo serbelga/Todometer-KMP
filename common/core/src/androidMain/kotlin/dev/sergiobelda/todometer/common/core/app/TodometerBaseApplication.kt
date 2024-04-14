@@ -20,7 +20,7 @@ import android.app.Application
 import dev.sergiobelda.todometer.common.database.DriverFactory
 import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 
-open class TodometerBaseApp : Application() {
+open class TodometerBaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

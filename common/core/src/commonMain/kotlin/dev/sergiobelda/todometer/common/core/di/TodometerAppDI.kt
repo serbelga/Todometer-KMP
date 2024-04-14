@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.common.core.di
 
 import androidx.compose.runtime.Composable
-import org.koin.compose.koinInject
-import org.koin.core.parameter.ParametersDefinition
-import org.koin.core.qualifier.Qualifier
+import org.koin.compose.KoinApplication
+import org.koin.dsl.KoinAppDeclaration
 
 @Composable
-actual inline fun <reified T : Any> getViewModel(
-    qualifier: Qualifier?,
-    noinline parameters: ParametersDefinition?
-): T = koinInject(
-    qualifier = qualifier,
-    parameters = parameters
+fun TodometerAppDI(
+    appDeclaration: KoinAppDeclaration = {},
+    content: @Composable () -> Unit
+) = KoinApplication(
+    application = {
+        modules(
+            databaseModule +
+                preferenceModule +
+                localDataSourceModule +
+                repositoryModule +
+                useCaseModule
+        )
+        appDeclaration()
+    },
+    content = content
 )

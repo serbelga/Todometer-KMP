@@ -23,18 +23,21 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.compose.rememberNavController
-import dev.sergiobelda.todometer.app.TodometerNavHost
-import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
+import dev.sergiobelda.todometer.app.TodometerApp
+import dev.sergiobelda.todometer.app.di.mainViewModelModule
+import dev.sergiobelda.todometer.app.feature.addtask.di.addTaskViewModelModule
+import dev.sergiobelda.todometer.app.feature.addtasklist.di.addTaskListViewModelModule
+import dev.sergiobelda.todometer.app.feature.edittask.di.editTaskViewModelModule
+import dev.sergiobelda.todometer.app.feature.edittasklist.di.editTaskListViewModelModule
+import dev.sergiobelda.todometer.app.feature.home.di.homeViewModelModule
+import dev.sergiobelda.todometer.app.feature.settings.di.settingsViewModelModule
+import dev.sergiobelda.todometer.app.feature.taskdetails.di.taskDetailsViewModelModule
+import dev.sergiobelda.todometer.common.core.di.TodometerAppDI
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -47,45 +50,39 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            ProvideTodometerStrings {
-                MainContent()
-            }
-        }
-    }
-
-    @Composable
-    private fun MainContent(mainViewModel: MainViewModel = koinViewModel()) {
-        val navController = rememberNavController()
-        val action = remember(navController) { Action(navController) }
-
-        val appThemeState = mainViewModel.appTheme.collectAsStateWithLifecycle()
-        val darkTheme: Boolean = when (appThemeState.value) {
-            AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-            AppTheme.DARK_THEME -> true
-            AppTheme.LIGHT_THEME -> false
-        }
-
-        DisposableEffect(darkTheme) {
-            enableEdgeToEdge(
-                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
-                    darkTheme
+            TodometerAppDI(
+                appDeclaration = {
+                    modules(
+                        mainViewModelModule +
+                            addTaskViewModelModule +
+                            addTaskListViewModelModule +
+                            editTaskViewModelModule +
+                            editTaskListViewModelModule +
+                            homeViewModelModule +
+                            settingsViewModelModule +
+                            taskDetailsViewModelModule
+                    )
+                    androidContext(this@MainActivity)
                 }
-            )
-            onDispose {}
-        }
+            ) {
+                val mainViewModel: MainViewModel = koinViewModel()
+                val appThemeState = mainViewModel.appTheme.collectAsStateWithLifecycle()
+                val darkTheme: Boolean = when (appThemeState.value) {
+                    AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                    AppTheme.DARK_THEME -> true
+                    AppTheme.LIGHT_THEME -> false
+                }
 
-        // TODO: Remove
-        val keyboardController = LocalSoftwareKeyboardController.current
-        val navigateBackAction: () -> Unit = {
-            keyboardController?.hide()
-            action.navigateUp()
-        }
-        TodometerAppTheme(darkTheme) {
-            TodometerNavHost(
-                navController = navController,
-                action = action,
-                navigateBackAction = navigateBackAction
-            )
+                DisposableEffect(darkTheme) {
+                    enableEdgeToEdge(
+                        statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
+                            darkTheme
+                        }
+                    )
+                    onDispose {}
+                }
+                TodometerApp()
+            }
         }
     }
 }

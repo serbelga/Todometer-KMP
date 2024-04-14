@@ -18,22 +18,15 @@ package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,17 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
-import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
-import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
-import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
@@ -65,7 +53,7 @@ fun AddTaskListScreen(
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
 
-    if (viewModel.uiState.isAdded) {
+    if (viewModel.uiState.isTaskListAdded) {
         navigateBack()
     }
 
@@ -109,45 +97,6 @@ fun AddTaskListScreen(
                     taskListNameInputError = false
                 }
             )
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun AddTaskListTopBar(
-    navigateBack: () -> Unit,
-    isSaveButtonEnabled: Boolean,
-    onSaveButtonClick: () -> Unit,
-    saveButtonTintColor: Color = Color.Unspecified
-) {
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = navigateBack) {
-                Icon(
-                    Images.Icons.NavigateBefore,
-                    contentDescription = TodometerResources.strings.back
-                )
-            }
-        },
-        title = { Text(TodometerResources.strings.addTaskList) },
-        actions = {
-            TextButton(
-                enabled = isSaveButtonEnabled,
-                onClick = onSaveButtonClick
-            ) {
-                Icon(
-                    Images.Icons.Check,
-                    contentDescription = TodometerResources.strings.save,
-                    tint = saveButtonTintColor
-                )
-                Spacer(modifier = Modifier.size(4.dp))
-                Text(
-                    text = TodometerResources.strings.save,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = saveButtonTintColor
-                )
-            }
         }
     )
 }

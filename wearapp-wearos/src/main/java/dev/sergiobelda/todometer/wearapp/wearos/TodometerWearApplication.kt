@@ -14,22 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.core.di
+package dev.sergiobelda.todometer.wearapp.wearos
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import dev.sergiobelda.todometer.common.core.app.TodometerBaseApplication
 
-internal fun startDI(appDeclaration: KoinAppDeclaration) = startKoin {
-    modules(
-        databaseModule +
-            preferenceModule +
-            localDataSourceModule +
-            repositoryModule +
-            useCaseModule
-    )
-    appDeclaration()
-}
-
-fun startAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI(appDeclaration)
-
-fun startWearAppDI(appDeclaration: KoinAppDeclaration = {}) = startDI(appDeclaration)
+class TodometerWearApplication : TodometerBaseApplication()

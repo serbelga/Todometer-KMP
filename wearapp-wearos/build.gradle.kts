@@ -88,10 +88,6 @@ dependencies {
     implementation(libs.wear.input)
     implementation(libs.wear.wear)
 
-    implementation(project.dependencies.platform(libs.koin.bom))
-    implementation(libs.koin.android)
-    implementation(libs.koin.compose)
-
     implementation(libs.google.playServicesWearable)
 
     implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))

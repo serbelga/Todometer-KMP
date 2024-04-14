@@ -63,10 +63,6 @@ kotlin {
             dependencies {
                 implementation(projects.common.android)
 
-                implementation(project.dependencies.platform(libs.koin.bom))
-                implementation(libs.koin.android)
-                implementation(libs.koin.compose)
-
                 implementation(libs.androidx.activityCompose)
 
                 implementation(libs.androidx.glance.appWidget)
@@ -137,7 +133,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "dev.sergiobelda.todometer.app.TodometerAppKt"
+        mainClass = "dev.sergiobelda.todometer.app.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules(
@@ -165,3 +161,4 @@ compose.desktop {
     }
 }
 
+task("testClasses")

@@ -48,6 +48,7 @@ import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsDestinati
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.navigateToTaskDetails
 import dev.sergiobelda.todometer.common.navigation.Action
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -102,7 +103,7 @@ private fun NavGraphBuilder.homeNode(
             navigateToTaskDetails = navigateToTaskDetails,
             navigateToSettings = navigateToSettings,
             navigateToAbout = navigateToAbout,
-            viewModel = getViewModel()
+            viewModel = koinInject()
         )
     }
 }
@@ -119,7 +120,7 @@ private fun NavGraphBuilder.taskDetailsNode(
         TaskDetailsScreen(
             navigateToEditTask = { navigateToEditTask(taskId) },
             navigateBack = navigateBack,
-            viewModel = getViewModel { parametersOf(taskId) }
+            viewModel = koinInject { parametersOf(taskId) }
         )
     }
 }
@@ -130,7 +131,7 @@ private fun NavGraphBuilder.addTaskListRoute(
     composable(AddTaskListDestination.route) {
         AddTaskListScreen(
             navigateBack = navigateBack,
-            viewModel = getViewModel()
+            viewModel = koinInject()
         )
     }
 }
@@ -141,7 +142,7 @@ private fun NavGraphBuilder.editTaskListNode(
     composable(EditTaskListDestination.route) {
         EditTaskListScreen(
             navigateBack = navigateBack,
-            viewModel = getViewModel()
+            viewModel = koinInject()
         )
     }
 }
@@ -155,7 +156,7 @@ private fun NavGraphBuilder.addTaskNode(
     ) {
         AddTaskScreen(
             navigateBack = navigateBack,
-            viewModel = getViewModel()
+            viewModel = koinInject()
         )
     }
 }
@@ -167,7 +168,7 @@ private fun NavGraphBuilder.editTaskNode(
         val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)
         EditTaskScreen(
             navigateBack = navigateBack,
-            viewModel = getViewModel { parametersOf(taskId) }
+            viewModel = koinInject { parametersOf(taskId) }
         )
     }
 }
@@ -178,7 +179,7 @@ private fun NavGraphBuilder.settingsNode(
     composable(SettingsDestination.route) {
         SettingsScreen(
             navigateBack = navigateBack,
-            viewModel = getViewModel()
+            viewModel = koinInject()
         )
     }
 }

@@ -55,4 +55,6 @@ internal fun Project.configureCommonAndroid(
             targetCompatibility = JavaVersion.VERSION_17
         }
     }
+
+    task("testClasses")
 }

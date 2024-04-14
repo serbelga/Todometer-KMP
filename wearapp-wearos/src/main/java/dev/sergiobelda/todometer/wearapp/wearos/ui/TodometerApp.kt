@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.sergiobelda.todometer.common.navigation.Action
+import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 import dev.sergiobelda.todometer.wearapp.wearos.ui.theme.TodometerTheme
 
 @Composable
@@ -27,7 +28,9 @@ fun TodometerApp() {
     val navController = rememberSwipeDismissableNavController()
     val action = remember(navController) { Action(navController) }
 
-    TodometerTheme {
-        TodometerNavHost(navController = navController, action = action)
+    ProvideTodometerStrings {
+        TodometerTheme {
+            TodometerNavHost(navController = navController, action = action)
+        }
     }
 }

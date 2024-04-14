@@ -39,13 +39,13 @@ class AddTaskListViewModel(
         result.doIfSuccess {
             uiState = uiState.copy(
                 isAddingTaskList = false,
-                isAdded = true,
+                isTaskListAdded = true,
                 errorUi = null
             )
         }.doIfError { error ->
             uiState = uiState.copy(
                 isAddingTaskList = false,
-                isAdded = false,
+                isTaskListAdded = false,
                 errorUi = error.mapToErrorUi()
             )
         }
