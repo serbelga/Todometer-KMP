@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import dev.sergiobelda.todometer.common.core.di.TodometerAppDI
+import dev.sergiobelda.todometer.wearapp.wearos.di.TodometerAppDI
 import dev.sergiobelda.todometer.wearapp.wearos.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 

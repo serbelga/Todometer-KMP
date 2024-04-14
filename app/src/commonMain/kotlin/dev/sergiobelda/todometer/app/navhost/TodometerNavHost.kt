@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.app.navhost
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition

@@ -33,6 +33,6 @@ jobs:
     - name: Run Unit tests
       run: ./gradlew testDebugUnitTest
     - name: Build app
-      run:  ./gradlew app:assemble
+      run:  ./gradlew app:assembleDebug
     - name: Build wearapp-wearos
       run:  ./gradlew wearapp-wearos:assembleDebug

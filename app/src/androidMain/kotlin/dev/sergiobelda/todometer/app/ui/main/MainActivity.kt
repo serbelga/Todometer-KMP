@@ -27,15 +27,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.sergiobelda.todometer.app.TodometerApp
+import dev.sergiobelda.todometer.app.di.TodometerAppDI
 import dev.sergiobelda.todometer.app.di.mainViewModelModule
-import dev.sergiobelda.todometer.app.feature.addtask.di.addTaskViewModelModule
-import dev.sergiobelda.todometer.app.feature.addtasklist.di.addTaskListViewModelModule
-import dev.sergiobelda.todometer.app.feature.edittask.di.editTaskViewModelModule
-import dev.sergiobelda.todometer.app.feature.edittasklist.di.editTaskListViewModelModule
-import dev.sergiobelda.todometer.app.feature.home.di.homeViewModelModule
-import dev.sergiobelda.todometer.app.feature.settings.di.settingsViewModelModule
-import dev.sergiobelda.todometer.app.feature.taskdetails.di.taskDetailsViewModelModule
-import dev.sergiobelda.todometer.common.core.di.TodometerAppDI
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.compose.koinViewModel
@@ -52,16 +45,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TodometerAppDI(
                 appDeclaration = {
-                    modules(
-                        mainViewModelModule +
-                            addTaskViewModelModule +
-                            addTaskListViewModelModule +
-                            editTaskViewModelModule +
-                            editTaskListViewModelModule +
-                            homeViewModelModule +
-                            settingsViewModelModule +
-                            taskDetailsViewModelModule
-                    )
+                    modules(mainViewModelModule)
                     androidContext(this@MainActivity)
                 }
             ) {

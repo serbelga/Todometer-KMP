@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2024 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,3 +15,8 @@
  */
 
 package dev.sergiobelda.todometer.common.core.di
+
+val dataModules = databaseModule +
+    preferenceModule +
+    localDataSourceModule +
+    repositoryModule

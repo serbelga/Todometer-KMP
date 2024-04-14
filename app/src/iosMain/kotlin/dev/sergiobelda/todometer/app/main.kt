@@ -17,30 +17,11 @@
 package dev.sergiobelda.todometer.app
 
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.sergiobelda.todometer.app.feature.addtask.di.addTaskViewModelModule
-import dev.sergiobelda.todometer.app.feature.addtasklist.di.addTaskListViewModelModule
-import dev.sergiobelda.todometer.app.feature.edittask.di.editTaskViewModelModule
-import dev.sergiobelda.todometer.app.feature.edittasklist.di.editTaskListViewModelModule
-import dev.sergiobelda.todometer.app.feature.home.di.homeViewModelModule
-import dev.sergiobelda.todometer.app.feature.settings.di.settingsViewModelModule
-import dev.sergiobelda.todometer.app.feature.taskdetails.di.taskDetailsViewModelModule
-import dev.sergiobelda.todometer.common.core.di.TodometerAppDI
+import dev.sergiobelda.todometer.app.di.TodometerAppDI
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController = ComposeUIViewController {
-    TodometerAppDI(
-        appDeclaration = {
-            modules(
-                addTaskViewModelModule +
-                    addTaskListViewModelModule +
-                    editTaskViewModelModule +
-                    editTaskListViewModelModule +
-                    homeViewModelModule +
-                    settingsViewModelModule +
-                    taskDetailsViewModelModule
-            )
-        }
-    ) {
+    TodometerAppDI {
         TodometerApp()
     }
 }

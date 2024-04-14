@@ -56,5 +56,6 @@ internal fun Project.configureCommonAndroid(
         }
     }
 
+    // Workaround to avoid task "testClasses" not found on "Rebuild project"
     task("testClasses")
 }

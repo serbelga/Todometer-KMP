@@ -161,4 +161,5 @@ compose.desktop {
     }
 }
 
+// Workaround to avoid task "testClasses" not found on "Rebuild project"
 task("testClasses")
