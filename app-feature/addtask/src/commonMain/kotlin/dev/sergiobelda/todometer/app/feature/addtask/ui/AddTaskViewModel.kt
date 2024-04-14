@@ -31,7 +31,7 @@ class AddTaskViewModel(
     private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase
 ) : ViewModel() {
 
-    var addTaskUiState by mutableStateOf(AddTaskUiState())
+    var uiState by mutableStateOf(AddTaskUiState())
         private set
 
     fun insertTask(
@@ -41,7 +41,7 @@ class AddTaskViewModel(
         dueDate: Long? = null,
         taskChecklistItems: List<String> = emptyList()
     ) = coroutineScope.launch {
-        addTaskUiState = addTaskUiState.copy(isAddingTask = true)
+        uiState = uiState.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(
             title,
             tag,
@@ -50,15 +50,15 @@ class AddTaskViewModel(
             taskChecklistItems
         )
         result.doIfSuccess {
-            addTaskUiState = addTaskUiState.copy(
+            uiState = uiState.copy(
                 isAddingTask = false,
-                isAdded = true,
+                isTaskAdded = true,
                 errorUi = null
             )
         }.doIfError { error ->
-            addTaskUiState = addTaskUiState.copy(
+            uiState = uiState.copy(
                 isAddingTask = false,
-                isAdded = false,
+                isTaskAdded = false,
                 errorUi = error.mapToErrorUi()
             )
         }

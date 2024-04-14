@@ -45,6 +45,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -66,9 +68,9 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 fun SettingsScreen(
     navigateBack: () -> Unit,
-    onChooseAppTheme: (AppTheme) -> Unit,
-    appTheme: AppTheme
+    viewModel: SettingsViewModel
 ) {
+    val appTheme by viewModel.appTheme.collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -87,7 +89,10 @@ fun SettingsScreen(
         }
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            SettingsChooseAppTheme(appTheme, onItemClick = { onChooseAppTheme(it) })
+            SettingsChooseAppTheme(
+                appTheme,
+                onItemClick = { viewModel.setAppTheme(it) }
+            )
         }
     }
 }

@@ -73,12 +73,46 @@ import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskDetailsScreen(
-    navigateToEditTask: () -> Unit,
     navigateBack: () -> Unit,
-    taskDetailsUiState: TaskDetailsUiState,
+    navigateToEditTask: () -> Unit,
+    viewModel: TaskDetailsViewModel
+) {
+    when {
+        viewModel.uiState.isLoadingTask -> {
+            LoadingScreenDialog(navigateBack)
+        }
+
+        !viewModel.uiState.isLoadingTask ->
+            viewModel.uiState.task?.let { task ->
+                TaskDetailsSuccessContent(
+                    task = task,
+                    taskChecklistItems = viewModel.uiState.taskChecklistItems,
+                    navigateBack = navigateBack,
+                    navigateToEditTask = navigateToEditTask,
+                    onTaskChecklistItemClick = { id, checked ->
+                        if (checked) {
+                            viewModel.setTaskChecklistItemChecked(id)
+                        } else {
+                            viewModel.setTaskChecklistItemUnchecked(id)
+                        }
+                    },
+                    onDeleteTaskCheckListItem = viewModel::deleteTaskChecklistItem,
+                    onAddTaskCheckListItem = viewModel::insertTaskChecklistItem,
+                    toggleTaskPinnedValueClick = viewModel::toggleTaskPinnedValueUseCase
+                )
+            }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun TaskDetailsSuccessContent(
+    task: Task,
+    taskChecklistItems: List<TaskChecklistItem>,
+    navigateBack: () -> Unit,
+    navigateToEditTask: () -> Unit,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
@@ -91,83 +125,72 @@ fun TaskDetailsScreen(
     val showTopAppBarTitle by remember {
         derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
     }
-
-    when {
-        taskDetailsUiState.isLoadingTask -> {
-            LoadingScreenDialog(navigateBack)
-        }
-
-        !taskDetailsUiState.isLoadingTask && taskDetailsUiState.task != null -> {
-            Scaffold(
-                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-                topBar = {
-                    TopAppBar(
-                        title = {
-                            AnimatedVisibility(
-                                visible = showTopAppBarTitle && !taskDetailsUiState.isLoadingTask,
-                                enter = fadeIn(),
-                                exit = fadeOut()
-                            ) {
-                                Text(
-                                    taskDetailsUiState.task.title,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-                        },
-                        navigationIcon = {
-                            IconButton(onClick = navigateBack) {
-                                Icon(
-                                    Images.Icons.NavigateBefore,
-                                    contentDescription = TodometerResources.strings.back
-                                )
-                            }
-                        },
-                        actions = {
-                            if (!taskDetailsUiState.isLoadingTask) {
-                                IconButton(onClick = toggleTaskPinnedValueClick) {
-                                    Icon(
-                                        imageVector = if (taskDetailsUiState.task.isPinned) {
-                                            Images.Icons.PushPinFilled
-                                        } else {
-                                            Images.Icons.PushPin
-                                        },
-                                        contentDescription = if (taskDetailsUiState.task.isPinned) {
-                                            TodometerResources.strings.pinned_task
-                                        } else {
-                                            TodometerResources.strings.not_pinned_task
-                                        },
-                                        tint = MaterialTheme.colorScheme.primary
-                                    )
-                                }
-                                IconButton(onClick = navigateToEditTask) {
-                                    Icon(
-                                        Images.Icons.Edit,
-                                        contentDescription = TodometerResources.strings.edit_task,
-                                        tint = MaterialTheme.colorScheme.primary
-                                    )
-                                }
-                            }
-                        },
-                        scrollBehavior = scrollBehavior
-                    )
-                },
-                content = { paddingValues ->
-                    LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
-                        taskTitle(taskDetailsUiState.task)
-                        taskChips(taskDetailsUiState.task)
-                        taskChecklist(
-                            taskDetailsUiState.taskChecklistItems,
-                            onTaskChecklistItemClick = onTaskChecklistItemClick,
-                            onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
-                            onAddTaskCheckListItem = onAddTaskCheckListItem
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                title = {
+                    AnimatedVisibility(
+                        visible = showTopAppBarTitle,
+                        enter = fadeIn(),
+                        exit = fadeOut()
+                    ) {
+                        Text(
+                            task.title,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
-                        taskDescription(taskDetailsUiState.task.description)
                     }
-                }
+                },
+                navigationIcon = {
+                    IconButton(onClick = navigateBack) {
+                        Icon(
+                            Images.Icons.NavigateBefore,
+                            contentDescription = TodometerResources.strings.back
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = toggleTaskPinnedValueClick) {
+                        Icon(
+                            imageVector = if (task.isPinned) {
+                                Images.Icons.PushPinFilled
+                            } else {
+                                Images.Icons.PushPin
+                            },
+                            contentDescription = if (task.isPinned) {
+                                TodometerResources.strings.pinned_task
+                            } else {
+                                TodometerResources.strings.not_pinned_task
+                            },
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    IconButton(onClick = navigateToEditTask) {
+                        Icon(
+                            Images.Icons.Edit,
+                            contentDescription = TodometerResources.strings.edit_task,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior
             )
+        },
+        content = { paddingValues ->
+            LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
+                taskTitle(task)
+                taskChips(task)
+                taskChecklist(
+                    taskChecklistItems,
+                    onTaskChecklistItemClick = onTaskChecklistItemClick,
+                    onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
+                    onAddTaskCheckListItem = onAddTaskCheckListItem
+                )
+                taskDescription(task.description)
+            }
         }
-    }
+    )
 }
 
 private fun LazyListScope.taskTitle(task: Task) {

@@ -32,9 +32,7 @@ jobs:
       run: ./gradlew spotlessCheck
     - name: Run Unit tests
       run: ./gradlew testDebugUnitTest
-    - name: Build app-android
-      run:  ./gradlew app-android:assembleDebug
-    - name: Build app-desktop
-      run:  ./gradlew app-desktop:assemble
+    - name: Build app
+      run:  ./gradlew app:assemble
     - name: Build wearapp-wearos
       run:  ./gradlew wearapp-wearos:assembleDebug

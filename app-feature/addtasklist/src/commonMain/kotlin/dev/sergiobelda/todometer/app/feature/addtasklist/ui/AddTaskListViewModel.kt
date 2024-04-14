@@ -30,20 +30,20 @@ class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
-    var addTaskListUiState by mutableStateOf(AddTaskListUiState())
+    var uiState by mutableStateOf(AddTaskListUiState())
         private set
 
     fun insertTaskList(name: String) = coroutineScope.launch {
-        addTaskListUiState = addTaskListUiState.copy(isAddingTaskList = true)
+        uiState = uiState.copy(isAddingTaskList = true)
         val result = insertTaskListUseCase.invoke(name)
         result.doIfSuccess {
-            addTaskListUiState = addTaskListUiState.copy(
+            uiState = uiState.copy(
                 isAddingTaskList = false,
                 isAdded = true,
                 errorUi = null
             )
         }.doIfError { error ->
-            addTaskListUiState = addTaskListUiState.copy(
+            uiState = uiState.copy(
                 isAddingTaskList = false,
                 isAdded = false,
                 errorUi = error.mapToErrorUi()

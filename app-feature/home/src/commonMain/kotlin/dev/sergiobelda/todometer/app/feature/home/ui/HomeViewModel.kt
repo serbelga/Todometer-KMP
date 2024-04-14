@@ -46,7 +46,7 @@ class HomeViewModel(
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
 ) : ViewModel() {
 
-    var homeUiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
+    var uiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
         private set
 
     init {
@@ -58,11 +58,11 @@ class HomeViewModel(
     private fun getTaskListSelected() = coroutineScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
-                homeUiState = homeUiState.copy(
+                uiState = uiState.copy(
                     taskListSelected = taskList
                 )
             }.doIfError {
-                homeUiState = homeUiState.copy(
+                uiState = uiState.copy(
                     taskListSelected = null
                 )
             }
@@ -72,12 +72,12 @@ class HomeViewModel(
     private fun getTaskListSelectedTasks() = coroutineScope.launch {
         getTaskListSelectedTasksUseCase().collect { result ->
             result.doIfSuccess { tasks ->
-                homeUiState = homeUiState.copy(
+                uiState = uiState.copy(
                     isLoadingTasks = false,
                     tasks = tasks
                 )
             }.doIfError {
-                homeUiState = homeUiState.copy(
+                uiState = uiState.copy(
                     isLoadingTasks = false,
                     tasks = emptyList()
                 )
@@ -88,11 +88,11 @@ class HomeViewModel(
     private fun getTaskLists() = coroutineScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
-                homeUiState = homeUiState.copy(
+                uiState = uiState.copy(
                     taskLists = taskLists
                 )
             }.doIfError {
-                homeUiState = homeUiState.copy(
+                uiState = uiState.copy(
                     taskLists = emptyList()
                 )
             }
@@ -100,7 +100,7 @@ class HomeViewModel(
     }
 
     fun deleteSelectedTasks() = coroutineScope.launch {
-        deleteTasksUseCase(homeUiState.selectedTasksIds)
+        deleteTasksUseCase(uiState.selectedTasksIds)
         clearSelectedTasks()
     }
 
@@ -125,30 +125,30 @@ class HomeViewModel(
     }
 
     fun toggleSelectTask(id: String) {
-        val selectedTasksIds = homeUiState.selectedTasksIds.toMutableList()
+        val selectedTasksIds = uiState.selectedTasksIds.toMutableList()
         if (!selectedTasksIds.contains(id)) {
             selectedTasksIds.add(id)
         } else {
             selectedTasksIds.removeAll { it == id }
         }
-        homeUiState = homeUiState.copy(
+        uiState = uiState.copy(
             selectedTasksIds = selectedTasksIds
         )
     }
 
     fun clearSelectedTasks() = coroutineScope.launch {
         delay(CLEAR_SELECTED_TASKS_DELAY_MILLIS)
-        homeUiState = homeUiState.copy(selectedTasksIds = emptyList())
+        uiState = uiState.copy(selectedTasksIds = emptyList())
     }
 
     fun toggleSelectedTasksPinnedValue() = coroutineScope.launch {
-        val notPinnedSelectedTasks = homeUiState.selectedTasks.filter { !it.isPinned }
+        val notPinnedSelectedTasks = uiState.selectedTasks.filter { !it.isPinned }
         if (notPinnedSelectedTasks.isNotEmpty()) {
             notPinnedSelectedTasks.forEach {
                 toggleTaskPinnedValueUseCase(it.id)
             }
         } else {
-            homeUiState.selectedTasks.forEach {
+            uiState.selectedTasks.forEach {
                 toggleTaskPinnedValueUseCase(it.id)
             }
         }

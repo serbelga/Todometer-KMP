@@ -20,33 +20,35 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutDestination
+import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 import dev.sergiobelda.todometer.app.feature.about.ui.navigateToAbout
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskDestination
+import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
 import dev.sergiobelda.todometer.app.feature.addtask.ui.navigateToAddTask
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListDestination
+import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.navigateToAddTaskList
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskDestination
+import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
 import dev.sergiobelda.todometer.app.feature.edittask.ui.navigateToEditTask
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListDestination
+import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.navigateToEditTaskList
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeDestination
+import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsDestination
+import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
 import dev.sergiobelda.todometer.app.feature.settings.ui.navigateToSettings
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsDestination
+import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.navigateToTaskDetails
-import dev.sergiobelda.todometer.app.ui.about.AboutRoute
-import dev.sergiobelda.todometer.app.ui.addtask.AddTaskRoute
-import dev.sergiobelda.todometer.app.ui.addtasklist.AddTaskListRoute
-import dev.sergiobelda.todometer.app.ui.edittask.EditTaskRoute
-import dev.sergiobelda.todometer.app.ui.edittasklist.EditTaskListRoute
-import dev.sergiobelda.todometer.app.ui.home.HomeRoute
-import dev.sergiobelda.todometer.app.ui.settings.SettingsRoute
-import dev.sergiobelda.todometer.app.ui.taskdetails.TaskDetailsRoute
 import dev.sergiobelda.todometer.common.navigation.Action
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TodometerNavHost(
@@ -63,56 +65,134 @@ fun TodometerNavHost(
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }
     ) {
-        composable(HomeDestination.route) {
-            HomeRoute(
-                navigateToAddTaskList = action.navigateToAddTaskList,
-                navigateToEditTaskList = action.navigateToEditTaskList,
-                navigateToAddTask = action.navigateToAddTask,
-                navigateToTaskDetails = action.navigateToTaskDetails,
-                navigateToSettings = action.navigateToSettings,
-                navigateToAbout = action.navigateToAbout
-            )
-        }
-        composable(
-            TaskDetailsDestination.route,
-            deepLinks = listOf(TaskDetailsDestination.taskDetailNavDeepLink)
-        ) { navBackStackEntry ->
-            val taskId = TaskDetailsDestination.navArgsTaskId(navBackStackEntry)
-            TaskDetailsRoute(
-                taskId = taskId,
-                navigateToEditTask = { action.navigateToEditTask(taskId) },
-                navigateBack = navigateBackAction
-            )
-        }
-        composable(AddTaskListDestination.route) {
-            AddTaskListRoute(navigateBack = navigateBackAction)
-        }
-        composable(EditTaskListDestination.route) {
-            EditTaskListRoute(navigateBack = navigateBackAction)
-        }
-        composable(
-            AddTaskDestination.route,
-            deepLinks = listOf(AddTaskDestination.addTaskNavDeepLink)
-        ) {
-            AddTaskRoute(navigateBack = navigateBackAction)
-        }
-        composable(EditTaskDestination.route) { backStackEntry ->
-            val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)
-            EditTaskRoute(taskId = taskId, navigateBack = navigateBackAction)
-        }
-        composable(SettingsDestination.route) {
-            SettingsRoute(
-                navigateBack = navigateBackAction
-            )
-        }
-        composable(AboutDestination.route) {
-            // TODO: Resolve commented code
-            AboutRoute(
-                navigateToGitHub = { /*context.openWebPage(GitHubUrl)*/ },
-                navigateToPrivacyPolicy = { /*context.openWebPage(PrivacyPolicyUrl)*/ },
-                navigateToOpenSourceLicenses = { /*context.launchActivity<OssLicensesMenuActivity>()*/ },
-                navigateBack = navigateBackAction
-            )
-        }
+        homeNode(
+            navigateToAddTaskList = action.navigateToAddTaskList,
+            navigateToEditTaskList = action.navigateToEditTaskList,
+            navigateToAddTask = action.navigateToAddTask,
+            navigateToTaskDetails = action.navigateToTaskDetails,
+            navigateToSettings = action.navigateToSettings,
+            navigateToAbout = action.navigateToAbout
+        )
+        taskDetailsNode(
+            navigateBack = navigateBackAction,
+            navigateToEditTask = action.navigateToEditTask
+        )
+        addTaskListRoute(navigateBack = navigateBackAction)
+        editTaskListNode(navigateBack = navigateBackAction)
+        addTaskNode(navigateBack = navigateBackAction)
+        editTaskNode(navigateBack = navigateBackAction)
+        settingsNode(navigateBack = navigateBackAction)
+        aboutNode(navigateBack = navigateBackAction)
+    }
+}
+
+private fun NavGraphBuilder.homeNode(
+    navigateToAddTaskList: () -> Unit,
+    navigateToEditTaskList: () -> Unit,
+    navigateToAddTask: () -> Unit,
+    navigateToTaskDetails: (String) -> Unit,
+    navigateToSettings: () -> Unit,
+    navigateToAbout: () -> Unit
+) {
+    composable(HomeDestination.route) {
+        HomeScreen(
+            navigateToAddTaskList = navigateToAddTaskList,
+            navigateToEditTaskList = navigateToEditTaskList,
+            navigateToAddTask = navigateToAddTask,
+            navigateToTaskDetails = navigateToTaskDetails,
+            navigateToSettings = navigateToSettings,
+            navigateToAbout = navigateToAbout,
+            viewModel = getViewModel()
+        )
+    }
+}
+
+private fun NavGraphBuilder.taskDetailsNode(
+    navigateBack: () -> Unit,
+    navigateToEditTask: (String) -> Unit
+) {
+    composable(
+        TaskDetailsDestination.route,
+        deepLinks = listOf(TaskDetailsDestination.taskDetailNavDeepLink)
+    ) { navBackStackEntry ->
+        val taskId = TaskDetailsDestination.navArgsTaskId(navBackStackEntry)
+        TaskDetailsScreen(
+            navigateToEditTask = { navigateToEditTask(taskId) },
+            navigateBack = navigateBack,
+            viewModel = getViewModel { parametersOf(taskId) }
+        )
+    }
+}
+
+private fun NavGraphBuilder.addTaskListRoute(
+    navigateBack: () -> Unit
+) {
+    composable(AddTaskListDestination.route) {
+        AddTaskListScreen(
+            navigateBack = navigateBack,
+            viewModel = getViewModel()
+        )
+    }
+}
+
+private fun NavGraphBuilder.editTaskListNode(
+    navigateBack: () -> Unit
+) {
+    composable(EditTaskListDestination.route) {
+        EditTaskListScreen(
+            navigateBack = navigateBack,
+            viewModel = getViewModel()
+        )
+    }
+}
+
+private fun NavGraphBuilder.addTaskNode(
+    navigateBack: () -> Unit
+) {
+    composable(
+        AddTaskDestination.route,
+        deepLinks = listOf(AddTaskDestination.addTaskNavDeepLink)
+    ) {
+        AddTaskScreen(
+            navigateBack = navigateBack,
+            viewModel = getViewModel()
+        )
+    }
+}
+
+private fun NavGraphBuilder.editTaskNode(
+    navigateBack: () -> Unit
+) {
+    composable(EditTaskDestination.route) { backStackEntry ->
+        val taskId = EditTaskDestination.navArgsTaskId(backStackEntry)
+        EditTaskScreen(
+            navigateBack = navigateBack,
+            viewModel = getViewModel { parametersOf(taskId) }
+        )
+    }
+}
+
+private fun NavGraphBuilder.settingsNode(
+    navigateBack: () -> Unit
+) {
+    composable(SettingsDestination.route) {
+        SettingsScreen(
+            navigateBack = navigateBack,
+            viewModel = getViewModel()
+        )
+    }
+}
+
+private fun NavGraphBuilder.aboutNode(
+    navigateBack: () -> Unit
+) {
+    composable(AboutDestination.route) {
+        // TODO: Resolve commented code
+        AboutScreen(
+            navigateToGitHub = { /*context.openWebPage(GitHubUrl)*/ },
+            navigateToPrivacyPolicy = { /*context.openWebPage(PrivacyPolicyUrl)*/ },
+            navigateToOpenSourceLicenses = { /*context.launchActivity<OssLicensesMenuActivity>()*/ },
+            navigateBack = navigateBack
+        )
     }
 }

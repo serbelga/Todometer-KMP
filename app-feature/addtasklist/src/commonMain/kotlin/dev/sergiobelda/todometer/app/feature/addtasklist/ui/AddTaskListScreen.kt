@@ -58,22 +58,21 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 fun AddTaskListScreen(
     navigateBack: () -> Unit,
-    insertTaskList: (String) -> Unit,
-    addTaskListUiState: AddTaskListUiState
+    viewModel: AddTaskListViewModel
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
 
-    if (addTaskListUiState.isAdded) {
+    if (viewModel.uiState.isAdded) {
         navigateBack()
     }
 
-    if (addTaskListUiState.errorUi != null) {
+    if (viewModel.uiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = addTaskListUiState.errorUi.message ?: ""
+                message = viewModel.uiState.errorUi?.message ?: ""
             )
         }
     }
@@ -84,15 +83,15 @@ fun AddTaskListScreen(
             SaveActionTopAppBar(
                 navigateBack = navigateBack,
                 title = TodometerResources.strings.addTaskList,
-                isSaveButtonEnabled = !addTaskListUiState.isAddingTaskList,
+                isSaveButtonEnabled = !viewModel.uiState.isAddingTaskList,
                 onSaveButtonClick = {
                     if (taskListName.isBlank()) {
                         taskListNameInputError = true
                     } else {
-                        insertTaskList(taskListName)
+                        viewModel.insertTaskList(taskListName)
                     }
                 },
-                saveButtonTintColor = if (addTaskListUiState.isAddingTaskList) {
+                saveButtonTintColor = if (viewModel.uiState.isAddingTaskList) {
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
@@ -102,7 +101,7 @@ fun AddTaskListScreen(
         content = { paddingValues ->
             AddTaskListContent(
                 paddingValues = paddingValues,
-                showProgress = addTaskListUiState.isAddingTaskList,
+                showProgress = viewModel.uiState.isAddingTaskList,
                 taskListNameValue = taskListName,
                 taskListNameInputError = taskListNameInputError,
                 onTaskListNameValueChange = {

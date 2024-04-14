@@ -39,8 +39,8 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 fun SaveActionTopAppBar(
     navigateBack: () -> Unit,
     title: String,
-    isSaveButtonEnabled: Boolean,
     onSaveButtonClick: () -> Unit,
+    isSaveButtonEnabled: Boolean = true,
     saveButtonTintColor: Color = MaterialTheme.colorScheme.primary
 ) {
     TopAppBar(

@@ -39,56 +39,57 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 fun EditTaskListScreen(
     navigateBack: () -> Unit,
-    editTaskList: (String) -> Unit,
-    editTaskListUiState: EditTaskListUiState
+    viewModel: EditTaskListViewModel
 ) {
     when {
-        editTaskListUiState.isLoading -> {
+        viewModel.uiState.isLoading -> {
             LoadingScreenDialog(navigateBack)
         }
 
-        !editTaskListUiState.isLoading && editTaskListUiState.taskList != null -> {
-            var taskListName by rememberSaveable { mutableStateOf(editTaskListUiState.taskList.name) }
-            var taskListNameInputError by remember { mutableStateOf(false) }
+        !viewModel.uiState.isLoading -> {
+            viewModel.uiState.taskList?.let { taskList ->
+                var taskListName by rememberSaveable { mutableStateOf(taskList.name) }
+                var taskListNameInputError by remember { mutableStateOf(false) }
 
-            Scaffold(
-                topBar = {
-                    SaveActionTopAppBar(
-                        navigateBack = navigateBack,
-                        title = TodometerResources.strings.edit_task_list,
-                        isSaveButtonEnabled = !editTaskListUiState.isLoading,
-                        onSaveButtonClick = {
-                            if (taskListName.isBlank()) {
-                                taskListNameInputError = true
-                            } else {
-                                editTaskList(taskListName)
-                                navigateBack()
+                Scaffold(
+                    topBar = {
+                        SaveActionTopAppBar(
+                            navigateBack = navigateBack,
+                            title = TodometerResources.strings.edit_task_list,
+                            isSaveButtonEnabled = !viewModel.uiState.isLoading,
+                            onSaveButtonClick = {
+                                if (taskListName.isBlank()) {
+                                    taskListNameInputError = true
+                                } else {
+                                    viewModel.updateTaskList(taskListName)
+                                    navigateBack()
+                                }
                             }
-                        }
-                    )
-                },
-                content = { paddingValues ->
-                    Column(modifier = Modifier.padding(paddingValues)) {
-                        TodometerTitledTextField(
-                            title = TodometerResources.strings.name,
-                            value = taskListName,
-                            onValueChange = {
-                                taskListName = it
-                                taskListNameInputError = false
-                            },
-                            placeholder = { Text(TodometerResources.strings.enter_task_list_name) },
-                            singleLine = true,
-                            isError = taskListNameInputError,
-                            errorMessage = TodometerResources.strings.field_not_empty,
-                            keyboardOptions = KeyboardOptions(
-                                capitalization = KeyboardCapitalization.Sentences,
-                                imeAction = ImeAction.Done
-                            ),
-                            modifier = Modifier.padding(TextFieldPadding)
                         )
+                    },
+                    content = { paddingValues ->
+                        Column(modifier = Modifier.padding(paddingValues)) {
+                            TodometerTitledTextField(
+                                title = TodometerResources.strings.name,
+                                value = taskListName,
+                                onValueChange = {
+                                    taskListName = it
+                                    taskListNameInputError = false
+                                },
+                                placeholder = { Text(TodometerResources.strings.enter_task_list_name) },
+                                singleLine = true,
+                                isError = taskListNameInputError,
+                                errorMessage = TodometerResources.strings.field_not_empty,
+                                keyboardOptions = KeyboardOptions(
+                                    capitalization = KeyboardCapitalization.Sentences,
+                                    imeAction = ImeAction.Done
+                                ),
+                                modifier = Modifier.padding(TextFieldPadding)
+                            )
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

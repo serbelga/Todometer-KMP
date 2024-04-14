@@ -77,8 +77,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 fun AddTaskScreen(
     navigateBack: () -> Unit,
-    insertTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?, taskChecklistItems: List<String>) -> Unit,
-    addTaskUiState: AddTaskUiState
+    viewModel: AddTaskViewModel
 ) {
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -115,14 +114,14 @@ fun AddTaskScreen(
     }
     SystemBackHandler(onBack = onBack)
 
-    if (addTaskUiState.isAdded) {
+    if (viewModel.uiState.isTaskAdded) {
         navigateBack()
     }
 
-    if (addTaskUiState.errorUi != null) {
+    if (viewModel.uiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = addTaskUiState.errorUi.message ?: ""
+                message = viewModel.uiState.errorUi?.message ?: ""
             )
         }
     }
@@ -134,12 +133,12 @@ fun AddTaskScreen(
             SaveActionTopAppBar(
                 navigateBack = onBack,
                 title = TodometerResources.strings.addTask,
-                isSaveButtonEnabled = !addTaskUiState.isAddingTask,
+                isSaveButtonEnabled = !viewModel.uiState.isAddingTask,
                 onSaveButtonClick = {
                     if (taskTitle.isBlank()) {
                         taskTitleInputError = true
                     } else {
-                        insertTask(
+                        viewModel.insertTask(
                             taskTitle,
                             selectedTag,
                             taskDescription,
@@ -148,7 +147,7 @@ fun AddTaskScreen(
                         )
                     }
                 },
-                saveButtonTintColor = if (addTaskUiState.isAddingTask) {
+                saveButtonTintColor = if (viewModel.uiState.isAddingTask) {
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
@@ -156,7 +155,7 @@ fun AddTaskScreen(
             )
         },
         content = { paddingValues ->
-            if (addTaskUiState.isAddingTask) {
+            if (viewModel.uiState.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
