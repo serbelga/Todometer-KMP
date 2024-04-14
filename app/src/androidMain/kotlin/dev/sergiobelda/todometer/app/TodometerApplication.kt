@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,6 @@
 
 package dev.sergiobelda.todometer.app
 
-import androidx.compose.runtime.Composable
-import org.koin.core.parameter.ParametersDefinition
-import org.koin.core.qualifier.Qualifier
+import dev.sergiobelda.todometer.common.core.app.TodometerBaseApplication
 
-// TODO: Check if it should be on another place
-@Composable
-expect inline fun <reified T : Any> getViewModel(
-    qualifier: Qualifier? = null,
-    noinline parameters: ParametersDefinition? = null
-): T
+class TodometerApplication : TodometerBaseApplication()

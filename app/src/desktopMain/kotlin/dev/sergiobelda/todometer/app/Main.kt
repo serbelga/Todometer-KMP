@@ -16,7 +16,13 @@
 
 package dev.sergiobelda.todometer.app
 
-import dev.sergiobelda.todometer.app.di.mainViewModelModule
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.WindowState
+import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.app.feature.addtask.di.addTaskViewModelModule
 import dev.sergiobelda.todometer.app.feature.addtasklist.di.addTaskListViewModelModule
 import dev.sergiobelda.todometer.app.feature.edittask.di.editTaskViewModelModule
@@ -24,26 +30,32 @@ import dev.sergiobelda.todometer.app.feature.edittasklist.di.editTaskListViewMod
 import dev.sergiobelda.todometer.app.feature.home.di.homeViewModelModule
 import dev.sergiobelda.todometer.app.feature.settings.di.settingsViewModelModule
 import dev.sergiobelda.todometer.app.feature.taskdetails.di.taskDetailsViewModelModule
-import dev.sergiobelda.todometer.common.core.app.TodometerBaseApp
-import dev.sergiobelda.todometer.common.core.di.startAppDI
-import org.koin.android.ext.koin.androidContext
+import dev.sergiobelda.todometer.common.core.di.TodometerAppDI
 
-class TodometerApp : TodometerBaseApp() {
-
-    override fun onCreate() {
-        super.onCreate()
-        startAppDI {
-            androidContext(this@TodometerApp)
-            modules(
-                mainViewModelModule +
+fun main() = application {
+    Window(
+        resizable = false,
+        onCloseRequest = ::exitApplication,
+        title = "Todometer",
+        state = WindowState(
+            size = DpSize(480.dp, 860.dp),
+            position = WindowPosition.Aligned(Alignment.Center)
+        )
+    ) {
+        TodometerAppDI(
+            appDeclaration = {
+                modules(
                     addTaskViewModelModule +
-                    addTaskListViewModelModule +
-                    editTaskViewModelModule +
-                    editTaskListViewModelModule +
-                    homeViewModelModule +
-                    settingsViewModelModule +
-                    taskDetailsViewModelModule
-            )
+                        addTaskListViewModelModule +
+                        editTaskViewModelModule +
+                        editTaskListViewModelModule +
+                        homeViewModelModule +
+                        settingsViewModelModule +
+                        taskDetailsViewModelModule
+                )
+            }
+        ) {
+            TodometerApp()
         }
     }
 }
