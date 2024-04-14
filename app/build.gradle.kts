@@ -39,9 +39,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.compose.navigation-internal:navigation-common:0.0.0-nav-dev1535")
-                implementation("org.jetbrains.compose.navigation-internal:navigation-compose:0.0.0-nav-dev1535")
-
                 implementation(projects.appCommon.designsystem)
                 implementation(projects.appCommon.ui)
                 implementation(projects.appFeature.about)
@@ -106,7 +103,7 @@ kotlin {
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.app.android"
+    namespace = "dev.sergiobelda.todometer.app"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
@@ -140,7 +137,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "dev.sergiobelda.todometer.app.desktop.TodometerAppKt"
+        mainClass = "dev.sergiobelda.todometer.app.TodometerAppKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules(

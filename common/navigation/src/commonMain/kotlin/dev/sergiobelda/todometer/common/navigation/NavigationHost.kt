@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
+@Deprecated("Replaced by common androidx.navigation.compose.NavHost.")
 @Composable
 fun NavigationHost(
     navigationController: NavigationController,
@@ -38,6 +39,7 @@ fun NavigationHost(
     NavigationHost(navigationController, navigationGraph, modifier)
 }
 
+@Deprecated("Replaced by common androidx.navigation.compose.NavHost.")
 @Composable
 fun NavigationHost(
     navigationController: NavigationController,

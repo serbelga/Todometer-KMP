@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.common.navigation
 
 import androidx.compose.runtime.Composable
 
+@Deprecated("Replaced by common androidx.navigation.NavGraph.")
 class NavigationGraph(
     val startDestinationId: String? = null,
     val composableNodes: Map<String, @Composable () -> Unit> = mapOf()
@@ -40,6 +41,7 @@ class NavigationGraph(
     }
 }
 
+@Deprecated("Replaced by common androidx.navigation.compose.composable function.")
 fun NavigationGraph.Builder.composableNode(
     destinationId: String,
     content: @Composable () -> Unit

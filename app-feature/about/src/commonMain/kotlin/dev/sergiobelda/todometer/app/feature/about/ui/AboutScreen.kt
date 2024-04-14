@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.about.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,6 +31,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -39,12 +41,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Code
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+
+@Composable
+fun AboutScreen(
+    navigateToGitHub: () -> Unit,
+    navigateToPrivacyPolicy: () -> Unit,
+    navigateToOpenSourceLicenses: () -> Unit,
+    navigateBack: () -> Unit
+) {
+    Scaffold(
+        topBar = { AboutTopBar(navigateBack = navigateBack) }
+    ) { paddingValues ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth().padding(paddingValues)
+        ) {
+            TodometerTitle()
+            Spacer(modifier = Modifier.height(72.dp))
+            AboutItemCard(onCardClick = navigateToGitHub, AboutItem.GitHub)
+            AboutItemCard(onCardClick = navigateToPrivacyPolicy, AboutItem.PrivacyPolicy)
+            AboutItemCard(onCardClick = navigateToOpenSourceLicenses, AboutItem.OpenSourceLicenses)
+        }
+        AboutAppVersion()
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

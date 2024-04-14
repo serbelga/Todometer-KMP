@@ -24,8 +24,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle  
-    - name: Create google-services.json in app-android
-      run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app-android/google-services.json
+    - name: Create google-services.json in app
+      run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
     - name: Create google-services.json in wearapp-wearos
       run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > wearapp-wearos/google-services.json
     - name: Run spotlessCheck

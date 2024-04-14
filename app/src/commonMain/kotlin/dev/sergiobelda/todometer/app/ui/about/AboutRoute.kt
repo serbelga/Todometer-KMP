@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.ui
+package dev.sergiobelda.todometer.app.ui.about
 
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import androidx.compose.runtime.Composable
+import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 
-object SettingsDestination : Destination {
-    override val route: String = "settings"
+@Composable
+internal fun AboutRoute(
+    navigateToGitHub: () -> Unit,
+    navigateToPrivacyPolicy: () -> Unit,
+    navigateToOpenSourceLicenses: () -> Unit,
+    navigateBack: () -> Unit
+) {
+    AboutScreen(
+        navigateToGitHub = navigateToGitHub,
+        navigateToPrivacyPolicy = navigateToPrivacyPolicy,
+        navigateToOpenSourceLicenses = navigateToOpenSourceLicenses,
+        navigateBack = navigateBack
+    )
 }
-
-object SettingsNavigationParams : NavigationParams(SettingsDestination) {
-    override val navigationRoute: String = destination.route
-}
-
-val Action.navigateToSettings: () -> Unit
-    get() = {
-        navigate(SettingsNavigationParams)
-    }

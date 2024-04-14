@@ -14,21 +14,27 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.about.ui
+package dev.sergiobelda.todometer.app.feature.addtask.ui
 
+import androidx.navigation.NavDeepLink
 import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.common.navigation.Destination
 import dev.sergiobelda.todometer.common.navigation.NavigationParams
 
-object AboutDestination : Destination {
-    override val route: String = "about"
+object AddTaskDestination : Destination {
+    override val route: String = "addtask"
+
+    private const val AddTaskDeepLink = "app://open.add.task"
+
+    val addTaskNavDeepLink =
+        NavDeepLink.Builder().setUriPattern(AddTaskDeepLink).build()
 }
 
-object AboutNavigationParams : NavigationParams(AboutDestination) {
+object AddTaskNavigationParams : NavigationParams(AddTaskDestination) {
     override val navigationRoute: String = destination.route
 }
 
-val Action.navigateToAbout: () -> Unit
+val Action.navigateToAddTask: () -> Unit
     get() = {
-        navigate(AboutNavigationParams)
+        navigate(AddTaskNavigationParams)
     }
