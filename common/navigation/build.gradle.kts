@@ -20,9 +20,8 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.runtime)
 
-                // TODO: Move to libs.versions.toml
-                api("org.jetbrains.compose.navigation-internal:navigation-common:0.0.0-nav-dev1535")
-                api("org.jetbrains.compose.navigation-internal:navigation-compose:0.0.0-nav-dev1535")
+                api(libs.navigation.common)
+                api(libs.navigation.compose)
             }
         }
         val commonTest by getting

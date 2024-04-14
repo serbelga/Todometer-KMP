@@ -36,8 +36,6 @@ kotlin {
             dependencies {
                 implementation(compose.animationGraphics)
                 api(compose.uiTooling)
-
-                implementation(libs.androidx.navigation.compose)
             }
         }
         val androidUnitTest by getting

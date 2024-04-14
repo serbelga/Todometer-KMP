@@ -21,8 +21,6 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material3)
                 api(compose.ui)
-                implementation("org.jetbrains.compose.navigation-internal:navigation-common:0.0.0-nav-dev1535")
-                implementation("org.jetbrains.compose.navigation-internal:navigation-compose:0.0.0-nav-dev1535")
 
                 implementation(projects.appCommon.designsystem)
                 implementation(projects.common.domain)
@@ -45,7 +43,6 @@ kotlin {
             dependencies {
                 implementation(compose.animationGraphics)
                 implementation(compose.uiTooling)
-                implementation(libs.androidx.navigation.compose)
             }
         }
         val androidUnitTest by getting

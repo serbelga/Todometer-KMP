@@ -11,7 +11,7 @@ androidWearTargetSdk = "33"
 animationGraphicsAndroid = "1.6.5"
 appcompat = "1.6.1"
 composeCompiler = "1.5.11"
-composeMultiplatform = "1.6.10-dev1575"
+composeMultiplatform = "1.6.10-dev1578"
 composeVectorize = "0.7.0"
 dataStore = "1.1.0-rc01"
 dependencyGraphGenerator = "0.8.0"
@@ -32,7 +32,7 @@ lifecycle = "2.7.0"
 lyricist = "1.6.2-1.8.20"
 mockk = "1.13.10"
 mockkCommon = "1.12.5"
-navigation = "2.7.7"
+navigationComposeMultiplatform = "0.0.0-nav-dev1535"
 ossLicenses = "0.10.6"
 playServicesOssLicenses = "17.0.1"
 playServicesWearable = "18.1.0"
@@ -69,9 +69,6 @@ androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-kt
 androidx-lifecycle-viewmodelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
-androidx-navigation-runtimeKtx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigation" }
-
 androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 composeVectorize-core = { module = "dev.sergiobelda.compose.vectorize:compose-vectorize-core", version.ref = "composeVectorize" }
@@ -107,6 +104,9 @@ mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }
 google-playServicesOssLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "playServicesOssLicenses" }
 google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
 google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicenses" }
+
+navigation-common = { module = "org.jetbrains.compose.navigation-internal:navigation-common", version.ref = "navigationComposeMultiplatform" }
+navigation-compose = { module = "org.jetbrains.compose.navigation-internal:navigation-compose", version.ref = "navigationComposeMultiplatform" }
 
 spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 

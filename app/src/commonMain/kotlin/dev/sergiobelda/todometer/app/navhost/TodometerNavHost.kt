@@ -20,6 +20,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -55,10 +56,13 @@ import org.koin.core.parameter.parametersOf
 fun TodometerNavHost(
     navController: NavHostController,
     action: Action,
-    modifier: Modifier = Modifier,
-    // TODO: Remove this extra parameters
-    navigateBackAction: () -> Unit
+    modifier: Modifier = Modifier
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val navigateBackAction: () -> Unit = {
+        keyboardController?.hide()
+        action.navigateUp()
+    }
     NavHost(
         navController = navController,
         startDestination = HomeDestination.route,
