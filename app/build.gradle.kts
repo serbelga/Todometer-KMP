@@ -55,7 +55,6 @@ kotlin {
                 implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
-                implementation(projects.common.viewmodel)
             }
         }
         val commonTest by getting
@@ -80,6 +79,9 @@ kotlin {
                 // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
                 // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved
                 compileOnly(libs.kotlin.serialization.json)
+
+                // TODO: Remove when update Compose Multiplatform to 1.7.0
+                implementation("androidx.compose.ui:ui:1.7.0-alpha05")
             }
         }
         val androidUnitTest by getting

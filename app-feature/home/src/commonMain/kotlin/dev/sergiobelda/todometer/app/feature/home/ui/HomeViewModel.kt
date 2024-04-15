@@ -19,6 +19,8 @@ package dev.sergiobelda.todometer.app.feature.home.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
@@ -30,7 +32,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSe
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -55,7 +56,7 @@ class HomeViewModel(
         getTaskLists()
     }
 
-    private fun getTaskListSelected() = coroutineScope.launch {
+    private fun getTaskListSelected() = viewModelScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 uiState = uiState.copy(
@@ -69,7 +70,7 @@ class HomeViewModel(
         }
     }
 
-    private fun getTaskListSelectedTasks() = coroutineScope.launch {
+    private fun getTaskListSelectedTasks() = viewModelScope.launch {
         getTaskListSelectedTasksUseCase().collect { result ->
             result.doIfSuccess { tasks ->
                 uiState = uiState.copy(
@@ -85,7 +86,7 @@ class HomeViewModel(
         }
     }
 
-    private fun getTaskLists() = coroutineScope.launch {
+    private fun getTaskLists() = viewModelScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
                 uiState = uiState.copy(
@@ -99,28 +100,28 @@ class HomeViewModel(
         }
     }
 
-    fun deleteSelectedTasks() = coroutineScope.launch {
+    fun deleteSelectedTasks() = viewModelScope.launch {
         deleteTasksUseCase(uiState.selectedTasksIds)
         clearSelectedTasks()
     }
 
-    fun deleteTask(id: String) = coroutineScope.launch {
+    fun deleteTask(id: String) = viewModelScope.launch {
         deleteTasksUseCase(id)
     }
 
-    fun deleteTaskList() = coroutineScope.launch {
+    fun deleteTaskList() = viewModelScope.launch {
         deleteTaskListSelectedUseCase()
     }
 
-    fun setTaskDoing(id: String) = coroutineScope.launch {
+    fun setTaskDoing(id: String) = viewModelScope.launch {
         setTaskDoingUseCase(id)
     }
 
-    fun setTaskDone(id: String) = coroutineScope.launch {
+    fun setTaskDone(id: String) = viewModelScope.launch {
         setTaskDoneUseCase(id)
     }
 
-    fun setTaskListSelected(id: String) = coroutineScope.launch {
+    fun setTaskListSelected(id: String) = viewModelScope.launch {
         setTaskListSelectedUseCase(id)
     }
 
@@ -136,12 +137,12 @@ class HomeViewModel(
         )
     }
 
-    fun clearSelectedTasks() = coroutineScope.launch {
+    fun clearSelectedTasks() = viewModelScope.launch {
         delay(CLEAR_SELECTED_TASKS_DELAY_MILLIS)
         uiState = uiState.copy(selectedTasksIds = emptyList())
     }
 
-    fun toggleSelectedTasksPinnedValue() = coroutineScope.launch {
+    fun toggleSelectedTasksPinnedValue() = viewModelScope.launch {
         val notPinnedSelectedTasks = uiState.selectedTasks.filter { !it.isPinned }
         if (notPinnedSelectedTasks.isNotEmpty()) {
             notPinnedSelectedTasks.forEach {

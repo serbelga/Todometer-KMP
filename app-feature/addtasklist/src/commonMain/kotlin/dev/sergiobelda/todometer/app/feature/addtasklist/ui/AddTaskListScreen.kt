@@ -53,10 +53,6 @@ fun AddTaskListScreen(
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
 
-    if (viewModel.uiState.isTaskListAdded) {
-        navigateBack()
-    }
-
     if (viewModel.uiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
@@ -77,6 +73,7 @@ fun AddTaskListScreen(
                         taskListNameInputError = true
                     } else {
                         viewModel.insertTaskList(taskListName)
+                        navigateBack()
                     }
                 },
                 saveButtonTintColor = if (viewModel.uiState.isAddingTaskList) {

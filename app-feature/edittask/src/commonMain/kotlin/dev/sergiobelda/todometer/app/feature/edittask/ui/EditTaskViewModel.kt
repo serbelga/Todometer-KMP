@@ -19,13 +19,14 @@ package dev.sergiobelda.todometer.app.feature.edittask.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import dev.sergiobelda.todometer.common.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
 class EditTaskViewModel(
@@ -41,7 +42,7 @@ class EditTaskViewModel(
         getTask()
     }
 
-    private fun getTask() = coroutineScope.launch {
+    private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
                 uiState = uiState.copy(
@@ -64,7 +65,7 @@ class EditTaskViewModel(
         tag: Tag,
         description: String? = null,
         dueDate: Long? = null
-    ) = coroutineScope.launch {
+    ) = viewModelScope.launch {
         uiState.task?.let {
             updateTaskUseCase(
                 it.copy(

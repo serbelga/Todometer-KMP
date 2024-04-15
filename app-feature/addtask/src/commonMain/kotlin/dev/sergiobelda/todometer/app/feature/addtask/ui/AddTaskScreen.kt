@@ -114,10 +114,6 @@ fun AddTaskScreen(
     }
     SystemBackHandler(onBack = onBack)
 
-    if (viewModel.uiState.isTaskAdded) {
-        navigateBack()
-    }
-
     if (viewModel.uiState.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
@@ -145,6 +141,7 @@ fun AddTaskScreen(
                             taskDueDate,
                             taskChecklistItems
                         )
+                        navigateBack()
                     }
                 },
                 saveButtonTintColor = if (viewModel.uiState.isAddingTask) {

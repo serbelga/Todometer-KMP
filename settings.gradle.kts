@@ -43,6 +43,5 @@ include(":common:navigation")
 include(":common:preferences")
 include(":common:resources")
 include(":common:ui")
-include(":common:viewmodel")
 
 include(":wearapp-wearos")

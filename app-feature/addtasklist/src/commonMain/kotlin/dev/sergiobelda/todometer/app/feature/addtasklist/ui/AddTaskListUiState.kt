@@ -22,6 +22,5 @@ import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 @Immutable
 data class AddTaskListUiState(
     val isAddingTaskList: Boolean = false,
-    val isTaskListAdded: Boolean = false,
     val errorUi: ErrorUi? = null
 )

@@ -1,5 +1,5 @@
 [versions]
-activity = "1.8.2"
+activity = "1.9.0-beta01"
 androidCompileSdk = "34"
 androidCore = "1.12.0"
 androidGradlePlugin = "8.3.2"
@@ -28,7 +28,7 @@ kotlinDatetime = "0.5.0"
 kotlinSerializationJson = "1.6.3"
 ksp = "1.9.23-1.0.20"
 ktlint = "0.50.0"
-lifecycle = "2.7.0"
+lifecycle = "2.8.0-alpha04"
 lyricist = "1.6.2-1.8.20"
 mockk = "1.13.10"
 mockkCommon = "1.12.5"
@@ -66,7 +66,6 @@ androidx-glance-material3 = { module = "androidx.glance:glance-material3", versi
 
 androidx-lifecycle-runtimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-viewmodelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 
 androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
