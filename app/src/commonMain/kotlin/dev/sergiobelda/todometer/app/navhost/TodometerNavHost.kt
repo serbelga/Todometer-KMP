@@ -25,8 +25,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import dev.sergiobelda.todometer.app.feature.about.ui.AboutDestination
-import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 import dev.sergiobelda.todometer.app.feature.about.ui.navigateToAbout
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
@@ -188,16 +186,6 @@ private fun NavGraphBuilder.settingsNode(
     }
 }
 
-private fun NavGraphBuilder.aboutNode(
+internal expect fun NavGraphBuilder.aboutNode(
     navigateBack: () -> Unit
-) {
-    composable(AboutDestination.route) {
-        // TODO: Resolve commented code
-        AboutScreen(
-            navigateToGitHub = { /*context.openWebPage(GitHubUrl)*/ },
-            navigateToPrivacyPolicy = { /*context.openWebPage(PrivacyPolicyUrl)*/ },
-            navigateToOpenSourceLicenses = { /*context.launchActivity<OssLicensesMenuActivity>()*/ },
-            navigateBack = navigateBack
-        )
-    }
-}
+)
