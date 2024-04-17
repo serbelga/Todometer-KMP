@@ -77,8 +77,6 @@ dependencies {
 
     implementation(libs.androidx.coreKtx)
 
-    implementation(libs.androidx.lifecycle.runtime)
-
     implementation(libs.androidx.splashscreen)
 
     implementation(libs.wear.compose.foundation)

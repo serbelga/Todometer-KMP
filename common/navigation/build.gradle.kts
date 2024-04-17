@@ -20,8 +20,7 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.runtime)
 
-                api(libs.navigation.common)
-                api(libs.navigation.compose)
+                api(libs.jetbrains.navigation.compose)
             }
         }
         val commonTest by getting
