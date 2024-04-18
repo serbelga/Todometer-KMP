@@ -77,9 +77,6 @@ dependencies {
 
     implementation(libs.androidx.coreKtx)
 
-    implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.lifecycle.viewmodel)
-
     implementation(libs.androidx.splashscreen)
 
     implementation(libs.wear.compose.foundation)
@@ -87,10 +84,6 @@ dependencies {
     implementation(libs.wear.compose.navigation)
     implementation(libs.wear.input)
     implementation(libs.wear.wear)
-
-    implementation(project.dependencies.platform(libs.koin.bom))
-    implementation(libs.koin.android)
-    implementation(libs.koin.compose)
 
     implementation(libs.google.playServicesWearable)
 

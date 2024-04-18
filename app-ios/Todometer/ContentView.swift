@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import app_ios
+import app
 
 struct ContentView: View {
     var body: some View {
