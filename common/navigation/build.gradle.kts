@@ -19,20 +19,14 @@ kotlin {
             dependencies {
                 implementation(compose.foundation)
                 implementation(compose.runtime)
+
+                api(libs.jetbrains.navigation.compose)
             }
         }
         val commonTest by getting
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.androidx.navigation.runtimeKtx)
-            }
-        }
+        val androidMain by getting
         val androidUnitTest by getting
-        val desktopMain by getting {
-            dependencies {
-                implementation(compose.desktop.currentOs)
-            }
-        }
+        val desktopMain by getting
         val desktopTest by getting
         val iosMain by creating
         val iosTest by creating

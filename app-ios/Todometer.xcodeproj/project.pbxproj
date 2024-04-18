@@ -149,7 +149,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :app-ios:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :app:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -290,7 +290,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Todometer/Preview Content\"";
 				DEVELOPMENT_TEAM = 9B3DS6JXG9;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../app-ios/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../app/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -305,7 +305,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
-					"app_ios",
+					"app",
 					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.app.ios.Todometer;
@@ -326,7 +326,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Todometer/Preview Content\"";
 				DEVELOPMENT_TEAM = 9B3DS6JXG9;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../app-ios/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../app/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -341,7 +341,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
-					"app_ios",
+					"app",
 					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sergiobelda.todometer.app.ios.Todometer;

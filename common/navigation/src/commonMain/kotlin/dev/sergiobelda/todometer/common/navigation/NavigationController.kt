@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
+@Deprecated("Replaced by common androidx.navigation.NavHostController.")
 class NavigationController {
 
     var navigationGraph: NavigationGraph? = null
