@@ -75,6 +75,7 @@ Open `app-ios/Todometer.xcodeproj` in XCode or run it in Android Studio using Ko
 * [Compose ViewModel Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-lifecycle.html)
 * [Compose Navigation Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html)
 * [compose-vectorize](https://github.com/serbelga/compose-vectorize)
+* [navigation-compose-extended](https://github.com/serbelga/navigation-compose-extended)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/reference/koin-mp/kmp)
