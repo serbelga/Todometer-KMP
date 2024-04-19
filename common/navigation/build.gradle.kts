@@ -21,6 +21,7 @@ kotlin {
                 implementation(compose.runtime)
 
                 api(libs.jetbrains.navigation.compose)
+                api(libs.sergiobelda.navigationComposeExtended)
             }
         }
         val commonTest by getting

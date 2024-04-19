@@ -16,19 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.about.ui
 
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object AboutDestination : Destination {
-    override val route: String = "about"
+object AboutNavDestination : NavDestination<NavArgumentKey>() {
+    override val destinationId: String = "about"
 }
-
-object AboutNavigationParams : NavigationParams(AboutDestination) {
-    override val navigationRoute: String = destination.route
-}
-
-val Action.navigateToAbout: () -> Unit
-    get() = {
-        navigate(AboutNavigationParams)
-    }

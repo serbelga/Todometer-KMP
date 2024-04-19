@@ -16,26 +16,21 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
-import androidx.navigation.NavBackStackEntry
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import androidx.navigation.NavArgumentBuilder
+import androidx.navigation.NavType
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object EditTaskDestination : Destination {
-    private const val TaskIdArg = "taskId"
-    const val EditTask = "edittask"
-
-    override val route: String = "$EditTask/{$TaskIdArg}"
-
-    fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
-        navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""
+enum class EditTaskNavArgumentKeys(override val argumentKey: String) : NavArgumentKey {
+    TaskIdNavArgumentKey("taskId")
 }
 
-class EditTaskNavigationParams(taskId: String) : NavigationParams(EditTaskDestination) {
-    override val navigationRoute: String = "${EditTaskDestination.EditTask}/$taskId"
-}
+object EditTaskNavDestination : NavDestination<EditTaskNavArgumentKeys>() {
+    override val destinationId: String = "edittask"
 
-val Action.navigateToEditTask: (String) -> Unit
-    get() = { taskId ->
-        navigate(EditTaskNavigationParams(taskId))
-    }
+    override val argumentsMap: Map<EditTaskNavArgumentKeys, NavArgumentBuilder.() -> Unit> = mapOf(
+        EditTaskNavArgumentKeys.TaskIdNavArgumentKey to {
+            type = NavType.StringType
+        }
+    )
+}

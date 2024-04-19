@@ -16,14 +16,9 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object HomeDestination : Destination {
-    override val route: String = "home"
+object HomeNavDestination : NavDestination<NavArgumentKey>() {
+    override val destinationId: String = "home"
 }
-
-val Action.popBackStackToHome: () -> Unit
-    get() = {
-        popBackStack(HomeDestination.route, false)
-    }

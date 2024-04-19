@@ -19,13 +19,12 @@ package dev.sergiobelda.todometer.app
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
+import dev.sergiobelda.navigation.compose.extended.rememberNavAction
 import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.app.navhost.TodometerNavHost
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.navigation.Action
 import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 import org.koin.compose.koinInject
 
@@ -40,12 +39,12 @@ fun TodometerApp() {
             AppTheme.LIGHT_THEME -> false
         }
         val navController = rememberNavController()
-        val action = remember(navController) { Action(navController) }
+        val navAction = rememberNavAction(navController)
 
         TodometerAppTheme(darkTheme) {
             TodometerNavHost(
                 navController = navController,
-                action = action
+                navAction = navAction
             )
         }
     }
