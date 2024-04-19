@@ -16,26 +16,25 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail
 
-import androidx.navigation.NavBackStackEntry
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import androidx.navigation.NavArgumentBuilder
+import androidx.navigation.NavType
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object TaskDetailDestination : Destination {
-    const val TaskDetail = "taskdetail"
-    private const val TaskIdArg = "taskId"
-
-    override val route: String = "$TaskDetail/{$TaskIdArg}"
-
-    fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
-        navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""
+enum class TaskDetailNavArgumentKeys(override val argumentKey: String) : NavArgumentKey {
+    TaskIdNavArgumentKey("taskId")
 }
 
-class TaskDetailNavigationParams(taskId: String) : NavigationParams(TaskDetailDestination) {
-    override val navigationRoute: String = "${TaskDetailDestination.TaskDetail}/$taskId"
-}
+object TaskDetailNavDestination : NavDestination<TaskDetailNavArgumentKeys>() {
+    override val destinationId: String = "taskdetail"
 
-val Action.navigateToTaskDetail: (String) -> Unit
-    get() = { taskId ->
-        navigate(TaskDetailNavigationParams(taskId))
-    }
+    override val argumentsMap: Map<TaskDetailNavArgumentKeys, NavArgumentBuilder.() -> Unit> = mapOf(
+        TaskDetailNavArgumentKeys.TaskIdNavArgumentKey to {
+            type = NavType.StringType
+        }
+    )
+
+    override val deepLinkUris: List<String> = listOf(
+        "app://open.task"
+    )
+}

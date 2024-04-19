@@ -17,14 +17,14 @@
 package dev.sergiobelda.todometer.app.navhost
 
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import dev.sergiobelda.todometer.app.feature.about.ui.AboutDestination
+import dev.sergiobelda.navigation.compose.extended.composable
+import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 
 internal actual fun NavGraphBuilder.aboutNode(
     navigateBack: () -> Unit
 ) {
-    composable(AboutDestination.route) {
+    composable(navDestination = AboutNavDestination) {
         AboutScreen(
             navigateToGitHub = { },
             navigateToPrivacyPolicy = { },

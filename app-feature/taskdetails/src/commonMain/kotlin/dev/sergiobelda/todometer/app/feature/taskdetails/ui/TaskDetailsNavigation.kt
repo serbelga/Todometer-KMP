@@ -16,32 +16,25 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDeepLink
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import androidx.navigation.NavArgumentBuilder
+import androidx.navigation.NavType
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object TaskDetailsDestination : Destination {
-    private const val TaskIdArg = "taskId"
-    const val TaskDetails = "taskdetail"
-
-    override val route: String = "$TaskDetails/{$TaskIdArg}"
-
-    private const val TaskDetailsDeepLink = "app://open.task"
-
-    val taskDetailNavDeepLink =
-        NavDeepLink.Builder().setUriPattern("$TaskDetailsDeepLink/{$TaskIdArg}").build()
-
-    fun navArgsTaskId(navBackStackEntry: NavBackStackEntry): String =
-        navBackStackEntry.arguments?.getString(TaskIdArg) ?: ""
+enum class TaskDetailsNavArgumentKeys(override val argumentKey: String) : NavArgumentKey {
+    TaskIdNavArgumentKey("taskId")
 }
 
-class TaskDetailsNavigationParams(taskId: String) : NavigationParams(TaskDetailsDestination) {
-    override val navigationRoute: String = "${TaskDetailsDestination.TaskDetails}/$taskId"
-}
+object TaskDetailsNavDestination : NavDestination<TaskDetailsNavArgumentKeys>() {
+    override val destinationId: String = "taskdetails"
 
-val Action.navigateToTaskDetails: (String) -> Unit
-    get() = { taskId ->
-        navigate(TaskDetailsNavigationParams(taskId))
-    }
+    override val argumentsMap: Map<TaskDetailsNavArgumentKeys, NavArgumentBuilder.() -> Unit> = mapOf(
+        TaskDetailsNavArgumentKeys.TaskIdNavArgumentKey to {
+            type = NavType.StringType
+        }
+    )
+
+    override val deepLinkUris: List<String> = listOf(
+        "app://open.task"
+    )
+}

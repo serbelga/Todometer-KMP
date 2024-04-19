@@ -16,33 +16,22 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks
 
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.navArgument
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import androidx.navigation.NavArgumentBuilder
+import androidx.navigation.NavType
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object TaskListTasksDestination : Destination {
-    const val TaskListTasks = "tasklisttasks"
-    private const val TaskListIdArg = "taskListId"
-
-    override val route: String = "$TaskListTasks/{$TaskListIdArg}"
-
-    val taskListIdNavArgument = navArgument(TaskListIdArg) {
-        defaultValue = ""
-        nullable = true
-    }
-
-    fun navArgsTaskListId(navBackStackEntry: NavBackStackEntry): String =
-        navBackStackEntry.arguments?.getString(TaskListIdArg) ?: ""
+enum class TaskListTasksNavArgumentKeys(override val argumentKey: String) : NavArgumentKey {
+    TaskListIdNavArgumentKey("taskListId")
 }
 
-class TaskListTasksNavigationParams(taskListId: String?) :
-    NavigationParams(TaskListTasksDestination) {
-    override val navigationRoute: String = "${TaskListTasksDestination.TaskListTasks}/$taskListId"
-}
+object TaskListTasksNavDestination : NavDestination<TaskListTasksNavArgumentKeys>() {
+    override val destinationId: String = "tasklisttasks"
 
-val Action.navigateToTaskListTasks: (String?) -> Unit
-    get() = { taskListId ->
-        navigate(TaskListTasksNavigationParams(taskListId))
-    }
+    override val argumentsMap: Map<TaskListTasksNavArgumentKeys, NavArgumentBuilder.() -> Unit> = mapOf(
+        TaskListTasksNavArgumentKeys.TaskListIdNavArgumentKey to {
+            type = NavType.StringType
+            nullable = true
+        }
+    )
+}

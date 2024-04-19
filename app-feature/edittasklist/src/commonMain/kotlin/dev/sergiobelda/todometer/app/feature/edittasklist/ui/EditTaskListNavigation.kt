@@ -16,19 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.common.navigation.Destination
-import dev.sergiobelda.todometer.common.navigation.NavigationParams
+import dev.sergiobelda.navigation.compose.extended.NavArgumentKey
+import dev.sergiobelda.navigation.compose.extended.NavDestination
 
-object EditTaskListDestination : Destination {
-    override val route: String = "edittasklist"
+object EditTaskListNavDestination : NavDestination<NavArgumentKey>() {
+    override val destinationId: String = "edittasklist"
 }
-
-object EditTaskListNavigationParams : NavigationParams(EditTaskListDestination) {
-    override val navigationRoute: String = destination.route
-}
-
-val Action.navigateToEditTaskList: () -> Unit
-    get() = {
-        navigate(EditTaskListNavigationParams)
-    }

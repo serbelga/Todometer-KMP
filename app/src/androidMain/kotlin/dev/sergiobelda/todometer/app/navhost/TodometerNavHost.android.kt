@@ -18,9 +18,9 @@ package dev.sergiobelda.todometer.app.navhost
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import dev.sergiobelda.todometer.app.feature.about.ui.AboutDestination
+import dev.sergiobelda.navigation.compose.extended.composable
+import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 import dev.sergiobelda.todometer.app.feature.about.ui.GitHubUrl
 import dev.sergiobelda.todometer.app.feature.about.ui.PrivacyPolicyUrl
@@ -30,7 +30,9 @@ import dev.sergiobelda.todometer.common.android.extensions.openWebPage
 internal actual fun NavGraphBuilder.aboutNode(
     navigateBack: () -> Unit
 ) {
-    composable(AboutDestination.route) {
+    composable(
+        navDestination = AboutNavDestination
+    ) {
         val context = LocalContext.current
         AboutScreen(
             navigateToGitHub = { context.openWebPage(GitHubUrl) },
