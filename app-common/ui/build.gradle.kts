@@ -32,11 +32,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(compose.animationGraphics)
-            }
-        }
+        val androidMain by getting
         val androidUnitTest by getting
         val desktopMain by getting {
             dependencies {

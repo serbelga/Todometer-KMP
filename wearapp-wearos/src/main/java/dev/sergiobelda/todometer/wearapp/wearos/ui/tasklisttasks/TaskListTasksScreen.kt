@@ -24,7 +24,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
@@ -80,7 +79,7 @@ import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedImageVector
+import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedResources
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
@@ -290,8 +289,7 @@ private fun TaskItem(
                 icon = {
                     Box(modifier = Modifier.fillMaxSize()) {
                         Icon(
-                            painter = rememberAnimatedVectorPainter(
-                                TodometerAnimatedImageVector.Delete,
+                            painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
                                 atEnd = revealState.currentValue == Revealing
                             ),
                             contentDescription = TodometerResources.strings.delete_task,

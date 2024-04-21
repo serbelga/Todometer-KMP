@@ -34,12 +34,12 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
 
             val extension = extensions.getByType<KotlinMultiplatformExtension>()
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+            val navigationComposeExtendedCompiler =
+                libs.findLibrary("sergiobelda.navigationComposeExtendedCompiler").get().get()
+                    .toString()
 
             dependencies {
-                add(
-                    "kspCommonMainMetadata",
-                    "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-compiler:0.5.0-dev01"
-                )
+                add("kspCommonMainMetadata", navigationComposeExtendedCompiler)
             }
 
             // Workaround for KSP only in Common Main.
@@ -50,7 +50,9 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
                 }
             }
 
-            extension.sourceSets["commonMain"].kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+            extension.sourceSets["commonMain"].kotlin.srcDir(
+                "build/generated/ksp/metadata/commonMain/kotlin"
+            )
         }
     }
 }

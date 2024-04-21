@@ -67,7 +67,6 @@ dependencies {
     implementation(projects.common.resources)
     implementation(projects.common.ui)
 
-    implementation(compose.animationGraphics)
     implementation(compose.foundation)
     implementation(compose.uiTooling)
 

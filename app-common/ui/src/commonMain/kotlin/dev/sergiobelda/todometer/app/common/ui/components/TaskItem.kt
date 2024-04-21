@@ -43,7 +43,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
@@ -55,7 +54,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -63,6 +61,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedResources
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.RadioButtonUnchecked
@@ -126,7 +125,9 @@ fun TaskItem(
                     contentAlignment = Alignment.CenterStart
                 ) {
                     Icon(
-                        painter = taskItemBackgroundIcon(state),
+                        painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
+                            atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd
+                        ),
                         contentDescription = TodometerResources.strings.delete_task,
                         tint = MaterialTheme.colorScheme.onErrorContainer
                     )
@@ -148,12 +149,6 @@ fun TaskItem(
         )
     }
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal expect fun taskItemBackgroundIcon(
-    state: SwipeToDismissBoxState
-): Painter
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
