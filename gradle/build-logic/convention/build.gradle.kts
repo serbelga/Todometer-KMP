@@ -24,6 +24,11 @@ gradlePlugin {
             implementationClass =
                 "dev.sergiobelda.gradle.buildlogic.convention.CommonLibraryAndroidConventionPlugin"
         }
+        register("commonUi") {
+            id = "dev.sergiobelda.gradle.common.ui"
+            implementationClass =
+                "dev.sergiobelda.gradle.buildlogic.convention.CommonUiAndroidConventionPlugin"
+        }
         register("dependencyGraphGenerator") {
             id = "dev.sergiobelda.gradle.dependency-graph-generator"
             implementationClass =

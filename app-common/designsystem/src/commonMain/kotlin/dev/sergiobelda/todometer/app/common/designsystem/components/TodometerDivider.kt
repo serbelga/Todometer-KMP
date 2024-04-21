@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.common.designsystem.components
 
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,7 +30,7 @@ fun TodometerDivider(
     thickness: Dp = TodometerDividerDefaults.thickness,
     color: Color = TodometerDividerDefaults.color
 ) {
-    Divider(
+    HorizontalDivider(
         modifier = modifier,
         thickness = thickness,
         color = color

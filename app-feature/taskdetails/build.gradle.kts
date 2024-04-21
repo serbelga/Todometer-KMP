@@ -20,7 +20,6 @@ kotlin {
                 implementation(projects.appCommon.designsystem)
                 implementation(projects.appCommon.ui)
                 implementation(projects.common.domain)
-                implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
 

@@ -55,6 +55,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -124,9 +125,10 @@ fun TaskItem(
                         .padding(horizontal = TaskItemBackgroundHorizontalPadding),
                     contentAlignment = Alignment.CenterStart
                 ) {
-                    TaskItemBackgroundIcon(
-                        state,
-                        MaterialTheme.colorScheme.onErrorContainer
+                    Icon(
+                        painter = taskItemBackgroundIcon(state),
+                        contentDescription = TodometerResources.strings.delete_task,
+                        tint = MaterialTheme.colorScheme.onErrorContainer
                     )
                 }
             },
@@ -149,10 +151,9 @@ fun TaskItem(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal expect fun TaskItemBackgroundIcon(
-    state: SwipeToDismissBoxState,
-    backgroundIconTint: Color
-)
+internal expect fun taskItemBackgroundIcon(
+    state: SwipeToDismissBoxState
+): Painter
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     id("dev.sergiobelda.gradle.common.library.android")
+    id("dev.sergiobelda.gradle.common.ui")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
     id("dev.sergiobelda.gradle.spotless")
 }
@@ -20,7 +21,6 @@ kotlin {
                 implementation(projects.appCommon.designsystem)
                 implementation(projects.appCommon.ui)
                 implementation(projects.common.domain)
-                implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
 
