@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     kotlin("android")
     alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.ksp)
     id("dev.sergiobelda.gradle.spotless")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
@@ -87,4 +88,6 @@ dependencies {
     implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
     implementation(libs.google.firebase.firebaseAnalyticsKtx)
     implementation(libs.google.firebase.firebaseCrashlyticsKtx)
+
+    ksp(libs.sergiobelda.navigationComposeExtendedCompiler)
 }

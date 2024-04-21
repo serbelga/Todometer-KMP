@@ -58,6 +58,9 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
@@ -69,6 +72,14 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@NavDestination(
+    destinationId = "taskdetail",
+    name = "TaskDetail",
+    arguments = [
+        NavArgument("taskId", type = NavArgumentType.String)
+    ],
+    deepLinkUris = ["app://open.task"]
+)
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun TaskDetailScreen(
