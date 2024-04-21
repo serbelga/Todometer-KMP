@@ -27,7 +27,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Dele
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal actual fun taskItemBackgroundIcon(
-    state: SwipeToDismissBoxState,
+    state: SwipeToDismissBoxState
 ): Painter =
     rememberVectorPainter(
         Images.Icons.Delete

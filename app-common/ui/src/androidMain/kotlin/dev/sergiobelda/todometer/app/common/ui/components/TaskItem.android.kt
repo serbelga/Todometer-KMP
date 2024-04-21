@@ -31,6 +31,6 @@ internal actual fun taskItemBackgroundIcon(
     state: SwipeToDismissBoxState
 ): Painter =
     rememberAnimatedVectorPainter(
-            TodometerAnimatedImageVector.Delete,
-            atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd
+        TodometerAnimatedImageVector.Delete,
+        atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd
     )

@@ -64,7 +64,7 @@ fun TaskListProgress(
         LinearProgressIndicator(
             progress = { animatedProgress },
             modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp),
-            strokeCap = StrokeCap.Round,
+            strokeCap = StrokeCap.Round
         )
     }
 }
