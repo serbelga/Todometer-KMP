@@ -31,8 +31,8 @@ import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
-import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskNavArgumentKeys
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskNavDestination
+import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
@@ -40,8 +40,8 @@ import dev.sergiobelda.todometer.app.feature.home.ui.HomeNavDestination
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsNavDestination
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavArgumentKeys
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
+import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -65,26 +65,22 @@ fun TodometerNavHost(
         exitTransition = { ExitTransition.None }
     ) {
         homeNode(
-            navigateToAddTaskList = { navAction.navigate(AddTaskListNavDestination.navRoute()) },
-            navigateToEditTaskList = { navAction.navigate(EditTaskListNavDestination.navRoute()) },
-            navigateToAddTask = { navAction.navigate(AddTaskNavDestination.navRoute()) },
+            navigateToAddTaskList = { navAction.navigate(AddTaskListNavDestination.safeNavRoute()) },
+            navigateToEditTaskList = { navAction.navigate(EditTaskListNavDestination.safeNavRoute()) },
+            navigateToAddTask = { navAction.navigate(AddTaskNavDestination.safeNavRoute()) },
             navigateToTaskDetails = { taskId ->
                 navAction.navigate(
-                    TaskDetailsNavDestination.navRoute(
-                        TaskDetailsNavArgumentKeys.TaskIdNavArgumentKey to taskId
-                    )
+                    TaskDetailsNavDestination.safeNavRoute(taskId)
                 )
             },
-            navigateToSettings = { navAction.navigate(SettingsNavDestination.navRoute()) },
-            navigateToAbout = { navAction.navigate(AboutNavDestination.navRoute()) }
+            navigateToSettings = { navAction.navigate(SettingsNavDestination.safeNavRoute()) },
+            navigateToAbout = { navAction.navigate(AboutNavDestination.safeNavRoute()) }
         )
         taskDetailsNode(
             navigateBack = navigateBackAction,
             navigateToEditTask = { taskId ->
                 navAction.navigate(
-                    EditTaskNavDestination.navRoute(
-                        EditTaskNavArgumentKeys.TaskIdNavArgumentKey to taskId
-                    )
+                    EditTaskNavDestination.safeNavRoute(taskId)
                 )
             }
         )
@@ -123,8 +119,7 @@ private fun NavGraphBuilder.taskDetailsNode(
     navigateToEditTask: (String) -> Unit
 ) {
     composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
-        val taskId = TaskDetailsNavDestination.navArgs(navBackStackEntry)
-            .getString(TaskDetailsNavArgumentKeys.TaskIdNavArgumentKey).orEmpty()
+        val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId.orEmpty()
         TaskDetailsScreen(
             navigateToEditTask = { navigateToEditTask(taskId) },
             navigateBack = navigateBack,
@@ -170,8 +165,7 @@ private fun NavGraphBuilder.editTaskNode(
     navigateBack: () -> Unit
 ) {
     composable(navDestination = EditTaskNavDestination) { navBackStackEntry ->
-        val taskId = EditTaskNavDestination.navArgs(navBackStackEntry)
-            .getString(EditTaskNavArgumentKeys.TaskIdNavArgumentKey).orEmpty()
+        val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
         EditTaskScreen(
             navigateBack = navigateBack,
             viewModel = koinInject { parametersOf(taskId) }

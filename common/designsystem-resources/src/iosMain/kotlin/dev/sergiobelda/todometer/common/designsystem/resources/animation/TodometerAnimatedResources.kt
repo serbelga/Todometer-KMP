@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Sergio Belda
+ * Copyright 2024 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.common.ui.components
+package dev.sergiobelda.todometer.common.designsystem.resources.animation
 
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
-import dev.sergiobelda.todometer.common.resources.TodometerResources
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal actual fun TaskItemBackgroundIcon(
-    state: SwipeToDismissBoxState,
-    backgroundIconTint: Color
-) {
-    Icon(
-        Images.Icons.Delete,
-        contentDescription = TodometerResources.strings.delete_task,
-        tint = backgroundIconTint
-    )
+actual object TodometerAnimatedResources {
+    @Composable
+    actual fun deleteAnimatedVectorPainter(atEnd: Boolean): Painter =
+        rememberVectorPainter(
+            Images.Icons.Delete
+        )
 }

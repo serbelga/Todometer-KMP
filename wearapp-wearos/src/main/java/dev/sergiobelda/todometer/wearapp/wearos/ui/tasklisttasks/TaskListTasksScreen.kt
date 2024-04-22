@@ -23,8 +23,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
@@ -80,7 +78,10 @@ import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedImageVector
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
+import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedResources
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
@@ -99,6 +100,13 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@NavDestination(
+    destinationId = "tasklisttasks",
+    name = "TaskListTasks",
+    arguments = [
+        NavArgument("taskListId", type = NavArgumentType.String, nullable = true)
+    ]
+)
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun TaskListTasksScreen(
@@ -263,7 +271,6 @@ private fun TaskListProgressIndicator(progress: Float) {
 
 @OptIn(
     ExperimentalWearFoundationApi::class,
-    ExperimentalAnimationGraphicsApi::class,
     ExperimentalWearMaterialApi::class
 )
 @Composable
@@ -290,8 +297,7 @@ private fun TaskItem(
                 icon = {
                     Box(modifier = Modifier.fillMaxSize()) {
                         Icon(
-                            painter = rememberAnimatedVectorPainter(
-                                TodometerAnimatedImageVector.Delete,
+                            painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
                                 atEnd = revealState.currentValue == Revealing
                             ),
                             contentDescription = TodometerResources.strings.delete_task,

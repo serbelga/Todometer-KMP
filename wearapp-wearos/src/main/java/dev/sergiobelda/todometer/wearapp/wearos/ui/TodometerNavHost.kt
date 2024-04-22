@@ -24,11 +24,12 @@ import androidx.wear.compose.navigation.composable
 import dev.sergiobelda.navigation.compose.extended.NavAction
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailNavArgumentKeys
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailNavDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailScreen
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavArgumentKeys
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksScreen
 
 @Composable
@@ -57,15 +58,12 @@ fun TodometerNavHost(
             TaskListTasksNavDestination.route,
             arguments = TaskListTasksNavDestination.arguments
         ) { navBackStackEntry ->
-            val taskListId = TaskListTasksNavDestination.navArgs(navBackStackEntry)
-                .getString(TaskListTasksNavArgumentKeys.TaskListIdNavArgumentKey).orEmpty()
+            val taskListId = TaskListTasksSafeNavArgs(navBackStackEntry).taskListId.orEmpty()
             TaskListTasksScreen(
                 taskListId = taskListId,
                 openTask = { taskId ->
                     navAction.navigate(
-                        TaskDetailNavDestination.navRoute(
-                            TaskDetailNavArgumentKeys.TaskIdNavArgumentKey to taskId
-                        )
+                        TaskDetailNavDestination.safeNavRoute(taskId)
                     )
                 },
                 navigateBack = { navAction.popBackStack() }
@@ -73,10 +71,10 @@ fun TodometerNavHost(
         }
         composable(
             TaskDetailNavDestination.route,
-            arguments = TaskDetailNavDestination.arguments
+            arguments = TaskDetailNavDestination.arguments,
+            deepLinks = TaskDetailNavDestination.deepLinks
         ) { navBackStackEntry ->
-            val taskId = TaskDetailNavDestination.navArgs(navBackStackEntry)
-                .getString(TaskDetailNavArgumentKeys.TaskIdNavArgumentKey).orEmpty()
+            val taskId = TaskDetailSafeNavArgs(navBackStackEntry).taskId.orEmpty()
             TaskDetailScreen(
                 taskId = taskId,
                 navigateBack = { navAction.popBackStack() }
