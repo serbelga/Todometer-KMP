@@ -27,7 +27,6 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeScreen
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailScreen
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavArgumentKeys
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksScreen
@@ -47,9 +46,7 @@ fun TodometerNavHost(
             HomeScreen(
                 openTaskList = { taskListId ->
                     navAction.navigate(
-                        TaskListTasksNavDestination.navRoute(
-                            TaskListTasksNavArgumentKeys.TaskListIdNavArgumentKey to taskListId
-                        )
+                        TaskListTasksNavDestination.safeNavRoute(taskListId)
                     )
                 }
             )
