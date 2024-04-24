@@ -97,7 +97,7 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask.DeleteTaskAlertDia
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetasklist.DeleteTaskListAlertDialog
 import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 @NavDestination(
@@ -113,7 +113,7 @@ internal fun TaskListTasksScreen(
     taskListId: String,
     openTask: (String) -> Unit,
     navigateBack: () -> Unit,
-    taskListTasksViewModel: TaskListTasksViewModel = getViewModel { parametersOf(taskListId) }
+    taskListTasksViewModel: TaskListTasksViewModel = koinInject { parametersOf(taskListId) }
 ) {
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
