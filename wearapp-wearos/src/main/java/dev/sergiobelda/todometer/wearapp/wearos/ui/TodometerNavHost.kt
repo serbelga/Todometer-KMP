@@ -33,11 +33,11 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSc
 @Composable
 fun TodometerNavHost(
     navController: NavHostController,
-    navAction: NavAction,
+    navAction: NavAction
 ) {
     SwipeDismissableNavHost(
         navController = navController,
-        startNavDestination = HomeNavDestination,
+        startNavDestination = HomeNavDestination
     ) {
         composable(navDestination = HomeNavDestination) {
             HomeScreen(
