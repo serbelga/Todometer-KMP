@@ -64,7 +64,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.symbols.Is
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import org.koin.compose.koinInject
 
 @NavDestination(
     name = "Home",
@@ -74,7 +74,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
-    homeViewModel: HomeViewModel = getViewModel()
+    homeViewModel: HomeViewModel = koinInject()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val homeUiState = homeViewModel.homeUiState

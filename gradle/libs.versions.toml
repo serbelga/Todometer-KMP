@@ -31,7 +31,7 @@ ktlint = "0.50.0"
 lyricist = "1.7.0"
 mockk = "1.13.10"
 mockkCommon = "1.12.5"
-navigationComposeExtended = "0.6.0"
+navigationComposeExtended = "0.8.2"
 ossLicenses = "0.10.6"
 playServicesOssLicenses = "17.0.1"
 playServicesWearable = "18.1.0"
@@ -101,6 +101,7 @@ sergiobelda-composeVectorize-core = { module = "dev.sergiobelda.compose.vectoriz
 sergiobelda-navigationComposeExtended = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedAnnotation = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-annotation", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedCompiler = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-compiler", version.ref = "navigationComposeExtended" }
+sergiobelda-navigationComposeExtendedWear = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-wear", version.ref = "navigationComposeExtended" }
 
 spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
