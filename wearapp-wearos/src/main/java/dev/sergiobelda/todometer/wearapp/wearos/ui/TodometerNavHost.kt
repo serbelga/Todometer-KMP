@@ -17,50 +17,54 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.wear.compose.navigation.SwipeDismissableNavHost
-import androidx.wear.compose.navigation.composable
-import dev.sergiobelda.todometer.common.navigation.Action
-import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeDestination
+import dev.sergiobelda.navigation.compose.extended.NavAction
+import dev.sergiobelda.navigation.compose.extended.wear.SwipeDismissableNavHost
+import dev.sergiobelda.navigation.compose.extended.wear.composable
+import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailNavDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailScreen
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.navigateToTaskDetail
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksScreen
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.navigateToTaskListTasks
 
 @Composable
 fun TodometerNavHost(
     navController: NavHostController,
-    action: Action,
-    modifier: Modifier = Modifier
+    navAction: NavAction
 ) {
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = HomeDestination.route,
-        modifier = modifier
+        startNavDestination = HomeNavDestination
     ) {
-        composable(HomeDestination.route) {
-            HomeScreen(openTaskList = action.navigateToTaskListTasks)
-        }
-        composable(
-            TaskListTasksDestination.route,
-            arguments = listOf(TaskListTasksDestination.taskListIdNavArgument)
-        ) { navBackStackEntry ->
-            val taskListId = TaskListTasksDestination.navArgsTaskListId(navBackStackEntry)
-            TaskListTasksScreen(
-                taskListId = taskListId,
-                openTask = action.navigateToTaskDetail,
-                navigateBack = { action.popBackStack() }
+        composable(navDestination = HomeNavDestination) {
+            HomeScreen(
+                openTaskList = { taskListId ->
+                    navAction.navigate(
+                        TaskListTasksNavDestination.safeNavRoute(taskListId)
+                    )
+                }
             )
         }
-        composable(TaskDetailDestination.route) { navBackStackEntry ->
-            val taskId = TaskDetailDestination.navArgsTaskId(navBackStackEntry)
+        composable(navDestination = TaskListTasksNavDestination) { navBackStackEntry ->
+            val taskListId = TaskListTasksSafeNavArgs(navBackStackEntry).taskListId.orEmpty()
+            TaskListTasksScreen(
+                taskListId = taskListId,
+                openTask = { taskId ->
+                    navAction.navigate(
+                        TaskDetailNavDestination.safeNavRoute(taskId)
+                    )
+                },
+                navigateBack = { navAction.popBackStack() }
+            )
+        }
+        composable(navDestination = TaskDetailNavDestination) { navBackStackEntry ->
+            val taskId = TaskDetailSafeNavArgs(navBackStackEntry).taskId.orEmpty()
             TaskDetailScreen(
                 taskId = taskId,
-                navigateBack = { action.popBackStack() }
+                navigateBack = { navAction.popBackStack() }
             )
         }
     }

@@ -68,6 +68,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.actions.SystemBackHandler
@@ -92,6 +93,10 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import kotlinx.coroutines.launch
 
+@NavDestination(
+    destinationId = "home",
+    name = "Home"
+)
 @Composable
 fun HomeScreen(
     navigateToAddTaskList: () -> Unit,

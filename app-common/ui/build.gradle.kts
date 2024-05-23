@@ -17,14 +17,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.material3)
-                api(compose.ui)
-
                 implementation(projects.appCommon.designsystem)
                 implementation(projects.common.domain)
-                implementation(projects.common.navigation)
                 implementation(projects.common.resources)
                 implementation(projects.common.ui)
 
@@ -38,17 +32,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(compose.animationGraphics)
-                implementation(compose.uiTooling)
-            }
-        }
+        val androidMain by getting
         val androidUnitTest by getting
         val desktopMain by getting {
             dependencies {
                 api(libs.kotlin.coroutinesSwing)
-                api(compose.uiTooling)
             }
         }
         val desktopTest by getting

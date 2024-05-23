@@ -57,19 +57,24 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
 import dev.sergiobelda.todometer.common.designsystem.resources.images.symbols.IsotypeCutDark
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import org.koin.compose.koinInject
 
+@NavDestination(
+    name = "Home",
+    destinationId = "home"
+)
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
-    homeViewModel: HomeViewModel = getViewModel()
+    homeViewModel: HomeViewModel = koinInject()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val homeUiState = homeViewModel.homeUiState

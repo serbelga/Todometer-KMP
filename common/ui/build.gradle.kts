@@ -17,12 +17,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(projects.common.domain)
+
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
                 api(compose.ui)
-
-                implementation(projects.common.domain)
+                api(libs.jetbrains.navigation.compose)
+                api(libs.sergiobelda.navigationComposeExtended)
+                api(libs.sergiobelda.navigationComposeExtendedAnnotation)
 
                 implementation(libs.kotlin.datetime)
             }

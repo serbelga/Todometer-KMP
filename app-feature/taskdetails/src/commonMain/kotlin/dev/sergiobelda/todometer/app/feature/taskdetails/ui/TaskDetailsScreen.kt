@@ -53,6 +53,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerCheckbox
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -73,6 +76,14 @@ import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
+@NavDestination(
+    destinationId = "taskdetails",
+    name = "TaskDetails",
+    arguments = [
+        NavArgument("taskId", NavArgumentType.String)
+    ],
+    deepLinkUris = ["app://open.task"]
+)
 @Composable
 fun TaskDetailsScreen(
     navigateBack: () -> Unit,

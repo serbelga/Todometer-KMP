@@ -20,7 +20,7 @@ kotlin {
             dependencies {
                 implementation(compose.material3)
                 implementation(compose.ui)
-                implementation(libs.composeVectorize.core)
+                implementation(libs.sergiobelda.composeVectorize.core)
             }
         }
         val commonTest by getting

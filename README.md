@@ -61,9 +61,7 @@ Open `app-ios/Todometer.xcodeproj` in XCode or run it in Android Studio using Ko
 #### Android
 
 * [Android Jetpack](https://developer.android.com/jetpack)
-    * [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
     * [Android KTX](https://developer.android.com/kotlin/ktx)
-    * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
     * [Glance App Widget](https://developer.android.com/jetpack/androidx/releases/glance)
 
 #### Wear OS
@@ -73,8 +71,11 @@ Open `app-ios/Todometer.xcodeproj` in XCode or run it in Android Studio using Ko
 
 #### Common
 
-* [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
+* [Compose UI Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)
+* [Compose ViewModel Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-lifecycle.html)
+* [Compose Navigation Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html)
 * [compose-vectorize](https://github.com/serbelga/compose-vectorize)
+* [navigation-compose-extended](https://github.com/serbelga/navigation-compose-extended)
 * [Kotlin & Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/flow.html)
 * [Koin Multiplatform](https://insert-koin.io/docs/reference/koin-mp/kmp)

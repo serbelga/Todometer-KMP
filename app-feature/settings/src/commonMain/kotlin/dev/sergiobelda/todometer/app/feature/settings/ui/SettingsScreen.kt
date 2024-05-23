@@ -54,6 +54,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
@@ -64,6 +65,10 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Navi
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
+@NavDestination(
+    destinationId = "settings",
+    name = "Settings"
+)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(

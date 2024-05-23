@@ -58,6 +58,9 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
@@ -66,15 +69,23 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
+@NavDestination(
+    destinationId = "taskdetail",
+    name = "TaskDetail",
+    arguments = [
+        NavArgument("taskId", type = NavArgumentType.String)
+    ],
+    deepLinkUris = ["app://open.task"]
+)
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun TaskDetailScreen(
     taskId: String,
     navigateBack: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel = getViewModel(parameters = { parametersOf(taskId) })
+    taskDetailViewModel: TaskDetailViewModel = koinInject { parametersOf(taskId) }
 ) {
     val taskDetailUiState = taskDetailViewModel.taskDetailUiState
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }

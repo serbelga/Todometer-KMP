@@ -62,7 +62,7 @@ fun TaskListProgress(
             style = MaterialTheme.typography.bodyMedium
         )
         LinearProgressIndicator(
-            progress = animatedProgress,
+            progress = { animatedProgress },
             modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp),
             strokeCap = StrokeCap.Round
         )

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2024 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.navigation
+package dev.sergiobelda.todometer.common.designsystem.resources.animation
 
-abstract class NavigationParams(val destination: Destination) {
-    abstract val navigationRoute: String
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.painter.Painter
+
+expect object TodometerAnimatedResources {
+
+    @Composable
+    fun deleteAnimatedVectorPainter(
+        atEnd: Boolean
+    ): Painter
 }
