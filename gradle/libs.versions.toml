@@ -9,24 +9,23 @@ androidTargetSdk = "34"
 androidWearMinSdk = "25"
 androidWearTargetSdk = "33"
 appcompat = "1.6.1"
-composeCompiler = "1.5.11-kt-2.0.0-RC1"
 composeMultiplatform = "1.6.10"
 composeVectorize = "0.7.0"
 dataStore = "1.1.1"
 dependencyGraphGenerator = "0.8.0"
 espressoCore = "3.4.0"
 firebaseBom = "33.0.0"
-firebaseCrashlyticsGradle = "2.9.9"
+firebaseCrashlyticsGradle = "3.0.1"
 glance = "1.0.0"
 googleServices = "4.4.1"
-jetbrainsNavigation = "2.8.0-dev1590"
+jetbrainsNavigation = "2.8.0-alpha01"
 junit = "4.13.2"
 koinBom = "3.5.6"
-kotlin = "2.0.0-RC1"
+kotlin = "2.0.0"
 kotlinCoroutines = "1.8.1"
 kotlinDatetime = "0.6.0"
 kotlinSerializationJson = "1.6.3"
-ksp = "2.0.0-RC1-1.0.20"
+ksp = "2.0.0-1.0.21"
 ktlint = "0.50.0"
 lyricist = "1.7.0"
 mockk = "1.13.11"
@@ -122,6 +121,7 @@ wear-input = { module = "androidx.wear:wear-input", version.ref = "wearInput" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeVectorize = { id = "dev.sergiobelda.compose.vectorize", version.ref = "composeVectorize" }
 dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }

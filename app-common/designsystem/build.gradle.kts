@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
