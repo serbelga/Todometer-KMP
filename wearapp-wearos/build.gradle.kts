@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     kotlin("android")
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.ksp)
     id("dev.sergiobelda.gradle.spotless")
@@ -27,10 +28,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     buildTypes {
