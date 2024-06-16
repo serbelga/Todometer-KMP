@@ -26,9 +26,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Todometer.Starting"
         android:usesCleartextTraffic="true">
-        <profileable
-            android:shell="true"
-            tools:targetApi="29" />
 
         <activity
             android:name="dev.sergiobelda.todometer.app.ui.main.MainActivity"
