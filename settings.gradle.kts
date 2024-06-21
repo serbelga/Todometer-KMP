@@ -34,6 +34,8 @@ include(":app-feature:home")
 include(":app-feature:settings")
 include(":app-feature:taskdetails")
 
+include(":benchmark")
+
 include(":common:android")
 include(":common:core")
 include(":common:data")
