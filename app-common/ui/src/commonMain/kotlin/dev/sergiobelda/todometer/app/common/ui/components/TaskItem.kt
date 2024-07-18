@@ -37,7 +37,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -71,7 +70,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskItem(
     taskItem: TaskItem,
@@ -296,7 +294,7 @@ private fun taskItemTitleTextDecoration(state: TaskState): TextDecoration =
 @Composable
 private fun taskItemActionTintColor(state: TaskState): Color =
     when (state) {
-        TaskState.DOING -> MaterialTheme.colorScheme.onPrimaryContainer
+        TaskState.DOING -> MaterialTheme.colorScheme.onSurfaceVariant
         TaskState.DONE -> MaterialTheme.colorScheme.primary
     }
 

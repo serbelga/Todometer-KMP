@@ -127,7 +127,6 @@ internal fun AboutItemCard(
         shape = RoundedCornerShape(AboutItemCardCornerRadius),
         tonalElevation = AboutItemCardTonalElevation,
         modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp),
-        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
