@@ -126,7 +126,7 @@ internal fun AboutItemCard(
         onClick = onCardClick,
         shape = RoundedCornerShape(AboutItemCardCornerRadius),
         tonalElevation = AboutItemCardTonalElevation,
-        modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp),
+        modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
