@@ -15,9 +15,9 @@ package dev.sergiobelda.gradle.buildlogic.convention
  * limitations under the License.
  */
 
+import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
@@ -28,15 +28,11 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                // TODO: Use libs.
-                apply("com.google.devtools.ksp")
+                apply(libs.findPlugin("ksp").get().get().pluginId)
             }
 
-            val extension = extensions.getByType<KotlinMultiplatformExtension>()
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             val navigationComposeExtendedCompiler =
-                libs.findLibrary("sergiobelda.navigationComposeExtendedCompiler").get().get()
-                    .toString()
+                libs.findLibrary("sergiobelda.navigationComposeExtendedCompiler").get().get().toString()
 
             dependencies {
                 add("kspCommonMainMetadata", navigationComposeExtendedCompiler)
@@ -50,9 +46,20 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
                 }
             }
 
-            extension.sourceSets["commonMain"].kotlin.srcDir(
-                "build/generated/ksp/metadata/commonMain/kotlin"
-            )
+            val extension = extensions.getByType<KotlinMultiplatformExtension>()
+            extension.apply {
+                sourceSets["commonMain"].kotlin.srcDir(
+                    "build/generated/ksp/metadata/commonMain/kotlin"
+                )
+
+                sourceSets.apply {
+                    commonMain {
+                        dependencies {
+                            implementation(libs.findLibrary("kotlin-collections-immutable").get())
+                        }
+                    }
+                }
+            }
         }
     }
 }

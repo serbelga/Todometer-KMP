@@ -31,6 +31,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertT
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 
 class TaskDetailsViewModel(
@@ -80,12 +82,12 @@ class TaskDetailsViewModel(
             result.doIfSuccess { taskChecklistItems ->
                 uiState = uiState.copy(
                     isLoadingTaskChecklistItems = false,
-                    taskChecklistItems = taskChecklistItems
+                    taskChecklistItems = taskChecklistItems.toPersistentList()
                 )
             }.doIfError {
                 uiState = uiState.copy(
                     isLoadingTaskChecklistItems = false,
-                    taskChecklistItems = emptyList()
+                    taskChecklistItems = persistentListOf()
                 )
             }
         }

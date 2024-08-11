@@ -21,25 +21,32 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 
 @Immutable
 data class HomeUiState(
     val isLoadingTasks: Boolean = false,
-    val tasks: List<TaskItem> = emptyList(),
-    val selectedTasksIds: List<String> = emptyList(),
-    val taskLists: List<TaskList> = emptyList(),
+    val tasks: ImmutableList<TaskItem> = persistentListOf(),
+    val selectedTasksIds: ImmutableList<String> = persistentListOf(),
+    val taskLists: ImmutableList<TaskList> = persistentListOf(),
     val taskListSelected: TaskList? = null,
     val errorUi: ErrorUi? = null
 ) {
-    val selectedTasks: List<TaskItem> get() = tasks.filter { it.id in selectedTasksIds }
+    val selectedTasks: ImmutableList<TaskItem>
+        get() = tasks.filter { it.id in selectedTasksIds }.toPersistentList()
 
     val selectionMode: Boolean get() = selectedTasks.isNotEmpty()
 
-    val tasksDoingPinned: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING && it.isPinned }
+    val tasksDoingPinned: ImmutableList<TaskItem>
+        get() = tasks.filter { it.state == TaskState.DOING && it.isPinned }.toPersistentList()
 
-    val tasksDoingNotPinned: List<TaskItem> get() = tasks.filter { it.state == TaskState.DOING && !it.isPinned }
+    val tasksDoingNotPinned: ImmutableList<TaskItem>
+        get() = tasks.filter { it.state == TaskState.DOING && !it.isPinned }.toPersistentList()
 
-    val tasksDone: List<TaskItem> get() = tasks.filter { it.state == TaskState.DONE }
+    val tasksDone: ImmutableList<TaskItem>
+        get() = tasks.filter { it.state == TaskState.DONE }.toPersistentList()
 
     val isDefaultTaskListSelected: Boolean get() = taskListSelected == null
 }

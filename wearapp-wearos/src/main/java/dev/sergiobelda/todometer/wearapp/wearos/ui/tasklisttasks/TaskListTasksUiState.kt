@@ -19,6 +19,8 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks
 import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
 data class TaskListTasksUiState(
@@ -26,5 +28,5 @@ data class TaskListTasksUiState(
     val taskList: TaskList? = null,
     val isDefaultTaskList: Boolean = false,
     val isLoadingTasks: Boolean = false,
-    val tasks: List<TaskItem> = emptyList()
+    val tasks: ImmutableList<TaskItem> = persistentListOf()
 )

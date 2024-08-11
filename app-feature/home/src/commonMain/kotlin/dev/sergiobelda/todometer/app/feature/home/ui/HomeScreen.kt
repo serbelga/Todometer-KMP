@@ -91,6 +91,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrati
 import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.NoTasks
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
 
 @NavDestination(
@@ -275,12 +276,12 @@ private fun HomeTopAppBar(
     onEditTaskListClick: () -> Unit,
     onDeleteTaskListClick: () -> Unit,
     selectionMode: Boolean,
-    selectedTasks: List<TaskItem>,
+    selectedTasks: ImmutableList<TaskItem>,
     onClearSelectedTasksClick: () -> Unit,
     onToggleSelectedTasksPinnedValueClick: () -> Unit,
     onDeleteSelectedTasksClick: () -> Unit,
     taskListName: String?,
-    tasks: List<TaskItem>
+    tasks: ImmutableList<TaskItem>
 ) {
     val tonalElevation by animateDpAsState(
         if (selectionMode) HomeTopAppBarTonalElevation else 0.dp,
@@ -341,7 +342,7 @@ private fun SelectedTasksTopAppBar(
     onClearSelectedTasksClick: () -> Unit,
     onToggleSelectedTasksPinnedValueClick: () -> Unit,
     onDeleteSelectedTasksClick: () -> Unit,
-    selectedTasks: List<TaskItem>
+    selectedTasks: ImmutableList<TaskItem>
 ) {
     val atLeastOneNotPinnedTaskItem = remember(selectedTasks) { selectedTasks.any { !it.isPinned } }
     TopAppBar(
@@ -403,10 +404,10 @@ private fun HomeFloatingActionButton(
 
 @Composable
 private fun TasksListView(
-    tasksDoingPinned: List<TaskItem>,
-    tasksDoingNotPinned: List<TaskItem>,
-    tasksDone: List<TaskItem>,
-    selectedTasksIds: List<String>,
+    tasksDoingPinned: ImmutableList<TaskItem>,
+    tasksDoingNotPinned: ImmutableList<TaskItem>,
+    tasksDone: ImmutableList<TaskItem>,
+    selectedTasksIds: ImmutableList<String>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
@@ -495,14 +496,14 @@ private fun TasksListView(
 
 @OptIn(ExperimentalFoundationApi::class)
 fun LazyListScope.taskItems(
-    tasks: List<TaskItem>,
+    tasks: ImmutableList<TaskItem>,
     onDoingClick: (String) -> Unit,
     onDoneClick: (String) -> Unit,
     onTaskItemClick: (String) -> Unit,
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit,
     selectionMode: Boolean,
-    selectedTasksIds: List<String>
+    selectedTasksIds: ImmutableList<String>
 ) {
     items(
         tasks,

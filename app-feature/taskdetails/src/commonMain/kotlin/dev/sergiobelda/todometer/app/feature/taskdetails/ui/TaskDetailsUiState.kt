@@ -20,12 +20,14 @@ import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
 data class TaskDetailsUiState(
     val isLoadingTask: Boolean = false,
     val task: Task? = null,
     val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: List<TaskChecklistItem> = emptyList(),
+    val taskChecklistItems: ImmutableList<TaskChecklistItem> = persistentListOf(),
     val errorUi: ErrorUi? = null
 )

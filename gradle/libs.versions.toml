@@ -25,6 +25,7 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 koinBom = "3.5.6"
 kotlin = "2.0.0"
+kotlinCollectionsImmutable = "0.3.7"
 kotlinCoroutines = "1.8.1"
 kotlinDatetime = "0.6.0"
 kotlinSerializationJson = "1.7.1"
@@ -91,6 +92,7 @@ koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-test = { module = "io.insert-koin:koin-test" }
 
+kotlin-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinCollectionsImmutable" }
 kotlin-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinCoroutines" }
 kotlin-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
