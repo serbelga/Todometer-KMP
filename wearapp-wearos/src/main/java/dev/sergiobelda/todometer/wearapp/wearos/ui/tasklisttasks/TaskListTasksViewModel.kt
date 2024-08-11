@@ -31,6 +31,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 
 class TaskListTasksViewModel(
@@ -81,12 +83,12 @@ class TaskListTasksViewModel(
             result.doIfSuccess { tasks ->
                 taskListTasksUiState = taskListTasksUiState.copy(
                     isLoadingTasks = false,
-                    tasks = tasks
+                    tasks = tasks.toPersistentList()
                 )
             }.doIfError {
                 taskListTasksUiState = taskListTasksUiState.copy(
                     isLoadingTasks = false,
-                    tasks = emptyList()
+                    tasks = persistentListOf()
                 )
             }
         }

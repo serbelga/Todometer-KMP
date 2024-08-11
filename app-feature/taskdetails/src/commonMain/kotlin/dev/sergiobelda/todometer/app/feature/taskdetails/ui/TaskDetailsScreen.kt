@@ -75,6 +75,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import kotlinx.collections.immutable.ImmutableList
 
 @NavDestination(
     destinationId = "taskdetails",
@@ -121,7 +122,7 @@ fun TaskDetailsScreen(
 @Composable
 private fun TaskDetailsSuccessContent(
     task: Task,
-    taskChecklistItems: List<TaskChecklistItem>,
+    taskChecklistItems: ImmutableList<TaskChecklistItem>,
     navigateBack: () -> Unit,
     navigateToEditTask: () -> Unit,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
@@ -236,7 +237,7 @@ private fun LazyListScope.taskChips(task: Task) {
 }
 
 private fun LazyListScope.taskChecklist(
-    taskChecklistItems: List<TaskChecklistItem>,
+    taskChecklistItems: ImmutableList<TaskChecklistItem>,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit

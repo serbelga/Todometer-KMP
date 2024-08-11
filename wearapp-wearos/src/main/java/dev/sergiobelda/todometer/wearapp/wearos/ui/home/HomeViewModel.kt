@@ -26,6 +26,8 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -45,13 +47,13 @@ class HomeViewModel(
             result.doIfSuccess { taskLists ->
                 homeUiState = homeUiState.copy(
                     isLoading = false,
-                    taskLists = taskLists,
+                    taskLists = taskLists.toPersistentList(),
                     errorUi = null
                 )
             }.doIfError { error ->
                 homeUiState = homeUiState.copy(
                     isLoading = false,
-                    taskLists = emptyList(),
+                    taskLists = persistentListOf(),
                     errorUi = error.mapToErrorUi()
                 )
             }

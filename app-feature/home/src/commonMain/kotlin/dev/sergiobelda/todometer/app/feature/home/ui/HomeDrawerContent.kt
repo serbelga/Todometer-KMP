@@ -46,12 +46,13 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Info
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Settings
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 internal fun HomeDrawerContent(
     selectedTaskListId: String,
     defaultTaskListName: String,
-    taskLists: List<TaskList>,
+    taskLists: ImmutableList<TaskList>,
     onAddTaskList: () -> Unit,
     onTaskListItemClick: (String) -> Unit,
     onSettingsItemClick: () -> Unit,
@@ -129,7 +130,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
 private fun HomeDrawerTaskListsSection(
     selectedTaskListId: String,
     defaultTaskListName: String,
-    taskLists: List<TaskList>,
+    taskLists: ImmutableList<TaskList>,
     onAddTaskList: () -> Unit,
     onTaskListItemClick: (String) -> Unit
 ) {

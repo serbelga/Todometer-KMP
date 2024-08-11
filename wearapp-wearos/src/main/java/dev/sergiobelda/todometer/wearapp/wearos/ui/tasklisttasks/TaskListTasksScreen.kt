@@ -96,6 +96,8 @@ import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetasklist.DeleteTaskListAlertDialog
 import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -369,7 +371,7 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-            val remoteInputs: List<RemoteInput> = listOf(
+            val remoteInputs: ImmutableList<RemoteInput> = persistentListOf(
                 RemoteInput.Builder(TaskTitle)
                     .setLabel(taskTitleInput)
                     .wearableExtender {
@@ -406,7 +408,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
         onClick = {
             val intent: Intent =
                 RemoteInputIntentHelper.createActionRemoteInputIntent()
-            val remoteInputs: List<RemoteInput> = listOf(
+            val remoteInputs: ImmutableList<RemoteInput> = persistentListOf(
                 RemoteInput.Builder(TaskListName)
                     .setLabel(taskList.name)
                     .wearableExtender {

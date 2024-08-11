@@ -88,4 +88,6 @@ dependencies {
 
     implementation(libs.sergiobelda.navigationComposeExtendedWear)
     ksp(libs.sergiobelda.navigationComposeExtendedCompiler)
+
+    implementation(libs.kotlin.collections.immutable)
 }

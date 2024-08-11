@@ -32,6 +32,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListSe
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.SetTaskListSelectedUseCase
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -75,12 +77,12 @@ class HomeViewModel(
             result.doIfSuccess { tasks ->
                 uiState = uiState.copy(
                     isLoadingTasks = false,
-                    tasks = tasks
+                    tasks = tasks.toPersistentList()
                 )
             }.doIfError {
                 uiState = uiState.copy(
                     isLoadingTasks = false,
-                    tasks = emptyList()
+                    tasks = persistentListOf()
                 )
             }
         }
@@ -90,11 +92,11 @@ class HomeViewModel(
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
                 uiState = uiState.copy(
-                    taskLists = taskLists
+                    taskLists = taskLists.toPersistentList()
                 )
             }.doIfError {
                 uiState = uiState.copy(
-                    taskLists = emptyList()
+                    taskLists = persistentListOf()
                 )
             }
         }
@@ -133,13 +135,13 @@ class HomeViewModel(
             selectedTasksIds.removeAll { it == id }
         }
         uiState = uiState.copy(
-            selectedTasksIds = selectedTasksIds
+            selectedTasksIds = selectedTasksIds.toPersistentList()
         )
     }
 
     fun clearSelectedTasks() = viewModelScope.launch {
         delay(CLEAR_SELECTED_TASKS_DELAY_MILLIS)
-        uiState = uiState.copy(selectedTasksIds = emptyList())
+        uiState = uiState.copy(selectedTasksIds = persistentListOf())
     }
 
     fun toggleSelectedTasksPinnedValue() = viewModelScope.launch {

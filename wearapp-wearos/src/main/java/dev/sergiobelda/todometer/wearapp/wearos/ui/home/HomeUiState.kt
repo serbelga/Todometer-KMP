@@ -19,10 +19,12 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
 data class HomeUiState(
     val isLoading: Boolean = false,
-    val taskLists: List<TaskList> = emptyList(),
+    val taskLists: ImmutableList<TaskList> = persistentListOf(),
     val errorUi: ErrorUi? = null
 )
