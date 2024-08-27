@@ -26,7 +26,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 
 @Immutable
-data class HomeUiState(
+data class HomeState(
     val isLoadingTasks: Boolean = false,
     val tasks: ImmutableList<TaskItem> = persistentListOf(),
     val selectedTasksIds: ImmutableList<String> = persistentListOf(),

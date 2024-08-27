@@ -21,7 +21,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 @Immutable
-data class EditTaskListUiState(
+data class EditTaskListState(
     val isLoading: Boolean = false,
     val taskList: TaskList? = null,
     val errorUi: ErrorUi? = null

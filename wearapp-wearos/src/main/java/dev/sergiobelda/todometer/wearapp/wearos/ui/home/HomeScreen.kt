@@ -76,10 +76,10 @@ import org.koin.compose.koinInject
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
-    homeViewModel: HomeViewModel = koinInject()
+    viewModel: HomeViewModel = koinInject()
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-    val homeUiState = homeViewModel.homeUiState
+    val state = viewModel.state
 
     Scaffold(
         positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
@@ -112,7 +112,7 @@ internal fun HomeScreen(
             item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
             when {
-                homeUiState.isLoading -> {
+                state.isLoading -> {
                     item { ContentLoadingProgress() }
                 }
 
@@ -123,12 +123,12 @@ internal fun HomeScreen(
                             onClick = { openTaskList(null) }
                         )
                     }
-                    items(homeUiState.taskLists) { taskList ->
+                    items(state.taskLists) { taskList ->
                         TaskListItem(taskList.name) { openTaskList(taskList.id) }
                     }
                     item { Spacer(modifier = Modifier.height(4.dp)) }
                     item {
-                        AddTaskListButton { homeViewModel.insertTaskList(it) }
+                        AddTaskListButton { viewModel.insertTaskList(it) }
                     }
                 }
             }

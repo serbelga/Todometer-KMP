@@ -115,7 +115,7 @@ internal fun TaskListTasksScreen(
     taskListId: String,
     openTask: (String) -> Unit,
     navigateBack: () -> Unit,
-    taskListTasksViewModel: TaskListTasksViewModel = koinInject { parametersOf(taskListId) }
+    viewModel: TaskListTasksViewModel = koinInject { parametersOf(taskListId) }
 ) {
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
@@ -124,7 +124,7 @@ internal fun TaskListTasksScreen(
         deleteTaskAlertDialogState -> {
             DeleteTaskAlertDialog(
                 onDeleteTask = {
-                    taskListTasksViewModel.deleteTask(selectedTaskId)
+                    viewModel.deleteTask(selectedTaskId)
                     deleteTaskAlertDialogState = false
                 },
                 onCancel = { deleteTaskAlertDialogState = false }
@@ -134,7 +134,7 @@ internal fun TaskListTasksScreen(
         deleteTaskListAlertDialogState -> {
             DeleteTaskListAlertDialog(
                 onDeleteTaskList = {
-                    taskListTasksViewModel.deleteTaskList()
+                    viewModel.deleteTaskList()
                     navigateBack()
                 },
                 onCancel = { deleteTaskListAlertDialogState = false }
@@ -143,10 +143,10 @@ internal fun TaskListTasksScreen(
 
         else -> {
             val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
-            val taskListTasksUiState = taskListTasksViewModel.taskListTasksUiState
+            val state = viewModel.state
             val focusRequester = rememberActiveFocusRequester()
             val coroutineScope = rememberCoroutineScope()
-            val progress = TaskProgress.getTasksDoneProgress(taskListTasksUiState.tasks)
+            val progress = TaskProgress.getTasksDoneProgress(state.tasks)
             val animatedProgress by animateFloatAsState(
                 targetValue = progress,
                 animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
@@ -182,13 +182,13 @@ internal fun TaskListTasksScreen(
                         .focusable()
                 ) {
                     when {
-                        taskListTasksUiState.isLoadingTaskList -> {
+                        state.isLoadingTaskList -> {
                             item { ContentLoadingProgress() }
                         }
 
-                        !taskListTasksUiState.isLoadingTaskList -> {
+                        !state.isLoadingTaskList -> {
                             when {
-                                taskListTasksUiState.taskList == null && taskListTasksUiState.isDefaultTaskList -> {
+                                state.taskList == null && state.isDefaultTaskList -> {
                                     item {
                                         Text(
                                             TodometerResources.strings.default_task_list_name,
@@ -198,10 +198,10 @@ internal fun TaskListTasksScreen(
                                     }
                                 }
 
-                                taskListTasksUiState.taskList != null -> {
+                                state.taskList != null -> {
                                     item {
                                         Text(
-                                            taskListTasksUiState.taskList.name,
+                                            state.taskList.name,
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis,
                                             maxLines = 1,
@@ -211,7 +211,7 @@ internal fun TaskListTasksScreen(
                                 }
                             }
                             item { Spacer(modifier = Modifier.height(4.dp)) }
-                            if (taskListTasksUiState.tasks.isEmpty()) {
+                            if (state.tasks.isEmpty()) {
                                 item {
                                     Text(
                                         text = TodometerResources.strings.no_tasks,
@@ -220,11 +220,11 @@ internal fun TaskListTasksScreen(
                                     )
                                 }
                             } else {
-                                items(taskListTasksUiState.tasks, key = { it.id }) { task ->
+                                items(state.tasks, key = { it.id }) { task ->
                                     TaskItem(
                                         task,
-                                        onDoingClick = { taskListTasksViewModel.setTaskDoing(task.id) },
-                                        onDoneClick = { taskListTasksViewModel.setTaskDone(task.id) },
+                                        onDoingClick = { viewModel.setTaskDoing(task.id) },
+                                        onDoneClick = { viewModel.setTaskDone(task.id) },
                                         onDeleteTask = {
                                             // TODO: Refactor this assignment
                                             selectedTaskId = task.id
@@ -236,12 +236,12 @@ internal fun TaskListTasksScreen(
                             }
                             item { Spacer(modifier = Modifier.height(4.dp)) }
                             item {
-                                AddTaskButton { taskListTasksViewModel.insertTask(it) }
+                                AddTaskButton { viewModel.insertTask(it) }
                             }
-                            if (taskListTasksUiState.taskList != null) {
+                            if (state.taskList != null) {
                                 item {
-                                    EditTaskListButton(taskListTasksUiState.taskList) {
-                                        taskListTasksViewModel.updateTaskListName(it)
+                                    EditTaskListButton(state.taskList) {
+                                        viewModel.updateTaskListName(it)
                                     }
                                 }
                                 item {

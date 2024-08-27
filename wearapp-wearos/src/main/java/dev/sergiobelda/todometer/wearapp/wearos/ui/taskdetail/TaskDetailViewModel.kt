@@ -36,7 +36,7 @@ class TaskDetailViewModel(
     private val deleteTasksUseCase: DeleteTasksUseCase
 ) : ViewModel() {
 
-    var taskDetailUiState by mutableStateOf(TaskDetailUiState(isLoading = true))
+    var state by mutableStateOf(TaskDetailState(isLoading = true))
         private set
 
     init {
@@ -46,13 +46,13 @@ class TaskDetailViewModel(
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                taskDetailUiState = taskDetailUiState.copy(
+                state = state.copy(
                     isLoading = false,
                     task = task,
                     errorUi = null
                 )
             }.doIfError { error ->
-                taskDetailUiState = taskDetailUiState.copy(
+                state = state.copy(
                     isLoading = false,
                     task = null,
                     errorUi = error.mapToErrorUi()
@@ -62,7 +62,7 @@ class TaskDetailViewModel(
     }
 
     fun updateTask(title: String) = viewModelScope.launch {
-        taskDetailUiState.task?.let { task ->
+        state.task?.let { task ->
             updateTaskUseCase(task.copy(title = title))
         }
     }

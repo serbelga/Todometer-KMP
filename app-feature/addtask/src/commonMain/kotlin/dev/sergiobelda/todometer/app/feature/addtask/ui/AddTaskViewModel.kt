@@ -32,7 +32,7 @@ class AddTaskViewModel(
     private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(AddTaskUiState())
+    var state by mutableStateOf(AddTaskState())
         private set
 
     fun insertTask(
@@ -42,7 +42,7 @@ class AddTaskViewModel(
         dueDate: Long? = null,
         taskChecklistItems: List<String> = emptyList()
     ) = viewModelScope.launch {
-        uiState = uiState.copy(isAddingTask = true)
+        state = state.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(
             title,
             tag,
@@ -51,12 +51,12 @@ class AddTaskViewModel(
             taskChecklistItems
         )
         result.doIfSuccess {
-            uiState = uiState.copy(
+            state = state.copy(
                 isAddingTask = false,
                 errorUi = null
             )
         }.doIfError { error ->
-            uiState = uiState.copy(
+            state = state.copy(
                 isAddingTask = false,
                 errorUi = error.mapToErrorUi()
             )

@@ -33,7 +33,7 @@ class EditTaskListViewModel(
     private val updateTaskListUseCase: UpdateTaskListUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(EditTaskListUiState(isLoading = true))
+    var state by mutableStateOf(EditTaskListState(isLoading = true))
         private set
 
     init {
@@ -43,13 +43,13 @@ class EditTaskListViewModel(
     private fun getTaskListSelected() = viewModelScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoading = false,
                     taskList = taskList,
                     errorUi = null
                 )
             }.doIfError { error ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoading = false,
                     taskList = null,
                     errorUi = error.mapToErrorUi()
@@ -59,7 +59,7 @@ class EditTaskListViewModel(
     }
 
     fun updateTaskList(name: String) = viewModelScope.launch {
-        uiState.taskList?.let {
+        state.taskList?.let {
             updateTaskListUseCase(it.copy(name = name))
         }
     }

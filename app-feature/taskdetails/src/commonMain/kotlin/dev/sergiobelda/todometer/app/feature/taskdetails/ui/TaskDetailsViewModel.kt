@@ -46,8 +46,8 @@ class TaskDetailsViewModel(
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(
-        TaskDetailsUiState(
+    var state by mutableStateOf(
+        TaskDetailsState(
             isLoadingTask = true,
             isLoadingTaskChecklistItems = true
         )
@@ -62,13 +62,13 @@ class TaskDetailsViewModel(
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoadingTask = false,
                     task = task,
                     errorUi = null
                 )
             }.doIfError { error ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoadingTask = false,
                     task = null,
                     errorUi = error.mapToErrorUi()
@@ -80,12 +80,12 @@ class TaskDetailsViewModel(
     private fun getTaskChecklistItems() = viewModelScope.launch {
         getTaskChecklistItemsUseCase(taskId).collect { result ->
             result.doIfSuccess { taskChecklistItems ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoadingTaskChecklistItems = false,
                     taskChecklistItems = taskChecklistItems.toPersistentList()
                 )
             }.doIfError {
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoadingTaskChecklistItems = false,
                     taskChecklistItems = persistentListOf()
                 )

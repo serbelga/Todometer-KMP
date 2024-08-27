@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.taskdetails.ui
+package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.runtime.Immutable
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
-data class TaskDetailsUiState(
-    val isLoadingTask: Boolean = false,
-    val task: Task? = null,
-    val isLoadingTaskChecklistItems: Boolean = false,
-    val taskChecklistItems: ImmutableList<TaskChecklistItem> = persistentListOf(),
+data class HomeState(
+    val isLoading: Boolean = false,
+    val taskLists: ImmutableList<TaskList> = persistentListOf(),
     val errorUi: ErrorUi? = null
 )

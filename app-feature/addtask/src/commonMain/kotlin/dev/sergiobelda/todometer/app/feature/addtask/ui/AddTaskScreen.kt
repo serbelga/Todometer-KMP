@@ -120,10 +120,10 @@ fun AddTaskScreen(
     }
     SystemBackHandler(onBack = onBack)
 
-    if (viewModel.uiState.errorUi != null) {
+    if (viewModel.state.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = viewModel.uiState.errorUi?.message ?: ""
+                message = viewModel.state.errorUi?.message ?: ""
             )
         }
     }
@@ -135,7 +135,7 @@ fun AddTaskScreen(
             SaveActionTopAppBar(
                 navigateBack = onBack,
                 title = TodometerResources.strings.addTask,
-                isSaveButtonEnabled = !viewModel.uiState.isAddingTask,
+                isSaveButtonEnabled = !viewModel.state.isAddingTask,
                 onSaveButtonClick = {
                     if (taskTitle.isBlank()) {
                         taskTitleInputError = true
@@ -150,7 +150,7 @@ fun AddTaskScreen(
                         navigateBack()
                     }
                 },
-                saveButtonTintColor = if (viewModel.uiState.isAddingTask) {
+                saveButtonTintColor = if (viewModel.state.isAddingTask) {
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
@@ -158,7 +158,7 @@ fun AddTaskScreen(
             )
         },
         content = { paddingValues ->
-            if (viewModel.uiState.isAddingTask) {
+            if (viewModel.state.isAddingTask) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
             LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
