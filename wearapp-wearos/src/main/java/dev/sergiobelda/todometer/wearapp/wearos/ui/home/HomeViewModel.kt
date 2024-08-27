@@ -35,7 +35,7 @@ class HomeViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
-    var homeUiState by mutableStateOf(HomeUiState(isLoading = true))
+    var state by mutableStateOf(HomeState(isLoading = true))
         private set
 
     init {
@@ -45,13 +45,13 @@ class HomeViewModel(
     private fun getTaskLists() = viewModelScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
-                homeUiState = homeUiState.copy(
+                state = state.copy(
                     isLoading = false,
                     taskLists = taskLists.toPersistentList(),
                     errorUi = null
                 )
             }.doIfError { error ->
-                homeUiState = homeUiState.copy(
+                state = state.copy(
                     isLoading = false,
                     taskLists = persistentListOf(),
                     errorUi = error.mapToErrorUi()

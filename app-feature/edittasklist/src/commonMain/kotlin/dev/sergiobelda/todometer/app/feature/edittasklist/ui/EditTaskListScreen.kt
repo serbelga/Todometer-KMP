@@ -47,12 +47,12 @@ fun EditTaskListScreen(
     viewModel: EditTaskListViewModel
 ) {
     when {
-        viewModel.uiState.isLoading -> {
+        viewModel.state.isLoading -> {
             LoadingScreenDialog(navigateBack)
         }
 
-        !viewModel.uiState.isLoading -> {
-            viewModel.uiState.taskList?.let { taskList ->
+        !viewModel.state.isLoading -> {
+            viewModel.state.taskList?.let { taskList ->
                 var taskListName by rememberSaveable { mutableStateOf(taskList.name) }
                 var taskListNameInputError by remember { mutableStateOf(false) }
 
@@ -61,7 +61,7 @@ fun EditTaskListScreen(
                         SaveActionTopAppBar(
                             navigateBack = navigateBack,
                             title = TodometerResources.strings.edit_task_list,
-                            isSaveButtonEnabled = !viewModel.uiState.isLoading,
+                            isSaveButtonEnabled = !viewModel.state.isLoading,
                             onSaveButtonClick = {
                                 if (taskListName.isBlank()) {
                                     taskListNameInputError = true

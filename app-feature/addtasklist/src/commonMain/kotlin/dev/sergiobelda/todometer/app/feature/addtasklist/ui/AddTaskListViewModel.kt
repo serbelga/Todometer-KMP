@@ -31,19 +31,19 @@ class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(AddTaskListUiState())
+    var state by mutableStateOf(AddTaskListState())
         private set
 
     fun insertTaskList(name: String) = viewModelScope.launch {
-        uiState = uiState.copy(isAddingTaskList = true)
+        state = state.copy(isAddingTaskList = true)
         val result = insertTaskListUseCase.invoke(name)
         result.doIfSuccess {
-            uiState = uiState.copy(
+            state = state.copy(
                 isAddingTaskList = false,
                 errorUi = null
             )
         }.doIfError { error ->
-            uiState = uiState.copy(
+            state = state.copy(
                 isAddingTaskList = false,
                 errorUi = error.mapToErrorUi()
             )

@@ -69,12 +69,12 @@ fun EditTaskScreen(
     viewModel: EditTaskViewModel
 ) {
     when {
-        viewModel.uiState.isLoading -> {
+        viewModel.state.isLoading -> {
             LoadingScreenDialog(navigateBack)
         }
 
-        !viewModel.uiState.isLoading -> {
-            viewModel.uiState.task?.let { task ->
+        !viewModel.state.isLoading -> {
+            viewModel.state.task?.let { task ->
                 EditTaskSuccessContent(
                     task = task,
                     navigateBack = navigateBack,

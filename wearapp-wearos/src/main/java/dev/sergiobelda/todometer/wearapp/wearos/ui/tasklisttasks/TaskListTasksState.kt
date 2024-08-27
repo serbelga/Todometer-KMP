@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittask.ui
+package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks
 
 import androidx.compose.runtime.Immutable
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.todometer.common.domain.model.TaskItem
+import dev.sergiobelda.todometer.common.domain.model.TaskList
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Immutable
-data class EditTaskUiState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val errorUi: ErrorUi? = null
+data class TaskListTasksState(
+    val isLoadingTaskList: Boolean = false,
+    val taskList: TaskList? = null,
+    val isDefaultTaskList: Boolean = false,
+    val isLoadingTasks: Boolean = false,
+    val tasks: ImmutableList<TaskItem> = persistentListOf()
 )

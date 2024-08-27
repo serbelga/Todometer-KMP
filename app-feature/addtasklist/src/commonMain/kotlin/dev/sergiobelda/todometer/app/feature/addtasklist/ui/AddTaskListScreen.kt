@@ -58,10 +58,10 @@ fun AddTaskListScreen(
     var taskListName by rememberSaveable { mutableStateOf("") }
     var taskListNameInputError by remember { mutableStateOf(false) }
 
-    if (viewModel.uiState.errorUi != null) {
+    if (viewModel.state.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = viewModel.uiState.errorUi?.message ?: ""
+                message = viewModel.state.errorUi?.message ?: ""
             )
         }
     }
@@ -72,7 +72,7 @@ fun AddTaskListScreen(
             SaveActionTopAppBar(
                 navigateBack = navigateBack,
                 title = TodometerResources.strings.addTaskList,
-                isSaveButtonEnabled = !viewModel.uiState.isAddingTaskList,
+                isSaveButtonEnabled = !viewModel.state.isAddingTaskList,
                 onSaveButtonClick = {
                     if (taskListName.isBlank()) {
                         taskListNameInputError = true
@@ -81,7 +81,7 @@ fun AddTaskListScreen(
                         navigateBack()
                     }
                 },
-                saveButtonTintColor = if (viewModel.uiState.isAddingTaskList) {
+                saveButtonTintColor = if (viewModel.state.isAddingTaskList) {
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
@@ -91,7 +91,7 @@ fun AddTaskListScreen(
         content = { paddingValues ->
             AddTaskListContent(
                 paddingValues = paddingValues,
-                showProgress = viewModel.uiState.isAddingTaskList,
+                showProgress = viewModel.state.isAddingTaskList,
                 taskListNameValue = taskListName,
                 taskListNameInputError = taskListNameInputError,
                 onTaskListNameValueChange = {

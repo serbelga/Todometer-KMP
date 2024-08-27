@@ -134,15 +134,15 @@ fun HomeScreen(
     val cannotDeleteTaskList = TodometerResources.strings.cannot_delete_this_task_list
     val snackbarActionLabel = TodometerResources.strings.ok
 
-    SystemBackHandler(enabled = viewModel.uiState.selectionMode) { viewModel.clearSelectedTasks() }
+    SystemBackHandler(enabled = viewModel.state.selectionMode) { viewModel.clearSelectedTasks() }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             HomeDrawerContent(
-                viewModel.uiState.taskListSelected?.id ?: "",
+                viewModel.state.taskListSelected?.id ?: "",
                 defaultTaskListName,
-                viewModel.uiState.taskLists,
+                viewModel.state.taskLists,
                 onAddTaskList = {
                     drawerAction(navigateToAddTaskList)
                 },
@@ -157,7 +157,7 @@ fun HomeScreen(
                 }
             )
         },
-        gesturesEnabled = !viewModel.uiState.selectionMode
+        gesturesEnabled = !viewModel.state.selectionMode
     ) {
         Scaffold(
             topBar = {
@@ -167,7 +167,7 @@ fun HomeScreen(
                     onHomeMoreDropdownDismissRequest = closeHomeMoreDropdown,
                     homeMoreDropdownExpanded = homeMoreDropdownExpanded,
                     onEditTaskListClick = {
-                        if (viewModel.uiState.isDefaultTaskListSelected) {
+                        if (viewModel.state.isDefaultTaskListSelected) {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(
                                     cannotEditTaskList,
@@ -181,7 +181,7 @@ fun HomeScreen(
                         closeHomeMoreDropdown()
                     },
                     onDeleteTaskListClick = {
-                        if (viewModel.uiState.isDefaultTaskListSelected) {
+                        if (viewModel.state.isDefaultTaskListSelected) {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(
                                     cannotDeleteTaskList,
@@ -194,10 +194,10 @@ fun HomeScreen(
                         }
                         closeHomeMoreDropdown()
                     },
-                    taskListName = viewModel.uiState.taskListSelected?.name ?: defaultTaskListName,
-                    tasks = viewModel.uiState.tasks,
-                    selectionMode = viewModel.uiState.selectionMode,
-                    selectedTasks = viewModel.uiState.selectedTasks,
+                    taskListName = viewModel.state.taskListSelected?.name ?: defaultTaskListName,
+                    tasks = viewModel.state.tasks,
+                    selectionMode = viewModel.state.selectionMode,
+                    selectedTasks = viewModel.state.selectedTasks,
                     onClearSelectedTasksClick = viewModel::clearSelectedTasks,
                     onToggleSelectedTasksPinnedValueClick = viewModel::toggleSelectedTasksPinnedValue,
                     onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true }
@@ -227,18 +227,18 @@ fun HomeScreen(
                         onDeleteTaskListClick = viewModel::deleteTaskList
                     )
                 }
-                if (viewModel.uiState.isLoadingTasks) {
+                if (viewModel.state.isLoadingTasks) {
                     ContentLoadingProgress()
                 } else {
                     TasksListView(
-                        tasksDoingPinned = viewModel.uiState.tasksDoingPinned,
-                        tasksDoingNotPinned = viewModel.uiState.tasksDoingNotPinned,
-                        tasksDone = viewModel.uiState.tasksDone,
-                        selectedTasksIds = viewModel.uiState.selectedTasksIds,
+                        tasksDoingPinned = viewModel.state.tasksDoingPinned,
+                        tasksDoingNotPinned = viewModel.state.tasksDoingNotPinned,
+                        tasksDone = viewModel.state.tasksDone,
+                        selectedTasksIds = viewModel.state.selectedTasksIds,
                         onDoingClick = { viewModel.setTaskDoing(it) },
                         onDoneClick = { viewModel.setTaskDone(it) },
                         onTaskItemClick = { taskId ->
-                            if (viewModel.uiState.selectionMode) {
+                            if (viewModel.state.selectionMode) {
                                 viewModel.toggleSelectTask(taskId)
                             } else {
                                 navigateToTaskDetails(taskId)
@@ -249,14 +249,14 @@ fun HomeScreen(
                             deleteTaskAlertDialogState = true
                             swipedTaskId = it
                         },
-                        selectionMode = viewModel.uiState.selectionMode,
+                        selectionMode = viewModel.state.selectionMode,
                         modifier = Modifier.padding(paddingValues)
                     )
                 }
             },
             floatingActionButton = {
                 HomeFloatingActionButton(
-                    visible = !viewModel.uiState.selectionMode,
+                    visible = !viewModel.state.selectionMode,
                     navigateToAddTask = navigateToAddTask
                 )
             },

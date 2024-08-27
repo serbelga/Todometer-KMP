@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.addtask.ui
+package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail
 
 import androidx.compose.runtime.Immutable
+import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 @Immutable
-data class AddTaskUiState(
-    val isAddingTask: Boolean = false,
+data class TaskDetailState(
+    val isLoading: Boolean = false,
+    val task: Task? = null,
     val errorUi: ErrorUi? = null
 )

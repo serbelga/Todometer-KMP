@@ -92,15 +92,15 @@ fun TaskDetailsScreen(
     viewModel: TaskDetailsViewModel
 ) {
     when {
-        viewModel.uiState.isLoadingTask -> {
+        viewModel.state.isLoadingTask -> {
             LoadingScreenDialog(navigateBack)
         }
 
-        !viewModel.uiState.isLoadingTask ->
-            viewModel.uiState.task?.let { task ->
+        !viewModel.state.isLoadingTask ->
+            viewModel.state.task?.let { task ->
                 TaskDetailsSuccessContent(
                     task = task,
-                    taskChecklistItems = viewModel.uiState.taskChecklistItems,
+                    taskChecklistItems = viewModel.state.taskChecklistItems,
                     navigateBack = navigateBack,
                     navigateToEditTask = navigateToEditTask,
                     onTaskChecklistItemClick = { id, checked ->

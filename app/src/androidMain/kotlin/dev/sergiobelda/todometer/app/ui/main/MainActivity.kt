@@ -49,8 +49,8 @@ class MainActivity : ComponentActivity() {
                     androidContext(this@MainActivity)
                 }
             ) {
-                val mainViewModel: MainViewModel = koinViewModel()
-                val appThemeState = mainViewModel.appTheme.collectAsStateWithLifecycle()
+                val viewModel: MainViewModel = koinViewModel()
+                val appThemeState = viewModel.appTheme.collectAsStateWithLifecycle()
                 val darkTheme: Boolean = when (appThemeState.value) {
                     AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
                     AppTheme.DARK_THEME -> true

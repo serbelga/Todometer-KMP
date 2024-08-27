@@ -87,16 +87,16 @@ import org.koin.core.parameter.parametersOf
 internal fun TaskDetailScreen(
     taskId: String,
     navigateBack: () -> Unit,
-    taskDetailViewModel: TaskDetailViewModel = koinInject { parametersOf(taskId) }
+    viewModel: TaskDetailViewModel = koinInject { parametersOf(taskId) }
 ) {
-    val taskDetailUiState = taskDetailViewModel.taskDetailUiState
+    val state = viewModel.state
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
 
     when {
         deleteTaskAlertDialogState -> {
             DeleteTaskAlertDialog(
                 onDeleteTask = {
-                    taskDetailViewModel.deleteTask()
+                    viewModel.deleteTask()
                     navigateBack()
                 },
                 onCancel = { deleteTaskAlertDialogState = false }
@@ -136,12 +136,12 @@ internal fun TaskDetailScreen(
                         .focusable()
                 ) {
                     when {
-                        taskDetailUiState.isLoading -> {
+                        state.isLoading -> {
                             item { ContentLoadingProgress() }
                         }
 
                         else -> {
-                            taskDetailUiState.task?.let { task ->
+                            state.task?.let { task ->
                                 item {
                                     Text(
                                         text = task.title,
@@ -155,8 +155,8 @@ internal fun TaskDetailScreen(
                                     Spacer(modifier = Modifier.height(12.dp))
                                 }
                                 item {
-                                    EditTaskButton(taskDetailUiState.task) {
-                                        taskDetailViewModel.updateTask(
+                                    EditTaskButton(state.task) {
+                                        viewModel.updateTask(
                                             it
                                         )
                                     }

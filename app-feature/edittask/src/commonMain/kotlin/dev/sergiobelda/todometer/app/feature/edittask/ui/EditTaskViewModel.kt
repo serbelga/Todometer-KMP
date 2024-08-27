@@ -35,7 +35,7 @@ class EditTaskViewModel(
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(EditTaskUiState(isLoading = true))
+    var state by mutableStateOf(EditTaskState(isLoading = true))
         private set
 
     init {
@@ -45,13 +45,13 @@ class EditTaskViewModel(
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoading = false,
                     task = task,
                     errorUi = null
                 )
             }.doIfError { error ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoading = false,
                     task = null,
                     errorUi = error.mapToErrorUi()
@@ -66,7 +66,7 @@ class EditTaskViewModel(
         description: String? = null,
         dueDate: Long? = null
     ) = viewModelScope.launch {
-        uiState.task?.let {
+        state.task?.let {
             updateTaskUseCase(
                 it.copy(
                     title = title,

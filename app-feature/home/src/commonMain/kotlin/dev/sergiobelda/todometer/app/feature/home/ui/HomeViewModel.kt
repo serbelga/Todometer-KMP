@@ -49,7 +49,7 @@ class HomeViewModel(
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(HomeUiState(isLoadingTasks = true))
+    var state by mutableStateOf(HomeState(isLoadingTasks = true))
         private set
 
     init {
@@ -61,11 +61,11 @@ class HomeViewModel(
     private fun getTaskListSelected() = viewModelScope.launch {
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
-                uiState = uiState.copy(
+                state = state.copy(
                     taskListSelected = taskList
                 )
             }.doIfError {
-                uiState = uiState.copy(
+                state = state.copy(
                     taskListSelected = null
                 )
             }
@@ -75,12 +75,12 @@ class HomeViewModel(
     private fun getTaskListSelectedTasks() = viewModelScope.launch {
         getTaskListSelectedTasksUseCase().collect { result ->
             result.doIfSuccess { tasks ->
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoadingTasks = false,
                     tasks = tasks.toPersistentList()
                 )
             }.doIfError {
-                uiState = uiState.copy(
+                state = state.copy(
                     isLoadingTasks = false,
                     tasks = persistentListOf()
                 )
@@ -91,11 +91,11 @@ class HomeViewModel(
     private fun getTaskLists() = viewModelScope.launch {
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
-                uiState = uiState.copy(
+                state = state.copy(
                     taskLists = taskLists.toPersistentList()
                 )
             }.doIfError {
-                uiState = uiState.copy(
+                state = state.copy(
                     taskLists = persistentListOf()
                 )
             }
@@ -103,7 +103,7 @@ class HomeViewModel(
     }
 
     fun deleteSelectedTasks() = viewModelScope.launch {
-        deleteTasksUseCase(uiState.selectedTasksIds)
+        deleteTasksUseCase(state.selectedTasksIds)
         clearSelectedTasks()
     }
 
@@ -128,30 +128,30 @@ class HomeViewModel(
     }
 
     fun toggleSelectTask(id: String) {
-        val selectedTasksIds = uiState.selectedTasksIds.toMutableList()
+        val selectedTasksIds = state.selectedTasksIds.toMutableList()
         if (!selectedTasksIds.contains(id)) {
             selectedTasksIds.add(id)
         } else {
             selectedTasksIds.removeAll { it == id }
         }
-        uiState = uiState.copy(
+        state = state.copy(
             selectedTasksIds = selectedTasksIds.toPersistentList()
         )
     }
 
     fun clearSelectedTasks() = viewModelScope.launch {
         delay(CLEAR_SELECTED_TASKS_DELAY_MILLIS)
-        uiState = uiState.copy(selectedTasksIds = persistentListOf())
+        state = state.copy(selectedTasksIds = persistentListOf())
     }
 
     fun toggleSelectedTasksPinnedValue() = viewModelScope.launch {
-        val notPinnedSelectedTasks = uiState.selectedTasks.filter { !it.isPinned }
+        val notPinnedSelectedTasks = state.selectedTasks.filter { !it.isPinned }
         if (notPinnedSelectedTasks.isNotEmpty()) {
             notPinnedSelectedTasks.forEach {
                 toggleTaskPinnedValueUseCase(it.id)
             }
         } else {
-            uiState.selectedTasks.forEach {
+            state.selectedTasks.forEach {
                 toggleTaskPinnedValueUseCase(it.id)
             }
         }
