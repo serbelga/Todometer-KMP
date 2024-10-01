@@ -37,7 +37,7 @@
 
 ### Desktop
 
-`./gradlew :app-desktop:run`
+`./gradlew :app:run`
 
 | <img width="240" src="./screenshots/desktop/home.png" /> | <img width="240" src="./screenshots/desktop/add_task.png" /> |
 |----------------------------------------------------------|--------------------------------------------------------------|
