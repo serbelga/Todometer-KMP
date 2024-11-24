@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app.di
 
 import dev.sergiobelda.todometer.app.ui.main.MainViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 internal val mainViewModelModule = module {
