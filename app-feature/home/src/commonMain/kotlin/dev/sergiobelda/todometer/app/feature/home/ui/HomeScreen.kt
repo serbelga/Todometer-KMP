@@ -517,7 +517,7 @@ fun LazyListScope.taskItems(
             onTaskItemClick = { onTaskItemClick(taskItem.id) },
             onTaskItemLongClick = { onTaskItemLongClick(taskItem.id) },
             onSwipeToDismiss = { onSwipeToDismiss(taskItem.id) },
-            modifier = Modifier.animateItemPlacement(),
+            modifier = Modifier.animateItem(),
             swipeable = !selectionMode,
             checkEnabled = selectionMode,
             selected = selectedTasksIds.contains(taskItem.id)

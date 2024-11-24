@@ -289,7 +289,7 @@ private fun LazyItemScope.TaskChecklistItem(
                     taskChecklistItem.state == TaskChecklistItemState.UNCHECKED
                 )
             }
-            .animateItemPlacement()
+            .animateItem()
             .padding(horizontal = 8.dp)
     ) {
         TodometerCheckbox(
