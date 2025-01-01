@@ -74,6 +74,8 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Clos
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @OptIn(ExperimentalMaterial3Api::class)
 @NavDestination(
     name = "AddTask",
@@ -105,14 +107,16 @@ fun AddTaskScreen(
     var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.UNSPECIFIED) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
     val taskChecklistItems = mutableStateListOf<String>()
-    fun initialValuesUpdated() =
-        taskTitle.isNotBlank() ||
-            taskDueDate != null ||
-            taskDescription.isNotBlank() ||
-            taskChecklistItems.isNotEmpty()
 
     val onBack: () -> Unit = {
-        if (initialValuesUpdated()) {
+        if (
+            initialValuesUpdated(
+                taskTitle = taskTitle,
+                taskDueDate = taskDueDate,
+                taskDescription = taskDescription,
+                taskChecklistItems = taskChecklistItems
+            )
+        ) {
             discardTaskAlertDialogState = true
         } else {
             navigateBack()
@@ -170,9 +174,9 @@ fun AddTaskScreen(
                             taskTitle = it
                             taskTitleInputError = false
                         },
-                        placeholder = { Text(TodometerResources.strings.enter_task_name) },
+                        placeholder = { Text(TodometerResources.strings.enterTaskName) },
                         isError = taskTitleInputError,
-                        errorMessage = TodometerResources.strings.field_not_empty,
+                        errorMessage = TodometerResources.strings.fieldNotEmpty,
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Next
@@ -181,13 +185,13 @@ fun AddTaskScreen(
                     )
                 }
                 item {
-                    FieldTitle(text = TodometerResources.strings.choose_tag)
+                    FieldTitle(text = TodometerResources.strings.chooseTag)
                     TagSelector(selectedTag) { tag ->
                         selectedTag = tag
                     }
                 }
                 item {
-                    FieldTitle(text = TodometerResources.strings.date_time.addStyledOptionalSuffix())
+                    FieldTitle(text = TodometerResources.strings.dateTime.addStyledOptionalSuffix())
                     DateTimeSelector(
                         taskDueDate,
                         onEnterDateTimeClick = { datePickerDialogState = true },
@@ -225,7 +229,7 @@ fun AddTaskScreen(
                         title = TodometerResources.strings.description.addStyledOptionalSuffix(),
                         value = taskDescription,
                         onValueChange = { taskDescription = it },
-                        placeholder = { Text(TodometerResources.strings.enter_description) },
+                        placeholder = { Text(TodometerResources.strings.enterDescription) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
@@ -271,6 +275,16 @@ fun AddTaskScreen(
         }
     }
 }
+
+private fun initialValuesUpdated(
+    taskTitle: String,
+    taskDueDate: Long?,
+    taskDescription: String,
+    taskChecklistItems: List<String>
+) = taskTitle.isNotBlank() ||
+        taskDueDate != null ||
+        taskDescription.isNotBlank() ||
+        taskChecklistItems.isNotEmpty()
 
 @Composable
 private fun FieldTitle(text: String) {

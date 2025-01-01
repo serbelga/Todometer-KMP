@@ -119,10 +119,10 @@ private fun AddTaskListContent(
             title = TodometerResources.strings.name,
             value = taskListNameValue,
             onValueChange = onTaskListNameValueChange,
-            placeholder = { Text(TodometerResources.strings.enter_task_list_name) },
+            placeholder = { Text(TodometerResources.strings.enterTaskListName) },
             singleLine = true,
             isError = taskListNameInputError,
-            errorMessage = TodometerResources.strings.field_not_empty,
+            errorMessage = TodometerResources.strings.fieldNotEmpty,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
                 imeAction = ImeAction.Done

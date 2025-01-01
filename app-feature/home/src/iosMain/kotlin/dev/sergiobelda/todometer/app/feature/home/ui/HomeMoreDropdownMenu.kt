@@ -41,7 +41,7 @@ internal actual fun HomeMoreDropdownMenu(
         DropdownMenuItem(
             onClick = onEditTaskListClick,
             leadingIcon = { Icon(Images.Icons.Edit, contentDescription = null) },
-            text = { Text(TodometerResources.strings.edit_task_list) }
+            text = { Text(TodometerResources.strings.editTaskList) }
         )
         DropdownMenuItem(
             onClick = onDeleteTaskListClick,
@@ -51,7 +51,7 @@ internal actual fun HomeMoreDropdownMenu(
                     contentDescription = null
                 )
             },
-            text = { Text(TodometerResources.strings.delete_task_list) }
+            text = { Text(TodometerResources.strings.deleteTaskList) }
         )
     }
 }

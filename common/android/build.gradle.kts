@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     kotlin("android")
+    id("dev.sergiobelda.gradle.base")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
-    id("dev.sergiobelda.gradle.spotless")
 }
 
 android {

@@ -16,6 +16,7 @@ package dev.sergiobelda.gradle.buildlogic.convention
  */
 
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
+import dev.sergiobelda.gradle.buildlogic.convention.extensions.pluginId
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -28,7 +29,7 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("ksp").get().get().pluginId)
+                apply(libs.findPlugin("ksp").pluginId)
             }
 
             val navigationComposeExtendedCompiler =

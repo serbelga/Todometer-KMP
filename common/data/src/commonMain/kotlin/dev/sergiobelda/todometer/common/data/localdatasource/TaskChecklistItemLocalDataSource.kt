@@ -36,7 +36,9 @@ class TaskChecklistItemLocalDataSource(
 
     override suspend fun insertTaskChecklistItems(vararg taskChecklistItems: TaskChecklistItem) =
         taskChecklistItemDao.insertTaskChecklistItems(
-            *taskChecklistItems.map { it.asTaskChecklistItemEntity() }.toTypedArray()
+            taskChecklistItemEntities = taskChecklistItems.map {
+                it.asTaskChecklistItemEntity()
+            }.toTypedArray()
         )
 
     override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =

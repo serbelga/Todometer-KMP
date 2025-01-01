@@ -118,6 +118,8 @@ fun TaskDetailsScreen(
     }
 }
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TaskDetailsSuccessContent(
@@ -171,9 +173,9 @@ private fun TaskDetailsSuccessContent(
                                 Images.Icons.PushPin
                             },
                             contentDescription = if (task.isPinned) {
-                                TodometerResources.strings.pinned_task
+                                TodometerResources.strings.pinnedTask
                             } else {
-                                TodometerResources.strings.not_pinned_task
+                                TodometerResources.strings.notPinnedTask
                             },
                             tint = MaterialTheme.colorScheme.primary
                         )
@@ -181,7 +183,7 @@ private fun TaskDetailsSuccessContent(
                     IconButton(onClick = navigateToEditTask) {
                         Icon(
                             Images.Icons.Edit,
-                            contentDescription = TodometerResources.strings.edit_task,
+                            contentDescription = TodometerResources.strings.editTask,
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -300,7 +302,7 @@ private fun LazyItemScope.TaskChecklistItem(
                     checked
                 )
             },
-            modifier = Modifier.scale(0.85f)
+            modifier = Modifier.scale(TodometerCheckboxScaleFactor)
         )
         Text(
             text = taskChecklistItem.text,
@@ -340,7 +342,7 @@ private fun LazyListScope.taskDescription(description: String?) {
             )
         } else {
             Text(
-                text = TodometerResources.strings.no_description,
+                text = TodometerResources.strings.noDescription,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(
                     top = 16.dp,
@@ -363,3 +365,5 @@ private fun TaskDetailSectionTitle(text: String) {
         modifier = Modifier.padding(start = SectionPadding, bottom = 8.dp)
     )
 }
+
+private const val TodometerCheckboxScaleFactor: Float = 0.85f

@@ -112,8 +112,8 @@ private fun AboutItem.icon(): ImageVector =
 private fun AboutItem.text(): String =
     when (this) {
         AboutItem.GitHub -> TodometerResources.strings.github
-        AboutItem.PrivacyPolicy -> TodometerResources.strings.privacy_policy
-        AboutItem.OpenSourceLicenses -> TodometerResources.strings.open_source_licenses
+        AboutItem.PrivacyPolicy -> TodometerResources.strings.privacyPolicy
+        AboutItem.OpenSourceLicenses -> TodometerResources.strings.openSourceLicenses
     }
 
 @Composable

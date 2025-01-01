@@ -29,11 +29,11 @@ internal fun DiscardTaskAlertDialog(
 ) {
     AlertDialog(
         title = {
-            Text(TodometerResources.strings.discard_task_alert_dialog_title)
+            Text(TodometerResources.strings.discardTaskAlertDialogTitle)
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(TodometerResources.strings.discard_task_alert_dialog_body)
+            Text(TodometerResources.strings.discardTaskAlertDialogBody)
         },
         confirmButton = {
             TextButton(

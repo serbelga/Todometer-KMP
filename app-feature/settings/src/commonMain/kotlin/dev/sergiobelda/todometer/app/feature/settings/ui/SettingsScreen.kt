@@ -25,6 +25,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -166,27 +167,36 @@ private fun AppThemeItem(
                 }
             }
         }
-        AnimatedVisibility(
-            visible = selected,
-            enter = scaleIn(
-                animationSpec = tween(
-                    durationMillis = AppThemeItemSelectedIconAnimationDuration,
-                    easing = FastOutSlowInEasing
-                )
-            ),
-            exit = fadeOut()
-        ) {
-            Icon(
-                Images.Icons.CheckCircle,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.background)
-                    .size(AppThemeItemSelectedIconSize)
-                    .align(Alignment.TopStart)
+        AppThemeItemSelectorIndicator(
+            selected = selected,
+        )
+    }
+}
+
+@Composable
+private fun BoxScope.AppThemeItemSelectorIndicator(
+    selected: Boolean
+) {
+    AnimatedVisibility(
+        visible = selected,
+        enter = scaleIn(
+            animationSpec = tween(
+                durationMillis = AppThemeItemSelectedIconAnimationDuration,
+                easing = FastOutSlowInEasing
             )
-        }
+        ),
+        exit = fadeOut()
+    ) {
+        Icon(
+            Images.Icons.CheckCircle,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.background)
+                .size(AppThemeItemSelectedIconSize)
+                .align(Alignment.TopStart)
+        )
     }
 }
 

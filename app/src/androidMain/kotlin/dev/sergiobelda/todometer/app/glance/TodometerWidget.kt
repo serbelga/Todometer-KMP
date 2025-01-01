@@ -99,7 +99,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
             taskListSelected?.doIfSuccess {
                 taskListName = it.name
             }?.doIfError {
-                taskListName = TodometerResources.strings.default_task_list_name
+                taskListName = TodometerResources.strings.defaultTaskListName
             }
 
             val tasksDoing = remember { mutableStateListOf<TaskItem>() }
@@ -218,7 +218,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = TodometerResources.strings.no_pending_tasks,
+                    text = TodometerResources.strings.noPendingTasks,
                     style = TextStyle(color = GlanceTheme.colors.onBackground)
                 )
             }
@@ -301,7 +301,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = TodometerResources.strings.completed_tasks(tasksDone),
+                text = TodometerResources.strings.completedTasks(tasksDone),
                 style = TextStyle(color = GlanceTheme.colors.onBackground)
             )
         }

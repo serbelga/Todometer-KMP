@@ -36,7 +36,7 @@ fun AppTheme.themeIcon(): ImageVector =
 @Composable
 fun AppTheme.themeName(): String =
     when (this) {
-        AppTheme.FOLLOW_SYSTEM -> TodometerResources.strings.follow_system
-        AppTheme.DARK_THEME -> TodometerResources.strings.dark_theme
-        AppTheme.LIGHT_THEME -> TodometerResources.strings.light_theme
+        AppTheme.FOLLOW_SYSTEM -> TodometerResources.strings.followSystem
+        AppTheme.DARK_THEME -> TodometerResources.strings.darkTheme
+        AppTheme.LIGHT_THEME -> TodometerResources.strings.lightTheme
     }

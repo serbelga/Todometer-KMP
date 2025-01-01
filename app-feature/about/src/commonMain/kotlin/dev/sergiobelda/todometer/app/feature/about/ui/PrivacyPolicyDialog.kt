@@ -34,22 +34,22 @@ internal fun PrivacyPolicyDialog(
 ) {
     AlertDialog(
         title = {
-            Text(TodometerResources.strings.privacy_policy)
+            Text(TodometerResources.strings.privacyPolicy)
         },
         onDismissRequest = onDismissRequest,
         text = {
             Column {
-                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_user_data)
-                Text(TodometerResources.strings.privacy_policy_user_data_body)
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacyPolicyUserData)
+                Text(TodometerResources.strings.privacyPolicyUserDataBody)
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_permissions)
-                Text(TodometerResources.strings.privacy_policy_permissions_body)
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacyPolicyPermissions)
+                Text(TodometerResources.strings.privacyPolicyPermissionsBody)
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_device_and_network_abuse)
-                Text(TodometerResources.strings.privacy_policy_device_and_network_abuse_body)
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacyPolicyDeviceAndNetworkAbuse)
+                Text(TodometerResources.strings.privacyPolicyDeviceAndNetworkAbuseBody)
                 PrivacyPolicyDialogSeparator()
-                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacy_policy_public)
-                Text(TodometerResources.strings.privacy_policy_public_body)
+                PrivacyPolicyDialogSectionTitle(TodometerResources.strings.privacyPolicyPublic)
+                Text(TodometerResources.strings.privacyPolicyPublicBody)
             }
         },
         confirmButton = {

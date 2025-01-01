@@ -23,6 +23,6 @@ actual object PreferencesFactory {
 
     actual fun createPreferences(): Preferences =
         Preferences(
-            createDataStore(appContext.filesDir.resolve(dataStoreFileName).absolutePath)
+            createDataStore(appContext.filesDir.resolve(DataStoreFileName).absolutePath)
         )
 }

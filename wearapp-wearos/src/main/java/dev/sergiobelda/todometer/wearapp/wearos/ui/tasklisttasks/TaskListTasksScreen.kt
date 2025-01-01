@@ -191,7 +191,7 @@ internal fun TaskListTasksScreen(
                                 state.taskList == null && state.isDefaultTaskList -> {
                                     item {
                                         Text(
-                                            TodometerResources.strings.default_task_list_name,
+                                            TodometerResources.strings.defaultTaskListName,
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis
                                         )
@@ -214,7 +214,7 @@ internal fun TaskListTasksScreen(
                             if (state.tasks.isEmpty()) {
                                 item {
                                     Text(
-                                        text = TodometerResources.strings.no_tasks,
+                                        text = TodometerResources.strings.noTasks,
                                         textAlign = TextAlign.Center,
                                         style = MaterialTheme.typography.body2
                                     )
@@ -302,12 +302,12 @@ private fun TaskItem(
                             painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
                                 atEnd = revealState.currentValue == Revealing
                             ),
-                            contentDescription = TodometerResources.strings.delete_task,
+                            contentDescription = TodometerResources.strings.deleteTask,
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
                 },
-                label = { Text(TodometerResources.strings.delete_task) },
+                label = { Text(TodometerResources.strings.deleteTask) },
                 onClick = onDeleteTask
             )
         },
@@ -353,7 +353,7 @@ private fun TaskItem(
 
 @Composable
 private fun AddTaskButton(onComplete: (String) -> Unit) {
-    val taskTitleInput = TodometerResources.strings.task_title_input
+    val taskTitleInput = TodometerResources.strings.taskTitleInput
     val addTaskLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -403,7 +403,7 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
             Icon(Images.Icons.Edit, null)
         },
         label = {
-            Text(text = TodometerResources.strings.edit_task_list)
+            Text(text = TodometerResources.strings.editTaskList)
         },
         onClick = {
             val intent: Intent =
@@ -434,12 +434,12 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
         icon = {
             Icon(
                 Images.Icons.Delete,
-                TodometerResources.strings.delete_task_list
+                TodometerResources.strings.deleteTaskList
             )
         },
         label = {
             Text(
-                text = TodometerResources.strings.delete_task_list,
+                text = TodometerResources.strings.deleteTaskList,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )
