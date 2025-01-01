@@ -36,6 +36,7 @@ mockk = "1.13.14"
 mockkCommon = "1.12.5"
 navigationComposeExtended = "1.0.0"
 ossLicenses = "0.10.6"
+pigment = "0.3.0"
 playServicesOssLicenses = "17.1.0"
 playServicesWearable = "19.0.0"
 robolectric = "4.3.1"
@@ -112,6 +113,8 @@ sergiobelda-navigationComposeExtended = { module = "dev.sergiobelda.navigation.c
 sergiobelda-navigationComposeExtendedAnnotation = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-annotation", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedCompiler = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-compiler", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedWear = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-wear", version.ref = "navigationComposeExtended" }
+
+sergiobelda-pigment = { module = "dev.sergiobelda.pigment:pigment", version.ref = "pigment" }
 
 spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 

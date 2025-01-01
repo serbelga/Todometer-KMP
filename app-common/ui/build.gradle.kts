@@ -24,6 +24,7 @@ kotlin {
                 implementation(projects.common.ui)
 
                 implementation(libs.kotlin.datetime)
+                implementation(libs.sergiobelda.pigment)
             }
         }
         val commonTest by getting {
