@@ -16,113 +16,42 @@
 
 package dev.sergiobelda.todometer.app.common.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.pigment.colorpicker.ColorPicker
+import dev.sergiobelda.pigment.colorpicker.ColorPickerItem
 import dev.sergiobelda.todometer.app.common.designsystem.theme.TodometerTheme
 import dev.sergiobelda.todometer.app.common.ui.mapper.composeColorOf
-import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
-import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
-import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.FormatColorReset
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
-fun TagSelector(selectedTag: Tag, onSelected: (Tag) -> Unit) {
+fun TagSelector(selectedTag: Tag, onTagSelected: (Tag) -> Unit) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.padding(top = 16.dp, bottom = 16.dp),
-        state = state
-    ) {
-        items(tags) { tag ->
-            TagItem(
-                tag = tag,
-                selected = selectedTag == tag,
-                onClick = {
-                    onSelected(tag)
-                }
-            )
-        }
+
+    val colorsMap = tags.associateWith {
+        ColorPickerItem(
+            color = TodometerTheme.todometerColors.composeColorOf(it)
+        )
     }
+
+    ColorPicker.LazyRow(
+        colorsMap = colorsMap,
+        selectedItem = selectedTag,
+        onItemSelected = onTagSelected,
+        state = state,
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier.padding(vertical = 16.dp)
+    )
+
     LaunchedEffect(selectedTag) {
         state.animateScrollToItem(tags.indexOf(selectedTag))
     }
 }
-
-@Composable
-private fun TagItem(
-    tag: Tag,
-    selected: Boolean,
-    onClick: () -> Unit
-) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .size(TagItemSize)
-            .clip(CircleShape)
-            .clickable(onClick = onClick)
-    ) {
-        val color = TodometerTheme.todometerColors.composeColorOf(tag)
-        val borderColor = if (color == Color.Unspecified) {
-            MaterialTheme.colorScheme.outline
-        } else {
-            Color.Unspecified
-        }
-        val checkColor = if (color == Color.Unspecified) {
-            MaterialTheme.colorScheme.primary
-        } else {
-            MaterialTheme.colorScheme.background
-        }
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(TagItemInnerPadding)
-                .border(width = 1.dp, color = borderColor, shape = CircleShape)
-                .clip(CircleShape)
-                .background(color)
-
-        ) {
-            if (selected) {
-                Icon(
-                    Images.Icons.Check,
-                    TodometerResources.strings.selected,
-                    tint = checkColor
-                )
-            }
-            if (tag == Tag.UNSPECIFIED && !selected) {
-                Icon(
-                    Images.Icons.FormatColorReset,
-                    null,
-                    tint = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        }
-    }
-}
-
-private val TagItemSize: Dp = 42.dp
-private val TagItemInnerPadding: Dp = 4.dp
