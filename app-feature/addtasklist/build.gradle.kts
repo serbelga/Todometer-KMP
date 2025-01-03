@@ -3,10 +3,10 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
+    id("dev.sergiobelda.gradle.base")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.common.ui")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
-    id("dev.sergiobelda.gradle.spotless")
 }
 
 kotlin {

@@ -14,6 +14,7 @@ composeMultiplatform = "1.8.0+dev1965"
 composeVectorize = "1.0.2"
 dataStore = "1.1.1"
 dependencyGraphGenerator = "0.8.0"
+detekt = "1.23.7"
 espressoCore = "3.4.0"
 espressoCoreVersion = "3.6.1"
 firebaseBom = "33.7.0"
@@ -74,6 +75,8 @@ androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
 dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
+
+detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
 google-firebase-firebaseAnalyticsKtx = { module = "com.google.firebase:firebase-analytics-ktx" }
 google-firebase-firebaseCrashlyticsKtx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
@@ -140,6 +143,7 @@ composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "k
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeVectorize = { id = "dev.sergiobelda.compose.vectorize", version.ref = "composeVectorize" }
 dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

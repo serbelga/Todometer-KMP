@@ -33,7 +33,7 @@ fun TimePickerDialog(
         onDismissRequest = onDismissRequest,
         title = {
             Text(
-                TodometerResources.strings.select_time,
+                TodometerResources.strings.selectTime,
                 style = MaterialTheme.typography.labelLarge
             )
         },

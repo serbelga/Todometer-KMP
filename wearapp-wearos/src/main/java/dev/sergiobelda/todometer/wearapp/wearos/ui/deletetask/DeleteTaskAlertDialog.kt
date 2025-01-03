@@ -37,11 +37,11 @@ internal fun DeleteTaskAlertDialog(
         icon = {
             Icon(
                 Images.Icons.Delete,
-                TodometerResources.strings.delete_task
+                TodometerResources.strings.deleteTask
             )
         },
         title = {},
-        content = { Text(TodometerResources.strings.delete_task_question) },
+        content = { Text(TodometerResources.strings.deleteTaskQuestion) },
         positiveButton = {
             Button(onClick = onDeleteTask) {
                 Icon(Images.Icons.Check, null)

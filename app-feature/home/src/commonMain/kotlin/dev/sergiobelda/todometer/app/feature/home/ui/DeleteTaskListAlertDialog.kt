@@ -32,11 +32,11 @@ fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskListClic
             Icon(Images.Icons.Warning, contentDescription = null)
         },
         title = {
-            Text(TodometerResources.strings.delete_task_list)
+            Text(TodometerResources.strings.deleteTaskList)
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(TodometerResources.strings.delete_task_list_question)
+            Text(TodometerResources.strings.deleteTaskListQuestion)
         },
         confirmButton = {
             TextButton(

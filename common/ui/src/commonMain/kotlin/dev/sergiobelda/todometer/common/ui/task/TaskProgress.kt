@@ -27,5 +27,7 @@ object TaskProgress {
         } ?: 0F
 
     fun getPercentage(progress: Float) =
-        progress.takeIf { it in 0.0..1.0 }?.let { "${(it * 100).toInt()}%" } ?: "-%"
+        progress.takeIf { it in 0.0..1.0 }?.let { "${(it * PERCENTAGE_MULTIPLIER).toInt()}%" } ?: "-%"
+
+    private const val PERCENTAGE_MULTIPLIER = 100
 }

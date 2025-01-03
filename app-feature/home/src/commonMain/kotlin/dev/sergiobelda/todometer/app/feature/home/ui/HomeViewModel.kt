@@ -37,6 +37,7 @@ import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@Suppress("TooManyFunctions")
 class HomeViewModel(
     private val setTaskDoingUseCase: SetTaskDoingUseCase,
     private val setTaskDoneUseCase: SetTaskDoneUseCase,

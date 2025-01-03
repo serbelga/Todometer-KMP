@@ -21,7 +21,7 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory.createWith
 import okio.Path.Companion.toPath
 import androidx.datastore.preferences.core.Preferences as DataStorePreferences
 
-internal const val dataStoreFileName = "todometer_preferences.preferences_pb"
+internal const val DataStoreFileName = "todometer_preferences.preferences_pb"
 
 internal fun createDataStore(path: String): DataStore<DataStorePreferences> = createWithPath(
     produceFile = { path.toPath() }

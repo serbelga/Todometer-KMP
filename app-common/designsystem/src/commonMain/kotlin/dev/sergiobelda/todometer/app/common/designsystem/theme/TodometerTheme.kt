@@ -44,7 +44,7 @@ fun TodometerTheme(
         MaterialTheme(
             colorScheme = colorScheme,
             shapes = shapes,
-            typography = Typography.typography,
+            typography = typography,
             content = content
         )
     }

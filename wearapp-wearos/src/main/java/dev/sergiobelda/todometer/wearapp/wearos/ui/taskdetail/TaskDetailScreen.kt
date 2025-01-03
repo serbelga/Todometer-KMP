@@ -191,7 +191,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
             Icon(Images.Icons.Edit, null)
         },
         label = {
-            Text(text = TodometerResources.strings.edit_task)
+            Text(text = TodometerResources.strings.editTask)
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -219,10 +219,10 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
             backgroundColor = MaterialTheme.colors.error
         ),
         icon = {
-            Icon(Images.Icons.Delete, TodometerResources.strings.delete_task)
+            Icon(Images.Icons.Delete, TodometerResources.strings.deleteTask)
         },
         label = {
-            Text(text = TodometerResources.strings.delete_task)
+            Text(text = TodometerResources.strings.deleteTask)
         },
         onClick = onClick,
         modifier = Modifier.fillMaxWidth()

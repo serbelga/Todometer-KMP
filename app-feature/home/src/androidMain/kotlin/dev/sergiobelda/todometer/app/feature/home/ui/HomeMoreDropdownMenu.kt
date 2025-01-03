@@ -43,7 +43,7 @@ internal actual fun HomeMoreDropdownMenu(
             leadingIcon = { Icon(Images.Icons.Edit, contentDescription = null) },
             text = {
                 Text(
-                    TodometerResources.strings.edit_task_list,
+                    TodometerResources.strings.editTaskList,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
@@ -58,7 +58,7 @@ internal actual fun HomeMoreDropdownMenu(
             },
             text = {
                 Text(
-                    TodometerResources.strings.delete_task_list,
+                    TodometerResources.strings.deleteTaskList,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

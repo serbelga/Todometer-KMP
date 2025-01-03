@@ -4,9 +4,9 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeVectorize)
+    id("dev.sergiobelda.gradle.base")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
-    id("dev.sergiobelda.gradle.spotless")
 }
 
 kotlin {

@@ -12,13 +12,19 @@ java {
 
 dependencies {
     implementation(libs.android.gradlePlugin)
+    implementation(libs.dependencyGraphGenerator)
+    implementation(libs.detekt.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
-    implementation(libs.dependencyGraphGenerator)
 }
 
 gradlePlugin {
     plugins {
+        register("baseLibrary") {
+            id = "dev.sergiobelda.gradle.base"
+            implementationClass =
+                "dev.sergiobelda.gradle.buildlogic.convention.BaseConventionPlugin"
+        }
         register("commonLibraryAndroid") {
             id = "dev.sergiobelda.gradle.common.library.android"
             implementationClass =

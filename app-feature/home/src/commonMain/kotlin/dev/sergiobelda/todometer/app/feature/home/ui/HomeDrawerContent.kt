@@ -141,7 +141,7 @@ private fun HomeDrawerTaskListsSection(
             .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal)
     ) {
         Text(
-            text = TodometerResources.strings.task_lists,
+            text = TodometerResources.strings.taskLists,
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = Modifier.weight(1f))

@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
+    id("dev.sergiobelda.gradle.base")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
-    id("dev.sergiobelda.gradle.spotless")
 }
 
 if (file("google-services.json").exists()) {
@@ -57,7 +57,6 @@ kotlin {
                 implementation(projects.common.ui)
             }
         }
-        val commonTest by getting
         val androidMain by getting {
             dependencies {
                 implementation(projects.common.android)
@@ -81,15 +80,11 @@ kotlin {
                 compileOnly(libs.kotlin.serialization.json)
             }
         }
-        val androidUnitTest by getting
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
             }
         }
-        val desktopTest by getting
-        val iosMain by creating
-        val iosTest by creating
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")

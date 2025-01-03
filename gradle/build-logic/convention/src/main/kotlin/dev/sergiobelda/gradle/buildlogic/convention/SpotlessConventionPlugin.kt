@@ -1,4 +1,5 @@
 package dev.sergiobelda.gradle.buildlogic.convention
+
 /*
  * Copyright 2022 Sergio Belda
  *
@@ -22,7 +23,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
 
-class SpotlessConventionPlugin : Plugin<Project> {
+open class SpotlessConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -34,7 +35,7 @@ class SpotlessConventionPlugin : Plugin<Project> {
                 kotlin {
                     target("**/*.kt")
                     targetExclude("**/build/**/*.kt")
-                    ktlint(ktlintVersion)
+                    // ktlint(ktlintVersion)
                     licenseHeader(licenseHeaderKotlin)
                 }
                 format("kts") {

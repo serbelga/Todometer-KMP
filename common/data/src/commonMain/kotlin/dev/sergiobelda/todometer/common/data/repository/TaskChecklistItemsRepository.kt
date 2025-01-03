@@ -33,7 +33,7 @@ class TaskChecklistItemsRepository(
 
     override suspend fun insertTaskChecklistItems(taskId: String, vararg items: String) {
         taskChecklistItemLocalDataSource.insertTaskChecklistItems(
-            *items.map { text ->
+            taskChecklistItems = items.map { text ->
                 TaskChecklistItem(
                     id = randomUUIDString(),
                     text = text,

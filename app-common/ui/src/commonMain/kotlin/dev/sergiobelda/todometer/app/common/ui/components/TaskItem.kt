@@ -23,7 +23,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,6 +41,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
@@ -113,23 +113,9 @@ fun TaskItem(
             state = state,
             enableDismissFromEndToStart = false,
             backgroundContent = {
-                Box(
-                    Modifier
-                        .padding(4.dp)
-                        .fillMaxSize()
-                        .clip(TaskItemBackgroundShape)
-                        .background(MaterialTheme.colorScheme.errorContainer)
-                        .padding(horizontal = TaskItemBackgroundHorizontalPadding),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Icon(
-                        painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
-                            atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd
-                        ),
-                        contentDescription = TodometerResources.strings.delete_task,
-                        tint = MaterialTheme.colorScheme.onErrorContainer
-                    )
-                }
+                TaskItemSwipeableBackgroundContent(
+                    state = state
+                )
             },
             content = {
                 TaskItemContent(
@@ -148,7 +134,29 @@ fun TaskItem(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun TaskItemSwipeableBackgroundContent(
+    state: SwipeToDismissBoxState,
+) {
+    Box(
+        Modifier
+            .padding(4.dp)
+            .fillMaxSize()
+            .clip(TaskItemBackgroundShape)
+            .background(MaterialTheme.colorScheme.errorContainer)
+            .padding(horizontal = TaskItemBackgroundHorizontalPadding),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Icon(
+            painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
+                atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd
+            ),
+            contentDescription = TodometerResources.strings.deleteTask,
+            tint = MaterialTheme.colorScheme.onErrorContainer
+        )
+    }
+}
+
 @Composable
 private fun TaskItemContent(
     taskItem: TaskItem,
@@ -309,7 +317,7 @@ private fun taskItemActionIcon(state: TaskState): ImageVector =
 private fun taskItemActionContentDescription(state: TaskState): String =
     when (state) {
         TaskState.DOING -> TodometerResources.strings.checkTask
-        TaskState.DONE -> TodometerResources.strings.uncheck_task
+        TaskState.DONE -> TodometerResources.strings.uncheckTask
     }
 
 private val TaskItemBackgroundHorizontalPadding = 16.dp

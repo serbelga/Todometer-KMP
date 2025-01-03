@@ -94,6 +94,8 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @NavDestination(
     destinationId = "home",
     name = "Home"
@@ -125,13 +127,13 @@ fun HomeScreen(
     var deleteTasksAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
 
-    val defaultTaskListName = TodometerResources.strings.default_task_list_name
+    val defaultTaskListName = TodometerResources.strings.defaultTaskListName
 
     var homeMoreDropdownExpanded by remember { mutableStateOf(false) }
     val closeHomeMoreDropdown = { homeMoreDropdownExpanded = false }
 
-    val cannotEditTaskList = TodometerResources.strings.cannot_edit_this_task_list
-    val cannotDeleteTaskList = TodometerResources.strings.cannot_delete_this_task_list
+    val cannotEditTaskList = TodometerResources.strings.cannotEditThisTaskList
+    val cannotDeleteTaskList = TodometerResources.strings.cannotDeleteThisTaskList
     val snackbarActionLabel = TodometerResources.strings.ok
 
     SystemBackHandler(enabled = viewModel.state.selectionMode) { viewModel.clearSelectedTasks() }
@@ -355,7 +357,7 @@ private fun SelectedTasksTopAppBar(
             }
         },
         title = {
-            Text(text = TodometerResources.strings.selected_tasks(selectedTasks.size))
+            Text(text = TodometerResources.strings.selectedTasks(selectedTasks.size))
         },
         actions = {
             IconButton(onClick = onToggleSelectedTasksPinnedValueClick) {
@@ -366,16 +368,16 @@ private fun SelectedTasksTopAppBar(
                         Images.Icons.PushPinFilled
                     },
                     contentDescription = if (atLeastOneNotPinnedTaskItem) {
-                        TodometerResources.strings.not_pinned_task
+                        TodometerResources.strings.notPinnedTask
                     } else {
-                        TodometerResources.strings.pinned_task
+                        TodometerResources.strings.pinnedTask
                     }
                 )
             }
             IconButton(onClick = onDeleteSelectedTasksClick) {
                 Icon(
                     Images.Icons.Delete,
-                    contentDescription = TodometerResources.strings.delete_tasks
+                    contentDescription = TodometerResources.strings.deleteTasks
                 )
             }
         },
@@ -402,6 +404,8 @@ private fun HomeFloatingActionButton(
     }
 }
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @Composable
 private fun TasksListView(
     tasksDoingPinned: ImmutableList<TaskItem>,
@@ -420,7 +424,7 @@ private fun TasksListView(
     if ((tasksDoingPinned + tasksDoingNotPinned + tasksDone).isEmpty()) {
         HomeInfoIllustration(
             Images.Illustrations.NoTasks,
-            TodometerResources.strings.no_tasks
+            TodometerResources.strings.noTasks
         )
     } else {
         LazyColumn(
@@ -487,7 +491,7 @@ private fun TasksListView(
         if ((tasksDoingPinned + tasksDoingNotPinned).isEmpty() && !areTasksDoneVisible) {
             HomeInfoIllustration(
                 Images.Illustrations.CompletedTasks,
-                TodometerResources.strings.you_have_completed_all_tasks,
+                TodometerResources.strings.youHaveCompletedAllTasks,
                 TodometerResources.strings.congratulations
             )
         }
@@ -549,7 +553,7 @@ private fun CompletedTasksHeader(
     ListItem(
         headlineContent = {
             Text(
-                text = TodometerResources.strings.completed_tasks(completedTasks)
+                text = TodometerResources.strings.completedTasks(completedTasks)
             )
         },
         trailingContent = {
@@ -604,7 +608,6 @@ private fun HomeInfoIllustration(
     }
 }
 
-private const val HomeTopAppBarTaskListNameMaxLines: Int = 2
 private val HomeTopAppBarTonalElevation: Dp = 4.dp
 private const val HomeTopAppBarAnimationDuration: Int = 400
 private val HomeTaskListAreaBottomPadding: Dp = 84.dp

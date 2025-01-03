@@ -119,7 +119,7 @@ internal fun HomeScreen(
                 else -> {
                     item {
                         TaskListItem(
-                            TodometerResources.strings.default_task_list_name,
+                            TodometerResources.strings.defaultTaskListName,
                             onClick = { openTaskList(null) }
                         )
                     }
@@ -176,7 +176,7 @@ private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
 
 @Composable
 private fun AddTaskListButton(onComplete: (String) -> Unit) {
-    val taskListNameInput = TodometerResources.strings.task_list_name_input
+    val taskListNameInput = TodometerResources.strings.taskListNameInput
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {

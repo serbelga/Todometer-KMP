@@ -81,7 +81,7 @@ fun DateTimeSelector(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = TodometerResources.strings.enter_date_time,
+                text = TodometerResources.strings.enterDateTime,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier
                     .padding(horizontal = SectionPadding)

@@ -87,6 +87,8 @@ fun EditTaskScreen(
     }
 }
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditTaskSuccessContent(
@@ -117,7 +119,7 @@ private fun EditTaskSuccessContent(
         topBar = {
             SaveActionTopAppBar(
                 navigateBack = navigateBack,
-                title = TodometerResources.strings.edit_task,
+                title = TodometerResources.strings.editTask,
                 onSaveButtonClick = {
                     if (taskTitle.isBlank()) {
                         taskTitleInputError = true
@@ -137,9 +139,9 @@ private fun EditTaskSuccessContent(
                         taskTitle = it
                         taskTitleInputError = false
                     },
-                    placeholder = { Text(TodometerResources.strings.enter_task_name) },
+                    placeholder = { Text(TodometerResources.strings.enterTaskName) },
                     isError = taskTitleInputError,
-                    errorMessage = TodometerResources.strings.field_not_empty,
+                    errorMessage = TodometerResources.strings.fieldNotEmpty,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Next
@@ -147,7 +149,7 @@ private fun EditTaskSuccessContent(
                     modifier = Modifier.padding(TextFieldPadding)
                 )
                 Text(
-                    text = TodometerResources.strings.choose_tag.addStyledOptionalSuffix(),
+                    text = TodometerResources.strings.chooseTag.addStyledOptionalSuffix(),
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.labelLarge,
                     modifier = Modifier.padding(horizontal = SectionPadding)
@@ -156,7 +158,7 @@ private fun EditTaskSuccessContent(
                     selectedTag = tag
                 }
                 Text(
-                    text = TodometerResources.strings.date_time.addStyledOptionalSuffix(),
+                    text = TodometerResources.strings.dateTime.addStyledOptionalSuffix(),
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.labelLarge,
                     modifier = Modifier.padding(horizontal = SectionPadding)
@@ -172,7 +174,7 @@ private fun EditTaskSuccessContent(
                     title = TodometerResources.strings.description.addStyledOptionalSuffix(),
                     value = taskDescription,
                     onValueChange = { taskDescription = it },
-                    placeholder = { Text(TodometerResources.strings.enter_description) },
+                    placeholder = { Text(TodometerResources.strings.enterDescription) },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
                         imeAction = ImeAction.Done

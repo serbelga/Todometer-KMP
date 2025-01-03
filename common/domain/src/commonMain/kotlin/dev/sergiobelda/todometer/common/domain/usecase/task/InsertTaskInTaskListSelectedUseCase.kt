@@ -53,7 +53,7 @@ class InsertTaskInTaskListSelectedUseCase(
         result.doIfSuccess { taskId ->
             taskChecklistItemsRepository.insertTaskChecklistItems(
                 taskId,
-                *taskChecklistItems.toTypedArray()
+                items = taskChecklistItems.toTypedArray()
             )
         }
         return result

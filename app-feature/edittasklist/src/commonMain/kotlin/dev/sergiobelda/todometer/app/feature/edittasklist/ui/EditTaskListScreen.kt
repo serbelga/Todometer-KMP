@@ -60,7 +60,7 @@ fun EditTaskListScreen(
                     topBar = {
                         SaveActionTopAppBar(
                             navigateBack = navigateBack,
-                            title = TodometerResources.strings.edit_task_list,
+                            title = TodometerResources.strings.editTaskList,
                             isSaveButtonEnabled = !viewModel.state.isLoading,
                             onSaveButtonClick = {
                                 if (taskListName.isBlank()) {
@@ -81,10 +81,10 @@ fun EditTaskListScreen(
                                     taskListName = it
                                     taskListNameInputError = false
                                 },
-                                placeholder = { Text(TodometerResources.strings.enter_task_list_name) },
+                                placeholder = { Text(TodometerResources.strings.enterTaskListName) },
                                 singleLine = true,
                                 isError = taskListNameInputError,
-                                errorMessage = TodometerResources.strings.field_not_empty,
+                                errorMessage = TodometerResources.strings.fieldNotEmpty,
                                 keyboardOptions = KeyboardOptions(
                                     capitalization = KeyboardCapitalization.Sentences,
                                     imeAction = ImeAction.Done
