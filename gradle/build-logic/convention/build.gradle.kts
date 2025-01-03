@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "dev.sergiobelda.todometer.buildlogic"
+group = "dev.sergiobelda.gradle.buildlogic.convention"
 
 java {
     toolchain {
