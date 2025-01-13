@@ -26,6 +26,6 @@ actual object TodometerAnimatedResources {
     @Composable
     actual fun deleteAnimatedVectorPainter(atEnd: Boolean): Painter =
         rememberVectorPainter(
-            Images.Icons.Delete
+            Images.Icons.Delete,
         )
 }

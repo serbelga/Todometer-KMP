@@ -102,12 +102,14 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @NavDestination(
     destinationId = "tasklisttasks",
     name = "TaskListTasks",
     arguments = [
-        NavArgument("taskListId", type = NavArgumentType.String, nullable = true)
-    ]
+        NavArgument("taskListId", type = NavArgumentType.String, nullable = true),
+    ],
 )
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
@@ -115,7 +117,7 @@ internal fun TaskListTasksScreen(
     taskListId: String,
     openTask: (String) -> Unit,
     navigateBack: () -> Unit,
-    viewModel: TaskListTasksViewModel = koinInject { parametersOf(taskListId) }
+    viewModel: TaskListTasksViewModel = koinInject { parametersOf(taskListId) },
 ) {
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
     var deleteTaskListAlertDialogState by remember { mutableStateOf(false) }
@@ -127,7 +129,7 @@ internal fun TaskListTasksScreen(
                     viewModel.deleteTask(selectedTaskId)
                     deleteTaskAlertDialogState = false
                 },
-                onCancel = { deleteTaskAlertDialogState = false }
+                onCancel = { deleteTaskAlertDialogState = false },
             )
         }
 
@@ -137,7 +139,7 @@ internal fun TaskListTasksScreen(
                     viewModel.deleteTaskList()
                     navigateBack()
                 },
-                onCancel = { deleteTaskListAlertDialogState = false }
+                onCancel = { deleteTaskListAlertDialogState = false },
             )
         }
 
@@ -149,7 +151,7 @@ internal fun TaskListTasksScreen(
             val progress = TaskProgress.getTasksDoneProgress(state.tasks)
             val animatedProgress by animateFloatAsState(
                 targetValue = progress,
-                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
             )
             Scaffold(
                 timeText = {
@@ -157,13 +159,13 @@ internal fun TaskListTasksScreen(
                 },
                 positionIndicator = {
                     PositionIndicator(scalingLazyListState = scalingLazyListState)
-                }
+                },
             ) {
                 ScalingLazyColumn(
                     autoCentering = AutoCenteringParams(itemIndex = 2),
                     contentPadding = PaddingValues(
                         start = 16.dp,
-                        end = 16.dp
+                        end = 16.dp,
                     ),
                     state = scalingLazyListState,
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -179,7 +181,7 @@ internal fun TaskListTasksScreen(
                             true
                         }
                         .focusRequester(focusRequester)
-                        .focusable()
+                        .focusable(),
                 ) {
                     when {
                         state.isLoadingTaskList -> {
@@ -193,7 +195,7 @@ internal fun TaskListTasksScreen(
                                         Text(
                                             TodometerResources.strings.defaultTaskListName,
                                             fontWeight = FontWeight.Bold,
-                                            overflow = TextOverflow.Ellipsis
+                                            overflow = TextOverflow.Ellipsis,
                                         )
                                     }
                                 }
@@ -205,7 +207,7 @@ internal fun TaskListTasksScreen(
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis,
                                             maxLines = 1,
-                                            modifier = Modifier.padding(horizontal = 24.dp)
+                                            modifier = Modifier.padding(horizontal = 24.dp),
                                         )
                                     }
                                 }
@@ -216,7 +218,7 @@ internal fun TaskListTasksScreen(
                                     Text(
                                         text = TodometerResources.strings.noTasks,
                                         textAlign = TextAlign.Center,
-                                        style = MaterialTheme.typography.body2
+                                        style = MaterialTheme.typography.body2,
                                     )
                                 }
                             } else {
@@ -230,7 +232,7 @@ internal fun TaskListTasksScreen(
                                             selectedTaskId = task.id
                                             deleteTaskAlertDialogState = true
                                         },
-                                        onClick = { openTask(task.id) }
+                                        onClick = { openTask(task.id) },
                                     )
                                 }
                             }
@@ -248,7 +250,7 @@ internal fun TaskListTasksScreen(
                                     DeleteTaskListButton(
                                         onClick = {
                                             deleteTaskListAlertDialogState = true
-                                        }
+                                        },
                                     )
                                 }
                             }
@@ -267,13 +269,15 @@ private fun TaskListProgressIndicator(progress: Float) {
         modifier = Modifier.fillMaxSize(),
         startAngle = 300f,
         endAngle = 240f,
-        progress = progress
+        progress = progress,
     )
 }
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @OptIn(
     ExperimentalWearFoundationApi::class,
-    ExperimentalWearMaterialApi::class
+    ExperimentalWearMaterialApi::class,
 )
 @Composable
 private fun TaskItem(
@@ -281,7 +285,7 @@ private fun TaskItem(
     onDoingClick: () -> Unit,
     onDoneClick: () -> Unit,
     onDeleteTask: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val isTaskDone = taskItem.state == TaskState.DONE
     val textDecoration = if (isTaskDone) TextDecoration.LineThrough else TextDecoration.None
@@ -289,8 +293,8 @@ private fun TaskItem(
         anchors = createAnchors(
             // TODO: Const values
             revealingAnchor = 0.5f,
-            revealedAnchor = 0.5f
-        )
+            revealedAnchor = 0.5f,
+        ),
     )
     SwipeToRevealChip(
         primaryAction = {
@@ -300,19 +304,19 @@ private fun TaskItem(
                     Box(modifier = Modifier.fillMaxSize()) {
                         Icon(
                             painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
-                                atEnd = revealState.currentValue == Revealing
+                                atEnd = revealState.currentValue == Revealing,
                             ),
                             contentDescription = TodometerResources.strings.deleteTask,
-                            modifier = Modifier.align(Alignment.Center)
+                            modifier = Modifier.align(Alignment.Center),
                         )
                     }
                 },
                 label = { Text(TodometerResources.strings.deleteTask) },
-                onClick = onDeleteTask
+                onClick = onDeleteTask,
             )
         },
         revealState = revealState,
-        onFullSwipe = {}
+        onFullSwipe = {},
     ) {
         // Use SplitToggleChip if onClick is needed.
         SplitToggleChip(
@@ -330,7 +334,7 @@ private fun TaskItem(
                     color = MaterialTheme.colors.onSurface,
                     text = taskItem.title,
                     textDecoration = textDecoration,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             },
             onClick = onClick,
@@ -343,10 +347,10 @@ private fun TaskItem(
             },
             colors = ToggleChipDefaults.splitToggleChipColors(
                 uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
-                checkedToggleControlColor = MaterialTheme.colors.primary
+                checkedToggleControlColor = MaterialTheme.colors.primary,
             ),
             modifier = Modifier.fillMaxWidth(),
-            enabled = revealState.currentValue == Covered
+            enabled = revealState.currentValue == Covered,
         )
     }
 }
@@ -377,14 +381,14 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
                     .wearableExtender {
                         setEmojisAllowed(false)
                         setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build()
+                    }.build(),
             )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
             addTaskLauncher.launch(intent)
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 
@@ -414,14 +418,14 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
                     .wearableExtender {
                         setEmojisAllowed(false)
                         setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build()
+                    }.build(),
             )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
             editTaskListLauncher.launch(intent)
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 
@@ -429,23 +433,23 @@ private fun EditTaskListButton(taskList: TaskList, onComplete: (String) -> Unit)
 private fun DeleteTaskListButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.primaryChipColors(
-            backgroundColor = MaterialTheme.colors.error
+            backgroundColor = MaterialTheme.colors.error,
         ),
         icon = {
             Icon(
                 Images.Icons.Delete,
-                TodometerResources.strings.deleteTaskList
+                TodometerResources.strings.deleteTaskList,
             )
         },
         label = {
             Text(
                 text = TodometerResources.strings.deleteTaskList,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 1
+                maxLines = 1,
             )
         },
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 

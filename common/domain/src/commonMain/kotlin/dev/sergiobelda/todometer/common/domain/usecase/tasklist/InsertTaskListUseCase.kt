@@ -24,7 +24,7 @@ import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesReposi
 
 class InsertTaskListUseCase(
     private val taskListRepository: ITaskListRepository,
-    private val userPreferencesRepository: IUserPreferencesRepository
+    private val userPreferencesRepository: IUserPreferencesRepository,
 ) {
 
     /**

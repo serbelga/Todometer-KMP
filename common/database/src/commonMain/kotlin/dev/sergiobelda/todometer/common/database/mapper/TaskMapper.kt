@@ -28,7 +28,7 @@ fun TaskEntity.asTask(): Task = Task(
     state = state,
     taskListId = tasklist_id,
     isPinned = isPinned,
-    sync = sync
+    sync = sync,
 )
 
 fun Iterable<TaskEntity>.asTasks(): List<Task> = this.map {
@@ -44,5 +44,5 @@ fun Task.asTaskEntity(): TaskEntity = TaskEntity(
     state = state,
     tasklist_id = taskListId,
     isPinned = isPinned,
-    sync = sync
+    sync = sync,
 )

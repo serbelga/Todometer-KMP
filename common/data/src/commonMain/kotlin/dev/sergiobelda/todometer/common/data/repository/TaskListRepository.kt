@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.Flow
  * Repository for performing [TaskList] data operations.
  */
 class TaskListRepository(
-    private val taskListLocalDataSource: ITaskListLocalDataSource
+    private val taskListLocalDataSource: ITaskListLocalDataSource,
 ) : ITaskListRepository {
 
     override fun getTaskList(id: String): Flow<Result<TaskList>> =
@@ -44,8 +44,8 @@ class TaskListRepository(
                 id = taskListId,
                 name = name,
                 description = "",
-                sync = sync
-            )
+                sync = sync,
+            ),
         )
     }
 

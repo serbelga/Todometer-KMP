@@ -28,12 +28,12 @@ import androidx.compose.ui.unit.dp
 fun TodometerDivider(
     modifier: Modifier = Modifier,
     thickness: Dp = TodometerDividerDefaults.thickness,
-    color: Color = TodometerDividerDefaults.color
+    color: Color = TodometerDividerDefaults.color,
 ) {
     HorizontalDivider(
         modifier = modifier,
         thickness = thickness,
-        color = color
+        color = color,
     )
 }
 

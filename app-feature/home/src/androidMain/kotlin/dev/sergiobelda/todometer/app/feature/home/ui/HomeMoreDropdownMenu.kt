@@ -32,11 +32,11 @@ internal actual fun HomeMoreDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
     onEditTaskListClick: () -> Unit,
-    onDeleteTaskListClick: () -> Unit
+    onDeleteTaskListClick: () -> Unit,
 ) {
     DropdownMenu(
         expanded = expanded,
-        onDismissRequest = onDismissRequest
+        onDismissRequest = onDismissRequest,
     ) {
         DropdownMenuItem(
             onClick = onEditTaskListClick,
@@ -44,24 +44,24 @@ internal actual fun HomeMoreDropdownMenu(
             text = {
                 Text(
                     TodometerResources.strings.editTaskList,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
                 )
-            }
+            },
         )
         DropdownMenuItem(
             onClick = onDeleteTaskListClick,
             leadingIcon = {
                 Icon(
                     Images.Icons.Delete,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             },
             text = {
                 Text(
                     TodometerResources.strings.deleteTaskList,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
                 )
-            }
+            },
         )
     }
 }

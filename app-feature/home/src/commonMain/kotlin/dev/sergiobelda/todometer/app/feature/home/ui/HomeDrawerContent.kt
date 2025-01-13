@@ -56,16 +56,16 @@ internal fun HomeDrawerContent(
     onAddTaskList: () -> Unit,
     onTaskListItemClick: (String) -> Unit,
     onSettingsItemClick: () -> Unit,
-    onAboutItemClick: () -> Unit
+    onAboutItemClick: () -> Unit,
 ) {
     ModalDrawerSheet {
         Box(
-            modifier = Modifier.height(HomeDrawerTopHeight).fillMaxWidth()
+            modifier = Modifier.height(HomeDrawerTopHeight).fillMaxWidth(),
         ) {
             TodometerTitle(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .padding(horizontal = HomeDrawerTopPaddingHorizontal)
+                    .padding(horizontal = HomeDrawerTopPaddingHorizontal),
             )
         }
         TodometerDivider()
@@ -74,7 +74,7 @@ internal fun HomeDrawerContent(
             defaultTaskListName,
             taskLists,
             onAddTaskList,
-            onTaskListItemClick
+            onTaskListItemClick,
         )
         TodometerDivider()
         Column(modifier = Modifier.padding(HomeDrawerItemPadding)) {
@@ -90,18 +90,18 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
         icon = {
             Icon(
                 Images.Icons.Settings,
-                contentDescription = null
+                contentDescription = null,
             )
         },
         label = {
             Text(
                 text = TodometerResources.strings.settings,
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = HomeDrawerItemMaxLines
+                maxLines = HomeDrawerItemMaxLines,
             )
         },
         onClick = onClick,
-        selected = false
+        selected = false,
     )
 }
 
@@ -111,18 +111,18 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
         icon = {
             Icon(
                 Images.Icons.Info,
-                contentDescription = null
+                contentDescription = null,
             )
         },
         label = {
             Text(
                 text = TodometerResources.strings.about,
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = HomeDrawerItemMaxLines
+                maxLines = HomeDrawerItemMaxLines,
             )
         },
         onClick = onClick,
-        selected = false
+        selected = false,
     )
 }
 
@@ -132,17 +132,17 @@ private fun HomeDrawerTaskListsSection(
     defaultTaskListName: String,
     taskLists: ImmutableList<TaskList>,
     onAddTaskList: () -> Unit,
-    onTaskListItemClick: (String) -> Unit
+    onTaskListItemClick: (String) -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .height(HomeDrawerSectionTitleHeight)
-            .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal)
+            .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal),
     ) {
         Text(
             text = TodometerResources.strings.taskLists,
-            style = MaterialTheme.typography.titleSmall
+            style = MaterialTheme.typography.titleSmall,
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = onAddTaskList) {
@@ -167,12 +167,12 @@ private fun HomeDrawerTaskListsSection(
 private fun HomeNavigationDrawerTaskListItem(
     text: String,
     isSelected: Boolean,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
 ) {
     val colors = NavigationDrawerItemDefaults.colors(
         selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
         selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+        unselectedTextColor = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
     )
     NavigationDrawerItem(
         label = {
@@ -180,12 +180,12 @@ private fun HomeNavigationDrawerTaskListItem(
                 text = text,
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HomeDrawerItemMaxLines,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         },
         onClick = onItemClick,
         selected = isSelected,
-        colors = colors
+        colors = colors,
     )
 }
 

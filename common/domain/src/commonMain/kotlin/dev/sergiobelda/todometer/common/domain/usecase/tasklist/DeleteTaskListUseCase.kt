@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 
 class DeleteTaskListUseCase(
-    private val taskListRepository: ITaskListRepository
+    private val taskListRepository: ITaskListRepository,
 ) {
 
     /**

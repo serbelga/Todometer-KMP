@@ -24,6 +24,6 @@ internal fun TodometerTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colors = colorPalette,
         typography = typography,
-        content = content
+        content = content,
     )
 }

@@ -30,7 +30,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
 internal fun PrivacyPolicyDialog(
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -54,11 +54,11 @@ internal fun PrivacyPolicyDialog(
         },
         confirmButton = {
             TextButton(
-                onClick = onDismissRequest
+                onClick = onDismissRequest,
             ) {
                 Text(TodometerResources.strings.ok)
             }
-        }
+        },
     )
 }
 

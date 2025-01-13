@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
@@ -14,23 +14,13 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.androidx.datastore.preferences.core)
-                implementation(libs.kotlin.coroutinesCore)
-            }
+        commonMain.dependencies {
+            implementation(libs.androidx.datastore.preferences.core)
+            implementation(libs.kotlin.coroutinesCore)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
         }
-        val androidMain by getting
-        val androidUnitTest by getting
-        val desktopMain by getting
-        val desktopTest by getting
-        val iosMain by creating
-        val iosTest by creating
     }
 }
 

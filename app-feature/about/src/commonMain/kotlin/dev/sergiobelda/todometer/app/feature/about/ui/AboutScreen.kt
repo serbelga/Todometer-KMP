@@ -52,21 +52,21 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @NavDestination(
     name = "About",
-    destinationId = "about"
+    destinationId = "about",
 )
 @Composable
 fun AboutScreen(
     navigateToGitHub: () -> Unit,
     navigateToPrivacyPolicy: () -> Unit,
     navigateToOpenSourceLicenses: () -> Unit,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     Scaffold(
-        topBar = { AboutTopBar(navigateBack = navigateBack) }
+        topBar = { AboutTopBar(navigateBack = navigateBack) },
     ) { paddingValues ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth().padding(paddingValues)
+            modifier = Modifier.fillMaxWidth().padding(paddingValues),
         ) {
             TodometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
@@ -86,18 +86,18 @@ internal fun AboutTopBar(navigateBack: () -> Unit) {
             IconButton(onClick = navigateBack) {
                 Icon(
                     Images.Icons.NavigateBefore,
-                    contentDescription = TodometerResources.strings.back
+                    contentDescription = TodometerResources.strings.back,
                 )
             }
         },
-        title = {}
+        title = {},
     )
 }
 
 internal enum class AboutItem {
     GitHub,
     PrivacyPolicy,
-    OpenSourceLicenses
+    OpenSourceLicenses,
 }
 
 @Composable
@@ -120,23 +120,23 @@ private fun AboutItem.text(): String =
 internal fun AboutItemCard(
     onCardClick: () -> Unit,
     aboutItem: AboutItem,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         onClick = onCardClick,
         shape = RoundedCornerShape(AboutItemCardCornerRadius),
         tonalElevation = AboutItemCardTonalElevation,
-        modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp)
+        modifier = modifier.height(AboutItemCardHeight).fillMaxWidth().padding(8.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
             Spacer(modifier = Modifier.width(AboutItemCardSpacing))
             Icon(
                 aboutItem.icon(),
                 contentDescription = aboutItem.text(),
-                modifier = Modifier.size(AboutItemCardIconSize)
+                modifier = Modifier.size(AboutItemCardIconSize),
             )
             Spacer(modifier = Modifier.width(AboutItemCardSpacing))
             Text(aboutItem.text())
@@ -150,7 +150,7 @@ internal fun AboutAppVersion() {
         Text(
             text = appVersionName() ?: "",
             style = MaterialTheme.typography.labelSmall,
-            modifier = Modifier.padding(bottom = 24.dp)
+            modifier = Modifier.padding(bottom = 24.dp),
         )
     }
 }

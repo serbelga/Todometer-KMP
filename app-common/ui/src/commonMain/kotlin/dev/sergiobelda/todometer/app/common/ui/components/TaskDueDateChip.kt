@@ -54,18 +54,18 @@ fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
     }
     TodometerChip(
         border = BorderStroke(1.dp, dueDateChipOutline),
-        modifier = modifier
+        modifier = modifier,
     ) {
         Icon(
             Images.Icons.Event,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
-            tint = dueDateChipTint
+            tint = dueDateChipTint,
         )
         Text(
             TaskDueDate.getDueDateFormatted(dueDate),
             style = MaterialTheme.typography.labelLarge,
-            color = dueDateChipTint
+            color = dueDateChipTint,
         )
     }
 }

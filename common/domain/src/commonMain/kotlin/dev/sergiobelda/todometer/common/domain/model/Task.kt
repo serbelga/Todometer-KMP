@@ -25,5 +25,5 @@ data class Task(
     val state: TaskState,
     val taskListId: String,
     val isPinned: Boolean,
-    val sync: Boolean
+    val sync: Boolean,
 )

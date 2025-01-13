@@ -29,7 +29,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoadingScreenDialog(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -38,16 +38,16 @@ fun LoadingScreenDialog(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             Images.Icons.NavigateBefore,
-                            contentDescription = TodometerResources.strings.back
+                            contentDescription = TodometerResources.strings.back,
                         )
                     }
                 },
                 title = {},
-                actions = {}
+                actions = {},
             )
         },
         content = {
             ContentLoadingProgress()
-        }
+        },
     )
 }

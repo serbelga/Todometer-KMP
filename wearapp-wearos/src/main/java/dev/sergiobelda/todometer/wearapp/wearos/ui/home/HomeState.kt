@@ -26,5 +26,5 @@ import kotlinx.collections.immutable.persistentListOf
 data class HomeState(
     val isLoading: Boolean = false,
     val taskLists: ImmutableList<TaskList> = persistentListOf(),
-    val errorUi: ErrorUi? = null
+    val errorUi: ErrorUi? = null,
 )

@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 internal fun DiscardTaskAlertDialog(
     onDismissRequest: () -> Unit,
-    onConfirmButtonClick: () -> Unit
+    onConfirmButtonClick: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -40,7 +40,7 @@ internal fun DiscardTaskAlertDialog(
                 onClick = {
                     onConfirmButtonClick()
                     onDismissRequest()
-                }
+                },
             ) {
                 Text(TodometerResources.strings.ok)
             }
@@ -49,6 +49,6 @@ internal fun DiscardTaskAlertDialog(
             TextButton(onClick = onDismissRequest) {
                 Text(TodometerResources.strings.cancel)
             }
-        }
+        },
     )
 }

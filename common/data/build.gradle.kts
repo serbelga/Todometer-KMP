@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
@@ -14,37 +14,26 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(projects.common.domain)
-                implementation(projects.common.database)
-                implementation(projects.common.preferences)
+        commonMain.dependencies {
+            implementation(projects.common.domain)
+            implementation(projects.common.database)
+            implementation(projects.common.preferences)
 
-                implementation(libs.kotlin.coroutinesCore)
-            }
+            implementation(libs.kotlin.coroutinesCore)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.kotlin.coroutinesTest)
-                implementation(libs.mockk.common)
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.coroutinesTest)
+            implementation(libs.mockk.common)
+            implementation(kotlin("test"))
         }
-        val androidMain by getting
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.junit)
-                implementation(libs.mockk.mockk)
-            }
+        androidUnitTest.dependencies {
+            implementation(libs.junit)
+            implementation(libs.mockk.mockk)
         }
-        val desktopMain by getting
-        val desktopTest by getting {
-            dependencies {
-                implementation(libs.mockk.mockk)
-            }
+        val desktopTest by getting
+        desktopTest.dependencies {
+            implementation(libs.mockk.mockk)
         }
-        val iosMain by creating
-        val iosTest by creating
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")

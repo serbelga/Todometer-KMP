@@ -22,5 +22,5 @@ import androidx.compose.runtime.Composable
 @Composable
 expect fun TodometerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 )

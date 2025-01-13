@@ -52,7 +52,7 @@ fun DateTimeSelector(
     onDateClick: () -> Unit,
     onTimeClick: () -> Unit,
     onEnterDateTimeClick: () -> Unit,
-    onClearDateTimeClick: () -> Unit
+    onClearDateTimeClick: () -> Unit,
 ) {
     if (dateMillis != null) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -60,32 +60,32 @@ fun DateTimeSelector(
             ClickableField(
                 onClick = onDateClick,
                 text = dateMillis.dateFormat(),
-                imageVector = Images.Icons.Event
+                imageVector = Images.Icons.Event,
             )
             ClickableField(
                 onClick = onTimeClick,
                 text = dateMillis.timeFormat(),
-                imageVector = Images.Icons.Schedule
+                imageVector = Images.Icons.Schedule,
             )
             IconButton(onClick = onClearDateTimeClick) {
                 Icon(
                     Images.Icons.Close,
                     TodometerResources.strings.clear,
-                    tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                    tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
                 )
             }
         }
     } else {
         Box(
             modifier = Modifier.height(Height).clickable(onClick = onEnterDateTimeClick),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = TodometerResources.strings.enterDateTime,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier
                     .padding(horizontal = SectionPadding)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             )
         }
     }
@@ -95,7 +95,7 @@ fun DateTimeSelector(
 private fun ClickableField(
     onClick: () -> Unit,
     text: String,
-    imageVector: ImageVector? = null
+    imageVector: ImageVector? = null,
 ) {
     TextButton(onClick = onClick) {
         imageVector?.let {
@@ -103,14 +103,14 @@ private fun ClickableField(
                 it,
                 contentDescription = null,
                 modifier = Modifier.size(16.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
         Spacer(modifier = Modifier.size(4.dp))
         Text(
             text = text,
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
         )
     }
 }

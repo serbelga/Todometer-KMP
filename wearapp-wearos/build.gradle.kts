@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.ksp)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
 

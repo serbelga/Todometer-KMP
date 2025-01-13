@@ -37,7 +37,7 @@ fun TagSelector(selectedTag: Tag, onTagSelected: (Tag) -> Unit) {
 
     val colorsMap = tags.associateWith {
         ColorPickerItem(
-            color = TodometerTheme.todometerColors.composeColorOf(it)
+            color = TodometerTheme.todometerColors.composeColorOf(it),
         )
     }
 
@@ -48,7 +48,7 @@ fun TagSelector(selectedTag: Tag, onTagSelected: (Tag) -> Unit) {
         state = state,
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp),
-        modifier = Modifier.padding(vertical = 16.dp)
+        modifier = Modifier.padding(vertical = 16.dp),
     )
 
     LaunchedEffect(selectedTag) {

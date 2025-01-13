@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.firstOrNull
 
 class DeleteTaskListSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
-    private val taskListRepository: ITaskListRepository
+    private val taskListRepository: ITaskListRepository,
 ) {
 
     /**

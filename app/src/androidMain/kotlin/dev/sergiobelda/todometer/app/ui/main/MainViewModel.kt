@@ -25,13 +25,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class MainViewModel(
-    getAppThemeUseCase: GetAppThemeUseCase
+    getAppThemeUseCase: GetAppThemeUseCase,
 ) : ViewModel() {
 
     val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
-            AppTheme.FOLLOW_SYSTEM
+            AppTheme.FOLLOW_SYSTEM,
         )
 }

@@ -28,7 +28,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 fun DatePickerDialog(
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     DatePickerDialog(
         onDismissRequest = onDismissRequest,
@@ -41,7 +41,7 @@ fun DatePickerDialog(
             TextButton(onClick = onConfirm) {
                 Text(TodometerResources.strings.ok)
             }
-        }
+        },
     ) {
         content()
     }

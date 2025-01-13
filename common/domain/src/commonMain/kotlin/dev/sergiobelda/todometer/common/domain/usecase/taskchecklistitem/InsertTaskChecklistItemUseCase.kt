@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem
 import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRepository
 
 class InsertTaskChecklistItemUseCase(
-    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
+    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
 
     suspend operator fun invoke(taskId: String, text: String) =

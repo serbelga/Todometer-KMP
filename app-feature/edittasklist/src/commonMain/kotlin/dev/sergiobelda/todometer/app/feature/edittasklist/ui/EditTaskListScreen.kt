@@ -39,12 +39,12 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @NavDestination(
     destinationId = "edittasklist",
-    name = "EditTaskList"
+    name = "EditTaskList",
 )
 @Composable
 fun EditTaskListScreen(
     navigateBack: () -> Unit,
-    viewModel: EditTaskListViewModel
+    viewModel: EditTaskListViewModel,
 ) {
     when {
         viewModel.state.isLoading -> {
@@ -69,7 +69,7 @@ fun EditTaskListScreen(
                                     viewModel.updateTaskList(taskListName)
                                     navigateBack()
                                 }
-                            }
+                            },
                         )
                     },
                     content = { paddingValues ->
@@ -87,12 +87,12 @@ fun EditTaskListScreen(
                                 errorMessage = TodometerResources.strings.fieldNotEmpty,
                                 keyboardOptions = KeyboardOptions(
                                     capitalization = KeyboardCapitalization.Sentences,
-                                    imeAction = ImeAction.Done
+                                    imeAction = ImeAction.Done,
                                 ),
-                                modifier = Modifier.padding(TextFieldPadding)
+                                modifier = Modifier.padding(TextFieldPadding),
                             )
                         }
-                    }
+                    },
                 )
             }
         }

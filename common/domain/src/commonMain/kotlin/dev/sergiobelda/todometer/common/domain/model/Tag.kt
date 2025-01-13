@@ -29,5 +29,5 @@ enum class Tag {
     AMBER,
     ORANGE,
     BROWN,
-    GRAY
+    GRAY,
 }

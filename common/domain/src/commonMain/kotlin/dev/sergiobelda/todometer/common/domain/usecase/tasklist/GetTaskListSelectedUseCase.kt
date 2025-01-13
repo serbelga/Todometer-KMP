@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 
 class GetTaskListSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
-    private val taskListRepository: ITaskListRepository
+    private val taskListRepository: ITaskListRepository,
 ) {
 
     /**

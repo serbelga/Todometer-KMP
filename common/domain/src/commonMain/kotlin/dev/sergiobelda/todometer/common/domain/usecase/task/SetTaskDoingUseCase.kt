@@ -20,7 +20,7 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 
 class SetTaskDoingUseCase(
-    private val taskRepository: ITaskRepository
+    private val taskRepository: ITaskRepository,
 ) {
 
     /**

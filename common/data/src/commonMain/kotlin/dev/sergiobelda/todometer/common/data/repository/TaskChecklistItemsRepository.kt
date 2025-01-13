@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 import kotlinx.coroutines.flow.Flow
 
 class TaskChecklistItemsRepository(
-    private val taskChecklistItemLocalDataSource: ITaskChecklistItemLocalDataSource
+    private val taskChecklistItemLocalDataSource: ITaskChecklistItemLocalDataSource,
 ) : ITaskChecklistItemsRepository {
 
     override fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
@@ -38,9 +38,9 @@ class TaskChecklistItemsRepository(
                     id = randomUUIDString(),
                     text = text,
                     state = TaskChecklistItemState.UNCHECKED,
-                    taskId = taskId
+                    taskId = taskId,
                 )
-            }.toTypedArray()
+            }.toTypedArray(),
         )
     }
 

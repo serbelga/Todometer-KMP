@@ -31,27 +31,27 @@ internal actual fun HomeMoreDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
     onEditTaskListClick: () -> Unit,
-    onDeleteTaskListClick: () -> Unit
+    onDeleteTaskListClick: () -> Unit,
 ) {
     DropdownMenu(
         expanded = expanded,
-        onDismissRequest = onDismissRequest
+        onDismissRequest = onDismissRequest,
     ) {
         // TODO: Add icons and supportingText when use DropdownMenuItem from material3
         DropdownMenuItem(
             onClick = onEditTaskListClick,
             leadingIcon = { Icon(Images.Icons.Edit, contentDescription = null) },
-            text = { Text(TodometerResources.strings.editTaskList) }
+            text = { Text(TodometerResources.strings.editTaskList) },
         )
         DropdownMenuItem(
             onClick = onDeleteTaskListClick,
             leadingIcon = {
                 Icon(
                     Images.Icons.Delete,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             },
-            text = { Text(TodometerResources.strings.deleteTaskList) }
+            text = { Text(TodometerResources.strings.deleteTaskList) },
         )
     }
 }

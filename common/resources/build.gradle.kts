@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.ksp)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
@@ -19,19 +19,10 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(compose.ui)
-                api(libs.lyricist.lyricist)
-            }
+        commonMain.dependencies {
+            implementation(compose.ui)
+            api(libs.lyricist.lyricist)
         }
-        val commonTest by getting
-        val androidMain by getting
-        val androidUnitTest by getting
-        val desktopMain by getting
-        val desktopTest by getting
-        val iosMain by creating
-        val iosTest by creating
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")

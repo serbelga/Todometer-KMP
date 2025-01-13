@@ -33,19 +33,19 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSc
 @Composable
 fun TodometerNavHost(
     navController: NavHostController,
-    navAction: NavAction
+    navAction: NavAction,
 ) {
     SwipeDismissableNavHost(
         navController = navController,
-        startNavDestination = HomeNavDestination
+        startNavDestination = HomeNavDestination,
     ) {
         composable(navDestination = HomeNavDestination) {
             HomeScreen(
                 openTaskList = { taskListId ->
                     navAction.navigate(
-                        TaskListTasksNavDestination.safeNavRoute(taskListId)
+                        TaskListTasksNavDestination.safeNavRoute(taskListId),
                     )
-                }
+                },
             )
         }
         composable(navDestination = TaskListTasksNavDestination) { navBackStackEntry ->
@@ -54,17 +54,17 @@ fun TodometerNavHost(
                 taskListId = taskListId,
                 openTask = { taskId ->
                     navAction.navigate(
-                        TaskDetailNavDestination.safeNavRoute(taskId)
+                        TaskDetailNavDestination.safeNavRoute(taskId),
                     )
                 },
-                navigateBack = { navAction.popBackStack() }
+                navigateBack = { navAction.popBackStack() },
             )
         }
         composable(navDestination = TaskDetailNavDestination) { navBackStackEntry ->
             val taskId = TaskDetailSafeNavArgs(navBackStackEntry).taskId.orEmpty()
             TaskDetailScreen(
                 taskId = taskId,
-                navigateBack = { navAction.popBackStack() }
+                navigateBack = { navAction.popBackStack() },
             )
         }
     }

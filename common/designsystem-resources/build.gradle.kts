@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeVectorize)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
@@ -17,24 +17,14 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(compose.material3)
-                implementation(compose.ui)
-                implementation(libs.sergiobelda.composeVectorize.core)
-            }
+        commonMain.dependencies {
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(libs.sergiobelda.composeVectorize.core)
         }
-        val commonTest by getting
-        val androidMain by getting {
-            dependencies {
-                implementation(compose.animationGraphics)
-            }
+        androidMain.dependencies {
+            implementation(compose.animationGraphics)
         }
-        val androidUnitTest by getting
-        val desktopMain by getting
-        val desktopTest by getting
-        val iosMain by creating
-        val iosTest by creating
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")

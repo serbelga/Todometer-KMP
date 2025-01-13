@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.firstOrNull
 class InsertTaskInTaskListSelectedUseCase(
     private val taskRepository: ITaskRepository,
     private val userPreferencesRepository: IUserPreferencesRepository,
-    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
+    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
 
     /**
@@ -40,7 +40,7 @@ class InsertTaskInTaskListSelectedUseCase(
         tag: Tag = Tag.GRAY,
         description: String? = null,
         dueDate: Long? = null,
-        taskChecklistItems: List<String> = emptyList()
+        taskChecklistItems: List<String> = emptyList(),
     ): Result<String> {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull() ?: ""
         val result = taskRepository.insertTask(
@@ -48,12 +48,12 @@ class InsertTaskInTaskListSelectedUseCase(
             tag,
             description,
             dueDate,
-            taskListId
+            taskListId,
         )
         result.doIfSuccess { taskId ->
             taskChecklistItemsRepository.insertTaskChecklistItems(
                 taskId,
-                items = taskChecklistItems.toTypedArray()
+                items = taskChecklistItems.toTypedArray(),
             )
         }
         return result

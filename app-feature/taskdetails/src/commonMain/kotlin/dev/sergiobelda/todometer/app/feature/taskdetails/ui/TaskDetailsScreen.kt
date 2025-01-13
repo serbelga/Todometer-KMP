@@ -81,15 +81,15 @@ import kotlinx.collections.immutable.ImmutableList
     destinationId = "taskdetails",
     name = "TaskDetails",
     arguments = [
-        NavArgument("taskId", NavArgumentType.String)
+        NavArgument("taskId", NavArgumentType.String),
     ],
-    deepLinkUris = ["app://open.task"]
+    deepLinkUris = ["app://open.task"],
 )
 @Composable
 fun TaskDetailsScreen(
     navigateBack: () -> Unit,
     navigateToEditTask: () -> Unit,
-    viewModel: TaskDetailsViewModel
+    viewModel: TaskDetailsViewModel,
 ) {
     when {
         viewModel.state.isLoadingTask -> {
@@ -112,7 +112,7 @@ fun TaskDetailsScreen(
                     },
                     onDeleteTaskCheckListItem = viewModel::deleteTaskChecklistItem,
                     onAddTaskCheckListItem = viewModel::insertTaskChecklistItem,
-                    toggleTaskPinnedValueClick = viewModel::toggleTaskPinnedValueUseCase
+                    toggleTaskPinnedValueClick = viewModel::toggleTaskPinnedValueUseCase,
                 )
             }
     }
@@ -130,7 +130,7 @@ private fun TaskDetailsSuccessContent(
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
-    toggleTaskPinnedValueClick: () -> Unit
+    toggleTaskPinnedValueClick: () -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
     val topAppBarState = rememberTopAppBarState()
@@ -147,12 +147,12 @@ private fun TaskDetailsSuccessContent(
                     AnimatedVisibility(
                         visible = showTopAppBarTitle,
                         enter = fadeIn(),
-                        exit = fadeOut()
+                        exit = fadeOut(),
                     ) {
                         Text(
                             task.title,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis,
                         )
                     }
                 },
@@ -160,7 +160,7 @@ private fun TaskDetailsSuccessContent(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             Images.Icons.NavigateBefore,
-                            contentDescription = TodometerResources.strings.back
+                            contentDescription = TodometerResources.strings.back,
                         )
                     }
                 },
@@ -177,18 +177,18 @@ private fun TaskDetailsSuccessContent(
                             } else {
                                 TodometerResources.strings.notPinnedTask
                             },
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
                         )
                     }
                     IconButton(onClick = navigateToEditTask) {
                         Icon(
                             Images.Icons.Edit,
                             contentDescription = TodometerResources.strings.editTask,
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
                         )
                     }
                 },
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
             )
         },
         content = { paddingValues ->
@@ -199,11 +199,11 @@ private fun TaskDetailsSuccessContent(
                     taskChecklistItems,
                     onTaskChecklistItemClick = onTaskChecklistItemClick,
                     onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
-                    onAddTaskCheckListItem = onAddTaskCheckListItem
+                    onAddTaskCheckListItem = onAddTaskCheckListItem,
                 )
                 taskDescription(task.description)
             }
-        }
+        },
     )
 }
 
@@ -212,7 +212,7 @@ private fun LazyListScope.taskTitle(task: Task) {
         Surface(modifier = Modifier.heightIn(max = 80.dp, min = 64.dp)) {
             Row(
                 modifier = Modifier.padding(start = 24.dp, bottom = 8.dp, end = 24.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 if (task.tag != Tag.UNSPECIFIED) {
                     TaskTagIndicator(task.tag)
@@ -222,7 +222,7 @@ private fun LazyListScope.taskTitle(task: Task) {
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier.padding(bottom = 4.dp),
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         }
@@ -242,7 +242,7 @@ private fun LazyListScope.taskChecklist(
     taskChecklistItems: ImmutableList<TaskChecklistItem>,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
-    onAddTaskCheckListItem: (String) -> Unit
+    onAddTaskCheckListItem: (String) -> Unit,
 ) {
     item {
         Spacer(modifier = Modifier.height(24.dp))
@@ -256,7 +256,7 @@ private fun LazyListScope.taskChecklist(
     item {
         AddChecklistItemField(
             placeholder = { Text(TodometerResources.strings.addElement) },
-            onAddTaskCheckListItem = onAddTaskCheckListItem
+            onAddTaskCheckListItem = onAddTaskCheckListItem,
         )
     }
     item {
@@ -269,7 +269,7 @@ private fun LazyListScope.taskChecklist(
 private fun LazyItemScope.TaskChecklistItem(
     taskChecklistItem: TaskChecklistItem,
     onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit
+    onDeleteTaskCheckListItem: (String) -> Unit,
 ) {
     val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
         MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
@@ -288,21 +288,21 @@ private fun LazyItemScope.TaskChecklistItem(
             .clickable {
                 onTaskChecklistItemClick(
                     taskChecklistItem.id,
-                    taskChecklistItem.state == TaskChecklistItemState.UNCHECKED
+                    taskChecklistItem.state == TaskChecklistItemState.UNCHECKED,
                 )
             }
             .animateItem()
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 8.dp),
     ) {
         TodometerCheckbox(
             checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,
             onCheckedChange = { checked ->
                 onTaskChecklistItemClick(
                     taskChecklistItem.id,
-                    checked
+                    checked,
                 )
             },
-            modifier = Modifier.scale(TodometerCheckboxScaleFactor)
+            modifier = Modifier.scale(TodometerCheckboxScaleFactor),
         )
         Text(
             text = taskChecklistItem.text,
@@ -310,13 +310,13 @@ private fun LazyItemScope.TaskChecklistItem(
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             color = textColor,
-            textDecoration = textDecoration
+            textDecoration = textDecoration,
         )
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
                 Images.Icons.Close,
                 contentDescription = TodometerResources.strings.clear,
-                tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
             )
         }
     }
@@ -337,8 +337,8 @@ private fun LazyListScope.taskDescription(description: String?) {
                 modifier = Modifier.padding(
                     start = SectionPadding,
                     end = SectionPadding,
-                    bottom = SectionPadding
-                )
+                    bottom = SectionPadding,
+                ),
             )
         } else {
             Text(
@@ -348,9 +348,9 @@ private fun LazyListScope.taskDescription(description: String?) {
                     top = 16.dp,
                     start = SectionPadding,
                     end = SectionPadding,
-                    bottom = SectionPadding
+                    bottom = SectionPadding,
                 ),
-                color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
             )
         }
     }
@@ -362,7 +362,7 @@ private fun TaskDetailSectionTitle(text: String) {
         text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier.padding(start = SectionPadding, bottom = 8.dp)
+        modifier = Modifier.padding(start = SectionPadding, bottom = 8.dp),
     )
 }
 

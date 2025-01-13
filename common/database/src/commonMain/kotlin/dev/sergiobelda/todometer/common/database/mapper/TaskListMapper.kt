@@ -23,7 +23,7 @@ fun TaskListEntity.asTaskList(): TaskList = TaskList(
     id,
     name,
     description,
-    sync
+    sync,
 )
 
 fun Iterable<TaskListEntity>.asTaskLists(): List<TaskList> = this.map {
@@ -34,5 +34,5 @@ fun TaskList.asTaskListEntity(): TaskListEntity = TaskListEntity(
     id,
     name,
     description,
-    sync
+    sync,
 )

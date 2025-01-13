@@ -31,7 +31,7 @@ class TodometerColors(
     val red: Color,
     val pink: Color,
     val teal: Color,
-    val yellow: Color
+    val yellow: Color,
 )
 
 fun todometerLightColors(
@@ -47,7 +47,7 @@ fun todometerLightColors(
     red: Color = Color.Unspecified,
     pink: Color = Color.Unspecified,
     teal: Color = Color.Unspecified,
-    yellow: Color = Color.Unspecified
+    yellow: Color = Color.Unspecified,
 ): TodometerColors =
     TodometerColors(
         check = check,
@@ -62,7 +62,7 @@ fun todometerLightColors(
         red = red,
         pink = pink,
         teal = teal,
-        yellow = yellow
+        yellow = yellow,
     )
 
 fun todometerDarkColors(
@@ -78,7 +78,7 @@ fun todometerDarkColors(
     red: Color = Color.Unspecified,
     pink: Color = Color.Unspecified,
     teal: Color = Color.Unspecified,
-    yellow: Color = Color.Unspecified
+    yellow: Color = Color.Unspecified,
 ): TodometerColors =
     TodometerColors(
         check = check,
@@ -93,5 +93,5 @@ fun todometerDarkColors(
         red = red,
         pink = pink,
         teal = teal,
-        yellow = yellow
+        yellow = yellow,
     )

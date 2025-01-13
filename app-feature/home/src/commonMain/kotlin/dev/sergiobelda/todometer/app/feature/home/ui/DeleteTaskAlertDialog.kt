@@ -37,7 +37,7 @@ fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskClick: () ->
                 onClick = {
                     onDeleteTaskClick()
                     onDismissRequest()
-                }
+                },
             ) {
                 Text(TodometerResources.strings.ok)
             }
@@ -46,6 +46,6 @@ fun DeleteTaskAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskClick: () ->
             TextButton(onClick = onDismissRequest) {
                 Text(TodometerResources.strings.cancel)
             }
-        }
+        },
     )
 }

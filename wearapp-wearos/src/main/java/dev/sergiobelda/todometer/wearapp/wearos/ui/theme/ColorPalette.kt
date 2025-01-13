@@ -34,5 +34,5 @@ internal val colorPalette = Colors(
     error = todometer_dark_error,
     onError = todometer_dark_onError,
     surface = todometer_dark_surface,
-    onSurface = todometer_dark_onSurface
+    onSurface = todometer_dark_onSurface,
 )

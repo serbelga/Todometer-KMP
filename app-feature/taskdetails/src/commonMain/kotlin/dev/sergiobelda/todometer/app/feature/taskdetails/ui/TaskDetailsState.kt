@@ -29,5 +29,5 @@ data class TaskDetailsState(
     val task: Task? = null,
     val isLoadingTaskChecklistItems: Boolean = false,
     val taskChecklistItems: ImmutableList<TaskChecklistItem> = persistentListOf(),
-    val errorUi: ErrorUi? = null
+    val errorUi: ErrorUi? = null,
 )

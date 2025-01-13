@@ -28,7 +28,7 @@ import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
-    private val insertTaskListUseCase: InsertTaskListUseCase
+    private val insertTaskListUseCase: InsertTaskListUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(AddTaskListState())
@@ -40,12 +40,12 @@ class AddTaskListViewModel(
         result.doIfSuccess {
             state = state.copy(
                 isAddingTaskList = false,
-                errorUi = null
+                errorUi = null,
             )
         }.doIfError { error ->
             state = state.copy(
                 isAddingTaskList = false,
-                errorUi = error.mapToErrorUi()
+                errorUi = error.mapToErrorUi(),
             )
         }
     }

@@ -28,17 +28,17 @@ import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 import dev.sergiobelda.todometer.common.android.extensions.openWebPage
 
 internal actual fun NavGraphBuilder.aboutNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(
-        navDestination = AboutNavDestination
+        navDestination = AboutNavDestination,
     ) {
         val context = LocalContext.current
         AboutScreen(
             navigateToGitHub = { context.openWebPage(GitHubUrl) },
             navigateToPrivacyPolicy = { context.openWebPage(PrivacyPolicyUrl) },
             navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
-            navigateBack = navigateBack
+            navigateBack = navigateBack,
         )
     }
 }

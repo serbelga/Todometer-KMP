@@ -24,7 +24,7 @@ import androidx.datastore.preferences.core.Preferences as DataStorePreferences
 internal const val DataStoreFileName = "todometer_preferences.preferences_pb"
 
 internal fun createDataStore(path: String): DataStore<DataStorePreferences> = createWithPath(
-    produceFile = { path.toPath() }
+    produceFile = { path.toPath() },
 )
 
 expect object PreferencesFactory {

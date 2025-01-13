@@ -24,5 +24,5 @@ import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 data class EditTaskListState(
     val isLoading: Boolean = false,
     val taskList: TaskList? = null,
-    val errorUi: ErrorUi? = null
+    val errorUi: ErrorUi? = null,
 )

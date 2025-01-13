@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.map
 
 class GetTaskListSelectedTasksUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
-    private val taskRepository: ITaskRepository
+    private val taskRepository: ITaskRepository,
 ) {
 
     /**

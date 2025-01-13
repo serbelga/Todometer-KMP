@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 
 class SetTaskListSelectedUseCase(
-    private val userPreferencesRepository: IUserPreferencesRepository
+    private val userPreferencesRepository: IUserPreferencesRepository,
 ) {
 
     suspend operator fun invoke(id: String) =

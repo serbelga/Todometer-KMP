@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetTaskUseCase(
-    private val taskRepository: ITaskRepository
+    private val taskRepository: ITaskRepository,
 ) {
 
     /**

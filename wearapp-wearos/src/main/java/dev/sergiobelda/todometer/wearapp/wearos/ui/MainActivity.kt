@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                 appDeclaration = {
                     modules(viewModelModule)
                     androidContext(this@MainActivity)
-                }
+                },
             ) {
                 TodometerApp()
             }

@@ -28,5 +28,5 @@ data class TaskListTasksState(
     val taskList: TaskList? = null,
     val isDefaultTaskList: Boolean = false,
     val isLoadingTasks: Boolean = false,
-    val tasks: ImmutableList<TaskItem> = persistentListOf()
+    val tasks: ImmutableList<TaskItem> = persistentListOf(),
 )

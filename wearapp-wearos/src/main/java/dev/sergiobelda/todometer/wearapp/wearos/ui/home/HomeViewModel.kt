@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,
-    private val insertTaskListUseCase: InsertTaskListUseCase
+    private val insertTaskListUseCase: InsertTaskListUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(HomeState(isLoading = true))
@@ -48,13 +48,13 @@ class HomeViewModel(
                 state = state.copy(
                     isLoading = false,
                     taskLists = taskLists.toPersistentList(),
-                    errorUi = null
+                    errorUi = null,
                 )
             }.doIfError { error ->
                 state = state.copy(
                     isLoading = false,
                     taskLists = persistentListOf(),
-                    errorUi = error.mapToErrorUi()
+                    errorUi = error.mapToErrorUi(),
                 )
             }
         }

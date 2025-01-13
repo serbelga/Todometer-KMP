@@ -46,12 +46,12 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @NavDestination(
     name = "AddTaskList",
-    destinationId = "addtasklist"
+    destinationId = "addtasklist",
 )
 @Composable
 fun AddTaskListScreen(
     navigateBack: () -> Unit,
-    viewModel: AddTaskListViewModel
+    viewModel: AddTaskListViewModel,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -61,7 +61,7 @@ fun AddTaskListScreen(
     if (viewModel.state.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = viewModel.state.errorUi?.message ?: ""
+                message = viewModel.state.errorUi?.message ?: "",
             )
         }
     }
@@ -85,7 +85,7 @@ fun AddTaskListScreen(
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
-                }
+                },
             )
         },
         content = { paddingValues ->
@@ -97,9 +97,9 @@ fun AddTaskListScreen(
                 onTaskListNameValueChange = {
                     taskListName = it
                     taskListNameInputError = false
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -109,7 +109,7 @@ private fun AddTaskListContent(
     showProgress: Boolean,
     taskListNameValue: String,
     taskListNameInputError: Boolean,
-    onTaskListNameValueChange: (String) -> Unit
+    onTaskListNameValueChange: (String) -> Unit,
 ) {
     if (showProgress) {
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
@@ -125,9 +125,9 @@ private fun AddTaskListContent(
             errorMessage = TodometerResources.strings.fieldNotEmpty,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Done,
             ),
-            modifier = Modifier.padding(TextFieldPadding)
+            modifier = Modifier.padding(TextFieldPadding),
         )
     }
 }

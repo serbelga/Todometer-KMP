@@ -23,6 +23,6 @@ expect object TodometerAnimatedResources {
 
     @Composable
     fun deleteAnimatedVectorPainter(
-        atEnd: Boolean
+        atEnd: Boolean,
     ): Painter
 }

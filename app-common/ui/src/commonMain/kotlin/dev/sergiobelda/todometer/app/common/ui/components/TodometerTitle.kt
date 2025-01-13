@@ -38,21 +38,21 @@ fun TodometerTitle(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(TodometerTitleTextPaddingStart)
+        horizontalArrangement = Arrangement.spacedBy(TodometerTitleTextPaddingStart),
     ) {
         Icon(
             Images.Symbols.IsotypeCutMonochrome,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(TodometerTitleIconSize)
+            modifier = Modifier.size(TodometerTitleIconSize),
         )
         Text(
             text = TodometerResources.strings.appName,
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(
-                bottom = TodometerTitleTextPaddingBottom
+                bottom = TodometerTitleTextPaddingBottom,
             ),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
     }
 }

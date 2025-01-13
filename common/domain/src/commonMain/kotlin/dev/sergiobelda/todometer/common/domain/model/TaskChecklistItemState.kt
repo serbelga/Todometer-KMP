@@ -18,5 +18,5 @@ package dev.sergiobelda.todometer.common.domain.model
 
 enum class TaskChecklistItemState {
     UNCHECKED,
-    CHECKED
+    CHECKED,
 }

@@ -40,33 +40,33 @@ import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 fun TaskListProgress(
     taskListName: String?,
     tasks: List<TaskItem>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val progress = TaskProgress.getTasksDoneProgress(tasks)
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
     Column(
-        modifier = modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, bottom = 16.dp)
+        modifier = modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, bottom = 16.dp),
     ) {
         Text(
             taskListName ?: "",
             style = MaterialTheme.typography.titleSmall,
             maxLines = TaskListNameMaxLines,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = TaskProgress.getPercentage(progress),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
         )
         LinearProgressIndicator(
             progress = { animatedProgress },
             modifier = Modifier.fillMaxWidth().paddingFromBaseline(8.dp),
             strokeCap = StrokeCap.Round,
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
-            drawStopIndicator = {}
+            drawStopIndicator = {},
         )
     }
 }

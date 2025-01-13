@@ -21,7 +21,7 @@ sealed class Result<out A> {
     data class Error(
         val code: Int? = null,
         val message: String? = null,
-        val exception: Throwable? = null
+        val exception: Throwable? = null,
     ) : Result<Nothing>()
 
     fun <B> map(m: ((A) -> B)): Result<B> = when (this) {

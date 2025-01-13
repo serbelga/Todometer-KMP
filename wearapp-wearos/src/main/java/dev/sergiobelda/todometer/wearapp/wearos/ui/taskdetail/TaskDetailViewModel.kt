@@ -33,7 +33,7 @@ class TaskDetailViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
-    private val deleteTasksUseCase: DeleteTasksUseCase
+    private val deleteTasksUseCase: DeleteTasksUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(TaskDetailState(isLoading = true))
@@ -49,13 +49,13 @@ class TaskDetailViewModel(
                 state = state.copy(
                     isLoading = false,
                     task = task,
-                    errorUi = null
+                    errorUi = null,
                 )
             }.doIfError { error ->
                 state = state.copy(
                     isLoading = false,
                     task = null,
-                    errorUi = error.mapToErrorUi()
+                    errorUi = error.mapToErrorUi(),
                 )
             }
         }

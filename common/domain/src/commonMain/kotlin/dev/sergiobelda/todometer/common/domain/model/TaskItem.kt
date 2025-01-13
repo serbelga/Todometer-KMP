@@ -26,5 +26,5 @@ data class TaskItem(
     val dueDate: Long?,
     val checklistItemsDone: Long,
     val totalChecklistItems: Long,
-    val isPinned: Boolean
+    val isPinned: Boolean,
 )

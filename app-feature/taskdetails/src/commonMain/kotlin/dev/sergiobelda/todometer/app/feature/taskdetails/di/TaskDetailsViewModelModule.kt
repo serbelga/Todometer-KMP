@@ -29,7 +29,7 @@ val taskDetailsViewModelModule = module {
             get(),
             get(),
             get(),
-            get()
+            get(),
         )
     }
 }
