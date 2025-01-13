@@ -30,8 +30,8 @@ fun TodometerAppDI(
     application = {
         modules(
             dataModules +
-                    domainModules +
-                    presentationModules,
+                domainModules +
+                presentationModules,
         )
         appDeclaration()
     },

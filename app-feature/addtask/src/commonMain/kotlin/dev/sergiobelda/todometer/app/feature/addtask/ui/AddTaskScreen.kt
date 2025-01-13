@@ -282,9 +282,9 @@ private fun initialValuesUpdated(
     taskDescription: String,
     taskChecklistItems: List<String>,
 ) = taskTitle.isNotBlank() ||
-        taskDueDate != null ||
-        taskDescription.isNotBlank() ||
-        taskChecklistItems.isNotEmpty()
+    taskDueDate != null ||
+    taskDescription.isNotBlank() ||
+    taskChecklistItems.isNotEmpty()
 
 @Composable
 private fun FieldTitle(text: String) {
