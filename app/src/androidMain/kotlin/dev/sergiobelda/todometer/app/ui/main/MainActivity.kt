@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 appDeclaration = {
                     modules(mainViewModelModule)
                     androidContext(this@MainActivity)
-                }
+                },
             ) {
                 val viewModel: MainViewModel = koinViewModel()
                 val appThemeState = viewModel.appTheme.collectAsStateWithLifecycle()
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                     enableEdgeToEdge(
                         statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
                             darkTheme
-                        }
+                        },
                     )
                     onDispose {}
                 }

@@ -60,13 +60,13 @@ import dev.sergiobelda.todometer.common.ui.extensions.localTime
     destinationId = "edittask",
     name = "EditTask",
     arguments = [
-        NavArgument("taskId", NavArgumentType.String)
-    ]
+        NavArgument("taskId", NavArgumentType.String),
+    ],
 )
 @Composable
 fun EditTaskScreen(
     navigateBack: () -> Unit,
-    viewModel: EditTaskViewModel
+    viewModel: EditTaskViewModel,
 ) {
     when {
         viewModel.state.isLoading -> {
@@ -80,7 +80,7 @@ fun EditTaskScreen(
                     navigateBack = navigateBack,
                     updateTask = { title, tag, description, dueDate ->
                         viewModel.updateTask(title, tag, description, dueDate)
-                    }
+                    },
                 )
             }
         }
@@ -94,13 +94,13 @@ fun EditTaskScreen(
 private fun EditTaskSuccessContent(
     task: Task,
     navigateBack: () -> Unit,
-    updateTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit
+    updateTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit,
 ) {
     var taskTitle by rememberSaveable { mutableStateOf(task.title) }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
     var taskDescription by rememberSaveable {
         mutableStateOf(
-            task.description ?: ""
+            task.description ?: "",
         )
     }
     var selectedTag by rememberSaveable { mutableStateOf(task.tag) }
@@ -112,7 +112,7 @@ private fun EditTaskSuccessContent(
     var timePickerDialogState by remember { mutableStateOf(false) }
     val timePickerState = rememberTimePickerState(
         initialHour = task.dueDate?.localTime()?.hour ?: 0,
-        initialMinute = task.dueDate?.localTime()?.minute ?: 0
+        initialMinute = task.dueDate?.localTime()?.minute ?: 0,
     )
 
     Scaffold(
@@ -127,7 +127,7 @@ private fun EditTaskSuccessContent(
                         updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
                         navigateBack()
                     }
-                }
+                },
             )
         },
         content = { paddingValues ->
@@ -144,15 +144,15 @@ private fun EditTaskSuccessContent(
                     errorMessage = TodometerResources.strings.fieldNotEmpty,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Next
+                        imeAction = ImeAction.Next,
                     ),
-                    modifier = Modifier.padding(TextFieldPadding)
+                    modifier = Modifier.padding(TextFieldPadding),
                 )
                 Text(
                     text = TodometerResources.strings.chooseTag.addStyledOptionalSuffix(),
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.padding(horizontal = SectionPadding)
+                    modifier = Modifier.padding(horizontal = SectionPadding),
                 )
                 TagSelector(selectedTag) { tag ->
                     selectedTag = tag
@@ -161,14 +161,14 @@ private fun EditTaskSuccessContent(
                     text = TodometerResources.strings.dateTime.addStyledOptionalSuffix(),
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.padding(horizontal = SectionPadding)
+                    modifier = Modifier.padding(horizontal = SectionPadding),
                 )
                 DateTimeSelector(
                     taskDueDate,
                     onEnterDateTimeClick = { datePickerDialogState = true },
                     onDateClick = { datePickerDialogState = true },
                     onTimeClick = { timePickerDialogState = true },
-                    onClearDateTimeClick = { taskDueDate = null }
+                    onClearDateTimeClick = { taskDueDate = null },
                 )
                 TodometerTitledTextField(
                     title = TodometerResources.strings.description.addStyledOptionalSuffix(),
@@ -177,14 +177,14 @@ private fun EditTaskSuccessContent(
                     placeholder = { Text(TodometerResources.strings.enterDescription) },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Done
+                        imeAction = ImeAction.Done,
                     ),
                     modifier = Modifier.padding(TextFieldPadding),
-                    maxLines = 4
+                    maxLines = 4,
                 )
                 TodometerDivider()
             }
-        }
+        },
     )
     if (datePickerDialogState) {
         DatePickerDialog(
@@ -193,7 +193,7 @@ private fun EditTaskSuccessContent(
                 datePickerDialogState = false
                 taskDueDate =
                     datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            }
+            },
         ) {
             DatePicker(state = datePickerState)
         }
@@ -205,7 +205,7 @@ private fun EditTaskSuccessContent(
                 timePickerDialogState = false
                 taskDueDate =
                     datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            }
+            },
         ) {
             TimePicker(state = timePickerState)
         }

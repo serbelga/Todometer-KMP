@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class TaskLocalDataSource(
-    private val taskDao: ITaskDao
+    private val taskDao: ITaskDao,
 ) : ITaskLocalDataSource {
 
     override fun getTask(id: String): Flow<Result<Task>> =

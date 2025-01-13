@@ -97,5 +97,5 @@ internal val EsTodometerStrings = TodometerStrings(
     title = "Título",
     uncheckTask = "Desmarcar tarea",
     youHaveCompletedAllTasks = "Has completado todas las tareas",
-    youHaveNotAnyTaskList = "No tienes ninguna lista de tareas"
+    youHaveNotAnyTaskList = "No tienes ninguna lista de tareas",
 )

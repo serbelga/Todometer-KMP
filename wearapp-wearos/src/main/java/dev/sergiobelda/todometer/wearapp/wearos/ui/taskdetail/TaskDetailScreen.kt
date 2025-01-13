@@ -74,20 +74,22 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
+// TODO: Resolve LongMethod issue.
+@Suppress("LongMethod")
 @NavDestination(
     destinationId = "taskdetail",
     name = "TaskDetail",
     arguments = [
-        NavArgument("taskId", type = NavArgumentType.String)
+        NavArgument("taskId", type = NavArgumentType.String),
     ],
-    deepLinkUris = ["app://open.task"]
+    deepLinkUris = ["app://open.task"],
 )
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun TaskDetailScreen(
     taskId: String,
     navigateBack: () -> Unit,
-    viewModel: TaskDetailViewModel = koinInject { parametersOf(taskId) }
+    viewModel: TaskDetailViewModel = koinInject { parametersOf(taskId) },
 ) {
     val state = viewModel.state
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }
@@ -99,7 +101,7 @@ internal fun TaskDetailScreen(
                     viewModel.deleteTask()
                     navigateBack()
                 },
-                onCancel = { deleteTaskAlertDialogState = false }
+                onCancel = { deleteTaskAlertDialogState = false },
             )
         }
 
@@ -109,7 +111,7 @@ internal fun TaskDetailScreen(
             Scaffold(
                 positionIndicator = {
                     PositionIndicator(scalingLazyListState = scalingLazyListState)
-                }
+                },
             ) {
                 val focusRequester = rememberActiveFocusRequester()
                 val coroutineScope = rememberCoroutineScope()
@@ -117,7 +119,7 @@ internal fun TaskDetailScreen(
                 ScalingLazyColumn(
                     contentPadding = PaddingValues(
                         start = 16.dp,
-                        end = 16.dp
+                        end = 16.dp,
                     ),
                     state = scalingLazyListState,
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -133,7 +135,7 @@ internal fun TaskDetailScreen(
                             true
                         }
                         .focusRequester(focusRequester)
-                        .focusable()
+                        .focusable(),
                 ) {
                     when {
                         state.isLoading -> {
@@ -148,7 +150,7 @@ internal fun TaskDetailScreen(
                                         fontWeight = FontWeight.Bold,
                                         maxLines = 2,
                                         modifier = Modifier.padding(horizontal = 24.dp),
-                                        overflow = TextOverflow.Ellipsis
+                                        overflow = TextOverflow.Ellipsis,
                                     )
                                 }
                                 item {
@@ -157,7 +159,7 @@ internal fun TaskDetailScreen(
                                 item {
                                     EditTaskButton(state.task) {
                                         viewModel.updateTask(
-                                            it
+                                            it,
                                         )
                                     }
                                 }
@@ -201,14 +203,14 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
                     .wearableExtender {
                         setEmojisAllowed(false)
                         setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build()
+                    }.build(),
             )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
             launcher.launch(intent)
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 
@@ -216,7 +218,7 @@ private fun EditTaskButton(task: Task, onComplete: (String) -> Unit) {
 private fun DeleteTaskButton(onClick: () -> Unit) {
     Chip(
         colors = ChipDefaults.primaryChipColors(
-            backgroundColor = MaterialTheme.colors.error
+            backgroundColor = MaterialTheme.colors.error,
         ),
         icon = {
             Icon(Images.Icons.Delete, TodometerResources.strings.deleteTask)
@@ -225,7 +227,7 @@ private fun DeleteTaskButton(onClick: () -> Unit) {
             Text(text = TodometerResources.strings.deleteTask)
         },
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 

@@ -44,14 +44,14 @@ class TaskListTasksViewModel(
     private val setTaskDoneUseCase: SetTaskDoneUseCase,
     private val updateTaskListNameUseCase: UpdateTaskListNameUseCase,
     private val deleteTasksUseCase: DeleteTasksUseCase,
-    private val deleteTaskListUseCase: DeleteTaskListUseCase
+    private val deleteTaskListUseCase: DeleteTaskListUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(
         TaskListTasksState(
             isLoadingTaskList = true,
-            isLoadingTasks = true
-        )
+            isLoadingTasks = true,
+        ),
     )
         private set
 
@@ -66,13 +66,13 @@ class TaskListTasksViewModel(
                 state = state.copy(
                     isLoadingTaskList = false,
                     taskList = taskList,
-                    isDefaultTaskList = false
+                    isDefaultTaskList = false,
                 )
             }.doIfError {
                 state = state.copy(
                     isLoadingTaskList = false,
                     taskList = null,
-                    isDefaultTaskList = true
+                    isDefaultTaskList = true,
                 )
             }
         }
@@ -83,12 +83,12 @@ class TaskListTasksViewModel(
             result.doIfSuccess { tasks ->
                 state = state.copy(
                     isLoadingTasks = false,
-                    tasks = tasks.toPersistentList()
+                    tasks = tasks.toPersistentList(),
                 )
             }.doIfError {
                 state = state.copy(
                     isLoadingTasks = false,
-                    tasks = persistentListOf()
+                    tasks = persistentListOf(),
                 )
             }
         }

@@ -88,7 +88,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
         Intent.ACTION_VIEW,
         AddTaskDeepLink.toUri(),
         context,
-        MainActivity::class.java
+        MainActivity::class.java,
     )
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -131,7 +131,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                             TaskState.DOING -> scope.launch { setTaskDoneUseCase.invoke(id) }
                             TaskState.DONE -> scope.launch { setTaskDoingUseCase.invoke(id) }
                         }
-                    }
+                    },
                 )
             }
         }
@@ -143,13 +143,13 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
         taskListProgress: Float,
         tasksDoing: List<TaskItem>,
         tasksDone: List<TaskItem>,
-        toggleTaskItemState: (String, TaskState) -> Unit
+        toggleTaskItemState: (String, TaskState) -> Unit,
     ) {
         Box(
             modifier = GlanceModifier
                 .fillMaxSize()
                 // TODO: Update background color to use GlanceTheme.
-                .background(ImageProvider(R.drawable.todometer_widget_background))
+                .background(ImageProvider(R.drawable.todometer_widget_background)),
         ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
                 TodometerWidgetHeader(taskListName, taskListProgress)
@@ -167,41 +167,41 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                 .fillMaxWidth()
                 .padding(start = 8.dp)
                 .clickable(
-                    onClick = actionStartActivity<MainActivity>()
+                    onClick = actionStartActivity<MainActivity>(),
                 ),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalAlignment = Alignment.End
+            horizontalAlignment = Alignment.End,
         ) {
             Column(
                 modifier = GlanceModifier
                     .fillMaxWidth()
                     .defaultWeight()
                     .clickable(
-                        onClick = actionStartActivity<MainActivity>()
-                    )
+                        onClick = actionStartActivity<MainActivity>(),
+                    ),
             ) {
                 Text(
                     text = taskListName,
                     style = TextStyle(
                         color = GlanceTheme.colors.onSurface,
-                        fontSize = 16.sp
-                    )
+                        fontSize = 16.sp,
+                    ),
                 )
                 Text(
                     text = TaskProgress.getPercentage(taskListProgress),
                     style = TextStyle(
                         color = GlanceTheme.colors.onSurfaceVariant,
-                        fontSize = 16.sp
-                    )
+                        fontSize = 16.sp,
+                    ),
                 )
             }
             // TODO: Use Button when available.
             Image(
                 ImageProvider(R.drawable.todometer_widget_add_button),
                 modifier = GlanceModifier.clickable(
-                    onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent)
+                    onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent),
                 ),
-                contentDescription = null
+                contentDescription = null,
             )
         }
     }
@@ -210,16 +210,16 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
     private fun TodometerWidgetBody(
         tasksDoing: List<TaskItem>,
         tasksDone: List<TaskItem>,
-        toggleTaskItemState: (String, TaskState) -> Unit
+        toggleTaskItemState: (String, TaskState) -> Unit,
     ) {
         if (tasksDoing.isEmpty()) {
             Box(
                 modifier = GlanceModifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = TodometerResources.strings.noPendingTasks,
-                    style = TextStyle(color = GlanceTheme.colors.onBackground)
+                    style = TextStyle(color = GlanceTheme.colors.onBackground),
                 )
             }
         } else {
@@ -229,7 +229,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                         taskItem,
                         toggleTaskItemState = {
                             toggleTaskItemState(taskItem.id, taskItem.state)
-                        }
+                        },
                     )
                 }
                 item {
@@ -242,13 +242,13 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
     @Composable
     private fun TaskItem(
         taskItem: TaskItem,
-        toggleTaskItemState: () -> Unit
+        toggleTaskItemState: () -> Unit,
     ) {
         val openTaskDeepLinkIntent = Intent(
             Intent.ACTION_VIEW,
             "$TaskDetailsDeepLink/${taskItem.id}".toUri(),
             context,
-            MainActivity::class.java
+            MainActivity::class.java,
         )
         Column {
             // TODO: Use Card with GlanceTheme color surface when available.
@@ -258,12 +258,12 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                     .height(48.dp)
                     .background(ImageProvider(R.drawable.todometer_widget_card))
                     .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 val textStyle = if (taskItem.state == TaskState.DONE) {
                     TextStyle(
                         color = GlanceTheme.colors.onSurface,
-                        textDecoration = TextDecoration.LineThrough
+                        textDecoration = TextDecoration.LineThrough,
                     )
                 } else {
                     TextStyle(color = GlanceTheme.colors.onSurface)
@@ -272,7 +272,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                     text = taskItem.title,
                     style = textStyle,
                     modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
-                        .clickable(actionStartActivityIntent(openTaskDeepLinkIntent))
+                        .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
                 )
                 Image(
                     ImageProvider(
@@ -280,13 +280,13 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                             R.drawable.todometer_widget_ic_round_task_alt_24
                         } else {
                             R.drawable.todometer_widget_ic_round_radio_button_unchecked_24
-                        }
+                        },
                     ),
                     contentDescription = null,
                     modifier = GlanceModifier.padding(8.dp).clickable {
                         toggleTaskItemState()
                     },
-                    colorFilter = ColorFilter.tint(GlanceTheme.colors.onSurface)
+                    colorFilter = ColorFilter.tint(GlanceTheme.colors.onSurface),
                 )
             }
             Spacer(modifier = GlanceModifier.height(8.dp))
@@ -298,11 +298,11 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
         Row(
             modifier = GlanceModifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = TodometerResources.strings.completedTasks(tasksDone),
-                style = TextStyle(color = GlanceTheme.colors.onBackground)
+                style = TextStyle(color = GlanceTheme.colors.onBackground),
             )
         }
     }

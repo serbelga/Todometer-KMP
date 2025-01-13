@@ -44,7 +44,7 @@ fun TodometerApp() {
         TodometerAppTheme(darkTheme) {
             TodometerNavHost(
                 navController = navController,
-                navAction = navAction
+                navAction = navAction,
             )
         }
     }

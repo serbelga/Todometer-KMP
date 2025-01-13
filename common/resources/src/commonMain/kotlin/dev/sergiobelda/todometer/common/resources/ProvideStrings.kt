@@ -29,7 +29,7 @@ fun rememberStrings(): Lyricist<TodometerStrings> =
 @Composable
 fun ProvideTodometerStrings(
     lyricist: Lyricist<TodometerStrings> = rememberStrings(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     ProvideStrings(lyricist, LocalStrings, content)
 }

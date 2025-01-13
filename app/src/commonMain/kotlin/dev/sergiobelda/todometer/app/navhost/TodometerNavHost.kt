@@ -50,7 +50,7 @@ import org.koin.core.parameter.parametersOf
 fun TodometerNavHost(
     navController: NavHostController,
     navAction: NavAction,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val navigateBackAction: () -> Unit = {
@@ -62,7 +62,7 @@ fun TodometerNavHost(
         startDestination = HomeNavDestination.route,
         modifier = modifier,
         enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None }
+        exitTransition = { ExitTransition.None },
     ) {
         homeNode(
             navigateToAddTaskList = { navAction.navigate(AddTaskListNavDestination.safeNavRoute()) },
@@ -70,19 +70,19 @@ fun TodometerNavHost(
             navigateToAddTask = { navAction.navigate(AddTaskNavDestination.safeNavRoute()) },
             navigateToTaskDetails = { taskId ->
                 navAction.navigate(
-                    TaskDetailsNavDestination.safeNavRoute(taskId)
+                    TaskDetailsNavDestination.safeNavRoute(taskId),
                 )
             },
             navigateToSettings = { navAction.navigate(SettingsNavDestination.safeNavRoute()) },
-            navigateToAbout = { navAction.navigate(AboutNavDestination.safeNavRoute()) }
+            navigateToAbout = { navAction.navigate(AboutNavDestination.safeNavRoute()) },
         )
         taskDetailsNode(
             navigateBack = navigateBackAction,
             navigateToEditTask = { taskId ->
                 navAction.navigate(
-                    EditTaskNavDestination.safeNavRoute(taskId)
+                    EditTaskNavDestination.safeNavRoute(taskId),
                 )
-            }
+            },
         )
         addTaskListRoute(navigateBack = navigateBackAction)
         editTaskListNode(navigateBack = navigateBackAction)
@@ -99,7 +99,7 @@ private fun NavGraphBuilder.homeNode(
     navigateToAddTask: () -> Unit,
     navigateToTaskDetails: (String) -> Unit,
     navigateToSettings: () -> Unit,
-    navigateToAbout: () -> Unit
+    navigateToAbout: () -> Unit,
 ) {
     composable(navDestination = HomeNavDestination) {
         HomeScreen(
@@ -109,81 +109,81 @@ private fun NavGraphBuilder.homeNode(
             navigateToTaskDetails = navigateToTaskDetails,
             navigateToSettings = navigateToSettings,
             navigateToAbout = navigateToAbout,
-            viewModel = koinInject()
+            viewModel = koinInject(),
         )
     }
 }
 
 private fun NavGraphBuilder.taskDetailsNode(
     navigateBack: () -> Unit,
-    navigateToEditTask: (String) -> Unit
+    navigateToEditTask: (String) -> Unit,
 ) {
     composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
         val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId.orEmpty()
         TaskDetailsScreen(
             navigateToEditTask = { navigateToEditTask(taskId) },
             navigateBack = navigateBack,
-            viewModel = koinInject { parametersOf(taskId) }
+            viewModel = koinInject { parametersOf(taskId) },
         )
     }
 }
 
 private fun NavGraphBuilder.addTaskListRoute(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(navDestination = AddTaskListNavDestination) {
         AddTaskListScreen(
             navigateBack = navigateBack,
-            viewModel = koinInject()
+            viewModel = koinInject(),
         )
     }
 }
 
 private fun NavGraphBuilder.editTaskListNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(navDestination = EditTaskListNavDestination) {
         EditTaskListScreen(
             navigateBack = navigateBack,
-            viewModel = koinInject()
+            viewModel = koinInject(),
         )
     }
 }
 
 private fun NavGraphBuilder.addTaskNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(navDestination = AddTaskNavDestination) {
         AddTaskScreen(
             navigateBack = navigateBack,
-            viewModel = koinInject()
+            viewModel = koinInject(),
         )
     }
 }
 
 private fun NavGraphBuilder.editTaskNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(navDestination = EditTaskNavDestination) { navBackStackEntry ->
         val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
         EditTaskScreen(
             navigateBack = navigateBack,
-            viewModel = koinInject { parametersOf(taskId) }
+            viewModel = koinInject { parametersOf(taskId) },
         )
     }
 }
 
 private fun NavGraphBuilder.settingsNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(navDestination = SettingsNavDestination) {
         SettingsScreen(
             navigateBack = navigateBack,
-            viewModel = koinInject()
+            viewModel = koinInject(),
         )
     }
 }
 
 internal expect fun NavGraphBuilder.aboutNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 )

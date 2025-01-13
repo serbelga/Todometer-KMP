@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.map
 
 // TODO Catch errors and return Result.Error
 class TaskListLocalDataSource(
-    private val taskListDao: ITaskListDao
+    private val taskListDao: ITaskListDao,
 ) : ITaskListLocalDataSource {
 
     override fun getTaskLists(): Flow<Result<List<TaskList>>> =

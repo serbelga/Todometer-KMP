@@ -31,20 +31,20 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @Composable
 internal fun DeleteTaskListAlertDialog(
     onDeleteTaskList: () -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
 ) {
     Alert(
         icon = {
             Icon(
                 Images.Icons.Delete,
-                TodometerResources.strings.deleteTaskList
+                TodometerResources.strings.deleteTaskList,
             )
         },
         title = {},
         content = { Text(TodometerResources.strings.deleteTaskListQuestion) },
         positiveButton = {
             Button(
-                onClick = onDeleteTaskList
+                onClick = onDeleteTaskList,
             ) {
                 Icon(Images.Icons.Check, null)
             }
@@ -53,6 +53,6 @@ internal fun DeleteTaskListAlertDialog(
             Button(colors = secondaryButtonColors(), onClick = onCancel) {
                 Icon(Images.Icons.Close, null)
             }
-        }
+        },
     )
 }

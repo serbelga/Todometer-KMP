@@ -32,7 +32,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.color.todometer_l
 @Composable
 actual fun TodometerAppTheme(
     darkTheme: Boolean,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val todometerColors = if (darkTheme) TodometerDarkColors else TodometerLightColors
 
@@ -51,6 +51,6 @@ actual fun TodometerAppTheme(
     TodometerTheme(
         todometerColors = todometerColors,
         colorScheme = colorScheme,
-        content = content
+        content = content,
     )
 }

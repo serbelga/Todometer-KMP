@@ -30,7 +30,7 @@ fun TodometerCheckbox(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     Checkbox(
         checked = checked,
@@ -38,6 +38,6 @@ fun TodometerCheckbox(
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
-        colors = CheckboxDefaults.colors(checkedColor = MaterialTheme.colorScheme.primary)
+        colors = CheckboxDefaults.colors(checkedColor = MaterialTheme.colorScheme.primary),
     )
 }

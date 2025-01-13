@@ -81,7 +81,7 @@ fun TaskItem(
     modifier: Modifier = Modifier,
     swipeable: Boolean = false,
     checkEnabled: Boolean = false,
-    selected: Boolean = false
+    selected: Boolean = false,
 ) {
     if (!swipeable) {
         TaskItemContent(
@@ -91,7 +91,7 @@ fun TaskItem(
             onClick = onTaskItemClick,
             onLongClick = onTaskItemLongClick,
             checkEnabled = checkEnabled,
-            selected = selected
+            selected = selected,
         )
     } else {
         val state = rememberSwipeToDismissBoxState(
@@ -100,21 +100,21 @@ fun TaskItem(
                     onSwipeToDismiss()
                 }
                 it != SwipeToDismissBoxValue.StartToEnd
-            }
+            },
         )
         val taskItemShadowElevation by animateDpAsState(
             if (state.targetValue != SwipeToDismissBoxValue.Settled) TaskItemDismissedShadowElevation else 0.dp,
             animationSpec = tween(
                 durationMillis = TaskItemShadowElevationAnimationDuration,
-                easing = FastOutSlowInEasing
-            )
+                easing = FastOutSlowInEasing,
+            ),
         )
         SwipeToDismissBox(
             state = state,
             enableDismissFromEndToStart = false,
             backgroundContent = {
                 TaskItemSwipeableBackgroundContent(
-                    state = state
+                    state = state,
                 )
             },
             content = {
@@ -126,10 +126,10 @@ fun TaskItem(
                     onLongClick = onTaskItemLongClick,
                     shadowElevation = taskItemShadowElevation,
                     selected = selected,
-                    checkEnabled = checkEnabled
+                    checkEnabled = checkEnabled,
                 )
             },
-            modifier = modifier
+            modifier = modifier,
         )
     }
 }
@@ -145,14 +145,14 @@ private fun TaskItemSwipeableBackgroundContent(
             .clip(TaskItemBackgroundShape)
             .background(MaterialTheme.colorScheme.errorContainer)
             .padding(horizontal = TaskItemBackgroundHorizontalPadding),
-        contentAlignment = Alignment.CenterStart
+        contentAlignment = Alignment.CenterStart,
     ) {
         Icon(
             painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
-                atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd
+                atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd,
             ),
             contentDescription = TodometerResources.strings.deleteTask,
-            tint = MaterialTheme.colorScheme.onErrorContainer
+            tint = MaterialTheme.colorScheme.onErrorContainer,
         )
     }
 }
@@ -167,7 +167,7 @@ private fun TaskItemContent(
     checkEnabled: Boolean,
     selected: Boolean,
     modifier: Modifier = Modifier,
-    shadowElevation: Dp = 0.dp
+    shadowElevation: Dp = 0.dp,
 ) {
     val border = if (selected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null
 
@@ -177,19 +177,19 @@ private fun TaskItemContent(
             modifier = modifier.padding(TaskItemPadding),
             tonalElevation = TaskItemTonalElevation,
             shadowElevation = shadowElevation,
-            border = border
+            border = border,
         ) {
             Column(
                 modifier = Modifier.combinedClickable(
                     onClick = onClick,
-                    onLongClick = onLongClick
-                )
+                    onLongClick = onLongClick,
+                ),
             ) {
                 TaskItemHeadlineContent(
                     taskItem = taskItem,
                     onDoingClick = onDoingClick,
                     onDoneClick = onDoneClick,
-                    checkEnabled = checkEnabled
+                    checkEnabled = checkEnabled,
                 )
                 TaskItemSupportingContent(taskItem)
             }
@@ -199,10 +199,10 @@ private fun TaskItemContent(
             enter = scaleIn(
                 animationSpec = tween(
                     durationMillis = TaskItemSelectedIconAnimationDuration,
-                    easing = FastOutSlowInEasing
-                )
+                    easing = FastOutSlowInEasing,
+                ),
             ),
-            exit = fadeOut()
+            exit = fadeOut(),
         ) {
             Icon(
                 Images.Icons.CheckCircle,
@@ -213,7 +213,7 @@ private fun TaskItemContent(
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.background)
                     .size(TaskItemSelectedIconSize)
-                    .align(Alignment.TopStart)
+                    .align(Alignment.TopStart),
             )
         }
     }
@@ -224,14 +224,14 @@ private fun TaskItemHeadlineContent(
     taskItem: TaskItem,
     onDoingClick: () -> Unit,
     onDoneClick: () -> Unit,
-    checkEnabled: Boolean = true
+    checkEnabled: Boolean = true,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(
             start = TaskItemInnerPaddingStart,
-            end = TaskItemInnerPaddingEnd
-        )
+            end = TaskItemInnerPaddingEnd,
+        ),
     ) {
         if (taskItem.tag != Tag.UNSPECIFIED) {
             TaskTagIndicator(taskItem.tag)
@@ -242,7 +242,7 @@ private fun TaskItemHeadlineContent(
             color = taskItemTitleColor(taskItem.state),
             modifier = Modifier.weight(1f),
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
         IconButton(
             onClick = {
@@ -253,12 +253,12 @@ private fun TaskItemHeadlineContent(
                 }
             },
             modifier = Modifier.alpha(if (checkEnabled) Alpha.Disabled else Alpha.High),
-            enabled = !checkEnabled
+            enabled = !checkEnabled,
         ) {
             Icon(
                 taskItemActionIcon(taskItem.state),
                 contentDescription = taskItemActionContentDescription(taskItem.state),
-                tint = taskItemActionTintColor(taskItem.state)
+                tint = taskItemActionTintColor(taskItem.state),
             )
         }
     }
@@ -269,7 +269,7 @@ private fun TaskItemSupportingContent(taskItem: TaskItem) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
         modifier = Modifier.padding(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         if (taskItem.state == TaskState.DOING) {
             taskItem.dueDate?.let { dueDate ->

@@ -98,5 +98,5 @@ internal val EnTodometerStrings = TodometerStrings(
     title = "Title",
     uncheckTask = "Uncheck task",
     youHaveCompletedAllTasks = "You have completed all tasks",
-    youHaveNotAnyTaskList = "You haven\'t any task list"
+    youHaveNotAnyTaskList = "You haven\'t any task list",
 )

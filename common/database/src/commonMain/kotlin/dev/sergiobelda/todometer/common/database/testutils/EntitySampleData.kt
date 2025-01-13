@@ -28,21 +28,21 @@ val taskListEntity1 = TaskListEntity(
     id = "1",
     name = "Task List 1",
     description = "Description",
-    sync = false
+    sync = false,
 )
 
 val taskListEntity1Updated = TaskListEntity(
     id = "1",
     name = "Task List 1 Updated",
     description = "Description",
-    sync = false
+    sync = false,
 )
 
 val taskListEntity2 = TaskListEntity(
     id = "2",
     name = "Task List 2",
     description = "Description",
-    sync = false
+    sync = false,
 )
 
 val taskListEntities = listOf(taskListEntity1, taskListEntity2)
@@ -56,7 +56,7 @@ val taskEntity1 = TaskEntity(
     state = TaskState.DOING,
     tasklist_id = "1",
     isPinned = false,
-    sync = false
+    sync = false,
 )
 
 val taskEntity1Updated = TaskEntity(
@@ -68,7 +68,7 @@ val taskEntity1Updated = TaskEntity(
     state = TaskState.DOING,
     tasklist_id = "1",
     isPinned = false,
-    sync = false
+    sync = false,
 )
 
 val taskEntity2 = TaskEntity(
@@ -80,7 +80,7 @@ val taskEntity2 = TaskEntity(
     state = TaskState.DOING,
     tasklist_id = "1",
     isPinned = false,
-    sync = false
+    sync = false,
 )
 
 val taskItemsEntities = listOf<SelectTasksByTaskListId>()
@@ -89,5 +89,5 @@ val taskChecklistItemEntity = TaskChecklistItemEntity(
     id = "1",
     text = "Item 1",
     state = TaskChecklistItemState.UNCHECKED,
-    task_id = "1"
+    task_id = "1",
 )

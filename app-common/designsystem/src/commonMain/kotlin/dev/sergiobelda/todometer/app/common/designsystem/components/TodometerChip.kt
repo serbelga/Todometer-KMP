@@ -36,17 +36,17 @@ fun TodometerChip(
     modifier: Modifier = Modifier,
     border: BorderStroke = TodometerChipDefaults.borderStroke,
     color: Color = TodometerChipDefaults.color,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     Surface(
         modifier = modifier,
         border = border,
         shape = RoundedCornerShape(TodometerChipCornerRadius),
-        color = color
+        color = color,
     ) {
         Row(
             modifier = Modifier.padding(TodometerChipContentPadding),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             content()
         }
@@ -57,7 +57,7 @@ private object TodometerChipDefaults {
     val borderStroke: BorderStroke
         @Composable get() = BorderStroke(
             1.dp,
-            MaterialTheme.colorScheme.outline
+            MaterialTheme.colorScheme.outline,
         )
 
     val color: Color @Composable get() = MaterialTheme.colorScheme.surface

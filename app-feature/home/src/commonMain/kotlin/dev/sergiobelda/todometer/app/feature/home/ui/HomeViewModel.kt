@@ -47,7 +47,7 @@ class HomeViewModel(
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
-    private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
+    private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(HomeState(isLoadingTasks = true))
@@ -63,11 +63,11 @@ class HomeViewModel(
         getTaskListSelectedUseCase().collect { result ->
             result.doIfSuccess { taskList ->
                 state = state.copy(
-                    taskListSelected = taskList
+                    taskListSelected = taskList,
                 )
             }.doIfError {
                 state = state.copy(
-                    taskListSelected = null
+                    taskListSelected = null,
                 )
             }
         }
@@ -78,12 +78,12 @@ class HomeViewModel(
             result.doIfSuccess { tasks ->
                 state = state.copy(
                     isLoadingTasks = false,
-                    tasks = tasks.toPersistentList()
+                    tasks = tasks.toPersistentList(),
                 )
             }.doIfError {
                 state = state.copy(
                     isLoadingTasks = false,
-                    tasks = persistentListOf()
+                    tasks = persistentListOf(),
                 )
             }
         }
@@ -93,11 +93,11 @@ class HomeViewModel(
         getTaskListsUseCase().collect { result ->
             result.doIfSuccess { taskLists ->
                 state = state.copy(
-                    taskLists = taskLists.toPersistentList()
+                    taskLists = taskLists.toPersistentList(),
                 )
             }.doIfError {
                 state = state.copy(
-                    taskLists = persistentListOf()
+                    taskLists = persistentListOf(),
                 )
             }
         }
@@ -136,7 +136,7 @@ class HomeViewModel(
             selectedTasksIds.removeAll { it == id }
         }
         state = state.copy(
-            selectedTasksIds = selectedTasksIds.toPersistentList()
+            selectedTasksIds = selectedTasksIds.toPersistentList(),
         )
     }
 

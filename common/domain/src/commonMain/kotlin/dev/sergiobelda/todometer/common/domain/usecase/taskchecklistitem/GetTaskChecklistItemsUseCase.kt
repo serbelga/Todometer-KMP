@@ -22,7 +22,7 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 import kotlinx.coroutines.flow.Flow
 
 class GetTaskChecklistItemsUseCase(
-    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository
+    private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
 
     operator fun invoke(taskId: String): Flow<Result<List<TaskChecklistItem>>> =

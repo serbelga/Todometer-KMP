@@ -29,7 +29,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 fun String.addStyledOptionalSuffix(): AnnotatedString = buildAnnotatedString {
     append(this@addStyledOptionalSuffix)
     withStyle(
-        style = SpanStyle(color = MaterialTheme.colorScheme.onBackground.applyMediumEmphasisAlpha())
+        style = SpanStyle(color = MaterialTheme.colorScheme.onBackground.applyMediumEmphasisAlpha()),
     ) {
         append(" · ")
         append(TodometerResources.strings.optional)

@@ -72,7 +72,7 @@ class TaskListLocalDataSourceTest {
         assertTrue { result is Result.Success }
         assertEquals(
             taskListEntities.map { it.asTaskList() },
-            (result as? Result.Success)?.value
+            (result as? Result.Success)?.value,
         )
     }
 

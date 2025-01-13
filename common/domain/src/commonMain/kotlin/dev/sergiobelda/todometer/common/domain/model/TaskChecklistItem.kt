@@ -20,5 +20,5 @@ data class TaskChecklistItem(
     val id: String,
     val text: String,
     val state: TaskChecklistItemState,
-    val taskId: String
+    val taskId: String,
 )

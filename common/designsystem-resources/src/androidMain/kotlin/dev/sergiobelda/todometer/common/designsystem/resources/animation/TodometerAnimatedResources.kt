@@ -29,10 +29,10 @@ actual object TodometerAnimatedResources {
     @OptIn(ExperimentalAnimationGraphicsApi::class)
     @Composable
     actual fun deleteAnimatedVectorPainter(
-        atEnd: Boolean
+        atEnd: Boolean,
     ): Painter =
         rememberAnimatedVectorPainter(
             animatedImageVector = AnimatedImageVector.animatedVectorResource(R.drawable.avd_delete),
-            atEnd = atEnd
+            atEnd = atEnd,
         )
 }

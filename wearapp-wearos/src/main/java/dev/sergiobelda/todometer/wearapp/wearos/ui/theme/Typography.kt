@@ -20,5 +20,5 @@ import androidx.wear.compose.material.Typography
 import dev.sergiobelda.todometer.common.designsystem.resources.type.quickSandFontFamily
 
 internal val typography = Typography(
-    defaultFontFamily = quickSandFontFamily
+    defaultFontFamily = quickSandFontFamily,
 )

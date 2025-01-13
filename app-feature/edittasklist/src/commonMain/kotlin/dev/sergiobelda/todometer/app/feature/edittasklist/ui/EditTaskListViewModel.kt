@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 class EditTaskListViewModel(
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase,
-    private val updateTaskListUseCase: UpdateTaskListUseCase
+    private val updateTaskListUseCase: UpdateTaskListUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(EditTaskListState(isLoading = true))
@@ -46,13 +46,13 @@ class EditTaskListViewModel(
                 state = state.copy(
                     isLoading = false,
                     taskList = taskList,
-                    errorUi = null
+                    errorUi = null,
                 )
             }.doIfError { error ->
                 state = state.copy(
                     isLoading = false,
                     taskList = null,
-                    errorUi = error.mapToErrorUi()
+                    errorUi = error.mapToErrorUi(),
                 )
             }
         }

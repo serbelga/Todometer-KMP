@@ -19,5 +19,5 @@ package dev.sergiobelda.todometer.common.domain.preference
 enum class AppTheme {
     FOLLOW_SYSTEM,
     DARK_THEME,
-    LIGHT_THEME
+    LIGHT_THEME,
 }

@@ -25,15 +25,15 @@ import org.koin.dsl.KoinAppDeclaration
 @Composable
 fun TodometerAppDI(
     appDeclaration: KoinAppDeclaration = {},
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) = KoinApplication(
     application = {
         modules(
             dataModules +
-                domainModules +
-                presentationModules
+                    domainModules +
+                    presentationModules,
         )
         appDeclaration()
     },
-    content = content
+    content = content,
 )

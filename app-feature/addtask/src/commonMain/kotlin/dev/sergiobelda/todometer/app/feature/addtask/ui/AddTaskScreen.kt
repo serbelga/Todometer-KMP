@@ -80,12 +80,12 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 @NavDestination(
     name = "AddTask",
     destinationId = "addtask",
-    deepLinkUris = ["app://open.add.task"]
+    deepLinkUris = ["app://open.add.task"],
 )
 @Composable
 fun AddTaskScreen(
     navigateBack: () -> Unit,
-    viewModel: AddTaskViewModel
+    viewModel: AddTaskViewModel,
 ) {
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -114,7 +114,7 @@ fun AddTaskScreen(
                 taskTitle = taskTitle,
                 taskDueDate = taskDueDate,
                 taskDescription = taskDescription,
-                taskChecklistItems = taskChecklistItems
+                taskChecklistItems = taskChecklistItems,
             )
         ) {
             discardTaskAlertDialogState = true
@@ -127,7 +127,7 @@ fun AddTaskScreen(
     if (viewModel.state.errorUi != null) {
         LaunchedEffect(snackbarHostState) {
             snackbarHostState.showSnackbar(
-                message = viewModel.state.errorUi?.message ?: ""
+                message = viewModel.state.errorUi?.message ?: "",
             )
         }
     }
@@ -149,7 +149,7 @@ fun AddTaskScreen(
                             selectedTag,
                             taskDescription,
                             taskDueDate,
-                            taskChecklistItems
+                            taskChecklistItems,
                         )
                         navigateBack()
                     }
@@ -158,7 +158,7 @@ fun AddTaskScreen(
                     MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                 } else {
                     MaterialTheme.colorScheme.primary
-                }
+                },
             )
         },
         content = { paddingValues ->
@@ -179,9 +179,9 @@ fun AddTaskScreen(
                         errorMessage = TodometerResources.strings.fieldNotEmpty,
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Next
+                            imeAction = ImeAction.Next,
                         ),
-                        modifier = Modifier.padding(TextFieldPadding)
+                        modifier = Modifier.padding(TextFieldPadding),
                     )
                 }
                 item {
@@ -197,7 +197,7 @@ fun AddTaskScreen(
                         onEnterDateTimeClick = { datePickerDialogState = true },
                         onDateClick = { datePickerDialogState = true },
                         onTimeClick = { timePickerDialogState = true },
-                        onClearDateTimeClick = { taskDueDate = null }
+                        onClearDateTimeClick = { taskDueDate = null },
                     )
                 }
                 item {
@@ -208,20 +208,20 @@ fun AddTaskScreen(
                         modifier = Modifier.padding(
                             start = SectionPadding,
                             top = 16.dp,
-                            end = SectionPadding
-                        )
+                            end = SectionPadding,
+                        ),
                     )
                 }
                 itemsIndexed(taskChecklistItems) { index, item ->
                     TaskChecklistItem(
                         item,
-                        onDeleteTaskCheckListItem = { taskChecklistItems.removeAt(index) }
+                        onDeleteTaskCheckListItem = { taskChecklistItems.removeAt(index) },
                     )
                 }
                 item {
                     AddChecklistItemField(
                         placeholder = { Text(TodometerResources.strings.addElementOptional) },
-                        onAddTaskCheckListItem = { taskChecklistItems.add(it) }
+                        onAddTaskCheckListItem = { taskChecklistItems.add(it) },
                     )
                 }
                 item {
@@ -232,10 +232,10 @@ fun AddTaskScreen(
                         placeholder = { Text(TodometerResources.strings.enterDescription) },
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Done
+                            imeAction = ImeAction.Done,
                         ),
                         modifier = Modifier.padding(TextFieldPadding),
-                        maxLines = 4
+                        maxLines = 4,
                     )
                 }
                 item {
@@ -245,10 +245,10 @@ fun AddTaskScreen(
             if (discardTaskAlertDialogState) {
                 DiscardTaskAlertDialog(
                     onDismissRequest = { discardTaskAlertDialogState = false },
-                    onConfirmButtonClick = navigateBack
+                    onConfirmButtonClick = navigateBack,
                 )
             }
-        }
+        },
     )
     if (datePickerDialogState) {
         DatePickerDialog(
@@ -257,7 +257,7 @@ fun AddTaskScreen(
                 datePickerDialogState = false
                 taskDueDate =
                     datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            }
+            },
         ) {
             DatePicker(state = datePickerState)
         }
@@ -269,7 +269,7 @@ fun AddTaskScreen(
                 timePickerDialogState = false
                 taskDueDate =
                     datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            }
+            },
         ) {
             TimePicker(state = timePickerState)
         }
@@ -280,7 +280,7 @@ private fun initialValuesUpdated(
     taskTitle: String,
     taskDueDate: Long?,
     taskDescription: String,
-    taskChecklistItems: List<String>
+    taskChecklistItems: List<String>,
 ) = taskTitle.isNotBlank() ||
         taskDueDate != null ||
         taskDescription.isNotBlank() ||
@@ -292,42 +292,42 @@ private fun FieldTitle(text: String) {
         text = text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier.padding(horizontal = SectionPadding)
+        modifier = Modifier.padding(horizontal = SectionPadding),
     )
 }
 
 @Composable
 private fun FieldTitle(
-    text: AnnotatedString
+    text: AnnotatedString,
 ) {
     Text(
         text = text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier.padding(horizontal = SectionPadding)
+        modifier = Modifier.padding(horizontal = SectionPadding),
     )
 }
 
 @Composable
 private fun TaskChecklistItem(
     taskChecklistItem: String,
-    onDeleteTaskCheckListItem: () -> Unit
+    onDeleteTaskCheckListItem: () -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = SectionPadding, end = 8.dp)
+        modifier = Modifier.padding(start = SectionPadding, end = 8.dp),
     ) {
         Text(
             text = taskChecklistItem,
             modifier = Modifier.weight(1f),
             maxLines = 2,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
                 Images.Icons.Close,
                 contentDescription = TodometerResources.strings.clear,
-                tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
             )
         }
     }

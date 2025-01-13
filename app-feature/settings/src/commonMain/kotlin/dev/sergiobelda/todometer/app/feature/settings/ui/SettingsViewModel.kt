@@ -28,13 +28,13 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
-    private val setAppThemeUseCase: SetAppThemeUseCase
+    private val setAppThemeUseCase: SetAppThemeUseCase,
 ) : ViewModel() {
     val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
-            AppTheme.FOLLOW_SYSTEM
+            AppTheme.FOLLOW_SYSTEM,
         )
 
     fun setAppTheme(theme: AppTheme) = viewModelScope.launch {

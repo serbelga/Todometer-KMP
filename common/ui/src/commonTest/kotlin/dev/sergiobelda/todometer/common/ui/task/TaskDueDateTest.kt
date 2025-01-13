@@ -33,7 +33,7 @@ class TaskDueDateTest {
         val instant = localDateTime.toInstant(TimeZone.UTC)
         assertEquals(
             "01-03-2020 16:25h",
-            TaskDueDate.getDueDateFormatted(instant.toEpochMilliseconds())
+            TaskDueDate.getDueDateFormatted(instant.toEpochMilliseconds()),
         )
     }
 
@@ -43,7 +43,7 @@ class TaskDueDateTest {
         val localDateTime = instant.toLocalDateTime(TimeZone.UTC)
         assertEquals(
             "${localDateTime.hour.format(2)}:${localDateTime.minute.format(2)}h",
-            TaskDueDate.getDueDateFormatted(instant.toEpochMilliseconds())
+            TaskDueDate.getDueDateFormatted(instant.toEpochMilliseconds()),
         )
     }
 }

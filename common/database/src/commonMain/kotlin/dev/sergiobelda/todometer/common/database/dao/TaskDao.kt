@@ -47,7 +47,7 @@ class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
             tasklist_id = task.tasklist_id,
             sync = task.sync,
             dueDate = task.dueDate,
-            isPinned = task.isPinned
+            isPinned = task.isPinned,
         )
         todometerDatabase.pragmaQueries.pragmaForeignKeysOn()
         // TODO Call return last_insert_rowid() from SQLDelight.
@@ -66,20 +66,20 @@ class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
             description = task.description,
             tag = task.tag,
             dueDate = task.dueDate,
-            isPinned = task.isPinned
+            isPinned = task.isPinned,
         )
 
     override suspend fun updateTaskSync(id: String, sync: Boolean) {
         todometerDatabase.taskEntityQueries.updateTaskSync(
             id = id,
-            sync = sync
+            sync = sync,
         )
     }
 
     override suspend fun updateTaskState(id: String, state: TaskState) {
         todometerDatabase.taskEntityQueries.updateTaskState(
             id = id,
-            state = state
+            state = state,
         )
     }
 

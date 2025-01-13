@@ -32,7 +32,7 @@ data class HomeState(
     val selectedTasksIds: ImmutableList<String> = persistentListOf(),
     val taskLists: ImmutableList<TaskList> = persistentListOf(),
     val taskListSelected: TaskList? = null,
-    val errorUi: ErrorUi? = null
+    val errorUi: ErrorUi? = null,
 ) {
     val selectedTasks: ImmutableList<TaskItem>
         get() = tasks.filter { it.id in selectedTasksIds }.toPersistentList()

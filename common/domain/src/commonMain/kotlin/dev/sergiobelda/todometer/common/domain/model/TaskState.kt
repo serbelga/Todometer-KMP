@@ -18,7 +18,8 @@ package dev.sergiobelda.todometer.common.domain.model
 
 enum class TaskState {
     DOING,
-    DONE;
+    DONE,
+    ;
 
     override fun toString(): String {
         return name

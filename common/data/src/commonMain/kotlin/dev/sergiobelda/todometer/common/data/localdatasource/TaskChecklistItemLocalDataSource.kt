@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class TaskChecklistItemLocalDataSource(
-    private val taskChecklistItemDao: ITaskChecklistItemDao
+    private val taskChecklistItemDao: ITaskChecklistItemDao,
 ) : ITaskChecklistItemLocalDataSource {
 
     override fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
@@ -38,7 +38,7 @@ class TaskChecklistItemLocalDataSource(
         taskChecklistItemDao.insertTaskChecklistItems(
             taskChecklistItemEntities = taskChecklistItems.map {
                 it.asTaskChecklistItemEntity()
-            }.toTypedArray()
+            }.toTypedArray(),
         )
 
     override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =

@@ -31,12 +31,12 @@ class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
         title: String,
         tag: Tag = Tag.GRAY,
         description: String? = null,
-        dueDate: Long? = null
+        dueDate: Long? = null,
     ): Result<String> = taskRepository.insertTask(
         title,
         tag,
         description,
         dueDate,
-        taskListId
+        taskListId,
     )
 }
