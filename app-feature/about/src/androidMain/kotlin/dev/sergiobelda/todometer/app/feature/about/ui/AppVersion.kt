@@ -32,5 +32,6 @@ private fun Context.getVersionName(): String? =
         val packageInfo = packageManager.getPackageInfo(packageName, 0)
         packageInfo.versionName
     } catch (e: PackageManager.NameNotFoundException) {
+        println(e)
         null
     }

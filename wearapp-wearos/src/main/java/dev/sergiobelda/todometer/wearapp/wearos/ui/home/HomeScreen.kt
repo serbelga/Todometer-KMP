@@ -70,19 +70,19 @@ import org.koin.compose.koinInject
 
 @NavDestination(
     name = "Home",
-    destinationId = "home"
+    destinationId = "home",
 )
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
-    viewModel: HomeViewModel = koinInject()
+    viewModel: HomeViewModel = koinInject(),
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val state = viewModel.state
 
     Scaffold(
-        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) }
+        positionIndicator = { PositionIndicator(scalingLazyListState = scalingLazyListState) },
     ) {
         val focusRequester = rememberActiveFocusRequester()
         val coroutineScope = rememberCoroutineScope()
@@ -91,7 +91,7 @@ internal fun HomeScreen(
             autoCentering = AutoCenteringParams(itemIndex = 1),
             contentPadding = PaddingValues(
                 start = 16.dp,
-                end = 16.dp
+                end = 16.dp,
             ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -107,7 +107,7 @@ internal fun HomeScreen(
                     true
                 }
                 .focusRequester(focusRequester)
-                .focusable()
+                .focusable(),
         ) {
             item { ToDometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
@@ -120,7 +120,7 @@ internal fun HomeScreen(
                     item {
                         TaskListItem(
                             TodometerResources.strings.defaultTaskListName,
-                            onClick = { openTaskList(null) }
+                            onClick = { openTaskList(null) },
                         )
                     }
                     items(state.taskLists) { taskList ->
@@ -140,19 +140,19 @@ internal fun HomeScreen(
 private fun ToDometerTitle() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Icon(
             Images.Symbols.IsotypeCutDark,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
-            tint = MaterialTheme.colors.primary
+            tint = MaterialTheme.colors.primary,
         )
         Text(
             TodometerResources.strings.appName,
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }
@@ -166,11 +166,11 @@ private fun TaskListItem(taskListName: String, onClick: () -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colors.onSurface,
                 text = taskListName,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         },
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 
@@ -192,7 +192,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = TodometerResources.strings.addTaskList
+                text = TodometerResources.strings.addTaskList,
             )
         },
         onClick = {
@@ -203,14 +203,14 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
                     .wearableExtender {
                         setEmojisAllowed(false)
                         setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build()
+                    }.build(),
             )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
             launcher.launch(intent)
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 

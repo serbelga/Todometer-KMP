@@ -20,6 +20,7 @@ import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import dev.sergiobelda.todometer.common.database.DriverFactory.appContext
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -28,31 +29,41 @@ actual object DriverFactory {
     lateinit var appContext: Context
 
     actual fun createDriver(): SqlDriver {
-        val fileName = "todometer.db"
-        val database: File = appContext.getDatabasePath(fileName)
+        val database: File = appContext.getDatabasePath(FILENAME)
 
         if (!database.exists()) {
-            try {
-                val inputStream = appContext.assets.open(fileName)
-                val outputStream = FileOutputStream(database.absolutePath)
-
-                inputStream.use { input ->
-                    outputStream.use {
-                        input.copyTo(it)
-                    }
-                }
-            } catch (_: FileNotFoundException) {}
+            openDatabaseFile(
+                absolutePath = database.absolutePath,
+            )
         }
 
         return AndroidSqliteDriver(
             TodometerDatabase.Schema,
             appContext,
-            fileName,
+            FILENAME,
             callback = object : AndroidSqliteDriver.Callback(TodometerDatabase.Schema) {
                 override fun onOpen(db: SupportSQLiteDatabase) {
                     db.execSQL("PRAGMA foreign_keys = ON;")
                 }
-            }
+            },
         )
     }
 }
+
+private fun openDatabaseFile(
+    absolutePath: String,
+) {
+    try {
+        val inputStream = appContext.assets.open(FILENAME)
+        val outputStream = FileOutputStream(absolutePath)
+
+        inputStream.use { input ->
+            outputStream.use {
+                input.copyTo(it)
+            }
+        }
+    } catch (_: FileNotFoundException) {
+    }
+}
+
+private const val FILENAME: String = "todometer.db"

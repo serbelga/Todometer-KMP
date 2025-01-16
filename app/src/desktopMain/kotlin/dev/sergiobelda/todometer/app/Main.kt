@@ -32,8 +32,8 @@ fun main() = application {
         title = "Todometer",
         state = WindowState(
             size = DpSize(480.dp, 860.dp),
-            position = WindowPosition.Aligned(Alignment.Center)
-        )
+            position = WindowPosition.Aligned(Alignment.Center),
+        ),
     ) {
         TodometerAppDI {
             TodometerApp()

@@ -27,14 +27,14 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 fun TimePickerDialog(
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
         title = {
             Text(
                 TodometerResources.strings.selectTime,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
             )
         },
         text = {
@@ -42,17 +42,17 @@ fun TimePickerDialog(
         },
         dismissButton = {
             TextButton(
-                onClick = onDismissRequest
+                onClick = onDismissRequest,
             ) {
                 Text(TodometerResources.strings.cancel)
             }
         },
         confirmButton = {
             TextButton(
-                onClick = onConfirm
+                onClick = onConfirm,
             ) {
                 Text(TodometerResources.strings.ok)
             }
-        }
+        },
     )
 }

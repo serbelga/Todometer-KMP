@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.ui.error
 import dev.sergiobelda.todometer.common.domain.Result
 
 data class ErrorUi(
-    val message: String? = null
+    val message: String? = null,
 )
 
 fun <T : Any> Result<T>.mapToErrorUi(): ErrorUi? =

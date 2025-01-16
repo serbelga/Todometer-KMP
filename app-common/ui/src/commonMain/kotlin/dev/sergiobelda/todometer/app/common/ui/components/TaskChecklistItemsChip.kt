@@ -48,18 +48,18 @@ internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItem
 
     TodometerChip(
         border = BorderStroke(1.dp, completedChipOutline),
-        modifier = Modifier.padding(bottom = 8.dp)
+        modifier = Modifier.padding(bottom = 8.dp),
     ) {
         Icon(
             Images.Icons.CheckBox,
             contentDescription = null,
             modifier = Modifier.size(16.dp).padding(end = 4.dp),
-            tint = completedChipTint
+            tint = completedChipTint,
         )
         Text(
             "$checklistItemsDone/$totalChecklistItems",
             style = MaterialTheme.typography.labelLarge,
-            color = completedChipTint
+            color = completedChipTint,
         )
     }
 }

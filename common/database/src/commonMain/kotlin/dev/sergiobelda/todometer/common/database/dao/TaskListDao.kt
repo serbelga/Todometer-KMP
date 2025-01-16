@@ -39,7 +39,7 @@ class TaskListDao(private val todometerDatabase: TodometerDatabase) : ITaskListD
             id = taskList.id,
             name = taskList.name,
             description = taskList.description,
-            sync = taskList.sync
+            sync = taskList.sync,
         )
         // TODO Call return last_insert_rowid() from SQLDelight.
         return taskList.id
@@ -55,7 +55,7 @@ class TaskListDao(private val todometerDatabase: TodometerDatabase) : ITaskListD
             id = taskList.id,
             name = taskList.name,
             description = taskList.description,
-            sync = taskList.sync
+            sync = taskList.sync,
         )
     }
 
@@ -69,7 +69,7 @@ class TaskListDao(private val todometerDatabase: TodometerDatabase) : ITaskListD
                 id = taskList.id,
                 name = taskList.name,
                 description = taskList.description,
-                sync = taskList.sync
+                sync = taskList.sync,
             )
         }
     }

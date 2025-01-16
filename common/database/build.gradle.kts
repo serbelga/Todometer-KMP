@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.sqlDelight)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.common.library.android")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
@@ -15,41 +15,30 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.coroutines)
-                implementation(libs.sqldelight.primitiveAdapters)
+        commonMain.dependencies {
+            implementation(libs.sqldelight.coroutines)
+            implementation(libs.sqldelight.primitiveAdapters)
 
-                implementation(projects.common.domain)
-            }
+            implementation(projects.common.domain)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.kotlin.coroutinesTest)
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.coroutinesTest)
+            implementation(kotlin("test"))
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.androidDriver)
-            }
+        androidMain.dependencies {
+            implementation(libs.sqldelight.androidDriver)
         }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.sqldelight.jvmDriver)
-            }
+        androidUnitTest.dependencies {
+            implementation(libs.sqldelight.jvmDriver)
         }
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.jvmDriver)
-            }
+        val desktopMain by getting
+        desktopMain.dependencies {
+            implementation(libs.sqldelight.jvmDriver)
         }
-        val iosMain by creating {
-            dependencies {
-                implementation(libs.sqldelight.nativeDriver)
-            }
+
+        iosMain.dependencies {
+            implementation(libs.sqldelight.nativeDriver)
         }
-        val iosTest by creating
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")

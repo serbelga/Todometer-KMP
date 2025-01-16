@@ -29,7 +29,7 @@ class TaskListMapperTest {
             id = "1",
             name = "Name",
             description = "Description",
-            sync = true
+            sync = true,
         )
         val taskListEntity = taskList.asTaskListEntity()
         assertEquals(taskList.id, taskListEntity.id)
@@ -44,7 +44,7 @@ class TaskListMapperTest {
             id = "1",
             name = "Name",
             description = "Description",
-            sync = true
+            sync = true,
         )
         val taskList = taskListEntity.asTaskList()
         assertEquals(taskListEntity.id, taskList.id)

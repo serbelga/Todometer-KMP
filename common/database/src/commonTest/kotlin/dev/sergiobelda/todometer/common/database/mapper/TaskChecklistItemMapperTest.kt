@@ -30,7 +30,7 @@ class TaskChecklistItemMapperTest {
             id = "1",
             text = "Text",
             state = TaskChecklistItemState.CHECKED,
-            taskId = "2"
+            taskId = "2",
         )
         val taskChecklistItemEntity = taskChecklistItem.asTaskChecklistItemEntity()
         assertEquals(taskChecklistItem.id, taskChecklistItemEntity.id)
@@ -45,7 +45,7 @@ class TaskChecklistItemMapperTest {
             id = "1",
             text = "Text",
             state = TaskChecklistItemState.CHECKED,
-            task_id = "2"
+            task_id = "2",
         )
         val taskChecklistItem = taskChecklistItemEntity.asTaskChecklistItem()
         assertEquals(taskChecklistItemEntity.id, taskChecklistItem.id)

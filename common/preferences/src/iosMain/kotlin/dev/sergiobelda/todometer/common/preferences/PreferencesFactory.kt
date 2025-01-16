@@ -30,13 +30,13 @@ actual object PreferencesFactory {
         inDomain = NSUserDomainMask,
         appropriateForURL = null,
         create = false,
-        error = null
+        error = null,
     )
 
     actual fun createPreferences(): Preferences =
         Preferences(
             createDataStore(
-                requireNotNull(documentDirectory).path + "/$DataStoreFileName"
-            )
+                requireNotNull(documentDirectory).path + "/$DataStoreFileName",
+            ),
         )
 }

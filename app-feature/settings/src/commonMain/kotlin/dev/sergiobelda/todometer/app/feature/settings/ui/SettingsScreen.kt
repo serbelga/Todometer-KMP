@@ -68,13 +68,13 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @NavDestination(
     destinationId = "settings",
-    name = "Settings"
+    name = "Settings",
 )
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     navigateBack: () -> Unit,
-    viewModel: SettingsViewModel
+    viewModel: SettingsViewModel,
 ) {
     val appTheme by viewModel.appTheme.collectAsState()
     Scaffold(
@@ -84,20 +84,20 @@ fun SettingsScreen(
                     IconButton(onClick = navigateBack) {
                         Icon(
                             Images.Icons.NavigateBefore,
-                            contentDescription = TodometerResources.strings.back
+                            contentDescription = TodometerResources.strings.back,
                         )
                     }
                 },
                 title = {
                     Text(TodometerResources.strings.settings)
-                }
+                },
             )
-        }
+        },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             SettingsChooseAppTheme(
                 appTheme,
-                onItemClick = { viewModel.setAppTheme(it) }
+                onItemClick = { viewModel.setAppTheme(it) },
             )
         }
     }
@@ -111,13 +111,13 @@ private fun SettingsChooseAppTheme(appTheme: AppTheme, onItemClick: (AppTheme) -
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(AppThemeItemsSpacing),
             modifier = Modifier.fillMaxWidth(),
-            columns = GridCells.Adaptive(minSize = AppThemeItemWidth)
+            columns = GridCells.Adaptive(minSize = AppThemeItemWidth),
         ) {
             items(enumValues<AppTheme>()) {
                 AppThemeItem(
                     it,
                     onClick = { onItemClick(it) },
-                    it == appTheme
+                    it == appTheme,
                 )
             }
         }
@@ -129,7 +129,7 @@ private fun AppThemeItem(
     appTheme: AppTheme,
     onClick: () -> Unit,
     selected: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val selectedAlpha = if (selected) Alpha.High else Alpha.Medium
     Box {
@@ -138,23 +138,23 @@ private fun AppThemeItem(
             shape = RoundedCornerShape(AppThemeItemCornerRadius),
             border = BorderStroke(
                 width = AppThemeItemBorder,
-                color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
+                color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
             ),
             modifier = modifier
                 .height(AppThemeItemHeight)
                 .fillMaxWidth()
                 .padding(AppThemeItemPadding),
             tonalElevation = if (selected) AppThemeItemSelectedElevation else AppThemeItemUnselectedElevation,
-            contentColor = MaterialTheme.colorScheme.onSurface.withAlpha(selectedAlpha)
+            contentColor = MaterialTheme.colorScheme.onSurface.withAlpha(selectedAlpha),
         ) {
             Box {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
                 ) {
                     Icon(
                         appTheme.themeIcon(),
-                        contentDescription = null
+                        contentDescription = null,
                     )
                     Spacer(modifier = Modifier.height(AppThemeItemSelectedSpacing))
                     Text(
@@ -162,7 +162,7 @@ private fun AppThemeItem(
                         textAlign = TextAlign.Center,
                         maxLines = AppThemeItemMaxLines,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.labelLarge
+                        style = MaterialTheme.typography.labelLarge,
                     )
                 }
             }
@@ -175,17 +175,17 @@ private fun AppThemeItem(
 
 @Composable
 private fun BoxScope.AppThemeItemSelectorIndicator(
-    selected: Boolean
+    selected: Boolean,
 ) {
     AnimatedVisibility(
         visible = selected,
         enter = scaleIn(
             animationSpec = tween(
                 durationMillis = AppThemeItemSelectedIconAnimationDuration,
-                easing = FastOutSlowInEasing
-            )
+                easing = FastOutSlowInEasing,
+            ),
         ),
-        exit = fadeOut()
+        exit = fadeOut(),
     ) {
         Icon(
             Images.Icons.CheckCircle,
@@ -195,7 +195,7 @@ private fun BoxScope.AppThemeItemSelectorIndicator(
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.background)
                 .size(AppThemeItemSelectedIconSize)
-                .align(Alignment.TopStart)
+                .align(Alignment.TopStart),
         )
     }
 }

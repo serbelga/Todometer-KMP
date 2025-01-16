@@ -49,17 +49,17 @@ fun TodometerTitledTextField(
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = Color.Transparent,
         unfocusedBorderColor = Color.Transparent,
-        errorBorderColor = Color.Transparent
-    )
+        errorBorderColor = Color.Transparent,
+    ),
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
         Text(
             title,
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = TodometerTitledTextFieldTitlePaddingStart)
+            modifier = Modifier.padding(start = TodometerTitledTextFieldTitlePaddingStart),
         )
         TextField(
             value = value,
@@ -71,7 +71,7 @@ fun TodometerTitledTextField(
             keyboardOptions = keyboardOptions,
             singleLine = singleLine,
             maxLines = maxLines,
-            colors = colors
+            colors = colors,
         )
     }
 }
@@ -92,17 +92,17 @@ fun TodometerTitledTextField(
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = Color.Transparent,
         unfocusedBorderColor = Color.Transparent,
-        errorBorderColor = Color.Transparent
-    )
+        errorBorderColor = Color.Transparent,
+    ),
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
         Text(
             title,
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = TodometerTitledTextFieldTitlePaddingStart)
+            modifier = Modifier.padding(start = TodometerTitledTextFieldTitlePaddingStart),
         )
         TextField(
             value = value,
@@ -114,7 +114,7 @@ fun TodometerTitledTextField(
             keyboardOptions = keyboardOptions,
             singleLine = singleLine,
             maxLines = maxLines,
-            colors = colors
+            colors = colors,
         )
     }
 }
@@ -133,8 +133,8 @@ private fun TextField(
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = Color.Transparent,
         unfocusedBorderColor = Color.Transparent,
-        errorBorderColor = Color.Transparent
-    )
+        errorBorderColor = Color.Transparent,
+    ),
 ) {
     OutlinedTextField(
         value = value,
@@ -146,14 +146,14 @@ private fun TextField(
         isError = isError,
         singleLine = singleLine,
         maxLines = maxLines,
-        colors = colors
+        colors = colors,
     )
     if (isError) {
         Text(
             errorMessage,
             color = MaterialTheme.colorScheme.error,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(start = 16.dp)
+            modifier = Modifier.padding(start = 16.dp),
         )
     }
 }

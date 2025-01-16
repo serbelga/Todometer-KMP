@@ -22,14 +22,14 @@ import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 
 internal actual fun NavGraphBuilder.aboutNode(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     composable(navDestination = AboutNavDestination) {
         AboutScreen(
             navigateToGitHub = { },
             navigateToPrivacyPolicy = { },
             navigateToOpenSourceLicenses = { },
-            navigateBack = navigateBack
+            navigateBack = navigateBack,
         )
     }
 }

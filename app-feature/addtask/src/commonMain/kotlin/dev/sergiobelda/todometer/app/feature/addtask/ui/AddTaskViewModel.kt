@@ -29,7 +29,7 @@ import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(
-    private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase
+    private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(AddTaskState())
@@ -40,7 +40,7 @@ class AddTaskViewModel(
         tag: Tag,
         description: String? = null,
         dueDate: Long? = null,
-        taskChecklistItems: List<String> = emptyList()
+        taskChecklistItems: List<String> = emptyList(),
     ) = viewModelScope.launch {
         state = state.copy(isAddingTask = true)
         val result = insertTaskInTaskListSelectedUseCase.invoke(
@@ -48,17 +48,17 @@ class AddTaskViewModel(
             tag,
             description,
             dueDate,
-            taskChecklistItems
+            taskChecklistItems,
         )
         result.doIfSuccess {
             state = state.copy(
                 isAddingTask = false,
-                errorUi = null
+                errorUi = null,
             )
         }.doIfError { error ->
             state = state.copy(
                 isAddingTask = false,
-                errorUi = error.mapToErrorUi()
+                errorUi = error.mapToErrorUi(),
             )
         }
     }

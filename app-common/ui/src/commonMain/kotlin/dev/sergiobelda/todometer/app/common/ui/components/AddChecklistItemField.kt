@@ -41,7 +41,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Chec
 @Composable
 fun AddChecklistItemField(
     placeholder: @Composable (() -> Unit)? = null,
-    onAddTaskCheckListItem: (String) -> Unit
+    onAddTaskCheckListItem: (String) -> Unit,
 ) {
     var taskChecklistItemText by remember { mutableStateOf("") }
     val addTaskChecklistItemAction = {
@@ -58,24 +58,24 @@ fun AddChecklistItemField(
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.Transparent,
                 unfocusedBorderColor = Color.Transparent,
-                errorBorderColor = Color.Transparent
+                errorBorderColor = Color.Transparent,
             ),
             placeholder = placeholder,
             maxLines = 1,
             singleLine = true,
             keyboardActions = KeyboardActions(
-                onDone = { addTaskChecklistItemAction() }
+                onDone = { addTaskChecklistItemAction() },
             ),
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
         )
         if (taskChecklistItemText.isNotBlank()) {
             IconButton(
-                onClick = addTaskChecklistItemAction
+                onClick = addTaskChecklistItemAction,
             ) {
                 Icon(
                     Images.Icons.Check,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.primary,
                 )
             }
         }

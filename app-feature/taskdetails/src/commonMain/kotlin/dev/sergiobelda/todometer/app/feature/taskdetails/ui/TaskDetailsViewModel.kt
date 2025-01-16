@@ -43,14 +43,14 @@ class TaskDetailsViewModel(
     private val deleteTaskChecklistItemUseCase: DeleteTaskChecklistItemUseCase,
     private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
     private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase,
-    private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase
+    private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(
         TaskDetailsState(
             isLoadingTask = true,
-            isLoadingTaskChecklistItems = true
-        )
+            isLoadingTaskChecklistItems = true,
+        ),
     )
         private set
 
@@ -65,13 +65,13 @@ class TaskDetailsViewModel(
                 state = state.copy(
                     isLoadingTask = false,
                     task = task,
-                    errorUi = null
+                    errorUi = null,
                 )
             }.doIfError { error ->
                 state = state.copy(
                     isLoadingTask = false,
                     task = null,
-                    errorUi = error.mapToErrorUi()
+                    errorUi = error.mapToErrorUi(),
                 )
             }
         }
@@ -82,12 +82,12 @@ class TaskDetailsViewModel(
             result.doIfSuccess { taskChecklistItems ->
                 state = state.copy(
                     isLoadingTaskChecklistItems = false,
-                    taskChecklistItems = taskChecklistItems.toPersistentList()
+                    taskChecklistItems = taskChecklistItems.toPersistentList(),
                 )
             }.doIfError {
                 state = state.copy(
                     isLoadingTaskChecklistItems = false,
-                    taskChecklistItems = persistentListOf()
+                    taskChecklistItems = persistentListOf(),
                 )
             }
         }

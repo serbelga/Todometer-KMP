@@ -41,14 +41,14 @@ fun SaveActionTopAppBar(
     title: String,
     onSaveButtonClick: () -> Unit,
     isSaveButtonEnabled: Boolean = true,
-    saveButtonTintColor: Color = MaterialTheme.colorScheme.primary
+    saveButtonTintColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
                     Images.Icons.NavigateBefore,
-                    contentDescription = TodometerResources.strings.back
+                    contentDescription = TodometerResources.strings.back,
                 )
             }
         },
@@ -56,20 +56,20 @@ fun SaveActionTopAppBar(
         actions = {
             TextButton(
                 enabled = isSaveButtonEnabled,
-                onClick = onSaveButtonClick
+                onClick = onSaveButtonClick,
             ) {
                 Icon(
                     Images.Icons.Check,
                     contentDescription = TodometerResources.strings.save,
-                    tint = saveButtonTintColor
+                    tint = saveButtonTintColor,
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Text(
                     text = TodometerResources.strings.save,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = saveButtonTintColor
+                    color = saveButtonTintColor,
                 )
             }
-        }
+        },
     )
 }

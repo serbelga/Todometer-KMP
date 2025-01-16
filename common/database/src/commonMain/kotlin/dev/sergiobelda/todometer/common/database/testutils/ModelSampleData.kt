@@ -25,21 +25,21 @@ val taskList1 = TaskList(
     id = "1",
     name = "Task List 1",
     description = "Description",
-    sync = false
+    sync = false,
 )
 
 val taskList1Updated = TaskList(
     id = "1",
     name = "Task List 1 Updated",
     description = "Description",
-    sync = false
+    sync = false,
 )
 
 val taskList2 = TaskList(
     id = "2",
     name = "Task List 2",
     description = "Description",
-    sync = false
+    sync = false,
 )
 
 val taskLists = listOf(taskList1, taskList2)
@@ -53,7 +53,7 @@ val task1 = Task(
     state = TaskState.DOING,
     taskListId = "1",
     isPinned = false,
-    sync = false
+    sync = false,
 )
 
 val task1Updated = Task(
@@ -65,7 +65,7 @@ val task1Updated = Task(
     state = TaskState.DOING,
     taskListId = "1",
     isPinned = false,
-    sync = false
+    sync = false,
 )
 
 val task2 = Task(
@@ -77,7 +77,7 @@ val task2 = Task(
     state = TaskState.DOING,
     taskListId = "1",
     isPinned = false,
-    sync = false
+    sync = false,
 )
 
 val tasks = listOf(task1, task2)

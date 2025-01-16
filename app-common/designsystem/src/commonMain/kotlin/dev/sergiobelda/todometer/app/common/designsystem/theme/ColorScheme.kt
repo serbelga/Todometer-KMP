@@ -126,7 +126,7 @@ val LightColorScheme = lightColorScheme(
     inverseOnSurface = todometer_light_inverseOnSurface,
     inverseSurface = todometer_light_inverseSurface,
     inversePrimary = todometer_light_inversePrimary,
-    surfaceTint = todometer_light_surfaceTint
+    surfaceTint = todometer_light_surfaceTint,
 )
 
 val TodometerLightColors = todometerLightColors(
@@ -142,7 +142,7 @@ val TodometerLightColors = todometerLightColors(
     red = redLight,
     pink = pinkLight,
     teal = tealLight,
-    yellow = yellowLight
+    yellow = yellowLight,
 )
 
 val DarkColorScheme = darkColorScheme(
@@ -172,7 +172,7 @@ val DarkColorScheme = darkColorScheme(
     inverseOnSurface = todometer_dark_inverseOnSurface,
     inverseSurface = todometer_dark_inverseSurface,
     inversePrimary = todometer_dark_inversePrimary,
-    surfaceTint = todometer_dark_surfaceTint
+    surfaceTint = todometer_dark_surfaceTint,
 )
 
 val TodometerDarkColors = todometerDarkColors(
@@ -188,5 +188,5 @@ val TodometerDarkColors = todometerDarkColors(
     red = redDark,
     pink = pinkDark,
     teal = tealDark,
-    yellow = yellowDark
+    yellow = yellowDark,
 )

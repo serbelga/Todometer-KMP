@@ -95,11 +95,11 @@ data class TodometerStrings(
     val title: String,
     val uncheckTask: String,
     val youHaveCompletedAllTasks: String,
-    val youHaveNotAnyTaskList: String
+    val youHaveNotAnyTaskList: String,
 )
 
 internal val Strings: Map<String, TodometerStrings> = mapOf(
     Locales.CA to CaTodometerStrings,
     Locales.EN to EnTodometerStrings,
-    Locales.ES to EsTodometerStrings
+    Locales.ES to EsTodometerStrings,
 )

@@ -32,5 +32,5 @@ actual val quickSandFontFamily = FontFamily(
     quickSandRegularFont,
     quickSandMediumFont,
     quickSandSemiBoldFont,
-    quickSandBoldFont
+    quickSandBoldFont,
 )

@@ -23,5 +23,5 @@ internal expect fun HomeMoreDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
     onEditTaskListClick: () -> Unit,
-    onDeleteTaskListClick: () -> Unit
+    onDeleteTaskListClick: () -> Unit,
 )

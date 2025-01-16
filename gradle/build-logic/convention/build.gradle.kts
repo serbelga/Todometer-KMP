@@ -20,30 +20,36 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        val conventionPluginsPath = "dev.sergiobelda.gradle.buildlogic.convention."
         register("baseLibrary") {
             id = "dev.sergiobelda.gradle.base"
-            implementationClass =
-                "dev.sergiobelda.gradle.buildlogic.convention.BaseConventionPlugin"
+            implementationClass = conventionPluginsPath + "BaseConventionPlugin"
         }
         register("commonLibraryAndroid") {
             id = "dev.sergiobelda.gradle.common.library.android"
-            implementationClass =
-                "dev.sergiobelda.gradle.buildlogic.convention.CommonLibraryAndroidConventionPlugin"
+            implementationClass = conventionPluginsPath + "CommonLibraryAndroidConventionPlugin"
         }
         register("commonUi") {
             id = "dev.sergiobelda.gradle.common.ui"
-            implementationClass =
-                "dev.sergiobelda.gradle.buildlogic.convention.CommonUiAndroidConventionPlugin"
+            implementationClass = conventionPluginsPath + "CommonUiAndroidConventionPlugin"
         }
         register("dependencyGraphGenerator") {
             id = "dev.sergiobelda.gradle.dependency-graph-generator"
-            implementationClass =
-                "dev.sergiobelda.gradle.buildlogic.convention.DependencyGraphGeneratorConventionPlugin"
+            implementationClass = conventionPluginsPath + "DependencyGraphGeneratorConventionPlugin"
+        }
+
+        val conventionPluginsLintPath = conventionPluginsPath + "lint."
+        register("detekt") {
+            id = "dev.sergiobelda.gradle.detekt"
+            implementationClass = conventionPluginsLintPath + "DetektConventionPlugin"
         }
         register("spotless") {
             id = "dev.sergiobelda.gradle.spotless"
-            implementationClass =
-                "dev.sergiobelda.gradle.buildlogic.convention.SpotlessConventionPlugin"
+            implementationClass = conventionPluginsLintPath + "SpotlessConventionPlugin"
+        }
+        register("lint") {
+            id = "dev.sergiobelda.gradle.lint"
+            implementationClass = conventionPluginsLintPath + "LintConventionPlugin"
         }
     }
 }

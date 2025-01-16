@@ -30,7 +30,7 @@ fun SelectTasksByTaskListId.asTaskItem(): TaskItem =
         dueDate = dueDate,
         checklistItemsDone = checklistItemsDone,
         totalChecklistItems = totalChecklistItems,
-        isPinned = isPinned
+        isPinned = isPinned,
     )
 
 fun Iterable<SelectTasksByTaskListId>.asTaskItems(): List<TaskItem> = this.map {

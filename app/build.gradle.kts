@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
-    id("dev.sergiobelda.gradle.base")
+    id("dev.sergiobelda.gradle.lint")
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
 
@@ -38,52 +38,47 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(projects.appCommon.designsystem)
-                implementation(projects.appCommon.ui)
-                implementation(projects.appFeature.about)
-                implementation(projects.appFeature.addtask)
-                implementation(projects.appFeature.addtasklist)
-                implementation(projects.appFeature.edittask)
-                implementation(projects.appFeature.edittasklist)
-                implementation(projects.appFeature.home)
-                implementation(projects.appFeature.settings)
-                implementation(projects.appFeature.taskdetails)
+        commonMain.dependencies {
+            implementation(projects.appCommon.designsystem)
+            implementation(projects.appCommon.ui)
+            implementation(projects.appFeature.about)
+            implementation(projects.appFeature.addtask)
+            implementation(projects.appFeature.addtasklist)
+            implementation(projects.appFeature.edittask)
+            implementation(projects.appFeature.edittasklist)
+            implementation(projects.appFeature.home)
+            implementation(projects.appFeature.settings)
+            implementation(projects.appFeature.taskdetails)
 
-                implementation(projects.common.core)
-                implementation(projects.common.domain)
-                implementation(projects.common.resources)
-                implementation(projects.common.ui)
-            }
+            implementation(projects.common.core)
+            implementation(projects.common.domain)
+            implementation(projects.common.resources)
+            implementation(projects.common.ui)
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(projects.common.android)
+        androidMain.dependencies {
+            implementation(projects.common.android)
 
-                implementation(libs.androidx.activityCompose)
+            implementation(libs.androidx.activityCompose)
 
-                implementation(libs.androidx.glance.appWidget)
-                implementation(libs.androidx.glance.glance)
-                implementation(libs.androidx.glance.material3)
+            implementation(libs.androidx.glance.appWidget)
+            implementation(libs.androidx.glance.glance)
+            implementation(libs.androidx.glance.material3)
 
-                implementation(libs.androidx.splashscreen)
+            implementation(libs.androidx.splashscreen)
 
-                implementation(libs.google.playServicesOssLicenses)
+            implementation(libs.google.playServicesOssLicenses)
 
-                implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-                implementation(libs.google.firebase.firebaseAnalyticsKtx)
-                implementation(libs.google.firebase.firebaseCrashlyticsKtx)
+            implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
+            implementation(libs.google.firebase.firebaseAnalyticsKtx)
+            implementation(libs.google.firebase.firebaseCrashlyticsKtx)
 
-                // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
-                // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved
-                compileOnly(libs.kotlin.serialization.json)
-            }
+            // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
+            // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved
+            compileOnly(libs.kotlin.serialization.json)
         }
-        val desktopMain by getting {
-            dependencies {
-                implementation(compose.desktop.currentOs)
-            }
+        val desktopMain by getting
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
         }
 
         all {

@@ -42,7 +42,7 @@ class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : IT
         tag: Tag,
         description: String?,
         dueDate: Long?,
-        taskListId: String
+        taskListId: String,
     ): Result<String> {
         val taskId = randomUUIDString()
         val sync = false
@@ -56,8 +56,8 @@ class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : IT
                 state = TaskState.DOING,
                 taskListId = taskListId,
                 isPinned = false,
-                sync = sync
-            )
+                sync = sync,
+            ),
         )
     }
 

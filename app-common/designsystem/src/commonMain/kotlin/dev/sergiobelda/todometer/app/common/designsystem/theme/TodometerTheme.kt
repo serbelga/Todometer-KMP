@@ -36,16 +36,16 @@ object TodometerTheme {
 fun TodometerTheme(
     todometerColors: TodometerColors = TodometerTheme.todometerColors,
     colorScheme: ColorScheme = MaterialTheme.colorScheme,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalTodometerColors provides todometerColors
+        LocalTodometerColors provides todometerColors,
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
             shapes = shapes,
             typography = typography,
-            content = content
+            content = content,
         )
     }
 }

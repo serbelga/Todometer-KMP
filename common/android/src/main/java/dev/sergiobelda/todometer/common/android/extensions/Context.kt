@@ -38,10 +38,10 @@ import android.os.Bundle
  */
 inline fun <reified A : Activity> Context.launchActivity(
     options: Bundle? = null,
-    block: Intent.() -> Unit = {}
+    block: Intent.() -> Unit = {},
 ) = startActivity(
     Intent(this, A::class.java).apply(block),
-    options
+    options,
 )
 
 /**
@@ -57,6 +57,6 @@ fun Context.openWebPage(url: String) {
     val webpage: Uri = Uri.parse(url)
     startActivity(
         Intent(Intent.ACTION_VIEW, webpage),
-        null
+        null,
     )
 }

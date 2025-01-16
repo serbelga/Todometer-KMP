@@ -98,7 +98,7 @@ import kotlinx.coroutines.launch
 @Suppress("LongMethod")
 @NavDestination(
     destinationId = "home",
-    name = "Home"
+    name = "Home",
 )
 @Composable
 fun HomeScreen(
@@ -108,7 +108,7 @@ fun HomeScreen(
     navigateToTaskDetails: (String) -> Unit,
     navigateToSettings: () -> Unit,
     navigateToAbout: () -> Unit,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -156,10 +156,10 @@ fun HomeScreen(
                 },
                 onAboutItemClick = {
                     drawerAction(navigateToAbout)
-                }
+                },
             )
         },
-        gesturesEnabled = !viewModel.state.selectionMode
+        gesturesEnabled = !viewModel.state.selectionMode,
     ) {
         Scaffold(
             topBar = {
@@ -174,7 +174,7 @@ fun HomeScreen(
                                 snackbarHostState.showSnackbar(
                                     cannotEditTaskList,
                                     snackbarActionLabel,
-                                    duration = SnackbarDuration.Short
+                                    duration = SnackbarDuration.Short,
                                 )
                             }
                         } else {
@@ -188,7 +188,7 @@ fun HomeScreen(
                                 snackbarHostState.showSnackbar(
                                     cannotDeleteTaskList,
                                     snackbarActionLabel,
-                                    duration = SnackbarDuration.Short
+                                    duration = SnackbarDuration.Short,
                                 )
                             }
                         } else {
@@ -202,7 +202,7 @@ fun HomeScreen(
                     selectedTasks = viewModel.state.selectedTasks,
                     onClearSelectedTasksClick = viewModel::clearSelectedTasks,
                     onToggleSelectedTasksPinnedValueClick = viewModel::toggleSelectedTasksPinnedValue,
-                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true }
+                    onDeleteSelectedTasksClick = { deleteTasksAlertDialogState = true },
                 )
             },
             content = { paddingValues ->
@@ -212,7 +212,7 @@ fun HomeScreen(
                             deleteTaskAlertDialogState = false
                             swipedTaskId = ""
                         },
-                        onDeleteTaskClick = { viewModel.deleteTask(swipedTaskId) }
+                        onDeleteTaskClick = { viewModel.deleteTask(swipedTaskId) },
                     )
                 }
                 if (deleteTasksAlertDialogState) {
@@ -220,13 +220,13 @@ fun HomeScreen(
                         onDismissRequest = {
                             deleteTasksAlertDialogState = false
                         },
-                        onDeleteTaskClick = viewModel::deleteSelectedTasks
+                        onDeleteTaskClick = viewModel::deleteSelectedTasks,
                     )
                 }
                 if (deleteTaskListAlertDialogState) {
                     DeleteTaskListAlertDialog(
                         onDismissRequest = { deleteTaskListAlertDialogState = false },
-                        onDeleteTaskListClick = viewModel::deleteTaskList
+                        onDeleteTaskListClick = viewModel::deleteTaskList,
                     )
                 }
                 if (viewModel.state.isLoadingTasks) {
@@ -252,18 +252,18 @@ fun HomeScreen(
                             swipedTaskId = it
                         },
                         selectionMode = viewModel.state.selectionMode,
-                        modifier = Modifier.padding(paddingValues)
+                        modifier = Modifier.padding(paddingValues),
                     )
                 }
             },
             floatingActionButton = {
                 HomeFloatingActionButton(
                     visible = !viewModel.state.selectionMode,
-                    navigateToAddTask = navigateToAddTask
+                    navigateToAddTask = navigateToAddTask,
                 )
             },
             floatingActionButtonPosition = FabPosition.End,
-            snackbarHost = { SnackbarHost(snackbarHostState) }
+            snackbarHost = { SnackbarHost(snackbarHostState) },
         )
     }
 }
@@ -283,14 +283,14 @@ private fun HomeTopAppBar(
     onToggleSelectedTasksPinnedValueClick: () -> Unit,
     onDeleteSelectedTasksClick: () -> Unit,
     taskListName: String?,
-    tasks: ImmutableList<TaskItem>
+    tasks: ImmutableList<TaskItem>,
 ) {
     val tonalElevation by animateDpAsState(
         if (selectionMode) HomeTopAppBarTonalElevation else 0.dp,
         animationSpec = tween(
             durationMillis = HomeTopAppBarAnimationDuration,
-            easing = FastOutSlowInEasing
-        )
+            easing = FastOutSlowInEasing,
+        ),
     )
     Surface(tonalElevation = tonalElevation) {
         Column {
@@ -300,7 +300,7 @@ private fun HomeTopAppBar(
                         onClearSelectedTasksClick = onClearSelectedTasksClick,
                         onToggleSelectedTasksPinnedValueClick = onToggleSelectedTasksPinnedValueClick,
                         onDeleteSelectedTasksClick = onDeleteSelectedTasksClick,
-                        selectedTasks = selectedTasks
+                        selectedTasks = selectedTasks,
                     )
                 } else {
                     CenterAlignedTopAppBar(
@@ -311,7 +311,7 @@ private fun HomeTopAppBar(
                             IconButton(onClick = onMenuClick) {
                                 Icon(
                                     Images.Icons.Menu,
-                                    contentDescription = TodometerResources.strings.menu
+                                    contentDescription = TodometerResources.strings.menu,
                                 )
                             }
                         },
@@ -319,16 +319,16 @@ private fun HomeTopAppBar(
                             IconButton(onClick = onMoreClick) {
                                 Icon(
                                     Images.Icons.MoreVert,
-                                    contentDescription = TodometerResources.strings.more
+                                    contentDescription = TodometerResources.strings.more,
                                 )
                             }
                             HomeMoreDropdownMenu(
                                 onEditTaskListClick = onEditTaskListClick,
                                 onDeleteTaskListClick = onDeleteTaskListClick,
                                 expanded = homeMoreDropdownExpanded,
-                                onDismissRequest = onHomeMoreDropdownDismissRequest
+                                onDismissRequest = onHomeMoreDropdownDismissRequest,
                             )
-                        }
+                        },
                     )
                 }
             }
@@ -344,7 +344,7 @@ private fun SelectedTasksTopAppBar(
     onClearSelectedTasksClick: () -> Unit,
     onToggleSelectedTasksPinnedValueClick: () -> Unit,
     onDeleteSelectedTasksClick: () -> Unit,
-    selectedTasks: ImmutableList<TaskItem>
+    selectedTasks: ImmutableList<TaskItem>,
 ) {
     val atLeastOneNotPinnedTaskItem = remember(selectedTasks) { selectedTasks.any { !it.isPinned } }
     TopAppBar(
@@ -352,7 +352,7 @@ private fun SelectedTasksTopAppBar(
             IconButton(onClick = onClearSelectedTasksClick) {
                 Icon(
                     Images.Icons.Close,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         },
@@ -371,34 +371,34 @@ private fun SelectedTasksTopAppBar(
                         TodometerResources.strings.notPinnedTask
                     } else {
                         TodometerResources.strings.pinnedTask
-                    }
+                    },
                 )
             }
             IconButton(onClick = onDeleteSelectedTasksClick) {
                 Icon(
                     Images.Icons.Delete,
-                    contentDescription = TodometerResources.strings.deleteTasks
+                    contentDescription = TodometerResources.strings.deleteTasks,
                 )
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors()
+        colors = TopAppBarDefaults.topAppBarColors(),
     )
 }
 
 @Composable
 private fun HomeFloatingActionButton(
     visible: Boolean,
-    navigateToAddTask: () -> Unit
+    navigateToAddTask: () -> Unit,
 ) {
     AnimatedVisibility(
         visible = visible,
         enter = scaleIn() + fadeIn(),
-        exit = scaleOut() + fadeOut()
+        exit = scaleOut() + fadeOut(),
     ) {
         FloatingActionButton(onClick = navigateToAddTask) {
             Icon(
                 Images.Icons.Add,
-                contentDescription = TodometerResources.strings.addTask
+                contentDescription = TodometerResources.strings.addTask,
             )
         }
     }
@@ -418,18 +418,18 @@ private fun TasksListView(
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit,
     selectionMode: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var areTasksDoneVisible by remember { mutableStateOf(false) }
     if ((tasksDoingPinned + tasksDoingNotPinned + tasksDone).isEmpty()) {
         HomeInfoIllustration(
             Images.Illustrations.NoTasks,
-            TodometerResources.strings.noTasks
+            TodometerResources.strings.noTasks,
         )
     } else {
         LazyColumn(
             modifier = modifier,
-            contentPadding = PaddingValues(top = 8.dp)
+            contentPadding = PaddingValues(top = 8.dp),
         ) {
             if (tasksDoingPinned.isNotEmpty()) {
                 item {
@@ -444,7 +444,7 @@ private fun TasksListView(
                 onTaskItemLongClick = onTaskItemLongClick,
                 onSwipeToDismiss = onSwipeToDismiss,
                 selectionMode = selectionMode,
-                selectedTasksIds = selectedTasksIds
+                selectedTasksIds = selectedTasksIds,
             )
             if (tasksDoingPinned.isNotEmpty() && tasksDoingNotPinned.isNotEmpty()) {
                 item {
@@ -459,7 +459,7 @@ private fun TasksListView(
                 onTaskItemLongClick = onTaskItemLongClick,
                 onSwipeToDismiss = onSwipeToDismiss,
                 selectionMode = selectionMode,
-                selectedTasksIds = selectedTasksIds
+                selectedTasksIds = selectedTasksIds,
             )
             if (tasksDone.isNotEmpty()) {
                 item {
@@ -468,7 +468,7 @@ private fun TasksListView(
                         enabled = !selectionMode,
                         expanded = areTasksDoneVisible,
                         showExpandIcon = !selectionMode,
-                        onClick = { areTasksDoneVisible = !areTasksDoneVisible }
+                        onClick = { areTasksDoneVisible = !areTasksDoneVisible },
                     )
                 }
             }
@@ -481,7 +481,7 @@ private fun TasksListView(
                     onTaskItemLongClick = onTaskItemLongClick,
                     onSwipeToDismiss = onSwipeToDismiss,
                     selectionMode = selectionMode,
-                    selectedTasksIds = selectedTasksIds
+                    selectedTasksIds = selectedTasksIds,
                 )
             }
             item {
@@ -492,7 +492,7 @@ private fun TasksListView(
             HomeInfoIllustration(
                 Images.Illustrations.CompletedTasks,
                 TodometerResources.strings.youHaveCompletedAllTasks,
-                TodometerResources.strings.congratulations
+                TodometerResources.strings.congratulations,
             )
         }
     }
@@ -507,12 +507,12 @@ fun LazyListScope.taskItems(
     onTaskItemLongClick: (String) -> Unit,
     onSwipeToDismiss: (String) -> Unit,
     selectionMode: Boolean,
-    selectedTasksIds: ImmutableList<String>
+    selectedTasksIds: ImmutableList<String>,
 ) {
     items(
         tasks,
         key = { it.id },
-        contentType = { it }
+        contentType = { it },
     ) { taskItem ->
         TaskItem(
             taskItem = taskItem,
@@ -524,21 +524,21 @@ fun LazyListScope.taskItems(
             modifier = Modifier.animateItem(),
             swipeable = !selectionMode,
             checkEnabled = selectionMode,
-            selected = selectedTasksIds.contains(taskItem.id)
+            selected = selectedTasksIds.contains(taskItem.id),
         )
     }
 }
 
 @Composable
 private fun TasksSeparator(
-    text: String
+    text: String,
 ) {
     Text(
         text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
         modifier = Modifier
-            .padding(horizontal = SectionPadding, vertical = 8.dp)
+            .padding(horizontal = SectionPadding, vertical = 8.dp),
     )
 }
 
@@ -548,12 +548,12 @@ private fun CompletedTasksHeader(
     enabled: Boolean,
     expanded: Boolean,
     showExpandIcon: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     ListItem(
         headlineContent = {
             Text(
-                text = TodometerResources.strings.completedTasks(completedTasks)
+                text = TodometerResources.strings.completedTasks(completedTasks),
             )
         },
         trailingContent = {
@@ -561,20 +561,20 @@ private fun CompletedTasksHeader(
                 if (expanded) {
                     Icon(
                         Images.Icons.ExpandLess,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 } else {
                     Icon(
                         Images.Icons.ExpandMore,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
             }
         },
         modifier = Modifier.clickable(
             enabled = enabled,
-            onClick = onClick
-        )
+            onClick = onClick,
+        ),
     )
 }
 
@@ -582,26 +582,26 @@ private fun CompletedTasksHeader(
 private fun HomeInfoIllustration(
     imageVector: ImageVector,
     text: String,
-    secondaryText: String? = null
+    secondaryText: String? = null,
 ) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center).padding(bottom = 72.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
                 imageVector,
                 modifier = Modifier.size(220.dp).padding(bottom = 36.dp),
-                contentDescription = null
+                contentDescription = null,
             )
             Text(text = text)
             secondaryText?.let {
                 Text(
                     text = it,
                     color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = 8.dp),
                 )
             }
         }

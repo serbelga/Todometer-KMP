@@ -97,5 +97,5 @@ internal val CaTodometerStrings = TodometerStrings(
     title = "Títol",
     uncheckTask = "Desmarcar tasca",
     youHaveCompletedAllTasks = "Has completat totes les tasques",
-    youHaveNotAnyTaskList = "No tens cap llista de tasques"
+    youHaveNotAnyTaskList = "No tens cap llista de tasques",
 )
