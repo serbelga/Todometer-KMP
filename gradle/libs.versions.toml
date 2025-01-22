@@ -155,3 +155,4 @@ sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 dev-sergiobelda-gradle-lint = { id = "dev.sergiobelda.gradle.lint" }
 dev-sergiobelda-gradle-spotless = { id = "dev.sergiobelda.gradle.spotless" }
 dev-sergiobelda-gradle-detekt = {id = "dev.sergiobelda.gradle.detekt"}
+dev-sergiobelda-gradle-dependency-graph-generator = {id = "dev.sergiobelda.gradle.dependency-graph-generator"}

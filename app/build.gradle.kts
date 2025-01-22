@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.dev.sergiobelda.gradle.lint)
-    id("dev.sergiobelda.gradle.dependency-graph-generator")
+    alias(libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator)
 }
 
 if (file("google-services.json").exists()) {

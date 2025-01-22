@@ -34,7 +34,7 @@ gradlePlugin {
             implementationClass = conventionPluginsPath + "CommonUiAndroidConventionPlugin"
         }
         register("dependencyGraphGenerator") {
-            id = "dev.sergiobelda.gradle.dependency-graph-generator"
+            id = libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator.get().pluginId
             implementationClass = conventionPluginsPath + "DependencyGraphGeneratorConventionPlugin"
         }
 

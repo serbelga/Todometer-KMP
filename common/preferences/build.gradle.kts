@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.dev.sergiobelda.gradle.lint)
     id("dev.sergiobelda.gradle.common.library.android")
-    id("dev.sergiobelda.gradle.dependency-graph-generator")
+    alias(libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator)
 }
 
 kotlin {
