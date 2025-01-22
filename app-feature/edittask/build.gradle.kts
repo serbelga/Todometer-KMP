@@ -24,9 +24,6 @@ kotlin {
             implementation(projects.common.resources)
             implementation(projects.common.ui)
 
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
-
             implementation(libs.kotlin.datetime)
         }
         androidMain.dependencies {

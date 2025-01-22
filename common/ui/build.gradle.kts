@@ -27,6 +27,9 @@ kotlin {
             api(libs.sergiobelda.navigationComposeExtended)
             api(libs.sergiobelda.navigationComposeExtendedAnnotation)
 
+            api(project.dependencies.platform(libs.koin.bom))
+            api(libs.koin.compose.viewmodel)
+
             implementation(libs.kotlin.datetime)
         }
         commonTest.dependencies {

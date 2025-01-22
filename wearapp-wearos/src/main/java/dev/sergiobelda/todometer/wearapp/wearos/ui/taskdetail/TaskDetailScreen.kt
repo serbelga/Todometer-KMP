@@ -71,7 +71,7 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgres
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 // TODO: Resolve LongMethod issue.
@@ -89,7 +89,7 @@ import org.koin.core.parameter.parametersOf
 internal fun TaskDetailScreen(
     taskId: String,
     navigateBack: () -> Unit,
-    viewModel: TaskDetailViewModel = koinInject { parametersOf(taskId) },
+    viewModel: TaskDetailViewModel = koinViewModel { parametersOf(taskId) },
 ) {
     val state = viewModel.state
     var deleteTaskAlertDialogState by remember { mutableStateOf(false) }

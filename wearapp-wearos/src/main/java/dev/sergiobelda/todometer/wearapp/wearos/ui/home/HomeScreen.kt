@@ -66,7 +66,7 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgres
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @NavDestination(
     name = "Home",
@@ -76,7 +76,7 @@ import org.koin.compose.koinInject
 @Composable
 internal fun HomeScreen(
     openTaskList: (String?) -> Unit,
-    viewModel: HomeViewModel = koinInject(),
+    viewModel: HomeViewModel = koinViewModel(),
 ) {
     val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
     val state = viewModel.state
