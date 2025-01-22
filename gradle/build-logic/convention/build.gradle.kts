@@ -22,7 +22,7 @@ gradlePlugin {
     plugins {
         val conventionPluginsPath = "dev.sergiobelda.gradle.buildlogic.convention."
         register("baseLibrary") {
-            id = "dev.sergiobelda.gradle.base"
+            id = libs.plugins.dev.sergiobelda.gradle.base.get().pluginId
             implementationClass = conventionPluginsPath + "BaseConventionPlugin"
         }
         register("commonLibraryAndroid") {

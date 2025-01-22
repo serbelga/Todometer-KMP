@@ -158,3 +158,4 @@ dev-sergiobelda-gradle-detekt = { id = "dev.sergiobelda.gradle.detekt" }
 dev-sergiobelda-gradle-dependency-graph-generator = { id = "dev.sergiobelda.gradle.dependency-graph-generator" }
 dev-sergiobelda-gradle-common-ui = { id = "dev.sergiobelda.gradle.common.ui" }
 dev-sergiobelda-gradle-common-library-android = { id = "dev.sergiobelda.gradle.common.library.android" }
+dev-sergiobelda-gradle-base = { id = "dev.sergiobelda.gradle.base" }
