@@ -25,6 +25,7 @@ kotlin {
 
             api(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.compose)
+            api(libs.koin.compose.viewmodel)
             api(libs.koin.core)
             api(libs.koin.test)
         }
