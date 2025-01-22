@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeVectorize)
     alias(libs.plugins.dev.sergiobelda.gradle.lint)
-    id("dev.sergiobelda.gradle.common.library.android")
+    alias(libs.plugins.dev.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator)
 }
 

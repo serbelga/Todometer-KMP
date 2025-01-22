@@ -26,7 +26,7 @@ gradlePlugin {
             implementationClass = conventionPluginsPath + "BaseConventionPlugin"
         }
         register("commonLibraryAndroid") {
-            id = "dev.sergiobelda.gradle.common.library.android"
+            id = libs.plugins.dev.sergiobelda.gradle.common.library.android.get().pluginId
             implementationClass = conventionPluginsPath + "CommonLibraryAndroidConventionPlugin"
         }
         register("commonUi") {

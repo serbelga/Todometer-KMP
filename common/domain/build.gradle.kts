@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.dev.sergiobelda.gradle.lint)
-    id("dev.sergiobelda.gradle.common.library.android")
+    alias(libs.plugins.dev.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator)
 }
 
