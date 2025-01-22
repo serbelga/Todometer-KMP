@@ -40,7 +40,7 @@ gradlePlugin {
 
         val conventionPluginsLintPath = conventionPluginsPath + "lint."
         register("detekt") {
-            id = "dev.sergiobelda.gradle.detekt"
+            id = libs.plugins.dev.sergiobelda.gradle.detekt.get().pluginId
             implementationClass = conventionPluginsLintPath + "DetektConventionPlugin"
         }
         register("spotless") {

@@ -154,3 +154,4 @@ sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 # Plugins defined by this project
 dev-sergiobelda-gradle-lint = { id = "dev.sergiobelda.gradle.lint" }
 dev-sergiobelda-gradle-spotless = { id = "dev.sergiobelda.gradle.spotless" }
+dev-sergiobelda-gradle-detekt = {id = "dev.sergiobelda.gradle.detekt"}
