@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.androidTest)
+    alias(libs.plugins.android.test)
     kotlin("android")
 }
 
