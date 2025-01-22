@@ -150,3 +150,6 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+
+# Plugins defined by this project
+dev-sergiobelda-gradle-lint = { id = "dev.sergiobelda.gradle.lint" }

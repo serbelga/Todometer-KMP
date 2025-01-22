@@ -48,7 +48,7 @@ gradlePlugin {
             implementationClass = conventionPluginsLintPath + "SpotlessConventionPlugin"
         }
         register("lint") {
-            id = "dev.sergiobelda.gradle.lint"
+            id = libs.plugins.dev.sergiobelda.gradle.lint.get().pluginId
             implementationClass = conventionPluginsLintPath + "LintConventionPlugin"
         }
     }

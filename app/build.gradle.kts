@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
-    id("dev.sergiobelda.gradle.lint")
+    alias(libs.plugins.dev.sergiobelda.gradle.lint)
     id("dev.sergiobelda.gradle.dependency-graph-generator")
 }
 
