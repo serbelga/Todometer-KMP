@@ -1,12 +1,12 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.dev.sergiobelda.gradle.lint)
-    alias(libs.plugins.dev.sergiobelda.gradle.common.library.android)
-    alias(libs.plugins.dev.sergiobelda.gradle.common.ui)
-    alias(libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.jetbrains.composeCompiler)
+    alias(libs.plugins.jetbrains.kotlinMultiplatform)
+    alias(libs.plugins.sergiobelda.gradle.common.library.android)
+    alias(libs.plugins.sergiobelda.gradle.common.ui)
+    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(libs.plugins.sergiobelda.gradle.lint)
 }
 
 kotlin {

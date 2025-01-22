@@ -28,7 +28,7 @@ class CommonLibraryAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("androidLibrary").get().get().pluginId)
+                apply(libs.findPlugin("android-library").get().get().pluginId)
             }
 
             val extension = extensions.getByType<LibraryExtension>()

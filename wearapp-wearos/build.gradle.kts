@@ -1,16 +1,16 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.android.application)
     kotlin("android")
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.dev.sergiobelda.gradle.lint)
-    alias(libs.plugins.dev.sergiobelda.gradle.dependency.graph.generator)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.jetbrains.composeCompiler)
+    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(libs.plugins.sergiobelda.gradle.lint)
 }
 
 if (file("google-services.json").exists()) {
-    apply(plugin = libs.plugins.googleServices.get().pluginId)
-    apply(plugin = libs.plugins.firebaseCrashlytics.get().pluginId)
+    apply(plugin = libs.plugins.google.firebaseCrashlytics.get().pluginId)
+    apply(plugin = libs.plugins.google.services.get().pluginId)
 }
 
 android {

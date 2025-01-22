@@ -29,7 +29,7 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("ksp").pluginId)
+                apply(libs.findPlugin("google-ksp").pluginId)
             }
 
             val navigationComposeExtendedCompiler =
