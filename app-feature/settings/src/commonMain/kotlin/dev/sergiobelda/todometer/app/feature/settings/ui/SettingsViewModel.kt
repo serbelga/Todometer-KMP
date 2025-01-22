@@ -16,11 +16,12 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -29,15 +30,35 @@ import kotlinx.coroutines.launch
 class SettingsViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase,
-) : ViewModel() {
-    val appTheme: StateFlow<AppTheme> =
+) : BaseViewModel<SettingsState>(
+    initialState = SettingsState(),
+) {
+    private val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(),
             AppTheme.FOLLOW_SYSTEM,
         )
 
-    fun setAppTheme(theme: AppTheme) = viewModelScope.launch {
+    init {
+        viewModelScope.launch {
+            appTheme.collect { appTheme ->
+                updateState { state ->
+                    state.copy(appTheme = appTheme)
+                }
+            }
+        }
+    }
+
+    override fun handleEvent(event: BaseEvent) {
+        when (event) {
+            is SettingsEvents.SetAppTheme -> {
+                setAppTheme(event.theme)
+            }
+        }
+    }
+
+    private fun setAppTheme(theme: AppTheme) = viewModelScope.launch {
         setAppThemeUseCase(theme)
     }
 }

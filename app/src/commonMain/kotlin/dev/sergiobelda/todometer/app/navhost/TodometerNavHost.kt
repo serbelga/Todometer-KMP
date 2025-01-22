@@ -29,8 +29,10 @@ import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
+import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.addTaskListNavigationEventsHandler
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
+import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
@@ -38,13 +40,17 @@ import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDest
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeNavDestination
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
+import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventsHandler
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsNavDestination
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
+import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
+import dev.sergiobelda.todometer.common.ui.base.navigation.ScreenNavigationNode
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 
 @Composable
 fun TodometerNavHost(
@@ -131,10 +137,13 @@ private fun NavGraphBuilder.taskDetailsNode(
 private fun NavGraphBuilder.addTaskListRoute(
     navigateBack: () -> Unit,
 ) {
+    val addTaskListNavigationEventsHandler = addTaskListNavigationEventsHandler(
+        navigateBack = navigateBack,
+    )
     composable(navDestination = AddTaskListNavDestination) {
-        AddTaskListScreen(
-            navigateBack = navigateBack,
-            viewModel = koinViewModel(),
+        AddTaskListScreen.ScreenNavigationNode(
+            navigationEventsHandler = addTaskListNavigationEventsHandler,
+            viewModel = koinViewModel(named<AddTaskListViewModel>()),
         )
     }
 }
@@ -176,10 +185,13 @@ private fun NavGraphBuilder.editTaskNode(
 private fun NavGraphBuilder.settingsNode(
     navigateBack: () -> Unit,
 ) {
+    val settingsNavigationEventsHandler = settingsNavigationEventsHandler(
+        navigateBack = navigateBack,
+    )
     composable(navDestination = SettingsNavDestination) {
-        SettingsScreen(
-            navigateBack = navigateBack,
-            viewModel = koinViewModel(),
+        SettingsScreen.ScreenNavigationNode(
+            navigationEventsHandler = settingsNavigationEventsHandler,
+            viewModel = koinViewModel(named<SettingsViewModel>()),
         )
     }
 }

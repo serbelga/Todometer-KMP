@@ -43,58 +43,89 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
+import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEvents
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Code
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseScreen
 
-@NavDestination(
-    name = "About",
-    destinationId = "about",
-)
-@Composable
-fun AboutScreen(
-    navigateToGitHub: () -> Unit,
-    navigateToPrivacyPolicy: () -> Unit,
-    navigateToOpenSourceLicenses: () -> Unit,
-    navigateBack: () -> Unit,
-) {
-    Scaffold(
-        topBar = { AboutTopBar(navigateBack = navigateBack) },
-    ) { paddingValues ->
+data object AboutScreen : BaseScreen<AboutState, AboutUIState>() {
+
+    @Composable
+    override fun rememberUIState(): AboutUIState = rememberAboutUIState()
+
+    @NavDestination(
+        name = "About",
+        destinationId = "about",
+    )
+    @Composable
+    override fun Content(
+        state: AboutState,
+        uiState: AboutUIState,
+    ) {
+        Scaffold(
+            topBar = {
+                AboutTopBar()
+            },
+            content = { paddingValues ->
+                AboutContent(
+                    modifier = Modifier.padding(paddingValues),
+                )
+            },
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun AboutTopBar() {
+        TopAppBar(
+            navigationIcon = {
+                IconButton(
+                    onClick = {
+                        onEvent(AboutNavigationEvents.NavigateBack)
+                    },
+                ) {
+                    Icon(
+                        Images.Icons.NavigateBefore,
+                        contentDescription = TodometerResources.strings.back,
+                    )
+                }
+            },
+            title = {},
+        )
+    }
+
+    @Composable
+    private fun AboutContent(
+        modifier: Modifier,
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth().padding(paddingValues),
+            modifier = modifier.fillMaxWidth(),
         ) {
             TodometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
-            AboutItemCard(onCardClick = navigateToGitHub, AboutItem.GitHub)
-            AboutItemCard(onCardClick = navigateToPrivacyPolicy, AboutItem.PrivacyPolicy)
-            AboutItemCard(onCardClick = navigateToOpenSourceLicenses, AboutItem.OpenSourceLicenses)
+            AboutItemCard(
+                onCardClick = { onEvent(AboutNavigationEvents.NavigateToGitHub) },
+                AboutItem.GitHub,
+            )
+            AboutItemCard(
+                onCardClick = { onEvent(AboutNavigationEvents.NavigateToPrivacyPolicy) },
+                AboutItem.PrivacyPolicy,
+            )
+            AboutItemCard(
+                onCardClick = { onEvent(AboutNavigationEvents.NavigateToOpenSourceLicenses) },
+                AboutItem.OpenSourceLicenses,
+            )
         }
         AboutAppVersion()
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal fun AboutTopBar(navigateBack: () -> Unit) {
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = navigateBack) {
-                Icon(
-                    Images.Icons.NavigateBefore,
-                    contentDescription = TodometerResources.strings.back,
-                )
-            }
-        },
-        title = {},
-    )
-}
-
-internal enum class AboutItem {
+private enum class AboutItem {
     GitHub,
     PrivacyPolicy,
     OpenSourceLicenses,
@@ -117,7 +148,7 @@ private fun AboutItem.text(): String =
     }
 
 @Composable
-internal fun AboutItemCard(
+private fun AboutItemCard(
     onCardClick: () -> Unit,
     aboutItem: AboutItem,
     modifier: Modifier = Modifier,
@@ -145,7 +176,7 @@ internal fun AboutItemCard(
 }
 
 @Composable
-internal fun AboutAppVersion() {
+private fun AboutAppVersion() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
         Text(
             text = appVersionName() ?: "",

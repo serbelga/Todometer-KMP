@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.di
+package dev.sergiobelda.todometer.common.ui.base
 
-import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
-import dev.sergiobelda.todometer.common.ui.di.baseViewModelOf
-import org.koin.core.module.dsl.named
-import org.koin.dsl.module
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 
-val settingsViewModelModule = module {
-    baseViewModelOf(::SettingsViewModel) {
-        named<SettingsViewModel>()
+abstract class BaseViewModel<S : BaseState>(
+    initialState: S,
+) : ViewModel(), EventHandler {
+
+    private var _state by mutableStateOf(initialState)
+
+    val state: S get() = _state
+
+    abstract override fun handleEvent(event: BaseEvent)
+
+    protected fun updateState(block: (S) -> S) {
+        _state = block.invoke(state)
     }
 }

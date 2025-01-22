@@ -25,7 +25,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -42,65 +41,78 @@ import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTit
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
+import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListNavigationEvents
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseScreen
 
-@NavDestination(
-    name = "AddTaskList",
-    destinationId = "addtasklist",
-)
-@Composable
-fun AddTaskListScreen(
-    navigateBack: () -> Unit,
-    viewModel: AddTaskListViewModel,
-) {
-    val snackbarHostState = remember { SnackbarHostState() }
+data object AddTaskListScreen : BaseScreen<AddTaskListState, AddTaskListUIState>() {
+    @Composable
+    override fun rememberUIState(): AddTaskListUIState = rememberAddTaskListUIState()
 
-    var taskListName by rememberSaveable { mutableStateOf("") }
-    var taskListNameInputError by remember { mutableStateOf(false) }
-
-    if (viewModel.state.errorUi != null) {
-        LaunchedEffect(snackbarHostState) {
-            snackbarHostState.showSnackbar(
-                message = viewModel.state.errorUi?.message ?: "",
-            )
-        }
-    }
-
-    Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        topBar = {
-            SaveActionTopAppBar(
-                navigateBack = navigateBack,
-                title = TodometerResources.strings.addTaskList,
-                isSaveButtonEnabled = !viewModel.state.isAddingTaskList,
-                onSaveButtonClick = {
-                    if (taskListName.isBlank()) {
-                        taskListNameInputError = true
-                    } else {
-                        viewModel.insertTaskList(taskListName)
-                        navigateBack()
-                    }
-                },
-                saveButtonTintColor = if (viewModel.state.isAddingTaskList) {
-                    MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-                } else {
-                    MaterialTheme.colorScheme.primary
-                },
-            )
-        },
-        content = { paddingValues ->
-            AddTaskListContent(
-                paddingValues = paddingValues,
-                showProgress = viewModel.state.isAddingTaskList,
-                taskListNameValue = taskListName,
-                taskListNameInputError = taskListNameInputError,
-                onTaskListNameValueChange = {
-                    taskListName = it
-                    taskListNameInputError = false
-                },
-            )
-        },
+    @NavDestination(
+        name = "AddTaskList",
+        destinationId = "addtasklist",
     )
+    @Composable
+    override fun Content(
+        state: AddTaskListState,
+        uiState: AddTaskListUIState,
+    ) {
+        var taskListName by rememberSaveable { mutableStateOf("") }
+        var taskListNameInputError by remember { mutableStateOf(false) }
+
+        if (state.errorUi != null) {
+            LaunchedEffect(uiState.snackbarHostState) {
+                uiState.showSnackbar(
+                    message = state.errorUi.message ?: "",
+                )
+            }
+        }
+
+        Scaffold(
+            snackbarHost = { SnackbarHost(uiState.snackbarHostState) },
+            topBar = {
+                SaveActionTopAppBar(
+                    navigateBack = {
+                        onEvent(
+                            AddTaskListNavigationEvents.NavigateBack,
+                        )
+                    },
+                    title = TodometerResources.strings.addTaskList,
+                    isSaveButtonEnabled = !state.isAddingTaskList,
+                    onSaveButtonClick = {
+                        if (taskListName.isBlank()) {
+                            taskListNameInputError = true
+                        } else {
+                            onEvent(
+                                AddTaskListEvents.InsertTaskList(taskListName),
+                            )
+                            onEvent(
+                                AddTaskListNavigationEvents.NavigateBack,
+                            )
+                        }
+                    },
+                    saveButtonTintColor = if (state.isAddingTaskList) {
+                        MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+                    } else {
+                        MaterialTheme.colorScheme.primary
+                    },
+                )
+            },
+            content = { paddingValues ->
+                AddTaskListContent(
+                    paddingValues = paddingValues,
+                    showProgress = state.isAddingTaskList,
+                    taskListNameValue = taskListName,
+                    taskListNameInputError = taskListNameInputError,
+                    onTaskListNameValueChange = {
+                        taskListName = it
+                        taskListNameInputError = false
+                    },
+                )
+            },
+        )
+    }
 }
 
 @Composable

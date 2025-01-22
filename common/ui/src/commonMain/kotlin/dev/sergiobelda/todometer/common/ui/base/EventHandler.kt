@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.di
+package dev.sergiobelda.todometer.common.ui.base
 
-import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
-import dev.sergiobelda.todometer.common.ui.di.baseViewModelOf
-import org.koin.core.module.dsl.named
-import org.koin.dsl.module
-
-val settingsViewModelModule = module {
-    baseViewModelOf(::SettingsViewModel) {
-        named<SettingsViewModel>()
-    }
+fun interface EventHandler {
+    fun handleEvent(event: BaseEvent)
 }

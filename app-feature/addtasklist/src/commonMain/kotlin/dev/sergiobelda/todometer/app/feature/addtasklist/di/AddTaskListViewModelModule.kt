@@ -17,9 +17,12 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist.di
 
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
-import org.koin.core.module.dsl.viewModelOf
+import dev.sergiobelda.todometer.common.ui.di.baseViewModelOf
+import org.koin.core.module.dsl.named
 import org.koin.dsl.module
 
 val addTaskListViewModelModule = module {
-    viewModelOf(::AddTaskListViewModel)
+    baseViewModelOf(::AddTaskListViewModel) {
+        named<AddTaskListViewModel>()
+    }
 }

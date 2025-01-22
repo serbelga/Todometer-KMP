@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.di
+package dev.sergiobelda.todometer.app.feature.about.ui
 
-import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
-import dev.sergiobelda.todometer.common.ui.di.baseViewModelOf
-import org.koin.core.module.dsl.named
-import org.koin.dsl.module
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 
-val settingsViewModelModule = module {
-    baseViewModelOf(::SettingsViewModel) {
-        named<SettingsViewModel>()
-    }
+class AboutUIState internal constructor() : BaseUIState {
+    override fun handleEvent(event: BaseEvent) = Unit
 }
+
+@Composable
+internal fun rememberAboutUIState(): AboutUIState = remember { AboutUIState() }

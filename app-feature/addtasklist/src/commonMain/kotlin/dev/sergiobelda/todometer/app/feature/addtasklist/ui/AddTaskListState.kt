@@ -17,10 +17,11 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.compose.runtime.Immutable
+import dev.sergiobelda.todometer.common.ui.base.BaseState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 @Immutable
 data class AddTaskListState(
     val isAddingTaskList: Boolean = false,
     val errorUi: ErrorUi? = null,
-)
+) : BaseState

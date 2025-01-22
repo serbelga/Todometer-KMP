@@ -28,6 +28,7 @@ kotlin {
             api(libs.sergiobelda.navigationComposeExtendedAnnotation)
 
             api(project.dependencies.platform(libs.koin.bom))
+            api(libs.koin.core)
             api(libs.koin.compose.viewmodel)
 
             implementation(libs.kotlin.datetime)
