@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationEvent
 
-sealed class SettingsNavigationEvents : BaseEvent {
+sealed class SettingsNavigationEvents : NavigationEvent {
     data object NavigateBack : SettingsNavigationEvents()
 }

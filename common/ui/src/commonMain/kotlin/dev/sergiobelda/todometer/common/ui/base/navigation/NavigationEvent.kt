@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.addtasklist.navigation
+package dev.sergiobelda.todometer.common.ui.base.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationEvent
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-sealed class AddTaskListNavigationEvents : NavigationEvent {
-    data object NavigateBack : AddTaskListNavigationEvents()
-}
+interface NavigationEvent : BaseEvent

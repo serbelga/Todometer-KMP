@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.about.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationEvent
 
-sealed class AboutNavigationEvents : BaseEvent {
+sealed class AboutNavigationEvents : NavigationEvent {
     data object NavigateBack : AboutNavigationEvents()
     data object NavigateToGitHub : AboutNavigationEvents()
     data object NavigateToOpenSourceLicenses : AboutNavigationEvents()
