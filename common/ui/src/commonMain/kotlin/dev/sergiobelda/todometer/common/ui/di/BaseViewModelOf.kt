@@ -25,23 +25,23 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.onOptions
 import org.koin.core.module.dsl.viewModelOf
 
-inline fun <reified S : BaseState> Module.baseViewModelOf(
-    crossinline constructor: () -> BaseViewModel<S>,
-    noinline options: (BeanDefinition<BaseViewModel<S>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<S>> = viewModelOf(constructor) {
-    bind<BaseViewModel<S>>()
+inline fun <reified State : BaseState> Module.baseViewModelOf(
+    crossinline constructor: () -> BaseViewModel<State>,
+    noinline options: (BeanDefinition<BaseViewModel<State>>.() -> Unit)? = null,
+): KoinDefinition<BaseViewModel<State>> = viewModelOf(constructor) {
+    bind<BaseViewModel<State>>()
 }.onOptions(options)
 
-inline fun <reified S : BaseState, reified T1> Module.baseViewModelOf(
-    crossinline constructor: (T1) -> BaseViewModel<S>,
-    noinline options: (BeanDefinition<BaseViewModel<S>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<S>> = viewModelOf(constructor) {
-    bind<BaseViewModel<S>>()
+inline fun <reified State : BaseState, reified T1> Module.baseViewModelOf(
+    crossinline constructor: (T1) -> BaseViewModel<State>,
+    noinline options: (BeanDefinition<BaseViewModel<State>>.() -> Unit)? = null,
+): KoinDefinition<BaseViewModel<State>> = viewModelOf(constructor) {
+    bind<BaseViewModel<State>>()
 }.onOptions(options)
 
-inline fun <reified S : BaseState, reified T1, reified T2> Module.baseViewModelOf(
-    crossinline constructor: (T1, T2) -> BaseViewModel<S>,
-    noinline options: (BeanDefinition<BaseViewModel<S>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<S>> = viewModelOf(constructor) {
-    bind<BaseViewModel<S>>()
+inline fun <reified State : BaseState, reified T1, reified T2> Module.baseViewModelOf(
+    crossinline constructor: (T1, T2) -> BaseViewModel<State>,
+    noinline options: (BeanDefinition<BaseViewModel<State>>.() -> Unit)? = null,
+): KoinDefinition<BaseViewModel<State>> = viewModelOf(constructor) {
+    bind<BaseViewModel<State>>()
 }.onOptions(options)
