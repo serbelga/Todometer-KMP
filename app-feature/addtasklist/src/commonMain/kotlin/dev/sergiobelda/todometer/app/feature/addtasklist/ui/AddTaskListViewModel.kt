@@ -16,37 +16,50 @@
 
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase,
-) : ViewModel() {
+) : BaseViewModel<AddTaskListUIState>(
+    initialUIState = AddTaskListUIState(),
+) {
 
-    var state by mutableStateOf(AddTaskListState())
-        private set
+    override fun handleEvent(event: BaseEvent) {
+        when (event) {
+            is AddTaskListEvent.InsertTaskList -> {
+                insertTaskList(event.name)
+            }
+        }
+    }
 
-    fun insertTaskList(name: String) = viewModelScope.launch {
-        state = state.copy(isAddingTaskList = true)
-        val result = insertTaskListUseCase.invoke(name)
-        result.doIfSuccess {
-            state = state.copy(
-                isAddingTaskList = false,
-                errorUi = null,
-            )
-        }.doIfError { error ->
-            state = state.copy(
-                isAddingTaskList = false,
-                errorUi = error.mapToErrorUi(),
-            )
+    private fun insertTaskList(name: String) = viewModelScope.launch {
+        updateUIState {
+            it.copy(isAddingTaskList = true)
+        }
+        if (name.isNotBlank()) {
+            val result = insertTaskListUseCase.invoke(name)
+            result.doIfSuccess {
+                updateUIState {
+                    it.copy(
+                        isAddingTaskList = false,
+                        errorUi = null,
+                    )
+                }
+            }.doIfError { error ->
+                updateUIState {
+                    it.copy(
+                        isAddingTaskList = false,
+                        errorUi = error.mapToErrorUi(),
+                    )
+                }
+            }
         }
     }
 }

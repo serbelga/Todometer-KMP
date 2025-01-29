@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2021 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.di
+package dev.sergiobelda.todometer.common.preferences
 
-import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.baseViewModelOf
-import org.koin.core.module.dsl.named
-import org.koin.dsl.module
+import android.content.Context
+import androidx.datastore.preferences.preferencesDataStore
 
-val settingsViewModelModule = module {
-    baseViewModelOf(::SettingsViewModel) {
-        named<SettingsViewModel>()
-    }
+private val Context.dataStore by preferencesDataStore(DataStoreFileName)
+
+actual object PreferencesFactory {
+    lateinit var appContext: Context
+
+    actual fun createPreferences(): Preferences =
+        Preferences(
+            appContext.dataStore,
+        )
 }

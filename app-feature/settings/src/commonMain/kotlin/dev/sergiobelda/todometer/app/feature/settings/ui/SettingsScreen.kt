@@ -46,8 +46,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,44 +58,76 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeName
+import dev.sergiobelda.todometer.app.feature.settings.navigation.SettingsNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
-@NavDestination(
-    destinationId = "settings",
-    name = "Settings",
-)
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SettingsScreen(
-    navigateBack: () -> Unit,
-    viewModel: SettingsViewModel,
-) {
-    val appTheme by viewModel.appTheme.collectAsState()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            Images.Icons.NavigateBefore,
-                            contentDescription = TodometerResources.strings.back,
-                        )
-                    }
-                },
-                title = {
-                    Text(TodometerResources.strings.settings)
-                },
-            )
-        },
-    ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
+data object SettingsScreen : BaseUI<SettingsUIState, SettingsContentState>() {
+
+    @Composable
+    override fun rememberContentState(): SettingsContentState = rememberSettingsContentState()
+
+    @NavDestination(
+        destinationId = "settings",
+        name = "Settings",
+    )
+    @Composable
+    override fun Content(
+        uiState: SettingsUIState,
+        contentState: SettingsContentState,
+    ) {
+        Scaffold(
+            topBar = {
+                SettingsTopBar()
+            },
+            content = { paddingValues ->
+                SettingsContent(
+                    appTheme = uiState.appTheme,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            },
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun SettingsTopBar() {
+        TopAppBar(
+            navigationIcon = {
+                IconButton(
+                    onClick = {
+                        onEvent(SettingsNavigationEvent.NavigateBack)
+                    },
+                ) {
+                    Icon(
+                        Images.Icons.NavigateBefore,
+                        contentDescription = TodometerResources.strings.back,
+                    )
+                }
+            },
+            title = {
+                Text(TodometerResources.strings.settings)
+            },
+        )
+    }
+
+    @Composable
+    private fun SettingsContent(
+        appTheme: AppTheme,
+        modifier: Modifier,
+    ) {
+        Column(
+            modifier = modifier,
+        ) {
             SettingsChooseAppTheme(
-                appTheme,
-                onItemClick = { viewModel.setAppTheme(it) },
+                appTheme = appTheme,
+                onItemClick = {
+                    onEvent(SettingsEvent.SetAppTheme(it))
+                },
             )
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.preferences
+package dev.sergiobelda.todometer.app.feature.settings.navigation
 
-import android.content.Context
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
 
-actual object PreferencesFactory {
-    lateinit var appContext: Context
-
-    actual fun createPreferences(): Preferences =
-        Preferences(
-            createDataStore(appContext.filesDir.resolve(DataStoreFileName).absolutePath),
-        )
+fun settingsNavigationEventHandler(
+    navigateBack: () -> Unit,
+): BaseNavigationEventHandler<SettingsNavigationEvent> = BaseNavigationEventHandler {
+    when (it) {
+        SettingsNavigationEvent.NavigateBack -> navigateBack()
+    }
 }

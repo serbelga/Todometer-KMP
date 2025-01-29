@@ -16,16 +16,22 @@
 
 package dev.sergiobelda.todometer.app.navhost
 
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavGraphBuilder
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.navigation.compose.extended.composable
+import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
+import dev.sergiobelda.todometer.app.feature.about.ui.AboutViewModel
 import dev.sergiobelda.todometer.app.feature.about.ui.GitHubUrl
 import dev.sergiobelda.todometer.app.feature.about.ui.PrivacyPolicyUrl
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
-import dev.sergiobelda.todometer.common.android.extensions.openWebPage
+import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.qualifier.named
 
 internal actual fun NavGraphBuilder.aboutNode(
     navigateBack: () -> Unit,
@@ -34,11 +40,18 @@ internal actual fun NavGraphBuilder.aboutNode(
         navDestination = AboutNavDestination,
     ) {
         val context = LocalContext.current
-        AboutScreen(
-            navigateToGitHub = { context.openWebPage(GitHubUrl) },
-            navigateToPrivacyPolicy = { context.openWebPage(PrivacyPolicyUrl) },
-            navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
-            navigateBack = navigateBack,
+        val uriHandler = LocalUriHandler.current
+        val aboutNavigationEventHandler = remember {
+            AboutNavigationEventHandler(
+                navigateBack = navigateBack,
+                navigateToGitHub = { uriHandler.openUri(GitHubUrl) },
+                navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
+                navigateToPrivacyPolicy = { uriHandler.openUri(PrivacyPolicyUrl) },
+            )
+        }
+        AboutScreen.NavigationNodeContent(
+            viewModel = koinViewModel(named<AboutViewModel>()),
+            navigationEventHandler = aboutNavigationEventHandler,
         )
     }
 }
