@@ -66,7 +66,14 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
             topBar = {
                 AddTaskListTopBar(
                     isSaveButtonEnabled = !uiState.isAddingTaskList && contentState.isSaveButtonEnabled,
-                    taskListName = contentState.taskListName,
+                    onSaveButtonClick = {
+                        onEvent(
+                            AddTaskListEvent.InsertTaskList(contentState.taskListName),
+                        )
+                        onEvent(
+                            AddTaskListNavigationEvent.NavigateBack,
+                        )
+                    }
                 )
             },
             content = { paddingValues ->
@@ -82,7 +89,7 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
     @Composable
     private fun AddTaskListTopBar(
         isSaveButtonEnabled: Boolean,
-        taskListName: String,
+        onSaveButtonClick: () -> Unit
     ) {
         SaveActionTopAppBar(
             navigateBack = {
@@ -92,14 +99,7 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
             },
             title = TodometerResources.strings.addTaskList,
             isSaveButtonEnabled = isSaveButtonEnabled,
-            onSaveButtonClick = {
-                onEvent(
-                    AddTaskListEvent.InsertTaskList(taskListName),
-                )
-                onEvent(
-                    AddTaskListNavigationEvent.NavigateBack,
-                )
-            },
+            onSaveButtonClick = onSaveButtonClick,
             saveButtonTintColor = if (isSaveButtonEnabled) {
                 MaterialTheme.colorScheme.primary
             } else {
