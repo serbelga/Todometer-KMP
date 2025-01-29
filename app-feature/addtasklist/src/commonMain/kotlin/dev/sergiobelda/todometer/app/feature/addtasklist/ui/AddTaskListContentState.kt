@@ -22,6 +22,8 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import dev.sergiobelda.todometer.common.ui.base.BaseContentState
 import dev.sergiobelda.todometer.common.ui.base.BaseEvent
@@ -29,7 +31,6 @@ import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 class AddTaskListContentState internal constructor(
     val snackbarHostState: SnackbarHostState,
 ) : BaseContentState {
-    // TODO: Implement Saver
     var taskListName: String by mutableStateOf("")
         private set
 
@@ -45,12 +46,33 @@ class AddTaskListContentState internal constructor(
 
     suspend fun showSnackbar(message: String) =
         snackbarHostState.showSnackbar(message = message)
+
+    companion object {
+        fun saver(
+            snackbarHostState: SnackbarHostState,
+        ): Saver<AddTaskListContentState, String> = Saver(
+            save = {
+                it.taskListName
+            },
+            restore = {
+                AddTaskListContentState(
+                    snackbarHostState = snackbarHostState,
+                ).apply {
+                    taskListName = it
+                }
+            },
+        )
+    }
 }
 
 @Composable
 fun rememberAddTaskListContentState(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
-): AddTaskListContentState = remember {
+): AddTaskListContentState = rememberSaveable(
+    saver = AddTaskListContentState.saver(
+        snackbarHostState = snackbarHostState,
+    ),
+) {
     AddTaskListContentState(
         snackbarHostState = snackbarHostState,
     )
