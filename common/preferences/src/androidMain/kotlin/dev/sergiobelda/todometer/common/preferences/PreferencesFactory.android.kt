@@ -26,6 +26,6 @@ actual object PreferencesFactory {
 
     actual fun createPreferences(): Preferences =
         Preferences(
-            appContext.dataStore
+            appContext.dataStore,
         )
 }

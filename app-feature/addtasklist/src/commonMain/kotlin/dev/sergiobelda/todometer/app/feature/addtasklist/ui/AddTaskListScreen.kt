@@ -73,7 +73,7 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
                         onEvent(
                             AddTaskListNavigationEvent.NavigateBack,
                         )
-                    }
+                    },
                 )
             },
             content = { paddingValues ->
@@ -89,7 +89,7 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
     @Composable
     private fun AddTaskListTopBar(
         isSaveButtonEnabled: Boolean,
-        onSaveButtonClick: () -> Unit
+        onSaveButtonClick: () -> Unit,
     ) {
         SaveActionTopAppBar(
             navigateBack = {
