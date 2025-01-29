@@ -65,11 +65,12 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Navi
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.base.BaseUI
+import dev.sergiobelda.todometer.common.ui.base.DefaultContentState
 
-data object SettingsScreen : BaseUI<SettingsUIState, SettingsContentState>() {
+data object SettingsScreen : BaseUI<SettingsUIState, DefaultContentState>() {
 
     @Composable
-    override fun rememberContentState(): SettingsContentState = rememberSettingsContentState()
+    override fun rememberContentState(): DefaultContentState = DefaultContentState
 
     @NavDestination(
         destinationId = "settings",
@@ -78,7 +79,7 @@ data object SettingsScreen : BaseUI<SettingsUIState, SettingsContentState>() {
     @Composable
     override fun Content(
         uiState: SettingsUIState,
-        contentState: SettingsContentState,
+        contentState: DefaultContentState,
     ) {
         Scaffold(
             topBar = {

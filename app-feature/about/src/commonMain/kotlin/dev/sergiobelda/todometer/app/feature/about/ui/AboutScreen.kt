@@ -51,11 +51,12 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Gith
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.base.BaseUI
+import dev.sergiobelda.todometer.common.ui.base.DefaultContentState
 
-data object AboutScreen : BaseUI<AboutUIState, AboutContentState>() {
+data object AboutScreen : BaseUI<AboutUIState, DefaultContentState>() {
 
     @Composable
-    override fun rememberContentState(): AboutContentState = rememberAboutContentState()
+    override fun rememberContentState(): DefaultContentState = DefaultContentState
 
     @NavDestination(
         name = "About",
@@ -64,7 +65,7 @@ data object AboutScreen : BaseUI<AboutUIState, AboutContentState>() {
     @Composable
     override fun Content(
         uiState: AboutUIState,
-        contentState: AboutContentState,
+        contentState: DefaultContentState,
     ) {
         Scaffold(
             topBar = {
