@@ -29,7 +29,7 @@ import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
-import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.addTaskListNavigationEventsHandler
+import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.addTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
@@ -40,7 +40,7 @@ import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDest
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeNavDestination
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
-import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventsHandler
+import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsNavDestination
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
@@ -137,12 +137,12 @@ private fun NavGraphBuilder.taskDetailsNode(
 private fun NavGraphBuilder.addTaskListRoute(
     navigateBack: () -> Unit,
 ) {
-    val addTaskListNavigationEventsHandler = addTaskListNavigationEventsHandler(
+    val addTaskListNavigationEventHandler = addTaskListNavigationEventHandler(
         navigateBack = navigateBack,
     )
     composable(navDestination = AddTaskListNavDestination) {
         AddTaskListScreen.NavigationNodeContent(
-            navigationEventsHandler = addTaskListNavigationEventsHandler,
+            navigationEventHandler = addTaskListNavigationEventHandler,
             viewModel = koinViewModel(named<AddTaskListViewModel>()),
         )
     }
@@ -185,12 +185,12 @@ private fun NavGraphBuilder.editTaskNode(
 private fun NavGraphBuilder.settingsNode(
     navigateBack: () -> Unit,
 ) {
-    val settingsNavigationEventsHandler = settingsNavigationEventsHandler(
+    val settingsNavigationEventHandler = settingsNavigationEventHandler(
         navigateBack = navigateBack,
     )
     composable(navDestination = SettingsNavDestination) {
         SettingsScreen.NavigationNodeContent(
-            navigationEventsHandler = settingsNavigationEventsHandler,
+            navigationEventHandler = settingsNavigationEventHandler,
             viewModel = koinViewModel(named<SettingsViewModel>()),
         )
     }

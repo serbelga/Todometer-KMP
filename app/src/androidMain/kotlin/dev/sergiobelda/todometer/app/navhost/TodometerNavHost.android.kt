@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavGraphBuilder
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.navigation.compose.extended.composable
-import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEventsHandler
+import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutViewModel
@@ -41,8 +41,8 @@ internal actual fun NavGraphBuilder.aboutNode(
     ) {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
-        val aboutNavigationEventsHandler = remember {
-            AboutNavigationEventsHandler(
+        val aboutNavigationEventHandler = remember {
+            AboutNavigationEventHandler(
                 navigateBack = navigateBack,
                 navigateToGitHub = { uriHandler.openUri(GitHubUrl) },
                 navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
@@ -51,7 +51,7 @@ internal actual fun NavGraphBuilder.aboutNode(
         }
         AboutScreen.NavigationNodeContent(
             viewModel = koinViewModel(named<AboutViewModel>()),
-            navigationEventsHandler = aboutNavigationEventsHandler,
+            navigationEventHandler = aboutNavigationEventHandler,
         )
     }
 }

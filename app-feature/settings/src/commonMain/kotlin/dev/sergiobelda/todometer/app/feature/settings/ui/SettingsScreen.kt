@@ -58,7 +58,7 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeName
-import dev.sergiobelda.todometer.app.feature.settings.navigation.SettingsNavigationEvents
+import dev.sergiobelda.todometer.app.feature.settings.navigation.SettingsNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
@@ -100,7 +100,7 @@ data object SettingsScreen : BaseUI<SettingsUIState, SettingsContentState>() {
             navigationIcon = {
                 IconButton(
                     onClick = {
-                        onEvent(SettingsNavigationEvents.NavigateBack)
+                        onEvent(SettingsNavigationEvent.NavigateBack)
                     },
                 ) {
                     Icon(
@@ -126,7 +126,7 @@ data object SettingsScreen : BaseUI<SettingsUIState, SettingsContentState>() {
             SettingsChooseAppTheme(
                 appTheme = appTheme,
                 onItemClick = {
-                    onEvent(SettingsEvents.SetAppTheme(it))
+                    onEvent(SettingsEvent.SetAppTheme(it))
                 },
             )
         }

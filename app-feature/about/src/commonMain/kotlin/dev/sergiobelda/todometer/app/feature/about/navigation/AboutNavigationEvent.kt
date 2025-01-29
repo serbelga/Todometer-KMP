@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.navigation
+package dev.sergiobelda.todometer.app.feature.about.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationEventsHandler
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
 
-fun settingsNavigationEventsHandler(
-    navigateBack: () -> Unit,
-): NavigationEventsHandler<SettingsNavigationEvents> = NavigationEventsHandler {
-    when (it) {
-        SettingsNavigationEvents.NavigateBack -> navigateBack()
-    }
+sealed class AboutNavigationEvent : BaseNavigationEvent {
+    data object NavigateBack : AboutNavigationEvent()
+    data object NavigateToGitHub : AboutNavigationEvent()
+    data object NavigateToOpenSourceLicenses : AboutNavigationEvent()
+    data object NavigateToPrivacyPolicy : AboutNavigationEvent()
 }

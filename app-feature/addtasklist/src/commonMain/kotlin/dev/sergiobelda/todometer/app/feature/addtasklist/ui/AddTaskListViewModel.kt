@@ -33,7 +33,7 @@ class AddTaskListViewModel(
 
     override fun handleEvent(event: BaseEvent) {
         when (event) {
-            is AddTaskListEvents.InsertTaskList -> {
+            is AddTaskListEvent.InsertTaskList -> {
                 insertTaskList(event.name)
             }
         }

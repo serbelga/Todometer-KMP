@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.navigation
+package dev.sergiobelda.todometer.common.ui.base.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationEvent
+fun interface BaseNavigationEventHandler<NavigationEvent : BaseNavigationEvent> {
 
-sealed class SettingsNavigationEvents : NavigationEvent {
-    data object NavigateBack : SettingsNavigationEvents()
+    fun handleNavigationEvent(navigationEvent: NavigationEvent)
 }

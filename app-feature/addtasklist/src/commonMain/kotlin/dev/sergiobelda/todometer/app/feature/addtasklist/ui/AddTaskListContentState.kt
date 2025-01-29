@@ -37,7 +37,7 @@ class AddTaskListContentState internal constructor(
 
     override fun handleEvent(event: BaseEvent) {
         when (event) {
-            is AddTaskListEvents.TaskListNameValueChange -> {
+            is AddTaskListEvent.TaskListNameValueChange -> {
                 taskListName = event.value
             }
         }

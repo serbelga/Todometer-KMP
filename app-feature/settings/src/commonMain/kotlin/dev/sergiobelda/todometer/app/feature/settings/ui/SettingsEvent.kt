@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.ui.base.navigation
+package dev.sergiobelda.todometer.app.feature.settings.ui
 
-fun interface NavigationEventsHandler<Event : NavigationEvent> {
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-    fun handleNavigationEvent(event: Event)
+sealed class SettingsEvent : BaseEvent {
+    data class SetAppTheme(val theme: AppTheme) : SettingsEvent()
 }

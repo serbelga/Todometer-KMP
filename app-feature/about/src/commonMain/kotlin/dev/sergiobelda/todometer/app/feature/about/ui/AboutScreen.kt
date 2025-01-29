@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
-import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEvents
+import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Code
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
@@ -85,7 +85,7 @@ data object AboutScreen : BaseUI<AboutUIState, AboutContentState>() {
             navigationIcon = {
                 IconButton(
                     onClick = {
-                        onEvent(AboutNavigationEvents.NavigateBack)
+                        onEvent(AboutNavigationEvent.NavigateBack)
                     },
                 ) {
                     Icon(
@@ -109,15 +109,15 @@ data object AboutScreen : BaseUI<AboutUIState, AboutContentState>() {
             TodometerTitle()
             Spacer(modifier = Modifier.height(72.dp))
             AboutItemCard(
-                onCardClick = { onEvent(AboutNavigationEvents.NavigateToGitHub) },
+                onCardClick = { onEvent(AboutNavigationEvent.NavigateToGitHub) },
                 AboutItem.GitHub,
             )
             AboutItemCard(
-                onCardClick = { onEvent(AboutNavigationEvents.NavigateToPrivacyPolicy) },
+                onCardClick = { onEvent(AboutNavigationEvent.NavigateToPrivacyPolicy) },
                 AboutItem.PrivacyPolicy,
             )
             AboutItemCard(
-                onCardClick = { onEvent(AboutNavigationEvents.NavigateToOpenSourceLicenses) },
+                onCardClick = { onEvent(AboutNavigationEvent.NavigateToOpenSourceLicenses) },
                 AboutItem.OpenSourceLicenses,
             )
         }

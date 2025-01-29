@@ -52,7 +52,7 @@ class SettingsViewModel(
 
     override fun handleEvent(event: BaseEvent) {
         when (event) {
-            is SettingsEvents.SetAppTheme -> {
+            is SettingsEvent.SetAppTheme -> {
                 setAppTheme(event.theme)
             }
         }

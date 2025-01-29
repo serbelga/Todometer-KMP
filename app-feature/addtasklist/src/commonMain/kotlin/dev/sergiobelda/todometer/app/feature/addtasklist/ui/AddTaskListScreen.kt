@@ -35,7 +35,7 @@ import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTit
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
-import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListNavigationEvents
+import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListNavigationEvent
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
@@ -87,17 +87,17 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
         SaveActionTopAppBar(
             navigateBack = {
                 onEvent(
-                    AddTaskListNavigationEvents.NavigateBack,
+                    AddTaskListNavigationEvent.NavigateBack,
                 )
             },
             title = TodometerResources.strings.addTaskList,
             isSaveButtonEnabled = isSaveButtonEnabled,
             onSaveButtonClick = {
                 onEvent(
-                    AddTaskListEvents.InsertTaskList(taskListName),
+                    AddTaskListEvent.InsertTaskList(taskListName),
                 )
                 onEvent(
-                    AddTaskListNavigationEvents.NavigateBack,
+                    AddTaskListNavigationEvent.NavigateBack,
                 )
             },
             saveButtonTintColor = if (isSaveButtonEnabled) {
@@ -124,7 +124,7 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
                 title = TodometerResources.strings.name,
                 value = taskListNameValue,
                 onValueChange = {
-                    onEvent(AddTaskListEvents.TaskListNameValueChange(it))
+                    onEvent(AddTaskListEvent.TaskListNameValueChange(it))
                 },
                 placeholder = { Text(TodometerResources.strings.enterTaskListName) },
                 singleLine = true,
