@@ -30,8 +30,8 @@ import kotlinx.coroutines.launch
 class SettingsViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase,
-) : BaseViewModel<SettingsState>(
-    initialState = SettingsState(),
+) : BaseViewModel<SettingsUIState>(
+    initialUIState = SettingsUIState(),
 ) {
     private val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
@@ -43,7 +43,7 @@ class SettingsViewModel(
     init {
         viewModelScope.launch {
             appTheme.collect { appTheme ->
-                updateState { state ->
+                updateUIState { state ->
                     state.copy(appTheme = appTheme)
                 }
             }

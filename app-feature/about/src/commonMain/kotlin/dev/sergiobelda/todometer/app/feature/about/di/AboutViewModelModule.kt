@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.about.di
 
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutViewModel
-import dev.sergiobelda.todometer.common.ui.di.baseViewModelOf
+import dev.sergiobelda.todometer.common.ui.base.di.baseViewModelOf
 import org.koin.core.module.dsl.named
 import org.koin.dsl.module
 

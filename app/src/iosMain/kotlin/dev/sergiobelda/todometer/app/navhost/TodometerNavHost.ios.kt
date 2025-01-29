@@ -25,7 +25,7 @@ import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 import dev.sergiobelda.todometer.app.feature.about.ui.GitHubUrl
 import dev.sergiobelda.todometer.app.feature.about.ui.PrivacyPolicyUrl
-import dev.sergiobelda.todometer.common.ui.base.navigation.ScreenNavigationNode
+import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 
 internal actual fun NavGraphBuilder.aboutNode(
@@ -43,7 +43,7 @@ internal actual fun NavGraphBuilder.aboutNode(
                 navigateToPrivacyPolicy = { uriHandler.openUri(PrivacyPolicyUrl) },
             )
         }
-        AboutScreen.ScreenNavigationNode(
+        AboutScreen.NavigationNodeContent(
             viewModel = koinViewModel(),
             navigationEventsHandler = aboutNavigationEventsHandler,
         )

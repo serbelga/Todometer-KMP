@@ -43,11 +43,12 @@ import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListNavigationEvents
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseScreen
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
-data object AddTaskListScreen : BaseScreen<AddTaskListState, AddTaskListUIState>() {
+data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentState>() {
+
     @Composable
-    override fun rememberUIState(): AddTaskListUIState = rememberAddTaskListUIState()
+    override fun rememberContentState(): AddTaskListContentState = rememberAddTaskListContentState()
 
     @NavDestination(
         name = "AddTaskList",
@@ -55,22 +56,22 @@ data object AddTaskListScreen : BaseScreen<AddTaskListState, AddTaskListUIState>
     )
     @Composable
     override fun Content(
-        state: AddTaskListState,
         uiState: AddTaskListUIState,
+        contentState: AddTaskListContentState,
     ) {
         var taskListName by rememberSaveable { mutableStateOf("") }
         var taskListNameInputError by remember { mutableStateOf(false) }
 
-        if (state.errorUi != null) {
-            LaunchedEffect(uiState.snackbarHostState) {
-                uiState.showSnackbar(
-                    message = state.errorUi.message ?: "",
+        if (uiState.errorUi != null) {
+            LaunchedEffect(contentState.snackbarHostState) {
+                contentState.showSnackbar(
+                    message = uiState.errorUi.message ?: "",
                 )
             }
         }
 
         Scaffold(
-            snackbarHost = { SnackbarHost(uiState.snackbarHostState) },
+            snackbarHost = { SnackbarHost(contentState.snackbarHostState) },
             topBar = {
                 SaveActionTopAppBar(
                     navigateBack = {
@@ -79,7 +80,7 @@ data object AddTaskListScreen : BaseScreen<AddTaskListState, AddTaskListUIState>
                         )
                     },
                     title = TodometerResources.strings.addTaskList,
-                    isSaveButtonEnabled = !state.isAddingTaskList,
+                    isSaveButtonEnabled = !uiState.isAddingTaskList,
                     onSaveButtonClick = {
                         if (taskListName.isBlank()) {
                             taskListNameInputError = true
@@ -92,7 +93,7 @@ data object AddTaskListScreen : BaseScreen<AddTaskListState, AddTaskListUIState>
                             )
                         }
                     },
-                    saveButtonTintColor = if (state.isAddingTaskList) {
+                    saveButtonTintColor = if (uiState.isAddingTaskList) {
                         MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
                     } else {
                         MaterialTheme.colorScheme.primary
@@ -102,7 +103,7 @@ data object AddTaskListScreen : BaseScreen<AddTaskListState, AddTaskListUIState>
             content = { paddingValues ->
                 AddTaskListContent(
                     paddingValues = paddingValues,
-                    showProgress = state.isAddingTaskList,
+                    showProgress = uiState.isAddingTaskList,
                     taskListNameValue = taskListName,
                     taskListNameInputError = taskListNameInputError,
                     onTaskListNameValueChange = {

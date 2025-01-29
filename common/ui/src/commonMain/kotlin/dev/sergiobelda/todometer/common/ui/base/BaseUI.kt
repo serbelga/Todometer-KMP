@@ -18,34 +18,34 @@ package dev.sergiobelda.todometer.common.ui.base
 
 import androidx.compose.runtime.Composable
 
-abstract class BaseScreen<State : BaseState, UIState : BaseUIState> {
+abstract class BaseUI<UIState : BaseUIState, ContentState : BaseContentState> {
 
-    private lateinit var eventHandler: EventHandler
-
-    @Composable
-    abstract fun rememberUIState(): UIState
+    private lateinit var eventHandler: BaseEventHandler
 
     @Composable
-    fun Screen(
-        viewModel: BaseViewModel<State>,
+    abstract fun rememberContentState(): ContentState
+
+    @Composable
+    fun Content(
+        viewModel: BaseViewModel<UIState>,
         onEvent: (BaseEvent) -> Unit = {},
     ) {
-        val uiState = rememberUIState()
-        eventHandler = EventHandler { event ->
+        val contentState = rememberContentState()
+        eventHandler = BaseEventHandler { event ->
             viewModel.handleEvent(event)
-            uiState.handleEvent(event)
+            contentState.handleEvent(event)
             onEvent.invoke(event)
         }
         Content(
-            state = viewModel.state,
-            uiState = uiState,
+            uiState = viewModel.uiState,
+            contentState = contentState,
         )
     }
 
     @Composable
     protected abstract fun Content(
-        state: State,
         uiState: UIState,
+        contentState: ContentState,
     )
 
     fun onEvent(

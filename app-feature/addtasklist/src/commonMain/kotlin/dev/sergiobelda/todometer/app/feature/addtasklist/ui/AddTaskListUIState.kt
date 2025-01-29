@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,12 @@
 
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
-class AddTaskListUIState internal constructor(
-    val snackbarHostState: SnackbarHostState,
-) : BaseUIState {
-    override fun handleEvent(event: BaseEvent) = Unit
-
-    suspend fun showSnackbar(message: String) =
-        snackbarHostState.showSnackbar(message = message)
-}
-
-@Composable
-fun rememberAddTaskListUIState(
-    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
-): AddTaskListUIState = remember {
-    AddTaskListUIState(
-        snackbarHostState = snackbarHostState,
-    )
-}
+@Immutable
+data class AddTaskListUIState(
+    val isAddingTaskList: Boolean = false,
+    val errorUi: ErrorUi? = null,
+) : BaseUIState

@@ -47,7 +47,7 @@ import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
-import dev.sergiobelda.todometer.common.ui.base.navigation.ScreenNavigationNode
+import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
@@ -141,7 +141,7 @@ private fun NavGraphBuilder.addTaskListRoute(
         navigateBack = navigateBack,
     )
     composable(navDestination = AddTaskListNavDestination) {
-        AddTaskListScreen.ScreenNavigationNode(
+        AddTaskListScreen.NavigationNodeContent(
             navigationEventsHandler = addTaskListNavigationEventsHandler,
             viewModel = koinViewModel(named<AddTaskListViewModel>()),
         )
@@ -189,7 +189,7 @@ private fun NavGraphBuilder.settingsNode(
         navigateBack = navigateBack,
     )
     composable(navDestination = SettingsNavDestination) {
-        SettingsScreen.ScreenNavigationNode(
+        SettingsScreen.NavigationNodeContent(
             navigationEventsHandler = settingsNavigationEventsHandler,
             viewModel = koinViewModel(named<SettingsViewModel>()),
         )

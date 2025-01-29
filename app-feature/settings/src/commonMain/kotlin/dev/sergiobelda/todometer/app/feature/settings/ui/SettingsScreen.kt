@@ -64,12 +64,12 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Chec
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseScreen
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
-data object SettingsScreen : BaseScreen<SettingsState, SettingsUIState>() {
+data object SettingsScreen : BaseUI<SettingsUIState, SettingsContentState>() {
 
     @Composable
-    override fun rememberUIState(): SettingsUIState = rememberSettingsUIState()
+    override fun rememberContentState(): SettingsContentState = rememberSettingsContentState()
 
     @NavDestination(
         destinationId = "settings",
@@ -77,8 +77,8 @@ data object SettingsScreen : BaseScreen<SettingsState, SettingsUIState>() {
     )
     @Composable
     override fun Content(
-        state: SettingsState,
         uiState: SettingsUIState,
+        contentState: SettingsContentState,
     ) {
         Scaffold(
             topBar = {
@@ -86,7 +86,7 @@ data object SettingsScreen : BaseScreen<SettingsState, SettingsUIState>() {
             },
             content = { paddingValues ->
                 SettingsContent(
-                    appTheme = state.appTheme,
+                    appTheme = uiState.appTheme,
                     modifier = Modifier.padding(paddingValues),
                 )
             },

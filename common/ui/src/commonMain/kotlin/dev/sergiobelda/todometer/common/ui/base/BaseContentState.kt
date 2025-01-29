@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.settings.ui
+package dev.sergiobelda.todometer.common.ui.base
 
-import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.ui.base.BaseState
-
-data class SettingsState(
-    val appTheme: AppTheme = AppTheme.FOLLOW_SYSTEM,
-) : BaseState
+interface BaseContentState : BaseEventHandler {
+    override fun handleEvent(event: BaseEvent)
+}

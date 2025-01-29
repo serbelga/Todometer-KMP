@@ -16,6 +16,4 @@
 
 package dev.sergiobelda.todometer.common.ui.base
 
-interface BaseUIState : EventHandler {
-    override fun handleEvent(event: BaseEvent)
-}
+interface BaseUIState

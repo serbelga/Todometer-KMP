@@ -16,14 +16,6 @@
 
 package dev.sergiobelda.todometer.app.feature.about.ui
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 
-class AboutUIState internal constructor() : BaseUIState {
-    override fun handleEvent(event: BaseEvent) = Unit
-}
-
-@Composable
-internal fun rememberAboutUIState(): AboutUIState = remember { AboutUIState() }
+data object AboutUIState : BaseUIState

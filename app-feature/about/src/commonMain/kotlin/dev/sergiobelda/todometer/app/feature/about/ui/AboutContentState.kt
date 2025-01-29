@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.ui.base
+package dev.sergiobelda.todometer.app.feature.about.ui
 
-interface BaseState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import dev.sergiobelda.todometer.common.ui.base.BaseContentState
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+
+class AboutContentState internal constructor() : BaseContentState {
+    override fun handleEvent(event: BaseEvent) = Unit
+}
+
+@Composable
+internal fun rememberAboutContentState(): AboutContentState = remember { AboutContentState() }

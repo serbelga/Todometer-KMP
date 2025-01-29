@@ -16,14 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 
-class SettingsUIState internal constructor() : BaseUIState {
-    override fun handleEvent(event: BaseEvent) = Unit
-}
-
-@Composable
-internal fun rememberSettingsUIState() = remember { SettingsUIState() }
+data class SettingsUIState(
+    val appTheme: AppTheme = AppTheme.FOLLOW_SYSTEM,
+) : BaseUIState

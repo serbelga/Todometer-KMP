@@ -19,8 +19,8 @@ package dev.sergiobelda.todometer.app.feature.about.ui
 import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 
-class AboutViewModel : BaseViewModel<AboutState>(
-    AboutState,
+class AboutViewModel : BaseViewModel<AboutUIState>(
+    AboutUIState,
 ) {
     override fun handleEvent(event: BaseEvent) = Unit
 }

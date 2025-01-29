@@ -17,21 +17,20 @@
 package dev.sergiobelda.todometer.common.ui.base.navigation
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.ui.base.BaseScreen
-import dev.sergiobelda.todometer.common.ui.base.BaseState
+import dev.sergiobelda.todometer.common.ui.base.BaseContentState
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 
 @Composable
-inline fun <State : BaseState, UIState : BaseUIState, reified E : NavigationEvent>
-    BaseScreen<State, UIState>.ScreenNavigationNode(
-        viewModel: BaseViewModel<State>,
-        navigationEventsHandler: NavigationEventsHandler<E>,
-    ) {
-    Screen(
+inline fun <reified Event, UIState, ContentState> BaseUI<UIState, ContentState>.NavigationNodeContent(
+    viewModel: BaseViewModel<UIState>,
+    navigationEventsHandler: NavigationEventsHandler<Event>,
+) where Event : NavigationEvent, UIState : BaseUIState, ContentState : BaseContentState {
+    Content(
         viewModel = viewModel,
         onEvent = {
-            if (it is E) {
+            if (it is Event) {
                 navigationEventsHandler.handleNavigationEvent(it)
             }
         },
@@ -39,11 +38,10 @@ inline fun <State : BaseState, UIState : BaseUIState, reified E : NavigationEven
 }
 
 @Composable
-inline fun <State : BaseState, UIState : BaseUIState>
-    BaseScreen<State, UIState>.ScreenNavigationNode(
-        viewModel: BaseViewModel<State>,
-    ) {
-    ScreenNavigationNode(
+inline fun <UIState, ContentState> BaseUI<UIState, ContentState>.NavigationNodeContent(
+    viewModel: BaseViewModel<UIState>,
+) where UIState : BaseUIState, ContentState : BaseContentState {
+    NavigationNodeContent(
         viewModel = viewModel,
         navigationEventsHandler = NavigationEventsHandler { },
     )

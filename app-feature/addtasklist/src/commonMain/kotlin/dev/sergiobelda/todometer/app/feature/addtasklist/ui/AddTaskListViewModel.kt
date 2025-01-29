@@ -27,8 +27,8 @@ import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase,
-) : BaseViewModel<AddTaskListState>(
-    initialState = AddTaskListState(),
+) : BaseViewModel<AddTaskListUIState>(
+    initialUIState = AddTaskListUIState(),
 ) {
 
     override fun handleEvent(event: BaseEvent) {
@@ -40,20 +40,20 @@ class AddTaskListViewModel(
     }
 
     private fun insertTaskList(name: String) = viewModelScope.launch {
-        updateState { state ->
-            state.copy(isAddingTaskList = true)
+        updateUIState {
+            it.copy(isAddingTaskList = true)
         }
         val result = insertTaskListUseCase.invoke(name)
         result.doIfSuccess {
-            updateState { state ->
-                state.copy(
+            updateUIState {
+                it.copy(
                     isAddingTaskList = false,
                     errorUi = null,
                 )
             }
         }.doIfError { error ->
-            updateState { state ->
-                state.copy(
+            updateUIState {
+                it.copy(
                     isAddingTaskList = false,
                     errorUi = error.mapToErrorUi(),
                 )
