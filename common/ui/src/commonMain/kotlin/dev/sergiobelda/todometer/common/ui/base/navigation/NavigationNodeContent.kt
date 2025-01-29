@@ -23,14 +23,14 @@ import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 
 @Composable
-inline fun <reified NavigationEvent, UIState, ContentState> BaseUI<UIState, ContentState>.NavigationNodeContent(
-    viewModel: BaseViewModel<UIState>,
-    navigationEventHandler: BaseNavigationEventHandler<NavigationEvent>,
-) where NavigationEvent : BaseNavigationEvent, UIState : BaseUIState, ContentState : BaseContentState {
+inline fun <reified N, U, C> BaseUI<U, C>.NavigationNodeContent(
+    viewModel: BaseViewModel<U>,
+    navigationEventHandler: BaseNavigationEventHandler<N>,
+) where N : BaseNavigationEvent, U : BaseUIState, C : BaseContentState {
     Content(
         viewModel = viewModel,
         onEvent = {
-            if (it is NavigationEvent) {
+            if (it is N) {
                 navigationEventHandler.handleNavigationEvent(it)
             }
         },
@@ -38,9 +38,9 @@ inline fun <reified NavigationEvent, UIState, ContentState> BaseUI<UIState, Cont
 }
 
 @Composable
-inline fun <UIState, ContentState> BaseUI<UIState, ContentState>.NavigationNodeContent(
-    viewModel: BaseViewModel<UIState>,
-) where UIState : BaseUIState, ContentState : BaseContentState {
+inline fun <U, C> BaseUI<U, C>.NavigationNodeContent(
+    viewModel: BaseViewModel<U>,
+) where U : BaseUIState, C : BaseContentState {
     NavigationNodeContent(
         viewModel = viewModel,
         navigationEventHandler = BaseNavigationEventHandler { },

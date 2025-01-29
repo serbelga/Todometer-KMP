@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.common.ui.base.navigation
 
-fun interface BaseNavigationEventHandler<NavigationEvent : BaseNavigationEvent> {
+fun interface BaseNavigationEventHandler<N : BaseNavigationEvent> {
 
-    fun handleNavigationEvent(navigationEvent: NavigationEvent)
+    fun handleNavigationEvent(navigationEvent: N)
 }

@@ -21,17 +21,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-abstract class BaseViewModel<UIState : BaseUIState>(
-    initialUIState: UIState,
+abstract class BaseViewModel<U : BaseUIState>(
+    initialUIState: U,
 ) : ViewModel(), BaseEventHandler {
 
     private var _uiState by mutableStateOf(initialUIState)
 
-    val uiState: UIState get() = _uiState
+    val uiState: U get() = _uiState
 
     abstract override fun handleEvent(event: BaseEvent)
 
-    protected fun updateUIState(block: (UIState) -> UIState) {
+    protected fun updateUIState(block: (U) -> U) {
         _uiState = block.invoke(uiState)
     }
 }

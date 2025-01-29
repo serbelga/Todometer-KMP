@@ -25,23 +25,23 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.onOptions
 import org.koin.core.module.dsl.viewModelOf
 
-inline fun <reified UIState : BaseUIState> Module.baseViewModelOf(
-    crossinline constructor: () -> BaseViewModel<UIState>,
-    noinline options: (BeanDefinition<BaseViewModel<UIState>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<UIState>> = viewModelOf(constructor) {
-    bind<BaseViewModel<UIState>>()
+inline fun <reified U : BaseUIState> Module.baseViewModelOf(
+    crossinline constructor: () -> BaseViewModel<U>,
+    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
+): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
+    bind<BaseViewModel<U>>()
 }.onOptions(options)
 
-inline fun <reified UIState : BaseUIState, reified T1> Module.baseViewModelOf(
-    crossinline constructor: (T1) -> BaseViewModel<UIState>,
-    noinline options: (BeanDefinition<BaseViewModel<UIState>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<UIState>> = viewModelOf(constructor) {
-    bind<BaseViewModel<UIState>>()
+inline fun <reified U : BaseUIState, reified T1> Module.baseViewModelOf(
+    crossinline constructor: (T1) -> BaseViewModel<U>,
+    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
+): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
+    bind<BaseViewModel<U>>()
 }.onOptions(options)
 
-inline fun <reified UIState : BaseUIState, reified T1, reified T2> Module.baseViewModelOf(
-    crossinline constructor: (T1, T2) -> BaseViewModel<UIState>,
-    noinline options: (BeanDefinition<BaseViewModel<UIState>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<UIState>> = viewModelOf(constructor) {
-    bind<BaseViewModel<UIState>>()
+inline fun <reified U : BaseUIState, reified T1, reified T2> Module.baseViewModelOf(
+    crossinline constructor: (T1, T2) -> BaseViewModel<U>,
+    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
+): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
+    bind<BaseViewModel<U>>()
 }.onOptions(options)
