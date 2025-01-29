@@ -18,14 +18,30 @@ package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import dev.sergiobelda.todometer.common.ui.base.BaseContentState
 import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
 class AddTaskListContentState internal constructor(
     val snackbarHostState: SnackbarHostState,
 ) : BaseContentState {
-    override fun handleEvent(event: BaseEvent) = Unit
+    // TODO: Implement Saver
+    var taskListName: String by mutableStateOf("")
+        private set
+
+    val isSaveButtonEnabled: Boolean by derivedStateOf { taskListName.isNotBlank() }
+
+    override fun handleEvent(event: BaseEvent) {
+        when (event) {
+            is AddTaskListEvents.TaskListNameValueChange -> {
+                taskListName = event.value
+            }
+        }
+    }
 
     suspend fun showSnackbar(message: String) =
         snackbarHostState.showSnackbar(message = message)

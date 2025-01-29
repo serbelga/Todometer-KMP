@@ -20,4 +20,5 @@ import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
 sealed class AddTaskListEvents : BaseEvent {
     data class InsertTaskList(val name: String) : AddTaskListEvents()
+    data class TaskListNameValueChange(val value: String) : AddTaskListEvents()
 }

@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,11 +27,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -59,9 +53,6 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
         uiState: AddTaskListUIState,
         contentState: AddTaskListContentState,
     ) {
-        var taskListName by rememberSaveable { mutableStateOf("") }
-        var taskListNameInputError by remember { mutableStateOf(false) }
-
         if (uiState.errorUi != null) {
             LaunchedEffect(contentState.snackbarHostState) {
                 contentState.showSnackbar(
@@ -73,74 +64,76 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
         Scaffold(
             snackbarHost = { SnackbarHost(contentState.snackbarHostState) },
             topBar = {
-                SaveActionTopAppBar(
-                    navigateBack = {
-                        onEvent(
-                            AddTaskListNavigationEvents.NavigateBack,
-                        )
-                    },
-                    title = TodometerResources.strings.addTaskList,
-                    isSaveButtonEnabled = !uiState.isAddingTaskList,
-                    onSaveButtonClick = {
-                        if (taskListName.isBlank()) {
-                            taskListNameInputError = true
-                        } else {
-                            onEvent(
-                                AddTaskListEvents.InsertTaskList(taskListName),
-                            )
-                            onEvent(
-                                AddTaskListNavigationEvents.NavigateBack,
-                            )
-                        }
-                    },
-                    saveButtonTintColor = if (uiState.isAddingTaskList) {
-                        MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-                    } else {
-                        MaterialTheme.colorScheme.primary
-                    },
+                AddTaskListTopBar(
+                    isSaveButtonEnabled = !uiState.isAddingTaskList && contentState.isSaveButtonEnabled,
+                    taskListName = contentState.taskListName,
                 )
             },
             content = { paddingValues ->
                 AddTaskListContent(
-                    paddingValues = paddingValues,
                     showProgress = uiState.isAddingTaskList,
-                    taskListNameValue = taskListName,
-                    taskListNameInputError = taskListNameInputError,
-                    onTaskListNameValueChange = {
-                        taskListName = it
-                        taskListNameInputError = false
-                    },
+                    taskListNameValue = contentState.taskListName,
+                    modifier = Modifier.padding(paddingValues),
                 )
             },
         )
     }
-}
 
-@Composable
-private fun AddTaskListContent(
-    paddingValues: PaddingValues,
-    showProgress: Boolean,
-    taskListNameValue: String,
-    taskListNameInputError: Boolean,
-    onTaskListNameValueChange: (String) -> Unit,
-) {
-    if (showProgress) {
-        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-    }
-    Column(modifier = Modifier.padding(paddingValues)) {
-        TodometerTitledTextField(
-            title = TodometerResources.strings.name,
-            value = taskListNameValue,
-            onValueChange = onTaskListNameValueChange,
-            placeholder = { Text(TodometerResources.strings.enterTaskListName) },
-            singleLine = true,
-            isError = taskListNameInputError,
-            errorMessage = TodometerResources.strings.fieldNotEmpty,
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.Sentences,
-                imeAction = ImeAction.Done,
-            ),
-            modifier = Modifier.padding(TextFieldPadding),
+    @Composable
+    private fun AddTaskListTopBar(
+        isSaveButtonEnabled: Boolean,
+        taskListName: String,
+    ) {
+        SaveActionTopAppBar(
+            navigateBack = {
+                onEvent(
+                    AddTaskListNavigationEvents.NavigateBack,
+                )
+            },
+            title = TodometerResources.strings.addTaskList,
+            isSaveButtonEnabled = isSaveButtonEnabled,
+            onSaveButtonClick = {
+                onEvent(
+                    AddTaskListEvents.InsertTaskList(taskListName),
+                )
+                onEvent(
+                    AddTaskListNavigationEvents.NavigateBack,
+                )
+            },
+            saveButtonTintColor = if (isSaveButtonEnabled) {
+                MaterialTheme.colorScheme.primary
+            } else {
+                MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+            },
         )
+    }
+
+    @Composable
+    private fun AddTaskListContent(
+        showProgress: Boolean,
+        taskListNameValue: String,
+        modifier: Modifier,
+    ) {
+        Column(
+            modifier = modifier,
+        ) {
+            if (showProgress) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+            TodometerTitledTextField(
+                title = TodometerResources.strings.name,
+                value = taskListNameValue,
+                onValueChange = {
+                    onEvent(AddTaskListEvents.TaskListNameValueChange(it))
+                },
+                placeholder = { Text(TodometerResources.strings.enterTaskListName) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Done,
+                ),
+                modifier = Modifier.padding(TextFieldPadding),
+            )
+        }
     }
 }

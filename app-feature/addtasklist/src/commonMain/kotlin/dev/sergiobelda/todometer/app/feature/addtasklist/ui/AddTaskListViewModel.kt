@@ -43,20 +43,22 @@ class AddTaskListViewModel(
         updateUIState {
             it.copy(isAddingTaskList = true)
         }
-        val result = insertTaskListUseCase.invoke(name)
-        result.doIfSuccess {
-            updateUIState {
-                it.copy(
-                    isAddingTaskList = false,
-                    errorUi = null,
-                )
-            }
-        }.doIfError { error ->
-            updateUIState {
-                it.copy(
-                    isAddingTaskList = false,
-                    errorUi = error.mapToErrorUi(),
-                )
+        if (name.isNotBlank()) {
+            val result = insertTaskListUseCase.invoke(name)
+            result.doIfSuccess {
+                updateUIState {
+                    it.copy(
+                        isAddingTaskList = false,
+                        errorUi = null,
+                    )
+                }
+            }.doIfError { error ->
+                updateUIState {
+                    it.copy(
+                        isAddingTaskList = false,
+                        errorUi = error.mapToErrorUi(),
+                    )
+                }
             }
         }
     }

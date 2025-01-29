@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.common.ui.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 
 abstract class BaseUI<UIState : BaseUIState, ContentState : BaseContentState> {
 
@@ -31,10 +32,12 @@ abstract class BaseUI<UIState : BaseUIState, ContentState : BaseContentState> {
         onEvent: (BaseEvent) -> Unit = {},
     ) {
         val contentState = rememberContentState()
-        eventHandler = BaseEventHandler { event ->
-            viewModel.handleEvent(event)
-            contentState.handleEvent(event)
-            onEvent.invoke(event)
+        eventHandler = remember {
+            BaseEventHandler { event ->
+                viewModel.handleEvent(event)
+                contentState.handleEvent(event)
+                onEvent.invoke(event)
+            }
         }
         Content(
             uiState = viewModel.uiState,
@@ -48,7 +51,7 @@ abstract class BaseUI<UIState : BaseUIState, ContentState : BaseContentState> {
         contentState: ContentState,
     )
 
-    fun onEvent(
+    protected fun onEvent(
         event: BaseEvent,
     ) {
         eventHandler.handleEvent(event)
