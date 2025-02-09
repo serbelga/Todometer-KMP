@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@ package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 
 import androidx.compose.runtime.Immutable
 import dev.sergiobelda.todometer.common.domain.model.TaskList
+import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 @Immutable
-data class EditTaskListState(
+data class EditTaskListUIState(
     val isLoading: Boolean = false,
     val taskList: TaskList? = null,
     val errorUi: ErrorUi? = null,
-)
+) : BaseUIState

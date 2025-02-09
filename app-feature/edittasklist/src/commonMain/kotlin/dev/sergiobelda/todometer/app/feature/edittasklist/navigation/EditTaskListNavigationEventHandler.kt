@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittasklist.di
+package dev.sergiobelda.todometer.app.feature.edittasklist.navigation
 
-import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.baseViewModelOf
-import org.koin.core.module.dsl.named
-import org.koin.dsl.module
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
 
-val editTaskListViewModelModule = module {
-    baseViewModelOf(::EditTaskListViewModel) {
-        named<EditTaskListViewModel>()
+fun editTaskListNavigationEventHandler(
+    navigateBack: () -> Unit,
+): BaseNavigationEventHandler<EditTaskListNavigationEvent> = BaseNavigationEventHandler {
+    when (it) {
+        EditTaskListNavigationEvent.NavigateBack -> navigateBack()
     }
 }
