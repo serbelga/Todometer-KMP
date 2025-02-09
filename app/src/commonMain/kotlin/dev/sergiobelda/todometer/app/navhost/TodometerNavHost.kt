@@ -27,8 +27,10 @@ import androidx.navigation.compose.NavHost
 import dev.sergiobelda.navigation.compose.extended.NavAction
 import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
+import dev.sergiobelda.todometer.app.feature.addtask.navigation.addTaskNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
+import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskViewModel
 import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.addTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
@@ -162,10 +164,13 @@ private fun NavGraphBuilder.editTaskListNode(
 private fun NavGraphBuilder.addTaskNode(
     navigateBack: () -> Unit,
 ) {
+    val addTaskNavigationEventHandler = addTaskNavigationEventHandler(
+        navigateBack = navigateBack,
+    )
     composable(navDestination = AddTaskNavDestination) {
-        AddTaskScreen(
-            navigateBack = navigateBack,
-            viewModel = koinViewModel(),
+        AddTaskScreen.NavigationNodeContent(
+            navigationEventHandler = addTaskNavigationEventHandler,
+            viewModel = koinViewModel(named<AddTaskViewModel>()),
         )
     }
 }
