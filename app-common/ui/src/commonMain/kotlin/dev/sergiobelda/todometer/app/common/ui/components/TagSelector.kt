@@ -33,7 +33,7 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 @Composable
 fun TagSelector(
     onTagSelected: (Tag) -> Unit,
-    selectedTag: Tag
+    selectedTag: Tag,
 ) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()

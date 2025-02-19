@@ -120,8 +120,8 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
                                 onInsertNewTask = {
                                     onEvent(AddTaskEvent.OnInsertNewTask(it))
                                     onEvent(AddTaskNavigationEvent.NavigateBack)
-                                }
-                            )
+                                },
+                            ),
                         )
                     },
                 )
@@ -203,19 +203,19 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
             LazyColumn {
                 taskTitleItem(
                     taskTitle = taskTitle,
-                    taskTitleInputError = taskTitleInputError
+                    taskTitleInputError = taskTitleInputError,
                 )
                 tagSelectorItem(
-                    selectedTag = selectedTag
+                    selectedTag = selectedTag,
                 )
                 taskDueDateItem(
-                   taskDueDate = taskDueDate
+                    taskDueDate = taskDueDate,
                 )
                 taskChecklistItemsItem(
-                    taskChecklistItems = taskChecklistItems
+                    taskChecklistItems = taskChecklistItems,
                 )
                 taskDescriptionItem(
-                    taskDescription = taskDescription
+                    taskDescription = taskDescription,
                 )
                 item {
                     TodometerDivider()
@@ -252,7 +252,7 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
             FieldTitle(text = TodometerResources.strings.chooseTag)
             TagSelector(
                 onTagSelected = { onEvent(AddTaskEvent.OnTagSelected(it)) },
-                selectedTag
+                selectedTag,
             )
         }
     }

@@ -156,7 +156,7 @@ private fun EditTaskSuccessContent(
                 )
                 TagSelector(
                     onTagSelected = { selectedTag = it },
-                    selectedTag = selectedTag
+                    selectedTag = selectedTag,
                 )
                 Text(
                     text = TodometerResources.strings.dateTime.addStyledOptionalSuffix(),

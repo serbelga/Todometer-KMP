@@ -143,9 +143,9 @@ data class AddTaskContentState internal constructor(
 
     private fun initialValuesUpdated(): Boolean =
         taskTitle.isNotBlank() ||
-                taskDueDate != null ||
-                taskDescription.isNotBlank() ||
-                taskChecklistItems.isNotEmpty()
+            taskDueDate != null ||
+            taskDescription.isNotBlank() ||
+            taskChecklistItems.isNotEmpty()
 
     private fun taskTitleValueChange(event: AddTaskEvent.TaskTitleValueChange) {
         taskTitle = event.value
@@ -179,7 +179,7 @@ data class AddTaskContentState internal constructor(
                     description = taskDescription,
                     dueDate = taskDueDate,
                     taskChecklistItems = taskChecklistItems,
-                )
+                ),
             )
         }
     }
@@ -204,14 +204,14 @@ data class AddTaskContentState internal constructor(
                     snackbarHostState = snackbarHostState,
                     topAppBarState = topAppBarState,
                     datePickerState = datePickerState,
-                    timePickerState = timePickerState
+                    timePickerState = timePickerState,
                 ).apply {
                     taskTitle = map[TaskTitleKey] as String
                     taskDescription = map[TaskDescriptionKey] as String
                     selectedTag = map[SelectedTagKey] as Tag
                     taskDueDate = map[TaskDueDateKey] as? Long
                 }
-            }
+            },
         )
 
         private const val TaskTitleKey: String = "task_title"
@@ -234,7 +234,7 @@ fun rememberAddTaskContentState(
         topAppBarState = topAppBarState,
         datePickerState = datePickerState,
         timePickerState = timePickerState,
-    )
+    ),
 ) {
     AddTaskContentState(
         snackbarHostState = snackbarHostState,

@@ -38,13 +38,13 @@ class AddTaskViewModel(
     }
 
     private fun insertTask(
-        newTask: NewTask
+        newTask: NewTask,
     ) = viewModelScope.launch {
         updateUIState {
             it.copy(isAddingTask = true)
         }
         val result = insertTaskInTaskListSelectedUseCase.invoke(
-            newTask
+            newTask,
         )
         result.doIfSuccess {
             updateUIState {

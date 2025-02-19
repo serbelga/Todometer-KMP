@@ -41,7 +41,7 @@ sealed class AddTaskEvent : BaseEvent {
     data class TaskDescriptionValueChange(val value: String) : AddTaskEvent()
 
     data class OnSaveButtonClick(
-        val onInsertNewTask: (NewTask) -> Unit
+        val onInsertNewTask: (NewTask) -> Unit,
     ) : AddTaskEvent()
     data class OnInsertNewTask(val newTask: NewTask) : AddTaskEvent()
 }

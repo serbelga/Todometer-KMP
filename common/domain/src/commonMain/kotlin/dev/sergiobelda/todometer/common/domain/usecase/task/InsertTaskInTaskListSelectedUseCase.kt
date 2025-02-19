@@ -35,7 +35,7 @@ class InsertTaskInTaskListSelectedUseCase(
      * Creates a new [Task] given a [newTask].
      */
     suspend operator fun invoke(
-        newTask: NewTask
+        newTask: NewTask,
     ): Result<String> {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull() ?: ""
         val result = taskRepository.insertTask(
