@@ -16,12 +16,13 @@
 
 package dev.sergiobelda.todometer.app.feature.addtask.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,21 +32,11 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.material3.rememberTimePickerState
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -66,225 +57,272 @@ import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.components.TagSelector
 import dev.sergiobelda.todometer.app.common.ui.components.TimePickerDialog
 import dev.sergiobelda.todometer.app.common.ui.extensions.addStyledOptionalSuffix
-import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
+import dev.sergiobelda.todometer.app.feature.addtask.navigation.AddTaskNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
 
-// TODO: Resolve LongMethod issue.
-@Suppress("LongMethod")
 @OptIn(ExperimentalMaterial3Api::class)
-@NavDestination(
-    name = "AddTask",
-    destinationId = "addtask",
-    deepLinkUris = ["app://open.add.task"],
-)
-@Composable
-fun AddTaskScreen(
-    navigateBack: () -> Unit,
-    viewModel: AddTaskViewModel,
-) {
-    val lazyListState = rememberLazyListState()
-    val snackbarHostState = remember { SnackbarHostState() }
-    val topAppBarState = rememberTopAppBarState()
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
+data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
 
-    var discardTaskAlertDialogState by remember { mutableStateOf(false) }
+    @Composable
+    override fun rememberContentState(
+        uiState: AddTaskUIState,
+    ): AddTaskContentState = rememberAddTaskContentState()
 
-    var datePickerDialogState by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState()
+    @NavDestination(
+        name = "AddTask",
+        destinationId = "addtask",
+        deepLinkUris = ["app://open.add.task"],
+    )
+    @Composable
+    override fun Content(
+        uiState: AddTaskUIState,
+        contentState: AddTaskContentState,
+    ) {
+        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(contentState.topAppBarState)
 
-    var timePickerDialogState by remember { mutableStateOf(false) }
-    val timePickerState = rememberTimePickerState()
-
-    var taskTitle by rememberSaveable { mutableStateOf("") }
-    var taskTitleInputError by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable { mutableStateOf("") }
-    val tags = enumValues<Tag>()
-    var selectedTag by rememberSaveable { mutableStateOf(tags.firstOrNull() ?: Tag.UNSPECIFIED) }
-    var taskDueDate: Long? by rememberSaveable { mutableStateOf(null) }
-    val taskChecklistItems = mutableStateListOf<String>()
-
-    val onBack: () -> Unit = {
-        if (
-            initialValuesUpdated(
-                taskTitle = taskTitle,
-                taskDueDate = taskDueDate,
-                taskDescription = taskDescription,
-                taskChecklistItems = taskChecklistItems,
-            )
-        ) {
-            discardTaskAlertDialogState = true
-        } else {
-            navigateBack()
-        }
-    }
-    SystemBackHandler(onBack = onBack)
-
-    if (viewModel.state.errorUi != null) {
-        LaunchedEffect(snackbarHostState) {
-            snackbarHostState.showSnackbar(
-                message = viewModel.state.errorUi?.message ?: "",
+        val onBack: () -> Unit = {
+            onEvent(
+                AddTaskEvent.OnBack(
+                    navigateBack = {
+                        onEvent(AddTaskNavigationEvent.NavigateBack)
+                    },
+                ),
             )
         }
-    }
+        SystemBackHandler(onBack = onBack)
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        topBar = {
-            SaveActionTopAppBar(
-                navigateBack = onBack,
-                title = TodometerResources.strings.addTask,
-                isSaveButtonEnabled = !viewModel.state.isAddingTask,
-                onSaveButtonClick = {
-                    if (taskTitle.isBlank()) {
-                        taskTitleInputError = true
-                    } else {
-                        viewModel.insertTask(
-                            taskTitle,
-                            selectedTag,
-                            taskDescription,
-                            taskDueDate,
-                            taskChecklistItems,
+        if (uiState.errorUi != null) {
+            LaunchedEffect(contentState.snackbarHostState) {
+                contentState.showSnackbar(
+                    message = uiState.errorUi.message ?: "",
+                )
+            }
+        }
+
+        Scaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            snackbarHost = { SnackbarHost(contentState.snackbarHostState) },
+            topBar = {
+                AddTaskTopBar(
+                    navigateBack = onBack,
+                    isSaveButtonEnabled = !uiState.isAddingTask,
+                    onSaveButtonClick = {
+                        onEvent(
+                            AddTaskEvent.OnSaveButtonClick(
+                                onInsertNewTask = {
+                                    onEvent(AddTaskEvent.OnInsertNewTask(it))
+                                    onEvent(AddTaskNavigationEvent.NavigateBack)
+                                },
+                            ),
                         )
-                        navigateBack()
-                    }
-                },
-                saveButtonTintColor = if (viewModel.state.isAddingTask) {
-                    MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-                } else {
-                    MaterialTheme.colorScheme.primary
-                },
+                    },
+                )
+            },
+            content = { paddingValues ->
+                AddTaskContent(
+                    showProgress = uiState.isAddingTask,
+                    taskTitle = contentState.taskTitle,
+                    taskTitleInputError = contentState.taskTitleInputError,
+                    selectedTag = contentState.selectedTag,
+                    taskDueDate = contentState.taskDueDate,
+                    taskChecklistItems = contentState.taskChecklistItems.toPersistentList(),
+                    taskDescription = contentState.taskDescription,
+                    modifier = Modifier
+                        .padding(paddingValues),
+                )
+            },
+        )
+        if (contentState.discardTaskAlertDialogVisible) {
+            DiscardTaskAlertDialog(
+                onDismissRequest = { onEvent(AddTaskEvent.OnDismissDiscardTaskDialog) },
+                onConfirmButtonClick = { onEvent(AddTaskNavigationEvent.NavigateBack) },
             )
-        },
-        content = { paddingValues ->
-            if (viewModel.state.isAddingTask) {
+        }
+        if (contentState.datePickerDialogVisible) {
+            DatePickerDialog(
+                onDismissRequest = { onEvent(AddTaskEvent.OnDismissDatePickerDialog) },
+                onConfirm = { onEvent(AddTaskEvent.OnConfirmDatePickerDialog) },
+            ) {
+                DatePicker(state = contentState.datePickerState)
+            }
+        }
+        if (contentState.timePickerDialogVisible) {
+            TimePickerDialog(
+                onDismissRequest = { onEvent(AddTaskEvent.OnDismissTimePickerDialog) },
+                onConfirm = { onEvent(AddTaskEvent.OnConfirmTimePickerDialog) },
+            ) {
+                TimePicker(state = contentState.timePickerState)
+            }
+        }
+    }
+
+    @Composable
+    private fun AddTaskTopBar(
+        navigateBack: () -> Unit,
+        isSaveButtonEnabled: Boolean,
+        onSaveButtonClick: () -> Unit,
+    ) {
+        SaveActionTopAppBar(
+            navigateBack = navigateBack,
+            title = TodometerResources.strings.addTask,
+            isSaveButtonEnabled = isSaveButtonEnabled,
+            onSaveButtonClick = onSaveButtonClick,
+            saveButtonTintColor = if (isSaveButtonEnabled) {
+                MaterialTheme.colorScheme.primary
+            } else {
+                MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+            },
+        )
+    }
+
+    @Composable
+    private inline fun AddTaskContent(
+        showProgress: Boolean,
+        taskTitle: String,
+        taskTitleInputError: Boolean,
+        selectedTag: Tag,
+        taskDueDate: Long?,
+        taskChecklistItems: ImmutableList<String>,
+        taskDescription: String,
+        modifier: Modifier,
+    ) {
+        Column(
+            modifier = modifier,
+        ) {
+            if (showProgress) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-            LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
-                item {
-                    TodometerTitledTextField(
-                        title = TodometerResources.strings.name,
-                        value = taskTitle,
-                        onValueChange = {
-                            taskTitle = it
-                            taskTitleInputError = false
-                        },
-                        placeholder = { Text(TodometerResources.strings.enterTaskName) },
-                        isError = taskTitleInputError,
-                        errorMessage = TodometerResources.strings.fieldNotEmpty,
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Next,
-                        ),
-                        modifier = Modifier.padding(TextFieldPadding),
-                    )
-                }
-                item {
-                    FieldTitle(text = TodometerResources.strings.chooseTag)
-                    TagSelector(selectedTag) { tag ->
-                        selectedTag = tag
-                    }
-                }
-                item {
-                    FieldTitle(text = TodometerResources.strings.dateTime.addStyledOptionalSuffix())
-                    DateTimeSelector(
-                        taskDueDate,
-                        onEnterDateTimeClick = { datePickerDialogState = true },
-                        onDateClick = { datePickerDialogState = true },
-                        onTimeClick = { timePickerDialogState = true },
-                        onClearDateTimeClick = { taskDueDate = null },
-                    )
-                }
-                item {
-                    Text(
-                        text = TodometerResources.strings.checklist.addStyledOptionalSuffix(),
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.labelLarge,
-                        modifier = Modifier.padding(
-                            start = SectionPadding,
-                            top = 16.dp,
-                            end = SectionPadding,
-                        ),
-                    )
-                }
-                itemsIndexed(taskChecklistItems) { index, item ->
-                    TaskChecklistItem(
-                        item,
-                        onDeleteTaskCheckListItem = { taskChecklistItems.removeAt(index) },
-                    )
-                }
-                item {
-                    AddChecklistItemField(
-                        placeholder = { Text(TodometerResources.strings.addElementOptional) },
-                        onAddTaskCheckListItem = { taskChecklistItems.add(it) },
-                    )
-                }
-                item {
-                    TodometerTitledTextField(
-                        title = TodometerResources.strings.description.addStyledOptionalSuffix(),
-                        value = taskDescription,
-                        onValueChange = { taskDescription = it },
-                        placeholder = { Text(TodometerResources.strings.enterDescription) },
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            imeAction = ImeAction.Done,
-                        ),
-                        modifier = Modifier.padding(TextFieldPadding),
-                        maxLines = 4,
-                    )
-                }
+            LazyColumn {
+                taskTitleItem(
+                    taskTitle = taskTitle,
+                    taskTitleInputError = taskTitleInputError,
+                )
+                tagSelectorItem(
+                    selectedTag = selectedTag,
+                )
+                taskDueDateItem(
+                    taskDueDate = taskDueDate,
+                )
+                taskChecklistItemsItem(
+                    taskChecklistItems = taskChecklistItems,
+                )
+                taskDescriptionItem(
+                    taskDescription = taskDescription,
+                )
                 item {
                     TodometerDivider()
                 }
             }
-            if (discardTaskAlertDialogState) {
-                DiscardTaskAlertDialog(
-                    onDismissRequest = { discardTaskAlertDialogState = false },
-                    onConfirmButtonClick = navigateBack,
-                )
-            }
-        },
-    )
-    if (datePickerDialogState) {
-        DatePickerDialog(
-            onDismissRequest = { datePickerDialogState = false },
-            onConfirm = {
-                datePickerDialogState = false
-                taskDueDate =
-                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            },
-        ) {
-            DatePicker(state = datePickerState)
         }
     }
-    if (timePickerDialogState) {
-        TimePickerDialog(
-            onDismissRequest = { timePickerDialogState = false },
-            onConfirm = {
-                timePickerDialogState = false
-                taskDueDate =
-                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            },
-        ) {
-            TimePicker(state = timePickerState)
+
+    private inline fun LazyListScope.taskTitleItem(
+        taskTitle: String,
+        taskTitleInputError: Boolean,
+    ) {
+        item {
+            TodometerTitledTextField(
+                title = TodometerResources.strings.name,
+                value = taskTitle,
+                onValueChange = { onEvent(AddTaskEvent.TaskTitleValueChange(it)) },
+                placeholder = { Text(TodometerResources.strings.enterTaskName) },
+                isError = taskTitleInputError,
+                errorMessage = TodometerResources.strings.fieldNotEmpty,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Next,
+                ),
+                modifier = Modifier.padding(TextFieldPadding),
+            )
+        }
+    }
+
+    private inline fun LazyListScope.tagSelectorItem(
+        selectedTag: Tag,
+    ) {
+        item {
+            FieldTitle(text = TodometerResources.strings.chooseTag)
+            TagSelector(
+                onTagSelected = { onEvent(AddTaskEvent.OnTagSelected(it)) },
+                selectedTag,
+            )
+        }
+    }
+
+    private inline fun LazyListScope.taskDueDateItem(
+        taskDueDate: Long?,
+    ) {
+        item {
+            FieldTitle(text = TodometerResources.strings.dateTime.addStyledOptionalSuffix())
+            DateTimeSelector(
+                taskDueDate,
+                onEnterDateTimeClick = { onEvent(AddTaskEvent.OnShowDatePickerDialog) },
+                onDateClick = { onEvent(AddTaskEvent.OnShowDatePickerDialog) },
+                onTimeClick = { onEvent(AddTaskEvent.OnShowTimePickerDialog) },
+                onClearDateTimeClick = { onEvent(AddTaskEvent.ClearDateTime) },
+            )
+        }
+    }
+
+    private inline fun LazyListScope.taskChecklistItemsItem(
+        taskChecklistItems: ImmutableList<String>,
+    ) {
+        item {
+            Text(
+                text = TodometerResources.strings.checklist.addStyledOptionalSuffix(),
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(
+                    start = SectionPadding,
+                    top = 16.dp,
+                    end = SectionPadding,
+                ),
+            )
+        }
+        itemsIndexed(taskChecklistItems) { index, item ->
+            TaskChecklistItem(
+                onDeleteTaskCheckListItem = {
+                    onEvent(AddTaskEvent.OnDeleteTaskCheckListItem(index))
+                },
+                taskChecklistItem = item,
+            )
+        }
+        item {
+            AddChecklistItemField(
+                onAddTaskCheckListItem = { onEvent(AddTaskEvent.OnAddTaskCheckListItem(it)) },
+            ) {
+                Text(TodometerResources.strings.addElementOptional)
+            }
+        }
+    }
+
+    private inline fun LazyListScope.taskDescriptionItem(
+        taskDescription: String,
+    ) {
+        item {
+            TodometerTitledTextField(
+                title = TodometerResources.strings.description.addStyledOptionalSuffix(),
+                value = taskDescription,
+                onValueChange = { onEvent(AddTaskEvent.TaskDescriptionValueChange(it)) },
+                placeholder = { Text(TodometerResources.strings.enterDescription) },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Done,
+                ),
+                modifier = Modifier.padding(TextFieldPadding),
+                maxLines = 4,
+            )
         }
     }
 }
-
-private fun initialValuesUpdated(
-    taskTitle: String,
-    taskDueDate: Long?,
-    taskDescription: String,
-    taskChecklistItems: List<String>,
-) = taskTitle.isNotBlank() ||
-    taskDueDate != null ||
-    taskDescription.isNotBlank() ||
-    taskChecklistItems.isNotEmpty()
 
 @Composable
 private fun FieldTitle(text: String) {
@@ -310,8 +348,8 @@ private fun FieldTitle(
 
 @Composable
 private fun TaskChecklistItem(
-    taskChecklistItem: String,
     onDeleteTaskCheckListItem: () -> Unit,
+    taskChecklistItem: String,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
