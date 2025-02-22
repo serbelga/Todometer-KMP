@@ -36,7 +36,7 @@ abstract class BaseUI<U : BaseUIState, C : BaseContentState> {
         val contentState = rememberContentState(
             uiState = viewModel.uiState,
         )
-        eventHandler = remember {
+        eventHandler = remember(contentState) {
             BaseEventHandler { event ->
                 viewModel.handleEvent(event)
                 contentState.handleEvent(event)

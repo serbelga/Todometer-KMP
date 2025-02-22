@@ -28,6 +28,7 @@ import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 data class EditTaskListContentState internal constructor(
     private val taskListName: String,
 ) : BaseContentState {
+
     var nameTextFieldValue: String by mutableStateOf(taskListName)
         private set
 
@@ -57,6 +58,7 @@ data class EditTaskListContentState internal constructor(
 fun rememberEditTaskListContentState(
     taskListNameInputValue: String,
 ): EditTaskListContentState = rememberSaveable(
+    inputs = arrayOf(taskListNameInputValue),
     saver = EditTaskListContentState.saver(),
 ) {
     EditTaskListContentState(

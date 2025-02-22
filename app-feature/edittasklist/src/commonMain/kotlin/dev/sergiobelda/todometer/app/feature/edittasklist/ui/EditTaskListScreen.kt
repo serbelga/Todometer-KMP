@@ -42,7 +42,7 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
     override fun rememberContentState(
         uiState: EditTaskListUIState,
     ): EditTaskListContentState = rememberEditTaskListContentState(
-        taskListNameInputValue = uiState.taskList?.name ?: "Default",
+        taskListNameInputValue = uiState.taskList?.name ?: "",
     )
 
     @NavDestination(
