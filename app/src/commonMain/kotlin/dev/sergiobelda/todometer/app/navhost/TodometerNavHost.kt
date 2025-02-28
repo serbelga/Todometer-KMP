@@ -38,8 +38,10 @@ import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
+import dev.sergiobelda.todometer.app.feature.edittasklist.navigation.editTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
+import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListViewModel
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeNavDestination
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventHandler
@@ -153,10 +155,13 @@ private fun NavGraphBuilder.addTaskListRoute(
 private fun NavGraphBuilder.editTaskListNode(
     navigateBack: () -> Unit,
 ) {
+    val editTaskListNavigationEventHandler = editTaskListNavigationEventHandler(
+        navigateBack = navigateBack,
+    )
     composable(navDestination = EditTaskListNavDestination) {
-        EditTaskListScreen(
-            navigateBack = navigateBack,
-            viewModel = koinViewModel(),
+        EditTaskListScreen.NavigationNodeContent(
+            navigationEventHandler = editTaskListNavigationEventHandler,
+            viewModel = koinViewModel(named<EditTaskListViewModel>()),
         )
     }
 }
