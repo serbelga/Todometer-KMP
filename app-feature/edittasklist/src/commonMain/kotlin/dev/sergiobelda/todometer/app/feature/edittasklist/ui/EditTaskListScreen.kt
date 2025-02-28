@@ -71,12 +71,12 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
                         EditTaskListTopBar(
                             isSaveButtonEnabled = !uiState.isLoading,
                             onSaveButtonClick = {
-                                // TODO
                                 onEvent(
                                     EditTaskListEvent.UpdateTaskList(
                                         contentState.nameTextFieldValue,
                                     ),
                                 )
+                                onEvent(EditTaskListNavigationEvent.NavigateBack)
                             },
                         )
                     },
