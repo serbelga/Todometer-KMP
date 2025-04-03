@@ -94,8 +94,9 @@ android {
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
         minSdk = libs.versions.androidMinSdk.get().toInt()
+        targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
-        versionCode = 1290400
+        versionCode = 1290401
         versionName = "android-2.9.0"
     }
 
