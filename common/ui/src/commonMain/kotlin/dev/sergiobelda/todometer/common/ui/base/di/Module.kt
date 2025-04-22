@@ -19,11 +19,18 @@ package dev.sergiobelda.todometer.common.ui.base.di
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import org.koin.core.definition.BeanDefinition
+import org.koin.core.definition.Definition
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.onOptions
 import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.qualifier.Qualifier
+
+inline fun <reified U : BaseUIState> Module.baseViewModel(
+    qualifier: Qualifier? = null,
+    noinline definition: Definition<BaseViewModel<U>>,
+): KoinDefinition<BaseViewModel<U>> = factory(qualifier, definition)
 
 inline fun <reified U : BaseUIState> Module.baseViewModelOf(
     crossinline constructor: () -> BaseViewModel<U>,

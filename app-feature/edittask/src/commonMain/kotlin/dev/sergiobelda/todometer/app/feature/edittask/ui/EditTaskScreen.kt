@@ -51,37 +51,58 @@ import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
+import dev.sergiobelda.todometer.app.feature.edittask.navigation.EditTaskNavigationEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
+import dev.sergiobelda.todometer.common.ui.base.DefaultContentState
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
-@NavDestination(
-    destinationId = "edittask",
-    name = "EditTask",
-    arguments = [
-        NavArgument("taskId", NavArgumentType.String),
-    ],
-)
-@Composable
-fun EditTaskScreen(
-    navigateBack: () -> Unit,
-    viewModel: EditTaskViewModel,
-) {
-    when {
-        viewModel.state.isLoading -> {
-            LoadingScreenDialog(navigateBack)
-        }
+data object EditTaskScreen : BaseUI<EditTaskUIState, DefaultContentState>() {
 
-        !viewModel.state.isLoading -> {
-            viewModel.state.task?.let { task ->
-                EditTaskSuccessContent(
-                    task = task,
-                    navigateBack = navigateBack,
-                    updateTask = { title, tag, description, dueDate ->
-                        viewModel.updateTask(title, tag, description, dueDate)
+    @Composable
+    override fun rememberContentState(
+        uiState: EditTaskUIState,
+    ): DefaultContentState = DefaultContentState
+
+    @NavDestination(
+        destinationId = "edittask",
+        name = "EditTask",
+        arguments = [
+            NavArgument("taskId", NavArgumentType.String),
+        ],
+    )
+    @Composable
+    override fun Content(
+        uiState: EditTaskUIState,
+        contentState: DefaultContentState,
+    ) {
+        when {
+            uiState.isLoading -> {
+                LoadingScreenDialog(
+                    navigateBack = {
+                        onEvent(
+                            EditTaskNavigationEvent.NavigateBack,
+                        )
                     },
                 )
+            }
+
+            !uiState.isLoading -> {
+                uiState.task?.let { task ->
+                    EditTaskSuccessContent(
+                        task = task,
+                        navigateBack = {
+                            onEvent(
+                                EditTaskNavigationEvent.NavigateBack,
+                            )
+                        },
+                        updateTask = { title, tag, description, dueDate ->
+                            // viewModel.updateTask(title, tag, description, dueDate)
+                        },
+                    )
+                }
             }
         }
     }

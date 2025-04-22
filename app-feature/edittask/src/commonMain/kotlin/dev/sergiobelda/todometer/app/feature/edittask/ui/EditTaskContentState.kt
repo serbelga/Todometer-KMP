@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittask.di
+package dev.sergiobelda.todometer.app.feature.edittask.ui
 
-import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.baseViewModel
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import dev.sergiobelda.todometer.common.ui.base.BaseContentState
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-val editTaskViewModelModule = module {
-    baseViewModel(named<EditTaskViewModel>()) { parameters ->
-        EditTaskViewModel(taskId = parameters.get(), get(), get())
+data class EditTaskContentState internal constructor(
+    private val taskTitle: String,
+    private val taskDescription: String,
+) : BaseContentState {
+
+    override fun handleEvent(event: BaseEvent) {
     }
 }
