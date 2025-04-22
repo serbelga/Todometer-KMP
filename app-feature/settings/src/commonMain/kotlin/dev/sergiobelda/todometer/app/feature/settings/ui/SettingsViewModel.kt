@@ -53,12 +53,14 @@ class SettingsViewModel(
     override fun handleEvent(event: BaseEvent) {
         when (event) {
             is SettingsEvent.SetAppTheme -> {
-                setAppTheme(event.theme)
+                setAppTheme(event)
             }
         }
     }
 
-    private fun setAppTheme(theme: AppTheme) = viewModelScope.launch {
-        setAppThemeUseCase(theme)
+    private fun setAppTheme(
+        event: SettingsEvent.SetAppTheme,
+    ) = viewModelScope.launch {
+        setAppThemeUseCase(event.theme)
     }
 }

@@ -66,7 +66,7 @@ data class AddTaskListContentState internal constructor(
 }
 
 @Composable
-fun rememberAddTaskListContentState(
+internal fun rememberAddTaskListContentState(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ): AddTaskListContentState = rememberSaveable(
     saver = AddTaskListContentState.saver(

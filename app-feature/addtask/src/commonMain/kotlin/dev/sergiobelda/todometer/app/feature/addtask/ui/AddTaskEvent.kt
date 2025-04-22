@@ -25,23 +25,23 @@ sealed class AddTaskEvent : BaseEvent {
         val navigateBack: () -> Unit,
     ) : AddTaskEvent()
 
-    data object OnConfirmDatePickerDialog : AddTaskEvent()
-    data object OnDismissDatePickerDialog : AddTaskEvent()
-    data object OnShowDatePickerDialog : AddTaskEvent()
-    data object OnConfirmTimePickerDialog : AddTaskEvent()
-    data object OnDismissTimePickerDialog : AddTaskEvent()
-    data object OnShowTimePickerDialog : AddTaskEvent()
-    data object OnDismissDiscardTaskDialog : AddTaskEvent()
+    data object ConfirmDatePickerDialog : AddTaskEvent()
+    data object DismissDatePickerDialog : AddTaskEvent()
+    data object ShowDatePickerDialog : AddTaskEvent()
+    data object ConfirmTimePickerDialog : AddTaskEvent()
+    data object DismissTimePickerDialog : AddTaskEvent()
+    data object ShowTimePickerDialog : AddTaskEvent()
+    data object DismissDiscardTaskDialog : AddTaskEvent()
     data object ClearDateTime : AddTaskEvent()
 
     data class TaskTitleValueChange(val value: String) : AddTaskEvent()
-    data class OnTagSelected(val tag: Tag) : AddTaskEvent()
-    data class OnAddTaskCheckListItem(val item: String) : AddTaskEvent()
-    data class OnDeleteTaskCheckListItem(val index: Int) : AddTaskEvent()
+    data class SelectTag(val tag: Tag) : AddTaskEvent()
+    data class AddTaskCheckListItem(val item: String) : AddTaskEvent()
+    data class DeleteTaskCheckListItem(val index: Int) : AddTaskEvent()
     data class TaskDescriptionValueChange(val value: String) : AddTaskEvent()
 
-    data class OnSaveButtonClick(
+    data class SaveButtonClick(
         val onInsertNewTask: (NewTask) -> Unit,
     ) : AddTaskEvent()
-    data class OnInsertNewTask(val newTask: NewTask) : AddTaskEvent()
+    data class InsertNewTask(val newTask: NewTask) : AddTaskEvent()
 }

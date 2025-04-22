@@ -62,13 +62,15 @@ class EditTaskListViewModel(
 
     override fun handleEvent(event: BaseEvent) {
         when (event) {
-            is EditTaskListEvent.UpdateTaskList -> updateTaskList(event.name)
+            is EditTaskListEvent.UpdateTaskList -> updateTaskList(event)
         }
     }
 
-    private fun updateTaskList(name: String) = viewModelScope.launch {
+    private fun updateTaskList(
+        event: EditTaskListEvent.UpdateTaskList,
+    ) = viewModelScope.launch {
         uiState.taskList?.let {
-            updateTaskListUseCase(it.copy(name = name))
+            updateTaskListUseCase(it.copy(name = event.name))
         }
     }
 }

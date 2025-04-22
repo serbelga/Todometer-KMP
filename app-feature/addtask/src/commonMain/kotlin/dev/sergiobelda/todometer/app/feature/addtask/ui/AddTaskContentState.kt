@@ -78,20 +78,20 @@ data class AddTaskContentState internal constructor(
     override fun handleEvent(event: BaseEvent) {
         when (event) {
             is AddTaskEvent.OnBack -> checkOnBack(event)
-            is AddTaskEvent.OnConfirmDatePickerDialog -> confirmDatePickerDialog()
-            is AddTaskEvent.OnDismissDatePickerDialog -> dismissDatePickerDialog()
-            is AddTaskEvent.OnShowDatePickerDialog -> showDatePickerDialog()
-            is AddTaskEvent.OnConfirmTimePickerDialog -> confirmTimePickerDialog()
-            is AddTaskEvent.OnDismissTimePickerDialog -> dismissTimePickerDialog()
-            is AddTaskEvent.OnShowTimePickerDialog -> showTimePickerDialog()
-            is AddTaskEvent.OnDismissDiscardTaskDialog -> dismissDiscardTaskDialog()
+            is AddTaskEvent.ConfirmDatePickerDialog -> confirmDatePickerDialog()
+            is AddTaskEvent.DismissDatePickerDialog -> dismissDatePickerDialog()
+            is AddTaskEvent.ShowDatePickerDialog -> showDatePickerDialog()
+            is AddTaskEvent.ConfirmTimePickerDialog -> confirmTimePickerDialog()
+            is AddTaskEvent.DismissTimePickerDialog -> dismissTimePickerDialog()
+            is AddTaskEvent.ShowTimePickerDialog -> showTimePickerDialog()
+            is AddTaskEvent.DismissDiscardTaskDialog -> dismissDiscardTaskDialog()
             is AddTaskEvent.ClearDateTime -> clearDateTime()
             is AddTaskEvent.TaskTitleValueChange -> taskTitleValueChange(event)
-            is AddTaskEvent.OnTagSelected -> selectTag(event)
-            is AddTaskEvent.OnAddTaskCheckListItem -> addTaskCheckListItem(event)
-            is AddTaskEvent.OnDeleteTaskCheckListItem -> deleteTaskCheckListItem(event)
+            is AddTaskEvent.SelectTag -> selectTag(event)
+            is AddTaskEvent.AddTaskCheckListItem -> addTaskCheckListItem(event)
+            is AddTaskEvent.DeleteTaskCheckListItem -> deleteTaskCheckListItem(event)
             is AddTaskEvent.TaskDescriptionValueChange -> taskDescriptionValueChange(event)
-            is AddTaskEvent.OnSaveButtonClick -> onSaveButtonClick(event)
+            is AddTaskEvent.SaveButtonClick -> onSaveButtonClick(event)
         }
     }
 
@@ -151,15 +151,15 @@ data class AddTaskContentState internal constructor(
         taskTitle = event.value
     }
 
-    private fun selectTag(event: AddTaskEvent.OnTagSelected) {
+    private fun selectTag(event: AddTaskEvent.SelectTag) {
         selectedTag = event.tag
     }
 
-    private fun addTaskCheckListItem(event: AddTaskEvent.OnAddTaskCheckListItem) {
+    private fun addTaskCheckListItem(event: AddTaskEvent.AddTaskCheckListItem) {
         taskChecklistItems.add(event.item)
     }
 
-    private fun deleteTaskCheckListItem(event: AddTaskEvent.OnDeleteTaskCheckListItem) {
+    private fun deleteTaskCheckListItem(event: AddTaskEvent.DeleteTaskCheckListItem) {
         taskChecklistItems.removeAt(index = event.index)
     }
 
@@ -167,7 +167,7 @@ data class AddTaskContentState internal constructor(
         taskDescription = event.value
     }
 
-    private fun onSaveButtonClick(event: AddTaskEvent.OnSaveButtonClick) {
+    private fun onSaveButtonClick(event: AddTaskEvent.SaveButtonClick) {
         taskTitleInputError = false
         if (taskTitle.isBlank()) {
             taskTitleInputError = true
@@ -223,7 +223,7 @@ data class AddTaskContentState internal constructor(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun rememberAddTaskContentState(
+internal fun rememberAddTaskContentState(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     topAppBarState: TopAppBarState = rememberTopAppBarState(),
     datePickerState: DatePickerState = rememberDatePickerState(),

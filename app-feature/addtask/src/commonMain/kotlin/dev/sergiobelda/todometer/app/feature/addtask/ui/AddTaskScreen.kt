@@ -116,9 +116,9 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
                     isSaveButtonEnabled = !uiState.isAddingTask,
                     onSaveButtonClick = {
                         onEvent(
-                            AddTaskEvent.OnSaveButtonClick(
+                            AddTaskEvent.SaveButtonClick(
                                 onInsertNewTask = {
-                                    onEvent(AddTaskEvent.OnInsertNewTask(it))
+                                    onEvent(AddTaskEvent.InsertNewTask(it))
                                     onEvent(AddTaskNavigationEvent.NavigateBack)
                                 },
                             ),
@@ -142,22 +142,22 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
         )
         if (contentState.discardTaskAlertDialogVisible) {
             DiscardTaskAlertDialog(
-                onDismissRequest = { onEvent(AddTaskEvent.OnDismissDiscardTaskDialog) },
+                onDismissRequest = { onEvent(AddTaskEvent.DismissDiscardTaskDialog) },
                 onConfirmButtonClick = { onEvent(AddTaskNavigationEvent.NavigateBack) },
             )
         }
         if (contentState.datePickerDialogVisible) {
             DatePickerDialog(
-                onDismissRequest = { onEvent(AddTaskEvent.OnDismissDatePickerDialog) },
-                onConfirm = { onEvent(AddTaskEvent.OnConfirmDatePickerDialog) },
+                onDismissRequest = { onEvent(AddTaskEvent.DismissDatePickerDialog) },
+                onConfirm = { onEvent(AddTaskEvent.ConfirmDatePickerDialog) },
             ) {
                 DatePicker(state = contentState.datePickerState)
             }
         }
         if (contentState.timePickerDialogVisible) {
             TimePickerDialog(
-                onDismissRequest = { onEvent(AddTaskEvent.OnDismissTimePickerDialog) },
-                onConfirm = { onEvent(AddTaskEvent.OnConfirmTimePickerDialog) },
+                onDismissRequest = { onEvent(AddTaskEvent.DismissTimePickerDialog) },
+                onConfirm = { onEvent(AddTaskEvent.ConfirmTimePickerDialog) },
             ) {
                 TimePicker(state = contentState.timePickerState)
             }
@@ -175,11 +175,6 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
             title = TodometerResources.strings.addTask,
             isSaveButtonEnabled = isSaveButtonEnabled,
             onSaveButtonClick = onSaveButtonClick,
-            saveButtonTintColor = if (isSaveButtonEnabled) {
-                MaterialTheme.colorScheme.primary
-            } else {
-                MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-            },
         )
     }
 
@@ -251,8 +246,8 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
         item {
             FieldTitle(text = TodometerResources.strings.chooseTag)
             TagSelector(
-                onTagSelected = { onEvent(AddTaskEvent.OnTagSelected(it)) },
                 selectedTag,
+                onTagSelected = { onEvent(AddTaskEvent.SelectTag(it)) },
             )
         }
     }
@@ -264,9 +259,9 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
             FieldTitle(text = TodometerResources.strings.dateTime.addStyledOptionalSuffix())
             DateTimeSelector(
                 taskDueDate,
-                onEnterDateTimeClick = { onEvent(AddTaskEvent.OnShowDatePickerDialog) },
-                onDateClick = { onEvent(AddTaskEvent.OnShowDatePickerDialog) },
-                onTimeClick = { onEvent(AddTaskEvent.OnShowTimePickerDialog) },
+                onEnterDateTimeClick = { onEvent(AddTaskEvent.ShowDatePickerDialog) },
+                onDateClick = { onEvent(AddTaskEvent.ShowDatePickerDialog) },
+                onTimeClick = { onEvent(AddTaskEvent.ShowTimePickerDialog) },
                 onClearDateTimeClick = { onEvent(AddTaskEvent.ClearDateTime) },
             )
         }
@@ -290,14 +285,14 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
         itemsIndexed(taskChecklistItems) { index, item ->
             TaskChecklistItem(
                 onDeleteTaskCheckListItem = {
-                    onEvent(AddTaskEvent.OnDeleteTaskCheckListItem(index))
+                    onEvent(AddTaskEvent.DeleteTaskCheckListItem(index))
                 },
                 taskChecklistItem = item,
             )
         }
         item {
             AddChecklistItemField(
-                onAddTaskCheckListItem = { onEvent(AddTaskEvent.OnAddTaskCheckListItem(it)) },
+                onAddTaskCheckListItem = { onEvent(AddTaskEvent.AddTaskCheckListItem(it)) },
             ) {
                 Text(TodometerResources.strings.addElementOptional)
             }

@@ -16,16 +16,13 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
-import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
@@ -33,10 +30,11 @@ class EditTaskViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
-) : ViewModel() {
-
-    var state by mutableStateOf(EditTaskState(isLoading = true))
-        private set
+) : BaseViewModel<EditTaskUIState>(
+    initialUIState = EditTaskUIState(
+        isLoading = true,
+    ),
+) {
 
     init {
         getTask()
@@ -45,34 +43,41 @@ class EditTaskViewModel(
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                state = state.copy(
-                    isLoading = false,
-                    task = task,
-                    errorUi = null,
-                )
+                updateUIState {
+                    it.copy(
+                        isLoading = false,
+                        task = task,
+                        errorUi = null,
+                    )
+                }
             }.doIfError { error ->
-                state = state.copy(
-                    isLoading = false,
-                    task = null,
-                    errorUi = error.mapToErrorUi(),
-                )
+                updateUIState {
+                    it.copy(
+                        isLoading = false,
+                        task = null,
+                        errorUi = error.mapToErrorUi(),
+                    )
+                }
             }
         }
     }
 
-    fun updateTask(
-        title: String,
-        tag: Tag,
-        description: String? = null,
-        dueDate: Long? = null,
+    override fun handleEvent(event: BaseEvent) {
+        when (event) {
+            is EditTaskEvent.UpdateTask -> updateTask(event)
+        }
+    }
+
+    private fun updateTask(
+        event: EditTaskEvent.UpdateTask,
     ) = viewModelScope.launch {
-        state.task?.let {
+        uiState.task?.let {
             updateTaskUseCase(
                 it.copy(
-                    title = title,
-                    tag = tag,
-                    description = description,
-                    dueDate = dueDate,
+                    title = event.title,
+                    tag = event.tag,
+                    description = event.description,
+                    dueDate = event.dueDate,
                 ),
             )
         }
