@@ -34,7 +34,7 @@ data class EditTaskListContentState internal constructor(
 
     override fun handleEvent(event: BaseEvent) {
         when (event) {
-            is EditTaskListEvent.TaskListNameValueChange -> {
+            is EditTaskListEvent.NameTextFieldValueChange -> {
                 nameTextFieldValue = event.value
             }
         }
@@ -56,12 +56,12 @@ data class EditTaskListContentState internal constructor(
 
 @Composable
 internal fun rememberEditTaskListContentState(
-    taskListNameInputValue: String,
+    taskListName: String,
 ): EditTaskListContentState = rememberSaveable(
-    inputs = arrayOf(taskListNameInputValue),
+    inputs = arrayOf(taskListName),
     saver = EditTaskListContentState.saver(),
 ) {
     EditTaskListContentState(
-        taskListName = taskListNameInputValue,
+        taskListName = taskListName,
     )
 }

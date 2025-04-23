@@ -20,5 +20,5 @@ import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
 sealed class EditTaskListEvent : BaseEvent {
     data class UpdateTaskList(val name: String) : EditTaskListEvent()
-    data class TaskListNameValueChange(val value: String) : EditTaskListEvent()
+    data class NameTextFieldValueChange(val value: String) : EditTaskListEvent()
 }

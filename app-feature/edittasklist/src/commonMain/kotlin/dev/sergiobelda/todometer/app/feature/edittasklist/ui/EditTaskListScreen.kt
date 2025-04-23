@@ -42,7 +42,7 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
     override fun rememberContentState(
         uiState: EditTaskListUIState,
     ): EditTaskListContentState = rememberEditTaskListContentState(
-        taskListNameInputValue = uiState.taskList?.name ?: "",
+        taskListName = uiState.taskList?.name ?: "",
     )
 
     @NavDestination(
@@ -82,7 +82,7 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
                     },
                     content = { paddingValues ->
                         EditTaskListContent(
-                            taskListNameValue = contentState.nameTextFieldValue,
+                            nameTextFieldValue = contentState.nameTextFieldValue,
                             modifier = Modifier
                                 .padding(paddingValues),
                         )
@@ -116,7 +116,7 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
 
     @Composable
     private fun EditTaskListContent(
-        taskListNameValue: String,
+        nameTextFieldValue: String,
         modifier: Modifier,
     ) {
         Column(
@@ -124,9 +124,9 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
         ) {
             TodometerTitledTextField(
                 title = TodometerResources.strings.name,
-                value = taskListNameValue,
+                value = nameTextFieldValue,
                 onValueChange = {
-                    onEvent(EditTaskListEvent.TaskListNameValueChange(it))
+                    onEvent(EditTaskListEvent.NameTextFieldValueChange(it))
                 },
                 placeholder = { Text(TodometerResources.strings.enterTaskListName) },
                 singleLine = true,
