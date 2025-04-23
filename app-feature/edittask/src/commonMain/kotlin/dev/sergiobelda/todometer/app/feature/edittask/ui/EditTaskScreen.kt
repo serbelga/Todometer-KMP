@@ -56,15 +56,17 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.base.BaseUI
-import dev.sergiobelda.todometer.common.ui.base.DefaultContentState
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
-data object EditTaskScreen : BaseUI<EditTaskUIState, DefaultContentState>() {
+data object EditTaskScreen : BaseUI<EditTaskUIState, EditTaskContentState>() {
 
     @Composable
     override fun rememberContentState(
         uiState: EditTaskUIState,
-    ): DefaultContentState = DefaultContentState
+    ): EditTaskContentState = rememberEditTaskContentState(
+        taskTitle = uiState.task?.title ?: "",
+        taskDescription = uiState.task?.description ?: "",
+    )
 
     @NavDestination(
         destinationId = "edittask",
@@ -76,7 +78,7 @@ data object EditTaskScreen : BaseUI<EditTaskUIState, DefaultContentState>() {
     @Composable
     override fun Content(
         uiState: EditTaskUIState,
-        contentState: DefaultContentState,
+        contentState: EditTaskContentState,
     ) {
         when {
             uiState.isLoading -> {
@@ -92,6 +94,8 @@ data object EditTaskScreen : BaseUI<EditTaskUIState, DefaultContentState>() {
             !uiState.isLoading -> {
                 uiState.task?.let { task ->
                     EditTaskSuccessContent(
+                        titleTextFieldValue = contentState.titleTextFieldValue,
+                        descriptionTextFieldValue = contentState.descriptionTextFieldValue,
                         task = task,
                         navigateBack = {
                             onEvent(
@@ -113,17 +117,13 @@ data object EditTaskScreen : BaseUI<EditTaskUIState, DefaultContentState>() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditTaskSuccessContent(
+    titleTextFieldValue: String,
+    descriptionTextFieldValue: String,
     task: Task,
     navigateBack: () -> Unit,
     updateTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit,
 ) {
-    var taskTitle by rememberSaveable { mutableStateOf(task.title) }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable {
-        mutableStateOf(
-            task.description ?: "",
-        )
-    }
     var selectedTag by rememberSaveable { mutableStateOf(task.tag) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(task.dueDate) }
 
@@ -142,11 +142,11 @@ private fun EditTaskSuccessContent(
                 navigateBack = navigateBack,
                 title = TodometerResources.strings.editTask,
                 onSaveButtonClick = {
-                    if (taskTitle.isBlank()) {
+                    if (titleTextFieldValue.isBlank()) {
                         taskTitleInputError = true
                     } else {
-                        updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
-                        navigateBack()
+                        // updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
+                        // navigateBack()
                     }
                 },
             )
@@ -155,10 +155,10 @@ private fun EditTaskSuccessContent(
             Column(modifier = Modifier.padding(paddingValues)) {
                 TodometerTitledTextField(
                     title = TodometerResources.strings.name,
-                    value = taskTitle,
+                    value = titleTextFieldValue,
                     onValueChange = {
-                        taskTitle = it
-                        taskTitleInputError = false
+                        // taskTitle = it
+                        // taskTitleInputError = false
                     },
                     placeholder = { Text(TodometerResources.strings.enterTaskName) },
                     isError = taskTitleInputError,
@@ -194,8 +194,10 @@ private fun EditTaskSuccessContent(
                 )
                 TodometerTitledTextField(
                     title = TodometerResources.strings.description.addStyledOptionalSuffix(),
-                    value = taskDescription,
-                    onValueChange = { taskDescription = it },
+                    value = descriptionTextFieldValue,
+                    onValueChange = {
+                        // taskDescription = it
+                    },
                     placeholder = { Text(TodometerResources.strings.enterDescription) },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,

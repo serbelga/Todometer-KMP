@@ -29,7 +29,7 @@ abstract class BaseViewModel<U : BaseUIState>(
 
     val uiState: U get() = _uiState
 
-    abstract override fun handleEvent(event: BaseEvent)
+    override fun handleEvent(event: BaseEvent) = Unit
 
     protected fun updateUIState(block: (U) -> U) {
         _uiState = block.invoke(uiState)

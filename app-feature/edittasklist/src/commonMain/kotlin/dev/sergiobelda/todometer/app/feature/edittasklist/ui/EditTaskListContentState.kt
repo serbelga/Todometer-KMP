@@ -41,7 +41,7 @@ data class EditTaskListContentState internal constructor(
     }
 
     companion object {
-        fun saver(): Saver<EditTaskListContentState, String> = Saver(
+        internal fun saver(): Saver<EditTaskListContentState, String> = Saver(
             save = {
                 it.nameTextFieldValue
             },
@@ -55,7 +55,7 @@ data class EditTaskListContentState internal constructor(
 }
 
 @Composable
-fun rememberEditTaskListContentState(
+internal fun rememberEditTaskListContentState(
     taskListNameInputValue: String,
 ): EditTaskListContentState = rememberSaveable(
     inputs = arrayOf(taskListNameInputValue),

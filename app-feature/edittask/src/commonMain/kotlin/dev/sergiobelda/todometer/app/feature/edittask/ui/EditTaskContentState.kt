@@ -16,6 +16,12 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.mapSaver
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import dev.sergiobelda.todometer.common.ui.base.BaseContentState
 import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
@@ -24,6 +30,46 @@ data class EditTaskContentState internal constructor(
     private val taskDescription: String,
 ) : BaseContentState {
 
+    var titleTextFieldValue: String by mutableStateOf(taskTitle)
+        private set
+
+    var descriptionTextFieldValue: String by mutableStateOf(taskDescription)
+        private set
+
     override fun handleEvent(event: BaseEvent) {
     }
+
+    companion object {
+        internal fun saver() = mapSaver(
+            save = {
+                mapOf(
+                    TaskTitleKey to it.taskTitle,
+                    TaskDescriptionKey to it.taskTitle,
+                )
+            },
+            restore = {
+                EditTaskContentState(
+                    taskTitle = it[TaskTitleKey] as String,
+                    taskDescription = it[TaskDescriptionKey] as String,
+                )
+            },
+        )
+
+        private const val TaskTitleKey: String = "TASK_TITLE"
+        private const val TaskDescriptionKey: String = "TASK_DESCRIPTION"
+    }
+}
+
+@Composable
+internal fun rememberEditTaskContentState(
+    taskTitle: String,
+    taskDescription: String,
+): EditTaskContentState = rememberSaveable(
+    inputs = arrayOf(taskTitle, taskDescription),
+    saver = EditTaskContentState.saver(),
+) {
+    EditTaskContentState(
+        taskTitle = taskTitle,
+        taskDescription = taskDescription,
+    )
 }

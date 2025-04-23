@@ -17,9 +17,7 @@
 package dev.sergiobelda.todometer.common.ui.base
 
 interface BaseContentState : BaseEventHandler {
-    override fun handleEvent(event: BaseEvent)
-}
-
-data object DefaultContentState : BaseContentState {
     override fun handleEvent(event: BaseEvent) = Unit
 }
+
+data object DefaultContentState : BaseContentState

@@ -189,7 +189,7 @@ private fun NavGraphBuilder.editTaskNode(
         val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
         EditTaskScreen.NavigationNodeContent(
             navigationEventHandler = BaseNavigationEventHandler { },
-            viewModel = koinViewModel(named<EditTaskViewModel>()) { parametersOf(taskId) },
+            viewModel = koinViewModel<EditTaskViewModel> { parametersOf(taskId) },
         )
     }
 }

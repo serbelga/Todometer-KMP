@@ -27,10 +27,10 @@ import org.koin.core.module.dsl.onOptions
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.Qualifier
 
-inline fun <reified U : BaseUIState> Module.baseViewModel(
+inline fun <reified T : BaseViewModel<*>> Module.baseViewModel(
     qualifier: Qualifier? = null,
-    noinline definition: Definition<BaseViewModel<U>>,
-): KoinDefinition<BaseViewModel<U>> = factory(qualifier, definition)
+    noinline definition: Definition<T>,
+): KoinDefinition<T> = factory(qualifier, definition)
 
 inline fun <reified U : BaseUIState> Module.baseViewModelOf(
     crossinline constructor: () -> BaseViewModel<U>,
