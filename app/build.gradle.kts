@@ -2,6 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
@@ -115,15 +116,15 @@ android {
         lint {
             abortOnError = false
         }
-        create("benchmark") {
-            initWith(buildTypes.getByName("release"))
-            signingConfig = signingConfigs.getByName("debug")
-            matchingFallbacks += listOf("release")
-            isDebuggable = false
-        }
     }
     kotlin {
         jvmToolchain(17)
+    }
+
+    dependencies {
+        baselineProfile(projects.macrobenchmark)
+
+        implementation(libs.androidx.profileinstaller)
     }
 }
 
