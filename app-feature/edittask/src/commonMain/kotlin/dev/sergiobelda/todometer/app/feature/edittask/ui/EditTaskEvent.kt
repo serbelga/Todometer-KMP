@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittasklist.ui
+package dev.sergiobelda.todometer.app.feature.edittask.ui
 
+import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-sealed class EditTaskListEvent : BaseEvent {
-    data class UpdateTaskList(val name: String) : EditTaskListEvent()
-    data class NameTextFieldValueChange(val value: String) : EditTaskListEvent()
+sealed class EditTaskEvent : BaseEvent {
+    data class UpdateTask(
+        val title: String,
+        val tag: Tag,
+        val description: String? = null,
+        val dueDate: Long? = null,
+    ) : EditTaskEvent()
 }

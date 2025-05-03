@@ -38,6 +38,7 @@ import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
+import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskViewModel
 import dev.sergiobelda.todometer.app.feature.edittasklist.navigation.editTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
@@ -51,6 +52,7 @@ import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
 import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -185,9 +187,9 @@ private fun NavGraphBuilder.editTaskNode(
 ) {
     composable(navDestination = EditTaskNavDestination) { navBackStackEntry ->
         val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
-        EditTaskScreen(
-            navigateBack = navigateBack,
-            viewModel = koinViewModel { parametersOf(taskId) },
+        EditTaskScreen.NavigationNodeContent(
+            navigationEventHandler = BaseNavigationEventHandler { },
+            viewModel = koinViewModel<EditTaskViewModel> { parametersOf(taskId) },
         )
     }
 }

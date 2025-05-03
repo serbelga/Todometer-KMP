@@ -51,37 +51,62 @@ import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
+import dev.sergiobelda.todometer.app.feature.edittask.navigation.EditTaskNavigationEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
-@NavDestination(
-    destinationId = "edittask",
-    name = "EditTask",
-    arguments = [
-        NavArgument("taskId", NavArgumentType.String),
-    ],
-)
-@Composable
-fun EditTaskScreen(
-    navigateBack: () -> Unit,
-    viewModel: EditTaskViewModel,
-) {
-    when {
-        viewModel.state.isLoading -> {
-            LoadingScreenDialog(navigateBack)
-        }
+data object EditTaskScreen : BaseUI<EditTaskUIState, EditTaskContentState>() {
 
-        !viewModel.state.isLoading -> {
-            viewModel.state.task?.let { task ->
-                EditTaskSuccessContent(
-                    task = task,
-                    navigateBack = navigateBack,
-                    updateTask = { title, tag, description, dueDate ->
-                        viewModel.updateTask(title, tag, description, dueDate)
+    @Composable
+    override fun rememberContentState(
+        uiState: EditTaskUIState,
+    ): EditTaskContentState = rememberEditTaskContentState(
+        taskTitle = uiState.task?.title ?: "",
+        taskDescription = uiState.task?.description ?: "",
+    )
+
+    @NavDestination(
+        destinationId = "edittask",
+        name = "EditTask",
+        arguments = [
+            NavArgument("taskId", NavArgumentType.String),
+        ],
+    )
+    @Composable
+    override fun Content(
+        uiState: EditTaskUIState,
+        contentState: EditTaskContentState,
+    ) {
+        when {
+            uiState.isLoading -> {
+                LoadingScreenDialog(
+                    navigateBack = {
+                        onEvent(
+                            EditTaskNavigationEvent.NavigateBack,
+                        )
                     },
                 )
+            }
+
+            !uiState.isLoading -> {
+                uiState.task?.let { task ->
+                    EditTaskSuccessContent(
+                        titleTextFieldValue = contentState.titleTextFieldValue,
+                        descriptionTextFieldValue = contentState.descriptionTextFieldValue,
+                        task = task,
+                        navigateBack = {
+                            onEvent(
+                                EditTaskNavigationEvent.NavigateBack,
+                            )
+                        },
+                        updateTask = { title, tag, description, dueDate ->
+                            // viewModel.updateTask(title, tag, description, dueDate)
+                        },
+                    )
+                }
             }
         }
     }
@@ -92,17 +117,13 @@ fun EditTaskScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditTaskSuccessContent(
+    titleTextFieldValue: String,
+    descriptionTextFieldValue: String,
     task: Task,
     navigateBack: () -> Unit,
     updateTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit,
 ) {
-    var taskTitle by rememberSaveable { mutableStateOf(task.title) }
     var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable {
-        mutableStateOf(
-            task.description ?: "",
-        )
-    }
     var selectedTag by rememberSaveable { mutableStateOf(task.tag) }
     var taskDueDate: Long? by rememberSaveable { mutableStateOf(task.dueDate) }
 
@@ -121,11 +142,11 @@ private fun EditTaskSuccessContent(
                 navigateBack = navigateBack,
                 title = TodometerResources.strings.editTask,
                 onSaveButtonClick = {
-                    if (taskTitle.isBlank()) {
+                    if (titleTextFieldValue.isBlank()) {
                         taskTitleInputError = true
                     } else {
-                        updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
-                        navigateBack()
+                        // updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
+                        // navigateBack()
                     }
                 },
             )
@@ -134,10 +155,10 @@ private fun EditTaskSuccessContent(
             Column(modifier = Modifier.padding(paddingValues)) {
                 TodometerTitledTextField(
                     title = TodometerResources.strings.name,
-                    value = taskTitle,
+                    value = titleTextFieldValue,
                     onValueChange = {
-                        taskTitle = it
-                        taskTitleInputError = false
+                        // taskTitle = it
+                        // taskTitleInputError = false
                     },
                     placeholder = { Text(TodometerResources.strings.enterTaskName) },
                     isError = taskTitleInputError,
@@ -173,8 +194,10 @@ private fun EditTaskSuccessContent(
                 )
                 TodometerTitledTextField(
                     title = TodometerResources.strings.description.addStyledOptionalSuffix(),
-                    value = taskDescription,
-                    onValueChange = { taskDescription = it },
+                    value = descriptionTextFieldValue,
+                    onValueChange = {
+                        // taskDescription = it
+                    },
                     placeholder = { Text(TodometerResources.strings.enterDescription) },
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,

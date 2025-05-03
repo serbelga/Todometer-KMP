@@ -223,7 +223,7 @@ data class AddTaskContentState internal constructor(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun rememberAddTaskContentState(
+internal fun rememberAddTaskContentState(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     topAppBarState: TopAppBarState = rememberTopAppBarState(),
     datePickerState: DatePickerState = rememberDatePickerState(),
