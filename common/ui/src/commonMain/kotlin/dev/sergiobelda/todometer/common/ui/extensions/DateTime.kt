@@ -16,11 +16,12 @@
 
 package dev.sergiobelda.todometer.common.ui.extensions
 
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 /**
  * Return date in format: HH:mm.
@@ -42,5 +43,6 @@ fun Long.dateFormat(): String {
 
 fun Long.localTime(): LocalTime = this.toLocalDateTime().time
 
+@OptIn(ExperimentalTime::class)
 internal fun Long.toLocalDateTime(): LocalDateTime =
     Instant.fromEpochMilliseconds(this).toLocalDateTime(TimeZone.UTC)

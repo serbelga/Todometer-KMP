@@ -21,10 +21,11 @@ kotlin {
         compilations.all {
             kotlin {
                 jvmToolchain(17)
+                compilerOptions {
+                    optIn.add("kotlin.RequiresOptIn")
+                }
             }
-            kotlinOptions {
-                freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-            }
+
         }
     }
     listOf(

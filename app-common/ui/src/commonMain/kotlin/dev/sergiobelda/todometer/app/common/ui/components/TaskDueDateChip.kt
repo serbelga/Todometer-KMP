@@ -30,11 +30,13 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMedium
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Event
 import dev.sergiobelda.todometer.common.ui.task.TaskDueDate
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
+@OptIn(ExperimentalTime::class)
 @Composable
 fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
     val currentInstant =

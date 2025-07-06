@@ -19,10 +19,11 @@ package dev.sergiobelda.todometer.common.ui.task
 import dev.sergiobelda.todometer.common.ui.extensions.dateFormat
 import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
 import dev.sergiobelda.todometer.common.ui.extensions.toLocalDateTime
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 object TaskDueDate {
 
@@ -30,6 +31,7 @@ object TaskDueDate {
      * Returns due date formatted. If due date is today, it only shows HH:mm,
      * otherwise it displays dd-MM-yyyy HH:mm.
      */
+    @OptIn(ExperimentalTime::class)
     fun getDueDateFormatted(dueDate: Long): String {
         val localDateTime: LocalDateTime = dueDate.toLocalDateTime()
         val todayLocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
