@@ -17,16 +17,18 @@
 package dev.sergiobelda.todometer.common.ui.task
 
 import dev.sergiobelda.todometer.common.ui.extensions.format
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 class TaskDueDateTest {
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun testGetDueDateFormatted() {
         val localDateTime = LocalDateTime(2020, 3, 1, 16, 25)
@@ -37,6 +39,7 @@ class TaskDueDateTest {
         )
     }
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun testGetDueDateFormattedToday() {
         val instant = Clock.System.now()
