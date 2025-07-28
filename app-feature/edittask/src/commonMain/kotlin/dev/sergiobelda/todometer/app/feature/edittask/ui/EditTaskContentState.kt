@@ -166,11 +166,12 @@ data class EditTaskContentState internal constructor(
 internal fun rememberEditTaskContentState(
     task: Task?,
 ): EditTaskContentState {
-    val datePickerState = task?.dueDate?.let { rememberDatePickerState(it) }
-    val timePickerState = task?.dueDate?.localTime()?.let { localTime ->
+    val datePickerState = task?.let { rememberDatePickerState(it.dueDate) }
+    val timePickerState = task?.let {
+        val localTime = it.dueDate?.localTime()
         rememberTimePickerState(
-            initialHour = localTime.hour,
-            initialMinute = localTime.minute,
+            initialHour = localTime?.hour ?: 0,
+            initialMinute = localTime?.minute ?: 0,
         )
     }
     return rememberSaveable(
