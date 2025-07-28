@@ -19,7 +19,6 @@ package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
-import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
@@ -42,7 +40,7 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
     override fun rememberContentState(
         uiState: EditTaskListUIState,
     ): EditTaskListContentState = rememberEditTaskListContentState(
-        taskListNameInputValue = uiState.taskList?.name ?: "",
+        taskListName = uiState.taskList?.name ?: "",
     )
 
     @NavDestination(
@@ -82,7 +80,7 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
                     },
                     content = { paddingValues ->
                         EditTaskListContent(
-                            taskListNameValue = contentState.nameTextFieldValue,
+                            nameTextFieldValue = contentState.nameTextFieldValue,
                             modifier = Modifier
                                 .padding(paddingValues),
                         )
@@ -106,17 +104,12 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
             title = TodometerResources.strings.editTaskList,
             isSaveButtonEnabled = isSaveButtonEnabled,
             onSaveButtonClick = onSaveButtonClick,
-            saveButtonTintColor = if (isSaveButtonEnabled) {
-                MaterialTheme.colorScheme.primary
-            } else {
-                MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-            },
         )
     }
 
     @Composable
     private fun EditTaskListContent(
-        taskListNameValue: String,
+        nameTextFieldValue: String,
         modifier: Modifier,
     ) {
         Column(
@@ -124,9 +117,9 @@ data object EditTaskListScreen : BaseUI<EditTaskListUIState, EditTaskListContent
         ) {
             TodometerTitledTextField(
                 title = TodometerResources.strings.name,
-                value = taskListNameValue,
+                value = nameTextFieldValue,
                 onValueChange = {
-                    onEvent(EditTaskListEvent.TaskListNameValueChange(it))
+                    onEvent(EditTaskListEvent.NameTextFieldValueChange(it))
                 },
                 placeholder = { Text(TodometerResources.strings.enterTaskListName) },
                 singleLine = true,

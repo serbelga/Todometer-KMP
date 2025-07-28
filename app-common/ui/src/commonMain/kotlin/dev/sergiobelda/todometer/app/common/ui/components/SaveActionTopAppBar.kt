@@ -27,7 +27,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
@@ -41,7 +40,6 @@ fun SaveActionTopAppBar(
     title: String,
     onSaveButtonClick: () -> Unit,
     isSaveButtonEnabled: Boolean = true,
-    saveButtonTintColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     TopAppBar(
         navigationIcon = {
@@ -61,13 +59,11 @@ fun SaveActionTopAppBar(
                 Icon(
                     Images.Icons.Check,
                     contentDescription = TodometerResources.strings.save,
-                    tint = saveButtonTintColor,
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Text(
                     text = TodometerResources.strings.save,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = saveButtonTintColor,
                 )
             }
         },

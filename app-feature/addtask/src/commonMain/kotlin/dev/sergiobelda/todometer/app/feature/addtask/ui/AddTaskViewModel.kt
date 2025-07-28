@@ -33,7 +33,7 @@ class AddTaskViewModel(
 ) {
     override fun handleEvent(event: BaseEvent) {
         when (event) {
-            is AddTaskEvent.OnInsertNewTask -> insertTask(event.newTask)
+            is AddTaskEvent.InsertNewTask -> insertTask(event.newTask)
         }
     }
 

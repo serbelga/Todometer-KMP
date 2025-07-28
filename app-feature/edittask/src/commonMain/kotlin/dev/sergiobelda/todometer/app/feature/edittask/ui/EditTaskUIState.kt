@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Sergio Belda
+ * Copyright 2022 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittasklist.ui
+package dev.sergiobelda.todometer.app.feature.edittask.ui
 
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import androidx.compose.runtime.Immutable
+import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.ui.base.BaseUIState
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
-sealed class EditTaskListEvent : BaseEvent {
-    data class UpdateTaskList(val name: String) : EditTaskListEvent()
-    data class NameTextFieldValueChange(val value: String) : EditTaskListEvent()
-}
+@Immutable
+data class EditTaskUIState(
+    val isLoading: Boolean = false,
+    val task: Task? = null,
+    val errorUi: ErrorUi? = null,
+) : BaseUIState

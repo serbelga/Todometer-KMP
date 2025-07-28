@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittasklist.ui
+package dev.sergiobelda.todometer.app.feature.edittask.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
 
-sealed class EditTaskListEvent : BaseEvent {
-    data class UpdateTaskList(val name: String) : EditTaskListEvent()
-    data class NameTextFieldValueChange(val value: String) : EditTaskListEvent()
+sealed class EditTaskNavigationEvent : BaseNavigationEvent {
+    data object NavigateBack : EditTaskNavigationEvent()
 }

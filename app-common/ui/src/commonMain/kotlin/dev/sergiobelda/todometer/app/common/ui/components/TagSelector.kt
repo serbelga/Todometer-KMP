@@ -32,8 +32,8 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @Composable
 fun TagSelector(
+    tag: Tag,
     onTagSelected: (Tag) -> Unit,
-    selectedTag: Tag,
 ) {
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
@@ -46,7 +46,7 @@ fun TagSelector(
 
     ColorPicker.LazyRow(
         colorsMap = colorsMap,
-        selectedItem = selectedTag,
+        selectedItem = tag,
         onItemSelected = onTagSelected,
         state = state,
         contentPadding = PaddingValues(horizontal = 16.dp),
@@ -54,7 +54,7 @@ fun TagSelector(
         modifier = Modifier.padding(vertical = 16.dp),
     )
 
-    LaunchedEffect(selectedTag) {
-        state.animateScrollToItem(tags.indexOf(selectedTag))
+    LaunchedEffect(tag) {
+        state.animateScrollToItem(tags.indexOf(tag))
     }
 }

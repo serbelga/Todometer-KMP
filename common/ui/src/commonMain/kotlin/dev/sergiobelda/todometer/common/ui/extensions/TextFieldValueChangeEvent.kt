@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,8 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.edittask.ui
+package dev.sergiobelda.todometer.common.ui.extensions
 
-import androidx.compose.runtime.Immutable
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
-
-@Immutable
-data class EditTaskState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val errorUi: ErrorUi? = null,
-)
+interface TextFieldValueChangeEvent {
+    val value: String
+}

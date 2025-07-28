@@ -25,14 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePicker
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -47,168 +40,175 @@ import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.components.TagSelector
 import dev.sergiobelda.todometer.app.common.ui.components.TimePickerDialog
 import dev.sergiobelda.todometer.app.common.ui.extensions.addStyledOptionalSuffix
-import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
+import dev.sergiobelda.todometer.app.feature.edittask.navigation.EditTaskNavigationEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.extensions.localTime
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
-@NavDestination(
-    destinationId = "edittask",
-    name = "EditTask",
-    arguments = [
-        NavArgument("taskId", NavArgumentType.String),
-    ],
-)
-@Composable
-fun EditTaskScreen(
-    navigateBack: () -> Unit,
-    viewModel: EditTaskViewModel,
-) {
-    when {
-        viewModel.state.isLoading -> {
-            LoadingScreenDialog(navigateBack)
-        }
+data object EditTaskScreen : BaseUI<EditTaskUIState, EditTaskContentState>() {
 
-        !viewModel.state.isLoading -> {
-            viewModel.state.task?.let { task ->
-                EditTaskSuccessContent(
-                    task = task,
-                    navigateBack = navigateBack,
-                    updateTask = { title, tag, description, dueDate ->
-                        viewModel.updateTask(title, tag, description, dueDate)
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    override fun rememberContentState(
+        uiState: EditTaskUIState,
+    ): EditTaskContentState = rememberEditTaskContentState(
+        task = uiState.task,
+    )
+
+    @NavDestination(
+        destinationId = "edittask",
+        name = "EditTask",
+        arguments = [
+            NavArgument("taskId", NavArgumentType.String),
+        ],
+    )
+    @Composable
+    override fun Content(
+        uiState: EditTaskUIState,
+        contentState: EditTaskContentState,
+    ) {
+        when {
+            uiState.isLoading -> {
+                LoadingScreenDialog(
+                    navigateBack = {
+                        onEvent(
+                            EditTaskNavigationEvent.NavigateBack,
+                        )
                     },
+                )
+            }
+
+            !uiState.isLoading -> {
+                EditTaskScaffold(
+                    contentState = contentState,
                 )
             }
         }
     }
-}
 
-// TODO: Resolve LongMethod issue.
-@Suppress("LongMethod")
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun EditTaskSuccessContent(
-    task: Task,
-    navigateBack: () -> Unit,
-    updateTask: (taskTitle: String, selectedTag: Tag, taskDescription: String, taskDueDate: Long?) -> Unit,
-) {
-    var taskTitle by rememberSaveable { mutableStateOf(task.title) }
-    var taskTitleInputError: Boolean by remember { mutableStateOf(false) }
-    var taskDescription by rememberSaveable {
-        mutableStateOf(
-            task.description ?: "",
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun EditTaskScaffold(
+        contentState: EditTaskContentState,
+    ) {
+        Scaffold(
+            topBar = {
+                EditTaskTopBar(
+                    isSaveButtonEnabled = contentState.isSaveButtonEnabled,
+                    onSaveButtonClick = {
+                        onEvent(
+                            EditTaskEvent.UpdateTask(
+                                title = contentState.title,
+                                tag = contentState.tag,
+                                description = contentState.description,
+                                dueDate = contentState.dueDate,
+                            ),
+                        )
+                        onEvent(EditTaskNavigationEvent.NavigateBack)
+                    },
+                )
+            },
+            content = { paddingValues ->
+                EditTaskContent(
+                    title = contentState.title,
+                    description = contentState.description,
+                    dueDate = contentState.dueDate,
+                    tag = contentState.tag,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            },
+        )
+        if (contentState.datePickerState != null && contentState.datePickerDialogVisible) {
+            DatePickerDialog(
+                onDismissRequest = { onEvent(EditTaskEvent.DismissDatePickerDialog) },
+                onConfirm = { onEvent(EditTaskEvent.ConfirmDatePickerDialog) },
+            ) {
+                DatePicker(state = contentState.datePickerState)
+            }
+        }
+        if (contentState.timePickerState != null && contentState.timePickerDialogVisible) {
+            TimePickerDialog(
+                onDismissRequest = { onEvent(EditTaskEvent.DismissTimePickerDialog) },
+                onConfirm = { onEvent(EditTaskEvent.ConfirmTimePickerDialog) },
+            ) {
+                TimePicker(state = contentState.timePickerState)
+            }
+        }
+    }
+
+    @Composable
+    private fun EditTaskTopBar(
+        isSaveButtonEnabled: Boolean,
+        onSaveButtonClick: () -> Unit,
+    ) {
+        SaveActionTopAppBar(
+            navigateBack = { onEvent(EditTaskNavigationEvent.NavigateBack) },
+            isSaveButtonEnabled = isSaveButtonEnabled,
+            title = TodometerResources.strings.editTask,
+            onSaveButtonClick = onSaveButtonClick,
         )
     }
-    var selectedTag by rememberSaveable { mutableStateOf(task.tag) }
-    var taskDueDate: Long? by rememberSaveable { mutableStateOf(task.dueDate) }
 
-    var datePickerDialogState by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = task.dueDate)
-
-    var timePickerDialogState by remember { mutableStateOf(false) }
-    val timePickerState = rememberTimePickerState(
-        initialHour = task.dueDate?.localTime()?.hour ?: 0,
-        initialMinute = task.dueDate?.localTime()?.minute ?: 0,
-    )
-
-    Scaffold(
-        topBar = {
-            SaveActionTopAppBar(
-                navigateBack = navigateBack,
-                title = TodometerResources.strings.editTask,
-                onSaveButtonClick = {
-                    if (taskTitle.isBlank()) {
-                        taskTitleInputError = true
-                    } else {
-                        updateTask(taskTitle, selectedTag, taskDescription, taskDueDate)
-                        navigateBack()
-                    }
-                },
+    @Composable
+    private fun EditTaskContent(
+        title: String,
+        description: String,
+        dueDate: Long?,
+        tag: Tag,
+        modifier: Modifier,
+    ) {
+        Column(modifier = modifier) {
+            TodometerTitledTextField(
+                title = TodometerResources.strings.name,
+                value = title,
+                onValueChange = { onEvent(EditTaskEvent.TitleValueChange(it)) },
+                placeholder = { Text(TodometerResources.strings.enterTaskName) },
+                errorMessage = TodometerResources.strings.fieldNotEmpty,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Next,
+                ),
+                modifier = Modifier.padding(TextFieldPadding),
             )
-        },
-        content = { paddingValues ->
-            Column(modifier = Modifier.padding(paddingValues)) {
-                TodometerTitledTextField(
-                    title = TodometerResources.strings.name,
-                    value = taskTitle,
-                    onValueChange = {
-                        taskTitle = it
-                        taskTitleInputError = false
-                    },
-                    placeholder = { Text(TodometerResources.strings.enterTaskName) },
-                    isError = taskTitleInputError,
-                    errorMessage = TodometerResources.strings.fieldNotEmpty,
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Next,
-                    ),
-                    modifier = Modifier.padding(TextFieldPadding),
-                )
-                Text(
-                    text = TodometerResources.strings.chooseTag.addStyledOptionalSuffix(),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.padding(horizontal = SectionPadding),
-                )
-                TagSelector(
-                    onTagSelected = { selectedTag = it },
-                    selectedTag = selectedTag,
-                )
-                Text(
-                    text = TodometerResources.strings.dateTime.addStyledOptionalSuffix(),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.padding(horizontal = SectionPadding),
-                )
-                DateTimeSelector(
-                    taskDueDate,
-                    onEnterDateTimeClick = { datePickerDialogState = true },
-                    onDateClick = { datePickerDialogState = true },
-                    onTimeClick = { timePickerDialogState = true },
-                    onClearDateTimeClick = { taskDueDate = null },
-                )
-                TodometerTitledTextField(
-                    title = TodometerResources.strings.description.addStyledOptionalSuffix(),
-                    value = taskDescription,
-                    onValueChange = { taskDescription = it },
-                    placeholder = { Text(TodometerResources.strings.enterDescription) },
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        imeAction = ImeAction.Done,
-                    ),
-                    modifier = Modifier.padding(TextFieldPadding),
-                    maxLines = 4,
-                )
-                TodometerDivider()
-            }
-        },
-    )
-    if (datePickerDialogState) {
-        DatePickerDialog(
-            onDismissRequest = { datePickerDialogState = false },
-            onConfirm = {
-                datePickerDialogState = false
-                taskDueDate =
-                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            },
-        ) {
-            DatePicker(state = datePickerState)
-        }
-    }
-    if (timePickerDialogState) {
-        TimePickerDialog(
-            onDismissRequest = { timePickerDialogState = false },
-            onConfirm = {
-                timePickerDialogState = false
-                taskDueDate =
-                    datePickerState.selectedDateMillis?.plus(timePickerState.selectedTimeMillis)
-            },
-        ) {
-            TimePicker(state = timePickerState)
+            Text(
+                text = TodometerResources.strings.chooseTag.addStyledOptionalSuffix(),
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(horizontal = SectionPadding),
+            )
+            TagSelector(
+                tag = tag,
+                onTagSelected = { onEvent(EditTaskEvent.SelectTag(it)) },
+            )
+            Text(
+                text = TodometerResources.strings.dateTime.addStyledOptionalSuffix(),
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(horizontal = SectionPadding),
+            )
+            DateTimeSelector(
+                dateMillis = dueDate,
+                onEnterDateTimeClick = { onEvent(EditTaskEvent.ShowDatePickerDialog) },
+                onDateClick = { onEvent(EditTaskEvent.ShowDatePickerDialog) },
+                onTimeClick = { onEvent(EditTaskEvent.ShowTimePickerDialog) },
+                onClearDateTimeClick = { onEvent(EditTaskEvent.ClearDateTime) },
+            )
+            TodometerTitledTextField(
+                title = TodometerResources.strings.description.addStyledOptionalSuffix(),
+                value = description,
+                onValueChange = { onEvent(EditTaskEvent.DescriptionValueChange(it)) },
+                placeholder = { Text(TodometerResources.strings.enterDescription) },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    imeAction = ImeAction.Done,
+                ),
+                modifier = Modifier.padding(TextFieldPadding),
+                maxLines = 4,
+            )
+            TodometerDivider()
         }
     }
 }
