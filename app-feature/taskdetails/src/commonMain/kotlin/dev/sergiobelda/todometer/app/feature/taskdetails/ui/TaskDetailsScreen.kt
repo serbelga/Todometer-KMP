@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
@@ -55,10 +56,13 @@ import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerCheckbox
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.app.common.ui.animation.LocalAnimatedContentScope
+import dev.sergiobelda.todometer.app.common.ui.animation.LocalSharedTransitionScope
+import dev.sergiobelda.todometer.app.common.ui.animation.TaskSharedElementKey
+import dev.sergiobelda.todometer.app.common.ui.animation.TaskSharedElementType
 import dev.sergiobelda.todometer.app.common.ui.components.AddChecklistItemField
 import dev.sergiobelda.todometer.app.common.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.app.common.ui.components.TaskTagIndicator
-import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.feature.taskdetails.navigation.TaskDetailsNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
@@ -99,11 +103,10 @@ data object TaskDetailsScreen : BaseUI<TaskDetailsUIState, TaskDetailsContentSta
     ) {
         when {
             uiState.isLoadingTask -> {
-                LoadingScreenDialog(
-                    navigateBack = {
+                /*LoadingScreenDialog(navigateBack= {
                         onEvent(TaskDetailsNavigationEvent.NavigateBack)
                     },
-                )
+                )*/
             }
 
             !uiState.isLoadingTask ->
@@ -227,6 +230,7 @@ data object TaskDetailsScreen : BaseUI<TaskDetailsUIState, TaskDetailsContentSta
             modifier = modifier,
         ) {
             taskTitle(
+                taskId = task.id,
                 taskTag = task.tag,
                 taskTitle = task.title,
             )
@@ -248,11 +252,15 @@ data object TaskDetailsScreen : BaseUI<TaskDetailsUIState, TaskDetailsContentSta
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 private fun LazyListScope.taskTitle(
+    taskId: String,
     taskTag: Tag,
     taskTitle: String,
 ) {
     item {
+        val sharedTransitionScope = LocalSharedTransitionScope.current
+        val animatedContentScope = LocalAnimatedContentScope.current
         Box(
             modifier = Modifier.heightIn(max = 80.dp, min = 64.dp),
         ) {
@@ -260,16 +268,40 @@ private fun LazyListScope.taskTitle(
                 modifier = Modifier.padding(start = 24.dp, bottom = 8.dp, end = 24.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (taskTag != Tag.UNSPECIFIED) {
-                    TaskTagIndicator(taskTag)
+                with(sharedTransitionScope) {
+                    if (taskTag != Tag.UNSPECIFIED) {
+                        TaskTagIndicator(
+                            tag = taskTag,
+                            modifier = Modifier
+                                .sharedElement(
+                                    sharedContentState = rememberSharedContentState(
+                                        key = TaskSharedElementKey(
+                                            type = TaskSharedElementType.Tag,
+                                            taskId = taskId,
+                                        ),
+                                    ),
+                                    animatedVisibilityScope = animatedContentScope,
+                                ),
+                        )
+                    }
+                    Text(
+                        text = taskTitle,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier
+                            .sharedElement(
+                                sharedContentState = rememberSharedContentState(
+                                    key = TaskSharedElementKey(
+                                        type = TaskSharedElementType.Title,
+                                        taskId = taskId,
+                                    ),
+                                ),
+                                animatedVisibilityScope = animatedContentScope,
+                            )
+                            .padding(bottom = 4.dp),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
                 }
-                Text(
-                    text = taskTitle,
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(bottom = 4.dp),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
             }
         }
         TodometerDivider()
