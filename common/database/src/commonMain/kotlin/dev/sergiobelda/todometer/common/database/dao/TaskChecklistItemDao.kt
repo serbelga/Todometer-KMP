@@ -43,7 +43,7 @@ class TaskChecklistItemDao(private val todometerDatabase: TodometerDatabase) :
             }
         }
 
-    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState){
+    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) {
         todometerDatabase.taskChecklistItemEntityQueries.updateTaskChecklistItemState(
             id = id,
             state = state,
