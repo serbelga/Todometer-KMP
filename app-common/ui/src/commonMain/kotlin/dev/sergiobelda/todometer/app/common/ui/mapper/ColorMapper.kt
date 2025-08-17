@@ -16,12 +16,10 @@
 
 package dev.sergiobelda.todometer.app.common.ui.mapper
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import dev.sergiobelda.todometer.app.common.designsystem.theme.TodometerColors
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
-@Composable
 fun TodometerColors.composeColorOf(tag: Tag): Color =
     when (tag) {
         Tag.UNSPECIFIED -> Color.Unspecified

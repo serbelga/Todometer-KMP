@@ -38,7 +38,7 @@ inline fun <reified N, U, C> BaseUI<U, C>.NavigationNodeContent(
 }
 
 @Composable
-inline fun <U, C> BaseUI<U, C>.NavigationNodeContent(
+fun <U, C> BaseUI<U, C>.NavigationNodeContent(
     viewModel: BaseViewModel<U>,
 ) where U : BaseUIState, C : BaseContentState {
     NavigationNodeContent(

@@ -59,7 +59,7 @@ class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
             insertTask(task)
         }
 
-    override suspend fun updateTask(task: TaskEntity) =
+    override suspend fun updateTask(task: TaskEntity) {
         todometerDatabase.taskEntityQueries.updateTask(
             id = task.id,
             title = task.title,
@@ -68,6 +68,7 @@ class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
             dueDate = task.dueDate,
             isPinned = task.isPinned,
         )
+    }
 
     override suspend fun updateTaskSync(id: String, sync: Boolean) {
         todometerDatabase.taskEntityQueries.updateTaskSync(

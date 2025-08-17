@@ -74,6 +74,7 @@ class TaskListDao(private val todometerDatabase: TodometerDatabase) : ITaskListD
         }
     }
 
-    override suspend fun deleteTaskList(id: String) =
+    override suspend fun deleteTaskList(id: String) {
         todometerDatabase.taskListEntityQueries.deleteTaskList(id)
+    }
 }
