@@ -2,6 +2,7 @@ package dev.sergiobelda.gradle.buildlogic.convention
 
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.pluginId
+import dev.sergiobelda.gradle.buildlogic.convention.lint.SpotlessConventionPlugin
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Plugin

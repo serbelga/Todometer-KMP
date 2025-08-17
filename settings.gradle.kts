@@ -23,7 +23,6 @@ rootProject.name = "Todometer-KMP"
 include(":app")
 include(":app-common:designsystem")
 include(":app-common:ui")
-include(":app-desktop")
 include(":app-feature:about")
 include(":app-feature:addtask")
 include(":app-feature:addtasklist")
