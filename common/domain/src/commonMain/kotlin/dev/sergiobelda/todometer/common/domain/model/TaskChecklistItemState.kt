@@ -19,4 +19,10 @@ package dev.sergiobelda.todometer.common.domain.model
 enum class TaskChecklistItemState {
     UNCHECKED,
     CHECKED,
+    ;
+
+    fun toggle(): TaskChecklistItemState = when (this) {
+        UNCHECKED -> CHECKED
+        CHECKED -> UNCHECKED
+    }
 }

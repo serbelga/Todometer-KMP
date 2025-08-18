@@ -18,7 +18,6 @@ package dev.sergiobelda.todometer.app.common.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -33,7 +32,7 @@ import dev.sergiobelda.todometer.app.common.ui.mapper.composeColorOf
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @Composable
-fun RowScope.TaskTagIndicator(
+fun TaskTagIndicator(
     tag: Tag,
     modifier: Modifier = Modifier,
 ) {

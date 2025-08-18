@@ -20,6 +20,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,22 +30,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -63,6 +60,7 @@ import dev.sergiobelda.todometer.app.common.ui.components.TaskDueDateChip
 import dev.sergiobelda.todometer.app.common.ui.components.TaskTagIndicator
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
+import dev.sergiobelda.todometer.app.feature.taskdetails.navigation.TaskDetailsNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
@@ -74,150 +72,199 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import kotlinx.collections.immutable.ImmutableList
 
-@NavDestination(
-    destinationId = "taskdetails",
-    name = "TaskDetails",
-    arguments = [
-        NavArgument("taskId", NavArgumentType.String),
-    ],
-    deepLinkUris = ["app://open.task"],
-)
-@Composable
-fun TaskDetailsScreen(
-    navigateBack: () -> Unit,
-    navigateToEditTask: () -> Unit,
-    viewModel: TaskDetailsViewModel,
-) {
-    when {
-        viewModel.state.isLoadingTask -> {
-            LoadingScreenDialog(navigateBack)
-        }
+data object TaskDetailsScreen : BaseUI<TaskDetailsUIState, TaskDetailsContentState>() {
 
-        !viewModel.state.isLoadingTask ->
-            viewModel.state.task?.let { task ->
-                TaskDetailsSuccessContent(
-                    task = task,
-                    taskChecklistItems = viewModel.state.taskChecklistItems,
-                    navigateBack = navigateBack,
-                    navigateToEditTask = navigateToEditTask,
-                    onTaskChecklistItemClick = { id, checked ->
-                        if (checked) {
-                            viewModel.setTaskChecklistItemChecked(id)
-                        } else {
-                            viewModel.setTaskChecklistItemUnchecked(id)
-                        }
-                    },
-                    onDeleteTaskCheckListItem = viewModel::deleteTaskChecklistItem,
-                    onAddTaskCheckListItem = viewModel::insertTaskChecklistItem,
-                    toggleTaskPinnedValueClick = viewModel::toggleTaskPinnedValueUseCase,
-                )
-            }
-    }
-}
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    override fun rememberContentState(
+        uiState: TaskDetailsUIState,
+    ): TaskDetailsContentState =
+        rememberTaskDetailsContentState()
 
-// TODO: Resolve LongMethod issue.
-@Suppress("LongMethod")
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun TaskDetailsSuccessContent(
-    task: Task,
-    taskChecklistItems: ImmutableList<TaskChecklistItem>,
-    navigateBack: () -> Unit,
-    navigateToEditTask: () -> Unit,
-    onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit,
-    onAddTaskCheckListItem: (String) -> Unit,
-    toggleTaskPinnedValueClick: () -> Unit,
-) {
-    val lazyListState = rememberLazyListState()
-    val topAppBarState = rememberTopAppBarState()
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
-
-    val showTopAppBarTitle by remember {
-        derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
-    }
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    AnimatedVisibility(
-                        visible = showTopAppBarTitle,
-                        enter = fadeIn(),
-                        exit = fadeOut(),
-                    ) {
-                        Text(
-                            task.title,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(
-                            Images.Icons.NavigateBefore,
-                            contentDescription = TodometerResources.strings.back,
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = toggleTaskPinnedValueClick) {
-                        Icon(
-                            imageVector = if (task.isPinned) {
-                                Images.Icons.PushPinFilled
-                            } else {
-                                Images.Icons.PushPin
-                            },
-                            contentDescription = if (task.isPinned) {
-                                TodometerResources.strings.pinnedTask
-                            } else {
-                                TodometerResources.strings.notPinnedTask
-                            },
-                            tint = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                    IconButton(onClick = navigateToEditTask) {
-                        Icon(
-                            Images.Icons.Edit,
-                            contentDescription = TodometerResources.strings.editTask,
-                            tint = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-        content = { paddingValues ->
-            LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
-                taskTitle(task)
-                taskChips(task)
-                taskChecklist(
-                    taskChecklistItems,
-                    onTaskChecklistItemClick = onTaskChecklistItemClick,
-                    onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
-                    onAddTaskCheckListItem = onAddTaskCheckListItem,
-                )
-                taskDescription(task.description)
-            }
-        },
+    @NavDestination(
+        destinationId = "taskdetails",
+        name = "TaskDetails",
+        arguments = [
+            NavArgument("taskId", NavArgumentType.String),
+        ],
+        deepLinkUris = ["app://open.task"],
     )
+    @Composable
+    override fun Content(
+        uiState: TaskDetailsUIState,
+        contentState: TaskDetailsContentState,
+    ) {
+        when {
+            uiState.isLoadingTask -> {
+                LoadingScreenDialog(
+                    navigateBack = {
+                        onEvent(TaskDetailsNavigationEvent.NavigateBack)
+                    },
+                )
+            }
+
+            !uiState.isLoadingTask ->
+                uiState.task?.let { task ->
+                    TaskDetailsScaffold(
+                        contentState = contentState,
+                        task = task,
+                        taskChecklistItems = uiState.taskChecklistItems,
+                    )
+                }
+        }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun TaskDetailsScaffold(
+        contentState: TaskDetailsContentState,
+        task: Task,
+        taskChecklistItems: ImmutableList<TaskChecklistItem>,
+    ) {
+        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
+        Scaffold(
+            modifier = Modifier
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
+            topBar = {
+                TaskDetailsTopBar(
+                    showTopAppBarTitle = contentState.showTopAppBarTitle,
+                    taskTitle = task.title,
+                    taskIsPinned = task.isPinned,
+                    scrollBehavior = scrollBehavior,
+                )
+            },
+            content = { paddingValues ->
+                TaskDetailsContent(
+                    task = task,
+                    taskChecklistItems = taskChecklistItems,
+                    lazyListState = contentState.lazyListState,
+                    modifier = Modifier
+                        .padding(paddingValues),
+                )
+            },
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun TaskDetailsTopBar(
+        showTopAppBarTitle: Boolean,
+        taskTitle: String,
+        taskIsPinned: Boolean,
+        scrollBehavior: TopAppBarScrollBehavior,
+    ) {
+        TopAppBar(
+            title = {
+                AnimatedVisibility(
+                    visible = showTopAppBarTitle,
+                    enter = fadeIn(),
+                    exit = fadeOut(),
+                ) {
+                    Text(
+                        text = taskTitle,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            },
+            navigationIcon = {
+                IconButton(
+                    onClick = {
+                        onEvent(TaskDetailsNavigationEvent.NavigateBack)
+                    },
+                ) {
+                    Icon(
+                        Images.Icons.NavigateBefore,
+                        contentDescription = TodometerResources.strings.back,
+                    )
+                }
+            },
+            actions = {
+                IconButton(onClick = { onEvent(TaskDetailsEvent.ToggleTaskPinnedValue) }) {
+                    Icon(
+                        imageVector = if (taskIsPinned) {
+                            Images.Icons.PushPinFilled
+                        } else {
+                            Images.Icons.PushPin
+                        },
+                        contentDescription = if (taskIsPinned) {
+                            TodometerResources.strings.pinnedTask
+                        } else {
+                            TodometerResources.strings.notPinnedTask
+                        },
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                IconButton(
+                    onClick = {
+                        onEvent(TaskDetailsNavigationEvent.NavigateToEditTask)
+                    },
+                ) {
+                    Icon(
+                        Images.Icons.Edit,
+                        contentDescription = TodometerResources.strings.editTask,
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            },
+            scrollBehavior = scrollBehavior,
+        )
+    }
+
+    @Composable
+    private fun TaskDetailsContent(
+        task: Task,
+        taskChecklistItems: ImmutableList<TaskChecklistItem>,
+        lazyListState: LazyListState,
+        modifier: Modifier,
+    ) {
+        LazyColumn(
+            state = lazyListState,
+            modifier = modifier,
+        ) {
+            taskTitle(
+                taskTag = task.tag,
+                taskTitle = task.title,
+            )
+            taskChips(task)
+            taskChecklist(
+                taskChecklistItems,
+                onTaskChecklistItemClick = { id, state ->
+                    onEvent(TaskDetailsEvent.ClickTaskChecklistItem(id, state))
+                },
+                onDeleteTaskCheckListItem = { id ->
+                    onEvent(TaskDetailsEvent.DeleteTaskChecklistItem(id))
+                },
+                onAddTaskCheckListItem = { id ->
+                    onEvent(TaskDetailsEvent.AddTaskChecklistItem(id))
+                },
+            )
+            taskDescription(task.description)
+        }
+    }
 }
 
-private fun LazyListScope.taskTitle(task: Task) {
+private fun LazyListScope.taskTitle(
+    taskTag: Tag,
+    taskTitle: String,
+) {
     item {
-        Surface(modifier = Modifier.heightIn(max = 80.dp, min = 64.dp)) {
+        Box(
+            modifier = Modifier.heightIn(max = 80.dp, min = 64.dp),
+        ) {
             Row(
                 modifier = Modifier.padding(start = 24.dp, bottom = 8.dp, end = 24.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (task.tag != Tag.UNSPECIFIED) {
-                    TaskTagIndicator(task.tag)
+                if (taskTag != Tag.UNSPECIFIED) {
+                    TaskTagIndicator(taskTag)
                 }
                 Text(
-                    text = task.title,
+                    text = taskTitle,
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier.padding(bottom = 4.dp),
                     maxLines = 2,
@@ -232,14 +279,17 @@ private fun LazyListScope.taskTitle(task: Task) {
 private fun LazyListScope.taskChips(task: Task) {
     item {
         task.dueDate?.let {
-            TaskDueDateChip(it, modifier = Modifier.padding(start = 24.dp, top = 24.dp))
+            TaskDueDateChip(
+                dueDate = it,
+                modifier = Modifier.padding(start = 24.dp, top = 24.dp),
+            )
         }
     }
 }
 
 private fun LazyListScope.taskChecklist(
     taskChecklistItems: ImmutableList<TaskChecklistItem>,
-    onTaskChecklistItemClick: (String, Boolean) -> Unit,
+    onTaskChecklistItemClick: (String, TaskChecklistItemState) -> Unit,
     onDeleteTaskCheckListItem: (String) -> Unit,
     onAddTaskCheckListItem: (String) -> Unit,
 ) {
@@ -249,8 +299,18 @@ private fun LazyListScope.taskChecklist(
     item {
         TaskDetailSectionTitle(TodometerResources.strings.checklist)
     }
-    items(taskChecklistItems, key = { it.id }) { taskChecklistItem ->
-        TaskChecklistItem(taskChecklistItem, onTaskChecklistItemClick, onDeleteTaskCheckListItem)
+    items(
+        taskChecklistItems,
+        key = { it.id },
+        contentType = { it::class },
+    ) { taskChecklistItem ->
+        TaskChecklistItem(
+            taskChecklistItem = taskChecklistItem,
+            onTaskChecklistItemClick = {
+                onTaskChecklistItemClick(taskChecklistItem.id, taskChecklistItem.state)
+            },
+            onDeleteTaskCheckListItem = onDeleteTaskCheckListItem,
+        )
     }
     item {
         AddChecklistItemField(
@@ -259,16 +319,14 @@ private fun LazyListScope.taskChecklist(
             Text(TodometerResources.strings.addElement)
         }
     }
-    item {
-        TodometerDivider()
-    }
+    item { TodometerDivider() }
 }
 
 @Composable
-private fun LazyItemScope.TaskChecklistItem(
+private inline fun LazyItemScope.TaskChecklistItem(
     taskChecklistItem: TaskChecklistItem,
-    onTaskChecklistItemClick: (String, Boolean) -> Unit,
-    onDeleteTaskCheckListItem: (String) -> Unit,
+    crossinline onTaskChecklistItemClick: (String) -> Unit,
+    crossinline onDeleteTaskCheckListItem: (String) -> Unit,
 ) {
     val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
         MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
@@ -285,21 +343,15 @@ private fun LazyItemScope.TaskChecklistItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                onTaskChecklistItemClick(
-                    taskChecklistItem.id,
-                    taskChecklistItem.state == TaskChecklistItemState.UNCHECKED,
-                )
+                onTaskChecklistItemClick(taskChecklistItem.id)
             }
             .animateItem()
             .padding(horizontal = 8.dp),
     ) {
         TodometerCheckbox(
             checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,
-            onCheckedChange = { checked ->
-                onTaskChecklistItemClick(
-                    taskChecklistItem.id,
-                    checked,
-                )
+            onCheckedChange = {
+                onTaskChecklistItemClick(taskChecklistItem.id)
             },
             modifier = Modifier.scale(TodometerCheckboxScaleFactor),
         )

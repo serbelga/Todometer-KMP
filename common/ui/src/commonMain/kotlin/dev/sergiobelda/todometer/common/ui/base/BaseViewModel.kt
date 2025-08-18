@@ -31,7 +31,7 @@ abstract class BaseViewModel<U : BaseUIState>(
 
     override fun handleEvent(event: BaseEvent) = Unit
 
-    protected fun updateUIState(block: (U) -> U) {
+    protected fun updateUIState(block: (state: U) -> U) {
         _uiState = block.invoke(uiState)
     }
 }

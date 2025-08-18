@@ -16,13 +16,10 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
+import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.ToggleTaskPinnedValueUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.DeleteTaskChecklistItemUseCase
@@ -30,6 +27,8 @@ import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.GetTask
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertTaskChecklistItemUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
+import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
@@ -44,16 +43,12 @@ class TaskDetailsViewModel(
     private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
     private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase,
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase,
-) : ViewModel() {
-
-    var state by mutableStateOf(
-        TaskDetailsState(
-            isLoadingTask = true,
-            isLoadingTaskChecklistItems = true,
-        ),
-    )
-        private set
-
+) : BaseViewModel<TaskDetailsUIState>(
+    initialUIState = TaskDetailsUIState(
+        isLoadingTask = true,
+        isLoadingTaskChecklistItems = true,
+    ),
+) {
     init {
         getTask()
         getTaskChecklistItems()
@@ -62,17 +57,21 @@ class TaskDetailsViewModel(
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                state = state.copy(
-                    isLoadingTask = false,
-                    task = task,
-                    errorUi = null,
-                )
+                updateUIState {
+                    it.copy(
+                        isLoadingTask = false,
+                        task = task,
+                        errorUi = null,
+                    )
+                }
             }.doIfError { error ->
-                state = state.copy(
-                    isLoadingTask = false,
-                    task = null,
-                    errorUi = error.mapToErrorUi(),
-                )
+                updateUIState {
+                    it.copy(
+                        isLoadingTask = false,
+                        task = null,
+                        errorUi = error.mapToErrorUi(),
+                    )
+                }
             }
         }
     }
@@ -80,15 +79,39 @@ class TaskDetailsViewModel(
     private fun getTaskChecklistItems() = viewModelScope.launch {
         getTaskChecklistItemsUseCase(taskId).collect { result ->
             result.doIfSuccess { taskChecklistItems ->
-                state = state.copy(
-                    isLoadingTaskChecklistItems = false,
-                    taskChecklistItems = taskChecklistItems.toPersistentList(),
-                )
+                updateUIState {
+                    it.copy(
+                        isLoadingTaskChecklistItems = false,
+                        taskChecklistItems = taskChecklistItems.toPersistentList(),
+                    )
+                }
             }.doIfError {
-                state = state.copy(
-                    isLoadingTaskChecklistItems = false,
-                    taskChecklistItems = persistentListOf(),
-                )
+                updateUIState {
+                    it.copy(
+                        isLoadingTaskChecklistItems = false,
+                        taskChecklistItems = persistentListOf(),
+                    )
+                }
+            }
+        }
+    }
+
+    override fun handleEvent(event: BaseEvent) {
+        when (event) {
+            is TaskDetailsEvent.AddTaskChecklistItem -> {
+                insertTaskChecklistItem(event.text)
+            }
+
+            is TaskDetailsEvent.DeleteTaskChecklistItem -> {
+                deleteTaskChecklistItem(event.id)
+            }
+
+            is TaskDetailsEvent.ClickTaskChecklistItem -> {
+                toggleTaskChecklistItem(event.id, event.state)
+            }
+
+            is TaskDetailsEvent.ToggleTaskPinnedValue -> {
+                toggleTaskPinnedValueUseCase()
             }
         }
     }
@@ -97,12 +120,19 @@ class TaskDetailsViewModel(
         insertTaskChecklistItemsUseCase(taskId, text)
     }
 
-    fun setTaskChecklistItemUnchecked(id: String) = viewModelScope.launch {
-        setTaskChecklistItemUncheckedUseCase(id)
-    }
+    fun toggleTaskChecklistItem(
+        id: String,
+        state: TaskChecklistItemState,
+    ) = viewModelScope.launch {
+        when (state) {
+            TaskChecklistItemState.UNCHECKED -> {
+                setTaskChecklistItemCheckedUseCase(id)
+            }
 
-    fun setTaskChecklistItemChecked(id: String) = viewModelScope.launch {
-        setTaskChecklistItemCheckedUseCase(id)
+            TaskChecklistItemState.CHECKED -> {
+                setTaskChecklistItemUncheckedUseCase(id)
+            }
+        }
     }
 
     fun deleteTaskChecklistItem(id: String) = viewModelScope.launch {

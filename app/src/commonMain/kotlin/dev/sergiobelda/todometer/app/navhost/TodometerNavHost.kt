@@ -45,9 +45,11 @@ import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsNavDestination
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
+import dev.sergiobelda.todometer.app.feature.taskdetails.navigation.taskDetailsNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
+import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsViewModel
 import dev.sergiobelda.todometer.common.ui.base.di.koin.koinBaseViewModel
 import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
@@ -127,10 +129,17 @@ private fun NavGraphBuilder.taskDetailsNode(
 ) {
     composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
         val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId.orEmpty()
-        TaskDetailsScreen(
-            navigateToEditTask = { navigateToEditTask(taskId) },
+        val taskDetailsNavigationEventHandler = taskDetailsNavigationEventHandler(
             navigateBack = navigateBack,
-            viewModel = koinViewModel { parametersOf(taskId) },
+            navigateToEditTask = {
+                navigateToEditTask.invoke(taskId)
+            },
+        )
+        TaskDetailsScreen.NavigationNodeContent(
+            navigationEventHandler = taskDetailsNavigationEventHandler,
+            viewModel = koinBaseViewModel {
+                parametersOf(taskId)
+            },
         )
     }
 }
