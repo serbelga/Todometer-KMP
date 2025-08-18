@@ -25,13 +25,11 @@ import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
-import dev.sergiobelda.todometer.app.feature.about.ui.AboutViewModel
 import dev.sergiobelda.todometer.app.feature.about.ui.GitHubUrl
 import dev.sergiobelda.todometer.app.feature.about.ui.PrivacyPolicyUrl
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
+import dev.sergiobelda.todometer.common.ui.base.di.koin.koinBaseViewModel
 import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.qualifier.named
 
 internal actual fun NavGraphBuilder.aboutNode(
     navigateBack: () -> Unit,
@@ -50,7 +48,7 @@ internal actual fun NavGraphBuilder.aboutNode(
             )
         }
         AboutScreen.NavigationNodeContent(
-            viewModel = koinViewModel(named<AboutViewModel>()),
+            viewModel = koinBaseViewModel(),
             navigationEventHandler = aboutNavigationEventHandler,
         )
     }

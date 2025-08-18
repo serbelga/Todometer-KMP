@@ -17,11 +17,15 @@
 package dev.sergiobelda.todometer.app.feature.edittask.di
 
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.baseViewModel
+import dev.sergiobelda.todometer.common.ui.base.di.koin.baseViewModel
 import org.koin.dsl.module
 
 val editTaskViewModelModule = module {
     baseViewModel { parameters ->
-        EditTaskViewModel(taskId = parameters.get(), get(), get())
+        EditTaskViewModel(
+            taskId = parameters.get(),
+            get(),
+            get(),
+        )
     }
 }

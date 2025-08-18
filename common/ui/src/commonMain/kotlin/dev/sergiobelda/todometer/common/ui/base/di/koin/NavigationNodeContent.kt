@@ -14,34 +14,23 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.ui.base.navigation
+package dev.sergiobelda.todometer.common.ui.base.di.koin
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
-import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
+import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
+import org.koin.core.parameter.ParametersDefinition
 
 @Composable
-inline fun <reified N, U> BaseUI<U, *>.NavigationNodeContent(
-    viewModel: BaseViewModel<U>,
+inline fun <reified N, reified U> BaseUI<U, *>.KoinNavigationNodeContent(
+    noinline parameters: ParametersDefinition? = null,
     navigationEventHandler: BaseNavigationEventHandler<N>,
 ) where N : BaseNavigationEvent, U : BaseUIState {
-    Content(
-        viewModel = viewModel,
-        onEvent = {
-            if (it is N) {
-                navigationEventHandler.handleNavigationEvent(it)
-            }
-        },
-    )
-}
-
-@Composable
-fun <U> BaseUI<U, *>.NavigationNodeContent(
-    viewModel: BaseViewModel<U>,
-) where U : BaseUIState {
     NavigationNodeContent(
-        viewModel = viewModel,
-        navigationEventHandler = BaseNavigationEventHandler { },
+        viewModel = koinBaseViewModel(parameters = parameters),
+        navigationEventHandler = navigationEventHandler,
     )
 }

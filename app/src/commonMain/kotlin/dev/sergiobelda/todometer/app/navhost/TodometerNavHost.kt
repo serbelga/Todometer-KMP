@@ -30,33 +30,28 @@ import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.navigation.addTaskNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskScreen
-import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskViewModel
 import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.addTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListScreen
-import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
 import dev.sergiobelda.todometer.app.feature.edittask.navigation.editTaskNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskNavDestination
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
-import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskViewModel
 import dev.sergiobelda.todometer.app.feature.edittasklist.navigation.editTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
-import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListViewModel
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeNavDestination
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsNavDestination
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsScreen
-import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
+import dev.sergiobelda.todometer.common.ui.base.di.koin.koinBaseViewModel
 import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
 
 @Composable
 fun TodometerNavHost(
@@ -149,7 +144,7 @@ private fun NavGraphBuilder.addTaskListRoute(
     composable(navDestination = AddTaskListNavDestination) {
         AddTaskListScreen.NavigationNodeContent(
             navigationEventHandler = addTaskListNavigationEventHandler,
-            viewModel = koinViewModel(named<AddTaskListViewModel>()),
+            viewModel = koinBaseViewModel(),
         )
     }
 }
@@ -163,7 +158,7 @@ private fun NavGraphBuilder.editTaskListNode(
     composable(navDestination = EditTaskListNavDestination) {
         EditTaskListScreen.NavigationNodeContent(
             navigationEventHandler = editTaskListNavigationEventHandler,
-            viewModel = koinViewModel(named<EditTaskListViewModel>()),
+            viewModel = koinBaseViewModel(),
         )
     }
 }
@@ -177,7 +172,7 @@ private fun NavGraphBuilder.addTaskNode(
     composable(navDestination = AddTaskNavDestination) {
         AddTaskScreen.NavigationNodeContent(
             navigationEventHandler = addTaskNavigationEventHandler,
-            viewModel = koinViewModel(named<AddTaskViewModel>()),
+            viewModel = koinBaseViewModel(),
         )
     }
 }
@@ -192,7 +187,7 @@ private fun NavGraphBuilder.editTaskNode(
         val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
         EditTaskScreen.NavigationNodeContent(
             navigationEventHandler = editTaskNavigationEventHandler,
-            viewModel = koinViewModel<EditTaskViewModel> { parametersOf(taskId) },
+            viewModel = koinBaseViewModel { parametersOf(taskId) },
         )
     }
 }
@@ -206,7 +201,7 @@ private fun NavGraphBuilder.settingsNode(
     composable(navDestination = SettingsNavDestination) {
         SettingsScreen.NavigationNodeContent(
             navigationEventHandler = settingsNavigationEventHandler,
-            viewModel = koinViewModel(named<SettingsViewModel>()),
+            viewModel = koinBaseViewModel(),
         )
     }
 }
