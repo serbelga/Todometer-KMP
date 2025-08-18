@@ -18,11 +18,8 @@ package dev.sergiobelda.todometer.app.feature.settings.di
 
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
 import dev.sergiobelda.todometer.common.ui.base.di.baseViewModelOf
-import org.koin.core.module.dsl.named
 import org.koin.dsl.module
 
 val settingsViewModelModule = module {
-    baseViewModelOf(::SettingsViewModel) {
-        named<SettingsViewModel>()
-    }
+    baseViewModelOf(::SettingsViewModel)
 }

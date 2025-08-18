@@ -22,6 +22,10 @@ import org.koin.dsl.module
 
 val editTaskViewModelModule = module {
     baseViewModel { parameters ->
-        EditTaskViewModel(taskId = parameters.get(), get(), get())
+        EditTaskViewModel(
+            taskId = parameters.get(),
+            get(),
+            get(),
+        )
     }
 }

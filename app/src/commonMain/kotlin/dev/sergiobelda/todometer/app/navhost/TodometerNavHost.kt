@@ -56,7 +56,6 @@ import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
 import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
 
 @Composable
 fun TodometerNavHost(
@@ -149,7 +148,7 @@ private fun NavGraphBuilder.addTaskListRoute(
     composable(navDestination = AddTaskListNavDestination) {
         AddTaskListScreen.NavigationNodeContent(
             navigationEventHandler = addTaskListNavigationEventHandler,
-            viewModel = koinViewModel(named<AddTaskListViewModel>()),
+            viewModel = koinViewModel<AddTaskListViewModel>(),
         )
     }
 }
@@ -163,7 +162,7 @@ private fun NavGraphBuilder.editTaskListNode(
     composable(navDestination = EditTaskListNavDestination) {
         EditTaskListScreen.NavigationNodeContent(
             navigationEventHandler = editTaskListNavigationEventHandler,
-            viewModel = koinViewModel(named<EditTaskListViewModel>()),
+            viewModel = koinViewModel<EditTaskListViewModel>(),
         )
     }
 }
@@ -177,7 +176,7 @@ private fun NavGraphBuilder.addTaskNode(
     composable(navDestination = AddTaskNavDestination) {
         AddTaskScreen.NavigationNodeContent(
             navigationEventHandler = addTaskNavigationEventHandler,
-            viewModel = koinViewModel(named<AddTaskViewModel>()),
+            viewModel = koinViewModel<AddTaskViewModel>(),
         )
     }
 }
@@ -206,7 +205,7 @@ private fun NavGraphBuilder.settingsNode(
     composable(navDestination = SettingsNavDestination) {
         SettingsScreen.NavigationNodeContent(
             navigationEventHandler = settingsNavigationEventHandler,
-            viewModel = koinViewModel(named<SettingsViewModel>()),
+            viewModel = koinViewModel<SettingsViewModel>(),
         )
     }
 }

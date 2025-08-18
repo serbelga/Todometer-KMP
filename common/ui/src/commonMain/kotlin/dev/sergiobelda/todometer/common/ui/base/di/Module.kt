@@ -16,7 +16,6 @@
 
 package dev.sergiobelda.todometer.common.ui.base.di
 
-import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import org.koin.core.definition.BeanDefinition
 import org.koin.core.definition.Definition
@@ -32,23 +31,23 @@ inline fun <reified T : BaseViewModel<*>> Module.baseViewModel(
     noinline definition: Definition<T>,
 ): KoinDefinition<T> = factory(qualifier, definition)
 
-inline fun <reified U : BaseUIState> Module.baseViewModelOf(
-    crossinline constructor: () -> BaseViewModel<U>,
-    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
-    bind<BaseViewModel<U>>()
+inline fun <reified V : BaseViewModel<*>> Module.baseViewModelOf(
+    crossinline constructor: () -> V,
+    noinline options: (BeanDefinition<V>.() -> Unit)? = null,
+): KoinDefinition<V> = viewModelOf(constructor) {
+    bind<V>()
 }.onOptions(options)
 
-inline fun <reified U : BaseUIState, reified T1> Module.baseViewModelOf(
-    crossinline constructor: (T1) -> BaseViewModel<U>,
-    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
-    bind<BaseViewModel<U>>()
+inline fun <reified V : BaseViewModel<*>, reified T1> Module.baseViewModelOf(
+    crossinline constructor: (T1) -> V,
+    noinline options: (BeanDefinition<V>.() -> Unit)? = null,
+): KoinDefinition<V> = viewModelOf(constructor) {
+    bind<V>()
 }.onOptions(options)
 
-inline fun <reified U : BaseUIState, reified T1, reified T2> Module.baseViewModelOf(
-    crossinline constructor: (T1, T2) -> BaseViewModel<U>,
-    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
-    bind<BaseViewModel<U>>()
+inline fun <reified V : BaseViewModel<*>, reified T1, reified T2> Module.baseViewModelOf(
+    crossinline constructor: (T1, T2) -> V,
+    noinline options: (BeanDefinition<V>.() -> Unit)? = null,
+): KoinDefinition<V> = viewModelOf(constructor) {
+    bind<V>()
 }.onOptions(options)
