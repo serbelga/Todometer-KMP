@@ -21,7 +21,6 @@ import org.koin.core.definition.BeanDefinition
 import org.koin.core.definition.Definition
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.onOptions
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.Qualifier
 
@@ -33,23 +32,14 @@ inline fun <reified T : BaseViewModel<*>> Module.baseViewModel(
 inline fun <reified V : BaseViewModel<*>> Module.baseViewModelOf(
     crossinline constructor: () -> V,
     noinline options: (BeanDefinition<V>.() -> Unit)? = null,
-): KoinDefinition<V> = viewModelOf(constructor) {
-    // TODO: Remove
-    // bind<V>()
-}.onOptions(options)
+): KoinDefinition<V> = viewModelOf(constructor, options)
 
 inline fun <reified V : BaseViewModel<*>, reified T1> Module.baseViewModelOf(
     crossinline constructor: (T1) -> V,
     noinline options: (BeanDefinition<V>.() -> Unit)? = null,
-): KoinDefinition<V> = viewModelOf(constructor) {
-    // TODO: Remove
-    // bind<V>()
-}.onOptions(options)
+): KoinDefinition<V> = viewModelOf(constructor, options)
 
 inline fun <reified V : BaseViewModel<*>, reified T1, reified T2> Module.baseViewModelOf(
     crossinline constructor: (T1, T2) -> V,
     noinline options: (BeanDefinition<V>.() -> Unit)? = null,
-): KoinDefinition<V> = viewModelOf(constructor) {
-    // TODO: Remove
-    // bind<V>()
-}.onOptions(options)
+): KoinDefinition<V> = viewModelOf(constructor, options)
