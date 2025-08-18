@@ -2,7 +2,7 @@
 
 <img src="../../resources/dependency_graphs/common-ui-dependency-graph-multiplatform-projects.svg">
 
-### DI
+### DI: Koin example
 
 ```kotlin
 class SettingsViewModel(
@@ -31,7 +31,7 @@ composable(navDestination = SettingsNavDestination) {
 }
 ```
 
-### DI: Koin DI extension
+### DI: Koin DI extensions
 
 ```kotlin
 val settingsViewModelModule = module {
@@ -48,7 +48,7 @@ composable(navDestination = SettingsNavDestination) {
 }
 ```
 
-#### DI: Koin DI Navigation extension
+#### DI: Koin DI Navigation extensions
 
 Syntax sugar `KoinNavigationNodeContent`
 
