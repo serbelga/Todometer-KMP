@@ -49,7 +49,6 @@ import dev.sergiobelda.todometer.app.feature.taskdetails.navigation.taskDetailsN
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsViewModel
 import dev.sergiobelda.todometer.common.ui.base.di.koin.koinBaseViewModel
 import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
