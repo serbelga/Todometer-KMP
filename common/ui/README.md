@@ -43,7 +43,7 @@ val settingsViewModelModule = module {
 composable(navDestination = SettingsNavDestination) {
     SettingsScreen.NavigationNodeContent(
         navigationEventHandler = settingsNavigationEventHandler,
-        viewModel = injectBaseViewModel(),
+        viewModel = koinBaseViewModel(),
     )
 }
 ```
