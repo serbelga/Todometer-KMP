@@ -25,13 +25,12 @@ abstract class BaseViewModel<U : BaseUIState>(
     initialUIState: U,
 ) : ViewModel(), BaseEventHandler {
 
-    private var _uiState by mutableStateOf(initialUIState)
-
-    val uiState: U get() = _uiState
+    var uiState: U by mutableStateOf(initialUIState)
+        private set
 
     override fun handleEvent(event: BaseEvent) = Unit
 
     protected fun updateUIState(block: (state: U) -> U) {
-        _uiState = block.invoke(uiState)
+        uiState = block.invoke(uiState)
     }
 }
