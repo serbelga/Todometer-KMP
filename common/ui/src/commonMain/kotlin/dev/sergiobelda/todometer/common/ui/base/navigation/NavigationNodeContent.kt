@@ -17,16 +17,15 @@
 package dev.sergiobelda.todometer.common.ui.base.navigation
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.ui.base.BaseContentState
 import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 
 @Composable
-inline fun <reified N, U, C> BaseUI<U, C>.NavigationNodeContent(
+inline fun <reified N, U> BaseUI<U, *>.NavigationNodeContent(
     viewModel: BaseViewModel<U>,
     navigationEventHandler: BaseNavigationEventHandler<N>,
-) where N : BaseNavigationEvent, U : BaseUIState, C : BaseContentState {
+) where N : BaseNavigationEvent, U : BaseUIState {
     Content(
         viewModel = viewModel,
         onEvent = {
@@ -38,9 +37,9 @@ inline fun <reified N, U, C> BaseUI<U, C>.NavigationNodeContent(
 }
 
 @Composable
-fun <U, C> BaseUI<U, C>.NavigationNodeContent(
+fun <U> BaseUI<U, *>.NavigationNodeContent(
     viewModel: BaseViewModel<U>,
-) where U : BaseUIState, C : BaseContentState {
+) where U : BaseUIState {
     NavigationNodeContent(
         viewModel = viewModel,
         navigationEventHandler = BaseNavigationEventHandler { },
