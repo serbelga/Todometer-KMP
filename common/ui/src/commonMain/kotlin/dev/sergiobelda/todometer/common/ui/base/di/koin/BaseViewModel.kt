@@ -25,43 +25,23 @@ import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import org.koin.compose.currentKoinScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinInternalApi
-import org.koin.core.definition.BeanDefinition
 import org.koin.core.definition.Definition
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.named
-import org.koin.core.module.dsl.onOptions
-import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.named
-import org.koin.core.qualifier.qualifier
 import org.koin.core.scope.Scope
 import org.koin.viewmodel.defaultExtras
 
+/**
+ * Allow to declare a [BaseViewModel] - be later inject with dedicated injector.
+ *
+ * @param definition - allow definition override
+ */
 inline fun <reified U : BaseUIState> Module.baseViewModel(
     noinline definition: Definition<BaseViewModel<U>>,
-): KoinDefinition<BaseViewModel<U>> = factory(named<U>(), definition)
-
-inline fun <reified U : BaseUIState> Module.baseViewModelOf(
-    crossinline constructor: () -> BaseViewModel<U>,
-    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
-    named<U>()
-}.onOptions(options)
-
-inline fun <reified U : BaseUIState, reified T1> Module.baseViewModelOf(
-    crossinline constructor: (T1) -> BaseViewModel<U>,
-    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
-    named<U>()
-}.onOptions(options)
-
-inline fun <reified U : BaseUIState, reified T1, reified T2> Module.baseViewModelOf(
-    crossinline constructor: (T1, T2) -> BaseViewModel<U>,
-    noinline options: (BeanDefinition<BaseViewModel<U>>.() -> Unit)? = null,
-): KoinDefinition<BaseViewModel<U>> = viewModelOf(constructor) {
-    named<U>()
-}.onOptions(options)
+): KoinDefinition<BaseViewModel<U>> = viewModel(named<U>(), definition)
 
 @OptIn(KoinInternalApi::class)
 @Composable
@@ -74,7 +54,7 @@ inline fun <reified U : BaseUIState> koinBaseViewModel(
     noinline parameters: ParametersDefinition? = null,
 ): BaseViewModel<U> =
     koinViewModel(
-        qualifier = qualifier<U>(),
+        qualifier = named<U>(),
         viewModelStoreOwner = viewModelStoreOwner,
         key = key,
         extras = extras,

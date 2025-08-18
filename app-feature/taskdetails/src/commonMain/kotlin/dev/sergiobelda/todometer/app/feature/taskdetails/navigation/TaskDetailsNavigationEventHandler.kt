@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.domain.model
+package dev.sergiobelda.todometer.app.feature.taskdetails.navigation
 
-enum class TaskChecklistItemState {
-    UNCHECKED,
-    CHECKED,
-    ;
+import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
 
-    fun toggle(): TaskChecklistItemState = when (this) {
-        UNCHECKED -> CHECKED
-        CHECKED -> UNCHECKED
+fun taskDetailsNavigationEventHandler(
+    navigateBack: () -> Unit,
+    navigateToEditTask: () -> Unit,
+): BaseNavigationEventHandler<TaskDetailsNavigationEvent> = BaseNavigationEventHandler {
+    when (it) {
+        TaskDetailsNavigationEvent.NavigateBack -> navigateBack()
+        TaskDetailsNavigationEvent.NavigateToEditTask -> navigateToEditTask()
     }
 }
