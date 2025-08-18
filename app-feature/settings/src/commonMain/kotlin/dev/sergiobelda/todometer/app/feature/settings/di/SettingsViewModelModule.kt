@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.settings.di
 
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.baseViewModelOf
+import dev.sergiobelda.todometer.common.ui.base.di.koin.baseViewModelOf
 import org.koin.dsl.module
 
 val settingsViewModelModule = module {

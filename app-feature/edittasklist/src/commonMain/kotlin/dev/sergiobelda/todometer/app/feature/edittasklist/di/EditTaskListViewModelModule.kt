@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.edittasklist.di
 
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.baseViewModelOf
+import dev.sergiobelda.todometer.common.ui.base.di.koin.baseViewModelOf
 import org.koin.dsl.module
 
 val editTaskListViewModelModule = module {
