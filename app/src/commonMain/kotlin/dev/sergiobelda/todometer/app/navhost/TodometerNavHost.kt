@@ -16,9 +16,10 @@
 
 package dev.sergiobelda.todometer.app.navhost
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavGraphBuilder
@@ -26,6 +27,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import dev.sergiobelda.navigation.compose.extended.NavAction
 import dev.sergiobelda.navigation.compose.extended.composable
+import dev.sergiobelda.todometer.app.common.ui.animation.LocalAnimatedContentScope
+import dev.sergiobelda.todometer.app.common.ui.animation.LocalSharedTransitionScope
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.addtask.navigation.addTaskNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskNavDestination
@@ -54,6 +57,7 @@ import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun TodometerNavHost(
     navController: NavHostController,
@@ -65,39 +69,41 @@ fun TodometerNavHost(
         keyboardController?.hide()
         navAction.navigateUp()
     }
-    NavHost(
-        navController = navController,
-        startDestination = HomeNavDestination.route,
-        modifier = modifier,
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None },
-    ) {
-        homeNode(
-            navigateToAddTaskList = { navAction.navigate(AddTaskListNavDestination.safeNavRoute()) },
-            navigateToEditTaskList = { navAction.navigate(EditTaskListNavDestination.safeNavRoute()) },
-            navigateToAddTask = { navAction.navigate(AddTaskNavDestination.safeNavRoute()) },
-            navigateToTaskDetails = { taskId ->
-                navAction.navigate(
-                    TaskDetailsNavDestination.safeNavRoute(taskId),
+    SharedTransitionLayout {
+        CompositionLocalProvider(LocalSharedTransitionScope provides this) {
+            NavHost(
+                navController = navController,
+                startDestination = HomeNavDestination.route,
+                modifier = modifier,
+            ) {
+                homeNode(
+                    navigateToAddTaskList = { navAction.navigate(AddTaskListNavDestination.safeNavRoute()) },
+                    navigateToEditTaskList = { navAction.navigate(EditTaskListNavDestination.safeNavRoute()) },
+                    navigateToAddTask = { navAction.navigate(AddTaskNavDestination.safeNavRoute()) },
+                    navigateToTaskDetails = { taskId ->
+                        navAction.navigate(
+                            TaskDetailsNavDestination.safeNavRoute(taskId),
+                        )
+                    },
+                    navigateToSettings = { navAction.navigate(SettingsNavDestination.safeNavRoute()) },
+                    navigateToAbout = { navAction.navigate(AboutNavDestination.safeNavRoute()) },
                 )
-            },
-            navigateToSettings = { navAction.navigate(SettingsNavDestination.safeNavRoute()) },
-            navigateToAbout = { navAction.navigate(AboutNavDestination.safeNavRoute()) },
-        )
-        taskDetailsNode(
-            navigateBack = navigateBackAction,
-            navigateToEditTask = { taskId ->
-                navAction.navigate(
-                    EditTaskNavDestination.safeNavRoute(taskId),
+                taskDetailsNode(
+                    navigateBack = navigateBackAction,
+                    navigateToEditTask = { taskId ->
+                        navAction.navigate(
+                            EditTaskNavDestination.safeNavRoute(taskId),
+                        )
+                    },
                 )
-            },
-        )
-        addTaskListRoute(navigateBack = navigateBackAction)
-        editTaskListNode(navigateBack = navigateBackAction)
-        addTaskNode(navigateBack = navigateBackAction)
-        editTaskNode(navigateBack = navigateBackAction)
-        settingsNode(navigateBack = navigateBackAction)
-        aboutNode(navigateBack = navigateBackAction)
+                addTaskListRoute(navigateBack = navigateBackAction)
+                editTaskListNode(navigateBack = navigateBackAction)
+                addTaskNode(navigateBack = navigateBackAction)
+                editTaskNode(navigateBack = navigateBackAction)
+                settingsNode(navigateBack = navigateBackAction)
+                aboutNode(navigateBack = navigateBackAction)
+            }
+        }
     }
 }
 
@@ -110,15 +116,19 @@ private fun NavGraphBuilder.homeNode(
     navigateToAbout: () -> Unit,
 ) {
     composable(navDestination = HomeNavDestination) {
-        HomeScreen(
-            navigateToAddTaskList = navigateToAddTaskList,
-            navigateToEditTaskList = navigateToEditTaskList,
-            navigateToAddTask = navigateToAddTask,
-            navigateToTaskDetails = navigateToTaskDetails,
-            navigateToSettings = navigateToSettings,
-            navigateToAbout = navigateToAbout,
-            viewModel = koinViewModel(),
-        )
+        CompositionLocalProvider(
+            LocalAnimatedContentScope provides this@composable,
+        ) {
+            HomeScreen(
+                navigateToAddTaskList = navigateToAddTaskList,
+                navigateToEditTaskList = navigateToEditTaskList,
+                navigateToAddTask = navigateToAddTask,
+                navigateToTaskDetails = navigateToTaskDetails,
+                navigateToSettings = navigateToSettings,
+                navigateToAbout = navigateToAbout,
+                viewModel = koinViewModel(),
+            )
+        }
     }
 }
 
@@ -127,19 +137,23 @@ private fun NavGraphBuilder.taskDetailsNode(
     navigateToEditTask: (String) -> Unit,
 ) {
     composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
-        val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId.orEmpty()
-        val taskDetailsNavigationEventHandler = taskDetailsNavigationEventHandler(
-            navigateBack = navigateBack,
-            navigateToEditTask = {
-                navigateToEditTask.invoke(taskId)
-            },
-        )
-        TaskDetailsScreen.NavigationNodeContent(
-            navigationEventHandler = taskDetailsNavigationEventHandler,
-            viewModel = koinBaseViewModel {
-                parametersOf(taskId)
-            },
-        )
+        CompositionLocalProvider(
+            LocalAnimatedContentScope provides this@composable,
+        ) {
+            val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId.orEmpty()
+            val taskDetailsNavigationEventHandler = taskDetailsNavigationEventHandler(
+                navigateBack = navigateBack,
+                navigateToEditTask = {
+                    navigateToEditTask.invoke(taskId)
+                },
+            )
+            TaskDetailsScreen.NavigationNodeContent(
+                navigationEventHandler = taskDetailsNavigationEventHandler,
+                viewModel = koinBaseViewModel {
+                    parametersOf(taskId)
+                },
+            )
+        }
     }
 }
 

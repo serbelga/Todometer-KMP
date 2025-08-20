@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.app.common.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -61,6 +62,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
+import dev.sergiobelda.todometer.app.common.ui.animation.LocalAnimatedContentScope
+import dev.sergiobelda.todometer.app.common.ui.animation.LocalSharedTransitionScope
+import dev.sergiobelda.todometer.app.common.ui.animation.TaskSharedElementKey
+import dev.sergiobelda.todometer.app.common.ui.animation.TaskSharedElementType
 import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedResources
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
@@ -221,6 +226,7 @@ private fun TaskItemContent(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun TaskItemHeadlineContent(
     taskItem: TaskItem,
@@ -228,6 +234,8 @@ private fun TaskItemHeadlineContent(
     onDoneClick: () -> Unit,
     checkEnabled: Boolean = true,
 ) {
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+    val animatedContentScope = LocalAnimatedContentScope.current
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(
@@ -235,17 +243,41 @@ private fun TaskItemHeadlineContent(
             end = TaskItemInnerPaddingEnd,
         ),
     ) {
-        if (taskItem.tag != Tag.UNSPECIFIED) {
-            TaskTagIndicator(taskItem.tag)
+        with(sharedTransitionScope) {
+            if (taskItem.tag != Tag.UNSPECIFIED) {
+                TaskTagIndicator(
+                    taskItem.tag,
+                    modifier = Modifier
+                        .sharedElement(
+                            sharedContentState = rememberSharedContentState(
+                                key = TaskSharedElementKey(
+                                    type = TaskSharedElementType.Tag,
+                                    taskId = taskItem.id,
+                                ),
+                            ),
+                            animatedVisibilityScope = animatedContentScope,
+                        ),
+                )
+            }
+            Text(
+                taskItem.title,
+                textDecoration = taskItemTitleTextDecoration(taskItem.state),
+                color = taskItemTitleColor(taskItem.state),
+                modifier = Modifier
+                    .sharedElement(
+                        sharedContentState = rememberSharedContentState(
+                            key = TaskSharedElementKey(
+                                type = TaskSharedElementType.Title,
+                                taskId = taskItem.id,
+                            ),
+                        ),
+                        animatedVisibilityScope = animatedContentScope,
+                    )
+                    .weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
         }
-        Text(
-            taskItem.title,
-            textDecoration = taskItemTitleTextDecoration(taskItem.state),
-            color = taskItemTitleColor(taskItem.state),
-            modifier = Modifier.weight(1f),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
         IconButton(
             onClick = {
                 if (taskItem.state == TaskState.DONE) {
@@ -282,7 +314,10 @@ private fun TaskItemSupportingContent(taskItem: TaskItem) {
         }
         if (taskItem.totalChecklistItems > 0) {
             item {
-                TaskChecklistItemsChip(taskItem.checklistItemsDone, taskItem.totalChecklistItems)
+                TaskChecklistItemsChip(
+                    taskItem.checklistItemsDone,
+                    taskItem.totalChecklistItems,
+                )
             }
         }
     }
@@ -308,7 +343,6 @@ private fun taskItemActionTintColor(state: TaskState): Color =
         TaskState.DONE -> MaterialTheme.colorScheme.primary
     }
 
-@Composable
 private fun taskItemActionIcon(state: TaskState): ImageVector =
     when (state) {
         TaskState.DOING -> Images.Icons.RadioButtonUnchecked
