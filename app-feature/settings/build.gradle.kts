@@ -17,7 +17,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-
         commonMain.dependencies {
             implementation(projects.appCommon.designsystem)
             implementation(projects.appCommon.ui)
@@ -28,7 +27,6 @@ kotlin {
 
         androidMain.dependencies {
             implementation(compose.animationGraphics)
-            api(compose.uiTooling)
         }
         val desktopMain by getting
         desktopMain.dependencies {
@@ -44,4 +42,9 @@ kotlin {
 
 android {
     namespace = "dev.sergiobelda.todometer.app.feature.settings"
+
+    dependencies {
+        implementation(compose.preview)
+        debugImplementation(compose.uiTooling)
+    }
 }
