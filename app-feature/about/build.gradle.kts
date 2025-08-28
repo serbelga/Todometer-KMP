@@ -25,7 +25,6 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(compose.animationGraphics)
-            api(compose.uiTooling)
         }
         val desktopMain by getting
         desktopMain.dependencies {
@@ -41,4 +40,9 @@ kotlin {
 
 android {
     namespace = "dev.sergiobelda.todometer.app.feature.about"
+
+    dependencies {
+        implementation(compose.preview)
+        debugImplementation(compose.uiTooling)
+    }
 }

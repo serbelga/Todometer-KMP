@@ -66,7 +66,7 @@ dependencies {
     implementation(projects.common.ui)
 
     implementation(compose.foundation)
-    implementation(compose.uiTooling)
+    debugImplementation(compose.uiTooling)
 
     implementation(libs.androidx.activityCompose)
 
