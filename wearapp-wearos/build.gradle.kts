@@ -90,4 +90,7 @@ dependencies {
     ksp(libs.sergiobelda.navigationComposeExtendedCompiler)
 
     implementation(libs.kotlin.collections.immutable)
+
+    implementation(libs.sergiobelda.fonament)
+    implementation(libs.sergiobelda.fonament.diKoin)
 }

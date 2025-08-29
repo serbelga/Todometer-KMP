@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail
+package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
@@ -29,14 +30,16 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
-class TaskDetailViewModel(
+class TaskDetailsViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTasksUseCase: DeleteTasksUseCase,
-) : ViewModel() {
+) : FonamentViewModel<TaskDetailsUIState>(
+    initialUIState = TaskDetailsUIState()
+) {
 
-    var state by mutableStateOf(TaskDetailState(isLoading = true))
+    var state by mutableStateOf(TaskDetailsUIState(isLoading = true))
         private set
 
     init {
@@ -58,6 +61,12 @@ class TaskDetailViewModel(
                     errorUi = error.mapToErrorUi(),
                 )
             }
+        }
+    }
+
+    override fun handleEvent(event: FonamentEvent) {
+        when (event) {
+            else -> {}
         }
     }
 

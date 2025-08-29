@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail
+package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
 import androidx.compose.runtime.Immutable
+import dev.sergiobelda.fonament.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 @Immutable
-data class TaskDetailState(
+data class TaskDetailsUIState(
     val isLoading: Boolean = false,
     val task: Task? = null,
     val errorUi: ErrorUi? = null,
-)
+) : FonamentUIState

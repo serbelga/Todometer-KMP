@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.wearapp.wearos.di
 
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeViewModel
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailViewModel
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsViewModel
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -39,6 +39,6 @@ internal val viewModelModule = module {
         )
     }
     viewModel { parameters ->
-        TaskDetailViewModel(taskId = parameters.get(), get(), get(), get())
+        TaskDetailsViewModel(taskId = parameters.get(), get(), get(), get())
     }
 }
