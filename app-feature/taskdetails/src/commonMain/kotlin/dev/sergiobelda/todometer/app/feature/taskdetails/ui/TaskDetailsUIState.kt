@@ -17,9 +17,9 @@
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
 import androidx.compose.runtime.Immutable
+import dev.sergiobelda.fonament.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -31,4 +31,4 @@ data class TaskDetailsUIState(
     val isLoadingTaskChecklistItems: Boolean = false,
     val taskChecklistItems: ImmutableList<TaskChecklistItem> = persistentListOf(),
     val errorUi: ErrorUi? = null,
-) : BaseUIState
+) : FonamentUIState

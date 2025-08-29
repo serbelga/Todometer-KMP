@@ -22,12 +22,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import dev.sergiobelda.todometer.common.ui.base.BaseContentState
+import dev.sergiobelda.fonament.ui.FonamentContentState
 
 @OptIn(ExperimentalMaterial3Api::class)
 data class TaskDetailsContentState internal constructor(
     internal val lazyListState: LazyListState,
-) : BaseContentState {
+) : FonamentContentState {
 
     internal val showTopAppBarTitle by derivedStateOf {
         lazyListState.firstVisibleItemIndex > 0

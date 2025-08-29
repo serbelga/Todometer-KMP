@@ -17,6 +17,8 @@
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
@@ -27,8 +29,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.GetTask
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.InsertTaskChecklistItemUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemCheckedUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.taskchecklistitem.SetTaskChecklistItemUncheckedUseCase
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
-import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
@@ -43,7 +43,7 @@ class TaskDetailsViewModel(
     private val setTaskChecklistItemUncheckedUseCase: SetTaskChecklistItemUncheckedUseCase,
     private val setTaskChecklistItemCheckedUseCase: SetTaskChecklistItemCheckedUseCase,
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase,
-) : BaseViewModel<TaskDetailsUIState>(
+) : FonamentViewModel<TaskDetailsUIState>(
     initialUIState = TaskDetailsUIState(
         isLoadingTask = true,
         isLoadingTaskChecklistItems = true,
@@ -96,7 +96,7 @@ class TaskDetailsViewModel(
         }
     }
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is TaskDetailsEvent.AddTaskChecklistItem -> {
                 insertTaskChecklistItem(event.text)

@@ -136,9 +136,9 @@ private fun NavGraphBuilder.taskDetailsNode(
                 navigateToEditTask.invoke(taskId)
             },
         )
-        TaskDetailsScreen.NavigationNodeContent(
+        TaskDetailsScreen.NavigationNode(
             navigationEventHandler = taskDetailsNavigationEventHandler,
-            viewModel = koinBaseViewModel {
+            viewModel = koinFonamentViewModel {
                 parametersOf(taskId)
             },
         )

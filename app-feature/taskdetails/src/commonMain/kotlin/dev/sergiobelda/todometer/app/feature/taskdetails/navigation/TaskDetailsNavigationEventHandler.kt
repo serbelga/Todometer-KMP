@@ -16,12 +16,12 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
 
 fun taskDetailsNavigationEventHandler(
     navigateBack: () -> Unit,
     navigateToEditTask: () -> Unit,
-): BaseNavigationEventHandler<TaskDetailsNavigationEvent> = BaseNavigationEventHandler {
+): FonamentNavigationEventHandler<TaskDetailsNavigationEvent> = FonamentNavigationEventHandler {
     when (it) {
         TaskDetailsNavigationEvent.NavigateBack -> navigateBack()
         TaskDetailsNavigationEvent.NavigateToEditTask -> navigateToEditTask()
