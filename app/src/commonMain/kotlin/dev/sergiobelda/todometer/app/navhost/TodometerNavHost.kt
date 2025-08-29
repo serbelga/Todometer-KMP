@@ -51,8 +51,6 @@ import dev.sergiobelda.todometer.app.feature.taskdetails.navigation.taskDetailsN
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
-import dev.sergiobelda.todometer.common.ui.base.di.koin.koinBaseViewModel
-import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -152,9 +150,9 @@ private fun NavGraphBuilder.addTaskListRoute(
         navigateBack = navigateBack,
     )
     composable(navDestination = AddTaskListNavDestination) {
-        AddTaskListScreen.NavigationNodeContent(
+        AddTaskListScreen.NavigationNode(
             navigationEventHandler = addTaskListNavigationEventHandler,
-            viewModel = koinBaseViewModel(),
+            viewModel = koinFonamentViewModel(),
         )
     }
 }
@@ -166,9 +164,9 @@ private fun NavGraphBuilder.editTaskListNode(
         navigateBack = navigateBack,
     )
     composable(navDestination = EditTaskListNavDestination) {
-        EditTaskListScreen.NavigationNodeContent(
+        EditTaskListScreen.NavigationNode(
             navigationEventHandler = editTaskListNavigationEventHandler,
-            viewModel = koinBaseViewModel(),
+            viewModel = koinFonamentViewModel(),
         )
     }
 }
@@ -195,9 +193,9 @@ private fun NavGraphBuilder.editTaskNode(
     )
     composable(navDestination = EditTaskNavDestination) { navBackStackEntry ->
         val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
-        EditTaskScreen.NavigationNodeContent(
+        EditTaskScreen.NavigationNode(
             navigationEventHandler = editTaskNavigationEventHandler,
-            viewModel = koinBaseViewModel { parametersOf(taskId) },
+            viewModel = koinFonamentViewModel { parametersOf(taskId) },
         )
     }
 }

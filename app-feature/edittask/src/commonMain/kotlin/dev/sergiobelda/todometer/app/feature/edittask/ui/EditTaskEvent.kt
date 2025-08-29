@@ -16,40 +16,40 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
+import dev.sergiobelda.fonament.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 import dev.sergiobelda.todometer.common.ui.extensions.TextFieldValueChangeEvent
 
-sealed class EditTaskEvent : BaseEvent {
+sealed interface EditTaskEvent : FonamentEvent {
 
     data class UpdateTask(
         val title: String,
         val tag: Tag,
         val description: String? = null,
         val dueDate: Long? = null,
-    ) : EditTaskEvent()
+    ) : EditTaskEvent
 
     data class TitleValueChange(override val value: String) :
-        EditTaskEvent(),
+        EditTaskEvent,
         TextFieldValueChangeEvent
 
     data class DescriptionValueChange(override val value: String) :
-        EditTaskEvent(),
+        EditTaskEvent,
         TextFieldValueChangeEvent
 
-    data object ConfirmDatePickerDialog : EditTaskEvent()
+    data object ConfirmDatePickerDialog : EditTaskEvent
 
-    data object DismissDatePickerDialog : EditTaskEvent()
+    data object DismissDatePickerDialog : EditTaskEvent
 
-    data object ShowDatePickerDialog : EditTaskEvent()
+    data object ShowDatePickerDialog : EditTaskEvent
 
-    data object ConfirmTimePickerDialog : EditTaskEvent()
+    data object ConfirmTimePickerDialog : EditTaskEvent
 
-    data object DismissTimePickerDialog : EditTaskEvent()
+    data object DismissTimePickerDialog : EditTaskEvent
 
-    data object ShowTimePickerDialog : EditTaskEvent()
+    data object ShowTimePickerDialog : EditTaskEvent
 
-    data object ClearDateTime : EditTaskEvent()
+    data object ClearDateTime : EditTaskEvent
 
-    data class SelectTag(val tag: Tag) : EditTaskEvent()
+    data class SelectTag(val tag: Tag) : EditTaskEvent
 }

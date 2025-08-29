@@ -14,71 +14,72 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.taskdetails
+package dev.sergiobelda.todometer.app.feature.edittask
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsContent
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsUIState
-import dev.sergiobelda.todometer.app.feature.taskdetails.ui.rememberTaskDetailsContentState
+import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskContent
+import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskUIState
+import dev.sergiobelda.todometer.app.feature.edittask.ui.rememberEditTaskContentState
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
-import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLandscape
 import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLightDark
 import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLocales
 import dev.sergiobelda.todometer.common.ui.tooling.preview.getTomorrowEpochMilliseconds
-import dev.sergiobelda.todometer.common.ui.tooling.preview.getYesterdayEpochMilliseconds
-import kotlinx.collections.immutable.persistentListOf
 
 @PreviewTodometerLocales
 @PreviewTodometerLightDark
 @PreviewTodometerLandscape
 @Composable
-fun TaskDetailsContentPreview() {
+fun EditTaskContentPreview() {
     TodometerAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState(
+        EditTaskContent(
+            uiState = EditTaskUIState(
                 task = taskSample,
-                taskChecklistItems = taskChecklistItemsSample,
             ),
-            contentState = rememberTaskDetailsContentState(),
+            contentState = rememberEditTaskContentState(
+                taskSample,
+            ),
         )
     }
 }
 
 @Preview
 @Composable
-fun TaskDetailsLoadingPreview() {
+fun EditTaskLoadingPreview() {
     TodometerAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState(
-                isLoadingTask = true,
+        EditTaskContent(
+            uiState = EditTaskUIState(
+                isLoading = true,
             ),
-            contentState = rememberTaskDetailsContentState(),
+            contentState = rememberEditTaskContentState(
+                taskSample,
+            ),
         )
     }
 }
 
 @Preview
 @Composable
-fun TaskDetailsDeltaPreview() {
+fun EditTaskDeltaPreview() {
+    val taskDelta = taskSample.copy(
+        title = "",
+        tag = Tag.UNSPECIFIED,
+        dueDate = null,
+        description = null,
+    )
     TodometerAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState(
-                task = taskSample.copy(
-                    title = LoremIpsum(30).values.first(),
-                    isPinned = true,
-                    tag = Tag.UNSPECIFIED,
-                    dueDate = getYesterdayEpochMilliseconds(),
-                    description = "",
-                ),
+        EditTaskContent(
+            uiState = EditTaskUIState(
+                task = taskDelta,
             ),
-            contentState = rememberTaskDetailsContentState(),
+            contentState = rememberEditTaskContentState(
+                taskDelta,
+            ),
         )
     }
 }
@@ -93,19 +94,4 @@ private val taskSample = Task(
     taskListId = "0",
     isPinned = false,
     sync = false,
-)
-
-private val taskChecklistItemsSample = persistentListOf(
-    TaskChecklistItem(
-        id = "0",
-        taskId = "0",
-        text = "Item 1",
-        state = TaskChecklistItemState.CHECKED,
-    ),
-    TaskChecklistItem(
-        id = "1",
-        taskId = "0",
-        text = "Item 2",
-        state = TaskChecklistItemState.UNCHECKED,
-    ),
 )

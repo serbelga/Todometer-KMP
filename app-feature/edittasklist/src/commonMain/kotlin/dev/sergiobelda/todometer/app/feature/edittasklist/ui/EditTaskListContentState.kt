@@ -22,17 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import dev.sergiobelda.todometer.common.ui.base.BaseContentState
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.fonament.ui.FonamentContentState
+import dev.sergiobelda.fonament.ui.FonamentEvent
 
 data class EditTaskListContentState internal constructor(
     private val taskListName: String,
-) : BaseContentState {
+) : FonamentContentState {
 
     var nameTextFieldValue: String by mutableStateOf(taskListName)
         private set
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is EditTaskListEvent.NameTextFieldValueChange -> {
                 nameTextFieldValue = event.value

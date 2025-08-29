@@ -28,11 +28,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import dev.sergiobelda.fonament.ui.FonamentContentState
+import dev.sergiobelda.fonament.ui.FonamentEvent
 import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.ui.base.BaseContentState
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +43,7 @@ data class EditTaskContentState internal constructor(
     private val initialDueDate: Long?,
     internal val datePickerState: DatePickerState?,
     internal val timePickerState: TimePickerState?,
-) : BaseContentState {
+) : FonamentContentState {
 
     var title: String by mutableStateOf(initialTitle)
         private set
@@ -64,7 +64,7 @@ data class EditTaskContentState internal constructor(
     var timePickerDialogVisible by mutableStateOf(false)
         private set
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is EditTaskEvent.TitleValueChange -> titleValueChange(event)
             is EditTaskEvent.DescriptionValueChange -> descriptionValueChange(event)

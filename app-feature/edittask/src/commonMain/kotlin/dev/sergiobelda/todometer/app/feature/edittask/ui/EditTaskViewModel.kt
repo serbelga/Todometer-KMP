@@ -17,12 +17,12 @@
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
-import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
@@ -30,7 +30,7 @@ class EditTaskViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
-) : BaseViewModel<EditTaskUIState>(
+) : FonamentViewModel<EditTaskUIState>(
     initialUIState = EditTaskUIState(
         isLoading = true,
     ),
@@ -62,7 +62,7 @@ class EditTaskViewModel(
         }
     }
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is EditTaskEvent.UpdateTask -> updateTask(event)
         }

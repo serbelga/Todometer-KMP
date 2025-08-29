@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.app.feature.edittasklist.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
 
-sealed class EditTaskListNavigationEvent : BaseNavigationEvent {
-    data object NavigateBack : EditTaskListNavigationEvent()
+sealed interface EditTaskListNavigationEvent : FonamentNavigationEvent {
+    data object NavigateBack : EditTaskListNavigationEvent
 }

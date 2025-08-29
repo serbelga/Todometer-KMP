@@ -14,4 +14,5 @@ android {
 
 dependencies {
     implementation(compose.preview)
+    implementation(libs.kotlin.datetime)
 }
