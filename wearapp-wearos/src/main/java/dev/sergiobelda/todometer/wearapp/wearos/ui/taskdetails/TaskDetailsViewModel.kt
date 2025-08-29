@@ -14,60 +14,60 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail
+package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
+import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
-class TaskDetailViewModel(
+class TaskDetailsViewModel(
     private val taskId: String,
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTasksUseCase: DeleteTasksUseCase,
-) : ViewModel() {
-
-    var state by mutableStateOf(TaskDetailState(isLoading = true))
-        private set
-
-    init {
-        getTask()
-    }
+) : FonamentViewModel<TaskDetailsUIState>(
+    initialUIState = TaskDetailsUIState.LoadingTaskDetailsUIState,
+) {
+    init { getTask() }
 
     private fun getTask() = viewModelScope.launch {
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
-                state = state.copy(
-                    isLoading = false,
-                    task = task,
-                    errorUi = null,
-                )
+                updateUIState {
+                    TaskDetailsUIState.SuccessTaskDetailsUIState(task)
+                }
             }.doIfError { error ->
-                state = state.copy(
-                    isLoading = false,
-                    task = null,
-                    errorUi = error.mapToErrorUi(),
-                )
+                updateUIState {
+                    TaskDetailsUIState.ErrorTaskDetailsUIState(
+                        errorUi = error.mapToErrorUi() ?: ErrorUi(),
+                    )
+                }
             }
         }
     }
 
-    fun updateTask(title: String) = viewModelScope.launch {
-        state.task?.let { task ->
-            updateTaskUseCase(task.copy(title = title))
+    override fun handleEvent(event: FonamentEvent) {
+        when (event) {
+            TaskDetailsEvent.DeleteTask -> { deleteTask() }
+            is TaskDetailsEvent.UpdateTask -> { updateTask(event.title) }
         }
     }
 
-    fun deleteTask() = viewModelScope.launch {
+    private fun updateTask(title: String) = viewModelScope.launch {
+        (uiState as? TaskDetailsUIState.SuccessTaskDetailsUIState)?.let {
+            updateTaskUseCase(it.task.copy(title = title))
+        }
+    }
+
+    private fun deleteTask() = viewModelScope.launch {
         deleteTasksUseCase(taskId)
     }
 }

@@ -18,17 +18,21 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import dev.sergiobelda.fonament.di.koin.koinFonamentViewModel
+import dev.sergiobelda.fonament.navigation.NavigationNode
 import dev.sergiobelda.navigation.compose.extended.NavAction
 import dev.sergiobelda.navigation.compose.extended.wear.SwipeDismissableNavHost
 import dev.sergiobelda.navigation.compose.extended.wear.composable
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeScreen
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailNavDestination
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailSafeNavArgs
-import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail.TaskDetailScreen
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsNavDestination
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsSafeNavArgs
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsScreen
+import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.navigation.taskDetailsNavigationEventHandler
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksScreen
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TodometerNavHost(
@@ -54,17 +58,19 @@ fun TodometerNavHost(
                 taskListId = taskListId,
                 openTask = { taskId ->
                     navAction.navigate(
-                        TaskDetailNavDestination.safeNavRoute(taskId),
+                        TaskDetailsNavDestination.safeNavRoute(taskId),
                     )
                 },
                 navigateBack = { navAction.popBackStack() },
             )
         }
-        composable(navDestination = TaskDetailNavDestination) { navBackStackEntry ->
-            val taskId = TaskDetailSafeNavArgs(navBackStackEntry).taskId
-            TaskDetailScreen(
-                taskId = taskId,
-                navigateBack = { navAction.popBackStack() },
+        composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
+            val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId
+            TaskDetailsScreen.NavigationNode(
+                viewModel = koinFonamentViewModel { parametersOf(taskId) },
+                navigationEventHandler = taskDetailsNavigationEventHandler(
+                    navigateBack = { navAction.popBackStack() },
+                ),
             )
         }
     }

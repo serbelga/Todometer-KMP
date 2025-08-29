@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetail
+package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
-import androidx.compose.runtime.Immutable
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import dev.sergiobelda.fonament.ui.FonamentEvent
 
-@Immutable
-data class TaskDetailState(
-    val isLoading: Boolean = false,
-    val task: Task? = null,
-    val errorUi: ErrorUi? = null,
-)
+sealed interface TaskDetailsEvent : FonamentEvent {
+
+    data object DeleteTask : TaskDetailsEvent
+
+    data class UpdateTask(val title: String) : TaskDetailsEvent
+
+    data object ShowDeleteTaskAlertDialog : TaskDetailsEvent
+
+    data object CancelDeleteTaskAlertDialog : TaskDetailsEvent
+}

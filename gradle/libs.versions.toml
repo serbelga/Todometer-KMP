@@ -135,7 +135,7 @@ sqldelight-androidDriver = { module = "app.cash.sqldelight:android-driver", vers
 sqldelight-jvmDriver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqldelight-nativeDriver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
-sqldelight-primitiveAdapters = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+sqldelight-primitiveAdapters = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqlDelight" }
 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
