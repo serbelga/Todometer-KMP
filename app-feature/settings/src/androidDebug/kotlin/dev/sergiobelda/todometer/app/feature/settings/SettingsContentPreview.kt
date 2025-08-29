@@ -17,20 +17,41 @@
 package dev.sergiobelda.todometer.app.feature.settings
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import dev.sergiobelda.fonament.ui.NoContentState
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsContent
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsUIState
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewLocales
+import dev.sergiobelda.todometer.common.domain.preference.AppTheme
+import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLightDark
+import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLocales
 
-@PreviewLocales
-@PreviewLightDark
+@PreviewTodometerLocales
+@PreviewTodometerLightDark
 @Composable
 fun SettingsContentPreview() {
     TodometerAppPreview {
         SettingsContent(
             uiState = SettingsUIState(),
+            contentState = NoContentState,
+        )
+    }
+}
+
+class AppThemeProvider : CollectionPreviewParameterProvider<AppTheme>(AppTheme.entries)
+
+@Preview
+@Composable
+fun SettingsContentSelectionPreview(
+    @PreviewParameter(AppThemeProvider::class) appTheme: AppTheme,
+) {
+    TodometerAppPreview {
+        SettingsContent(
+            uiState = SettingsUIState(
+                appTheme = appTheme,
+            ),
             contentState = NoContentState,
         )
     }

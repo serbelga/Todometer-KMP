@@ -16,6 +16,8 @@
 
 package dev.sergiobelda.todometer.common.ui.tooling.preview
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.content.res.Configuration.UI_MODE_TYPE_NORMAL
 import androidx.compose.ui.tooling.preview.Preview
 
 @Retention(AnnotationRetention.BINARY)
@@ -23,4 +25,10 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(name = "English", group = "Language", locale = "en")
 @Preview(name = "Spanish", group = "Language", locale = "es")
 @Preview(name = "Catalan", group = "Language", locale = "ca")
-annotation class PreviewLocales
+annotation class PreviewTodometerLocales
+
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
+@Preview(name = "Light", group = "Theme")
+@Preview(name = "Dark", group = "Theme", uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL)
+annotation class PreviewTodometerLightDark
