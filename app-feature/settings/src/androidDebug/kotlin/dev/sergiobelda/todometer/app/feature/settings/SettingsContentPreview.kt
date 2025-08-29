@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.app.feature.settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.fonament.ui.NoContentState
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerPreview
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsContent
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsUIState
 import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewLocales
@@ -28,7 +28,7 @@ import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewLocales
 @PreviewLightDark
 @Composable
 fun SettingsContentPreview() {
-    TodometerPreview {
+    TodometerAppPreview {
         SettingsContent(
             uiState = SettingsUIState(),
             contentState = NoContentState,

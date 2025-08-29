@@ -19,14 +19,14 @@ package dev.sergiobelda.todometer.app.feature.about.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.fonament.ui.NoContentState
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerPreview
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewLocales
 
 @PreviewLocales
 @PreviewLightDark
 @Composable
 fun AboutContentPreview() {
-    TodometerPreview {
+    TodometerAppPreview {
         AboutContent(
             uiState = AboutUIState,
             contentState = NoContentState,
