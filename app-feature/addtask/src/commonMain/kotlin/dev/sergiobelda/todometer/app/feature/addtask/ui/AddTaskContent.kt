@@ -46,7 +46,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
@@ -68,11 +67,6 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toPersistentList
-
-data object AddTaskScreen : FonamentUI<AddTaskUIState>() {
-
-    override val content: FonamentContent<AddTaskUIState, *> = AddTaskContent
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState>() {

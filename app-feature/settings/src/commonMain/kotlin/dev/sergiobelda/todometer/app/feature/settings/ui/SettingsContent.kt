@@ -54,7 +54,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.fonament.ui.NoContentState
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
@@ -67,11 +66,6 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Chec
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-
-data object SettingsScreen : FonamentUI<SettingsUIState>() {
-
-    override val content: FonamentContent<SettingsUIState, *> = SettingsContent
-}
 
 internal data object SettingsContent : FonamentContent<SettingsUIState, NoContentState>() {
     @Composable

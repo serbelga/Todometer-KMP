@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
@@ -34,10 +33,6 @@ import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.app.feature.edittasklist.navigation.EditTaskListNavigationEvent
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-
-data object EditTaskListScreen : FonamentUI<EditTaskListUIState>() {
-    override val content: FonamentContent<EditTaskListUIState, *> = EditTaskListContent
-}
 
 data object EditTaskListContent : FonamentContent<EditTaskListUIState, EditTaskListContentState>() {
 

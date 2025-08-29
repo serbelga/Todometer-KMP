@@ -42,7 +42,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.fonament.ui.NoContentState
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
@@ -53,11 +52,6 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Desc
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-
-data object AboutScreen : FonamentUI<AboutUIState>() {
-
-    override val content: FonamentContent<AboutUIState, *> = AboutContent
-}
 
 internal data object AboutContent : FonamentContent<AboutUIState, NoContentState>() {
     @Composable
