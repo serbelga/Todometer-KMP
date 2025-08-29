@@ -31,7 +31,7 @@ kotlin {
             api(libs.koin.core)
             api(libs.koin.compose.viewmodel)
 
-            implementation(libs.kotlin.datetime)
+            api(libs.kotlin.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.coroutinesTest)
