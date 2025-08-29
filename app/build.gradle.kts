@@ -56,6 +56,8 @@ kotlin {
             implementation(projects.common.domain)
             implementation(projects.common.resources)
             implementation(projects.common.ui)
+
+            implementation(libs.sergiobelda.fonament.diKoin)
         }
         androidMain.dependencies {
             implementation(projects.common.android)

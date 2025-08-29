@@ -17,21 +17,21 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
-import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
 class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase,
-) : BaseViewModel<AddTaskListUIState>(
+) : FonamentViewModel<AddTaskListUIState>(
     initialUIState = AddTaskListUIState(),
 ) {
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is AddTaskListEvent.InsertTaskList -> {
                 insertTaskList(event.name)

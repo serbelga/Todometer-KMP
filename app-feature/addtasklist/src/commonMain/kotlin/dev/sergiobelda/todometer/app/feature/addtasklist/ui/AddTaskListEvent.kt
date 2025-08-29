@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.fonament.ui.FonamentEvent
 
-sealed class AddTaskListEvent : BaseEvent {
-    data class InsertTaskList(val name: String) : AddTaskListEvent()
-    data class TaskListNameValueChange(val value: String) : AddTaskListEvent()
+sealed interface AddTaskListEvent : FonamentEvent {
+    data class InsertTaskList(val name: String) : AddTaskListEvent
+    data class TaskListNameValueChange(val value: String) : AddTaskListEvent
 }

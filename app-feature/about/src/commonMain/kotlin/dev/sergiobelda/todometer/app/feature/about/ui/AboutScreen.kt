@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.fonament.ui.NoContentState
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEvent
@@ -50,15 +53,15 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Desc
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseUI
-import dev.sergiobelda.todometer.common.ui.base.DefaultContentState
 
-data object AboutScreen : BaseUI<AboutUIState, DefaultContentState>() {
+data object AboutScreen : FonamentUI<AboutUIState>() {
 
+    override val content: FonamentContent<AboutUIState, *> = AboutContent
+}
+
+internal data object AboutContent : FonamentContent<AboutUIState, NoContentState>() {
     @Composable
-    override fun rememberContentState(
-        uiState: AboutUIState,
-    ): DefaultContentState = DefaultContentState
+    override fun createContentState(uiState: AboutUIState): NoContentState = NoContentState
 
     @NavDestination(
         name = "About",
@@ -67,7 +70,8 @@ data object AboutScreen : BaseUI<AboutUIState, DefaultContentState>() {
     @Composable
     override fun Content(
         uiState: AboutUIState,
-        contentState: DefaultContentState,
+        contentState: NoContentState,
+        modifier: Modifier,
     ) {
         Scaffold(
             topBar = {

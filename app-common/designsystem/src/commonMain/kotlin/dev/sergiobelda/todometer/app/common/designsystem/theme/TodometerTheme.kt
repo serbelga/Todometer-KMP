@@ -35,7 +35,7 @@ object TodometerTheme {
 @Composable
 fun TodometerTheme(
     todometerColors: TodometerColors = TodometerTheme.todometerColors,
-    colorScheme: ColorScheme = MaterialTheme.colorScheme,
+    colorScheme: ColorScheme = LightColorScheme,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(

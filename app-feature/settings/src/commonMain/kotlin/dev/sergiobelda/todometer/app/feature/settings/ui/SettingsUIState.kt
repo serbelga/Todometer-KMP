@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
+import dev.sergiobelda.fonament.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.ui.base.BaseUIState
 
 data class SettingsUIState(
     val appTheme: AppTheme = AppTheme.FOLLOW_SYSTEM,
-) : BaseUIState
+) : FonamentUIState

@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.app.feature.addtask.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
 
-sealed class AddTaskNavigationEvent : BaseNavigationEvent {
-    data object NavigateBack : AddTaskNavigationEvent()
+sealed interface AddTaskNavigationEvent : FonamentNavigationEvent {
+    data object NavigateBack : AddTaskNavigationEvent
 }

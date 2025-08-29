@@ -49,6 +49,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
 import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
@@ -72,14 +74,17 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import kotlinx.collections.immutable.ImmutableList
 
-data object TaskDetailsScreen : BaseUI<TaskDetailsUIState, TaskDetailsContentState>() {
+data object TaskDetailsScreen : FonamentUI<TaskDetailsUIState>() {
+    override val content: FonamentContent<TaskDetailsUIState, *> = TaskDetailsContent
+}
+
+data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetailsContentState>() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    override fun rememberContentState(
+    override fun createContentState(
         uiState: TaskDetailsUIState,
     ): TaskDetailsContentState =
         rememberTaskDetailsContentState()
@@ -96,6 +101,7 @@ data object TaskDetailsScreen : BaseUI<TaskDetailsUIState, TaskDetailsContentSta
     override fun Content(
         uiState: TaskDetailsUIState,
         contentState: TaskDetailsContentState,
+        modifier: Modifier,
     ) {
         when {
             uiState.isLoadingTask -> {

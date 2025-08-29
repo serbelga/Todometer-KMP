@@ -29,18 +29,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListNavigationEvent
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
-data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentState>() {
+data object AddTaskListScreen : FonamentUI<AddTaskListUIState>() {
+    override val content: FonamentContent<AddTaskListUIState, *> = AddTaskListContent
+}
+
+data object AddTaskListContent : FonamentContent<AddTaskListUIState, AddTaskListContentState>() {
 
     @Composable
-    override fun rememberContentState(
+    override fun createContentState(
         uiState: AddTaskListUIState,
     ): AddTaskListContentState = rememberAddTaskListContentState()
 
@@ -52,6 +57,7 @@ data object AddTaskListScreen : BaseUI<AddTaskListUIState, AddTaskListContentSta
     override fun Content(
         uiState: AddTaskListUIState,
         contentState: AddTaskListContentState,
+        modifier: Modifier,
     ) {
         if (uiState.errorUi != null) {
             LaunchedEffect(contentState.snackbarHostState) {

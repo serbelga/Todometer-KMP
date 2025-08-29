@@ -16,6 +16,6 @@
 
 package dev.sergiobelda.todometer.app.feature.about.ui
 
-import dev.sergiobelda.todometer.common.ui.base.BaseUIState
+import dev.sergiobelda.fonament.ui.FonamentUIState
 
-data object AboutUIState : BaseUIState
+data object AboutUIState : FonamentUIState

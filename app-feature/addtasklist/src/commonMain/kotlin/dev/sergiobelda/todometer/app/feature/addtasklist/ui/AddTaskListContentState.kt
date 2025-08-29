@@ -25,18 +25,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import dev.sergiobelda.todometer.common.ui.base.BaseContentState
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
+import dev.sergiobelda.fonament.ui.FonamentContentState
+import dev.sergiobelda.fonament.ui.FonamentEvent
 
 data class AddTaskListContentState internal constructor(
     val snackbarHostState: SnackbarHostState,
-) : BaseContentState {
+) : FonamentContentState {
     var taskListName: String by mutableStateOf("")
         private set
 
     val isSaveButtonEnabled: Boolean by derivedStateOf { taskListName.isNotBlank() }
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is AddTaskListEvent.TaskListNameValueChange -> {
                 taskListName = event.value

@@ -46,5 +46,7 @@ android {
     dependencies {
         implementation(compose.preview)
         debugImplementation(compose.uiTooling)
+        debugImplementation(projects.appCommon.uiTooling)
+        debugImplementation(projects.common.uiTooling)
     }
 }

@@ -29,6 +29,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
 import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
@@ -46,13 +48,16 @@ import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.app.feature.edittask.navigation.EditTaskNavigationEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseUI
 
-data object EditTaskScreen : BaseUI<EditTaskUIState, EditTaskContentState>() {
+data object EditTaskScreen : FonamentUI<EditTaskUIState>() {
+    override val content: FonamentContent<EditTaskUIState, *> = EditTaskContent
+}
+
+data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentState>() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    override fun rememberContentState(
+    override fun createContentState(
         uiState: EditTaskUIState,
     ): EditTaskContentState = rememberEditTaskContentState(
         task = uiState.task,
@@ -69,6 +74,7 @@ data object EditTaskScreen : BaseUI<EditTaskUIState, EditTaskContentState>() {
     override fun Content(
         uiState: EditTaskUIState,
         contentState: EditTaskContentState,
+        modifier: Modifier,
     ) {
         when {
             uiState.isLoading -> {

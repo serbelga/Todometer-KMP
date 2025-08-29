@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
 
 fun editTaskNavigationEventHandler(
     navigateBack: () -> Unit,
-): BaseNavigationEventHandler<EditTaskNavigationEvent> = BaseNavigationEventHandler {
+): FonamentNavigationEventHandler<EditTaskNavigationEvent> = FonamentNavigationEventHandler {
     when (it) {
         EditTaskNavigationEvent.NavigateBack -> navigateBack()
     }

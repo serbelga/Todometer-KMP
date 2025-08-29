@@ -16,23 +16,23 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
+import dev.sergiobelda.fonament.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-sealed class TaskDetailsEvent : BaseEvent {
+sealed interface TaskDetailsEvent : FonamentEvent {
 
     data class AddTaskChecklistItem(
         internal val text: String,
-    ) : TaskDetailsEvent()
+    ) : TaskDetailsEvent
 
     data class ClickTaskChecklistItem(
         internal val id: String,
         internal val state: TaskChecklistItemState,
-    ) : TaskDetailsEvent()
+    ) : TaskDetailsEvent
 
     data class DeleteTaskChecklistItem(
         internal val id: String,
-    ) : TaskDetailsEvent()
+    ) : TaskDetailsEvent
 
-    data object ToggleTaskPinnedValue : TaskDetailsEvent()
+    data object ToggleTaskPinnedValue : TaskDetailsEvent
 }

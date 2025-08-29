@@ -17,11 +17,11 @@
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
-import dev.sergiobelda.todometer.common.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 class SettingsViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase,
-) : BaseViewModel<SettingsUIState>(
+) : FonamentViewModel<SettingsUIState>(
     initialUIState = SettingsUIState(),
 ) {
     private val appTheme: StateFlow<AppTheme> =
@@ -50,7 +50,7 @@ class SettingsViewModel(
         }
     }
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is SettingsEvent.SetAppTheme -> {
                 setAppTheme(event)

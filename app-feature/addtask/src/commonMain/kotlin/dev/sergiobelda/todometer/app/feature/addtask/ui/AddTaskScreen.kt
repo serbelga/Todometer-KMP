@@ -45,6 +45,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
@@ -64,17 +66,20 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
-import dev.sergiobelda.todometer.common.ui.base.BaseUI
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toPersistentList
 
+data object AddTaskScreen : FonamentUI<AddTaskUIState>() {
+
+    override val content: FonamentContent<AddTaskUIState, *> = AddTaskContent
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
-data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
+data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState>() {
 
     @Composable
-    override fun rememberContentState(
-        uiState: AddTaskUIState,
-    ): AddTaskContentState = rememberAddTaskContentState()
+    override fun createContentState(uiState: AddTaskUIState): AddTaskContentState =
+        rememberAddTaskContentState()
 
     @NavDestination(
         name = "AddTask",
@@ -85,6 +90,7 @@ data object AddTaskScreen : BaseUI<AddTaskUIState, AddTaskContentState>() {
     override fun Content(
         uiState: AddTaskUIState,
         contentState: AddTaskContentState,
+        modifier: Modifier,
     ) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(contentState.topAppBarState)
 

@@ -16,10 +16,10 @@
 
 package dev.sergiobelda.todometer.app.feature.about.di
 
+import dev.sergiobelda.fonament.di.koin.fonamentViewModelOf
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.koin.baseViewModelOf
 import org.koin.dsl.module
 
 val aboutViewModelModule = module {
-    baseViewModelOf(::AboutViewModel)
+    fonamentViewModelOf(::AboutViewModel)
 }

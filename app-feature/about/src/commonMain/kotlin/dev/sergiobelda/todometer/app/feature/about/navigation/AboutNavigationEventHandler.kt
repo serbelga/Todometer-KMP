@@ -16,21 +16,18 @@
 
 package dev.sergiobelda.todometer.app.feature.about.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
 
-data class AboutNavigationEventHandler(
-    val navigateBack: () -> Unit,
-    val navigateToGitHub: () -> Unit,
-    val navigateToOpenSourceLicenses: () -> Unit,
-    val navigateToPrivacyPolicy: () -> Unit,
-) : BaseNavigationEventHandler<AboutNavigationEvent> {
-
-    override fun handleNavigationEvent(navigationEvent: AboutNavigationEvent) {
-        when (navigationEvent) {
-            AboutNavigationEvent.NavigateBack -> navigateBack()
-            AboutNavigationEvent.NavigateToGitHub -> navigateToGitHub()
-            AboutNavigationEvent.NavigateToOpenSourceLicenses -> navigateToOpenSourceLicenses()
-            AboutNavigationEvent.NavigateToPrivacyPolicy -> navigateToPrivacyPolicy()
-        }
+fun aboutNavigationEventHandler(
+    navigateBack: () -> Unit,
+    navigateToGitHub: () -> Unit,
+    navigateToPrivacyPolicy: () -> Unit,
+    navigateToOpenSourceLicenses: () -> Unit = {},
+): FonamentNavigationEventHandler<AboutNavigationEvent> = FonamentNavigationEventHandler {
+    when (it) {
+        AboutNavigationEvent.NavigateBack -> navigateBack()
+        AboutNavigationEvent.NavigateToGitHub -> navigateToGitHub()
+        AboutNavigationEvent.NavigateToOpenSourceLicenses -> navigateToOpenSourceLicenses()
+        AboutNavigationEvent.NavigateToPrivacyPolicy -> navigateToPrivacyPolicy()
     }
 }

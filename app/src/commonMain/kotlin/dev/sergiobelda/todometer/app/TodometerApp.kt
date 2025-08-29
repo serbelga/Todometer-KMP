@@ -38,10 +38,9 @@ fun TodometerApp() {
             AppTheme.DARK_THEME -> true
             AppTheme.LIGHT_THEME -> false
         }
-        val navController = rememberNavController()
-        val navAction = rememberNavAction(navController)
-
         TodometerAppTheme(darkTheme) {
+            val navController = rememberNavController()
+            val navAction = rememberNavAction(navController)
             TodometerNavHost(
                 navController = navController,
                 navAction = navAction,

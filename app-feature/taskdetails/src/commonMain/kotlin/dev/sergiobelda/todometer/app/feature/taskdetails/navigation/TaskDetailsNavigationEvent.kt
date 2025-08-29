@@ -16,10 +16,10 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
 
-sealed class TaskDetailsNavigationEvent : BaseNavigationEvent {
-    data object NavigateBack : TaskDetailsNavigationEvent()
+sealed interface TaskDetailsNavigationEvent : FonamentNavigationEvent {
+    data object NavigateBack : TaskDetailsNavigationEvent
 
-    data object NavigateToEditTask : TaskDetailsNavigationEvent()
+    data object NavigateToEditTask : TaskDetailsNavigationEvent
 }

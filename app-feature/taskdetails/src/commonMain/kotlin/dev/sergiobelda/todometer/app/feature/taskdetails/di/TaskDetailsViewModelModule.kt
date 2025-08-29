@@ -16,12 +16,12 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.di
 
+import dev.sergiobelda.fonament.di.koin.fonamentViewModel
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsViewModel
-import dev.sergiobelda.todometer.common.ui.base.di.koin.baseViewModel
 import org.koin.dsl.module
 
 val taskDetailsViewModelModule = module {
-    baseViewModel { parameters ->
+    fonamentViewModel { parameters ->
         TaskDetailsViewModel(
             taskId = parameters.get(),
             get(),
