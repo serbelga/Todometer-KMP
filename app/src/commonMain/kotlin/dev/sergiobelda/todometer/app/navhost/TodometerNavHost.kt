@@ -24,6 +24,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import dev.sergiobelda.fonament.di.koin.koinFonamentViewModel
+import dev.sergiobelda.fonament.navigation.NavigationNode
 import dev.sergiobelda.navigation.compose.extended.NavAction
 import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
@@ -207,9 +209,9 @@ private fun NavGraphBuilder.settingsNode(
         navigateBack = navigateBack,
     )
     composable(navDestination = SettingsNavDestination) {
-        SettingsScreen.NavigationNodeContent(
+        SettingsScreen.NavigationNode(
             navigationEventHandler = settingsNavigationEventHandler,
-            viewModel = koinBaseViewModel(),
+            viewModel = koinFonamentViewModel(),
         )
     }
 }

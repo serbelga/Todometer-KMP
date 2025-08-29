@@ -34,7 +34,8 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
             }
 
             val navigationComposeExtendedCompiler =
-                libs.findLibrary("sergiobelda.navigationComposeExtendedCompiler").get().get().toString()
+                libs.findLibrary("sergiobelda.navigationComposeExtendedCompiler").get().get()
+                    .toString()
 
             dependencies {
                 add("kspCommonMainMetadata", navigationComposeExtendedCompiler)
@@ -58,6 +59,9 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
                     commonMain {
                         dependencies {
                             implementation(libs.findLibrary("kotlin-collections-immutable").get())
+
+                            implementation(libs.findLibrary("sergiobelda-fonament").get())
+                            implementation(libs.findLibrary("sergiobelda-fonament-diKoin").get())
                         }
                     }
                 }

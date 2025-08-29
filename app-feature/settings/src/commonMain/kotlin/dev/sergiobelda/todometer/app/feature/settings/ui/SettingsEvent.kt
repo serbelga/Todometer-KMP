@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
+import dev.sergiobelda.fonament.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-sealed class SettingsEvent : BaseEvent {
-    data class SetAppTheme(val theme: AppTheme) : SettingsEvent()
+sealed interface SettingsEvent : FonamentEvent {
+    data class SetAppTheme(val theme: AppTheme) : SettingsEvent
 }

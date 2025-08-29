@@ -16,17 +16,16 @@
 
 package dev.sergiobelda.todometer.app.navhost
 
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavGraphBuilder
+import dev.sergiobelda.fonament.di.koin.koinFonamentViewModel
+import dev.sergiobelda.fonament.navigation.NavigationNode
 import dev.sergiobelda.navigation.compose.extended.composable
-import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEventHandler
+import dev.sergiobelda.todometer.app.feature.about.navigation.aboutNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
 import dev.sergiobelda.todometer.app.feature.about.ui.GitHubUrl
 import dev.sergiobelda.todometer.app.feature.about.ui.PrivacyPolicyUrl
-import dev.sergiobelda.todometer.common.ui.base.navigation.NavigationNodeContent
-import org.koin.compose.viewmodel.koinViewModel
 
 internal actual fun NavGraphBuilder.aboutNode(
     navigateBack: () -> Unit,
@@ -35,16 +34,13 @@ internal actual fun NavGraphBuilder.aboutNode(
         navDestination = AboutNavDestination,
     ) {
         val uriHandler = LocalUriHandler.current
-        val aboutNavigationEventHandler = remember {
-            AboutNavigationEventHandler(
-                navigateBack = navigateBack,
-                navigateToGitHub = { uriHandler.openUri(GitHubUrl) },
-                navigateToOpenSourceLicenses = {},
-                navigateToPrivacyPolicy = { uriHandler.openUri(PrivacyPolicyUrl) },
-            )
-        }
-        AboutScreen.NavigationNodeContent(
-            viewModel = koinViewModel(),
+        val aboutNavigationEventHandler = aboutNavigationEventHandler(
+            navigateBack = navigateBack,
+            navigateToGitHub = { uriHandler.openUri(GitHubUrl) },
+            navigateToPrivacyPolicy = { uriHandler.openUri(PrivacyPolicyUrl) },
+        )
+        AboutScreen.NavigationNode(
+            viewModel = koinFonamentViewModel(),
             navigationEventHandler = aboutNavigationEventHandler,
         )
     }

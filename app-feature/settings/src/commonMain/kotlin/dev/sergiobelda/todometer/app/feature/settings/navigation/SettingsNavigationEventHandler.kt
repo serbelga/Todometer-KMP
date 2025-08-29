@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEventHandler
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
 
 fun settingsNavigationEventHandler(
     navigateBack: () -> Unit,
-): BaseNavigationEventHandler<SettingsNavigationEvent> = BaseNavigationEventHandler {
+): FonamentNavigationEventHandler<SettingsNavigationEvent> = FonamentNavigationEventHandler {
     when (it) {
         SettingsNavigationEvent.NavigateBack -> navigateBack()
     }

@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.app.feature.about.navigation
 
-import dev.sergiobelda.todometer.common.ui.base.navigation.BaseNavigationEvent
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
 
-sealed class AboutNavigationEvent : BaseNavigationEvent {
-    data object NavigateBack : AboutNavigationEvent()
-    data object NavigateToGitHub : AboutNavigationEvent()
-    data object NavigateToOpenSourceLicenses : AboutNavigationEvent()
-    data object NavigateToPrivacyPolicy : AboutNavigationEvent()
+sealed interface AboutNavigationEvent : FonamentNavigationEvent {
+    data object NavigateBack : AboutNavigationEvent
+    data object NavigateToGitHub : AboutNavigationEvent
+    data object NavigateToOpenSourceLicenses : AboutNavigationEvent
+    data object NavigateToPrivacyPolicy : AboutNavigationEvent
 }

@@ -23,6 +23,7 @@ rootProject.name = "Todometer-KMP"
 include(":app")
 include(":app-common:designsystem")
 include(":app-common:ui")
+include(":app-common:ui-tooling")
 include(":app-feature:about")
 include(":app-feature:addtask")
 include(":app-feature:addtasklist")
@@ -41,6 +42,7 @@ include(":common:domain")
 include(":common:preferences")
 include(":common:resources")
 include(":common:ui")
+include(":common:ui-tooling")
 
 include(":macrobenchmark")
 

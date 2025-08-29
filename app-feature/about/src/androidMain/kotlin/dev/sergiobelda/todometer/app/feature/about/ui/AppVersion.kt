@@ -17,7 +17,6 @@
 package dev.sergiobelda.todometer.app.feature.about.ui
 
 import android.content.Context
-import android.content.pm.PackageManager
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
@@ -31,7 +30,7 @@ private fun Context.getVersionName(): String? =
     try {
         val packageInfo = packageManager.getPackageInfo(packageName, 0)
         packageInfo.versionName
-    } catch (e: PackageManager.NameNotFoundException) {
+    } catch (e: Exception) {
         println(e)
         null
     }
