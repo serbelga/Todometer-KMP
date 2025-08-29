@@ -180,9 +180,9 @@ private fun NavGraphBuilder.addTaskNode(
         navigateBack = navigateBack,
     )
     composable(navDestination = AddTaskNavDestination) {
-        AddTaskScreen.NavigationNodeContent(
+        AddTaskScreen.NavigationNode(
             navigationEventHandler = addTaskNavigationEventHandler,
-            viewModel = koinBaseViewModel(),
+            viewModel = koinFonamentViewModel(),
         )
     }
 }

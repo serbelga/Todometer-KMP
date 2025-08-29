@@ -33,11 +33,11 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import dev.sergiobelda.fonament.ui.FonamentContentState
+import dev.sergiobelda.fonament.ui.FonamentEvent
 import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.common.domain.model.NewTask
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.ui.base.BaseContentState
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 data class AddTaskContentState internal constructor(
@@ -45,7 +45,7 @@ data class AddTaskContentState internal constructor(
     val topAppBarState: TopAppBarState,
     val datePickerState: DatePickerState,
     val timePickerState: TimePickerState,
-) : BaseContentState {
+) : FonamentContentState {
     private val tags = enumValues<Tag>()
 
     var taskTitle by mutableStateOf("")
@@ -75,7 +75,7 @@ data class AddTaskContentState internal constructor(
     suspend fun showSnackbar(message: String) =
         snackbarHostState.showSnackbar(message = message)
 
-    override fun handleEvent(event: BaseEvent) {
+    override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is AddTaskEvent.OnBack -> checkOnBack(event)
             is AddTaskEvent.ConfirmDatePickerDialog -> confirmDatePickerDialog()

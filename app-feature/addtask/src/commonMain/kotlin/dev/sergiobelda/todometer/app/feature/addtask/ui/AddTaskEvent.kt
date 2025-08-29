@@ -16,32 +16,32 @@
 
 package dev.sergiobelda.todometer.app.feature.addtask.ui
 
+import dev.sergiobelda.fonament.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.NewTask
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.ui.base.BaseEvent
 
-sealed class AddTaskEvent : BaseEvent {
+sealed interface AddTaskEvent : FonamentEvent {
     data class OnBack(
         val navigateBack: () -> Unit,
-    ) : AddTaskEvent()
+    ) : AddTaskEvent
 
-    data object ConfirmDatePickerDialog : AddTaskEvent()
-    data object DismissDatePickerDialog : AddTaskEvent()
-    data object ShowDatePickerDialog : AddTaskEvent()
-    data object ConfirmTimePickerDialog : AddTaskEvent()
-    data object DismissTimePickerDialog : AddTaskEvent()
-    data object ShowTimePickerDialog : AddTaskEvent()
-    data object DismissDiscardTaskDialog : AddTaskEvent()
-    data object ClearDateTime : AddTaskEvent()
+    data object ConfirmDatePickerDialog : AddTaskEvent
+    data object DismissDatePickerDialog : AddTaskEvent
+    data object ShowDatePickerDialog : AddTaskEvent
+    data object ConfirmTimePickerDialog : AddTaskEvent
+    data object DismissTimePickerDialog : AddTaskEvent
+    data object ShowTimePickerDialog : AddTaskEvent
+    data object DismissDiscardTaskDialog : AddTaskEvent
+    data object ClearDateTime : AddTaskEvent
 
-    data class TaskTitleValueChange(val value: String) : AddTaskEvent()
-    data class SelectTag(val tag: Tag) : AddTaskEvent()
-    data class AddTaskCheckListItem(val item: String) : AddTaskEvent()
-    data class DeleteTaskCheckListItem(val index: Int) : AddTaskEvent()
-    data class TaskDescriptionValueChange(val value: String) : AddTaskEvent()
+    data class TaskTitleValueChange(val value: String) : AddTaskEvent
+    data class SelectTag(val tag: Tag) : AddTaskEvent
+    data class AddTaskCheckListItem(val item: String) : AddTaskEvent
+    data class DeleteTaskCheckListItem(val index: Int) : AddTaskEvent
+    data class TaskDescriptionValueChange(val value: String) : AddTaskEvent
 
     data class SaveButtonClick(
         val onInsertNewTask: (NewTask) -> Unit,
-    ) : AddTaskEvent()
-    data class InsertNewTask(val newTask: NewTask) : AddTaskEvent()
+    ) : AddTaskEvent
+    data class InsertNewTask(val newTask: NewTask) : AddTaskEvent
 }
