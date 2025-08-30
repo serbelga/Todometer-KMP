@@ -46,7 +46,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -75,11 +74,6 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
     override fun createContentState(uiState: AddTaskUIState): AddTaskContentState =
         rememberAddTaskContentState()
 
-    @NavDestination(
-        name = "AddTask",
-        destinationId = "addtask",
-        deepLinkUris = ["app://open.add.task"],
-    )
     @Composable
     override fun Content(
         uiState: AddTaskUIState,

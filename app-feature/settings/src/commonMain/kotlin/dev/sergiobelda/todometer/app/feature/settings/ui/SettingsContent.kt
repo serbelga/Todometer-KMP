@@ -55,7 +55,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.NoContentState
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon
@@ -71,10 +70,6 @@ internal data object SettingsContent : FonamentContent<SettingsUIState, NoConten
     @Composable
     override fun createContentState(uiState: SettingsUIState): NoContentState = NoContentState
 
-    @NavDestination(
-        destinationId = "settings",
-        name = "Settings",
-    )
     @Composable
     override fun Content(
         uiState: SettingsUIState,

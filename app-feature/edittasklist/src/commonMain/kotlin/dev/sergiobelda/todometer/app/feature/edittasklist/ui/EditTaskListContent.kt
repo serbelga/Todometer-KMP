@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.loading.LoadingScreenDialog
@@ -43,10 +42,6 @@ data object EditTaskListContent : FonamentContent<EditTaskListUIState, EditTaskL
         taskListName = uiState.taskList?.name ?: "",
     )
 
-    @NavDestination(
-        destinationId = "edittasklist",
-        name = "EditTaskList",
-    )
     @Composable
     override fun Content(
         uiState: EditTaskListUIState,

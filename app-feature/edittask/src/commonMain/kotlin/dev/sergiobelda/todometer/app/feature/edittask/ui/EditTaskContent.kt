@@ -30,9 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
-import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTitledTextField
 import dev.sergiobelda.todometer.app.common.ui.components.DatePickerDialog
@@ -58,13 +55,6 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
         task = uiState.task,
     )
 
-    @NavDestination(
-        destinationId = "edittask",
-        name = "EditTask",
-        arguments = [
-            NavArgument("taskId", NavArgumentType.String),
-        ],
-    )
     @Composable
     override fun Content(
         uiState: EditTaskUIState,

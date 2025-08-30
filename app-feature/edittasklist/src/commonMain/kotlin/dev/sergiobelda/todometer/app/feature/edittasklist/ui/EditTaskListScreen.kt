@@ -18,7 +18,12 @@ package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 
+@NavDestination(
+    destinationId = "edittasklist",
+    name = "EditTaskList",
+)
 data object EditTaskListScreen : FonamentUI<EditTaskListUIState>() {
     override val content: FonamentContent<EditTaskListUIState, *> = EditTaskListContent
 }

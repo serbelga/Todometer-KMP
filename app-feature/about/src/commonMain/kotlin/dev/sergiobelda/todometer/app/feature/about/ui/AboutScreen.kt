@@ -18,8 +18,12 @@ package dev.sergiobelda.todometer.app.feature.about.ui
 
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 
+@NavDestination(
+    name = "About",
+    destinationId = "about",
+)
 data object AboutScreen : FonamentUI<AboutUIState>() {
-
     override val content: FonamentContent<AboutUIState, *> = AboutContent
 }

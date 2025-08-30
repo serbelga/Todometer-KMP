@@ -18,7 +18,12 @@ package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 
+@NavDestination(
+    name = "AddTaskList",
+    destinationId = "addtasklist",
+)
 data object AddTaskListScreen : FonamentUI<AddTaskListUIState>() {
     override val content: FonamentContent<AddTaskListUIState, *> = AddTaskListContent
 }

@@ -18,7 +18,18 @@ package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
+import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 
+@NavDestination(
+    destinationId = "taskdetails",
+    name = "TaskDetails",
+    arguments = [
+        NavArgument("taskId", NavArgumentType.String),
+    ],
+    deepLinkUris = ["app://open.task"],
+)
 data object TaskDetailsScreen : FonamentUI<TaskDetailsUIState>() {
     override val content: FonamentContent<TaskDetailsUIState, *> = TaskDetailsContent
 }

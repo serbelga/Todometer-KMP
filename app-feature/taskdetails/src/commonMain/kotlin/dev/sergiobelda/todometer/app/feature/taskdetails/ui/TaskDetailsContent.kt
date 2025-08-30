@@ -50,9 +50,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
-import dev.sergiobelda.navigation.compose.extended.annotation.NavArgumentType
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerCheckbox
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
@@ -84,14 +81,6 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
     ): TaskDetailsContentState =
         rememberTaskDetailsContentState()
 
-    @NavDestination(
-        destinationId = "taskdetails",
-        name = "TaskDetails",
-        arguments = [
-            NavArgument("taskId", NavArgumentType.String),
-        ],
-        deepLinkUris = ["app://open.task"],
-    )
     @Composable
     override fun Content(
         uiState: TaskDetailsUIState,

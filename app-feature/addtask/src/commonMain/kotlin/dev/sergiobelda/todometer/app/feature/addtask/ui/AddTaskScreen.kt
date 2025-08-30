@@ -18,7 +18,13 @@ package dev.sergiobelda.todometer.app.feature.addtask.ui
 
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 
+@NavDestination(
+    name = "AddTask",
+    destinationId = "addtask",
+    deepLinkUris = ["app://open.add.task"],
+)
 data object AddTaskScreen : FonamentUI<AddTaskUIState>() {
 
     override val content: FonamentContent<AddTaskUIState, *> = AddTaskContent

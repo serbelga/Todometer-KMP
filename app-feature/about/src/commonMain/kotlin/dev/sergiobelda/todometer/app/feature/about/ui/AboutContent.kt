@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.fonament.ui.FonamentContent
 import dev.sergiobelda.fonament.ui.NoContentState
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
@@ -57,10 +56,6 @@ internal data object AboutContent : FonamentContent<AboutUIState, NoContentState
     @Composable
     override fun createContentState(uiState: AboutUIState): NoContentState = NoContentState
 
-    @NavDestination(
-        name = "About",
-        destinationId = "about",
-    )
     @Composable
     override fun Content(
         uiState: AboutUIState,
