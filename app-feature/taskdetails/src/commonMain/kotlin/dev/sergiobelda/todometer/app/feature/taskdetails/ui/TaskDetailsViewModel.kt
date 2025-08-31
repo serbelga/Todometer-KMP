@@ -116,11 +116,11 @@ class TaskDetailsViewModel(
         }
     }
 
-    fun insertTaskChecklistItem(text: String) = viewModelScope.launch {
+    private fun insertTaskChecklistItem(text: String) = viewModelScope.launch {
         insertTaskChecklistItemsUseCase(taskId, text)
     }
 
-    fun toggleTaskChecklistItem(
+    private fun toggleTaskChecklistItem(
         id: String,
         state: TaskChecklistItemState,
     ) = viewModelScope.launch {
@@ -135,11 +135,11 @@ class TaskDetailsViewModel(
         }
     }
 
-    fun deleteTaskChecklistItem(id: String) = viewModelScope.launch {
+    private fun deleteTaskChecklistItem(id: String) = viewModelScope.launch {
         deleteTaskChecklistItemUseCase(id)
     }
 
-    fun toggleTaskPinnedValueUseCase() = viewModelScope.launch {
+    private fun toggleTaskPinnedValueUseCase() = viewModelScope.launch {
         toggleTaskPinnedValueUseCase(taskId)
     }
 }
