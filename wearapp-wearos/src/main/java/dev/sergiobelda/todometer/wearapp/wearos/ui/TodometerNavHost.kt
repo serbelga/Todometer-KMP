@@ -61,7 +61,7 @@ fun TodometerNavHost(
             )
         }
         composable(navDestination = TaskDetailNavDestination) { navBackStackEntry ->
-            val taskId = TaskDetailSafeNavArgs(navBackStackEntry).taskId.orEmpty()
+            val taskId = TaskDetailSafeNavArgs(navBackStackEntry).taskId
             TaskDetailScreen(
                 taskId = taskId,
                 navigateBack = { navAction.popBackStack() },

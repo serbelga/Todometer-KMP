@@ -127,7 +127,7 @@ private fun NavGraphBuilder.taskDetailsNode(
     navigateToEditTask: (String) -> Unit,
 ) {
     composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
-        val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId.orEmpty()
+        val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId
         val taskDetailsNavigationEventHandler = taskDetailsNavigationEventHandler(
             navigateBack = navigateBack,
             navigateToEditTask = {
@@ -192,7 +192,7 @@ private fun NavGraphBuilder.editTaskNode(
         navigateBack = navigateBack,
     )
     composable(navDestination = EditTaskNavDestination) { navBackStackEntry ->
-        val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId.orEmpty()
+        val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId
         EditTaskScreen.NavigationNode(
             navigationEventHandler = editTaskNavigationEventHandler,
             viewModel = koinFonamentViewModel { parametersOf(taskId) },
