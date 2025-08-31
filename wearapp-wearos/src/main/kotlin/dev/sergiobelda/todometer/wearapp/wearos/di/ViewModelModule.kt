@@ -17,15 +17,15 @@
 package dev.sergiobelda.todometer.wearapp.wearos.di
 
 import dev.sergiobelda.fonament.di.koin.fonamentViewModel
+import dev.sergiobelda.fonament.di.koin.fonamentViewModelOf
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsViewModel
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksViewModel
 import org.koin.core.module.dsl.viewModel
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 internal val viewModelModule = module {
-    viewModelOf(::HomeViewModel)
+    fonamentViewModelOf(::HomeViewModel)
     viewModel { parameters ->
         TaskListTasksViewModel(
             taskListId = parameters.get(),

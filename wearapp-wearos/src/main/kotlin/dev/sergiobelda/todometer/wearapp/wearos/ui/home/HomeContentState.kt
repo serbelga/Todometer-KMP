@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
+package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import dev.sergiobelda.fonament.ui.FonamentContentState
@@ -33,23 +30,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Stable
-data class TaskDetailsContentState internal constructor(
+data class HomeContentState internal constructor(
     val scalingLazyListState: ScalingLazyListState,
     val coroutineScope: CoroutineScope,
 ) : FonamentContentState {
 
-    var showDeleteTaskAlertDialog by mutableStateOf(false)
-        private set
-
     override fun handleEvent(event: FonamentEvent) {
         when (event) {
-            TaskDetailsEvent.ShowDeleteTaskAlertDialog -> {
-                showDeleteTaskAlertDialog = true
-            }
-            TaskDetailsEvent.CancelDeleteTaskAlertDialog -> {
-                showDeleteTaskAlertDialog = false
-            }
-            is TaskDetailsEvent.LaunchRotaryScrollEvent -> {
+            is HomeEvent.LaunchRotaryScrollEvent -> {
                 coroutineScope.launch {
                     scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
 
@@ -61,11 +49,11 @@ data class TaskDetailsContentState internal constructor(
 }
 
 @Composable
-fun rememberTaskDetailsContentState(
+fun rememberHomeContentState(
     scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): TaskDetailsContentState = remember {
-    TaskDetailsContentState(
+): HomeContentState = remember {
+    HomeContentState(
         scalingLazyListState = scalingLazyListState,
         coroutineScope = coroutineScope,
     )

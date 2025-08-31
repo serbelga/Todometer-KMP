@@ -25,6 +25,7 @@ import dev.sergiobelda.navigation.compose.extended.wear.SwipeDismissableNavHost
 import dev.sergiobelda.navigation.compose.extended.wear.composable
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeScreen
+import dev.sergiobelda.todometer.wearapp.wearos.ui.home.navigation.homeNavigationEventHandler
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsScreen
@@ -44,12 +45,15 @@ fun TodometerNavHost(
         startNavDestination = HomeNavDestination,
     ) {
         composable(navDestination = HomeNavDestination) {
-            HomeScreen(
-                openTaskList = { taskListId ->
-                    navAction.navigate(
-                        TaskListTasksNavDestination.safeNavRoute(taskListId),
-                    )
-                },
+            HomeScreen.NavigationNode(
+                viewModel = koinFonamentViewModel(),
+                navigationEventHandler = homeNavigationEventHandler(
+                    navigateToTaskList = { taskListId ->
+                        navAction.navigate(
+                            TaskListTasksNavDestination.safeNavRoute(taskListId),
+                        )
+                    },
+                ),
             )
         }
         composable(navDestination = TaskListTasksNavDestination) { navBackStackEntry ->

@@ -94,7 +94,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetasklist.DeleteTaskListAlertDialog
-import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
+import dev.sergiobelda.todometer.wearapp.wearos.ui.progress.FullScreenProgressContent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
@@ -183,7 +183,7 @@ internal fun TaskListTasksScreen(
                 ) {
                     when {
                         state.isLoadingTaskList -> {
-                            item { ContentLoadingProgress() }
+                            item { FullScreenProgressContent() }
                         }
 
                         !state.isLoadingTaskList -> {

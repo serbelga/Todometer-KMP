@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,16 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
-import androidx.compose.runtime.Immutable
-import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
+import androidx.compose.ui.input.rotary.RotaryScrollEvent
+import dev.sergiobelda.fonament.ui.FonamentEvent
 
-@Immutable
-data class HomeState(
-    val isLoading: Boolean = false,
-    val taskLists: ImmutableList<TaskList> = persistentListOf(),
-    val errorUi: ErrorUi? = null,
-)
+sealed interface HomeEvent : FonamentEvent {
+
+    data class InsertTaskList(
+        val name: String,
+    ) : HomeEvent
+
+    data class LaunchRotaryScrollEvent(
+        val scrollEvent: RotaryScrollEvent,
+    ) : HomeEvent
+}

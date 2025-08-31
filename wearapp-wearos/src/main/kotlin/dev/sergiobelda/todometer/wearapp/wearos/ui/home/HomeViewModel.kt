@@ -16,51 +16,53 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListsUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val insertTaskListUseCase: InsertTaskListUseCase,
-) : ViewModel() {
+) : FonamentViewModel<HomeUIState>(
+    initialUIState = HomeUIState.Loading,
+) {
 
-    var state by mutableStateOf(HomeState(isLoading = true))
-        private set
+    init { getTaskLists() }
 
-    init {
-        getTaskLists()
-    }
-
-    private fun getTaskLists() = viewModelScope.launch {
-        getTaskListsUseCase().collect { result ->
-            result.doIfSuccess { taskLists ->
-                state = state.copy(
-                    isLoading = false,
-                    taskLists = taskLists.toPersistentList(),
-                    errorUi = null,
-                )
-            }.doIfError { error ->
-                state = state.copy(
-                    isLoading = false,
-                    taskLists = persistentListOf(),
-                    errorUi = error.mapToErrorUi(),
-                )
+    private fun getTaskLists() {
+        viewModelScope.launch {
+            getTaskListsUseCase().collect { result ->
+                result.doIfSuccess { taskLists ->
+                    updateUIState {
+                        HomeUIState.Success(taskLists.toPersistentList())
+                    }
+                }.doIfError { error ->
+                    updateUIState {
+                        HomeUIState.Error(
+                            errorUi = error.mapToErrorUi(),
+                        )
+                    }
+                }
             }
         }
     }
 
-    fun insertTaskList(name: String) = viewModelScope.launch {
+    override fun handleEvent(event: FonamentEvent) {
+        when (event) {
+            is HomeEvent.InsertTaskList -> {
+                insertTaskList(event.name)
+            }
+        }
+    }
+
+    private fun insertTaskList(name: String) = viewModelScope.launch {
         insertTaskListUseCase.invoke(name)
     }
 }

@@ -24,7 +24,6 @@ import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.UpdateTaskUseCase
-import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 import dev.sergiobelda.todometer.common.ui.error.mapToErrorUi
 import kotlinx.coroutines.launch
 
@@ -34,7 +33,7 @@ class TaskDetailsViewModel(
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTasksUseCase: DeleteTasksUseCase,
 ) : FonamentViewModel<TaskDetailsUIState>(
-    initialUIState = TaskDetailsUIState.LoadingTaskDetailsUIState,
+    initialUIState = TaskDetailsUIState.Loading,
 ) {
     init { getTask() }
 
@@ -42,12 +41,12 @@ class TaskDetailsViewModel(
         getTaskUseCase(taskId).collect { result ->
             result.doIfSuccess { task ->
                 updateUIState {
-                    TaskDetailsUIState.SuccessTaskDetailsUIState(task)
+                    TaskDetailsUIState.Success(task)
                 }
             }.doIfError { error ->
                 updateUIState {
-                    TaskDetailsUIState.ErrorTaskDetailsUIState(
-                        errorUi = error.mapToErrorUi() ?: ErrorUi(),
+                    TaskDetailsUIState.Error(
+                        errorUi = error.mapToErrorUi(),
                     )
                 }
             }
@@ -62,7 +61,7 @@ class TaskDetailsViewModel(
     }
 
     private fun updateTask(title: String) = viewModelScope.launch {
-        (uiState as? TaskDetailsUIState.SuccessTaskDetailsUIState)?.let {
+        (uiState as? TaskDetailsUIState.Success)?.let {
             updateTaskUseCase(it.task.copy(title = title))
         }
     }

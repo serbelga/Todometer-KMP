@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.home
+package dev.sergiobelda.todometer.wearapp.wearos.ui.home.navigation
 
-import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.FonamentUI
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
+import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
 
-@NavDestination(
-    name = "Home",
-    destinationId = "home",
-)
-data object HomeScreen : FonamentUI<HomeUIState>() {
-    override val content: FonamentContent<HomeUIState, *> = HomeContent
-}
+fun homeNavigationEventHandler(
+    navigateToTaskList: (taskListId: String?) -> Unit,
+): FonamentNavigationEventHandler<HomeNavigationEvent> =
+    FonamentNavigationEventHandler { event ->
+        when (event) {
+            is HomeNavigationEvent.NavigateToTaskList -> {
+                navigateToTaskList.invoke(event.taskListId)
+            }
+        }
+    }

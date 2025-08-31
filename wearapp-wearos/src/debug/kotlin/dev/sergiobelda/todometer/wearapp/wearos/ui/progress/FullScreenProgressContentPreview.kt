@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.loading
+package dev.sergiobelda.todometer.wearapp.wearos.ui.progress
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
 
 @PreviewWearDevices
 @Composable
-private fun ContentLoadingProgressPreview() {
-    ContentLoadingProgress()
+private fun FullScreenProgressContentPreview() {
+    FullScreenProgressContent()
 }

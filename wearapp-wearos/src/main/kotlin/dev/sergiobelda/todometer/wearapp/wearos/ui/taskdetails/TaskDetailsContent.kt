@@ -57,7 +57,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask.DeleteTaskAlertDialog
-import dev.sergiobelda.todometer.wearapp.wearos.ui.loading.ContentLoadingProgress
+import dev.sergiobelda.todometer.wearapp.wearos.ui.progress.FullScreenProgressContent
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsEvent.UpdateTask
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.navigation.TaskDetailsNavigationEvent
 import kotlinx.collections.immutable.ImmutableList
@@ -87,23 +87,23 @@ internal data object TaskDetailsContent :
                     onCancel = { onEvent(TaskDetailsEvent.CancelDeleteTaskAlertDialog) },
                 )
             }
-            uiState is TaskDetailsUIState.LoadingTaskDetailsUIState -> {
-                ContentLoadingProgress()
+            uiState is TaskDetailsUIState.Loading -> {
+                FullScreenProgressContent()
             }
-            uiState is TaskDetailsUIState.SuccessTaskDetailsUIState -> {
+            uiState is TaskDetailsUIState.Success -> {
                 TaskDetailsScaffold(
                     scalingLazyListState = contentState.scalingLazyListState,
                     uiState = uiState,
                 )
             }
-            uiState is TaskDetailsUIState.ErrorTaskDetailsUIState -> Unit
+            uiState is TaskDetailsUIState.Error -> Unit
         }
     }
 
     @Composable
     private fun TaskDetailsScaffold(
         scalingLazyListState: ScalingLazyListState,
-        uiState: TaskDetailsUIState.SuccessTaskDetailsUIState,
+        uiState: TaskDetailsUIState.Success,
     ) {
         Scaffold(
             positionIndicator = {

@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
+package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.runtime.Immutable
 import dev.sergiobelda.fonament.ui.FonamentUIState
-import dev.sergiobelda.todometer.common.domain.model.Task
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
-sealed interface TaskDetailsUIState : FonamentUIState {
+sealed interface HomeUIState : FonamentUIState {
 
-    data object Loading : TaskDetailsUIState
+    data object Loading : HomeUIState
 
     @Immutable
     data class Success(
-        val task: Task,
-    ) : TaskDetailsUIState
+        val taskLists: ImmutableList<TaskList> = persistentListOf(),
+    ) : HomeUIState
 
     data class Error(
         val errorUi: ErrorUi?,
-    ) : TaskDetailsUIState
+    ) : HomeUIState
 }

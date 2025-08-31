@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.loading
+package dev.sergiobelda.todometer.wearapp.wearos.ui.progress
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.wear.compose.material.CircularProgressIndicator
 
 @Composable
-internal fun ContentLoadingProgress() {
+internal fun FullScreenProgressContent() {
     Box(
         modifier = Modifier
             .fillMaxSize(),

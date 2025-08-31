@@ -14,61 +14,55 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
+package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskState
+import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import kotlinx.collections.immutable.persistentListOf
 
 @PreviewWearDevices
 @Composable
-private fun TaskDetailsLoadingPreview() {
+fun HomeContentLoadingPreview() {
     TodometerWearAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState.Loading,
-            contentState = rememberTaskDetailsContentState(),
+        HomeContent(
+            uiState = HomeUIState.Loading,
+            contentState = rememberHomeContentState(),
         )
     }
 }
 
 @PreviewWearDevices
 @Composable
-private fun TaskDetailsContentPreview() {
+fun HomeContentPreview() {
     TodometerWearAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState.Success(
-                task = taskSample,
+        HomeContent(
+            uiState = HomeUIState.Success(
+                taskLists = persistentListOf(
+                    TaskList(
+                        id = "0",
+                        name = "Custom task list",
+                        description = "",
+                        sync = true,
+                    ),
+                ),
             ),
-            contentState = rememberTaskDetailsContentState(),
+            contentState = rememberHomeContentState(),
         )
     }
 }
 
 @PreviewWearLocales
 @Composable
-private fun TaskDetailsContentLocalesPreview() {
+fun HomeContentLocalesPreview() {
     TodometerWearAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState.Success(
-                task = taskSample,
+        HomeContent(
+            uiState = HomeUIState.Success(
+                taskLists = persistentListOf(),
             ),
-            contentState = rememberTaskDetailsContentState(),
+            contentState = rememberHomeContentState(),
         )
     }
 }
-
-private val taskSample = Task(
-    id = "0",
-    title = "The task title",
-    description = "",
-    tag = Tag.UNSPECIFIED,
-    dueDate = 0,
-    state = TaskState.DOING,
-    taskListId = "0",
-    isPinned = false,
-    sync = false,
-)
