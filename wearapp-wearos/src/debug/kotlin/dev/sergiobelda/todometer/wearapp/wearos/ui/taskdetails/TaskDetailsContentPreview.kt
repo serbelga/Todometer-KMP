@@ -26,7 +26,7 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWear
 
 @PreviewWearDevices
 @Composable
-fun TaskDetailsLoadingPreview() {
+private fun TaskDetailsLoadingPreview() {
     TodometerWearAppPreview {
         TaskDetailsContent(
             uiState = TaskDetailsUIState.LoadingTaskDetailsUIState,
@@ -37,7 +37,7 @@ fun TaskDetailsLoadingPreview() {
 
 @PreviewWearDevices
 @Composable
-fun TaskDetailsContentPreview() {
+private fun TaskDetailsContentPreview() {
     TodometerWearAppPreview {
         TaskDetailsContent(
             uiState = TaskDetailsUIState.SuccessTaskDetailsUIState(
@@ -50,7 +50,7 @@ fun TaskDetailsContentPreview() {
 
 @PreviewWearLocales
 @Composable
-fun TaskDetailsContentLocalesPreview() {
+private fun TaskDetailsContentLocalesPreview() {
     TodometerWearAppPreview {
         TaskDetailsContent(
             uiState = TaskDetailsUIState.SuccessTaskDetailsUIState(

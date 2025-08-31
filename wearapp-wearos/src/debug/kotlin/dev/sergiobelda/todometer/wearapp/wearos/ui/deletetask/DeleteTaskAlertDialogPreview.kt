@@ -14,13 +14,31 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.loading
+package dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask
 
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
 
 @PreviewWearDevices
 @Composable
-private fun ContentLoadingProgressPreview() {
-    ContentLoadingProgress()
+private fun DeleteTaskAlertDialogPreview() {
+    TodometerWearAppPreview {
+        DeleteTaskAlertDialog(
+            onDeleteTask = {},
+            onCancel = {},
+        )
+    }
+}
+
+@PreviewWearLocales
+@Composable
+private fun DeleteTaskAlertDialogPreviewLocales() {
+    TodometerWearAppPreview {
+        DeleteTaskAlertDialog(
+            onDeleteTask = {},
+            onCancel = {},
+        )
+    }
 }
