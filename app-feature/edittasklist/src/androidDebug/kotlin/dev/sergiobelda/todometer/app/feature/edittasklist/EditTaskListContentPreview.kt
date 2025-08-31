@@ -18,18 +18,18 @@ package dev.sergiobelda.todometer.app.feature.edittasklist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListContent
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListUIState
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.rememberEditTaskListContentState
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLandscape
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLightDark
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLocales
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
 
-@PreviewTodometerLocales
-@PreviewTodometerLightDark
-@PreviewTodometerLandscape
+@PreviewLocales
+@PreviewLightDark
+@PreviewLandscape
 @Composable
 fun EditTaskListContentPreview() {
     TodometerAppPreview {

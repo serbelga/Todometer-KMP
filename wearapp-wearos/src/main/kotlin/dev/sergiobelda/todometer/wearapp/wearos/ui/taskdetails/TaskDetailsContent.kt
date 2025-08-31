@@ -23,8 +23,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.focusable
-import androidx.compose.foundation.gestures.animateScrollBy
-import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -32,11 +30,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
@@ -45,6 +38,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListScope
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.requestFocusOnHierarchyActive
 import androidx.wear.compose.material.Chip
@@ -68,11 +62,10 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsEvent.
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.navigation.TaskDetailsNavigationEvent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalWearFoundationApi::class)
-internal data object TaskDetailsContent
-    : FonamentContent<TaskDetailsUIState, TaskDetailsContentState>() {
+internal data object TaskDetailsContent :
+    FonamentContent<TaskDetailsUIState, TaskDetailsContentState>() {
 
     @Composable
     override fun createContentState(uiState: TaskDetailsUIState): TaskDetailsContentState =
@@ -84,24 +77,33 @@ internal data object TaskDetailsContent
         contentState: TaskDetailsContentState,
         modifier: Modifier,
     ) {
-        if (contentState.showDeleteTaskAlertDialog) {
-            DeleteTaskAlertDialog(
-                onDeleteTask = {
-                    onEvent(TaskDetailsEvent.DeleteTask)
-                    onEvent(TaskDetailsNavigationEvent.NavigateBack)
-                },
-                onCancel = { onEvent(TaskDetailsEvent.CancelDeleteTaskAlertDialog) },
-            )
-        } else {
-            TaskDetailsScaffold(
-                scalingLazyListState = contentState.scalingLazyListState,
-            )
+        when {
+            contentState.showDeleteTaskAlertDialog -> {
+                DeleteTaskAlertDialog(
+                    onDeleteTask = {
+                        onEvent(TaskDetailsEvent.DeleteTask)
+                        onEvent(TaskDetailsNavigationEvent.NavigateBack)
+                    },
+                    onCancel = { onEvent(TaskDetailsEvent.CancelDeleteTaskAlertDialog) },
+                )
+            }
+            uiState is TaskDetailsUIState.LoadingTaskDetailsUIState -> {
+                ContentLoadingProgress()
+            }
+            uiState is TaskDetailsUIState.SuccessTaskDetailsUIState -> {
+                TaskDetailsScaffold(
+                    scalingLazyListState = contentState.scalingLazyListState,
+                    uiState = uiState,
+                )
+            }
+            uiState is TaskDetailsUIState.ErrorTaskDetailsUIState -> Unit
         }
     }
 
     @Composable
     private fun TaskDetailsScaffold(
         scalingLazyListState: ScalingLazyListState,
+        uiState: TaskDetailsUIState.SuccessTaskDetailsUIState,
     ) {
         Scaffold(
             positionIndicator = {
@@ -119,61 +121,55 @@ internal data object TaskDetailsContent
                 modifier = Modifier
                     .fillMaxWidth()
                     .onRotaryScrollEvent {
-                        coroutineScope.launch {
-                            scalingLazyListState.scrollBy(it.verticalScrollPixels)
-
-                            scalingLazyListState.animateScrollBy(0f)
-                        }
+                        onEvent(TaskDetailsEvent.LaunchRotaryScrollEvent(it))
                         true
                     }
                     .requestFocusOnHierarchyActive()
                     .focusable(),
             ) {
-                when (uiState) {
-                    is TaskDetailsUIState.LoadingTaskDetailsUIState -> {
-                        item { ContentLoadingProgress() }
-                    }
-
-                    is TaskDetailsUIState.SuccessTaskDetailsUIState -> {
-                        item {
-                            Text(
-                                text = uiState.task.title,
-                                fontWeight = FontWeight.Bold,
-                                maxLines = 2,
-                                modifier = Modifier.padding(horizontal = 24.dp),
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                        item {
-                            Spacer(modifier = Modifier.height(12.dp))
-                        }
-                        item {
-                            EditTaskButton(
-                                task = uiState.task,
-                                onComplete = {
-                                    onEvent(UpdateTask(it))
-                                }
-                            )
-                        }
-                        item {
-                            DeleteTaskButton(
-                                onClick = {
-                                    onEvent(TaskDetailsEvent.ShowDeleteTaskAlertDialog)
-                                }
-                            )
-                        }
-                    }
-
-                    is TaskDetailsUIState.ErrorTaskDetailsUIState -> Unit
-                }
+                taskDetailsContent(
+                    task = uiState.task,
+                )
             }
+        }
+    }
+
+    private fun ScalingLazyListScope.taskDetailsContent(
+        task: Task,
+    ) {
+        item {
+            Text(
+                text = task.title,
+                fontWeight = FontWeight.Bold,
+                maxLines = 2,
+                modifier = Modifier.padding(horizontal = 24.dp),
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+        }
+        item {
+            EditTaskButton(
+                task = task,
+                onComplete = {
+                    onEvent(UpdateTask(it))
+                },
+            )
+        }
+        item {
+            DeleteTaskButton(
+                onClick = {
+                    onEvent(TaskDetailsEvent.ShowDeleteTaskAlertDialog)
+                },
+            )
         }
     }
 
     @Composable
     private fun EditTaskButton(
         task: Task,
-        onComplete: (String) -> Unit
+        onComplete: (String) -> Unit,
     ) {
         val launcher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.StartActivityForResult(),

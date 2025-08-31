@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.ui.tooling.preview
+package dev.sergiobelda.todometer.app.common.ui.tooling.preview
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.content.res.Configuration.UI_MODE_TYPE_NORMAL
 import androidx.compose.ui.tooling.preview.Preview
 
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
-@Preview(name = "Landscape", device = "spec:parent=pixel_5,orientation=landscape")
-annotation class PreviewTodometerLandscape
+@Preview(name = "Light", group = "Theme")
+@Preview(name = "Dark", group = "Theme", uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL)
+annotation class PreviewLightDark

@@ -19,6 +19,8 @@ package dev.sergiobelda.todometer.app.feature.taskdetails
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsContent
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsUIState
@@ -28,16 +30,14 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLandscape
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLightDark
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLocales
-import dev.sergiobelda.todometer.common.ui.tooling.preview.getTomorrowEpochMilliseconds
-import dev.sergiobelda.todometer.common.ui.tooling.preview.getYesterdayEpochMilliseconds
+import dev.sergiobelda.todometer.common.ui.tooling.getTomorrowEpochMilliseconds
+import dev.sergiobelda.todometer.common.ui.tooling.getYesterdayEpochMilliseconds
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
 import kotlinx.collections.immutable.persistentListOf
 
-@PreviewTodometerLocales
-@PreviewTodometerLightDark
-@PreviewTodometerLandscape
+@PreviewLocales
+@PreviewLightDark
+@PreviewLandscape
 @Composable
 fun TaskDetailsContentPreview() {
     TodometerAppPreview {

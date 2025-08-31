@@ -1,5 +1,23 @@
+/*
+ * Copyright 2025 Sergio Belda
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
+import androidx.compose.foundation.gestures.animateScrollBy
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,8 +29,9 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import dev.sergiobelda.fonament.ui.FonamentContentState
 import dev.sergiobelda.fonament.ui.FonamentEvent
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-data class TaskDetailsContentState internal constructor (
+data class TaskDetailsContentState internal constructor(
     val scalingLazyListState: ScalingLazyListState,
     val coroutineScope: CoroutineScope,
 ) : FonamentContentState {
@@ -27,6 +46,13 @@ data class TaskDetailsContentState internal constructor (
             }
             TaskDetailsEvent.CancelDeleteTaskAlertDialog -> {
                 showDeleteTaskAlertDialog = false
+            }
+            is TaskDetailsEvent.LaunchRotaryScrollEvent -> {
+                coroutineScope.launch {
+                    scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
+
+                    scalingLazyListState.animateScrollBy(0f)
+                }
             }
         }
     }

@@ -17,17 +17,17 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist
 
 import androidx.compose.runtime.Composable
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListContent
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListUIState
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.rememberAddTaskListContentState
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLandscape
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLightDark
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLocales
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
 
-@PreviewTodometerLocales
-@PreviewTodometerLightDark
-@PreviewTodometerLandscape
+@PreviewLocales
+@PreviewLightDark
+@PreviewLandscape
 @Composable
 fun AddTaskListContentPreview() {
     TodometerAppPreview {

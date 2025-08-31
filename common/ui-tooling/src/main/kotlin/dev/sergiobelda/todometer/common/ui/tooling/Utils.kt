@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.common.ui.tooling.preview
+package dev.sergiobelda.todometer.common.ui.tooling
 
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.TimeZone

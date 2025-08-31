@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui.loading
+package dev.sergiobelda.todometer.app.common.ui.tooling.preview
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material.CircularProgressIndicator
+import androidx.compose.ui.tooling.preview.Preview
 
-@Composable
-internal fun ContentLoadingProgress() {
-    CircularProgressIndicator(modifier = Modifier.padding(top = 24.dp))
-}
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
+@Preview(name = "English", group = "Language", locale = "en")
+@Preview(name = "Spanish", group = "Language", locale = "es")
+@Preview(name = "Catalan", group = "Language", locale = "ca")
+annotation class PreviewLocales

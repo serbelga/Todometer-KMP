@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
+import androidx.compose.ui.input.rotary.RotaryScrollEvent
 import dev.sergiobelda.fonament.ui.FonamentEvent
 
 sealed interface TaskDetailsEvent : FonamentEvent {
@@ -27,4 +28,8 @@ sealed interface TaskDetailsEvent : FonamentEvent {
     data object ShowDeleteTaskAlertDialog : TaskDetailsEvent
 
     data object CancelDeleteTaskAlertDialog : TaskDetailsEvent
+
+    data class LaunchRotaryScrollEvent(
+        val scrollEvent: RotaryScrollEvent,
+    ) : TaskDetailsEvent
 }
