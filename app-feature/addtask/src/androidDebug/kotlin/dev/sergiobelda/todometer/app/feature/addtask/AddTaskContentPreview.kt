@@ -20,11 +20,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskContent
 import dev.sergiobelda.todometer.app.feature.addtask.ui.AddTaskUIState
 import dev.sergiobelda.todometer.app.feature.addtask.ui.rememberAddTaskContentState
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
 
 @OptIn(ExperimentalMaterial3Api::class)
 @PreviewLocales
