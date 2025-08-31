@@ -42,7 +42,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,16 +50,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.CurvedLayout
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
-import androidx.wear.compose.foundation.RevealValue.Companion.Covered
-import androidx.wear.compose.foundation.RevealValue.Companion.Revealing
-import androidx.wear.compose.foundation.createAnchors
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import androidx.wear.compose.foundation.rememberActiveFocusRequester
-import androidx.wear.compose.foundation.rememberRevealState
+import androidx.wear.compose.foundation.requestFocusOnHierarchyActive
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CircularProgressIndicator
@@ -69,13 +64,17 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.ProgressIndicatorDefaults
+import androidx.wear.compose.material.RevealValue.Companion.Covered
+import androidx.wear.compose.material.RevealValue.Companion.LeftRevealing
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.SplitToggleChip
 import androidx.wear.compose.material.SwipeToRevealChip
+import androidx.wear.compose.material.SwipeToRevealDefaults.createRevealAnchors
 import androidx.wear.compose.material.SwipeToRevealPrimaryAction
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
+import androidx.wear.compose.material.rememberRevealState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
 import dev.sergiobelda.navigation.compose.extended.annotation.NavArgument
@@ -146,7 +145,6 @@ internal fun TaskListTasksScreen(
         else -> {
             val scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState()
             val state = viewModel.state
-            val focusRequester = rememberActiveFocusRequester()
             val coroutineScope = rememberCoroutineScope()
             val progress = TaskProgress.getTasksDoneProgress(state.tasks)
             val animatedProgress by animateFloatAsState(
@@ -180,7 +178,7 @@ internal fun TaskListTasksScreen(
                             }
                             true
                         }
-                        .focusRequester(focusRequester)
+                        .requestFocusOnHierarchyActive()
                         .focusable(),
                 ) {
                     when {
@@ -290,7 +288,7 @@ private fun TaskItem(
     val isTaskDone = taskItem.state == TaskState.DONE
     val textDecoration = if (isTaskDone) TextDecoration.LineThrough else TextDecoration.None
     val revealState = rememberRevealState(
-        anchors = createAnchors(
+        anchors = createRevealAnchors(
             // TODO: Const values
             revealingAnchor = 0.5f,
             revealedAnchor = 0.5f,
@@ -304,7 +302,7 @@ private fun TaskItem(
                     Box(modifier = Modifier.fillMaxSize()) {
                         Icon(
                             painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
-                                atEnd = revealState.currentValue == Revealing,
+                                atEnd = revealState.currentValue == LeftRevealing,
                             ),
                             contentDescription = TodometerResources.strings.deleteTask,
                             modifier = Modifier.align(Alignment.Center),

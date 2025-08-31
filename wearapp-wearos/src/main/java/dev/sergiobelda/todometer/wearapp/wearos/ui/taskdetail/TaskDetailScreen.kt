@@ -39,7 +39,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -48,7 +47,7 @@ import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import androidx.wear.compose.foundation.rememberActiveFocusRequester
+import androidx.wear.compose.foundation.requestFocusOnHierarchyActive
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
@@ -113,7 +112,6 @@ internal fun TaskDetailScreen(
                     PositionIndicator(scalingLazyListState = scalingLazyListState)
                 },
             ) {
-                val focusRequester = rememberActiveFocusRequester()
                 val coroutineScope = rememberCoroutineScope()
 
                 ScalingLazyColumn(
@@ -134,7 +132,7 @@ internal fun TaskDetailScreen(
                             }
                             true
                         }
-                        .focusRequester(focusRequester)
+                        .requestFocusOnHierarchyActive()
                         .focusable(),
                 ) {
                     when {
