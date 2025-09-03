@@ -21,17 +21,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import dev.sergiobelda.fonament.ui.NoContentState
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsContent
 import dev.sergiobelda.todometer.app.feature.settings.ui.SettingsUIState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLandscape
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLightDark
-import dev.sergiobelda.todometer.common.ui.tooling.preview.PreviewTodometerLocales
 
-@PreviewTodometerLocales
-@PreviewTodometerLightDark
-@PreviewTodometerLandscape
+@PreviewLocales
+@PreviewLightDark
+@PreviewLandscape
 @Composable
 fun SettingsContentPreview() {
     TodometerAppPreview {

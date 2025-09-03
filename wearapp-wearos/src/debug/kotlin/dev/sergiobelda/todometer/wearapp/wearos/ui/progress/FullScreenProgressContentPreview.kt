@@ -14,24 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.about.ui
+package dev.sergiobelda.todometer.wearapp.wearos.ui.progress
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.fonament.ui.NoContentState
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
 
-@PreviewLocales
-@PreviewLightDark
-@PreviewLandscape
+@PreviewWearDevices
 @Composable
-fun AboutContentPreview() {
-    TodometerAppPreview {
-        AboutContent(
-            uiState = AboutUIState,
-            contentState = NoContentState,
-        )
-    }
+private fun FullScreenProgressContentPreview() {
+    FullScreenProgressContent()
 }

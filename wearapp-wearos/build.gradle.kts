@@ -52,9 +52,6 @@ android {
     kotlin {
         jvmToolchain(17)
     }
-    kotlinOptions {
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
-    }
 }
 
 dependencies {
@@ -64,21 +61,21 @@ dependencies {
     implementation(projects.common.domain)
     implementation(projects.common.resources)
     implementation(projects.common.ui)
+    debugImplementation(projects.common.uiTooling)
 
     implementation(compose.foundation)
     debugImplementation(compose.uiTooling)
 
     implementation(libs.androidx.activityCompose)
-
     implementation(libs.androidx.coreKtx)
-
     implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.wear.compose.foundation)
+    implementation(libs.androidx.wear.compose.material)
+    implementation(libs.androidx.wear.compose.navigation)
+    implementation(libs.androidx.wear.input)
+    implementation(libs.androidx.wear.wear)
 
-    implementation(libs.wear.compose.foundation)
-    implementation(libs.wear.compose.material)
-    implementation(libs.wear.compose.navigation)
-    implementation(libs.wear.input)
-    implementation(libs.wear.wear)
+    implementation(libs.kotlin.collections.immutable)
 
     implementation(libs.google.playServicesWearable)
 
@@ -89,5 +86,8 @@ dependencies {
     implementation(libs.sergiobelda.navigationComposeExtendedWear)
     ksp(libs.sergiobelda.navigationComposeExtendedCompiler)
 
-    implementation(libs.kotlin.collections.immutable)
+    implementation(libs.sergiobelda.fonament)
+    implementation(libs.sergiobelda.fonament.diKoin)
+
+    implementation("androidx.wear:wear-tooling-preview:1.0.0")
 }

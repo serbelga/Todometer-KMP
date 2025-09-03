@@ -31,6 +31,7 @@ kotlin {
             api(libs.koin.core)
             api(libs.koin.compose.viewmodel)
 
+            implementation(libs.kotlin.collections.immutable)
             implementation(libs.kotlin.datetime)
         }
         commonTest.dependencies {
