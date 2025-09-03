@@ -17,12 +17,10 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.domain.model.TaskState
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.util.taskSample
 
 @PreviewWearDevices
 @Composable
@@ -60,15 +58,3 @@ private fun TaskDetailsContentLocalesPreview() {
         )
     }
 }
-
-private val taskSample = Task(
-    id = "0",
-    title = "The task title",
-    description = "",
-    tag = Tag.UNSPECIFIED,
-    dueDate = 0,
-    state = TaskState.DOING,
-    taskListId = "0",
-    isPinned = false,
-    sync = false,
-)

@@ -17,10 +17,10 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.util.taskListSample
 import kotlinx.collections.immutable.persistentListOf
 
 @PreviewWearDevices
@@ -41,12 +41,7 @@ fun HomeContentPreview() {
         HomeContent(
             uiState = HomeUIState.Success(
                 taskLists = persistentListOf(
-                    TaskList(
-                        id = "0",
-                        name = "Custom task list",
-                        description = "",
-                        sync = true,
-                    ),
+                    taskListSample,
                 ),
             ),
             contentState = rememberHomeContentState(),
