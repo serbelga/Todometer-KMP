@@ -21,12 +21,11 @@ import dev.sergiobelda.fonament.di.koin.fonamentViewModelOf
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsViewModel
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksViewModel
-import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 internal val viewModelModule = module {
     fonamentViewModelOf(::HomeViewModel)
-    viewModel { parameters ->
+    fonamentViewModel { parameters ->
         TaskListTasksViewModel(
             taskListId = parameters.get(),
             get(),
@@ -40,6 +39,11 @@ internal val viewModelModule = module {
         )
     }
     fonamentViewModel { parameters ->
-        TaskDetailsViewModel(taskId = parameters.get(), get(), get(), get())
+        TaskDetailsViewModel(
+            taskId = parameters.get(),
+            get(),
+            get(),
+            get(),
+        )
     }
 }

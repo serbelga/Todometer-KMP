@@ -16,18 +16,23 @@
 
 package dev.sergiobelda.todometer.common.ui.task
 
+import androidx.annotation.FloatRange
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 object TaskProgress {
 
-    fun getTasksDoneProgress(list: List<TaskItem?>): Float =
-        list.takeUnless { it.isEmpty() }?.let {
-            it.filter { task -> task?.state == TaskState.DONE }.size / it.size.toFloat()
-        } ?: 0F
+    fun getTasksDoneProgress(list: List<TaskItem?>): Float {
+        val size = list.size
+        if (size == 0) return 0f
+        return list.count { it?.state == TaskState.DONE } / size.toFloat()
+    }
 
-    fun getPercentage(progress: Float) =
-        progress.takeIf { it in 0.0..1.0 }?.let { "${(it * PERCENTAGE_MULTIPLIER).toInt()}%" } ?: "-%"
+    fun getPercentage(
+        @FloatRange(from = 0.0, to = 1.0) progress: Float,
+    ): String = progress.takeIf {
+        it in 0.0..1.0
+    }?.let { "${(it * PERCENTAGE_MULTIPLIER).toInt()}%" } ?: "-%"
 
     private const val PERCENTAGE_MULTIPLIER = 100
 }

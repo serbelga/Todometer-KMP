@@ -16,11 +16,9 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
@@ -31,7 +29,6 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.DeleteTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.UpdateTaskListNameUseCase
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 
@@ -45,35 +42,42 @@ class TaskListTasksViewModel(
     private val updateTaskListNameUseCase: UpdateTaskListNameUseCase,
     private val deleteTasksUseCase: DeleteTasksUseCase,
     private val deleteTaskListUseCase: DeleteTaskListUseCase,
-) : ViewModel() {
-
-    var state by mutableStateOf(
-        TaskListTasksState(
-            isLoadingTaskList = true,
-            isLoadingTasks = true,
-        ),
-    )
-        private set
+) : FonamentViewModel<TaskListTasksUIState>(
+    initialUIState = TaskListTasksUIState(
+        taskListUIState = TaskListUIState.Loading,
+        tasksUIState = TasksUIState.Loading,
+    ),
+) {
 
     init {
         getTaskList()
         getTaskListTasks()
     }
 
-    private fun getTaskList() = viewModelScope.launch {
-        getTaskListUseCase(taskListId).collect { result ->
-            result.doIfSuccess { taskList ->
-                state = state.copy(
-                    isLoadingTaskList = false,
-                    taskList = taskList,
-                    isDefaultTaskList = false,
+    private fun getTaskList() {
+        if (taskListId.isEmpty()) {
+            updateUIState {
+                it.copy(
+                    taskListUIState = TaskListUIState.DefaultTaskList,
                 )
-            }.doIfError {
-                state = state.copy(
-                    isLoadingTaskList = false,
-                    taskList = null,
-                    isDefaultTaskList = true,
-                )
+            }
+        } else {
+            viewModelScope.launch {
+                getTaskListUseCase(taskListId).collect { result ->
+                    result.doIfSuccess { taskList ->
+                        updateUIState {
+                            it.copy(
+                                taskListUIState = TaskListUIState.Success(taskList),
+                            )
+                        }
+                    }.doIfError {
+                        updateUIState {
+                            it.copy(
+                                taskListUIState = TaskListUIState.Error(errorUi = null),
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -81,40 +85,53 @@ class TaskListTasksViewModel(
     private fun getTaskListTasks() = viewModelScope.launch {
         getTaskListTasksUseCase(taskListId).collect { result ->
             result.doIfSuccess { tasks ->
-                state = state.copy(
-                    isLoadingTasks = false,
-                    tasks = tasks.toPersistentList(),
-                )
+                updateUIState {
+                    it.copy(
+                        tasksUIState = TasksUIState.Success(tasks.toPersistentList()),
+                    )
+                }
             }.doIfError {
-                state = state.copy(
-                    isLoadingTasks = false,
-                    tasks = persistentListOf(),
-                )
+                updateUIState {
+                    it.copy(
+                        tasksUIState = TasksUIState.Error(errorUi = null),
+                    )
+                }
             }
         }
     }
 
-    fun insertTask(title: String) = viewModelScope.launch {
+    override fun handleEvent(event: FonamentEvent) {
+        when (event) {
+            is TaskListTasksEvent.InsertTask -> insertTask(event.title)
+            is TaskListTasksEvent.SetTaskDoing -> setTaskDoing(event.taskId)
+            is TaskListTasksEvent.SetTaskDone -> setTaskDone(event.taskId)
+            is TaskListTasksEvent.UpdateTaskListName -> updateTaskListName(event.name)
+            is TaskListTasksEvent.DeleteTask -> deleteTask(event.taskId)
+            is TaskListTasksEvent.DeleteTaskList -> deleteTaskList()
+        }
+    }
+
+    private fun insertTask(title: String) = viewModelScope.launch {
         insertTaskUseCase.invoke(taskListId, title)
     }
 
-    fun setTaskDoing(id: String) = viewModelScope.launch {
+    private fun setTaskDoing(id: String) = viewModelScope.launch {
         setTaskDoingUseCase(id)
     }
 
-    fun setTaskDone(id: String) = viewModelScope.launch {
+    private fun setTaskDone(id: String) = viewModelScope.launch {
         setTaskDoneUseCase(id)
     }
 
-    fun updateTaskListName(name: String) = viewModelScope.launch {
+    private fun updateTaskListName(name: String) = viewModelScope.launch {
         updateTaskListNameUseCase(taskListId, name)
     }
 
-    fun deleteTask(id: String) = viewModelScope.launch {
+    private fun deleteTask(id: String) = viewModelScope.launch {
         deleteTasksUseCase(id)
     }
 
-    fun deleteTaskList() = viewModelScope.launch {
+    private fun deleteTaskList() = viewModelScope.launch {
         deleteTaskListUseCase(taskListId)
     }
 }

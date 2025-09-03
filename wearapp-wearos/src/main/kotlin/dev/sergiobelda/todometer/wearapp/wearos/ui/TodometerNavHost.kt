@@ -33,6 +33,7 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.navigation.taskDe
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksNavDestination
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksSafeNavArgs
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.TaskListTasksScreen
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.navigation.taskListTasksNavigationEventHandler
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -58,14 +59,16 @@ fun TodometerNavHost(
         }
         composable(navDestination = TaskListTasksNavDestination) { navBackStackEntry ->
             val taskListId = TaskListTasksSafeNavArgs(navBackStackEntry).taskListId.orEmpty()
-            TaskListTasksScreen(
-                taskListId = taskListId,
-                openTask = { taskId ->
-                    navAction.navigate(
-                        TaskDetailsNavDestination.safeNavRoute(taskId),
-                    )
-                },
-                navigateBack = { navAction.popBackStack() },
+            TaskListTasksScreen.NavigationNode(
+                viewModel = koinFonamentViewModel { parametersOf(taskListId) },
+                navigationEventHandler = taskListTasksNavigationEventHandler(
+                    navigateBack = { navAction.popBackStack() },
+                    navigateToTaskDetails = { taskId ->
+                        navAction.navigate(
+                            TaskDetailsNavDestination.safeNavRoute(taskId),
+                        )
+                    },
+                ),
             )
         }
         composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
