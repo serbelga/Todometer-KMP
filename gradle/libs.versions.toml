@@ -1,5 +1,5 @@
 [versions]
-activity = "1.10.1"
+activity = "1.11.0"
 androidBaselineProfileMinSdk = "28"
 androidCompileSdk = "36"
 androidCore = "1.17.0"
