@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 
 sealed interface SettingsEvent : FonamentEvent {

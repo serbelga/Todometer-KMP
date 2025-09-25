@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.taskdetails.ui
 
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 
 sealed interface TaskDetailsEvent : FonamentEvent {

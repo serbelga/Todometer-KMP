@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.ui.input.rotary.RotaryScrollEvent
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
 sealed interface HomeEvent : FonamentEvent {
 

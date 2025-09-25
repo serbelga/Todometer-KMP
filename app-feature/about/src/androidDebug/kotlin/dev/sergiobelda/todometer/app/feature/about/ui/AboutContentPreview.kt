@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.about.ui
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.fonament.ui.NoContentState
+import dev.sergiobelda.fonament.presentation.ui.NoContentState
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales

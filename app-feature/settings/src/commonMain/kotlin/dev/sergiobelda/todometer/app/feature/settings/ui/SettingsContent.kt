@@ -53,8 +53,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.NoContentState
+import dev.sergiobelda.fonament.presentation.ui.FonamentContent
+import dev.sergiobelda.fonament.presentation.ui.NoContentState
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha
 import dev.sergiobelda.todometer.app.common.designsystem.theme.withAlpha
 import dev.sergiobelda.todometer.app.common.ui.preferences.themeIcon

@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
 sealed interface EditTaskListEvent : FonamentEvent {
     data class UpdateTaskList(val name: String) : EditTaskListEvent

@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import dev.sergiobelda.fonament.ui.FonamentContentState
+import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 
 @OptIn(ExperimentalMaterial3Api::class)
 data class TaskDetailsContentState internal constructor(

@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.navigation
 
-import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
+import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEvent
 
 sealed interface EditTaskNavigationEvent : FonamentNavigationEvent {
     data object NavigateBack : EditTaskNavigationEvent

@@ -33,8 +33,8 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import dev.sergiobelda.fonament.ui.FonamentContentState
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.app.common.ui.extensions.selectedTimeMillis
 import dev.sergiobelda.todometer.common.domain.model.NewTask
 import dev.sergiobelda.todometer.common.domain.model.Tag

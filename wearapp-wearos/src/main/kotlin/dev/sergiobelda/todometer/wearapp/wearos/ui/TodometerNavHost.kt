@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import dev.sergiobelda.fonament.di.koin.koinFonamentViewModel
-import dev.sergiobelda.fonament.navigation.NavigationNode
+import dev.sergiobelda.fonament.presentation.navigation.NavigationNode
 import dev.sergiobelda.navigation.compose.extended.NavAction
 import dev.sergiobelda.navigation.compose.extended.wear.SwipeDismissableNavHost
 import dev.sergiobelda.navigation.compose.extended.wear.composable

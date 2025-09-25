@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
-import dev.sergiobelda.fonament.ui.NoContentState
+import dev.sergiobelda.fonament.presentation.ui.NoContentState
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales

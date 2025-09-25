@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
-import dev.sergiobelda.fonament.ui.FonamentUIState
+import dev.sergiobelda.fonament.presentation.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 
 data class SettingsUIState(

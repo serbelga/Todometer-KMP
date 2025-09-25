@@ -41,8 +41,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.NoContentState
+import dev.sergiobelda.fonament.presentation.ui.FonamentContent
+import dev.sergiobelda.fonament.presentation.ui.NoContentState
 import dev.sergiobelda.todometer.app.common.ui.components.TodometerTitle
 import dev.sergiobelda.todometer.app.feature.about.navigation.AboutNavigationEvent
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images

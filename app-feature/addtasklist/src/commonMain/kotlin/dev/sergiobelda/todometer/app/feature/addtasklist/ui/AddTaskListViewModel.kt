@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.fonament.ui.FonamentEvent
-import dev.sergiobelda.fonament.ui.FonamentViewModel
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.InsertTaskListUseCase

@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.ui
 
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.ui.extensions.TextFieldValueChangeEvent
 

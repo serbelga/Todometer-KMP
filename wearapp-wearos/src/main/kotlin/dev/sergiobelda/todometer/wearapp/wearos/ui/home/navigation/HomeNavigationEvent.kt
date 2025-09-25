@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home.navigation
 
-import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
+import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEvent
 
 sealed interface HomeNavigationEvent : FonamentNavigationEvent {
 

@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.navigation
 
-import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
+import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventHandler
 
 fun taskListTasksNavigationEventHandler(
     navigateBack: () -> Unit,

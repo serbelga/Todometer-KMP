@@ -16,8 +16,8 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
-import dev.sergiobelda.fonament.ui.FonamentContent
-import dev.sergiobelda.fonament.ui.FonamentUI
+import dev.sergiobelda.fonament.presentation.ui.FonamentContent
+import dev.sergiobelda.fonament.presentation.ui.FonamentUI
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
 
 @NavDestination(

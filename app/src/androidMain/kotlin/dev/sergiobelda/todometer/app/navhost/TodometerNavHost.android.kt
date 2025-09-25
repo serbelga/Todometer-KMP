@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavGraphBuilder
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.sergiobelda.fonament.di.koin.koinFonamentViewModel
-import dev.sergiobelda.fonament.navigation.NavigationNode
+import dev.sergiobelda.fonament.presentation.navigation.NavigationNode
 import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.navigation.aboutNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination

@@ -27,8 +27,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import dev.sergiobelda.fonament.ui.FonamentContentState
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

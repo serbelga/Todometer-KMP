@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.compose.runtime.Immutable
-import dev.sergiobelda.fonament.ui.FonamentUIState
+import dev.sergiobelda.fonament.presentation.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 @Immutable

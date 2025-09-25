@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.addtask.ui
 
-import dev.sergiobelda.fonament.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.NewTask
 import dev.sergiobelda.todometer.common.domain.model.Tag
 

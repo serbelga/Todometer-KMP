@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks.navigation
 
-import dev.sergiobelda.fonament.navigation.FonamentNavigationEvent
+import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEvent
 
 sealed interface TaskListTasksNavigationEvent : FonamentNavigationEvent {
 

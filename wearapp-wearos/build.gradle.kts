@@ -86,8 +86,8 @@ dependencies {
     implementation(libs.sergiobelda.navigationComposeExtendedWear)
     ksp(libs.sergiobelda.navigationComposeExtendedCompiler)
 
-    implementation(libs.sergiobelda.fonament)
     implementation(libs.sergiobelda.fonament.diKoin)
+    implementation(libs.sergiobelda.fonament.presentation)
 
     implementation("androidx.wear:wear-tooling-preview:1.0.0")
 }

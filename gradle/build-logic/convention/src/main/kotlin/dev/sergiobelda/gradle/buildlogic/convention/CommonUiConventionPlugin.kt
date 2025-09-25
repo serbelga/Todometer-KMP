@@ -60,8 +60,8 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
                         dependencies {
                             implementation(libs.findLibrary("kotlin-collections-immutable").get())
 
-                            implementation(libs.findLibrary("sergiobelda-fonament").get())
                             implementation(libs.findLibrary("sergiobelda-fonament-diKoin").get())
+                            implementation(libs.findLibrary("sergiobelda-fonament-presentation").get())
                         }
                     }
                 }

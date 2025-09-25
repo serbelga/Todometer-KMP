@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.edittask.navigation
 
-import dev.sergiobelda.fonament.navigation.FonamentNavigationEventHandler
+import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventHandler
 
 fun editTaskNavigationEventHandler(
     navigateBack: () -> Unit,

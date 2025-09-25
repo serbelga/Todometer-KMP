@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.app.feature.settings.ui
 
 import androidx.lifecycle.viewModelScope
-import dev.sergiobelda.fonament.ui.FonamentEvent
-import dev.sergiobelda.fonament.ui.FonamentViewModel
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.SetAppThemeUseCase

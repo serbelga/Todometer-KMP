@@ -72,7 +72,7 @@ import androidx.wear.compose.material.curvedText
 import androidx.wear.compose.material.rememberRevealState
 import androidx.wear.input.RemoteInputIntentHelper
 import androidx.wear.input.wearableExtender
-import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.presentation.ui.FonamentContent
 import dev.sergiobelda.todometer.common.designsystem.resources.animation.TodometerAnimatedResources
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add

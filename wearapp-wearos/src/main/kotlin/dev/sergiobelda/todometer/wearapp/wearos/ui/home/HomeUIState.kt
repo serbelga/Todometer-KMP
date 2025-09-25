@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.runtime.Immutable
-import dev.sergiobelda.fonament.ui.FonamentUIState
+import dev.sergiobelda.fonament.presentation.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 import kotlinx.collections.immutable.ImmutableList

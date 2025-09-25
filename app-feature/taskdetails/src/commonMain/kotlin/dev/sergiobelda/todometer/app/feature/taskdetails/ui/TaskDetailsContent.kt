@@ -49,7 +49,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.sergiobelda.fonament.ui.FonamentContent
+import dev.sergiobelda.fonament.presentation.ui.FonamentContent
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerCheckbox
 import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerDivider
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
