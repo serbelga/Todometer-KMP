@@ -25,6 +25,7 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.annotation.RememberInComposition
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -40,7 +41,7 @@ import dev.sergiobelda.todometer.common.domain.model.NewTask
 import dev.sergiobelda.todometer.common.domain.model.Tag
 
 @OptIn(ExperimentalMaterial3Api::class)
-data class AddTaskContentState internal constructor(
+data class AddTaskContentState @RememberInComposition constructor(
     val snackbarHostState: SnackbarHostState,
     val topAppBarState: TopAppBarState,
     val datePickerState: DatePickerState,

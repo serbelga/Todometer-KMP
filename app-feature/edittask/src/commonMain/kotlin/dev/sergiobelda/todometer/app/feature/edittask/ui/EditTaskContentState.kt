@@ -22,6 +22,7 @@ import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.annotation.RememberInComposition
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,7 +37,7 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
 @OptIn(ExperimentalMaterial3Api::class)
-data class EditTaskContentState internal constructor(
+data class EditTaskContentState @RememberInComposition constructor(
     private val initialTitle: String,
     private val initialDescription: String?,
     private val initialTag: Tag,

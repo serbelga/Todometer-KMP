@@ -20,13 +20,14 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.annotation.RememberInComposition
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 
 @OptIn(ExperimentalMaterial3Api::class)
-data class TaskDetailsContentState internal constructor(
+data class TaskDetailsContentState @RememberInComposition constructor(
     internal val lazyListState: LazyListState,
 ) : FonamentContentState {
 

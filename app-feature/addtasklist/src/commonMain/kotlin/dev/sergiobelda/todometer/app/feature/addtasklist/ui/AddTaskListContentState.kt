@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.app.feature.addtasklist.ui
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.annotation.RememberInComposition
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,7 +29,7 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
-data class AddTaskListContentState internal constructor(
+data class AddTaskListContentState @RememberInComposition constructor(
     val snackbarHostState: SnackbarHostState,
 ) : FonamentContentState {
     var taskListName: String by mutableStateOf("")

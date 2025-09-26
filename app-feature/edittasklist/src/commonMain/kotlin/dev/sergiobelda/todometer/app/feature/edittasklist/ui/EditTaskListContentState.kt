@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.annotation.RememberInComposition
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
@@ -25,7 +26,7 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
-data class EditTaskListContentState internal constructor(
+data class EditTaskListContentState @RememberInComposition constructor(
     private val taskListName: String,
 ) : FonamentContentState {
 
