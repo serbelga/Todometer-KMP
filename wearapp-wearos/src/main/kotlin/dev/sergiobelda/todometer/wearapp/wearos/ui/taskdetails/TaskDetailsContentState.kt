@@ -20,6 +20,7 @@ import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.annotation.RememberInComposition
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,7 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Stable
-data class TaskDetailsContentState internal constructor(
+data class TaskDetailsContentState @RememberInComposition constructor(
     val scalingLazyListState: ScalingLazyListState,
     val coroutineScope: CoroutineScope,
 ) : FonamentContentState {
