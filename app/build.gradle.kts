@@ -17,17 +17,7 @@ if (file("google-services.json").exists()) {
 
 kotlin {
     androidTarget()
-    jvm("desktop") {
-        compilations.all {
-            kotlin {
-                jvmToolchain(17)
-                compilerOptions {
-                    optIn.add("kotlin.RequiresOptIn")
-                }
-            }
-
-        }
-    }
+    jvm("desktop")
     listOf(
         iosX64(),
         iosArm64(),
@@ -78,7 +68,7 @@ kotlin {
 
             // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
             // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved
-            compileOnly(libs.kotlin.serialization.json)
+            compileOnly(libs.jetbrains.kotlin.serialization.json)
         }
         val desktopMain by getting
         desktopMain.dependencies {
@@ -160,6 +150,3 @@ compose.desktop {
         }
     }
 }
-
-// Workaround to avoid task "testClasses" not found on "Rebuild project"
-task("testClasses")

@@ -52,7 +52,4 @@ internal fun Project.configureCommonAndroid(
             targetCompatibility = JavaVersion.VERSION_17
         }
     }
-
-    // Workaround to avoid task "testClasses" not found on "Rebuild project"
-    task("testClasses")
 }

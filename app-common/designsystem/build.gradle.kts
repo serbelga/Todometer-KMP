@@ -19,21 +19,21 @@ kotlin {
         commonMain.dependencies {
             api(projects.common.designsystemResources)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
+            implementation(libs.jetbrains.compose.foundation)
+            implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.runtime)
+            implementation(libs.jetbrains.compose.ui)
         }
 
         androidMain.dependencies {
-            implementation(compose.uiTooling)
+            implementation(libs.jetbrains.compose.uiTooling)
         }
         androidUnitTest.dependencies {
             implementation(libs.junit)
         }
         val desktopMain by getting
         desktopMain.dependencies {
-            implementation(compose.uiTooling)
+            implementation(libs.jetbrains.compose.uiTooling)
         }
 
         all {

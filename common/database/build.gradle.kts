@@ -22,7 +22,7 @@ kotlin {
             implementation(projects.common.domain)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.coroutinesTest)
+            implementation(libs.jetbrains.kotlin.coroutines.test)
             implementation(kotlin("test"))
         }
         androidMain.dependencies {

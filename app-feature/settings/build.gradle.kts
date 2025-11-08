@@ -26,12 +26,12 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(compose.animationGraphics)
+            implementation(libs.jetbrains.compose.animationGraphics)
         }
         val desktopMain by getting
         desktopMain.dependencies {
-            api(libs.kotlin.coroutinesSwing)
-            api(compose.uiTooling)
+            api(libs.jetbrains.compose.uiTooling)
+            api(libs.jetbrains.kotlin.coroutines.swing)
         }
 
         all {
@@ -44,9 +44,9 @@ android {
     namespace = "dev.sergiobelda.todometer.app.feature.settings"
 
     dependencies {
-        implementation(compose.preview)
-        debugImplementation(compose.uiTooling)
         debugImplementation(projects.appCommon.uiTooling)
         debugImplementation(projects.common.uiTooling)
+        debugImplementation(libs.jetbrains.compose.uiTooling)
+        implementation(libs.jetbrains.compose.uiToolingPreview)
     }
 }

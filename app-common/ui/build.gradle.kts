@@ -22,17 +22,18 @@ kotlin {
             implementation(projects.common.resources)
             implementation(projects.common.ui)
 
-            implementation(libs.kotlin.datetime)
+            implementation(libs.jetbrains.kotlin.datetime)
+
             implementation(libs.sergiobelda.pigment)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.coroutinesTest)
+            implementation(libs.jetbrains.kotlin.coroutines.test)
             implementation(libs.mockk.common)
             implementation(kotlin("test"))
         }
         val desktopMain by getting
         desktopMain.dependencies {
-            api(libs.kotlin.coroutinesSwing)
+            api(libs.jetbrains.kotlin.coroutines.swing)
         }
 
         all {

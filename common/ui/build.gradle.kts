@@ -19,27 +19,27 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.common.domain)
 
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material3)
-            api(compose.ui)
-            api(libs.jetbrains.navigation.compose)
+            api(libs.jetbrains.androidx.navigation.compose)
+            api(libs.jetbrains.compose.foundation)
+            api(libs.jetbrains.compose.material3)
+            api(libs.jetbrains.compose.runtime)
+            api(libs.jetbrains.compose.ui)
+            implementation(libs.jetbrains.kotlin.collections.immutable)
+            implementation(libs.jetbrains.kotlin.datetime)
+
             api(libs.sergiobelda.navigationComposeExtended)
             api(libs.sergiobelda.navigationComposeExtendedAnnotation)
 
             api(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.core)
             api(libs.koin.compose.viewmodel)
-
-            implementation(libs.kotlin.collections.immutable)
-            implementation(libs.kotlin.datetime)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.coroutinesTest)
+            implementation(libs.jetbrains.kotlin.coroutines.test)
             implementation(kotlin("test"))
         }
         androidMain.dependencies {
-            implementation(compose.uiTooling)
+            implementation(libs.jetbrains.compose.uiTooling)
         }
 
         all {

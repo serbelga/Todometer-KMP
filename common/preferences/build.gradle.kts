@@ -16,7 +16,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.androidx.datastore.preferences.core)
-            implementation(libs.kotlin.coroutinesCore)
+            implementation(libs.jetbrains.kotlin.coroutines.core)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

@@ -13,6 +13,6 @@ android {
 }
 
 dependencies {
-    implementation(compose.preview)
-    implementation(libs.kotlin.datetime)
+    implementation(libs.jetbrains.compose.uiToolingPreview)
+    implementation(libs.jetbrains.kotlin.datetime)
 }

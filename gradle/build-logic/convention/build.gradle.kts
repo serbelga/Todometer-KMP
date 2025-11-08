@@ -14,7 +14,7 @@ dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
     implementation(libs.detekt.gradlePlugin)
-    implementation(libs.kotlin.gradlePlugin)
+    implementation(libs.jetbrains.kotlin.gradlePlugin)
     implementation(libs.spotless.gradlePlugin)
 }
 
@@ -44,7 +44,7 @@ gradlePlugin {
             implementationClass = conventionPluginsLintPath + "DetektConventionPlugin"
         }
         register("spotless") {
-            id =  libs.plugins.sergiobelda.gradle.spotless.get().pluginId
+            id = libs.plugins.sergiobelda.gradle.spotless.get().pluginId
             implementationClass = conventionPluginsLintPath + "SpotlessConventionPlugin"
         }
         register("lint") {
