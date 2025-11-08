@@ -22,8 +22,6 @@ kotlin {
             implementation(projects.appCommon.ui)
             implementation(projects.common.resources)
             implementation(projects.common.ui)
-
-            implementation("org.jetbrains.androidx.navigation3:navigation3-ui:1.0.0-alpha05+dev3227")
         }
         androidMain.dependencies {
             implementation(libs.jetbrains.compose.animationGraphics)
