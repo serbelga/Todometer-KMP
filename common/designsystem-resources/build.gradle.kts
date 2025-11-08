@@ -18,12 +18,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.material3)
-            implementation(compose.ui)
+            implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.ui)
             implementation(libs.sergiobelda.composeVectorize.core)
         }
         androidMain.dependencies {
-            implementation(compose.animationGraphics)
+            implementation(libs.jetbrains.compose.animationGraphics)
         }
 
         all {

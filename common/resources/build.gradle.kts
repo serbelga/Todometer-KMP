@@ -20,7 +20,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.ui)
+            implementation(libs.jetbrains.compose.ui)
             api(libs.lyricist.lyricist)
         }
 

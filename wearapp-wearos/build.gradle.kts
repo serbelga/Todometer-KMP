@@ -63,8 +63,8 @@ dependencies {
     implementation(projects.common.ui)
     debugImplementation(projects.common.uiTooling)
 
-    implementation(compose.foundation)
-    debugImplementation(compose.uiTooling)
+    implementation(libs.jetbrains.compose.foundation)
+    debugImplementation(libs.jetbrains.compose.uiTooling)
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.coreKtx)
@@ -75,7 +75,7 @@ dependencies {
     implementation(libs.androidx.wear.input)
     implementation(libs.androidx.wear.wear)
 
-    implementation(libs.kotlin.collections.immutable)
+    implementation(libs.jetbrains.kotlin.collections.immutable)
 
     implementation(libs.google.playServicesWearable)
 

@@ -19,10 +19,10 @@ kotlin {
             implementation(projects.common.database)
             implementation(projects.common.preferences)
 
-            implementation(libs.kotlin.coroutinesCore)
+            implementation(libs.jetbrains.kotlin.coroutines.core)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.coroutinesTest)
+            implementation(libs.jetbrains.kotlin.coroutines.test)
             implementation(libs.mockk.common)
             implementation(kotlin("test"))
         }

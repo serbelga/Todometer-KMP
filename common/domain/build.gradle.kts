@@ -15,7 +15,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlin.coroutinesCore)
+            implementation(libs.jetbrains.kotlin.coroutines.core)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
