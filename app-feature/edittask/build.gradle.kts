@@ -18,21 +18,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.appCommon.designsystem)
             implementation(projects.appCommon.ui)
-            implementation(projects.common.domain)
-            implementation(projects.common.resources)
-            implementation(projects.common.ui)
-
-            implementation(libs.jetbrains.kotlin.datetime)
-        }
-        androidMain.dependencies {
-            implementation(libs.jetbrains.compose.animationGraphics)
-        }
-        val desktopMain by getting
-        desktopMain.dependencies {
-            api(libs.jetbrains.compose.uiTooling)
-            api(libs.jetbrains.kotlin.coroutines.swing)
+            implementation(projects.appCommon.uiTooling)
         }
 
         all {
@@ -43,11 +30,4 @@ kotlin {
 
 android {
     namespace = "dev.sergiobelda.todometer.app.feature.edittask"
-
-    dependencies {
-        debugImplementation(projects.appCommon.uiTooling)
-        debugImplementation(projects.common.uiTooling)
-        debugImplementation(libs.jetbrains.compose.uiTooling)
-        implementation(libs.jetbrains.compose.uiToolingPreview)
-    }
 }

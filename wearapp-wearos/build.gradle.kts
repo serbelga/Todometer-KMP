@@ -57,14 +57,7 @@ android {
 dependencies {
     implementation(projects.common.android)
     implementation(projects.common.core)
-    implementation(projects.common.designsystemResources)
-    implementation(projects.common.domain)
-    implementation(projects.common.resources)
     implementation(projects.common.ui)
-    debugImplementation(projects.common.uiTooling)
-
-    implementation(libs.jetbrains.compose.foundation)
-    debugImplementation(libs.jetbrains.compose.uiTooling)
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.coreKtx)

@@ -24,16 +24,8 @@ kotlin {
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.ui)
         }
-
-        androidMain.dependencies {
-            implementation(libs.jetbrains.compose.uiTooling)
-        }
         androidUnitTest.dependencies {
             implementation(libs.junit)
-        }
-        val desktopMain by getting
-        desktopMain.dependencies {
-            implementation(libs.jetbrains.compose.uiTooling)
         }
 
         all {

@@ -18,21 +18,9 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.appCommon.designsystem)
             implementation(projects.appCommon.ui)
-            implementation(projects.common.domain)
-            implementation(projects.common.resources)
-            implementation(projects.common.ui)
+            implementation(projects.appCommon.uiTooling)
         }
-        androidMain.dependencies {
-            implementation(libs.jetbrains.compose.animationGraphics)
-        }
-        val desktopMain by getting
-        desktopMain.dependencies {
-            api(libs.jetbrains.compose.uiTooling)
-            api(libs.jetbrains.kotlin.coroutines.swing)
-        }
-
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
         }
@@ -41,11 +29,4 @@ kotlin {
 
 android {
     namespace = "dev.sergiobelda.todometer.app.feature.home"
-
-    dependencies {
-        debugImplementation(projects.appCommon.uiTooling)
-        debugImplementation(projects.common.uiTooling)
-        debugImplementation(libs.jetbrains.compose.uiTooling)
-        implementation(libs.jetbrains.compose.uiToolingPreview)
-    }
 }

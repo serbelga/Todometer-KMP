@@ -31,7 +31,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.appCommon.designsystem)
             implementation(projects.appCommon.ui)
             implementation(projects.appFeature.about)
             implementation(projects.appFeature.addtask)
@@ -43,8 +42,6 @@ kotlin {
             implementation(projects.appFeature.taskdetails)
 
             implementation(projects.common.core)
-            implementation(projects.common.domain)
-            implementation(projects.common.resources)
             implementation(projects.common.ui)
 
             implementation(libs.sergiobelda.fonament.diKoin)
@@ -53,11 +50,9 @@ kotlin {
             implementation(projects.common.android)
 
             implementation(libs.androidx.activityCompose)
-
             implementation(libs.androidx.glance.appWidget)
             implementation(libs.androidx.glance.glance)
             implementation(libs.androidx.glance.material3)
-
             implementation(libs.androidx.splashscreen)
 
             implementation(libs.google.playServicesOssLicenses)

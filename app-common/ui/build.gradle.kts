@@ -17,12 +17,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.appCommon.designsystem)
-            implementation(projects.common.domain)
-            implementation(projects.common.resources)
-            implementation(projects.common.ui)
-
-            implementation(libs.jetbrains.kotlin.datetime)
+            api(projects.common.ui)
+            api(projects.appCommon.designsystem)
 
             implementation(libs.sergiobelda.pigment)
         }

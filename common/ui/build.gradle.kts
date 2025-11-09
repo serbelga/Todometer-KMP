@@ -17,15 +17,17 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.common.domain)
+            api(projects.common.domain)
+            api(projects.common.resources)
+            api(projects.common.uiTooling)
 
             api(libs.jetbrains.androidx.navigation.compose)
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.material3)
             api(libs.jetbrains.compose.runtime)
             api(libs.jetbrains.compose.ui)
-            implementation(libs.jetbrains.kotlin.collections.immutable)
-            implementation(libs.jetbrains.kotlin.datetime)
+            api(libs.jetbrains.kotlin.collections.immutable)
+            api(libs.jetbrains.kotlin.datetime)
 
             api(libs.sergiobelda.navigationComposeExtended)
             api(libs.sergiobelda.navigationComposeExtendedAnnotation)
@@ -39,7 +41,7 @@ kotlin {
             implementation(kotlin("test"))
         }
         androidMain.dependencies {
-            implementation(libs.jetbrains.compose.uiTooling)
+            api(libs.jetbrains.compose.animationGraphics)
         }
 
         all {

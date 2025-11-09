@@ -2,17 +2,27 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
+    alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(libs.plugins.sergiobelda.gradle.lint)
-    kotlin("android")
+}
+
+kotlin {
+    androidTarget()
+    jvm("desktop")
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        commonMain.dependencies {
+            api(libs.jetbrains.compose.uiToolingPreview)
+            implementation(libs.jetbrains.kotlin.datetime)
+        }
+    }
 }
 
 android {
     namespace = "dev.sergiobelda.todometer.common.ui.tooling"
-}
-
-dependencies {
-    implementation(libs.jetbrains.compose.uiToolingPreview)
-    implementation(libs.jetbrains.kotlin.datetime)
 }
