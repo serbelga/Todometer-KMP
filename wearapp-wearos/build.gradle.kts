@@ -57,6 +57,7 @@ android {
 dependencies {
     implementation(projects.common.android)
     implementation(projects.common.core)
+    implementation(projects.common.designsystemResources)
     implementation(projects.common.ui)
 
     implementation(libs.androidx.activityCompose)
