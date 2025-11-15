@@ -19,15 +19,18 @@ package dev.sergiobelda.todometer.app.di
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.core.di.dataModules
 import dev.sergiobelda.todometer.common.core.di.domainModules
-import org.koin.compose.KoinApplication
+import org.koin.compose.KoinMultiplatformApplication
+import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.KoinConfiguration
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun TodometerAppDI(
+fun TodometerKoinApplication(
     appDeclaration: KoinAppDeclaration = {},
     content: @Composable () -> Unit,
-) = KoinApplication(
-    application = {
+) = KoinMultiplatformApplication(
+    config = KoinConfiguration {
         modules(
             dataModules +
                 domainModules +
