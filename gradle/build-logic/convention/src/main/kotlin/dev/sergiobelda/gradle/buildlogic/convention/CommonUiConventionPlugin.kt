@@ -26,7 +26,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
-class CommonUiAndroidConventionPlugin : Plugin<Project> {
+class CommonUiConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
@@ -56,17 +56,10 @@ class CommonUiAndroidConventionPlugin : Plugin<Project> {
                 )
 
                 sourceSets.apply {
-                    commonMain {
-                        dependencies {
-                            implementation(
-                                libs.findLibrary("jetbrains-kotlin-collections-immutable").get()
-                            )
-
-                            implementation(libs.findLibrary("sergiobelda-fonament-diKoin").get())
-                            implementation(
-                                libs.findLibrary("sergiobelda-fonament-presentation").get()
-                            )
-                        }
+                    commonMain.dependencies {
+                        implementation(libs.findLibrary("jetbrains-kotlin-collections-immutable").get())
+                        implementation(libs.findLibrary("sergiobelda-fonament-diKoin").get())
+                        implementation(libs.findLibrary("sergiobelda-fonament-presentation").get())
                     }
                 }
             }

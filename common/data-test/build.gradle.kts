@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
@@ -17,15 +15,16 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.common.uiTooling)
+            implementation(projects.common.domain)
+            implementation(libs.jetbrains.kotlin.coroutines.core)
+        }
 
-            // TODO: Remove these dependencies
-            implementation(projects.appCommon.ui)
-            implementation(projects.common.resources)
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
         }
     }
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.app.common.ui.tooling"
+    namespace = "dev.sergiobelda.todometer.common.data.test"
 }

@@ -110,6 +110,8 @@ android {
     }
 
     dependencies {
+        implementation(projects.common.dataTest)
+
         baselineProfile(projects.macrobenchmark)
 
         implementation(libs.androidx.profileinstaller)

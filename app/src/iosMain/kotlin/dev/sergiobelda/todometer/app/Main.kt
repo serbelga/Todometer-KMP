@@ -17,11 +17,11 @@
 package dev.sergiobelda.todometer.app
 
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.sergiobelda.todometer.app.di.TodometerAppDI
+import dev.sergiobelda.todometer.app.di.TodometerKoinApplication
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController = ComposeUIViewController {
-    TodometerAppDI {
+    TodometerKoinApplication {
         TodometerApp()
     }
 }

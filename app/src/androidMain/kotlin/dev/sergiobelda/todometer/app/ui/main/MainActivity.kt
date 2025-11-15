@@ -27,13 +27,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.sergiobelda.todometer.app.TodometerApp
-import dev.sergiobelda.todometer.app.di.TodometerAppDI
+import dev.sergiobelda.todometer.app.di.TodometerKoinApplication
 import dev.sergiobelda.todometer.app.di.mainViewModelModule
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.module.Module
 
-class MainActivity : ComponentActivity() {
+open class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -43,10 +43,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            TodometerAppDI(
+            TodometerKoinApplication(
                 appDeclaration = {
-                    modules(mainViewModelModule)
-                    androidContext(this@MainActivity)
+                    modules(getModules())
                 },
             ) {
                 val viewModel: MainViewModel = koinViewModel()
@@ -69,4 +68,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    protected open fun getModules(): List<Module> =
+        listOf(mainViewModelModule)
 }

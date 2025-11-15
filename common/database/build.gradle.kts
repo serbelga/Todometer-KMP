@@ -48,13 +48,6 @@ kotlin {
 
 android {
     namespace = "dev.sergiobelda.todometer.common.database"
-
-    buildTypes {
-        create("benchmark") {
-            signingConfig = getByName("debug").signingConfig
-            matchingFallbacks += listOf("release")
-        }
-    }
 }
 
 sqldelight {
