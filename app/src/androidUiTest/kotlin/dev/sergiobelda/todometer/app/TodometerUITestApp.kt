@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.app
 import dev.sergiobelda.todometer.app.di.TodometerUITestAppDI
 import dev.sergiobelda.todometer.common.di.TodometerDI
 
-class TodometerUITestApplication : TodometerApplication() {
+class TodometerUITestApp : TodometerMainApp() {
 
     override val todometerDI: TodometerDI = TodometerUITestAppDI()
 }

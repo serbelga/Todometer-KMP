@@ -16,11 +16,11 @@
 
 package dev.sergiobelda.todometer.app
 
-import dev.sergiobelda.todometer.app.di.TodometerAndroidAppDI
+import dev.sergiobelda.todometer.app.di.TodometerMainAppDI
 import dev.sergiobelda.todometer.common.core.app.TodometerBaseApplication
 import dev.sergiobelda.todometer.common.di.TodometerDI
 
-open class TodometerApplication : TodometerBaseApplication() {
+open class TodometerMainApp : TodometerBaseApplication() {
 
-    override val todometerDI: TodometerDI = TodometerAndroidAppDI()
+    override val todometerDI: TodometerDI = TodometerMainAppDI()
 }

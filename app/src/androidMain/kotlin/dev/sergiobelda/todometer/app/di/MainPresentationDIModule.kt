@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,19 @@
 
 package dev.sergiobelda.todometer.app.di
 
-import androidx.compose.runtime.Composable
-import org.koin.compose.KoinMultiplatformApplication
-import org.koin.core.annotation.KoinExperimentalAPI
-import org.koin.dsl.KoinAppDeclaration
-import org.koin.dsl.KoinConfiguration
+import dev.sergiobelda.todometer.app.ui.main.MainViewModel
+import dev.sergiobelda.todometer.common.di.TodometerDIModule
+import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
 
-@OptIn(KoinExperimentalAPI::class)
-@Composable
-fun TodometerKoinApplication(
-    appDeclaration: KoinAppDeclaration = {},
-    content: @Composable () -> Unit,
-) = KoinMultiplatformApplication(
-    config = KoinConfiguration {
-        TodometerAppDI().provideModules(this)
-        appDeclaration()
-    },
-    content = content,
-)
+data object MainPresentationDIModule : TodometerDIModule {
+
+    override val module: Module = module {
+        viewModel()
+    }
+
+    private fun Module.viewModel() {
+        viewModelOf(::MainViewModel)
+    }
+}

@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="dev.sergiobelda.todometer.app.TodometerApplication"
+        android:name="dev.sergiobelda.todometer.app.TodometerMainApp"
         android:allowBackup="false"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"

@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.app.di
 
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
-class TodometerUITestAppDI : TodometerAndroidAppDI() {
+class TodometerUITestAppDI : TodometerMainAppDI() {
 
     override val modules: List<TodometerDIModule> =
         super.modules + TodometerUITestDIModule

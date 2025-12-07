@@ -20,7 +20,7 @@ import dev.sergiobelda.todometer.common.core.app.TodometerBaseApplication
 import dev.sergiobelda.todometer.common.di.TodometerDI
 import dev.sergiobelda.todometer.wearapp.wearos.di.TodometerWearAppDI
 
-class TodometerWearApplication : TodometerBaseApplication() {
+class TodometerWearApp : TodometerBaseApplication() {
 
     override val todometerDI: TodometerDI = TodometerWearAppDI()
 }

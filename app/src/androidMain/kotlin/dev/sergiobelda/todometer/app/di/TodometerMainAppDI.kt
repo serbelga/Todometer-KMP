@@ -16,19 +16,10 @@
 
 package dev.sergiobelda.todometer.app.di
 
-import dev.sergiobelda.todometer.app.ui.main.MainViewModel
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
-import org.koin.core.module.Module
-import org.koin.core.module.dsl.viewModelOf
-import org.koin.dsl.module
 
-data object TodometerPresentationDIModule : TodometerDIModule {
+open class TodometerMainAppDI : TodometerAppDI() {
 
-    override val module: Module = module {
-        viewModel()
-    }
-
-    private fun Module.viewModel() {
-        viewModelOf(::MainViewModel)
-    }
+    override val modules: List<TodometerDIModule> =
+        super.modules + MainPresentationDIModule
 }

@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.core.di.TodometerBaseDI
 import dev.sergiobelda.todometer.common.database.DriverFactory
 import dev.sergiobelda.todometer.common.di.TodometerDI
 import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
-import org.koin.core.context.startKoin
 
 open class TodometerBaseApplication : Application() {
 
@@ -32,8 +31,6 @@ open class TodometerBaseApplication : Application() {
         PreferencesFactory.appContext = this
         DriverFactory.appContext = this
 
-        startKoin {
-            todometerDI.provideModules(this)
-        }
+        todometerDI.startDI()
     }
 }

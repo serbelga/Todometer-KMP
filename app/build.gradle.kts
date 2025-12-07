@@ -107,14 +107,21 @@ android {
     }
     flavorDimensions += "version"
     productFlavors {
+        create("prod") {
+            dimension = "version"
+            applicationIdSuffix = ".prod"
+            versionNameSuffix = "-prod"
+        }
         create("uiTest") {
             dimension = "version"
             applicationIdSuffix = ".uitest"
             versionNameSuffix = "-uitest"
         }
     }
-    sourceSets.getByName("uiTest") {
-        manifest.srcFile("src/androidUiTest/AndroidManifest.xml")
+    sourceSets {
+        getByName("uiTest") {
+            manifest.srcFile("src/androidUiTest/AndroidManifest.xml")
+        }
     }
     kotlin {
         jvmToolchain(17)
