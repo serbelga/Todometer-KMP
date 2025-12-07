@@ -34,9 +34,9 @@ class FakeTaskRepository() : ITaskRepository {
         flow {
             emit(
                 Result.Success(
-                    listOf(
+                    List(10) {
                         TaskItem(
-                            id = "0",
+                            id = it.toString(),
                             title = "The task title",
                             tag = Tag.UNSPECIFIED,
                             dueDate = 0,
@@ -47,8 +47,8 @@ class FakeTaskRepository() : ITaskRepository {
                             checklistItemsDone = 0,
                             totalChecklistItems = 0,
                         )
-                    )
-                )
+                    },
+                ),
             )
         }
 
@@ -60,19 +60,11 @@ class FakeTaskRepository() : ITaskRepository {
         taskListId: String,
     ): Result<String> = Result.Success("")
 
-    override suspend fun updateTask(task: Task) {
+    override suspend fun updateTask(task: Task) = Unit
 
-    }
+    override suspend fun updateTaskState(id: String, state: TaskState) = Unit
 
-    override suspend fun updateTaskState(id: String, state: TaskState) {
+    override suspend fun deleteTasks(vararg ids: String) = Unit
 
-    }
-
-    override suspend fun deleteTasks(vararg ids: String) {
-
-    }
-
-    override suspend fun toggleTaskPinnedValue(id: String) {
-
-    }
+    override suspend fun toggleTaskPinnedValue(id: String) = Unit
 }

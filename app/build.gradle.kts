@@ -105,14 +105,25 @@ android {
             abortOnError = false
         }
     }
+    flavorDimensions += "version"
+    productFlavors {
+        create("uiTest") {
+            dimension = "version"
+            applicationIdSuffix = ".uitest"
+            versionNameSuffix = "-uitest"
+        }
+    }
+    sourceSets.getByName("uiTest") {
+        manifest.srcFile("src/androidUiTest/AndroidManifest.xml")
+    }
     kotlin {
         jvmToolchain(17)
     }
 
     dependencies {
-        implementation(projects.common.dataTest)
-
         baselineProfile(projects.macrobenchmark)
+
+        "uiTestImplementation"(projects.common.dataTest)
 
         implementation(libs.androidx.profileinstaller)
     }

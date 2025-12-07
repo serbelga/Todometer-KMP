@@ -17,17 +17,19 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.common.di)
-
-            implementation(projects.common.data)
-            implementation(projects.common.database)
-            implementation(projects.common.domain)
-            implementation(projects.common.preferences)
-            implementation(projects.common.ui)
+            api(project.dependencies.platform(libs.koin.bom))
+            api(libs.koin.compose)
+            api(libs.koin.compose.viewmodel)
+            api(libs.koin.core)
+            api(libs.koin.test)
+        }
+        androidMain.dependencies {
+            api(libs.koin.android)
+            api(libs.koin.androidXCompose)
         }
     }
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.common.core"
+    namespace = "dev.sergiobelda.todometer.common.di"
 }

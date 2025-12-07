@@ -27,11 +27,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.sergiobelda.todometer.app.TodometerApp
-import dev.sergiobelda.todometer.app.di.TodometerKoinApplication
-import dev.sergiobelda.todometer.app.di.mainViewModelModule
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.module.Module
 
 open class MainActivity : ComponentActivity() {
 
@@ -43,32 +40,23 @@ open class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            TodometerKoinApplication(
-                appDeclaration = {
-                    modules(getModules())
-                },
-            ) {
-                val viewModel: MainViewModel = koinViewModel()
-                val appThemeState = viewModel.appTheme.collectAsStateWithLifecycle()
-                val darkTheme: Boolean = when (appThemeState.value) {
-                    AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-                    AppTheme.DARK_THEME -> true
-                    AppTheme.LIGHT_THEME -> false
-                }
-
-                DisposableEffect(darkTheme) {
-                    enableEdgeToEdge(
-                        statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
-                            darkTheme
-                        },
-                    )
-                    onDispose {}
-                }
-                TodometerApp()
+            val viewModel: MainViewModel = koinViewModel()
+            val appThemeState = viewModel.appTheme.collectAsStateWithLifecycle()
+            val darkTheme: Boolean = when (appThemeState.value) {
+                AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                AppTheme.DARK_THEME -> true
+                AppTheme.LIGHT_THEME -> false
             }
+
+            DisposableEffect(darkTheme) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
+                        darkTheme
+                    },
+                )
+                onDispose {}
+            }
+            TodometerApp()
         }
     }
-
-    protected open fun getModules(): List<Module> =
-        listOf(mainViewModelModule)
 }

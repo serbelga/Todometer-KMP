@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.wearapp.wearos.ui
+package dev.sergiobelda.todometer.wearapp.wearos.di
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import dev.sergiobelda.todometer.common.core.di.TodometerBaseDI
+import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
-class MainActivity : ComponentActivity() {
+class TodometerWearAppDI : TodometerBaseDI() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        installSplashScreen()
-
-        setContent { TodometerApp() }
-    }
+    override val modules: List<TodometerDIModule> =
+        super.modules + TodometerPresentationDIModule
 }
