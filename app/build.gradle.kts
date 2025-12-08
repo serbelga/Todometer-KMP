@@ -109,8 +109,6 @@ android {
     productFlavors {
         create("prod") {
             dimension = "version"
-            applicationIdSuffix = ".prod"
-            versionNameSuffix = "-prod"
         }
         create("uiTest") {
             dimension = "version"
