@@ -107,11 +107,11 @@ android {
     }
     flavorDimensions += "version"
     productFlavors {
-        /*create("prod") {
+        create("prod") {
             dimension = "version"
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
-        }*/
+        }
         create("uiTest") {
             dimension = "version"
             applicationIdSuffix = ".uitest"
