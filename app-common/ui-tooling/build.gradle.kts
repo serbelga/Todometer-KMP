@@ -19,7 +19,6 @@ kotlin {
         commonMain.dependencies {
             api(projects.common.uiTooling)
 
-            // TODO: Remove these dependencies
             implementation(projects.appCommon.ui)
             implementation(projects.common.resources)
         }

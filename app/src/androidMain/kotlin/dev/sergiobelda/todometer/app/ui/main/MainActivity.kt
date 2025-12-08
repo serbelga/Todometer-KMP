@@ -30,7 +30,7 @@ import dev.sergiobelda.todometer.app.TodometerApp
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
-open class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

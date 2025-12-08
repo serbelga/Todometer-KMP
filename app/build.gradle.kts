@@ -128,9 +128,9 @@ android {
     dependencies {
         baselineProfile(projects.macrobenchmark)
 
-        "uiTestImplementation"(projects.common.dataTest)
-
         implementation(libs.androidx.profileinstaller)
+
+        "uiTestImplementation"(projects.common.dataTest)
     }
 }
 
