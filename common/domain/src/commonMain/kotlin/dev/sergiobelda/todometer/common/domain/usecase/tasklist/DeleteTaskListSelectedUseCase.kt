@@ -24,7 +24,6 @@ class DeleteTaskListSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
     private val taskListRepository: ITaskListRepository,
 ) {
-
     /**
      * Deletes a task list. The deleted task list will be the current task list selected.
      * Once is deleted, it will select the first task list in task list list if is not empty.

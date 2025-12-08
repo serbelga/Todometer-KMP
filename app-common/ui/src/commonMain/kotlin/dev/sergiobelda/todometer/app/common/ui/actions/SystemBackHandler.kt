@@ -19,4 +19,7 @@ package dev.sergiobelda.todometer.app.common.ui.actions
 import androidx.compose.runtime.Composable
 
 @Composable
-expect fun SystemBackHandler(enabled: Boolean = true, onBack: () -> Unit)
+expect fun SystemBackHandler(
+    enabled: Boolean = true,
+    onBack: () -> Unit,
+)

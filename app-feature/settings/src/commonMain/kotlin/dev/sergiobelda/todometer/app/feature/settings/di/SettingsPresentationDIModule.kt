@@ -23,8 +23,8 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 data object SettingsPresentationDIModule : TodometerDIModule {
-
-    override val module: Module = module {
-        fonamentViewModelOf(::SettingsViewModel)
-    }
+    override val module: Module =
+        module {
+            fonamentViewModelOf(::SettingsViewModel)
+        }
 }

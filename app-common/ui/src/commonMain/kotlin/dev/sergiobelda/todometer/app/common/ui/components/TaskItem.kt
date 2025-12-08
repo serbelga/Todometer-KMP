@@ -95,20 +95,22 @@ fun TaskItem(
             selected = selected,
         )
     } else {
-        val state = rememberSwipeToDismissBoxState(
-            confirmValueChange = {
-                if (it == SwipeToDismissBoxValue.StartToEnd) {
-                    onSwipeToDismiss()
-                }
-                it != SwipeToDismissBoxValue.StartToEnd
-            },
-        )
+        val state =
+            rememberSwipeToDismissBoxState(
+                confirmValueChange = {
+                    if (it == SwipeToDismissBoxValue.StartToEnd) {
+                        onSwipeToDismiss()
+                    }
+                    it != SwipeToDismissBoxValue.StartToEnd
+                },
+            )
         val taskItemShadowElevation by animateDpAsState(
             if (state.targetValue != SwipeToDismissBoxValue.Settled) TaskItemDismissedShadowElevation else 0.dp,
-            animationSpec = tween(
-                durationMillis = TaskItemShadowElevationAnimationDuration,
-                easing = FastOutSlowInEasing,
-            ),
+            animationSpec =
+                tween(
+                    durationMillis = TASK_ITEM_SHADOW_ELEVATION_ANIMATION_DURATION,
+                    easing = FastOutSlowInEasing,
+                ),
         )
         SwipeToDismissBox(
             state = state,
@@ -136,9 +138,7 @@ fun TaskItem(
 }
 
 @Composable
-private fun TaskItemSwipeableBackgroundContent(
-    state: SwipeToDismissBoxState,
-) {
+private fun TaskItemSwipeableBackgroundContent(state: SwipeToDismissBoxState) {
     Box(
         Modifier
             .padding(4.dp)
@@ -149,9 +149,10 @@ private fun TaskItemSwipeableBackgroundContent(
         contentAlignment = Alignment.CenterStart,
     ) {
         Icon(
-            painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
-                atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd,
-            ),
+            painter =
+                TodometerAnimatedResources.deleteAnimatedVectorPainter(
+                    atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd,
+                ),
             contentDescription = TodometerResources.strings.deleteTask,
             tint = MaterialTheme.colorScheme.onErrorContainer,
         )
@@ -182,10 +183,11 @@ private fun TaskItemContent(
             border = border,
         ) {
             Column(
-                modifier = Modifier.combinedClickable(
-                    onClick = onClick,
-                    onLongClick = onLongClick,
-                ),
+                modifier =
+                    Modifier.combinedClickable(
+                        onClick = onClick,
+                        onLongClick = onLongClick,
+                    ),
             ) {
                 TaskItemHeadlineContent(
                     taskItem = taskItem,
@@ -198,24 +200,27 @@ private fun TaskItemContent(
         }
         AnimatedVisibility(
             visible = selected,
-            enter = scaleIn(
-                animationSpec = tween(
-                    durationMillis = TaskItemSelectedIconAnimationDuration,
-                    easing = FastOutSlowInEasing,
+            enter =
+                scaleIn(
+                    animationSpec =
+                        tween(
+                            durationMillis = TASK_ITEM_SELECTED_ICON_ANIMATION_DURATION,
+                            easing = FastOutSlowInEasing,
+                        ),
                 ),
-            ),
             exit = fadeOut(),
         ) {
             Icon(
                 Images.Icons.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .padding(start = TaskItemSelectedIconPadding)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.background)
-                    .size(TaskItemSelectedIconSize)
-                    .align(Alignment.TopStart),
+                modifier =
+                    Modifier
+                        .padding(start = TaskItemSelectedIconPadding)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.background)
+                        .size(TaskItemSelectedIconSize)
+                        .align(Alignment.TopStart),
             )
         }
     }
@@ -230,10 +235,11 @@ private fun TaskItemHeadlineContent(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(
-            start = TaskItemInnerPaddingStart,
-            end = TaskItemInnerPaddingEnd,
-        ),
+        modifier =
+            Modifier.padding(
+                start = TaskItemInnerPaddingStart,
+                end = TaskItemInnerPaddingEnd,
+            ),
     ) {
         if (taskItem.tag != Tag.UNSPECIFIED) {
             TaskTagIndicator(taskItem.tag)
@@ -254,7 +260,7 @@ private fun TaskItemHeadlineContent(
                     onDoneClick()
                 }
             },
-            modifier = Modifier.alpha(if (checkEnabled) Alpha.Disabled else Alpha.High),
+            modifier = Modifier.alpha(if (checkEnabled) Alpha.DISABLED else Alpha.HIGH),
             enabled = !checkEnabled,
         ) {
             Icon(
@@ -325,13 +331,13 @@ private fun taskItemActionContentDescription(state: TaskState): String =
 private val TaskItemBackgroundHorizontalPadding = 16.dp
 private val TaskItemBackgroundShape: Shape = RoundedCornerShape(14.dp)
 
+private const val TASK_ITEM_SELECTED_ICON_ANIMATION_DURATION: Int = 150
+private const val TASK_ITEM_SHADOW_ELEVATION_ANIMATION_DURATION: Int = 400
+private val TaskItemDismissedShadowElevation: Dp = 4.dp
 private val TaskItemInnerPaddingEnd: Dp = 8.dp
 private val TaskItemInnerPaddingStart: Dp = 16.dp
-private const val TaskItemSelectedIconAnimationDuration: Int = 150
+private val TaskItemPadding: Dp = 4.dp
 private val TaskItemSelectedIconPadding: Dp = 2.dp
 private val TaskItemSelectedIconSize: Dp = 20.dp
-private val TaskItemPadding: Dp = 4.dp
 private val TaskItemShape: Shape = RoundedCornerShape(12.dp)
 private val TaskItemTonalElevation: Dp = 2.dp
-private const val TaskItemShadowElevationAnimationDuration: Int = 400
-private val TaskItemDismissedShadowElevation: Dp = 4.dp

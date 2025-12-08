@@ -28,9 +28,8 @@ import kotlinx.coroutines.launch
 class AddTaskListViewModel(
     private val insertTaskListUseCase: InsertTaskListUseCase,
 ) : FonamentViewModel<AddTaskListUIState>(
-    initialUIState = AddTaskListUIState(),
-) {
-
+        initialUIState = AddTaskListUIState(),
+    ) {
     override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is AddTaskListEvent.InsertTaskList -> {
@@ -39,27 +38,29 @@ class AddTaskListViewModel(
         }
     }
 
-    private fun insertTaskList(name: String) = viewModelScope.launch {
-        updateUIState {
-            it.copy(isAddingTaskList = true)
-        }
-        if (name.isNotBlank()) {
-            val result = insertTaskListUseCase.invoke(name)
-            result.doIfSuccess {
-                updateUIState {
-                    it.copy(
-                        isAddingTaskList = false,
-                        errorUi = null,
-                    )
-                }
-            }.doIfError { error ->
-                updateUIState {
-                    it.copy(
-                        isAddingTaskList = false,
-                        errorUi = error.mapToErrorUi(),
-                    )
-                }
+    private fun insertTaskList(name: String) =
+        viewModelScope.launch {
+            updateUIState {
+                it.copy(isAddingTaskList = true)
+            }
+            if (name.isNotBlank()) {
+                val result = insertTaskListUseCase.invoke(name)
+                result
+                    .doIfSuccess {
+                        updateUIState {
+                            it.copy(
+                                isAddingTaskList = false,
+                                errorUi = null,
+                            )
+                        }
+                    }.doIfError { error ->
+                        updateUIState {
+                            it.copy(
+                                isAddingTaskList = false,
+                                errorUi = error.mapToErrorUi(),
+                            )
+                        }
+                    }
             }
         }
-    }
 }

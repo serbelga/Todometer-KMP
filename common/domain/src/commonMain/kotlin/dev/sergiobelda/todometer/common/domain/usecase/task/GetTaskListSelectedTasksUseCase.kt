@@ -30,7 +30,6 @@ class GetTaskListSelectedTasksUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
     private val taskRepository: ITaskRepository,
 ) {
-
     /**
      * Get the list of [TaskItem] for the current task list selected. This flow emits a new value
      * every time that current task list selected in user preferences changes or

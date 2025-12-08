@@ -128,27 +128,28 @@ private fun NavGraphBuilder.taskDetailsNode(
 ) {
     composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
         val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId
-        val taskDetailsNavigationEventHandler = taskDetailsNavigationEventHandler(
-            navigateBack = navigateBack,
-            navigateToEditTask = {
-                navigateToEditTask.invoke(taskId)
-            },
-        )
+        val taskDetailsNavigationEventHandler =
+            taskDetailsNavigationEventHandler(
+                navigateBack = navigateBack,
+                navigateToEditTask = {
+                    navigateToEditTask.invoke(taskId)
+                },
+            )
         TaskDetailsScreen.NavigationNode(
             navigationEventHandler = taskDetailsNavigationEventHandler,
-            viewModel = koinFonamentViewModel {
-                parametersOf(taskId)
-            },
+            viewModel =
+                koinFonamentViewModel {
+                    parametersOf(taskId)
+                },
         )
     }
 }
 
-private fun NavGraphBuilder.addTaskListRoute(
-    navigateBack: () -> Unit,
-) {
-    val addTaskListNavigationEventHandler = addTaskListNavigationEventHandler(
-        navigateBack = navigateBack,
-    )
+private fun NavGraphBuilder.addTaskListRoute(navigateBack: () -> Unit) {
+    val addTaskListNavigationEventHandler =
+        addTaskListNavigationEventHandler(
+            navigateBack = navigateBack,
+        )
     composable(navDestination = AddTaskListNavDestination) {
         AddTaskListScreen.NavigationNode(
             navigationEventHandler = addTaskListNavigationEventHandler,
@@ -157,12 +158,11 @@ private fun NavGraphBuilder.addTaskListRoute(
     }
 }
 
-private fun NavGraphBuilder.editTaskListNode(
-    navigateBack: () -> Unit,
-) {
-    val editTaskListNavigationEventHandler = editTaskListNavigationEventHandler(
-        navigateBack = navigateBack,
-    )
+private fun NavGraphBuilder.editTaskListNode(navigateBack: () -> Unit) {
+    val editTaskListNavigationEventHandler =
+        editTaskListNavigationEventHandler(
+            navigateBack = navigateBack,
+        )
     composable(navDestination = EditTaskListNavDestination) {
         EditTaskListScreen.NavigationNode(
             navigationEventHandler = editTaskListNavigationEventHandler,
@@ -171,12 +171,11 @@ private fun NavGraphBuilder.editTaskListNode(
     }
 }
 
-private fun NavGraphBuilder.addTaskNode(
-    navigateBack: () -> Unit,
-) {
-    val addTaskNavigationEventHandler = addTaskNavigationEventHandler(
-        navigateBack = navigateBack,
-    )
+private fun NavGraphBuilder.addTaskNode(navigateBack: () -> Unit) {
+    val addTaskNavigationEventHandler =
+        addTaskNavigationEventHandler(
+            navigateBack = navigateBack,
+        )
     composable(navDestination = AddTaskNavDestination) {
         AddTaskScreen.NavigationNode(
             navigationEventHandler = addTaskNavigationEventHandler,
@@ -185,12 +184,11 @@ private fun NavGraphBuilder.addTaskNode(
     }
 }
 
-private fun NavGraphBuilder.editTaskNode(
-    navigateBack: () -> Unit,
-) {
-    val editTaskNavigationEventHandler = editTaskNavigationEventHandler(
-        navigateBack = navigateBack,
-    )
+private fun NavGraphBuilder.editTaskNode(navigateBack: () -> Unit) {
+    val editTaskNavigationEventHandler =
+        editTaskNavigationEventHandler(
+            navigateBack = navigateBack,
+        )
     composable(navDestination = EditTaskNavDestination) { navBackStackEntry ->
         val taskId = EditTaskSafeNavArgs(navBackStackEntry).taskId
         EditTaskScreen.NavigationNode(
@@ -200,12 +198,11 @@ private fun NavGraphBuilder.editTaskNode(
     }
 }
 
-private fun NavGraphBuilder.settingsNode(
-    navigateBack: () -> Unit,
-) {
-    val settingsNavigationEventHandler = settingsNavigationEventHandler(
-        navigateBack = navigateBack,
-    )
+private fun NavGraphBuilder.settingsNode(navigateBack: () -> Unit) {
+    val settingsNavigationEventHandler =
+        settingsNavigationEventHandler(
+            navigateBack = navigateBack,
+        )
     composable(navDestination = SettingsNavDestination) {
         SettingsScreen.NavigationNode(
             navigationEventHandler = settingsNavigationEventHandler,
@@ -214,6 +211,4 @@ private fun NavGraphBuilder.settingsNode(
     }
 }
 
-internal expect fun NavGraphBuilder.aboutNode(
-    navigateBack: () -> Unit,
-)
+internal expect fun NavGraphBuilder.aboutNode(navigateBack: () -> Unit)

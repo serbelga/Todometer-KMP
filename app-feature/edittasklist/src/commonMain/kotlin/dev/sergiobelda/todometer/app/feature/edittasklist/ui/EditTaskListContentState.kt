@@ -26,43 +26,44 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
-data class EditTaskListContentState @RememberInComposition constructor(
-    private val taskListName: String,
-) : FonamentContentState {
+data class EditTaskListContentState
+    @RememberInComposition
+    constructor(
+        private val taskListName: String,
+    ) : FonamentContentState {
+        var nameTextFieldValue: String by mutableStateOf(taskListName)
+            private set
 
-    var nameTextFieldValue: String by mutableStateOf(taskListName)
-        private set
-
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            is EditTaskListEvent.NameTextFieldValueChange -> {
-                nameTextFieldValue = event.value
+        override fun handleEvent(event: FonamentEvent) {
+            when (event) {
+                is EditTaskListEvent.NameTextFieldValueChange -> {
+                    nameTextFieldValue = event.value
+                }
             }
+        }
+
+        companion object {
+            internal fun saver(): Saver<EditTaskListContentState, String> =
+                Saver(
+                    save = {
+                        it.nameTextFieldValue
+                    },
+                    restore = {
+                        EditTaskListContentState(
+                            taskListName = it,
+                        )
+                    },
+                )
         }
     }
 
-    companion object {
-        internal fun saver(): Saver<EditTaskListContentState, String> = Saver(
-            save = {
-                it.nameTextFieldValue
-            },
-            restore = {
-                EditTaskListContentState(
-                    taskListName = it,
-                )
-            },
+@Composable
+internal fun rememberEditTaskListContentState(taskListName: String): EditTaskListContentState =
+    rememberSaveable(
+        inputs = arrayOf(taskListName),
+        saver = EditTaskListContentState.saver(),
+    ) {
+        EditTaskListContentState(
+            taskListName = taskListName,
         )
     }
-}
-
-@Composable
-internal fun rememberEditTaskListContentState(
-    taskListName: String,
-): EditTaskListContentState = rememberSaveable(
-    inputs = arrayOf(taskListName),
-    saver = EditTaskListContentState.saver(),
-) {
-    EditTaskListContentState(
-        taskListName = taskListName,
-    )
-}

@@ -19,30 +19,33 @@ package dev.sergiobelda.todometer.common.database.mapper
 import dev.sergiobelda.todometer.common.database.TaskEntity
 import dev.sergiobelda.todometer.common.domain.model.Task
 
-fun TaskEntity.asTask(): Task = Task(
-    id = id,
-    title = title,
-    tag = tag,
-    description = description,
-    dueDate = dueDate,
-    state = state,
-    taskListId = tasklist_id,
-    isPinned = isPinned,
-    sync = sync,
-)
+fun TaskEntity.asTask(): Task =
+    Task(
+        id = id,
+        title = title,
+        tag = tag,
+        description = description,
+        dueDate = dueDate,
+        state = state,
+        taskListId = tasklist_id,
+        isPinned = isPinned,
+        sync = sync,
+    )
 
-fun Iterable<TaskEntity>.asTasks(): List<Task> = this.map {
-    it.asTask()
-}
+fun Iterable<TaskEntity>.asTasks(): List<Task> =
+    this.map {
+        it.asTask()
+    }
 
-fun Task.asTaskEntity(): TaskEntity = TaskEntity(
-    id = id,
-    title = title,
-    tag = tag,
-    description = description,
-    dueDate = dueDate,
-    state = state,
-    tasklist_id = taskListId,
-    isPinned = isPinned,
-    sync = sync,
-)
+fun Task.asTaskEntity(): TaskEntity =
+    TaskEntity(
+        id = id,
+        title = title,
+        tag = tag,
+        description = description,
+        dueDate = dueDate,
+        state = state,
+        tasklist_id = taskListId,
+        isPinned = isPinned,
+        sync = sync,
+    )

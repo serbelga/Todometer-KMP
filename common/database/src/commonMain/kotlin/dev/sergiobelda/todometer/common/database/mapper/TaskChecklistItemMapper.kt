@@ -27,9 +27,10 @@ fun TaskChecklistItemEntity.asTaskChecklistItem(): TaskChecklistItem =
         state = state,
     )
 
-fun Iterable<TaskChecklistItemEntity>.asTaskChecklist(): List<TaskChecklistItem> = this.map {
-    it.asTaskChecklistItem()
-}
+fun Iterable<TaskChecklistItemEntity>.asTaskChecklist(): List<TaskChecklistItem> =
+    this.map {
+        it.asTaskChecklistItem()
+    }
 
 fun TaskChecklistItem.asTaskChecklistItemEntity(): TaskChecklistItemEntity =
     TaskChecklistItemEntity(

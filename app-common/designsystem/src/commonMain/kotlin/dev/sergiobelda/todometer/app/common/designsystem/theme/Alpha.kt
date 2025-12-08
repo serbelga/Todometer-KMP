@@ -20,18 +20,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 object Alpha {
-    const val High: Float = 1f
-    const val Medium: Float = 0.6f
-    const val Disabled: Float = 0.38f
+    const val HIGH: Float = 1f
+    const val MEDIUM: Float = 0.6f
+    const val DISABLED: Float = 0.38f
 
     @Composable
-    fun Color.applyHighEmphasisAlpha(): Color = withAlpha(High)
+    fun Color.applyHighEmphasisAlpha(): Color = withAlpha(HIGH)
 
     @Composable
-    fun Color.applyMediumEmphasisAlpha(): Color = withAlpha(Medium)
+    fun Color.applyMediumEmphasisAlpha(): Color = withAlpha(MEDIUM)
 
     @Composable
-    fun Color.applyDisabledEmphasisAlpha(): Color = withAlpha(Disabled)
+    fun Color.applyDisabledEmphasisAlpha(): Color = withAlpha(DISABLED)
 }
 
 @Composable

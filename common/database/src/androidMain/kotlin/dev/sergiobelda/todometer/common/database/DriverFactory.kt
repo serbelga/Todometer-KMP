@@ -41,18 +41,17 @@ actual object DriverFactory {
             TodometerDatabase.Schema,
             appContext,
             FILENAME,
-            callback = object : AndroidSqliteDriver.Callback(TodometerDatabase.Schema) {
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    db.execSQL("PRAGMA foreign_keys = ON;")
-                }
-            },
+            callback =
+                object : AndroidSqliteDriver.Callback(TodometerDatabase.Schema) {
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        db.execSQL("PRAGMA foreign_keys = ON;")
+                    }
+                },
         )
     }
 }
 
-private fun openDatabaseFile(
-    absolutePath: String,
-) {
+private fun openDatabaseFile(absolutePath: String) {
     try {
         val inputStream = appContext.assets.open(FILENAME)
         val outputStream = FileOutputStream(absolutePath)

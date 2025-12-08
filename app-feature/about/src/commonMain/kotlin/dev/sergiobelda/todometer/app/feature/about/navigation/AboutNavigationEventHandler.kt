@@ -23,11 +23,12 @@ fun aboutNavigationEventHandler(
     navigateToGitHub: () -> Unit,
     navigateToPrivacyPolicy: () -> Unit,
     navigateToOpenSourceLicenses: () -> Unit = {},
-): FonamentNavigationEventHandler<AboutNavigationEvent> = FonamentNavigationEventHandler {
-    when (it) {
-        AboutNavigationEvent.NavigateBack -> navigateBack()
-        AboutNavigationEvent.NavigateToGitHub -> navigateToGitHub()
-        AboutNavigationEvent.NavigateToOpenSourceLicenses -> navigateToOpenSourceLicenses()
-        AboutNavigationEvent.NavigateToPrivacyPolicy -> navigateToPrivacyPolicy()
+): FonamentNavigationEventHandler<AboutNavigationEvent> =
+    FonamentNavigationEventHandler {
+        when (it) {
+            AboutNavigationEvent.NavigateBack -> navigateBack()
+            AboutNavigationEvent.NavigateToGitHub -> navigateToGitHub()
+            AboutNavigationEvent.NavigateToOpenSourceLicenses -> navigateToOpenSourceLicenses()
+            AboutNavigationEvent.NavigateToPrivacyPolicy -> navigateToPrivacyPolicy()
+        }
     }
-}

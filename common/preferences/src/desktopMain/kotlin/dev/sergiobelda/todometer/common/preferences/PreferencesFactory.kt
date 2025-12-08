@@ -17,8 +17,8 @@
 package dev.sergiobelda.todometer.common.preferences
 
 actual object PreferencesFactory {
-
-    actual fun createPreferences(): Preferences = Preferences(
-        createDataStore("./$DataStoreFileName"),
-    )
+    actual fun createPreferences(): Preferences =
+        Preferences(
+            createDataStore("./$DATA_STORE_FILE_NAME"),
+        )
 }

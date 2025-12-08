@@ -21,6 +21,5 @@ import dev.sergiobelda.todometer.common.core.app.TodometerBaseApplication
 import dev.sergiobelda.todometer.common.di.TodometerDI
 
 open class TodometerMainApp : TodometerBaseApplication() {
-
     override val todometerDI: TodometerDI = TodometerMainAppDI()
 }

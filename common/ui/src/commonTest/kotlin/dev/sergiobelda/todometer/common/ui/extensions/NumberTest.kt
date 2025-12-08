@@ -20,7 +20,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class NumberTest {
-
     @Test
     fun testNumberFormat() {
         val number = 0

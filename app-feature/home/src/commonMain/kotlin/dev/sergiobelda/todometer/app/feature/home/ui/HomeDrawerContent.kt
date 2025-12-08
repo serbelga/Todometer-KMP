@@ -63,9 +63,10 @@ internal fun HomeDrawerContent(
             modifier = Modifier.height(HomeDrawerTopHeight).fillMaxWidth(),
         ) {
             TodometerTitle(
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(horizontal = HomeDrawerTopPaddingHorizontal),
+                modifier =
+                    Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(horizontal = HomeDrawerTopPaddingHorizontal),
             )
         }
         TodometerDivider()
@@ -97,7 +98,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
             Text(
                 text = TodometerResources.strings.settings,
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = HomeDrawerItemMaxLines,
+                maxLines = HOME_DRAWER_ITEM_MAX_LINES,
             )
         },
         onClick = onClick,
@@ -118,7 +119,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
             Text(
                 text = TodometerResources.strings.about,
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = HomeDrawerItemMaxLines,
+                maxLines = HOME_DRAWER_ITEM_MAX_LINES,
             )
         },
         onClick = onClick,
@@ -136,9 +137,10 @@ private fun HomeDrawerTaskListsSection(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .height(HomeDrawerSectionTitleHeight)
-            .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal),
+        modifier =
+            Modifier
+                .height(HomeDrawerSectionTitleHeight)
+                .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal),
     ) {
         Text(
             text = TodometerResources.strings.taskLists,
@@ -169,17 +171,18 @@ private fun HomeNavigationDrawerTaskListItem(
     isSelected: Boolean,
     onItemClick: () -> Unit,
 ) {
-    val colors = NavigationDrawerItemDefaults.colors(
-        selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-        selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
-    )
+    val colors =
+        NavigationDrawerItemDefaults.colors(
+            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            unselectedTextColor = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
+        )
     NavigationDrawerItem(
         label = {
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleSmall,
-                maxLines = HomeDrawerItemMaxLines,
+                maxLines = HOME_DRAWER_ITEM_MAX_LINES,
                 overflow = TextOverflow.Ellipsis,
             )
         },
@@ -189,9 +192,9 @@ private fun HomeNavigationDrawerTaskListItem(
     )
 }
 
-private val HomeDrawerTopHeight: Dp = 56.dp
-private val HomeDrawerTopPaddingHorizontal: Dp = 16.dp
+private const val HOME_DRAWER_ITEM_MAX_LINES: Int = 1
+private val HomeDrawerItemPadding: Dp = 8.dp
 private val HomeDrawerSectionTitleHeight: Dp = 56.dp
 private val HomeDrawerSectionTitlePaddingHorizontal: Dp = 16.dp
-private val HomeDrawerItemPadding: Dp = 8.dp
-private const val HomeDrawerItemMaxLines: Int = 1
+private val HomeDrawerTopHeight: Dp = 56.dp
+private val HomeDrawerTopPaddingHorizontal: Dp = 16.dp

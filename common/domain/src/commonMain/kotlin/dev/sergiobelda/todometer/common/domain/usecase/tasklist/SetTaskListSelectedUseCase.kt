@@ -21,7 +21,5 @@ import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesReposi
 class SetTaskListSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
 ) {
-
-    suspend operator fun invoke(id: String) =
-        userPreferencesRepository.setTaskListSelected(id)
+    suspend operator fun invoke(id: String) = userPreferencesRepository.setTaskListSelected(id)
 }

@@ -26,14 +26,19 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 
-class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
-
+class TaskDao(
+    private val todometerDatabase: TodometerDatabase,
+) : ITaskDao {
     override fun getTask(id: String): Flow<TaskEntity?> =
-        todometerDatabase.taskEntityQueries.selectTask(id).asFlow()
+        todometerDatabase.taskEntityQueries
+            .selectTask(id)
+            .asFlow()
             .mapToOneOrNull(Dispatchers.Default)
 
     override fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId>> =
-        todometerDatabase.taskEntityQueries.selectTasksByTaskListId(taskListId).asFlow()
+        todometerDatabase.taskEntityQueries
+            .selectTasksByTaskListId(taskListId)
+            .asFlow()
             .mapToList(Dispatchers.Default)
 
     override suspend fun insertTask(task: TaskEntity): String {
@@ -70,14 +75,20 @@ class TaskDao(private val todometerDatabase: TodometerDatabase) : ITaskDao {
         )
     }
 
-    override suspend fun updateTaskSync(id: String, sync: Boolean) {
+    override suspend fun updateTaskSync(
+        id: String,
+        sync: Boolean,
+    ) {
         todometerDatabase.taskEntityQueries.updateTaskSync(
             id = id,
             sync = sync,
         )
     }
 
-    override suspend fun updateTaskState(id: String, state: TaskState) {
+    override suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    ) {
         todometerDatabase.taskEntityQueries.updateTaskState(
             id = id,
             state = state,

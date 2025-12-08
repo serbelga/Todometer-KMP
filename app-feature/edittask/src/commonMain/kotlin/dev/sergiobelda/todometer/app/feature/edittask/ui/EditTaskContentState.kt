@@ -37,150 +37,151 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.extensions.localTime
 
 @OptIn(ExperimentalMaterial3Api::class)
-data class EditTaskContentState @RememberInComposition constructor(
-    private val initialTitle: String,
-    private val initialDescription: String?,
-    private val initialTag: Tag,
-    private val initialDueDate: Long?,
-    internal val datePickerState: DatePickerState?,
-    internal val timePickerState: TimePickerState?,
-) : FonamentContentState {
+data class EditTaskContentState
+    @RememberInComposition
+    constructor(
+        private val initialTitle: String,
+        private val initialDescription: String?,
+        private val initialTag: Tag,
+        private val initialDueDate: Long?,
+        internal val datePickerState: DatePickerState?,
+        internal val timePickerState: TimePickerState?,
+    ) : FonamentContentState {
+        var title: String by mutableStateOf(initialTitle)
+            private set
 
-    var title: String by mutableStateOf(initialTitle)
-        private set
+        var description: String by mutableStateOf(initialDescription.orEmpty())
+            private set
 
-    var description: String by mutableStateOf(initialDescription.orEmpty())
-        private set
+        var tag by mutableStateOf(initialTag)
+            private set
 
-    var tag by mutableStateOf(initialTag)
-        private set
+        var dueDate: Long? by mutableStateOf(initialDueDate)
 
-    var dueDate: Long? by mutableStateOf(initialDueDate)
+        val isSaveButtonEnabled: Boolean by derivedStateOf { title.isNotBlank() }
 
-    val isSaveButtonEnabled: Boolean by derivedStateOf { title.isNotBlank() }
+        var datePickerDialogVisible by mutableStateOf(false)
+            private set
 
-    var datePickerDialogVisible by mutableStateOf(false)
-        private set
+        var timePickerDialogVisible by mutableStateOf(false)
+            private set
 
-    var timePickerDialogVisible by mutableStateOf(false)
-        private set
+        override fun handleEvent(event: FonamentEvent) {
+            when (event) {
+                is EditTaskEvent.TitleValueChange -> titleValueChange(event)
+                is EditTaskEvent.DescriptionValueChange -> descriptionValueChange(event)
+                is EditTaskEvent.ConfirmDatePickerDialog -> confirmDatePickerDialog()
+                is EditTaskEvent.DismissDatePickerDialog -> dismissDatePickerDialog()
+                is EditTaskEvent.ShowDatePickerDialog -> showDatePickerDialog()
+                is EditTaskEvent.ConfirmTimePickerDialog -> confirmTimePickerDialog()
+                is EditTaskEvent.DismissTimePickerDialog -> dismissTimePickerDialog()
+                is EditTaskEvent.ShowTimePickerDialog -> showTimePickerDialog()
+                is EditTaskEvent.ClearDateTime -> clearDateTime()
+                is EditTaskEvent.SelectTag -> selectTag(event)
+            }
+        }
 
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            is EditTaskEvent.TitleValueChange -> titleValueChange(event)
-            is EditTaskEvent.DescriptionValueChange -> descriptionValueChange(event)
-            is EditTaskEvent.ConfirmDatePickerDialog -> confirmDatePickerDialog()
-            is EditTaskEvent.DismissDatePickerDialog -> dismissDatePickerDialog()
-            is EditTaskEvent.ShowDatePickerDialog -> showDatePickerDialog()
-            is EditTaskEvent.ConfirmTimePickerDialog -> confirmTimePickerDialog()
-            is EditTaskEvent.DismissTimePickerDialog -> dismissTimePickerDialog()
-            is EditTaskEvent.ShowTimePickerDialog -> showTimePickerDialog()
-            is EditTaskEvent.ClearDateTime -> clearDateTime()
-            is EditTaskEvent.SelectTag -> selectTag(event)
+        private fun titleValueChange(event: EditTaskEvent.TitleValueChange) {
+            title = event.value
+        }
+
+        private fun descriptionValueChange(event: EditTaskEvent.DescriptionValueChange) {
+            description = event.value
+        }
+
+        private fun confirmDatePickerDialog() {
+            datePickerDialogVisible = false
+            updateTaskDueDate()
+        }
+
+        private fun dismissDatePickerDialog() {
+            datePickerDialogVisible = false
+        }
+
+        private fun showDatePickerDialog() {
+            datePickerDialogVisible = true
+        }
+
+        private fun confirmTimePickerDialog() {
+            timePickerDialogVisible = false
+            updateTaskDueDate()
+        }
+
+        private fun dismissTimePickerDialog() {
+            timePickerDialogVisible = false
+        }
+
+        private fun showTimePickerDialog() {
+            timePickerDialogVisible = true
+        }
+
+        private fun clearDateTime() {
+            dueDate = null
+        }
+
+        private fun selectTag(event: EditTaskEvent.SelectTag) {
+            tag = event.tag
+        }
+
+        private fun updateTaskDueDate() {
+            dueDate =
+                datePickerState?.selectedDateMillis?.plus(timePickerState?.selectedTimeMillis ?: 0)
+        }
+
+        companion object {
+            internal fun saver(
+                datePickerState: DatePickerState?,
+                timePickerState: TimePickerState?,
+            ) = mapSaver(
+                save = {
+                    mapOf(
+                        TITLE_KEY to it.title,
+                        DESCRIPTION_KEY to it.description,
+                        TAG_KEY to it.tag,
+                        DUE_DATE_KEY to it.dueDate,
+                    )
+                },
+                restore = {
+                    EditTaskContentState(
+                        initialTitle = it[TITLE_KEY] as String,
+                        initialDescription = it[DESCRIPTION_KEY] as String,
+                        initialTag = it[TAG_KEY] as Tag,
+                        initialDueDate = it[DUE_DATE_KEY] as? Long,
+                        datePickerState = datePickerState,
+                        timePickerState = timePickerState,
+                    )
+                },
+            )
+
+            private const val TITLE_KEY: String = "TITLE"
+
+            private const val DESCRIPTION_KEY: String = "DESCRIPTION"
+
+            private const val TAG_KEY: String = "TAG"
+
+            private const val DUE_DATE_KEY: String = "DUE_DATE"
         }
     }
 
-    private fun titleValueChange(event: EditTaskEvent.TitleValueChange) {
-        title = event.value
-    }
-
-    private fun descriptionValueChange(event: EditTaskEvent.DescriptionValueChange) {
-        description = event.value
-    }
-
-    private fun confirmDatePickerDialog() {
-        datePickerDialogVisible = false
-        updateTaskDueDate()
-    }
-
-    private fun dismissDatePickerDialog() {
-        datePickerDialogVisible = false
-    }
-
-    private fun showDatePickerDialog() {
-        datePickerDialogVisible = true
-    }
-
-    private fun confirmTimePickerDialog() {
-        timePickerDialogVisible = false
-        updateTaskDueDate()
-    }
-
-    private fun dismissTimePickerDialog() {
-        timePickerDialogVisible = false
-    }
-
-    private fun showTimePickerDialog() {
-        timePickerDialogVisible = true
-    }
-
-    private fun clearDateTime() {
-        dueDate = null
-    }
-
-    private fun selectTag(event: EditTaskEvent.SelectTag) {
-        tag = event.tag
-    }
-
-    private fun updateTaskDueDate() {
-        dueDate =
-            datePickerState?.selectedDateMillis?.plus(timePickerState?.selectedTimeMillis ?: 0)
-    }
-
-    companion object {
-        internal fun saver(
-            datePickerState: DatePickerState?,
-            timePickerState: TimePickerState?,
-        ) = mapSaver(
-            save = {
-                mapOf(
-                    TitleKey to it.title,
-                    DescriptionKey to it.description,
-                    TagKey to it.tag,
-                    DueDateKey to it.dueDate,
-                )
-            },
-            restore = {
-                EditTaskContentState(
-                    initialTitle = it[TitleKey] as String,
-                    initialDescription = it[DescriptionKey] as String,
-                    initialTag = it[TagKey] as Tag,
-                    initialDueDate = it[DueDateKey] as? Long,
-                    datePickerState = datePickerState,
-                    timePickerState = timePickerState,
-                )
-            },
-        )
-
-        private const val TitleKey: String = "TITLE"
-
-        private const val DescriptionKey: String = "DESCRIPTION"
-
-        private const val TagKey: String = "TAG"
-
-        private const val DueDateKey: String = "DUE_DATE"
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun rememberEditTaskContentState(
-    task: Task?,
-): EditTaskContentState {
+internal fun rememberEditTaskContentState(task: Task?): EditTaskContentState {
     val datePickerState = task?.let { rememberDatePickerState(it.dueDate) }
-    val timePickerState = task?.let {
-        val localTime = it.dueDate?.localTime()
-        rememberTimePickerState(
-            initialHour = localTime?.hour ?: 0,
-            initialMinute = localTime?.minute ?: 0,
-        )
-    }
+    val timePickerState =
+        task?.let {
+            val localTime = it.dueDate?.localTime()
+            rememberTimePickerState(
+                initialHour = localTime?.hour ?: 0,
+                initialMinute = localTime?.minute ?: 0,
+            )
+        }
     return rememberSaveable(
         inputs = arrayOf(task),
-        saver = EditTaskContentState.saver(
-            datePickerState = datePickerState,
-            timePickerState = timePickerState,
-        ),
+        saver =
+            EditTaskContentState.saver(
+                datePickerState = datePickerState,
+                timePickerState = timePickerState,
+            ),
     ) {
         EditTaskContentState(
             initialTitle = task?.title.orEmpty(),

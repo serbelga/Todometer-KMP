@@ -130,7 +130,10 @@ internal data object SettingsContent : FonamentContent<SettingsUIState, NoConten
 }
 
 @Composable
-private fun SettingsChooseAppTheme(appTheme: AppTheme, onItemClick: (AppTheme) -> Unit) {
+private fun SettingsChooseAppTheme(
+    appTheme: AppTheme,
+    onItemClick: (AppTheme) -> Unit,
+) {
     Column(modifier = Modifier.fillMaxWidth().padding(SettingsItemPaddingHorizontal)) {
         Text(text = TodometerResources.strings.theme)
         Spacer(modifier = Modifier.height(SettingsItemInternalSpacing))
@@ -157,19 +160,21 @@ private fun AppThemeItem(
     selected: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val selectedAlpha = if (selected) Alpha.High else Alpha.Medium
+    val selectedAlpha = if (selected) Alpha.HIGH else Alpha.MEDIUM
     Box {
         Surface(
             onClick = onClick,
             shape = RoundedCornerShape(AppThemeItemCornerRadius),
-            border = BorderStroke(
-                width = AppThemeItemBorder,
-                color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
-            ),
-            modifier = modifier
-                .height(AppThemeItemHeight)
-                .fillMaxWidth()
-                .padding(AppThemeItemPadding),
+            border =
+                BorderStroke(
+                    width = AppThemeItemBorder,
+                    color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
+                ),
+            modifier =
+                modifier
+                    .height(AppThemeItemHeight)
+                    .fillMaxWidth()
+                    .padding(AppThemeItemPadding),
             tonalElevation = if (selected) AppThemeItemSelectedElevation else AppThemeItemUnselectedElevation,
             contentColor = MaterialTheme.colorScheme.onSurface.withAlpha(selectedAlpha),
         ) {
@@ -186,7 +191,7 @@ private fun AppThemeItem(
                     Text(
                         appTheme.themeName(),
                         textAlign = TextAlign.Center,
-                        maxLines = AppThemeItemMaxLines,
+                        maxLines = APP_THEME_ITEM_MAX_LINES,
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.labelLarge,
                     )
@@ -200,45 +205,44 @@ private fun AppThemeItem(
 }
 
 @Composable
-private fun BoxScope.AppThemeItemSelectorIndicator(
-    selected: Boolean,
-) {
+private fun BoxScope.AppThemeItemSelectorIndicator(selected: Boolean) {
     AnimatedVisibility(
         visible = selected,
-        enter = scaleIn(
-            animationSpec = tween(
-                durationMillis = AppThemeItemSelectedIconAnimationDuration,
-                easing = FastOutSlowInEasing,
+        enter =
+            scaleIn(
+                animationSpec =
+                    tween(
+                        durationMillis = APP_THEME_ITEM_SELECTED_ICON_ANIMATION_DURATION,
+                        easing = FastOutSlowInEasing,
+                    ),
             ),
-        ),
         exit = fadeOut(),
     ) {
         Icon(
             Images.Icons.CheckCircle,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.background)
-                .size(AppThemeItemSelectedIconSize)
-                .align(Alignment.TopStart),
+            modifier =
+                Modifier
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.background)
+                    .size(AppThemeItemSelectedIconSize)
+                    .align(Alignment.TopStart),
         )
     }
 }
 
-private val SettingsItemPaddingHorizontal: Dp = 16.dp
-private val SettingsItemInternalSpacing: Dp = 16.dp
-
-private val AppThemeItemsSpacing: Dp = 12.dp
-
-private const val AppThemeItemMaxLines: Int = 2
+private const val APP_THEME_ITEM_MAX_LINES: Int = 2
+private const val APP_THEME_ITEM_SELECTED_ICON_ANIMATION_DURATION: Int = 150
 private val AppThemeItemBorder: Dp = 1.dp
 private val AppThemeItemCornerRadius: Dp = 8.dp
 private val AppThemeItemHeight: Dp = 96.dp
-private val AppThemeItemSelectedElevation: Dp = 6.dp
-private const val AppThemeItemSelectedIconAnimationDuration: Int = 150
 private val AppThemeItemPadding: Dp = 2.dp
+private val AppThemeItemSelectedElevation: Dp = 6.dp
 private val AppThemeItemSelectedIconSize: Dp = 20.dp
 private val AppThemeItemSelectedSpacing: Dp = 6.dp
 private val AppThemeItemUnselectedElevation: Dp = 0.dp
 private val AppThemeItemWidth: Dp = 96.dp
+private val AppThemeItemsSpacing: Dp = 12.dp
+private val SettingsItemInternalSpacing: Dp = 16.dp
+private val SettingsItemPaddingHorizontal: Dp = 16.dp

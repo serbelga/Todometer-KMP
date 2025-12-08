@@ -32,7 +32,10 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckBox
 
 @Composable
-internal fun TaskChecklistItemsChip(checklistItemsDone: Long, totalChecklistItems: Long) {
+internal fun TaskChecklistItemsChip(
+    checklistItemsDone: Long,
+    totalChecklistItems: Long,
+) {
     val completedChipTint =
         if (checklistItemsDone == totalChecklistItems) {
             TodometerTheme.todometerColors.check

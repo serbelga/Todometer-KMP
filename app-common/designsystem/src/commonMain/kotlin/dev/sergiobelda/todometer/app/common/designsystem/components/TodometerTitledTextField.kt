@@ -46,11 +46,12 @@ fun TodometerTitledTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     singleLine: Boolean = false,
     maxLines: Int = 10,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = Color.Transparent,
-        unfocusedBorderColor = Color.Transparent,
-        errorBorderColor = Color.Transparent,
-    ),
+    colors: TextFieldColors =
+        OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color.Transparent,
+            unfocusedBorderColor = Color.Transparent,
+            errorBorderColor = Color.Transparent,
+        ),
 ) {
     Column(
         modifier = modifier,
@@ -89,11 +90,12 @@ fun TodometerTitledTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     singleLine: Boolean = false,
     maxLines: Int = 10,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = Color.Transparent,
-        unfocusedBorderColor = Color.Transparent,
-        errorBorderColor = Color.Transparent,
-    ),
+    colors: TextFieldColors =
+        OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color.Transparent,
+            unfocusedBorderColor = Color.Transparent,
+            errorBorderColor = Color.Transparent,
+        ),
 ) {
     Column(
         modifier = modifier,
@@ -130,11 +132,12 @@ private fun TextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     singleLine: Boolean = false,
     maxLines: Int = 10,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = Color.Transparent,
-        unfocusedBorderColor = Color.Transparent,
-        errorBorderColor = Color.Transparent,
-    ),
+    colors: TextFieldColors =
+        OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color.Transparent,
+            unfocusedBorderColor = Color.Transparent,
+            errorBorderColor = Color.Transparent,
+        ),
 ) {
     OutlinedTextField(
         value = value,

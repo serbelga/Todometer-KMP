@@ -20,8 +20,9 @@ import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetAppThemeUseCase(private val userPreferencesRepository: IUserPreferencesRepository) {
-
+class GetAppThemeUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository,
+) {
     /**
      * Retrieves the current selected [AppTheme] in user preferences
      * every time it changes.

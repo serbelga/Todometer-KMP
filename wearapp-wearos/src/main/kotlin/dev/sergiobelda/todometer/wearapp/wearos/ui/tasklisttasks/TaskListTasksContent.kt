@@ -93,11 +93,8 @@ import kotlinx.collections.immutable.persistentListOf
 
 data object TaskListTasksContent :
     FonamentContent<TaskListTasksUIState, TaskListTasksContentState>() {
-
     @Composable
-    override fun createContentState(
-        uiState: TaskListTasksUIState,
-    ): TaskListTasksContentState = rememberTaskListTasksContentState()
+    override fun createContentState(uiState: TaskListTasksUIState): TaskListTasksContentState = rememberTaskListTasksContentState()
 
     @Composable
     override fun Content(
@@ -160,21 +157,22 @@ data object TaskListTasksContent :
         ) {
             ScalingLazyColumn(
                 autoCentering = AutoCenteringParams(itemIndex = 2),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                ),
+                contentPadding =
+                    PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
                 state = scalingLazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onRotaryScrollEvent {
-                        TaskListTasksEvent.LaunchRotaryScrollEvent(it)
-                        true
-                    }
-                    .requestFocusOnHierarchyActive()
-                    .focusable(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .onRotaryScrollEvent {
+                            TaskListTasksEvent.LaunchRotaryScrollEvent(it)
+                            true
+                        }.requestFocusOnHierarchyActive()
+                        .focusable(),
             ) {
                 taskListTitle(
                     taskListUIState = uiState.taskListUIState,
@@ -200,9 +198,7 @@ data object TaskListTasksContent :
         }
     }
 
-    private fun ScalingLazyListScope.taskListTitle(
-        taskListUIState: TaskListUIState,
-    ) {
+    private fun ScalingLazyListScope.taskListTitle(taskListUIState: TaskListUIState) {
         when (taskListUIState) {
             is TaskListUIState.DefaultTaskList -> {
                 item {
@@ -226,13 +222,13 @@ data object TaskListTasksContent :
                 }
             }
 
-            else -> Unit
+            else -> {
+                Unit
+            }
         }
     }
 
-    private fun ScalingLazyListScope.taskListActions(
-        taskListUIState: TaskListUIState,
-    ) {
+    private fun ScalingLazyListScope.taskListActions(taskListUIState: TaskListUIState) {
         if (taskListUIState is TaskListUIState.DefaultTaskList || taskListUIState is TaskListUIState.Success) {
             item {
                 AddTaskButton(
@@ -257,9 +253,7 @@ data object TaskListTasksContent :
         }
     }
 
-    private fun ScalingLazyListScope.taskItems(
-        tasksUIState: TasksUIState,
-    ) {
+    private fun ScalingLazyListScope.taskItems(tasksUIState: TasksUIState) {
         if (tasksUIState is TasksUIState.Success) {
             if (tasksUIState.tasks.isEmpty()) {
                 item {
@@ -322,13 +316,15 @@ private fun TaskItem(
     onDeleteTask: () -> Unit,
     onClick: () -> Unit,
 ) {
-    val revealState = rememberRevealState(
-        anchors = createRevealAnchors(
-            // TODO: Const values
-            revealingAnchor = 0.5f,
-            revealedAnchor = 0.5f,
-        ),
-    )
+    val revealState =
+        rememberRevealState(
+            anchors =
+                createRevealAnchors(
+                    // TODO: Const values
+                    revealingAnchor = 0.5f,
+                    revealedAnchor = 0.5f,
+                ),
+        )
     SwipeToRevealChip(
         primaryAction = {
             TaskItemSwipeToRevealPrimaryAction(
@@ -361,9 +357,10 @@ private fun TaskItemSwipeToRevealPrimaryAction(
         icon = {
             Box(modifier = Modifier.fillMaxSize()) {
                 Icon(
-                    painter = TodometerAnimatedResources.deleteAnimatedVectorPainter(
-                        atEnd = revealState.currentValue == LeftRevealing,
-                    ),
+                    painter =
+                        TodometerAnimatedResources.deleteAnimatedVectorPainter(
+                            atEnd = revealState.currentValue == LeftRevealing,
+                        ),
                     contentDescription = TodometerResources.strings.deleteTask,
                     modifier = Modifier.align(Alignment.Center),
                 )
@@ -412,10 +409,11 @@ private fun TaskItemSplitToggleChip(
                 Icon(Images.Icons.RadioButtonUnchecked, null)
             }
         },
-        colors = ToggleChipDefaults.splitToggleChipColors(
-            uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
-            checkedToggleControlColor = MaterialTheme.colors.primary,
-        ),
+        colors =
+            ToggleChipDefaults.splitToggleChipColors(
+                uncheckedToggleControlColor = MaterialTheme.colors.onSurface,
+                checkedToggleControlColor = MaterialTheme.colors.primary,
+            ),
         modifier = Modifier.fillMaxWidth(),
         enabled = revealState.currentValue == Covered,
     )
@@ -424,14 +422,15 @@ private fun TaskItemSplitToggleChip(
 @Composable
 private fun AddTaskButton(onComplete: (String) -> Unit) {
     val taskTitleInput = TodometerResources.strings.taskTitleInput
-    val addTaskLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val title = RemoteInput.getResultsFromIntent(result.data).getString(TaskTitle)
-            title?.let { onComplete(it) }
+    val addTaskLauncher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                title?.let { onComplete(it) }
+            }
         }
-    }
     Chip(
         colors = ChipDefaults.gradientBackgroundChipColors(),
         icon = {
@@ -442,14 +441,16 @@ private fun AddTaskButton(onComplete: (String) -> Unit) {
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-            val remoteInputs: ImmutableList<RemoteInput> = persistentListOf(
-                RemoteInput.Builder(TaskTitle)
-                    .setLabel(taskTitleInput)
-                    .wearableExtender {
-                        setEmojisAllowed(false)
-                        setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build(),
-            )
+            val remoteInputs: ImmutableList<RemoteInput> =
+                persistentListOf(
+                    RemoteInput
+                        .Builder(TASK_TITLE)
+                        .setLabel(taskTitleInput)
+                        .wearableExtender {
+                            setEmojisAllowed(false)
+                            setInputActionType(EditorInfo.IME_ACTION_DONE)
+                        }.build(),
+                )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
@@ -467,7 +468,7 @@ private fun EditTaskListButton(
     val editTaskListLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TaskListName)
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
                 name?.let { onComplete(it) }
             }
         }
@@ -482,14 +483,16 @@ private fun EditTaskListButton(
         onClick = {
             val intent: Intent =
                 RemoteInputIntentHelper.createActionRemoteInputIntent()
-            val remoteInputs: ImmutableList<RemoteInput> = persistentListOf(
-                RemoteInput.Builder(TaskListName)
-                    .setLabel(taskList.name)
-                    .wearableExtender {
-                        setEmojisAllowed(false)
-                        setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build(),
-            )
+            val remoteInputs: ImmutableList<RemoteInput> =
+                persistentListOf(
+                    RemoteInput
+                        .Builder(TASK_LIST_NAME)
+                        .setLabel(taskList.name)
+                        .wearableExtender {
+                            setEmojisAllowed(false)
+                            setInputActionType(EditorInfo.IME_ACTION_DONE)
+                        }.build(),
+                )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
@@ -502,9 +505,10 @@ private fun EditTaskListButton(
 @Composable
 private fun DeleteTaskListButton(onClick: () -> Unit) {
     Chip(
-        colors = ChipDefaults.primaryChipColors(
-            backgroundColor = MaterialTheme.colors.error,
-        ),
+        colors =
+            ChipDefaults.primaryChipColors(
+                backgroundColor = MaterialTheme.colors.error,
+            ),
         icon = {
             Icon(
                 Images.Icons.Delete,
@@ -523,5 +527,5 @@ private fun DeleteTaskListButton(onClick: () -> Unit) {
     )
 }
 
-private const val TaskTitle = "task_title"
-private const val TaskListName = "task_list_name"
+private const val TASK_TITLE = "task_title"
+private const val TASK_LIST_NAME = "task_list_name"

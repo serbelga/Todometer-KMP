@@ -38,11 +38,12 @@ fun TagSelector(
     val tags = enumValues<Tag>()
     val state = rememberLazyListState()
 
-    val colorsMap = tags.associateWith {
-        ColorPickerItem(
-            color = TodometerTheme.todometerColors.composeColorOf(it),
-        )
-    }
+    val colorsMap =
+        tags.associateWith {
+            ColorPickerItem(
+                color = TodometerTheme.todometerColors.composeColorOf(it),
+            )
+        }
 
     ColorPicker.LazyRow(
         colorsMap = colorsMap,

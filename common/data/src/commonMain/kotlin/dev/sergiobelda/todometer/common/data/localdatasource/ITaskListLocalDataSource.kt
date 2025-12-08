@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskListLocalDataSource {
-
     fun getTaskLists(): Flow<Result<List<TaskList>>>
 
     fun getTaskList(id: String): Flow<Result<TaskList>>
@@ -32,7 +31,10 @@ interface ITaskListLocalDataSource {
 
     suspend fun updateTaskList(taskList: TaskList)
 
-    suspend fun updateTaskListName(id: String, name: String)
+    suspend fun updateTaskListName(
+        id: String,
+        name: String,
+    )
 
     suspend fun deleteTaskList(id: String)
 }

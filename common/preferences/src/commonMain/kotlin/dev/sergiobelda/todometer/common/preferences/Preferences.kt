@@ -25,23 +25,33 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import androidx.datastore.preferences.core.Preferences as DataStorePreferences
 
-class Preferences(private val dataStore: DataStore<DataStorePreferences>) {
-
-    suspend fun set(key: String, value: String) {
+class Preferences(
+    private val dataStore: DataStore<DataStorePreferences>,
+) {
+    suspend fun set(
+        key: String,
+        value: String,
+    ) {
         val stringKey = stringPreferencesKey(key)
         dataStore.edit { preferences ->
             preferences[stringKey] = value
         }
     }
 
-    suspend fun set(key: String, value: Long) {
+    suspend fun set(
+        key: String,
+        value: Long,
+    ) {
         val longKey = longPreferencesKey(key)
         dataStore.edit { preferences ->
             preferences[longKey] = value
         }
     }
 
-    suspend fun set(key: String, value: Int) {
+    suspend fun set(
+        key: String,
+        value: Int,
+    ) {
         val intKey = intPreferencesKey(key)
         dataStore.edit { preferences ->
             preferences[intKey] = value
@@ -54,7 +64,10 @@ class Preferences(private val dataStore: DataStore<DataStorePreferences>) {
             preferences[stringKey]
         }
 
-    fun getStringOrDefault(key: String, default: String): Flow<String> =
+    fun getStringOrDefault(
+        key: String,
+        default: String,
+    ): Flow<String> =
         dataStore.data.map { preferences ->
             val stringKey = stringPreferencesKey(key)
             preferences[stringKey] ?: default
@@ -66,7 +79,10 @@ class Preferences(private val dataStore: DataStore<DataStorePreferences>) {
             preferences[longKey]
         }
 
-    fun getLongOrDefault(key: String, default: Long): Flow<Long> =
+    fun getLongOrDefault(
+        key: String,
+        default: Long,
+    ): Flow<Long> =
         dataStore.data.map { preferences ->
             val longKey = longPreferencesKey(key)
             preferences[longKey] ?: default
@@ -78,7 +94,10 @@ class Preferences(private val dataStore: DataStore<DataStorePreferences>) {
             preferences[intKey]
         }
 
-    fun getIntOrDefault(key: String, default: Int): Flow<Int> =
+    fun getIntOrDefault(
+        key: String,
+        default: Int,
+    ): Flow<Int> =
         dataStore.data.map { preferences ->
             val intKey = intPreferencesKey(key)
             preferences[intKey] ?: default

@@ -38,22 +38,27 @@ import kotlin.time.Instant
 
 @OptIn(ExperimentalTime::class)
 @Composable
-fun TaskDueDateChip(dueDate: Long, modifier: Modifier = Modifier) {
+fun TaskDueDateChip(
+    dueDate: Long,
+    modifier: Modifier = Modifier,
+) {
     val currentInstant =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
     val expired =
         currentInstant > Instant.fromEpochMilliseconds(dueDate).toLocalDateTime(TimeZone.UTC)
 
-    val dueDateChipTint = if (expired) {
-        MaterialTheme.colorScheme.error
-    } else {
-        MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-    }
-    val dueDateChipOutline = if (expired) {
-        MaterialTheme.colorScheme.error
-    } else {
-        MaterialTheme.colorScheme.outline
-    }
+    val dueDateChipTint =
+        if (expired) {
+            MaterialTheme.colorScheme.error
+        } else {
+            MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+        }
+    val dueDateChipOutline =
+        if (expired) {
+            MaterialTheme.colorScheme.error
+        } else {
+            MaterialTheme.colorScheme.outline
+        }
     TodometerChip(
         border = BorderStroke(1.dp, dueDateChipOutline),
         modifier = modifier,

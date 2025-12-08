@@ -20,16 +20,19 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 
-internal val quickSandRegularFont = Font(
-    resource = "quicksand_regular.ttf",
-    weight = FontWeight.Normal,
-)
-internal val quickSandMediumFont = Font(
-    resource = "quicksand_medium.ttf",
-    weight = FontWeight.Medium,
-)
+internal val quickSandRegularFont =
+    Font(
+        resource = "quicksand_regular.ttf",
+        weight = FontWeight.Normal,
+    )
+internal val quickSandMediumFont =
+    Font(
+        resource = "quicksand_medium.ttf",
+        weight = FontWeight.Medium,
+    )
 
-actual val quickSandFontFamily = FontFamily(
-    quickSandRegularFont,
-    quickSandMediumFont,
-)
+actual val quickSandFontFamily =
+    FontFamily(
+        quickSandRegularFont,
+        quickSandMediumFont,
+    )

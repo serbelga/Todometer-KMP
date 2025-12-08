@@ -22,7 +22,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskDao {
-
     fun getTask(id: String): Flow<TaskEntity?>
 
     fun getTasks(taskListId: String): Flow<List<SelectTasksByTaskListId>>
@@ -33,9 +32,15 @@ interface ITaskDao {
 
     suspend fun updateTask(task: TaskEntity)
 
-    suspend fun updateTaskSync(id: String, sync: Boolean)
+    suspend fun updateTaskSync(
+        id: String,
+        sync: Boolean,
+    )
 
-    suspend fun updateTaskState(id: String, state: TaskState)
+    suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    )
 
     suspend fun deleteTasks(vararg ids: String)
 

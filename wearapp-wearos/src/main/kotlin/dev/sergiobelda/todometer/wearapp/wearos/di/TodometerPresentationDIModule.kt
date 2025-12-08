@@ -26,10 +26,10 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 data object TodometerPresentationDIModule : TodometerDIModule {
-
-    override val module: Module = module {
-        viewModel()
-    }
+    override val module: Module =
+        module {
+            viewModel()
+        }
 
     private fun Module.viewModel() {
         fonamentViewModelOf(::HomeViewModel)

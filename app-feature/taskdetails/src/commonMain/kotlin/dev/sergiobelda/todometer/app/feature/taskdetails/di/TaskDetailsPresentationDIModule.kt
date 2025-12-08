@@ -23,19 +23,19 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 data object TaskDetailsPresentationDIModule : TodometerDIModule {
-
-    override val module: Module = module {
-        fonamentViewModel { parameters ->
-            TaskDetailsViewModel(
-                taskId = parameters.get(),
-                get(),
-                get(),
-                get(),
-                get(),
-                get(),
-                get(),
-                get(),
-            )
+    override val module: Module =
+        module {
+            fonamentViewModel { parameters ->
+                TaskDetailsViewModel(
+                    taskId = parameters.get(),
+                    get(),
+                    get(),
+                    get(),
+                    get(),
+                    get(),
+                    get(),
+                    get(),
+                )
+            }
         }
-    }
 }

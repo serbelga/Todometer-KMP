@@ -18,10 +18,9 @@ package dev.sergiobelda.todometer.app.feature.addtask.navigation
 
 import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventHandler
 
-fun addTaskNavigationEventHandler(
-    navigateBack: () -> Unit,
-): FonamentNavigationEventHandler<AddTaskNavigationEvent> = FonamentNavigationEventHandler {
-    when (it) {
-        AddTaskNavigationEvent.NavigateBack -> navigateBack()
+fun addTaskNavigationEventHandler(navigateBack: () -> Unit): FonamentNavigationEventHandler<AddTaskNavigationEvent> =
+    FonamentNavigationEventHandler {
+        when (it) {
+            AddTaskNavigationEvent.NavigateBack -> navigateBack()
+        }
     }
-}

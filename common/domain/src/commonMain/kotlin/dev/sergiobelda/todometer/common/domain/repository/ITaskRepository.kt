@@ -24,7 +24,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskRepository {
-
     /**
      * Get a task given its [id].
      */
@@ -54,7 +53,10 @@ interface ITaskRepository {
     /**
      * Updates a [Task] given its [id] to [state].
      */
-    suspend fun updateTaskState(id: String, state: TaskState)
+    suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    )
 
     /**
      * Deletes a [Task] given its [ids].

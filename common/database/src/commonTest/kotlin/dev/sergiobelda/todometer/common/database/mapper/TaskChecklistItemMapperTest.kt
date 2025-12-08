@@ -23,15 +23,15 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class TaskChecklistItemMapperTest {
-
     @Test
     fun testTaskChecklistItemToTaskChecklistItemEntity() {
-        val taskChecklistItem = TaskChecklistItem(
-            id = "1",
-            text = "Text",
-            state = TaskChecklistItemState.CHECKED,
-            taskId = "2",
-        )
+        val taskChecklistItem =
+            TaskChecklistItem(
+                id = "1",
+                text = "Text",
+                state = TaskChecklistItemState.CHECKED,
+                taskId = "2",
+            )
         val taskChecklistItemEntity = taskChecklistItem.asTaskChecklistItemEntity()
         assertEquals(taskChecklistItem.id, taskChecklistItemEntity.id)
         assertEquals(taskChecklistItem.text, taskChecklistItemEntity.text)
@@ -41,12 +41,13 @@ class TaskChecklistItemMapperTest {
 
     @Test
     fun testTaskChecklistItemEntityToTaskChecklistItem() {
-        val taskChecklistItemEntity = TaskChecklistItemEntity(
-            id = "1",
-            text = "Text",
-            state = TaskChecklistItemState.CHECKED,
-            task_id = "2",
-        )
+        val taskChecklistItemEntity =
+            TaskChecklistItemEntity(
+                id = "1",
+                text = "Text",
+                state = TaskChecklistItemState.CHECKED,
+                task_id = "2",
+            )
         val taskChecklistItem = taskChecklistItemEntity.asTaskChecklistItem()
         assertEquals(taskChecklistItemEntity.id, taskChecklistItem.id)
         assertEquals(taskChecklistItemEntity.text, taskChecklistItem.text)

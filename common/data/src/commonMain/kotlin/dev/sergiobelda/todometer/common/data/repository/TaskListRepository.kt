@@ -29,12 +29,9 @@ import kotlinx.coroutines.flow.Flow
 class TaskListRepository(
     private val taskListLocalDataSource: ITaskListLocalDataSource,
 ) : ITaskListRepository {
+    override fun getTaskList(id: String): Flow<Result<TaskList>> = taskListLocalDataSource.getTaskList(id)
 
-    override fun getTaskList(id: String): Flow<Result<TaskList>> =
-        taskListLocalDataSource.getTaskList(id)
-
-    override fun getTaskLists(): Flow<Result<List<TaskList>>> =
-        taskListLocalDataSource.getTaskLists()
+    override fun getTaskLists(): Flow<Result<List<TaskList>>> = taskListLocalDataSource.getTaskLists()
 
     override suspend fun insertTaskList(name: String): Result<String> {
         val taskListId = randomUUIDString()
@@ -49,11 +46,12 @@ class TaskListRepository(
         )
     }
 
-    override suspend fun updateTaskList(taskList: TaskList) =
-        taskListLocalDataSource.updateTaskList(taskList)
+    override suspend fun updateTaskList(taskList: TaskList) = taskListLocalDataSource.updateTaskList(taskList)
 
-    override suspend fun updateTaskListName(id: String, name: String) =
-        taskListLocalDataSource.updateTaskListName(id, name)
+    override suspend fun updateTaskListName(
+        id: String,
+        name: String,
+    ) = taskListLocalDataSource.updateTaskListName(id, name)
 
     override suspend fun deleteTaskList(id: String) = taskListLocalDataSource.deleteTaskList(id)
 }

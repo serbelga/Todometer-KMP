@@ -20,7 +20,6 @@ import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import kotlinx.coroutines.flow.Flow
 
 interface IUserPreferencesRepository {
-
     /**
      * Retrieves the current task list selected Id every time it changes in
      * user preferences.

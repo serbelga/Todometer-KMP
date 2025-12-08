@@ -33,40 +33,51 @@ class TaskDetailsViewModel(
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTasksUseCase: DeleteTasksUseCase,
 ) : FonamentViewModel<TaskDetailsUIState>(
-    initialUIState = TaskDetailsUIState.Loading,
-) {
-    init { getTask() }
+        initialUIState = TaskDetailsUIState.Loading,
+    ) {
+    init {
+        getTask()
+    }
 
-    private fun getTask() = viewModelScope.launch {
-        getTaskUseCase(taskId).collect { result ->
-            result.doIfSuccess { task ->
-                updateUIState {
-                    TaskDetailsUIState.Success(task)
-                }
-            }.doIfError { error ->
-                updateUIState {
-                    TaskDetailsUIState.Error(
-                        errorUi = error.mapToErrorUi(),
-                    )
-                }
+    private fun getTask() =
+        viewModelScope.launch {
+            getTaskUseCase(taskId).collect { result ->
+                result
+                    .doIfSuccess { task ->
+                        updateUIState {
+                            TaskDetailsUIState.Success(task)
+                        }
+                    }.doIfError { error ->
+                        updateUIState {
+                            TaskDetailsUIState.Error(
+                                errorUi = error.mapToErrorUi(),
+                            )
+                        }
+                    }
+            }
+        }
+
+    override fun handleEvent(event: FonamentEvent) {
+        when (event) {
+            TaskDetailsEvent.DeleteTask -> {
+                deleteTask()
+            }
+
+            is TaskDetailsEvent.UpdateTask -> {
+                updateTask(event.title)
             }
         }
     }
 
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            TaskDetailsEvent.DeleteTask -> { deleteTask() }
-            is TaskDetailsEvent.UpdateTask -> { updateTask(event.title) }
+    private fun updateTask(title: String) =
+        viewModelScope.launch {
+            (uiState as? TaskDetailsUIState.Success)?.let {
+                updateTaskUseCase(it.task.copy(title = title))
+            }
         }
-    }
 
-    private fun updateTask(title: String) = viewModelScope.launch {
-        (uiState as? TaskDetailsUIState.Success)?.let {
-            updateTaskUseCase(it.task.copy(title = title))
+    private fun deleteTask() =
+        viewModelScope.launch {
+            deleteTasksUseCase(taskId)
         }
-    }
-
-    private fun deleteTask() = viewModelScope.launch {
-        deleteTasksUseCase(taskId)
-    }
 }

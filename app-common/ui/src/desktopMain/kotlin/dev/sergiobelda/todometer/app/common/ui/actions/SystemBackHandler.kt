@@ -19,4 +19,7 @@ package dev.sergiobelda.todometer.app.common.ui.actions
 import androidx.compose.runtime.Composable
 
 @Composable
-actual fun SystemBackHandler(enabled: Boolean, onBack: () -> Unit) = Unit
+actual fun SystemBackHandler(
+    enabled: Boolean,
+    onBack: () -> Unit,
+) = Unit

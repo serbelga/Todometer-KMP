@@ -26,7 +26,6 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 object TaskDueDate {
-
     /**
      * Returns due date formatted. If due date is today, it only shows HH:mm,
      * otherwise it displays dd-MM-yyyy HH:mm.

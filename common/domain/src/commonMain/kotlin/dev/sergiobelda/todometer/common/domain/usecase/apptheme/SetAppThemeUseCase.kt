@@ -19,11 +19,11 @@ package dev.sergiobelda.todometer.common.domain.usecase.apptheme
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
 
-class SetAppThemeUseCase(private val userPreferencesRepository: IUserPreferencesRepository) {
-
+class SetAppThemeUseCase(
+    private val userPreferencesRepository: IUserPreferencesRepository,
+) {
     /**
      * Updates the current selected [AppTheme].
      */
-    suspend operator fun invoke(theme: AppTheme) =
-        userPreferencesRepository.setUserTheme(theme)
+    suspend operator fun invoke(theme: AppTheme) = userPreferencesRepository.setUserTheme(theme)
 }

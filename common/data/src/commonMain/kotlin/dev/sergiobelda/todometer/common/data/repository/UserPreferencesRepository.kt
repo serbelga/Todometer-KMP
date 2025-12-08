@@ -25,18 +25,19 @@ import kotlinx.coroutines.flow.map
 /**
  * Repository for performing data operations on [preferences].
  */
-class UserPreferencesRepository(private val preferences: Preferences) : IUserPreferencesRepository {
-
-    override fun taskListSelected(): Flow<String> =
-        preferences.getStringOrDefault(TASK_LIST_SELECTED_KEY, "")
+class UserPreferencesRepository(
+    private val preferences: Preferences,
+) : IUserPreferencesRepository {
+    override fun taskListSelected(): Flow<String> = preferences.getStringOrDefault(TASK_LIST_SELECTED_KEY, "")
 
     override suspend fun setTaskListSelected(taskListSelectedId: String) {
         preferences.set(TASK_LIST_SELECTED_KEY, taskListSelectedId)
     }
 
-    override fun getUserTheme(): Flow<AppTheme> = preferences.getInt(APP_THEME).map { theme ->
-        theme?.let { enumValues<AppTheme>().getOrNull(it) } ?: AppTheme.FOLLOW_SYSTEM
-    }
+    override fun getUserTheme(): Flow<AppTheme> =
+        preferences.getInt(APP_THEME).map { theme ->
+            theme?.let { enumValues<AppTheme>().getOrNull(it) } ?: AppTheme.FOLLOW_SYSTEM
+        }
 
     override suspend fun setUserTheme(theme: AppTheme) {
         preferences.set(APP_THEME, theme.ordinal)

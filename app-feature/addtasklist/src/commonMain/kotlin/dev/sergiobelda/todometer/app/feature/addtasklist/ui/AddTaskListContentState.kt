@@ -29,52 +29,54 @@ import androidx.compose.runtime.setValue
 import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
-data class AddTaskListContentState @RememberInComposition constructor(
-    val snackbarHostState: SnackbarHostState,
-) : FonamentContentState {
-    var taskListName: String by mutableStateOf("")
-        private set
+data class AddTaskListContentState
+    @RememberInComposition
+    constructor(
+        val snackbarHostState: SnackbarHostState,
+    ) : FonamentContentState {
+        var taskListName: String by mutableStateOf("")
+            private set
 
-    val isSaveButtonEnabled: Boolean by derivedStateOf { taskListName.isNotBlank() }
+        val isSaveButtonEnabled: Boolean by derivedStateOf { taskListName.isNotBlank() }
 
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            is AddTaskListEvent.TaskListNameValueChange -> {
-                taskListName = event.value
+        override fun handleEvent(event: FonamentEvent) {
+            when (event) {
+                is AddTaskListEvent.TaskListNameValueChange -> {
+                    taskListName = event.value
+                }
             }
         }
-    }
 
-    suspend fun showSnackbar(message: String) =
-        snackbarHostState.showSnackbar(message = message)
+        suspend fun showSnackbar(message: String) = snackbarHostState.showSnackbar(message = message)
 
-    companion object {
-        fun saver(
-            snackbarHostState: SnackbarHostState,
-        ): Saver<AddTaskListContentState, String> = Saver(
-            save = {
-                it.taskListName
-            },
-            restore = {
-                AddTaskListContentState(
-                    snackbarHostState = snackbarHostState,
-                ).apply {
-                    taskListName = it
-                }
-            },
-        )
+        companion object {
+            fun saver(snackbarHostState: SnackbarHostState): Saver<AddTaskListContentState, String> =
+                Saver(
+                    save = {
+                        it.taskListName
+                    },
+                    restore = {
+                        AddTaskListContentState(
+                            snackbarHostState = snackbarHostState,
+                        ).apply {
+                            taskListName = it
+                        }
+                    },
+                )
+        }
     }
-}
 
 @Composable
 internal fun rememberAddTaskListContentState(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
-): AddTaskListContentState = rememberSaveable(
-    saver = AddTaskListContentState.saver(
-        snackbarHostState = snackbarHostState,
-    ),
-) {
-    AddTaskListContentState(
-        snackbarHostState = snackbarHostState,
-    )
-}
+): AddTaskListContentState =
+    rememberSaveable(
+        saver =
+            AddTaskListContentState.saver(
+                snackbarHostState = snackbarHostState,
+            ),
+    ) {
+        AddTaskListContentState(
+            snackbarHostState = snackbarHostState,
+        )
+    }

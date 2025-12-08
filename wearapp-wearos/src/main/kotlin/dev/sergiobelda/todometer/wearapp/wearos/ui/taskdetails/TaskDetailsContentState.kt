@@ -34,40 +34,44 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Stable
-data class TaskDetailsContentState @RememberInComposition constructor(
-    val scalingLazyListState: ScalingLazyListState,
-    val coroutineScope: CoroutineScope,
-) : FonamentContentState {
+data class TaskDetailsContentState
+    @RememberInComposition
+    constructor(
+        val scalingLazyListState: ScalingLazyListState,
+        val coroutineScope: CoroutineScope,
+    ) : FonamentContentState {
+        var showDeleteTaskAlertDialog by mutableStateOf(false)
+            private set
 
-    var showDeleteTaskAlertDialog by mutableStateOf(false)
-        private set
+        override fun handleEvent(event: FonamentEvent) {
+            when (event) {
+                TaskDetailsEvent.ShowDeleteTaskAlertDialog -> {
+                    showDeleteTaskAlertDialog = true
+                }
 
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            TaskDetailsEvent.ShowDeleteTaskAlertDialog -> {
-                showDeleteTaskAlertDialog = true
-            }
-            TaskDetailsEvent.CancelDeleteTaskAlertDialog -> {
-                showDeleteTaskAlertDialog = false
-            }
-            is TaskDetailsEvent.LaunchRotaryScrollEvent -> {
-                coroutineScope.launch {
-                    scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
+                TaskDetailsEvent.CancelDeleteTaskAlertDialog -> {
+                    showDeleteTaskAlertDialog = false
+                }
 
-                    scalingLazyListState.animateScrollBy(0f)
+                is TaskDetailsEvent.LaunchRotaryScrollEvent -> {
+                    coroutineScope.launch {
+                        scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
+
+                        scalingLazyListState.animateScrollBy(0f)
+                    }
                 }
             }
         }
     }
-}
 
 @Composable
 fun rememberTaskDetailsContentState(
     scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): TaskDetailsContentState = remember {
-    TaskDetailsContentState(
-        scalingLazyListState = scalingLazyListState,
-        coroutineScope = coroutineScope,
-    )
-}
+): TaskDetailsContentState =
+    remember {
+        TaskDetailsContentState(
+            scalingLazyListState = scalingLazyListState,
+            coroutineScope = coroutineScope,
+        )
+    }

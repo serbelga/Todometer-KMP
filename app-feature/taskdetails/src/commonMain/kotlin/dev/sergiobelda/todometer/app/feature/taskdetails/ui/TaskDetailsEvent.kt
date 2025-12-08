@@ -20,7 +20,6 @@ import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 
 sealed interface TaskDetailsEvent : FonamentEvent {
-
     data class AddTaskChecklistItem(
         internal val text: String,
     ) : TaskDetailsEvent

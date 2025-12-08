@@ -39,11 +39,13 @@ fun HomeContentLoadingPreview() {
 fun HomeContentPreview() {
     TodometerWearAppPreview {
         HomeContent(
-            uiState = HomeUIState.Success(
-                taskLists = persistentListOf(
-                    taskListSample,
+            uiState =
+                HomeUIState.Success(
+                    taskLists =
+                        persistentListOf(
+                            taskListSample,
+                        ),
                 ),
-            ),
             contentState = rememberHomeContentState(),
         )
     }
@@ -54,9 +56,10 @@ fun HomeContentPreview() {
 fun HomeContentLocalesPreview() {
     TodometerWearAppPreview {
         HomeContent(
-            uiState = HomeUIState.Success(
-                taskLists = persistentListOf(),
-            ),
+            uiState =
+                HomeUIState.Success(
+                    taskLists = persistentListOf(),
+                ),
             contentState = rememberHomeContentState(),
         )
     }

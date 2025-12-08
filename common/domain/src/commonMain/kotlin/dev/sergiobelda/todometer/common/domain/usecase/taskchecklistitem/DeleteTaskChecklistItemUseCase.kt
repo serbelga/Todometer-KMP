@@ -21,7 +21,5 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 class DeleteTaskChecklistItemUseCase(
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
-
-    suspend operator fun invoke(id: String) =
-        taskChecklistItemsRepository.deleteTaskChecklistItem(id)
+    suspend operator fun invoke(id: String) = taskChecklistItemsRepository.deleteTaskChecklistItem(id)
 }

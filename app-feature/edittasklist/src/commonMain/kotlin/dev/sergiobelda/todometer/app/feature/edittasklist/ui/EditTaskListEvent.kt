@@ -19,6 +19,11 @@ package dev.sergiobelda.todometer.app.feature.edittasklist.ui
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
 sealed interface EditTaskListEvent : FonamentEvent {
-    data class UpdateTaskList(val name: String) : EditTaskListEvent
-    data class NameTextFieldValueChange(val value: String) : EditTaskListEvent
+    data class UpdateTaskList(
+        val name: String,
+    ) : EditTaskListEvent
+
+    data class NameTextFieldValueChange(
+        val value: String,
+    ) : EditTaskListEvent
 }

@@ -28,9 +28,7 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoadingScreenDialog(
-    navigateBack: () -> Unit,
-) {
+fun LoadingScreenDialog(navigateBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

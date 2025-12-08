@@ -26,12 +26,13 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMedium
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
-fun String.addStyledOptionalSuffix(): AnnotatedString = buildAnnotatedString {
-    append(this@addStyledOptionalSuffix)
-    withStyle(
-        style = SpanStyle(color = MaterialTheme.colorScheme.onBackground.applyMediumEmphasisAlpha()),
-    ) {
-        append(" · ")
-        append(TodometerResources.strings.optional)
+fun String.addStyledOptionalSuffix(): AnnotatedString =
+    buildAnnotatedString {
+        append(this@addStyledOptionalSuffix)
+        withStyle(
+            style = SpanStyle(color = MaterialTheme.colorScheme.onBackground.applyMediumEmphasisAlpha()),
+        ) {
+            append(" · ")
+            append(TodometerResources.strings.optional)
+        }
     }
-}

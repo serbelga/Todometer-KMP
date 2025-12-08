@@ -22,7 +22,6 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
 abstract class DatabaseTest {
-
     private lateinit var sqlDriver: SqlDriver
 
     lateinit var database: TodometerDatabase
@@ -30,16 +29,19 @@ abstract class DatabaseTest {
     @BeforeTest
     fun initDatabase() {
         sqlDriver = createSqlDriver()
-        database = TodometerDatabase(
-            sqlDriver,
-            TaskEntityAdapter = TaskEntity.Adapter(
-                stateAdapter = EnumColumnAdapter(),
-                tagAdapter = EnumColumnAdapter(),
-            ),
-            TaskChecklistItemEntityAdapter = TaskChecklistItemEntity.Adapter(
-                stateAdapter = EnumColumnAdapter(),
-            ),
-        )
+        database =
+            TodometerDatabase(
+                sqlDriver,
+                TaskEntityAdapter =
+                    TaskEntity.Adapter(
+                        stateAdapter = EnumColumnAdapter(),
+                        tagAdapter = EnumColumnAdapter(),
+                    ),
+                TaskChecklistItemEntityAdapter =
+                    TaskChecklistItemEntity.Adapter(
+                        stateAdapter = EnumColumnAdapter(),
+                    ),
+            )
     }
 
     @AfterTest

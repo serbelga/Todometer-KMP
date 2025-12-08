@@ -20,9 +20,9 @@ import dev.sergiobelda.todometer.common.di.TodometerDI
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
 open class TodometerBaseDI : TodometerDI() {
-
-    override val modules: List<TodometerDIModule> = listOf(
-        TodometerDataDIModule,
-        TodometerDomainDIModule,
-    )
+    override val modules: List<TodometerDIModule> =
+        listOf(
+            TodometerDataDIModule,
+            TodometerDomainDIModule,
+        )
 }

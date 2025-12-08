@@ -37,11 +37,12 @@ fun TaskTagIndicator(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier
-            .clip(shape = CircleShape)
-            .background(color = TodometerTheme.todometerColors.composeColorOf(tag))
-            .height(20.dp)
-            .width(4.dp),
+        modifier =
+            modifier
+                .clip(shape = CircleShape)
+                .background(color = TodometerTheme.todometerColors.composeColorOf(tag))
+                .height(20.dp)
+                .width(4.dp),
     )
     Spacer(
         modifier.size(12.dp),

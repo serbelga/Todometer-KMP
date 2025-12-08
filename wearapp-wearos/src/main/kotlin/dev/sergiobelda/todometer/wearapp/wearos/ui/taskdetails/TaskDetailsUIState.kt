@@ -22,7 +22,6 @@ import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.ui.error.ErrorUi
 
 sealed interface TaskDetailsUIState : FonamentUIState {
-
     data object Loading : TaskDetailsUIState
 
     @Immutable

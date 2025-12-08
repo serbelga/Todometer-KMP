@@ -19,7 +19,6 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui.home.navigation
 import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEvent
 
 sealed interface HomeNavigationEvent : FonamentNavigationEvent {
-
     data class NavigateToTaskList(
         val taskListId: String?,
     ) : HomeNavigationEvent

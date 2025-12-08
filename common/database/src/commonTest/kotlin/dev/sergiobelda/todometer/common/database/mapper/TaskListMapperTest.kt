@@ -22,15 +22,15 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class TaskListMapperTest {
-
     @Test
     fun testTaskListToTaskListEntity() {
-        val taskList = TaskList(
-            id = "1",
-            name = "Name",
-            description = "Description",
-            sync = true,
-        )
+        val taskList =
+            TaskList(
+                id = "1",
+                name = "Name",
+                description = "Description",
+                sync = true,
+            )
         val taskListEntity = taskList.asTaskListEntity()
         assertEquals(taskList.id, taskListEntity.id)
         assertEquals(taskList.name, taskListEntity.name)
@@ -40,12 +40,13 @@ class TaskListMapperTest {
 
     @Test
     fun testTaskListEntityToTaskList() {
-        val taskListEntity = TaskListEntity(
-            id = "1",
-            name = "Name",
-            description = "Description",
-            sync = true,
-        )
+        val taskListEntity =
+            TaskListEntity(
+                id = "1",
+                name = "Name",
+                description = "Description",
+                sync = true,
+            )
         val taskList = taskListEntity.asTaskList()
         assertEquals(taskListEntity.id, taskList.id)
         assertEquals(taskListEntity.name, taskList.name)

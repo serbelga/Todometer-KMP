@@ -26,7 +26,10 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Warn
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
-fun DeleteTaskListAlertDialog(onDismissRequest: () -> Unit, onDeleteTaskListClick: () -> Unit) {
+fun DeleteTaskListAlertDialog(
+    onDismissRequest: () -> Unit,
+    onDeleteTaskListClick: () -> Unit,
+) {
     AlertDialog(
         icon = {
             Icon(Images.Icons.Warning, contentDescription = null)

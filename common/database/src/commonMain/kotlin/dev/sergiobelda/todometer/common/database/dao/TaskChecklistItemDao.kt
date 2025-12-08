@@ -24,11 +24,13 @@ import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 
-class TaskChecklistItemDao(private val todometerDatabase: TodometerDatabase) :
-    ITaskChecklistItemDao {
-
+class TaskChecklistItemDao(
+    private val todometerDatabase: TodometerDatabase,
+) : ITaskChecklistItemDao {
     override fun getTaskChecklistItems(taskId: String): Flow<List<TaskChecklistItemEntity>> =
-        todometerDatabase.taskChecklistItemEntityQueries.selectTaskChecklistItems(taskId).asFlow()
+        todometerDatabase.taskChecklistItemEntityQueries
+            .selectTaskChecklistItems(taskId)
+            .asFlow()
             .mapToList(Dispatchers.Default)
 
     override suspend fun insertTaskChecklistItems(vararg taskChecklistItemEntities: TaskChecklistItemEntity) =
@@ -43,7 +45,10 @@ class TaskChecklistItemDao(private val todometerDatabase: TodometerDatabase) :
             }
         }
 
-    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) {
+    override suspend fun updateTaskChecklistItemState(
+        id: String,
+        state: TaskChecklistItemState,
+    ) {
         todometerDatabase.taskChecklistItemEntityQueries.updateTaskChecklistItemState(
             id = id,
             state = state,

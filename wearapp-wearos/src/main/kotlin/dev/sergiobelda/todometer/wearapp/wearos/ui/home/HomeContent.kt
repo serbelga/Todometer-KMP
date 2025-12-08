@@ -65,8 +65,7 @@ import kotlinx.collections.immutable.persistentListOf
 
 data object HomeContent : FonamentContent<HomeUIState, HomeContentState>() {
     @Composable
-    override fun createContentState(uiState: HomeUIState): HomeContentState =
-        rememberHomeContentState()
+    override fun createContentState(uiState: HomeUIState): HomeContentState = rememberHomeContentState()
 
     @Composable
     override fun Content(
@@ -88,25 +87,27 @@ data object HomeContent : FonamentContent<HomeUIState, HomeContentState>() {
                 )
             }
 
-            is HomeUIState.Error -> Unit
+            is HomeUIState.Error -> {
+                Unit
+            }
         }
     }
 
     @Composable
-    private fun HomeContentLoading(
-        scalingLazyListState: ScalingLazyListState,
-    ) {
+    private fun HomeContentLoading(scalingLazyListState: ScalingLazyListState) {
         ScalingLazyColumn(
             autoCentering = AutoCenteringParams(itemIndex = 1),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp,
-            ),
+            contentPadding =
+                PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                ),
             state = scalingLazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxWidth(),
         ) {
             item { TodometerTitle() }
             item { Spacer(modifier = Modifier.height(4.dp)) }
@@ -126,30 +127,29 @@ data object HomeContent : FonamentContent<HomeUIState, HomeContentState>() {
         ) {
             ScalingLazyColumn(
                 autoCentering = AutoCenteringParams(itemIndex = 1),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                ),
+                contentPadding =
+                    PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
                 state = scalingLazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onRotaryScrollEvent {
-                        onEvent(HomeEvent.LaunchRotaryScrollEvent(it))
-                        true
-                    }
-                    .requestFocusOnHierarchyActive()
-                    .focusable(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .onRotaryScrollEvent {
+                            onEvent(HomeEvent.LaunchRotaryScrollEvent(it))
+                            true
+                        }.requestFocusOnHierarchyActive()
+                        .focusable(),
             ) {
                 homeContent(taskLists = uiState.taskLists)
             }
         }
     }
 
-    private fun ScalingLazyListScope.homeContent(
-        taskLists: ImmutableList<TaskList>,
-    ) {
+    private fun ScalingLazyListScope.homeContent(taskLists: ImmutableList<TaskList>) {
         item { TodometerTitle() }
         item { Spacer(modifier = Modifier.height(4.dp)) }
         item {
@@ -226,7 +226,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val name = RemoteInput.getResultsFromIntent(result.data).getString(TaskListName)
+                val name = RemoteInput.getResultsFromIntent(result.data).getString(TASK_LIST_NAME)
                 name?.let { onComplete(it) }
             }
         }
@@ -243,14 +243,16 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         },
         onClick = {
             val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-            val remoteInputs: ImmutableList<RemoteInput> = persistentListOf(
-                RemoteInput.Builder(TaskListName)
-                    .setLabel(taskListNameInput)
-                    .wearableExtender {
-                        setEmojisAllowed(false)
-                        setInputActionType(EditorInfo.IME_ACTION_DONE)
-                    }.build(),
-            )
+            val remoteInputs: ImmutableList<RemoteInput> =
+                persistentListOf(
+                    RemoteInput
+                        .Builder(TASK_LIST_NAME)
+                        .setLabel(taskListNameInput)
+                        .wearableExtender {
+                            setEmojisAllowed(false)
+                            setInputActionType(EditorInfo.IME_ACTION_DONE)
+                        }.build(),
+                )
 
             RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
@@ -260,4 +262,4 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
     )
 }
 
-private const val TaskListName = "task_list_name"
+private const val TASK_LIST_NAME = "task_list_name"

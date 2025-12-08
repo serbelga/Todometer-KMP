@@ -33,11 +33,12 @@ fun TodometerApp() {
     ProvideTodometerStrings {
         val getAppThemeUseCase = koinInject<GetAppThemeUseCase>()
         val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)
-        val darkTheme: Boolean = when (appThemeState.value) {
-            AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-            AppTheme.DARK_THEME -> true
-            AppTheme.LIGHT_THEME -> false
-        }
+        val darkTheme: Boolean =
+            when (appThemeState.value) {
+                AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                AppTheme.DARK_THEME -> true
+                AppTheme.LIGHT_THEME -> false
+            }
         TodometerAppTheme(darkTheme) {
             val navController = rememberNavController()
             val navAction = rememberNavAction(navController)

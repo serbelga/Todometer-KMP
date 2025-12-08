@@ -18,10 +18,9 @@ package dev.sergiobelda.todometer.app.feature.settings.navigation
 
 import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventHandler
 
-fun settingsNavigationEventHandler(
-    navigateBack: () -> Unit,
-): FonamentNavigationEventHandler<SettingsNavigationEvent> = FonamentNavigationEventHandler {
-    when (it) {
-        SettingsNavigationEvent.NavigateBack -> navigateBack()
+fun settingsNavigationEventHandler(navigateBack: () -> Unit): FonamentNavigationEventHandler<SettingsNavigationEvent> =
+    FonamentNavigationEventHandler {
+        when (it) {
+            SettingsNavigationEvent.NavigateBack -> navigateBack()
+        }
     }
-}

@@ -21,8 +21,9 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 
-class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
-
+class InsertTaskUseCase(
+    private val taskRepository: ITaskRepository,
+) {
     /**
      * Creates a new [Task] given a [title], [description] and [tag], in the task list [taskListId].
      */
@@ -32,11 +33,12 @@ class InsertTaskUseCase(private val taskRepository: ITaskRepository) {
         tag: Tag = Tag.GRAY,
         description: String? = null,
         dueDate: Long? = null,
-    ): Result<String> = taskRepository.insertTask(
-        title,
-        tag,
-        description,
-        dueDate,
-        taskListId,
-    )
+    ): Result<String> =
+        taskRepository.insertTask(
+            title,
+            tag,
+            description,
+            dueDate,
+            taskListId,
+        )
 }

@@ -33,6 +33,7 @@ fun SelectTasksByTaskListId.asTaskItem(): TaskItem =
         isPinned = isPinned,
     )
 
-fun Iterable<SelectTasksByTaskListId>.asTaskItems(): List<TaskItem> = this.map {
-    it.asTaskItem()
-}
+fun Iterable<SelectTasksByTaskListId>.asTaskItems(): List<TaskItem> =
+    this.map {
+        it.asTaskItem()
+    }

@@ -66,10 +66,8 @@ import kotlinx.collections.immutable.persistentListOf
 @OptIn(ExperimentalWearFoundationApi::class)
 internal data object TaskDetailsContent :
     FonamentContent<TaskDetailsUIState, TaskDetailsContentState>() {
-
     @Composable
-    override fun createContentState(uiState: TaskDetailsUIState): TaskDetailsContentState =
-        rememberTaskDetailsContentState()
+    override fun createContentState(uiState: TaskDetailsUIState): TaskDetailsContentState = rememberTaskDetailsContentState()
 
     @Composable
     override fun Content(
@@ -87,16 +85,21 @@ internal data object TaskDetailsContent :
                     onCancel = { onEvent(TaskDetailsEvent.CancelDeleteTaskAlertDialog) },
                 )
             }
+
             uiState is TaskDetailsUIState.Loading -> {
                 FullScreenProgressContent()
             }
+
             uiState is TaskDetailsUIState.Success -> {
                 TaskDetailsScaffold(
                     scalingLazyListState = contentState.scalingLazyListState,
                     uiState = uiState,
                 )
             }
-            uiState is TaskDetailsUIState.Error -> Unit
+
+            uiState is TaskDetailsUIState.Error -> {
+                Unit
+            }
         }
     }
 
@@ -111,21 +114,22 @@ internal data object TaskDetailsContent :
             },
         ) {
             ScalingLazyColumn(
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                ),
+                contentPadding =
+                    PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
                 state = scalingLazyListState,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onRotaryScrollEvent {
-                        onEvent(TaskDetailsEvent.LaunchRotaryScrollEvent(it))
-                        true
-                    }
-                    .requestFocusOnHierarchyActive()
-                    .focusable(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .onRotaryScrollEvent {
+                            onEvent(TaskDetailsEvent.LaunchRotaryScrollEvent(it))
+                            true
+                        }.requestFocusOnHierarchyActive()
+                        .focusable(),
             ) {
                 taskDetailsContent(
                     task = uiState.task,
@@ -134,9 +138,7 @@ internal data object TaskDetailsContent :
         }
     }
 
-    private fun ScalingLazyListScope.taskDetailsContent(
-        task: Task,
-    ) {
+    private fun ScalingLazyListScope.taskDetailsContent(task: Task) {
         item {
             Text(
                 text = task.title,
@@ -171,16 +173,17 @@ internal data object TaskDetailsContent :
         task: Task,
         onComplete: (String) -> Unit,
     ) {
-        val launcher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.StartActivityForResult(),
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val title = RemoteInput.getResultsFromIntent(result.data).getString(TaskTitle)
-                if (!title.isNullOrEmpty()) {
-                    onComplete(title)
+        val launcher =
+            rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.StartActivityForResult(),
+            ) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val title = RemoteInput.getResultsFromIntent(result.data).getString(TASK_TITLE)
+                    if (!title.isNullOrEmpty()) {
+                        onComplete(title)
+                    }
                 }
             }
-        }
 
         Chip(
             colors = ChipDefaults.gradientBackgroundChipColors(),
@@ -192,14 +195,16 @@ internal data object TaskDetailsContent :
             },
             onClick = {
                 val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-                val remoteInputs: ImmutableList<RemoteInput> = persistentListOf(
-                    RemoteInput.Builder(TaskTitle)
-                        .setLabel(task.title)
-                        .wearableExtender {
-                            setEmojisAllowed(false)
-                            setInputActionType(EditorInfo.IME_ACTION_DONE)
-                        }.build(),
-                )
+                val remoteInputs: ImmutableList<RemoteInput> =
+                    persistentListOf(
+                        RemoteInput
+                            .Builder(TASK_TITLE)
+                            .setLabel(task.title)
+                            .wearableExtender {
+                                setEmojisAllowed(false)
+                                setInputActionType(EditorInfo.IME_ACTION_DONE)
+                            }.build(),
+                    )
 
                 RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
 
@@ -212,9 +217,10 @@ internal data object TaskDetailsContent :
     @Composable
     private fun DeleteTaskButton(onClick: () -> Unit) {
         Chip(
-            colors = ChipDefaults.primaryChipColors(
-                backgroundColor = MaterialTheme.colors.error,
-            ),
+            colors =
+                ChipDefaults.primaryChipColors(
+                    backgroundColor = MaterialTheme.colors.error,
+                ),
             icon = {
                 Icon(
                     Images.Icons.Delete,
@@ -228,4 +234,4 @@ internal data object TaskDetailsContent :
     }
 }
 
-private const val TaskTitle = "task_title"
+private const val TASK_TITLE = "task_title"

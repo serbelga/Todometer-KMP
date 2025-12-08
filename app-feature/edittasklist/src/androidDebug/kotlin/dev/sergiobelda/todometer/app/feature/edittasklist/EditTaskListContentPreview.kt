@@ -34,12 +34,14 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 fun EditTaskListContentPreview() {
     TodometerAppPreview {
         EditTaskListContent(
-            uiState = EditTaskListUIState(
-                taskList = taskListSample,
-            ),
-            contentState = rememberEditTaskListContentState(
-                taskListName = taskListSample.name,
-            ),
+            uiState =
+                EditTaskListUIState(
+                    taskList = taskListSample,
+                ),
+            contentState =
+                rememberEditTaskListContentState(
+                    taskListName = taskListSample.name,
+                ),
         )
     }
 }
@@ -49,19 +51,22 @@ fun EditTaskListContentPreview() {
 fun EditTaskListLoadingPreview() {
     TodometerAppPreview {
         EditTaskListContent(
-            uiState = EditTaskListUIState(
-                isLoading = true,
-            ),
-            contentState = rememberEditTaskListContentState(
-                taskListName = "",
-            ),
+            uiState =
+                EditTaskListUIState(
+                    isLoading = true,
+                ),
+            contentState =
+                rememberEditTaskListContentState(
+                    taskListName = "",
+                ),
         )
     }
 }
 
-private val taskListSample = TaskList(
-    id = "1",
-    name = "List of tasks",
-    description = "",
-    sync = true,
-)
+private val taskListSample =
+    TaskList(
+        id = "1",
+        name = "List of tasks",
+        description = "",
+        sync = true,
+    )

@@ -19,7 +19,6 @@ package dev.sergiobelda.todometer.app.di
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
 open class TodometerMainAppDI : TodometerAppDI() {
-
     override val modules: List<TodometerDIModule> =
         super.modules + MainPresentationDIModule
 }

@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.stateIn
 class MainViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
 ) : ViewModel() {
-
     val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
             viewModelScope,

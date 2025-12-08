@@ -19,7 +19,7 @@ package dev.sergiobelda.todometer.common.preferences
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 
-private val Context.dataStore by preferencesDataStore(DataStoreFileName)
+private val Context.dataStore by preferencesDataStore(DATA_STORE_FILE_NAME)
 
 actual object PreferencesFactory {
     lateinit var appContext: Context

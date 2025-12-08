@@ -25,6 +25,5 @@ import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
     name = "Settings",
 )
 data object SettingsScreen : FonamentUI<SettingsUIState>() {
-
     override val content: FonamentContent<SettingsUIState, *> = SettingsContent
 }

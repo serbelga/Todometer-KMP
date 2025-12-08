@@ -18,10 +18,9 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.navigation
 
 import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventHandler
 
-fun taskDetailsNavigationEventHandler(
-    navigateBack: () -> Unit,
-): FonamentNavigationEventHandler<TaskDetailsNavigationEvent> = FonamentNavigationEventHandler {
-    when (it) {
-        TaskDetailsNavigationEvent.NavigateBack -> navigateBack()
+fun taskDetailsNavigationEventHandler(navigateBack: () -> Unit): FonamentNavigationEventHandler<TaskDetailsNavigationEvent> =
+    FonamentNavigationEventHandler {
+        when (it) {
+            TaskDetailsNavigationEvent.NavigateBack -> navigateBack()
+        }
     }
-}

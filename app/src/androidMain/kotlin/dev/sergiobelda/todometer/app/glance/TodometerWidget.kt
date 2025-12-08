@@ -72,8 +72,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import androidx.glance.appwidget.action.actionStartActivity as actionStartActivityIntent
 
-class TodometerWidget : GlanceAppWidget(), KoinComponent {
-
+class TodometerWidget :
+    GlanceAppWidget(),
+    KoinComponent {
     private val getTaskListSelectedUseCase: GetTaskListSelectedUseCase by inject()
 
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase by inject()
@@ -84,41 +85,47 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
 
     private val context by inject<Context>()
 
-    private val openAddTaskDeepLinkIntent = Intent(
-        Intent.ACTION_VIEW,
-        AddTaskDeepLink.toUri(),
-        context,
-        MainActivity::class.java,
-    )
+    private val openAddTaskDeepLinkIntent =
+        Intent(
+            Intent.ACTION_VIEW,
+            ADD_TASK_DEEP_LINK.toUri(),
+            context,
+            MainActivity::class.java,
+        )
 
-    override suspend fun provideGlance(context: Context, id: GlanceId) {
+    override suspend fun provideGlance(
+        context: Context,
+        id: GlanceId,
+    ) {
         provideContent {
             val scope = rememberCoroutineScope()
             var taskListName: String by remember { mutableStateOf("") }
             val taskListSelected by getTaskListSelectedUseCase().collectAsState(null)
-            taskListSelected?.doIfSuccess {
-                taskListName = it.name
-            }?.doIfError {
-                taskListName = TodometerResources.strings.defaultTaskListName
-            }
+            taskListSelected
+                ?.doIfSuccess {
+                    taskListName = it.name
+                }?.doIfError {
+                    taskListName = TodometerResources.strings.defaultTaskListName
+                }
 
             val tasksDoing = remember { mutableStateListOf<TaskItem>() }
             val tasksDone = remember { mutableStateListOf<TaskItem>() }
             var taskListProgress by remember { mutableStateOf(0F) }
             val taskListSelectedTasks by getTaskListSelectedTasksUseCase().collectAsState(null)
-            taskListSelectedTasks?.doIfSuccess { tasks ->
-                tasksDoing.clear()
-                tasksDoing.addAll(tasks.filter { it.state == TaskState.DOING })
+            taskListSelectedTasks
+                ?.doIfSuccess { tasks ->
+                    tasksDoing.clear()
+                    tasksDoing.addAll(tasks.filter { it.state == TaskState.DOING })
 
-                tasksDone.clear()
-                tasksDone.addAll(tasks.filter { it.state == TaskState.DONE })
+                    tasksDone.clear()
+                    tasksDone.addAll(tasks.filter { it.state == TaskState.DONE })
 
-                taskListProgress = TaskProgress.getTasksDoneProgress(tasks)
-            }?.doIfError {
-                tasksDoing.clear()
-                tasksDone.clear()
-                taskListProgress = 0F
-            }
+                    taskListProgress = TaskProgress.getTasksDoneProgress(tasks)
+                }?.doIfError {
+                    tasksDoing.clear()
+                    tasksDone.clear()
+                    taskListProgress = 0F
+                }
 
             TodometerWidgetTheme {
                 TodometerWidgetContent(
@@ -146,10 +153,11 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
         toggleTaskItemState: (String, TaskState) -> Unit,
     ) {
         Box(
-            modifier = GlanceModifier
-                .fillMaxSize()
-                // TODO: Update background color to use GlanceTheme.
-                .background(ImageProvider(R.drawable.todometer_widget_background)),
+            modifier =
+                GlanceModifier
+                    .fillMaxSize()
+                    // TODO: Update background color to use GlanceTheme.
+                    .background(ImageProvider(R.drawable.todometer_widget_background)),
         ) {
             Column(modifier = GlanceModifier.padding(8.dp).fillMaxSize()) {
                 TodometerWidgetHeader(taskListName, taskListProgress)
@@ -160,47 +168,55 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     @Composable
-    private fun TodometerWidgetHeader(taskListName: String, taskListProgress: Float) {
+    private fun TodometerWidgetHeader(
+        taskListName: String,
+        taskListProgress: Float,
+    ) {
         // TODO: Use Loading Progress indicator.
         Row(
-            modifier = GlanceModifier
-                .fillMaxWidth()
-                .padding(start = 8.dp)
-                .clickable(
-                    onClick = actionStartActivity<MainActivity>(),
-                ),
+            modifier =
+                GlanceModifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp)
+                    .clickable(
+                        onClick = actionStartActivity<MainActivity>(),
+                    ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalAlignment = Alignment.End,
         ) {
             Column(
-                modifier = GlanceModifier
-                    .fillMaxWidth()
-                    .defaultWeight()
-                    .clickable(
-                        onClick = actionStartActivity<MainActivity>(),
-                    ),
+                modifier =
+                    GlanceModifier
+                        .fillMaxWidth()
+                        .defaultWeight()
+                        .clickable(
+                            onClick = actionStartActivity<MainActivity>(),
+                        ),
             ) {
                 Text(
                     text = taskListName,
-                    style = TextStyle(
-                        color = GlanceTheme.colors.onSurface,
-                        fontSize = 16.sp,
-                    ),
+                    style =
+                        TextStyle(
+                            color = GlanceTheme.colors.onSurface,
+                            fontSize = 16.sp,
+                        ),
                 )
                 Text(
                     text = TaskProgress.getPercentage(taskListProgress),
-                    style = TextStyle(
-                        color = GlanceTheme.colors.onSurfaceVariant,
-                        fontSize = 16.sp,
-                    ),
+                    style =
+                        TextStyle(
+                            color = GlanceTheme.colors.onSurfaceVariant,
+                            fontSize = 16.sp,
+                        ),
                 )
             }
             // TODO: Use Button when available.
             Image(
                 ImageProvider(R.drawable.todometer_widget_add_button),
-                modifier = GlanceModifier.clickable(
-                    onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent),
-                ),
+                modifier =
+                    GlanceModifier.clickable(
+                        onClick = actionStartActivityIntent(openAddTaskDeepLinkIntent),
+                    ),
                 contentDescription = null,
             )
         }
@@ -244,35 +260,42 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
         taskItem: TaskItem,
         toggleTaskItemState: () -> Unit,
     ) {
-        val openTaskDeepLinkIntent = Intent(
-            Intent.ACTION_VIEW,
-            "$TaskDetailsDeepLink/${taskItem.id}".toUri(),
-            context,
-            MainActivity::class.java,
-        )
+        val openTaskDeepLinkIntent =
+            Intent(
+                Intent.ACTION_VIEW,
+                "$TASK_DETAILS_DEEP_LINK/${taskItem.id}".toUri(),
+                context,
+                MainActivity::class.java,
+            )
         Column {
             // TODO: Use Card with GlanceTheme color surface when available.
             Row(
-                modifier = GlanceModifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .background(ImageProvider(R.drawable.todometer_widget_card))
-                    .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
+                modifier =
+                    GlanceModifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .background(ImageProvider(R.drawable.todometer_widget_card))
+                        .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                val textStyle = if (taskItem.state == TaskState.DONE) {
-                    TextStyle(
-                        color = GlanceTheme.colors.onSurface,
-                        textDecoration = TextDecoration.LineThrough,
-                    )
-                } else {
-                    TextStyle(color = GlanceTheme.colors.onSurface)
-                }
+                val textStyle =
+                    if (taskItem.state == TaskState.DONE) {
+                        TextStyle(
+                            color = GlanceTheme.colors.onSurface,
+                            textDecoration = TextDecoration.LineThrough,
+                        )
+                    } else {
+                        TextStyle(color = GlanceTheme.colors.onSurface)
+                    }
                 Text(
                     text = taskItem.title,
                     style = textStyle,
-                    modifier = GlanceModifier.padding(start = 8.dp).fillMaxWidth().defaultWeight()
-                        .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
+                    modifier =
+                        GlanceModifier
+                            .padding(start = 8.dp)
+                            .fillMaxWidth()
+                            .defaultWeight()
+                            .clickable(actionStartActivityIntent(openTaskDeepLinkIntent)),
                 )
                 Image(
                     ImageProvider(
@@ -283,9 +306,10 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
                         },
                     ),
                     contentDescription = null,
-                    modifier = GlanceModifier.padding(8.dp).clickable {
-                        toggleTaskItemState()
-                    },
+                    modifier =
+                        GlanceModifier.padding(8.dp).clickable {
+                            toggleTaskItemState()
+                        },
                     colorFilter = ColorFilter.tint(GlanceTheme.colors.onSurface),
                 )
             }
@@ -308,7 +332,7 @@ class TodometerWidget : GlanceAppWidget(), KoinComponent {
     }
 
     companion object {
-        private const val AddTaskDeepLink: String = "app://open.add.task"
-        private const val TaskDetailsDeepLink: String = "app://open.task"
+        private const val ADD_TASK_DEEP_LINK: String = "app://open.add.task"
+        private const val TASK_DETAILS_DEEP_LINK: String = "app://open.task"
     }
 }
