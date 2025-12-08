@@ -109,6 +109,7 @@ android {
     productFlavors {
         create("prod") {
             dimension = "version"
+            isDefault = true
         }
         create("fake") {
             dimension = "version"
@@ -117,6 +118,9 @@ android {
         }
     }
     sourceSets {
+        getByName("prod") {
+            manifest.srcFile("src/androidProd/AndroidManifest.xml")
+        }
         getByName("fake") {
             manifest.srcFile("src/androidFake/AndroidManifest.xml")
         }
