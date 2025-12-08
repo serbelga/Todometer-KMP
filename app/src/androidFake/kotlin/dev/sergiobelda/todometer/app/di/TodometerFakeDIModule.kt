@@ -24,7 +24,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-data object TodometerUITestDIModule : TodometerDIModule {
+data object TodometerFakeDIModule : TodometerDIModule {
     override val module: Module =
         module {
             singleOf(::FakeTaskRepository) bind ITaskRepository::class

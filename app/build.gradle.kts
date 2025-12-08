@@ -110,15 +110,15 @@ android {
         create("prod") {
             dimension = "version"
         }
-        create("uiTest") {
+        create("fake") {
             dimension = "version"
-            applicationIdSuffix = ".uitest"
-            versionNameSuffix = "-uitest"
+            applicationIdSuffix = ".fake"
+            versionNameSuffix = "-fake"
         }
     }
     sourceSets {
-        getByName("uiTest") {
-            manifest.srcFile("src/androidUiTest/AndroidManifest.xml")
+        getByName("fake") {
+            manifest.srcFile("src/androidFake/AndroidManifest.xml")
         }
     }
     kotlin {
@@ -130,7 +130,7 @@ android {
 
         implementation(libs.androidx.profileinstaller)
 
-        "uiTestImplementation"(projects.common.dataTest)
+        "fakeImplementation"(projects.common.dataTest)
     }
 }
 
