@@ -18,6 +18,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(projects.common.uiTooling)
+
             implementation(projects.appCommon.ui)
             implementation(projects.common.resources)
         }

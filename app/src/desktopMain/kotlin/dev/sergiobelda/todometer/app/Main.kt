@@ -26,6 +26,7 @@ import androidx.compose.ui.window.application
 import dev.sergiobelda.todometer.app.di.TodometerAppDI
 
 fun main() = application {
+    TodometerAppDI().startDI()
     Window(
         resizable = false,
         onCloseRequest = ::exitApplication,
@@ -35,8 +36,6 @@ fun main() = application {
             position = WindowPosition.Aligned(Alignment.Center),
         ),
     ) {
-        TodometerAppDI {
-            TodometerApp()
-        }
+        TodometerApp()
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Sergio Belda
+ * Copyright 2025 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,27 @@
 
 package dev.sergiobelda.todometer.app.di
 
-import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.core.di.dataModules
-import dev.sergiobelda.todometer.common.core.di.domainModules
-import org.koin.compose.KoinApplication
-import org.koin.dsl.KoinAppDeclaration
+import dev.sergiobelda.todometer.app.feature.about.di.AboutPresentationDIModule
+import dev.sergiobelda.todometer.app.feature.addtask.di.AddTaskPresentationDIModule
+import dev.sergiobelda.todometer.app.feature.addtasklist.di.AddTaskListPresentationDIModule
+import dev.sergiobelda.todometer.app.feature.edittask.di.EditTaskPresentationDIModule
+import dev.sergiobelda.todometer.app.feature.edittasklist.di.EditTaskListPresentationDIModule
+import dev.sergiobelda.todometer.app.feature.home.di.HomePresentationDIModule
+import dev.sergiobelda.todometer.app.feature.settings.di.SettingsPresentationDIModule
+import dev.sergiobelda.todometer.app.feature.taskdetails.di.TaskDetailsPresentationDIModule
+import dev.sergiobelda.todometer.common.core.di.TodometerBaseDI
+import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
-@Composable
-fun TodometerAppDI(
-    appDeclaration: KoinAppDeclaration = {},
-    content: @Composable () -> Unit,
-) = KoinApplication(
-    application = {
-        modules(
-            dataModules +
-                domainModules +
-                presentationModules,
+open class TodometerAppDI : TodometerBaseDI() {
+    override val modules: List<TodometerDIModule> =
+        super.modules + listOf(
+            AboutPresentationDIModule,
+            AddTaskPresentationDIModule,
+            AddTaskListPresentationDIModule,
+            EditTaskPresentationDIModule,
+            EditTaskListPresentationDIModule,
+            HomePresentationDIModule,
+            SettingsPresentationDIModule,
+            TaskDetailsPresentationDIModule,
         )
-        appDeclaration()
-    },
-    content = content,
-)
+}

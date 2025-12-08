@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.app.di.TodometerAppDI
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController = ComposeUIViewController {
-    TodometerAppDI {
-        TodometerApp()
-    }
+    TodometerAppDI().startDI()
+    TodometerApp()
 }

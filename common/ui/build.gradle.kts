@@ -17,6 +17,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.common.di)
             api(projects.common.domain)
             api(projects.common.resources)
             api(projects.common.uiTooling)
@@ -31,10 +32,6 @@ kotlin {
 
             api(libs.sergiobelda.navigationComposeExtended)
             api(libs.sergiobelda.navigationComposeExtendedAnnotation)
-
-            api(project.dependencies.platform(libs.koin.bom))
-            api(libs.koin.core)
-            api(libs.koin.compose.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.jetbrains.kotlin.coroutines.test)

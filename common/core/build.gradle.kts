@@ -17,21 +17,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.common.ui)
             implementation(projects.common.data)
             implementation(projects.common.database)
+            implementation(projects.common.di)
             implementation(projects.common.domain)
             implementation(projects.common.preferences)
-
-            api(project.dependencies.platform(libs.koin.bom))
-            api(libs.koin.compose)
-            api(libs.koin.compose.viewmodel)
-            api(libs.koin.core)
-            api(libs.koin.test)
-        }
-        androidMain.dependencies {
-            api(libs.koin.android)
-            api(libs.koin.androidXCompose)
+            implementation(projects.common.ui)
         }
     }
 }

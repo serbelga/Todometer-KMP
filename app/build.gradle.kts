@@ -105,6 +105,22 @@ android {
             abortOnError = false
         }
     }
+    flavorDimensions += "version"
+    productFlavors {
+        create("prod") {
+            dimension = "version"
+        }
+        create("uiTest") {
+            dimension = "version"
+            applicationIdSuffix = ".uitest"
+            versionNameSuffix = "-uitest"
+        }
+    }
+    sourceSets {
+        getByName("uiTest") {
+            manifest.srcFile("src/androidUiTest/AndroidManifest.xml")
+        }
+    }
     kotlin {
         jvmToolchain(17)
     }
@@ -113,6 +129,8 @@ android {
         baselineProfile(projects.macrobenchmark)
 
         implementation(libs.androidx.profileinstaller)
+
+        "uiTestImplementation"(projects.common.dataTest)
     }
 }
 
