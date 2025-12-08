@@ -15,6 +15,6 @@
 
     <application
         tools:replace="android:name"
-        android:name=".TodometerUITestApp">
+        android:name=".TodometerFakeApp">
     </application>
 </manifest>

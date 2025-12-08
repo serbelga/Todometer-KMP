@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app
+package dev.sergiobelda.todometer.app.di
 
-import dev.sergiobelda.todometer.app.di.TodometerUITestAppDI
-import dev.sergiobelda.todometer.common.di.TodometerDI
+import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
-class TodometerUITestApp : TodometerMainApp() {
-    override val todometerDI: TodometerDI = TodometerUITestAppDI()
+class TodometerFakeAppDI : TodometerMainAppDI() {
+    override val modules: List<TodometerDIModule> =
+        super.modules + TodometerFakeDIModule
 }
