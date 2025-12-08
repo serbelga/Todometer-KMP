@@ -46,14 +46,12 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentState>() {
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    override fun createContentState(
-        uiState: EditTaskUIState,
-    ): EditTaskContentState = rememberEditTaskContentState(
-        task = uiState.task,
-    )
+    override fun createContentState(uiState: EditTaskUIState): EditTaskContentState =
+        rememberEditTaskContentState(
+            task = uiState.task,
+        )
 
     @Composable
     override fun Content(
@@ -82,9 +80,7 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun EditTaskScaffold(
-        contentState: EditTaskContentState,
-    ) {
+    private fun EditTaskScaffold(contentState: EditTaskContentState) {
         Scaffold(
             topBar = {
                 EditTaskTopBar(
@@ -158,10 +154,11 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
                 onValueChange = { onEvent(EditTaskEvent.TitleValueChange(it)) },
                 placeholder = { Text(TodometerResources.strings.enterTaskName) },
                 errorMessage = TodometerResources.strings.fieldNotEmpty,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Next,
-                ),
+                keyboardOptions =
+                    KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Next,
+                    ),
                 modifier = Modifier.padding(TextFieldPadding),
             )
             Text(
@@ -192,10 +189,11 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
                 value = description,
                 onValueChange = { onEvent(EditTaskEvent.DescriptionValueChange(it)) },
                 placeholder = { Text(TodometerResources.strings.enterDescription) },
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Done,
-                ),
+                keyboardOptions =
+                    KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done,
+                    ),
                 modifier = Modifier.padding(TextFieldPadding),
                 maxLines = 4,
             )

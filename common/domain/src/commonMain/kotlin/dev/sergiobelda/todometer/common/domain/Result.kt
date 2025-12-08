@@ -17,17 +17,21 @@
 package dev.sergiobelda.todometer.common.domain
 
 sealed class Result<out A> {
-    data class Success<out A>(val value: A) : Result<A>()
+    data class Success<out A>(
+        val value: A,
+    ) : Result<A>()
+
     data class Error(
         val code: Int? = null,
         val message: String? = null,
         val exception: Throwable? = null,
     ) : Result<Nothing>()
 
-    fun <B> map(m: ((A) -> B)): Result<B> = when (this) {
-        is Success -> Success(m(this.value))
-        is Error -> Error(this.code, this.message, this.exception)
-    }
+    fun <B> map(m: ((A) -> B)): Result<B> =
+        when (this) {
+            is Success -> Success(m(this.value))
+            is Error -> Error(this.code, this.message, this.exception)
+        }
 }
 
 /**
@@ -50,9 +54,8 @@ inline fun <reified A> Result<A>.doIfError(callback: (error: Result.Error) -> Un
  * Specify a default value if a given result is not [Result.Success], otherwise it
  * returns the success value.
  */
-inline fun <A> Result<A>.withDefault(default: () -> A): Result.Success<A> {
-    return when (this) {
+inline fun <A> Result<A>.withDefault(default: () -> A): Result.Success<A> =
+    when (this) {
         is Result.Success -> this
         else -> Result.Success(default())
     }
-}

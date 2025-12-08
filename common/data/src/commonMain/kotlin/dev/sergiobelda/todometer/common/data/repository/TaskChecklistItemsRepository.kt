@@ -27,26 +27,31 @@ import kotlinx.coroutines.flow.Flow
 class TaskChecklistItemsRepository(
     private val taskChecklistItemLocalDataSource: ITaskChecklistItemLocalDataSource,
 ) : ITaskChecklistItemsRepository {
-
     override fun getTaskChecklistItems(taskId: String): Flow<Result<List<TaskChecklistItem>>> =
         taskChecklistItemLocalDataSource.getTaskChecklistItems(taskId)
 
-    override suspend fun insertTaskChecklistItems(taskId: String, vararg items: String) {
+    override suspend fun insertTaskChecklistItems(
+        taskId: String,
+        vararg items: String,
+    ) {
         taskChecklistItemLocalDataSource.insertTaskChecklistItems(
-            taskChecklistItems = items.map { text ->
-                TaskChecklistItem(
-                    id = randomUUIDString(),
-                    text = text,
-                    state = TaskChecklistItemState.UNCHECKED,
-                    taskId = taskId,
-                )
-            }.toTypedArray(),
+            taskChecklistItems =
+                items
+                    .map { text ->
+                        TaskChecklistItem(
+                            id = randomUUIDString(),
+                            text = text,
+                            state = TaskChecklistItemState.UNCHECKED,
+                            taskId = taskId,
+                        )
+                    }.toTypedArray(),
         )
     }
 
-    override suspend fun updateTaskChecklistItemState(id: String, state: TaskChecklistItemState) =
-        taskChecklistItemLocalDataSource.updateTaskChecklistItemState(id, state)
+    override suspend fun updateTaskChecklistItemState(
+        id: String,
+        state: TaskChecklistItemState,
+    ) = taskChecklistItemLocalDataSource.updateTaskChecklistItemState(id, state)
 
-    override suspend fun deleteTaskChecklistItem(id: String) =
-        taskChecklistItemLocalDataSource.deleteTaskChecklistItem(id)
+    override suspend fun deleteTaskChecklistItem(id: String) = taskChecklistItemLocalDataSource.deleteTaskChecklistItem(id)
 }

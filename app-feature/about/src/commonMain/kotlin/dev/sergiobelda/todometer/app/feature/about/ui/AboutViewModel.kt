@@ -18,6 +18,7 @@ package dev.sergiobelda.todometer.app.feature.about.ui
 
 import dev.sergiobelda.fonament.presentation.ui.FonamentViewModel
 
-class AboutViewModel : FonamentViewModel<AboutUIState>(
-    AboutUIState,
-)
+class AboutViewModel :
+    FonamentViewModel<AboutUIState>(
+        AboutUIState,
+    )

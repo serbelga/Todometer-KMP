@@ -27,21 +27,21 @@ import androidx.compose.runtime.remember
 import dev.sergiobelda.fonament.presentation.ui.FonamentContentState
 
 @OptIn(ExperimentalMaterial3Api::class)
-data class TaskDetailsContentState @RememberInComposition constructor(
-    internal val lazyListState: LazyListState,
-) : FonamentContentState {
-
-    internal val showTopAppBarTitle by derivedStateOf {
-        lazyListState.firstVisibleItemIndex > 0
+data class TaskDetailsContentState
+    @RememberInComposition
+    constructor(
+        internal val lazyListState: LazyListState,
+    ) : FonamentContentState {
+        internal val showTopAppBarTitle by derivedStateOf {
+            lazyListState.firstVisibleItemIndex > 0
+        }
     }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun rememberTaskDetailsContentState(
-    lazyListState: LazyListState = rememberLazyListState(),
-): TaskDetailsContentState = remember {
-    TaskDetailsContentState(
-        lazyListState = lazyListState,
-    )
-}
+internal fun rememberTaskDetailsContentState(lazyListState: LazyListState = rememberLazyListState()): TaskDetailsContentState =
+    remember {
+        TaskDetailsContentState(
+            lazyListState = lazyListState,
+        )
+    }

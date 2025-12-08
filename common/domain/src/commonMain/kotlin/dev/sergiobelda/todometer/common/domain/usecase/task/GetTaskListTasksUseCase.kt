@@ -24,7 +24,5 @@ import kotlinx.coroutines.flow.Flow
 class GetTaskListTasksUseCase(
     private val taskRepository: ITaskRepository,
 ) {
-
-    operator fun invoke(taskListId: String): Flow<Result<List<TaskItem>>> =
-        taskRepository.getTasks(taskListId)
+    operator fun invoke(taskListId: String): Flow<Result<List<TaskItem>>> = taskRepository.getTasks(taskListId)
 }

@@ -55,10 +55,11 @@ fun TodometerChip(
 
 private object TodometerChipDefaults {
     val borderStroke: BorderStroke
-        @Composable get() = BorderStroke(
-            1.dp,
-            MaterialTheme.colorScheme.outline,
-        )
+        @Composable get() =
+            BorderStroke(
+                1.dp,
+                MaterialTheme.colorScheme.outline,
+            )
 
     val color: Color @Composable get() = MaterialTheme.colorScheme.surface
 }

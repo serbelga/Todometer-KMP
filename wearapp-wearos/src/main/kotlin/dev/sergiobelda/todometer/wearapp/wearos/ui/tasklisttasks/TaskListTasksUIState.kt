@@ -31,7 +31,6 @@ data class TaskListTasksUIState(
 ) : FonamentUIState
 
 sealed interface TaskListUIState {
-
     data object Loading : TaskListUIState
 
     @Immutable
@@ -47,14 +46,12 @@ sealed interface TaskListUIState {
 }
 
 sealed interface TasksUIState {
-
     data object Loading : TasksUIState
 
     @Immutable
     data class Success(
         val tasks: ImmutableList<TaskItem>,
     ) : TasksUIState {
-
         val progress
             get() = TaskProgress.getTasksDoneProgress(tasks)
     }

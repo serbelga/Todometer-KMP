@@ -33,7 +33,6 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class TaskDaoTest : DatabaseTest() {
-
     private lateinit var taskDao: TaskDao
 
     private lateinit var taskListDao: TaskListDao
@@ -48,73 +47,81 @@ class TaskDaoTest : DatabaseTest() {
     }
 
     @Test
-    fun testGetTask() = runTest {
-        val id = taskDao.insertTask(taskEntity1)
-        assertNotNull(taskDao.getTask(id).first())
-    }
+    fun testGetTask() =
+        runTest {
+            val id = taskDao.insertTask(taskEntity1)
+            assertNotNull(taskDao.getTask(id).first())
+        }
 
     @Test
-    fun testGetTaskNotExist() = runTest {
-        assertNull(taskDao.getTask("1").first())
-    }
+    fun testGetTaskNotExist() =
+        runTest {
+            assertNull(taskDao.getTask("1").first())
+        }
 
     @Test
-    fun testGetTasks() = runTest {
-        taskDao.insertTask(taskEntity1)
-        taskDao.insertTask(taskEntity2)
-        val list = taskDao.getTasks("1").first()
-        assertTrue { list.size == 2 }
-    }
+    fun testGetTasks() =
+        runTest {
+            taskDao.insertTask(taskEntity1)
+            taskDao.insertTask(taskEntity2)
+            val list = taskDao.getTasks("1").first()
+            assertTrue { list.size == 2 }
+        }
 
     @Test
-    fun testInsertTask() = runTest {
-        val id = taskDao.insertTask(taskEntity1)
-        assertEquals(taskEntity1, taskDao.getTask(id).first())
-    }
+    fun testInsertTask() =
+        runTest {
+            val id = taskDao.insertTask(taskEntity1)
+            assertEquals(taskEntity1, taskDao.getTask(id).first())
+        }
 
     @Test
-    fun testUpdateTask() = runTest {
-        val id = taskDao.insertTask(taskEntity1)
-        var task = taskDao.getTask(id).first()
-        assertEquals("Task 1", task?.title)
-        assertEquals("Description 1", task?.description)
-        assertEquals(Tag.GRAY, task?.tag)
+    fun testUpdateTask() =
+        runTest {
+            val id = taskDao.insertTask(taskEntity1)
+            var task = taskDao.getTask(id).first()
+            assertEquals("Task 1", task?.title)
+            assertEquals("Description 1", task?.description)
+            assertEquals(Tag.GRAY, task?.tag)
 
-        taskDao.updateTask(taskEntity1Updated)
+            taskDao.updateTask(taskEntity1Updated)
 
-        task = taskDao.getTask(id).first()
-        assertEquals("Task 1 Updated", task?.title)
-        assertEquals("Description 1 Updated", task?.description)
-        assertEquals(Tag.RED, task?.tag)
-    }
-
-    @Test
-    fun testUpdateState() = runTest {
-        val id = taskDao.insertTask(taskEntity1)
-        var task = taskDao.getTask(id).first()
-        assertEquals(TaskState.DOING, task?.state)
-
-        taskDao.updateTaskState(id, TaskState.DONE)
-        task = taskDao.getTask(id).first()
-        assertEquals(TaskState.DONE, task?.state)
-    }
+            task = taskDao.getTask(id).first()
+            assertEquals("Task 1 Updated", task?.title)
+            assertEquals("Description 1 Updated", task?.description)
+            assertEquals(Tag.RED, task?.tag)
+        }
 
     @Test
-    fun testDeleteTask() = runTest {
-        val id = taskDao.insertTask(taskEntity1)
-        assertNotNull(taskDao.getTask(id).first())
-        taskDao.deleteTasks(id)
-        assertNull(taskDao.getTask(id).first())
-    }
+    fun testUpdateState() =
+        runTest {
+            val id = taskDao.insertTask(taskEntity1)
+            var task = taskDao.getTask(id).first()
+            assertEquals(TaskState.DOING, task?.state)
+
+            taskDao.updateTaskState(id, TaskState.DONE)
+            task = taskDao.getTask(id).first()
+            assertEquals(TaskState.DONE, task?.state)
+        }
 
     @Test
-    fun testToggleTaskPinnedValue() = runTest {
-        val id = taskDao.insertTask(taskEntity1)
-        var task = taskDao.getTask(id).first()
-        assertEquals(false, task?.isPinned)
+    fun testDeleteTask() =
+        runTest {
+            val id = taskDao.insertTask(taskEntity1)
+            assertNotNull(taskDao.getTask(id).first())
+            taskDao.deleteTasks(id)
+            assertNull(taskDao.getTask(id).first())
+        }
 
-        taskDao.toggleTaskPinnedValue(id)
-        task = taskDao.getTask(id).first()
-        assertEquals(true, task?.isPinned)
-    }
+    @Test
+    fun testToggleTaskPinnedValue() =
+        runTest {
+            val id = taskDao.insertTask(taskEntity1)
+            var task = taskDao.getTask(id).first()
+            assertEquals(false, task?.isPinned)
+
+            taskDao.toggleTaskPinnedValue(id)
+            task = taskDao.getTask(id).first()
+            assertEquals(true, task?.isPinned)
+        }
 }

@@ -21,7 +21,5 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 class ToggleTaskPinnedValueUseCase(
     private val taskRepository: ITaskRepository,
 ) {
-
-    suspend operator fun invoke(id: String) =
-        taskRepository.toggleTaskPinnedValue(id)
+    suspend operator fun invoke(id: String) = taskRepository.toggleTaskPinnedValue(id)
 }

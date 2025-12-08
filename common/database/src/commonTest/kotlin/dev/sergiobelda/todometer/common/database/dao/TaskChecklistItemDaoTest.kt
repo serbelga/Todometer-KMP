@@ -24,7 +24,6 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class TaskChecklistItemDaoTest : DatabaseTest() {
-
     private lateinit var taskChecklistItemDao: ITaskChecklistItemDao
 
     @BeforeTest
@@ -33,10 +32,11 @@ class TaskChecklistItemDaoTest : DatabaseTest() {
     }
 
     @Test
-    fun testInsertTaskChecklistItems() = runTest {
-        taskChecklistItemDao.insertTaskChecklistItems(taskChecklistItemEntity)
-        val taskChecklistItems =
-            taskChecklistItemDao.getTaskChecklistItems(taskChecklistItemEntity.task_id).first()
-        taskChecklistItems.contains(taskChecklistItemEntity)
-    }
+    fun testInsertTaskChecklistItems() =
+        runTest {
+            taskChecklistItemDao.insertTaskChecklistItems(taskChecklistItemEntity)
+            val taskChecklistItems =
+                taskChecklistItemDao.getTaskChecklistItems(taskChecklistItemEntity.task_id).first()
+            taskChecklistItems.contains(taskChecklistItemEntity)
+        }
 }

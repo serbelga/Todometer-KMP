@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
 object TaskProgress {
-
     fun getTasksDoneProgress(list: List<TaskItem?>): Float {
         val size = list.size
         if (size == 0) return 0f
@@ -30,9 +29,11 @@ object TaskProgress {
 
     fun getPercentage(
         @FloatRange(from = 0.0, to = 1.0) progress: Float,
-    ): String = progress.takeIf {
-        it in 0.0..1.0
-    }?.let { "${(it * PERCENTAGE_MULTIPLIER).toInt()}%" } ?: "-%"
+    ): String =
+        progress
+            .takeIf {
+                it in 0.0..1.0
+            }?.let { "${(it * PERCENTAGE_MULTIPLIER).toInt()}%" } ?: "-%"
 
     private const val PERCENTAGE_MULTIPLIER = 100
 }

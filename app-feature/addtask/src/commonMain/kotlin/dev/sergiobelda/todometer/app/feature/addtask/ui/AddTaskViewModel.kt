@@ -29,37 +29,38 @@ import kotlinx.coroutines.launch
 class AddTaskViewModel(
     private val insertTaskInTaskListSelectedUseCase: InsertTaskInTaskListSelectedUseCase,
 ) : FonamentViewModel<AddTaskUIState>(
-    initialUIState = AddTaskUIState(),
-) {
+        initialUIState = AddTaskUIState(),
+    ) {
     override fun handleEvent(event: FonamentEvent) {
         when (event) {
             is AddTaskEvent.InsertNewTask -> insertTask(event.newTask)
         }
     }
 
-    private fun insertTask(
-        newTask: NewTask,
-    ) = viewModelScope.launch {
-        updateUIState {
-            it.copy(isAddingTask = true)
-        }
-        val result = insertTaskInTaskListSelectedUseCase.invoke(
-            newTask,
-        )
-        result.doIfSuccess {
+    private fun insertTask(newTask: NewTask) =
+        viewModelScope.launch {
             updateUIState {
-                it.copy(
-                    isAddingTask = false,
-                    errorUi = null,
-                )
+                it.copy(isAddingTask = true)
             }
-        }.doIfError { error ->
-            updateUIState {
-                it.copy(
-                    isAddingTask = false,
-                    errorUi = error.mapToErrorUi(),
+            val result =
+                insertTaskInTaskListSelectedUseCase.invoke(
+                    newTask,
                 )
-            }
+            result
+                .doIfSuccess {
+                    updateUIState {
+                        it.copy(
+                            isAddingTask = false,
+                            errorUi = null,
+                        )
+                    }
+                }.doIfError { error ->
+                    updateUIState {
+                        it.copy(
+                            isAddingTask = false,
+                            errorUi = error.mapToErrorUi(),
+                        )
+                    }
+                }
         }
-    }
 }

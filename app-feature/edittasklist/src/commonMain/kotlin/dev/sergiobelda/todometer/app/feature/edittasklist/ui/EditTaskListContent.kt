@@ -34,13 +34,11 @@ import dev.sergiobelda.todometer.app.feature.edittasklist.navigation.EditTaskLis
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 data object EditTaskListContent : FonamentContent<EditTaskListUIState, EditTaskListContentState>() {
-
     @Composable
-    override fun createContentState(
-        uiState: EditTaskListUIState,
-    ): EditTaskListContentState = rememberEditTaskListContentState(
-        taskListName = uiState.taskList?.name ?: "",
-    )
+    override fun createContentState(uiState: EditTaskListUIState): EditTaskListContentState =
+        rememberEditTaskListContentState(
+            taskListName = uiState.taskList?.name ?: "",
+        )
 
     @Composable
     override fun Content(
@@ -77,8 +75,9 @@ data object EditTaskListContent : FonamentContent<EditTaskListUIState, EditTaskL
                     content = { paddingValues ->
                         EditTaskListContent(
                             nameTextFieldValue = contentState.nameTextFieldValue,
-                            modifier = Modifier
-                                .padding(paddingValues),
+                            modifier =
+                                Modifier
+                                    .padding(paddingValues),
                         )
                     },
                 )
@@ -120,10 +119,11 @@ data object EditTaskListContent : FonamentContent<EditTaskListUIState, EditTaskL
                 placeholder = { Text(TodometerResources.strings.enterTaskListName) },
                 singleLine = true,
                 errorMessage = TodometerResources.strings.fieldNotEmpty,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Done,
-                ),
+                keyboardOptions =
+                    KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done,
+                    ),
                 modifier = Modifier.padding(TextFieldPadding),
             )
         }

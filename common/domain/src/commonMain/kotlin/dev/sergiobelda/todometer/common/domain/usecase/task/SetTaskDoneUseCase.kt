@@ -22,10 +22,8 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 class SetTaskDoneUseCase(
     private val taskRepository: ITaskRepository,
 ) {
-
     /**
      * Sets the taskState of a task to [TaskState.DONE] given its [id].
      */
-    suspend operator fun invoke(id: String) =
-        taskRepository.updateTaskState(id, TaskState.DONE)
+    suspend operator fun invoke(id: String) = taskRepository.updateTaskState(id, TaskState.DONE)
 }

@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskList
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskListRepository {
-
     /**
      * Get a task list given its [id].
      */
@@ -45,7 +44,10 @@ interface ITaskListRepository {
     /**
      * Updates the name of a Task List given a new [name].
      */
-    suspend fun updateTaskListName(id: String, name: String)
+    suspend fun updateTaskListName(
+        id: String,
+        name: String,
+    )
 
     /**
      * Deletes a [TaskList] given its [id].

@@ -21,8 +21,9 @@ enum class TaskChecklistItemState {
     CHECKED,
     ;
 
-    fun toggle(): TaskChecklistItemState = when (this) {
-        UNCHECKED -> CHECKED
-        CHECKED -> UNCHECKED
-    }
+    fun toggle(): TaskChecklistItemState =
+        when (this) {
+            UNCHECKED -> CHECKED
+            CHECKED -> UNCHECKED
+        }
 }

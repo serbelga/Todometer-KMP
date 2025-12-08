@@ -21,9 +21,10 @@ import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventH
 fun taskDetailsNavigationEventHandler(
     navigateBack: () -> Unit,
     navigateToEditTask: () -> Unit,
-): FonamentNavigationEventHandler<TaskDetailsNavigationEvent> = FonamentNavigationEventHandler {
-    when (it) {
-        TaskDetailsNavigationEvent.NavigateBack -> navigateBack()
-        TaskDetailsNavigationEvent.NavigateToEditTask -> navigateToEditTask()
+): FonamentNavigationEventHandler<TaskDetailsNavigationEvent> =
+    FonamentNavigationEventHandler {
+        when (it) {
+            TaskDetailsNavigationEvent.NavigateBack -> navigateBack()
+            TaskDetailsNavigationEvent.NavigateToEditTask -> navigateToEditTask()
+        }
     }
-}

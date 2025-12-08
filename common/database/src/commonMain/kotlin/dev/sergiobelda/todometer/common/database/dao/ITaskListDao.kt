@@ -20,7 +20,6 @@ import dev.sergiobelda.todometer.common.database.TaskListEntity
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskListDao {
-
     fun getTaskLists(): Flow<List<TaskListEntity>>
 
     fun getTaskList(id: String): Flow<TaskListEntity?>
@@ -31,7 +30,10 @@ interface ITaskListDao {
 
     suspend fun updateTaskList(taskList: TaskListEntity)
 
-    suspend fun updateTaskListName(id: String, name: String)
+    suspend fun updateTaskListName(
+        id: String,
+        name: String,
+    )
 
     suspend fun updateTaskLists(taskLists: List<TaskListEntity>)
 

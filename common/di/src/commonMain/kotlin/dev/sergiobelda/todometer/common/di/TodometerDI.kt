@@ -24,7 +24,8 @@ abstract class TodometerDI {
     open val modules: List<TodometerDIModule> = emptyList()
 
     @KoinApplicationDslMarker
-    fun startDI(): KoinApplication = startKoin {
-        modules(modules.map { it.module })
-    }
+    fun startDI(): KoinApplication =
+        startKoin {
+            modules(modules.map { it.module })
+        }
 }

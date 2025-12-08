@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui.theme
 import androidx.wear.compose.material.Typography
 import dev.sergiobelda.todometer.common.designsystem.resources.type.quickSandFontFamily
 
-internal val typography = Typography(
-    defaultFontFamily = quickSandFontFamily,
-)
+internal val typography =
+    Typography(
+        defaultFontFamily = quickSandFontFamily,
+    )

@@ -26,7 +26,6 @@ class InsertTaskListUseCase(
     private val taskListRepository: ITaskListRepository,
     private val userPreferencesRepository: IUserPreferencesRepository,
 ) {
-
     /**
      * Creates a new [TaskList] given a [name].
      */

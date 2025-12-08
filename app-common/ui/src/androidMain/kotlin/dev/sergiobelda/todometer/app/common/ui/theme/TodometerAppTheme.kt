@@ -36,17 +36,18 @@ actual fun TodometerAppTheme(
 ) {
     val todometerColors = if (darkTheme) TodometerDarkColors else TodometerLightColors
 
-    val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        val context = LocalContext.current
-        // Update default outline value for dynamic color schemes.
-        if (darkTheme) {
-            dynamicDarkColorScheme(context).copy(outline = todometer_dark_outline)
+    val colorScheme =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val context = LocalContext.current
+            // Update default outline value for dynamic color schemes.
+            if (darkTheme) {
+                dynamicDarkColorScheme(context).copy(outline = todometer_dark_outline)
+            } else {
+                dynamicLightColorScheme(context).copy(outline = todometer_light_outline)
+            }
         } else {
-            dynamicLightColorScheme(context).copy(outline = todometer_light_outline)
+            if (darkTheme) DarkColorScheme else LightColorScheme
         }
-    } else {
-        if (darkTheme) DarkColorScheme else LightColorScheme
-    }
 
     TodometerTheme(
         todometerColors = todometerColors,

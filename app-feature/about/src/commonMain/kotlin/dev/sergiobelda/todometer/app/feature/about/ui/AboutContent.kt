@@ -95,9 +95,7 @@ internal data object AboutContent : FonamentContent<AboutUIState, NoContentState
     }
 
     @Composable
-    private fun AboutContent(
-        modifier: Modifier,
-    ) {
+    private fun AboutContent(modifier: Modifier) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier.fillMaxWidth(),
@@ -182,8 +180,8 @@ private fun AboutAppVersion() {
     }
 }
 
-const val GitHubUrl: String = "https://github.com/serbelga/Todometer-KMP"
-const val PrivacyPolicyUrl: String =
+const val GITHUB_URL: String = "https://github.com/serbelga/Todometer-KMP"
+const val PRIVACY_POLICY_URL: String =
     "https://github.com/serbelga/Todometer-KMP/blob/main/PRIVACY_POLICY.md"
 
 private val AboutItemCardHeight: Dp = 72.dp

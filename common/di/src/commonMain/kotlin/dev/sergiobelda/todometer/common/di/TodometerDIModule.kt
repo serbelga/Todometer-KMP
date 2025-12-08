@@ -19,6 +19,5 @@ package dev.sergiobelda.todometer.common.di
 import org.koin.core.module.Module
 
 interface TodometerDIModule {
-
     val module: Module
 }

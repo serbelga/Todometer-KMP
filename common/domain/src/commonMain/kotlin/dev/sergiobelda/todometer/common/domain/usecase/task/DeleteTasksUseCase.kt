@@ -18,17 +18,16 @@ package dev.sergiobelda.todometer.common.domain.usecase.task
 
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 
-class DeleteTasksUseCase(private val taskRepository: ITaskRepository) {
+class DeleteTasksUseCase(
+    private val taskRepository: ITaskRepository,
+) {
+    /**
+     * Deletes a task.
+     */
+    suspend operator fun invoke(id: String) = taskRepository.deleteTasks(id)
 
     /**
      * Deletes a task.
      */
-    suspend operator fun invoke(id: String) =
-        taskRepository.deleteTasks(id)
-
-    /**
-     * Deletes a task.
-     */
-    suspend operator fun invoke(ids: List<String>) =
-        taskRepository.deleteTasks(ids = ids.toTypedArray())
+    suspend operator fun invoke(ids: List<String>) = taskRepository.deleteTasks(ids = ids.toTypedArray())
 }

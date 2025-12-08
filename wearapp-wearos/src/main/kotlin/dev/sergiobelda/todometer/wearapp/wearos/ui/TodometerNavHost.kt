@@ -48,36 +48,39 @@ fun TodometerNavHost(
         composable(navDestination = HomeNavDestination) {
             HomeScreen.NavigationNode(
                 viewModel = koinFonamentViewModel(),
-                navigationEventHandler = homeNavigationEventHandler(
-                    navigateToTaskList = { taskListId ->
-                        navAction.navigate(
-                            TaskListTasksNavDestination.safeNavRoute(taskListId),
-                        )
-                    },
-                ),
+                navigationEventHandler =
+                    homeNavigationEventHandler(
+                        navigateToTaskList = { taskListId ->
+                            navAction.navigate(
+                                TaskListTasksNavDestination.safeNavRoute(taskListId),
+                            )
+                        },
+                    ),
             )
         }
         composable(navDestination = TaskListTasksNavDestination) { navBackStackEntry ->
             val taskListId = TaskListTasksSafeNavArgs(navBackStackEntry).taskListId.orEmpty()
             TaskListTasksScreen.NavigationNode(
                 viewModel = koinFonamentViewModel { parametersOf(taskListId) },
-                navigationEventHandler = taskListTasksNavigationEventHandler(
-                    navigateBack = { navAction.popBackStack() },
-                    navigateToTaskDetails = { taskId ->
-                        navAction.navigate(
-                            TaskDetailsNavDestination.safeNavRoute(taskId),
-                        )
-                    },
-                ),
+                navigationEventHandler =
+                    taskListTasksNavigationEventHandler(
+                        navigateBack = { navAction.popBackStack() },
+                        navigateToTaskDetails = { taskId ->
+                            navAction.navigate(
+                                TaskDetailsNavDestination.safeNavRoute(taskId),
+                            )
+                        },
+                    ),
             )
         }
         composable(navDestination = TaskDetailsNavDestination) { navBackStackEntry ->
             val taskId = TaskDetailsSafeNavArgs(navBackStackEntry).taskId
             TaskDetailsScreen.NavigationNode(
                 viewModel = koinFonamentViewModel { parametersOf(taskId) },
-                navigationEventHandler = taskDetailsNavigationEventHandler(
-                    navigateBack = { navAction.popBackStack() },
-                ),
+                navigationEventHandler =
+                    taskDetailsNavigationEventHandler(
+                        navigateBack = { navAction.popBackStack() },
+                    ),
             )
         }
     }

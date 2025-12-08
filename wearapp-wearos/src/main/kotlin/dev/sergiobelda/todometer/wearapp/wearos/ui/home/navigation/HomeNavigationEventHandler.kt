@@ -18,9 +18,7 @@ package dev.sergiobelda.todometer.wearapp.wearos.ui.home.navigation
 
 import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEventHandler
 
-fun homeNavigationEventHandler(
-    navigateToTaskList: (taskListId: String?) -> Unit,
-): FonamentNavigationEventHandler<HomeNavigationEvent> =
+fun homeNavigationEventHandler(navigateToTaskList: (taskListId: String?) -> Unit): FonamentNavigationEventHandler<HomeNavigationEvent> =
     FonamentNavigationEventHandler { event ->
         when (event) {
             is HomeNavigationEvent.NavigateToTaskList -> {

@@ -20,20 +20,29 @@ import androidx.compose.ui.input.rotary.RotaryScrollEvent
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
 sealed interface TaskListTasksEvent : FonamentEvent {
-
     data class LaunchRotaryScrollEvent(
         val scrollEvent: RotaryScrollEvent,
     ) : TaskListTasksEvent
 
-    data class InsertTask(val title: String) : TaskListTasksEvent
+    data class InsertTask(
+        val title: String,
+    ) : TaskListTasksEvent
 
-    data class SetTaskDoing(val taskId: String) : TaskListTasksEvent
+    data class SetTaskDoing(
+        val taskId: String,
+    ) : TaskListTasksEvent
 
-    data class SetTaskDone(val taskId: String) : TaskListTasksEvent
+    data class SetTaskDone(
+        val taskId: String,
+    ) : TaskListTasksEvent
 
-    data class UpdateTaskListName(val name: String) : TaskListTasksEvent
+    data class UpdateTaskListName(
+        val name: String,
+    ) : TaskListTasksEvent
 
-    data class DeleteTask(val taskId: String) : TaskListTasksEvent
+    data class DeleteTask(
+        val taskId: String,
+    ) : TaskListTasksEvent
 
     object DeleteTaskList : TaskListTasksEvent
 
@@ -45,5 +54,7 @@ sealed interface TaskListTasksEvent : FonamentEvent {
 
     data object CancelDeleteTaskListAlertDialog : TaskListTasksEvent
 
-    data class SelectTask(val taskId: String) : TaskListTasksEvent
+    data class SelectTask(
+        val taskId: String,
+    ) : TaskListTasksEvent
 }

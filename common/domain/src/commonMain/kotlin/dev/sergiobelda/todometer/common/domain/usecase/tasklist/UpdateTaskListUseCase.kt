@@ -19,11 +19,11 @@ package dev.sergiobelda.todometer.common.domain.usecase.tasklist
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 
-class UpdateTaskListUseCase(private val taskListRepository: ITaskListRepository) {
-
+class UpdateTaskListUseCase(
+    private val taskListRepository: ITaskListRepository,
+) {
     /**
      * Updates a [TaskList] given a [taskList] object.
      */
-    suspend operator fun invoke(taskList: TaskList) =
-        taskListRepository.updateTaskList(taskList)
+    suspend operator fun invoke(taskList: TaskList) = taskListRepository.updateTaskList(taskList)
 }

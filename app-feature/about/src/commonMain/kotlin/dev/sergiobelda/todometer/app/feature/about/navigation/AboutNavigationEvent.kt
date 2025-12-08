@@ -20,7 +20,10 @@ import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEvent
 
 sealed interface AboutNavigationEvent : FonamentNavigationEvent {
     data object NavigateBack : AboutNavigationEvent
+
     data object NavigateToGitHub : AboutNavigationEvent
+
     data object NavigateToOpenSourceLicenses : AboutNavigationEvent
+
     data object NavigateToPrivacyPolicy : AboutNavigationEvent
 }

@@ -21,7 +21,5 @@ enum class TaskState {
     DONE,
     ;
 
-    override fun toString(): String {
-        return name
-    }
+    override fun toString(): String = name
 }

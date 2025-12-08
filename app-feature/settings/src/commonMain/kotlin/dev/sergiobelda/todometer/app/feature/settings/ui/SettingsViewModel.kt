@@ -31,8 +31,8 @@ class SettingsViewModel(
     getAppThemeUseCase: GetAppThemeUseCase,
     private val setAppThemeUseCase: SetAppThemeUseCase,
 ) : FonamentViewModel<SettingsUIState>(
-    initialUIState = SettingsUIState(),
-) {
+        initialUIState = SettingsUIState(),
+    ) {
     private val appTheme: StateFlow<AppTheme> =
         getAppThemeUseCase().stateIn(
             viewModelScope,
@@ -58,9 +58,8 @@ class SettingsViewModel(
         }
     }
 
-    private fun setAppTheme(
-        event: SettingsEvent.SetAppTheme,
-    ) = viewModelScope.launch {
-        setAppThemeUseCase(event.theme)
-    }
+    private fun setAppTheme(event: SettingsEvent.SetAppTheme) =
+        viewModelScope.launch {
+            setAppThemeUseCase(event.theme)
+        }
 }

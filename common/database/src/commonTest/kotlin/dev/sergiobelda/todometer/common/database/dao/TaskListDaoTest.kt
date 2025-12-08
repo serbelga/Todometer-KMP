@@ -31,7 +31,6 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class TaskListDaoTest : DatabaseTest() {
-
     private lateinit var taskListDao: TaskListDao
 
     @BeforeTest
@@ -40,67 +39,75 @@ class TaskListDaoTest : DatabaseTest() {
     }
 
     @Test
-    fun testGetTaskLists() = runTest {
-        taskListDao.insertTaskList(taskListEntity1)
-        taskListDao.insertTaskList(taskListEntity2)
-        val list = taskListDao.getTaskLists().first()
-        assertTrue { list.size == 2 }
-    }
+    fun testGetTaskLists() =
+        runTest {
+            taskListDao.insertTaskList(taskListEntity1)
+            taskListDao.insertTaskList(taskListEntity2)
+            val list = taskListDao.getTaskLists().first()
+            assertTrue { list.size == 2 }
+        }
 
     @Test
-    fun testGetTaskList() = runTest {
-        val id = taskListDao.insertTaskList(taskListEntity1)
-        assertNotNull(taskListDao.getTaskList(id).first())
-    }
+    fun testGetTaskList() =
+        runTest {
+            val id = taskListDao.insertTaskList(taskListEntity1)
+            assertNotNull(taskListDao.getTaskList(id).first())
+        }
 
     @Test
-    fun testGetTaskListNotExist() = runTest {
-        assertNull(taskListDao.getTaskList("1").first())
-    }
+    fun testGetTaskListNotExist() =
+        runTest {
+            assertNull(taskListDao.getTaskList("1").first())
+        }
 
     @Test
-    fun testInsertTaskList() = runTest {
-        val id = taskListDao.insertTaskList(taskListEntity1)
-        assertEquals(taskListEntity1, taskListDao.getTaskList(id).first())
-    }
+    fun testInsertTaskList() =
+        runTest {
+            val id = taskListDao.insertTaskList(taskListEntity1)
+            assertEquals(taskListEntity1, taskListDao.getTaskList(id).first())
+        }
 
     @Test
-    fun testInsertTaskLists() = runTest {
-        taskListDao.insertTaskLists(taskListEntities)
-        val list = taskListDao.getTaskLists().first()
-        assertTrue { list.containsAll(taskListEntities) }
-    }
+    fun testInsertTaskLists() =
+        runTest {
+            taskListDao.insertTaskLists(taskListEntities)
+            val list = taskListDao.getTaskLists().first()
+            assertTrue { list.containsAll(taskListEntities) }
+        }
 
     @Test
-    fun testUpdateTaskList() = runTest {
-        val id = taskListDao.insertTaskList(taskListEntity1)
-        var taskList = taskListDao.getTaskList(id).first()
-        assertEquals("Task List 1", taskList?.name)
+    fun testUpdateTaskList() =
+        runTest {
+            val id = taskListDao.insertTaskList(taskListEntity1)
+            var taskList = taskListDao.getTaskList(id).first()
+            assertEquals("Task List 1", taskList?.name)
 
-        taskListDao.updateTaskList(taskListEntity1Updated)
+            taskListDao.updateTaskList(taskListEntity1Updated)
 
-        taskList = taskListDao.getTaskList(id).first()
-        assertEquals("Task List 1 Updated", taskList?.name)
-    }
-
-    @Test
-    fun testUpdateTaskListName() = runTest {
-        val id = taskListDao.insertTaskList(taskListEntity1)
-        var taskList = taskListDao.getTaskList(id).first()
-        assertEquals("Task List 1", taskList?.name)
-
-        val updatedName = "updated name"
-        taskListDao.updateTaskListName(id, updatedName)
-
-        taskList = taskListDao.getTaskList(id).first()
-        assertEquals(updatedName, taskList?.name)
-    }
+            taskList = taskListDao.getTaskList(id).first()
+            assertEquals("Task List 1 Updated", taskList?.name)
+        }
 
     @Test
-    fun testDeleteTaskList() = runTest {
-        val id = taskListDao.insertTaskList(taskListEntity1)
-        assertNotNull(taskListDao.getTaskList(id).first())
-        taskListDao.deleteTaskList(id)
-        assertNull(taskListDao.getTaskList(id).first())
-    }
+    fun testUpdateTaskListName() =
+        runTest {
+            val id = taskListDao.insertTaskList(taskListEntity1)
+            var taskList = taskListDao.getTaskList(id).first()
+            assertEquals("Task List 1", taskList?.name)
+
+            val updatedName = "updated name"
+            taskListDao.updateTaskListName(id, updatedName)
+
+            taskList = taskListDao.getTaskList(id).first()
+            assertEquals(updatedName, taskList?.name)
+        }
+
+    @Test
+    fun testDeleteTaskList() =
+        runTest {
+            val id = taskListDao.insertTaskList(taskListEntity1)
+            assertNotNull(taskListDao.getTaskList(id).first())
+            taskListDao.deleteTaskList(id)
+            assertNull(taskListDao.getTaskList(id).first())
+        }
 }

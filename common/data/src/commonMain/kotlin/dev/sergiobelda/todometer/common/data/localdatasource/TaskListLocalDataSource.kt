@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.map
 class TaskListLocalDataSource(
     private val taskListDao: ITaskListDao,
 ) : ITaskListLocalDataSource {
-
     override fun getTaskLists(): Flow<Result<List<TaskList>>> =
         taskListDao.getTaskLists().map { list ->
             Result.Success(list.asTaskLists())
@@ -45,14 +44,14 @@ class TaskListLocalDataSource(
         return Result.Success(taskListId)
     }
 
-    override suspend fun insertTaskLists(taskLists: List<TaskList>) =
-        taskListDao.insertTaskLists(taskLists.map { it.asTaskListEntity() })
+    override suspend fun insertTaskLists(taskLists: List<TaskList>) = taskListDao.insertTaskLists(taskLists.map { it.asTaskListEntity() })
 
-    override suspend fun updateTaskList(taskList: TaskList) =
-        taskListDao.updateTaskList(taskList.asTaskListEntity())
+    override suspend fun updateTaskList(taskList: TaskList) = taskListDao.updateTaskList(taskList.asTaskListEntity())
 
-    override suspend fun updateTaskListName(id: String, name: String) =
-        taskListDao.updateTaskListName(id, name)
+    override suspend fun updateTaskListName(
+        id: String,
+        name: String,
+    ) = taskListDao.updateTaskListName(id, name)
 
     override suspend fun deleteTaskList(id: String) = taskListDao.deleteTaskList(id)
 }

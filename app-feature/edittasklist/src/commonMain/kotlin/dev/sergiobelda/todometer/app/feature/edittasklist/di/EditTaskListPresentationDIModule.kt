@@ -23,8 +23,8 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 data object EditTaskListPresentationDIModule : TodometerDIModule {
-
-    override val module: Module = module {
-        fonamentViewModelOf(::EditTaskListViewModel)
-    }
+    override val module: Module =
+        module {
+            fonamentViewModelOf(::EditTaskListViewModel)
+        }
 }

@@ -69,10 +69,8 @@ import kotlinx.collections.immutable.toPersistentList
 
 @OptIn(ExperimentalMaterial3Api::class)
 data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState>() {
-
     @Composable
-    override fun createContentState(uiState: AddTaskUIState): AddTaskContentState =
-        rememberAddTaskContentState()
+    override fun createContentState(uiState: AddTaskUIState): AddTaskContentState = rememberAddTaskContentState()
 
     @Composable
     override fun Content(
@@ -129,8 +127,9 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
                     taskDueDate = contentState.taskDueDate,
                     taskChecklistItems = contentState.taskChecklistItems.toPersistentList(),
                     taskDescription = contentState.taskDescription,
-                    modifier = Modifier
-                        .padding(paddingValues),
+                    modifier =
+                        Modifier
+                            .padding(paddingValues),
                 )
             },
         )
@@ -225,18 +224,17 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
                 placeholder = { Text(TodometerResources.strings.enterTaskName) },
                 isError = taskTitleInputError,
                 errorMessage = TodometerResources.strings.fieldNotEmpty,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Next,
-                ),
+                keyboardOptions =
+                    KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Next,
+                    ),
                 modifier = Modifier.padding(TextFieldPadding),
             )
         }
     }
 
-    private inline fun LazyListScope.tagSelectorItem(
-        selectedTag: Tag,
-    ) {
+    private inline fun LazyListScope.tagSelectorItem(selectedTag: Tag) {
         item {
             FieldTitle(text = TodometerResources.strings.chooseTag)
             TagSelector(
@@ -246,9 +244,7 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
         }
     }
 
-    private inline fun LazyListScope.taskDueDateItem(
-        taskDueDate: Long?,
-    ) {
+    private inline fun LazyListScope.taskDueDateItem(taskDueDate: Long?) {
         item {
             FieldTitle(text = TodometerResources.strings.dateTime.addStyledOptionalSuffix())
             DateTimeSelector(
@@ -261,19 +257,18 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
         }
     }
 
-    private inline fun LazyListScope.taskChecklistItemsItem(
-        taskChecklistItems: ImmutableList<String>,
-    ) {
+    private inline fun LazyListScope.taskChecklistItemsItem(taskChecklistItems: ImmutableList<String>) {
         item {
             Text(
                 text = TodometerResources.strings.checklist.addStyledOptionalSuffix(),
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.padding(
-                    start = SectionPadding,
-                    top = 16.dp,
-                    end = SectionPadding,
-                ),
+                modifier =
+                    Modifier.padding(
+                        start = SectionPadding,
+                        top = 16.dp,
+                        end = SectionPadding,
+                    ),
             )
         }
         itemsIndexed(taskChecklistItems) { index, item ->
@@ -293,19 +288,18 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
         }
     }
 
-    private inline fun LazyListScope.taskDescriptionItem(
-        taskDescription: String,
-    ) {
+    private inline fun LazyListScope.taskDescriptionItem(taskDescription: String) {
         item {
             TodometerTitledTextField(
                 title = TodometerResources.strings.description.addStyledOptionalSuffix(),
                 value = taskDescription,
                 onValueChange = { onEvent(AddTaskEvent.TaskDescriptionValueChange(it)) },
                 placeholder = { Text(TodometerResources.strings.enterDescription) },
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Done,
-                ),
+                keyboardOptions =
+                    KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done,
+                    ),
                 modifier = Modifier.padding(TextFieldPadding),
                 maxLines = 4,
             )
@@ -324,9 +318,7 @@ private fun FieldTitle(text: String) {
 }
 
 @Composable
-private fun FieldTitle(
-    text: AnnotatedString,
-) {
+private fun FieldTitle(text: AnnotatedString) {
     Text(
         text = text,
         color = MaterialTheme.colorScheme.primary,

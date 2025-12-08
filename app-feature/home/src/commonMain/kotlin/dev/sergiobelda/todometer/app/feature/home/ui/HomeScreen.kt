@@ -114,6 +114,7 @@ fun HomeScreen(
     val snackbarHostState = remember { SnackbarHostState() }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
+
     fun drawerAction(action: () -> Unit) {
         coroutineScope.launch {
             drawerState.close()
@@ -287,10 +288,11 @@ private fun HomeTopAppBar(
 ) {
     val tonalElevation by animateDpAsState(
         if (selectionMode) HomeTopAppBarTonalElevation else 0.dp,
-        animationSpec = tween(
-            durationMillis = HomeTopAppBarAnimationDuration,
-            easing = FastOutSlowInEasing,
-        ),
+        animationSpec =
+            tween(
+                durationMillis = HOME_TOP_APP_BAR_ANIMATION_DURATION,
+                easing = FastOutSlowInEasing,
+            ),
     )
     Surface(tonalElevation = tonalElevation) {
         Column {
@@ -362,16 +364,18 @@ private fun SelectedTasksTopAppBar(
         actions = {
             IconButton(onClick = onToggleSelectedTasksPinnedValueClick) {
                 Icon(
-                    imageVector = if (atLeastOneNotPinnedTaskItem) {
-                        Images.Icons.PushPin
-                    } else {
-                        Images.Icons.PushPinFilled
-                    },
-                    contentDescription = if (atLeastOneNotPinnedTaskItem) {
-                        TodometerResources.strings.notPinnedTask
-                    } else {
-                        TodometerResources.strings.pinnedTask
-                    },
+                    imageVector =
+                        if (atLeastOneNotPinnedTaskItem) {
+                            Images.Icons.PushPin
+                        } else {
+                            Images.Icons.PushPinFilled
+                        },
+                    contentDescription =
+                        if (atLeastOneNotPinnedTaskItem) {
+                            TodometerResources.strings.notPinnedTask
+                        } else {
+                            TodometerResources.strings.pinnedTask
+                        },
                 )
             }
             IconButton(onClick = onDeleteSelectedTasksClick) {
@@ -530,15 +534,14 @@ fun LazyListScope.taskItems(
 }
 
 @Composable
-private fun TasksSeparator(
-    text: String,
-) {
+private fun TasksSeparator(text: String) {
     Text(
         text,
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier
-            .padding(horizontal = SectionPadding, vertical = 8.dp),
+        modifier =
+            Modifier
+                .padding(horizontal = SectionPadding, vertical = 8.dp),
     )
 }
 
@@ -571,10 +574,11 @@ private fun CompletedTasksHeader(
                 }
             }
         },
-        modifier = Modifier.clickable(
-            enabled = enabled,
-            onClick = onClick,
-        ),
+        modifier =
+            Modifier.clickable(
+                enabled = enabled,
+                onClick = onClick,
+            ),
     )
 }
 
@@ -608,6 +612,6 @@ private fun HomeInfoIllustration(
     }
 }
 
-private val HomeTopAppBarTonalElevation: Dp = 4.dp
-private const val HomeTopAppBarAnimationDuration: Int = 400
+private const val HOME_TOP_APP_BAR_ANIMATION_DURATION: Int = 400
 private val HomeTaskListAreaBottomPadding: Dp = 84.dp
+private val HomeTopAppBarTonalElevation: Dp = 4.dp

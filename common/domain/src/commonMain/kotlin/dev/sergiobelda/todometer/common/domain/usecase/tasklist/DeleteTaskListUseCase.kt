@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 class DeleteTaskListUseCase(
     private val taskListRepository: ITaskListRepository,
 ) {
-
     /**
      * Deletes a task list given its [id].
      */

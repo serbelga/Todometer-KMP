@@ -22,34 +22,37 @@ import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
 
-internal val taskSample = Task(
-    id = "0",
-    title = "The task title",
-    description = "",
-    tag = Tag.UNSPECIFIED,
-    dueDate = 0,
-    state = TaskState.DOING,
-    taskListId = "0",
-    isPinned = false,
-    sync = false,
-)
+internal val taskSample =
+    Task(
+        id = "0",
+        title = "The task title",
+        description = "",
+        tag = Tag.UNSPECIFIED,
+        dueDate = 0,
+        state = TaskState.DOING,
+        taskListId = "0",
+        isPinned = false,
+        sync = false,
+    )
 
-internal val taskItemSample = TaskItem(
-    id = "0",
-    title = "The task title",
-    tag = Tag.UNSPECIFIED,
-    dueDate = 0,
-    state = TaskState.DOING,
-    taskListId = "0",
-    isPinned = false,
-    sync = false,
-    checklistItemsDone = 0,
-    totalChecklistItems = 0,
-)
+internal val taskItemSample =
+    TaskItem(
+        id = "0",
+        title = "The task title",
+        tag = Tag.UNSPECIFIED,
+        dueDate = 0,
+        state = TaskState.DOING,
+        taskListId = "0",
+        isPinned = false,
+        sync = false,
+        checklistItemsDone = 0,
+        totalChecklistItems = 0,
+    )
 
-internal val taskListSample = TaskList(
-    id = "0",
-    name = "Custom task list",
-    description = "",
-    sync = true,
-)
+internal val taskListSample =
+    TaskList(
+        id = "0",
+        name = "Custom task list",
+        description = "",
+        sync = true,
+    )

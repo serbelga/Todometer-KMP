@@ -48,10 +48,10 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 data object TodometerDomainDIModule : TodometerDIModule {
-
-    override val module: Module = module {
-        useCase()
-    }
+    override val module: Module =
+        module {
+            useCase()
+        }
 
     private fun Module.useCase() {
         singleOf(::GetTaskListsUseCase)

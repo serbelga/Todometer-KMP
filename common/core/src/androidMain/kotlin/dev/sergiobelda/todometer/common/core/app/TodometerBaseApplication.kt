@@ -23,7 +23,6 @@ import dev.sergiobelda.todometer.common.di.TodometerDI
 import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 
 open class TodometerBaseApplication : Application() {
-
     protected open val todometerDI: TodometerDI = TodometerBaseDI()
 
     override fun onCreate() {

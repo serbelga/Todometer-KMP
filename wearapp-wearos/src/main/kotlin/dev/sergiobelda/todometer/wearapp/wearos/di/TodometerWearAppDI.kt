@@ -20,7 +20,6 @@ import dev.sergiobelda.todometer.common.core.di.TodometerBaseDI
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
 class TodometerWearAppDI : TodometerBaseDI() {
-
     override val modules: List<TodometerDIModule> =
         super.modules + TodometerPresentationDIModule
 }

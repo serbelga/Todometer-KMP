@@ -51,9 +51,10 @@ fun SettingsContentSelectionPreview(
 ) {
     TodometerAppPreview {
         SettingsContent(
-            uiState = SettingsUIState(
-                appTheme = appTheme,
-            ),
+            uiState =
+                SettingsUIState(
+                    appTheme = appTheme,
+                ),
             contentState = NoContentState,
         )
     }

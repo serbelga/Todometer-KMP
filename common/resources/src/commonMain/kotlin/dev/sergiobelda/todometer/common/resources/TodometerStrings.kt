@@ -98,8 +98,9 @@ data class TodometerStrings(
     val youHaveNotAnyTaskList: String,
 )
 
-internal val Strings: Map<String, TodometerStrings> = mapOf(
-    Locales.CA to CaTodometerStrings,
-    Locales.EN to EnTodometerStrings,
-    Locales.ES to EsTodometerStrings,
-)
+internal val Strings: Map<String, TodometerStrings> =
+    mapOf(
+        Locales.CA to CaTodometerStrings,
+        Locales.EN to EnTodometerStrings,
+        Locales.ES to EsTodometerStrings,
+    )

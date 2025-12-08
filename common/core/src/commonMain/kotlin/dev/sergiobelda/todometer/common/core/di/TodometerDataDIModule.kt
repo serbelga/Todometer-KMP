@@ -45,13 +45,13 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 data object TodometerDataDIModule : TodometerDIModule {
-
-    override val module: Module = module {
-        database()
-        preferences()
-        localDataSource()
-        repository()
-    }
+    override val module: Module =
+        module {
+            database()
+            preferences()
+            localDataSource()
+            repository()
+        }
 
     private fun Module.database() {
         single { createDatabase() }

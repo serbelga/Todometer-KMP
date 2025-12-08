@@ -29,9 +29,7 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
-internal fun PrivacyPolicyDialog(
-    onDismissRequest: () -> Unit,
-) {
+internal fun PrivacyPolicyDialog(onDismissRequest: () -> Unit) {
     AlertDialog(
         title = {
             Text(TodometerResources.strings.privacyPolicy)

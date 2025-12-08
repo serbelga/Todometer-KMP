@@ -20,10 +20,11 @@ import androidx.compose.ui.input.rotary.RotaryScrollEvent
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
 sealed interface TaskDetailsEvent : FonamentEvent {
-
     data object DeleteTask : TaskDetailsEvent
 
-    data class UpdateTask(val title: String) : TaskDetailsEvent
+    data class UpdateTask(
+        val title: String,
+    ) : TaskDetailsEvent
 
     data object ShowDeleteTaskAlertDialog : TaskDetailsEvent
 

@@ -22,7 +22,6 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 class SetTaskChecklistItemUncheckedUseCase(
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
-
     suspend operator fun invoke(id: String) =
         taskChecklistItemsRepository.updateTaskChecklistItemState(
             id,

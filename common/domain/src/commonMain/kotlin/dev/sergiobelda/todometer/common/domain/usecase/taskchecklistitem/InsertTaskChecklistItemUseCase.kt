@@ -21,7 +21,8 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 class InsertTaskChecklistItemUseCase(
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
-
-    suspend operator fun invoke(taskId: String, text: String) =
-        taskChecklistItemsRepository.insertTaskChecklistItems(taskId = taskId, text)
+    suspend operator fun invoke(
+        taskId: String,
+        text: String,
+    ) = taskChecklistItemsRepository.insertTaskChecklistItems(taskId = taskId, text)
 }

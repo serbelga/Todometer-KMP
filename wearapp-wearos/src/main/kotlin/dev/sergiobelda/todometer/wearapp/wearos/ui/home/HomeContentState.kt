@@ -31,31 +31,33 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Stable
-data class HomeContentState @RememberInComposition constructor(
-    val scalingLazyListState: ScalingLazyListState,
-    val coroutineScope: CoroutineScope,
-) : FonamentContentState {
+data class HomeContentState
+    @RememberInComposition
+    constructor(
+        val scalingLazyListState: ScalingLazyListState,
+        val coroutineScope: CoroutineScope,
+    ) : FonamentContentState {
+        override fun handleEvent(event: FonamentEvent) {
+            when (event) {
+                is HomeEvent.LaunchRotaryScrollEvent -> {
+                    coroutineScope.launch {
+                        scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
 
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            is HomeEvent.LaunchRotaryScrollEvent -> {
-                coroutineScope.launch {
-                    scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
-
-                    scalingLazyListState.animateScrollBy(0f)
+                        scalingLazyListState.animateScrollBy(0f)
+                    }
                 }
             }
         }
     }
-}
 
 @Composable
 fun rememberHomeContentState(
     scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): HomeContentState = remember {
-    HomeContentState(
-        scalingLazyListState = scalingLazyListState,
-        coroutineScope = coroutineScope,
-    )
-}
+): HomeContentState =
+    remember {
+        HomeContentState(
+            scalingLazyListState = scalingLazyListState,
+            coroutineScope = coroutineScope,
+        )
+    }

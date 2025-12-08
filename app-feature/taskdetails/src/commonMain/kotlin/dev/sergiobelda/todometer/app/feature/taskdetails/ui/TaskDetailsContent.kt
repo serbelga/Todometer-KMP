@@ -73,13 +73,9 @@ import dev.sergiobelda.todometer.common.resources.TodometerResources
 import kotlinx.collections.immutable.ImmutableList
 
 data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetailsContentState>() {
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    override fun createContentState(
-        uiState: TaskDetailsUIState,
-    ): TaskDetailsContentState =
-        rememberTaskDetailsContentState()
+    override fun createContentState(uiState: TaskDetailsUIState): TaskDetailsContentState = rememberTaskDetailsContentState()
 
     @Composable
     override fun Content(
@@ -96,7 +92,7 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
                 )
             }
 
-            !uiState.isLoadingTask ->
+            !uiState.isLoadingTask -> {
                 uiState.task?.let { task ->
                     TaskDetailsScaffold(
                         contentState = contentState,
@@ -104,6 +100,7 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
                         taskChecklistItems = uiState.taskChecklistItems,
                     )
                 }
+            }
         }
     }
 
@@ -117,8 +114,9 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
         Scaffold(
-            modifier = Modifier
-                .nestedScroll(scrollBehavior.nestedScrollConnection),
+            modifier =
+                Modifier
+                    .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
                 TaskDetailsTopBar(
                     showTopAppBarTitle = contentState.showTopAppBarTitle,
@@ -132,8 +130,9 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
                     task = task,
                     taskChecklistItems = taskChecklistItems,
                     lazyListState = contentState.lazyListState,
-                    modifier = Modifier
-                        .padding(paddingValues),
+                    modifier =
+                        Modifier
+                            .padding(paddingValues),
                 )
             },
         )
@@ -176,16 +175,18 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
             actions = {
                 IconButton(onClick = { onEvent(TaskDetailsEvent.ToggleTaskPinnedValue) }) {
                     Icon(
-                        imageVector = if (taskIsPinned) {
-                            Images.Icons.PushPinFilled
-                        } else {
-                            Images.Icons.PushPin
-                        },
-                        contentDescription = if (taskIsPinned) {
-                            TodometerResources.strings.pinnedTask
-                        } else {
-                            TodometerResources.strings.notPinnedTask
-                        },
+                        imageVector =
+                            if (taskIsPinned) {
+                                Images.Icons.PushPinFilled
+                            } else {
+                                Images.Icons.PushPin
+                            },
+                        contentDescription =
+                            if (taskIsPinned) {
+                                TodometerResources.strings.pinnedTask
+                            } else {
+                                TodometerResources.strings.notPinnedTask
+                            },
                         tint = MaterialTheme.colorScheme.primary,
                     )
                 }
@@ -318,32 +319,34 @@ private inline fun LazyItemScope.TaskChecklistItem(
     crossinline onTaskChecklistItemClick: (String) -> Unit,
     crossinline onDeleteTaskCheckListItem: (String) -> Unit,
 ) {
-    val textColor = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
-        MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
-    } else {
-        MaterialTheme.colorScheme.onSurface
-    }
-    val textDecoration = if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
-        TextDecoration.LineThrough
-    } else {
-        null
-    }
+    val textColor =
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
+            MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha()
+        } else {
+            MaterialTheme.colorScheme.onSurface
+        }
+    val textDecoration =
+        if (taskChecklistItem.state == TaskChecklistItemState.CHECKED) {
+            TextDecoration.LineThrough
+        } else {
+            null
+        }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                onTaskChecklistItemClick(taskChecklistItem.id)
-            }
-            .animateItem()
-            .padding(horizontal = 8.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    onTaskChecklistItemClick(taskChecklistItem.id)
+                }.animateItem()
+                .padding(horizontal = 8.dp),
     ) {
         TodometerCheckbox(
             checked = taskChecklistItem.state == TaskChecklistItemState.CHECKED,
             onCheckedChange = {
                 onTaskChecklistItemClick(taskChecklistItem.id)
             },
-            modifier = Modifier.scale(TodometerCheckboxScaleFactor),
+            modifier = Modifier.scale(TODOMETER_CHECKBOX_SCALE_FACTOR),
         )
         Text(
             text = taskChecklistItem.text,
@@ -375,22 +378,24 @@ private fun LazyListScope.taskDescription(description: String?) {
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(
-                    start = SectionPadding,
-                    end = SectionPadding,
-                    bottom = SectionPadding,
-                ),
+                modifier =
+                    Modifier.padding(
+                        start = SectionPadding,
+                        end = SectionPadding,
+                        bottom = SectionPadding,
+                    ),
             )
         } else {
             Text(
                 text = TodometerResources.strings.noDescription,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(
-                    top = 16.dp,
-                    start = SectionPadding,
-                    end = SectionPadding,
-                    bottom = SectionPadding,
-                ),
+                modifier =
+                    Modifier.padding(
+                        top = 16.dp,
+                        start = SectionPadding,
+                        end = SectionPadding,
+                        bottom = SectionPadding,
+                    ),
                 color = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
             )
         }
@@ -407,4 +412,4 @@ private fun TaskDetailSectionTitle(text: String) {
     )
 }
 
-private const val TodometerCheckboxScaleFactor: Float = 0.85f
+private const val TODOMETER_CHECKBOX_SCALE_FACTOR: Float = 0.85f

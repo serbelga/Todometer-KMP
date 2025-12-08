@@ -26,6 +26,5 @@ import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
     deepLinkUris = ["app://open.add.task"],
 )
 data object AddTaskScreen : FonamentUI<AddTaskUIState>() {
-
     override val content: FonamentContent<AddTaskUIState, *> = AddTaskContent
 }

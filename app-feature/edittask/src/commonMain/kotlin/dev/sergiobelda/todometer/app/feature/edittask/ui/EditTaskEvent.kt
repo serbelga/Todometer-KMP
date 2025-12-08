@@ -21,7 +21,6 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.ui.extensions.TextFieldValueChangeEvent
 
 sealed interface EditTaskEvent : FonamentEvent {
-
     data class UpdateTask(
         val title: String,
         val tag: Tag,
@@ -29,12 +28,14 @@ sealed interface EditTaskEvent : FonamentEvent {
         val dueDate: Long? = null,
     ) : EditTaskEvent
 
-    data class TitleValueChange(override val value: String) :
-        EditTaskEvent,
+    data class TitleValueChange(
+        override val value: String,
+    ) : EditTaskEvent,
         TextFieldValueChangeEvent
 
-    data class DescriptionValueChange(override val value: String) :
-        EditTaskEvent,
+    data class DescriptionValueChange(
+        override val value: String,
+    ) : EditTaskEvent,
         TextFieldValueChangeEvent
 
     data object ConfirmDatePickerDialog : EditTaskEvent
@@ -51,5 +52,7 @@ sealed interface EditTaskEvent : FonamentEvent {
 
     data object ClearDateTime : EditTaskEvent
 
-    data class SelectTag(val tag: Tag) : EditTaskEvent
+    data class SelectTag(
+        val tag: Tag,
+    ) : EditTaskEvent
 }

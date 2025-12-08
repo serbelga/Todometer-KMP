@@ -26,24 +26,23 @@ import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.navigation.aboutNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutNavDestination
 import dev.sergiobelda.todometer.app.feature.about.ui.AboutScreen
-import dev.sergiobelda.todometer.app.feature.about.ui.GitHubUrl
-import dev.sergiobelda.todometer.app.feature.about.ui.PrivacyPolicyUrl
+import dev.sergiobelda.todometer.app.feature.about.ui.GITHUB_URL
+import dev.sergiobelda.todometer.app.feature.about.ui.PRIVACY_POLICY_URL
 import dev.sergiobelda.todometer.common.android.extensions.launchActivity
 
-internal actual fun NavGraphBuilder.aboutNode(
-    navigateBack: () -> Unit,
-) {
+internal actual fun NavGraphBuilder.aboutNode(navigateBack: () -> Unit) {
     composable(
         navDestination = AboutNavDestination,
     ) {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
-        val aboutNavigationEventHandler = aboutNavigationEventHandler(
-            navigateBack = navigateBack,
-            navigateToGitHub = { uriHandler.openUri(GitHubUrl) },
-            navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
-            navigateToPrivacyPolicy = { uriHandler.openUri(PrivacyPolicyUrl) },
-        )
+        val aboutNavigationEventHandler =
+            aboutNavigationEventHandler(
+                navigateBack = navigateBack,
+                navigateToGitHub = { uriHandler.openUri(GITHUB_URL) },
+                navigateToOpenSourceLicenses = { context.launchActivity<OssLicensesMenuActivity>() },
+                navigateToPrivacyPolicy = { uriHandler.openUri(PRIVACY_POLICY_URL) },
+            )
         AboutScreen.NavigationNode(
             viewModel = koinFonamentViewModel(),
             navigationEventHandler = aboutNavigationEventHandler,

@@ -42,10 +42,11 @@ import kotlinx.collections.immutable.persistentListOf
 fun TaskDetailsContentPreview() {
     TodometerAppPreview {
         TaskDetailsContent(
-            uiState = TaskDetailsUIState(
-                task = taskSample,
-                taskChecklistItems = taskChecklistItemsSample,
-            ),
+            uiState =
+                TaskDetailsUIState(
+                    task = taskSample,
+                    taskChecklistItems = taskChecklistItemsSample,
+                ),
             contentState = rememberTaskDetailsContentState(),
         )
     }
@@ -56,9 +57,10 @@ fun TaskDetailsContentPreview() {
 fun TaskDetailsLoadingPreview() {
     TodometerAppPreview {
         TaskDetailsContent(
-            uiState = TaskDetailsUIState(
-                isLoadingTask = true,
-            ),
+            uiState =
+                TaskDetailsUIState(
+                    isLoadingTask = true,
+                ),
             contentState = rememberTaskDetailsContentState(),
         )
     }
@@ -69,43 +71,47 @@ fun TaskDetailsLoadingPreview() {
 fun TaskDetailsDeltaPreview() {
     TodometerAppPreview {
         TaskDetailsContent(
-            uiState = TaskDetailsUIState(
-                task = taskSample.copy(
-                    title = LoremIpsum(30).values.first(),
-                    isPinned = true,
-                    tag = Tag.UNSPECIFIED,
-                    dueDate = getYesterdayEpochMilliseconds(),
-                    description = "",
+            uiState =
+                TaskDetailsUIState(
+                    task =
+                        taskSample.copy(
+                            title = LoremIpsum(30).values.first(),
+                            isPinned = true,
+                            tag = Tag.UNSPECIFIED,
+                            dueDate = getYesterdayEpochMilliseconds(),
+                            description = "",
+                        ),
                 ),
-            ),
             contentState = rememberTaskDetailsContentState(),
         )
     }
 }
 
-private val taskSample = Task(
-    id = "0",
-    title = "Task title",
-    description = LoremIpsum().values.first(),
-    tag = Tag.BLUE,
-    dueDate = getTomorrowEpochMilliseconds(),
-    state = TaskState.DOING,
-    taskListId = "0",
-    isPinned = false,
-    sync = false,
-)
-
-private val taskChecklistItemsSample = persistentListOf(
-    TaskChecklistItem(
+private val taskSample =
+    Task(
         id = "0",
-        taskId = "0",
-        text = "Item 1",
-        state = TaskChecklistItemState.CHECKED,
-    ),
-    TaskChecklistItem(
-        id = "1",
-        taskId = "0",
-        text = "Item 2",
-        state = TaskChecklistItemState.UNCHECKED,
-    ),
-)
+        title = "Task title",
+        description = LoremIpsum().values.first(),
+        tag = Tag.BLUE,
+        dueDate = getTomorrowEpochMilliseconds(),
+        state = TaskState.DOING,
+        taskListId = "0",
+        isPinned = false,
+        sync = false,
+    )
+
+private val taskChecklistItemsSample =
+    persistentListOf(
+        TaskChecklistItem(
+            id = "0",
+            taskId = "0",
+            text = "Item 1",
+            state = TaskChecklistItemState.CHECKED,
+        ),
+        TaskChecklistItem(
+            id = "1",
+            taskId = "0",
+            text = "Item 2",
+            state = TaskChecklistItemState.UNCHECKED,
+        ),
+    )

@@ -25,10 +25,8 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeTaskRepository() : ITaskRepository {
-
-    override fun getTask(id: String): Flow<Result<Task>> =
-        flow {}
+class FakeTaskRepository : ITaskRepository {
+    override fun getTask(id: String): Flow<Result<Task>> = flow {}
 
     override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
         flow {
@@ -62,7 +60,10 @@ class FakeTaskRepository() : ITaskRepository {
 
     override suspend fun updateTask(task: Task) = Unit
 
-    override suspend fun updateTaskState(id: String, state: TaskState) = Unit
+    override suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    ) = Unit
 
     override suspend fun deleteTasks(vararg ids: String) = Unit
 

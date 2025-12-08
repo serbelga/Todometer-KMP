@@ -44,5 +44,4 @@ fun Long.dateFormat(): String {
 fun Long.localTime(): LocalTime = this.toLocalDateTime().time
 
 @OptIn(ExperimentalTime::class)
-internal fun Long.toLocalDateTime(): LocalDateTime =
-    Instant.fromEpochMilliseconds(this).toLocalDateTime(TimeZone.UTC)
+internal fun Long.toLocalDateTime(): LocalDateTime = Instant.fromEpochMilliseconds(this).toLocalDateTime(TimeZone.UTC)

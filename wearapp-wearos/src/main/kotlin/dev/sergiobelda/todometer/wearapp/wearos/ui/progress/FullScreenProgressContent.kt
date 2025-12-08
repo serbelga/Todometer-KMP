@@ -26,12 +26,14 @@ import androidx.wear.compose.material.CircularProgressIndicator
 @Composable
 internal fun FullScreenProgressContent() {
     Box(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier =
+            Modifier
+                .fillMaxSize(),
     ) {
         CircularProgressIndicator(
-            modifier = Modifier
-                .align(Alignment.Center),
+            modifier =
+                Modifier
+                    .align(Alignment.Center),
         )
     }
 }

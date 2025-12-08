@@ -31,36 +31,38 @@ class EditTaskViewModel(
     private val getTaskUseCase: GetTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
 ) : FonamentViewModel<EditTaskUIState>(
-    initialUIState = EditTaskUIState(
-        isLoading = true,
-    ),
-) {
-
+        initialUIState =
+            EditTaskUIState(
+                isLoading = true,
+            ),
+    ) {
     init {
         getTask()
     }
 
-    private fun getTask() = viewModelScope.launch {
-        getTaskUseCase(taskId).collect { result ->
-            result.doIfSuccess { task ->
-                updateUIState {
-                    it.copy(
-                        isLoading = false,
-                        task = task,
-                        errorUi = null,
-                    )
-                }
-            }.doIfError { error ->
-                updateUIState {
-                    it.copy(
-                        isLoading = false,
-                        task = null,
-                        errorUi = error.mapToErrorUi(),
-                    )
-                }
+    private fun getTask() =
+        viewModelScope.launch {
+            getTaskUseCase(taskId).collect { result ->
+                result
+                    .doIfSuccess { task ->
+                        updateUIState {
+                            it.copy(
+                                isLoading = false,
+                                task = task,
+                                errorUi = null,
+                            )
+                        }
+                    }.doIfError { error ->
+                        updateUIState {
+                            it.copy(
+                                isLoading = false,
+                                task = null,
+                                errorUi = error.mapToErrorUi(),
+                            )
+                        }
+                    }
             }
         }
-    }
 
     override fun handleEvent(event: FonamentEvent) {
         when (event) {
@@ -68,18 +70,17 @@ class EditTaskViewModel(
         }
     }
 
-    private fun updateTask(
-        event: EditTaskEvent.UpdateTask,
-    ) = viewModelScope.launch {
-        uiState.task?.let {
-            updateTaskUseCase(
-                it.copy(
-                    title = event.title,
-                    tag = event.tag,
-                    description = event.description,
-                    dueDate = event.dueDate,
-                ),
-            )
+    private fun updateTask(event: EditTaskEvent.UpdateTask) =
+        viewModelScope.launch {
+            uiState.task?.let {
+                updateTaskUseCase(
+                    it.copy(
+                        title = event.title,
+                        tag = event.tag,
+                        description = event.description,
+                        dueDate = event.dueDate,
+                    ),
+                )
+            }
         }
-    }
 }

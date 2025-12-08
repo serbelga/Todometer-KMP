@@ -31,7 +31,6 @@ import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
 
@@ -42,17 +41,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             val viewModel: MainViewModel = koinViewModel()
             val appThemeState = viewModel.appTheme.collectAsStateWithLifecycle()
-            val darkTheme: Boolean = when (appThemeState.value) {
-                AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-                AppTheme.DARK_THEME -> true
-                AppTheme.LIGHT_THEME -> false
-            }
+            val darkTheme: Boolean =
+                when (appThemeState.value) {
+                    AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                    AppTheme.DARK_THEME -> true
+                    AppTheme.LIGHT_THEME -> false
+                }
 
             DisposableEffect(darkTheme) {
                 enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
-                        darkTheme
-                    },
+                    statusBarStyle =
+                        SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) {
+                            darkTheme
+                        },
                 )
                 onDispose {}
             }

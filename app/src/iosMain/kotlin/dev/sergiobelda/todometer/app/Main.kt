@@ -20,7 +20,8 @@ import androidx.compose.ui.window.ComposeUIViewController
 import dev.sergiobelda.todometer.app.di.TodometerAppDI
 import platform.UIKit.UIViewController
 
-fun MainViewController(): UIViewController = ComposeUIViewController {
-    TodometerAppDI().startDI()
-    TodometerApp()
-}
+fun mainViewController(): UIViewController =
+    ComposeUIViewController {
+        TodometerAppDI().startDI()
+        TodometerApp()
+    }

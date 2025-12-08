@@ -38,12 +38,14 @@ import dev.sergiobelda.todometer.common.ui.tooling.getTomorrowEpochMilliseconds
 fun EditTaskContentPreview() {
     TodometerAppPreview {
         EditTaskContent(
-            uiState = EditTaskUIState(
-                task = taskSample,
-            ),
-            contentState = rememberEditTaskContentState(
-                taskSample,
-            ),
+            uiState =
+                EditTaskUIState(
+                    task = taskSample,
+                ),
+            contentState =
+                rememberEditTaskContentState(
+                    taskSample,
+                ),
         )
     }
 }
@@ -53,12 +55,14 @@ fun EditTaskContentPreview() {
 fun EditTaskLoadingPreview() {
     TodometerAppPreview {
         EditTaskContent(
-            uiState = EditTaskUIState(
-                isLoading = true,
-            ),
-            contentState = rememberEditTaskContentState(
-                taskSample,
-            ),
+            uiState =
+                EditTaskUIState(
+                    isLoading = true,
+                ),
+            contentState =
+                rememberEditTaskContentState(
+                    taskSample,
+                ),
         )
     }
 }
@@ -66,32 +70,36 @@ fun EditTaskLoadingPreview() {
 @Preview
 @Composable
 fun EditTaskDeltaPreview() {
-    val taskDelta = taskSample.copy(
-        title = "",
-        tag = Tag.UNSPECIFIED,
-        dueDate = null,
-        description = null,
-    )
+    val taskDelta =
+        taskSample.copy(
+            title = "",
+            tag = Tag.UNSPECIFIED,
+            dueDate = null,
+            description = null,
+        )
     TodometerAppPreview {
         EditTaskContent(
-            uiState = EditTaskUIState(
-                task = taskDelta,
-            ),
-            contentState = rememberEditTaskContentState(
-                taskDelta,
-            ),
+            uiState =
+                EditTaskUIState(
+                    task = taskDelta,
+                ),
+            contentState =
+                rememberEditTaskContentState(
+                    taskDelta,
+                ),
         )
     }
 }
 
-private val taskSample = Task(
-    id = "0",
-    title = "Task title",
-    description = LoremIpsum().values.first(),
-    tag = Tag.BLUE,
-    dueDate = getTomorrowEpochMilliseconds(),
-    state = TaskState.DOING,
-    taskListId = "0",
-    isPinned = false,
-    sync = false,
-)
+private val taskSample =
+    Task(
+        id = "0",
+        title = "Task title",
+        description = LoremIpsum().values.first(),
+        tag = Tag.BLUE,
+        dueDate = getTomorrowEpochMilliseconds(),
+        state = TaskState.DOING,
+        taskListId = "0",
+        isPinned = false,
+        sync = false,
+    )

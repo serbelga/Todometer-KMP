@@ -23,69 +23,82 @@ import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.unit.sp
 import dev.sergiobelda.todometer.common.designsystem.resources.type.quickSandFontFamily
 
-val typography = Typography(
-    headlineLarge = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 32.sp,
-    ),
-    headlineMedium = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 28.sp,
-    ),
-    headlineSmall = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 22.sp,
-        letterSpacing = 0.15.sp,
-    ),
-    titleLarge = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
-    ),
-    titleMedium = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-    ),
-    titleSmall = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-    ),
-    bodyLarge = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
-        baselineShift = BaselineShift(+0.1f),
-    ),
-    bodyMedium = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-        baselineShift = BaselineShift(+0.3f),
-    ),
-    bodySmall = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-    ),
-    labelLarge = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 12.sp,
-    ),
-    labelMedium = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-    ),
-    labelSmall = TextStyle(
-        fontFamily = quickSandFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 10.sp,
-        letterSpacing = 1.5.sp,
-    ),
-)
+val typography =
+    Typography(
+        headlineLarge =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 32.sp,
+            ),
+        headlineMedium =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 28.sp,
+            ),
+        headlineSmall =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 22.sp,
+                letterSpacing = 0.15.sp,
+            ),
+        titleLarge =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 20.sp,
+            ),
+        titleMedium =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 16.sp,
+            ),
+        titleSmall =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
+            ),
+        bodyLarge =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 16.sp,
+                baselineShift = BaselineShift(+0.1f),
+            ),
+        bodyMedium =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
+                baselineShift = BaselineShift(+0.3f),
+            ),
+        bodySmall =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 12.sp,
+            ),
+        labelLarge =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+            ),
+        labelMedium =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 12.sp,
+            ),
+        labelSmall =
+            TextStyle(
+                fontFamily = quickSandFontFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 10.sp,
+                letterSpacing = 1.5.sp,
+            ),
+    )

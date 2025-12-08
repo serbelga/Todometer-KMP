@@ -24,14 +24,19 @@ import dev.sergiobelda.todometer.common.database.TodometerDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 
-class TaskListDao(private val todometerDatabase: TodometerDatabase) : ITaskListDao {
-
+class TaskListDao(
+    private val todometerDatabase: TodometerDatabase,
+) : ITaskListDao {
     override fun getTaskLists(): Flow<List<TaskListEntity>> =
-        todometerDatabase.taskListEntityQueries.selectAllTaskLists().asFlow()
+        todometerDatabase.taskListEntityQueries
+            .selectAllTaskLists()
+            .asFlow()
             .mapToList(Dispatchers.Default)
 
     override fun getTaskList(id: String): Flow<TaskListEntity?> =
-        todometerDatabase.taskListEntityQueries.selectTaskList(id).asFlow()
+        todometerDatabase.taskListEntityQueries
+            .selectTaskList(id)
+            .asFlow()
             .mapToOneOrNull(Dispatchers.Default)
 
     override suspend fun insertTaskList(taskList: TaskListEntity): String {
@@ -59,7 +64,10 @@ class TaskListDao(private val todometerDatabase: TodometerDatabase) : ITaskListD
         )
     }
 
-    override suspend fun updateTaskListName(id: String, name: String) {
+    override suspend fun updateTaskListName(
+        id: String,
+        name: String,
+    ) {
         todometerDatabase.taskListEntityQueries.updateTaskListName(id = id, name = name)
     }
 

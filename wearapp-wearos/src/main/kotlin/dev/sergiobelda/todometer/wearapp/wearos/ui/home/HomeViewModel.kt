@@ -31,25 +31,27 @@ class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val insertTaskListUseCase: InsertTaskListUseCase,
 ) : FonamentViewModel<HomeUIState>(
-    initialUIState = HomeUIState.Loading,
-) {
-
-    init { getTaskLists() }
+        initialUIState = HomeUIState.Loading,
+    ) {
+    init {
+        getTaskLists()
+    }
 
     private fun getTaskLists() {
         viewModelScope.launch {
             getTaskListsUseCase().collect { result ->
-                result.doIfSuccess { taskLists ->
-                    updateUIState {
-                        HomeUIState.Success(taskLists.toPersistentList())
+                result
+                    .doIfSuccess { taskLists ->
+                        updateUIState {
+                            HomeUIState.Success(taskLists.toPersistentList())
+                        }
+                    }.doIfError { error ->
+                        updateUIState {
+                            HomeUIState.Error(
+                                errorUi = error.mapToErrorUi(),
+                            )
+                        }
                     }
-                }.doIfError { error ->
-                    updateUIState {
-                        HomeUIState.Error(
-                            errorUi = error.mapToErrorUi(),
-                        )
-                    }
-                }
             }
         }
     }
@@ -62,7 +64,8 @@ class HomeViewModel(
         }
     }
 
-    private fun insertTaskList(name: String) = viewModelScope.launch {
-        insertTaskListUseCase.invoke(name)
-    }
+    private fun insertTaskList(name: String) =
+        viewModelScope.launch {
+            insertTaskListUseCase.invoke(name)
+        }
 }

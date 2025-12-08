@@ -34,55 +34,62 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Stable
-data class TaskListTasksContentState @RememberInComposition constructor(
-    val scalingLazyListState: ScalingLazyListState,
-    val coroutineScope: CoroutineScope,
-) : FonamentContentState {
+data class TaskListTasksContentState
+    @RememberInComposition
+    constructor(
+        val scalingLazyListState: ScalingLazyListState,
+        val coroutineScope: CoroutineScope,
+    ) : FonamentContentState {
+        var selectedTaskId by mutableStateOf("")
+            private set
 
-    var selectedTaskId by mutableStateOf("")
-        private set
+        var showDeleteTaskAlertDialog by mutableStateOf(false)
+            private set
 
-    var showDeleteTaskAlertDialog by mutableStateOf(false)
-        private set
+        var showDeleteTaskListAlertDialog by mutableStateOf(false)
+            private set
 
-    var showDeleteTaskListAlertDialog by mutableStateOf(false)
-        private set
+        override fun handleEvent(event: FonamentEvent) {
+            when (event) {
+                is TaskListTasksEvent.LaunchRotaryScrollEvent -> {
+                    coroutineScope.launch {
+                        scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
 
-    override fun handleEvent(event: FonamentEvent) {
-        when (event) {
-            is TaskListTasksEvent.LaunchRotaryScrollEvent -> {
-                coroutineScope.launch {
-                    scalingLazyListState.scrollBy(event.scrollEvent.verticalScrollPixels)
-
-                    scalingLazyListState.animateScrollBy(0f)
+                        scalingLazyListState.animateScrollBy(0f)
+                    }
                 }
-            }
-            is TaskListTasksEvent.ShowDeleteTaskAlertDialog -> {
-                showDeleteTaskAlertDialog = true
-            }
-            is TaskListTasksEvent.ShowDeleteTaskListAlertDialog -> {
-                showDeleteTaskListAlertDialog = true
-            }
-            is TaskListTasksEvent.CancelDeleteTaskAlertDialog -> {
-                showDeleteTaskAlertDialog = false
-            }
-            is TaskListTasksEvent.CancelDeleteTaskListAlertDialog -> {
-                showDeleteTaskListAlertDialog = false
-            }
-            is TaskListTasksEvent.SelectTask -> {
-                selectedTaskId = event.taskId
+
+                is TaskListTasksEvent.ShowDeleteTaskAlertDialog -> {
+                    showDeleteTaskAlertDialog = true
+                }
+
+                is TaskListTasksEvent.ShowDeleteTaskListAlertDialog -> {
+                    showDeleteTaskListAlertDialog = true
+                }
+
+                is TaskListTasksEvent.CancelDeleteTaskAlertDialog -> {
+                    showDeleteTaskAlertDialog = false
+                }
+
+                is TaskListTasksEvent.CancelDeleteTaskListAlertDialog -> {
+                    showDeleteTaskListAlertDialog = false
+                }
+
+                is TaskListTasksEvent.SelectTask -> {
+                    selectedTaskId = event.taskId
+                }
             }
         }
     }
-}
 
 @Composable
 fun rememberTaskListTasksContentState(
     scalingLazyListState: ScalingLazyListState = rememberScalingLazyListState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): TaskListTasksContentState = remember {
-    TaskListTasksContentState(
-        scalingLazyListState = scalingLazyListState,
-        coroutineScope = coroutineScope,
-    )
-}
+): TaskListTasksContentState =
+    remember {
+        TaskListTasksContentState(
+            scalingLazyListState = scalingLazyListState,
+            coroutineScope = coroutineScope,
+        )
+    }

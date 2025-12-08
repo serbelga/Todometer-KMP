@@ -27,7 +27,6 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 class TaskDueDateTest {
-
     @OptIn(ExperimentalTime::class)
     @Test
     fun testGetDueDateFormatted() {

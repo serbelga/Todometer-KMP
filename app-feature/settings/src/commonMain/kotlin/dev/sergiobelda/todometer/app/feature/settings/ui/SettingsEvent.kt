@@ -20,5 +20,7 @@ import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 
 sealed interface SettingsEvent : FonamentEvent {
-    data class SetAppTheme(val theme: AppTheme) : SettingsEvent
+    data class SetAppTheme(
+        val theme: AppTheme,
+    ) : SettingsEvent
 }

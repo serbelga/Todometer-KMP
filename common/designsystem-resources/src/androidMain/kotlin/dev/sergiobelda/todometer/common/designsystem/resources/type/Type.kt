@@ -27,10 +27,11 @@ internal val quickSandMediumFont = Font(R.font.quicksand_medium, FontWeight.Medi
 internal val quickSandSemiBoldFont = Font(R.font.quicksand_semi_bold, FontWeight.SemiBold)
 internal val quickSandBoldFont = Font(R.font.quicksand_semi_bold, FontWeight.Bold)
 
-actual val quickSandFontFamily = FontFamily(
-    quickSandLightFont,
-    quickSandRegularFont,
-    quickSandMediumFont,
-    quickSandSemiBoldFont,
-    quickSandBoldFont,
-)
+actual val quickSandFontFamily =
+    FontFamily(
+        quickSandLightFont,
+        quickSandRegularFont,
+        quickSandMediumFont,
+        quickSandSemiBoldFont,
+        quickSandBoldFont,
+    )

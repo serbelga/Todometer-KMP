@@ -49,9 +49,10 @@ fun TodometerTitle(modifier: Modifier = Modifier) {
         Text(
             text = TodometerResources.strings.appName,
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(
-                bottom = TodometerTitleTextPaddingBottom,
-            ),
+            modifier =
+                Modifier.padding(
+                    bottom = TodometerTitleTextPaddingBottom,
+                ),
             fontWeight = FontWeight.Bold,
         )
     }

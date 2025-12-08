@@ -23,8 +23,7 @@ import cafe.adriel.lyricist.ProvideStrings
 import cafe.adriel.lyricist.rememberStrings
 
 @Composable
-fun rememberStrings(): Lyricist<TodometerStrings> =
-    rememberStrings(Strings)
+fun rememberStrings(): Lyricist<TodometerStrings> = rememberStrings(Strings)
 
 @Composable
 fun ProvideTodometerStrings(

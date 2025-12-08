@@ -29,10 +29,11 @@ import kotlinx.collections.immutable.persistentListOf
 private fun TaskListTasksContentLoadingPreview() {
     TodometerWearAppPreview {
         TaskListTasksContent(
-            uiState = TaskListTasksUIState(
-                taskListUIState = TaskListUIState.Loading,
-                tasksUIState = TasksUIState.Loading,
-            ),
+            uiState =
+                TaskListTasksUIState(
+                    taskListUIState = TaskListUIState.Loading,
+                    tasksUIState = TasksUIState.Loading,
+                ),
             contentState = rememberTaskListTasksContentState(),
         )
     }
@@ -44,12 +45,14 @@ private fun TaskListTasksContentLoadingPreview() {
 private fun TaskListTasksContentDefaultTaskListPreview() {
     TodometerWearAppPreview {
         TaskListTasksContent(
-            uiState = TaskListTasksUIState(
-                taskListUIState = TaskListUIState.DefaultTaskList,
-                tasksUIState = TasksUIState.Success(
-                    tasks = persistentListOf(),
+            uiState =
+                TaskListTasksUIState(
+                    taskListUIState = TaskListUIState.DefaultTaskList,
+                    tasksUIState =
+                        TasksUIState.Success(
+                            tasks = persistentListOf(),
+                        ),
                 ),
-            ),
             contentState = rememberTaskListTasksContentState(),
         )
     }
@@ -61,16 +64,20 @@ private fun TaskListTasksContentDefaultTaskListPreview() {
 private fun TaskListTasksContentPreview() {
     TodometerWearAppPreview {
         TaskListTasksContent(
-            uiState = TaskListTasksUIState(
-                taskListUIState = TaskListUIState.Success(
-                    taskList = taskListSample,
+            uiState =
+                TaskListTasksUIState(
+                    taskListUIState =
+                        TaskListUIState.Success(
+                            taskList = taskListSample,
+                        ),
+                    tasksUIState =
+                        TasksUIState.Success(
+                            tasks =
+                                persistentListOf(
+                                    taskItemSample,
+                                ),
+                        ),
                 ),
-                tasksUIState = TasksUIState.Success(
-                    tasks = persistentListOf(
-                        taskItemSample,
-                    ),
-                ),
-            ),
             contentState = rememberTaskListTasksContentState(),
         )
     }

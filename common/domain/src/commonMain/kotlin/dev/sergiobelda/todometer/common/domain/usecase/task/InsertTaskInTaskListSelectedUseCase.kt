@@ -30,21 +30,19 @@ class InsertTaskInTaskListSelectedUseCase(
     private val userPreferencesRepository: IUserPreferencesRepository,
     private val taskChecklistItemsRepository: ITaskChecklistItemsRepository,
 ) {
-
     /**
      * Creates a new [Task] given a [newTask].
      */
-    suspend operator fun invoke(
-        newTask: NewTask,
-    ): Result<String> {
+    suspend operator fun invoke(newTask: NewTask): Result<String> {
         val taskListId = userPreferencesRepository.taskListSelected().firstOrNull() ?: ""
-        val result = taskRepository.insertTask(
-            newTask.title,
-            newTask.tag,
-            newTask.description,
-            newTask.dueDate,
-            taskListId,
-        )
+        val result =
+            taskRepository.insertTask(
+                newTask.title,
+                newTask.tag,
+                newTask.description,
+                newTask.dueDate,
+                taskListId,
+            )
         result.doIfSuccess { taskId ->
             taskChecklistItemsRepository.insertTaskChecklistItems(
                 taskId,

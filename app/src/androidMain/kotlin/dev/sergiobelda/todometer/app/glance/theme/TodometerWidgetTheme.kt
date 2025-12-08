@@ -27,18 +27,19 @@ import dev.sergiobelda.todometer.app.common.designsystem.theme.LightColorScheme
 @Composable
 fun TodometerWidgetTheme(
     content:
-    @GlanceComposable @Composable
-    () -> Unit,
+        @GlanceComposable @Composable
+        () -> Unit,
 ) {
     GlanceTheme(
-        colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            GlanceTheme.colors
-        } else {
-            ColorProviders(
-                light = LightColorScheme,
-                dark = DarkColorScheme,
-            )
-        },
+        colors =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                GlanceTheme.colors
+            } else {
+                ColorProviders(
+                    light = LightColorScheme,
+                    dark = DarkColorScheme,
+                )
+            },
         content = content,
     )
 }

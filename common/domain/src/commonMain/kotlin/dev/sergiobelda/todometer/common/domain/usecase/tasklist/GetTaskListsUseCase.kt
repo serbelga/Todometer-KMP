@@ -24,12 +24,10 @@ import kotlinx.coroutines.flow.Flow
 class GetTaskListsUseCase(
     private val taskListRepository: ITaskListRepository,
 ) {
-
     /**
      * Retrieves the list of task list every time it changes.
      *
      * @return A Flow that emits the list of all task lists.
      */
-    operator fun invoke(): Flow<Result<List<TaskList>>> =
-        taskListRepository.getTaskLists()
+    operator fun invoke(): Flow<Result<List<TaskList>>> = taskListRepository.getTaskLists()
 }

@@ -37,11 +37,8 @@ import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListN
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 data object AddTaskListContent : FonamentContent<AddTaskListUIState, AddTaskListContentState>() {
-
     @Composable
-    override fun createContentState(
-        uiState: AddTaskListUIState,
-    ): AddTaskListContentState = rememberAddTaskListContentState()
+    override fun createContentState(uiState: AddTaskListUIState): AddTaskListContentState = rememberAddTaskListContentState()
 
     @Composable
     override fun Content(
@@ -119,10 +116,11 @@ data object AddTaskListContent : FonamentContent<AddTaskListUIState, AddTaskList
                 },
                 placeholder = { Text(TodometerResources.strings.enterTaskListName) },
                 singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                    imeAction = ImeAction.Done,
-                ),
+                keyboardOptions =
+                    KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        imeAction = ImeAction.Done,
+                    ),
                 modifier = Modifier.padding(TextFieldPadding),
             )
         }

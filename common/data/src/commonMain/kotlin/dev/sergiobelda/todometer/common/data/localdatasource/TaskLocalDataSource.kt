@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.map
 class TaskLocalDataSource(
     private val taskDao: ITaskDao,
 ) : ITaskLocalDataSource {
-
     override fun getTask(id: String): Flow<Result<Task>> =
         taskDao.getTask(id).map { taskEntity ->
             taskEntity?.let { Result.Success(it.asTask()) } ?: Result.Error()
@@ -50,18 +49,19 @@ class TaskLocalDataSource(
         taskDao.insertTasks(tasks.map { it.asTaskEntity() })
     }
 
-    override suspend fun updateTask(task: Task) =
-        taskDao.updateTask(task.asTaskEntity())
+    override suspend fun updateTask(task: Task) = taskDao.updateTask(task.asTaskEntity())
 
-    override suspend fun updateTaskSync(id: String, sync: Boolean) =
-        taskDao.updateTaskSync(id, sync)
+    override suspend fun updateTaskSync(
+        id: String,
+        sync: Boolean,
+    ) = taskDao.updateTaskSync(id, sync)
 
-    override suspend fun updateTaskState(id: String, state: TaskState) =
-        taskDao.updateTaskState(id, state)
+    override suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    ) = taskDao.updateTaskState(id, state)
 
-    override suspend fun deleteTasks(vararg ids: String) =
-        taskDao.deleteTasks(ids = ids)
+    override suspend fun deleteTasks(vararg ids: String) = taskDao.deleteTasks(ids = ids)
 
-    override suspend fun toggleTaskPinnedValue(id: String) =
-        taskDao.toggleTaskPinnedValue(id)
+    override suspend fun toggleTaskPinnedValue(id: String) = taskDao.toggleTaskPinnedValue(id)
 }

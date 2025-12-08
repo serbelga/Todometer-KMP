@@ -19,6 +19,4 @@ package dev.sergiobelda.todometer.common.database
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 
-actual fun createSqlDriver(): SqlDriver {
-    return NativeSqliteDriver(TodometerDatabase.Schema, "todometer.db")
-}
+actual fun createSqlDriver(): SqlDriver = NativeSqliteDriver(TodometerDatabase.Schema, "todometer.db")

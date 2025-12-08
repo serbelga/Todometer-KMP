@@ -26,13 +26,14 @@ import dev.sergiobelda.todometer.common.designsystem.resources.color.todometer_d
 import dev.sergiobelda.todometer.common.designsystem.resources.color.todometer_dark_secondary
 import dev.sergiobelda.todometer.common.designsystem.resources.color.todometer_dark_surface
 
-internal val colorPalette = Colors(
-    primary = todometer_dark_primary,
-    onPrimary = todometer_dark_onPrimary,
-    secondary = todometer_dark_secondary,
-    onSecondary = todometer_dark_onSecondary,
-    error = todometer_dark_error,
-    onError = todometer_dark_onError,
-    surface = todometer_dark_surface,
-    onSurface = todometer_dark_onSurface,
-)
+internal val colorPalette =
+    Colors(
+        primary = todometer_dark_primary,
+        onPrimary = todometer_dark_onPrimary,
+        secondary = todometer_dark_secondary,
+        onSecondary = todometer_dark_onSecondary,
+        error = todometer_dark_error,
+        onError = todometer_dark_onError,
+        surface = todometer_dark_surface,
+        onSurface = todometer_dark_onSurface,
+    )

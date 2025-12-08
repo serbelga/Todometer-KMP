@@ -35,66 +35,74 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class TaskListLocalDataSourceTest {
-
     @MockK
     private val taskListDao: ITaskListDao = mockk(relaxed = true)
 
     private val taskListLocalDataSource = TaskListLocalDataSource(taskListDao)
 
     @Test
-    fun testGetTaskList() = runTest {
-        coEvery { taskListDao.getTaskList("1") } returns flow {
-            emit(taskListEntity1)
+    fun testGetTaskList() =
+        runTest {
+            coEvery { taskListDao.getTaskList("1") } returns
+                flow {
+                    emit(taskListEntity1)
+                }
+
+            val result = taskListLocalDataSource.getTaskList("1").first()
+            assertTrue { result is Result.Success }
+            assertEquals(taskListEntity1.asTaskList(), (result as? Result.Success)?.value)
         }
 
-        val result = taskListLocalDataSource.getTaskList("1").first()
-        assertTrue { result is Result.Success }
-        assertEquals(taskListEntity1.asTaskList(), (result as? Result.Success)?.value)
-    }
-
     @Test
-    fun testGetTaskListNotExist() = runTest {
-        coEvery { taskListDao.getTaskList("1") } returns flow {
-            emit(null)
+    fun testGetTaskListNotExist() =
+        runTest {
+            coEvery { taskListDao.getTaskList("1") } returns
+                flow {
+                    emit(null)
+                }
+
+            val result = taskListLocalDataSource.getTaskList("1").first()
+            assertTrue { result is Result.Error }
         }
 
-        val result = taskListLocalDataSource.getTaskList("1").first()
-        assertTrue { result is Result.Error }
-    }
-
     @Test
-    fun testGetTaskLists() = runTest {
-        coEvery { taskListDao.getTaskLists() } returns flow {
-            emit(taskListEntities)
+    fun testGetTaskLists() =
+        runTest {
+            coEvery { taskListDao.getTaskLists() } returns
+                flow {
+                    emit(taskListEntities)
+                }
+
+            val result = taskListLocalDataSource.getTaskLists().first()
+            assertTrue { result is Result.Success }
+            assertEquals(
+                taskListEntities.map { it.asTaskList() },
+                (result as? Result.Success)?.value,
+            )
         }
 
-        val result = taskListLocalDataSource.getTaskLists().first()
-        assertTrue { result is Result.Success }
-        assertEquals(
-            taskListEntities.map { it.asTaskList() },
-            (result as? Result.Success)?.value,
-        )
-    }
+    @Test
+    fun testInsertTaskList() =
+        runTest {
+            coEvery { taskListDao.insertTaskList(taskListEntity1) } returns taskListEntity1.id
+
+            val result = taskListLocalDataSource.insertTaskList(taskListEntity1.asTaskList())
+            assertTrue { result is Result.Success }
+        }
 
     @Test
-    fun testInsertTaskList() = runTest {
-        coEvery { taskListDao.insertTaskList(taskListEntity1) } returns taskListEntity1.id
+    fun testUpdateTaskList() =
+        runTest {
+            taskListLocalDataSource.updateTaskList(taskList1)
 
-        val result = taskListLocalDataSource.insertTaskList(taskListEntity1.asTaskList())
-        assertTrue { result is Result.Success }
-    }
-
-    @Test
-    fun testUpdateTaskList() = runTest {
-        taskListLocalDataSource.updateTaskList(taskList1)
-
-        coVerify { taskListDao.updateTaskList(taskList1.asTaskListEntity()) }
-    }
+            coVerify { taskListDao.updateTaskList(taskList1.asTaskListEntity()) }
+        }
 
     @Test
-    fun testDeleteTaskList() = runTest {
-        taskListLocalDataSource.deleteTaskList("1")
+    fun testDeleteTaskList() =
+        runTest {
+            taskListLocalDataSource.deleteTaskList("1")
 
-        coVerify { taskListDao.deleteTaskList("1") }
-    }
+            coVerify { taskListDao.deleteTaskList("1") }
+        }
 }

@@ -55,17 +55,19 @@ fun AddChecklistItemField(
             value = taskChecklistItemText,
             onValueChange = { taskChecklistItemText = it },
             modifier = Modifier.weight(1f),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Transparent,
-                unfocusedBorderColor = Color.Transparent,
-                errorBorderColor = Color.Transparent,
-            ),
+            colors =
+                OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    errorBorderColor = Color.Transparent,
+                ),
             placeholder = placeholder,
             maxLines = 1,
             singleLine = true,
-            keyboardActions = KeyboardActions(
-                onDone = { addTaskChecklistItemAction() },
-            ),
+            keyboardActions =
+                KeyboardActions(
+                    onDone = { addTaskChecklistItemAction() },
+                ),
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
         )
         if (taskChecklistItemText.isNotBlank()) {

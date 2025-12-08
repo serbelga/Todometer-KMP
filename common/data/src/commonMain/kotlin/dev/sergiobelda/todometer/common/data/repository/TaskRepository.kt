@@ -29,13 +29,12 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Repository for performing [Task] data operations.
  */
-class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : ITaskRepository {
+class TaskRepository(
+    private val taskLocalDataSource: ITaskLocalDataSource,
+) : ITaskRepository {
+    override fun getTask(id: String): Flow<Result<Task>> = taskLocalDataSource.getTask(id)
 
-    override fun getTask(id: String): Flow<Result<Task>> =
-        taskLocalDataSource.getTask(id)
-
-    override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> =
-        taskLocalDataSource.getTasks(taskListId)
+    override fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>> = taskLocalDataSource.getTasks(taskListId)
 
     override suspend fun insertTask(
         title: String,
@@ -63,12 +62,14 @@ class TaskRepository(private val taskLocalDataSource: ITaskLocalDataSource) : IT
 
     override suspend fun updateTask(task: Task) = taskLocalDataSource.updateTask(task)
 
-    override suspend fun updateTaskState(id: String, state: TaskState) {
+    override suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    ) {
         taskLocalDataSource.updateTaskState(id, state)
     }
 
-    override suspend fun deleteTasks(vararg ids: String) =
-        taskLocalDataSource.deleteTasks(ids = ids)
+    override suspend fun deleteTasks(vararg ids: String) = taskLocalDataSource.deleteTasks(ids = ids)
 
     override suspend fun toggleTaskPinnedValue(id: String) {
         taskLocalDataSource.toggleTaskPinnedValue(id)

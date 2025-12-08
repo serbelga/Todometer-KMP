@@ -83,9 +83,10 @@ fun DateTimeSelector(
             Text(
                 text = TodometerResources.strings.enterDateTime,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier
-                    .padding(horizontal = SectionPadding)
-                    .fillMaxWidth(),
+                modifier =
+                    Modifier
+                        .padding(horizontal = SectionPadding)
+                        .fillMaxWidth(),
             )
         }
     }

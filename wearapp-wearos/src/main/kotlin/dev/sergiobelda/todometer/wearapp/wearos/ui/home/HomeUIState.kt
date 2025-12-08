@@ -24,7 +24,6 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 sealed interface HomeUIState : FonamentUIState {
-
     data object Loading : HomeUIState
 
     @Immutable

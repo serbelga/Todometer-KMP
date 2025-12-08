@@ -53,7 +53,7 @@ fun TaskListProgress(
         Text(
             taskListName ?: "",
             style = MaterialTheme.typography.titleSmall,
-            maxLines = TaskListNameMaxLines,
+            maxLines = TASK_LIST_NAME_MAX_LINES,
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.height(4.dp))
@@ -71,4 +71,4 @@ fun TaskListProgress(
     }
 }
 
-private const val TaskListNameMaxLines: Int = 2
+private const val TASK_LIST_NAME_MAX_LINES: Int = 2

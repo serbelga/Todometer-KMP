@@ -23,7 +23,6 @@ import dev.sergiobelda.todometer.common.domain.model.TaskState
 import kotlinx.coroutines.flow.Flow
 
 interface ITaskLocalDataSource {
-
     fun getTask(id: String): Flow<Result<Task>>
 
     fun getTasks(taskListId: String): Flow<Result<List<TaskItem>>>
@@ -34,9 +33,15 @@ interface ITaskLocalDataSource {
 
     suspend fun updateTask(task: Task)
 
-    suspend fun updateTaskSync(id: String, sync: Boolean)
+    suspend fun updateTaskSync(
+        id: String,
+        sync: Boolean,
+    )
 
-    suspend fun updateTaskState(id: String, state: TaskState)
+    suspend fun updateTaskState(
+        id: String,
+        state: TaskState,
+    )
 
     suspend fun deleteTasks(vararg ids: String)
 

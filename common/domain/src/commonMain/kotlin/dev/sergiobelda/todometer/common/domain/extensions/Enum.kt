@@ -25,5 +25,7 @@ internal inline fun <reified T : Enum<T>> safeEnumValueOf(name: String): T? =
 /**
  * Returns an enum entry with specified [name] or [default].
  */
-internal inline fun <reified T : Enum<T>> enumValueOrDefaultOf(name: String, default: T): T =
-    enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) } ?: default
+internal inline fun <reified T : Enum<T>> enumValueOrDefaultOf(
+    name: String,
+    default: T,
+): T = enumValues<T>().firstOrNull { it.name.equals(name, ignoreCase = true) } ?: default

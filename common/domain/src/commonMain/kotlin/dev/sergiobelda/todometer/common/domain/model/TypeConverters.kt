@@ -19,7 +19,6 @@ package dev.sergiobelda.todometer.common.domain.model
 import dev.sergiobelda.todometer.common.domain.extensions.enumValueOrDefaultOf
 
 object TypeConverters {
-
     fun taskStateValueOf(name: String): TaskState = enumValueOrDefaultOf(name, TaskState.DOING)
 
     fun tagValueOf(tag: String): Tag = enumValueOrDefaultOf(tag, Tag.GRAY)

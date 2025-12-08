@@ -38,9 +38,10 @@ private fun TaskDetailsLoadingPreview() {
 private fun TaskDetailsContentPreview() {
     TodometerWearAppPreview {
         TaskDetailsContent(
-            uiState = TaskDetailsUIState.Success(
-                task = taskSample,
-            ),
+            uiState =
+                TaskDetailsUIState.Success(
+                    task = taskSample,
+                ),
             contentState = rememberTaskDetailsContentState(),
         )
     }
@@ -51,9 +52,10 @@ private fun TaskDetailsContentPreview() {
 private fun TaskDetailsContentLocalesPreview() {
     TodometerWearAppPreview {
         TaskDetailsContent(
-            uiState = TaskDetailsUIState.Success(
-                task = taskSample,
-            ),
+            uiState =
+                TaskDetailsUIState.Success(
+                    task = taskSample,
+                ),
             contentState = rememberTaskDetailsContentState(),
         )
     }

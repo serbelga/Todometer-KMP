@@ -29,14 +29,15 @@ import dev.sergiobelda.todometer.common.di.TodometerDIModule
 
 open class TodometerAppDI : TodometerBaseDI() {
     override val modules: List<TodometerDIModule> =
-        super.modules + listOf(
-            AboutPresentationDIModule,
-            AddTaskPresentationDIModule,
-            AddTaskListPresentationDIModule,
-            EditTaskPresentationDIModule,
-            EditTaskListPresentationDIModule,
-            HomePresentationDIModule,
-            SettingsPresentationDIModule,
-            TaskDetailsPresentationDIModule,
-        )
+        super.modules +
+            listOf(
+                AboutPresentationDIModule,
+                AddTaskPresentationDIModule,
+                AddTaskListPresentationDIModule,
+                EditTaskPresentationDIModule,
+                EditTaskListPresentationDIModule,
+                HomePresentationDIModule,
+                SettingsPresentationDIModule,
+                TaskDetailsPresentationDIModule,
+            )
 }

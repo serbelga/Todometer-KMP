@@ -20,6 +20,5 @@ import dev.sergiobelda.todometer.app.di.TodometerUITestAppDI
 import dev.sergiobelda.todometer.common.di.TodometerDI
 
 class TodometerUITestApp : TodometerMainApp() {
-
     override val todometerDI: TodometerDI = TodometerUITestAppDI()
 }

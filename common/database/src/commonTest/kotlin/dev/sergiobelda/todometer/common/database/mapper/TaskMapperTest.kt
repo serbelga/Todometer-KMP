@@ -24,20 +24,20 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class TaskMapperTest {
-
     @Test
     fun testTaskToTaskEntity() {
-        val task = Task(
-            id = "1",
-            title = "Title",
-            tag = Tag.GRAY,
-            description = "Description",
-            dueDate = 1649887517234,
-            state = TaskState.DOING,
-            taskListId = "2",
-            isPinned = false,
-            sync = true,
-        )
+        val task =
+            Task(
+                id = "1",
+                title = "Title",
+                tag = Tag.GRAY,
+                description = "Description",
+                dueDate = 1649887517234,
+                state = TaskState.DOING,
+                taskListId = "2",
+                isPinned = false,
+                sync = true,
+            )
         val taskEntity = task.asTaskEntity()
         assertEquals(task.id, taskEntity.id)
         assertEquals(task.title, taskEntity.title)
@@ -51,17 +51,18 @@ class TaskMapperTest {
 
     @Test
     fun testTaskEntityToTask() {
-        val taskEntity = TaskEntity(
-            id = "1",
-            title = "Title",
-            tag = Tag.GRAY,
-            description = "Description",
-            dueDate = 1649887517234,
-            state = TaskState.DOING,
-            tasklist_id = "2",
-            isPinned = false,
-            sync = true,
-        )
+        val taskEntity =
+            TaskEntity(
+                id = "1",
+                title = "Title",
+                tag = Tag.GRAY,
+                description = "Description",
+                dueDate = 1649887517234,
+                state = TaskState.DOING,
+                tasklist_id = "2",
+                isPinned = false,
+                sync = true,
+            )
         val task = taskEntity.asTask()
         assertEquals(taskEntity.id, task.id)
         assertEquals(taskEntity.title, task.title)

@@ -20,7 +20,6 @@ import androidx.compose.ui.input.rotary.RotaryScrollEvent
 import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
 
 sealed interface HomeEvent : FonamentEvent {
-
     data class InsertTaskList(
         val name: String,
     ) : HomeEvent
