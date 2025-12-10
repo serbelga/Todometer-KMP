@@ -24,7 +24,14 @@ android {
         // Is NOT recommend using the Android emulator for regular benchmarking, because the performance
         // is not representative of a real device.
         // Note: Avoid pushing this line uncommented to main branch.
-        // testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
+        testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
+    }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("fake") {
+            dimension = "version"
+        }
     }
 
     experimentalProperties["android.experimental.self-instrumenting"] = true
