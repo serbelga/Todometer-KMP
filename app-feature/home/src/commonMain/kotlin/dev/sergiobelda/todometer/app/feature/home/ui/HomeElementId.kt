@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.di
+package dev.sergiobelda.todometer.app.feature.home.ui
 
-import dev.sergiobelda.todometer.common.di.TodometerDIModule
-import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
-import dev.sergiobelda.todometer.common.fake.data.repository.FakeTaskRepository
-import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.bind
-import org.koin.dsl.module
+import dev.sergiobelda.todometer.common.ui.id.ElementId
 
-data object TodometerFakeDIModule : TodometerDIModule {
-    override val module: Module =
-        module {
-            singleOf(::FakeTaskRepository) bind ITaskRepository::class
-        }
+enum class HomeElementId(
+    override val id: String,
+) : ElementId {
+    HomeTasksListView("home:tasks_list_view"),
 }

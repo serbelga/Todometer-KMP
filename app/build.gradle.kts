@@ -97,6 +97,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            baselineProfile.automaticGenerationDuringBuild = true
         }
         getByName("debug") {
             extra["enableCrashlytics"] = false
@@ -110,10 +111,10 @@ android {
         create("prod") {
             dimension = "version"
             isDefault = true
+            versionNameSuffix = "-prod"
         }
         create("fake") {
             dimension = "version"
-            applicationIdSuffix = ".fake"
             versionNameSuffix = "-fake"
         }
     }
@@ -134,8 +135,16 @@ android {
 
         implementation(libs.androidx.profileinstaller)
 
-        "fakeImplementation"(projects.common.dataTest)
+        "fakeImplementation"(projects.common.fakeData)
     }
+}
+
+baselineProfile {
+    // Don't build on every iteration of a full assemble.
+    // Instead enable generation directly for the release build variant.
+    automaticGenerationDuringBuild = false
+
+    mergeIntoMain = true
 }
 
 compose.desktop {

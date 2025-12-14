@@ -14,6 +14,10 @@ android {
         jvmToolchain(17)
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         minSdk = libs.versions.androidBaselineProfileMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
@@ -24,7 +28,13 @@ android {
         // Is NOT recommend using the Android emulator for regular benchmarking, because the performance
         // is not representative of a real device.
         // Note: Avoid pushing this line uncommented to main branch.
-        // testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
+        testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
+    }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("fake") { dimension = "version" }
+        create("prod") { dimension = "version" }
     }
 
     experimentalProperties["android.experimental.self-instrumenting"] = true
@@ -42,6 +52,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.common.ui)
+    implementation(projects.appFeature.home)
+
     implementation(libs.androidx.benchmark.macro.junit4)
     implementation(libs.androidx.test.espresso.core)
     implementation(libs.androidx.test.junit)
