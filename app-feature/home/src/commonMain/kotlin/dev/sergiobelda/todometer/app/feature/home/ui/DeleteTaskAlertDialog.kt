@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.resources.TodometerResources
 
 @Composable
-fun DeleteTaskAlertDialog(
+internal fun DeleteTaskAlertDialog(
     onDismissRequest: () -> Unit,
     onDeleteTaskClick: () -> Unit,
 ) {
