@@ -66,6 +66,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
@@ -432,7 +433,8 @@ private fun TasksListView(
         )
     } else {
         LazyColumn(
-            modifier = modifier,
+            modifier = modifier
+                .testTag("home:tasks_list_view"),
             contentPadding = PaddingValues(top = 8.dp),
         ) {
             if (tasksDoingPinned.isNotEmpty()) {

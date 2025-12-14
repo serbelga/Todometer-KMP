@@ -14,6 +14,10 @@ android {
         jvmToolchain(17)
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         minSdk = libs.versions.androidBaselineProfileMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
@@ -29,9 +33,8 @@ android {
 
     flavorDimensions += "version"
     productFlavors {
-        create("fake") {
-            dimension = "version"
-        }
+        create("fake") { dimension = "version" }
+        create("prod") { dimension = "version" }
     }
 
     experimentalProperties["android.experimental.self-instrumenting"] = true

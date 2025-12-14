@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.app
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import dev.sergiobelda.navigation.compose.extended.rememberNavAction
 import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
@@ -29,7 +30,9 @@ import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 import org.koin.compose.koinInject
 
 @Composable
-fun TodometerApp() {
+fun TodometerApp(
+    modifier: Modifier = Modifier,
+) {
     ProvideTodometerStrings {
         val getAppThemeUseCase = koinInject<GetAppThemeUseCase>()
         val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)
@@ -45,6 +48,7 @@ fun TodometerApp() {
             TodometerNavHost(
                 navController = navController,
                 navAction = navAction,
+                modifier = modifier,
             )
         }
     }

@@ -110,10 +110,10 @@ android {
         create("prod") {
             dimension = "version"
             isDefault = true
+            versionNameSuffix = "-prod"
         }
         create("fake") {
             dimension = "version"
-            applicationIdSuffix = ".fake"
             versionNameSuffix = "-fake"
         }
     }
@@ -136,6 +136,10 @@ android {
 
         "fakeImplementation"(projects.common.dataTest)
     }
+}
+
+baselineProfile {
+    mergeIntoMain = true
 }
 
 compose.desktop {

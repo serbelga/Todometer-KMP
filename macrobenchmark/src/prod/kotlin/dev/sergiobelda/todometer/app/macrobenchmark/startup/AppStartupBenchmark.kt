@@ -6,7 +6,6 @@ import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import dev.sergiobelda.todometer.app.benchmark.BuildConfig
 import dev.sergiobelda.todometer.app.macrobenchmark.utils.APP_PACKAGE_NAME
 import org.junit.Rule
 import org.junit.Test
@@ -29,7 +28,7 @@ internal class AppStartupBenchmark {
     )
 
     private fun startup(compilationMode: CompilationMode) = macrobenchmarkRule.measureRepeated(
-        packageName = "$APP_PACKAGE_NAME.${BuildConfig.FLAVOR}",
+        packageName = APP_PACKAGE_NAME,
         compilationMode = compilationMode,
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
