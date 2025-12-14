@@ -97,6 +97,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            baselineProfile.automaticGenerationDuringBuild = true
         }
         getByName("debug") {
             extra["enableCrashlytics"] = false
@@ -134,11 +135,15 @@ android {
 
         implementation(libs.androidx.profileinstaller)
 
-        "fakeImplementation"(projects.common.dataTest)
+        "fakeImplementation"(projects.common.fakeData)
     }
 }
 
 baselineProfile {
+    // Don't build on every iteration of a full assemble.
+    // Instead enable generation directly for the release build variant.
+    automaticGenerationDuringBuild = false
+
     mergeIntoMain = true
 }
 

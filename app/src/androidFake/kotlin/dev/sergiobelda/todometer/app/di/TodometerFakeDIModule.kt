@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.di
 
-import dev.sergiobelda.todometer.common.data.test.repository.FakeTaskRepository
+import dev.sergiobelda.todometer.common.fake.data.repository.FakeTaskRepository
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import org.koin.core.module.Module

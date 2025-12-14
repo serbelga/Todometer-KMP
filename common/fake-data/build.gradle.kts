@@ -26,5 +26,5 @@ kotlin {
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.common.data.test"
+    namespace = "dev.sergiobelda.todometer.common.fake.data"
 }
