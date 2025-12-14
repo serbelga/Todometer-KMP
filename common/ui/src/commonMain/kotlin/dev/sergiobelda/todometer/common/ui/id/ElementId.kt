@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.di
+package dev.sergiobelda.todometer.common.ui.id
 
-import dev.sergiobelda.todometer.common.di.TodometerDIModule
-import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
-import dev.sergiobelda.todometer.common.fake.data.repository.FakeTaskRepository
-import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.bind
-import org.koin.dsl.module
+import androidx.compose.runtime.Stable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
-data object TodometerFakeDIModule : TodometerDIModule {
-    override val module: Module =
-        module {
-            singleOf(::FakeTaskRepository) bind ITaskRepository::class
-        }
+interface ElementId {
+    val id: String
 }
+
+@Stable
+fun Modifier.elementId(elementId: ElementId) = this then Modifier.testTag(elementId.id)

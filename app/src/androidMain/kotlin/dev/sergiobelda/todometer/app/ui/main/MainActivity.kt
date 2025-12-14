@@ -61,9 +61,10 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
             TodometerApp(
-                modifier = Modifier.semantics {
-                    testTagsAsResourceId = true
-                }
+                modifier =
+                    Modifier.semantics {
+                        testTagsAsResourceId = true
+                    },
             )
         }
     }

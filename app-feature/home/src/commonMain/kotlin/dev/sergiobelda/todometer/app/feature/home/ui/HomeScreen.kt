@@ -92,6 +92,7 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrati
 import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.NoTasks
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.ui.id.elementId
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
 
@@ -433,8 +434,9 @@ private fun TasksListView(
         )
     } else {
         LazyColumn(
-            modifier = modifier
-                .testTag("home:tasks_list_view"),
+            modifier =
+                modifier
+                    .elementId(HomeElementId.HomeTasksListView),
             contentPadding = PaddingValues(top = 8.dp),
         ) {
             if (tasksDoingPinned.isNotEmpty()) {

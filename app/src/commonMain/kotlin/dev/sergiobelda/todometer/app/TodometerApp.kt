@@ -30,9 +30,7 @@ import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 import org.koin.compose.koinInject
 
 @Composable
-fun TodometerApp(
-    modifier: Modifier = Modifier,
-) {
+fun TodometerApp(modifier: Modifier = Modifier) {
     ProvideTodometerStrings {
         val getAppThemeUseCase = koinInject<GetAppThemeUseCase>()
         val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)

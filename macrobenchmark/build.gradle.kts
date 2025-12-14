@@ -52,6 +52,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.common.ui)
+    implementation(projects.appFeature.home)
+
     implementation(libs.androidx.benchmark.macro.junit4)
     implementation(libs.androidx.test.espresso.core)
     implementation(libs.androidx.test.junit)
