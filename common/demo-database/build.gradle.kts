@@ -14,10 +14,7 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        commonMain.dependencies {
-            implementation(projects.common.domain)
-            implementation(libs.jetbrains.kotlin.coroutines.core)
-        }
+        commonMain.dependencies {}
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
@@ -26,5 +23,5 @@ kotlin {
 }
 
 android {
-    namespace = "dev.sergiobelda.todometer.common.fake.data"
+    namespace = "dev.sergiobelda.todometer.common.demo.database"
 }

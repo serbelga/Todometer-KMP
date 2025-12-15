@@ -11,6 +11,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.coreKtx)
+    implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.coreKtx)
+    implementation(libs.androidx.profileinstaller)
+    implementation(libs.jetbrains.kotlin.coroutines.guava)
 }

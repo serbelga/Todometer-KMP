@@ -113,17 +113,17 @@ android {
             isDefault = true
             versionNameSuffix = "-prod"
         }
-        create("fake") {
+        create("demo") {
             dimension = "version"
-            versionNameSuffix = "-fake"
+            versionNameSuffix = "-demo"
         }
     }
     sourceSets {
         getByName("prod") {
             manifest.srcFile("src/androidProd/AndroidManifest.xml")
         }
-        getByName("fake") {
-            manifest.srcFile("src/androidFake/AndroidManifest.xml")
+        getByName("demo") {
+            manifest.srcFile("src/androidDemo/AndroidManifest.xml")
         }
     }
     kotlin {
@@ -135,7 +135,7 @@ android {
 
         implementation(libs.androidx.profileinstaller)
 
-        "fakeImplementation"(projects.common.fakeData)
+        "demoImplementation"(projects.common.demoDatabase)
     }
 }
 

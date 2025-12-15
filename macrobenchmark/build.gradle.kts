@@ -33,7 +33,7 @@ android {
 
     flavorDimensions += "version"
     productFlavors {
-        create("fake") { dimension = "version" }
+        create("demo") { dimension = "version" }
         create("prod") { dimension = "version" }
     }
 

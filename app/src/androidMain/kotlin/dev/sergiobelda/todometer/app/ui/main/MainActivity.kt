@@ -30,6 +30,7 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.sergiobelda.todometer.app.TodometerApp
+import dev.sergiobelda.todometer.common.android.extensions.logCompilationStatus
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -67,5 +68,10 @@ class MainActivity : ComponentActivity() {
                     },
             )
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        logCompilationStatus(name = "MainActivity")
     }
 }
