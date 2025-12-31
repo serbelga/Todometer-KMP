@@ -62,10 +62,6 @@ kotlin {
             implementation(libs.google.firebase.firebaseAnalytics)
             implementation(libs.google.firebase.firebaseCrashlytics)
             implementation(libs.google.firebase.firebasePerf)
-
-            // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
-            // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved
-            compileOnly(libs.jetbrains.kotlin.serialization.json)
         }
         val desktopMain by getting
         desktopMain.dependencies {
