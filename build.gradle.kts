@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.dependencyGraphGenerator) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.google.firebaseCrashlytics) apply false
+    alias(libs.plugins.google.firebasePerf) apply false
     alias(libs.plugins.google.ksp) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.jetbrains.composeCompiler) apply false

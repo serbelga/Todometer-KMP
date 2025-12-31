@@ -13,15 +13,15 @@ appcompat = "1.7.1"
 baselineprofile = "1.4.1"
 benchmark = "1.4.1"
 composeMultiplatformMaterial3 = "1.9.0"
-composeMultiplatform = "1.10.0-beta01"
+composeMultiplatform = "1.10.0-rc02"
 composeVectorize = "1.1.0"
 dataStore = "1.1.7"
 dependencyGraphGenerator = "0.8.0"
 detekt = "1.23.8"
-espressoCore = "3.4.0"
-espressoCoreVersion = "3.7.0"
-firebaseBom = "33.16.0"
+espressoCore = "3.7.0"
+firebaseBom = "34.7.0"
 firebaseCrashlytics = "3.0.6"
+firebasePerf = "2.0.2"
 fonament = "0.0.1-alpha02"
 glance = "1.1.1"
 googleServices = "4.4.4"
@@ -39,7 +39,7 @@ ktlint = "1.8.0"
 lyricist = "1.8.0"
 mockk = "1.14.7"
 mockkCommon = "1.12.5"
-navigationComposeExtended = "1.4.0"
+navigationComposeExtended = "1.5.0"
 ossLicenses = "0.10.10"
 pigment = "0.6.0"
 playServicesOssLicenses = "17.3.0"
@@ -77,7 +77,7 @@ androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstall
 androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmark" }
-androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreVersion" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
@@ -91,9 +91,10 @@ dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-ge
 
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
-google-firebase-firebaseAnalyticsKtx = { module = "com.google.firebase:firebase-analytics-ktx" }
-google-firebase-firebaseCrashlyticsKtx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+google-firebase-firebaseAnalytics = { module = "com.google.firebase:firebase-analytics" }
+google-firebase-firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 google-firebase-firebaseBom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+google-firebase-firebasePerf = { module = "com.google.firebase:firebase-perf" }
 google-playServicesOssLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "playServicesOssLicenses" }
 google-playServicesWearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "playServicesWearable" }
 google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicenses" }
@@ -161,6 +162,7 @@ androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "bas
 dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
+google-firebasePerf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerf" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }

@@ -12,6 +12,7 @@ plugins {
 
 if (file("google-services.json").exists()) {
     apply(plugin = libs.plugins.google.firebaseCrashlytics.get().pluginId)
+    apply(plugin = libs.plugins.google.firebasePerf.get().pluginId)
     apply(plugin = libs.plugins.google.services.get().pluginId)
 }
 
@@ -58,8 +59,9 @@ kotlin {
             implementation(libs.google.playServicesOssLicenses)
 
             implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-            implementation(libs.google.firebase.firebaseAnalyticsKtx)
-            implementation(libs.google.firebase.firebaseCrashlyticsKtx)
+            implementation(libs.google.firebase.firebaseAnalytics)
+            implementation(libs.google.firebase.firebaseCrashlytics)
+            implementation(libs.google.firebase.firebasePerf)
 
             // Workaround to avoid "Missing classes detected while running R8" using kotlinx-datetime library
             // TODO: Remove when issue https://github.com/Kotlin/kotlinx-datetime/issues/297 is resolved

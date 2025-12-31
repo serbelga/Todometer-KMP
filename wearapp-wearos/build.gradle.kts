@@ -74,8 +74,8 @@ dependencies {
     implementation(libs.google.playServicesWearable)
 
     implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-    implementation(libs.google.firebase.firebaseAnalyticsKtx)
-    implementation(libs.google.firebase.firebaseCrashlyticsKtx)
+    implementation(libs.google.firebase.firebaseAnalytics)
+    implementation(libs.google.firebase.firebaseCrashlytics)
 
     implementation(libs.sergiobelda.navigationComposeExtendedWear)
     ksp(libs.sergiobelda.navigationComposeExtendedCompiler)
