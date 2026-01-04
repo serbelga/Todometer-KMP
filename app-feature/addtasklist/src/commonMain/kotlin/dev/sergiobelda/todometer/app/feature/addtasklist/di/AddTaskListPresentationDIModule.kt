@@ -16,7 +16,7 @@
 
 package dev.sergiobelda.todometer.app.feature.addtasklist.di
 
-import dev.sergiobelda.fonament.di.koin.fonamentViewModelOf
+import dev.sergiobelda.fonament.presentation.di.koin.fonamentViewModelOf
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListViewModel
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 import org.koin.core.module.Module

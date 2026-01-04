@@ -19,13 +19,15 @@ package dev.sergiobelda.todometer.common.di
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.KoinApplicationDslMarker
+import org.koin.dsl.KoinAppDeclaration
 
 abstract class TodometerDI {
     open val modules: List<TodometerDIModule> = emptyList()
 
     @KoinApplicationDslMarker
-    fun startDI(): KoinApplication =
+    fun startDI(appDeclaration: KoinAppDeclaration = {}): KoinApplication =
         startKoin {
+            appDeclaration()
             modules(modules.map { it.module })
         }
 }

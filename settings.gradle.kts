@@ -15,7 +15,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        mavenLocal()
     }
 }
 
@@ -42,7 +41,6 @@ include(":common:demo-database")
 include(":common:designsystem-resources")
 include(":common:di")
 include(":common:domain")
-include(":common:preferences")
 include(":common:resources")
 include(":common:ui")
 include(":common:ui-tooling")

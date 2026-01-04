@@ -20,16 +20,17 @@ import android.app.Application
 import dev.sergiobelda.todometer.common.core.di.TodometerBaseDI
 import dev.sergiobelda.todometer.common.database.DriverFactory
 import dev.sergiobelda.todometer.common.di.TodometerDI
-import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
+import org.koin.android.ext.koin.androidContext
 
 open class TodometerBaseApplication : Application() {
     protected open val todometerDI: TodometerDI = TodometerBaseDI()
 
     override fun onCreate() {
         super.onCreate()
-        PreferencesFactory.appContext = this
         DriverFactory.appContext = this
 
-        todometerDI.startDI()
+        todometerDI.startDI {
+            androidContext(this@TodometerBaseApplication)
+        }
     }
 }

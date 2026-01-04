@@ -16,6 +16,7 @@
 
 package dev.sergiobelda.todometer.common.core.di
 
+import dev.sergiobelda.fonament.preferences.di.koin.fonamentPreferences
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskChecklistItemLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskListLocalDataSource
 import dev.sergiobelda.todometer.common.data.localdatasource.ITaskLocalDataSource
@@ -38,7 +39,6 @@ import dev.sergiobelda.todometer.common.domain.repository.ITaskChecklistItemsRep
 import dev.sergiobelda.todometer.common.domain.repository.ITaskListRepository
 import dev.sergiobelda.todometer.common.domain.repository.ITaskRepository
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
-import dev.sergiobelda.todometer.common.preferences.PreferencesFactory
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -61,7 +61,7 @@ data object TodometerDataDIModule : TodometerDIModule {
     }
 
     private fun Module.preferences() {
-        single { PreferencesFactory.createPreferences() }
+        fonamentPreferences(name = TODOMETER_PREFERENCES_NAME)
     }
 
     private fun Module.localDataSource() {
@@ -77,3 +77,5 @@ data object TodometerDataDIModule : TodometerDIModule {
         singleOf(::TaskChecklistItemsRepository) bind ITaskChecklistItemsRepository::class
     }
 }
+
+private const val TODOMETER_PREFERENCES_NAME = "todometer_preferences"

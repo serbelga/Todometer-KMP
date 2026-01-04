@@ -16,9 +16,9 @@
 
 package dev.sergiobelda.todometer.common.data.repository
 
+import dev.sergiobelda.fonament.preferences.FonamentPreferences
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.repository.IUserPreferencesRepository
-import dev.sergiobelda.todometer.common.preferences.Preferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.map
  * Repository for performing data operations on [preferences].
  */
 class UserPreferencesRepository(
-    private val preferences: Preferences,
+    private val preferences: FonamentPreferences,
 ) : IUserPreferencesRepository {
     override fun taskListSelected(): Flow<String> = preferences.getStringOrDefault(TASK_LIST_SELECTED_KEY, "")
 

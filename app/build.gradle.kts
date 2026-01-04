@@ -45,7 +45,7 @@ kotlin {
             implementation(projects.common.core)
             implementation(projects.common.ui)
 
-            implementation(libs.sergiobelda.fonament.diKoin)
+            implementation(libs.sergiobelda.fonament.presentationDiKoin)
         }
         androidMain.dependencies {
             implementation(projects.common.android)

@@ -17,7 +17,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.common.domain)
             implementation(projects.common.database)
-            implementation(projects.common.preferences)
+            implementation(libs.sergiobelda.fonament.preferences)
 
             implementation(libs.jetbrains.kotlin.coroutines.core)
         }

@@ -17,7 +17,7 @@
 package dev.sergiobelda.todometer.wearapp.wearos.di
 
 import dev.sergiobelda.fonament.di.koin.fonamentViewModel
-import dev.sergiobelda.fonament.di.koin.fonamentViewModelOf
+import dev.sergiobelda.fonament.presentation.di.koin.fonamentViewModelOf
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.HomeViewModel
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsViewModel
