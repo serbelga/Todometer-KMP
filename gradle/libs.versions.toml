@@ -22,7 +22,7 @@ espressoCore = "3.7.0"
 firebaseBom = "34.7.0"
 firebaseCrashlytics = "3.0.6"
 firebasePerf = "2.0.2"
-fonament = "0.0.1-alpha02"
+fonament = "0.0.1-alpha03"
 glance = "1.1.1"
 googleServices = "4.4.4"
 jetbrainsNavigation = "2.9.1"
@@ -132,8 +132,10 @@ mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }
 
 sergiobelda-composeVectorize-core = { module = "dev.sergiobelda.compose.vectorize:compose-vectorize-core", version.ref = "composeVectorize" }
-sergiobelda-fonament-diKoin = { module = "dev.sergiobelda.fonament:fonament-di-koin", version.ref = "fonament" }
+sergiobelda-fonament-preferences = { module = "dev.sergiobelda.fonament:fonament-preferences", version.ref = "fonament" }
+sergiobelda-fonament-preferencesDiKoin = { module = "dev.sergiobelda.fonament:fonament-preferences-di-koin", version.ref = "fonament" }
 sergiobelda-fonament-presentation = { module = "dev.sergiobelda.fonament:fonament-presentation", version.ref = "fonament" }
+sergiobelda-fonament-presentationDiKoin = { module = "dev.sergiobelda.fonament:fonament-presentation-di-koin", version.ref = "fonament" }
 sergiobelda-navigationComposeExtended = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedAnnotation = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-annotation", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedCompiler = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-compiler", version.ref = "navigationComposeExtended" }

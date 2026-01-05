@@ -21,8 +21,9 @@ kotlin {
             implementation(projects.common.database)
             implementation(projects.common.di)
             implementation(projects.common.domain)
-            implementation(projects.common.preferences)
             implementation(projects.common.ui)
+
+            implementation(libs.sergiobelda.fonament.preferencesDiKoin)
         }
     }
 }

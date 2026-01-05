@@ -18,7 +18,7 @@ package dev.sergiobelda.todometer.app.navhost
 
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavGraphBuilder
-import dev.sergiobelda.fonament.di.koin.koinFonamentViewModel
+import dev.sergiobelda.fonament.presentation.di.koin.koinFonamentViewModel
 import dev.sergiobelda.fonament.presentation.navigation.NavigationNode
 import dev.sergiobelda.navigation.compose.extended.composable
 import dev.sergiobelda.todometer.app.feature.about.navigation.aboutNavigationEventHandler

@@ -58,8 +58,8 @@ class CommonUiConventionPlugin : Plugin<Project> {
                 sourceSets.apply {
                     commonMain.dependencies {
                         implementation(libs.findLibrary("jetbrains-kotlin-collections-immutable").get())
-                        implementation(libs.findLibrary("sergiobelda-fonament-diKoin").get())
                         implementation(libs.findLibrary("sergiobelda-fonament-presentation").get())
+                        implementation(libs.findLibrary("sergiobelda-fonament-presentationDiKoin").get())
                     }
                 }
             }
