@@ -31,20 +31,20 @@ class UserPreferencesRepository(
     override fun taskListSelected(): Flow<String> = preferences.getStringOrDefault(TASK_LIST_SELECTED_KEY, "")
 
     override suspend fun setTaskListSelected(taskListSelectedId: String) {
-        preferences.set(TASK_LIST_SELECTED_KEY, taskListSelectedId)
+        preferences[TASK_LIST_SELECTED_KEY] = taskListSelectedId
     }
 
     override fun getUserTheme(): Flow<AppTheme> =
-        preferences.getInt(APP_THEME).map { theme ->
+        preferences.getInt(APP_THEME_KEY).map { theme ->
             theme?.let { enumValues<AppTheme>().getOrNull(it) } ?: AppTheme.FOLLOW_SYSTEM
         }
 
     override suspend fun setUserTheme(theme: AppTheme) {
-        preferences.set(APP_THEME, theme.ordinal)
+        preferences[APP_THEME_KEY] = theme.ordinal
     }
 
     companion object {
         private const val TASK_LIST_SELECTED_KEY = "task_list_selected"
-        private const val APP_THEME = "app_theme"
+        private const val APP_THEME_KEY = "app_theme"
     }
 }
