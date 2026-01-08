@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.sergiobelda.composeVectorize) apply false
     alias(libs.plugins.spotless)
     alias(libs.plugins.sqlDelight) apply false
+    alias(libs.plugins.android.kotlinMultiplatformLibrary) apply false
 }
 
 buildscript {

@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlinMultiplatformLibrary)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
@@ -8,8 +8,10 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
-    jvm("desktop")
+    androidLibrary {
+        namespace = "dev.sergiobelda.todometer.common.database"
+    }
+    jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -31,11 +33,9 @@ kotlin {
         androidUnitTest.dependencies {
             implementation(libs.sqldelight.jvmDriver)
         }
-        val desktopMain by getting
-        desktopMain.dependencies {
+        jvmMain.dependencies {
             implementation(libs.sqldelight.jvmDriver)
         }
-
         iosMain.dependencies {
             implementation(libs.sqldelight.nativeDriver)
         }
@@ -44,10 +44,6 @@ kotlin {
             languageSettings.optIn("kotlin.RequiresOptIn")
         }
     }
-}
-
-android {
-    namespace = "dev.sergiobelda.todometer.common.database"
 }
 
 sqldelight {
