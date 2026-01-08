@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlinMultiplatformLibrary)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
@@ -7,8 +7,10 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
-    jvm("desktop")
+    androidLibrary {
+        namespace = "dev.sergiobelda.todometer.common.demo.database"
+    }
+    jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -20,8 +22,4 @@ kotlin {
             languageSettings.optIn("kotlin.RequiresOptIn")
         }
     }
-}
-
-android {
-    namespace = "dev.sergiobelda.todometer.common.demo.database"
 }

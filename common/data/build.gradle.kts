@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlinMultiplatformLibrary)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
@@ -7,8 +7,10 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
-    jvm("desktop")
+    androidLibrary {
+        namespace = "dev.sergiobelda.todometer.common.data"
+    }
+    jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -30,8 +32,7 @@ kotlin {
             implementation(libs.junit)
             implementation(libs.mockk.mockk)
         }
-        val desktopTest by getting
-        desktopTest.dependencies {
+        jvmTest.dependencies {
             implementation(libs.mockk.mockk)
         }
 
@@ -39,8 +40,4 @@ kotlin {
             languageSettings.optIn("kotlin.RequiresOptIn")
         }
     }
-}
-
-android {
-    namespace = "dev.sergiobelda.todometer.common.data"
 }

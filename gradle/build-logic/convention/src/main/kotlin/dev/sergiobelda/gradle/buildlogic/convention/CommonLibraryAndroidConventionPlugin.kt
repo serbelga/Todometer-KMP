@@ -15,41 +15,29 @@ package dev.sergiobelda.gradle.buildlogic.convention
  * limitations under the License.
  */
 
-import com.android.build.api.dsl.CommonExtension
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.androidLibrary
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class CommonLibraryAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("android-library").get().get().pluginId)
+                apply(libs.findPlugin("android-kotlinMultiplatformLibrary").get().get().pluginId)
             }
 
-            val extension = extensions.getByType<LibraryExtension>()
-            configureCommonAndroid(extension)
-        }
-    }
-}
-
-internal fun Project.configureCommonAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-) {
-    commonExtension.apply {
-        compileSdk = libs.findVersion("androidCompileSdk").get().toString().toInt()
-        sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-        defaultConfig {
-            minSdk = libs.findVersion("androidMinSdk").get().toString().toInt()
-        }
-
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
+            val extension = extensions.getByType<KotlinMultiplatformExtension>()
+            extension.apply {
+                sourceSets.apply {
+                    androidLibrary {
+                        compileSdk = libs.findVersion("androidCompileSdk").get().toString().toInt()
+                        minSdk = libs.findVersion("androidMinSdk").get().toString().toInt()
+                    }
+                }
+            }
         }
     }
 }

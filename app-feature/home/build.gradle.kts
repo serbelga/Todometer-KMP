@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlinMultiplatformLibrary)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
@@ -10,8 +10,10 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
-    jvm("desktop")
+    androidLibrary {
+        namespace = "dev.sergiobelda.todometer.app.feature.home"
+    }
+    jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -25,8 +27,4 @@ kotlin {
             languageSettings.optIn("kotlin.RequiresOptIn")
         }
     }
-}
-
-android {
-    namespace = "dev.sergiobelda.todometer.app.feature.home"
 }
