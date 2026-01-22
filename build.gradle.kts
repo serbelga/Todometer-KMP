@@ -21,3 +21,5 @@ buildscript {
         classpath(libs.google.ossLicensesPlugin)
     }
 }
+
+apply(from = "./gradle/scripts/git/git-hooks.gradle.kts")

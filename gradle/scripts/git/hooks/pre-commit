@@ -1,0 +1,26 @@
+#!/bin/sh
+
+export JAVA_HOME=`/usr/libexec/java_home -v 17`
+
+#./gradlew detekt
+#RESULT=$?
+#
+#if [ "$RESULT" = 0 ] ; then
+#        echo "Detekt ✅"
+#else
+#        echo "Detekt ❌"
+#        exit 1
+#fi
+
+./gradlew spotlessCheck
+RESULT=$?
+
+if [ "$RESULT" = 0 ] ; then
+        echo "Spotless ✅"
+        exit 0
+else
+        echo "Spotless ❌"
+        echo "Applying Spotless"
+        ./gradlew spotlessApply
+        exit 1
+fi
