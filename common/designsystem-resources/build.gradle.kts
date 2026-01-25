@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlinMultiplatformLibrary)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
@@ -10,8 +10,16 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
-    jvm("desktop")
+    androidLibrary {
+        androidResources.enable = true
+
+        namespace = "dev.sergiobelda.todometer.common.designsystem.resources"
+
+        lint {
+            abortOnError = false
+        }
+    }
+    jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -29,16 +37,6 @@ kotlin {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
         }
-    }
-}
-
-android {
-    sourceSets["main"].resources.srcDir("src/commonMain/resources")
-
-    namespace = "dev.sergiobelda.todometer.common.designsystem.resources"
-
-    lint {
-        abortOnError = false
     }
 }
 
