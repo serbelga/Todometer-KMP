@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2023 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,9 +11,16 @@
      limitations under the License.
 -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <corners android:radius="@dimen/todometer_widget_card_corner_radius" />
-    <solid android:color="@color/todometer_widget_card_background" />
-</shape>
+    <item
+        android:width="48dp"
+        android:height="48dp"
+        android:drawable="@drawable/todometer_widget_button" />
+
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:drawable="@drawable/todometer_widget_ic_round_add_24"
+        android:gravity="center" />
+</layer-list>

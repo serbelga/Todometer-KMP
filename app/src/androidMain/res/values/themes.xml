@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2023 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,7 +15,6 @@
 
     <style name="Theme.Todometer.Starting" parent="Theme.SplashScreen">
         <item name="postSplashScreenTheme">@style/Theme.Todometer.NoActionBar</item>
-
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="windowSplashScreenBackground">@color/todometer_splash_screen_background</item>
     </style>

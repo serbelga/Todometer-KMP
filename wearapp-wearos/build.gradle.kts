@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    kotlin("android")
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)

@@ -21,6 +21,7 @@ import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,7 +55,7 @@ import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import androidx.glance.text.TextDecoration
 import androidx.glance.text.TextStyle
-import dev.sergiobelda.todometer.app.R
+import dev.sergiobelda.todometer.app.android.R
 import dev.sergiobelda.todometer.app.glance.theme.TodometerWidgetTheme
 import dev.sergiobelda.todometer.app.ui.main.MainActivity
 import dev.sergiobelda.todometer.common.domain.doIfError
@@ -110,7 +111,7 @@ class TodometerWidget :
 
             val tasksDoing = remember { mutableStateListOf<TaskItem>() }
             val tasksDone = remember { mutableStateListOf<TaskItem>() }
-            var taskListProgress by remember { mutableStateOf(0F) }
+            var taskListProgress by remember { mutableFloatStateOf(0F) }
             val taskListSelectedTasks by getTaskListSelectedTasksUseCase().collectAsState(null)
             taskListSelectedTasks
                 ?.doIfSuccess { tasks ->

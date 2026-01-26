@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2023 Sergio Belda
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,13 +11,9 @@
      limitations under the License.
 -->
 
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:tint="@color/todometer_widget_button_icon"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path
-        android:fillColor="@android:color/white"
-        android:pathData="M18,13h-5v5c0,0.55 -0.45,1 -1,1s-1,-0.45 -1,-1v-5H6c-0.55,0 -1,-0.45 -1,-1s0.45,-1 1,-1h5V6c0,-0.55 0.45,-1 1,-1s1,0.45 1,1v5h5c0.55,0 1,0.45 1,1s-0.45,1 -1,1z" />
-</vector>
+<resources>
+    <color name="todometer_widget_background">@android:color/system_accent2_800</color>
+    <color name="todometer_widget_button_icon">@android:color/system_accent1_800</color>
+    <color name="todometer_widget_button_background">@android:color/system_accent1_100</color>
+    <color name="todometer_widget_card_background">@android:color/system_accent2_600</color>
+</resources>
