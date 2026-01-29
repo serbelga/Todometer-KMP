@@ -20,9 +20,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "Todometer-KMP"
 
-include(":app")
-include(":app-android")
-include(":app-desktop")
+include(":app:android")
+include(":app:desktop")
+include(":app:shared")
+
 include(":app-common:designsystem")
 include(":app-common:ui")
 include(":app-common:ui-tooling")
@@ -49,4 +50,4 @@ include(":common:ui-tooling")
 
 include(":macrobenchmark")
 
-include(":wearapp-wearos")
+include(":wearapp:wearos")

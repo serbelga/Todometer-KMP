@@ -9,6 +9,8 @@ plugins {
 kotlin {
     androidLibrary {
         namespace = "dev.sergiobelda.todometer.common.data"
+
+        withHostTest {}
     }
     jvm()
     iosX64()
@@ -28,7 +30,7 @@ kotlin {
             implementation(libs.mockk.common)
             implementation(kotlin("test"))
         }
-        androidUnitTest.dependencies {
+        getByName("androidHostTest").dependencies {
             implementation(libs.junit)
             implementation(libs.mockk.mockk)
         }

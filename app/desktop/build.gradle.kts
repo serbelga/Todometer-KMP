@@ -1,18 +1,23 @@
-/*
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
-    alias(libs.plugins.sergiobelda.gradle.lint)
+    alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("dev.sergiobelda.gradle.spotless")
 }
 
-*/
-/*dependencies {
-    implementation(compose.desktop.currentOs)
-}*//*
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
+dependencies {
+    implementation(projects.app.shared)
+
+    implementation(compose.desktop.currentOs)
+}
 
 compose.desktop {
     application {
@@ -43,4 +48,3 @@ compose.desktop {
         }
     }
 }
-*/
