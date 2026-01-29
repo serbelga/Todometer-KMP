@@ -43,3 +43,6 @@ kotlin {
 composeVectorize {
     packageName = "dev.sergiobelda.todometer.common.designsystem.resources.images"
 }
+
+// Workaround to be able to run macrobenchmark tests - Update compose-vectorize if necessary.
+tasks["generateImages"].mustRunAfter("prepareAndroidMainArtProfile")

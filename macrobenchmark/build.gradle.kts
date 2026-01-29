@@ -3,7 +3,6 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 plugins {
     alias(libs.plugins.android.test)
     alias(libs.plugins.androidx.baselineprofile)
-    kotlin("android")
 }
 
 android {
@@ -39,7 +38,7 @@ android {
 
     experimentalProperties["android.experimental.self-instrumenting"] = true
 
-    targetProjectPath = ":app"
+    targetProjectPath = ":app:android"
 
     // This code creates the gradle managed device (GMD) used to generate baseline profiles.
     testOptions.managedDevices.allDevices {
