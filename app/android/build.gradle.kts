@@ -57,33 +57,35 @@ android {
     }
     sourceSets {
         getByName("prod") {
-            manifest.srcFile("src/androidProd/AndroidManifest.xml")
+            manifest.srcFile("src/prod/AndroidManifest.xml")
         }
         getByName("demo") {
-            manifest.srcFile("src/androidDemo/AndroidManifest.xml")
+            manifest.srcFile("src/demo/AndroidManifest.xml")
         }
     }
-    kotlin {
-        jvmToolchain(17)
-    }
-    dependencies {
-        implementation(projects.app)
+}
 
-        implementation(libs.androidx.glance.appWidget)
-        implementation(libs.androidx.glance.glance)
-        implementation(libs.androidx.glance.material3)
+kotlin {
+    jvmToolchain(17)
+}
 
-        implementation(libs.google.playServicesOssLicenses)
+dependencies {
+    implementation(projects.app.shared)
 
-        implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-        implementation(libs.google.firebase.firebaseAnalytics)
-        implementation(libs.google.firebase.firebaseCrashlytics)
-        implementation(libs.google.firebase.firebasePerf)
+    implementation(libs.androidx.glance.appWidget)
+    implementation(libs.androidx.glance.glance)
+    implementation(libs.androidx.glance.material3)
 
-        baselineProfile(projects.macrobenchmark)
-        implementation(libs.androidx.profileinstaller)
-        "demoImplementation"(projects.common.demoDatabase)
-    }
+    implementation(libs.google.playServicesOssLicenses)
+
+    implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
+    implementation(libs.google.firebase.firebaseAnalytics)
+    implementation(libs.google.firebase.firebaseCrashlytics)
+    implementation(libs.google.firebase.firebasePerf)
+
+    baselineProfile(projects.macrobenchmark)
+    implementation(libs.androidx.profileinstaller)
+    "demoImplementation"(projects.common.androidDemoDatabase)
 }
 
 baselineProfile {
