@@ -10,6 +10,8 @@ plugins {
 kotlin {
     androidLibrary {
         namespace = "dev.sergiobelda.todometer.common.database"
+
+        withHostTest {}
     }
     jvm()
     iosX64()
@@ -30,7 +32,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.sqldelight.androidDriver)
         }
-        androidUnitTest.dependencies {
+        getByName("androidHostTest").dependencies {
             implementation(libs.sqldelight.jvmDriver)
         }
         jvmMain.dependencies {

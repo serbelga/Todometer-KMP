@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    kotlin("android")
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(libs.plugins.sergiobelda.gradle.lint)
 }

@@ -26,9 +26,6 @@ kotlin {
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.ui)
         }
-        androidUnitTest.dependencies {
-            implementation(libs.junit)
-        }
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
