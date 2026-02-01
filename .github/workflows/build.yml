@@ -13,16 +13,16 @@ on:
 jobs:
   build:
 
-    runs-on: macos-15
+    runs-on: macos-latest
 
     steps:
     - name: Checkout the code
       uses: actions/checkout@v6
-    - name: set up JDK 17
+    - name: set up JDK 21
       uses: actions/setup-java@v5
       with:
-        java-version: '17'
-        distribution: 'temurin'
+        java-version: '21'
+        distribution: 'oracle'
         cache: gradle  
     - name: Create google-services.json in app:android
       run:  echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/android/google-services.json

@@ -63,10 +63,10 @@ android {
             manifest.srcFile("src/demo/AndroidManifest.xml")
         }
     }
-}
 
-kotlin {
-    jvmToolchain(17)
+    kotlin {
+        jvmToolchain(21)
+    }
 }
 
 dependencies {
