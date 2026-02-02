@@ -82,5 +82,5 @@ dependencies {
     implementation(libs.sergiobelda.fonament.presentation)
     implementation(libs.sergiobelda.fonament.presentationDiKoin)
 
-    implementation("androidx.wear:wear-tooling-preview:1.0.0")
+    implementation(libs.androidx.wear.tooling.preview)
 }
