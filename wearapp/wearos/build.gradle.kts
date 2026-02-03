@@ -54,7 +54,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.common.android)
+    implementation(projects.commonAndroid.extensions)
+    implementation(projects.commonAndroid.resources)
     implementation(projects.common.core)
     implementation(projects.common.designsystemResources)
     implementation(projects.common.ui)

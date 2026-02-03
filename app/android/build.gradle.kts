@@ -71,6 +71,7 @@ android {
 
 dependencies {
     implementation(projects.app.shared)
+    implementation(projects.commonAndroid.resources)
 
     implementation(libs.androidx.glance.appWidget)
     implementation(libs.androidx.glance.glance)
@@ -85,7 +86,7 @@ dependencies {
 
     baselineProfile(projects.macrobenchmark)
     implementation(libs.androidx.profileinstaller)
-    "demoImplementation"(projects.common.androidDemoDatabase)
+    "demoImplementation"(projects.commonAndroid.demoDatabase)
 }
 
 baselineProfile {

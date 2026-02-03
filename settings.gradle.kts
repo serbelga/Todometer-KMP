@@ -37,8 +37,10 @@ include(":app-feature:home")
 include(":app-feature:settings")
 include(":app-feature:taskdetails")
 
-include(":common:android")
-include(":common:android-demo-database")
+include(":common-android:demo-database")
+include(":common-android:extensions")
+include(":common-android:resources")
+
 include(":common:core")
 include(":common:data")
 include(":common:database")
