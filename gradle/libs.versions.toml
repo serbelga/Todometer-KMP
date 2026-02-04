@@ -12,8 +12,8 @@ androidWearTargetSdk = "33"
 appcompat = "1.7.1"
 baselineprofile = "1.5.0-alpha02"
 benchmark = "1.5.0-alpha02"
-composeMultiplatformMaterial3 = "1.9.0"
 composeMultiplatform = "1.10.0"
+composeMultiplatformMaterial3 = "1.9.0"
 composeVectorize = "1.1.0"
 dataStore = "1.2.0"
 dependencyGraphGenerator = "0.8.0"
@@ -51,6 +51,7 @@ uiautomator = "2.3.0"
 wear = "1.3.0"
 wearCompose = "1.5.6"
 wearInput = "1.2.0"
+wearToolingPreview = "1.0.0"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -77,11 +78,12 @@ androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espres
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
-androidx-wear-wear = { module = "androidx.wear:wear", version.ref = "wear" }
 androidx-wear-compose-foundation = { module = "androidx.wear.compose:compose-foundation", version.ref = "wearCompose" }
 androidx-wear-compose-material = { module = "androidx.wear.compose:compose-material", version.ref = "wearCompose" }
 androidx-wear-compose-navigation = { module = "androidx.wear.compose:compose-navigation", version.ref = "wearCompose" }
 androidx-wear-input = { module = "androidx.wear:wear-input", version.ref = "wearInput" }
+androidx-wear-tooling-preview = { module = "androidx.wear:wear-tooling-preview", version.ref = "wearToolingPreview" }
+androidx-wear-wear = { module = "androidx.wear:wear", version.ref = "wear" }
 
 dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
 
@@ -102,6 +104,7 @@ jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foun
 jetbrains-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMultiplatformMaterial3" }
 jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
 jetbrains-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
+jetbrains-compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }
 jetbrains-compose-uiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
 
 jetbrains-kotlin-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinCollectionsImmutable" }
@@ -173,6 +176,7 @@ sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 sergiobelda-gradle-base = { id = "dev.sergiobelda.gradle.base" }
 sergiobelda-gradle-common-library-android = { id = "dev.sergiobelda.gradle.common.library.android" }
 sergiobelda-gradle-common-ui = { id = "dev.sergiobelda.gradle.common.ui" }
+sergiobelda-gradle-common-uiToolingPreview = { id = "dev.sergiobelda.gradle.common.ui.tooling.preview" }
 sergiobelda-gradle-dependencyGraphGenerator = { id = "dev.sergiobelda.gradle.dependency-graph-generator" }
 sergiobelda-gradle-detekt = { id = "dev.sergiobelda.gradle.detekt" }
 sergiobelda-gradle-lint = { id = "dev.sergiobelda.gradle.lint" }

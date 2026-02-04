@@ -54,7 +54,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.common.android)
+    implementation(projects.commonAndroid.extensions)
+    implementation(projects.commonAndroid.resources)
     implementation(projects.common.core)
     implementation(projects.common.designsystemResources)
     implementation(projects.common.ui)
@@ -82,5 +83,5 @@ dependencies {
     implementation(libs.sergiobelda.fonament.presentation)
     implementation(libs.sergiobelda.fonament.presentationDiKoin)
 
-    implementation("androidx.wear:wear-tooling-preview:1.0.0")
+    implementation(libs.androidx.wear.tooling.preview)
 }

@@ -43,7 +43,7 @@ kotlin {
             implementation(libs.sergiobelda.fonament.presentationDiKoin)
         }
         androidMain.dependencies {
-            implementation(projects.common.android)
+            implementation(projects.commonAndroid.extensions)
 
             implementation(libs.androidx.activityCompose)
             implementation(libs.androidx.splashscreen)

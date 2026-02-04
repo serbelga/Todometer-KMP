@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Sergio Belda
+ * Copyright 2026 Sergio Belda
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPrevi
 @PreviewLightDark
 @PreviewLandscape
 @Composable
-fun AboutContentPreview() {
+private fun AboutContentPreview() {
     TodometerAppPreview {
         AboutContent(
             uiState = AboutUIState,
