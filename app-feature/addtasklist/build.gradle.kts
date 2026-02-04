@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.common.ui)
+    alias(libs.plugins.sergiobelda.gradle.common.uiToolingPreview)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(libs.plugins.sergiobelda.gradle.lint)
 }
