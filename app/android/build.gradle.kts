@@ -22,7 +22,7 @@ android {
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
-        versionCode = 1294401
+        versionCode = 1295401
         versionName = "android-2.9.5"
     }
 
