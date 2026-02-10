@@ -23,7 +23,7 @@ android {
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
 
         versionCode = 1294401
-        versionName = "android-2.9.4"
+        versionName = "android-2.9.5"
     }
 
     buildTypes {
