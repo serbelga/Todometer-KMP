@@ -10,7 +10,7 @@ android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     kotlin {
-        jvmToolchain(21)
+        jvmToolchain(libs.versions.jdk.get().toInt())
     }
 
     buildFeatures {

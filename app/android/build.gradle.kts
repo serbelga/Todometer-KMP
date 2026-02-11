@@ -65,7 +65,7 @@ android {
     }
 
     kotlin {
-        jvmToolchain(21)
+        jvmToolchain(libs.versions.jdk.get().toInt())
     }
 }
 
