@@ -53,7 +53,7 @@ wear = "1.4.0"
 wearCompose = "1.5.6"
 wearInput = "1.2.0"
 wearToolingPreview = "1.0.0"
-work = "2.11.1"
+work = "2.11.2"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
