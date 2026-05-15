@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         namespace = "dev.sergiobelda.todometer.app.common.ui.tooling"
     }
     jvm()

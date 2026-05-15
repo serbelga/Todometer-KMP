@@ -17,8 +17,6 @@
 package dev.sergiobelda.gradle.buildlogic.convention.lint
 
 import com.diffplug.gradle.spotless.SpotlessExtension
-import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
-import dev.sergiobelda.gradle.buildlogic.convention.extensions.version
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -29,15 +27,13 @@ import org.gradle.kotlin.dsl.configure
 class SpotlessConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            val ktlintVersion = libs.findVersion("ktlint").version
-
             pluginManager.apply("com.diffplug.spotless")
 
             extensions.configure<SpotlessExtension> {
                 kotlin {
                     target("**/*.kt")
                     targetExclude("**/build/**/*.kt")
-                    ktlint(ktlintVersion)
+                    ktlint()
                     licenseHeader(licenseHeaderKotlin)
                 }
                 format("kts") {

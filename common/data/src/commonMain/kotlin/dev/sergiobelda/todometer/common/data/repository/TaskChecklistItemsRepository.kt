@@ -51,7 +51,11 @@ class TaskChecklistItemsRepository(
     override suspend fun updateTaskChecklistItemState(
         id: String,
         state: TaskChecklistItemState,
-    ) = taskChecklistItemLocalDataSource.updateTaskChecklistItemState(id, state)
+    ) {
+        taskChecklistItemLocalDataSource.updateTaskChecklistItemState(id, state)
+    }
 
-    override suspend fun deleteTaskChecklistItem(id: String) = taskChecklistItemLocalDataSource.deleteTaskChecklistItem(id)
+    override suspend fun deleteTaskChecklistItem(id: String) {
+        taskChecklistItemLocalDataSource.deleteTaskChecklistItem(id)
+    }
 }

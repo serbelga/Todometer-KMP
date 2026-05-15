@@ -10,7 +10,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         namespace = "dev.sergiobelda.todometer.app.feature.home"
     }
     jvm()

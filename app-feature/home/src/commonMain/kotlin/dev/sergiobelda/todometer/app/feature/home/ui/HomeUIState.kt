@@ -17,6 +17,7 @@
 package dev.sergiobelda.todometer.app.feature.home.ui
 
 import androidx.compose.runtime.Immutable
+import dev.sergiobelda.fonament.presentation.ui.FonamentUIState
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskList
 import dev.sergiobelda.todometer.common.domain.model.TaskState
@@ -26,14 +27,14 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 
 @Immutable
-data class HomeState(
+data class HomeUIState(
     val isLoadingTasks: Boolean = false,
     val tasks: ImmutableList<TaskItem> = persistentListOf(),
     val selectedTasksIds: ImmutableList<String> = persistentListOf(),
     val taskLists: ImmutableList<TaskList> = persistentListOf(),
     val taskListSelected: TaskList? = null,
     val errorUi: ErrorUi? = null,
-) {
+) : FonamentUIState {
     val selectedTasks: ImmutableList<TaskItem>
         get() = tasks.filter { it.id in selectedTasksIds }.toPersistentList()
 

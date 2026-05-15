@@ -16,15 +16,15 @@
 
 package dev.sergiobelda.todometer.app.feature.home.di
 
+import dev.sergiobelda.fonament.presentation.di.koin.fonamentViewModelOf
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeViewModel
 import dev.sergiobelda.todometer.common.di.TodometerDIModule
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 data object HomePresentationDIModule : TodometerDIModule {
     override val module: Module =
         module {
-            viewModelOf(::HomeViewModel)
+            fonamentViewModelOf(::HomeViewModel)
         }
 }

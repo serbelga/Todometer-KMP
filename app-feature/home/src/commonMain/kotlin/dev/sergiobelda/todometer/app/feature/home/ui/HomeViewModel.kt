@@ -16,11 +16,9 @@
 
 package dev.sergiobelda.todometer.app.feature.home.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.sergiobelda.fonament.presentation.ui.FonamentEvent
+import dev.sergiobelda.fonament.presentation.ui.FonamentViewModel
 import dev.sergiobelda.todometer.common.domain.doIfError
 import dev.sergiobelda.todometer.common.domain.doIfSuccess
 import dev.sergiobelda.todometer.common.domain.usecase.task.DeleteTasksUseCase
@@ -48,14 +46,27 @@ class HomeViewModel(
     private val getTaskListsUseCase: GetTaskListsUseCase,
     private val getTaskListSelectedTasksUseCase: GetTaskListSelectedTasksUseCase,
     private val toggleTaskPinnedValueUseCase: ToggleTaskPinnedValueUseCase,
-) : ViewModel() {
-    var state by mutableStateOf(HomeState(isLoadingTasks = true))
-        private set
-
+) : FonamentViewModel<HomeUIState>(
+        initialUIState = HomeUIState(isLoadingTasks = true),
+    ) {
     init {
         getTaskListSelected()
         getTaskListSelectedTasks()
         getTaskLists()
+    }
+
+    override fun handleEvent(event: FonamentEvent) {
+        when (event) {
+            is HomeEvent.SetTaskDoing -> setTaskDoing(event.id)
+            is HomeEvent.SetTaskDone -> setTaskDone(event.id)
+            is HomeEvent.DeleteTask -> deleteTask(event.id)
+            HomeEvent.DeleteSelectedTasks -> deleteSelectedTasks()
+            HomeEvent.DeleteTaskList -> deleteTaskList()
+            is HomeEvent.SetTaskListSelected -> setTaskListSelected(event.id)
+            is HomeEvent.ToggleSelectTask -> toggleSelectTask(event.id)
+            HomeEvent.ClearSelectedTasks -> clearSelectedTasks()
+            HomeEvent.ToggleSelectedTasksPinnedValue -> toggleSelectedTasksPinnedValue()
+        }
     }
 
     private fun getTaskListSelected() =
@@ -63,15 +74,17 @@ class HomeViewModel(
             getTaskListSelectedUseCase().collect { result ->
                 result
                     .doIfSuccess { taskList ->
-                        state =
-                            state.copy(
+                        updateUIState {
+                            it.copy(
                                 taskListSelected = taskList,
                             )
+                        }
                     }.doIfError {
-                        state =
-                            state.copy(
+                        updateUIState {
+                            it.copy(
                                 taskListSelected = null,
                             )
+                        }
                     }
             }
         }
@@ -81,17 +94,19 @@ class HomeViewModel(
             getTaskListSelectedTasksUseCase().collect { result ->
                 result
                     .doIfSuccess { tasks ->
-                        state =
-                            state.copy(
+                        updateUIState {
+                            it.copy(
                                 isLoadingTasks = false,
                                 tasks = tasks.toPersistentList(),
                             )
+                        }
                     }.doIfError {
-                        state =
-                            state.copy(
+                        updateUIState {
+                            it.copy(
                                 isLoadingTasks = false,
                                 tasks = persistentListOf(),
                             )
+                        }
                     }
             }
         }
@@ -101,78 +116,83 @@ class HomeViewModel(
             getTaskListsUseCase().collect { result ->
                 result
                     .doIfSuccess { taskLists ->
-                        state =
-                            state.copy(
+                        updateUIState {
+                            it.copy(
                                 taskLists = taskLists.toPersistentList(),
                             )
+                        }
                     }.doIfError {
-                        state =
-                            state.copy(
+                        updateUIState {
+                            it.copy(
                                 taskLists = persistentListOf(),
                             )
+                        }
                     }
             }
         }
 
-    fun deleteSelectedTasks() =
+    private fun deleteSelectedTasks() =
         viewModelScope.launch {
-            deleteTasksUseCase(state.selectedTasksIds)
+            deleteTasksUseCase(uiState.selectedTasksIds)
             clearSelectedTasks()
         }
 
-    fun deleteTask(id: String) =
+    private fun deleteTask(id: String) =
         viewModelScope.launch {
             deleteTasksUseCase(id)
         }
 
-    fun deleteTaskList() =
+    private fun deleteTaskList() =
         viewModelScope.launch {
             deleteTaskListSelectedUseCase()
         }
 
-    fun setTaskDoing(id: String) =
+    private fun setTaskDoing(id: String) =
         viewModelScope.launch {
             setTaskDoingUseCase(id)
         }
 
-    fun setTaskDone(id: String) =
+    private fun setTaskDone(id: String) =
         viewModelScope.launch {
             setTaskDoneUseCase(id)
         }
 
-    fun setTaskListSelected(id: String) =
+    private fun setTaskListSelected(id: String) =
         viewModelScope.launch {
             setTaskListSelectedUseCase(id)
         }
 
-    fun toggleSelectTask(id: String) {
-        val selectedTasksIds = state.selectedTasksIds.toMutableList()
+    private fun toggleSelectTask(id: String) {
+        val selectedTasksIds = uiState.selectedTasksIds.toMutableList()
         if (!selectedTasksIds.contains(id)) {
             selectedTasksIds.add(id)
         } else {
             selectedTasksIds.removeAll { it == id }
         }
-        state =
-            state.copy(
+        updateUIState {
+            it.copy(
                 selectedTasksIds = selectedTasksIds.toPersistentList(),
             )
+        }
     }
 
-    fun clearSelectedTasks() =
+    private fun clearSelectedTasks() =
         viewModelScope.launch {
             delay(CLEAR_SELECTED_TASKS_DELAY_MILLIS)
-            state = state.copy(selectedTasksIds = persistentListOf())
+            updateUIState {
+                it.copy(selectedTasksIds = persistentListOf())
+            }
         }
 
-    fun toggleSelectedTasksPinnedValue() =
+    private fun toggleSelectedTasksPinnedValue() =
         viewModelScope.launch {
-            val notPinnedSelectedTasks = state.selectedTasks.filter { !it.isPinned }
+            val notPinnedSelectedTasks = uiState.selectedTasks.filter { !it.isPinned }
             if (notPinnedSelectedTasks.isNotEmpty()) {
                 notPinnedSelectedTasks.forEach {
                     toggleTaskPinnedValueUseCase(it.id)
                 }
             } else {
-                state.selectedTasks.forEach {
+                uiState.selectedTasks.forEach {
                     toggleTaskPinnedValueUseCase(it.id)
                 }
             }

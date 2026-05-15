@@ -42,6 +42,7 @@ import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskScreen
 import dev.sergiobelda.todometer.app.feature.edittasklist.navigation.editTaskListNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListNavDestination
 import dev.sergiobelda.todometer.app.feature.edittasklist.ui.EditTaskListScreen
+import dev.sergiobelda.todometer.app.feature.home.navigation.homeNavigationEventHandler
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeNavDestination
 import dev.sergiobelda.todometer.app.feature.home.ui.HomeScreen
 import dev.sergiobelda.todometer.app.feature.settings.navigation.settingsNavigationEventHandler
@@ -51,7 +52,6 @@ import dev.sergiobelda.todometer.app.feature.taskdetails.navigation.taskDetailsN
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsNavDestination
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsSafeNavArgs
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsScreen
-import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -110,14 +110,18 @@ private fun NavGraphBuilder.homeNode(
     navigateToAbout: () -> Unit,
 ) {
     composable(navDestination = HomeNavDestination) {
-        HomeScreen(
-            navigateToAddTaskList = navigateToAddTaskList,
-            navigateToEditTaskList = navigateToEditTaskList,
-            navigateToAddTask = navigateToAddTask,
-            navigateToTaskDetails = navigateToTaskDetails,
-            navigateToSettings = navigateToSettings,
-            navigateToAbout = navigateToAbout,
-            viewModel = koinViewModel(),
+        val homeNavigationEventHandler =
+            homeNavigationEventHandler(
+                navigateToAddTaskList = navigateToAddTaskList,
+                navigateToEditTaskList = navigateToEditTaskList,
+                navigateToAddTask = navigateToAddTask,
+                navigateToTaskDetails = navigateToTaskDetails,
+                navigateToSettings = navigateToSettings,
+                navigateToAbout = navigateToAbout,
+            )
+        HomeScreen.NavigationNode(
+            navigationEventHandler = homeNavigationEventHandler,
+            viewModel = koinFonamentViewModel(),
         )
     }
 }
