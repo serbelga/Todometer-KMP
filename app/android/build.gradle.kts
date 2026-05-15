@@ -27,16 +27,16 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            baselineProfile.automaticGenerationDuringBuild = true
+            // baselineProfile.automaticGenerationDuringBuild = true
         }
-        getByName("debug") {
+        debug {
             extra["enableCrashlytics"] = false
         }
         lint {
