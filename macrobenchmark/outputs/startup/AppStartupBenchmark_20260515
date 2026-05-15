@@ -1,0 +1,11 @@
+AppStartupBenchmark_measureCompilationBaselineProfiles
+timeToInitialDisplayMs   min 310.2,   median 320.9,   max 332.3
+Traces: Iteration 0 1 2 3 4
+
+AppStartupBenchmark_measureCompilationFull
+timeToInitialDisplayMs   min 382.1,   median 387.4,   max 451.5
+Traces: Iteration 0 1 2 3 4
+
+AppStartupBenchmark_measureCompilationNone
+timeToInitialDisplayMs   min 360.2,   median 380.1,   max 443.9
+Traces: Iteration 0 1 2 3 4
