@@ -49,7 +49,9 @@ sealed interface HomeEvent : FonamentEvent {
 
     data object OpenDrawer : HomeEvent
 
-    data object CloseDrawer : HomeEvent
+    data class CloseDrawer(
+        val onClose: () -> Unit = {},
+    ) : HomeEvent
 
     data object ShowHomeMoreDropdown : HomeEvent
 

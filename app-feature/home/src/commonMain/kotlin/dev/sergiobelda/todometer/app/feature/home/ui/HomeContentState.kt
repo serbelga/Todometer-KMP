@@ -62,8 +62,11 @@ data class HomeContentState
                     coroutineScope.launch { drawerState.open() }
                 }
 
-                HomeEvent.CloseDrawer -> {
-                    coroutineScope.launch { drawerState.close() }
+                is HomeEvent.CloseDrawer -> {
+                    coroutineScope.launch {
+                        drawerState.close()
+                        event.onClose()
+                    }
                 }
 
                 HomeEvent.ShowHomeMoreDropdown -> {

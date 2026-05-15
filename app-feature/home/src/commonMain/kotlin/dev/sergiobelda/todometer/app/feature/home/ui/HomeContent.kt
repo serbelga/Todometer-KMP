@@ -117,20 +117,29 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
                     defaultTaskListName,
                     uiState.taskLists,
                     onAddTaskList = {
-                        onEvent(HomeEvent.CloseDrawer)
-                        onEvent(HomeNavigationEvent.NavigateToAddTaskList)
+                        onEvent(
+                            HomeEvent.CloseDrawer(
+                                onClose = { onEvent(HomeNavigationEvent.NavigateToAddTaskList) },
+                            ),
+                        )
                     },
                     onTaskListItemClick = {
-                        onEvent(HomeEvent.CloseDrawer)
+                        onEvent(HomeEvent.CloseDrawer())
                         onEvent(HomeEvent.SetTaskListSelected(it))
                     },
                     onSettingsItemClick = {
-                        onEvent(HomeEvent.CloseDrawer)
-                        onEvent(HomeNavigationEvent.NavigateToSettings)
+                        onEvent(
+                            HomeEvent.CloseDrawer(
+                                onClose = { onEvent(HomeNavigationEvent.NavigateToSettings) },
+                            ),
+                        )
                     },
                     onAboutItemClick = {
-                        onEvent(HomeEvent.CloseDrawer)
-                        onEvent(HomeNavigationEvent.NavigateToAbout)
+                        onEvent(
+                            HomeEvent.CloseDrawer(
+                                onClose = { onEvent(HomeNavigationEvent.NavigateToAbout) },
+                            ),
+                        )
                     },
                 )
             },
