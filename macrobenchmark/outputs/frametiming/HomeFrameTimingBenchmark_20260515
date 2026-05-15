@@ -1,0 +1,18 @@
+HomeFrameTimingBenchmark_measureCompilationBaselineProfiles
+frameCount           min 95.0,   median 98.0,   max 99.0
+frameDurationCpuMs   P50   3.5,   P90   5.1,   P95   6.0,   P99   7.6
+frameOverrunMs       P50  -12.0,   P90  -10.2,   P95  -9.5,   P99  -6.8
+Traces: Iteration 0 1 2 3 4
+
+HomeFrameTimingBenchmark_measureCompilationFull
+frameCount           min  93.0,   median  98.0,   max 104.0
+frameDurationCpuMs   P50    3.5,   P90    5.2,   P95    5.9,   P99    9.3
+frameOverrunMs       P50  -11.7,   P90  -10.0,   P95   -8.8,   P99   -4.6
+Traces: Iteration 0 1 2 3 4
+
+HomeFrameTimingBenchmark_measureCompilationNone
+frameCount           min  88.0,   median  95.0,   max 107.0
+frameDurationCpuMs   P50    3.3,   P90    5.1,   P95    8.9,   P99   13.5
+frameOverrunMs       P50  -11.9,   P90   -6.8,   P95   -3.4,   P99    7.0
+Traces: Iteration 0 1 2 3 4
+
