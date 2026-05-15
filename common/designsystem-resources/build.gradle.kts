@@ -10,7 +10,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         androidResources.enable = true
 
         namespace = "dev.sergiobelda.todometer.common.designsystem.resources"

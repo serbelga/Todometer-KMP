@@ -7,7 +7,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         namespace = "dev.sergiobelda.todometer.common.data"
 
         withHostTest {}

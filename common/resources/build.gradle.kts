@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
-    // alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlinMultiplatformLibrary)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.jetbrains.compose)
@@ -13,7 +12,7 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+    android {
         androidResources.enable = true
 
         namespace = "dev.sergiobelda.todometer.common.resources"
