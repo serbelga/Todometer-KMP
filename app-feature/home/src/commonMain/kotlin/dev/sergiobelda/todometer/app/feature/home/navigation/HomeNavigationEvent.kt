@@ -14,16 +14,22 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.todometer.app.feature.home.ui
+package dev.sergiobelda.todometer.app.feature.home.navigation
 
-import dev.sergiobelda.fonament.presentation.ui.FonamentContent
-import dev.sergiobelda.fonament.presentation.ui.FonamentUI
-import dev.sergiobelda.navigation.compose.extended.annotation.NavDestination
+import dev.sergiobelda.fonament.presentation.navigation.FonamentNavigationEvent
 
-@NavDestination(
-    destinationId = "home",
-    name = "Home",
-)
-data object HomeScreen : FonamentUI<HomeUIState>() {
-    override val content: FonamentContent<HomeUIState, *> = HomeContent
+sealed interface HomeNavigationEvent : FonamentNavigationEvent {
+    data object NavigateToAddTaskList : HomeNavigationEvent
+
+    data object NavigateToEditTaskList : HomeNavigationEvent
+
+    data object NavigateToAddTask : HomeNavigationEvent
+
+    data class NavigateToTaskDetails(
+        val taskId: String,
+    ) : HomeNavigationEvent
+
+    data object NavigateToSettings : HomeNavigationEvent
+
+    data object NavigateToAbout : HomeNavigationEvent
 }
