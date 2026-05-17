@@ -35,7 +35,6 @@ kotlinCollectionsImmutable = "0.4.0"
 kotlinCoroutines = "1.11.0"
 kotlinDatetime = "0.8.0-0.6.x-compat"
 ksp = "2.3.5"
-lyricist = "1.8.0"
 mockk = "1.14.9"
 mockkCommon = "1.12.5"
 navigationComposeExtended = "1.6.2"
@@ -131,9 +130,6 @@ koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-test = { module = "io.insert-koin:koin-test" }
-
-lyricist-lyricist = { module = "cafe.adriel.lyricist:lyricist", version.ref = "lyricist" }
-lyricist-processor = { module = "cafe.adriel.lyricist:lyricist-processor", version.ref = "lyricist" }
 
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }
