@@ -20,6 +20,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.jetbrains.compose.ui)
             api(libs.jetbrains.compose.componentsResources)
         }
 
