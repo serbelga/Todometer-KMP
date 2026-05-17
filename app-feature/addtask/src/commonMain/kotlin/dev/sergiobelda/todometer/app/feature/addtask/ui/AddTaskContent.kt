@@ -63,9 +63,21 @@ import dev.sergiobelda.todometer.app.feature.addtask.navigation.AddTaskNavigatio
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.add_element_optional
+import dev.sergiobelda.todometer.common.resources.add_task
+import dev.sergiobelda.todometer.common.resources.checklist
+import dev.sergiobelda.todometer.common.resources.choose_tag
+import dev.sergiobelda.todometer.common.resources.clear
+import dev.sergiobelda.todometer.common.resources.date_time
+import dev.sergiobelda.todometer.common.resources.description
+import dev.sergiobelda.todometer.common.resources.enter_description
+import dev.sergiobelda.todometer.common.resources.enter_task_name
+import dev.sergiobelda.todometer.common.resources.field_not_empty
+import dev.sergiobelda.todometer.common.resources.name
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toPersistentList
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState>() {
@@ -165,7 +177,7 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
     ) {
         SaveActionTopAppBar(
             navigateBack = navigateBack,
-            title = TodometerResources.strings.addTask,
+            title = stringResource(Res.string.add_task),
             isSaveButtonEnabled = isSaveButtonEnabled,
             onSaveButtonClick = onSaveButtonClick,
         )
@@ -218,12 +230,12 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
     ) {
         item {
             TodometerTitledTextField(
-                title = TodometerResources.strings.name,
+                title = stringResource(Res.string.name),
                 value = taskTitle,
                 onValueChange = { onEvent(AddTaskEvent.TaskTitleValueChange(it)) },
-                placeholder = { Text(TodometerResources.strings.enterTaskName) },
+                placeholder = { Text(stringResource(Res.string.enter_task_name)) },
                 isError = taskTitleInputError,
-                errorMessage = TodometerResources.strings.fieldNotEmpty,
+                errorMessage = stringResource(Res.string.field_not_empty),
                 keyboardOptions =
                     KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
@@ -236,7 +248,7 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
 
     private inline fun LazyListScope.tagSelectorItem(selectedTag: Tag) {
         item {
-            FieldTitle(text = TodometerResources.strings.chooseTag)
+            FieldTitle(text = stringResource(Res.string.choose_tag))
             TagSelector(
                 selectedTag,
                 onTagSelected = { onEvent(AddTaskEvent.SelectTag(it)) },
@@ -246,7 +258,7 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
 
     private inline fun LazyListScope.taskDueDateItem(taskDueDate: Long?) {
         item {
-            FieldTitle(text = TodometerResources.strings.dateTime.addStyledOptionalSuffix())
+            FieldTitle(text = stringResource(Res.string.date_time).addStyledOptionalSuffix())
             DateTimeSelector(
                 taskDueDate,
                 onEnterDateTimeClick = { onEvent(AddTaskEvent.ShowDatePickerDialog) },
@@ -260,7 +272,7 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
     private inline fun LazyListScope.taskChecklistItemsItem(taskChecklistItems: ImmutableList<String>) {
         item {
             Text(
-                text = TodometerResources.strings.checklist.addStyledOptionalSuffix(),
+                text = stringResource(Res.string.checklist).addStyledOptionalSuffix(),
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.labelLarge,
                 modifier =
@@ -283,7 +295,7 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
             AddChecklistItemField(
                 onAddTaskCheckListItem = { onEvent(AddTaskEvent.AddTaskCheckListItem(it)) },
             ) {
-                Text(TodometerResources.strings.addElementOptional)
+                Text(stringResource(Res.string.add_element_optional))
             }
         }
     }
@@ -291,10 +303,10 @@ data object AddTaskContent : FonamentContent<AddTaskUIState, AddTaskContentState
     private inline fun LazyListScope.taskDescriptionItem(taskDescription: String) {
         item {
             TodometerTitledTextField(
-                title = TodometerResources.strings.description.addStyledOptionalSuffix(),
+                title = stringResource(Res.string.description).addStyledOptionalSuffix(),
                 value = taskDescription,
                 onValueChange = { onEvent(AddTaskEvent.TaskDescriptionValueChange(it)) },
-                placeholder = { Text(TodometerResources.strings.enterDescription) },
+                placeholder = { Text(stringResource(Res.string.enter_description)) },
                 keyboardOptions =
                     KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
@@ -345,7 +357,7 @@ private fun TaskChecklistItem(
         IconButton(onClick = onDeleteTaskCheckListItem) {
             Icon(
                 Images.Icons.Close,
-                contentDescription = TodometerResources.strings.clear,
+                contentDescription = stringResource(Res.string.clear),
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
             )
         }

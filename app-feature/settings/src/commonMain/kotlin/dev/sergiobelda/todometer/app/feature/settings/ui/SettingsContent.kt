@@ -64,7 +64,11 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.CheckCircle
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.back
+import dev.sergiobelda.todometer.common.resources.settings
+import dev.sergiobelda.todometer.common.resources.theme
+import org.jetbrains.compose.resources.stringResource
 
 internal data object SettingsContent : FonamentContent<SettingsUIState, NoContentState>() {
     @Composable
@@ -101,12 +105,12 @@ internal data object SettingsContent : FonamentContent<SettingsUIState, NoConten
                 ) {
                     Icon(
                         Images.Icons.NavigateBefore,
-                        contentDescription = TodometerResources.strings.back,
+                        contentDescription = stringResource(Res.string.back),
                     )
                 }
             },
             title = {
-                Text(TodometerResources.strings.settings)
+                Text(stringResource(Res.string.settings))
             },
         )
     }
@@ -135,7 +139,7 @@ private fun SettingsChooseAppTheme(
     onItemClick: (AppTheme) -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth().padding(SettingsItemPaddingHorizontal)) {
-        Text(text = TodometerResources.strings.theme)
+        Text(text = stringResource(Res.string.theme))
         Spacer(modifier = Modifier.height(SettingsItemInternalSpacing))
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(AppThemeItemsSpacing),

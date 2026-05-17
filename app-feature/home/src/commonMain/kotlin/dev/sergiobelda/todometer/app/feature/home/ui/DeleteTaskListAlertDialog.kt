@@ -23,7 +23,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Warning
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.cancel
+import dev.sergiobelda.todometer.common.resources.delete_task_list
+import dev.sergiobelda.todometer.common.resources.delete_task_list_question
+import dev.sergiobelda.todometer.common.resources.ok
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DeleteTaskListAlertDialog(
@@ -35,11 +40,11 @@ internal fun DeleteTaskListAlertDialog(
             Icon(Images.Icons.Warning, contentDescription = null)
         },
         title = {
-            Text(TodometerResources.strings.deleteTaskList)
+            Text(stringResource(Res.string.delete_task_list))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(TodometerResources.strings.deleteTaskListQuestion)
+            Text(stringResource(Res.string.delete_task_list_question))
         },
         confirmButton = {
             TextButton(
@@ -48,12 +53,12 @@ internal fun DeleteTaskListAlertDialog(
                     onDismissRequest()
                 },
             ) {
-                Text(TodometerResources.strings.ok)
+                Text(stringResource(Res.string.ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(TodometerResources.strings.cancel)
+                Text(stringResource(Res.string.cancel))
             }
         },
     )

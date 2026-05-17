@@ -66,9 +66,13 @@ import dev.sergiobelda.todometer.common.domain.usecase.task.GetTaskListSelectedT
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoingUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.task.SetTaskDoneUseCase
 import dev.sergiobelda.todometer.common.domain.usecase.tasklist.GetTaskListSelectedUseCase
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.completed_tasks
+import dev.sergiobelda.todometer.common.resources.default_task_list_name
+import dev.sergiobelda.todometer.common.resources.no_pending_tasks
 import dev.sergiobelda.todometer.common.ui.task.TaskProgress
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import androidx.glance.appwidget.action.actionStartActivity as actionStartActivityIntent
@@ -106,7 +110,7 @@ class TodometerWidget :
                 ?.doIfSuccess {
                     taskListName = it.name
                 }?.doIfError {
-                    taskListName = TodometerResources.strings.defaultTaskListName
+                    taskListName = stringResource(Res.string.default_task_list_name)
                 }
 
             val tasksDoing = remember { mutableStateListOf<TaskItem>() }
@@ -235,7 +239,7 @@ class TodometerWidget :
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    text = TodometerResources.strings.noPendingTasks,
+                    text = stringResource(Res.string.no_pending_tasks),
                     style = TextStyle(color = GlanceTheme.colors.onBackground),
                 )
             }
@@ -326,7 +330,7 @@ class TodometerWidget :
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = TodometerResources.strings.completedTasks(tasksDone),
+                text = stringResource(Res.string.completed_tasks, tasksDone),
                 style = TextStyle(color = GlanceTheme.colors.onBackground),
             )
         }

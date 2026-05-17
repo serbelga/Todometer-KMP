@@ -24,7 +24,10 @@ import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.delete_task_list
+import dev.sergiobelda.todometer.common.resources.edit_task_list
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal actual fun HomeMoreDropdownMenu(
@@ -41,7 +44,7 @@ internal actual fun HomeMoreDropdownMenu(
         DropdownMenuItem(
             onClick = onEditTaskListClick,
             leadingIcon = { Icon(Images.Icons.Edit, contentDescription = null) },
-            text = { Text(TodometerResources.strings.editTaskList) },
+            text = { Text(stringResource(Res.string.edit_task_list)) },
         )
         DropdownMenuItem(
             onClick = onDeleteTaskListClick,
@@ -51,7 +54,7 @@ internal actual fun HomeMoreDropdownMenu(
                     contentDescription = null,
                 )
             },
-            text = { Text(TodometerResources.strings.deleteTaskList) },
+            text = { Text(stringResource(Res.string.delete_task_list)) },
         )
     }
 }

@@ -1,8 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-
 plugins {
     alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.google.ksp)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
@@ -18,14 +15,13 @@ kotlin {
         namespace = "dev.sergiobelda.todometer.common.resources"
     }
     jvm()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
             implementation(libs.jetbrains.compose.ui)
-            api(libs.lyricist.lyricist)
+            api(libs.jetbrains.compose.componentsResources)
         }
 
         all {
@@ -34,20 +30,8 @@ kotlin {
     }
 }
 
-// region Lyricist Multiplatform setup
-dependencies {
-    add("kspCommonMainMetadata", libs.lyricist.processor)
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "dev.sergiobelda.todometer.common.resources"
+    generateResClass = always
 }
-
-// Workaround for KSP only in Common Main.
-// https://github.com/google/ksp/issues/567
-tasks.withType<KotlinCompilationTask<*>>().all {
-    if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
-}
-
-kotlin.sourceSets.commonMain {
-    kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-}
-// endregion

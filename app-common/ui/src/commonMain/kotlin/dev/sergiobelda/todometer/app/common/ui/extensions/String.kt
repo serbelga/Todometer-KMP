@@ -23,7 +23,9 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import dev.sergiobelda.todometer.app.common.designsystem.theme.Alpha.applyMediumEmphasisAlpha
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.optional
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun String.addStyledOptionalSuffix(): AnnotatedString =
@@ -33,6 +35,6 @@ fun String.addStyledOptionalSuffix(): AnnotatedString =
             style = SpanStyle(color = MaterialTheme.colorScheme.onBackground.applyMediumEmphasisAlpha()),
         ) {
             append(" · ")
-            append(TodometerResources.strings.optional)
+            append(stringResource(Res.string.optional))
         }
     }

@@ -87,10 +87,28 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Push
 import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.CompletedTasks
 import dev.sergiobelda.todometer.common.designsystem.resources.images.illustrations.NoTasks
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.add_task
+import dev.sergiobelda.todometer.common.resources.cannot_delete_this_task_list
+import dev.sergiobelda.todometer.common.resources.cannot_edit_this_task_list
+import dev.sergiobelda.todometer.common.resources.completed_tasks
+import dev.sergiobelda.todometer.common.resources.congratulations
+import dev.sergiobelda.todometer.common.resources.default_task_list_name
+import dev.sergiobelda.todometer.common.resources.delete_tasks
+import dev.sergiobelda.todometer.common.resources.menu
+import dev.sergiobelda.todometer.common.resources.more
+import dev.sergiobelda.todometer.common.resources.no_tasks
+import dev.sergiobelda.todometer.common.resources.not_pinned_task
+import dev.sergiobelda.todometer.common.resources.ok
+import dev.sergiobelda.todometer.common.resources.others
+import dev.sergiobelda.todometer.common.resources.pinned
+import dev.sergiobelda.todometer.common.resources.pinned_task
+import dev.sergiobelda.todometer.common.resources.selected_tasks
+import dev.sergiobelda.todometer.common.resources.you_have_completed_all_tasks
 import dev.sergiobelda.todometer.common.ui.id.elementId
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 
 internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState>() {
     @Composable
@@ -102,10 +120,10 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
         contentState: HomeContentState,
         modifier: Modifier,
     ) {
-        val defaultTaskListName = TodometerResources.strings.defaultTaskListName
-        val cannotEditTaskList = TodometerResources.strings.cannotEditThisTaskList
-        val cannotDeleteTaskList = TodometerResources.strings.cannotDeleteThisTaskList
-        val snackbarActionLabel = TodometerResources.strings.ok
+        val defaultTaskListName = stringResource(Res.string.default_task_list_name)
+        val cannotEditTaskList = stringResource(Res.string.cannot_edit_this_task_list)
+        val cannotDeleteTaskList = stringResource(Res.string.cannot_delete_this_task_list)
+        val snackbarActionLabel = stringResource(Res.string.ok)
 
         SystemBackHandler(enabled = uiState.selectionMode) { onEvent(HomeEvent.ClearSelectedTasks) }
 
@@ -294,7 +312,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
                                 IconButton(onClick = onMenuClick) {
                                     Icon(
                                         Images.Icons.Menu,
-                                        contentDescription = TodometerResources.strings.menu,
+                                        contentDescription = stringResource(Res.string.menu),
                                     )
                                 }
                             },
@@ -302,7 +320,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
                                 IconButton(onClick = onMoreClick) {
                                     Icon(
                                         Images.Icons.MoreVert,
-                                        contentDescription = TodometerResources.strings.more,
+                                        contentDescription = stringResource(Res.string.more),
                                     )
                                 }
                                 HomeMoreDropdownMenu(
@@ -340,7 +358,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
                 }
             },
             title = {
-                Text(text = TodometerResources.strings.selectedTasks(selectedTasks.size))
+                Text(text = stringResource(Res.string.selected_tasks, selectedTasks.size))
             },
             actions = {
                 IconButton(onClick = onToggleSelectedTasksPinnedValueClick) {
@@ -353,16 +371,16 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
                             },
                         contentDescription =
                             if (atLeastOneNotPinnedTaskItem) {
-                                TodometerResources.strings.notPinnedTask
+                                stringResource(Res.string.not_pinned_task)
                             } else {
-                                TodometerResources.strings.pinnedTask
+                                stringResource(Res.string.pinned_task)
                             },
                     )
                 }
                 IconButton(onClick = onDeleteSelectedTasksClick) {
                     Icon(
                         Images.Icons.Delete,
-                        contentDescription = TodometerResources.strings.deleteTasks,
+                        contentDescription = stringResource(Res.string.delete_tasks),
                     )
                 }
             },
@@ -383,7 +401,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
             FloatingActionButton(onClick = navigateToAddTask) {
                 Icon(
                     Images.Icons.Add,
-                    contentDescription = TodometerResources.strings.addTask,
+                    contentDescription = stringResource(Res.string.add_task),
                 )
             }
         }
@@ -407,7 +425,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
         if ((tasksDoingPinned + tasksDoingNotPinned + tasksDone).isEmpty()) {
             HomeInfoIllustration(
                 Images.Illustrations.NoTasks,
-                TodometerResources.strings.noTasks,
+                stringResource(Res.string.no_tasks),
             )
         } else {
             LazyColumn(
@@ -418,7 +436,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
             ) {
                 if (tasksDoingPinned.isNotEmpty()) {
                     item {
-                        TasksSeparator(TodometerResources.strings.pinned)
+                        TasksSeparator(stringResource(Res.string.pinned))
                     }
                 }
                 taskItems(
@@ -433,7 +451,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
                 )
                 if (tasksDoingPinned.isNotEmpty() && tasksDoingNotPinned.isNotEmpty()) {
                     item {
-                        TasksSeparator(TodometerResources.strings.others)
+                        TasksSeparator(stringResource(Res.string.others))
                     }
                 }
                 taskItems(
@@ -476,8 +494,8 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
             if ((tasksDoingPinned + tasksDoingNotPinned).isEmpty() && !areTasksDoneVisible) {
                 HomeInfoIllustration(
                     Images.Illustrations.CompletedTasks,
-                    TodometerResources.strings.youHaveCompletedAllTasks,
-                    TodometerResources.strings.congratulations,
+                    stringResource(Res.string.you_have_completed_all_tasks),
+                    stringResource(Res.string.congratulations),
                 )
             }
         }
@@ -537,7 +555,7 @@ internal data object HomeContent : FonamentContent<HomeUIState, HomeContentState
         ListItem(
             headlineContent = {
                 Text(
-                    text = TodometerResources.strings.completedTasks(completedTasks),
+                    text = stringResource(Res.string.completed_tasks, completedTasks),
                 )
             },
             trailingContent = {

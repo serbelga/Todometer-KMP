@@ -31,7 +31,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.symbols.IsotypeCutMonochrome
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.app_name
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TodometerTitle(modifier: Modifier = Modifier) {
@@ -47,7 +49,7 @@ fun TodometerTitle(modifier: Modifier = Modifier) {
             modifier = Modifier.size(TodometerTitleIconSize),
         )
         Text(
-            text = TodometerResources.strings.appName,
+            text = stringResource(Res.string.app_name),
             style = MaterialTheme.typography.headlineSmall,
             modifier =
                 Modifier.padding(

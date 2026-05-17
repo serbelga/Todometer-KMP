@@ -12,7 +12,7 @@ androidWearTargetSdk = "33"
 appcompat = "1.7.1"
 baselineprofile = "1.5.0-alpha06"
 benchmark = "1.5.0-alpha06"
-composeMultiplatform = "1.10.3"
+composeMultiplatform = "1.11.0"
 composeMultiplatformMaterial3 = "1.9.0"
 composeVectorize = "1.2.0"
 dataStore = "1.2.1"
@@ -35,7 +35,6 @@ kotlinCollectionsImmutable = "0.4.0"
 kotlinCoroutines = "1.11.0"
 kotlinDatetime = "0.8.0-0.6.x-compat"
 ksp = "2.3.5"
-lyricist = "1.8.0"
 mockk = "1.14.9"
 mockkCommon = "1.12.5"
 navigationComposeExtended = "1.6.2"
@@ -103,6 +102,7 @@ google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugi
 jetbrains-androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigation" }
 
 jetbrains-compose-animationGraphics = { module = "org.jetbrains.compose.animation:animation-graphics", version.ref = "composeMultiplatform" }
+jetbrains-compose-componentsResources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeMultiplatform" }
 jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 jetbrains-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMultiplatformMaterial3" }
 jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
@@ -130,9 +130,6 @@ koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-test = { module = "io.insert-koin:koin-test" }
-
-lyricist-lyricist = { module = "cafe.adriel.lyricist:lyricist", version.ref = "lyricist" }
-lyricist-processor = { module = "cafe.adriel.lyricist:lyricist-processor", version.ref = "lyricist" }
 
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-common = { module = "io.mockk:mockk-common", version.ref = "mockkCommon" }

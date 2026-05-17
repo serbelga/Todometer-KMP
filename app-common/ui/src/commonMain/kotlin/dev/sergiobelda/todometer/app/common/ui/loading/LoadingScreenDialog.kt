@@ -24,7 +24,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.back
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +38,7 @@ fun LoadingScreenDialog(navigateBack: () -> Unit) {
                     IconButton(onClick = navigateBack) {
                         Icon(
                             Images.Icons.NavigateBefore,
-                            contentDescription = TodometerResources.strings.back,
+                            contentDescription = stringResource(Res.string.back),
                         )
                     }
                 },

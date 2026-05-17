@@ -14,7 +14,6 @@ kotlin {
         namespace = "dev.sergiobelda.todometer.app.feature.home"
     }
     jvm()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 

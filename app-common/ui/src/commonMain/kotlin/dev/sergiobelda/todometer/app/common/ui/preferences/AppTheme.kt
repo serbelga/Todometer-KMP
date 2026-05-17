@@ -23,7 +23,11 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Cont
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.DarkMode
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.LightMode
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.dark_theme
+import dev.sergiobelda.todometer.common.resources.follow_system
+import dev.sergiobelda.todometer.common.resources.light_theme
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppTheme.themeIcon(): ImageVector =
@@ -36,7 +40,7 @@ fun AppTheme.themeIcon(): ImageVector =
 @Composable
 fun AppTheme.themeName(): String =
     when (this) {
-        AppTheme.FOLLOW_SYSTEM -> TodometerResources.strings.followSystem
-        AppTheme.DARK_THEME -> TodometerResources.strings.darkTheme
-        AppTheme.LIGHT_THEME -> TodometerResources.strings.lightTheme
+        AppTheme.FOLLOW_SYSTEM -> stringResource(Res.string.follow_system)
+        AppTheme.DARK_THEME -> stringResource(Res.string.dark_theme)
+        AppTheme.LIGHT_THEME -> stringResource(Res.string.light_theme)
     }
