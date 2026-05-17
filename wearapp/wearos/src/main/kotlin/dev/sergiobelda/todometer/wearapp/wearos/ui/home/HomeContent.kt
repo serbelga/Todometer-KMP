@@ -58,10 +58,15 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Add
 import dev.sergiobelda.todometer.common.designsystem.resources.images.symbols.IsotypeCutDark
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.add_task_list
+import dev.sergiobelda.todometer.common.resources.app_name
+import dev.sergiobelda.todometer.common.resources.default_task_list_name
+import dev.sergiobelda.todometer.common.resources.task_list_name_input
 import dev.sergiobelda.todometer.wearapp.wearos.ui.home.navigation.HomeNavigationEvent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import org.jetbrains.compose.resources.stringResource
 
 data object HomeContent : FonamentContent<HomeUIState, HomeContentState>() {
     @Composable
@@ -157,7 +162,7 @@ data object HomeContent : FonamentContent<HomeUIState, HomeContentState>() {
                 onClick = {
                     onEvent(HomeNavigationEvent.NavigateToTaskList(null))
                 },
-                taskListName = TodometerResources.strings.defaultTaskListName,
+                taskListName = stringResource(Res.string.default_task_list_name),
             )
         }
         items(taskLists) { taskList ->
@@ -192,7 +197,7 @@ private fun TodometerTitle() {
             tint = MaterialTheme.colors.primary,
         )
         Text(
-            TodometerResources.strings.appName,
+            stringResource(Res.string.app_name),
             style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
@@ -222,7 +227,7 @@ private fun TaskListItem(
 
 @Composable
 private fun AddTaskListButton(onComplete: (String) -> Unit) {
-    val taskListNameInput = TodometerResources.strings.taskListNameInput
+    val taskListNameInput = stringResource(Res.string.task_list_name_input)
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -238,7 +243,7 @@ private fun AddTaskListButton(onComplete: (String) -> Unit) {
         label = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = TodometerResources.strings.addTaskList,
+                text = stringResource(Res.string.add_task_list),
             )
         },
         onClick = {

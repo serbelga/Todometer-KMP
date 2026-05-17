@@ -42,9 +42,12 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Event
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Schedule
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.clear
+import dev.sergiobelda.todometer.common.resources.enter_date_time
 import dev.sergiobelda.todometer.common.ui.extensions.dateFormat
 import dev.sergiobelda.todometer.common.ui.extensions.timeFormat
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun DateTimeSelector(
@@ -70,7 +73,7 @@ fun DateTimeSelector(
             IconButton(onClick = onClearDateTimeClick) {
                 Icon(
                     Images.Icons.Close,
-                    TodometerResources.strings.clear,
+                    stringResource(Res.string.clear),
                     tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
                 )
             }
@@ -81,7 +84,7 @@ fun DateTimeSelector(
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = TodometerResources.strings.enterDateTime,
+                text = stringResource(Res.string.enter_date_time),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier =
                     Modifier

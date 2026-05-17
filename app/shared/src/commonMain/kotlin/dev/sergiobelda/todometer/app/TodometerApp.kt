@@ -26,28 +26,25 @@ import dev.sergiobelda.todometer.app.common.ui.theme.TodometerAppTheme
 import dev.sergiobelda.todometer.app.navhost.TodometerNavHost
 import dev.sergiobelda.todometer.common.domain.preference.AppTheme
 import dev.sergiobelda.todometer.common.domain.usecase.apptheme.GetAppThemeUseCase
-import dev.sergiobelda.todometer.common.resources.ProvideTodometerStrings
 import org.koin.compose.koinInject
 
 @Composable
 fun TodometerApp(modifier: Modifier = Modifier) {
-    ProvideTodometerStrings {
-        val getAppThemeUseCase = koinInject<GetAppThemeUseCase>()
-        val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)
-        val darkTheme: Boolean =
-            when (appThemeState.value) {
-                AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-                AppTheme.DARK_THEME -> true
-                AppTheme.LIGHT_THEME -> false
-            }
-        TodometerAppTheme(darkTheme) {
-            val navController = rememberNavController()
-            val navAction = rememberNavAction(navController)
-            TodometerNavHost(
-                navController = navController,
-                navAction = navAction,
-                modifier = modifier,
-            )
+    val getAppThemeUseCase = koinInject<GetAppThemeUseCase>()
+    val appThemeState = getAppThemeUseCase().collectAsState(AppTheme.FOLLOW_SYSTEM)
+    val darkTheme: Boolean =
+        when (appThemeState.value) {
+            AppTheme.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+            AppTheme.DARK_THEME -> true
+            AppTheme.LIGHT_THEME -> false
         }
+    TodometerAppTheme(darkTheme) {
+        val navController = rememberNavController()
+        val navAction = rememberNavAction(navController)
+        TodometerNavHost(
+            navController = navController,
+            navAction = navAction,
+            modifier = modifier,
+        )
     }
 }

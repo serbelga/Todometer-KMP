@@ -55,13 +55,16 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Edit
 import dev.sergiobelda.todometer.common.domain.model.Task
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.delete_task
+import dev.sergiobelda.todometer.common.resources.edit_task
 import dev.sergiobelda.todometer.wearapp.wearos.ui.deletetask.DeleteTaskAlertDialog
 import dev.sergiobelda.todometer.wearapp.wearos.ui.progress.FullScreenProgressContent
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.TaskDetailsEvent.UpdateTask
 import dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails.navigation.TaskDetailsNavigationEvent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalWearFoundationApi::class)
 internal data object TaskDetailsContent :
@@ -191,7 +194,7 @@ internal data object TaskDetailsContent :
                 Icon(Images.Icons.Edit, null)
             },
             label = {
-                Text(text = TodometerResources.strings.editTask)
+                Text(text = stringResource(Res.string.edit_task))
             },
             onClick = {
                 val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
@@ -224,10 +227,10 @@ internal data object TaskDetailsContent :
             icon = {
                 Icon(
                     Images.Icons.Delete,
-                    TodometerResources.strings.deleteTask,
+                    stringResource(Res.string.delete_task),
                 )
             },
-            label = { Text(text = TodometerResources.strings.deleteTask) },
+            label = { Text(text = stringResource(Res.string.delete_task)) },
             onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
         )

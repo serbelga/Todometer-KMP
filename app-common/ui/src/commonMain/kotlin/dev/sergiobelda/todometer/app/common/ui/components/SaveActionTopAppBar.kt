@@ -31,7 +31,10 @@ import androidx.compose.ui.unit.dp
 import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.back
+import dev.sergiobelda.todometer.common.resources.save
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +49,7 @@ fun SaveActionTopAppBar(
             IconButton(onClick = navigateBack) {
                 Icon(
                     Images.Icons.NavigateBefore,
-                    contentDescription = TodometerResources.strings.back,
+                    contentDescription = stringResource(Res.string.back),
                 )
             }
         },
@@ -58,11 +61,11 @@ fun SaveActionTopAppBar(
             ) {
                 Icon(
                     Images.Icons.Check,
-                    contentDescription = TodometerResources.strings.save,
+                    contentDescription = stringResource(Res.string.save),
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Text(
-                    text = TodometerResources.strings.save,
+                    text = stringResource(Res.string.save),
                     style = MaterialTheme.typography.bodyMedium,
                 )
             }

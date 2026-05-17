@@ -20,7 +20,12 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.cancel
+import dev.sergiobelda.todometer.common.resources.delete_task
+import dev.sergiobelda.todometer.common.resources.delete_task_question
+import dev.sergiobelda.todometer.common.resources.ok
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DeleteTaskAlertDialog(
@@ -29,11 +34,11 @@ internal fun DeleteTaskAlertDialog(
 ) {
     AlertDialog(
         title = {
-            Text(TodometerResources.strings.deleteTask)
+            Text(stringResource(Res.string.delete_task))
         },
         onDismissRequest = onDismissRequest,
         text = {
-            Text(TodometerResources.strings.deleteTaskQuestion)
+            Text(stringResource(Res.string.delete_task_question))
         },
         confirmButton = {
             TextButton(
@@ -42,12 +47,12 @@ internal fun DeleteTaskAlertDialog(
                     onDismissRequest()
                 },
             ) {
-                Text(TodometerResources.strings.ok)
+                Text(stringResource(Res.string.ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(TodometerResources.strings.cancel)
+                Text(stringResource(Res.string.cancel))
             }
         },
     )

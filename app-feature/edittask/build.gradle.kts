@@ -15,7 +15,6 @@ kotlin {
         namespace = "dev.sergiobelda.todometer.app.feature.edittask"
     }
     jvm()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 

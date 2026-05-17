@@ -69,7 +69,11 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Task
 import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.TaskItem
 import dev.sergiobelda.todometer.common.domain.model.TaskState
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.check_task
+import dev.sergiobelda.todometer.common.resources.delete_task
+import dev.sergiobelda.todometer.common.resources.uncheck_task
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TaskItem(
@@ -153,7 +157,7 @@ private fun TaskItemSwipeableBackgroundContent(state: SwipeToDismissBoxState) {
                 TodometerAnimatedResources.deleteAnimatedVectorPainter(
                     atEnd = state.targetValue == SwipeToDismissBoxValue.StartToEnd,
                 ),
-            contentDescription = TodometerResources.strings.deleteTask,
+            contentDescription = stringResource(Res.string.delete_task),
             tint = MaterialTheme.colorScheme.onErrorContainer,
         )
     }
@@ -324,8 +328,8 @@ private fun taskItemActionIcon(state: TaskState): ImageVector =
 @Composable
 private fun taskItemActionContentDescription(state: TaskState): String =
     when (state) {
-        TaskState.DOING -> TodometerResources.strings.checkTask
-        TaskState.DONE -> TodometerResources.strings.uncheckTask
+        TaskState.DOING -> stringResource(Res.string.check_task)
+        TaskState.DONE -> stringResource(Res.string.uncheck_task)
     }
 
 private val TaskItemBackgroundHorizontalPadding = 16.dp

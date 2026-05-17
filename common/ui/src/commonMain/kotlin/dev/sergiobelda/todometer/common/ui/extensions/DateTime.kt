@@ -19,6 +19,7 @@ package dev.sergiobelda.todometer.common.ui.extensions
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
@@ -38,7 +39,7 @@ fun Long.timeFormat(): String {
 fun Long.dateFormat(): String {
     val localDateTime: LocalDateTime = this.toLocalDateTime()
 
-    return "${localDateTime.dayOfMonth.format(2)}-${localDateTime.monthNumber.format(2)}-${localDateTime.year}"
+    return "${localDateTime.day.format(2)}-${localDateTime.month.number.format(2)}-${localDateTime.year}"
 }
 
 fun Long.localTime(): LocalTime = this.toLocalDateTime().time

@@ -22,9 +22,7 @@ import dev.sergiobelda.todometer.wearapp.wearos.ui.theme.TodometerTheme
 
 @Composable
 internal fun TodometerWearAppPreview(content: @Composable () -> Unit = {}) {
-    ProvideTodometerStrings {
-        TodometerTheme {
-            content.invoke()
-        }
+    TodometerTheme {
+        content.invoke()
     }
 }

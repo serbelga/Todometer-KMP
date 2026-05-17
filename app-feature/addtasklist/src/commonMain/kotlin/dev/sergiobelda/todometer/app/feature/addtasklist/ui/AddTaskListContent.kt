@@ -34,7 +34,11 @@ import dev.sergiobelda.todometer.app.common.designsystem.components.TodometerTit
 import dev.sergiobelda.todometer.app.common.ui.components.SaveActionTopAppBar
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.app.feature.addtasklist.navigation.AddTaskListNavigationEvent
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.add_task_list
+import dev.sergiobelda.todometer.common.resources.enter_task_list_name
+import dev.sergiobelda.todometer.common.resources.name
+import org.jetbrains.compose.resources.stringResource
 
 data object AddTaskListContent : FonamentContent<AddTaskListUIState, AddTaskListContentState>() {
     @Composable
@@ -90,7 +94,7 @@ data object AddTaskListContent : FonamentContent<AddTaskListUIState, AddTaskList
                     AddTaskListNavigationEvent.NavigateBack,
                 )
             },
-            title = TodometerResources.strings.addTaskList,
+            title = stringResource(Res.string.add_task_list),
             isSaveButtonEnabled = isSaveButtonEnabled,
             onSaveButtonClick = onSaveButtonClick,
         )
@@ -109,12 +113,12 @@ data object AddTaskListContent : FonamentContent<AddTaskListUIState, AddTaskList
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
             TodometerTitledTextField(
-                title = TodometerResources.strings.name,
+                title = stringResource(Res.string.name),
                 value = taskListNameValue,
                 onValueChange = {
                     onEvent(AddTaskListEvent.TaskListNameValueChange(it))
                 },
-                placeholder = { Text(TodometerResources.strings.enterTaskListName) },
+                placeholder = { Text(stringResource(Res.string.enter_task_list_name)) },
                 singleLine = true,
                 keyboardOptions =
                     KeyboardOptions(

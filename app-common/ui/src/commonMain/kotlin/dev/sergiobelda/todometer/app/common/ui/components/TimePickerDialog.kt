@@ -21,7 +21,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.cancel
+import dev.sergiobelda.todometer.common.resources.ok
+import dev.sergiobelda.todometer.common.resources.select_time
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TimePickerDialog(
@@ -33,7 +37,7 @@ fun TimePickerDialog(
         onDismissRequest = onDismissRequest,
         title = {
             Text(
-                TodometerResources.strings.selectTime,
+                stringResource(Res.string.select_time),
                 style = MaterialTheme.typography.labelLarge,
             )
         },
@@ -44,14 +48,14 @@ fun TimePickerDialog(
             TextButton(
                 onClick = onDismissRequest,
             ) {
-                Text(TodometerResources.strings.cancel)
+                Text(stringResource(Res.string.cancel))
             }
         },
         confirmButton = {
             TextButton(
                 onClick = onConfirm,
             ) {
-                Text(TodometerResources.strings.ok)
+                Text(stringResource(Res.string.ok))
             }
         },
     )

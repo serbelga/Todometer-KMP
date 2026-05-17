@@ -27,9 +27,7 @@ fun TodometerApp() {
     val navController = rememberSwipeDismissableNavController()
     val navAction = rememberNavAction(navController)
 
-    ProvideTodometerStrings {
-        TodometerTheme {
-            TodometerNavHost(navController = navController, navAction = navAction)
-        }
+    TodometerTheme {
+        TodometerNavHost(navController = navController, navAction = navAction)
     }
 }

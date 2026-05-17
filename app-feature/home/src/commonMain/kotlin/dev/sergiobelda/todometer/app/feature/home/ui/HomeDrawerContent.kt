@@ -45,8 +45,13 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Info
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Settings
 import dev.sergiobelda.todometer.common.domain.model.TaskList
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.about
+import dev.sergiobelda.todometer.common.resources.add_task_list
+import dev.sergiobelda.todometer.common.resources.settings
+import dev.sergiobelda.todometer.common.resources.task_lists
 import kotlinx.collections.immutable.ImmutableList
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun HomeDrawerContent(
@@ -96,7 +101,7 @@ private fun HomeNavigationDrawerSettingsItem(onClick: () -> Unit) {
         },
         label = {
             Text(
-                text = TodometerResources.strings.settings,
+                text = stringResource(Res.string.settings),
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HOME_DRAWER_ITEM_MAX_LINES,
             )
@@ -117,7 +122,7 @@ private fun HomeNavigationDrawerAboutItem(onClick: () -> Unit) {
         },
         label = {
             Text(
-                text = TodometerResources.strings.about,
+                text = stringResource(Res.string.about),
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = HOME_DRAWER_ITEM_MAX_LINES,
             )
@@ -143,12 +148,12 @@ private fun HomeDrawerTaskListsSection(
                 .padding(horizontal = HomeDrawerSectionTitlePaddingHorizontal),
     ) {
         Text(
-            text = TodometerResources.strings.taskLists,
+            text = stringResource(Res.string.task_lists),
             style = MaterialTheme.typography.titleSmall,
         )
         Spacer(modifier = Modifier.weight(1f))
         TextButton(onClick = onAddTaskList) {
-            Text(TodometerResources.strings.addTaskList)
+            Text(stringResource(Res.string.add_task_list))
         }
     }
     LazyColumn(modifier = Modifier.padding(HomeDrawerItemPadding)) {

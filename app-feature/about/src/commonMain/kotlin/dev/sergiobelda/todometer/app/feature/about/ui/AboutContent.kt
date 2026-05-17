@@ -50,7 +50,12 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Code
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Description
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Github
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.NavigateBefore
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.back
+import dev.sergiobelda.todometer.common.resources.github
+import dev.sergiobelda.todometer.common.resources.open_source_licenses
+import dev.sergiobelda.todometer.common.resources.privacy_policy
+import org.jetbrains.compose.resources.stringResource
 
 internal data object AboutContent : FonamentContent<AboutUIState, NoContentState>() {
     @Composable
@@ -86,7 +91,7 @@ internal data object AboutContent : FonamentContent<AboutUIState, NoContentState
                 ) {
                     Icon(
                         Images.Icons.NavigateBefore,
-                        contentDescription = TodometerResources.strings.back,
+                        contentDescription = stringResource(Res.string.back),
                     )
                 }
             },
@@ -136,9 +141,9 @@ private fun AboutItem.icon(): ImageVector =
 @Composable
 private fun AboutItem.text(): String =
     when (this) {
-        AboutItem.GitHub -> TodometerResources.strings.github
-        AboutItem.PrivacyPolicy -> TodometerResources.strings.privacyPolicy
-        AboutItem.OpenSourceLicenses -> TodometerResources.strings.openSourceLicenses
+        AboutItem.GitHub -> stringResource(Res.string.github)
+        AboutItem.PrivacyPolicy -> stringResource(Res.string.privacy_policy)
+        AboutItem.OpenSourceLicenses -> stringResource(Res.string.open_source_licenses)
     }
 
 @Composable

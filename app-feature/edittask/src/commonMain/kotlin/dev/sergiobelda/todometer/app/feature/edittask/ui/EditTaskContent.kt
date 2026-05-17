@@ -43,7 +43,16 @@ import dev.sergiobelda.todometer.app.common.ui.values.SectionPadding
 import dev.sergiobelda.todometer.app.common.ui.values.TextFieldPadding
 import dev.sergiobelda.todometer.app.feature.edittask.navigation.EditTaskNavigationEvent
 import dev.sergiobelda.todometer.common.domain.model.Tag
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.choose_tag
+import dev.sergiobelda.todometer.common.resources.date_time
+import dev.sergiobelda.todometer.common.resources.description
+import dev.sergiobelda.todometer.common.resources.edit_task
+import dev.sergiobelda.todometer.common.resources.enter_description
+import dev.sergiobelda.todometer.common.resources.enter_task_name
+import dev.sergiobelda.todometer.common.resources.field_not_empty
+import dev.sergiobelda.todometer.common.resources.name
+import org.jetbrains.compose.resources.stringResource
 
 data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentState>() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -134,7 +143,7 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
         SaveActionTopAppBar(
             navigateBack = { onEvent(EditTaskNavigationEvent.NavigateBack) },
             isSaveButtonEnabled = isSaveButtonEnabled,
-            title = TodometerResources.strings.editTask,
+            title = stringResource(Res.string.edit_task),
             onSaveButtonClick = onSaveButtonClick,
         )
     }
@@ -149,11 +158,11 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
     ) {
         Column(modifier = modifier) {
             TodometerTitledTextField(
-                title = TodometerResources.strings.name,
+                title = stringResource(Res.string.name),
                 value = title,
                 onValueChange = { onEvent(EditTaskEvent.TitleValueChange(it)) },
-                placeholder = { Text(TodometerResources.strings.enterTaskName) },
-                errorMessage = TodometerResources.strings.fieldNotEmpty,
+                placeholder = { Text(stringResource(Res.string.enter_task_name)) },
+                errorMessage = stringResource(Res.string.field_not_empty),
                 keyboardOptions =
                     KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,
@@ -162,7 +171,7 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
                 modifier = Modifier.padding(TextFieldPadding),
             )
             Text(
-                text = TodometerResources.strings.chooseTag.addStyledOptionalSuffix(),
+                text = stringResource(Res.string.choose_tag).addStyledOptionalSuffix(),
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(horizontal = SectionPadding),
@@ -172,7 +181,7 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
                 onTagSelected = { onEvent(EditTaskEvent.SelectTag(it)) },
             )
             Text(
-                text = TodometerResources.strings.dateTime.addStyledOptionalSuffix(),
+                text = stringResource(Res.string.date_time).addStyledOptionalSuffix(),
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(horizontal = SectionPadding),
@@ -185,10 +194,10 @@ data object EditTaskContent : FonamentContent<EditTaskUIState, EditTaskContentSt
                 onClearDateTimeClick = { onEvent(EditTaskEvent.ClearDateTime) },
             )
             TodometerTitledTextField(
-                title = TodometerResources.strings.description.addStyledOptionalSuffix(),
+                title = stringResource(Res.string.description).addStyledOptionalSuffix(),
                 value = description,
                 onValueChange = { onEvent(EditTaskEvent.DescriptionValueChange(it)) },
-                placeholder = { Text(TodometerResources.strings.enterDescription) },
+                placeholder = { Text(stringResource(Res.string.enter_description)) },
                 keyboardOptions =
                     KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences,

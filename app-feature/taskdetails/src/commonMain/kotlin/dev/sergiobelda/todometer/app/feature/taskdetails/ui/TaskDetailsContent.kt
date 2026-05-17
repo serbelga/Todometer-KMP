@@ -69,8 +69,18 @@ import dev.sergiobelda.todometer.common.domain.model.Tag
 import dev.sergiobelda.todometer.common.domain.model.Task
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItem
 import dev.sergiobelda.todometer.common.domain.model.TaskChecklistItemState
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.add_element
+import dev.sergiobelda.todometer.common.resources.back
+import dev.sergiobelda.todometer.common.resources.checklist
+import dev.sergiobelda.todometer.common.resources.clear
+import dev.sergiobelda.todometer.common.resources.description
+import dev.sergiobelda.todometer.common.resources.edit_task
+import dev.sergiobelda.todometer.common.resources.no_description
+import dev.sergiobelda.todometer.common.resources.not_pinned_task
+import dev.sergiobelda.todometer.common.resources.pinned_task
 import kotlinx.collections.immutable.ImmutableList
+import org.jetbrains.compose.resources.stringResource
 
 data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetailsContentState>() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -168,7 +178,7 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
                 ) {
                     Icon(
                         Images.Icons.NavigateBefore,
-                        contentDescription = TodometerResources.strings.back,
+                        contentDescription = stringResource(Res.string.back),
                     )
                 }
             },
@@ -183,9 +193,9 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
                             },
                         contentDescription =
                             if (taskIsPinned) {
-                                TodometerResources.strings.pinnedTask
+                                stringResource(Res.string.pinned_task)
                             } else {
-                                TodometerResources.strings.notPinnedTask
+                                stringResource(Res.string.not_pinned_task)
                             },
                         tint = MaterialTheme.colorScheme.primary,
                     )
@@ -197,7 +207,7 @@ data object TaskDetailsContent : FonamentContent<TaskDetailsUIState, TaskDetails
                 ) {
                     Icon(
                         Images.Icons.Edit,
-                        contentDescription = TodometerResources.strings.editTask,
+                        contentDescription = stringResource(Res.string.edit_task),
                         tint = MaterialTheme.colorScheme.primary,
                     )
                 }
@@ -288,7 +298,7 @@ private fun LazyListScope.taskChecklist(
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(TodometerResources.strings.checklist)
+        TaskDetailSectionTitle(stringResource(Res.string.checklist))
     }
     items(
         taskChecklistItems,
@@ -307,7 +317,7 @@ private fun LazyListScope.taskChecklist(
         AddChecklistItemField(
             onAddTaskCheckListItem = onAddTaskCheckListItem,
         ) {
-            Text(TodometerResources.strings.addElement)
+            Text(stringResource(Res.string.add_element))
         }
     }
     item { TodometerDivider() }
@@ -359,7 +369,7 @@ private inline fun LazyItemScope.TaskChecklistItem(
         IconButton(onClick = { onDeleteTaskCheckListItem(taskChecklistItem.id) }) {
             Icon(
                 Images.Icons.Close,
-                contentDescription = TodometerResources.strings.clear,
+                contentDescription = stringResource(Res.string.clear),
                 tint = MaterialTheme.colorScheme.onSurface.applyMediumEmphasisAlpha(),
             )
         }
@@ -371,7 +381,7 @@ private fun LazyListScope.taskDescription(description: String?) {
         Spacer(modifier = Modifier.height(24.dp))
     }
     item {
-        TaskDetailSectionTitle(TodometerResources.strings.description)
+        TaskDetailSectionTitle(stringResource(Res.string.description))
     }
     item {
         if (!description.isNullOrBlank()) {
@@ -387,7 +397,7 @@ private fun LazyListScope.taskDescription(description: String?) {
             )
         } else {
             Text(
-                text = TodometerResources.strings.noDescription,
+                text = stringResource(Res.string.no_description),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier =
                     Modifier.padding(

@@ -26,7 +26,10 @@ import dev.sergiobelda.todometer.common.designsystem.resources.images.Images
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Check
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Close
 import dev.sergiobelda.todometer.common.designsystem.resources.images.icons.Delete
-import dev.sergiobelda.todometer.common.resources.TodometerResources
+import dev.sergiobelda.todometer.common.resources.Res
+import dev.sergiobelda.todometer.common.resources.delete_task_list
+import dev.sergiobelda.todometer.common.resources.delete_task_list_question
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DeleteTaskListAlertDialog(
@@ -37,11 +40,11 @@ internal fun DeleteTaskListAlertDialog(
         icon = {
             Icon(
                 Images.Icons.Delete,
-                TodometerResources.strings.deleteTaskList,
+                stringResource(Res.string.delete_task_list),
             )
         },
         title = {},
-        content = { Text(TodometerResources.strings.deleteTaskListQuestion) },
+        content = { Text(stringResource(Res.string.delete_task_list_question)) },
         positiveButton = {
             Button(
                 onClick = onDeleteTaskList,

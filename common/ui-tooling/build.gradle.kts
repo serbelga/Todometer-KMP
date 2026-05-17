@@ -13,7 +13,6 @@ kotlin {
         namespace = "dev.sergiobelda.todometer.common.ui.tooling"
     }
     jvm()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 

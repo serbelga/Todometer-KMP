@@ -12,7 +12,7 @@ androidWearTargetSdk = "33"
 appcompat = "1.7.1"
 baselineprofile = "1.5.0-alpha06"
 benchmark = "1.5.0-alpha06"
-composeMultiplatform = "1.10.3"
+composeMultiplatform = "1.11.0"
 composeMultiplatformMaterial3 = "1.9.0"
 composeVectorize = "1.2.0"
 dataStore = "1.2.1"
@@ -103,6 +103,7 @@ google-ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugi
 jetbrains-androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "jetbrainsNavigation" }
 
 jetbrains-compose-animationGraphics = { module = "org.jetbrains.compose.animation:animation-graphics", version.ref = "composeMultiplatform" }
+jetbrains-compose-componentsResources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeMultiplatform" }
 jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 jetbrains-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMultiplatformMaterial3" }
 jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
