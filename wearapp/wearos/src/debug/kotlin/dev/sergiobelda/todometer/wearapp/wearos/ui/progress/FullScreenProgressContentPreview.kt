@@ -17,10 +17,13 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.progress
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
+import androidx.compose.ui.tooling.preview.PreviewWrapper
+import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun FullScreenProgressContentPreview() {
     FullScreenProgressContent()
 }

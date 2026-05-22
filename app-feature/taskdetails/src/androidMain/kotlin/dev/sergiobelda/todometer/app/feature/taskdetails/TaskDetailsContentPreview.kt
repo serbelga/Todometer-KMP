@@ -18,11 +18,12 @@ package dev.sergiobelda.todometer.app.feature.taskdetails
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreviewWrapper
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsContent
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.TaskDetailsUIState
 import dev.sergiobelda.todometer.app.feature.taskdetails.ui.rememberTaskDetailsContentState
@@ -39,52 +40,49 @@ import kotlinx.collections.immutable.persistentListOf
 @PreviewLightDark
 @PreviewLandscape
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun TaskDetailsContentPreview() {
-    TodometerAppPreview {
-        TaskDetailsContent(
-            uiState =
-                TaskDetailsUIState(
-                    task = taskSample,
-                    taskChecklistItems = taskChecklistItemsSample,
-                ),
-            contentState = rememberTaskDetailsContentState(),
-        )
-    }
+    TaskDetailsContent(
+        uiState =
+            TaskDetailsUIState(
+                task = taskSample,
+                taskChecklistItems = taskChecklistItemsSample,
+            ),
+        contentState = rememberTaskDetailsContentState(),
+    )
 }
 
 @Preview
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun TaskDetailsLoadingPreview() {
-    TodometerAppPreview {
-        TaskDetailsContent(
-            uiState =
-                TaskDetailsUIState(
-                    isLoadingTask = true,
-                ),
-            contentState = rememberTaskDetailsContentState(),
-        )
-    }
+    TaskDetailsContent(
+        uiState =
+            TaskDetailsUIState(
+                isLoadingTask = true,
+            ),
+        contentState = rememberTaskDetailsContentState(),
+    )
 }
 
 @Preview
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun TaskDetailsDeltaPreview() {
-    TodometerAppPreview {
-        TaskDetailsContent(
-            uiState =
-                TaskDetailsUIState(
-                    task =
-                        taskSample.copy(
-                            title = LoremIpsum(30).values.first(),
-                            isPinned = true,
-                            tag = Tag.UNSPECIFIED,
-                            dueDate = getYesterdayEpochMilliseconds(),
-                            description = "",
-                        ),
-                ),
-            contentState = rememberTaskDetailsContentState(),
-        )
-    }
+    TaskDetailsContent(
+        uiState =
+            TaskDetailsUIState(
+                task =
+                    taskSample.copy(
+                        title = LoremIpsum(30).values.first(),
+                        isPinned = true,
+                        tag = Tag.UNSPECIFIED,
+                        dueDate = getYesterdayEpochMilliseconds(),
+                        description = "",
+                    ),
+            ),
+        contentState = rememberTaskDetailsContentState(),
+    )
 }
 
 private val taskSample =

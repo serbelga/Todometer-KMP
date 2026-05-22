@@ -17,11 +17,14 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.PreviewWrapperProvider
 import dev.sergiobelda.todometer.wearapp.wearos.ui.theme.TodometerTheme
 
-@Composable
-internal fun TodometerWearAppPreview(content: @Composable () -> Unit = {}) {
-    TodometerTheme {
-        content.invoke()
+class TodometerWearAppPreview : PreviewWrapperProvider {
+    @Composable
+    override fun Wrap(content: @Composable (() -> Unit)) {
+        TodometerTheme {
+            content.invoke()
+        }
     }
 }

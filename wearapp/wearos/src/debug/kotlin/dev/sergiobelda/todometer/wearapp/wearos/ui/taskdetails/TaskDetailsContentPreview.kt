@@ -17,46 +17,44 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.taskdetails
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
+import androidx.compose.ui.tooling.preview.PreviewWrapper
+import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.WearPreviewLocales
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.util.taskSample
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun TaskDetailsLoadingPreview() {
-    TodometerWearAppPreview {
-        TaskDetailsContent(
-            uiState = TaskDetailsUIState.Loading,
-            contentState = rememberTaskDetailsContentState(),
-        )
-    }
+    TaskDetailsContent(
+        uiState = TaskDetailsUIState.Loading,
+        contentState = rememberTaskDetailsContentState(),
+    )
 }
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun TaskDetailsContentPreview() {
-    TodometerWearAppPreview {
-        TaskDetailsContent(
-            uiState =
-                TaskDetailsUIState.Success(
-                    task = taskSample,
-                ),
-            contentState = rememberTaskDetailsContentState(),
-        )
-    }
+    TaskDetailsContent(
+        uiState =
+            TaskDetailsUIState.Success(
+                task = taskSample,
+            ),
+        contentState = rememberTaskDetailsContentState(),
+    )
 }
 
-@PreviewWearLocales
+@WearPreviewLocales
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun TaskDetailsContentLocalesPreview() {
-    TodometerWearAppPreview {
-        TaskDetailsContent(
-            uiState =
-                TaskDetailsUIState.Success(
-                    task = taskSample,
-                ),
-            contentState = rememberTaskDetailsContentState(),
-        )
-    }
+    TaskDetailsContent(
+        uiState =
+            TaskDetailsUIState.Success(
+                task = taskSample,
+            ),
+        contentState = rememberTaskDetailsContentState(),
+    )
 }

@@ -17,50 +17,48 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.home
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
+import androidx.compose.ui.tooling.preview.PreviewWrapper
+import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.WearPreviewLocales
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.util.taskListSample
 import kotlinx.collections.immutable.persistentListOf
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 fun HomeContentLoadingPreview() {
-    TodometerWearAppPreview {
-        HomeContent(
-            uiState = HomeUIState.Loading,
-            contentState = rememberHomeContentState(),
-        )
-    }
+    HomeContent(
+        uiState = HomeUIState.Loading,
+        contentState = rememberHomeContentState(),
+    )
 }
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 fun HomeContentPreview() {
-    TodometerWearAppPreview {
-        HomeContent(
-            uiState =
-                HomeUIState.Success(
-                    taskLists =
-                        persistentListOf(
-                            taskListSample,
-                        ),
-                ),
-            contentState = rememberHomeContentState(),
-        )
-    }
+    HomeContent(
+        uiState =
+            HomeUIState.Success(
+                taskLists =
+                    persistentListOf(
+                        taskListSample,
+                    ),
+            ),
+        contentState = rememberHomeContentState(),
+    )
 }
 
-@PreviewWearLocales
+@WearPreviewLocales
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 fun HomeContentLocalesPreview() {
-    TodometerWearAppPreview {
-        HomeContent(
-            uiState =
-                HomeUIState.Success(
-                    taskLists = persistentListOf(),
-                ),
-            contentState = rememberHomeContentState(),
-        )
-    }
+    HomeContent(
+        uiState =
+            HomeUIState.Success(
+                taskLists = persistentListOf(),
+            ),
+        contentState = rememberHomeContentState(),
+    )
 }
