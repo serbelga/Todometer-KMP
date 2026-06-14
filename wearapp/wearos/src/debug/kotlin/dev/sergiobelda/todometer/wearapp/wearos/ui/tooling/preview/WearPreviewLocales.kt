@@ -21,10 +21,41 @@ import androidx.wear.tooling.preview.devices.WearDevices
 
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
-@Preview(name = "English - Small Round", group = "Language", locale = "en", device = WearDevices.SMALL_ROUND)
-@Preview(name = "Spanish - Small Round", group = "Language", locale = "es", device = WearDevices.SMALL_ROUND)
-@Preview(name = "Catalan - Small Round", group = "Language", locale = "ca", device = WearDevices.SMALL_ROUND)
-@Preview(name = "English - Large Round", group = "Language", locale = "en", device = WearDevices.LARGE_ROUND)
-@Preview(name = "Spanish - Large Round", group = "Language", locale = "es", device = WearDevices.LARGE_ROUND)
-@Preview(name = "Catalan - Large Round", group = "Language", locale = "ca", device = WearDevices.LARGE_ROUND)
-annotation class PreviewWearLocales
+@Preview(
+    name = "English - Small Round",
+    group = "Language",
+    locale = "en",
+    device = WearDevices.SMALL_ROUND,
+)
+@Preview(
+    name = "Spanish - Small Round",
+    group = "Language",
+    locale = "es",
+    device = WearDevices.SMALL_ROUND,
+)
+@Preview(
+    name = "Catalan - Small Round",
+    group = "Language",
+    locale = "ca",
+    device = WearDevices.SMALL_ROUND,
+)
+@Preview(
+    name = "English - Large Round",
+    group = "Language",
+    locale = "en",
+    device = WearDevices.LARGE_ROUND,
+)
+@Preview(
+    name = "Spanish - Large Round",
+    group = "Language",
+    locale = "es",
+    device = WearDevices.LARGE_ROUND,
+)
+@Preview(
+    name = "Catalan - Large Round",
+    group = "Language",
+    locale = "ca",
+    device = WearDevices.LARGE_ROUND,
+)
+@Preview
+annotation class WearPreviewLocales

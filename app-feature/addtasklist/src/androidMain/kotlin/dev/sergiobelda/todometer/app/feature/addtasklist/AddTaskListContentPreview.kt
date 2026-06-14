@@ -17,10 +17,11 @@
 package dev.sergiobelda.todometer.app.feature.addtasklist
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.PreviewWrapper
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreviewWrapper
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListContent
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.AddTaskListUIState
 import dev.sergiobelda.todometer.app.feature.addtasklist.ui.rememberAddTaskListContentState
@@ -29,11 +30,10 @@ import dev.sergiobelda.todometer.app.feature.addtasklist.ui.rememberAddTaskListC
 @PreviewLightDark
 @PreviewLandscape
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun AddTaskListContentPreview() {
-    TodometerAppPreview {
-        AddTaskListContent(
-            uiState = AddTaskListUIState(),
-            contentState = rememberAddTaskListContentState(),
-        )
-    }
+    AddTaskListContent(
+        uiState = AddTaskListUIState(),
+        contentState = rememberAddTaskListContentState(),
+    )
 }

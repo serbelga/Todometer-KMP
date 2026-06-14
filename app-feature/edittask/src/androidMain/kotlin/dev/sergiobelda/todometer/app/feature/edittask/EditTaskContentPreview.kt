@@ -18,11 +18,12 @@ package dev.sergiobelda.todometer.app.feature.edittask
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLandscape
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLightDark
 import dev.sergiobelda.todometer.app.common.ui.tooling.preview.PreviewLocales
-import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreview
+import dev.sergiobelda.todometer.app.common.ui.tooling.preview.TodometerAppPreviewWrapper
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskContent
 import dev.sergiobelda.todometer.app.feature.edittask.ui.EditTaskUIState
 import dev.sergiobelda.todometer.app.feature.edittask.ui.rememberEditTaskContentState
@@ -35,40 +36,39 @@ import dev.sergiobelda.todometer.common.ui.tooling.getTomorrowEpochMilliseconds
 @PreviewLightDark
 @PreviewLandscape
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun EditTaskContentPreview() {
-    TodometerAppPreview {
-        EditTaskContent(
-            uiState =
-                EditTaskUIState(
-                    task = taskSample,
-                ),
-            contentState =
-                rememberEditTaskContentState(
-                    taskSample,
-                ),
-        )
-    }
+    EditTaskContent(
+        uiState =
+            EditTaskUIState(
+                task = taskSample,
+            ),
+        contentState =
+            rememberEditTaskContentState(
+                taskSample,
+            ),
+    )
 }
 
 @Preview
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun EditTaskLoadingPreview() {
-    TodometerAppPreview {
-        EditTaskContent(
-            uiState =
-                EditTaskUIState(
-                    isLoading = true,
-                ),
-            contentState =
-                rememberEditTaskContentState(
-                    taskSample,
-                ),
-        )
-    }
+    EditTaskContent(
+        uiState =
+            EditTaskUIState(
+                isLoading = true,
+            ),
+        contentState =
+            rememberEditTaskContentState(
+                taskSample,
+            ),
+    )
 }
 
 @Preview
 @Composable
+@PreviewWrapper(TodometerAppPreviewWrapper::class)
 fun EditTaskDeltaPreview() {
     val taskDelta =
         taskSample.copy(
@@ -77,18 +77,16 @@ fun EditTaskDeltaPreview() {
             dueDate = null,
             description = null,
         )
-    TodometerAppPreview {
-        EditTaskContent(
-            uiState =
-                EditTaskUIState(
-                    task = taskDelta,
-                ),
-            contentState =
-                rememberEditTaskContentState(
-                    taskDelta,
-                ),
-        )
-    }
+    EditTaskContent(
+        uiState =
+            EditTaskUIState(
+                task = taskDelta,
+            ),
+        contentState =
+            rememberEditTaskContentState(
+                taskDelta,
+            ),
+    )
 }
 
 private val taskSample =

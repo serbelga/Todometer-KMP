@@ -66,7 +66,9 @@ dependencies {
     implementation(libs.androidx.wear.compose.foundation)
     implementation(libs.androidx.wear.compose.material)
     implementation(libs.androidx.wear.compose.navigation)
+    implementation(libs.androidx.wear.compose.uiTooling)
     implementation(libs.androidx.wear.input)
+    implementation(libs.androidx.wear.tooling.preview)
     implementation(libs.androidx.wear.wear)
 
     implementation(libs.jetbrains.kotlin.collections.immutable)
@@ -82,6 +84,4 @@ dependencies {
 
     implementation(libs.sergiobelda.fonament.presentation)
     implementation(libs.sergiobelda.fonament.presentationDiKoin)
-
-    implementation(libs.androidx.wear.tooling.preview)
 }

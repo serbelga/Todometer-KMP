@@ -17,28 +17,27 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.deletetasklist
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
+import androidx.compose.ui.tooling.preview.PreviewWrapper
+import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.WearPreviewLocales
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun DeleteTaskListAlertDialogPreview() {
-    TodometerWearAppPreview {
-        DeleteTaskListAlertDialog(
-            onDeleteTaskList = {},
-            onCancel = {},
-        )
-    }
+    DeleteTaskListAlertDialog(
+        onDeleteTaskList = {},
+        onCancel = {},
+    )
 }
 
-@PreviewWearLocales
+@WearPreviewLocales
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun DeleteTaskListAlertDialogPreviewLocales() {
-    TodometerWearAppPreview {
-        DeleteTaskListAlertDialog(
-            onDeleteTaskList = {},
-            onCancel = {},
-        )
-    }
+    DeleteTaskListAlertDialog(
+        onDeleteTaskList = {},
+        onCancel = {},
+    )
 }

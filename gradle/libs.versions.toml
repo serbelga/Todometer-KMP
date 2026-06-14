@@ -48,7 +48,7 @@ spotless = "8.6.0"
 sqlDelight = "2.3.2"
 uiautomator = "2.3.0"
 wear = "1.4.0"
-wearCompose = "1.6.1"
+wearCompose = "1.6.2"
 wearInput = "1.2.0"
 wearToolingPreview = "1.0.0"
 work = "2.11.2"
@@ -81,6 +81,7 @@ androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiaut
 androidx-wear-compose-foundation = { module = "androidx.wear.compose:compose-foundation", version.ref = "wearCompose" }
 androidx-wear-compose-material = { module = "androidx.wear.compose:compose-material", version.ref = "wearCompose" }
 androidx-wear-compose-navigation = { module = "androidx.wear.compose:compose-navigation", version.ref = "wearCompose" }
+androidx-wear-compose-uiTooling = { module = "androidx.wear.compose:compose-ui-tooling", version.ref = "wearCompose" }
 androidx-wear-input = { module = "androidx.wear:wear-input", version.ref = "wearInput" }
 androidx-wear-tooling-preview = { module = "androidx.wear:wear-tooling-preview", version.ref = "wearToolingPreview" }
 androidx-wear-wear = { module = "androidx.wear:wear", version.ref = "wear" }

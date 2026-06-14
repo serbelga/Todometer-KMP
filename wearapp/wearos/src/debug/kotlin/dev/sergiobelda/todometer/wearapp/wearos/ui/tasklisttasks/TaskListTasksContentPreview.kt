@@ -17,68 +17,66 @@
 package dev.sergiobelda.todometer.wearapp.wearos.ui.tasklisttasks
 
 import androidx.compose.runtime.Composable
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearDevices
-import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.PreviewWearLocales
+import androidx.compose.ui.tooling.preview.PreviewWrapper
+import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.TodometerWearAppPreview
+import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.preview.WearPreviewLocales
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.util.taskItemSample
 import dev.sergiobelda.todometer.wearapp.wearos.ui.tooling.util.taskListSample
 import kotlinx.collections.immutable.persistentListOf
 
-@PreviewWearDevices
+@WearPreviewDevices
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun TaskListTasksContentLoadingPreview() {
-    TodometerWearAppPreview {
-        TaskListTasksContent(
-            uiState =
-                TaskListTasksUIState(
-                    taskListUIState = TaskListUIState.Loading,
-                    tasksUIState = TasksUIState.Loading,
-                ),
-            contentState = rememberTaskListTasksContentState(),
-        )
-    }
+    TaskListTasksContent(
+        uiState =
+            TaskListTasksUIState(
+                taskListUIState = TaskListUIState.Loading,
+                tasksUIState = TasksUIState.Loading,
+            ),
+        contentState = rememberTaskListTasksContentState(),
+    )
 }
 
-@PreviewWearDevices
-@PreviewWearLocales
+@WearPreviewDevices
+@WearPreviewLocales
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun TaskListTasksContentDefaultTaskListPreview() {
-    TodometerWearAppPreview {
-        TaskListTasksContent(
-            uiState =
-                TaskListTasksUIState(
-                    taskListUIState = TaskListUIState.DefaultTaskList,
-                    tasksUIState =
-                        TasksUIState.Success(
-                            tasks = persistentListOf(),
-                        ),
-                ),
-            contentState = rememberTaskListTasksContentState(),
-        )
-    }
+    TaskListTasksContent(
+        uiState =
+            TaskListTasksUIState(
+                taskListUIState = TaskListUIState.DefaultTaskList,
+                tasksUIState =
+                    TasksUIState.Success(
+                        tasks = persistentListOf(),
+                    ),
+            ),
+        contentState = rememberTaskListTasksContentState(),
+    )
 }
 
-@PreviewWearDevices
-@PreviewWearLocales
+@WearPreviewDevices
+@WearPreviewLocales
 @Composable
+@PreviewWrapper(TodometerWearAppPreview::class)
 private fun TaskListTasksContentPreview() {
-    TodometerWearAppPreview {
-        TaskListTasksContent(
-            uiState =
-                TaskListTasksUIState(
-                    taskListUIState =
-                        TaskListUIState.Success(
-                            taskList = taskListSample,
-                        ),
-                    tasksUIState =
-                        TasksUIState.Success(
-                            tasks =
-                                persistentListOf(
-                                    taskItemSample,
-                                ),
-                        ),
-                ),
-            contentState = rememberTaskListTasksContentState(),
-        )
-    }
+    TaskListTasksContent(
+        uiState =
+            TaskListTasksUIState(
+                taskListUIState =
+                    TaskListUIState.Success(
+                        taskList = taskListSample,
+                    ),
+                tasksUIState =
+                    TasksUIState.Success(
+                        tasks =
+                            persistentListOf(
+                                taskItemSample,
+                            ),
+                    ),
+            ),
+        contentState = rememberTaskListTasksContentState(),
+    )
 }
