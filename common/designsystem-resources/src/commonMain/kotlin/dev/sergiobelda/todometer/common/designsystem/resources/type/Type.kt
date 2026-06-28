@@ -32,10 +32,11 @@ internal val quickSandSemiBoldFont @Composable get() = Font(Res.font.quicksand_s
 internal val quickSandBoldFont @Composable get() = Font(Res.font.quicksand_semi_bold, FontWeight.Bold)
 
 val quickSandFontFamily
-    @Composable get() = FontFamily(
-        quickSandLightFont,
-        quickSandRegularFont,
-        quickSandMediumFont,
-        quickSandSemiBoldFont,
-        quickSandBoldFont,
-    )
+    @Composable get() =
+        FontFamily(
+            quickSandLightFont,
+            quickSandRegularFont,
+            quickSandMediumFont,
+            quickSandSemiBoldFont,
+            quickSandBoldFont,
+        )
