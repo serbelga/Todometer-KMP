@@ -46,3 +46,8 @@ composeVectorize {
 
 // Workaround to be able to run macrobenchmark tests - Update compose-vectorize if necessary.
 tasks["generateImages"].mustRunAfter("prepareAndroidMainArtProfile")
+
+compose.resources {
+    packageOfResClass = "dev.sergiobelda.todometer.common.designsystem.resources"
+    generateResClass = always
+}
