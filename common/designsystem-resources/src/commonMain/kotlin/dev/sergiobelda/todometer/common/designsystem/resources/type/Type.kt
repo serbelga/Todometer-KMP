@@ -16,6 +16,26 @@
 
 package dev.sergiobelda.todometer.common.designsystem.resources.type
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import org.jetbrains.compose.resources.Font
+import todometer_kmp.common.designsystem_resources.generated.resources.Res
+import todometer_kmp.common.designsystem_resources.generated.resources.quicksand_medium
+import todometer_kmp.common.designsystem_resources.generated.resources.quicksand_regular
+import todometer_kmp.common.designsystem_resources.generated.resources.quicksand_semi_bold
 
-expect val quickSandFontFamily: FontFamily
+internal val quickSandLightFont @Composable get() = Font(Res.font.quicksand_regular, FontWeight.Light)
+internal val quickSandRegularFont @Composable get() = Font(Res.font.quicksand_regular, FontWeight.Normal)
+internal val quickSandMediumFont @Composable get() = Font(Res.font.quicksand_medium, FontWeight.Medium)
+internal val quickSandSemiBoldFont @Composable get() = Font(Res.font.quicksand_semi_bold, FontWeight.SemiBold)
+internal val quickSandBoldFont @Composable get() = Font(Res.font.quicksand_semi_bold, FontWeight.Bold)
+
+val quickSandFontFamily
+    @Composable get() = FontFamily(
+        quickSandLightFont,
+        quickSandRegularFont,
+        quickSandMediumFont,
+        quickSandSemiBoldFont,
+        quickSandBoldFont,
+    )
