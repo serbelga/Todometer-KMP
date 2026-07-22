@@ -25,6 +25,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.jetbrains.compose.componentsResources)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.ui)
             implementation(libs.sergiobelda.composeVectorize.core)
@@ -45,3 +46,8 @@ composeVectorize {
 
 // Workaround to be able to run macrobenchmark tests - Update compose-vectorize if necessary.
 tasks["generateImages"].mustRunAfter("prepareAndroidMainArtProfile")
+
+compose.resources {
+    packageOfResClass = "dev.sergiobelda.todometer.common.designsystem.resources"
+    generateResClass = always
+}
