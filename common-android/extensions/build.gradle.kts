@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(deps.plugins.android.library)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
 }
@@ -17,9 +17,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activityCompose)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.coreKtx)
-    implementation(libs.androidx.profileinstaller)
-    implementation(libs.jetbrains.kotlin.coroutines.guava)
+    implementation(deps.androidx.activityCompose)
+    implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.profileinstaller)
+    implementation(deps.jetbrains.kotlinx.coroutines.guava)
 }

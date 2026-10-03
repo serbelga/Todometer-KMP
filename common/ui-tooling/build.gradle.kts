@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
@@ -18,8 +18,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(libs.jetbrains.compose.uiToolingPreview)
-            implementation(libs.jetbrains.kotlin.datetime)
+            api(deps.jetbrains.compose.uiToolingPreview)
+            implementation(deps.jetbrains.kotlinx.datetime)
         }
     }
 }

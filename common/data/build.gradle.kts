@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
@@ -22,19 +22,19 @@ kotlin {
             implementation(projects.common.database)
             implementation(libs.sergiobelda.fonament.preferences)
 
-            implementation(libs.jetbrains.kotlin.coroutines.core)
+            implementation(deps.jetbrains.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
-            implementation(libs.jetbrains.kotlin.coroutines.test)
-            implementation(libs.mockk.common)
+            implementation(deps.jetbrains.kotlinx.coroutines.test)
+            implementation(deps.mockk.common)
             implementation(kotlin("test"))
         }
         getByName("androidHostTest").dependencies {
-            implementation(libs.junit)
-            implementation(libs.mockk.mockk)
+            implementation(deps.junit)
+            implementation(deps.mockk.mockk)
         }
         jvmTest.dependencies {
-            implementation(libs.mockk.mockk)
+            implementation(deps.mockk.mockk)
         }
 
         all {

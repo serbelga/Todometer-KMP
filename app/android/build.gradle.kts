@@ -1,16 +1,16 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(deps.plugins.android.application)
     alias(libs.plugins.androidx.baselineprofile)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
 }
 
 if (file("google-services.json").exists()) {
-    apply(plugin = libs.plugins.google.firebaseCrashlytics.get().pluginId)
+    apply(plugin = deps.plugins.google.firebase.crashlytics.get().pluginId)
     apply(plugin = libs.plugins.google.firebasePerf.get().pluginId)
-    apply(plugin = libs.plugins.google.services.get().pluginId)
+    apply(plugin = deps.plugins.google.gms.services.get().pluginId)
 }
 
 android {
@@ -73,20 +73,20 @@ dependencies {
     implementation(projects.app.shared)
     implementation(projects.commonAndroid.resources)
 
-    implementation(libs.androidx.glance.appWidget)
-    implementation(libs.androidx.glance.glance)
-    implementation(libs.androidx.glance.material3)
+    implementation(deps.androidx.glance.appWidget)
+    implementation(deps.androidx.glance.glance)
+    implementation(deps.androidx.glance.material3)
     implementation(libs.androidx.work.runtime)
 
-    implementation(libs.google.playServicesOssLicenses)
+    implementation(deps.google.gms.playServicesOssLicenses)
 
-    implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-    implementation(libs.google.firebase.firebaseAnalytics)
-    implementation(libs.google.firebase.firebaseCrashlytics)
+    implementation(project.dependencies.platform(deps.google.firebase.bom))
+    implementation(deps.google.firebase.analytics)
+    implementation(deps.google.firebase.crashlytics)
     implementation(libs.google.firebase.firebasePerf)
 
     baselineProfile(projects.macrobenchmark)
-    implementation(libs.androidx.profileinstaller)
+    implementation(deps.androidx.profileinstaller)
     "demoImplementation"(projects.commonAndroid.demoDatabase)
 }
 

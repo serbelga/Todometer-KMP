@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
 }
@@ -44,10 +44,10 @@ kotlin {
         androidMain.dependencies {
             implementation(projects.commonAndroid.extensions)
 
-            implementation(libs.androidx.activityCompose)
-            implementation(libs.androidx.splashscreen)
+            implementation(deps.androidx.activityCompose)
+            implementation(deps.androidx.core.splashscreen)
 
-            implementation(libs.google.playServicesOssLicenses)
+            implementation(deps.google.gms.playServicesOssLicenses)
         }
 
         all {

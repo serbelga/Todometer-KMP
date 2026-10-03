@@ -1,5 +1,6 @@
 package dev.sergiobelda.gradle.buildlogic.convention.multiplatform.ui
 
+import dev.sergiobelda.gradle.buildlogic.convention.extensions.deps
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.pluginId
 import org.gradle.api.Plugin
@@ -15,7 +16,7 @@ class CommonUiConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("google-ksp").pluginId)
+                apply(deps.findPlugin("google-ksp").pluginId)
             }
 
             val navigationComposeExtendedCompiler =
@@ -42,7 +43,7 @@ class CommonUiConventionPlugin : Plugin<Project> {
 
                 sourceSets.apply {
                     commonMain.dependencies {
-                        implementation(libs.findLibrary("jetbrains-kotlin-collections-immutable").get())
+                        implementation(deps.findLibrary("jetbrains-kotlinx-collections-immutable").get())
                         implementation(libs.findLibrary("sergiobelda-fonament-presentation").get())
                         implementation(libs.findLibrary("sergiobelda-fonament-presentationDiKoin").get())
                     }

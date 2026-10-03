@@ -1,6 +1,7 @@
 package dev.sergiobelda.gradle.buildlogic.convention.multiplatform.android
 
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
+import dev.sergiobelda.gradle.buildlogic.convention.extensions.deps
 import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,7 +14,7 @@ class CommonLibraryAndroidConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("android-kotlinMultiplatformLibrary").get().get().pluginId)
+                apply(deps.findPlugin("android-kotlinMultiplatformLibrary").get().get().pluginId)
             }
 
             val extension = extensions.getByType<KotlinMultiplatformExtension>()

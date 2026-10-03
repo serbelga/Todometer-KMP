@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(libs.plugins.sergiobelda.composeVectorize)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
@@ -26,12 +26,12 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.jetbrains.compose.componentsResources)
-            implementation(libs.jetbrains.compose.material3)
-            implementation(libs.jetbrains.compose.ui)
+            implementation(deps.jetbrains.compose.material3)
+            implementation(deps.jetbrains.compose.ui)
             implementation(libs.sergiobelda.composeVectorize.core)
         }
         androidMain.dependencies {
-            implementation(libs.jetbrains.compose.animationGraphics)
+            implementation(deps.jetbrains.compose.animationGraphics)
         }
 
         all {

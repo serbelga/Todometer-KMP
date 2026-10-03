@@ -13,7 +13,7 @@ java {
 dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
-    implementation(libs.jetbrains.kotlin.gradlePlugin)
+    implementation(deps.jetbrains.kotlin.gradlePlugin)
 }
 
 gradlePlugin {
