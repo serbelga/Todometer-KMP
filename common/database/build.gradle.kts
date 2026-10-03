@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
-    alias(libs.plugins.sergiobelda.gradle.lint)
+    alias(deps.plugins.sergiobelda.convention.lint)
     alias(libs.plugins.sqlDelight)
 }
 

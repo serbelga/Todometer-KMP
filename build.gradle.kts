@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.androidx.baselineprofile) apply false
     alias(libs.plugins.dependencyGraphGenerator) apply false
-    alias(libs.plugins.detekt) apply false
     alias(libs.plugins.google.firebaseCrashlytics) apply false
     alias(libs.plugins.google.firebasePerf) apply false
     alias(libs.plugins.google.ksp) apply false
@@ -14,8 +13,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.jetbrains.kotlinMultiplatform) apply false
     alias(libs.plugins.sergiobelda.composeVectorize) apply false
-    alias(libs.plugins.spotless)
     alias(libs.plugins.sqlDelight) apply false
+
+    alias(deps.plugins.detekt) apply false
+    alias(deps.plugins.spotless) apply false
 }
 
 buildscript {

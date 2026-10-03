@@ -1,4 +1,3 @@
-package dev.sergiobelda.gradle.buildlogic.convention
 /*
  * Copyright 2023 Sergio Belda
  *
@@ -14,6 +13,8 @@ package dev.sergiobelda.gradle.buildlogic.convention
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package dev.sergiobelda.gradle.buildlogic.convention
 
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtension
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorPlugin

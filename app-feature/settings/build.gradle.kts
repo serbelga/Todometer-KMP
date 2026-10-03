@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.sergiobelda.gradle.common.ui)
     alias(libs.plugins.sergiobelda.gradle.common.uiToolingPreview)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
-    alias(libs.plugins.sergiobelda.gradle.lint)
+    alias(deps.plugins.sergiobelda.convention.lint)
 }
 
 kotlin {

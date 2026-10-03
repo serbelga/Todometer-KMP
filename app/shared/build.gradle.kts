@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlinMultiplatform)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
-    alias(libs.plugins.sergiobelda.gradle.lint)
+    alias(deps.plugins.sergiobelda.convention.lint)
 }
 
 kotlin {

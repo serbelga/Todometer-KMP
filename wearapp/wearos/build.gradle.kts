@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
-    alias(libs.plugins.sergiobelda.gradle.lint)
+    alias(deps.plugins.sergiobelda.convention.lint)
 }
 
 if (file("google-services.json").exists()) {

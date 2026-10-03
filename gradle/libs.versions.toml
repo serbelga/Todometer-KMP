@@ -17,7 +17,6 @@ composeMultiplatformMaterial3 = "1.12.0-alpha03"
 composeVectorize = "1.3.0"
 dataStore = "1.2.1"
 dependencyGraphGenerator = "0.8.0"
-detekt = "1.23.8"
 espressoCore = "3.7.0"
 firebaseBom = "34.19.0"
 firebaseCrashlytics = "3.0.8"
@@ -48,7 +47,7 @@ spotless = "8.10.3"
 sqlDelight = "2.4.0"
 uiautomator = "2.4.0"
 wear = "1.4.0"
-wearCompose = "1.6.2"
+wearCompose = "1.7.0"
 wearInput = "1.2.0"
 wearToolingPreview = "1.0.0"
 work = "2.12.0"
@@ -89,8 +88,6 @@ androidx-wear-wear = { module = "androidx.wear:wear", version.ref = "wear" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "work" }
 
 dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
-
-detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
 google-firebase-firebaseAnalytics = { module = "com.google.firebase:firebase-analytics" }
 google-firebase-firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics" }
@@ -161,7 +158,6 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 google-firebasePerf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerf" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
@@ -174,11 +170,7 @@ sergiobelda-composeVectorize = { id = "dev.sergiobelda.compose.vectorize", versi
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
-sergiobelda-gradle-base = { id = "dev.sergiobelda.gradle.base" }
 sergiobelda-gradle-common-library-android = { id = "dev.sergiobelda.gradle.common.library.android" }
 sergiobelda-gradle-common-ui = { id = "dev.sergiobelda.gradle.common.ui" }
 sergiobelda-gradle-common-uiToolingPreview = { id = "dev.sergiobelda.gradle.common.ui.tooling.preview" }
 sergiobelda-gradle-dependencyGraphGenerator = { id = "dev.sergiobelda.gradle.dependency-graph-generator" }
-sergiobelda-gradle-detekt = { id = "dev.sergiobelda.gradle.detekt" }
-sergiobelda-gradle-lint = { id = "dev.sergiobelda.gradle.lint" }
-sergiobelda-gradle-spotless = { id = "dev.sergiobelda.gradle.spotless" }

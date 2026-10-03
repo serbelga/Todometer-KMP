@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.composeCompiler)
     alias(libs.plugins.jetbrains.kotlin.jvm)
-    id("dev.sergiobelda.gradle.spotless")
+    alias(deps.plugins.sergiobelda.convention.lint)
 }
 
 java {
