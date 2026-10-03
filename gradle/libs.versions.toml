@@ -43,7 +43,6 @@ playServicesOssLicenses = "17.5.2"
 playServicesWearable = "20.0.1"
 profileinstaller = "1.4.1"
 splashscreen = "1.2.0"
-spotless = "8.10.3"
 sqlDelight = "2.4.0"
 uiautomator = "2.4.0"
 wear = "1.4.0"
@@ -143,8 +142,6 @@ sergiobelda-navigationComposeExtendedCompiler = { module = "dev.sergiobelda.navi
 sergiobelda-navigationComposeExtendedWear = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-wear", version.ref = "navigationComposeExtended" }
 sergiobelda-pigment = { module = "dev.sergiobelda.pigment:pigment", version.ref = "pigment" }
 
-spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
-
 sqldelight-androidDriver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqldelight-jvmDriver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqldelight-nativeDriver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
@@ -167,7 +164,6 @@ jetbrains-composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", versio
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 jetbrains-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 sergiobelda-composeVectorize = { id = "dev.sergiobelda.compose.vectorize", version.ref = "composeVectorize" }
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
 sergiobelda-gradle-common-library-android = { id = "dev.sergiobelda.gradle.common.library.android" }

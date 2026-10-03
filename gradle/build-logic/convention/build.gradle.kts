@@ -14,7 +14,6 @@ dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.dependencyGraphGenerator)
     implementation(libs.jetbrains.kotlin.gradlePlugin)
-    implementation(libs.spotless.gradlePlugin)
 }
 
 gradlePlugin {
