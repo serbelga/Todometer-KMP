@@ -1,9 +1,9 @@
 plugins {
     alias(deps.plugins.android.kotlinMultiplatformLibrary)
     alias(deps.plugins.jetbrains.kotlin.multiplatform)
-    alias(libs.plugins.sergiobelda.gradle.common.library.android)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.common.library.android)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 kotlin {

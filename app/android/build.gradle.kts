@@ -3,8 +3,8 @@ plugins {
     alias(deps.plugins.androidx.baselineprofile)
     alias(deps.plugins.jetbrains.compose)
     alias(deps.plugins.jetbrains.kotlin.composeCompiler)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 if (file("google-services.json").exists()) {

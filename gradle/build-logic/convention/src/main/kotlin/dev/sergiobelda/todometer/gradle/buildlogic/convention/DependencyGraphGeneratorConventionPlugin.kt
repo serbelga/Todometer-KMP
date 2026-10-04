@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.gradle.buildlogic.convention
+package dev.sergiobelda.todometer.gradle.buildlogic.convention
 
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorExtension
 import com.vanniktech.dependency.graph.generator.DependencyGraphGeneratorPlugin

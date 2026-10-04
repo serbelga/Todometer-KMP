@@ -3,7 +3,7 @@ plugins {
     alias(deps.plugins.google.ksp)
     alias(deps.plugins.jetbrains.compose)
     alias(deps.plugins.jetbrains.kotlin.composeCompiler)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
 }
 

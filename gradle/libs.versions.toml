@@ -5,6 +5,7 @@ fonament = "0.0.1-alpha07"
 jdk = "21"
 navigationComposeExtended = "1.6.2"
 pigment = "0.7.0"
+sergiobelda-projectconfig = "2026.10.01"
 
 [libraries]
 dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
@@ -19,12 +20,13 @@ sergiobelda-navigationComposeExtendedAnnotation = { module = "dev.sergiobelda.na
 sergiobelda-navigationComposeExtendedCompiler = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-compiler", version.ref = "navigationComposeExtended" }
 sergiobelda-navigationComposeExtendedWear = { module = "dev.sergiobelda.navigation.compose.extended:navigation-compose-extended-wear", version.ref = "navigationComposeExtended" }
 sergiobelda-pigment = { module = "dev.sergiobelda.pigment:pigment", version.ref = "pigment" }
+sergiobelda-projectconfig-convention = { module = "dev.sergiobelda.projectconfig.buildlogic:convention", version.ref = "sergiobelda-projectconfig" }
 
 [plugins]
 dependencyGraphGenerator = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }
 sergiobelda-composeVectorize = { id = "dev.sergiobelda.compose.vectorize", version.ref = "composeVectorize" }
 
-sergiobelda-gradle-common-library-android = { id = "dev.sergiobelda.gradle.common.library.android" }
-sergiobelda-gradle-common-ui = { id = "dev.sergiobelda.gradle.common.ui" }
-sergiobelda-gradle-common-uiToolingPreview = { id = "dev.sergiobelda.gradle.common.ui.tooling.preview" }
-sergiobelda-gradle-dependencyGraphGenerator = { id = "dev.sergiobelda.gradle.dependency-graph-generator" }
+sergiobelda-todometer-common-library-android = { id = "dev.sergiobelda.todometer.gradle.common.library.android" }
+sergiobelda-todometer-common-ui = { id = "dev.sergiobelda.todometer.gradle.common.ui" }
+sergiobelda-todometer-common-uiToolingPreview = { id = "dev.sergiobelda.todometer.gradle.common.ui.tooling.preview" }
+sergiobelda-todometer-dependencyGraphGenerator = { id = "dev.sergiobelda.todometer.gradle.dependency-graph-generator" }

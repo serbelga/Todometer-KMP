@@ -1,7 +1,7 @@
 plugins {
     alias(deps.plugins.android.library)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 android {
