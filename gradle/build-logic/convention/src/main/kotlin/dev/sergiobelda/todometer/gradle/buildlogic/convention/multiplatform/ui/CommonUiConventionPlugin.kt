@@ -24,7 +24,9 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 class CommonUiConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -39,6 +41,14 @@ class CommonUiConventionPlugin : Plugin<Project> {
 
             dependencies {
                 add("kspCommonMainMetadata", navigationComposeExtendedCompiler)
+            }
+
+            // Workaround for KSP only in Common Main.
+            // https://github.com/google/ksp/issues/567
+            tasks.withType<KotlinCompilationTask<*>>().all {
+                if (name != "kspCommonMainKotlinMetadata") {
+                    dependsOn("kspCommonMainKotlinMetadata")
+                }
             }
 
             val extension = extensions.getByType<KotlinMultiplatformExtension>()
