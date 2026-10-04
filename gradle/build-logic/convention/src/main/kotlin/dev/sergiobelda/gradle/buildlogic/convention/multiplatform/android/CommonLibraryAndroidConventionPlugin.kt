@@ -20,8 +20,8 @@ class CommonLibraryAndroidConventionPlugin : Plugin<Project> {
             val extension = extensions.getByType<KotlinMultiplatformExtension>()
             // TODO: Replace by androidLibrary when "Unresolved reference 'androidLibrary'" is fixed.
             extension.extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
-                compileSdk = libs.findVersion("androidCompileSdk").get().toString().toInt()
-                minSdk = libs.findVersion("androidMinSdk").get().toString().toInt()
+                compileSdk = deps.findVersion("android-compileSdk").get().toString().toInt()
+                minSdk = deps.findVersion("android-minSdk").get().toString().toInt()
             }
         }
     }

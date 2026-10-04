@@ -6,9 +6,9 @@ plugins {
 
 android {
     namespace = "dev.sergiobelda.todometer.common.android.demo.database"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
+    compileSdk = deps.versions.android.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = libs.versions.androidMinSdk.get().toInt()
+        minSdk = deps.versions.android.minSdk.get().toInt()
     }
 
     kotlin {

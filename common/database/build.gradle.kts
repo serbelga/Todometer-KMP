@@ -1,10 +1,10 @@
 plugins {
     alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.cashapp.sqldelight)
     alias(deps.plugins.jetbrains.kotlin.multiplatform)
+    alias(deps.plugins.sergiobelda.convention.lint)
     alias(libs.plugins.sergiobelda.gradle.common.library.android)
     alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
-    alias(deps.plugins.sergiobelda.convention.lint)
-    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -19,8 +19,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.sqldelight.coroutines)
-            implementation(libs.sqldelight.primitiveAdapters)
+            implementation(deps.cashapp.sqldelight.coroutines)
+            implementation(deps.cashapp.sqldelight.primitiveAdapters)
 
             implementation(projects.common.domain)
         }
@@ -29,16 +29,16 @@ kotlin {
             implementation(kotlin("test"))
         }
         androidMain.dependencies {
-            implementation(libs.sqldelight.androidDriver)
+            implementation(deps.cashapp.sqldelight.androidDriver)
         }
         getByName("androidHostTest").dependencies {
-            implementation(libs.sqldelight.jvmDriver)
+            implementation(deps.cashapp.sqldelight.jvmDriver)
         }
         jvmMain.dependencies {
-            implementation(libs.sqldelight.jvmDriver)
+            implementation(deps.cashapp.sqldelight.jvmDriver)
         }
         iosMain.dependencies {
-            implementation(libs.sqldelight.nativeDriver)
+            implementation(deps.cashapp.sqldelight.nativeDriver)
         }
 
         all {

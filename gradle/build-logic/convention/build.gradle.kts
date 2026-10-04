@@ -11,9 +11,9 @@ java {
 }
 
 dependencies {
-    implementation(libs.android.gradlePlugin)
-    implementation(libs.dependencyGraphGenerator)
+    implementation(deps.android.gradlePlugin)
     implementation(deps.jetbrains.kotlin.gradlePlugin)
+    implementation(libs.dependencyGraphGenerator)
 }
 
 gradlePlugin {

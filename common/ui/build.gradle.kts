@@ -23,7 +23,7 @@ kotlin {
             api(projects.common.resources)
             api(projects.common.uiTooling)
 
-            api(libs.jetbrains.androidx.navigation.compose)
+            api(deps.jetbrains.androidx.navigation.compose)
             api(deps.jetbrains.compose.foundation)
             api(deps.jetbrains.compose.material3)
             api(deps.jetbrains.compose.runtime)

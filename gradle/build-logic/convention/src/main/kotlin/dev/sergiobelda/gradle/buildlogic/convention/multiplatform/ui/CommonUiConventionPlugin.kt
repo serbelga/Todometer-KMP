@@ -27,14 +27,6 @@ class CommonUiConventionPlugin : Plugin<Project> {
                 add("kspCommonMainMetadata", navigationComposeExtendedCompiler)
             }
 
-            // Workaround for KSP only in Common Main.
-            // https://github.com/google/ksp/issues/567
-            tasks.withType<KotlinCompilationTask<*>>().all {
-                if (name != "kspCommonMainKotlinMetadata") {
-                    dependsOn("kspCommonMainKotlinMetadata")
-                }
-            }
-
             val extension = extensions.getByType<KotlinMultiplatformExtension>()
             extension.apply {
                 sourceSets["commonMain"].kotlin.srcDir(

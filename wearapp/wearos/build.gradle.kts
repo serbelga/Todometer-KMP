@@ -14,12 +14,12 @@ if (file("google-services.json").exists()) {
 
 android {
     namespace = "dev.sergiobelda.todometer.wearapp.wearos"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
+    compileSdk = deps.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
-        minSdk = libs.versions.androidWearMinSdk.get().toInt()
-        targetSdk = libs.versions.androidWearTargetSdk.get().toInt()
+        minSdk = deps.versions.android.wear.minSdk.get().toInt()
+        targetSdk = deps.versions.android.wear.targetSdk.get().toInt()
 
         versionCode = 4170201
         versionName = "wearos-1.7.0-beta01"
@@ -66,7 +66,7 @@ dependencies {
     implementation(deps.androidx.wear.compose.foundation)
     implementation(deps.androidx.wear.compose.material)
     implementation(deps.androidx.wear.compose.navigation)
-    implementation(libs.androidx.wear.compose.uiTooling)
+    implementation(deps.androidx.wear.compose.uiTooling)
     implementation(deps.androidx.wear.input)
     implementation(deps.androidx.wear.toolingPreview)
     implementation(deps.androidx.wear.wear)

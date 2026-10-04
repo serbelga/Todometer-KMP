@@ -25,7 +25,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.jetbrains.compose.componentsResources)
+            implementation(deps.jetbrains.compose.componentsResources)
             implementation(deps.jetbrains.compose.material3)
             implementation(deps.jetbrains.compose.ui)
             implementation(libs.sergiobelda.composeVectorize.core)

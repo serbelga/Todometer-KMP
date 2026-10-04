@@ -2,12 +2,12 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 
 plugins {
     alias(deps.plugins.android.test)
-    alias(libs.plugins.androidx.baselineprofile)
+    alias(deps.plugins.androidx.baselineprofile)
 }
 
 android {
     namespace = "dev.sergiobelda.todometer.app.benchmark"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
+    compileSdk = deps.versions.android.compileSdk.get().toInt()
 
     kotlin {
         jvmToolchain(libs.versions.jdk.get().toInt())
@@ -18,8 +18,8 @@ android {
     }
 
     defaultConfig {
-        minSdk = libs.versions.androidBaselineProfileMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+        minSdk = deps.versions.android.baselineprofile.minSdk.get().toInt()
+        targetSdk = deps.versions.android.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -54,9 +54,9 @@ dependencies {
     implementation(projects.common.ui)
     implementation(projects.appFeature.home)
 
-    implementation(libs.androidx.benchmark.macro.junit4)
+    implementation(deps.androidx.benchmark.macroJunit4)
     implementation(deps.androidx.test.espresso.core)
-    implementation(libs.androidx.test.junit)
+    implementation(deps.androidx.test.ext.junit)
     implementation(deps.androidx.test.uiautomator)
 }
 

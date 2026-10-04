@@ -10,8 +10,8 @@ plugins {
 kotlin {
     android {
         namespace = "dev.sergiobelda.todometer.app"
-        compileSdk = libs.versions.androidCompileSdk.get().toInt()
-        minSdk = libs.versions.androidMinSdk.get().toInt()
+        compileSdk = deps.versions.android.compileSdk.get().toInt()
+        minSdk = deps.versions.android.minSdk.get().toInt()
         androidResources { enable = true }
     }
     jvm()
