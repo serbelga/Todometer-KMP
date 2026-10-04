@@ -5,7 +5,7 @@ fonament = "0.0.1-alpha07"
 jdk = "21"
 navigationComposeExtended = "1.6.2"
 pigment = "0.7.0"
-sergiobelda-projectconfig = "2026.10.01"
+sergiobelda-projectconfig = "2026.10.02"
 
 [libraries]
 dependencyGraphGenerator = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
