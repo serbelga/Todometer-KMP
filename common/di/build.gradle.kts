@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
-    alias(libs.plugins.sergiobelda.gradle.common.library.android)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.common.library.android)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 kotlin {
@@ -18,15 +18,15 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project.dependencies.platform(libs.koin.bom))
-            api(libs.koin.compose)
-            api(libs.koin.compose.viewmodel)
-            api(libs.koin.core)
-            api(libs.koin.test)
+            api(project.dependencies.platform(deps.koin.bom))
+            api(deps.koin.compose)
+            api(deps.koin.composeViewmodel)
+            api(deps.koin.core)
+            api(deps.koin.test)
         }
         androidMain.dependencies {
-            api(libs.koin.android)
-            api(libs.koin.androidXCompose)
+            api(deps.koin.android)
+            api(deps.koin.androidXCompose)
         }
     }
 }

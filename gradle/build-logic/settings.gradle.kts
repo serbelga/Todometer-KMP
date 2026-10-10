@@ -12,6 +12,11 @@ dependencyResolutionManagement {
             from(files("../libs.versions.toml"))
         }
     }
+    versionCatalogs {
+        create("deps") {
+            from("dev.sergiobelda.projectconfig.catalog:deps:2026.10.02")
+        }
+    }
 }
 
 include(":convention")

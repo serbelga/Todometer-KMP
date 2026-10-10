@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package dev.sergiobelda.gradle.buildlogic.convention.extensions
+package dev.sergiobelda.todometer.gradle.buildlogic.convention.extensions
 
-import org.gradle.api.provider.Provider
-import org.gradle.plugin.use.PluginDependency
-import java.util.Optional
+import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.getByType
 
-val Optional<Provider<PluginDependency>>.pluginId
-    get() = get().get().pluginId
+val Project.libs
+    get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")

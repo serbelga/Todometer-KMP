@@ -1,25 +1,25 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.google.ksp)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.application)
+    alias(deps.plugins.google.ksp)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
     alias(deps.plugins.sergiobelda.convention.lint)
 }
 
 if (file("google-services.json").exists()) {
-    apply(plugin = libs.plugins.google.firebaseCrashlytics.get().pluginId)
-    apply(plugin = libs.plugins.google.services.get().pluginId)
+    apply(plugin = deps.plugins.google.firebase.crashlytics.get().pluginId)
+    apply(plugin = deps.plugins.google.gms.services.get().pluginId)
 }
 
 android {
     namespace = "dev.sergiobelda.todometer.wearapp.wearos"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
+    compileSdk = deps.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
-        minSdk = libs.versions.androidWearMinSdk.get().toInt()
-        targetSdk = libs.versions.androidWearTargetSdk.get().toInt()
+        minSdk = deps.versions.android.wear.minSdk.get().toInt()
+        targetSdk = deps.versions.android.wear.targetSdk.get().toInt()
 
         versionCode = 4170201
         versionName = "wearos-1.7.0-beta01"
@@ -60,24 +60,24 @@ dependencies {
     implementation(projects.common.designsystemResources)
     implementation(projects.common.ui)
 
-    implementation(libs.androidx.activityCompose)
-    implementation(libs.androidx.coreKtx)
-    implementation(libs.androidx.splashscreen)
-    implementation(libs.androidx.wear.compose.foundation)
-    implementation(libs.androidx.wear.compose.material)
-    implementation(libs.androidx.wear.compose.navigation)
-    implementation(libs.androidx.wear.compose.uiTooling)
-    implementation(libs.androidx.wear.input)
-    implementation(libs.androidx.wear.tooling.preview)
-    implementation(libs.androidx.wear.wear)
+    implementation(deps.androidx.activityCompose)
+    implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.core.splashscreen)
+    implementation(deps.androidx.wear.compose.foundation)
+    implementation(deps.androidx.wear.compose.material)
+    implementation(deps.androidx.wear.compose.navigation)
+    implementation(deps.androidx.wear.compose.uiTooling)
+    implementation(deps.androidx.wear.input)
+    implementation(deps.androidx.wear.toolingPreview)
+    implementation(deps.androidx.wear.wear)
 
-    implementation(libs.jetbrains.kotlin.collections.immutable)
+    implementation(deps.jetbrains.kotlinx.collections.immutable)
 
-    implementation(libs.google.playServicesWearable)
+    implementation(deps.google.gms.playServicesWearable)
 
-    implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-    implementation(libs.google.firebase.firebaseAnalytics)
-    implementation(libs.google.firebase.firebaseCrashlytics)
+    implementation(project.dependencies.platform(deps.google.firebase.bom))
+    implementation(deps.google.firebase.analytics)
+    implementation(deps.google.firebase.crashlytics)
 
     implementation(libs.sergiobelda.navigationComposeExtendedWear)
     ksp(libs.sergiobelda.navigationComposeExtendedCompiler)

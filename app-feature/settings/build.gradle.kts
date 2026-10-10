@@ -1,13 +1,13 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
-    alias(libs.plugins.sergiobelda.gradle.common.library.android)
-    alias(libs.plugins.sergiobelda.gradle.common.ui)
-    alias(libs.plugins.sergiobelda.gradle.common.uiToolingPreview)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.common.library.android)
+    alias(libs.plugins.sergiobelda.todometer.common.ui)
+    alias(libs.plugins.sergiobelda.todometer.common.uiToolingPreview)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 kotlin {

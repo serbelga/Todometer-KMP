@@ -1,17 +1,17 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 kotlin {
     android {
         namespace = "dev.sergiobelda.todometer.app"
-        compileSdk = libs.versions.androidCompileSdk.get().toInt()
-        minSdk = libs.versions.androidMinSdk.get().toInt()
+        compileSdk = deps.versions.android.compileSdk.get().toInt()
+        minSdk = deps.versions.android.minSdk.get().toInt()
         androidResources { enable = true }
     }
     jvm()
@@ -44,10 +44,10 @@ kotlin {
         androidMain.dependencies {
             implementation(projects.commonAndroid.extensions)
 
-            implementation(libs.androidx.activityCompose)
-            implementation(libs.androidx.splashscreen)
+            implementation(deps.androidx.activityCompose)
+            implementation(deps.androidx.core.splashscreen)
 
-            implementation(libs.google.playServicesOssLicenses)
+            implementation(deps.google.gms.playServicesOssLicenses)
         }
 
         all {

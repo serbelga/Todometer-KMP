@@ -1,7 +1,24 @@
-package dev.sergiobelda.gradle.buildlogic.convention.multiplatform.ui
+/*
+ * Copyright 2025 Sergio Belda
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import dev.sergiobelda.gradle.buildlogic.convention.extensions.libs
-import dev.sergiobelda.gradle.buildlogic.convention.extensions.pluginId
+package dev.sergiobelda.todometer.gradle.buildlogic.convention.multiplatform.ui
+
+import dev.sergiobelda.todometer.gradle.buildlogic.convention.extensions.libs
+import dev.sergiobelda.projectconfig.buildlogic.convention.extensions.deps
+import dev.sergiobelda.projectconfig.buildlogic.convention.extensions.pluginId
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -15,7 +32,7 @@ class CommonUiConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.findPlugin("google-ksp").pluginId)
+                apply(deps.findPlugin("google-ksp").pluginId)
             }
 
             val navigationComposeExtendedCompiler =
@@ -42,7 +59,7 @@ class CommonUiConventionPlugin : Plugin<Project> {
 
                 sourceSets.apply {
                     commonMain.dependencies {
-                        implementation(libs.findLibrary("jetbrains-kotlin-collections-immutable").get())
+                        implementation(deps.findLibrary("jetbrains-kotlinx-collections-immutable").get())
                         implementation(libs.findLibrary("sergiobelda-fonament-presentation").get())
                         implementation(libs.findLibrary("sergiobelda-fonament-presentationDiKoin").get())
                     }

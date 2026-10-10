@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
-    alias(libs.plugins.sergiobelda.gradle.common.library.android)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.common.library.android)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 kotlin {
@@ -16,7 +16,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.jetbrains.kotlin.coroutines.core)
+            implementation(deps.jetbrains.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

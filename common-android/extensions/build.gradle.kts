@@ -1,14 +1,14 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.library)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 android {
     namespace = "dev.sergiobelda.todometer.common.android"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
+    compileSdk = deps.versions.android.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = libs.versions.androidMinSdk.get().toInt()
+        minSdk =  deps.versions.android.minSdk.get().toInt()
     }
 
     kotlin {
@@ -17,9 +17,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activityCompose)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.coreKtx)
-    implementation(libs.androidx.profileinstaller)
-    implementation(libs.jetbrains.kotlin.coroutines.guava)
+    implementation(deps.androidx.activityCompose)
+    implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.profileinstaller)
+    implementation(deps.jetbrains.kotlinx.coroutines.guava)
 }

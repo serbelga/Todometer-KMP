@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.android.kotlinMultiplatformLibrary)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.jetbrains.kotlinMultiplatform)
-    alias(libs.plugins.sergiobelda.gradle.common.library.android)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.kotlinMultiplatformLibrary)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
+    alias(deps.plugins.jetbrains.kotlin.multiplatform)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.common.library.android)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 kotlin {
@@ -23,23 +23,23 @@ kotlin {
             api(projects.common.resources)
             api(projects.common.uiTooling)
 
-            api(libs.jetbrains.androidx.navigation.compose)
-            api(libs.jetbrains.compose.foundation)
-            api(libs.jetbrains.compose.material3)
-            api(libs.jetbrains.compose.runtime)
-            api(libs.jetbrains.compose.ui)
-            api(libs.jetbrains.kotlin.collections.immutable)
-            api(libs.jetbrains.kotlin.datetime)
+            api(deps.jetbrains.androidx.navigation.compose)
+            api(deps.jetbrains.compose.foundation)
+            api(deps.jetbrains.compose.material3)
+            api(deps.jetbrains.compose.runtime)
+            api(deps.jetbrains.compose.ui)
+            api(deps.jetbrains.kotlinx.collections.immutable)
+            api(deps.jetbrains.kotlinx.datetime)
 
             api(libs.sergiobelda.navigationComposeExtended)
             api(libs.sergiobelda.navigationComposeExtendedAnnotation)
         }
         commonTest.dependencies {
-            implementation(libs.jetbrains.kotlin.coroutines.test)
+            implementation(deps.jetbrains.kotlinx.coroutines.test)
             implementation(kotlin("test"))
         }
         androidMain.dependencies {
-            api(libs.jetbrains.compose.animationGraphics)
+            api(deps.jetbrains.compose.animationGraphics)
         }
 
         all {

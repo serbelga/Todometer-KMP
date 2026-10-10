@@ -1,26 +1,26 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.androidx.baselineprofile)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.composeCompiler)
-    alias(libs.plugins.sergiobelda.gradle.dependencyGraphGenerator)
+    alias(deps.plugins.android.application)
+    alias(deps.plugins.androidx.baselineprofile)
+    alias(deps.plugins.jetbrains.compose)
+    alias(deps.plugins.jetbrains.kotlin.composeCompiler)
     alias(deps.plugins.sergiobelda.convention.lint)
+    alias(libs.plugins.sergiobelda.todometer.dependencyGraphGenerator)
 }
 
 if (file("google-services.json").exists()) {
-    apply(plugin = libs.plugins.google.firebaseCrashlytics.get().pluginId)
-    apply(plugin = libs.plugins.google.firebasePerf.get().pluginId)
-    apply(plugin = libs.plugins.google.services.get().pluginId)
+    apply(plugin = deps.plugins.google.firebase.crashlytics.get().pluginId)
+    apply(plugin = deps.plugins.google.firebase.perf.get().pluginId)
+    apply(plugin = deps.plugins.google.gms.services.get().pluginId)
 }
 
 android {
     namespace = "dev.sergiobelda.todometer.app.android"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
+    compileSdk = deps.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "dev.sergiobelda.todometer"
-        minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+        minSdk = deps.versions.android.minSdk.get().toInt()
+        targetSdk = deps.versions.android.targetSdk.get().toInt()
 
         versionCode = 1298401
         versionName = "android-2.9.8"
@@ -73,20 +73,20 @@ dependencies {
     implementation(projects.app.shared)
     implementation(projects.commonAndroid.resources)
 
-    implementation(libs.androidx.glance.appWidget)
-    implementation(libs.androidx.glance.glance)
-    implementation(libs.androidx.glance.material3)
-    implementation(libs.androidx.work.runtime)
+    implementation(deps.androidx.glance.appWidget)
+    implementation(deps.androidx.glance.glance)
+    implementation(deps.androidx.glance.material3)
+    implementation(deps.androidx.work.runtime)
 
-    implementation(libs.google.playServicesOssLicenses)
+    implementation(deps.google.gms.playServicesOssLicenses)
 
-    implementation(project.dependencies.platform(libs.google.firebase.firebaseBom))
-    implementation(libs.google.firebase.firebaseAnalytics)
-    implementation(libs.google.firebase.firebaseCrashlytics)
-    implementation(libs.google.firebase.firebasePerf)
+    implementation(project.dependencies.platform(deps.google.firebase.bom))
+    implementation(deps.google.firebase.analytics)
+    implementation(deps.google.firebase.crashlytics)
+    implementation(deps.google.firebase.perf)
 
     baselineProfile(projects.macrobenchmark)
-    implementation(libs.androidx.profileinstaller)
+    implementation(deps.androidx.profileinstaller)
     "demoImplementation"(projects.commonAndroid.demoDatabase)
 }
 
