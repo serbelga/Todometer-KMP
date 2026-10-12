@@ -6,6 +6,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
     }
     versionCatalogs {
         create("libs") {
@@ -14,7 +15,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("deps") {
-            from("dev.sergiobelda.projectconfig.catalog:deps:2026.10.02")
+            from("dev.sergiobelda.projectconfig.catalog:deps:2026.10.03")
         }
     }
 }
