@@ -1,3 +1,39 @@
 ## :app:common:ui
 
-<img src="../../resources/dependency_graphs/app-common-ui-dependency-graph-multiplatform-projects.svg">
+```mermaid
+---
+config:
+  layout: elk
+  elk:
+    nodePlacementStrategy: SIMPLE
+---
+graph TB
+  subgraph ui
+    direction TB
+    :app:common:ui[:app:common:ui]:::kmp-library
+    :app:common:designsystem[:app:common:designsystem]:::kmp-library
+    :common:designsystem-resources[:common:designsystem-resources]:::kmp-library
+    :common:domain[:common:domain]:::kmp-library
+    :common:navigation[:common:navigation]:::kmp-library
+    :common:resources[:common:resources]:::kmp-library
+    :common:viewmodel[:common:viewmodel]:::kmp-library
+    :common:ui[:common:ui]:::kmp-library
+  end
+
+  :app:common:ui -.-> :app:common:designsystem
+  :app:common:ui -.-> :common:domain
+  :app:common:ui -.-> :common:navigation
+  :app:common:ui -.-> :common:resources
+  :app:common:ui -.-> :common:viewmodel
+  :app:common:ui -.-> :common:ui
+  :app:common:designsystem --> :common:designsystem-resources
+  :common:ui -.-> :common:domain
+
+classDef android-application fill:#CAFFBF,stroke:#000,stroke-width:1px,color:#000;
+classDef android-feature fill:#FFD6A5,stroke:#000,stroke-width:1px,color:#000;
+classDef android-library fill:#9BF6FF,stroke:#000,stroke-width:1px,color:#000;
+classDef android-test fill:#A0C4FF,stroke:#000,stroke-width:1px,color:#000;
+classDef jvm-library fill:#BDB2FF,stroke:#000,stroke-width:1px,color:#000;
+classDef kmp-library fill:#A280FF,stroke:#000,stroke-width:1px,color:#000;
+classDef unknown fill:#FFADAD,stroke:#000,stroke-width:1px,color:#000;
+```
